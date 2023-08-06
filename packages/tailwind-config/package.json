@@ -1,0 +1,23 @@
+{
+  "name": "tailwind-config",
+  "version": "0.0.0",
+  "description": "tailwind config for use in svelte websites",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint": "prettier --check --ignore-path=../../.prettierignore . && eslint \".\"",
+    "format": "prettier --write --ignore-path=../../.prettierignore ."
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "0.4.2",
+    "@tailwindcss/container-queries": "0.1.1",
+    "@tailwindcss/forms": "0.5.4",
+    "@tailwindcss/line-clamp": "0.4.4",
+    "@tailwindcss/typography": "0.5.9",
+    "autoprefixer": "10.4.14",
+    "daisyui": "3.5.1",
+    "eslint-config-custom": "workspace:*",
+    "postcss": "8.4.27",
+    "tailwindcss": "3.3.3"
+  }
+}
