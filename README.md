@@ -20,10 +20,10 @@ This Turborepo includes the following packages/apps:
   - `docs`: a sample documentation [svelte-kit](https://kit.svelte.dev/) web app
   - `web`: a sample [svelte-kit](https://kit.svelte.dev/) web app
 - Packages
-- `ui`: a stub Svelte component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
-- `tailwind-config`: shared `tailwindcss` configurations (includes etc...)
-- `helpers`: utility functions used throughout the monorepo
+  - `ui`: a stub Svelte component library shared by both `web` and `docs` applications
+  - `eslint-config-custom`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
+  - `tailwind-config`: shared `tailwindcss` configurations (includes etc...)
+  - `helpers`: utility functions used throughout the monorepo
 
 ### Utilities
 
