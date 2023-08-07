@@ -2,7 +2,12 @@
   "name": "tailwind-config",
   "version": "0.0.0",
   "description": "tailwind config for use in svelte websites",
-  "main": "index.js",
+  "main": "tailwind.config.ts",
+  "types": "tailwind.config.ts",
+  "exports": {
+    "./tailwind.config.ts": "./tailwind.config.ts",
+    "./postcss.config.cjs": "./postcss.config.cjs"
+  },
   "license": "MIT",
   "scripts": {
     "lint": "prettier --check --ignore-path=../../.prettierignore . && eslint \".\"",

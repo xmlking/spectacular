@@ -1,4 +1,5 @@
 <script lang="ts">
+  import '../app.pcss';
   import { MyCounterButton } from 'ui';
 
   import { add } from "helpers";
