@@ -33,34 +33,34 @@ importers:
   apps/docs:
     devDependencies:
       '@sveltejs/adapter-auto':
-        specifier: ^2.1.0
+        specifier: 2.1.0
         version: 2.1.0(@sveltejs/kit@1.22.4)
       '@sveltejs/kit':
-        specifier: ^1.22.4
+        specifier: 1.22.4
         version: 1.22.4(svelte@4.1.2)(vite@4.4.8)
       eslint-config-custom:
         specifier: workspace:*
         version: link:../../packages/eslint-config-custom
       svelte:
-        specifier: ^4.1.2
+        specifier: 4.1.2
         version: 4.1.2
       svelte-check:
-        specifier: ^3.4.6
+        specifier: 3.4.6
         version: 3.4.6(svelte@4.1.2)
       svelte-preprocess:
-        specifier: ^5.0.4
+        specifier: 5.0.4
         version: 5.0.4(svelte@4.1.2)(typescript@5.1.6)
       tslib:
-        specifier: ^2.6.1
+        specifier: 2.6.1
         version: 2.6.1
       typescript:
-        specifier: ^5.1.6
+        specifier: 5.1.6
         version: 5.1.6
       ui:
         specifier: workspace:*
         version: link:../../packages/ui
       vite:
-        specifier: ^4.4.8
+        specifier: 4.4.8
         version: 4.4.8(@types/node@20.4.8)
 
   apps/web:
