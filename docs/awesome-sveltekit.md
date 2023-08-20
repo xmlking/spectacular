@@ -5,19 +5,18 @@ Awesome **SvelteKit** Links
 ## Components
 
 - UI Component ToolKits
+
   - [Skeleton UI](https://www.skeleton.dev/) UI components designed for Tailwind, Svelte and SvelteKit.
   - [GrailUI](https://grail-ui.vercel.app/) is a set of headless UI components, actions and utilities.
   - [Flowbite](https://flowbite-svelte.com/) components for Svelte, built on Tailwind CSS
   - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSS
   - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
   - [Melt UI](https://www.melt-ui.com/) strives to be the de-facto headless UI library for Svelte.
--
-- Force Graph examples with D3
 
-  - [d3 Force Directed Graph demo](https://svelte.dev/repl/c23b43904005457981e78ca5042f7dd4?version=3.29.7)
-  - [d3-fdg-svelte](https://github.com/happybeing/d3-fdg-svelte)
-  - [redisgraph-navi](https://github.com/jlefebure/redisgraph-navi/tree/master/src/client)
-  - [Autosize Textarea](https://github.com/ankurrsinghal/svelte-autoresize-textarea)
+- Tables
+
+  - [Svelte Headless Table](https://svelte-headless-table.bryanmylee.com/)
+  - [svelte-generic-crud-table](https://github.com/ivosdc/svelte-generic-crud-table/)
 
 - Forms
 
@@ -29,6 +28,11 @@ Awesome **SvelteKit** Links
     - [Intro Video](https://youtu.be/hB6OkaYWS5I)
   - [felte](https://felte.dev/) - An extensible form library for Svelte, Solid and React
 
+- Force Graph examples with D3
+  - [d3 Force Directed Graph demo](https://svelte.dev/repl/c23b43904005457981e78ca5042f7dd4?version=3.29.7)
+  - [d3-fdg-svelte](https://github.com/happybeing/d3-fdg-svelte)
+  - [redisgraph-navi](https://github.com/jlefebure/redisgraph-navi/tree/master/src/client)
+  - [Autosize Textarea](https://github.com/ankurrsinghal/svelte-autoresize-textarea)
 - three.js
 
   - [Threlte](https://threlte.xyz/) is a component library for Svelte to build and render `three.js` scenes declaratively and state-driven in Svelte apps.
@@ -63,7 +67,7 @@ Awesome **SvelteKit** Links
   - [Framework7 Svelte](https://framework7.io/svelte/) Build full featured iOS, Android & Desktop apps
 
 - CMS
-- [editable-website](https://github.com/michael/editable-website) A SvelteKit template for building CMS-free editable websites. Try [DEMO](https://editable.website)
+  - [editable-website](https://github.com/michael/editable-website) A SvelteKit template for building CMS-free editable websites. Try [DEMO](https://editable.website)
 
 ## Animation
 
@@ -131,6 +135,8 @@ Awesome **SvelteKit** Links
 - [SvelteLab](https://github.com/SvelteLab/SvelteLab)
 - [Appwrite Console](https://github.com/appwrite/console)
 - [Chat UI - GPT Style](https://github.com/huggingface/chat-ui)
+- _Building Efficient, Resilient Web Apps With SvelteKit:_ [Blog](https://geoffrich.net/posts/thatconf-2023/), [Deck](https://thatconf-slides-2023.vercel.app/), [Repo](https://github.com/geoffrich/sveltunes)
+-
 
 ## FQA
 
