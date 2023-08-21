@@ -1,4 +1,3 @@
-
 export interface Subject {
 	id: string;
 	displayName: string;
