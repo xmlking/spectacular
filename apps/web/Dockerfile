@@ -1,78 +1,112 @@
-FROM node:lts-bullseye-slim AS builder
-#https://turbo.build/repo/docs/handbook/deploying-with-docker
-#https://github.com/vercel/turbo/tree/main/examples/with-docker
+# syntax=docker/dockerfile:1.4
+############################################################
+### stage_tini
+### add tini to act as PID1 for proper signal handling
+############################################################
+FROM --platform=${BUILDPLATFORM} alpine as tini
+ENV TINI_VERSION v0.19.0
+# Use BuildKit to help translate architecture names
+ARG TARGETPLATFORM
+# translating Docker's TARGETPLATFORM into tini download names
+RUN case ${TARGETPLATFORM} in \
+	"linux/amd64")  TINI_ARCH=amd64  ;; \
+	"linux/arm64")  TINI_ARCH=arm64  ;; \
+	"linux/arm/v7") TINI_ARCH=armhf  ;; \
+	"linux/arm/v6") TINI_ARCH=armel  ;; \
+	"linux/386")    TINI_ARCH=i386   ;; \
+	esac \
+	&& wget -q https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-static-${TINI_ARCH} -O /tini \
+	&& chmod +x /tini
 
-# Install pnpm
-ENV PNPM_HOME="/root/.local/share/pnpm"
-ENV PATH="${PATH}:${PNPM_HOME}"
-SHELL ["/bin/bash", "-c"]
-RUN npm install --global pnpm \
-  && SHELL=bash pnpm setup \
-  && source /root/.bashrc
+############################################################
+### stage_build
+### this stage builds the application.
+############################################################
+FROM --platform=${BUILDPLATFORM} node:20 as build
+
+# install pnpm
+#RUN curl -fsSL https://get.pnpm.io/install.sh | sh -; node - add --global pnpm
+RUN corepack enable; corepack prepare pnpm@8.6.0 --activate
+
+# build-args are used in vite.config.ts
+ARG BUILD_TIME
+ARG BUILD_VERSION
+ARG BUILD_REVISION
 
 WORKDIR /app
-RUN pnpm install -g turbo
+
+# clean install all dependencies (except optional)
+COPY ./patches/ ./patches/
+COPY .npmrc package.json pnpm-lock.yaml ./
+RUN pnpm fetch --no-optional --ignore-scripts --unsafe-perm
+RUN pnpm install -r --offline --no-optional --ignore-scripts --unsafe-perm
+
 COPY . .
-RUN turbo prune --scope=@fullpower-stack/nextjs --docker
 
-# Add lockfile and package.json's of isolated subworkspace
-FROM node:lts-bullseye-slim AS installer
+# build SvelteKit app
+RUN pnpm build
+
+############################################################
+### stage_runtime
+### this stage installs the runtime dependencies.
+############################################################
+FROM --platform=${BUILDPLATFORM} node:20-alpine as runtime
+
+# install pnpm
+RUN corepack enable; corepack prepare pnpm@8.6.0 --activate
+
 WORKDIR /app
 
-# Install pnpm
-ENV PNPM_HOME="/root/.local/share/pnpm"
-ENV PATH="${PATH}:${PNPM_HOME}"
-SHELL ["/bin/bash", "-c"]
-RUN npm install --global pnpm \
-  && SHELL=bash pnpm setup \
-  && source /root/.bashrc
+# clean install dependencies, no devDependencies, no prepare script
+COPY ./patches/ ./patches/
+COPY .npmrc package.json pnpm-lock.yaml ./
+RUN pnpm fetch --prod --unsafe-perm --ignore-scripts --unsafe-perm
+RUN pnpm install -r --offline --prod
+RUN pnpm prune --prod --no-optional
 
-# First install the dependencies (as they change less often)
-COPY .gitignore .gitignore
-COPY --from=builder /app/out/json/ .
-COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-
-# https://playwright.dev/docs/browsers
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
-ENV STANDALONE_BUILD true
-
-# Build the project
-COPY --from=builder /app/out/full/ .
-COPY turbo.json turbo.json
-RUN pnpm install
-RUN pnpm turbo run build --filter=@fullpower-stack/nextjs
-
-# Run the app
-FROM node:lts-bullseye-slim AS runner
+############################################################
+### stage_final
+### this stage only needs the compiled application and the runtime dependencies.
+############################################################
+#FROM gcr.io/distroless/nodejs:19 as final
+# FROM gcr.io/distroless/nodejs:18-debug as final
+FROM cgr.dev/chainguard/node:20 as final
 ENV NODE_ENV production
-ENV STANDALONE_BUILD true
-
-# Install pnpm
-ENV PNPM_HOME="/root/.local/share/pnpm"
-ENV PATH="${PATH}:${PNPM_HOME}"
-SHELL ["/bin/bash", "-c"]
-RUN npm install --global pnpm \
-  && SHELL=bash pnpm setup \
-  && source /root/.bashrc
-
 
 WORKDIR /app
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-USER nextjs
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=installer --chown=nextjs:nodejs /app/apps/nextjs/.next/standalone ./
-COPY --from=installer --chown=nextjs:nodejs /app/apps/nextjs/.next/static ./apps/nextjs/.next/static
-
-COPY --from=installer /app/apps/nextjs/public ./apps/nextjs/public
-COPY --from=installer /app/apps/nextjs/next.config.js ./apps/nextjs/next.config.js
-COPY --from=installer /app/apps/nextjs/package.json ./apps/nextjs/package.json
+COPY --from=tini --chown=node:node /tini /tini
+# ENTRYPOINT ["/tini", "-s", "--", "/nodejs/bin/node"]
+ENTRYPOINT ["/tini", "-s", "--", "/usr/bin/node"]
+COPY --from=build --chown=node:node /app/build ./build
+# COPY --from=build --chown=node:node /app/config ./config
+COPY --from=runtime --chown=node:node /app/package.json ./package.json
+COPY --from=runtime --chown=node:node /app/node_modules ./node_modules
 
 EXPOSE 3000
-ENV PORT 3000
+#USER nonroot:nonroot
 
+# Metadata params
+ARG TARGET=svelte-starter-kit
+ARG DOCKER_REGISTRY=ghcr.io
+ARG DOCKER_CONTEXT_PATH=xmlking
+ARG BUILD_TIME
+ARG BUILD_VERSION
+ARG VCS_URL=svelte-starter-kit
+ARG VCS_REF=1
+ARG VENDOR=xmlking
 
-CMD node apps/nextjs/server.js
+# Metadata
+LABEL org.opencontainers.image.created=$BUILD_TIME \
+	org.opencontainers.image.name="${TARGET}" \
+	org.opencontainers.image.title="${TARGET}" \
+	org.opencontainers.image.description="Example of SvelteKit multi-stage docker build" \
+	org.opencontainers.image.url=https://github.com/xmlking/$VCS_URL \
+	org.opencontainers.image.source=https://github.com/xmlking/$VCS_URL \
+	org.opencontainers.image.revision=$VCS_REF \
+	org.opencontainers.image.version=$BUILD_VERSION \
+	org.opencontainers.image.authors=sumanth \
+	org.opencontainers.image.vendor=$VENDOR \
+	org.opencontainers.image.licenses=MIT \
+	org.opencontainers.image.documentation="docker run -it -e NODE_ENV=production -p 3000:3000  ${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}${DOCKER_CONTEXT_PATH}/${TARGET}:${BUILD_VERSION}"
+
+CMD ["build"]

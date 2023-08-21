@@ -1,0 +1,9 @@
+mutation InsertDevicePool($poolId: uuid!, $deviceId: uuid!) {
+	insert_device_pool_one(object: { poolId: $poolId, deviceId: $deviceId }) {
+		associationId: id
+		poolId
+		deviceId
+		createdAt
+		createdBy
+	}
+}

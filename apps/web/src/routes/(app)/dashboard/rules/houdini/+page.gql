@@ -1,0 +1,27 @@
+query SearchSharedRules1($limit: Int = 50, $offset: Int = 0, $displayName: String! = "%%")
+@cache(policy: NetworkOnly) {
+	rules(
+		limit: $limit
+		offset: $offset
+		order_by: [{ updatedAt: desc_nulls_last }]
+		where: { displayName: { _like: $displayName }, shared: { _eq: true } }
+	) {
+		id
+		displayName
+		description
+		tags
+		annotations
+		shared
+		source
+		sourcePort
+		destination
+		destinationPort
+		protocol
+		direction
+		action
+		appId
+		weight
+		updatedBy
+		updatedAt
+	}
+}

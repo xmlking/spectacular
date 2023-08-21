@@ -1,0 +1,24 @@
+mutation UpsertDevice($input: devices_insert_input!) {
+	insert_devices_one(
+		object: $input
+		on_conflict: {
+			update_columns: [ip, version]
+			constraint: devices_display_name_organization_key
+			where: { deletedAt: { _is_null: true } }
+		}
+	) {
+		annotations
+		ip
+		id
+		displayName
+		tags
+		organization
+		description
+		version
+		createdAt
+		createdBy
+		updatedAt
+		updatedBy
+		deletedAt
+	}
+}

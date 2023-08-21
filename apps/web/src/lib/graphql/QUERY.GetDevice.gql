@@ -1,0 +1,17 @@
+query GetDevice($id: uuid!) {
+	devices_by_pk(id: $id) {
+		id
+		ip
+		displayName
+		description
+		organization
+		tags
+		annotations
+		version
+		createdAt
+		createdBy
+		updatedAt
+		updatedBy
+		deletedAt
+	}
+}

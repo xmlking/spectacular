@@ -1,3 +1,35 @@
+/*Write your global styles here, in PostCSS syntax*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	/* FIXME: use https://tailwindcss.com/docs/typography-plugin  `prose dark:prose-invert` */
+	p,
+	h1,
+	h2,
+	h3 {
+		@apply dark:text-white;
+	}
+
+	/*!* Global CSS Variables *!*/
+	:root {
+		--column-content-hight: 445px;
+		//--column-test-muted: theme(colors.rose.300);
+		//--column-test-muted: theme(colors.rose.300 / 25%);
+	}
+}
+
+.logo img {
+	width: 15%;
+	aspect-ration: 3/2;
+	object-fit: contain;
+	mix-blend-mode: color-burn;
+}
+
+pre {
+	//background-color: rgb(242, 242, 242);
+	white-space: pre-wrap;
+	width: 100%;
+}

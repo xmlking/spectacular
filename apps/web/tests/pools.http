@@ -1,0 +1,223 @@
+###
+@graphqlEndpoint =  {{$dotenv HASURA_GRAPHQL_ENDPOINT}}/v1/graphql
+@graphqlAdminToken = {{$dotenv HASURA_GRAPHQL_ADMIN_SECRET}}
+# set token without `''`
+@graphqlUserToken =
+###
+
+### IntrospectionQuery
+# @name IntrospectionQuery
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+x-hasura-admin-secret: {{graphqlAdminToken}}
+
+query IntrospectionQuery {
+	__schema {
+		types {
+			name
+			description
+		}
+		directives {
+			name
+			description
+			locations
+		}
+	}
+}
+
+### List Active Pools
+# @name listPools
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+Authorization: Bearer {{graphqlUserToken}}
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles:  user manager
+x-hasura-role: manager
+x-hasura-org-id: chinthagunta
+x-hasura-user-id: xmlking@gmail.com
+
+query ListPools($limit: Int = 50, $offset: Int = 0, $order_by: [pools_order_by!] = [{updatedAt: desc_nulls_last}]) {
+  pools(limit: $limit, offset: $offset, order_by: $order_by) {
+	tags
+	createdBy
+	description
+	displayName
+	organization
+    updatedBy
+	createdAt
+	deletedAt
+	updatedAt
+	annotations
+	id
+  }
+}
+
+{
+  "limit": 5,
+  "offset": 0
+}
+
+### Search Active Pools
+# @name searchPools
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+Authorization: Bearer {{graphqlUserToken}}
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles:  user manager
+x-hasura-role: manager
+x-hasura-org-id: chinthagunta
+x-hasura-user-id: xmlking@gmail.com
+
+query SearchPools($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [pools_order_by!] = [{updatedAt: desc_nulls_last}]) {
+  pools(order_by: $orderBy, limit: $limit, offset: $offset, where: {displayName: {_like: $filter}}) {
+    tags
+    createdBy
+    description
+    displayName
+    organization
+    updatedBy
+    createdAt
+    deletedAt
+    updatedAt
+    annotations
+    id
+  }
+}
+
+{
+  "filter": "%sumanth%",
+  "limit": 2
+}
+
+###
+@firstPoolId =  {{listPools.response.body.$.data.pools[0].id}}
+###
+
+### getPool by Id
+# @name getPool
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+Authorization: Bearer {{graphqlUserToken}}
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles:  user manager
+x-hasura-role: manager
+x-hasura-org-id: chinthagunta
+x-hasura-user-id: xmlking@gmail.com
+
+query GetPool($id: uuid!) {
+  pools_by_pk(id: $id) {
+    id
+    displayName
+    description
+    organization
+    tags
+    annotations
+    createdAt
+    createdBy
+    updatedAt
+    updatedBy
+    deletedAt
+  }
+}
+
+{
+  "id": "{{firstPoolId}}"
+}
+
+### Create Pool
+# organization = x-hasura-org-id
+# createdBy = x-hasura-user-id
+# @name createPool
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+Authorization: Bearer {{graphqlUserToken}}
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles:  user manager
+x-hasura-role: manager
+x-hasura-org-id: chinthagunta
+x-hasura-user-id: xmlking@gmail.com
+
+mutation CreatePool($data: pools_insert_input!) {
+  insert_pools_one(object: $data) {
+    id
+    displayName
+	description
+	tags
+	annotations
+  }
+}
+
+{
+  "data": {
+    "displayName": "1_SumouserPool",
+    "description":"SumouserPool Description",
+    "tags":["tz","us"],
+    "annotations":"sumanthKey=>SumanthValue"
+  }
+}
+###
+@createdPoolId =  {{createPool.response.body.$.data.insert_pools_one.id}}
+###
+
+### Update Pool
+# organization = x-hasura-org-id
+# createdBy = x-hasura-user-id
+# @name updatePool
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+Authorization: Bearer {{graphqlUserToken}}
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles:  user manager
+x-hasura-role: manager
+x-hasura-org-id: chinthagunta
+x-hasura-user-id: xmlking@gmail.com
+
+mutation UpdatePool($id: uuid!, $data: pools_set_input!) {
+  update_pools_by_pk(pk_columns: {id: $id}, _set: $data) {
+    id
+    displayName
+    description
+	tags
+	annotations
+    updatedAt
+  }
+}
+
+{
+  "id":"{{createdPoolId}}",
+  "data": {
+	"description":"SumouserPool Description updated v1",
+    "tags":["tz","us"],
+    "annotations":"updatedSumanthKey=>updatedSumanthValue"
+  }
+}
+
+### Delete Pool
+# if null returned, either ID is not found or this user don't have permissions to delete
+# @name deletePool
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+Authorization: Bearer {{graphqlUserToken}}
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles:  user manager
+x-hasura-role: manager
+x-hasura-org-id: chinthagunta
+x-hasura-user-id: xmlking@gmail.com
+
+mutation DeletePool($id: uuid!, $deletedAt: timestamptz!) {
+	update_pools_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+		displayName
+	}
+}
+
+{
+  "id": "{{createdPoolId}}",
+  "deletedAt": "{{$localDatetime iso8601}}"
+}

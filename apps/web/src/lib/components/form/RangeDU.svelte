@@ -1,0 +1,49 @@
+<script lang="ts">
+	import { clsx } from 'clsx';
+	import { Helper } from 'flowbite-svelte';
+	import type { FormPathLeaves } from 'sveltekit-superforms';
+	import { formFieldProxy } from 'sveltekit-superforms/client';
+	import type { AnyZodObject, z } from 'zod';
+	import { getFormContext } from './forms';
+
+	// eslint-disable-next-line no-undef
+	type T = $$Generic<AnyZodObject>;
+	export let field: FormPathLeaves<z.infer<T>>;
+	export let labelClasses = '';
+	export let labelPosition: 'before' | 'after' = 'before';
+
+	const defaultClasses = 'range';
+	const defaultLabelClasses = 'label';
+	const { superform } = getFormContext();
+	const { path, value, errors, constraints } = formFieldProxy(superform, field);
+
+	console.log(clsx(defaultClasses, $$props.class));
+</script>
+
+<label class={clsx(defaultLabelClasses, labelClasses)}>
+	{#if labelPosition == 'before'}
+		<span class:text-error={$errors} class="label-text"><slot /></span>
+	{/if}
+	<input
+		type="range"
+		name={field}
+		bind:value={$value}
+		on:change
+		on:click
+		on:keydown
+		on:keypress
+		on:keyup
+		data-invalid={$errors}
+		aria-invalid={Boolean($errors)}
+		aria-errormessage={Array($errors).join('. ')}
+		{...$constraints}
+		{...$$restProps}
+		class={clsx(defaultClasses, $$props.class)}
+	/>
+	{#if labelPosition == 'after'}
+		<span class:text-error={$errors} class="label-text"><slot /></span>
+	{/if}
+</label>
+{#if $errors}
+	<Helper class="mt-2" color="red">{$errors}</Helper>
+{/if}

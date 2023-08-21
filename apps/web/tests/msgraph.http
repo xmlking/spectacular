@@ -1,0 +1,46 @@
+
+
+###
+@tenantId = {{$dotenv MICROSOFT_GRAPH_TENANT_ID}}
+@graphEndpoint = {{$dotenv MICROSOFT_GRAPH_ENDPOINT}}/v1.0
+@authEndpoint = https://login.microsoftonline.com/{{tenantId}}/oauth2/v2.0/token
+@clientId = {{$dotenv MICROSOFT_GRAPH_CLIENT_ID}}
+@clientSecret = {{$dotenv MICROSOFT_GRAPH_CLIENT_SECRET}}
+@scope = {{$dotenv MICROSOFT_GRAPH_SCOPES}}
+###
+
+
+###
+# @name getToken
+POST {{authEndpoint}}
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{clientId}}
+&scope={{scope}}
+&client_secret={{clientSecret}}
+&grant_type=client_credentials
+
+###
+@token =  {{getToken.response.body.$.access_token}}
+###
+
+###
+# @name getUsers
+GET {{graphEndpoint}}/users
+?$count=true
+&$top=10
+&$search="displayName:Subash"
+&$select=id,displayName,userPrincipalName
+Authorization: Bearer {{token}}
+ConsistencyLevel: eventual
+
+###
+# @name getGroups
+GET {{graphEndpoint}}/groups
+?$count=true
+&$top=10
+&$search="displayName:threatzero"
+&$select=id,displayName,securityIdentifier
+Authorization: Bearer {{token}}
+ConsistencyLevel: eventual
+

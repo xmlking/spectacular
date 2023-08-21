@@ -1,0 +1,34 @@
+### Pull Schema
+# @name IntrospectionQuery
+POST https://beta.pokeapi.co/graphql/v1beta
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query IntrospectionQuery {
+	__schema {
+		types {
+			name
+			description
+		}
+		directives {
+			name
+			description
+			locations
+		}
+	}
+}
+
+### list pokemon
+# @name ListPoki
+POST https://beta.pokeapi.co/graphql/v1beta
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query samplePokeAPIquery {
+	pokemon_v2_pokemon(limit: 2) {
+		id
+		name
+		height
+		weight
+	}
+}

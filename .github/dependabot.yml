@@ -1,0 +1,31 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    labels:
+      - dependencies
+      - actions
+      - 'Skip Changelog'
+    schedule:
+      day: sunday
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /
+    labels:
+      - dependencies
+      - docker
+      - 'Skip Changelog'
+    schedule:
+      day: sunday
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /
+    labels:
+      - dependencies
+      - node
+      - 'Skip Changelog'
+    schedule:
+      day: sunday
+      interval: weekly

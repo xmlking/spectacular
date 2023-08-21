@@ -1,7 +1,7 @@
 node_modules
 /node_modules
 /.svelte
-/.svelte-kit
+.svelte-kit
 /package
 .vercel
 .output
@@ -67,10 +67,10 @@ pids
 
 # environment files #
 #####################
-/.env
-/.env.*
-/.env.local
-/.env.*.local
+.env
+.env.*
+.env.local
+.env.*.local
 !.env.example
 !.env.local.example
 !.env.production.example

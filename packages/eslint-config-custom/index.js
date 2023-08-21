@@ -5,9 +5,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:jsdoc/recommended-typescript-error',
+    'plugin:jsdoc/recommended-error',
     'plugin:svelte/recommended',
     'plugin:import/recommended',
-    'plugin:jsdoc/recommended-error',
     'turbo',
     'prettier'
   ],

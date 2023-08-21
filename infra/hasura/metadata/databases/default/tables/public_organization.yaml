@@ -1,0 +1,23 @@
+table:
+  name: organization
+  schema: public
+is_enum: true
+select_permissions:
+  - role: engine
+    permission:
+      columns:
+        - description
+        - value
+      filter: {}
+  - role: manager
+    permission:
+      columns:
+        - description
+        - value
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - description
+        - value
+      filter: {}

@@ -1,0 +1,18 @@
+/** Dispatch event on click outside of node */
+// https://svelte.dev/tutorial/actions
+export function clickOutside(node: HTMLElement, callback: () => void) {
+	const handleClick = (event: MouseEvent) => {
+		if (!event?.target) return;
+		if (node && !node.contains(event.target as Node) && !event.defaultPrevented) {
+			callback();
+		}
+	};
+
+	document.addEventListener('click', handleClick, true);
+
+	return {
+		destroy() {
+			document.removeEventListener('click', handleClick, true);
+		}
+	};
+}

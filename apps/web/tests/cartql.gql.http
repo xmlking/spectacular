@@ -1,0 +1,130 @@
+### Docs: https://cartql.com/
+
+### Pull Schema
+# @name IntrospectionQuery
+POST https://api.cartql.com
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query IntrospectionQuery {
+	__schema {
+		types {
+			name
+			description
+		}
+		directives {
+			name
+			description
+			locations
+		}
+	}
+}
+
+### create cart
+# @name GetOrCreateCart
+POST https://api.cartql.com
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query GetOrCreateCart {
+  cart(id: "ck5r8d5b500003f5o2aif0v2b", currency: { code: USD }) {
+    id
+    isEmpty
+    totalItems
+    items {
+      id
+	  name
+    }
+  }
+}
+
+### Set Cart Items
+# @name SetCartItems
+POST https://api.cartql.com
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation SetCartItems {
+  setItems(
+    input: {
+      cartId: "ck5r8d5b500003f5o2aif0v2b"
+      items: [
+        {
+          id: "5e3293a3462051"
+          name: "Full Logo Tee"
+          description: "Purple Triblend / L"
+          images: ["full-logo-tee.png"]
+          price: 2000
+          quantity: 10
+          metadata: { customEngraving: "GraphQL" }
+        }
+        {
+          id: "5e3293a3462051"
+          name: "Cap"
+          description: "Blue Cap / L"
+          images: ["cap.png"]
+          price: 1000
+          quantity: 1
+        }
+      ]
+    }
+  ) {
+    id
+    totalItems
+    items {
+      id
+      name
+      lineTotal {
+        amount
+      }
+      metadata
+    }
+  }
+}
+
+### Checkout
+# @name Checkout
+POST https://api.cartql.com
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation Checkout {
+  checkout(
+    input: {
+      cartId: "ck5r8d5b500003f5o2aif0v2b"
+      email: "jamie@cartql.com"
+      shipping: {
+        name: "Jamie Barton"
+        line1: "123 Cart Lane"
+        city: "Newcastle upon Tyne"
+        postalCode: "NE14 CQL"
+        country: "England"
+      }
+    }
+  ) {
+    id
+    email
+    billing {
+      name
+      line1
+      city
+      postalCode
+      country
+    }
+    shippingTotal {
+      amount
+      formatted
+    }
+    taxTotal {
+      amount
+      formatted
+    }
+    subTotal {
+      amount
+      formatted
+    }
+    grandTotal {
+      formatted
+    }
+  }
+}

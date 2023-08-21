@@ -1,0 +1,18 @@
+mutation UpdatePolicy(
+	$policyId: uuid!
+	$policyData: policies_set_input!
+	$ruleId: uuid!
+	$ruleData: rules_set_input!
+	$skipRuleUpdate: Boolean = false
+) {
+	update_policies_by_pk(pk_columns: { id: $policyId }, _set: $policyData) {
+		id
+		subjectDisplayName
+		updatedAt
+	}
+	update_rules_by_pk(pk_columns: { id: $ruleId }, _set: $ruleData) @skip(if: $skipRuleUpdate) {
+		id
+		displayName
+		updatedAt
+	}
+}

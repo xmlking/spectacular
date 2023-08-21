@@ -164,6 +164,12 @@ Add ORIGIN Env Varaible i.e., `ORIGIN=http://localhost:3000 node build/index.js`
   - **Option 1:** add `src/service-worker.js` as documented in SvelteKit [Docs](https://kit.svelte.dev/docs/service-workers)
   - **Option 2:** If you need a more full-flegded but also more opinionated solution, we recommend looking at solutions like [Vite PWA plugin](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html), which uses [Workbox](https://web.dev/learn/pwa/workbox).
 
+- How to set up [Svelte-Inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/inspector.md)?
+	-  with environment variables, set: `SVELTE_INSPECTOR_TOGGLE=control-shift`
+	-  with Svelte config: add `vitePlugin: { inspector: true}` to `svelte.config.js`
+	-  open up your project in the browser. Then use the key combo `Command + Shift` to activate
+	-  For [Setting up Svelte-Inspector with VS Code + WSL](https://dev.to/mikehtmlallthethings/setting-up-svelte-inspector-with-vs-code-wsl-ao)
+ 
 ## Blogs
 
 - [https://joyofcode.xyz/](https://joyofcode.xyz/)

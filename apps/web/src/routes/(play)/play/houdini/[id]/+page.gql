@@ -1,0 +1,6 @@
+query GetPolicy2($id: uuid!) {
+	policies_by_pk(id: $id) {
+		id
+		...Policy_all_fields
+	}
+}

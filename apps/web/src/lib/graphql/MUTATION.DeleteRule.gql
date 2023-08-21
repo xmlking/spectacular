@@ -1,0 +1,18 @@
+mutation DeleteRule($id: uuid!, $deletedAt: timestamptz!) {
+	# CASCADING SOFT DELETE POLICIES
+	update_rules_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+		displayName
+	}
+	update_policies(where: { ruleId: { _eq: $id } }, _set: { deletedAt: $deletedAt }) {
+		affected_rows
+		returning {
+			id
+		}
+	}
+}
+
+# mutation DeleteRule($id: uuid!) {
+# 	delete_rules_by_pk(id: $id) {
+# 		displayName
+# 	}
+# }

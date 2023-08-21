@@ -1,0 +1,9 @@
+mutation UpdatePool($id: uuid!, $data: pools_set_input!) {
+	update_pools_by_pk(pk_columns: { id: $id }, _set: $data) {
+		id
+		displayName
+		description
+		tags
+		annotations
+	}
+}

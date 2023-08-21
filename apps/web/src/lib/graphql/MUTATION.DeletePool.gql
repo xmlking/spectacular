@@ -1,0 +1,12 @@
+mutation DeletePool($id: uuid!, $deletedAt: timestamptz!) {
+	# ADD CASCADING SOFT DELETE INTO DEVICE_POOL Table
+	update_pools_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+		displayName
+	}
+}
+
+# mutation DeletePool($id: uuid!) {
+# 	delete_pools_by_pk(id: $id) {
+# 		displayName
+# 	}
+# }

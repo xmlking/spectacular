@@ -1,0 +1,7 @@
+mutation UpdateDevice($id: uuid!, $data: devices_set_input!) {
+	update_devices_by_pk(pk_columns: { id: $id }, _set: $data) {
+		id
+		displayName
+		updatedAt
+	}
+}

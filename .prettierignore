@@ -13,3 +13,17 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 package-lock.json
 yarn.lock
+
+.vercel_build_output/**
+static/**
+/coverage
+CHANGELOG.md
+src/lib/models/types/**
+.idea
+dev-dist
+
+/infra/helm/templates/deployment.yaml
+infra/helm/templates/ingress.yaml
+schema.graphql
+$houdini
+infra/hasura
