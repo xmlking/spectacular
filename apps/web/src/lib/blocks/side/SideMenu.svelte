@@ -3,6 +3,7 @@
 	import { Drawer } from '$lib/components';
 	import { sidebarOpen } from '$lib/stores/sidebar.store';
 	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
+	import { Icon } from 'flowbite-svelte-icons';
 	import { IconOutline } from 'svelte-heros-v2';
 
 	// custom style
@@ -24,7 +25,9 @@
 					label="Dashboard"
 				>
 					<svelte:fragment slot="icon"
-						><IconOutline name="chart-pie-outline" class="mr-2 text-red-500 dark:text-blue-500" /></svelte:fragment
+						><Icon name="chart-pie-outline" size="md" class="mr-2 text-red-500 dark:text-blue-500" />
+						<!-- <IconOutline name="chart-pie-outline" class="mr-2 text-red-500 dark:text-blue-500" /> -->
+						</svelte:fragment
 					>
 				</SidebarItem>
 				<SidebarItem label="Reports" {spanClass}>
