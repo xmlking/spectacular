@@ -14,9 +14,10 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 // TODO https://github.com/tradingstrategy-ai/frontend/blob/master/src/lib/components/datatable/DataTable.svelte
 -->
 <script lang="ts">
-	import { Button, ButtonGroup, ChevronDown, ChevronUp, Select } from 'flowbite-svelte';
+	import { Button, ButtonGroup, Select } from 'flowbite-svelte';
 	import type { TableViewModel } from 'svelte-headless-table';
 	import { Render, Subscribe } from 'svelte-headless-table';
+	import { IconSolid } from 'svelte-heros-v2';
 
 	export let tableViewModel: TableViewModel<any, any>;
 	export let hasSearch = true;
@@ -87,9 +88,9 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 									<div class="flex items-center">
 										<Render of={cell.render()} />
 										{#if props.sort.order === 'asc'}
-											<ChevronDown size="16" variation="solid" class="ml-1" />
+											<IconSolid name="chevron-down-solid" width="16" height="16" class="ml-1" />
 										{:else if props.sort.order === 'desc'}
-											<ChevronUp size="16" variation="solid" class="ml-1" />
+											<IconSolid name="chevron-up-solid" width="16"  height="16" class="ml-1" />
 										{/if}
 										{#if props.resize && !props.resize.disabled}
 											<div class="resizer" use:props.resize.drag />

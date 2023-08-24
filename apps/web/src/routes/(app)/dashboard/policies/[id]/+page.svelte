@@ -18,8 +18,8 @@
 	} from '$lib/models/enums';
 	import { updatePolicyKeys as keys } from '$lib/models/schema';
 	import { Logger } from '$lib/utils';
-	import { A, Breadcrumb, BreadcrumbItem, Heading, Helper, UserCircle } from 'flowbite-svelte';
-	import { DevicePhoneMobile, RectangleGroup, User, UserGroup } from 'svelte-heros-v2';
+	import { A, Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
+	import { IconOutline } from 'svelte-heros-v2';
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
@@ -101,15 +101,15 @@
 			>
 				<b slot="prepend">
 					{#if $form.subjectType == 'group'}
-						<UserGroup />
+						<IconOutline name="user-group-outline" />
 					{:else if $form.subjectType == 'service_account'}
-						<UserCircle />
+						<IconOutline name="user-circle-outline" />
 					{:else if $form.subjectType == 'device'}
-						<DevicePhoneMobile />
+						<IconOutline name="device-phone-mobile-outline" />
 					{:else if $form.subjectType == 'device_pool'}
-						<RectangleGroup />
+						<IconOutline name="rectangle-group-outline" />
 					{:else}
-						<User />
+						<IconOutline name="user-outline" />
 					{/if}
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>

@@ -2,9 +2,9 @@
 	import { default as Frame } from '$lib/components/utils/Frame.svelte';
 	import { clsx } from 'clsx';
 	import { CloseButton } from 'flowbite-svelte';
-	import { Check, ExclamationTriangle, HandRaised, InformationCircle } from 'svelte-heros-v2';
+	import { IconOutline, IconSolid } from 'svelte-heros-v2';
 	import { slide } from 'svelte/transition';
-	import { dismissToast, ToastLevel, toasts } from './store';
+	import { ToastLevel, dismissToast, toasts } from './store';
 
 	export let divClass = 'w-full max-w-xs p-4 ';
 
@@ -47,13 +47,13 @@
 				<div class="flex items-center">
 					<Frame color={toast.type} rounded class={iconClass}>
 						{#if toast.type === ToastLevel.Success}
-							<Check size="10" variation="solid" ariaLabel="Success icon" />
+							<IconSolid name="check-solid" width="10" height="10" ariaLabel="Success icon" />
 						{:else if toast.type === ToastLevel.Error}
-							<ExclamationTriangle size="10" ariaLabel="Error icon" />
+							<IconOutline name="exclamation-triangle-outline" width="10" height="10" ariaLabel="Error icon" />
 						{:else if toast.type === ToastLevel.Warning}
-							<HandRaised size="10" ariaLabel="Warning icon" />
+							<IconOutline name="hand-raised-outline"  width="10" height="10" ariaLabel="Warning icon" />
 						{:else}
-							<InformationCircle size="10" ariaLabel="Info icon" />
+							<IconOutline name="information-circle-outline"  width="10" height="10" ariaLabel="Info icon" />
 						{/if}
 					</Frame>
 					<div class="w-full text-sm font-normal">

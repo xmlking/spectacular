@@ -20,14 +20,10 @@
 	import { createPolicyKeys as keys } from '$lib/models/schema';
 	import type { Subject } from '$lib/models/types';
 	import { Logger } from '$lib/utils';
-	import { Breadcrumb, BreadcrumbItem, Heading, Helper, UserCircle } from 'flowbite-svelte';
+	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 	import {
-		DevicePhoneMobile,
-		MagnifyingGlass,
-		RectangleGroup,
-		User,
-		UserGroup
+		IconOutline
 	} from 'svelte-heros-v2';
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms/client';
@@ -260,15 +256,15 @@
 			>
 				<b slot="prepend">
 					{#if $form.subjectType == 'group'}
-						<UserGroup />
+						<IconOutline name="user-group-outline" />
 					{:else if $form.subjectType == 'service_account'}
-						<UserCircle />
+						<IconOutline name="user-circle-outline" />
 					{:else if $form.subjectType == 'device'}
-						<DevicePhoneMobile />
+						<IconOutline name="device-phone-mobile-outline" />
 					{:else if $form.subjectType == 'device_pool'}
-						<RectangleGroup />
+						<IconOutline name="rectangle-group-outline" />
 					{:else}
-						<User />
+						<IconOutline name="user-outline" />
 					{/if}
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
@@ -298,7 +294,7 @@
 				--border-focused="1px solid blue"
 			>
 				<b slot="prepend">
-					<MagnifyingGlass />
+					<IconOutline name="magnifying-glass-outline" />
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
 					<input

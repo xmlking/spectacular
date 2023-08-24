@@ -27,14 +27,7 @@
 		addSortBy,
 		addTableFilter
 	} from 'svelte-headless-table/plugins';
-	import {
-		DevicePhoneMobile,
-		RectangleGroup,
-		ShieldCheck,
-		User,
-		UserCircle,
-		UserGroup
-	} from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 	import { default as SelectFetch } from 'svelte-select';
 	import { TimeDistance } from 'svelte-time-distance';
 	import { writable } from 'svelte/store';
@@ -284,7 +277,7 @@
 <form data-sveltekit-noscroll bind:this={searchForm}>
 	<Navbar border={true} rounded={true}>
 		<NavBrand>
-			<ShieldCheck />
+			<IconOutline name="shield-check-outline" />
 			<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
 				Policies
 			</span>
@@ -316,15 +309,15 @@
 			>
 				<b slot="prepend" class="p-2">
 					{#if $form.subjectType == 'group'}
-						<UserGroup />
+						<IconOutline name="user-group-outline" />
 					{:else if $form.subjectType == 'service_account'}
-						<UserCircle />
+						<IconOutline name="user-circle-outline" />
 					{:else if $form.subjectType == 'device'}
-						<DevicePhoneMobile />
+						<IconOutline name="device-phone-mobile-outline" />
 					{:else if $form.subjectType == 'device_pool'}
-						<RectangleGroup />
+						<IconOutline name="rectangle-group-outline" />
 					{:else}
-						<User />
+						<IconOutline name="user-outline" />
 					{/if}
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>

@@ -8,7 +8,7 @@
 
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { ArchiveBox } from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 
 	export let id: string;
 	export let id2: string;
@@ -21,7 +21,7 @@
 </script>
 
 <button on:click={handleDeleteButton}>
-	<ArchiveBox class="text-pink-700 dark:text-blue-300" />
+	<IconOutline name="archive-box-outline" class="text-pink-700 dark:text-blue-300" />
 </button>
 <!-- For Debug -->
 <slot />

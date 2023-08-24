@@ -59,7 +59,7 @@ Awesome **SvelteKit** Links
 - Icons
 
   - [flowbite-svelte-icons](https://github.com/themesberg/flowbite-svelte-icons) 480+ SVG [Flowbite icons](https://flowbite.com/icons/) components for Svelte.
-  - [heroicons](https://heroicons.com/) Icons via [svelte-heros-v2](https://github.com/shinokada/svelte-heros-v2) Icon Components.
+  - [heroicons](https://heroicons.com/) Icons via [svelte-heros-v2](https://github.com/shinokada/svelte-heros-v2) Icon Components. list of icon [names](https://svelte-heros-v2.vercel.app/outline)
 
 - Mobile
 

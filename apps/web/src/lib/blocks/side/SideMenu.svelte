@@ -3,22 +3,7 @@
 	import { Drawer } from '$lib/components';
 	import { sidebarOpen } from '$lib/stores/sidebar.store';
 	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
-	import {
-		ArrowRightOnRectangle,
-		Bell,
-		ChartPie,
-		ClipboardDocumentList,
-		Cog,
-		DevicePhoneMobile,
-		HandRaised,
-		RectangleGroup,
-		Scale,
-		ShieldCheck,
-		Squares2x2,
-		Star,
-		UserGroup,
-		Users
-	} from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 
 	// custom style
 	let spanClass = 'flex-1 ml-3 whitespace-nowrap';
@@ -36,15 +21,14 @@
 				<!--				<SidebarBrand site={{	name: 'Datablocks',href: '/',img: '/logos/6-1.svg' }}/>-->
 				<SidebarItem
 					href="/dashboard"
-					icon={{ name: ChartPie, class: 'text-red-500 mr-2 dark:text-blue-500' }}
 					label="Dashboard"
 				>
 					<svelte:fragment slot="icon"
-						><ChartPie class="mr-2 text-red-500 dark:text-blue-500" /></svelte:fragment
+						><IconOutline name="chart-pie-outline" class="mr-2 text-red-500 dark:text-blue-500" /></svelte:fragment
 					>
 				</SidebarItem>
 				<SidebarItem label="Reports" {spanClass}>
-					<svelte:fragment slot="icon"><Squares2x2 /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="squares-2x2-outline" /></svelte:fragment>
 					<svelte:fragment slot="subtext">
 						<span
 							class="ml-3 inline-flex items-center justify-center rounded-full bg-gray-200 px-2 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300"
@@ -53,7 +37,7 @@
 					</svelte:fragment>
 				</SidebarItem>
 				<SidebarItem label="Notifications" {spanClass}>
-					<svelte:fragment slot="icon"><Bell /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="bell-outline" /></svelte:fragment>
 					<svelte:fragment slot="subtext">
 						<span
 							class="ml-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-200 p-3 text-sm font-medium text-blue-600 dark:bg-blue-900 dark:text-blue-200"
@@ -66,14 +50,14 @@
 					href="/dashboard/policies"
 					active={activeUrl === '/dashboard/policies'}
 				>
-					<svelte:fragment slot="icon"><ShieldCheck /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="shield-check-outline" /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Golden Rule"
 					href="/dashboard/rules"
 					active={activeUrl === '/dashboard/rules'}
 				>
-					<svelte:fragment slot="icon"><Scale /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="scale-outline" /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Devices"
@@ -81,7 +65,7 @@
 					href="/dashboard/devices"
 					active={activeUrl === 'dashboard/devices'}
 				>
-					<svelte:fragment slot="icon"><DevicePhoneMobile /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="device-phone-mobile-outline" /></svelte:fragment>
 					<svelte:fragment slot="subtext">
 						<span
 							class="ml-3 inline-flex items-center justify-center rounded-full bg-blue-200 px-2 text-sm font-medium text-blue-600 dark:bg-blue-900 dark:text-blue-200"
@@ -94,28 +78,28 @@
 					href="/dashboard/pools"
 					active={activeUrl === 'dashboard/pool'}
 				>
-					<svelete:fragment slot="icon"><RectangleGroup /></svelete:fragment>
+					<svelete:fragment slot="icon"><IconOutline name="rectangle-group-outline" /></svelete:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Users"
 					href="/dashboard/users"
 					active={activeUrl === '/dashboard/users'}
 				>
-					<svelte:fragment slot="icon"><Users /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="users-outline" /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Tenants"
 					href="/dashboard/tenants"
 					active={activeUrl === '/dashboard/tenants'}
 				>
-					<svelte:fragment slot="icon"><UserGroup /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="user-group-outline" /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Settings"
 					href="/dashboard/settings"
 					active={activeUrl === '/dashboard/settings'}
 				>
-					<svelte:fragment slot="icon"><Cog /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="cog-outline" /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					href="/auth/signout?callbackUrl=/blog"
@@ -123,18 +107,18 @@
 					data-sveltekit-preload-code="off"
 					label="Sign Out"
 				>
-					<svelte:fragment slot="icon"><ArrowRightOnRectangle /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="arrow-right-on-rectangle-outline" /></svelte:fragment>
 				</SidebarItem>
 			</SidebarGroup>
 			<SidebarGroup border>
 				<SidebarItem label="Upgrade to Pro">
-					<svelte:fragment slot="icon"><Star /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="star-outline" /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem label="Documentation">
-					<svelte:fragment slot="icon"><ClipboardDocumentList /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="clipboard-document-list-outline" /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem label="Help">
-					<svelte:fragment slot="icon"><HandRaised /></svelte:fragment>
+					<svelte:fragment slot="icon"><IconOutline name="hand-raised-outline" /></svelte:fragment>
 				</SidebarItem>
 			</SidebarGroup>
 		</SidebarWrapper>

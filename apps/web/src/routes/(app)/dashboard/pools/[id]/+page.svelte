@@ -5,14 +5,14 @@
 	import type { CustomEventProps as RemoveCustomEventProps } from '$lib/components/DeleteButton.svelte';
 	import { FloatingTextInput, Form, TagsInput } from '$lib/components/form';
 	import { DataTable } from '$lib/components/table';
-	import { ToastLevel, addToast } from '$lib/components/toast';
+	import { addToast, ToastLevel } from '$lib/components/toast';
 	import { updatePoolKeys as keys } from '$lib/models/schema';
 	import { Logger } from '$lib/utils';
-	import { Breadcrumb, BreadcrumbItem, Heading, Helper, NavBrand, Navbar } from 'flowbite-svelte';
+	import { Breadcrumb, BreadcrumbItem, Heading, Helper, Navbar, NavBrand } from 'flowbite-svelte';
 	import { GraphQLError } from 'graphql';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
-	import { DevicePhoneMobile } from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 	import { TimeDistance } from 'svelte-time-distance';
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
@@ -330,7 +330,7 @@
 {#if inPool && notInPool}
 	<Navbar class="rounded border">
 		<NavBrand>
-			<DevicePhoneMobile />
+			<IconOutline name="device-phone-mobile-outline" />
 			<span class="ml-2 self-center whitespace-nowrap text-xl font-semibold dark:text-white">
 				Devices in Pool
 			</span>
@@ -340,7 +340,7 @@
 
 	<Navbar class="rounded border">
 		<NavBrand>
-			<DevicePhoneMobile />
+			<IconOutline name="device-phone-mobile-outline" />
 			<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
 				Devices NOT in Pool
 			</span>

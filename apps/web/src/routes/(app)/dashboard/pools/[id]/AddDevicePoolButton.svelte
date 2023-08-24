@@ -8,7 +8,7 @@
 
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { PlusCircle } from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 
 	export let poolId: string;
 	export let deviceId: string;
@@ -21,7 +21,7 @@
 </script>
 
 <button on:click={handleAddButton}>
-	<PlusCircle color="green" variation="outline" />
+	<IconOutline name="plus-circle-outline" color="green" />
 </button>
 <!-- For Debug -->
 <slot />

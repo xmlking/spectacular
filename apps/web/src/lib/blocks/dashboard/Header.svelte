@@ -53,7 +53,7 @@
 	<!--
 	<div>
 		<Button color="none" data-collapse-toggle="mobile-menu-3" aria-controls="mobile-menu-3" aria-expanded="false" class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
-			<Search variation="solid" />
+			<IconSolid name="search-solid" />
 		</Button>
 		<div class="hidden relative md:block">
 			<div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

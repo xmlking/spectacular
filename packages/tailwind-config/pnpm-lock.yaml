@@ -12,8 +12,8 @@ devDependencies:
     specifier: 0.1.1
     version: 0.1.1(tailwindcss@3.3.3)
   '@tailwindcss/forms':
-    specifier: 0.5.4
-    version: 0.5.4(tailwindcss@3.3.3)
+    specifier: 0.5.5
+    version: 0.5.5(tailwindcss@3.3.3)
   '@tailwindcss/line-clamp':
     specifier: 0.4.4
     version: 0.4.4(tailwindcss@3.3.3)
@@ -24,8 +24,8 @@ devDependencies:
     specifier: 10.4.15
     version: 10.4.15(postcss@8.4.28)
   daisyui:
-    specifier: 3.5.1
-    version: 3.5.1
+    specifier: 3.6.1
+    version: 3.6.1
   eslint-config-custom:
     specifier: workspace:*
     version: link:../eslint-config-custom
@@ -110,8 +110,8 @@ packages:
       tailwindcss: 3.3.3
     dev: true
 
-  /@tailwindcss/forms@0.5.4(tailwindcss@3.3.3):
-    resolution: {integrity: sha512-YAm12D3R7/9Mh4jFbYSMnsd6jG++8KxogWgqs7hbdo/86aWjjlIEvL7+QYdVELmAI0InXTpZqFIg5e7aDVWI2Q==}
+  /@tailwindcss/forms@0.5.5(tailwindcss@3.3.3):
+    resolution: {integrity: sha512-03sXK1DcPt44GZ0Yg6AcAfQln89IKdbE79g2OwoKqBm1ukaadLO2AH3EiB3mXHeQnxa3tzm7eE0x7INXSjbuug==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
@@ -200,7 +200,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001522
-      electron-to-chromium: 1.4.496
+      electron-to-chromium: 1.4.500
       node-releases: 2.0.13
       update-browserslist-db: 1.0.11(browserslist@4.21.10)
     dev: true
@@ -226,7 +226,7 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /colord@2.9.3:
@@ -255,8 +255,8 @@ packages:
     hasBin: true
     dev: true
 
-  /daisyui@3.5.1:
-    resolution: {integrity: sha512-7GG+9QXnr2qQMCqnyFU8TxpaOYJigXiEtmzoivmiiZZHvxqIwYdaMAkgivqTVxEgy3Hot3m1suzZjmt1zUrvmA==}
+  /daisyui@3.6.1:
+    resolution: {integrity: sha512-H330IdmNoQy0i6ImktBIvIVsyYujl1N2R73rDiWFjgIGPzXIFRMFh2PcmErcSzpLJmZ28jPMEwQJEJaNp6uN5g==}
     engines: {node: '>=16.9.0'}
     dependencies:
       colord: 2.9.3
@@ -276,8 +276,8 @@ packages:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
     dev: true
 
-  /electron-to-chromium@1.4.496:
-    resolution: {integrity: sha512-qeXC3Zbykq44RCrBa4kr8v/dWzYJA8rAwpyh9Qd+NKWoJfjG5vvJqy9XOJ9H4P/lqulZBCgUWAYi+FeK5AuJ8g==}
+  /electron-to-chromium@1.4.500:
+    resolution: {integrity: sha512-P38NO8eOuWOKY1sQk5yE0crNtrjgjJj6r3NrbIKtG18KzCHmHE2Bt+aQA7/y0w3uYsHWxDa6icOohzjLJ4vJ4A==}
     dev: true
 
   /escalade@3.1.1:
@@ -321,8 +321,8 @@ packages:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
 
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true

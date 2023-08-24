@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button, Input, Navbar, NavBrand, TableSearch } from 'flowbite-svelte';
-	import { MagnifyingGlassCircle, Users } from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 
 	let itemEx = [
 		['Apple MacBook Pro 17"', 'Sliver', 'Laptop', '$2999', '<a href="/">Edit</a>'],
@@ -20,7 +20,7 @@
 
 <Navbar let:hidden let:toggle border={true} rounded={true}>
 	<NavBrand>
-		<Users />
+		<IconOutline name="users-outline" />
 		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
 			Users
 		</span>
@@ -28,7 +28,7 @@
 	<div>
 		<div class="relative hidden md:block">
 			<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-				<MagnifyingGlassCircle />
+				<IconOutline name="magnifying-glass-circle-outline" />
 			</div>
 			<Input id="search-navbar" class="pl-10" placeholder="Search Users..." />
 		</div>

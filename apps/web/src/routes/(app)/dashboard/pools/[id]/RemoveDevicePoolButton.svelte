@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { MinusCircle } from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 
 	export let id: string;
 
@@ -13,7 +13,7 @@
 </script>
 
 <button on:click={handleDeleteButton}>
-	<MinusCircle color="red" variation="outline" />
+	<IconOutline name="minus-circle-outline" color="red" />
 </button>
 
 <!-- For Debugging -->

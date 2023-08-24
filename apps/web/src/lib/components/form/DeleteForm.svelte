@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { ArchiveBox } from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 
 	export let id: string;
 </script>
@@ -9,7 +9,7 @@
 	<input type="hidden" name="id" hidden value={id} />
 	<!-- <button type="submit" on:click={(e) => !confirm('Are you sure?') && e.preventDefault()}> -->
 	<button type="submit">
-		<ArchiveBox class="text-pink-700 dark:text-blue-300" />
+		<IconOutline name="archive-box-outline" class="text-pink-700 dark:text-blue-300" />
 	</button>
 </form>
 

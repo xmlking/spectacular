@@ -75,13 +75,13 @@ Use `.env.local` to override environment variables in `.env` (like API keys) for
 Once you've cloned the project and installed dependencies with `pnpm i`, start a development server:
 
 ```shell
-pnpm dev
+turbo dev --filter=./apps/web
 
 # or start the server and open the app in a new browser tab
-pnpm dev -- --open
+turbo dev --filter=./apps/web -- --open
 
 # run in debug mode
-pnpm dev:debug
+turbo dev:debug --filter=./apps/web
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
@@ -95,7 +95,7 @@ PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 pnpm dev
 To update the packages to their latest versions in `package.json`
 
 ```shell
-pnpm up --latest
+pnpm up --latest -r
 pnpm audit --fix
 ```
 

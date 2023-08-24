@@ -21,7 +21,7 @@
 	import { GraphQLError } from 'graphql';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
-	import { MagnifyingGlass, RectangleGroup } from 'svelte-heros-v2';
+	import { IconOutline } from 'svelte-heros-v2';
 	import { TimeDistance } from 'svelte-time-distance';
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
@@ -176,7 +176,7 @@
 <form data-sveltekit-noscroll>
 	<Navbar border={true} rounded={true}>
 		<NavBrand>
-			<RectangleGroup />
+			<IconOutline name="rectangle-group-outline" />
 			<span class="self-center whitespace-nowrap px-1 text-xl font-semibold dark:text-white">
 				Golden Rules
 			</span>
@@ -209,7 +209,7 @@
 			<input name="limit" bind:value={$form.limit} type="hidden" />
 			<input name="offset" bind:value={$form.offset} type="hidden" />
 			<Button type="submit" color="primary" class="!p-2.5"
-				><MagnifyingGlass size="20" /></Button
+				><IconOutline name="magnifying-glass-outline"  width="20" height="20" /></Button
 			>
 		</ButtonGroup>
 		<Button href="/dashboard/rules/create">Add Rule</Button>
