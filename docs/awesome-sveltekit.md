@@ -105,6 +105,7 @@ Awesome **SvelteKit** Links
 
 - [Svelte Sirens](https://github.com/Svelte-Sirens/svelte-sirens)
 - [Usagizmo turbo Monorepo](https://github.com/usagizmo/webapp-template)
+- [url-shortener turbo Monorepo](https://github.com/koolskateguy89/url-shortener)
 - [SvelteKit stack for enterprise](https://github.com/joysofcode/enterprise-stack)
 - [SvelteKit SaaS Demo](https://github.com/joshnuss/sveltekit-saas) - Auth.js, Prisma, Stripe
 - [SvelteKit Starter with trpc, lucia, skeleton and svelte-headless-table](https://github.com/widiu7omo/my-kit)

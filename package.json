@@ -10,6 +10,10 @@
 		"clean": "turbo clean && rm -rf node_modules",
 		"preinstall": "npx only-allow pnpm"
 	},
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
 	"devDependencies": {
 		"eslint": "8.48.0",
 		"eslint-config-custom": "workspace:*",

@@ -105,9 +105,6 @@ devDependencies:
   d3-scale:
     specifier: 4.0.2
     version: 4.0.2
-  daisyui:
-    specifier: 3.6.3
-    version: 3.6.3
   date-fns:
     specifier: 2.30.0
     version: 2.30.0
@@ -223,8 +220,8 @@ devDependencies:
     specifier: 5.2.2
     version: 5.2.2
   ui:
-    specifier: workspace:*
-    version: link:../../packages/ui
+    specifier: workspace:ui-flowbite@*
+    version: link:../../packages/ui-flowbite
   vite:
     specifier: 4.4.9
     version: 4.4.9(@types/node@20.5.7)
@@ -3662,13 +3659,6 @@ packages:
       nth-check: 2.1.1
     dev: true
 
-  /css-selector-tokenizer@0.8.0:
-    resolution: {integrity: sha512-Jd6Ig3/pe62/qe5SBPTN8h8LeUg/pT4lLgtavPf7updwwHpvFzxvOQBHYj2LZDMjUnBzgvIUSjRcf6oT5HzHFg==}
-    dependencies:
-      cssesc: 3.0.0
-      fastparse: 1.1.2
-    dev: true
-
   /css-to-react-native@3.2.0:
     resolution: {integrity: sha512-e8RKaLXMOFii+02mOlqwjbD00KSEKqblnpO9e++1aXS1fPQOpS1YoqdVHBqPjHNoxeF2mimzVqawm2KCbEdtHQ==}
     dependencies:
@@ -3866,19 +3856,6 @@ packages:
   /d3-timer@3.0.1:
     resolution: {integrity: sha512-ndfJ/JxxMd3nw31uyKoY2naivF+r29V+Lc0svZxe1JvvIRmi8hUsrMvdOwgS1o6uBHmiz91geQ0ylPP0aj1VUA==}
     engines: {node: '>=12'}
-    dev: true
-
-  /daisyui@3.6.3:
-    resolution: {integrity: sha512-VNWogAjx37H8kNYd2E/+r1OXc6dOvJTKlKltqIKAlNMFVfx2BIKPcmnVxaHQLfj2vhv1mYDBjgWj+1enQ+4yZA==}
-    engines: {node: '>=16.9.0'}
-    dependencies:
-      colord: 2.9.3
-      css-selector-tokenizer: 0.8.0
-      postcss: 8.4.28
-      postcss-js: 4.0.1(postcss@8.4.28)
-      tailwindcss: 3.3.3
-    transitivePeerDependencies:
-      - ts-node
     dev: true
 
   /data-uri-to-buffer@4.0.1:
@@ -4411,10 +4388,6 @@ packages:
 
   /fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
-    dev: true
-
-  /fastparse@1.1.2:
-    resolution: {integrity: sha512-483XLLxTVIwWK3QTrMGRqUfUpoOs/0hbQrl2oz4J0pAcm3A3bu84wxTFqGqkJzewCLdME38xJLJAxBABfQT8sQ==}
     dev: true
 
   /fastq@1.15.0:
