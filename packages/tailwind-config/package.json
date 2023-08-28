@@ -14,15 +14,22 @@
 		"format": "prettier --write --ignore-path=../../.prettierignore ."
 	},
 	"devDependencies": {
+		"postcss": "8.4.28",
+		"autoprefixer": "10.4.15",
+		"tailwindcss": "3.3.3"
+	},
+	"peerDependencies": {
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/container-queries": "0.1.1",
 		"@tailwindcss/forms": "0.5.5",
 		"@tailwindcss/line-clamp": "0.4.4",
 		"@tailwindcss/typography": "0.5.9",
-		"autoprefixer": "10.4.15",
-		"daisyui": "3.6.1",
+		"tailwindcss-animate": "1.0.6",
+		"tailwind-merge": "1.14.0",
 		"eslint-config-custom": "workspace:*",
-		"postcss": "8.4.28",
-		"tailwindcss": "3.3.3"
+		"flowbite-svelte": "0.44.4",
+		"flowbite-svelte-blocks": "0.4.14",
+		"flowbite-svelte-icons": "0.3.6",
+		"flowbite-typography": "1.0.3"
 	}
 }

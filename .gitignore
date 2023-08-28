@@ -78,6 +78,12 @@ pids
 !.env
 !.env.test
 
+# turborepo #
+##########################
+/apps/**/package
+/packages/**/package
+/apps/**/build
+
 # project specific files #
 ##########################
 stats.html

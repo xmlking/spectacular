@@ -49,7 +49,8 @@ pnpx playwright install
 ### Styling
 
 We will be using [TailwindCSS](https://tailwindcss.com/) for system-wide styling.  
-Follow [SvelteKit integration](https://tailwindcss.com/docs/guides/sveltekit) guide
+Follow [SvelteKit integration](https://tailwindcss.com/docs/guides/sveltekit) guide  
+Animation with [tailwindcss-animate](https://github.com/jamiebuilds/tailwindcss-animate),  usage [example](https://github.com/bautistaaa/typehero),  [Demo](https://www.typehero.dev/)  
 
 Add and configure tailwindcss via [svelte-add](https://github.com/svelte-add/tailwindcss)
 
@@ -57,7 +58,10 @@ Add and configure tailwindcss via [svelte-add](https://github.com/svelte-add/tai
 pnpx svelte-add@latest tailwindcss  --typography --daisyui
 # NOTE: tailwindcss's forms plugin and daisyui wont work together
 # also add other tailwind plugins and include them in `tailwind.config.cjs`
-pnpm add -D @tailwindcss/aspect-ratio @tailwindcss/container-queries
+pnpm add --save-peer  @tailwindcss/aspect-ratio @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter ./packages/tailwind-config
+pnpm add --save-peer  flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter ./packages/tailwind-config
+pnpm add -D @tailwindcss/aspect-ratio @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter ./apps/web
+pnpm add -D flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter ./apps/web
 ```
 
 Install JetBrain's [postcss](https://plugins.jetbrains.com/plugin/8578-postcss) plugin  
@@ -93,9 +97,12 @@ We will be using [Flowbite icons](https://flowbite.com/icons/) via [lowbite-svel
 
 Use [clsx](https://github.com/lukeed/clsx) in place of [classnames](https://github.com/JedWatson/classnames) utility lib for constructing _className_ strings conditionally.
 
+Flowbite Svelte Blocks: [quickstart](https://flowbite-svelte-blocks.vercel.app/pages/quickstart)  
+
 ```shell
-pnpm add -D flowbite flowbite-svelte tailwind-merge
-pnpm add -D flowbite-svelte-icons
+# pnpm add -D flowbite flowbite-svelte tailwind-merge
+# pnpm add -D flowbite-svelte-icons
+pnpm add -D flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons
 pnpm add -D clsx
 ```
 

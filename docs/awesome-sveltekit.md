@@ -45,6 +45,7 @@ Awesome **SvelteKit** Links
 
 - Charts
 
+  - [apexcharts](https://github.com/galkatz373/svelte-apexcharts) with [flowbite](https://flowbite-svelte.com/docs/plugins/charts)
   - [pancake](https://pancake-charts.surge.sh/)
   - [Layer Cake](https://layercake.graphics/) supports SSR, responsive graphics, full customizable layers for your graph.
 

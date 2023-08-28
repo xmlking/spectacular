@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 	import {
-		Checkbox,
+		Toggle,
 		FloatingTextInput,
 		Form,
 		Select as FormSelect,
@@ -97,11 +97,11 @@
 			<Radio field={keys.direction} items={directionOptions} />
 		</div>
 		<div class="col-start-5 flex justify-end">
-			<Checkbox
+			<Toggle
 				field={keys.shared}
 				class="toggle-secondary toggle"
 				labelPosition="before"
-				disabled>Shared</Checkbox
+				disabled>Shared</Toggle
 			>
 		</div>
 		<div class="col-end-7">

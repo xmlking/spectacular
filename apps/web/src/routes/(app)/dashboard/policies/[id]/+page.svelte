@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { dev } from '$app/environment';
 	import {
-		Checkbox,
 		DateInput,
 		FloatingTextInput,
 		Form,
 		Select as FormSelect,
 		Radio,
 		Range,
-		TagsInput
+		TagsInput,
+		Toggle
 	} from '$lib/components/form';
 	import {
 		actionOptions,
@@ -166,11 +166,11 @@
 			<Radio field="rule.direction" items={directionOptions} {disabled} />
 		</div>
 		<div class="col-start-5 flex justify-end">
-			<Checkbox
+			<Toggle
 				field="rule.shared"
 				class="toggle-secondary toggle"
 				labelPosition="before"
-				{disabled}>Shared</Checkbox
+				{disabled}>Shared</Toggle
 			>
 		</div>
 		<div class="col-end-7">
@@ -194,8 +194,8 @@
 			>
 		</div>
 		<div class="flex justify-start">
-			<Checkbox field={keys.active} class="toggle-secondary toggle" labelPosition="before"
-				>Active</Checkbox
+			<Toggle field={keys.active} class="toggle-secondary toggle" labelPosition="before"
+				>Active</Toggle
 			>
 		</div>
 		<div class="col-start-5">

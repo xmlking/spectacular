@@ -1,9 +1,9 @@
 <script lang="ts">
 	/**
 	 * <div class="flex justify-start">
-	 *   <Checkbox field={keys.active} class="toggle toggle-secondary" labelPosition="before" disabled={editMode}>Active</Checkbox>
-	 *   <Checkbox field={keys.active} class="toggle toggle-secondary" disabled={editMode}>Active</Checkbox>
-	 *   <Checkbox field={keys.active} class="w-4 h-4" disabled={editMode}>Active</Checkbox>
+	 *   <Toggle field={keys.active} class="toggle toggle-secondary" labelPosition="before" disabled={editMode}>Active</Checkbox>
+	 *   <Toggle field={keys.active} class="toggle toggle-secondary" disabled={editMode}>Active</Checkbox>
+	 *   <Toggle field={keys.active} class="w-4 h-4" disabled={editMode}>Active</Checkbox>
 	 * </div>
 	 */
 	import { clsx } from 'clsx';

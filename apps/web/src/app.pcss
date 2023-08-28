@@ -33,3 +33,9 @@ pre {
 	white-space: pre-wrap;
 	width: 100%;
 }
+/* for use in  apps/web/src/lib/components/form/Radio.svelte */
+@layer components {
+	.checked-label:has(input:checked) {
+		@apply bg-primary-700 text-white;
+	}
+}

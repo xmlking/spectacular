@@ -15,7 +15,7 @@
 	$: checked = value as Writable<boolean>;
 </script>
 
-<Checkbox
+<Toggle
 	name={field}
 	color={$errors ? 'red' : 'green'}
 	bind:checked={$checked}
@@ -27,7 +27,7 @@
 	{...$$restProps}
 >
 	<span class:text-error={$errors} class="label-text"><slot /></span>
-</Checkbox>
+</Toggle>
 {#if $errors}
 	<Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}
