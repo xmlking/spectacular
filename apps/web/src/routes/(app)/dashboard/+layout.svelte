@@ -1,19 +1,19 @@
 <script lang="ts">
-	// import { onNavigate } from "$app/navigation";
+	import { onNavigate } from "$app/navigation";
 	import { page } from '$app/stores';
 	import { Footer, Header } from '$lib/blocks/dashboard';
 	import { SideMenu } from '$lib/blocks/side';
 	import { DarkMode } from '$lib/components';
 	import { addToast } from '$lib/components/toast';
 	import { onMount } from 'svelte';
-	import { initFlash } from 'sveltekit-flash-message/client';
+	import { getFlash } from 'sveltekit-flash-message/client';
 
 	export let data;
 
 	/**
 	 * Setup Flash Message listener
 	 */
-	const flash = initFlash(page);
+	const flash = getFlash(page);
 	flash.subscribe(($flash) => {
 		if (!$flash) return;
 		addToast($flash);
@@ -51,16 +51,16 @@
 	// TODO: https://github.com/karimfromjordan/sveltekit-view-transitions
 	// https://github.com/sveltejs/kit/pull/9605
 	// https://twitter.com/karimfromjordan/status/1692859106699169883
-	// onNavigate(async (navigation) => {
-	// 	if (!document.startViewTransition) return;
+	onNavigate(async (navigation) => {
+		if (!document.startViewTransition) return;
 
-	// 	return new Promise((oldStateCaptureResolve) => {
-	// 	document.startViewTransition(async () => {
-	// 		oldStateCaptureResolve();
-	// 		await navigation.complete;
-	// 	});
-	// 	});
-	// });
+		return new Promise((oldStateCaptureResolve) => {
+		document.startViewTransition(async () => {
+			oldStateCaptureResolve();
+			await navigation.complete;
+		});
+		});
+	});
 
 	// HINT: added `right-4 top-24` to original `btnClass`
 	let btnClass =

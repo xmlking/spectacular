@@ -2,14 +2,14 @@
 	import { browser, dev } from '$app/environment';
 	import { CachePolicy, SearchRulesStore, order_by } from '$houdini';
 	import {
-		Toggle,
 		DateInput,
 		FloatingTextInput,
 		Form,
 		Select as FormSelect,
 		Radio,
 		Range,
-		TagsInput
+		TagsInput,
+		Toggle
 	} from '$lib/components/form';
 	import {
 		actionOptions,
@@ -21,10 +21,8 @@
 	import type { Subject } from '$lib/models/types';
 	import { Logger } from '$lib/utils';
 	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
+	import { Icon } from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
-	import {
-		IconOutline
-	} from 'svelte-heros-v2';
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
@@ -256,15 +254,15 @@
 			>
 				<b slot="prepend">
 					{#if $form.subjectType == 'group'}
-						<IconOutline name="user-group-outline" />
+						<Icon name="users-group-outline" />
 					{:else if $form.subjectType == 'service_account'}
-						<IconOutline name="user-circle-outline" />
+						<Icon name="user-circle-outline" />
 					{:else if $form.subjectType == 'device'}
-						<IconOutline name="device-phone-mobile-outline" />
+						<Icon name="mobile-phone-outline" />
 					{:else if $form.subjectType == 'device_pool'}
-						<IconOutline name="rectangle-group-outline" />
+						<Icon name="computer-speaker-outline" />
 					{:else}
-						<IconOutline name="user-outline" />
+						<Icon name="user-outline" />
 					{/if}
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
@@ -294,7 +292,7 @@
 				--border-focused="1px solid blue"
 			>
 				<b slot="prepend">
-					<IconOutline name="magnifying-glass-outline" />
+					<Icon name="search-outline" />
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
 					<input

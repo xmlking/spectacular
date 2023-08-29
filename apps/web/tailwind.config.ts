@@ -13,7 +13,7 @@ export default {
 
 	plugins: [flowbite({ charts: false, forms: true })],
 
-	darkMode: ['class', '[data-theme="dark"]'],
+	darkMode: 'class',
 	theme: {
 		extend: {
 			fontFamily: {

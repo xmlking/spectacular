@@ -9,10 +9,10 @@
 	import { updatePoolKeys as keys } from '$lib/models/schema';
 	import { Logger } from '$lib/utils';
 	import { Breadcrumb, BreadcrumbItem, Heading, Helper, Navbar, NavBrand } from 'flowbite-svelte';
+	import { Icon } from 'flowbite-svelte-icons';
 	import { GraphQLError } from 'graphql';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
-	import { IconOutline } from 'svelte-heros-v2';
 	import { TimeDistance } from 'svelte-time-distance';
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
@@ -330,7 +330,7 @@
 {#if inPool && notInPool}
 	<Navbar class="rounded border">
 		<NavBrand>
-			<IconOutline name="device-phone-mobile-outline" />
+			<Icon name="mobile-phone-outline" />
 			<span class="ml-2 self-center whitespace-nowrap text-xl font-semibold dark:text-white">
 				Devices in Pool
 			</span>
@@ -340,7 +340,7 @@
 
 	<Navbar class="rounded border">
 		<NavBrand>
-			<IconOutline name="device-phone-mobile-outline" />
+			<Icon name="mobile-phone-outline" />
 			<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
 				Devices NOT in Pool
 			</span>

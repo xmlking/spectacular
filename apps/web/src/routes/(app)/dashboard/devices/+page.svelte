@@ -14,9 +14,9 @@
 		NavBrand,
 		Navbar
 	} from 'flowbite-svelte';
+	import { Icon } from 'flowbite-svelte-icons';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
-	import { IconOutline } from 'svelte-heros-v2';
 	import { TimeDistance } from 'svelte-time-distance';
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
@@ -128,7 +128,7 @@
 <form data-sveltekit-noscroll>
 	<Navbar border={true} rounded={true}>
 		<NavBrand>
-			<IconOutline name="device-phone-mobile-outline" />
+			<Icon name="mobile-phone-outline" />
 			<span class="self-center whitespace-nowrap px-1 text-xl font-semibold dark:text-white">
 				Devices
 			</span>
@@ -161,7 +161,7 @@
 			<input name="limit" bind:value={$form.limit} type="hidden" />
 			<input name="offset" bind:value={$form.offset} type="hidden" />
 			<Button type="submit" color="primary" class="!p-2.5"
-				><IconOutline name="magnifying-glass-outline" width="20" height="20" /></Button
+				><Icon name="search-outline" size="md" /></Button
 			>
 		</ButtonGroup>
 		<span />

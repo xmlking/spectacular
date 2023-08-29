@@ -2,7 +2,7 @@
 	import { default as Frame } from '$lib/components/utils/Frame.svelte';
 	import { clsx } from 'clsx';
 	import { CloseButton } from 'flowbite-svelte';
-	import { IconOutline, IconSolid } from 'svelte-heros-v2';
+	import { Icon } from 'flowbite-svelte-icons';
 	import { slide } from 'svelte/transition';
 	import { ToastLevel, dismissToast, toasts } from './store';
 
@@ -42,18 +42,17 @@
 				transition={slide}
 				class="mb-2 w-full max-w-xs p-4"
 				{...$$restProps}
-				role="alert"
-			>
+				role="alert"			>
 				<div class="flex items-center">
 					<Frame color={toast.type} rounded class={iconClass}>
 						{#if toast.type === ToastLevel.Success}
-							<IconSolid name="check-solid" width="10" height="10" ariaLabel="Success icon" />
+							<Icon name="check-solid" size='xs' ariaLabel="Success icon" />
 						{:else if toast.type === ToastLevel.Error}
-							<IconOutline name="exclamation-triangle-outline" width="10" height="10" ariaLabel="Error icon" />
+							<Icon name="close-circle-solid" size='xs' ariaLabel="Error icon" />
 						{:else if toast.type === ToastLevel.Warning}
-							<IconOutline name="hand-raised-outline"  width="10" height="10" ariaLabel="Warning icon" />
+							<Icon name="exclamation-circle-outline"  size='xs' ariaLabel="Warning icon" />
 						{:else}
-							<IconOutline name="information-circle-outline"  width="10" height="10" ariaLabel="Info icon" />
+							<Icon name="info-circle-outline"  size='xs' ariaLabel="Info icon" />
 						{/if}
 					</Frame>
 					<div class="w-full text-sm font-normal">

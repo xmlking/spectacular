@@ -19,6 +19,7 @@
 		Navbar,
 		Select
 	} from 'flowbite-svelte';
+	import { Icon } from 'flowbite-svelte-icons';
 	import { GraphQLError } from 'graphql';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import {
@@ -27,7 +28,6 @@
 		addSortBy,
 		addTableFilter
 	} from 'svelte-headless-table/plugins';
-	import { IconOutline } from 'svelte-heros-v2';
 	import { default as SelectFetch } from 'svelte-select';
 	import { TimeDistance } from 'svelte-time-distance';
 	import { writable } from 'svelte/store';
@@ -277,7 +277,7 @@
 <form data-sveltekit-noscroll bind:this={searchForm}>
 	<Navbar border={true} rounded={true}>
 		<NavBrand>
-			<IconOutline name="shield-check-outline" />
+			<Icon name="shield-check-outline" />
 			<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
 				Policies
 			</span>
@@ -309,15 +309,15 @@
 			>
 				<b slot="prepend" class="p-2">
 					{#if $form.subjectType == 'group'}
-						<IconOutline name="user-group-outline" />
+						<Icon name="users-group-outline" />
 					{:else if $form.subjectType == 'service_account'}
-						<IconOutline name="user-circle-outline" />
+						<Icon name="user-circle-outline" />
 					{:else if $form.subjectType == 'device'}
-						<IconOutline name="device-phone-mobile-outline" />
+						<Icon name="mobile-phone-outline" />
 					{:else if $form.subjectType == 'device_pool'}
-						<IconOutline name="rectangle-group-outline" />
+						<Icon name="computer-speaker-outline" />
 					{:else}
-						<IconOutline name="user-outline" />
+						<Icon name="user-outline" />
 					{/if}
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>

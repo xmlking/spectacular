@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { IconOutline } from 'svelte-heros-v2';
-</script>
+	import { Icon } from 'flowbite-svelte-icons';
+	</script>
 
 <div class="max-w-7xl">
 	<h3 class="text-lg font-medium leading-6 text-gray-900"> Last 30 days </h3>
@@ -67,7 +67,7 @@
 			<div class="flex-grow px-4 py-5 sm:p-6">
 				<div class="flex items-center">
 					<div class="flex-shrink-0 rounded-md bg-indigo-500 p-3">
-						<IconOutline name="shield-exclamation-outline" color="#ffffff" />
+						<Icon name="shield-exclamation-outline" color="#ffffff" />
 					</div>
 					<div class="ml-5 w-0 flex-1">
 						<dt class="truncate text-sm font-medium text-gray-500">

@@ -7,10 +7,10 @@ settings:
 devDependencies:
   '@sveltejs/adapter-auto':
     specifier: 2.1.0
-    version: 2.1.0(@sveltejs/kit@1.23.0)
+    version: 2.1.0(@sveltejs/kit@1.24.0)
   '@sveltejs/kit':
-    specifier: 1.23.0
-    version: 1.23.0(svelte@4.2.0)(vite@4.4.9)
+    specifier: 1.24.0
+    version: 1.24.0(svelte@4.2.0)(vite@4.4.9)
   eslint-config-custom:
     specifier: workspace:*
     version: link:../../packages/eslint-config-custom
@@ -18,8 +18,8 @@ devDependencies:
     specifier: 4.2.0
     version: 4.2.0
   svelte-check:
-    specifier: 3.5.0
-    version: 3.5.0(svelte@4.2.0)
+    specifier: 3.5.1
+    version: 3.5.1(svelte@4.2.0)
   svelte-preprocess:
     specifier: 5.0.4
     version: 5.0.4(svelte@4.2.0)(typescript@5.2.2)
@@ -299,17 +299,17 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@sveltejs/adapter-auto@2.1.0(@sveltejs/kit@1.23.0):
+  /@sveltejs/adapter-auto@2.1.0(@sveltejs/kit@1.24.0):
     resolution: {integrity: sha512-o2pZCfATFtA/Gw/BB0Xm7k4EYaekXxaPGER3xGSY3FvzFJGTlJlZjBseaXwYSM94lZ0HniOjTokN3cWaLX6fow==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0
     dependencies:
-      '@sveltejs/kit': 1.23.0(svelte@4.2.0)(vite@4.4.9)
+      '@sveltejs/kit': 1.24.0(svelte@4.2.0)(vite@4.4.9)
       import-meta-resolve: 3.0.0
     dev: true
 
-  /@sveltejs/kit@1.23.0(svelte@4.2.0)(vite@4.4.9):
-    resolution: {integrity: sha512-MuDM6afpSMnPFMtEsE1O+Qn6NVPNHDqsDYYZE/8/+Z3IvGmE+GKHC+za6fEmCfwXLqNlxFZiV8s8kKOeNVJP+g==}
+  /@sveltejs/kit@1.24.0(svelte@4.2.0)(vite@4.4.9):
+    resolution: {integrity: sha512-r7Gj0/VcdAIRL1yE1cJ5rurWJ5drrR7BzRv+P+NAathtvnMCi0u4FhezO7T4bj7DJdQ3TNsax3yQcrVWxh60fg==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     requiresBuild: true
@@ -329,6 +329,7 @@ packages:
       set-cookie-parser: 2.6.0
       sirv: 2.0.3
       svelte: 4.2.0
+      tiny-glob: 0.2.9
       undici: 5.23.0
       vite: 4.4.9
     transitivePeerDependencies:
@@ -617,6 +618,14 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
+    dev: true
+
+  /globalyzer@0.1.0:
+    resolution: {integrity: sha512-40oNTM9UfG6aBmuKxk/giHn5nQ8RVz/SS4Ir6zgzOv9/qC3kKZ9v4etGTcJbEl/NyVQH7FGU7d+X1egr57Md2Q==}
+    dev: true
+
+  /globrex@0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
     dev: true
 
   /graceful-fs@4.2.11:
@@ -911,8 +920,8 @@ packages:
       min-indent: 1.0.1
     dev: true
 
-  /svelte-check@3.5.0(svelte@4.2.0):
-    resolution: {integrity: sha512-KHujbn4k17xKYLmtCwv0sKKM7uiHTYcQvXnvrCcNU6a7hcszh99zFTIoiu/Sp/ewAw5aJmillJ1Cs8gKLmcX4A==}
+  /svelte-check@3.5.1(svelte@4.2.0):
+    resolution: {integrity: sha512-+Zb4iHxAhdUtcUg/WJPRjlS1RJalIsWAe9Mz6G1zyznSs7dDkT7VUBdXc3q7Iwg49O/VrZgyJRvOJkjuBfKjFA==}
     hasBin: true
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0
@@ -1011,6 +1020,13 @@ packages:
       locate-character: 3.0.0
       magic-string: 0.30.3
       periscopic: 3.1.0
+    dev: true
+
+  /tiny-glob@0.2.9:
+    resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}
+    dependencies:
+      globalyzer: 0.1.0
+      globrex: 0.1.2
     dev: true
 
   /to-regex-range@5.0.1:
