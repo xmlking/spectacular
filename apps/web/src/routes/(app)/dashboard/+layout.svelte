@@ -48,17 +48,17 @@
 
 	// console.log('session>>>', session);
 
-	// TODO: https://github.com/karimfromjordan/sveltekit-view-transitions
-	// https://github.com/sveltejs/kit/pull/9605
-	// https://twitter.com/karimfromjordan/status/1692859106699169883
+	// TODO: https://twitter.com/karimfromjordan/status/1692859106699169883
 	onNavigate(async (navigation) => {
+		// @ts-expect-error - not supported by all browsers
 		if (!document.startViewTransition) return;
 
 		return new Promise((oldStateCaptureResolve) => {
-		document.startViewTransition(async () => {
-			oldStateCaptureResolve();
-			await navigation.complete;
-		});
+			// @ts-expect-error - not supported by all browsers
+			document.startViewTransition(async () => {
+				oldStateCaptureResolve();
+				await navigation.complete;
+			});
 		});
 	});
 
@@ -78,7 +78,7 @@
 		<SideMenu />
 		<!--   end::Sidebar      -->
 		<!--   start::Main Content     -->
-		<main class="container mx-auto overflow-y-auto px-8 py-32 dark:text-white">
+		<main style:view-transition-name="main" class="container mx-auto overflow-y-auto px-8 py-32 dark:text-white">
 			<slot />
 		</main>
 		<!--   end::Main Content      -->
@@ -87,3 +87,4 @@
 	<Footer />
 	<!--   end::Footer      -->
 </div>
+

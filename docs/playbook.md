@@ -50,7 +50,7 @@ pnpx playwright install
 
 We will be using [TailwindCSS](https://tailwindcss.com/) for system-wide styling.  
 Follow [SvelteKit integration](https://tailwindcss.com/docs/guides/sveltekit) guide  
-Animation with [tailwindcss-animate](https://github.com/jamiebuilds/tailwindcss-animate),  usage [example](https://github.com/bautistaaa/typehero),  [Demo](https://www.typehero.dev/)  
+Animation with [tailwindcss-animate](https://github.com/jamiebuilds/tailwindcss-animate), usage [example](https://github.com/bautistaaa/typehero), [Demo](https://www.typehero.dev/)
 
 Add and configure tailwindcss via [svelte-add](https://github.com/svelte-add/tailwindcss)
 
@@ -97,7 +97,7 @@ We will be using [Flowbite icons](https://flowbite.com/icons/) via [lowbite-svel
 
 Use [clsx](https://github.com/lukeed/clsx) in place of [classnames](https://github.com/JedWatson/classnames) utility lib for constructing _className_ strings conditionally.
 
-Flowbite Svelte Blocks: [quickstart](https://flowbite-svelte-blocks.vercel.app/pages/quickstart)  
+Flowbite Svelte Blocks: [quickstart](https://flowbite-svelte-blocks.vercel.app/pages/quickstart)
 
 ```shell
 # pnpm add -D flowbite flowbite-svelte tailwind-merge
