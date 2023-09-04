@@ -46,6 +46,46 @@ pnpm i -O @vitest/ui
 pnpx playwright install
 ```
 
+### SEO
+#### Meta Tags, OG
+Svelte [Meta Tags](https://github.com/oekazuma/svelte-meta-tags) provides components designed to help you manage SEO for Svelte projects.
+```shell
+pnpm add -D svelte-meta-tags --filter "./apps/**"
+```
+
+#### Image Optimization
+[vite-imagetools](https://github.com/JonasKruckenberg/imagetools/tree/main/packages/vite) A toolbox of import directives for Vite that can transform your image at compile-time.
+
+```shell
+pnpm add -D vite-imagetools --filter "./apps/**"
+```
+
+**Setup**
+
+```ts
+import { defineConfig } from 'vite'
+import { imagetools } from 'vite-imagetools'
+
+export default defineConfig({
+  plugins: [imagetools()]
+})
+```
+
+**Usage**
+
+```ts
+import Image from 'example.jpg?w=400&h=300&format=webp'
+```
+
+### Release
+
+#### changesets
+
+```shell
+npx changeset init
+pnpm add -D @changesets/changelog-github  -w
+```
+
 ### Styling
 
 We will be using [TailwindCSS](https://tailwindcss.com/) for system-wide styling.  

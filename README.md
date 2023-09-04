@@ -17,6 +17,7 @@ This Turborepo includes the following packages/apps:
 ### Apps and Packages
 
 - WebApps
+  - `playground`: an experimental  [svelte-kit](https://kit.svelte.dev/) web app to play with new ideas.
   - `docs`: a sample documentation [svelte-kit](https://kit.svelte.dev/) web app
   - `web`: a sample [svelte-kit](https://kit.svelte.dev/) web app
 - Packages

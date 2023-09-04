@@ -138,9 +138,30 @@
 		"svelte"
 	],
 	// This is a whitelist of words that we think we spell just fine.
-	"cSpell.words": ["grpc", "log", "proto", "protobuf", "timeout", "hasura"],
-	"cSpell.ignorePaths": ["node_modules", "**/node_modules", "**/node_modules/**", ".git"],
-
+	"cSpell.words": [
+		"combobox",
+		"Felte",
+		"grpc",
+		"hasura",
+		"log",
+		"proto",
+		"protobuf",
+		"sveltekit",
+		"svitejs",
+		"timeout"
+	],
+	"cSpell.ignorePaths": [
+		"node_modules",
+		"**/node_modules",
+		"**/node_modules/**",
+		".git",
+		"static/**",
+		"pnpm-lock.yaml",
+		"package-lock.json",
+		"yarn.lock",
+		"package/**"
+	],
+	"cSpell.dictionaries": ["html", "typescript", "softwareTerms", "companies"],
 	////////// svelte //////////
 	"svelte.enable-ts-plugin": true,
 	"svelte.plugin.svelte.format.config.svelteStrictMode": true,

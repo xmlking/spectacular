@@ -1,20 +1,49 @@
 {
+	"name": "spectacular",
+	"description": "SvelteKit monorepo template",
 	"private": true,
 	"scripts": {
 		"build": "turbo build",
 		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"test": "turbo test",
+		"check": "turbo check",
 		"test:watch": "turbo run test:watch",
 		"format": "prettier --write .",
 		"clean": "turbo clean && rm -rf node_modules",
-		"preinstall": "npx only-allow pnpm"
+		"preinstall": "npx only-allow pnpm",
+		"ci:publish": "changeset publish",
+		"cs": "changeset"
 	},
+	"license": "MIT",
+	"homepage": "https://chinthagunta.com/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/xmlking/spectacular.git"
+	},
+	"bugs": {
+		"url": "https://github.com/xmlking/spectacular/issues"
+	},
+	"keywords": [
+		"cli",
+		"components",
+		"ui",
+		"component",
+		"svelte",
+		"template",
+		"ui-framework",
+		"tailwind",
+		"tailwindcss",
+		"components-library",
+		"sveltekit"
+	],
 	"workspaces": [
 		"apps/*",
 		"packages/*"
 	],
 	"devDependencies": {
+		"@changesets/cli": "2.26.2",
+		"@changesets/changelog-github": "0.4.8",
 		"eslint": "8.48.0",
 		"eslint-config-custom": "workspace:*",
 		"prettier": "3.0.3",
@@ -27,9 +56,5 @@
 	"engines": {
 		"node": ">=20",
 		"pnpm": ">=8"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/xmlking/spectacular"
 	}
 }
