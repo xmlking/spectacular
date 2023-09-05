@@ -12,6 +12,12 @@
 	const movies = movies_json as Movie[];
 </script>
 
+<svelte:head>
+	<title>Movies</title>
+	<meta name="description" content="Showcase container queries" />
+</svelte:head>
+
+
 <Page>
 	<header class="space-y-4">
 		<h1 class="h1">Movies</h1>

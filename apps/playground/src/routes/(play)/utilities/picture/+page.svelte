@@ -6,6 +6,10 @@
 	console.log(`Client version: ${version}`);
 </script>
 
+<svelte:head>
+	<title>Picture</title>
+	<meta name="description" content="Showcase image optimization" />
+</svelte:head>
 
 <Page>
 	<header class="space-y-4">

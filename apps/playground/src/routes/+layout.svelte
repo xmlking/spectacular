@@ -7,6 +7,9 @@
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 
+	// 3rd party
+	import { MetaTags } from 'svelte-meta-tags';
+
 	// SvelteKit Imports
 	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
@@ -53,7 +56,11 @@
 	inject({ mode: dev ? 'development' : 'production' });
 
 	// SEO Meta tags
-	// TODO
+	const metaDefaults = Object.freeze({
+		title: 'Home',
+		description: 'Spectacular is a fully featured SvelteKit template for building reactive interfaces quickly using Svelte and Tailwind.',
+		image: 'https://user-images.githubusercontent.com/1509726/212382766-f29b9c9a-82e3-44c2-b911-b17a9197e5b9.jpg',
+	});
 
 	// Registered list of Components for Modals
 	const modalComponentRegistry: Record<string, ModalComponent> = {
@@ -103,10 +110,63 @@
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 </script>
 
+<MetaTags
+  title="Home"
+  titleTemplate="%s | Spectacular"
+  description="Spectacular is a fully featured SvelteKit template for building reactive interfaces quickly using Svelte and Tailwind"
+  canonical="https://www.chinthagunta.com/"
+  openGraph={{
+    url: 'https://www.url.ie/a',
+    title: 'Open Graph Title',
+    description: 'Open Graph Description',
+    images: [
+      {
+        url: 'https://www.example.ie/og-image.jpg',
+        alt: 'Og Image Alt',
+        width: 800,
+        height: 600,
+        secureUrl: 'https://www.example.ie/og-image.jpg',
+        type: 'image/jpeg'
+      }
+    ],
+    videos: [
+      {
+        url: 'https://www.example.ie/og-video.mp4',
+        width: 800,
+        height: 600,
+        secureUrl: 'https://www.example.ie/og-video.mp4',
+        type: 'video/mp4'
+      }
+    ],
+    audio: [
+      {
+        url: 'https://www.example.ie/og-audio.mp3',
+        secureUrl: 'https://www.example.ie/og-audio.mp3',
+        type: 'audio/mp3'
+      }
+    ],
+    siteName: 'Spectacular'
+  }}
+  twitter={{
+    handle: '@xmlking',
+    site: '@crossbusiness',
+    cardType: 'summary_large_image',
+    title: 'Using More of Config',
+    description: 'This example uses more of the available config options.',
+    image: 'https://www.example.ie/twitter-image.jpg',
+    imageAlt: 'Twitter image alt'
+  }}
+  facebook={{
+    appId: '1234567890'
+  }}
+/>
+
 <!-- Overlays -->
 <Modal components={modalComponentRegistry} />
 <Toast />
 <Drawer />
+
+
 
 <!-- App Shell -->
 <AppShell {slotSidebarLeft} regionPage={allyPageSmoothScroll} slotFooter="bg-black p-4">
