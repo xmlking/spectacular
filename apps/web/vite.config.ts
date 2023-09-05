@@ -4,6 +4,7 @@ import houdini from 'houdini/vite';
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
 import type { UserConfig } from 'vite';
+import { imagetools } from 'vite-imagetools';
 import { configDefaults } from 'vitest/config';
 
 // Get current tag/commit and last commit date from git
@@ -24,6 +25,7 @@ const config: UserConfig = {
 	plugins: [
 		houdini(),
 		sveltekit(),
+		imagetools(),
 		SvelteKitPWA({
 			// adapterFallback: 'index.html',
 			base: '/',

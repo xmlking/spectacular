@@ -100,8 +100,8 @@ pnpx svelte-add@latest tailwindcss  --typography --daisyui
 # also add other tailwind plugins and include them in `tailwind.config.cjs`
 pnpm add --save-peer  @tailwindcss/aspect-ratio @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter ./packages/tailwind-config
 pnpm add --save-peer  flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter ./packages/tailwind-config
-pnpm add -D @tailwindcss/aspect-ratio @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter ./apps/web
-pnpm add -D flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter ./apps/web
+pnpm add -D @tailwindcss/aspect-ratio @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter "./apps/**"
+pnpm add -D flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter "./apps/**"
 ```
 
 Install JetBrain's [postcss](https://plugins.jetbrains.com/plugin/8578-postcss) plugin  

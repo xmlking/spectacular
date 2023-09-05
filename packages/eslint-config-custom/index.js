@@ -4,9 +4,10 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
-		'plugin:jsdoc/recommended-typescript-error',
-		'plugin:jsdoc/recommended-error',
-		'plugin:svelte/recommended',
+		// 'plugin:jsdoc/recommended-typescript-error',
+		// 'plugin:jsdoc/recommended-error',
+		// 'plugin:svelte/recommended',
+		'plugin:svelte/prettier',
 		'plugin:import/recommended',
 		'turbo',
 		'prettier'
@@ -37,6 +38,7 @@ module.exports = {
 	},
 
 	rules: {
+		'svelte/no-at-html-tags': 'off',
 		'@typescript-eslint/no-unused-vars': [
 			'error',
 			{

@@ -5,6 +5,7 @@
 	"main": "tailwind.config.ts",
 	"types": "tailwind.config.ts",
 	"exports": {
+		"./tailwind.skeleton.config.ts": "./tailwind.skeleton.config.ts",
 		"./tailwind.config.ts": "./tailwind.config.ts",
 		"./postcss.config.cjs": "./postcss.config.cjs"
 	},
@@ -19,6 +20,7 @@
 		"tailwindcss": "3.3.3"
 	},
 	"peerDependencies": {
+		"@skeletonlabs/tw-plugin": "0.1.0",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/container-queries": "0.1.1",
 		"@tailwindcss/forms": "0.5.5",
