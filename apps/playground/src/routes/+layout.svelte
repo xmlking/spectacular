@@ -22,15 +22,15 @@
 
 	// Docs Components
 	import AppBar from '$lib/components/layout/AppBar.svelte';
-	import Sidebar from '$lib/components/layout/Sidebar.svelte';
 	import Drawer from '$lib/components/layout/Drawer.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
+	import Sidebar from '$lib/components/layout/Sidebar.svelte';
 	// Modal Components
 	import Search from '$lib/modals/Search.svelte';
 	// NOTE: (forms example uses direct method)
-	import ModalExampleList from '$lib/modals/examples/ModalExampleList.svelte';
 	import ModalExampleEmbed from '$lib/modals/examples/ModalExampleEmbed.svelte';
 	import ModalExampleImage from '$lib/modals/examples/ModalExampleImage.svelte';
+	import ModalExampleList from '$lib/modals/examples/ModalExampleList.svelte';
 	// Global Stylesheets
 	import '../app.postcss';
 
@@ -41,8 +41,11 @@
 	// IMPORTANT: DO NOT MODIFY THIS UNLESS YOU KNOW WHAT YOU'RE DOING
 	import { storeTheme, storeVercelProductionMode } from '$lib/stores/stores';
 	storeVercelProductionMode.set(data.vercelEnv === 'production');
-	// Init Vercel Analytics TODO
+	// Init Vercel Analytics
 	// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+	inject({ mode: dev ? 'development' : 'production' });
 
 	// SEO Meta tags
 	// TODO

@@ -54,6 +54,9 @@ devDependencies:
   '@typescript-eslint/parser':
     specifier: 6.6.0
     version: 6.6.0(eslint@8.48.0)(typescript@5.2.2)
+  '@vercel/analytics':
+    specifier: 1.0.2
+    version: 1.0.2
   autoprefixer:
     specifier: 10.4.15
     version: 10.4.15(postcss@8.4.29)
@@ -461,6 +464,7 @@ packages:
       playwright-core: 1.37.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: false
     optional: true
 
   /@polka/url@1.0.0-next.21:
@@ -771,6 +775,10 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.6.0
       eslint-visitor-keys: 3.4.3
+    dev: true
+
+  /@vercel/analytics@1.0.2:
+    resolution: {integrity: sha512-BZFxVrv24VbNNl5xMxqUojQIegEeXMI6rX3rg1uVLYUEXsuKNBSAEQf4BWEcjQDp/8aYJOj6m8V4PUA3x/cxgg==}
     dev: true
 
   /@vitest/expect@0.34.3:

@@ -60,6 +60,12 @@ pnpm add -D svelte-meta-tags --filter "./apps/**"
 pnpm add -D vite-imagetools --filter "./apps/**"
 ```
 
+### Web Analytics
+
+```
+pnpm add -D @vercel/analytics --filter "./apps/**"
+```
+
 **Setup**
 
 ```ts

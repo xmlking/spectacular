@@ -78,6 +78,9 @@ devDependencies:
   '@typescript-eslint/parser':
     specifier: 6.6.0
     version: 6.6.0(eslint@8.48.0)(typescript@5.2.2)
+  '@vercel/analytics':
+    specifier: ^1.0.2
+    version: 1.0.2
   '@vite-pwa/sveltekit':
     specifier: 0.2.5
     version: 0.2.5(@sveltejs/kit@1.24.1)(vite-plugin-pwa@0.16.4)
@@ -2906,6 +2909,10 @@ packages:
 
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+    dev: true
+
+  /@vercel/analytics@1.0.2:
+    resolution: {integrity: sha512-BZFxVrv24VbNNl5xMxqUojQIegEeXMI6rX3rg1uVLYUEXsuKNBSAEQf4BWEcjQDp/8aYJOj6m8V4PUA3x/cxgg==}
     dev: true
 
   /@vite-pwa/sveltekit@0.2.5(@sveltejs/kit@1.24.1)(vite-plugin-pwa@0.16.4):
