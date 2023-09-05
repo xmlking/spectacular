@@ -1,5 +1,7 @@
 <!-- Layout: (root) -->
 <script lang="ts">
+	/* eslint-disable import/order */
+
 	// Dependency: Floating UI for Popups
 	import { storePopup } from '@skeletonlabs/skeleton';
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
@@ -25,12 +27,15 @@
 	import Drawer from '$lib/components/layout/Drawer.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
+
 	// Modal Components
 	import Search from '$lib/modals/Search.svelte';
+
 	// NOTE: (forms example uses direct method)
 	import ModalExampleEmbed from '$lib/modals/examples/ModalExampleEmbed.svelte';
 	import ModalExampleImage from '$lib/modals/examples/ModalExampleImage.svelte';
 	import ModalExampleList from '$lib/modals/examples/ModalExampleList.svelte';
+
 	// Global Stylesheets
 	import '../app.postcss';
 
