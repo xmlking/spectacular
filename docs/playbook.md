@@ -6,10 +6,16 @@ Show how this repo is setup via step-by-step guild
 
 ### Prerequisite
 
-Instal needed global node packages
+
+Install following CLI tools globally
+
+- [tsx](https://github.com/esbuild-kit/tsx) to run _TypeScript_ & _ESM_ files from command-line. This is **NOT** React's [TSX/JSX](https://www.typescriptlang.org/docs/handbook/jsx.html)
+- [hasura-cli](https://hasura.io/docs/latest/hasura-cli/install-hasura-cli/) as GitOps tool for Hasura
 
 ```shell
-npm i  -G tsx
+pnpm add -g tsx
+pnpm add -g hasura-cli
+pnpm add -g turbo
 ```
 
 ### Create
@@ -316,16 +322,6 @@ pnpm add  -D next-auth-hasura-adapter
 #### Cookies
 
 Set/Get/Remove cookies in browser (for server-side svelte already provide utils)
-
-Install following CLI tools globally
-
-- [tsx](https://github.com/esbuild-kit/tsx) to run _TypeScript_ & _ESM_ files from command-line. This is **NOT** React's [TSX/JSX](https://www.typescriptlang.org/docs/handbook/jsx.html)
-- [hasura-cli](https://hasura.io/docs/latest/hasura-cli/install-hasura-cli/) as GitOps tool for Hasura
-
-```shell
-pnpm add -g tsx
-pnpm add -g hasura-cli
-```
 
 #### Forms
 
