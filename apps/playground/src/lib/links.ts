@@ -139,8 +139,8 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 				{ href: '/utilities/movies', label: 'Movies', keywords: 'overlay, slide, panel, sidebar' },
 				{ href: '/utilities/settings', label: 'Settings', keywords: 'light, dark, toggle, prefer, color, scheme' },
 				{
-					href: '/utilities/local-storage-stores',
-					label: 'Local Storage Stores',
+					href: '/utilities/transitions',
+					label: 'Transitions',
 					keywords: 'svelte, writable, get, cache, persist'
 				},
 				{
