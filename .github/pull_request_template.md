@@ -27,9 +27,9 @@ Please read and apply all [contribution requirements](../CODE_OF_CONDUCT.md).
 This project requires at least one commit per PR to follow the below format.  
 Commit type: [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]
 
-| Commit message                                                                                              | Release type     |
-| ----------------------------------------------------------------------------------------------------------- | ---------------- |
-| `fix(module): short description of change`                                                                   | Patch Release    |
-| `feat(module): short description of change`                                                                 | Feature Release  |
-| `feat(module): short description of change`<br><br>`BREAKING CHANGE: Long description of what is breaking`  | Breaking Release |
-| `ci(module): short description of change`                                                                   | Feature Release  |
+| Commit message                                                                                             | Release type     |
+| ---------------------------------------------------------------------------------------------------------- | ---------------- |
+| `fix(module): short description of change`                                                                 | Patch Release    |
+| `feat(module): short description of change`                                                                | Feature Release  |
+| `feat(module): short description of change`<br><br>`BREAKING CHANGE: Long description of what is breaking` | Breaking Release |
+| `ci(module): short description of change`                                                                  | Feature Release  |

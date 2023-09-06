@@ -137,7 +137,7 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 			list: [
 				{ href: '/utilities/picture', label: 'Picture', keywords: 'highlight, syntax, code' },
 				{ href: '/utilities/movies', label: 'Movies', keywords: 'overlay, slide, panel, sidebar' },
-				{ href: '/utilities/lightswitches', label: 'Lightswitch', keywords: 'light, dark, toggle, prefer, color, scheme' },
+				{ href: '/utilities/settings', label: 'Settings', keywords: 'light, dark, toggle, prefer, color, scheme' },
 				{
 					href: '/utilities/local-storage-stores',
 					label: 'Local Storage Stores',

@@ -238,7 +238,7 @@ Added [Dockerfile](../Dockerfile) and GitHub [actions](../.github/workflows).
 pnpm add -D svelte-headless-table
 #pnpm add -D @tanstack/svelte-table
 # form library for Svelte
-pnpm i -D sveltekit-superforms zod zod-form-data
+pnpm i -D sveltekit-superforms zod formsnap zod-form-data
 # make any element draggable
 pnpm add -D @neodrag/svelte
 # to fetch, cache and update data
