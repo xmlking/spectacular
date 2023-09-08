@@ -6,8 +6,9 @@ import { redirect, type Handle } from '@sveltejs/kit';
  * It should be the last middleware
  */
 const log = new Logger('middleware:guard');
-const protectedPaths = ['/dashboard', '/account', '/api'];
+const protectedPaths = ['/dashboard', '/account', '/api', '/downloads'];
 const adminPaths = ['/dashboard/admin'];
+const userPaths = ['/downloads'];
 export const guard = (async ({ event, resolve }) => {
 	// skip auth logic on build to prevent infinite redirection in production mode
 	// FIXME: https://github.com/nextauthjs/next-auth/discussions/6186
@@ -32,11 +33,16 @@ export const guard = (async ({ event, resolve }) => {
 
 	if (!user) {
 		// FIXME: redirect from middleware may cause recursion
-		throw redirect(303, `${origin}/auth/signin?callbackUrl=/dashboard`);
+		throw redirect(303, `${origin}/auth/signin?callbackUrl=${pathname}`);
 	}
 	if (expires && new Date(expires) < new Date()) {
 		log.debug('session expired at: ', expires);
 		throw redirect(303, `${origin}/auth/signout?callbackUrl=/blog`);
+	}
+	if (startsWith(pathname, userPaths)) {
+		if (!roles?.includes('user')) {
+			throw redirect(303, `${origin}/home`);
+		}
 	}
 	if (startsWith(pathname, adminPaths)) {
 		if (!roles?.includes('Policy.Write')) {

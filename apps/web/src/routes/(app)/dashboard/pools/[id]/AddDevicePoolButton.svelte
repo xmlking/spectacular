@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-	import { Icon } from 'flowbite-svelte-icons';
+	import { CirclePlusOutline } from 'flowbite-svelte-icons';
 	import { createEventDispatcher } from 'svelte';
 
 	export let poolId: string;
@@ -21,7 +21,7 @@
 </script>
 
 <button on:click={handleAddButton}>
-	<Icon name="circle-plus-outline" color="green" />
+	<CirclePlusOutline color="green" />
 </button>
 <!-- For Debug -->
 <slot />

@@ -67,7 +67,6 @@ Awesome **SvelteKit** Links
   - [Konsta UI](https://konstaui.com) Pixel perfect mobile UI components built with Tailwind CSS
   - [Framework7 Svelte](https://framework7.io/svelte/) Build full featured iOS, Android & Desktop apps
 
-
 - Security
 
   - [lucia](https://lucia-auth.com/) OIDC auth with [SvelteKit](https://lucia-auth.com/guidebook/github-oauth/sveltekit)

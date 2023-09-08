@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { Icon } from 'flowbite-svelte-icons';
+	import { ArchiveOutline } from 'flowbite-svelte-icons';
 
 	export let id: string;
 </script>
@@ -9,7 +9,7 @@
 	<input type="hidden" name="id" hidden value={id} />
 	<!-- <button type="submit" on:click={(e) => !confirm('Are you sure?') && e.preventDefault()}> -->
 	<button type="submit">
-		<Icon name="archive-outline" class="text-pink-700 dark:text-blue-300" />
+		<ArchiveOutline class="text-pink-700 dark:text-blue-300" />
 	</button>
 </form>
 

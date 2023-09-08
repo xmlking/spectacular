@@ -21,7 +21,7 @@
 	import type { Subject } from '$lib/models/types';
 	import { Logger } from '$lib/utils';
 	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import { Icon } from 'flowbite-svelte-icons';
+	import { ComputerSpeakerOutline, MobilePhoneOutline, SearchOutline, UserCircleOutline, UserOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms/client';
@@ -254,15 +254,15 @@
 			>
 				<b slot="prepend">
 					{#if $form.subjectType == 'group'}
-						<Icon name="users-group-outline" />
+						<UsersGroupOutline />
 					{:else if $form.subjectType == 'service_account'}
-						<Icon name="user-circle-outline" />
+						<UserCircleOutline />
 					{:else if $form.subjectType == 'device'}
-						<Icon name="mobile-phone-outline" />
+						<MobilePhoneOutline />
 					{:else if $form.subjectType == 'device_pool'}
-						<Icon name="computer-speaker-outline" />
+						<ComputerSpeakerOutline />
 					{:else}
-						<Icon name="user-outline" />
+						<UserOutline />
 					{/if}
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
@@ -292,7 +292,7 @@
 				--border-focused="1px solid blue"
 			>
 				<b slot="prepend">
-					<Icon name="search-outline" />
+					<SearchOutline />
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
 					<input

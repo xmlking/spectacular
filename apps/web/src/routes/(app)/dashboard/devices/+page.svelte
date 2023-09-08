@@ -14,7 +14,7 @@
 		NavBrand,
 		Navbar
 	} from 'flowbite-svelte';
-	import { Icon } from 'flowbite-svelte-icons';
+	import { MobilePhoneOutline, SearchOutline } from 'flowbite-svelte-icons';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
 	import { TimeDistance } from 'svelte-time-distance';
@@ -128,7 +128,7 @@
 <form data-sveltekit-noscroll>
 	<Navbar border={true} rounded={true}>
 		<NavBrand>
-			<Icon name="mobile-phone-outline" />
+			<MobilePhoneOutline />
 			<span class="self-center whitespace-nowrap px-1 text-xl font-semibold dark:text-white">
 				Devices
 			</span>
@@ -161,7 +161,7 @@
 			<input name="limit" bind:value={$form.limit} type="hidden" />
 			<input name="offset" bind:value={$form.offset} type="hidden" />
 			<Button type="submit" color="primary" class="!p-2.5"
-				><Icon name="search-outline" size="md" /></Button
+				><SearchOutline size="md" /></Button
 			>
 		</ButtonGroup>
 		<span />

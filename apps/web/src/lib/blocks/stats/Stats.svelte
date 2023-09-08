@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Icon } from 'flowbite-svelte-icons';
+	import { ExclamationCircleOutline } from 'flowbite-svelte-icons';
 	</script>
 
 <div class="max-w-7xl">
@@ -67,7 +67,7 @@
 			<div class="flex-grow px-4 py-5 sm:p-6">
 				<div class="flex items-center">
 					<div class="flex-shrink-0 rounded-md bg-indigo-500 p-3">
-						<Icon name="shield-exclamation-outline" color="#ffffff" />
+						<ExclamationCircleOutline color="#ffffff" />
 					</div>
 					<div class="ml-5 w-0 flex-1">
 						<dt class="truncate text-sm font-medium text-gray-500">

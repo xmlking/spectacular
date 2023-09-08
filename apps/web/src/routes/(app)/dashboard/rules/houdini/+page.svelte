@@ -18,7 +18,7 @@
 		Navbar,
 		NavBrand
 	} from 'flowbite-svelte';
-	import { Icon } from 'flowbite-svelte-icons';
+	import { ComputerSpeakerOutline, SearchOutline } from 'flowbite-svelte-icons';
 	import { GraphQLError } from 'graphql';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
@@ -176,7 +176,7 @@
 <form data-sveltekit-noscroll>
 	<Navbar border={true} rounded={true}>
 		<NavBrand>
-			<Icon name="computer-speaker-outline" />
+			<ComputerSpeakerOutline />
 			<span class="self-center whitespace-nowrap px-1 text-xl font-semibold dark:text-white">
 				Golden Rules
 			</span>
@@ -209,7 +209,7 @@
 			<input name="limit" bind:value={$form.limit} type="hidden" />
 			<input name="offset" bind:value={$form.offset} type="hidden" />
 			<Button type="submit" color="primary" class="!p-2.5"
-				><Icon name="search-outline"  size="md" /></Button
+				><SearchOutline  size="md" /></Button
 			>
 		</ButtonGroup>
 		<Button href="/dashboard/rules/create">Add Rule</Button>

@@ -15,7 +15,7 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 -->
 <script lang="ts">
 	import { Button, ButtonGroup, Select } from 'flowbite-svelte';
-	import { Icon } from 'flowbite-svelte-icons';
+	import { ChevronDownSolid, ChevronUpSolid } from 'flowbite-svelte-icons';
 	import type { TableViewModel } from 'svelte-headless-table';
 	import { Render, Subscribe } from 'svelte-headless-table';
 
@@ -88,9 +88,9 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 									<div class="flex items-center">
 										<Render of={cell.render()} />
 										{#if props.sort.order === 'asc'}
-											<Icon name="chevron-down-solid" size="sm" class="ml-1" />
+											<ChevronDownSolid size="sm" class="ml-1" />
 										{:else if props.sort.order === 'desc'}
-											<Icon name="chevron-up-solid" size="sm" class="ml-1" />
+											<ChevronUpSolid size="sm" class="ml-1" />
 										{/if}
 										{#if props.resize && !props.resize.disabled}
 											<div class="resizer" use:props.resize.drag />

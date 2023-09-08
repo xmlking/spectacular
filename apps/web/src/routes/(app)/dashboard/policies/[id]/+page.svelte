@@ -19,7 +19,7 @@
 	import { updatePolicyKeys as keys } from '$lib/models/schema';
 	import { Logger } from '$lib/utils';
 	import { A, Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import { Icon } from 'flowbite-svelte-icons';
+	import { ComputerSpeakerOutline, Icon, MobilePhoneOutline, UserCircleOutline, UserOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
@@ -101,15 +101,15 @@
 			>
 				<b slot="prepend">
 					{#if $form.subjectType == 'group'}
-						<Icon name="users-group-outline" />
+						<UsersGroupOutline />
 					{:else if $form.subjectType == 'service_account'}
-						<Icon name="user-circle-outline" />
+						<UserCircleOutline />
 					{:else if $form.subjectType == 'device'}
-						<Icon name="mobile-phone-outline" />
+						<MobilePhoneOutline />
 					{:else if $form.subjectType == 'device_pool'}
-						<Icon name="computer-speaker-outline" />
+						<ComputerSpeakerOutline />
 					{:else}
-						<Icon name="user-outline" />
+						<UserOutline />
 					{/if}
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>

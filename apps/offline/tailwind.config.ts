@@ -1,15 +1,18 @@
-import { join } from 'path'
-import type { Config } from 'tailwindcss'
+import { join } from 'path';
+import type { Config } from 'tailwindcss';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import { skeleton } from '@skeletonlabs/tw-plugin';
-import { sumo } from './src/sumo'
+import { sumo } from './src/sumo';
 
 export default {
 	darkMode: 'class',
-	content: ['./src/**/*.{html,js,svelte,ts}', join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')],
+	content: [
+		'./src/**/*.{html,js,svelte,ts}',
+		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
+	],
 	theme: {
-		extend: {},
+		extend: {}
 	},
 	plugins: [
 		forms,
@@ -19,49 +22,47 @@ export default {
 				preset: [
 					{
 						name: 'skeleton',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'wintry',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'modern',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'hamlindigo',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'rocket',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'sahara',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'gold-nouveau',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'vintage',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'seafoam',
-						enhancements: true,
+						enhancements: true
 					},
 					{
 						name: 'crimson',
-						enhancements: true,
-					},
+						enhancements: true
+					}
 				],
-				custom: [
-					sumo,
-				],
-			},
-		}),
-	],
+				custom: [sumo]
+			}
+		})
+	]
 } satisfies Config;

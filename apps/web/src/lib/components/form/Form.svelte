@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { Alert, Button, ButtonGroup, Modal, Spinner } from 'flowbite-svelte';
-	import { Icon } from 'flowbite-svelte-icons';
+	import { AdjustmentsHorizontalOutline, ArrowLeftOutline, CloudArrowUpOutline } from 'flowbite-svelte-icons';
 	import { setContext } from 'svelte';
 	import type { HTMLFormAttributes } from 'svelte/elements';
 	import type { SuperForm } from 'sveltekit-superforms/client';
@@ -73,13 +73,13 @@
 	{#if showButtons}
 		<ButtonGroup>
 			<Button outline on:click={() => history.back()}>
-				<Icon name="arrow-left-outline"
+				<ArrowLeftOutline
 					width="18" height="18"
 					class="mr-2 text-blue-500 dark:text-green-500"
 				/>{backButtonText}
 			</Button>
 			<Button outline disabled={!$tainted} on:click={() => reset()}>
-				<Icon name="adjustments-horizontal-outline"
+				<AdjustmentsHorizontalOutline
 					width="18" height="18"
 					class="mr-2 text-blue-500 dark:text-green-500"
 				/>{resetButtonText}
@@ -89,7 +89,7 @@
 				{#if $submitting}
 					<Spinner class="mr-3" size="4" color="white" />Saveing ...
 				{:else}
-					<Icon name="cloud-arrow-up-outline"
+					<CloudArrowUpOutline
 						class="mr-2 text-blue-500 dark:text-green-500"
 					/>{submitButtonText}
 				{/if}
@@ -100,7 +100,7 @@
 
 	{#if $delayed}
 		<div class="m-0 p-0">
-			<Modal open={$delayed} permanent>
+			<Modal open={$delayed}>
 				<Spinner />
 			</Modal>
 		</div>

@@ -3,7 +3,7 @@
 	import { Drawer } from '$lib/components';
 	import { sidebarOpen } from '$lib/stores/sidebar.store';
 	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
-	import { Icon } from 'flowbite-svelte-icons';
+	import { ArrowRightToBracketOutline, BellOutline, ChartPieOutline, ClipboardListOutline, CogOutline, ComputerSpeakerOutline, DrawSquareOutline, MobilePhoneOutline, QuestionCircleOutline, ScaleBalancedOutline, ShieldCheckOutline, StarOutline, UsersGroupOutline, UsersOutline } from 'flowbite-svelte-icons';
 
 	// custom style
 	let spanClass = 'flex-1 ml-3 whitespace-nowrap';
@@ -24,13 +24,13 @@
 					label="Dashboard"
 				>
 					<svelte:fragment slot="icon"
-						><Icon name="chart-pie-outline" size="md" class="mr-2 text-red-500 dark:text-blue-500" />
-						<!-- <Icon name="chart-pie-outline" class="mr-2 text-red-500 dark:text-blue-500" /> -->
+						><ChartPieOutline size="md" class="mr-2 text-red-500 dark:text-blue-500" />
+						<!-- <ChartPieOutline" class="mr-2 text-red-500 dark:text-blue-500" /> -->
 						</svelte:fragment
 					>
 				</SidebarItem>
 				<SidebarItem label="Reports" {spanClass}>
-					<svelte:fragment slot="icon"><Icon name="draw-square-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><DrawSquareOutline  /></svelte:fragment>
 					<svelte:fragment slot="subtext">
 						<span
 							class="ml-3 inline-flex items-center justify-center rounded-full bg-gray-200 px-2 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300"
@@ -39,7 +39,7 @@
 					</svelte:fragment>
 				</SidebarItem>
 				<SidebarItem label="Notifications" {spanClass}>
-					<svelte:fragment slot="icon"><Icon name="bell-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><BellOutline /></svelte:fragment>
 					<svelte:fragment slot="subtext">
 						<span
 							class="ml-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-200 p-3 text-sm font-medium text-blue-600 dark:bg-blue-900 dark:text-blue-200"
@@ -51,20 +51,20 @@
 					label="Policies"
 					href="/dashboard/policies"
 				>
-					<svelte:fragment slot="icon"><Icon name="shield-check-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><ShieldCheckOutline /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Golden Rule"
 					href="/dashboard/rules"
 				>
-					<svelte:fragment slot="icon"><Icon name="scale-balanced-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><ScaleBalancedOutline /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Devices"
 					{spanClass}
 					href="/dashboard/devices"
 				>
-					<svelte:fragment slot="icon"><Icon name="mobile-phone-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><MobilePhoneOutline /></svelte:fragment>
 					<svelte:fragment slot="subtext">
 						<span
 							class="ml-3 inline-flex items-center justify-center rounded-full bg-blue-200 px-2 text-sm font-medium text-blue-600 dark:bg-blue-900 dark:text-blue-200"
@@ -76,25 +76,25 @@
 					label="Device Pools"
 					href="/dashboard/pools"
 				>
-					<svelete:fragment slot="icon"><Icon name="computer-speaker-outline" /></svelete:fragment>
+					<svelete:fragment slot="icon"><ComputerSpeakerOutline /></svelete:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Users"
 					href="/dashboard/users"
 				>
-					<svelte:fragment slot="icon"><Icon name="users-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><UsersOutline /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Tenants"
 					href="/dashboard/tenants"
 				>
-					<svelte:fragment slot="icon"><Icon name="users-group-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><UsersGroupOutline /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					label="Settings"
 					href="/dashboard/settings"
 				>
-					<svelte:fragment slot="icon"><Icon name="cog-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><CogOutline /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem
 					href="/auth/signout?callbackUrl=/blog"
@@ -102,18 +102,18 @@
 					data-sveltekit-preload-code="off"
 					label="Sign Out"
 				>
-					<svelte:fragment slot="icon"><Icon name="arrow-right-to-bracket-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><ArrowRightToBracketOutline /></svelte:fragment>
 				</SidebarItem>
 			</SidebarGroup>
 			<SidebarGroup border>
 				<SidebarItem label="Upgrade to Pro">
-					<svelte:fragment slot="icon"><Icon name="star-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><StarOutline /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem label="Documentation">
-					<svelte:fragment slot="icon"><Icon name="clipboard-list-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><ClipboardListOutline /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem label="Help">
-					<svelte:fragment slot="icon"><Icon name="question-circle-outline" /></svelte:fragment>
+					<svelte:fragment slot="icon"><QuestionCircleOutline /></svelte:fragment>
 				</SidebarItem>
 			</SidebarGroup>
 		</SidebarWrapper>

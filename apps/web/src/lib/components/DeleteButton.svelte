@@ -6,7 +6,7 @@
 </script>
 
 <script lang="ts">
-	import { Icon } from 'flowbite-svelte-icons';
+	import { ArchiveOutline } from 'flowbite-svelte-icons';
 	import { createEventDispatcher } from 'svelte';
 
 	export let id: string;
@@ -19,7 +19,7 @@
 </script>
 
 <button on:click={handleDeleteButton}>
-	<Icon name="archive-outline" class="text-pink-700 dark:text-blue-300" />
+	<ArchiveOutline class="text-pink-700 dark:text-blue-300" />
 </button>
 <!-- For Debug -->
 <slot />

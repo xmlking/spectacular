@@ -6,7 +6,6 @@ Show how this repo is setup via step-by-step guild
 
 ### Prerequisite
 
-
 Install following CLI tools globally
 
 - [tsx](https://github.com/esbuild-kit/tsx) to run _TypeScript_ & _ESM_ files from command-line. This is **NOT** React's [TSX/JSX](https://www.typescriptlang.org/docs/handbook/jsx.html)
@@ -53,13 +52,17 @@ pnpx playwright install
 ```
 
 ### SEO
+
 #### Meta Tags, OG
+
 Svelte [Meta Tags](https://github.com/oekazuma/svelte-meta-tags) provides components designed to help you manage SEO for Svelte projects.
+
 ```shell
 pnpm add -D svelte-meta-tags --filter "./apps/**"
 ```
 
 #### Image Optimization
+
 [vite-imagetools](https://github.com/JonasKruckenberg/imagetools/tree/main/packages/vite) A toolbox of import directives for Vite that can transform your image at compile-time.
 
 ```shell
@@ -75,18 +78,18 @@ pnpm add -D @vercel/analytics --filter "./apps/**"
 **Setup**
 
 ```ts
-import { defineConfig } from 'vite'
-import { imagetools } from 'vite-imagetools'
+import { defineConfig } from 'vite';
+import { imagetools } from 'vite-imagetools';
 
 export default defineConfig({
-  plugins: [imagetools()]
-})
+	plugins: [imagetools()]
+});
 ```
 
 **Usage**
 
 ```ts
-import Image from 'example.jpg?w=400&h=300&format=webp'
+import Image from 'example.jpg?w=400&h=300&format=webp';
 ```
 
 ### Release
@@ -235,14 +238,14 @@ Added [Dockerfile](../Dockerfile) and GitHub [actions](../.github/workflows).
 
 ```shell
 # table library for Svelte
-pnpm add -D svelte-headless-table
+pnpm add -D svelte-headless-table  --filter "./apps/**"
 #pnpm add -D @tanstack/svelte-table
 # form library for Svelte
-pnpm i -D sveltekit-superforms zod formsnap zod-form-data
+pnpm i -D sveltekit-superforms zod formsnap zod-form-data sveltekit-rate-limiter --filter "./apps/**"
 # make any element draggable
-pnpm add -D @neodrag/svelte
+pnpm add -D @neodrag/svelte --filter "./apps/**"
 # to fetch, cache and update data
-pnpm add -D @tanstack/svelte-query
+pnpm add -D @tanstack/svelte-query --filter "./apps/**"
 ```
 
 ### Optional
