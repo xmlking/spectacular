@@ -1,8 +1,17 @@
 # Turborepo
 
+### Run
 ```shell
-turbo run dev --filter=./apps/web
-turbo run dev --filter=./apps/docs
-
-turbo run test --filter=./packages/helpers
+turbo dev --filter=web
+turbo dev --filter=docs
 ```
+### Test
+```shell
+turbo test --filter=helpers
+```
+
+### Build
+```shell
+turbo build  --filter=playground...
+```
+
