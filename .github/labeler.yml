@@ -1,28 +1,45 @@
-app:
-  - src/routes/(app)/**/*
-  - change-notes/**/*app*
-home:
-  - src/routes/(home)/**/*
-  - change-notes/**/*home*
+web:
+  - apps/web/**/*
+  - change-notes/**/*web*
+docs:
+  - apps/docs/**/*
+  - change-notes/**/*docs*
+offline:
+  - apps/offline/**/*
+  - change-notes/**/*offline*
 playground:
-  - src/routes/(play)/**/*
+  - apps/playground/**/*
   - change-notes/**/*playground*
+ui:
+  - packages/ui/**/*
+  - change-notes/**/*ui*
+  - packages/ui-flowbite/**/*
+  - change-notes/**/*ui-flowbite*
+assets:
+  - packages/assets/**/*
+  - change-notes/**/*assets*
+tailwind-config:
+  - packages/tailwind-config/**/*
+  - change-notes/**/*tailwind-config*
+tsconfig:
+  - packages/tsconfig/**/*
+  - change-notes/**/*tsconfig*
 documentation:
   - '**/*.md'
   - docs/**/*
+hasura:
+  - infra/hasura/**/*
+  - change-notes/**/*hasura*
 test:
-  - tests/**/*
+  - /**/tests/**/*
   - change-notes/**/*tests*
-api:
-  - src/routes/api/**/*
-  - change-notes/**/*api*
-users:
-  - src/routes/dashboard/users/**/*
-  - change-notes/**/*users*
-groups:
-  - src/routes/dashboard/groups/**/*
-  - change-notes/**/*groups*
+env:
+  - '**/.env'
+  - '**/.env.local'
+  - '**/.env.test'
 workspace:
   - .github/**/*
-  - Dockerfile*.*
+  - .prettierrc
+  - config.yaml
+  - turbo.json
   - package.json

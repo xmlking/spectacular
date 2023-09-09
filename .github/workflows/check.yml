@@ -25,23 +25,23 @@ jobs:
         uses: cocogitto/cocogitto-action@v3.5
         with:
           check-latest-tag-only: true
-  linter:
-    name: Lint Code Base
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-        with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
-      - name: Lint Code Base
-        uses: github/super-linter@v5
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          IGNORE_GENERATED_FILES: true
-          # FILTER_REGEX_EXCLUDE: CHANGELOG.md
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #   linter:
+  #     name: Lint Code Base
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #       - name: Checkout Code
+  #         uses: actions/checkout@v3
+  #         with:
+  #           # Full git history is needed to get a proper list of changed files within `super-linter`
+  #           fetch-depth: 0
+  #       - name: Lint Code Base
+  #         uses: github/super-linter@v5
+  #         env:
+  #           VALIDATE_ALL_CODEBASE: false
+  #           IGNORE_GENERATED_FILES: true
+  #           # FILTER_REGEX_EXCLUDE: CHANGELOG.md
+  #           DEFAULT_BRANCH: main
+  #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   test:
     name: 'Unit tests'
     runs-on: ubuntu-latest

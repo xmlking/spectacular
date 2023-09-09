@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - 'assets/**'
+      - '**.md'
+      - '!.changeset/**'
+      - 'LICENSE'
+  workflow_dispatch:
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: nhost
+  DASHBOARD_PACKAGE: '@nhost/dashboard'
+
+jobs:
+  version:
+    name: Version
+    runs-on: ubuntu-latest
+    outputs:
+      hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
+      dashboardVersion: ${{ steps.dashboard.outputs.dashboardVersion }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install Node and dependencies
+        uses: ./.github/actions/install-dependencies
+        with:
+          TURBO_TOKEN: ${{ env.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ env.TURBO_TEAM }}
+      - name: Create PR or Publish release
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm run ci:version
+          commit: 'chore: update versions'
+          title: 'chore: update versions'
+          publish: pnpm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Check Dashboard tag
+        id: dashboard
+        if: steps.changesets.outputs.hasChangesets == 'false'
+        run: |
+          DASHBOARD_VERSION=$(jq -r .version dashboard/package.json)
+          GIT_TAG="${{ env.DASHBOARD_PACKAGE}}@$DASHBOARD_VERSION"
+          if [ -z "$(git tag -l | grep $GIT_TAG)" ]; then
+            echo "dashboardVersion=$DASHBOARD_VERSION" >> $GITHUB_OUTPUT
