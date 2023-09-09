@@ -26,6 +26,7 @@
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	// import { Datepicker } from 'flowbite-svelte';
 
 	const log = new Logger('routes:policies:create');
 	export let data;
@@ -374,6 +375,9 @@
 				>Active</Toggle
 			>
 		</div>
+		<!-- <div class="col-span-2  col-start-5">
+			<Datepicker range datepickerTitle="Valid Range"  datepickerButtons />
+		</div> -->
 		<div class="col-start-5">
 			<DateInput type="datetime-local" field={keys.validFrom} label="Valid From" />
 		</div>

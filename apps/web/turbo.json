@@ -1,7 +1,9 @@
 {
 	"extends": ["//"],
 	"pipeline": {
-		"build": {},
+		"build": {
+			"env": ["VERCEL_URL", "VERCEL_ENV"]
+		},
 		"preview": {},
 		"special-task": {}
 	}

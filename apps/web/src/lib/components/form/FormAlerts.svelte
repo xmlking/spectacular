@@ -2,6 +2,8 @@
 	// Usage: To display Form-level message or errors
 	import { page } from '$app/stores';
 	import { Alert } from 'flowbite-svelte';
+	// import { List, Li, Heading } from 'flowbite-svelte';
+	// import { CheckCircleSolid, CloseCircleSolid } from 'flowbite-svelte-icons';
 
 	export let message: string | undefined;
 	export let errors: string[] | undefined;
@@ -31,6 +33,14 @@
 					<li>{error}</li>
 				{/each}
 			</ul>
+			<!-- <List tag="ul" class="space-y-1 text-gray-500 dark:text-gray-400" list="none">
+				{#each errors as error, index}
+					<Li icon>
+						<CloseCircleSolid class="w-3.5 h-3.5 mr-2 text-gray-500 dark:text-gray-400" />
+						{error}
+					</Li>
+				{/each}
+			</List> -->
 		{/if}
 	</Alert>
 {/if}

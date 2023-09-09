@@ -54,9 +54,6 @@ devDependencies:
   '@sveltejs/package':
     specifier: 2.2.2
     version: 2.2.2(svelte@4.2.0)(typescript@5.2.2)
-  '@tailwindcss/aspect-ratio':
-    specifier: 0.4.2
-    version: 0.4.2(tailwindcss@3.3.3)
   '@tailwindcss/container-queries':
     specifier: 0.1.1
     version: 0.1.1(tailwindcss@3.3.3)
@@ -121,8 +118,8 @@ devDependencies:
     specifier: 9.0.0
     version: 9.0.0(eslint@8.49.0)
   eslint-plugin-svelte:
-    specifier: 2.33.0
-    version: 2.33.0(eslint@8.49.0)(svelte@4.2.0)
+    specifier: 2.33.1
+    version: 2.33.1(eslint@8.49.0)(svelte@4.2.0)
   flowbite-svelte:
     specifier: 0.44.15
     version: 0.44.15(svelte@4.2.0)
@@ -2617,14 +2614,6 @@ packages:
       - supports-color
     dev: true
 
-  /@tailwindcss/aspect-ratio@0.4.2(tailwindcss@3.3.3):
-    resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
-    peerDependencies:
-      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
-    dependencies:
-      tailwindcss: 3.3.3
-    dev: true
-
   /@tailwindcss/container-queries@0.1.1(tailwindcss@3.3.3):
     resolution: {integrity: sha512-p18dswChx6WnTSaJCSGx6lTmrGzNNvm2FtXmiO6AuA1V4U5REyoqwmT6kgAsIMdjo07QdAfYXHJ4hnMtfHzWgA==}
     peerDependencies:
@@ -4274,8 +4263,8 @@ packages:
       eslint: 8.49.0
     dev: true
 
-  /eslint-plugin-svelte@2.33.0(eslint@8.49.0)(svelte@4.2.0):
-    resolution: {integrity: sha512-kk7Z4BfxVjFYJseFcOpS8kiKNio7KnAnhFagmM89h1wNSKlM7tIn+uguNQppKM9leYW+S+Us0Rjg2Qg3zsEcvg==}
+  /eslint-plugin-svelte@2.33.1(eslint@8.49.0)(svelte@4.2.0):
+    resolution: {integrity: sha512-veYmyjsbt8ikXdaa6pLsgytdlzJpZZKw9vRaQlRBNKaLNmrbsdJulwiWfcDZ7tYJdaVpRB4iDFn/fuPeebxUVg==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0-0

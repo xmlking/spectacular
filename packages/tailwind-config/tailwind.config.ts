@@ -4,7 +4,7 @@ import type { Config } from 'tailwindcss';
 // PLUGINS
 // import lineClamp from '@tailwindcss/line-clamp';
 // import forms from "@tailwindcss/forms";
-import aspectRatio from '@tailwindcss/aspect-ratio';
+// import aspectRatio from '@tailwindcss/aspect-ratio';
 import containerQueries from '@tailwindcss/container-queries';
 // @ts-expect-error 7016 TODO
 import animate from 'tailwindcss-animate';
@@ -21,7 +21,7 @@ export default {
 		'./node_modules/flowbite-svelte-blocks/**/*.{html,js,svelte,ts}'
 	],
 
-	plugins: [aspectRatio, containerQueries, animate, flowbite({ charts: false, forms: true }), flowbiteTypography],
+	plugins: [containerQueries, animate, flowbite({ charts: false, forms: true }), flowbiteTypography],
 
 	// darkMode: 'class', // or 'media' or false
 	darkMode: 'class',
@@ -34,6 +34,7 @@ export default {
 			// },
 			// custom shades generator https://javisperez.github.io/tailwindcolorshades/?
 			// http://colorcode.is/ - helpful color site
+			// Or - Tailwind CSS Color Generator: https://uicolors.app/create
 			// prettier-ignore
 			colors: {
 				// To change the primary color, simply uncomment the desired color object and modify the corresponding color values as needed.

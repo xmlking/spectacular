@@ -113,9 +113,9 @@ Add and configure tailwindcss via [svelte-add](https://github.com/svelte-add/tai
 pnpx svelte-add@latest tailwindcss  --typography --daisyui
 # NOTE: tailwindcss's forms plugin and daisyui wont work together
 # also add other tailwind plugins and include them in `tailwind.config.cjs`
-pnpm add --save-peer  @tailwindcss/aspect-ratio @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter ./packages/tailwind-config
+pnpm add --save-peer @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter ./packages/tailwind-config
 pnpm add --save-peer  flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter ./packages/tailwind-config
-pnpm add -D @tailwindcss/aspect-ratio @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter "./apps/**"
+pnpm add -D @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter "./apps/**"
 pnpm add -D flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter "./apps/**"
 ```
 
