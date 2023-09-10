@@ -26,7 +26,7 @@ FROM --platform=${BUILDPLATFORM} node:20 as build
 
 # install pnpm
 #RUN curl -fsSL https://get.pnpm.io/install.sh | sh -; node - add --global pnpm
-RUN corepack enable; corepack prepare pnpm@8.6.0 --activate
+RUN corepack enable; corepack prepare pnpm@8.7.4 --activate
 
 # build-args are used in vite.config.ts
 ARG BUILD_TIME
@@ -39,7 +39,8 @@ WORKDIR /app
 COPY ./patches/ ./patches/
 COPY .npmrc package.json pnpm-lock.yaml ./
 RUN pnpm fetch --no-optional --ignore-scripts --unsafe-perm
-RUN pnpm install -r --offline --no-optional --ignore-scripts --unsafe-perm
+# RUN pnpm install -r --offline --no-optional --ignore-scripts --unsafe-perm # FIXME offline not working
+RUN pnpm install -r  --no-optional --ignore-scripts --unsafe-perm
 
 COPY . .
 
@@ -53,7 +54,7 @@ RUN pnpm build
 FROM --platform=${BUILDPLATFORM} node:20-alpine as runtime
 
 # install pnpm
-RUN corepack enable; corepack prepare pnpm@8.6.0 --activate
+RUN corepack enable; corepack prepare pnpm@8.7.4 --activate
 
 WORKDIR /app
 
@@ -61,14 +62,15 @@ WORKDIR /app
 COPY ./patches/ ./patches/
 COPY .npmrc package.json pnpm-lock.yaml ./
 RUN pnpm fetch --prod --unsafe-perm --ignore-scripts --unsafe-perm
-RUN pnpm install -r --offline --prod
+# RUN pnpm install -r --offline --prod # FIXME offline not working
+RUN pnpm install -r --prod
 RUN pnpm prune --prod --no-optional
 
 ############################################################
 ### stage_final
 ### this stage only needs the compiled application and the runtime dependencies.
 ############################################################
-#FROM gcr.io/distroless/nodejs:19 as final
+# FROM gcr.io/distroless/nodejs:19 as final
 # FROM gcr.io/distroless/nodejs:18-debug as final
 FROM cgr.dev/chainguard/node:20 as final
 ENV NODE_ENV production

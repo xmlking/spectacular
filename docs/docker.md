@@ -32,7 +32,7 @@ VERSION=v0.4.0
 BUILD_TIME=$(date +%FT%T%Z)
 REGISTRY=ghcr.io
 #REGISTRY=us-west1-docker.pkg.dev/<project_id>/docker
-IMAGE_NAME=xmlking/svelte-starter-kit
+IMAGE_NAME=xmlking/spectacular/playground
 DOCKER_IMAGE=$REGISTRY/$IMAGE_NAME
 
 # build
@@ -43,7 +43,10 @@ docker buildx build --platform linux/arm64/v8,linux/amd64 \
 -t $DOCKER_IMAGE\:$VERSION \
 -t $DOCKER_IMAGE\:latest \
 --build-arg BUILD_TIME=$BUILD_TIME --build-arg BUILD_VERSION=$VERSION \
+--progress=plain \
 --push .
+
+docker  build -t playground:latest -f apps/playground/Dockerfile --progress=plain .
 
 # (optional) pull recent images from GHCR
 docker pull --platform linux/arm64/v8 $DOCKER_IMAGE\:latest
