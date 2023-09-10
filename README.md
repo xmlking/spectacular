@@ -47,7 +47,7 @@
 ## Experementing
 
 - [ ] **tRPC-SvelteKit** [End-to-end typesafe APIs](https://icflorescu.github.io/trpc-sveltekit) SvelteKit.
-- [x] Implement Changesets [(link)](https://github.com/changesets/changesets)
+- [ ] Implement Changesets [(link)](https://github.com/changesets/changesets)
 - [ ] **TAURI:** Use [tauri](https://tauri.app/) for multi-platform
 
 ## Setup
