@@ -46,7 +46,21 @@ docker buildx build --platform linux/arm64/v8,linux/amd64 \
 --progress=plain \
 --push .
 
-docker  build -t playground:latest -f apps/playground/Dockerfile --progress=plain .
+
+SCOPE=playground
+docker build --progress=plain \
+-t $SCOPE\:latest \
+--load .
+
+docker run \
+--rm -it \
+-p 3000:3000 \
+--platform=linux/arm64 \
+ --name $SCOPE $SCOPE\:latest
+
+docker kill $SCOPE
+
+
 
 # (optional) pull recent images from GHCR
 docker pull --platform linux/arm64/v8 $DOCKER_IMAGE\:latest
