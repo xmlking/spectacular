@@ -3,6 +3,7 @@ ARG SCOPE=playground
 # Stage 0: base image											                        #
 ###################################################################
 FROM node:20-slim AS base
+RUN apk add --no-cache git
 
 ARG SCOPE
 ENV SCOPE=${SCOPE}
