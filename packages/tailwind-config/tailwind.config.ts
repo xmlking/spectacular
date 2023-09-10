@@ -5,6 +5,7 @@ import type { Config } from 'tailwindcss';
 // import lineClamp from '@tailwindcss/line-clamp';
 // import forms from "@tailwindcss/forms";
 // import aspectRatio from '@tailwindcss/aspect-ratio';
+// @ts-expect-error 7016 TODO
 import containerQueries from '@tailwindcss/container-queries';
 // @ts-expect-error 7016 TODO
 import animate from 'tailwindcss-animate';
