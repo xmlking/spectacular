@@ -76,7 +76,7 @@ ENV NODE_ENV production
 ARG SCOPE
 
 # copy tini
-COPY --from=base /usr/bin/tini /usr/bin/tini
+COPY --from=builder /usr/bin/tini /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "-s", "--", "/usr/bin/node"]
 
 # copy runtime needed config files???
