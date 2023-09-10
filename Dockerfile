@@ -3,7 +3,8 @@ ARG SCOPE=playground
 # Stage 0: base image											                        #
 ###################################################################
 FROM node:20-slim AS base
-RUN apk add --no-cache git
+ENV GIT_SSL_NO_VERIFY 1
+RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
 ARG SCOPE
 ENV SCOPE=${SCOPE}
@@ -48,6 +49,7 @@ RUN pnpm install
 
 # Build the project
 COPY --from=pruner /app/out/full/ .
+COPY --from=pruner /app/.git .git
 COPY turbo.json turbo.json
 
 # Uncomment and use build args to enable remote caching
@@ -58,7 +60,7 @@ COPY turbo.json turbo.json
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
 # TODO: set any extra ENV needed for build
-# ENV ENCRYPTION_SECRET=encryption_secret_placeholder123 DATABASE_URL=postgresql://postgres:typebot@typebot-db:5432/typebot NEXTAUTH_URL=http://localhost:3000 NEXT_PUBLIC_VIEWER_URL=http://localhost:3001
+# ENV ENCRYPTION_SECRET=encryption_secret_placeholder123 NEXTAUTH_URL=http://localhost:3000 NEXT_PUBLIC_VIEWER_URL=http://localhost:3001
 RUN pnpm turbo run build --filter=${SCOPE}...
 
 ###################################################################
@@ -70,9 +72,12 @@ FROM cgr.dev/chainguard/node:20 AS runner
 # FROM base AS runner
 
 WORKDIR /app
-ENTRYPOINT ["/usr/bin/node"]
 ENV NODE_ENV production
 ARG SCOPE
+
+# copy tini
+COPY --from=base /usr/bin/tini /usr/bin/tini
+ENTRYPOINT ["/usr/bin/tini", "-s", "--", "/usr/bin/node"]
 
 # copy runtime needed config files???
 COPY --from=builder /app/apps/${SCOPE}/package.json .
