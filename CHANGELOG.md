@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.1.1](https://github.com/xmlking/svelte-starter-kit/compare/v0.1.0..v0.1.1) - 2023-09-11
+#### Bug Fixes
+- testing deploy [skip ci] - ([7fd9132](https://github.com/xmlking/svelte-starter-kit/commit/7fd91327f98282086a5650774c08f1235965e8e8)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.1.0](https://github.com/xmlking/svelte-starter-kit/compare/e213fc8b9f95bdeecdd2275e838d78793fd62313..v0.1.0) - 2023-09-11
 #### Bug Fixes
 - **(playground)** desable prerender crawl - ([83baa91](https://github.com/xmlking/svelte-starter-kit/commit/83baa91fe8fe8bfed51112655130120385335fcf)) - [@xmlking](https://github.com/xmlking)
