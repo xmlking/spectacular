@@ -26,8 +26,10 @@ on:
 
 env:
   GHCR_REGISTRY: ghcr.io
-  SCOPE: ${{ inputs.app }}
-  IMAGE_NAME: ${{ github.repository }}/${{ inputs.app }}
+  SCOPE: ${{ inputs.app || 'playground' }}
+  IMAGE_NAME: ${{ github.repository }}/${{ inputs.app || 'playground' }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 permissions:
   contents: write # needed to write releases
