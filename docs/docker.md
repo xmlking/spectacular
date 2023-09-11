@@ -32,35 +32,39 @@ VERSION=v0.4.0
 BUILD_TIME=$(date +%FT%T%Z)
 REGISTRY=ghcr.io
 #REGISTRY=us-west1-docker.pkg.dev/<project_id>/docker
-IMAGE_NAME=xmlking/spectacular/playground
-DOCKER_IMAGE=$REGISTRY/$IMAGE_NAME
+TURBO_TEAM=cloudbusters
+TURBO_TOKEN=<FILL_ME_IN>
+SCOPE=playground
+IMAGE_NAME=xmlking/spectacular
+DOCKER_IMAGE=$REGISTRY/$IMAGE_NAME/$SCOPE
 
-# build
+#(optional) enable buildx
 export DOCKER_CLI_EXPERIMENTAL=enabled
 docker buildx create --use
 
-docker buildx build --platform linux/arm64/v8,linux/amd64 \
+# build for local platform
+docker build \
+-t $DOCKER_IMAGE\:$VERSION \
+-t $DOCKER_IMAGE\:latest \
+--build-arg BUILD_TIME=$BUILD_TIME --build-arg BUILD_VERSION=$VERSION \
+--progress=plain \
+--load .
+
+# (or) build for multi-plateform and push
+docker buildx build \
+--platform linux/arm64/v8,linux/amd64 \
 -t $DOCKER_IMAGE\:$VERSION \
 -t $DOCKER_IMAGE\:latest \
 --build-arg BUILD_TIME=$BUILD_TIME --build-arg BUILD_VERSION=$VERSION \
 --progress=plain \
 --push .
 
-
-SCOPE=playground
-docker build --progress=plain \
--t $SCOPE\:latest \
---load .
-
+# run
 docker run \
 --rm -it \
 -p 3000:3000 \
 --platform=linux/arm64 \
- --name $SCOPE $SCOPE\:latest
-
-docker kill $SCOPE
-
-
+--name $SCOPE $DOCKER_IMAGE\:latest
 
 # (optional) pull recent images from GHCR
 docker pull --platform linux/arm64/v8 $DOCKER_IMAGE\:latest

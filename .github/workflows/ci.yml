@@ -7,6 +7,16 @@ on:
         description: Build with the given version.
         default: v1.0.0
         required: true
+      app:
+        type: choice
+        description: Target application
+        default: 'playground'
+        required: true
+        options:
+          - playground
+          - web
+          - docs
+          - offline
       dey-run:
         description: Build with dey-run.
         required: false
@@ -16,7 +26,7 @@ on:
 
 env:
   GHCR_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}/${{ inputs.app }}
 
 permissions:
   contents: write # needed to write releases
@@ -52,8 +62,8 @@ jobs:
           labels: |
             org.opencontainers.image.vendor=MyCompany
             org.opencontainers.image.licenses=MIT
-            org.opencontainers.image.documentation=docker run -it -e NODE_ENV=production -p 3000:3000  ghcr.io/xmlking/svelte-starter-kit:latest
-            org.opencontainers.image.name=svelte-starter-kit
+            org.opencontainers.image.documentation=docker run -it -e NODE_ENV=production -p 3000:3000 ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            org.opencontainers.image.name=${{ env.IMAGE_NAME }}
             org.opencontainers.image.authors=sumanth
       - name: Build and push Docker image
         uses: docker/build-push-action@v4

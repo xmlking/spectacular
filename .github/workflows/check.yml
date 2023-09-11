@@ -1,7 +1,6 @@
 name: Check
+
 on:
-  pull_request:
-    branches: [main]
   push:
     # This should disable running the workflow on tags, according to the
     # on.<push|pull_request>.<branches|tags> GitHub Actions docs.
@@ -10,6 +9,10 @@ on:
     paths-ignore:
       - 'README.md'
       - 'docs'
+      - 'infra'
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   cog_check:
@@ -25,35 +28,44 @@ jobs:
         uses: cocogitto/cocogitto-action@v3.5
         with:
           check-latest-tag-only: true
-  #   linter:
-  #     name: Lint Code Base
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: Checkout Code
-  #         uses: actions/checkout@v3
-  #         with:
-  #           # Full git history is needed to get a proper list of changed files within `super-linter`
-  #           fetch-depth: 0
-  #       - name: Lint Code Base
-  #         uses: github/super-linter@v5
-  #         env:
-  #           VALIDATE_ALL_CODEBASE: false
-  #           IGNORE_GENERATED_FILES: true
-  #           # FILTER_REGEX_EXCLUDE: CHANGELOG.md
-  #           DEFAULT_BRANCH: main
-  #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  test:
-    name: 'Unit tests'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm test:coverage
+#   linter:
+#     name: Lint Code Base
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
+#         with:
+#           # Full git history is needed to get a proper list of changed files within `super-linter`
+#           fetch-depth: 0
+#       - name: Lint Code Base
+#         uses: github/super-linter@v5
+#         env:
+#           VALIDATE_ALL_CODEBASE: false
+#           IGNORE_GENERATED_FILES: true
+#           # FILTER_REGEX_EXCLUDE: CHANGELOG.md
+#           DEFAULT_BRANCH: main
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#   build:
+#     name: Build and Test
+#     timeout-minutes: 15
+#     runs-on: ubuntu-latest
+#     # To use Remote Caching, uncomment the next lines and follow the steps below.
+#     env:
+#       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+#       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+#     steps:
+#       - name: Check out code
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 2
+#       - uses: pnpm/action-setup@v2
+#         with:
+#           version: 8
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: '20'
+#           cache: 'pnpm'
+#       - run: pnpm install
+#       - run: pnpm build
+#       - run: pnpm test:unit:coverage
