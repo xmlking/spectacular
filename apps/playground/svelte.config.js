@@ -9,6 +9,8 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [vitePreprocess()],
 
+	// The Svelte Inspector
+	// Usage: open up your project in the browser. Then use the key combo Command + Shift to activate
 	vitePlugin: {
 		inspector: true
 	},

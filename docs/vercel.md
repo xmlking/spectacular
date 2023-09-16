@@ -1,6 +1,7 @@
 # Vercel
 
-![Vercel Monorepo](./images/monorepo.avif "Title")
+![Vercel Monorepo](./images/monorepo.avif 'Title')
+
 <p style="text-align: center;">The architecture of a monorepo deployed to Vercel</p>
 
 If your team uses a `trunk-based` development workflow and you want to deploy using `tags` and `releases`,
