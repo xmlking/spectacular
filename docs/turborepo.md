@@ -76,8 +76,17 @@ turbo test --filter=helpers
 
 ```shell
 turbo build --filter=playground...
+turbo build --filter=playground... --summarize
 turbo build --filter=playground... --dry
 turbo build --filter=playground... --graph
+```
+
+### Maintenance
+
+migrate command which both upgrades your repo to the specified version (latest by default) of turbo, and runs any codemods required.
+
+```shell
+bunx  @turbo/codemod migrate
 ```
 
 ### Other

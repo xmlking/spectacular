@@ -105,11 +105,11 @@ TODO              text
 # Configs
 *.cnf             text
 *.conf            text
-*.config          text
-.editorconfig     text
+*.config           text
+.editorconfig      text
 .env              text
 .gitattributes    text
-.gitconfig        text
+.gitconfig         text
 .htaccess         text
 *.lock            text -diff
 package.json      text eol=lf
@@ -171,8 +171,8 @@ Procfile          text
 *.asf             binary
 *.asx             binary
 *.avi             binary
-*.fla             binary
-*.flv             binary
+*.fla              binary
+*.flv              binary
 *.m4v             binary
 *.mng             binary
 *.mov             binary
@@ -213,3 +213,6 @@ Procfile          text
 .yarn/* linguist-vendored
 .pnp.js linguist-vendored
 *.test.ts linguist-vendored
+
+# Bun
+*.lockb 		binary diff=lockb

@@ -7,17 +7,17 @@ Demo app build with `tailwind`, `flowbite`, `graphql`, `houdini`, `superforms`
 Once you've cloned the project and installed dependencies with `bun i`, start a development server:
 
 ```shell
-bun dev --filter=./apps/web
+bun run dev --filter=./apps/web
 
 # or start the server and open the app in a new browser tab
-bun dev --filter=./apps/web -- --open
+bun run dev --filter=./apps/web -- --open
 
 # run in debug mode
-bun dev:debug --filter=./apps/web
+bun run dev:debug --filter=./apps/web
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
-PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 bun dev
+PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 bun run dev
 ```
 
 ## Maintenance
@@ -27,8 +27,18 @@ PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 bun dev
 To update the packages to their latest versions in `package.json`
 
 ```shell
+# TODO: not at available for bun
 bun up --latest -r
 bun audit --fix
+```
+
+## Format
+
+Format and lint code
+
+```shell
+bun run format --filter=web
+bun run lint --filter=web
 ```
 
 ## Testing
@@ -36,16 +46,16 @@ bun audit --fix
 ### Unit/Component Tests
 
 ```shell
-bun test
+bun run test --filter=web
 
-bun test:ui
+bun run test:ui --filter=web
 #Then, you can visit the Vitest UI at http://localhost:51204/__vitest__/.
 
 # test coverage
-bun test:coverage
+bun run test:coverage --filter=web
 
 # updating Snapshots
-bunx vitest -u
+bunx vitest -u --filter=web
 
 # test specific folder
 bunx vitest apps/web/src/lib/utils
@@ -56,7 +66,7 @@ bunx vitest apps/web/src/lib/utils
 ### E2E Tests
 
 ```shell
-bun test:e2e
+bun run test:e2e --filter=web
 ```
 
 ## Building
@@ -64,11 +74,11 @@ bun test:e2e
 To create a production version of your app:
 
 ```shell
-bun build
+bun run build
 # run build
-bun build  --filter=playground...
-bun build  --filter=playground... --dry
-bun build --filter=playground... --graph
+bun run build  --filter=web...
+bun run build  --filter=web... --dry
+bun run build --filter=web... --graph
 ```
 
 Run from the local build directory:
@@ -85,7 +95,7 @@ ORIGIN=https://my.site \
 node build
 ```
 
-You can preview the production build with `bun preview`.
+You can preview the production build with `bun run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
 > environment.
@@ -106,7 +116,7 @@ cog bump --auto
 To build and publish libs
 
 ```shell
-bun build --filter=lib...
+bun run build --filter=lib...
 cd package
 bun publish
 ```
