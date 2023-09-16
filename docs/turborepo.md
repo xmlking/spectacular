@@ -30,6 +30,13 @@ This Turborepo has some additional tools already setup for you:
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
 
+## Prerequisite
+
+```bash
+pnpm add -g turbo@latest
+# bun add -g turbo@latest
+```
+
 ## Setup
 
 ### Create sveltekit turborepo
@@ -38,6 +45,7 @@ to create a new sveltekit turborepo, Run the following command:
 
 ```sh
 pnpx create-turbo@latest -e with-svelte
+# bunx create-turbo@latest -e with-svelte
 ```
 
 ### Setup Remote Caching for Turborepo on Vercel
@@ -45,6 +53,7 @@ pnpx create-turbo@latest -e with-svelte
 ```shell
 npx turbo login
 npx turbo link
+# bunx turbo login
 ```
 
 ## Usage
@@ -52,6 +61,7 @@ npx turbo link
 ### Run
 
 ```shell
+turbo dev --filter=playground
 turbo dev --filter=web
 turbo dev --filter=docs
 ```
@@ -65,7 +75,16 @@ turbo test --filter=helpers
 ### Build
 
 ```shell
-turbo build  --filter=playground...
-turbo build  --filter=playground... --dry
+turbo build --filter=playground...
+turbo build --filter=playground... --dry
 turbo build --filter=playground... --graph
+```
+
+## Bun
+```shell
+bun run build
+bun run dev
+bun run dev  --filter=playground
+bun run lint
+bunx turbo login
 ```
