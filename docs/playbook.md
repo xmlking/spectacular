@@ -20,6 +20,7 @@ pnpm add -g turbo
 ### Create
 
 ```shell
+# bun create svelte@latest spectacular && cd $_ && code .
 pnpm create svelte@latest spectacular && cd $_ && code .
 # select `yes` for TypeScript, ESLint, Prettier, Playwright and Vitest
 ```

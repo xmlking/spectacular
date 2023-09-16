@@ -88,8 +88,8 @@ jobs:
         with:
           bun-version: latest
       - name: Install Dependencies
-        run: bun  install --platform=linuxmusl
-      #   - run: bun run check --filter=playground
-      #   - run: bun run lint --filter=playground
-      - run: bun run build --filter=playground
-      - run: bun run test:unit:coverage --filter=playground
+        run: bun  install
+      #   - run: bun run check --filter=docs
+      #   - run: bun run lint --filter=docs
+      - run: bun run build --filter=docs
+      - run: bun run test:unit:coverage --filter=docs
