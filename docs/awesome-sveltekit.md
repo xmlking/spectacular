@@ -184,7 +184,7 @@ Add ORIGIN Env Varaible i.e., `ORIGIN=http://localhost:3000 node build/index.js`
 - [https://joyofcode.xyz/](https://joyofcode.xyz/)
 - [Exploring Auth.js](https://medium.com/@jibla/auth-js-exploration-1b6c27cf076f)
 - [Svelte Reviewed](https://dev.to/somedood/svelte-reviewed-a-masterclass-on-empowerment-2544)
-- [Conditionally stream data in SvelteKit](https://geoffrich.net/posts/conditionally-stream-data/) 
+- [Conditionally stream data in SvelteKit](https://geoffrich.net/posts/conditionally-stream-data/)
 
 ## Community
 

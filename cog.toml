@@ -26,7 +26,7 @@ post_bump_hooks = [
 [git_hooks.commit-msg]
 script = """#!/bin/sh
 set -e
-pnpm format
+bun run format
 
 cog verify -i --file $1
 """
@@ -54,7 +54,7 @@ ex = { changelog_title = "This is the markdown title for `ex` commit type" }
 path = "CHANGELOG.md"
 template = "remote"
 remote = "github.com"
-repository = "svelte-starter-kit"
+repository = "spectacular"
 owner = "xmlking"
 authors = [{ username = "xmlking", signature = "Sumanth Chinthagunta" }]
 

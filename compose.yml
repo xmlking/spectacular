@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   webapp:
-    image: ghcr.io/xmlking/svelte-starter-kit:latest
+    image: ghcr.io/xmlking/spectacular:latest
     init: true
     build:
       context: .

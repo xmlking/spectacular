@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 
-	export let title = 'Svelte-Starter-Kit';
+	export let title = 'spectacular';
 	export let description = 'SvelteKit starter template';
 
 	const getImg = () => {

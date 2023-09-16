@@ -3,17 +3,16 @@
 	"description": "SvelteKit monorepo template",
 	"private": true,
 	"scripts": {
-		"build": "turbo build",
-		"dev": "turbo dev",
-		"lint": "turbo lint",
-		"test": "turbo test",
-		"test:unit": "turbo test:unit",
-		"test:unit:coverage": "turbo test:unit:coverage",
-		"check": "turbo check",
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"test": "turbo run test",
+		"test:unit": "turbo run test:unit",
+		"test:unit:coverage": "turbo run test:unit:coverage",
+		"check": "turbo run check",
 		"test:watch": "turbo run test:watch",
 		"format": "prettier --write .",
-		"clean": "turbo clean && rm -rf node_modules",
-		"preinstall": "npx only-allow pnpm",
+		"clean": "turbo run clean && rm -rf node_modules",
 		"ci:publish": "changeset publish",
 		"cs": "changeset"
 	},
@@ -51,13 +50,10 @@
 		"prettier": "3.0.3",
 		"prettier-plugin-svelte": "3.0.3",
 		"prettier-plugin-tailwindcss": "0.5.4",
-		"turbo": "1.10.13",
-		"vitest": "0.34.4"
+		"turbo": "1.10.14",
+		"vitest": "0.34.4",
+		"tsconfig": "workspace:*"
 	},
-	"packageManager": "pnpm@8.7.4",
-	"engines": {
-		"node": ">=18",
-		"pnpm": ">=8"
-	},
+	"packageManager": "bun@1.0.2",
 	"version": "0.1.2"
 }
