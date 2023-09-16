@@ -80,11 +80,20 @@ turbo build --filter=playground... --dry
 turbo build --filter=playground... --graph
 ```
 
+### Other
+
+```shell
+turbo prune --scope=playground --docker
+```
+
 ## Bun
+
 ```shell
 bun run build
 bun run dev
 bun run dev  --filter=playground
 bun run lint
 bunx turbo login
+
+bun run turbo prune --scope=playground --docker
 ```

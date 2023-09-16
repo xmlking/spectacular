@@ -1,58 +1,59 @@
 {
-  "name": "spectacular",
-  "description": "SvelteKit monorepo template",
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "test": "turbo run test",
-    "test:unit": "turbo run test:unit",
-    "test:unit:coverage": "turbo run test:unit:coverage",
-    "check": "turbo run check",
-    "test:watch": "turbo run test:watch",
-    "format": "prettier --write .",
-    "clean": "turbo run clean && rm -rf node_modules",
-    "ci:publish": "changeset publish",
-    "cs": "changeset"
-  },
-  "license": "MIT",
-  "homepage": "https://chinthagunta.com/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/xmlking/spectacular.git"
-  },
-  "bugs": {
-    "url": "https://github.com/xmlking/spectacular/issues"
-  },
-  "keywords": [
-    "cli",
-    "components",
-    "ui",
-    "component",
-    "svelte",
-    "template",
-    "ui-framework",
-    "tailwind",
-    "tailwindcss",
-    "components-library",
-    "sveltekit"
-  ],
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "devDependencies": {
-    "@changesets/changelog-github": "0.4.8",
-    "@changesets/cli": "2.26.2",
-    "eslint": "8.49.0",
-    "eslint-config-custom": "workspace:*",
-    "prettier": "3.0.3",
-    "prettier-plugin-svelte": "3.0.3",
-    "prettier-plugin-tailwindcss": "0.5.4",
-    "turbo": "1.10.14",
-    "vitest": "0.34.4"
-  },
-  "packageManager": "bun@1.0.2",
-  "version": "0.1.2"
+	"name": "spectacular",
+	"description": "SvelteKit monorepo template",
+	"private": true,
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"test": "turbo run test",
+		"test:unit": "turbo run test:unit",
+		"test:unit:coverage": "turbo run test:unit:coverage",
+		"check": "turbo run check",
+		"test:watch": "turbo run test:watch",
+		"format": "prettier --write .",
+		"clean": "turbo run clean && rm -rf node_modules",
+		"ci:publish": "changeset publish",
+		"cs": "changeset"
+	},
+	"license": "MIT",
+	"homepage": "https://chinthagunta.com/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/xmlking/spectacular.git"
+	},
+	"bugs": {
+		"url": "https://github.com/xmlking/spectacular/issues"
+	},
+	"keywords": [
+		"cli",
+		"components",
+		"ui",
+		"component",
+		"svelte",
+		"template",
+		"ui-framework",
+		"tailwind",
+		"tailwindcss",
+		"components-library",
+		"sveltekit"
+	],
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"devDependencies": {
+		"@changesets/changelog-github": "0.4.8",
+		"@changesets/cli": "2.26.2",
+		"eslint": "8.49.0",
+		"eslint-config-custom": "workspace:*",
+		"prettier": "3.0.3",
+		"prettier-plugin-svelte": "3.0.3",
+		"prettier-plugin-tailwindcss": "0.5.4",
+		"turbo": "1.10.14",
+		"vitest": "0.34.4",
+		"tsconfig": "workspace:*"
+	},
+	"packageManager": "bun@1.0.2",
+	"version": "0.1.2"
 }

@@ -9,7 +9,7 @@ brew install bun
 bun upgrade
 ```
 
-Add  `~/.bun/bin` to your $PATH in the `~/.zshrc` file
+Add `~/.bun/bin` to your $PATH in the `~/.zshrc` file
 
 ```shell
 # verify
@@ -27,6 +27,7 @@ rm -rf ~/.bun # for macOS, Linux, and WSL
 ## scaffold
 
 To scaffold a new project:
+
 ```shell
 mkdir quickstart
 cd quickstart
@@ -34,12 +35,15 @@ bun init
 ```
 
 To install the TypeScript definitions for Bun's built-in APIs, install bun-types.
+
 ```shell
 bun add -d bun-types # dev dependency
 ```
 
 package manager
+
 ## Utils
+
 ```shell
 bun pm bin
 bun pm bin -g

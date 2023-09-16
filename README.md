@@ -55,9 +55,9 @@
 ```shell
 cd ~/Developer/Work/SPA
 git clone https://github.com/xmlking/spectacular.git
-cd spectacular && pnpm i
-# playwright is required for end-to-end testing
-pnpx playwright install
+cd spectacular && bun i
+# (optional) playwright is required for end-to-end testing
+bunx playwright install
 # (optional) add git-commit-hooks
 cog install-hook --all
 ```
@@ -66,29 +66,26 @@ cog install-hook --all
 
 By default, the `dev` server (dev command) runs in `development` mode and the `build` command run in `production`
 mode.  
-This means when running `npm build`, it will load the env variables from `.env.production` if there is one:  
+This means when running `bun build`, it will load the env variables from `.env.production` if there is one:  
 Use `.env.local` to override environment variables in `.env` (like API keys) for local development.
 
-````shell
 ## Developing
 
-Once you've cloned the project and installed dependencies with `pnpm i`, start a development server:
+Once you've cloned the project and installed dependencies with `bun i`, start a development server:
 
 ```shell
-turbo dev --filter=playground
-turbo dev --filter=web
-turbo dev --filter=docs
+bun dev --filter=./apps/web
 
 # or start the server and open the app in a new browser tab
-turbo dev --filter=playground -- --open
+bun dev --filter=./apps/web -- --open
 
 # run in debug mode
-turbo de:debug --filter=web
+bun dev:debug --filter=./apps/web
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
-PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 pnpm dev
-````
+PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 bun dev
+```
 
 ## Maintenance
 
@@ -97,8 +94,8 @@ PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 pnpm dev
 To update the packages to their latest versions in `package.json`
 
 ```shell
-pnpm up --latest -r
-pnpm audit --fix
+bun up --latest -r
+bun audit --fix
 ```
 
 ## Testing
@@ -106,19 +103,19 @@ pnpm audit --fix
 ### Unit/Component Tests
 
 ```shell
-turbo test
+bun test
 
-turbo test:ui
+bun test:ui
 #Then, you can visit the Vitest UI at http://localhost:51204/__vitest__/.
 
 # test coverage
-turbo test:coverage
+bun test:coverage
 
 # updating Snapshots
-pnpx vitest -u
+bunx vitest -u
 
 # test specific folder
-pnpx vitest run apps/web/src/lib/utils
+bunx vitest apps/web/src/lib/utils
 (or)
 ./node_modules/.bin/vitest run apps/web/src/lib/utils
 ```
@@ -126,7 +123,7 @@ pnpx vitest run apps/web/src/lib/utils
 ### E2E Tests
 
 ```shell
-turbo test:e2e
+bun test:e2e
 ```
 
 ## Building
@@ -134,11 +131,11 @@ turbo test:e2e
 To create a production version of your app:
 
 ```shell
-turbo build
+bun build
 # run build
-turbo build  --filter=playground...
-turbo build  --filter=playground... --dry
-turbo build --filter=playground... --graph
+bun build  --filter=playground...
+bun build  --filter=playground... --dry
+bun build --filter=playground... --graph
 ```
 
 Run from the local build directory:
@@ -155,7 +152,7 @@ ORIGIN=https://my.site \
 node build
 ```
 
-You can preview the production build with `pnpm preview`.
+You can preview the production build with `bun preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
 > environment.
@@ -176,7 +173,7 @@ cog bump --auto
 To build and publish libs
 
 ```shell
-trubo build --filter=lib...
+bun build --filter=lib...
 cd package
-pnpm publish
+bun publish
 ```

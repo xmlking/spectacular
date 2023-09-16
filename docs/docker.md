@@ -96,13 +96,13 @@ dive $DOCKER_IMAGE:$VERSION
 Sign Docker image and push with Keyless mode
 
 ```shell
-#nerdctl push --sign=cosign ghcr.io/xmlking/svelte-starter-kit:$VERSION
+#nerdctl push --sign=cosign ghcr.io/xmlking/spectacular:$VERSION
 COSIGN_EXPERIMENTAL=1 cosign $DOCKER_IMAGE:$VERSION
 ```
 
 Verify the image with Keyless mode
 
 ```shell
-#nerdctl pull --verify=cosign ghcr.io/xmlking/svelte-starter-kit:$VERSION
+#nerdctl pull --verify=cosign ghcr.io/xmlking/spectacular:$VERSION
 COSIGN_EXPERIMENTAL=1 cosign verify $DOCKER_IMAGE:$VERSION
 ```
