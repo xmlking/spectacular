@@ -33,8 +33,8 @@ This Turborepo has some additional tools already setup for you:
 ## Prerequisite
 
 ```bash
-pnpm add -g turbo@latest
-# bun add -g turbo@latest
+# pnpm add -g turbo@latest
+bun add -g turbo@latest
 ```
 
 ## Setup

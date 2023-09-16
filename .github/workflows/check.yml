@@ -28,44 +28,68 @@ jobs:
         uses: cocogitto/cocogitto-action@v3.5
         with:
           check-latest-tag-only: true
-#   linter:
-#     name: Lint Code Base
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Code
-#         uses: actions/checkout@v4
-#         with:
-#           # Full git history is needed to get a proper list of changed files within `super-linter`
-#           fetch-depth: 0
-#       - name: Lint Code Base
-#         uses: github/super-linter@v5
-#         env:
-#           VALIDATE_ALL_CODEBASE: false
-#           IGNORE_GENERATED_FILES: true
-#           # FILTER_REGEX_EXCLUDE: CHANGELOG.md
-#           DEFAULT_BRANCH: main
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#   build:
-#     name: Build and Test
-#     timeout-minutes: 15
-#     runs-on: ubuntu-latest
-#     # To use Remote Caching, uncomment the next lines and follow the steps below.
-#     env:
-#       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-#       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  #   linter:
+  #     name: Lint Code Base
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #       - name: Checkout Code
+  #         uses: actions/checkout@v4
+  #         with:
+  #           # Full git history is needed to get a proper list of changed files within `super-linter`
+  #           fetch-depth: 0
+  #       - name: Lint Code Base
+  #         uses: github/super-linter@v5
+  #         env:
+  #           VALIDATE_ALL_CODEBASE: false
+  #           IGNORE_GENERATED_FILES: true
+  #           # FILTER_REGEX_EXCLUDE: CHANGELOG.md
+  #           DEFAULT_BRANCH: main
+  #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #   build:
+  #     name: Build and Test
+  #     timeout-minutes: 15
+  #     runs-on: ubuntu-latest
+  #     # To use Remote Caching, uncomment the next lines and follow the steps below.
+  #     env:
+  #       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  #       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
-#     steps:
-#       - name: Check out code
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 2
-#       - uses: pnpm/action-setup@v2
-#         with:
-#           version: 8
-#       - uses: actions/setup-node@v3
-#         with:
-#           node-version: '20'
-#           cache: 'pnpm'
-#       - run: pnpm install
-#       - run: pnpm build
-#       - run: pnpm test:unit:coverage
+  #     steps:
+  #       - name: Check out code
+  #         uses: actions/checkout@v4
+  #         with:
+  #           fetch-depth: 2
+  #       - uses: pnpm/action-setup@v2
+  #         with:
+  #           version: 8
+  #       - uses: actions/setup-node@v3
+  #         with:
+  #           node-version: '20'
+  #           cache: 'pnpm'
+  #       - run: pnpm install
+  #       - run: pnpm run build --filter=playground
+  #       - run: pnpm run test:unit:coverage --filter=playground
+
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    # To use Remote Caching, uncomment the next lines and follow the steps below.
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install Dependencies
+        run: bun install
+      #   - run: bun run check --filter=playground
+      #   - run: bun run lint --filter=playground
+      - run: bun run build --filter=playground
+      - run: bun run test:unit:coverage --filter=playground

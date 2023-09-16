@@ -8,7 +8,7 @@ Closes #{issueNumber}
 
 ## Changsets
 
-Instructions: Changesets automate our changelog. If you modify files in `/packages/ui`, run `pnpm changeset` in the root of the monorepo, follow the prompts, then commit the markdown file. Changes that add features should be `minor` while chores and bugfixes should be `patch`. Please prefix the changeset message with `feat:`, `fix:` or `chore:`.
+Instructions: Changesets automate our changelog. If you modify files in `/packages/ui`, run `bun run changeset` in the root of the monorepo, follow the prompts, then commit the markdown file. Changes that add features should be `minor` while chores and bugfixes should be `patch`. Please prefix the changeset message with `feat:`, `fix:` or `chore:`.
 
 ## Checklist
 
@@ -17,9 +17,9 @@ Please read and apply all [contribution requirements](../CODE_OF_CONDUCT.md).
 - [ ] This PR targets the `main` branch
 - [ ] Documentation reflects all relevant changes
 - [ ] Branch is prefixed with: `docs/`, `feat/`, `chore/`, `fix/`
-- [ ] Ensure Svelte and Typescript linting is current - run `pnpm check`
-- [ ] Ensure Prettier linting is current - run `pnpm format`
-- [ ] All test cases are passing - run `pnpm test`
+- [ ] Ensure Svelte and Typescript linting is current - run `bun run check`
+- [ ] Ensure Prettier linting is current - run `bun run format`
+- [ ] All test cases are passing - run `bun run test`
 - [ ] Includes a changeset (if relevant; see above)
 
 ### Commit message format

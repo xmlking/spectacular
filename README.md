@@ -74,13 +74,13 @@ Use `.env.local` to override environment variables in `.env` (like API keys) for
 Once you've cloned the project and installed dependencies with `bun i`, start a development server:
 
 ```shell
-bun run dev --filter=./apps/web
+bun run dev --filter=web
 
 # or start the server and open the app in a new browser tab
-bun run dev --filter=./apps/web -- --open
+bun run dev --filter=web -- --open
 
 # run in debug mode
-bun run dev:debug --filter=./apps/web
+bun run dev:debug --filter=web
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
