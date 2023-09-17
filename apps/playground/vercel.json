@@ -1,7 +1,8 @@
 {
 	"$schema": "http://openapi.vercel.sh/vercel.json",
 	"framework": "sveltekit-1",
-	"buildCommand": "cd ../.. && turbo run build --filter=playground...",
+	"installCommand": "bun install",
+	"buildCommand": "bun run build",
 	"ignoreCommand": "[ \"$VERCEL_ENV\" != production ] || npx turbo-ignore",
 	"redirects": [
 		{ "source": "/exit-code.html", "destination": "/node/exit-code.html", "permanent": true },
