@@ -42,6 +42,20 @@ To install the TypeScript definitions for Bun's built-in APIs, install bun-types
 bun add -d bun-types # dev dependency
 ```
 
+And add it to your `tsconfig.json`
+
+```json
+"compilerOptions": {
+	"types": ["bun-types"]
+}
+```
+
+Using the runtime
+
+```svelte
+<h1>{Bun.version}</h1>
+```
+
 In the repo root, set `.gitattributes` and `git config` as documented [here](https://bun.sh/docs/install/lockfile)
 
 ## Utils

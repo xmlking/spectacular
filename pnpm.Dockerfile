@@ -85,7 +85,7 @@ COPY --from=builder --chown=node:node /app/apps/${SCOPE}/package.json .
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=node:node /app/apps/playground/build ./build
+COPY --from=builder --chown=node:node /app/apps/${SCOPE}/build ./build
 
 
 EXPOSE 3000

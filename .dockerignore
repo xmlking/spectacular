@@ -2,7 +2,9 @@
 !.git
 !.gitignore
 !.npmrc
+!tsconfig.json
 !turbo.json
+!bun.lockb
 !/package.json
 !/pnpm-lock.yaml
 !/pnpm-workspace.yaml
@@ -12,7 +14,14 @@
 !/config
 
 **/build
+**/.turbo
 **/.svelte-kit
 **/$houdini
 **/node_modules
 **/README.md
+**/.eslintignore
+**/.eslintrc.cjs
+**/.prettierignore
+**/CHANGELOG.md
+**/vite.config.js.timestamp-*
+**/vite.config.ts.timestamp-*

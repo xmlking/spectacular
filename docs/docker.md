@@ -33,8 +33,8 @@ BUILD_TIME=$(date +%FT%T%Z)
 REGISTRY=ghcr.io
 #REGISTRY=us-west1-docker.pkg.dev/<project_id>/docker
 TURBO_TEAM=cloudbusters
-TURBO_TOKEN=<FILL_ME_IN>
-SCOPE=playground
+TURBO_TOKEN=r5tgcj65H0sBLx7E1ki9jDr4
+SCOPE=web
 IMAGE_NAME=xmlking/spectacular
 DOCKER_IMAGE=$REGISTRY/$IMAGE_NAME/$SCOPE
 
@@ -42,11 +42,13 @@ DOCKER_IMAGE=$REGISTRY/$IMAGE_NAME/$SCOPE
 export DOCKER_CLI_EXPERIMENTAL=enabled
 docker buildx create --use
 
+> Note: to desable **cache**,  use `--no-cache` option
+
 # build for local platform
 docker build \
 -t $DOCKER_IMAGE\:$VERSION \
 -t $DOCKER_IMAGE\:latest \
---build-arg BUILD_TIME=$BUILD_TIME --build-arg BUILD_VERSION=$VERSION \
+--build-arg BUILD_TIME=$BUILD_TIME --build-arg BUILD_VERSION=$VERSION --build-arg SCOPE=$SCOPE \
 --progress=plain \
 --load .
 
@@ -55,7 +57,7 @@ docker buildx build \
 --platform linux/arm64/v8,linux/amd64 \
 -t $DOCKER_IMAGE\:$VERSION \
 -t $DOCKER_IMAGE\:latest \
---build-arg BUILD_TIME=$BUILD_TIME --build-arg BUILD_VERSION=$VERSION \
+--build-arg BUILD_TIME=$BUILD_TIME --build-arg BUILD_VERSION=$VERSION --build-arg SCOPE=$SCOPE \
 --progress=plain \
 --push .
 
