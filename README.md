@@ -55,7 +55,7 @@
 ```shell
 cd ~/Developer/Work/SPA
 git clone https://github.com/xmlking/spectacular.git
-cd spectacular && bun i
+cd spectacular && pnpm i
 # (optional) playwright is required for end-to-end testing
 bunx playwright install
 # (optional) add git-commit-hooks
@@ -66,25 +66,25 @@ cog install-hook --all
 
 By default, the `dev` server (dev command) runs in `development` mode and the `build` command run in `production`
 mode.  
-This means when running `bun run build`, it will load the env variables from `.env.production` if there is one:  
+This means when running `pnpm run build`, it will load the env variables from `.env.production` if there is one:  
 Use `.env.local` to override environment variables in `.env` (like API keys) for local development.
 
 ## Developing
 
-Once you've cloned the project and installed dependencies with `bun i`, start a development server:
+Once you've cloned the project and installed dependencies with `pnpm i`, start a development server:
 
 ```shell
-bun run dev --filter=web
+pnpm run dev --filter=web
 
 # or start the server and open the app in a new browser tab
-bun run dev --filter=web -- --open
+pnpm run dev --filter=web -- --open
 
 # run in debug mode
-bun run dev:debug --filter=web
+pnpm run dev:debug --filter=web
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
-PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 bun run dev
+PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 pnpm run dev
 ```
 
 ## Maintenance
@@ -94,9 +94,9 @@ PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 bun run dev
 To update the packages to their latest versions in `package.json`
 
 ```shell
-# TODO: not at available for bun
-bun up --latest -r
-bun audit --fix
+# TODO: not at available for pnpm
+pnpm up --latest -r
+pnpm audit --fix
 ```
 
 ## Format
@@ -104,8 +104,8 @@ bun audit --fix
 Format and lint code
 
 ```shell
-bun run format
-bun run lint
+pnpm run format
+pnpm run lint
 ```
 
 ## Testing
@@ -113,13 +113,13 @@ bun run lint
 ### Unit/Component Tests
 
 ```shell
-bun run test
+pnpm run test
 
-bun run test:ui
+pnpm run test:ui
 #Then, you can visit the Vitest UI at http://localhost:51204/__vitest__/.
 
 # test coverage
-bun run test:coverage
+pnpm run test:coverage
 
 # updating Snapshots
 bunx vitest -u
@@ -133,7 +133,7 @@ bunx vitest apps/web/src/lib/utils
 ### E2E Tests
 
 ```shell
-bun run test:e2e
+pnpm run test:e2e
 ```
 
 ## Building
@@ -141,11 +141,11 @@ bun run test:e2e
 To create a production version of your app:
 
 ```shell
-bun run build
+pnpm run build
 # run build
-bun run build  --filter=playground...
-bun run build  --filter=playground... --dry
-bun run build --filter=playground... --graph
+pnpm run build  --filter=playground...
+pnpm run build  --filter=playground... --dry
+pnpm run build --filter=playground... --graph
 ```
 
 Run from the local build directory:
@@ -162,7 +162,7 @@ ORIGIN=https://my.site \
 node build
 ```
 
-You can preview the production build with `bun run preview`.
+You can preview the production build with `pnpm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
 > environment.
@@ -183,7 +183,7 @@ cog bump --auto
 To build and publish libs
 
 ```shell
-bun run build --filter=lib...
+pnpm run build --filter=lib...
 cd package
-bun publish
+pnpm publish
 ```

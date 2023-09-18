@@ -8,10 +8,10 @@ If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
 # create a new project in the current directory
-bun create svelte@latest
+pnpm create svelte@latest
 
 # create a new project in my-app
-bun create svelte@latest my-app
+pnpm create svelte@latest my-app
 ```
 
 ## Developing

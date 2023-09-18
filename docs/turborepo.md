@@ -34,7 +34,7 @@ This Turborepo has some additional tools already setup for you:
 
 ```bash
 # pnpm add -g turbo@latest
-bun add -g turbo@latest
+pnpm add -g turbo@latest
 ```
 
 ## Setup
@@ -86,7 +86,7 @@ turbo build --filter=playground... --graph
 migrate command which both upgrades your repo to the specified version (latest by default) of turbo, and runs any codemods required.
 
 ```shell
-bunx  @turbo/codemod migrate
+pnpx  @turbo/codemod migrate
 ```
 
 ### Other
@@ -95,14 +95,14 @@ bunx  @turbo/codemod migrate
 turbo prune --scope=playground --docker
 ```
 
-## Bun
+## pnpm
 
 ```shell
-bun run build
-bun run dev
-bun run dev  --filter=playground
-bun run lint
-bunx turbo login
+pnpm run build
+pnpm run dev
+pnpm run dev  --filter=playground
+pnpm run lint
+pnpx turbo login
 
-bun run turbo prune --scope=playground --docker
+pnpm run turbo prune --scope=playground --docker
 ```

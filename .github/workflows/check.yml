@@ -45,31 +45,6 @@ jobs:
   #           # FILTER_REGEX_EXCLUDE: CHANGELOG.md
   #           DEFAULT_BRANCH: main
   #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #   build:
-  #     name: Build and Test
-  #     timeout-minutes: 15
-  #     runs-on: ubuntu-latest
-  #     # To use Remote Caching, uncomment the next lines and follow the steps below.
-  #     env:
-  #       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-  #       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
-  #     steps:
-  #       - name: Check out code
-  #         uses: actions/checkout@v4
-  #         with:
-  #           fetch-depth: 2
-  #       - uses: pnpm/action-setup@v2
-  #         with:
-  #           version: 8
-  #       - uses: actions/setup-node@v3
-  #         with:
-  #           node-version: '20'
-  #           cache: 'pnpm'
-  #       - run: pnpm install
-  #       - run: pnpm run build --filter=playground
-  #       - run: pnpm run test:unit:coverage --filter=playground
-
   build:
     name: Build and Test
     timeout-minutes: 15
@@ -84,12 +59,27 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - uses: oven-sh/setup-bun@v1
+      - uses: pnpm/action-setup@v2
         with:
-          bun-version: latest
-      - name: Install Dependencies
-        run: bun  install
-      #   - run: bun run check --filter=docs
-      #   - run: bun run lint --filter=docs
-      - run: bun run build --filter=docs
-      - run: bun run test:unit:coverage --filter=docs
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm run build --filter=docs
+      - run: pnpm run test:unit:coverage --filter=docs
+#     steps:
+#       - name: Check out code
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 2
+#       - uses: oven-sh/setup-bun@v1
+#         with:
+#           bun-version: latest
+#       - name: Install Dependencies
+#         run: bun  install
+#       #   - run: bun run check --filter=docs
+#       #   - run: bun run lint --filter=docs
+#       - run: bun run build --filter=docs
+#       - run: bun run test:unit:coverage --filter=docs

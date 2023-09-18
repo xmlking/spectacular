@@ -2,37 +2,56 @@ ARG SCOPE=playground
 ###################################################################
 # Stage 0: base image											                        #
 ###################################################################
-FROM oven/bun:1.0.2 AS base
+FROM node:20-slim AS base
 ENV GIT_SSL_NO_VERIFY 1
 RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
 ARG SCOPE
 ENV SCOPE=${SCOPE}
 
-# Install turbo
-# RUN bun --bun add -g turbo@latest
-# RUN turbo --version
-RUN bun --version
+#https://turbo.build/repo/docs/handbook/deploying-with-docker
+#https://github.com/vercel/turbo/tree/main/examples/with-docker
+
+# Install pnpm
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="${PATH}:${PNPM_HOME}"
+SHELL ["/bin/bash", "-c"]
+RUN npm install --global pnpm \
+  && SHELL=bash pnpm setup \
+  && source /root/.bashrc
 
 ###################################################################
-# Stage 1: Install dependencies                                   #
+# Stage 1: Prune monorepo                                         #
+###################################################################
+FROM base AS pruner
+
+WORKDIR /app
+RUN pnpm add -g turbo
+COPY . .
+RUN turbo prune --scope=${SCOPE} --docker
+
+###################################################################
+# Stage 2: Install dependencies                                   #
 # Add lockfile and package.json's of isolated subworkspace         #
 ###################################################################
 FROM base AS builder
 
 WORKDIR /app
-# Copy all the application files to the container
-COPY . .
-RUN ls -la  /app/apps/web
+# First install the dependencies (as they change less often)
+COPY .gitignore .gitignore
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
 # https://playwright.dev/docs/browsers
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
 
-# First install the dependencies (as they change less often)
-# RUN bun i --backend copyfile
-RUN bun i
+RUN pnpm install
 
-# Run your build process
+# Build the project
+COPY --from=pruner /app/out/full/ .
+COPY --from=pruner /app/.git .git
+COPY turbo.json turbo.json
+
 # Uncomment and use build args to enable remote caching
 ARG TURBO_TEAM
 ENV TURBO_TEAM=$TURBO_TEAM
@@ -41,31 +60,32 @@ ARG TURBO_TOKEN
 ENV TURBO_TOKEN=$TURBO_TOKEN
 
 # TODO: set any extra ENV needed for build
-ENV BUN_ENV=true
-RUN bun run build --filter=${SCOPE}...
-RUN ls -la  /app/apps/web
+# ENV ENCRYPTION_SECRET=encryption_secret_placeholder123 NEXTAUTH_URL=http://localhost:3000 NEXT_PUBLIC_VIEWER_URL=http://localhost:3001
+RUN pnpm turbo run build --filter=${SCOPE}...
 
 ###################################################################
-# Stage 2: Run the app (prod)                                     #
+# Stage 4: Run the app (prod)                                     #
 ###################################################################
-FROM base AS runner
-USER bun:bun
+# FROM gcr.io/distroless/nodejs:20 as final
+# FROM gcr.io/distroless/nodejs:20-debug as final
+FROM cgr.dev/chainguard/node:20 AS runner
+# FROM base AS runner
 
 WORKDIR /app
 ENV NODE_ENV production
 ARG SCOPE
 
 # copy tini
-COPY --from=builder --chown=bun:bun /usr/bin/tini /usr/bin/tini
-ENTRYPOINT ["/usr/bin/tini", "-s", "--", "bun"]
+COPY --from=builder --chown=node:node /usr/bin/tini /usr/bin/tini
+ENTRYPOINT ["/usr/bin/tini", "-s", "--", "/usr/bin/node"]
 
 # copy runtime needed config files???
-COPY --from=builder --chown=bun:bun /app/apps/${SCOPE}/package.json .
-# COPY --from=builder --chown=bun:bun /app/config ./config
+COPY --from=builder --chown=node:node /app/apps/${SCOPE}/package.json .
+# COPY --from=builder --chown=node:node /app/config ./config
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=bun:bun /app/apps/${SCOPE}/build ./build
+COPY --from=builder --chown=node:node /app/apps/${SCOPE}/build ./build
 
 
 EXPOSE 3000
@@ -93,5 +113,4 @@ LABEL org.opencontainers.image.created=$BUILD_TIME \
 	org.opencontainers.image.licenses=MIT \
 	org.opencontainers.image.documentation="docker run -it -e NODE_ENV=production -p 3000:3000  ${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}${VCS_CONTEXT_PATH}/${SCOPE}:${BUILD_VERSION}"
 
-#Start the application
-CMD ["./build/index.js" ]
+CMD ["build"]
