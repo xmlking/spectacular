@@ -98,11 +98,11 @@ turbo prune --scope=playground --docker
 ## pnpm
 
 ```shell
-pnpm run build
-pnpm run dev
-pnpm run dev  --filter=playground
-pnpm run lint
+turbo build
+turbo dev
+turbo dev  --filter=playground
+turbo lint
 pnpx turbo login
 
-pnpm run turbo prune --scope=playground --docker
+turbo prune --scope=playground --docker
 ```

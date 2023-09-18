@@ -7,17 +7,17 @@ Demo app build with `tailwind`, `flowbite`, `graphql`, `houdini`, `superforms`
 Once you've cloned the project and installed dependencies with `pnpm i`, start a development server:
 
 ```shell
-pnpm run dev --filter=./apps/web
+turbo dev --filter=./apps/web
 
 # or start the server and open the app in a new browser tab
-pnpm run dev --filter=./apps/web -- --open
+turbo dev --filter=./apps/web -- --open
 
 # run in debug mode
-pnpm run dev:debug --filter=./apps/web
+turbo dev:debug --filter=./apps/web
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
-PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 pnpm run dev
+PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 turbo dev
 ```
 
 ## Maintenance
@@ -37,8 +37,8 @@ pnpm audit --fix
 Format and lint code
 
 ```shell
-pnpm run format --filter=web
-pnpm run lint --filter=web
+turbo format --filter=web
+turbo lint --filter=web
 ```
 
 ## Testing
@@ -46,13 +46,13 @@ pnpm run lint --filter=web
 ### Unit/Component Tests
 
 ```shell
-pnpm run test --filter=web
+turbo test --filter=web
 
-pnpm run test:ui --filter=web
+turbo test:ui --filter=web
 #Then, you can visit the Vitest UI at http://localhost:51204/__vitest__/.
 
 # test coverage
-pnpm run test:coverage --filter=web
+turbo test:coverage --filter=web
 
 # updating Snapshots
 pnpx vitest -u --filter=web
@@ -66,7 +66,7 @@ pnpx vitest apps/web/src/lib/utils
 ### E2E Tests
 
 ```shell
-pnpm run test:e2e --filter=web
+turbo test:e2e --filter=web
 ```
 
 ## Building
@@ -74,11 +74,11 @@ pnpm run test:e2e --filter=web
 To create a production version of your app:
 
 ```shell
-pnpm run build
+turbo build
 # run build
-pnpm run build  --filter=web...
-pnpm run build  --filter=web... --dry
-pnpm run build --filter=web... --graph
+turbo build  --filter=web...
+turbo build  --filter=web... --dry
+turbo build --filter=web... --graph
 ```
 
 Run from the local build directory:
@@ -95,7 +95,7 @@ ORIGIN=https://my.site \
 node build
 ```
 
-You can preview the production build with `pnpm run preview`.
+You can preview the production build with `turbo preview --filter=web...`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
 > environment.
@@ -116,7 +116,7 @@ cog bump --auto
 To build and publish libs
 
 ```shell
-pnpm run build --filter=lib...
+turbo build --filter=lib...
 cd package
 pnpm publish
 ```

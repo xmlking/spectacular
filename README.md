@@ -66,7 +66,7 @@ cog install-hook --all
 
 By default, the `dev` server (dev command) runs in `development` mode and the `build` command run in `production`
 mode.  
-This means when running `pnpm run build`, it will load the env variables from `.env.production` if there is one:  
+This means when running `turbo build`, it will load the env variables from `.env.production` if there is one:  
 Use `.env.local` to override environment variables in `.env` (like API keys) for local development.
 
 ## Developing
@@ -74,17 +74,17 @@ Use `.env.local` to override environment variables in `.env` (like API keys) for
 Once you've cloned the project and installed dependencies with `pnpm i`, start a development server:
 
 ```shell
-pnpm run dev --filter=web
+turbo dev --filter=web
 
 # or start the server and open the app in a new browser tab
-pnpm run dev --filter=web -- --open
+turbo dev --filter=web -- --open
 
 # run in debug mode
-pnpm run dev:debug --filter=web
+turbo dev:debug --filter=web
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
-PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 pnpm run dev
+PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 turbo dev
 ```
 
 ## Maintenance
@@ -104,8 +104,8 @@ pnpm audit --fix
 Format and lint code
 
 ```shell
-pnpm run format
-pnpm run lint
+turbo format
+turbo lint
 ```
 
 ## Testing
@@ -113,13 +113,13 @@ pnpm run lint
 ### Unit/Component Tests
 
 ```shell
-pnpm run test
+turbo test
 
-pnpm run test:ui
+turbo test:ui
 #Then, you can visit the Vitest UI at http://localhost:51204/__vitest__/.
 
 # test coverage
-pnpm run test:coverage
+turbo test:coverage
 
 # updating Snapshots
 bunx vitest -u
@@ -133,7 +133,7 @@ bunx vitest apps/web/src/lib/utils
 ### E2E Tests
 
 ```shell
-pnpm run test:e2e
+turbo test:e2e
 ```
 
 ## Building
@@ -141,11 +141,11 @@ pnpm run test:e2e
 To create a production version of your app:
 
 ```shell
-pnpm run build
+turbo build
 # run build
-pnpm run build  --filter=playground...
-pnpm run build  --filter=playground... --dry
-pnpm run build --filter=playground... --graph
+turbo build  --filter=playground...
+turbo build  --filter=playground... --dry
+turbo build --filter=playground... --graph
 ```
 
 Run from the local build directory:
@@ -162,7 +162,7 @@ ORIGIN=https://my.site \
 node build
 ```
 
-You can preview the production build with `pnpm run preview`.
+You can preview the production build with `turbo preview --filter=playground...`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
 > environment.
@@ -183,7 +183,7 @@ cog bump --auto
 To build and publish libs
 
 ```shell
-pnpm run build --filter=lib...
+turbo build --filter=lib...
 cd package
 pnpm publish
 ```

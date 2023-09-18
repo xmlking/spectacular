@@ -149,7 +149,11 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 					keywords: 'overlay, dialog, notification, alert, confirm, prompt, multiple, form, list, embed, video'
 				},
 				{ href: '/utilities/lazy', label: 'Lazy', keywords: 'menu, tooltip, overlay, dropdown, combobox, drop, down, select' },
-				{ href: '/utilities/toasts', label: 'Toasts', keywords: 'overlay, snack, snackbar, bar, action, alert, notification' },
+				{
+					href: '/utilities/particles',
+					label: 'Particles',
+					keywords: 'overlay, Particles, snackbar, bar, action, alert, notification'
+				},
 				{
 					href: '/utilities/table-of-contents',
 					label: 'Table of Contents',
