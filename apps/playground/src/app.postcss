@@ -50,3 +50,29 @@ body {
 .page-section {
 	@apply space-y-4;
 }
+
+/* view animations */
+::view-transition-old(content) {
+	animation:
+		90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to;
+}
+
+::view-transition-new(content) {
+	animation:
+		210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from;
+}
+
+/* particles */
+.particles {
+	visibility: hidden;
+	opacity: 0;
+	transition:
+		visibility 0s,
+		opacity 1s linear;
+}
+.particles-loaded {
+	visibility: visible;
+	opacity: 1;
+}

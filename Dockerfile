@@ -29,6 +29,7 @@ RUN ls -la  /app/apps/web
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
 
 # First install the dependencies (as they change less often)
+# RUN bun i --backend copyfile
 RUN bun i
 
 # Run your build process
