@@ -74,12 +74,12 @@ export const authjs = SvelteKitAuth({
 		// pages: {
 		// 	signIn: '/login'
 		// },
-		async jwt({ token, user, account, profile, isNewUser }) {
+		async jwt({ token, user, account, profile, trigger }) {
 			// log.debug('token>>>', token);
 			// log.debug('user>>>', user);
 			// log.debug('account>>>', account);
 			// log.debug('profile>>>', profile);
-			// log.debug('isNewUser>>>', isNewUser);
+			// log.debug('trigger>>>', trigger);
 			// profile == undefined when login with CredentialsProvider
 			if (!profile && user) profile = { roles: user.roles, upn: user.id };
 			const isSignIn = !!(user && profile && account);
@@ -93,6 +93,16 @@ export const authjs = SvelteKitAuth({
 				token.scp = scp;
 
 				// token.accessToken = account.access_token; // account.id_token
+
+				// -------- START: Remove when NOT using nhost ------------ //
+				// to support nhost. FIXME: https://github.com/nhost/nhost/issues/1738
+				token['https://hasura.io/jwt/claims'] = {
+					'x-hasura-allowed-roles': token.roles,
+					'x-hasura-default-role': 'anonymous',
+					'x-hasura-org-id': token.org,
+					'x-hasura-user-id': token.email
+				};
+				// -------- END: Remove when NOT using nhost ------------ //
 
 				// FIXME: for Azure AD picture is base64 and it is too big to fit in cookie.
 				// will through `431 Request Header Fields Too Large` unless we remove it.

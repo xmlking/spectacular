@@ -32,7 +32,7 @@ services:
       - /app/.mesh:exec,mode=777
 
   postgres:
-    image: postgres:16rc1
+    image: postgres:16
     restart: always
     ports:
       - '5432:5432'

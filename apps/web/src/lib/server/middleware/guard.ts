@@ -29,7 +29,7 @@ export const guard = (async ({ event, resolve }) => {
 	}
 
 	const { user, roles, expires } = (await locals.getSession()) ?? {};
-	log.debug('Session roles-->', roles);
+	// log.debug('Session roles-->', roles);
 
 	if (!user) {
 		// FIXME: redirect from middleware may cause recursion
