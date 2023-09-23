@@ -1,7 +1,3 @@
-import { dev } from '$app/environment';
-import { Logger } from '$lib/utils';
-import envPub from '$lib/variables/variables';
-import envPri from '$lib/variables/variables.server';
 import type { Provider } from '@auth/core/providers';
 import AzureAD from '@auth/core/providers/azure-ad';
 import CredentialsProvider from '@auth/core/providers/credentials';
@@ -9,6 +5,10 @@ import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { Handle } from '@sveltejs/kit';
+import envPri from '$lib/variables/variables.server';
+import envPub from '$lib/variables/variables';
+import { Logger } from '$lib/utils';
+import { dev } from '$app/environment';
 import { getOrg } from './org-mapper';
 import { appRoles } from './role-mapper';
 // import { HasuraAdapter } from 'next-auth-hasura-adapter';
@@ -42,7 +42,7 @@ export const authjs = SvelteKitAuth({
 								name: 'Sumo Demo',
 								org: credentials.domain,
 								roles: ['user', 'tester'],
-								email: 'sumo@demo.com'
+								email: 'sumo@gmail.com'
 							};
 							return user;
 						}
