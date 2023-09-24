@@ -104,19 +104,23 @@ importers:
         version: link:../../packages/ui
       vite:
         specifier: 4.4.9
-        version: 4.4.9(@types/node@20.6.3)
+        version: 4.4.9(@types/node@20.6.4)
       vitest:
         specifier: 0.34.5
         version: 0.34.5(@vitest/ui@0.34.5)(jsdom@22.1.0)
 
   apps/offline:
+    optionalDependencies:
+      '@playwright/test':
+        specifier: 1.38.1
+        version: 1.38.1
+      '@vitest/ui':
+        specifier: 0.34.5
+        version: 0.34.5(vitest@0.34.5)
     devDependencies:
       '@floating-ui/dom':
         specifier: 1.5.3
         version: 1.5.3
-      '@playwright/test':
-        specifier: 1.38.1
-        version: 1.38.1
       '@skeletonlabs/skeleton':
         specifier: 2.1.0
         version: 2.1.0(svelte@4.2.1)
@@ -142,14 +146,17 @@ importers:
         specifier: 0.5.10
         version: 0.5.10(tailwindcss@3.3.3)
       '@types/node':
-        specifier: 20.6.3
-        version: 20.6.3
+        specifier: 20.6.4
+        version: 20.6.4
       '@typescript-eslint/eslint-plugin':
         specifier: 6.7.2
         version: 6.7.2(@typescript-eslint/parser@6.7.2)(eslint@8.50.0)(typescript@5.2.2)
       '@typescript-eslint/parser':
         specifier: 6.7.2
         version: 6.7.2(eslint@8.50.0)(typescript@5.2.2)
+      '@vercel/analytics':
+        specifier: 1.0.2
+        version: 1.0.2
       '@vitest/coverage-v8':
         specifier: 0.34.5
         version: 0.34.5(vitest@0.34.5)
@@ -159,12 +166,18 @@ importers:
       eslint:
         specifier: 8.50.0
         version: 8.50.0
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../../packages/eslint-config-custom
       eslint-config-prettier:
         specifier: 9.0.0
         version: 9.0.0(eslint@8.50.0)
       eslint-plugin-svelte:
         specifier: 2.33.2
         version: 2.33.2(eslint@8.50.0)(svelte@4.2.1)
+      helpers:
+        specifier: workspace:*
+        version: link:../../packages/helpers
       highlight.js:
         specifier: 11.8.0
         version: 11.8.0
@@ -177,15 +190,24 @@ importers:
       prettier-plugin-svelte:
         specifier: 3.0.3
         version: 3.0.3(prettier@3.0.3)(svelte@4.2.1)
+      prettier-plugin-tailwindcss:
+        specifier: 0.5.4
+        version: 0.5.4(prettier-plugin-svelte@3.0.3)(prettier@3.0.3)
       svelte:
         specifier: 4.2.1
         version: 4.2.1
+      svelte-adapter-bun:
+        specifier: 0.5.0
+        version: 0.5.0
       svelte-check:
         specifier: 3.5.2
         version: 3.5.2(@babel/core@7.22.20)(postcss@8.4.30)(svelte@4.2.1)
       sveltekit-rate-limiter:
         specifier: 0.4.1
         version: 0.4.1(@sveltejs/kit@1.25.0)
+      tailwind-config:
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       tailwindcss:
         specifier: 3.3.3
         version: 3.3.3
@@ -195,9 +217,12 @@ importers:
       typescript:
         specifier: 5.2.2
         version: 5.2.2
+      ui:
+        specifier: workspace:*
+        version: link:../../packages/ui
       vite:
         specifier: 4.4.9
-        version: 4.4.9(@types/node@20.6.3)
+        version: 4.4.9(@types/node@20.6.4)
       vite-plugin-tailwind-purgecss:
         specifier: 0.1.3
         version: 0.1.3(vite@4.4.9)
@@ -245,8 +270,8 @@ importers:
         specifier: 0.5.10
         version: 0.5.10(tailwindcss@3.3.3)
       '@types/node':
-        specifier: 20.6.3
-        version: 20.6.3
+        specifier: 20.6.4
+        version: 20.6.4
       '@typescript-eslint/eslint-plugin':
         specifier: 6.7.2
         version: 6.7.2(@typescript-eslint/parser@6.7.2)(eslint@8.50.0)(typescript@5.2.2)
@@ -342,7 +367,7 @@ importers:
         version: link:../../packages/ui
       vite:
         specifier: 4.4.9
-        version: 4.4.9(@types/node@20.6.3)
+        version: 4.4.9(@types/node@20.6.4)
       vite-imagetools:
         specifier: 5.0.8
         version: 5.0.8
@@ -584,7 +609,7 @@ importers:
         version: link:../../packages/ui-flowbite
       vite:
         specifier: 4.4.9
-        version: 4.4.9(@types/node@20.6.3)
+        version: 4.4.9(@types/node@20.6.4)
       vite-plugin-pwa:
         specifier: 0.16.5
         version: 0.16.5(vite@4.4.9)(workbox-build@7.0.0)(workbox-window@7.0.0)
@@ -3093,8 +3118,11 @@ packages:
     resolution: {integrity: sha512-NqRp8XMwj3AK+zKLbZShl0r/9wKgzqI/527bkptKXomtuo+dOjU9NdMASQ8DNC9z9zLOMbG53T4eihYr3XR+BQ==}
     engines: {node: '>=16'}
     hasBin: true
+    requiresBuild: true
     dependencies:
       playwright: 1.38.1
+    dev: false
+    optional: true
 
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
@@ -3339,7 +3367,7 @@ packages:
       svelte: 3.59.2
       tiny-glob: 0.2.9
       undici: 5.23.0
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3367,7 +3395,7 @@ packages:
       svelte: 4.2.1
       tiny-glob: 0.2.9
       undici: 5.23.0
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3400,7 +3428,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.6(svelte@3.59.2)(vite@4.4.9)
       debug: 4.3.4
       svelte: 3.59.2
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3416,7 +3444,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.6(svelte@4.2.1)(vite@4.4.9)
       debug: 4.3.4
       svelte: 4.2.1
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3435,7 +3463,7 @@ packages:
       magic-string: 0.30.3
       svelte: 3.59.2
       svelte-hmr: 0.15.3(svelte@3.59.2)
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
@@ -3455,7 +3483,7 @@ packages:
       magic-string: 0.30.3
       svelte: 4.2.1
       svelte-hmr: 0.15.3(svelte@4.2.1)
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
@@ -3620,7 +3648,7 @@ packages:
   /@types/fs-extra@9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 20.6.4
     dev: true
 
   /@types/gtag.js@0.0.14:
@@ -3670,8 +3698,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
-  /@types/node@20.6.3:
-    resolution: {integrity: sha512-HksnYH4Ljr4VQgEy2lTStbCKv/P590tmPe5HqOnv9Gprffgv5WXAY+Y5Gqniu0GGqeTCUdBnzC3QSrzPkBkAMA==}
+  /@types/node@20.6.4:
+    resolution: {integrity: sha512-nU6d9MPY0NBUMiE/nXd2IIoC4OLvsLpwAjheoAeuzgvDZA1Cb10QYg+91AF6zQiKWRN5i1m07x6sMe0niBznoQ==}
 
   /@types/normalize-package-data@2.4.2:
     resolution: {integrity: sha512-lqa4UEhhv/2sjjIQgjX8B+RBjj47eo0mzGasklVJ78UKGQY1r0VpB9XHDaZZO9qzEFDdy4MrXLuEaSmPrPSe/A==}
@@ -3684,7 +3712,7 @@ packages:
   /@types/resolve@1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 20.6.4
     dev: true
 
   /@types/resolve@1.20.2:
@@ -3697,7 +3725,7 @@ packages:
   /@types/set-cookie-parser@2.4.3:
     resolution: {integrity: sha512-7QhnH7bi+6KAhBB+Auejz1uV9DHiopZqu7LfR/5gZZTkejJV5nYeZZpgfFoE0N8aDsXuiYpfKyfyMatCwQhyTQ==}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 20.6.4
     dev: true
 
   /@types/trusted-types@2.0.4:
@@ -6030,6 +6058,7 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
+    dev: false
     optional: true
 
   /fsevents@2.3.3:
@@ -6320,7 +6349,7 @@ packages:
       recast: 0.23.4
       rollup: 3.29.3
       svelte: 3.59.2
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6792,7 +6821,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 20.6.4
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -7794,15 +7823,21 @@ packages:
     resolution: {integrity: sha512-tQqNFUKa3OfMf4b2jQ7aGLB8o9bS3bOY0yMEtldtC2+spf8QXG9zvXLTXUeRsoNuxEYMgLYR+NXfAa1rjKRcrg==}
     engines: {node: '>=16'}
     hasBin: true
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /playwright@1.38.1:
     resolution: {integrity: sha512-oRMSJmZrOu1FP5iu3UrCx8JEFRIMxLDM0c/3o4bpzU5Tz97BypefWf7TuTNPWeCe279TPal5RtPPZ+9lW/Qkow==}
     engines: {node: '>=16'}
     hasBin: true
+    requiresBuild: true
     dependencies:
       playwright-core: 1.38.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: false
+    optional: true
 
   /postcss-attribute-case-insensitive@6.0.2(postcss@8.4.30):
     resolution: {integrity: sha512-IRuCwwAAQbgaLhxQdQcIIK0dCVXg3XDUnzgKD8iwdiYdwU4rMWRWyl/W9/0nA4ihVpq5pyALiHB2veBJ0292pw==}
@@ -10563,7 +10598,7 @@ packages:
       - rollup
     dev: true
 
-  /vite-node@0.34.5(@types/node@20.6.3):
+  /vite-node@0.34.5(@types/node@20.6.4):
     resolution: {integrity: sha512-RNZ+DwbCvDoI5CbCSQSyRyzDTfFvFauvMs6Yq4ObJROKlIKuat1KgSX/Ako5rlDMfVCyMcpMRMTkJBxd6z8YRA==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -10573,7 +10608,7 @@ packages:
       mlly: 1.4.2
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -10595,7 +10630,7 @@ packages:
       debug: 4.3.4
       fast-glob: 3.3.1
       pretty-bytes: 6.1.1
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
       workbox-build: 7.0.0
       workbox-window: 7.0.0
     transitivePeerDependencies:
@@ -10609,7 +10644,7 @@ packages:
     dependencies:
       estree-walker: 3.0.3
       purgecss: 6.0.0-alpha.0
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
     dev: true
 
   /vite-plugin-watch-and-run@1.1.3:
@@ -10619,7 +10654,7 @@ packages:
       micromatch: 4.0.5
     dev: true
 
-  /vite@4.4.9(@types/node@20.6.3):
+  /vite@4.4.9(@types/node@20.6.4):
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -10647,7 +10682,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.6.3
+      '@types/node': 20.6.4
       esbuild: 0.18.20
       postcss: 8.4.30
       rollup: 3.29.3
@@ -10662,7 +10697,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.9(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
     dev: true
 
   /vitest@0.34.5(@vitest/ui@0.34.5)(jsdom@22.1.0):
@@ -10698,7 +10733,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.6
       '@types/chai-subset': 1.3.3
-      '@types/node': 20.6.3
+      '@types/node': 20.6.4
       '@vitest/expect': 0.34.5
       '@vitest/runner': 0.34.5
       '@vitest/snapshot': 0.34.5
@@ -10719,8 +10754,8 @@ packages:
       strip-literal: 1.3.0
       tinybench: 2.5.1
       tinypool: 0.7.0
-      vite: 4.4.9(@types/node@20.6.3)
-      vite-node: 0.34.5(@types/node@20.6.3)
+      vite: 4.4.9(@types/node@20.6.4)
+      vite-node: 0.34.5(@types/node@20.6.4)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less

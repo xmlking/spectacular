@@ -12,6 +12,7 @@ Awesome **SvelteKit** Links
   - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSS
   - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
   - [Melt UI](https://www.melt-ui.com/) strives to be the de-facto headless UI library for Svelte.
+  - [svelte-headlessu](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit
 
 - Tables
 

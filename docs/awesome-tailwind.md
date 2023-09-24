@@ -31,11 +31,62 @@ Awesome **Tailwind CSS** Links
 - [Collection of Tailwind Components](https://github.com/unlight/tailwind-components)
 - [Beautiful CSS box-shadow examples](https://getcssscan.com/css-box-shadow-examples)
 - [storyblok-that-speakers](https://github.com/bradgarropy/jqq-demos/tree/main/storyblok-that-speakers#visual-editing) showcase [responsive grid](https://github.com/bradgarropy/jqq-demos/blob/main/storyblok-that-speakers/my-app/src/routes/speakers/%2Bpage.svelte#L17-L20)
+
+## FQA
+
 - Rendering different views for **Mobile** and **Desktop**:
+
+tell SvelteKit not to handle a link, but allow the browser to handle it
 
 ```html
 <!-- Mobile -->
 <header class="block md:hidden"></header>
 <!-- Desktop -->
 <header class="hidden md:block"></header>
+```
+
+- Svelte Component styling
+
+[Styling children: slot props](https://svelte-headlessui.goss.io/docs/2.0/general-concepts#component-styling)
+
+```svelte
+<RadioGroup bind:value={plan}>
+	<RadioGroupLabel>Plan</RadioGroupLabel>
+	<RadioGroupOption value="startup" let:checked>
+		<span class:checked>Startup</span>
+	</RadioGroupOption>
+	<RadioGroupOption value="business" let:checked>
+		<span class:checked>Business</span>
+	</RadioGroupOption>
+</RadioGroup>
+
+<style>
+	/* Note that using global styles this way is bad practice in larger applications; see below for more */
+	:global(.checked) {
+		background-color: rgb(191 219 254);
+	}
+</style>
+```
+
+You can scope this more narrowly if you have a wrapper element:
+
+```svelte
+<div>
+	<RadioGroup bind:value={plan}>
+		<RadioGroupLabel>Plan</RadioGroupLabel>
+		<RadioGroupOption value="startup" class={({ checked }) => (checked ? 'checked' : '')}>
+			Startup
+		</RadioGroupOption>
+		<RadioGroupOption value="business" class={({ checked }) => (checked ? 'checked' : '')}>
+			Business
+		</RadioGroupOption>
+	</RadioGroup>
+</div>
+
+<!-- This will only apply to .checked elements that descend from this component -->
+<style>
+	* > :global(.checked) {
+		background-color: rgb(191 219 254);
+	}
+</style>
 ```

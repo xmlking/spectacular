@@ -67,7 +67,7 @@ cog install-hook --all
 By default, the `dev` server (dev command) runs in `development` mode and the `build` command run in `production`
 mode.  
 This means when running `turbo build`, it will load the env variables from `.env.production` if there is one:  
-Use `.env.local` to override environment variables  in `.env` (secrets like API keys) for local development.
+Use `.env.local` to override environment variables in `.env` (secrets like API keys) for local development.
 
 ## Developing
 
@@ -79,7 +79,7 @@ Once you've cloned the project and installed dependencies with `pnpm i`, start a
 docker compose up hasura
 # shutdown
 docker compose down
-# (optional) shutdown and reset volume 
+# (optional) shutdown and reset volume
 docker compose down -v
 ```
 
