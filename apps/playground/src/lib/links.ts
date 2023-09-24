@@ -155,9 +155,9 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 					keywords: 'overlay, Particles, snackbar, bar, action, alert, notification'
 				},
 				{
-					href: '/utilities/table-of-contents',
-					label: 'Table of Contents',
-					keywords: 'page, results, links, navigation',
+					href: '/utilities/outclick',
+					label: 'Outclick',
+					keywords: 'outclick, click, half-click',
 					badge: 'Beta'
 				}
 				// DELISTED UNTIL FURTHER NOTICE

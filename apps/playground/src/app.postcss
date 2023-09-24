@@ -33,6 +33,18 @@ body {
 	@apply h-full overflow-hidden;
 }
 
+/* @layer base {
+    * {
+        @apply select-none [outline:none];
+    }
+} */
+
+@layer components {
+	.box {
+		@apply relative z-10 flex h-20 items-center justify-center rounded border-2 border-dashed border-gray-700 bg-gray-100 text-center text-xs;
+	}
+}
+
 /* Page Styles */
 /* Use these to define common page styles. */
 .page-container {
@@ -62,17 +74,4 @@ body {
 	animation:
 		210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
 		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from;
-}
-
-/* particles */
-.particles {
-	visibility: hidden;
-	opacity: 0;
-	transition:
-		visibility 0s,
-		opacity 1s linear;
-}
-.particles-loaded {
-	visibility: visible;
-	opacity: 1;
 }

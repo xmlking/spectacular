@@ -121,11 +121,30 @@
 	};
 </script>
 
-<svelte:component
-	this={ParticlesComponent}
-	id="particles"
-	class={loaded ? 'particles particles-loaded' : 'particles'}
-	options={particlesConfig}
-	on:particlesLoaded={onParticlesLoaded}
-	{particlesInit}
-/>
+<div>
+	<svelte:component
+		this={ParticlesComponent}
+		id="particles"
+		class={loaded ? 'particles particles-loaded' : 'particles'}
+		options={particlesConfig}
+		on:particlesLoaded={onParticlesLoaded}
+		{particlesInit}
+	/>
+</div>
+
+
+<style lang="postcss">
+	/* Note that using global styles this way is bad practice in larger applications */
+	/* You can scope this more narrowly if you have a wrapper element: i.e., <div> */
+	* > :global(.particles) {
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility 0s,
+			opacity 1s linear;
+	}
+	* > :global(.particles-loaded) {
+		visibility: visible;
+		opacity: 1;
+	}
+</style>
