@@ -251,6 +251,14 @@ pnpm add -D @tanstack/svelte-query --filter "./apps/**"
 
 ### Optional
 
+### view-transition
+
+with [sveltekit-view-transition](https://github.com/paoloricciuti/sveltekit-view-transition/tree/main)
+
+```shell
+pnpm add -D sveltekit-view-transition@latest --filter "./apps/**"
+```
+
 #### Markdown CMS
 
 ```shell

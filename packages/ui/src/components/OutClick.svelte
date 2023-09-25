@@ -1,4 +1,5 @@
 <script lang="ts">
+	// Source: https://babakfp.ir/docs/svelte-outclick
     import { createEventDispatcher } from "svelte"
     const dispatch = createEventDispatcher()
 
@@ -98,6 +99,9 @@
         }
     }
 
+    /**
+     *
+     */
     function castArray(value: any): any[] {
         return Array.isArray(value) ? value : [value]
     }

@@ -2,11 +2,13 @@
 	// import { dev } from '$app/environment';
 	// import { Analytics } from '$lib/components';
 	// import envPub from '$lib/variables/variables';
-	import { Toasts } from '$lib/components/toast';
-	import '../app.pcss';
-
+	import '../app.postcss';
+	import { setupViewTransition } from 'sveltekit-view-transition';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
+	import { Toasts } from '$lib/components/toast';
+
+	setupViewTransition();
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let ReloadPrompt: any;
@@ -50,3 +52,18 @@
 {#if ReloadPrompt}
 	<svelte:component this={ReloadPrompt} />
 {/if}
+
+<style lang="postcss">
+	/*** view-transition animations for ROOT ***/
+
+	/* Disable default crossfade. */
+	/* :root {
+		view-transition-name: none;
+	} */
+
+	/* Or, just modify the duration. */
+	:global(::view-transition-old(root)),
+	:global(::view-transition-new(root)) {
+		animation-duration: 500ms;
+	}
+</style>

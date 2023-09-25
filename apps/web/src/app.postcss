@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Follow: https://tailwindcss.com/docs/adding-custom-styles */
+
 @layer base {
 	/* FIXME: use https://tailwindcss.com/docs/typography-plugin  `prose dark:prose-invert` */
 	p,
@@ -11,6 +13,12 @@
 	h2,
 	h3 {
 		@apply dark:text-white;
+	}
+
+	pre {
+		//background-color: rgb(242, 242, 242);
+		white-space: pre-wrap;
+		width: 100%;
 	}
 
 	/*!* Global CSS Variables *!*/
@@ -21,39 +29,22 @@
 	}
 }
 
-.logo img {
-	width: 15%;
-	aspect-ration: 3/2;
-	object-fit: contain;
-	mix-blend-mode: color-burn;
-}
-
-pre {
-	//background-color: rgb(242, 242, 242);
-	white-space: pre-wrap;
-	width: 100%;
-}
-/* for use in  apps/web/src/lib/components/form/Radio.svelte */
 @layer components {
+	/* for use in  apps/web/src/lib/components/form/Radio.svelte */
 	.checked-label:has(input:checked) {
 		@apply bg-primary-700 text-white;
 	}
+
+	.logo img {
+		width: 15%;
+		aspect-ration: 3/2;
+		object-fit: contain;
+		mix-blend-mode: color-burn;
+	}
 }
 
-/* view-transition animations */
-::view-transition-old(content) {
-	animation:
-		90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to;
-}
-
-::view-transition-new(content) {
-	animation:
-		210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-		300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from;
-}
-
-::view-transition-old(main),
-::view-transition-new(main) {
-	height: 100%;
+@layer utilities {
+	.content-auto1 {
+		content-visibility: auto;
+	}
 }

@@ -87,6 +87,9 @@ importers:
       sveltekit-rate-limiter:
         specifier: 0.4.1
         version: 0.4.1(@sveltejs/kit@1.25.0)
+      sveltekit-view-transition:
+        specifier: 0.4.6
+        version: 0.4.6(@sveltejs/kit@1.25.0)(svelte@4.2.1)
       tailwind-merge:
         specifier: 1.14.0
         version: 1.14.0
@@ -205,6 +208,9 @@ importers:
       sveltekit-rate-limiter:
         specifier: 0.4.1
         version: 0.4.1(@sveltejs/kit@1.25.0)
+      sveltekit-view-transition:
+        specifier: 0.4.6
+        version: 0.4.6(@sveltejs/kit@1.25.0)(svelte@4.2.1)
       tailwind-config:
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -344,6 +350,9 @@ importers:
       sveltekit-superforms:
         specifier: 1.7.2
         version: 1.7.2(@sveltejs/kit@1.25.0)(svelte@4.2.1)(zod@3.22.2)
+      sveltekit-view-transition:
+        specifier: 0.4.6
+        version: 0.4.6(@sveltejs/kit@1.25.0)(svelte@4.2.1)
       tailwind-config:
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -589,6 +598,9 @@ importers:
       sveltekit-superforms:
         specifier: 1.7.2
         version: 1.7.2(@sveltejs/kit@1.25.0)(svelte@4.2.1)(zod@3.22.2)
+      sveltekit-view-transition:
+        specifier: 0.4.6
+        version: 0.4.6(@sveltejs/kit@1.25.0)(svelte@4.2.1)
       tailwind-config:
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -9717,6 +9729,16 @@ packages:
       '@sveltejs/kit': 1.25.0(svelte@4.2.1)(vite@4.4.9)
       svelte: 4.2.1
       zod: 3.22.2
+    dev: true
+
+  /sveltekit-view-transition@0.4.6(@sveltejs/kit@1.25.0)(svelte@4.2.1):
+    resolution: {integrity: sha512-aZCooKPQdgOD3H3wDTLLWJdsBcvssxWnraXHJadb1aQ3nd5MN57Ws4AD3uAGt/nbBlXgsQNvZCXs9p+3mcFRcQ==}
+    peerDependencies:
+      '@sveltejs/kit': ^1.20.4
+      svelte: ^4.0.0
+    dependencies:
+      '@sveltejs/kit': 1.25.0(svelte@4.2.1)(vite@4.4.9)
+      svelte: 4.2.1
     dev: true
 
   /svg.draggable.js@2.2.2:

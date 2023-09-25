@@ -121,7 +121,7 @@
 	};
 </script>
 
-<div>
+<div style="display: contents">
 	<svelte:component
 		this={ParticlesComponent}
 		id="particles"

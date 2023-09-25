@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { onNavigate } from "$app/navigation";
+	import { onMount } from 'svelte';
+	import { getFlash } from 'sveltekit-flash-message/client';
+	import { setupViewTransition } from 'sveltekit-view-transition';
 	import { page } from '$app/stores';
 	import { Footer, Header } from '$lib/blocks/dashboard';
 	import { SideMenu } from '$lib/blocks/side';
 	import { DarkMode } from '$lib/components';
 	import { addToast } from '$lib/components/toast';
-	import { onMount } from 'svelte';
-	import { getFlash } from 'sveltekit-flash-message/client';
 
 	export let data;
 
@@ -23,6 +23,9 @@
 		flash.set(undefined);
 	});
 
+	/**
+	 *
+	 */
 	async function getAzureProfilePicture(access_token: string) {
 		const res = await fetch('https://graph.microsoft.com/v1.0/me/photos/48x48/$value', {
 			headers: {
@@ -49,18 +52,7 @@
 	// console.log('session>>>', session);
 
 	// TODO: https://twitter.com/karimfromjordan/status/1692859106699169883
-	onNavigate(async (navigation) => {
-		// @ts-expect-error - not supported by all browsers
-		if (!document.startViewTransition) return;
-
-		return new Promise((oldStateCaptureResolve) => {
-			// @ts-expect-error - not supported by all browsers
-			document.startViewTransition(async () => {
-				oldStateCaptureResolve();
-				await navigation.complete;
-			});
-		});
-	});
+	const { transition } = setupViewTransition();
 
 	// HINT: added `right-4 top-24` to original `btnClass`
 	let btnClass =
@@ -78,7 +70,7 @@
 		<SideMenu />
 		<!--   end::Sidebar      -->
 		<!--   start::Main Content     -->
-		<main style:view-transition-name="main" class="container mx-auto overflow-y-auto px-8 py-32 dark:text-white">
+		<main use:transition={'main'} class="container mx-auto overflow-y-auto px-8 py-32 dark:text-white">
 			<slot />
 		</main>
 		<!--   end::Main Content      -->
@@ -88,3 +80,10 @@
 	<!--   end::Footer      -->
 </div>
 
+<style lang="postcss">
+	/*** view-transition animations for DASHBOARD ***/
+	:global(::view-transition-old(main)),
+	:global(::view-transition-new(main)) {
+		animation-duration: 600ms;
+	}
+</style>

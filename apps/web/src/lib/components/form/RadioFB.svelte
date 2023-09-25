@@ -49,7 +49,7 @@
 {/if}
 
 <style lang="postcss">
-/* TODO: has to define in apps/web/src/app.pcss */
+/* TODO: has to define in apps/web/src/app.postcss */
 /* @layer components {
   .checked-label:has(input:checked) {
     @apply bg-primary-700 text-white;
