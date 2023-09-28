@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/icons';
 	import { VERSION } from '@sveltejs/kit';
+	import { Stack } from '$lib/components/icons';
 
 	/*global __APP_VERSION__ __GIT_TAG__ __GIT_DATE__ */
 	const appVersion = __APP_VERSION__;
@@ -90,3 +90,9 @@
 		</span>
 	</div>
 </footer>
+
+<style lang="postcss">
+	footer {
+		view-transition-name: footer;
+	}
+</style>

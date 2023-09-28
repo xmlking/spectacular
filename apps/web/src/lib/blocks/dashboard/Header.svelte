@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { Hamburger } from '$lib/components';
 	import {
 		Avatar,
 		Dropdown,
@@ -13,6 +11,8 @@
 		NavLi,
 		NavUl
 	} from 'flowbite-svelte';
+	import { page } from '$app/stores';
+	import { Hamburger } from '$lib/components';
 
 	let path: string;
 	$: path = $page.url.pathname;
@@ -26,7 +26,7 @@
 		| undefined;
 </script>
 
-<Navbar let:hidden let:toggle fluid={true} border={false} color="light">
+<Navbar style="view-transition-name: header;" let:hidden let:toggle fluid={true} border={false} color="light">
 	<div class="flex items-center">
 		<Hamburger />
 		<NavBrand href="/">

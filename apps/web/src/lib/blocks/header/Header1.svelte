@@ -30,3 +30,9 @@
 		</nav>
 	</div>
 </header>
+
+<style lang="postcss">
+	header {
+		view-transition-name: header;
+	}
+</style>

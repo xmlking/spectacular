@@ -27,6 +27,29 @@
 		//--column-test-muted: theme(colors.rose.300);
 		//--column-test-muted: theme(colors.rose.300 / 25%);
 	}
+
+	,
+
+	/*** view-transition animation keyframes ***/
+	@keyframes fade-out {
+		to {
+			opacity: 0;
+		}
+	}
+	@keyframes slide-from-left {
+		from {
+			transform: translateX(-100%);
+			/* transform: translateX(-100%) scale(1.2);
+			box-shadow: var(--shadow-elevation-high); */
+		}
+	}
+	@keyframes slide-from-right {
+		from {
+			transform: translateX(100%);
+			/* transform: translateX(100%) scale(1.2);
+			box-shadow: var(--shadow-elevation-high); */
+		}
+	}
 }
 
 @layer components {

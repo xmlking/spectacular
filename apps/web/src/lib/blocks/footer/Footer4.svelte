@@ -225,3 +225,9 @@
 		</div>
 	</div>
 </footer>
+
+<style lang="postcss">
+	footer {
+		view-transition-name: footer;
+	}
+</style>

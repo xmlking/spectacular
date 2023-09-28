@@ -67,3 +67,9 @@
 		</slot>
 	</span>
 </button>
+
+<style lang="postcss">
+	button {
+		view-transition-name: dark-mode-button;
+	}
+</style>

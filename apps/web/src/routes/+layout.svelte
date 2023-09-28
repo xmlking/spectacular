@@ -62,8 +62,16 @@
 	} */
 
 	/* Or, just modify the duration. */
-	:global(::view-transition-old(root)),
+	/* :global(::view-transition-old(root)),
 	:global(::view-transition-new(root)) {
 		animation-duration: 500ms;
+	} */
+
+	/* Or, slide from right */
+	:global(:root::view-transition-old(root)) {
+		animation: 500ms ease-out both fade-out;
+	}
+	:global(:root::view-transition-new(root)) {
+		animation: 500ms ease-out both slide-from-left;
 	}
 </style>

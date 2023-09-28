@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
+	import { ArrowRightToBracketOutline, BellOutline, ChartPieOutline, ClipboardListOutline, CogOutline, ComputerSpeakerOutline, DrawSquareOutline, MobilePhoneOutline, QuestionCircleOutline, ScaleBalancedOutline, ShieldCheckOutline, StarOutline, UsersGroupOutline, UsersOutline } from 'flowbite-svelte-icons';
 	import { page } from '$app/stores';
 	import { Drawer } from '$lib/components';
 	import { sidebarOpen } from '$lib/stores/sidebar.store';
-	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
-	import { ArrowRightToBracketOutline, BellOutline, ChartPieOutline, ClipboardListOutline, CogOutline, ComputerSpeakerOutline, DrawSquareOutline, MobilePhoneOutline, QuestionCircleOutline, ScaleBalancedOutline, ShieldCheckOutline, StarOutline, UsersGroupOutline, UsersOutline } from 'flowbite-svelte-icons';
 
 	// custom style
 	let spanClass = 'flex-1 ml-3 whitespace-nowrap';
@@ -14,7 +14,7 @@
 	$: activeUrl = $page.url.pathname;
 </script>
 
-<Drawer bind:show={$sidebarOpen} {asideClass}>
+<Drawer style="view-transition-name: side-menu;" bind:show={$sidebarOpen} {asideClass}>
 	<Sidebar {activeUrl}>
 		<SidebarWrapper {divClass}>
 			<SidebarGroup>
