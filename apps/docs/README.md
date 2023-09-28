@@ -1,6 +1,6 @@
-# create-svelte
+# Docs
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Starter app used by [Sveltin CLI](https://sveltin.io/) to generate a new project.
 
 ## Creating a project
 

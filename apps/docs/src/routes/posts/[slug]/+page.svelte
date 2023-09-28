@@ -1,0 +1,138 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+	import type { SEOWebPage } from '@sveltinio/seo/types';
+	import { assets, base } from '$app/paths';
+	import { page } from '$app/stores';
+	import { website } from '$config/website.js';
+	import { canonicalPageUrl, getCoverImagePath } from '$lib/utils/strings.js';
+	import { JsonLdWebPage, PageMetaTags, JsonLdBreadcrumbs } from '@sveltinio/seo';
+	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
+	import { Breadcrumbs, TOC, PagesNavigator } from '@sveltinio/widgets';
+
+	export let data: PageData;
+
+	$: ({ actual, before, after, mdsvexComponent } = data);
+	$: current = actual;
+	$: previous = before;
+	$: next = after;
+
+	$: postsSlugPage = <SEOWebPage>{
+		url: canonicalPageUrl($page.url.pathname, website.baseURL),
+		title: current.metadata.title,
+		description: current.metadata.headline,
+		keywords: current.metadata.keywords || website.keywords,
+		author: current.metadata.author,
+		image: getCoverImagePath(current, website),
+		opengraph: {
+			type: OpenGraphType.Article,
+			article: {
+				published_at: new Date(current.metadata.created_at),
+				modified_at: new Date(current.metadata.updated_at)
+			}
+		},
+		twitter: {
+			type: TwitterCardType.Summary
+		}
+	};
+</script>
+
+<PageMetaTags data={ postsSlugPage } />
+<JsonLdWebPage data={ postsSlugPage } />
+<JsonLdBreadcrumbs url={$page.url.href} />
+
+<article class="page-wrapper">
+	<Breadcrumbs url={$page.url.href} />
+	<h1>{current.metadata.title}</h1>
+	<div class="entry-meta">
+		{#if current.metadata.created_at}
+			<time datetime={current.metadata.created_at}>
+				Created At {current.metadata.created_at}
+			</time>
+		{/if}
+		{#if current.metadata.updated_at}
+			<time datetime={current.metadata.updated_at}>
+				Updated On {current.metadata.updated_at}
+			</time>
+		{/if}
+		{#if current.metadata.readingTime}
+			<span>{current.metadata.readingTime.text}</span>
+		{/if}
+	</div>
+	{#if current.metadata.cover}
+		<div class="cover">
+			<img
+				src="{assets}/resources/{current.resource}/{current.metadata.slug}/{current.metadata.cover}"
+				alt="cover image for {current.metadata.title}"
+			/>
+		</div>
+	{/if}
+
+	<TOC data={current.metadata.headings} class="sveltin" />
+
+	<div class="markdown-body">
+		<svelte:component this={mdsvexComponent} />
+	</div>
+
+	<PagesNavigator
+		prev={ {
+			label: previous.metadata.title,
+			href: `${base}/${previous.resource}/${previous.metadata.slug}`,
+			title: `link to ${previous.metadata.title}`
+		} }
+		next={ {
+			label: next.metadata.title,
+			href: `${base}/${next.resource}/${next.metadata.slug}`,
+			title: `link to ${next.metadata.title}`
+		} }
+	/>
+</article>
+
+
+<style>
+	.entry-meta {
+		color: #475569;
+		letter-spacing: 0.025em;
+		font-size: 1rem; /* 16px */
+		line-height: 1.5rem; /* 24px */
+		margin-bottom: 10px;
+	}
+
+	.entry-meta > time {
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		text-transform: capitalize;
+	}
+
+	.entry-meta > time:not(:last-child)::after {
+		content: '';
+		background: #a5a8b2;
+		width: 5px;
+		height: 5px;
+		margin: 0 10px;
+		border-radius: 100%;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.cover {
+		position: relative;
+		padding-bottom: calc(9 / 16 * 100%);
+		margin-bottom: 2rem;
+	}
+
+	.cover > * {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.cover img {
+		object-fit: cover;
+		border-radius: 0.75rem;
+	}
+</style>

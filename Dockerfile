@@ -99,6 +99,9 @@ ARG BUILD_VERSION
 ARG VCS_REF=1
 ARG VENDOR=xmlking
 
+# for faster docker shutdown
+STOPSIGNAL SIGINT
+
 # Metadata
 LABEL org.opencontainers.image.created=$BUILD_TIME \
 	org.opencontainers.image.name="${SCOPE}" \

@@ -1,7 +1,6 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
-		"lib": ["es2022", "webworker"],
 		"allowJs": true,
 		"checkJs": true,
 		"esModuleInterop": true,
@@ -9,17 +8,36 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true,
-		"types": [
-			"vitest/globals",
-			"vitest/importMeta",
-			"@testing-library/jest-dom",
-			"vite-plugin-pwa/client"
-		],
-		"rootDirs": [".", "./.svelte-kit/types", "./$houdini/types"]
-	}
-	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
-	//
-	// If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
-	// from the referenced tsconfig.json - TypeScript does not merge them in
+		"strict": false,
+		"outDir": "./build",
+		"paths": {
+			"$sveltin": ["./src/sveltin"],
+			"$lib": ["./src/lib"],
+			"$lib/*": ["./src/lib/*"],
+			"$data": ["./data"],
+			"$data/*": ["./data/*"],
+			"$config": ["./config"],
+			"$config/*": ["./config/*"],
+			"$content": ["./content"],
+			"$content/*": ["./content/*"],
+			"$themes": ["./themes"],
+			"$themes/*": ["./themes/*"]
+		}
+	},
+	"include": [
+		"src/**/*.d.ts",
+		"src/**/*.js",
+		"src/**/*.ts",
+		"src/**/*.svelte",
+		"themes/**/*.d.ts",
+		"themes/**/*.js",
+		"themes/**/*.ts",
+		"themes/**/*.svelte"
+	],
+	"exclude": ["src/lib/utils/collections.js"]
+	/**
+	 * Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
+	 *
+	 * If you want to overwrite includes/excludes, make sure to copy over the relevant includes excludes from the referenced tsconfig.json - TypeScript does not merge them in
+	 */
 }

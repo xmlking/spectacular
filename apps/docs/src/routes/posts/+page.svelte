@@ -1,0 +1,88 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+	import type { SEOWebPage } from '@sveltinio/seo/types';
+	import { assets, base } from '$app/paths';
+	import { page } from '$app/stores';
+	import { website } from '$config/website.js';
+	import { Breadcrumbs, Card, CardAction, CardImage } from '@sveltinio/widgets';
+	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
+	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
+	import { canonicalPageUrl, toTitle, getFavicon } from '$lib/utils/strings.js';
+
+	export let data: PageData;
+
+	const pageDescription = `Here you can find the list of all available posts.`;
+	// page keywords as comma separeted values
+	const pageKeywords: Array<string> = [];
+
+	$: ({ resourceName, items } = data);
+	$: pathname = $page.url.pathname.replace(/^(.)|(.)$/g, '');
+	$: postsIndexPage = <SEOWebPage>{
+		url: canonicalPageUrl($page.url.pathname, website.baseURL),
+		title: toTitle(resourceName),
+		description: pageDescription,
+		keywords: pageKeywords || website.keywords,
+		image: getFavicon(website),
+		opengraph: {
+			type: OpenGraphType.Article
+		},
+		twitter: {
+			type: TwitterCardType.Summary
+		}
+	};
+</script>
+
+<PageMetaTags data={ postsIndexPage } />
+<JsonLdWebPage data={ postsIndexPage } />
+<JsonLdBreadcrumbs url={$page.url.href} />
+
+<section class="page-wrapper">
+	<Breadcrumbs url={$page.url.href} />
+	<div class="page-wrapper__content">
+		{#if items.length != 0}
+			<h1>{toTitle(resourceName)}</h1>
+			<div class="cards">
+				{#each items as item}
+					<Card
+					title={item.metadata.title}
+					content={item.metadata.headline}
+					href="{base}/{item.resource}/{item.metadata.slug}"
+					>
+						<CardImage
+							slot="cardImage"
+							alt={item.metadata.title}
+							src="{assets}/resources/{item.resource}/{item.metadata.slug}/{item.metadata.cover}"
+						/>
+						<CardAction slot="cardAction" href="{base}/{item.resource}/{item.metadata.slug}" />
+					</Card>
+				{/each}
+			</div>
+		{:else}
+		<h2 class="message message--warning">
+			Nothing to show here! Create some content first and reload the page:
+			<span><pre><code class="text-default">sveltin new content {pathname}/getting-started</code></pre></span>
+		</h2>
+		{/if}
+	</div>
+</section>
+
+<style>
+	.cards {
+		padding: 4px;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		align-content: center;
+		column-gap: 2rem;
+		row-gap: 2rem;
+	}
+
+	@media screen and (min-width: 1024px) {
+		.cards {
+			flex-direction: row;
+			justify-content: flex-start;
+		}
+	}
+</style>

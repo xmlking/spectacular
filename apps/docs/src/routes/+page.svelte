@@ -1,8 +1,29 @@
 <script lang="ts">
-  import { MyCounterButton } from 'ui';
+	import { website } from '$config/website.js';
+	import type { SEOWebPage } from '@sveltinio/seo/types';
+	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
+	import { PageMetaTags, JsonLdWebPage } from '@sveltinio/seo';
+	import CTA from '$themes/sveltin_theme/partials/CTA.svelte';
+	import { getFavicon } from '$lib/utils/strings.js';
+
+	const homePage: SEOWebPage = {
+		url: website.baseURL,
+		title: website.title,
+		description: website.seoDescription,
+		keywords: (website.keywords) ? website.keywords : new Array<string>(),
+		image: getFavicon(website),
+		opengraph: {
+			type: OpenGraphType.Website
+		},
+		twitter: {
+			type: TwitterCardType.Large
+		}
+	};
 </script>
 
-<h1>Docs</h1>
-<MyCounterButton />
+<!-- SEO Section -->
+<PageMetaTags data={homePage} />
+<JsonLdWebPage data={homePage} />
+<!-- End of SEO Section -->
 
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<CTA />

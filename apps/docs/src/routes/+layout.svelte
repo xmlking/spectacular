@@ -1,0 +1,29 @@
+<script lang="ts">
+	import '../app.css';
+	import { assets } from '$app/paths';
+	import { website } from '$config/website.js';
+	import { googleFonts } from '$config/externals.js';
+	import { menu } from '$config/menu.js';
+	import orderBy from 'lodash-es/orderBy.js';
+	import { JsonLdSiteNavigationElements, JsonLdWebSite } from '@sveltinio/seo';
+	import { GoogleFonts } from '@sveltinio/services';
+	import { ScrollToTopButton } from '@sveltinio/widgets';
+	import Footer from '$themes/sveltin_theme/partials/Footer.svelte';
+
+	const sortedMenu = orderBy(menu, 'weight');
+</script>
+
+<JsonLdWebSite data={website} />
+<JsonLdSiteNavigationElements baseURL={website.baseURL} data={sortedMenu} />
+
+<GoogleFonts fonts={googleFonts} />
+
+<div class="min-h-screen w-full flex flex-col justify-center">
+	<main class="grow">
+		<slot />
+	</main>
+
+	<Footer logoSrc="{assets}/images/sveltin/{website.logo}" />
+</div>
+
+<ScrollToTopButton bounce />

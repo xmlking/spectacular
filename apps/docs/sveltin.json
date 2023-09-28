@@ -1,0 +1,22 @@
+{
+	"name": "my-docs",
+	"baseurl": "https://spectacular-docs.vercel.app",
+	"theme": {
+		"style": "sveltin",
+		"name": "sveltin_theme",
+		"cssLib": "tailwindcss"
+	},
+	"sitemap": {
+		"changeFreq": "monthly",
+		"priority": 0.5
+	},
+	"sveltekit": {
+		"adapter": {
+			"pages": "build",
+			"assets": "build"
+		}
+	},
+	"sveltin": {
+		"version": "0.11.0"
+	}
+}

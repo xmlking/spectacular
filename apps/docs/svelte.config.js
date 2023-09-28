@@ -1,29 +1,31 @@
-import adapterNode from '@sveltejs/adapter-node';
-import adapterAuto from '@sveltejs/adapter-auto';
+import { mdsvex } from 'mdsvex';
+
 import { vitePreprocess } from '@sveltejs/kit/vite';
+import adapter from '@sveltejs/adapter-static';
+import mdsvexConfig from './mdsvex.config.js';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: ['.svelte'],
-	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
-	// for more information about preprocessors
-	preprocess: [vitePreprocess()],
-
-	vitePlugin: {
-		inspector: true
-	},
+	extensions: ['.svelte', ...mdsvexConfig.extensions],
+	preprocess: [
+		mdsvex(mdsvexConfig),
+		vitePreprocess({
+			postcss: true,
+			preserve: ['ld+json']
+		})
+	],
 	kit: {
-		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
-		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
-		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
-		adapter: process.env.VERCEL ? adapterAuto() : adapterNode(),
-		prerender: { crawl: false }, // FIXME: remove after all links are corrected.
-		output: {
-			preloadStrategy: 'preload-mjs'
-		},
-		version: {
-			name: process.env.npm_package_version
+		adapter: adapter({
+			pages: 'build',
+			assets: 'build',
+			fallback: '200.html',
+			precompress: true
+		}),
+		prerender: {
+			crawl: true,
+			entries: ['*']
 		}
 	}
 };
+
 export default config;
