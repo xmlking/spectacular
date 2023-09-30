@@ -1,12 +1,12 @@
+// DOCS: https://turbo.build/repo/docs/handbook/linting/eslint
 module.exports = {
-	// root: true,
 	parser: '@typescript-eslint/parser',
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		// 'plugin:jsdoc/recommended-typescript-error',
 		// 'plugin:jsdoc/recommended-error',
-		// 'plugin:svelte/recommended',
+		// 'plugin:svelte/recommended', // HINT: https://github.com/sveltejs/eslint-plugin-svelte
 		'plugin:svelte/prettier',
 		'plugin:import/recommended',
 		'turbo',
@@ -46,7 +46,7 @@ module.exports = {
 				varsIgnorePattern: '^_'
 			}
 		],
-		'@typescript-eslint/explicit-function-return-type': 'error',
+		'@typescript-eslint/explicit-function-return-type': 'off', // 'error', // lets infer from typescript
 		'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
 
 		'no-unused-vars': [

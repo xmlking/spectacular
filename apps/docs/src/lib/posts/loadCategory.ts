@@ -1,6 +1,6 @@
-import type { Sveltin } from '$sveltin';
 import { groupedByOne } from '$lib/utils/collections.js';
 import { list } from './loadPosts';
+import type { Sveltin } from '$sveltin';
 
 export const all = async (): Promise<Sveltin.ContentMetadata[]> => {
 	const mdName = 'category';
