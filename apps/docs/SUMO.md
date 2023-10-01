@@ -9,13 +9,14 @@ based on [swyxkit](https://github.com/swyxio/swyxkit) and [sveltin](https://docs
 [sveltin](https://docs.sveltin.io/) as CLI
 
 ## Features
+
 - [ ] The starter creates and caches responsive images using the `vite-imagetools` plugin.
-- [ ] [XML Sitemap](./static/sitemap.xml) and [RSS](./static/rss.xml) Feed  
+- [ ] [XML Sitemap](./static/sitemap.xml) and [RSS](./static/rss.xml) Feed
 - [ ] [Progressive Web App (PWA)](https://rodneylab.com/sveltekit-pwa/)
   - [ ] manifest.json
   - [ ] logos (for favicons) assets
   - [ ] HTML meta for SEO
 
-
 ## References
+
 - [rodneylab/sveltekit-blog-mdx](https://github.com/rodneylab/sveltekit-blog-mdx)
