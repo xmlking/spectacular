@@ -1,10 +1,10 @@
-import { error } from '@sveltejs/kit';
-import { list } from '$lib/posts/loadPosts';
 import type { PageServerLoad } from './$types';
 import type { Sveltin } from '$sveltin';
+import { error } from '@sveltejs/kit';
+import { list } from '$lib/guides/loadGuides';
 
 export const load = (async () => {
-	const resourceName = 'posts';
+	const resourceName = 'guides';
 	const data = await list();
 	const items: Array<Sveltin.ResourceContent> = [];
 
