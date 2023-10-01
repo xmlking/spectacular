@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { inject } from '@vercel/analytics';
 	import '../app.css';
 	import { orderBy } from 'lodash-es';
 	import { JsonLdSiteNavigationElements, JsonLdWebSite } from '@sveltinio/seo';
@@ -10,6 +11,10 @@
 	import { menu } from '$config/menu.js';
 	import Footer from '$themes/sveltin_theme/partials/Footer.svelte';
 	import Header from '$themes/sveltin_theme/partials/Header.svelte';
+	import { dev } from '$app/environment';
+
+	// Init Vercel Analytics
+	inject({ mode: dev ? 'development' : 'production' });
 
 	const sortedMenu = orderBy(menu, 'weight');
 </script>

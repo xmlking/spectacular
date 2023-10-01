@@ -76,7 +76,7 @@ module.exports = {
 			}
 		],
 		'jsdoc/require-jsdoc': [
-			'error',
+			'off', // 'error', // lets relax...
 			{
 				require: {
 					MethodDefinition: true

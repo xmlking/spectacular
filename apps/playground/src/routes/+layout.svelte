@@ -11,7 +11,7 @@
 	import { MetaTags } from 'svelte-meta-tags';
 
 	// SvelteKit Imports
-	import { browser } from '$app/environment';
+	import { browser, dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
 
@@ -51,7 +51,6 @@
 	storeVercelProductionMode.set(data.vercelEnv === 'production');
 	// Init Vercel Analytics
 	// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
-	import { dev } from '$app/environment';
 	import { inject } from '@vercel/analytics';
 	inject({ mode: dev ? 'development' : 'production' });
 
