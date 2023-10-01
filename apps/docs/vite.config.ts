@@ -2,6 +2,8 @@ import { resolve, join, dirname } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { imagetools } from 'vite-imagetools';
+import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { defineConfig } from 'vite';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,7 +35,7 @@ export default defineConfig({
 			$themes: resolve(join(__dirname, './themes'))
 		}
 	},
-	plugins: [sveltekit()],
+	plugins: [sveltekit(), imagetools(), purgeCss()],
 	ssr: { noExternal: ['@indaco/svelte-iconoir/**'] },
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']

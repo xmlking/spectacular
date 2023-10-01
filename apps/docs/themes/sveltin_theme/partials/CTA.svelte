@@ -31,4 +31,10 @@
 			>Read the Docs</Link
 		>
 	</div>
+
+	<div class="relative inline-flex justify-center w-full mx-auto mt-4">
+		<Link href="/posts" icon={false} class="relative inline-flex items-center p-2 text-white text-sm font-medium bg-river border-2 border-river rounded-l-lg hover:bg-haiti focus:outline-none lg:px-8" >Blog Posts</Link>
+		<Link href="/contact" icon={false} class="relative inline-flex items-center p-2 -ml-px text-sm font-medium border-2 border-river focus:outline-none lg:px-8">Contact</Link>
+		<Link href="/contact" icon={false} class="relative inline-flex items-center p-2 -ml-px text-sm font-medium border-2 border-river rounded-r-lg focus:outline-none lg:px-8">About</Link>
+	</div>
 </section>

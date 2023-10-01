@@ -70,12 +70,6 @@ pnpm add -D svelte-meta-tags --filter "./apps/**"
 pnpm add -D vite-imagetools --filter "./apps/**"
 ```
 
-### Web Analytics
-
-```
-pnpm add -D @vercel/analytics --filter "./apps/**"
-```
-
 **Setup**
 
 ```ts
@@ -100,6 +94,25 @@ import Image from 'example.jpg?w=400&h=300&format=webp';
 ```shell
 npx changeset init
 pnpm add -D @changesets/changelog-github  -w
+```
+
+### Web Analytics
+
+[Vercel Web Analytics](https://vercel.com/docs/frameworks/sveltekit#web-analytics)
+
+```shell
+pnpm add -D @vercel/analytics --filter "./apps/**"
+```
+
+In your SvelteKit project's main `+layout.svelte` file, add the following `<script>`:
+
+src/routes/+layout.svelte
+```html
+<script>
+  import { dev } from '$app/environment';
+  import { inject } from '@vercel/analytics';
+  inject({ mode: dev ? 'development' : 'production' });
+</script>
 ```
 
 ### Styling

@@ -15,7 +15,7 @@ Follow [SvelteKit on Vercel](https://vercel.com/docs/frameworks/sveltekit)
 5. Server-Side Rendering
 6. Use Vercel environment variables with SvelteKit
    1. `VERCEL_COMMIT_REF`
-7. Incremental Static Regeneration (ISR)
+7. [Incremental Static Regeneration (ISR)](https://vercel.com/docs/incremental-static-regeneration)
 8. Web Analytics
 9. Speed Insights
 10. Draft Mode

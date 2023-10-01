@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { Picture } from 'ui';
 	import { version } from '$app/environment';
 	import VinylImgMeta from '$lib/assets/img/erik-mclean-QzpgqElvSiA-unsplash.jpg?w=200;400;800&format=avif;webp;jpg&as=picture';
 	import Page from '$lib/components/layout/Page.svelte';
-	import { Picture } from 'ui';
 	console.log(`Client version: ${version}`);
 </script>
 

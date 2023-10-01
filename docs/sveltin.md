@@ -1,6 +1,6 @@
 # Sveltin
 
-Sveltin is a CLI (Command Line Interface) created to boost the developers productivity working on <strong>SvelteKit v1.x.x powered static websites</strong>.
+[Sveltin](https://sveltin.io/) is a CLI (Command Line Interface) created to boost the developers productivity working on <strong>SvelteKit v1.x.x powered static websites</strong>.
 
 ## :information_source: SvelteKit versions
 
