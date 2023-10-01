@@ -16,7 +16,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check --ignore-path=../../.prettierignore . && eslint .",
-		"format": "prettier  --write --ignore-path=../../.prettierignore ."
+		"format": "prettier --write --ignore-path=../../.prettierignore ."
 	},
 	"devDependencies": {
 		"@floating-ui/dom": "1.5.3",
@@ -29,7 +29,7 @@
 		"@tailwindcss/container-queries": "0.1.1",
 		"@tailwindcss/forms": "0.5.6",
 		"@tailwindcss/typography": "0.5.10",
-		"@types/node": "20.7.1",
+		"@types/node": "20.8.0",
 		"@typescript-eslint/eslint-plugin": "6.7.3",
 		"@typescript-eslint/parser": "6.7.3",
 		"@vercel/analytics": "1.0.2",

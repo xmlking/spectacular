@@ -7,11 +7,11 @@
    Refer to: https://mdsvex.pngwn.io/docs#layouts
 -->
 <script>
-	import { page } from '$app/stores';
-	import { website } from '$config/website.js';
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
 	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
 	import { canonicalPageUrl, getFavicon } from '$lib/utils/strings.js';
+	import { page } from '$app/stores';
+	import { website } from '$config/website.js';
 
 	/* All values defined in frontmatter are available as props.*/
 	export let title;

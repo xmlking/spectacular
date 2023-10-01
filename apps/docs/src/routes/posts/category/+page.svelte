@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import type { SEOWebPage } from '@sveltinio/seo/types';
+	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
+	import { Breadcrumbs } from '@sveltinio/widgets';
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { website } from '$config/website.js';
-	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
-	import { Breadcrumbs } from '@sveltinio/widgets';
 	import { canonicalPageUrl, getFavicon, capitalizeFirstLetter } from '$lib/utils/strings.js';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 

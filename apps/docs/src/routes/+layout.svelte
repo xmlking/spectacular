@@ -1,14 +1,15 @@
 <script lang="ts">
 	import '../app.css';
+	import { orderBy } from 'lodash-es';
+	import { JsonLdSiteNavigationElements, JsonLdWebSite } from '@sveltinio/seo';
+	import { GoogleFonts } from '@sveltinio/services';
+	import { ScrollToTopButton } from '@sveltinio/widgets';
 	import { assets } from '$app/paths';
 	import { website } from '$config/website.js';
 	import { googleFonts } from '$config/externals.js';
 	import { menu } from '$config/menu.js';
-	import orderBy from 'lodash-es/orderBy.js';
-	import { JsonLdSiteNavigationElements, JsonLdWebSite } from '@sveltinio/seo';
-	import { GoogleFonts } from '@sveltinio/services';
-	import { ScrollToTopButton } from '@sveltinio/widgets';
 	import Footer from '$themes/sveltin_theme/partials/Footer.svelte';
+	import Header from '$themes/sveltin_theme/partials/Header.svelte';
 
 	const sortedMenu = orderBy(menu, 'weight');
 </script>
@@ -19,6 +20,8 @@
 <GoogleFonts fonts={googleFonts} />
 
 <div class="min-h-screen w-full flex flex-col justify-center">
+	<Header logoSrc="{assets}/images/sveltin/{website.logo}" />
+
 	<main class="grow">
 		<slot />
 	</main>

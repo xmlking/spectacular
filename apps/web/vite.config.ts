@@ -1,8 +1,8 @@
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import houdini from 'houdini/vite';
-import { exec } from 'node:child_process';
-import { promisify } from 'node:util';
 import type { UserConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
 

@@ -69,8 +69,8 @@ importers:
         specifier: 0.4.2
         version: 0.4.2
       '@sveltinio/widgets':
-        specifier: 0.6.1
-        version: 0.6.1
+        specifier: 0.7.7
+        version: 0.7.7(svelte@4.2.1)
       '@tailwindcss/aspect-ratio':
         specifier: 0.4.2
         version: 0.4.2(tailwindcss@3.3.3)
@@ -84,8 +84,8 @@ importers:
         specifier: 4.17.9
         version: 4.17.9
       '@types/node':
-        specifier: 20.7.1
-        version: 20.7.1
+        specifier: 20.8.0
+        version: 20.8.0
       '@typescript-eslint/eslint-plugin':
         specifier: 6.7.3
         version: 6.7.3(@typescript-eslint/parser@6.7.3)(eslint@8.50.0)(typescript@5.2.2)
@@ -181,7 +181,7 @@ importers:
         version: 5.2.2
       vite:
         specifier: 4.4.9
-        version: 4.4.9(@types/node@20.7.1)
+        version: 4.4.9(@types/node@20.8.0)
 
   apps/offline:
     optionalDependencies:
@@ -220,8 +220,8 @@ importers:
         specifier: 0.5.10
         version: 0.5.10(tailwindcss@3.3.3)
       '@types/node':
-        specifier: 20.7.1
-        version: 20.7.1
+        specifier: 20.8.0
+        version: 20.8.0
       '@typescript-eslint/eslint-plugin':
         specifier: 6.7.3
         version: 6.7.3(@typescript-eslint/parser@6.7.3)(eslint@8.50.0)(typescript@5.2.2)
@@ -299,7 +299,7 @@ importers:
         version: link:../../packages/ui
       vite:
         specifier: 4.4.9
-        version: 4.4.9(@types/node@20.7.1)
+        version: 4.4.9(@types/node@20.8.0)
       vite-plugin-tailwind-purgecss:
         specifier: 0.1.3
         version: 0.1.3(vite@4.4.9)
@@ -347,8 +347,8 @@ importers:
         specifier: 0.5.10
         version: 0.5.10(tailwindcss@3.3.3)
       '@types/node':
-        specifier: 20.7.1
-        version: 20.7.1
+        specifier: 20.8.0
+        version: 20.8.0
       '@typescript-eslint/eslint-plugin':
         specifier: 6.7.3
         version: 6.7.3(@typescript-eslint/parser@6.7.3)(eslint@8.50.0)(typescript@5.2.2)
@@ -450,7 +450,7 @@ importers:
         version: link:../../packages/ui
       vite:
         specifier: 4.4.9
-        version: 4.4.9(@types/node@20.7.1)
+        version: 4.4.9(@types/node@20.8.0)
       vite-imagetools:
         specifier: 5.0.8
         version: 5.0.8
@@ -604,11 +604,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/helpers
       houdini:
-        specifier: 1.2.20
-        version: 1.2.20
+        specifier: 1.2.22
+        version: 1.2.22
       houdini-svelte:
-        specifier: 1.2.20
-        version: 1.2.20
+        specifier: 1.2.22
+        version: 1.2.22
       jose:
         specifier: 4.14.6
         version: 4.14.6
@@ -695,7 +695,7 @@ importers:
         version: link:../../packages/ui-flowbite
       vite:
         specifier: 4.4.9
-        version: 4.4.9(@types/node@20.7.1)
+        version: 4.4.9(@types/node@20.8.0)
       vite-plugin-pwa:
         specifier: 0.16.5
         version: 0.16.5(vite@4.4.9)(workbox-build@7.0.0)(workbox-window@7.0.0)
@@ -2165,7 +2165,7 @@ packages:
       semver: 7.5.4
       spawndamnit: 2.0.0
       term-size: 2.2.1
-      tty-table: 4.2.1
+      tty-table: 4.2.2
     dev: true
 
   /@changesets/config@2.3.1:
@@ -3493,7 +3493,7 @@ packages:
       svelte: 3.59.2
       tiny-glob: 0.2.9
       undici: 5.25.2
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3521,7 +3521,7 @@ packages:
       svelte: 4.2.1
       tiny-glob: 0.2.9
       undici: 5.25.2
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3554,7 +3554,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.6(svelte@3.59.2)(vite@4.4.9)
       debug: 4.3.4
       svelte: 3.59.2
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3570,7 +3570,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.6(svelte@4.2.1)(vite@4.4.9)
       debug: 4.3.4
       svelte: 4.2.1
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3589,7 +3589,7 @@ packages:
       magic-string: 0.30.4
       svelte: 3.59.2
       svelte-hmr: 0.15.3(svelte@3.59.2)
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
@@ -3609,7 +3609,7 @@ packages:
       magic-string: 0.30.4
       svelte: 4.2.1
       svelte-hmr: 0.15.3(svelte@4.2.1)
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
@@ -3663,10 +3663,14 @@ packages:
       neverthrow: 6.0.0
     dev: true
 
-  /@sveltinio/widgets@0.6.1:
-    resolution: {integrity: sha512-hp4Qmv0eopXcDT+UBsySJ1Zx4mGbpCsx10LpQnaNl6crPgAScTILdj/UH3LLRbBmrHKtMLuG5k0gSJhoUOqjWw==}
+  /@sveltinio/widgets@0.7.7(svelte@4.2.1):
+    resolution: {integrity: sha512-z6sx2CXHzvQTTA5EW+xaq1zjG4R3BriNaQyQCTZ0Yw9g72c/SoRqo4zf+XP/1BVHvb6/KNQiQHo5khL5ZTCwGQ==}
+    peerDependencies:
+      svelte: ^3.59.2 || ^4.0.0
     dependencies:
-      svelte: 3.59.2
+      '@sveltinio/essentials': 0.7.8
+      '@sveltinio/ts-utils': 0.8.0
+      svelte: 4.2.1
     dev: true
 
   /@tailwindcss/aspect-ratio@0.4.2(tailwindcss@3.3.3):
@@ -3836,7 +3840,7 @@ packages:
   /@types/fs-extra@9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
     dependencies:
-      '@types/node': 20.7.1
+      '@types/node': 20.8.0
     dev: true
 
   /@types/gtag.js@0.0.12:
@@ -3912,8 +3916,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
-  /@types/node@20.7.1:
-    resolution: {integrity: sha512-LT+OIXpp2kj4E2S/p91BMe+VgGX2+lfO+XTpfXhh+bCk2LkQtHZSub8ewFBMGP5ClysPjTDFa4sMI8Q3n4T0wg==}
+  /@types/node@20.8.0:
+    resolution: {integrity: sha512-LzcWltT83s1bthcvjBmiBvGJiiUe84NWRHkw+ZV6Fr41z2FbIzvc815dk2nQ3RAKMuN2fkenM/z3Xv2QzEpYxQ==}
 
   /@types/normalize-package-data@2.4.2:
     resolution: {integrity: sha512-lqa4UEhhv/2sjjIQgjX8B+RBjj47eo0mzGasklVJ78UKGQY1r0VpB9XHDaZZO9qzEFDdy4MrXLuEaSmPrPSe/A==}
@@ -3926,7 +3930,7 @@ packages:
   /@types/resolve@1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 20.7.1
+      '@types/node': 20.8.0
     dev: true
 
   /@types/resolve@1.20.2:
@@ -3939,7 +3943,7 @@ packages:
   /@types/set-cookie-parser@2.4.4:
     resolution: {integrity: sha512-xCfTC/eL/GmvMC24b42qJpYSTdCIBwWcfskDF80ztXtnU6pKXyvuZP2EConb2K9ps0s7gMhCa0P1foy7wiItMA==}
     dependencies:
-      '@types/node': 20.7.1
+      '@types/node': 20.8.0
     dev: true
 
   /@types/trusted-types@2.0.4:
@@ -4346,8 +4350,8 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  /apexcharts@3.42.0:
-    resolution: {integrity: sha512-hYhzZqh2Efny9uiutkGU2M/EarJ4Nn8s6dxZ0C7E7N+SV4d1xjTioXi2NLn4UKVJabZkb3HnpXDoumXgtAymwg==}
+  /apexcharts@3.43.0:
+    resolution: {integrity: sha512-YPw1aLatPQMUqVLMp5d+LDaXFi4QrRQND72/XO7/2NJdg+R5MjE9sifJ0GzOfgoZM7ltBUTjwfSxIvwR/9V8yw==}
     dependencies:
       '@yr/monotone-cubic-spline': 1.0.3
       svg.draggable.js: 2.2.2
@@ -4654,7 +4658,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001541
-      electron-to-chromium: 1.4.536
+      electron-to-chromium: 1.4.537
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
     dev: true
@@ -5579,8 +5583,8 @@ packages:
       jake: 10.8.7
     dev: true
 
-  /electron-to-chromium@1.4.536:
-    resolution: {integrity: sha512-L4VgC/76m6y8WVCgnw5kJy/xs7hXrViCFdNKVG8Y7B2isfwrFryFyJzumh3ugxhd/oB1uEaEEvRdmeLrnd7OFA==}
+  /electron-to-chromium@1.4.537:
+    resolution: {integrity: sha512-W1+g9qs9hviII0HAwOdehGYkr+zt7KKdmCcJcjH0mYg6oL8+ioT3Skjmt7BLoAQqXhjf40AXd+HlR4oAWMlXjA==}
     dev: true
 
   /emoji-regex@10.2.1:
@@ -6245,7 +6249,7 @@ packages:
       svelte: ^4.0.0
     dependencies:
       '@floating-ui/dom': 1.5.3
-      apexcharts: 3.42.0
+      apexcharts: 3.43.0
       flowbite: 1.8.1
       svelte: 4.2.1
       tailwind-merge: 1.14.0
@@ -6692,19 +6696,19 @@ packages:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
 
-  /houdini-svelte@1.2.20:
-    resolution: {integrity: sha512-jBBGkz4XQ9rf46SgodIi0Ujno8pn6ypcttZ/Jrfos21OLyk6OzpS8z7O9WPHnEb686xxDQZl/GiH1ukuvwBDuw==}
+  /houdini-svelte@1.2.22:
+    resolution: {integrity: sha512-Qv7cmmfbP0S9BXzXR6d5Q9IIlxgWpdtT9pJPomF2m1o1dBBaHbNdPpV5JqrIgsHAje6C95E2lWxqrzTFXOgUYQ==}
     dependencies:
       '@kitql/helper': 0.5.0
       '@sveltejs/kit': 1.25.1(svelte@3.59.2)(vite@4.4.9)
       ast-types: 0.16.1
       estree-walker: 3.0.3
       graphql: 15.8.0
-      houdini: 1.2.20
+      houdini: 1.2.22
       recast: 0.23.4
       rollup: 3.29.4
       svelte: 3.59.2
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6716,8 +6720,8 @@ packages:
       - terser
     dev: true
 
-  /houdini@1.2.20:
-    resolution: {integrity: sha512-jE34qXfx2Wxns1jZ+DYUgQUaY/lXMKOcsSkH7uMjmZefsBzzYAPlJpDyuOF/4rnOOkGgZo2kAzabLWXeJkOMvA==}
+  /houdini@1.2.22:
+    resolution: {integrity: sha512-Wu/NYcp2heYNZ4VTt5NvGn1yI+oDSb/Xt8p3Ea3nGKK8boJPvgjqK3FM7/TRS9PVI9eLSuRXaWxtkqofX38iIg==}
     hasBin: true
     dependencies:
       '@babel/parser': 7.23.0
@@ -7201,7 +7205,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.7.1
+      '@types/node': 20.8.0
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -10946,8 +10950,8 @@ packages:
       tsparticles-engine: 2.12.0
     dev: true
 
-  /tty-table@4.2.1:
-    resolution: {integrity: sha512-xz0uKo+KakCQ+Dxj1D/tKn2FSyreSYWzdkL/BYhgN6oMW808g8QRMuh1atAV9fjTPbWBjfbkKQpI/5rEcnAc7g==}
+  /tty-table@4.2.2:
+    resolution: {integrity: sha512-2gvCArMZLxgvpZ2NvQKdnYWIFLe7I/z5JClMuhrDXunmKgSZcQKcZRjN9XjAFiToMz2pUo1dEIXyrm0AwgV5Tw==}
     engines: {node: '>=8.0.0'}
     hasBin: true
     dependencies:
@@ -11353,7 +11357,7 @@ packages:
       - rollup
     dev: true
 
-  /vite-node@0.34.6(@types/node@20.7.1):
+  /vite-node@0.34.6(@types/node@20.8.0):
     resolution: {integrity: sha512-nlBMJ9x6n7/Amaz6F3zJ97EBwR2FkzhBRxF5e+jE6LA3yi6Wtc2lyTij1OnDMIr34v5g/tVQtsVAzhT0jc5ygA==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -11363,7 +11367,7 @@ packages:
       mlly: 1.4.2
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -11385,7 +11389,7 @@ packages:
       debug: 4.3.4
       fast-glob: 3.3.1
       pretty-bytes: 6.1.1
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
       workbox-build: 7.0.0
       workbox-window: 7.0.0
     transitivePeerDependencies:
@@ -11399,7 +11403,7 @@ packages:
     dependencies:
       estree-walker: 3.0.3
       purgecss: 6.0.0-alpha.0
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
     dev: true
 
   /vite-plugin-watch-and-run@1.1.3:
@@ -11409,7 +11413,7 @@ packages:
       micromatch: 4.0.5
     dev: true
 
-  /vite@4.4.9(@types/node@20.7.1):
+  /vite@4.4.9(@types/node@20.8.0):
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -11437,7 +11441,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.7.1
+      '@types/node': 20.8.0
       esbuild: 0.18.20
       postcss: 8.4.31
       rollup: 3.29.4
@@ -11452,7 +11456,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.9(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
     dev: true
 
   /vitest@0.34.6(@vitest/ui@0.34.6)(jsdom@22.1.0):
@@ -11488,7 +11492,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.6
       '@types/chai-subset': 1.3.3
-      '@types/node': 20.7.1
+      '@types/node': 20.8.0
       '@vitest/expect': 0.34.6
       '@vitest/runner': 0.34.6
       '@vitest/snapshot': 0.34.6
@@ -11509,8 +11513,8 @@ packages:
       strip-literal: 1.3.0
       tinybench: 2.5.1
       tinypool: 0.7.0
-      vite: 4.4.9(@types/node@20.7.1)
-      vite-node: 0.34.6(@types/node@20.7.1)
+      vite: 4.4.9(@types/node@20.8.0)
+      vite-node: 0.34.6(@types/node@20.8.0)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less

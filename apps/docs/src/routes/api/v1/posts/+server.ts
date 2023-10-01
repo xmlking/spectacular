@@ -1,6 +1,6 @@
-import type { RequestHandler } from './$types';
 import { error } from '@sveltejs/kit';
 import { list } from '$lib/posts/loadPosts';
+import type { RequestHandler } from './$types';
 
 export const prerender = false;
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { website } from '$config/website.js';
 	import type { SEOWebPage } from '@sveltinio/seo/types';
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
 	import { PageMetaTags, JsonLdWebPage } from '@sveltinio/seo';
+	import { website } from '$config/website.js';
 	import CTA from '$themes/sveltin_theme/partials/CTA.svelte';
 	import { getFavicon } from '$lib/utils/strings.js';
 

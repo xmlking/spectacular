@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { SEOWebPage } from '@sveltinio/seo/types';
-	import { page } from '$app/stores';
-	import { website } from '$config/website.js';
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
 	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
 	import { canonicalPageUrl, capitalizeFirstLetter, getFavicon } from '$lib/utils/strings.js';
+	import { page } from '$app/stores';
+	import { website } from '$config/website.js';
 
 	const title = 'contact';
 

@@ -1,8 +1,8 @@
-import { resolve, join, dirname } from 'path';
-import { readFileSync } from 'fs';
+import { resolve, join, dirname } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vitest/config';
-import { fileURLToPath } from 'url';
+import { defineConfig } from 'vite';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
