@@ -33,7 +33,7 @@ turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turb
 - [ ] [GitHub Issues as CMS](https://github.com/sw-yx/swyxkit/issues/10) - with comments displayed via [utterances](https://utteranc.es/) (lazy loaded)
   - [ ] Blog content pulled from the `GitHub Issues API`
   - [ ] `Comment` and `Reaction` system from GitHub Issues, rendered with `Utterances`
-- [ ] [Comment Components](./src/lib/components/comments): `Webmentions`, `Giscus`, `Utterances`... you can use more than one.
+- [ ] **Comment Components**: `Webmentions`, `Giscus`, `Utterances`... you can use more than one.
 - [ ] **Content Options**
   - [ ] Layouts - Content authors can choose the layouts aviable.
   - [ ] Table of Content
@@ -70,6 +70,7 @@ turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turb
 - [rehype-autolink-headings](https://github.com/rehypejs/rehype-autolink-headings) - rehype plugin to add links from headings back to themselves.
 - [remark-emoji](https://github.com/rhysd/remark-emoji) - remark plugin to replace `:emoji:` to real UTF-8 emojis in text.
 - [remark-reading-time](https://github.com/mattjennings/remark-reading-time#readme) - remark plugin to add estimated reading time
+- [remark-github](https://github.com/remarkjs/remark-github#remark-github) - remark plugin to link references to commits, issues, and users, in the same way that GitHub does
 
 ## ⚡️ Usage
 
@@ -94,6 +95,8 @@ You can preview the built app with `turbo prevew --filter=docs`
 ## References
 
 - [sveltekit-blog-mdx](https://github.com/rodneylab/sveltekit-blog-mdx) - SvelteKit MDX starter blog with MDsveX
-- [Urara Starter](https://github.com/importantimport/urara) - Sweet, Powerful, IndieWeb-Compatible SvelteKit Blog Starter
+- [Urara Starter](https://urara-docs.netlify.app/) - Sweet, Powerful, IndieWeb-Compatible SvelteKit Blog Starter. 
+  - [urara-demo](https://urara-demo.netlify.app)
 - [Sveltin](https://sveltin.io/) - The Smartest Way to Create SvelteKit powered static websites
 - [SwyxKit](https://github.com/swyxio/swyxkit) - A lightly opinionated starter for SvelteKit blogs Starter
+

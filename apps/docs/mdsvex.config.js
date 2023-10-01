@@ -1,4 +1,4 @@
-import { resolve, join, dirname } from 'node:path';
+import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineMDSveXConfig as defineConfig } from 'mdsvex';
 import relativeImages from 'mdsvex-relative-images';
@@ -18,13 +18,10 @@ const mdsvexConfig = defineConfig({
 		dashes: 'oldschool'
 	},
 	layout: {
-		default: resolve(join(__dirname, './themes/sveltin_theme/components/md-layout.svelte')),
-		fancy: resolve(join(__dirname, './themes/sveltin_theme/components/md-layout.svelte')),
-		fallback: resolve(join(__dirname, './themes/sveltin_theme/components/md-layout.svelte')),
-		// blog: resolve(join(__dirname, './src/routes/blog/layout.svelte')),
-		// projects: resolve(join(__dirname, './src/routes/projects/layout.svelte')),
-		_: './themes/sveltin_theme/components/md-layout.svelte',
-		page: './themes/sveltin_theme/components/md-layout.svelte'
+		// blog: './src/lib/layouts/blog.svelte',
+		// projects: './src/lib/layouts/projects.svelte',
+		page: './themes/sveltin_theme/components/md-layout.svelte',
+		_: './src/lib/layouts/blank.svelte' // fallback
 	},
 	remarkPlugins: [
 		headings,

@@ -10,7 +10,7 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"outDir": "./build",
+		"types": ["vite/client", "vite-plugin-pwa/client"],
 		"paths": {
 			"$sveltin": ["./src/sveltin"],
 			"$lib": ["./src/lib"],
