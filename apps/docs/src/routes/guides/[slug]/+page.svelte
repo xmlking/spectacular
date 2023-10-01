@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import type { SEOWebPage } from '@sveltinio/seo/types';
+	import { JsonLdWebPage, PageMetaTags, JsonLdBreadcrumbs } from '@sveltinio/seo';
+	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
+	import { Breadcrumbs, TOC, PagesNavigator } from '@sveltinio/widgets';
 	import { assets, base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { website } from '$config/website.js';
 	import { canonicalPageUrl, getCoverImagePath } from '$lib/utils/strings.js';
-	import { JsonLdWebPage, PageMetaTags, JsonLdBreadcrumbs } from '@sveltinio/seo';
-	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
-	import { Breadcrumbs, TOC, PagesNavigator } from '@sveltinio/widgets';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
@@ -73,6 +73,7 @@
 		<svelte:component this={mdsvexComponent} />
 	</div>
 
+	{#if previous?.metadata.slug && next?.metadata.slug} // FIXME: https://github.com/sveltinio/components-library/issues/270
 	<PagesNavigator
 		prev={ {
 			label: previous.metadata.title,
@@ -85,6 +86,7 @@
 			title: `link to ${next.metadata.title}`
 		} }
 	/>
+	{/if}
 </article>
 
 

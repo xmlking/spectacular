@@ -73,6 +73,7 @@
 		<svelte:component this={mdsvexComponent} />
 	</div>
 
+	{#if previous?.metadata.slug && next?.metadata.slug} // FIXME: https://github.com/sveltinio/components-library/issues/270
 	<PagesNavigator
 		prev={ {
 			label: previous.metadata.title,
@@ -85,6 +86,7 @@
 			title: `link to ${next.metadata.title}`
 		} }
 	/>
+	{/if}
 </article>
 
 

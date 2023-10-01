@@ -6,7 +6,6 @@ settings:
 
 overrides:
   remark-reading-time: 1.0.1
-  '@sveltinio/widgets': 0.7.4
 
 importers:
 
@@ -73,8 +72,8 @@ importers:
         specifier: 0.4.2
         version: 0.4.2
       '@sveltinio/widgets':
-        specifier: 0.7.4
-        version: 0.7.4
+        specifier: 0.7.8
+        version: 0.7.8(svelte@4.2.1)
       '@tailwindcss/aspect-ratio':
         specifier: 0.4.2
         version: 0.4.2(tailwindcss@3.3.3)
@@ -4107,6 +4106,15 @@ packages:
       svelte: 3.59.2
     dev: true
 
+  /@sveltinio/essentials@0.7.9(svelte@4.2.1):
+    resolution: {integrity: sha512-VH0qeGAmM+5lq9xugvotKM0IP3RKKQxK3ie8LMdVqFiV5szbpmEfK6Y47O8Q/A0+i/MWIT6vk73xxR7B4IJCEg==}
+    peerDependencies:
+      svelte: ^3.59.2 || ^4.0.0
+    dependencies:
+      '@sveltinio/ts-utils': 0.8.0
+      svelte: 4.2.1
+    dev: true
+
   /@sveltinio/media-content@0.4.2:
     resolution: {integrity: sha512-YCBtukI7X9zlHcEkMVuXTy5THiUsQ/qt5a3odEiMqOCYKTK1+8jcV8KsZEiw58XEC1dn9FO8BIqHM+JkjVdllw==}
     dependencies:
@@ -4148,10 +4156,14 @@ packages:
       neverthrow: 6.0.0
     dev: true
 
-  /@sveltinio/widgets@0.7.4:
-    resolution: {integrity: sha512-j6+Wb6utlbPHvvHp+0+VvAT6XbgWPfI+SsroYhL7MpvSvqnlJZGEu7yrM8Bkg2LzhAiyFLc+yR+b58Y+Mrat5w==}
+  /@sveltinio/widgets@0.7.8(svelte@4.2.1):
+    resolution: {integrity: sha512-5cMw3AABbk+jIRv0KSxlMDL/Lq8nnFOofreisAvJrDgS2mzmG5gUBU+6Vxaa2tKFJAuLsItf38L9K3PRzr/t8A==}
+    peerDependencies:
+      svelte: ^3.59.2 || ^4.0.0
     dependencies:
-      svelte: 3.59.2
+      '@sveltinio/essentials': 0.7.9(svelte@4.2.1)
+      '@sveltinio/ts-utils': 0.8.0
+      svelte: 4.2.1
     dev: true
 
   /@tailwindcss/aspect-ratio@0.4.2(tailwindcss@3.3.3):
