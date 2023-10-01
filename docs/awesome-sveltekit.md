@@ -151,23 +151,23 @@ Awesome **SvelteKit** Links
 
 - External Links
 
-tell SvelteKit not to handle a link, but allow the browser to handle it
+  tell SvelteKit not to handle a link, but allow the browser to handle it
 
-```html
-<a rel="external" href="path">Path</a>
-```
+  ```html
+  <a rel="external" href="path">Path</a>
+  ```
 
-By default, the **SvelteKit** runtime intercepts clicks on `<a>` elements and bypasses the normal browser navigation
-for relative (same-origin) URLs that match one of your page routes.  
- SvelteKit doc Adding a `rel=external` attribute to a link will trigger a browser navigation when the link is clicked.
+  By default, the **SvelteKit** runtime intercepts clicks on `<a>` elements and bypasses the normal browser navigation
+  for relative (same-origin) URLs that match one of your page routes.  
+  SvelteKit doc Adding a `rel=external` attribute to a link will trigger a browser navigation when the link is clicked.
 
 - Felte - ignore a specific form firled
 
-add `data-felte-ignore` attrubute
+  add `data-felte-ignore` attrubute
 
 - How to fix `Cross-site POST form submissions are forbidden` aks CSRF
 
-Add ORIGIN Env Varaible i.e., `ORIGIN=http://localhost:3000 node build/index.js`
+  Add ORIGIN Env Varaible i.e., `ORIGIN=http://localhost:3000 node build/index.js`
 
 - How to make SvelteKit WebApp as PWA
 
@@ -175,10 +175,35 @@ Add ORIGIN Env Varaible i.e., `ORIGIN=http://localhost:3000 node build/index.js`
   - **Option 2:** If you need a more full-flegded but also more opinionated solution, we recommend looking at solutions like [Vite PWA plugin](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html), which uses [Workbox](https://web.dev/learn/pwa/workbox).
 
 - How to set up [Svelte-Inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/inspector.md)?
+
   - with environment variables, set: `SVELTE_INSPECTOR_TOGGLE=control-shift`
   - with Svelte config: add `vitePlugin: { inspector: true}` to `svelte.config.js`
   - open up your project in the browser. Then use the key combo `Command + Shift` to activate
   - For [Setting up Svelte-Inspector with VS Code + WSL](https://dev.to/mikehtmlallthethings/setting-up-svelte-inspector-with-vs-code-wsl-ao)
+
+- Setting up a HTTPS Connection for localhost
+
+  To set this up with our SvelteKit project, we will install the vite plugin basic ssl like so:
+
+  ```shell
+  pnpm add -D @vitejs/plugin-basic-ssl
+  ```
+
+  Then, in our vite.config.js, let's import basic ssl and set the https to true:
+
+  ```shell
+  # vite.config.js
+  import { sveltekit } from "@sveltejs/kit/vite";
+  import { defineConfig } from "vite";
+  import basicSsl from "@vitejs/plugin-basic-ssl";
+
+  export default defineConfig({
+  plugins: [sveltekit(), basicSsl()],
+  server: {
+  	https: true,
+  },
+  });
+  ```
 
 ## Blogs
 
