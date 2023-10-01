@@ -23,7 +23,8 @@ const mdsvexConfig = defineConfig({
 		fallback: resolve(join(__dirname, './themes/sveltin_theme/components/md-layout.svelte')),
 		// blog: resolve(join(__dirname, './src/routes/blog/layout.svelte')),
 		// projects: resolve(join(__dirname, './src/routes/projects/layout.svelte')),
-		page: resolve(join(__dirname, './themes/sveltin_theme/components/md-layout.svelte'))
+		_: './themes/sveltin_theme/components/md-layout.svelte',
+		page: './themes/sveltin_theme/components/md-layout.svelte'
 	},
 	remarkPlugins: [
 		headings,

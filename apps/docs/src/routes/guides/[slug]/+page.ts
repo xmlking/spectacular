@@ -11,7 +11,8 @@ export const load = (async ({ params }) => {
 			actual: current,
 			before: previous,
 			after: next,
-			mdsvexComponent: (await import(`../../../../content/guides/${slug}/index.svx`)).default};
+			mdsvexComponent: (await import(`../../../../content/guides/${slug}/index.svx`)).default
+		};
 	}
 
 	throw error(404, 'Not found');

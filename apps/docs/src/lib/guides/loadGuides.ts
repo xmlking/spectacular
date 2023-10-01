@@ -18,8 +18,7 @@ export async function list() {
 		.sort((a, b) => (a.meta['created_at'] < b.meta['created_at'] ? 1 : -1));
 
 	return publishedByDate;
-};
-
+}
 
 export async function getSingle(slug: string) {
 	const resourceName = 'guides';
@@ -61,4 +60,4 @@ export async function getSingle(slug: string) {
 	return {
 		status: 404
 	};
-};
+}
