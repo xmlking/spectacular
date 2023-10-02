@@ -1,3 +1,6 @@
 packages:
   - "apps/*"
   - "packages/*"
+ # exclude some packages
+  - "!apps/swyxkit"
+  - "!apps/urara"
