@@ -38,7 +38,7 @@ turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turb
   - [ ] Layouts - Content authors can choose the layouts aviable.
   - [ ] Table of Content
   - [ ] [Twitter/YouTube Embeds](https://swyxkit.netlify.app/supporting-youtube-and-twitter-embeds) - made [fast](https://swyxkit.netlify.app/faster-youtube-embeds)
-  - [ ] [Mermaid](https://github.com/mermaid-js/mermaid) - Generate diagrams from markdown-like text.
+  - [ ] [Mermaid](https://github.com/mermaid-js/mermaid) - Generate diagrams from markdown-like text. 
   - [ ] Blog index search with [fuzzy and highlights matches](https://swyxkit.netlify.app/ufuzzy-search)
   - [ ] Error page (404, rate-limit exceeded errors)
 - [ ] Newsletter signup box - defaulted to [Buttondown.email](https://buttondown.email/) but easy to customize to whatever
@@ -96,7 +96,7 @@ You can preview the built app with `turbo prevew --filter=docs`
 
 - [sveltekit-blog-mdx](https://github.com/rodneylab/sveltekit-blog-mdx) - SvelteKit MDX starter blog with MDsveX
 - [Urara Starter](https://urara-docs.netlify.app/) - Sweet, Powerful, IndieWeb-Compatible SvelteKit Blog Starter. 
-  - [urara-demo](https://urara-demo.netlify.app)
+  - [urara-demo](https://urara-demo.netlify.app), [kwaa-demo](https://kwaa.dev/)
 - [Sveltin](https://sveltin.io/) - The Smartest Way to Create SvelteKit powered static websites
 - [SwyxKit](https://github.com/swyxio/swyxkit) - A lightly opinionated starter for SvelteKit blogs Starter
-
+https://github.com/jouwdan/jouwdan.com

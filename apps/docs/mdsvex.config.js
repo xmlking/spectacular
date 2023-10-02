@@ -7,6 +7,9 @@ import rehypeExternalLinks from 'rehype-external-links';
 import rehypeSlug from 'rehype-slug';
 import headings from '@sveltinio/remark-headings';
 import { getHighlighter } from 'shiki';
+import mermaid from 'mermaid';
+mermaid.initialize({ mermaid: { theme: { light: 'neutral', dark: 'dark' } } });
+import remarkMermaid from 'remark-mermaidjs';
 
 const mdsvexConfig = defineConfig({
 	extensions: ['.svelte.md', '.md', '.svx'],
@@ -26,7 +29,7 @@ const mdsvexConfig = defineConfig({
 			return `{@html \`${html}\`}`;
 		}
 	},
-	remarkPlugins: [headings, emoji, readingTime(), relativeImages],
+	remarkPlugins: [headings, emoji, readingTime(), relativeImages, remarkMermaid],
 	rehypePlugins: [
 		rehypeSlug,
 		[rehypeAutoLinkHeadings, { behavior: 'wrap' }],
