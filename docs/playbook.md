@@ -107,11 +107,12 @@ pnpm add -D @vercel/analytics --filter "./apps/**"
 In your SvelteKit project's main `+layout.svelte` file, add the following `<script>`:
 
 src/routes/+layout.svelte
+
 ```html
 <script>
-  import { dev } from '$app/environment';
-  import { inject } from '@vercel/analytics';
-  inject({ mode: dev ? 'development' : 'production' });
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+	inject({ mode: dev ? 'development' : 'production' });
 </script>
 ```
 
