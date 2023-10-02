@@ -1,6 +1,6 @@
 # Docs
 
-Sweet & Powerful SvelteKit Static Site Template
+A static portfolio site built with SvelteKit + Skeleton UI + MDsveX.
 
 ## 🎉 Try it now!
 

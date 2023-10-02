@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>{$page.status}: {$page.error.message}</title>
+	<title>{$page.status}: {$page.error?.message}</title>
 </svelte:head>
 <div class="error-container">
 	<div class="wrapper">
@@ -12,7 +12,7 @@
 			<div class="message-wrapper">
 				<div class="message-main">
 					<h1 class="error-title">
-						{$page.error.message}
+						{$page.error?.message}
 					</h1>
 					<p class="error-text">
 						Please check the URL in the address bar and try again.

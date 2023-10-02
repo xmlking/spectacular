@@ -7,13 +7,6 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
-	namespace Urara {
-		interface Post {
-			path: string;
-			title: string;
-		}
-		interface Page {}
-	}
 	// App version from package.json
 	declare const __APP_VERSION__: string;
 	// Git commit tag or hash

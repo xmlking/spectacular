@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import type { SEOWebPage } from '@sveltinio/seo/types';
-	import { assets, base } from '$app/paths';
-	import { page } from '$app/stores';
-	import { website } from '$config/website.js';
 	import { Breadcrumbs, Card, CardAction, CardImage } from '@sveltinio/widgets';
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
 	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
+	import { assets, base } from '$app/paths';
+	import { page } from '$app/stores';
+	import { website } from '$config/website.js';
 	import { canonicalPageUrl, toTitle, getFavicon } from '$lib/utils/strings.js';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 

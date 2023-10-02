@@ -36,6 +36,12 @@ const config = {
 			crawl: true,
 			entries: ['*']
 		},
+		output: {
+			preloadStrategy: 'preload-mjs'
+		},
+		version: {
+			name: process.env.npm_package_version
+		},
 		csp: {
 			mode: 'auto',
 			directives: {
@@ -44,5 +50,4 @@ const config = {
 		}
 	}
 };
-
 export default config;

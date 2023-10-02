@@ -9,8 +9,8 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 export default {
 	darkMode: 'class',
 	content: [
-		'./src/**/*.{html,js,svelte,ts,mdx}',
-		'../../packages/ui/src/**/*.{html,js,svelte,ts,mdx}',
+		'./src/**/*.{html,js,svelte,ts,md,svx}',
+		'../../packages/ui/src/**/*.{html,js,svelte,ts,md,svx}',
 		'./node_modules/@skeletonlabs/skeleton/**/*.{html,js,svelte,ts}'
 		// join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
 	],

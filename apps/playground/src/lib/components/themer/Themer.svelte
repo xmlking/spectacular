@@ -1,22 +1,19 @@
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
 
-	// Preview Components
-	import { ProgressBar, SlideToggle } from '@skeletonlabs/skeleton';
 	// Components
-	import { CodeBlock, LightSwitch } from '@skeletonlabs/skeleton';
+	import { CodeBlock, LightSwitch, ProgressBar, SlideToggle, localStorageStore, popup } from '@skeletonlabs/skeleton';
+	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import Swatch from './Swatch.svelte';
 
 	// Utilities
-	import { localStorageStore, popup } from '@skeletonlabs/skeleton';
 
 	// Local Utils
 	import { storePreview } from './stores';
-	import { storeTheme } from '$lib/stores/stores';
 	import type { ColorSettings, FormTheme, ContrastReport } from './types';
 	import { inputSettings, fontSettings } from './settings';
-	import { type Palette, generatePalette, generateA11yOnColor, hexValueIsValid, getPassReport } from './colors';
-	import type { PopupSettings } from '@skeletonlabs/skeleton';
+		import type {  Palette } from './colors';
+	import { generatePalette, generateA11yOnColor, hexValueIsValid, getPassReport } from './colors';
 
 	// Stores
 	const storeThemGenForm: Writable<FormTheme> = localStorageStore('storeThemGenForm', {

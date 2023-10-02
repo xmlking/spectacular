@@ -1,6 +1,6 @@
-import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
 import { groupedBy } from '$lib/posts/loadCategory';
+import type { PageLoad } from './$types';
 
 export const load = (async ({ params }) => {
 	const { slug } = params;
