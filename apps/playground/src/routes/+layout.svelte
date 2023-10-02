@@ -11,17 +11,14 @@
 	import { MetaTags } from 'svelte-meta-tags';
 
 	// SvelteKit Imports
-	import { browser, dev } from '$app/environment';
+	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
 
 	// Types
 	import type { ModalComponent } from '@skeletonlabs/skeleton';
 
-	// Stores
-	import { storePreview } from '$lib/components/themer/stores';
-
-	// Components & Utilities
+// Components & Utilities
 	import { AppShell, Modal, Toast, initializeStores, prefersReducedMotionStore } from '@skeletonlabs/skeleton';
 	initializeStores();
 
@@ -47,7 +44,7 @@
 	export let data: LayoutServerData;
 	// Pass to Store for Ad Conditionals
 	// IMPORTANT: DO NOT MODIFY THIS UNLESS YOU KNOW WHAT YOU'RE DOING
-	import { storeTheme, storeVercelProductionMode } from '$lib/stores/stores';
+	import { storeVercelProductionMode } from '$lib/stores/stores';
 	storeVercelProductionMode.set(data.vercelEnv === 'production');
 	// Init Vercel Analytics
 	// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
@@ -75,14 +72,6 @@
 		// If any blog route
 		if (pageUrlPath.includes('/blog')) return true;
 		return false;
-	}
-
-	// Set body `data-theme` based on current theme status
-	storePreview.subscribe(setBodyThemeAttribute);
-	storeTheme.subscribe(setBodyThemeAttribute);
-	function setBodyThemeAttribute(): void {
-		if (!browser) return;
-		document.body.setAttribute('data-theme', $storePreview ? 'generator' : $storeTheme);
 	}
 
 	// Scroll heading into view

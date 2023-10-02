@@ -4,10 +4,9 @@
 	import type { ModalComponent } from '@skeletonlabs/skeleton';
 	import { storePopup, AppShell, Modal, Toast, initializeStores, prefersReducedMotionStore } from '@skeletonlabs/skeleton';
 	import { inject } from '@vercel/analytics';
-	import { browser, dev } from '$app/environment';
+	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
-	import { storePreview, storeTheme } from '$lib/stores/stores';
 	// Docs Components
 	import AppBar from '$lib/components/AppBar.svelte';
 	import Drawer from '$lib/components/Drawer.svelte';
@@ -38,14 +37,6 @@
 		// If any blog route
 		if (pageUrlPath.includes('/blog')) return true;
 		return false;
-	}
-
-	// Set body `data-theme` based on current theme status
-	storePreview.subscribe(setBodyThemeAttribute);
-	storeTheme.subscribe(setBodyThemeAttribute);
-	function setBodyThemeAttribute(): void {
-		if (!browser) return;
-		document.body.setAttribute('data-theme', $storePreview ? 'generator' : $storeTheme);
 	}
 
 	// Scroll heading into view
