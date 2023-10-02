@@ -21,14 +21,15 @@
 	},
 	"devDependencies": {
 		"@indaco/svelte-iconoir": "4.6.0",
+		"@sveltejs/adapter-auto": "2.1.0",
 		"@sveltejs/adapter-static": "2.0.3",
 		"@sveltejs/kit": "1.25.1",
 		"@sveltejs/vite-plugin-svelte": "2.4.6",
-		"@sveltinio/essentials": "0.7.8",
-		"@sveltinio/media-content": "0.4.2",
+		"@sveltinio/essentials": "0.7.9",
+		"@sveltinio/media-content": "0.4.3",
 		"@sveltinio/remark-headings": "1.0.3",
-		"@sveltinio/seo": "0.4.2",
-		"@sveltinio/services": "0.4.2",
+		"@sveltinio/seo": "0.4.3",
+		"@sveltinio/services": "0.4.3",
 		"@sveltinio/widgets": "0.7.8",
 		"@tailwindcss/aspect-ratio": "0.4.2",
 		"@tailwindcss/typography": "0.5.10",
@@ -64,12 +65,15 @@
 		"svelte": "4.2.1",
 		"svelte-check": "3.5.2",
 		"svelte-preprocess": "5.0.4",
+		"sveltekit-embed": "0.0.12",
 		"tailwind-config": "workspace:*",
 		"tailwindcss": "3.3.3",
 		"tslib": "2.6.2",
 		"typescript": "5.2.2",
 		"vite": "4.4.9",
 		"vite-imagetools": "5.0.8",
-		"vite-plugin-tailwind-purgecss": "0.1.3"
+		"vite-plugin-tailwind-purgecss": "0.1.3",
+		"workbox-build": "7.0.0",
+		"workbox-window": "7.0.0"
 	}
 }
