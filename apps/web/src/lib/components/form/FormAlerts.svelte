@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Usage: To display Form-level message or errors
-	import { page } from '$app/stores';
 	import { Alert } from 'flowbite-svelte';
+	import { page } from '$app/stores';
 	// import { List, Li, Heading } from 'flowbite-svelte';
 	// import { CheckCircleSolid, CloseCircleSolid } from 'flowbite-svelte-icons';
 

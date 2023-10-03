@@ -9,7 +9,6 @@ export { default as FormAlerts } from './FormAlerts.svelte';
 export { default as Radio } from './RadioFB.svelte';
 export { default as Range } from './RangeFB.svelte';
 export { default as Select } from './Select.svelte';
-export { default as SelectDU } from './SelectDU.svelte';
 export { default as SelectFB } from './SelectFB.svelte';
 export { default as TagsInput } from './TagsInput.svelte';
 export { default as TextInput } from './TextInput.svelte';

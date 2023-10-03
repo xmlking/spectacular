@@ -1,17 +1,21 @@
-<script lang="ts">
-	import { page } from '$app/stores';
+<script lang="ts" context="module">
+	// https://superforms.rocks/components#using-a-formfieldproxy
+  	import type { AnyZodObject } from 'zod';
+  	type T = AnyZodObject;
+</script>
+
+<script lang="ts" generics="T extends AnyZodObject">
 	import { Alert, Button, ButtonGroup, Modal, Spinner } from 'flowbite-svelte';
 	import { AdjustmentsHorizontalOutline, ArrowLeftOutline, CloudArrowUpOutline } from 'flowbite-svelte-icons';
 	import { setContext } from 'svelte';
 	import type { HTMLFormAttributes } from 'svelte/elements';
-	import type { SuperForm } from 'sveltekit-superforms/client';
 	import type { ZodValidation } from 'sveltekit-superforms';
-	import type { AnyZodObject } from 'zod';
-	import { FORM_KEY, type FormContext } from './forms';
+	import type { SuperForm } from 'sveltekit-superforms/client'
+	import { page } from '$app/stores';
+	import { FORM_KEY } from './forms';
+	import type {  FormContext } from './forms';
 	interface $$restProps extends HTMLFormAttributes {}
 
-	// eslint-disable-next-line no-undef
-	type T = $$Generic<AnyZodObject>;
 	export let superform: SuperForm<ZodValidation<T>, unknown>;
 	export let showButtons = true;
 	export let showAlerts = true;

@@ -1,19 +1,26 @@
-<script lang="ts">
-	import { Tags } from '$lib/components';
+<script lang="ts" context="module">
+	// https://superforms.rocks/components#using-a-formfieldproxy
+  	import type { AnyZodObject } from 'zod';
+  	type T = AnyZodObject;
+</script>
+
+<script lang="ts" generics="T extends AnyZodObject">
 	import { Helper } from 'flowbite-svelte';
-	import type { FormPathLeaves } from 'sveltekit-superforms';
-	import { formFieldProxy } from 'sveltekit-superforms/client';
-	import type { AnyZodObject, z } from 'zod';
+	import type { z } from 'zod';
+	import type { ZodValidation, FormPathLeaves } from 'sveltekit-superforms';
+	import type { SuperForm } from 'sveltekit-superforms/client'
+	import { formFieldProxy } from 'sveltekit-superforms/client'
+	import { Tags } from '$lib/components';
 	import { getFormContext } from './forms';
 
-	// eslint-disable-next-line no-undef
-	type T = $$Generic<AnyZodObject>;
-	export let field: FormPathLeaves<z.infer<T>>;
+	export let form: SuperForm<ZodValidation<T>, unknown>;
+  	export let field: FormPathLeaves<z.infer<T>>;
 	export let label = '';
 	export let disabled = false;
 
 	const { superform } = getFormContext();
 	const { path, value, errors, constraints } = formFieldProxy(superform, field);
+	$: console.log($errors)
 </script>
 
 <!-- FIXME: add {...$constraints} -->
@@ -32,11 +39,13 @@
 </div>
 
 {#if $errors}
-	{#if $errors._errors}
-		<Helper class="mt-2" color="red">{$errors._errors}</Helper>
-	{:else}
-		<Helper class="mt-2" color="red">{$errors}</Helper>
-	{/if}
+	{#each Object.entries($errors) as [pos, errs]}
+		{#if pos == '_errors'}
+			<Helper class="mt-2" color="red">{errs}</Helper>
+		{:else}
+			<Helper class="mt-2" color="red">{pos}: {errs}</Helper>
+		{/if}
+	{/each}
 {/if}
 
 <style lang="postcss">
