@@ -99,4 +99,4 @@ You can preview the built app with `turbo prevew --filter=docs`
   - [urara-demo](https://urara-demo.netlify.app), [kwaa-demo](https://kwaa.dev/)
 - [Sveltin](https://sveltin.io/) - The Smartest Way to Create SvelteKit powered static websites
 - [SwyxKit](https://github.com/swyxio/swyxkit) - A lightly opinionated starter for SvelteKit blogs Starter
-- [jouwdan.com](https://github.com/jouwdan/jouwdan.com), [source](https://github.com/jouwdan/jouwdan.com)
+- [jouwdan.com](https://jouwdan.com/), [source](https://github.com/jouwdan/jouwdan.com)

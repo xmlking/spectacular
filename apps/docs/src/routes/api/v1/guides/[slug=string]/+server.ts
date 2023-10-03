@@ -1,6 +1,6 @@
-import type { RequestHandler } from './$types';
 import { error } from '@sveltejs/kit';
 import { getSingle } from '$lib/guides/loadGuides';
+import type { RequestHandler } from './$types';
 
 export const prerender = false;
 
