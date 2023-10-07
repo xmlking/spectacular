@@ -123,21 +123,21 @@
 						</li>
 						<hr class="!my-4" />
 						<li>
-							<a href="/utilities/picture">
+							<a href="/experiments/picture">
 								<span class="w-6 text-center"><DocsIcon name="tailwind" width="w-5" height="h-5" /></span>
 								<span>Picture</span>
 							</a>
 						</li>
 						<li>
-							<a href="/utilities/movies">
+							<a href="/experiments/movies">
 								<span class="w-6 text-center"><DocsIcon name="svelte" width="w-6" height="h-6" /></span>
 								<span>Movies</span>
 							</a>
 						</li>
 						<li>
-							<a href="/utilities/picture">
+							<a href="/experiments/picture">
 								<span class="w-6 text-center"><i class="fa-solid fa-screwdriver-wrench" /></span>
-								<span>Utilities</span>
+								<span>Experiments</span>
 							</a>
 						</li>
 					</ul>

@@ -23,7 +23,7 @@
 		if (['docs', 'essentials', 'resources'].includes(basePath)) currentRailCategory = '/docs';
 		if (['tokens', 'base', 'elements', 'blocks'].includes(basePath)) currentRailCategory = '/elements';
 		if (['components', 'actions'].includes(basePath)) currentRailCategory = '/svelte';
-		if (['utilities'].includes(basePath)) currentRailCategory = '/utilities';
+		if (['experiments'].includes(basePath)) currentRailCategory = '/experiments';
 	});
 
 	// Reactive
@@ -59,9 +59,9 @@
 			<svelte:fragment slot="lead"><Icon name="svelte" width="w-6" height="h-6" /></svelte:fragment>
 			<span>Svelte</span>
 		</AppRailTile>
-		<AppRailTile bind:group={currentRailCategory} name="utilities" value={'/utilities'}>
+		<AppRailTile bind:group={currentRailCategory} name="experiments" value={'/experiments'}>
 			<svelte:fragment slot="lead"><Icon name="screwdriverWrench" width="w-6" height="h-6" /></svelte:fragment>
-			<span>Utilities</span>
+			<span>Experiments</span>
 		</AppRailTile>
 	</AppRail>
 	<!-- Nav Links -->

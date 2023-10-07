@@ -5,3 +5,6 @@ https://github.com/phartenfeller/sveltekit-sqlite-offline-app/tree/part1
 https://github.com/phartenfeller/sveltekit-sqlite-offline-app/tree/part2
 https://github.com/phartenfeller/sveltekit-sqlite-offline-app/tree/part3
 https://github.com/phartenfeller/sveltekit-sqlite-offline-app/tree/part4
+
+
+https://github.com/electric-sql/electric/tree/main/examples

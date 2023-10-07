@@ -13,7 +13,7 @@
 
 	// Local
 	let searchTerm = '';
-	let resultsCopy = [...menuNavLinks['/docs'], ...menuNavLinks['/elements'], ...menuNavLinks['/svelte'], ...menuNavLinks['/utilities']];
+	let resultsCopy = [...menuNavLinks['/docs'], ...menuNavLinks['/elements'], ...menuNavLinks['/svelte'], ...menuNavLinks['/experiments']];
 	let results = resultsCopy;
 	const modalStore = getModalStore();
 

@@ -131,37 +131,37 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 			]
 		}
 	],
-	'/utilities': [
+	'/experiments': [
 		{
-			title: 'Utilities',
+			title: 'Experiments',
 			list: [
-				{ href: '/utilities/picture', label: 'Picture', keywords: 'highlight, syntax, code' },
-				{ href: '/utilities/movies', label: 'Movies', keywords: 'overlay, slide, panel, sidebar' },
-				{ href: '/utilities/settings', label: 'Settings', keywords: 'light, dark, toggle, prefer, color, scheme' },
+				{ href: '/experiments/picture', label: 'Picture', keywords: 'highlight, syntax, code' },
+				{ href: '/experiments/movies', label: 'Movies', keywords: 'overlay, slide, panel, sidebar' },
+				{ href: '/experiments/settings', label: 'Settings', keywords: 'light, dark, toggle, prefer, color, scheme' },
 				{
-					href: '/utilities/transitions',
+					href: '/experiments/transitions',
 					label: 'Transitions',
 					keywords: 'svelte, writable, get, cache, persist'
 				},
 				{
-					href: '/utilities/modals',
-					label: 'Modals',
-					keywords: 'overlay, dialog, notification, alert, confirm, prompt, multiple, form, list, embed, video'
+					href: '/experiments/animations',
+					label: 'Animations',
+					keywords: 'overlay, dialog, animations, notification, alert, confirm, prompt, multiple, form, list, embed, video'
 				},
-				{ href: '/utilities/lazy', label: 'Lazy', keywords: 'menu, tooltip, overlay, dropdown, combobox, drop, down, select' },
+				{ href: '/experiments/lazy', label: 'Lazy', keywords: 'menu, tooltip, overlay, dropdown, combobox, drop, down, select' },
 				{
-					href: '/utilities/particles',
+					href: '/experiments/particles',
 					label: 'Particles',
 					keywords: 'overlay, Particles, snackbar, bar, action, alert, notification'
 				},
 				{
-					href: '/utilities/outclick',
+					href: '/experiments/outclick',
 					label: 'Outclick',
 					keywords: 'outclick, click, half-click',
 					badge: 'Beta'
 				}
 				// DELISTED UNTIL FURTHER NOTICE
-				// { href: '/utilities/data-tables', label: 'Data Tables', keywords: 'search, sort, page, pagination, async', badge: 'Experimental' }
+				// { href: '/experiments/data-tables', label: 'Data Tables', keywords: 'search, sort, page, pagination, async', badge: 'Experimental' }
 			]
 		}
 	]

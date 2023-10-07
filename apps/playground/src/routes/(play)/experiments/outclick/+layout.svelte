@@ -9,11 +9,11 @@
     $: {
         if (navigating) {
             // prettier-ignore
-            if ($page.url.pathname === "/utilities/outclick") {
+            if ($page.url.pathname === "/experiments/outclick") {
 				$description = `Click outside of COMPONENT CONTENT to increase the counter. The component captures the event for you, so you can for example use it to close a dropdown, a menu, or do whatever.`
-			} else if ($page.url.pathname === "/utilities/outclick/exclude") {
+			} else if ($page.url.pathname === "/experiments/outclick/exclude") {
 				$description = "You can exclude some elements from triggering the event."
-			} else if ($page.url.pathname === "/utilities/outclick/half-click") {
+			} else if ($page.url.pathname === "/experiments/outclick/half-click") {
 				$description = "Trigger the event on pointer-down instead of a full click action (pointer-down + pointer-up)."
 			}
         }

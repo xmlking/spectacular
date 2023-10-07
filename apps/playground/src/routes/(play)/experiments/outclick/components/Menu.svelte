@@ -5,9 +5,9 @@
     import { page } from "$app/stores"
 
     const items = [
-        { title: "HOME", href: "/utilities/outclick" },
-        { title: "EXCLUDE", href: "/utilities/outclick/exclude" },
-        { title: "HALF CLICK", href: "/utilities/outclick/half-click" },
+        { title: "HOME", href: "/experiments/outclick" },
+        { title: "EXCLUDE", href: "/experiments/outclick/exclude" },
+        { title: "HALF CLICK", href: "/experiments/outclick/half-click" },
     ]
 
     let isOpen = false

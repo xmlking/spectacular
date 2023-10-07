@@ -53,7 +53,7 @@
 </style>
 
 <div class="container">
-    <a class="imgContainer" href="/utilities/transitions">
+    <a class="imgContainer" href="/experiments/transitions">
         <TransitionableImage class="image" src={src} transitionId={id}/>
     </a>
     <div class="content">
