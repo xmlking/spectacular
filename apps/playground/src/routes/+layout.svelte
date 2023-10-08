@@ -1,6 +1,7 @@
 <!-- Layout: (root) -->
 <script lang="ts">
 	/* eslint-disable import/order */
+	  import { setContext } from 'svelte';
 
 	// Dependency: Floating UI for Popups
 	import { storePopup } from '@skeletonlabs/skeleton';
@@ -96,6 +97,14 @@
 	// Disable left sidebar on homepage
 	$: slotSidebarLeft = matchPathWhitelist($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
+
+	// Define your global icon settings
+	const iconCtx = {
+		size: '16', // Icon size in pixels
+		// color: '#ff4488', // Icon color in hexadecimal or CSS color name
+		role: 'svg icon image' // Accessible role for the icon
+	};
+	setContext('iconCtx', iconCtx);
 </script>
 
 <MetaTags

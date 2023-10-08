@@ -2,6 +2,7 @@
 	import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import { AppBar, LightSwitch, getModalStore, popup , getDrawerStore } from '@skeletonlabs/skeleton';
+	import { CaretDownSolid, MagnifyingGlassSolid, GithubBrand, PaletteSolid, BarsSolid, HouseSolid, BookSolid, BullseyeSolid, BullhornSolid, ScrewdriverWrenchSolid } from 'svelte-awesome-icons';
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import logo from '$lib/assets/logo/logo.svg';
@@ -80,7 +81,8 @@
 		<div class="flex items-center space-x-4">
 			<!-- Hamburger Menu -->
 			<button on:click={drawerOpen} class="btn-icon btn-icon-sm lg:!hidden">
-				<i class="fa-solid fa-bars text-xl" />
+			
+				<BarsSolid size="24"/>
 			</button>
 			<!-- Logo -->
 			<a class="lg:!ml-0 w-[32px] lg:w-auto overflow-hidden" href="/" title="Go to Homepage">
@@ -105,7 +107,7 @@
 			<!-- trigger -->
 			<button class="btn hover:variant-soft-primary" use:popup={{ event: 'click', target: 'features' }}>
 				<span>Explore</span>
-				<i class="fa-solid fa-caret-down opacity-50" />
+				<CaretDownSolid  size="15" class="opacity-50"/>
 			</button>
 			<!-- popup -->
 			<div class="card p-4 w-60 shadow-xl" data-popup="features">
@@ -113,19 +115,19 @@
 					<ul>
 						<li>
 							<a href="/">
-								<span class="w-6 text-center"><i class="fa-solid fa-home" /></span>
+								<span class="w-6 text-center"><HouseSolid/> </span>
 								<span>Homepage</span>
 							</a>
 						</li>
 						<li>
 							<a href="/posts">
-								<span class="w-6 text-center"><i class="fa-solid fa-book" /></span>
+								<span class="w-6 text-center"><BookSolid/></span>
 								<span>Documentation</span>
 							</a>
 						</li>
 						<li>
 							<a href="/posts">
-								<span class="w-6 text-center"><i class="fa-solid fa-bullhorn" /></span>
+								<span class="w-6 text-center"><BullhornSolid /></span>
 								<span>Blog</span>
 							</a>
 						</li>
@@ -144,7 +146,7 @@
 						</li>
 						<li>
 							<a href="/guides">
-								<span class="w-6 text-center"><i class="fa-solid fa-screwdriver-wrench" /></span>
+								<span class="w-6 text-center"><ScrewdriverWrenchSolid /></span>
 								<span>Utilities</span>
 							</a>
 						</li>
@@ -158,9 +160,9 @@
 		<div>
 			<!-- trigger -->
 			<button class="btn hover:variant-soft-primary" use:popup={{ event: 'click', target: 'theme', closeQuery: 'a[href]' }}>
-				<i class="fa-solid fa-palette text-lg md:!hidden" />
+				<PaletteSolid class="md:!hidden"/>
 				<span class="hidden md:inline-block">Theme</span>
-				<i class="fa-solid fa-caret-down opacity-50" />
+				<CaretDownSolid class="opacity-50" />
 			</button>
 			<!-- popup -->
 			<div class="card p-4 w-60 shadow-xl" data-popup="theme">
@@ -199,7 +201,7 @@
 		<!-- Search -->
 		<div class="md:inline md:ml-4">
 			<button class="btn space-x-4 variant-soft hover:variant-soft-primary" on:click={triggerSearch}>
-				<i class="fa-solid fa-magnifying-glass text-sm" />
+				<MagnifyingGlassSolid  />
 				<small class="hidden md:inline-block">{isOsMac ? '⌘' : 'Ctrl'}+K</small>
 			</button>
 		</div>
@@ -207,7 +209,7 @@
 		<!-- Social -->
 		<section class="hidden sm:inline-flex space-x-1">
 			<a class="btn-icon hover:variant-soft-primary" href="https://github.com/xmlking/spectacular" target="_blank" rel="noreferrer">
-				<i class="fa-brands fa-github text-lg" />
+				<GithubBrand size="24"/>
 			</a>
 		</section>
 	</svelte:fragment>

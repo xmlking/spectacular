@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { menuNavLinks, type List } from '$lib/links';
 	import { getModalStore } from '@skeletonlabs/skeleton';
+	import { FileSolid, MagnifyingGlassSolid } from 'svelte-awesome-icons';
+	import { menuNavLinks  } from '$lib/links';
+import type {List} from '$lib/links';
 
 	// Classes
 	const cBase =
@@ -46,7 +48,7 @@
 <div bind:this={elemDocSearch} class="modal-search {cBase}">
 	<!-- Header -->
 	<header class="modal-search-header {cHeader}">
-		<i class="fa-solid fa-magnifying-glass text-xl ml-4" />
+		<MagnifyingGlassSolid size="24" class="text-xl ml-4"/>
 		<input class={cSearchInput} bind:value={searchTerm} type="search" placeholder="Search..." on:input={onInput} on:keydown={onKeyDown} />
 	</header>
 	<!-- Results -->
@@ -65,7 +67,7 @@
 								}}
 							>
 								<div class="flex items-center gap-4">
-									<i class="fa-regular fa-file" />
+									<FileSolid size="18"/>
 									<span class="flex-auto font-bold opacity-75">{link.label}</span>
 								</div>
 								<span class="hidden md:block text-xs opacity-50">{link.href}</span>

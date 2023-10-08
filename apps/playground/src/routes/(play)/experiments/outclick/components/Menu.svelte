@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { BarsSolid } from 'svelte-awesome-icons';
 	import { OutClick } from 'ui';
-	import {   BarsOutline } from 'flowbite-svelte-icons';
     import { beforeNavigate } from "$app/navigation"
     import { page } from "$app/stores"
 
@@ -21,7 +21,7 @@
     bind:this={toggleBtn}
     on:click={() => (isOpen = !isOpen)}
 >
-    <BarsOutline />
+    <BarsSolid />
 
 </button>
 
