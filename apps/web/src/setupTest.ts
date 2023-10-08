@@ -2,13 +2,13 @@
  * setup file
  * based_on: https://github.com/davipon/svelte-component-test-recipes
  */
-import type * as environment from '$app/environment';
-import type * as navigation from '$app/navigation';
-import type * as stores from '$app/stores';
 import type { Navigation, Page } from '@sveltejs/kit';
 import matchers from '@testing-library/jest-dom/matchers';
 import { readable } from 'svelte/store';
 import { expect, vi } from 'vitest';
+import type * as stores from '$app/stores';
+import type * as navigation from '$app/navigation';
+import type * as environment from '$app/environment';
 
 expect.extend(matchers);
 

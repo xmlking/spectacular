@@ -28,7 +28,7 @@ pnpm create svelte@latest spectacular && cd $_ && code .
 Next steps:
 
 1. git init && git add -A && git commit -m "chore(root): first commit" (optional)
-2. npm run dev -- --open
+2. pnpm run dev -- --open
 
 In this Playbook, we will be using [svelte-add](https://github.com/svelte-add/svelte-add) to easily add and integrate 3rd party tools to this Svelte App.
 

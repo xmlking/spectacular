@@ -6,4 +6,7 @@ export type Post = {
 	headerImage?: string;
 	categories: string[];
 	published: boolean;
+	// photo: any;
+	// user: string;
+	// avatar: any;
 };

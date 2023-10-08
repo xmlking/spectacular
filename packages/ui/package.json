@@ -4,25 +4,61 @@
 	"description": "Styles and components for use in svelte websites",
 	"license": "MIT",
 	"scripts": {
-		"package": "svelte-kit package && tsx --esm ./scripts/cleanupPackage.ts && rm ./dist/package.json",
-		"lint": "prettier --check --ignore-path=../../.prettierignore . && eslint \".\"",
-		"format": "prettier --write --ignore-path=../../.prettierignore ."
+		"dev": "vite dev",
+		"build": "vite build && pnpm run package",
+		"preview": "vite preview",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"#package": "svelte-kit sync && svelte-package && publint && tsx --esm ./scripts/cleanupPackage.ts && rm ./dist/package.json",
+		"prepublishOnly": "pnpm run package",
+		"test": "pnpm run test:integration && pnpm run test:unit",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --check --ignore-path=../../.prettierignore . && eslint .",
+		"format": "prettier --write --ignore-path=../../.prettierignore .",
+		"test:integration": "playwright test",
+		"test:unit": "vitest"
 	},
-	"devDependencies": {
-		"@floating-ui/dom": "1.5.3",
-		"@skeletonlabs/skeleton": "2.2.0",
-		"@skeletonlabs/tw-plugin": "0.2.1",
-		"eslint-config-custom": "workspace:*",
-		"svelte": "4.2.1",
-		"tailwind-config": "workspace:*",
-		"tailwindcss": "3.3.3",
-		"tsconfig": "workspace:*"
+	"exports-ori": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
 	},
-	"type": "module",
+	"files-ori": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
 	"exports": {
 		"./package.json": "./package.json",
 		".": "./src/index.ts"
 	},
+	"peerDependencies": {
+		"svelte": "4.0.0"
+	},
+	"devDependencies": {
+		"@floating-ui/dom": "1.5.3",
+		"@playwright/test": "1.38.1",
+		"@skeletonlabs/skeleton": "2.2.0",
+		"@skeletonlabs/tw-plugin": "0.2.1",
+		"@sveltejs/adapter-auto": "2.1.0",
+		"@sveltejs/kit": "1.25.1",
+		"@sveltejs/package": "2.2.2",
+		"eslint-config-custom": "workspace:*",
+		"publint": "0.2.3",
+		"svelte": "4.2.1",
+		"svelte-check": "3.5.2",
+		"tailwind-config": "workspace:*",
+		"tailwindcss": "3.3.3",
+		"tsconfig": "workspace:*",
+		"tslib": "2.6.2",
+		"typescript": "5.2.2",
+		"vite": "4.4.11",
+		"vitest": "0.34.6"
+	},
+	"type": "module",
+	"svelte-ori": "./dist/index.js",
+	"types-ori": "./dist/index.d.ts",
 	"types": "src/index.ts",
 	"svelte": "src/index.ts",
 	"module": "src/index.ts",

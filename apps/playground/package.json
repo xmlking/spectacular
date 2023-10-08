@@ -9,7 +9,7 @@
 		"dev:sw": "SW_DEV=true vite dev",
 		"build": "vite build",
 		"preview": "NEXTAUTH_URL=http://localhost:4173 vite preview",
-		"test": "npm run test:integration && npm run test:unit",
+		"test": "pnpm run test:integration && pnpm run test:unit",
 		"test:unit": "vitest",
 		"test:unit:ui": "vitest --ui",
 		"test:unit:coverage": "vitest run --coverage",

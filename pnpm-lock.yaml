@@ -607,9 +607,6 @@ importers:
       '@sveltejs/kit':
         specifier: 1.25.1
         version: 1.25.1(svelte@4.2.1)(vite@4.4.11)
-      '@sveltejs/package':
-        specifier: 2.2.2
-        version: 2.2.2(svelte@4.2.1)(typescript@5.2.2)
       '@tailwindcss/container-queries':
         specifier: 0.1.1
         version: 0.1.1(tailwindcss@3.3.3)
@@ -646,9 +643,6 @@ importers:
       c8:
         specifier: 8.0.1
         version: 8.0.1
-      clsx:
-        specifier: 2.0.0
-        version: 2.0.0
       cross-fetch:
         specifier: 4.0.0
         version: 4.0.0
@@ -698,11 +692,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/helpers
       houdini:
-        specifier: 1.2.26
-        version: 1.2.26
+        specifier: 1.2.27
+        version: 1.2.27
       houdini-svelte:
-        specifier: 1.2.26
-        version: 1.2.26
+        specifier: 1.2.27
+        version: 1.2.27
       jose:
         specifier: 4.15.2
         version: 4.15.2
@@ -917,18 +911,36 @@ importers:
       '@floating-ui/dom':
         specifier: 1.5.3
         version: 1.5.3
+      '@playwright/test':
+        specifier: 1.38.1
+        version: 1.38.1
       '@skeletonlabs/skeleton':
         specifier: 2.2.0
         version: 2.2.0(svelte@4.2.1)
       '@skeletonlabs/tw-plugin':
         specifier: 0.2.1
         version: 0.2.1(tailwindcss@3.3.3)
+      '@sveltejs/adapter-auto':
+        specifier: 2.1.0
+        version: 2.1.0(@sveltejs/kit@1.25.1)
+      '@sveltejs/kit':
+        specifier: 1.25.1
+        version: 1.25.1(svelte@4.2.1)(vite@4.4.11)
+      '@sveltejs/package':
+        specifier: 2.2.2
+        version: 2.2.2(svelte@4.2.1)(typescript@5.2.2)
       eslint-config-custom:
         specifier: workspace:*
         version: link:../eslint-config-custom
+      publint:
+        specifier: 0.2.3
+        version: 0.2.3
       svelte:
         specifier: 4.2.1
         version: 4.2.1
+      svelte-check:
+        specifier: 3.5.2
+        version: 3.5.2(@babel/core@7.23.0)(postcss-load-config@4.0.1)(postcss@8.4.31)(svelte@4.2.1)
       tailwind-config:
         specifier: workspace:*
         version: link:../tailwind-config
@@ -938,6 +950,18 @@ importers:
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
+      tslib:
+        specifier: 2.6.2
+        version: 2.6.2
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+      vite:
+        specifier: 4.4.11
+        version: 4.4.11(@types/node@20.8.3)
+      vitest:
+        specifier: 0.34.6
+        version: 0.34.6(@vitest/ui@0.34.6)(jsdom@22.1.0)
 
   packages/ui-flowbite:
     devDependencies:
@@ -3345,8 +3369,6 @@ packages:
     requiresBuild: true
     dependencies:
       playwright: 1.38.1
-    dev: false
-    optional: true
 
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
@@ -3426,8 +3448,8 @@ packages:
       rollup: 2.79.1
     dev: true
 
-  /@rollup/plugin-node-resolve@15.2.2(rollup@3.29.4):
-    resolution: {integrity: sha512-f64bU4OKqV0yihtxFemmuf0oj37pToCFMISCA+sJbbIAl5wcpbRO9XgWNWb1tDiWQJUcPxo6V0l59hcuZOQ3kw==}
+  /@rollup/plugin-node-resolve@15.2.3(rollup@3.29.4):
+    resolution: {integrity: sha512-j/lym8nf5E21LwBT4Df1VD6hRO2L2iwUeUmP7litikRsVp1H6NWx20NEp0Y7su+7XGc476GnXXc4kFeZNGmaSQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.78.0||^3.0.0||^4.0.0
@@ -3575,7 +3597,7 @@ packages:
     dependencies:
       '@rollup/plugin-commonjs': 25.0.5(rollup@3.29.4)
       '@rollup/plugin-json': 6.0.1(rollup@3.29.4)
-      '@rollup/plugin-node-resolve': 15.2.2(rollup@3.29.4)
+      '@rollup/plugin-node-resolve': 15.2.3(rollup@3.29.4)
       '@sveltejs/kit': 1.25.1(svelte@4.2.1)(vite@4.4.11)
       rollup: 3.29.4
     dev: true
@@ -5058,11 +5080,6 @@ packages:
     engines: {node: '>=0.8'}
     dev: true
 
-  /clsx@2.0.0:
-    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
-    engines: {node: '>=6'}
-    dev: true
-
   /code-red@1.0.4:
     resolution: {integrity: sha512-7qJWqItLA8/VPVlKJlFXU+NBlo/qyfs39aJcuMT/2ere32ZqvF5OSxgdM5xOfJJ7O429gg2HM47y8v9P+9wrNw==}
     dependencies:
@@ -5324,8 +5341,8 @@ packages:
     resolution: {integrity: sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg==}
     dev: true
 
-  /cssdb@7.7.3:
-    resolution: {integrity: sha512-QPbpOl+jR13quGTIvwCavognmtpr6T9ra6G9S++scJek7BY4xdkJpB3slU1JkjQmzKmpDHnPB+wkz+mxoT/h4w==}
+  /cssdb@7.8.0:
+    resolution: {integrity: sha512-SkeezZOQr5AHt9MgJgSFNyiuJwg1p8AwoVln6JwaQJsyxduRW9QJ+HP/gAQzbsz8SIqINtYvpJKjxTRI67zxLg==}
     dev: true
 
   /cssesc@3.0.0:
@@ -6810,7 +6827,6 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
-    dev: false
     optional: true
 
   /fsevents@2.3.3:
@@ -7182,15 +7198,15 @@ packages:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
 
-  /houdini-svelte@1.2.26:
-    resolution: {integrity: sha512-vHWSNyD/+Cc/R0a/jPpxGzyRr2Ad9yQdWs2nyENoxxbAw0t8HpvuzW54OeEpzKE9+epp/ciSn0noCt++4y0lBQ==}
+  /houdini-svelte@1.2.27:
+    resolution: {integrity: sha512-9m0mqb8D+O82o7fd9JGgNkKyuK+yglj65aHfsR08c8VUya6eC65vle7nyIU0AidFoiWmp/F0SAoFoOXqBMWUfQ==}
     dependencies:
       '@kitql/helper': 0.5.0
       '@sveltejs/kit': 1.25.1(svelte@3.59.2)(vite@4.4.11)
       ast-types: 0.16.1
       estree-walker: 3.0.3
       graphql: 15.8.0
-      houdini: 1.2.26
+      houdini: 1.2.27
       recast: 0.23.4
       rollup: 3.29.4
       svelte: 3.59.2
@@ -7206,8 +7222,8 @@ packages:
       - terser
     dev: true
 
-  /houdini@1.2.26:
-    resolution: {integrity: sha512-/G9JR2ucqrD9jBiRQsiFw2lAsNAkWUVPtsPjn2mT2BuKNKopkz/ipUym5zW0Mw15BrCRFMAV9YaCo7vQYMEOew==}
+  /houdini@1.2.27:
+    resolution: {integrity: sha512-Y60aCq26G/627dtH8gRPx9U4jYjySmKmyJ6kp5tGEEWUpuP6Jly7Eu9KAcMvcI79hCDmTGv0qQg9uQ6w83hApA==}
     hasBin: true
     dependencies:
       '@babel/parser': 7.23.0
@@ -7293,6 +7309,13 @@ packages:
 
   /ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
+    dev: true
+
+  /ignore-walk@5.0.1:
+    resolution: {integrity: sha512-yemi4pMf51WKT7khInJqAvsIGzoqYXblnsz0ql8tM+yi1EKYTY1evX4NAbJrLL/Aanr2HyZeluqU+Oi7MGHokw==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    dependencies:
+      minimatch: 5.1.6
     dev: true
 
   /ignore@5.2.4:
@@ -8692,6 +8715,29 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /npm-bundled@2.0.1:
+    resolution: {integrity: sha512-gZLxXdjEzE/+mOstGDqR6b0EkhJ+kM6fxM6vUuckuctuVPh80Q6pw/rSZj9s4Gex9GxWtIicO1pc8DB9KZWudw==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    dependencies:
+      npm-normalize-package-bin: 2.0.0
+    dev: true
+
+  /npm-normalize-package-bin@2.0.0:
+    resolution: {integrity: sha512-awzfKUO7v0FscrSpRoogyNm0sajikhBWpU0QMrW09AMi9n1PoKU6WaIqUzuJSQnpciZZmJ/jMZ2Egfmb/9LiWQ==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    dev: true
+
+  /npm-packlist@5.1.3:
+    resolution: {integrity: sha512-263/0NGrn32YFYi4J533qzrQ/krmmrWwhKkzwTuM4f/07ug51odoaNjUexxO4vxlzURHcmYMH1QjvHjsNDKLVg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
+    hasBin: true
+    dependencies:
+      glob: 8.1.0
+      ignore-walk: 5.0.1
+      npm-bundled: 2.0.1
+      npm-normalize-package-bin: 2.0.0
+    dev: true
+
   /npm-run-path@5.1.0:
     resolution: {integrity: sha512-sJOdmRGrY2sjNTRMbSvluQqg+8X7ZK61yvzBEIDhz4f8z1TZFYABsqjjCBd/0PUNE9M6QDgHJXQkGUEm7Q+l9Q==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
@@ -9037,8 +9083,6 @@ packages:
       playwright-core: 1.38.1
     optionalDependencies:
       fsevents: 2.3.2
-    dev: false
-    optional: true
 
   /postcss-attribute-case-insensitive@6.0.2(postcss@8.4.31):
     resolution: {integrity: sha512-IRuCwwAAQbgaLhxQdQcIIK0dCVXg3XDUnzgKD8iwdiYdwU4rMWRWyl/W9/0nA4ihVpq5pyALiHB2veBJ0292pw==}
@@ -9606,7 +9650,7 @@ packages:
       css-blank-pseudo: 6.0.0(postcss@8.4.31)
       css-has-pseudo: 6.0.0(postcss@8.4.31)
       css-prefers-color-scheme: 9.0.0(postcss@8.4.31)
-      cssdb: 7.7.3
+      cssdb: 7.8.0
       postcss: 8.4.31
       postcss-attribute-case-insensitive: 6.0.2(postcss@8.4.31)
       postcss-clamp: 4.1.0(postcss@8.4.31)
@@ -9921,6 +9965,16 @@ packages:
 
   /psl@1.9.0:
     resolution: {integrity: sha512-E/ZsdU4HLs/68gYzgGTkMicWTLPdAftJLfJFlLUAAKZGkStNU72sZjT66SnMDVOfOWY/YAoiD7Jxa9iHvngcag==}
+
+  /publint@0.2.3:
+    resolution: {integrity: sha512-Ml/rLotRiRTCbqL8CtWURiWDPzHtjv1SKU2E91R0ZG4mDJS3/rNQXYttM+Wt5t0JZ09MyAXIa/TYOt5OVUlYAQ==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      npm-packlist: 5.1.3
+      picocolors: 1.0.0
+      sade: 1.8.1
+    dev: true
 
   /pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
