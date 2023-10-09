@@ -1,4 +1,4 @@
-import { server } from './server';
+import { server } from './node';
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));

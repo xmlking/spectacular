@@ -1,4 +1,5 @@
-import { rest } from 'msw';
+// import { http, graphql, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 // Mock Data
 export const posts = [
@@ -25,32 +26,44 @@ export const posts = [
 // TODO: migration guide https://github.com/mswjs/msw/blob/feat/standard-api/MIGRATING.md
 // Define handlers that catch the corresponding requests and returns the mock data.
 export const handlers = [
-	rest.get('https://jsonplaceholder.typicode.com/posts', (req, res, ctx) => {
-		return res(ctx.status(200), ctx.json(posts));
+	http.get('https://jsonplaceholder.typicode.com/posts', async () => {
+		return HttpResponse.json(posts, { status: 200 });
 	}),
-	rest.get('http://test.mswjs.io', (req, res, ctx) => {
-		return res(
-			ctx.status(401),
-			ctx.set('x-header', 'yes'),
-			ctx.json({
+	http.get('http://test.mswjs.io', async ({ request, params }) => {
+		console.log('Intercepted %s %s', request.method, request.url);
+		console.log('Request path parameters:', params);
+		return HttpResponse.json(
+			{
 				firstName: 'John',
 				age: 32
-			})
+			},
+			{
+				status: 401,
+				headers: {
+					'X-Modified-Header': 'true'
+				}
+			}
 		);
 	}),
-	rest.post('https://test.mswjs.io', (req, res, ctx) => {
-		return res(ctx.status(403), ctx.set('x-header', 'yes'), ctx.json(req.body as Record<string, any>));
+	http.post('https://test.mswjs.io', async ({ request }) => {
+		const data = await request.json();
+		return HttpResponse.json(data, {
+			status: 403,
+			headers: {
+				'x-header': 'yes'
+			}
+		});
 	})
 	/*
-	rest.get('https://jsonplaceholder.typicode.com/posts', ({ request, params, cookies }) => {
+	http.get('https://jsonplaceholder.typicode.com/posts', ({ request, params, cookies }) => {
 		console.log(params, cookies);
 		console.log('Captured %s %s', request.method, request.url);
 		return HttpResponse.json(posts, { status: 200 });
 	}),
-	rest.post('https://prime-iguana-64.hasura.app/v1/graphql', () => {
+	http.post('https://prime-iguana-64.hasura.app/v1/graphql', () => {
 		return passthrough();
 	}),
-	rest.get('http://test.mswjs.io', () => {
+	http.get('http://test.mswjs.io', () => {
 		return HttpResponse.json(
 			{
 				firstName: 'John',
@@ -64,7 +77,7 @@ export const handlers = [
 			}
 		);
 	}),
-	rest.post('https://test.mswjs.io', async ({ request }) => {
+	http.post('https://test.mswjs.io', async ({ request }) => {
 		return HttpResponse.json(await request.json(), {
 			status: 403,
 			headers: {
@@ -73,4 +86,24 @@ export const handlers = [
 		});
 	})
 	*/
+	// graphql.mutation('CreateUser', async ({ request, query, variables }) => {
+	// 	console.log('Request request:', request);
+	// 	console.log('Request query:', query);
+	// 	console.log('Request variables:', variables);
+	// 	return new Response(
+	// 		JSON.stringify({
+	// 			data: {
+	// 				user: {
+	// 					id: 'abc-123',
+	// 					firstName: variables.firstName
+	// 				}
+	// 			}
+	// 		}),
+	// 		{
+	// 			headers: {
+	// 				'Content-Type': 'application/json'
+	// 			}
+	// 		}
+	// 	);
+	// })
 ];
