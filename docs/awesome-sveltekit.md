@@ -223,3 +223,4 @@ Awesome **SvelteKit** Links
 - Huntabyte [YouTube](https://www.youtube.com/c/Huntabyte>) tutorials
 - <https://github.com/janosh/awesome-sveltekit>
 - Learn something new with GraphQL, every week - [graphql.wtf](https://graphql.wtf/)
+- [VS code setup for Svelte](https://webjeda.com/blog/vscode-setup-svelte)

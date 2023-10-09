@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { clsx } from 'clsx';
+	import { twMerge } from 'tailwind-merge';
 	import { setContext } from 'svelte';
-
 	import type { Action } from 'svelte/action';
 	import { noop } from 'svelte/internal';
 	import type { TransitionConfig } from 'svelte/transition';
@@ -106,7 +105,7 @@
 
 	let divClass: string;
 
-	$: divClass = clsx(
+	$: divClass = twMerge(
 		bgColors[color],
 		textColors[color],
 		rounded && (color === 'dropdown' ? 'rounded' : 'rounded-lg'),

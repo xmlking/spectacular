@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { default as Frame } from '$lib/components/utils/Frame.svelte';
-	import { clsx } from 'clsx';
+	import { twMerge } from 'tailwind-merge';
 	import { CloseButton } from 'flowbite-svelte';
 	import { CheckSolid, CloseCircleSolid, ExclamationCircleOutline, InfoCircleOutline } from 'flowbite-svelte-icons';
 	import { slide } from 'svelte/transition';
+	import { default as Frame } from '$lib/components/utils/Frame.svelte';
 	import { ToastLevel, dismissToast, toasts } from './store';
 
 	export let divClass = 'w-full max-w-xs p-4 ';
@@ -27,10 +27,10 @@
 	};
 
 	let toastsClass: string;
-	$: toastsClass = clsx(divClass, placements[placement], $$props.class);
+	$: toastsClass = twMerge(divClass, placements[placement], $$props.class);
 
 	let iconClass: string;
-	$: iconClass = clsx('inline-flex items-center justify-center flex-shrink-0 w-8 h-8 mr-3');
+	$: iconClass = twMerge('inline-flex items-center justify-center flex-shrink-0 w-8 h-8 mr-3');
 </script>
 
 {#if $toasts}

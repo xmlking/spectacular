@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { clsx } from 'clsx';
+	import { twMerge } from 'tailwind-merge';
 	import { fly } from 'svelte/transition';
 
 	export let show = true;
@@ -10,7 +10,7 @@
 {#if show}
 	<aside
 		transition:fly={{ x: -250, opacity: 1 }}
-		class={clsx(asideClass, $$props.class)}
+		class={twMerge(asideClass, $$props.class)}
 		{...$$restProps}
 		aria-label="Sidebar"
 	>
