@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Page from '$lib/components/Page.svelte';
 	/* All values defined in frontmatter are available as props.*/
-	export let title: string;
+	export let title;
 	export let headline;
 	export let keywords;
 </script>

@@ -6,7 +6,7 @@
 		{ href: '/', text: 'Home',  icon: HouseSolid },
 		{ href: '/about', text: 'About', icon: FutbolRegular},
 		{ href: '/blog', text: 'Blog', icon: BullhornSolid},
-		{ href: '/guides', text: 'Guides', icon: BookSolid},
+		{ href: '/docs', text: 'Docs', icon: BookSolid},
 		{ href: '/faq', text: 'FAQ', icon: CircleQuestionRegular},
 		{ href: '/contact', text: 'Contact', icon: CommentRegular},
 	];
