@@ -1,56 +1,64 @@
 <script lang="ts">
-	import type { SEOWebPage } from '@sveltinio/seo/types';
-	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
-	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
-	import { canonicalPageUrl, capitalizeFirstLetter, getFavicon } from '$lib/utils/strings.js';
-	import { page } from '$app/stores';
-	import { website } from '$config/website.js';
-
-	const title = 'contact';
-
-	const pageDescription = `Here the description for the Contact page.`;
-	// page keywords as comma separeted values
-	const pageKeywords: Array<string> = [];
-
-	const contactPage: SEOWebPage = {
-		url: canonicalPageUrl($page.url.pathname, website.baseURL),
-		title: capitalizeFirstLetter(title),
-		description: pageDescription,
-		keywords: pageKeywords || website.keywords,
-		image: getFavicon(website),
-		opengraph: {
-			type: OpenGraphType.Article
-		},
-		twitter: {
-			type: TwitterCardType.Summary
-		}
-	};
+	import { Form } from "formsnap";
+	import Page from '$lib/components/Page.svelte';
+	import {contactFormSchema } from "./schema";
+	export let data;
 </script>
 
-<PageMetaTags data={ contactPage } />
-<JsonLdWebPage data={ contactPage } />
-<JsonLdBreadcrumbs url={$page.url.href} />
+ <svelte:head>
+	<title>Contact</title>
+	<meta name="description" content="Contact Info" />
+</svelte:head>
 
-<!-- Page markup-->
-<section class="page">
-	<div class="content">
-		<div class="centered">
-			<h1>This is the Contact page</h1>
-		</div>
-	</div>
-</section>
+<Page>
+	<header class="space-y-4">
+		<h1 class="h1">Contact</h1>
+		<!-- <p>Contact form.</p> -->
+	</header>
 
-<style>
-	.centered {
-		position: fixed;
-		top: 30%;
-		left: 40%;
-		margin-top: -50px;
-		margin-left: -100px;
-	}
+	<Form.Root
+		schema={contactFormSchema}
+		form={data.form}
+		debug={true}
+		let:config
+		class="container max-w-[750px] mx-auto flex flex-col gap-8"
+	>
+		<Form.Field {config} name="name">
+			<div class="grid gap-2">
+				<Form.Label>Name</Form.Label>
+				<Form.Input class="input" placeholder="Your Name"/>
+				<Form.Validation class="text-destructive" />
+			</div>
+		</Form.Field>
+		<Form.Field {config} name="email">
+			<div class="grid gap-2">
+				<Form.Label>Email</Form.Label>
+				<Form.Input class="input"  placeholder="your@email.com" />
+				<Form.Validation class="text-destructive" />
+			</div>
+		</Form.Field>
+		<Form.Field {config} name="subject">
+			<div class="grid gap-2">
+				<Form.Label>Subject</Form.Label>
+				<Form.Input class="input" placeholder="Subject" />
+				<Form.Validation class="text-destructive" />
+			</div>
+		</Form.Field>
+		<Form.Field {config} name="message">
+			<div class="grid gap-2">
+				<Form.Label>Message</Form.Label>
+				<Form.Textarea
+					rows={4}
+					class="textarea"
+					placeholder="Insert your message here..."
+				/>
+				<Form.Validation class="text-destructive" />
+			</div>
+		</Form.Field>
+		<button type="submit" class="btn variant-filled">Send</button>
+	</Form.Root>
+</Page>
 
-	.centered h1 {
-		font-size: 3rem;
-		line-height: 1;
-	}
+<style lang="postcss">
+
 </style>

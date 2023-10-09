@@ -124,7 +124,7 @@ importers:
         specifier: 1.1.0
         version: 1.1.0
       '@vite-pwa/sveltekit':
-        specifier: ^0.2.7
+        specifier: 0.2.7
         version: 0.2.7(@sveltejs/kit@1.25.1)(vite-plugin-pwa@0.16.5)
       '@vitest/coverage-v8':
         specifier: 0.34.6
@@ -144,6 +144,9 @@ importers:
       eslint-plugin-svelte:
         specifier: 2.34.0
         version: 2.34.0(eslint@8.51.0)(svelte@4.2.1)
+      formsnap:
+        specifier: 0.1.4
+        version: 0.1.4(svelte@4.2.1)(sveltekit-superforms@1.8.0)(zod@3.22.4)
       lodash-es:
         specifier: 4.17.21
         version: 4.17.21
@@ -205,7 +208,7 @@ importers:
         specifier: 4.2.1
         version: 4.2.1
       svelte-awesome-icons:
-        specifier: ^0.6.6
+        specifier: 0.6.6
         version: 0.6.6(svelte@4.2.1)
       svelte-check:
         specifier: 3.5.2
@@ -270,6 +273,9 @@ importers:
       workbox-window:
         specifier: 7.0.0
         version: 7.0.0
+      zod:
+        specifier: 3.22.4
+        version: 3.22.4
 
   apps/offline:
     optionalDependencies:
@@ -495,7 +501,7 @@ importers:
         specifier: 0.5.0
         version: 0.5.0
       svelte-awesome-icons:
-        specifier: ^0.6.6
+        specifier: 0.6.6
         version: 0.6.6(svelte@4.2.1)
       svelte-check:
         specifier: 3.5.2

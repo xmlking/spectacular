@@ -17,7 +17,7 @@ const mdsvexConfig = defineConfig({
 		dashes: 'oldschool'
 	},
 	layout: {
-		// blog: './src/lib/layouts/blog.svelte',
+		blog: './src/lib/layouts/blog.svelte',
 		// projects: './src/lib/layouts/projects.svelte',
 		page: './src/lib/layouts/page.svelte',
 		_: './src/lib/layouts/blank.svelte' // fallback

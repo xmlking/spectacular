@@ -1,18 +1,19 @@
+export const prerender = false;
+
 import { superValidate } from 'sveltekit-superforms/server';
 import { fail } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types.js';
-import { someFormSchema } from './schema.js';
+import { contactFormSchema } from './schema.js';
 
-export const load: PageServerLoad = async () => {
+export const load = async () => {
 	return {
-		form: superValidate(someFormSchema)
+		form: superValidate(contactFormSchema)
 	};
 };
 
 export const actions: Actions = {
 	default: async (event) => {
-		const form = await superValidate(event, someFormSchema);
+		const form = await superValidate(event, contactFormSchema);
 		if (!form.valid) {
 			return fail(400, { form });
 		}

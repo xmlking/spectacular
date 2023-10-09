@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { SEOWebPage } from '@sveltinio/seo/types';
-	import { JsonLdWebPage, PageMetaTags, JsonLdBreadcrumbs } from '@sveltinio/seo';
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
 	import { Breadcrumbs, TOC, PagesNavigator } from '@sveltinio/widgets';
 	import { assets, base } from '$app/paths';
@@ -35,10 +34,6 @@
 		}
 	};
 </script>
-
-<PageMetaTags data={ guidesSlugPage } />
-<JsonLdWebPage data={ guidesSlugPage } />
-<JsonLdBreadcrumbs url={$page.url.href} />
 
 <article class="page-wrapper">
 	<Breadcrumbs url={$page.url.href} />

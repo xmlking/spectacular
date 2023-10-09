@@ -2,7 +2,6 @@
 	import type { SEOWebPage } from '@sveltinio/seo/types';
 	import { Breadcrumbs, Card, CardAction, CardImage } from '@sveltinio/widgets';
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
-	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
 	import { assets, base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { website } from '$config/website.js';
@@ -31,10 +30,6 @@
 		}
 	};
 </script>
-
-<PageMetaTags data={ guidesIndexPage } />
-<JsonLdWebPage data={ guidesIndexPage } />
-<JsonLdBreadcrumbs url={$page.url.href} />
 
 <section class="page-wrapper">
 	<Breadcrumbs url={$page.url.href} />

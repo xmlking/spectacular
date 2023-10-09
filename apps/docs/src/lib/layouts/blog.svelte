@@ -7,7 +7,7 @@
 </script>
 
  <svelte:head>
-	<title>{title}</title>
+	<title>Blog | {title}</title>
 	<meta name="description" content={title}/>
 </svelte:head>
 

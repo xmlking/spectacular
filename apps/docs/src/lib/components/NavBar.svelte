@@ -1,15 +1,14 @@
 <script lang="ts">
+	import { Icon, HouseSolid, FutbolRegular, BullhornSolid, BookSolid, CircleQuestionRegular, CommentRegular } from 'svelte-awesome-icons';
 	import { page } from '$app/stores';
 	// import { twMerge } from 'tailwind-merge';
-	// import { faBook, faGamepad, faHippo, faHouse, faLightbulb } from '@fortawesome/free-solid-svg-icons';
-	// import Icon from 'svelte-awesome/components/Icon.svelte';
 	const links = [
-		{ href: '/', text: 'Home', /* icon: faHouse */},
-		{ href: '/about', text: 'About', /* icon: faGamepad */},
-		{ href: '/blog', text: 'Blog', /* icon: faBook */},
-		{ href: '/guides', text: 'Guides', /* icon: faBook */},
-		{ href: '/faq', text: 'FAQ', /* icon: faBook */},
-		{ href: '/contact', text: 'Contact', /* icon: faHippo */},
+		{ href: '/', text: 'Home',  icon: HouseSolid },
+		{ href: '/about', text: 'About', icon: FutbolRegular},
+		{ href: '/blog', text: 'Blog', icon: BullhornSolid},
+		{ href: '/guides', text: 'Guides', icon: BookSolid},
+		{ href: '/faq', text: 'FAQ', icon: CircleQuestionRegular},
+		{ href: '/contact', text: 'Contact', icon: CommentRegular},
 	];
 
 	$: classesActive = (href: string) => {
@@ -25,7 +24,7 @@
 <nav class="lex-row list-nav justify-center hidden lg:flex">
 	{#each links as link}
 		<a href={link.href} class={classesActive(link.href)}>
-            <!-- <Icon data={link.icon} class="mr-2" /> -->
+			<Icon class="mr-2" icon={link.icon} size={16} />
             {link.text}
         </a>
 	{/each}

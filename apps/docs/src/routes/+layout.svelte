@@ -72,6 +72,11 @@
 	};
 	setContext('iconCtx', iconCtx);
 </script>
+
+<svelte:head>
+	<title>Spectacular | Monorepo Docs</title>
+</svelte:head>
+
 <!-- Overlays -->
 <Modal components={modalComponentRegistry} />
 <Toast />
