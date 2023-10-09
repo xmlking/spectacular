@@ -193,3 +193,4 @@ Use plugin [@graphql-codegen/hasura-allow-list](https://npmjs.com/package/@graph
 - Hasura [Roles & Session Variables](https://hasura.io/docs/latest/auth/authorization/roles-variables/)
 - Hasura [Manage Migrations](https://hasura.io/docs/latest/migrations-metadata-seeds/manage-migrations/)
 - [Reset Hasura Migrations and Metadata](https://hasura.io/docs/latest/migrations-metadata-seeds/resetting-migrations-metadata/)
+- [Auto-Apply Migrations and Metadata](https://hasura.io/docs/latest/migrations-metadata-seeds/auto-apply-migrations/)

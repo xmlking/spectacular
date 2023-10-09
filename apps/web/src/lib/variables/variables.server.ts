@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { env as dynPriEnv } from '$env/dynamic/private';
 import * as statPriEnv from '$env/static/private';
 import { Logger } from '$lib/utils';
-import { z } from 'zod';
 
 const log = new Logger('lib:variables');
 /**
@@ -11,6 +11,9 @@ const log = new Logger('lib:variables');
 const schema = z.object({
 	// Add your private env variables here
 	HASURA_GRAPHQL_ENDPOINT: z.string().url().regex(new RegExp('^\\S*$'), {
+		message: 'No spaces allowed'
+	}),
+	HASURA_GRAPHQL_ADMIN_SECRET: z.string().regex(new RegExp('^\\S*$'), {
 		message: 'No spaces allowed'
 	}),
 	AUTH_SECRET: z.string().regex(new RegExp('^\\S*$'), {

@@ -3,6 +3,7 @@ import AzureAD from '@auth/core/providers/azure-ad';
 import CredentialsProvider from '@auth/core/providers/credentials';
 import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
+// import { HasuraAdapter } from '@auth/hasura-adapter';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { Handle } from '@sveltejs/kit';
 import envPri from '$lib/variables/variables.server';
@@ -23,8 +24,8 @@ export const authjs = SvelteKitAuth({
 	debug: dev,
 	trustHost: true,
 	// adapter: HasuraAdapter({
-	// 	endpoint: HASURA_GRAPHQL_ENDPOINT,
-	// 	adminSecret: HASURA_GRAPHQL_ADMIN_SECRET
+	// 	endpoint: envPri.HASURA_GRAPHQL_ENDPOINT,
+	// 	adminSecret: envPri.HASURA_GRAPHQL_ADMIN_SECRET
 	// }),
 	providers: [
 		...(dev

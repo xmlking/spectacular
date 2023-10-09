@@ -334,7 +334,7 @@ Use [Auth.js](https://authjs.dev/) for Authentication
 > TODO: try [jose](https://github.com/panva/jose) as alternative to jsonwebtoken ?
 
 ```shell
-pnpm add  -D @auth/core @auth/sveltekit
+pnpm add  -D @auth/core @auth/sveltekit @auth/hasura-adapter --filter "./apps/web"
 # for custom encode and decode JWT.
 # pnpm add jsonwebtoken
 # pnpm add -D @types/jsonwebtoken

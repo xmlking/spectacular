@@ -56,7 +56,8 @@ services:
     #   -c listen_addresses = '*'
 
   hasura:
-    image: hasura/graphql-engine:v2.33.4
+    ## User `cli-migrations-v3` only in local dev env. It will automatically apply Migrations and Metadata to a Hasura GraphQL Engine
+    image: hasura/graphql-engine:v2.33.4.cli-migrations-v3
     platform: linux/arm64/v8
     ports:
       - '8080:8080'
@@ -102,6 +103,9 @@ services:
       interval: 30s
       timeout: 15s
       retries: 3
+    volumes:
+      - ./infra/hasura/migrations:/hasura-migrations
+      - ./infra/hasura/metadata:/hasura-metadata
 
 volumes:
   db_data:
