@@ -76,9 +76,14 @@ Awesome **SvelteKit** Links
 - CMS
   - [editable-website](https://github.com/michael/editable-website) A SvelteKit template for building CMS-free editable websites. Try [DEMO](https://editable.website)
 
+- General
+  - [Svelte Hover Draw SVG](https://github.com/davipon/svelte-hover-draw-svg)
+  - [Draggable Sections](https://github.com/TIKramer/svelte-section-list)
+  - [svelte-splitpanes](https://github.com/orefalo/svelte-splitpanes), [docs](https://orefalo.github.io/svelte-splitpanes/)
+  
 ## Animation
 
-- [Svelte Star Wars Demo](https://github.com/geoffrich/star-wars-demo-svelte)
+- [Svelte Star Wars Demo](https://github.com/geoffrich/star-wars-demo-svelte), [Demo](https://main--transcendent-begonia-7a3d6f.netlify.app/)
 
 ## State Management
 
@@ -94,12 +99,16 @@ Awesome **SvelteKit** Links
 - [svelte-legos](https://github.com/ankurrsinghal/svelte-legos)[DEMO](https://svelte-legos.singhalankur.com)
 - [React Hooks in Svelte](<[auth.md](https://github.com/breadthe/react-hooks-in-svelte)>)
 
+## internationalization
+- [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n), [example with SvelteKit](https://github.com/ivanhofer/typesafe-i18n-demo-sveltekit)
+
 ## GraphQL
 
 - GraphQL Client - [houdini](https://houdinigraphql.com/)
   - Grafbase [live query plugin](https://github.com/grafbase/grafbase/tree/main/examples/sveltekit-houdini), [Getting started](https://grafbase.com/guides/getting-started-with-sveltekit-houdini-and-grafbase)
 - [GraphQL Mesh](https://the-guild.dev/graphql/mesh) Gateway
   - [kit-mesh](https://github.com/jycouet/kit-mesh/blob/main/src/routes/api/%2Bserver.ts), [yoga-sveltekit](https://github.com/jycouet/graphql-yoga-sveltekit/blob/master/src/routes/api/graphql.ts)
+- [GraphQL documentation generator](https://github.com/magidoc-org/magidoc)
 
 ## Testing
 
