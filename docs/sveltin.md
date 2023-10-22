@@ -27,7 +27,7 @@ With few commands Sveltin flex the muscles 💪
 
 > **NOTE**: each command can be executed in interactive way so do not need to pass arguments and flags to it.
 
-```bash
+```shell
 # Create a project with TailwindCSS support
 sveltin init myBlog --css tailwindcss
 
@@ -75,7 +75,7 @@ Please see the [documentation](https://docs.sveltin.io) for more information abo
 
 Homebrew will also install Git and Node.
 
-```bash
+```shell
 # Tap a new formula:
 brew tap sveltinio/sveltin
 
@@ -85,7 +85,7 @@ brew install sveltin
 
 ### Windows via Scoop
 
-```bash
+```shell
 # Tap a new bucket:
 scoop bucket add sveltinio https://github.com/sveltinio/scoop-sveltin.git
 
@@ -97,7 +97,7 @@ scoop install sveltinio/sveltin
 
 Installation is done by using the `go install` command. In this case, ensure to have **Go (v1.17 or higher) installed** on your machine:
 
-```bash
+```shell
 go install github.com/sveltinio/sveltin@latest
 ```
 
@@ -105,7 +105,7 @@ go install github.com/sveltinio/sveltin@latest
 
 You can download the pre-compiled binary for you specific OS from the [releases page](https://github.com/sveltinio/sveltin/releases). You will need to copy the and extract the binary, then move it to your local bin folder. Please, refer to the example below:
 
-```bash
+```shell
 curl https://github.com/sveltinio/sveltin/releases/download/${VERSION}/${PACKAGE_NAME} -o ${PACKAGE_NAME}
 sudo tar -xvf ${PACKAGE_NAME} -C /usr/local/bin/
 sudo chmod +x /usr/local/bin/sveltin
@@ -117,7 +117,7 @@ sveltin comes with a set of commands and subcommands to help dealing with your S
 
 Each command can be executed with inline arguments or interactivly.
 
-```bash
+```shell
 $ sveltin -h
 
 sveltin is the main command to work with SvelteKit powered static website.

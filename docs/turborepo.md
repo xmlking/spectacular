@@ -32,7 +32,7 @@ This Turborepo has some additional tools already setup for you:
 
 ## Prerequisite
 
-```bash
+```shell
 # pnpm add -g turbo@latest
 pnpm add -g turbo@latest
 ```

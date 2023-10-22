@@ -357,6 +357,18 @@ Custom form elements
 pnpm add -D svelte-select
 ```
 
+#### i18n
+
+> will be using [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n#get-started) for internationalization
+
+```shell
+pnpm add -D  typesafe-i18n  --filter "./apps/playground"
+# add 	`"outputPath": "./src/lib/i18n/"` to apps/playground/.typesafe-i18n.json
+# generate types
+turbo i18n --filter=playground -- --no-watch
+# add `locale` `LL` types to `app.d.ts`
+```
+
 #### Progressive Web Apps (PWA)
 
 check [example](https://github.com/vite-pwa/sveltekit/tree/main/examples/sveltekit-ts) for reference.

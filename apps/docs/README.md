@@ -6,7 +6,7 @@ A static portfolio site built with SvelteKit + Skeleton UI + MDsveX.
 
 ### Local
 
-```bash
+```shell
 npx degit xmlking/spectacular my-app && cd my-app # create a new project in my-app
 pnpm i # if u don't have pnpm installed, run: npm i -g pnpm
 turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turbo
@@ -78,7 +78,7 @@ turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turb
 
 Start a development server:
 
-```bash
+```shell
 turbo dev --filter=docs
 ```
 
@@ -86,7 +86,7 @@ turbo dev --filter=docs
 
 Create a production version of ur blog:
 
-```bash
+```shell
 turbo build --filter=docs...
 ```
 
