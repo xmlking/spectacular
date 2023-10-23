@@ -74,13 +74,14 @@ Awesome **SvelteKit** Links
   - [Auth.js](https://authjs.dev/) OIDC auth with [SvelteKit](https://authjs.dev/reference/sveltekit)
 
 - CMS
+
   - [editable-website](https://github.com/michael/editable-website) A SvelteKit template for building CMS-free editable websites. Try [DEMO](https://editable.website)
 
 - General
   - [Svelte Hover Draw SVG](https://github.com/davipon/svelte-hover-draw-svg)
   - [Draggable Sections](https://github.com/TIKramer/svelte-section-list)
   - [svelte-splitpanes](https://github.com/orefalo/svelte-splitpanes), [docs](https://orefalo.github.io/svelte-splitpanes/)
-  
+
 ## Animation
 
 - [Svelte Star Wars Demo](https://github.com/geoffrich/star-wars-demo-svelte), [Demo](https://main--transcendent-begonia-7a3d6f.netlify.app/)
@@ -100,6 +101,7 @@ Awesome **SvelteKit** Links
 - [React Hooks in Svelte](<[auth.md](https://github.com/breadthe/react-hooks-in-svelte)>)
 
 ## internationalization
+
 - [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n), [example with SvelteKit](https://github.com/ivanhofer/typesafe-i18n-demo-sveltekit)
 
 ## GraphQL

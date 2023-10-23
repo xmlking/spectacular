@@ -1,4 +1,4 @@
-import type { BaseTranslation } from '../i18n-types'
+import type { BaseTranslation } from '../i18n-types';
 
 const en = {
 	// TODO: your translations go here
@@ -72,4 +72,4 @@ const en = {
 	log: `This log was called from '{fileName:string}'`
 } satisfies BaseTranslation;
 
-export default en
+export default en;
