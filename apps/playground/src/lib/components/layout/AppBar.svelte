@@ -8,6 +8,7 @@
 	import DocsIcon from '$lib/components/icons/Icon.svelte';
 	import DocsLogoFull from '$lib/components/logos/LogoFull.svelte';
 	import { storeTheme } from '$lib/stores/stores';
+	import LocaleSwitcher from '$lib/components/LocaleSwitcher.svelte';
 	const drawerStore = getDrawerStore();
 
 	// Local
@@ -184,6 +185,10 @@
 				<!-- <div class="arrow bg-surface-100-800-token" /> -->
 			</div>
 		</div>
+
+
+		<!-- locale -->
+		<LocaleSwitcher />
 
 		<!-- Search -->
 		<div class="md:inline md:ml-4">

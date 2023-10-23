@@ -6,7 +6,7 @@ Everything you need to build a Svelte project, powered by [`create-svelte`](http
 
 If you're seeing this, you've probably already done this step. Congrats!
 
-```bash
+```shell
 # create a new project in the current directory
 pnpm create svelte@latest
 
@@ -18,18 +18,24 @@ pnpm create svelte@latest apps/my-app
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-```bash
+```shell
 turbo dev --filter=playground
 
 # or start the server and open the app in a new browser tab
 turbo dev --filter=playground -- --open
 ```
 
+Generate `i18n` types.
+
+```shell
+turbo i18n --filter=playground
+```
+
 ## Building
 
 To create a production version of your app:
 
-```bash
+```shell
 turbo build --filter=playground...
 turbo build --filter=playground... --summarize
 turbo build --filter=playground... --dry

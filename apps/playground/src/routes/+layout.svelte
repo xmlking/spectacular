@@ -1,7 +1,13 @@
 <!-- Layout: (root) -->
 <script lang="ts">
 	/* eslint-disable import/order */
-	  import { setContext } from 'svelte';
+	import { setContext } from 'svelte';
+    import LL, { setLocale } from '$lib/i18n/i18n-svelte'
+
+	export let data
+	// at the very top, set the locale before you access the store and before the actual rendering takes place
+	setLocale(data.locale)
+	console.info($LL.log({ fileName: '+layout.svelte' }))
 
 	// Dependency: Floating UI for Popups
 	import { storePopup } from '@skeletonlabs/skeleton';
@@ -41,8 +47,6 @@
 	import '../app.postcss';
 
 	// Handle Vercel Production Mode
-	import type { LayoutServerData } from './$types';
-	export let data: LayoutServerData;
 	// Pass to Store for Ad Conditionals
 	// IMPORTANT: DO NOT MODIFY THIS UNLESS YOU KNOW WHAT YOU'RE DOING
 	import { storeVercelProductionMode } from '$lib/stores/stores';
