@@ -4,10 +4,10 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev --port 3001",
+		"dev": "typesafe-i18n --no-watch && vite dev --port 3001",
 		"dev:debug": "DEBUG=* vite dev",
 		"dev:sw": "SW_DEV=true vite dev",
-		"build": "vite build",
+		"build": "typesafe-i18n --no-watch && vite build",
 		"preview": "NEXTAUTH_URL=http://localhost:4173 vite preview",
 		"test": "pnpm run test:integration && pnpm run test:unit",
 		"test:unit": "vitest",
