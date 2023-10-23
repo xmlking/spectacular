@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { RadioGroup , RadioItem} from '@skeletonlabs/skeleton';
 	import { browser } from '$app/environment'
 	import { invalidateAll } from '$app/navigation'
 	import { page } from '$app/stores'
@@ -6,6 +7,8 @@
 	import type { Locales } from '$lib/i18n/i18n-types'
 	import { locales } from '$lib/i18n/i18n-util'
 	import { loadLocaleAsync } from '$lib/i18n/i18n-util.async'
+
+	let locl: string = $locale;
 
 const switchLocale = async (newLocale: Locales) => {
 		if (!newLocale || $locale === newLocale) return
@@ -33,11 +36,8 @@ const switchLocale = async (newLocale: Locales) => {
 </script>
 
 <!-- TODO: make it pretty-->
-<ul>
+<RadioGroup>
 	{#each locales as l}
-		<li>
-			<button class:active={l === $locale} on:click={() => switchLocale(l)}> {l} </button>
-		</li>
+		<RadioItem bind:group={locl} name="justify" value={l} on:click={() => switchLocale(l)}>{l}</RadioItem>
 	{/each}
-</ul>
-
+</RadioGroup>

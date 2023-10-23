@@ -4,4 +4,4 @@ type ImgProps = {
 };
 type ImgPropsH = ImgProps & { h: number };
 
-export type ImgMeta = { img: ImgPropsH; sources: { [key: string]: ImgProps[] } };
+export type ImgMeta = { img: ImgPropsH; sources: string };

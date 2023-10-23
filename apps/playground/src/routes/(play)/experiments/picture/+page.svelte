@@ -16,7 +16,7 @@
 		<h1 class="h1">Picture</h1>
 		<p>Showcase image optimization.</p>
 	</header>
-		<Picture meta={VinylImgMeta} alt="Vinyls" sizes="33vw" />
+	<Picture meta={VinylImgMeta} alt="Vinyls" sizes="33vw" />
 </Page>
 
 
