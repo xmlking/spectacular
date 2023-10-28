@@ -14,8 +14,13 @@
 		"test:watch": "turbo run test:watch",
 		"format": "prettier --write .",
 		"clean": "turbo run clean && rm -rf node_modules",
-		"ci:publish": "changeset publish",
-		"cs": "changeset"
+		"cs": "changeset",
+		"//": "Include build, lint, test - all the things you need to run before publishing",
+		"prerelease": "pnpm clean && pnpm install && turbo run build lint test",
+		"ci:version": "changeset version",
+		"ci:version-status": "changeset status -v",
+		"ci:release": "pnpm run prerelease && changeset publish",
+		"ci:snapshot": "pnpm prerelease && changeset version --snapshot preview && pnpm install && changeset publish --tag preview"
 	},
 	"license": "MIT",
 	"homepage": "https://chinthagunta.com/",

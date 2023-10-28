@@ -2,6 +2,11 @@
 set -e
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_USER" <<-EOSQL
+	-- auth schema
+	-- CREATE SCHEMA IF NOT EXISTS auth;
+	-- https://github.com/hasura/graphql-engine/issues/3657
+	-- CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+	-- CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 	CREATE EXTENSION IF NOT EXISTS hstore;
 	-- create extension if not exists postgis;
 	SELECT * FROM PG_EXTENSION;

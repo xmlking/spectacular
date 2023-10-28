@@ -91,6 +91,8 @@ import Image from 'example.jpg?w=400&h=300&format=webp';
 
 #### changesets
 
+working with changesets in [turborepo](https://turbo.build/repo/docs/handbook/publishing-packages/versioning-and-publishing)
+
 ```shell
 npx changeset init
 pnpm add -D @changesets/changelog-github  -w
@@ -315,6 +317,7 @@ pnpx houdini init --headers "x-hasura-admin-secret=<HASURA_GRAPHQL_ADMIN_SECRET>
 
 # To updated your local schema with latest from the graphql server, run:
 # HINT: it will use `apiUrl` and `schemaPollHeaders` in `houdini.config.js`
+cd apps/web
 node_modules/.bin/houdini pull-schema
 ```
 

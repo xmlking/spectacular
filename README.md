@@ -47,10 +47,11 @@
 
 ## Experementing
 
+- [ ] Implement Changesets [(link)](https://github.com/changesets/changesets) with [turborepo](https://turbo.build/repo/docs/handbook/publishing-packages/versioning-and-publishing)
+- [ ] **TAURI:** Use [Tauri](https://tauri.app/) with [Skeleton](https://www.skeleton.dev/docs/tauri) for multi-platform. 
+- [ ] Charts with [LayerChart](https://www.layerchart.com/)
 - [ ] **tRPC-SvelteKit** [End-to-end typesafe APIs](https://icflorescu.github.io/trpc-sveltekit) SvelteKit.
-- [ ] Implement Changesets [(link)](https://github.com/changesets/changesets)
-- [ ] **TAURI:** Use [tauri](https://tauri.app/) for multi-platform
-
+  
 ## Setup
 
 ```shell

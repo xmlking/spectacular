@@ -48,7 +48,7 @@ Awesome **SvelteKit** Links
 
   - [apexcharts](https://github.com/galkatz373/svelte-apexcharts) with [flowbite](https://flowbite-svelte.com/docs/plugins/charts)
   - [pancake](https://pancake-charts.surge.sh/)
-  - [Layer Cake](https://layercake.graphics/) supports SSR, responsive graphics, full customizable layers for your graph.
+  - [LayerChart](https://www.layerchart.com/) which uses [Layer Cake](https://layercake.graphics/) - supports SSR, responsive graphics, full customizable layers for your graph.
 
 - Maps
 
@@ -120,6 +120,7 @@ Awesome **SvelteKit** Links
 
 ## Project Templates
 
+- [Backoffice template with ShadCN-Svelte, Auth, localization](https://github.com/upperdo/backoffice-template)
 - [Svelte Sirens](https://github.com/Svelte-Sirens/svelte-sirens)
 - [Usagizmo turbo Monorepo](https://github.com/usagizmo/webapp-template)
 - [url-shortener turbo Monorepo](https://github.com/koolskateguy89/url-shortener)
