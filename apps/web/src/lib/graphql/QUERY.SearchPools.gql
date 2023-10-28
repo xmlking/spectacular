@@ -1,10 +1,10 @@
 query SearchPools(
-	$where: pools_bool_exp
+	$where: PoolsBoolExp
 	$limit: Int = 50
 	$offset: Int = 0
-	$orderBy: [pools_order_by!] = [{ updatedAt: desc_nulls_last }]
+	$orderBy: [PoolsOrderBy!] = [{ updatedAt: DESC_NULLS_LAST }]
 ) {
-	pools(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
+	pools(orderBy: $orderBy, limit: $limit, offset: $offset, where: $where) {
 		id
 		displayName
 	}

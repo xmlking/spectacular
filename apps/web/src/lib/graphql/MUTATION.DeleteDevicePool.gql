@@ -1,5 +1,5 @@
 mutation DeleteDevicePool($id: uuid!) {
-	delete_device_pool_by_pk(id: $id) {
+	deleteDevicePoolByPk(id: $id) {
 		deviceId
 		poolId
 	}

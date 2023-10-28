@@ -3,7 +3,7 @@ query ListDevices($limit: Int = 50, $offset: Int = 0, $displayName: String = "%%
 	devices(
 		limit: $limit
 		offset: $offset
-		order_by: [{ updatedAt: desc_nulls_last }]
+		orderBy: [{ updatedAt: DESC_NULLS_LAST }]
 		where: { displayName: { _like: $displayName } }
 	) {
 		tags

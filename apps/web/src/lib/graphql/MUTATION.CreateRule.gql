@@ -1,5 +1,5 @@
-mutation CreateRule($data: rules_insert_input!) {
-	insert_rules_one(object: $data) {
+mutation CreateRule($data: RulesInsertInput!) {
+	insertRulesOne(object: $data) {
 		id
 		displayName
 		description

@@ -13,139 +13,8 @@ directive @cached(
   ttl: Int! = 60
 ) on QUERY
 
-"""
-Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
-"""
-input Boolean_comparison_exp {
-  _eq: Boolean
-  _gt: Boolean
-  _gte: Boolean
-  _in: [Boolean!]
-  _is_null: Boolean
-  _lt: Boolean
-  _lte: Boolean
-  _neq: Boolean
-  _nin: [Boolean!]
-}
-
-input ListUniversitiesInput {
-  country: String
-  name: String
-}
-
-type ListUniversitiesOutput {
-  alpha_two_code: String
-  country: String
-  domains: [String!]!
-  name: String
-  stateprovince: String
-  web_pages: [String!]!
-}
-
-input SearchRestroomsInput {
-  city: String
-  limit: Int
-  offset: Int
-  page: Int
-}
-
-type SearchRestroomsOutput {
-  accessible: Boolean
-  approved: Boolean
-  changing_table: Boolean
-  city: String
-  comment: String
-  country: String
-  created_at: String
-  directions: String
-  downvote: Int
-  edit_id: Int
-  id: Int
-  latitude: Float
-  longitude: Float
-  name: String
-  state: String
-  street: String
-  unisex: Boolean
-  updated_at: String
-  upvote: Int
-}
-
-"""
-Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
-"""
-input String_array_comparison_exp {
-  """is the array contained in the given array value"""
-  _contained_in: [String!]
-
-  """does the array contain the given value"""
-  _contains: [String!]
-  _eq: [String!]
-  _gt: [String!]
-  _gte: [String!]
-  _in: [[String!]!]
-  _is_null: Boolean
-  _lt: [String!]
-  _lte: [String!]
-  _neq: [String!]
-  _nin: [[String!]!]
-}
-
-"""
-Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
-"""
-input String_comparison_exp {
-  _eq: String
-  _gt: String
-  _gte: String
-
-  """does the column match the given case-insensitive pattern"""
-  _ilike: String
-  _in: [String!]
-
-  """
-  does the column match the given POSIX regular expression, case insensitive
-  """
-  _iregex: String
-  _is_null: Boolean
-
-  """does the column match the given pattern"""
-  _like: String
-  _lt: String
-  _lte: String
-  _neq: String
-
-  """does the column NOT match the given case-insensitive pattern"""
-  _nilike: String
-  _nin: [String!]
-
-  """
-  does the column NOT match the given POSIX regular expression, case insensitive
-  """
-  _niregex: String
-
-  """does the column NOT match the given pattern"""
-  _nlike: String
-
-  """
-  does the column NOT match the given POSIX regular expression, case sensitive
-  """
-  _nregex: String
-
-  """does the column NOT match the given SQL regular expression"""
-  _nsimilar: String
-
-  """
-  does the column match the given POSIX regular expression, case sensitive
-  """
-  _regex: String
-
-  """does the column match the given SQL regular expression"""
-  _similar: String
-}
-
 """action type"""
-type action {
+type Action {
   description: String!
   value: String!
 }
@@ -153,52 +22,52 @@ type action {
 """
 Boolean expression to filter rows from the table "action". All fields are combined with a logical 'AND'.
 """
-input action_bool_exp {
-  _and: [action_bool_exp!]
-  _not: action_bool_exp
-  _or: [action_bool_exp!]
-  description: String_comparison_exp
-  value: String_comparison_exp
+input ActionBoolExp {
+  _and: [ActionBoolExp!]
+  _not: ActionBoolExp
+  _or: [ActionBoolExp!]
+  description: StringComparisonExp
+  value: StringComparisonExp
 }
 
-enum action_enum {
+enum ActionEnum {
   """BLOCK"""
-  block
+  BLOCK
 
   """CALLOUT_INSPECTION"""
-  callout_inspection
+  CALLOUT_INSPECTION
 
   """CALLOUT_TERMINATING"""
-  callout_terminating
+  CALLOUT_TERMINATING
 
   """CALLOUT_UNKNOWN"""
-  callout_unknown
+  CALLOUT_UNKNOWN
 
   """PERMIT"""
-  permit
+  PERMIT
 }
 
 """
-Boolean expression to compare columns of type "action_enum". All fields are combined with logical 'AND'.
+Boolean expression to compare columns of type "ActionEnum". All fields are combined with logical 'AND'.
 """
-input action_enum_comparison_exp {
-  _eq: action_enum
-  _in: [action_enum!]
-  _is_null: Boolean
-  _neq: action_enum
-  _nin: [action_enum!]
+input ActionEnumComparisonExp {
+  _eq: ActionEnum
+  _in: [ActionEnum!]
+  _isNull: Boolean
+  _neq: ActionEnum
+  _nin: [ActionEnum!]
 }
 
 """Ordering options when selecting data from "action"."""
-input action_order_by {
-  description: order_by
-  value: order_by
+input ActionOrderBy {
+  description: OrderBy
+  value: OrderBy
 }
 
 """
 select columns of table "action"
 """
-enum action_select_column {
+enum ActionSelectColumn {
   """column name"""
   description
 
@@ -209,22 +78,37 @@ enum action_select_column {
 """
 Streaming cursor of the table "action"
 """
-input action_stream_cursor_input {
+input ActionStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: action_stream_cursor_value_input!
+  initialValue: ActionStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input action_stream_cursor_value_input {
+input ActionStreamCursorValueInput {
   description: String
   value: String
 }
 
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
+input BooleanComparisonExp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _isNull: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
 """ordering argument of a cursor"""
-enum cursor_ordering {
+enum CursorOrdering {
   """ascending ordering of the cursor"""
   ASC
 
@@ -233,17 +117,17 @@ enum cursor_ordering {
 }
 
 """device to pool bridge table """
-type device_pool {
+type DevicePool {
   createdAt: timestamptz!
   createdBy: String!
 
   """An object relationship"""
-  device: devices!
+  device: Devices!
   deviceId: uuid!
   id: uuid!
 
   """An object relationship"""
-  pool: pools!
+  pool: Pools!
   poolId: uuid!
   updatedAt: timestamptz!
   updatedBy: String!
@@ -252,44 +136,44 @@ type device_pool {
 """
 order by aggregate values of table "device_pool"
 """
-input device_pool_aggregate_order_by {
-  count: order_by
-  max: device_pool_max_order_by
-  min: device_pool_min_order_by
+input DevicePoolAggregateOrderBy {
+  count: OrderBy
+  max: DevicePoolMaxOrderBy
+  min: DevicePoolMinOrderBy
 }
 
 """
 input type for inserting array relation for remote table "device_pool"
 """
-input device_pool_arr_rel_insert_input {
-  data: [device_pool_insert_input!]!
+input DevicePoolArrRelInsertInput {
+  data: [DevicePoolInsertInput!]!
 
   """upsert condition"""
-  on_conflict: device_pool_on_conflict
+  onConflict: DevicePoolOnConflict
 }
 
 """
 Boolean expression to filter rows from the table "device_pool". All fields are combined with a logical 'AND'.
 """
-input device_pool_bool_exp {
-  _and: [device_pool_bool_exp!]
-  _not: device_pool_bool_exp
-  _or: [device_pool_bool_exp!]
-  createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
-  device: devices_bool_exp
-  deviceId: uuid_comparison_exp
-  id: uuid_comparison_exp
-  pool: pools_bool_exp
-  poolId: uuid_comparison_exp
-  updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
+input DevicePoolBoolExp {
+  _and: [DevicePoolBoolExp!]
+  _not: DevicePoolBoolExp
+  _or: [DevicePoolBoolExp!]
+  createdAt: TimestamptzComparisonExp
+  createdBy: StringComparisonExp
+  device: DevicesBoolExp
+  deviceId: UuidComparisonExp
+  id: UuidComparisonExp
+  pool: PoolsBoolExp
+  poolId: UuidComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  updatedBy: StringComparisonExp
 }
 
 """
 unique or primary key constraints on table "device_pool"
 """
-enum device_pool_constraint {
+enum DevicePoolConstraint {
   """
   unique or primary key constraint on columns "id"
   """
@@ -304,75 +188,75 @@ enum device_pool_constraint {
 """
 input type for inserting data into table "device_pool"
 """
-input device_pool_insert_input {
+input DevicePoolInsertInput {
   deviceId: uuid
-  pool: pools_obj_rel_insert_input
+  pool: PoolsObjRelInsertInput
   poolId: uuid
 }
 
 """
 order by max() on columns of table "device_pool"
 """
-input device_pool_max_order_by {
-  createdAt: order_by
-  createdBy: order_by
-  deviceId: order_by
-  id: order_by
-  poolId: order_by
-  updatedAt: order_by
-  updatedBy: order_by
+input DevicePoolMaxOrderBy {
+  createdAt: OrderBy
+  createdBy: OrderBy
+  deviceId: OrderBy
+  id: OrderBy
+  poolId: OrderBy
+  updatedAt: OrderBy
+  updatedBy: OrderBy
 }
 
 """
 order by min() on columns of table "device_pool"
 """
-input device_pool_min_order_by {
-  createdAt: order_by
-  createdBy: order_by
-  deviceId: order_by
-  id: order_by
-  poolId: order_by
-  updatedAt: order_by
-  updatedBy: order_by
+input DevicePoolMinOrderBy {
+  createdAt: OrderBy
+  createdBy: OrderBy
+  deviceId: OrderBy
+  id: OrderBy
+  poolId: OrderBy
+  updatedAt: OrderBy
+  updatedBy: OrderBy
 }
 
 """
 response of any mutation on the table "device_pool"
 """
-type device_pool_mutation_response {
+type DevicePoolMutationResponse {
   """number of rows affected by the mutation"""
-  affected_rows: Int!
+  affectedRows: Int!
 
   """data from the rows affected by the mutation"""
-  returning: [device_pool!]!
+  returning: [DevicePool!]!
 }
 
 """
 on_conflict condition type for table "device_pool"
 """
-input device_pool_on_conflict {
-  constraint: device_pool_constraint!
-  update_columns: [device_pool_update_column!]! = []
-  where: device_pool_bool_exp
+input DevicePoolOnConflict {
+  constraint: DevicePoolConstraint!
+  updateColumns: [DevicePoolUpdateColumn!]! = []
+  where: DevicePoolBoolExp
 }
 
 """Ordering options when selecting data from "device_pool"."""
-input device_pool_order_by {
-  createdAt: order_by
-  createdBy: order_by
-  device: devices_order_by
-  deviceId: order_by
-  id: order_by
-  pool: pools_order_by
-  poolId: order_by
-  updatedAt: order_by
-  updatedBy: order_by
+input DevicePoolOrderBy {
+  createdAt: OrderBy
+  createdBy: OrderBy
+  device: DevicesOrderBy
+  deviceId: OrderBy
+  id: OrderBy
+  pool: PoolsOrderBy
+  poolId: OrderBy
+  updatedAt: OrderBy
+  updatedBy: OrderBy
 }
 
 """
 select columns of table "device_pool"
 """
-enum device_pool_select_column {
+enum DevicePoolSelectColumn {
   """column name"""
   createdAt
 
@@ -398,16 +282,16 @@ enum device_pool_select_column {
 """
 Streaming cursor of the table "device_pool"
 """
-input device_pool_stream_cursor_input {
+input DevicePoolStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: device_pool_stream_cursor_value_input!
+  initialValue: DevicePoolStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input device_pool_stream_cursor_value_input {
+input DevicePoolStreamCursorValueInput {
   createdAt: timestamptz
   createdBy: String
   deviceId: uuid
@@ -420,13 +304,13 @@ input device_pool_stream_cursor_value_input {
 """
 placeholder for update columns of table "device_pool" (current role has no relevant permissions)
 """
-enum device_pool_update_column {
+enum DevicePoolUpdateColumn {
   """placeholder (do not use)"""
   _PLACEHOLDER
 }
 
 """devices metadata"""
-type devices {
+type Devices {
   annotations: hstore
   createdAt: timestamptz!
   createdBy: String!
@@ -436,7 +320,7 @@ type devices {
   """An array relationship"""
   device_pools(
     """distinct select on columns"""
-    distinct_on: [device_pool_select_column!]
+    distinctOn: [DevicePoolSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -445,15 +329,15 @@ type devices {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [device_pool_order_by!]
+    orderBy: [DevicePoolOrderBy!]
 
     """filter the rows returned"""
-    where: device_pool_bool_exp
-  ): [device_pool!]!
+    where: DevicePoolBoolExp
+  ): [DevicePool!]!
   displayName: String!
   id: uuid!
   ip: String!
-  organization: organization_enum!
+  organization: OrganizationEnum!
   tags: [String!]
   updatedAt: timestamptz!
   updatedBy: String!
@@ -463,68 +347,64 @@ type devices {
 """
 Boolean expression to filter rows from the table "devices". All fields are combined with a logical 'AND'.
 """
-input devices_bool_exp {
-  _and: [devices_bool_exp!]
-  _not: devices_bool_exp
-  _or: [devices_bool_exp!]
-  annotations: hstore_comparison_exp
-  createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
-  deletedAt: timestamptz_comparison_exp
-  description: String_comparison_exp
-  device_pools: device_pool_bool_exp
-  displayName: String_comparison_exp
-  id: uuid_comparison_exp
-  ip: String_comparison_exp
-  organization: organization_enum_comparison_exp
-  tags: String_array_comparison_exp
-  updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
-  version: String_comparison_exp
+input DevicesBoolExp {
+  _and: [DevicesBoolExp!]
+  _not: DevicesBoolExp
+  _or: [DevicesBoolExp!]
+  annotations: HstoreComparisonExp
+  createdAt: TimestamptzComparisonExp
+  createdBy: StringComparisonExp
+  deletedAt: TimestamptzComparisonExp
+  description: StringComparisonExp
+  device_pools: DevicePoolBoolExp
+  displayName: StringComparisonExp
+  id: UuidComparisonExp
+  ip: StringComparisonExp
+  organization: OrganizationEnumComparisonExp
+  tags: StringArrayComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  updatedBy: StringComparisonExp
+  version: StringComparisonExp
 }
 
 """
 response of any mutation on the table "devices"
 """
-type devices_mutation_response {
+type DevicesMutationResponse {
   """number of rows affected by the mutation"""
-  affected_rows: Int!
+  affectedRows: Int!
 
   """data from the rows affected by the mutation"""
-  returning: [devices!]!
-}
-
-input devices_not_in_pool_args {
-  poolid: uuid
+  returning: [Devices!]!
 }
 
 """Ordering options when selecting data from "devices"."""
-input devices_order_by {
-  annotations: order_by
-  createdAt: order_by
-  createdBy: order_by
-  deletedAt: order_by
-  description: order_by
-  device_pools_aggregate: device_pool_aggregate_order_by
-  displayName: order_by
-  id: order_by
-  ip: order_by
-  organization: order_by
-  tags: order_by
-  updatedAt: order_by
-  updatedBy: order_by
-  version: order_by
+input DevicesOrderBy {
+  annotations: OrderBy
+  createdAt: OrderBy
+  createdBy: OrderBy
+  deletedAt: OrderBy
+  description: OrderBy
+  device_poolsAggregate: DevicePoolAggregateOrderBy
+  displayName: OrderBy
+  id: OrderBy
+  ip: OrderBy
+  organization: OrderBy
+  tags: OrderBy
+  updatedAt: OrderBy
+  updatedBy: OrderBy
+  version: OrderBy
 }
 
 """primary key columns input for table: devices"""
-input devices_pk_columns_input {
+input DevicesPkColumnsInput {
   id: uuid!
 }
 
 """
 select columns of table "devices"
 """
-enum devices_select_column {
+enum DevicesSelectColumn {
   """column name"""
   annotations
 
@@ -568,7 +448,7 @@ enum devices_select_column {
 """
 input type for updating data in table "devices"
 """
-input devices_set_input {
+input DevicesSetInput {
   annotations: hstore
   deletedAt: timestamptz
   description: String
@@ -578,16 +458,16 @@ input devices_set_input {
 """
 Streaming cursor of the table "devices"
 """
-input devices_stream_cursor_input {
+input DevicesStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: devices_stream_cursor_value_input!
+  initialValue: DevicesStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input devices_stream_cursor_value_input {
+input DevicesStreamCursorValueInput {
   annotations: hstore
   createdAt: timestamptz
   createdBy: String
@@ -596,23 +476,23 @@ input devices_stream_cursor_value_input {
   displayName: String
   id: uuid
   ip: String
-  organization: organization_enum
+  organization: OrganizationEnum
   tags: [String!]
   updatedAt: timestamptz
   updatedBy: String
   version: String
 }
 
-input devices_updates {
+input DevicesUpdates {
   """sets the columns of the filtered rows to the given values"""
-  _set: devices_set_input
+  _set: DevicesSetInput
 
   """filter the rows which have to be updated"""
-  where: devices_bool_exp!
+  where: DevicesBoolExp!
 }
 
 """direction type"""
-type direction {
+type Direction {
   description: String!
   value: String!
 }
@@ -620,72 +500,72 @@ type direction {
 """
 aggregated selection of "direction"
 """
-type direction_aggregate {
-  aggregate: direction_aggregate_fields
-  nodes: [direction!]!
+type DirectionAggregate {
+  aggregate: DirectionAggregateFields
+  nodes: [Direction!]!
 }
 
 """
 aggregate fields of "direction"
 """
-type direction_aggregate_fields {
-  count(columns: [direction_select_column!], distinct: Boolean): Int!
-  max: direction_max_fields
-  min: direction_min_fields
+type DirectionAggregateFields {
+  count(columns: [DirectionSelectColumn!], distinct: Boolean): Int!
+  max: DirectionMaxFields
+  min: DirectionMinFields
 }
 
 """
 Boolean expression to filter rows from the table "direction". All fields are combined with a logical 'AND'.
 """
-input direction_bool_exp {
-  _and: [direction_bool_exp!]
-  _not: direction_bool_exp
-  _or: [direction_bool_exp!]
-  description: String_comparison_exp
-  value: String_comparison_exp
+input DirectionBoolExp {
+  _and: [DirectionBoolExp!]
+  _not: DirectionBoolExp
+  _or: [DirectionBoolExp!]
+  description: StringComparisonExp
+  value: StringComparisonExp
 }
 
-enum direction_enum {
+enum DirectionEnum {
   """EGRESS"""
-  egress
+  EGRESS
 
   """INGRESS"""
-  ingress
+  INGRESS
 }
 
 """
-Boolean expression to compare columns of type "direction_enum". All fields are combined with logical 'AND'.
+Boolean expression to compare columns of type "DirectionEnum". All fields are combined with logical 'AND'.
 """
-input direction_enum_comparison_exp {
-  _eq: direction_enum
-  _in: [direction_enum!]
-  _is_null: Boolean
-  _neq: direction_enum
-  _nin: [direction_enum!]
+input DirectionEnumComparisonExp {
+  _eq: DirectionEnum
+  _in: [DirectionEnum!]
+  _isNull: Boolean
+  _neq: DirectionEnum
+  _nin: [DirectionEnum!]
 }
 
 """aggregate max on columns"""
-type direction_max_fields {
+type DirectionMaxFields {
   description: String
   value: String
 }
 
 """aggregate min on columns"""
-type direction_min_fields {
+type DirectionMinFields {
   description: String
   value: String
 }
 
 """Ordering options when selecting data from "direction"."""
-input direction_order_by {
-  description: order_by
-  value: order_by
+input DirectionOrderBy {
+  description: OrderBy
+  value: OrderBy
 }
 
 """
 select columns of table "direction"
 """
-enum direction_select_column {
+enum DirectionSelectColumn {
   """column name"""
   description
 
@@ -696,301 +576,72 @@ enum direction_select_column {
 """
 Streaming cursor of the table "direction"
 """
-input direction_stream_cursor_input {
+input DirectionStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: direction_stream_cursor_value_input!
+  initialValue: DirectionStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input direction_stream_cursor_value_input {
+input DirectionStreamCursorValueInput {
   description: String
   value: String
 }
 
-scalar hstore
-
 """
 Boolean expression to compare columns of type "hstore". All fields are combined with logical 'AND'.
 """
-input hstore_comparison_exp {
+input HstoreComparisonExp {
   _eq: hstore
   _gt: hstore
   _gte: hstore
   _in: [hstore!]
-  _is_null: Boolean
+  _isNull: Boolean
   _lt: hstore
   _lte: hstore
   _neq: hstore
   _nin: [hstore!]
 }
 
-"""mutation root"""
-type mutation_root {
-  """
-  delete data from the table: "device_pool"
-  """
-  delete_device_pool(
-    """filter the rows which have to be deleted"""
-    where: device_pool_bool_exp!
-  ): device_pool_mutation_response
+input ListUniversitiesInput {
+  country: String
+  name: String
+}
 
-  """
-  delete single row from the table: "device_pool"
-  """
-  delete_device_pool_by_pk(id: uuid!): device_pool
-
-  """
-  delete data from the table: "pools"
-  """
-  delete_pools(
-    """filter the rows which have to be deleted"""
-    where: pools_bool_exp!
-  ): pools_mutation_response
-
-  """
-  delete single row from the table: "pools"
-  """
-  delete_pools_by_pk(id: uuid!): pools
-
-  """
-  insert data into the table: "device_pool"
-  """
-  insert_device_pool(
-    """the rows to be inserted"""
-    objects: [device_pool_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: device_pool_on_conflict
-  ): device_pool_mutation_response
-
-  """
-  insert a single row into the table: "device_pool"
-  """
-  insert_device_pool_one(
-    """the row to be inserted"""
-    object: device_pool_insert_input!
-
-    """upsert condition"""
-    on_conflict: device_pool_on_conflict
-  ): device_pool
-
-  """
-  insert data into the table: "policies"
-  """
-  insert_policies(
-    """the rows to be inserted"""
-    objects: [policies_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: policies_on_conflict
-  ): policies_mutation_response
-
-  """
-  insert a single row into the table: "policies"
-  """
-  insert_policies_one(
-    """the row to be inserted"""
-    object: policies_insert_input!
-
-    """upsert condition"""
-    on_conflict: policies_on_conflict
-  ): policies
-
-  """
-  insert data into the table: "pools"
-  """
-  insert_pools(
-    """the rows to be inserted"""
-    objects: [pools_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: pools_on_conflict
-  ): pools_mutation_response
-
-  """
-  insert a single row into the table: "pools"
-  """
-  insert_pools_one(
-    """the row to be inserted"""
-    object: pools_insert_input!
-
-    """upsert condition"""
-    on_conflict: pools_on_conflict
-  ): pools
-
-  """
-  insert data into the table: "rules"
-  """
-  insert_rules(
-    """the rows to be inserted"""
-    objects: [rules_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: rules_on_conflict
-  ): rules_mutation_response
-
-  """
-  insert a single row into the table: "rules"
-  """
-  insert_rules_one(
-    """the row to be inserted"""
-    object: rules_insert_input!
-
-    """upsert condition"""
-    on_conflict: rules_on_conflict
-  ): rules
-
-  """
-  update data of the table: "devices"
-  """
-  update_devices(
-    """sets the columns of the filtered rows to the given values"""
-    _set: devices_set_input
-
-    """filter the rows which have to be updated"""
-    where: devices_bool_exp!
-  ): devices_mutation_response
-
-  """
-  update single row of the table: "devices"
-  """
-  update_devices_by_pk(
-    """sets the columns of the filtered rows to the given values"""
-    _set: devices_set_input
-    pk_columns: devices_pk_columns_input!
-  ): devices
-
-  """
-  update multiples rows of table: "devices"
-  """
-  update_devices_many(
-    """updates to execute, in order"""
-    updates: [devices_updates!]!
-  ): [devices_mutation_response]
-
-  """
-  update data of the table: "policies"
-  """
-  update_policies(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: policies_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: policies_set_input
-
-    """filter the rows which have to be updated"""
-    where: policies_bool_exp!
-  ): policies_mutation_response
-
-  """
-  update single row of the table: "policies"
-  """
-  update_policies_by_pk(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: policies_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: policies_set_input
-    pk_columns: policies_pk_columns_input!
-  ): policies
-
-  """
-  update multiples rows of table: "policies"
-  """
-  update_policies_many(
-    """updates to execute, in order"""
-    updates: [policies_updates!]!
-  ): [policies_mutation_response]
-
-  """
-  update data of the table: "pools"
-  """
-  update_pools(
-    """sets the columns of the filtered rows to the given values"""
-    _set: pools_set_input
-
-    """filter the rows which have to be updated"""
-    where: pools_bool_exp!
-  ): pools_mutation_response
-
-  """
-  update single row of the table: "pools"
-  """
-  update_pools_by_pk(
-    """sets the columns of the filtered rows to the given values"""
-    _set: pools_set_input
-    pk_columns: pools_pk_columns_input!
-  ): pools
-
-  """
-  update multiples rows of table: "pools"
-  """
-  update_pools_many(
-    """updates to execute, in order"""
-    updates: [pools_updates!]!
-  ): [pools_mutation_response]
-
-  """
-  update data of the table: "rules"
-  """
-  update_rules(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: rules_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: rules_set_input
-
-    """filter the rows which have to be updated"""
-    where: rules_bool_exp!
-  ): rules_mutation_response
-
-  """
-  update single row of the table: "rules"
-  """
-  update_rules_by_pk(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: rules_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: rules_set_input
-    pk_columns: rules_pk_columns_input!
-  ): rules
-
-  """
-  update multiples rows of table: "rules"
-  """
-  update_rules_many(
-    """updates to execute, in order"""
-    updates: [rules_updates!]!
-  ): [rules_mutation_response]
+type ListUniversitiesOutput {
+  alpha_two_code: String
+  country: String
+  domains: [String!]!
+  name: String
+  stateprovince: String
+  web_pages: [String!]!
 }
 
 """column ordering options"""
-enum order_by {
+enum OrderBy {
   """in ascending order, nulls last"""
-  asc
+  ASC
 
   """in ascending order, nulls first"""
-  asc_nulls_first
+  ASC_NULLS_FIRST
 
   """in ascending order, nulls last"""
-  asc_nulls_last
+  ASC_NULLS_LAST
 
   """in descending order, nulls first"""
-  desc
+  DESC
 
   """in descending order, nulls first"""
-  desc_nulls_first
+  DESC_NULLS_FIRST
 
   """in descending order, nulls last"""
-  desc_nulls_last
+  DESC_NULLS_LAST
 }
 
 """organizations are enums"""
-type organization {
+type Organization {
   description: String!
   value: String!
 }
@@ -998,43 +649,43 @@ type organization {
 """
 Boolean expression to filter rows from the table "organization". All fields are combined with a logical 'AND'.
 """
-input organization_bool_exp {
-  _and: [organization_bool_exp!]
-  _not: organization_bool_exp
-  _or: [organization_bool_exp!]
-  description: String_comparison_exp
-  value: String_comparison_exp
+input OrganizationBoolExp {
+  _and: [OrganizationBoolExp!]
+  _not: OrganizationBoolExp
+  _or: [OrganizationBoolExp!]
+  description: StringComparisonExp
+  value: StringComparisonExp
 }
 
-enum organization_enum {
+enum OrganizationEnum {
   """chinthagunta org"""
-  chinthagunta
+  CHINTHAGUNTA
 
   """example org"""
-  example
+  EXAMPLE
 }
 
 """
-Boolean expression to compare columns of type "organization_enum". All fields are combined with logical 'AND'.
+Boolean expression to compare columns of type "OrganizationEnum". All fields are combined with logical 'AND'.
 """
-input organization_enum_comparison_exp {
-  _eq: organization_enum
-  _in: [organization_enum!]
-  _is_null: Boolean
-  _neq: organization_enum
-  _nin: [organization_enum!]
+input OrganizationEnumComparisonExp {
+  _eq: OrganizationEnum
+  _in: [OrganizationEnum!]
+  _isNull: Boolean
+  _neq: OrganizationEnum
+  _nin: [OrganizationEnum!]
 }
 
 """Ordering options when selecting data from "organization"."""
-input organization_order_by {
-  description: order_by
-  value: order_by
+input OrganizationOrderBy {
+  description: OrderBy
+  value: OrderBy
 }
 
 """
 select columns of table "organization"
 """
-enum organization_select_column {
+enum OrganizationSelectColumn {
   """column name"""
   description
 
@@ -1045,16 +696,16 @@ enum organization_select_column {
 """
 Streaming cursor of the table "organization"
 """
-input organization_stream_cursor_input {
+input OrganizationStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: organization_stream_cursor_value_input!
+  initialValue: OrganizationStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input organization_stream_cursor_value_input {
+input OrganizationStreamCursorValueInput {
   description: String
   value: String
 }
@@ -1062,20 +713,20 @@ input organization_stream_cursor_value_input {
 """
 policies is a joint table to connect a Subject polymorphically  and a Rule
 """
-type policies {
+type Policies {
   active: Boolean!
   createdAt: timestamptz!
   createdBy: String!
   id: uuid!
-  organization: organization_enum!
+  organization: OrganizationEnum!
 
   """An object relationship"""
-  rule: rules!
+  rule: Rules!
   ruleId: uuid!
   subjectDisplayName: String!
   subjectId: uuid!
   subjectSecondaryId: String!
-  subjectType: subject_type_enum!
+  subjectType: SubjectTypeEnum!
   updatedAt: timestamptz!
   updatedBy: String!
   validFrom: timestamptz!
@@ -1086,32 +737,32 @@ type policies {
 """
 Boolean expression to filter rows from the table "policies". All fields are combined with a logical 'AND'.
 """
-input policies_bool_exp {
-  _and: [policies_bool_exp!]
-  _not: policies_bool_exp
-  _or: [policies_bool_exp!]
-  active: Boolean_comparison_exp
-  createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
-  id: uuid_comparison_exp
-  organization: organization_enum_comparison_exp
-  rule: rules_bool_exp
-  ruleId: uuid_comparison_exp
-  subjectDisplayName: String_comparison_exp
-  subjectId: uuid_comparison_exp
-  subjectSecondaryId: String_comparison_exp
-  subjectType: subject_type_enum_comparison_exp
-  updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
-  validFrom: timestamptz_comparison_exp
-  validTo: timestamptz_comparison_exp
-  weight: smallint_comparison_exp
+input PoliciesBoolExp {
+  _and: [PoliciesBoolExp!]
+  _not: PoliciesBoolExp
+  _or: [PoliciesBoolExp!]
+  active: BooleanComparisonExp
+  createdAt: TimestamptzComparisonExp
+  createdBy: StringComparisonExp
+  id: UuidComparisonExp
+  organization: OrganizationEnumComparisonExp
+  rule: RulesBoolExp
+  ruleId: UuidComparisonExp
+  subjectDisplayName: StringComparisonExp
+  subjectId: UuidComparisonExp
+  subjectSecondaryId: StringComparisonExp
+  subjectType: SubjectTypeEnumComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  updatedBy: StringComparisonExp
+  validFrom: TimestamptzComparisonExp
+  validTo: TimestamptzComparisonExp
+  weight: SmallintComparisonExp
 }
 
 """
 unique or primary key constraints on table "policies"
 """
-enum policies_constraint {
+enum PoliciesConstraint {
   """
   unique or primary key constraint on columns "id"
   """
@@ -1126,21 +777,21 @@ enum policies_constraint {
 """
 input type for incrementing numeric columns in table "policies"
 """
-input policies_inc_input {
+input PoliciesIncInput {
   weight: smallint
 }
 
 """
 input type for inserting data into table "policies"
 """
-input policies_insert_input {
+input PoliciesInsertInput {
   active: Boolean
-  rule: rules_obj_rel_insert_input
+  rule: RulesObjRelInsertInput
   ruleId: uuid
   subjectDisplayName: String
   subjectId: uuid
   subjectSecondaryId: String
-  subjectType: subject_type_enum
+  subjectType: SubjectTypeEnum
   validFrom: timestamptz
   validTo: timestamptz
   weight: smallint
@@ -1149,52 +800,52 @@ input policies_insert_input {
 """
 response of any mutation on the table "policies"
 """
-type policies_mutation_response {
+type PoliciesMutationResponse {
   """number of rows affected by the mutation"""
-  affected_rows: Int!
+  affectedRows: Int!
 
   """data from the rows affected by the mutation"""
-  returning: [policies!]!
+  returning: [Policies!]!
 }
 
 """
 on_conflict condition type for table "policies"
 """
-input policies_on_conflict {
-  constraint: policies_constraint!
-  update_columns: [policies_update_column!]! = []
-  where: policies_bool_exp
+input PoliciesOnConflict {
+  constraint: PoliciesConstraint!
+  updateColumns: [PoliciesUpdateColumn!]! = []
+  where: PoliciesBoolExp
 }
 
 """Ordering options when selecting data from "policies"."""
-input policies_order_by {
-  active: order_by
-  createdAt: order_by
-  createdBy: order_by
-  id: order_by
-  organization: order_by
-  rule: rules_order_by
-  ruleId: order_by
-  subjectDisplayName: order_by
-  subjectId: order_by
-  subjectSecondaryId: order_by
-  subjectType: order_by
-  updatedAt: order_by
-  updatedBy: order_by
-  validFrom: order_by
-  validTo: order_by
-  weight: order_by
+input PoliciesOrderBy {
+  active: OrderBy
+  createdAt: OrderBy
+  createdBy: OrderBy
+  id: OrderBy
+  organization: OrderBy
+  rule: RulesOrderBy
+  ruleId: OrderBy
+  subjectDisplayName: OrderBy
+  subjectId: OrderBy
+  subjectSecondaryId: OrderBy
+  subjectType: OrderBy
+  updatedAt: OrderBy
+  updatedBy: OrderBy
+  validFrom: OrderBy
+  validTo: OrderBy
+  weight: OrderBy
 }
 
 """primary key columns input for table: policies"""
-input policies_pk_columns_input {
+input PoliciesPkColumnsInput {
   id: uuid!
 }
 
 """
 select columns of table "policies"
 """
-enum policies_select_column {
+enum PoliciesSelectColumn {
   """column name"""
   active
 
@@ -1244,7 +895,7 @@ enum policies_select_column {
 """
 input type for updating data in table "policies"
 """
-input policies_set_input {
+input PoliciesSetInput {
   active: Boolean
   deletedAt: timestamptz
   validFrom: timestamptz
@@ -1255,26 +906,26 @@ input policies_set_input {
 """
 Streaming cursor of the table "policies"
 """
-input policies_stream_cursor_input {
+input PoliciesStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: policies_stream_cursor_value_input!
+  initialValue: PoliciesStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input policies_stream_cursor_value_input {
+input PoliciesStreamCursorValueInput {
   active: Boolean
   createdAt: timestamptz
   createdBy: String
   id: uuid
-  organization: organization_enum
+  organization: OrganizationEnum
   ruleId: uuid
   subjectDisplayName: String
   subjectId: uuid
   subjectSecondaryId: String
-  subjectType: subject_type_enum
+  subjectType: SubjectTypeEnum
   updatedAt: timestamptz
   updatedBy: String
   validFrom: timestamptz
@@ -1285,7 +936,7 @@ input policies_stream_cursor_value_input {
 """
 update columns of table "policies"
 """
-enum policies_update_column {
+enum PoliciesUpdateColumn {
   """column name"""
   active
 
@@ -1302,19 +953,19 @@ enum policies_update_column {
   weight
 }
 
-input policies_updates {
+input PoliciesUpdates {
   """increments the numeric columns with given value of the filtered values"""
-  _inc: policies_inc_input
+  _inc: PoliciesIncInput
 
   """sets the columns of the filtered rows to the given values"""
-  _set: policies_set_input
+  _set: PoliciesSetInput
 
   """filter the rows which have to be updated"""
-  where: policies_bool_exp!
+  where: PoliciesBoolExp!
 }
 
 """Device pools"""
-type pools {
+type Pools {
   annotations: hstore
   createdAt: timestamptz!
   createdBy: String!
@@ -1322,12 +973,12 @@ type pools {
   description: String
   displayName: String!
   id: uuid!
-  organization: organization_enum!
+  organization: OrganizationEnum!
 
   """An array relationship"""
   pool_devices(
     """distinct select on columns"""
-    distinct_on: [device_pool_select_column!]
+    distinctOn: [DevicePoolSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -1336,11 +987,11 @@ type pools {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [device_pool_order_by!]
+    orderBy: [DevicePoolOrderBy!]
 
     """filter the rows returned"""
-    where: device_pool_bool_exp
-  ): [device_pool!]!
+    where: DevicePoolBoolExp
+  ): [DevicePool!]!
   tags: [String!]
   updatedAt: timestamptz!
   updatedBy: String!
@@ -1349,28 +1000,28 @@ type pools {
 """
 Boolean expression to filter rows from the table "pools". All fields are combined with a logical 'AND'.
 """
-input pools_bool_exp {
-  _and: [pools_bool_exp!]
-  _not: pools_bool_exp
-  _or: [pools_bool_exp!]
-  annotations: hstore_comparison_exp
-  createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
-  deletedAt: timestamptz_comparison_exp
-  description: String_comparison_exp
-  displayName: String_comparison_exp
-  id: uuid_comparison_exp
-  organization: organization_enum_comparison_exp
-  pool_devices: device_pool_bool_exp
-  tags: String_array_comparison_exp
-  updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
+input PoolsBoolExp {
+  _and: [PoolsBoolExp!]
+  _not: PoolsBoolExp
+  _or: [PoolsBoolExp!]
+  annotations: HstoreComparisonExp
+  createdAt: TimestamptzComparisonExp
+  createdBy: StringComparisonExp
+  deletedAt: TimestamptzComparisonExp
+  description: StringComparisonExp
+  displayName: StringComparisonExp
+  id: UuidComparisonExp
+  organization: OrganizationEnumComparisonExp
+  pool_devices: DevicePoolBoolExp
+  tags: StringArrayComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  updatedBy: StringComparisonExp
 }
 
 """
 unique or primary key constraints on table "pools"
 """
-enum pools_constraint {
+enum PoolsConstraint {
   """
   unique or primary key constraint on columns "organization", "display_name"
   """
@@ -1385,69 +1036,69 @@ enum pools_constraint {
 """
 input type for inserting data into table "pools"
 """
-input pools_insert_input {
+input PoolsInsertInput {
   annotations: hstore
   description: String
   displayName: String
-  pool_devices: device_pool_arr_rel_insert_input
+  pool_devices: DevicePoolArrRelInsertInput
   tags: [String!]
 }
 
 """
 response of any mutation on the table "pools"
 """
-type pools_mutation_response {
+type PoolsMutationResponse {
   """number of rows affected by the mutation"""
-  affected_rows: Int!
+  affectedRows: Int!
 
   """data from the rows affected by the mutation"""
-  returning: [pools!]!
+  returning: [Pools!]!
 }
 
 """
 input type for inserting object relation for remote table "pools"
 """
-input pools_obj_rel_insert_input {
-  data: pools_insert_input!
+input PoolsObjRelInsertInput {
+  data: PoolsInsertInput!
 
   """upsert condition"""
-  on_conflict: pools_on_conflict
+  onConflict: PoolsOnConflict
 }
 
 """
 on_conflict condition type for table "pools"
 """
-input pools_on_conflict {
-  constraint: pools_constraint!
-  update_columns: [pools_update_column!]! = []
-  where: pools_bool_exp
+input PoolsOnConflict {
+  constraint: PoolsConstraint!
+  updateColumns: [PoolsUpdateColumn!]! = []
+  where: PoolsBoolExp
 }
 
 """Ordering options when selecting data from "pools"."""
-input pools_order_by {
-  annotations: order_by
-  createdAt: order_by
-  createdBy: order_by
-  deletedAt: order_by
-  description: order_by
-  displayName: order_by
-  id: order_by
-  organization: order_by
-  pool_devices_aggregate: device_pool_aggregate_order_by
-  tags: order_by
-  updatedAt: order_by
-  updatedBy: order_by
+input PoolsOrderBy {
+  annotations: OrderBy
+  createdAt: OrderBy
+  createdBy: OrderBy
+  deletedAt: OrderBy
+  description: OrderBy
+  displayName: OrderBy
+  id: OrderBy
+  organization: OrderBy
+  pool_devicesAggregate: DevicePoolAggregateOrderBy
+  tags: OrderBy
+  updatedAt: OrderBy
+  updatedBy: OrderBy
 }
 
 """primary key columns input for table: pools"""
-input pools_pk_columns_input {
+input PoolsPkColumnsInput {
   id: uuid!
 }
 
 """
 select columns of table "pools"
 """
-enum pools_select_column {
+enum PoolsSelectColumn {
   """column name"""
   annotations
 
@@ -1485,7 +1136,7 @@ enum pools_select_column {
 """
 input type for updating data in table "pools"
 """
-input pools_set_input {
+input PoolsSetInput {
   annotations: hstore
   deletedAt: timestamptz
   description: String
@@ -1496,16 +1147,16 @@ input pools_set_input {
 """
 Streaming cursor of the table "pools"
 """
-input pools_stream_cursor_input {
+input PoolsStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: pools_stream_cursor_value_input!
+  initialValue: PoolsStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input pools_stream_cursor_value_input {
+input PoolsStreamCursorValueInput {
   annotations: hstore
   createdAt: timestamptz
   createdBy: String
@@ -1513,7 +1164,7 @@ input pools_stream_cursor_value_input {
   description: String
   displayName: String
   id: uuid
-  organization: organization_enum
+  organization: OrganizationEnum
   tags: [String!]
   updatedAt: timestamptz
   updatedBy: String
@@ -1522,7 +1173,7 @@ input pools_stream_cursor_value_input {
 """
 update columns of table "pools"
 """
-enum pools_update_column {
+enum PoolsUpdateColumn {
   """column name"""
   annotations
 
@@ -1539,16 +1190,16 @@ enum pools_update_column {
   tags
 }
 
-input pools_updates {
+input PoolsUpdates {
   """sets the columns of the filtered rows to the given values"""
-  _set: pools_set_input
+  _set: PoolsSetInput
 
   """filter the rows which have to be updated"""
-  where: pools_bool_exp!
+  where: PoolsBoolExp!
 }
 
 """network protocol enum"""
-type protocol {
+type Protocol {
   description: String!
   value: String!
 }
@@ -1556,34 +1207,34 @@ type protocol {
 """
 aggregated selection of "protocol"
 """
-type protocol_aggregate {
-  aggregate: protocol_aggregate_fields
-  nodes: [protocol!]!
+type ProtocolAggregate {
+  aggregate: ProtocolAggregateFields
+  nodes: [Protocol!]!
 }
 
 """
 aggregate fields of "protocol"
 """
-type protocol_aggregate_fields {
-  count(columns: [protocol_select_column!], distinct: Boolean): Int!
-  max: protocol_max_fields
-  min: protocol_min_fields
+type ProtocolAggregateFields {
+  count(columns: [ProtocolSelectColumn!], distinct: Boolean): Int!
+  max: ProtocolMaxFields
+  min: ProtocolMinFields
 }
 
 """
 Boolean expression to filter rows from the table "protocol". All fields are combined with a logical 'AND'.
 """
-input protocol_bool_exp {
-  _and: [protocol_bool_exp!]
-  _not: protocol_bool_exp
-  _or: [protocol_bool_exp!]
-  description: String_comparison_exp
-  value: String_comparison_exp
+input ProtocolBoolExp {
+  _and: [ProtocolBoolExp!]
+  _not: ProtocolBoolExp
+  _or: [ProtocolBoolExp!]
+  description: StringComparisonExp
+  value: StringComparisonExp
 }
 
-enum protocol_enum {
+enum ProtocolEnum {
   """Any"""
-  Any
+  ANY
 
   """ICMP"""
   ICMP
@@ -1611,38 +1262,38 @@ enum protocol_enum {
 }
 
 """
-Boolean expression to compare columns of type "protocol_enum". All fields are combined with logical 'AND'.
+Boolean expression to compare columns of type "ProtocolEnum". All fields are combined with logical 'AND'.
 """
-input protocol_enum_comparison_exp {
-  _eq: protocol_enum
-  _in: [protocol_enum!]
-  _is_null: Boolean
-  _neq: protocol_enum
-  _nin: [protocol_enum!]
+input ProtocolEnumComparisonExp {
+  _eq: ProtocolEnum
+  _in: [ProtocolEnum!]
+  _isNull: Boolean
+  _neq: ProtocolEnum
+  _nin: [ProtocolEnum!]
 }
 
 """aggregate max on columns"""
-type protocol_max_fields {
+type ProtocolMaxFields {
   description: String
   value: String
 }
 
 """aggregate min on columns"""
-type protocol_min_fields {
+type ProtocolMinFields {
   description: String
   value: String
 }
 
 """Ordering options when selecting data from "protocol"."""
-input protocol_order_by {
-  description: order_by
-  value: order_by
+input ProtocolOrderBy {
+  description: OrderBy
+  value: OrderBy
 }
 
 """
 select columns of table "protocol"
 """
-enum protocol_select_column {
+enum ProtocolSelectColumn {
   """column name"""
   description
 
@@ -1653,326 +1304,23 @@ enum protocol_select_column {
 """
 Streaming cursor of the table "protocol"
 """
-input protocol_stream_cursor_input {
+input ProtocolStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: protocol_stream_cursor_value_input!
+  initialValue: ProtocolStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input protocol_stream_cursor_value_input {
+input ProtocolStreamCursorValueInput {
   description: String
   value: String
 }
 
-type query_root {
-  """Universities API"""
-  ListUniversities(arg1: ListUniversitiesInput!): [ListUniversitiesOutput]
-
-  """Restrooms API"""
-  SearchRestrooms(arg1: SearchRestroomsInput!): [SearchRestroomsOutput]
-
-  """
-  fetch data from the table: "action"
-  """
-  action(
-    """distinct select on columns"""
-    distinct_on: [action_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [action_order_by!]
-
-    """filter the rows returned"""
-    where: action_bool_exp
-  ): [action!]!
-
-  """fetch data from the table: "action" using primary key columns"""
-  action_by_pk(value: String!): action
-
-  """
-  fetch data from the table: "device_pool"
-  """
-  device_pool(
-    """distinct select on columns"""
-    distinct_on: [device_pool_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [device_pool_order_by!]
-
-    """filter the rows returned"""
-    where: device_pool_bool_exp
-  ): [device_pool!]!
-
-  """fetch data from the table: "device_pool" using primary key columns"""
-  device_pool_by_pk(id: uuid!): device_pool
-
-  """
-  fetch data from the table: "devices"
-  """
-  devices(
-    """distinct select on columns"""
-    distinct_on: [devices_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [devices_order_by!]
-
-    """filter the rows returned"""
-    where: devices_bool_exp
-  ): [devices!]!
-
-  """fetch data from the table: "devices" using primary key columns"""
-  devices_by_pk(id: uuid!): devices
-
-  """
-  execute function "devices_not_in_pool" which returns "devices"
-  """
-  devices_not_in_pool(
-    """
-    input parameters for function "devices_not_in_pool"
-    """
-    args: devices_not_in_pool_args!
-
-    """distinct select on columns"""
-    distinct_on: [devices_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [devices_order_by!]
-
-    """filter the rows returned"""
-    where: devices_bool_exp
-  ): [devices!]!
-
-  """
-  fetch data from the table: "direction"
-  """
-  direction(
-    """distinct select on columns"""
-    distinct_on: [direction_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [direction_order_by!]
-
-    """filter the rows returned"""
-    where: direction_bool_exp
-  ): [direction!]!
-
-  """
-  fetch aggregated fields from the table: "direction"
-  """
-  direction_aggregate(
-    """distinct select on columns"""
-    distinct_on: [direction_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [direction_order_by!]
-
-    """filter the rows returned"""
-    where: direction_bool_exp
-  ): direction_aggregate!
-
-  """fetch data from the table: "direction" using primary key columns"""
-  direction_by_pk(value: String!): direction
-
-  """
-  fetch data from the table: "organization"
-  """
-  organization(
-    """distinct select on columns"""
-    distinct_on: [organization_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [organization_order_by!]
-
-    """filter the rows returned"""
-    where: organization_bool_exp
-  ): [organization!]!
-
-  """fetch data from the table: "organization" using primary key columns"""
-  organization_by_pk(value: String!): organization
-
-  """
-  fetch data from the table: "policies"
-  """
-  policies(
-    """distinct select on columns"""
-    distinct_on: [policies_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [policies_order_by!]
-
-    """filter the rows returned"""
-    where: policies_bool_exp
-  ): [policies!]!
-
-  """fetch data from the table: "policies" using primary key columns"""
-  policies_by_pk(id: uuid!): policies
-
-  """
-  fetch data from the table: "pools"
-  """
-  pools(
-    """distinct select on columns"""
-    distinct_on: [pools_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [pools_order_by!]
-
-    """filter the rows returned"""
-    where: pools_bool_exp
-  ): [pools!]!
-
-  """fetch data from the table: "pools" using primary key columns"""
-  pools_by_pk(id: uuid!): pools
-
-  """
-  fetch data from the table: "protocol"
-  """
-  protocol(
-    """distinct select on columns"""
-    distinct_on: [protocol_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [protocol_order_by!]
-
-    """filter the rows returned"""
-    where: protocol_bool_exp
-  ): [protocol!]!
-
-  """
-  fetch aggregated fields from the table: "protocol"
-  """
-  protocol_aggregate(
-    """distinct select on columns"""
-    distinct_on: [protocol_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [protocol_order_by!]
-
-    """filter the rows returned"""
-    where: protocol_bool_exp
-  ): protocol_aggregate!
-
-  """fetch data from the table: "protocol" using primary key columns"""
-  protocol_by_pk(value: String!): protocol
-
-  """
-  fetch data from the table: "rules"
-  """
-  rules(
-    """distinct select on columns"""
-    distinct_on: [rules_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [rules_order_by!]
-
-    """filter the rows returned"""
-    where: rules_bool_exp
-  ): [rules!]!
-
-  """fetch data from the table: "rules" using primary key columns"""
-  rules_by_pk(id: uuid!): rules
-
-  """
-  fetch data from the table: "subject_type"
-  """
-  subject_type(
-    """distinct select on columns"""
-    distinct_on: [subject_type_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [subject_type_order_by!]
-
-    """filter the rows returned"""
-    where: subject_type_bool_exp
-  ): [subject_type!]!
-
-  """fetch data from the table: "subject_type" using primary key columns"""
-  subject_type_by_pk(value: String!): subject_type
-}
-
 """5-tuple firewalls rules"""
-type rules {
-  action: action_enum!
+type Rules {
+  action: ActionEnum!
   annotations: hstore
   appId: String
   createdAt: timestamptz!
@@ -1980,11 +1328,11 @@ type rules {
   description: String
   destination: String
   destinationPort: String
-  direction: direction_enum!
+  direction: DirectionEnum!
   displayName: String!
   id: uuid!
-  organization: organization_enum!
-  protocol: protocol_enum!
+  organization: OrganizationEnum!
+  protocol: ProtocolEnum!
   shared: Boolean!
   source: String
   sourcePort: String
@@ -1998,37 +1346,37 @@ type rules {
 """
 Boolean expression to filter rows from the table "rules". All fields are combined with a logical 'AND'.
 """
-input rules_bool_exp {
-  _and: [rules_bool_exp!]
-  _not: rules_bool_exp
-  _or: [rules_bool_exp!]
-  action: action_enum_comparison_exp
-  annotations: hstore_comparison_exp
-  appId: String_comparison_exp
-  createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
-  description: String_comparison_exp
-  destination: String_comparison_exp
-  destinationPort: String_comparison_exp
-  direction: direction_enum_comparison_exp
-  displayName: String_comparison_exp
-  id: uuid_comparison_exp
-  organization: organization_enum_comparison_exp
-  protocol: protocol_enum_comparison_exp
-  shared: Boolean_comparison_exp
-  source: String_comparison_exp
-  sourcePort: String_comparison_exp
-  tags: String_array_comparison_exp
-  throttleRate: String_comparison_exp
-  updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
-  weight: smallint_comparison_exp
+input RulesBoolExp {
+  _and: [RulesBoolExp!]
+  _not: RulesBoolExp
+  _or: [RulesBoolExp!]
+  action: ActionEnumComparisonExp
+  annotations: HstoreComparisonExp
+  appId: StringComparisonExp
+  createdAt: TimestamptzComparisonExp
+  createdBy: StringComparisonExp
+  description: StringComparisonExp
+  destination: StringComparisonExp
+  destinationPort: StringComparisonExp
+  direction: DirectionEnumComparisonExp
+  displayName: StringComparisonExp
+  id: UuidComparisonExp
+  organization: OrganizationEnumComparisonExp
+  protocol: ProtocolEnumComparisonExp
+  shared: BooleanComparisonExp
+  source: StringComparisonExp
+  sourcePort: StringComparisonExp
+  tags: StringArrayComparisonExp
+  throttleRate: StringComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  updatedBy: StringComparisonExp
+  weight: SmallintComparisonExp
 }
 
 """
 unique or primary key constraints on table "rules"
 """
-enum rules_constraint {
+enum RulesConstraint {
   """
   unique or primary key constraint on columns "organization", "display_name"
   """
@@ -2043,23 +1391,23 @@ enum rules_constraint {
 """
 input type for incrementing numeric columns in table "rules"
 """
-input rules_inc_input {
+input RulesIncInput {
   weight: smallint
 }
 
 """
 input type for inserting data into table "rules"
 """
-input rules_insert_input {
-  action: action_enum
+input RulesInsertInput {
+  action: ActionEnum
   annotations: hstore
   appId: String
   description: String
   destination: String
   destinationPort: String
-  direction: direction_enum
+  direction: DirectionEnum
   displayName: String
-  protocol: protocol_enum
+  protocol: ProtocolEnum
   shared: Boolean
   source: String
   sourcePort: String
@@ -2071,67 +1419,67 @@ input rules_insert_input {
 """
 response of any mutation on the table "rules"
 """
-type rules_mutation_response {
+type RulesMutationResponse {
   """number of rows affected by the mutation"""
-  affected_rows: Int!
+  affectedRows: Int!
 
   """data from the rows affected by the mutation"""
-  returning: [rules!]!
+  returning: [Rules!]!
 }
 
 """
 input type for inserting object relation for remote table "rules"
 """
-input rules_obj_rel_insert_input {
-  data: rules_insert_input!
+input RulesObjRelInsertInput {
+  data: RulesInsertInput!
 
   """upsert condition"""
-  on_conflict: rules_on_conflict
+  onConflict: RulesOnConflict
 }
 
 """
 on_conflict condition type for table "rules"
 """
-input rules_on_conflict {
-  constraint: rules_constraint!
-  update_columns: [rules_update_column!]! = []
-  where: rules_bool_exp
+input RulesOnConflict {
+  constraint: RulesConstraint!
+  updateColumns: [RulesUpdateColumn!]! = []
+  where: RulesBoolExp
 }
 
 """Ordering options when selecting data from "rules"."""
-input rules_order_by {
-  action: order_by
-  annotations: order_by
-  appId: order_by
-  createdAt: order_by
-  createdBy: order_by
-  description: order_by
-  destination: order_by
-  destinationPort: order_by
-  direction: order_by
-  displayName: order_by
-  id: order_by
-  organization: order_by
-  protocol: order_by
-  shared: order_by
-  source: order_by
-  sourcePort: order_by
-  tags: order_by
-  throttleRate: order_by
-  updatedAt: order_by
-  updatedBy: order_by
-  weight: order_by
+input RulesOrderBy {
+  action: OrderBy
+  annotations: OrderBy
+  appId: OrderBy
+  createdAt: OrderBy
+  createdBy: OrderBy
+  description: OrderBy
+  destination: OrderBy
+  destinationPort: OrderBy
+  direction: OrderBy
+  displayName: OrderBy
+  id: OrderBy
+  organization: OrderBy
+  protocol: OrderBy
+  shared: OrderBy
+  source: OrderBy
+  sourcePort: OrderBy
+  tags: OrderBy
+  throttleRate: OrderBy
+  updatedAt: OrderBy
+  updatedBy: OrderBy
+  weight: OrderBy
 }
 
 """primary key columns input for table: rules"""
-input rules_pk_columns_input {
+input RulesPkColumnsInput {
   id: uuid!
 }
 
 """
 select columns of table "rules"
 """
-enum rules_select_column {
+enum RulesSelectColumn {
   """column name"""
   action
 
@@ -2199,17 +1547,17 @@ enum rules_select_column {
 """
 input type for updating data in table "rules"
 """
-input rules_set_input {
-  action: action_enum
+input RulesSetInput {
+  action: ActionEnum
   annotations: hstore
   appId: String
   deletedAt: timestamptz
   description: String
   destination: String
   destinationPort: String
-  direction: direction_enum
+  direction: DirectionEnum
   displayName: String
-  protocol: protocol_enum
+  protocol: ProtocolEnum
   shared: Boolean
   source: String
   sourcePort: String
@@ -2221,17 +1569,17 @@ input rules_set_input {
 """
 Streaming cursor of the table "rules"
 """
-input rules_stream_cursor_input {
+input RulesStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: rules_stream_cursor_value_input!
+  initialValue: RulesStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input rules_stream_cursor_value_input {
-  action: action_enum
+input RulesStreamCursorValueInput {
+  action: ActionEnum
   annotations: hstore
   appId: String
   createdAt: timestamptz
@@ -2239,11 +1587,11 @@ input rules_stream_cursor_value_input {
   description: String
   destination: String
   destinationPort: String
-  direction: direction_enum
+  direction: DirectionEnum
   displayName: String
   id: uuid
-  organization: organization_enum
-  protocol: protocol_enum
+  organization: OrganizationEnum
+  protocol: ProtocolEnum
   shared: Boolean
   source: String
   sourcePort: String
@@ -2257,7 +1605,7 @@ input rules_stream_cursor_value_input {
 """
 update columns of table "rules"
 """
-enum rules_update_column {
+enum RulesUpdateColumn {
   """column name"""
   action
 
@@ -2307,36 +1655,136 @@ enum rules_update_column {
   weight
 }
 
-input rules_updates {
+input RulesUpdates {
   """increments the numeric columns with given value of the filtered values"""
-  _inc: rules_inc_input
+  _inc: RulesIncInput
 
   """sets the columns of the filtered rows to the given values"""
-  _set: rules_set_input
+  _set: RulesSetInput
 
   """filter the rows which have to be updated"""
-  where: rules_bool_exp!
+  where: RulesBoolExp!
 }
 
-scalar smallint
+input SearchRestroomsInput {
+  city: String
+  limit: Int
+  offset: Int
+  page: Int
+}
+
+type SearchRestroomsOutput {
+  accessible: Boolean
+  approved: Boolean
+  changing_table: Boolean
+  city: String
+  comment: String
+  country: String
+  created_at: String
+  directions: String
+  downvote: Int
+  edit_id: Int
+  id: Int
+  latitude: Float
+  longitude: Float
+  name: String
+  state: String
+  street: String
+  unisex: Boolean
+  updated_at: String
+  upvote: Int
+}
 
 """
 Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'.
 """
-input smallint_comparison_exp {
+input SmallintComparisonExp {
   _eq: smallint
   _gt: smallint
   _gte: smallint
   _in: [smallint!]
-  _is_null: Boolean
+  _isNull: Boolean
   _lt: smallint
   _lte: smallint
   _neq: smallint
   _nin: [smallint!]
 }
 
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input StringArrayComparisonExp {
+  """is the array contained in the given array value"""
+  _containedIn: [String!]
+
+  """does the array contain the given value"""
+  _contains: [String!]
+  _eq: [String!]
+  _gt: [String!]
+  _gte: [String!]
+  _in: [[String!]!]
+  _isNull: Boolean
+  _lt: [String!]
+  _lte: [String!]
+  _neq: [String!]
+  _nin: [[String!]!]
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input StringComparisonExp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _isNull: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
 """Subject Type"""
-type subject_type {
+type SubjectType {
   description: String!
   value: String!
 }
@@ -2344,52 +1792,52 @@ type subject_type {
 """
 Boolean expression to filter rows from the table "subject_type". All fields are combined with a logical 'AND'.
 """
-input subject_type_bool_exp {
-  _and: [subject_type_bool_exp!]
-  _not: subject_type_bool_exp
-  _or: [subject_type_bool_exp!]
-  description: String_comparison_exp
-  value: String_comparison_exp
+input SubjectTypeBoolExp {
+  _and: [SubjectTypeBoolExp!]
+  _not: SubjectTypeBoolExp
+  _or: [SubjectTypeBoolExp!]
+  description: StringComparisonExp
+  value: StringComparisonExp
 }
 
-enum subject_type_enum {
+enum SubjectTypeEnum {
   """DEVICE"""
-  device
+  DEVICE
 
   """DEVICE_POOL"""
-  device_pool
+  DEVICE_POOL
 
   """GROUP"""
-  group
+  GROUP
 
   """SERVICE_ACCOUNT"""
-  service_account
+  SERVICE_ACCOUNT
 
   """USER"""
-  user
+  USER
 }
 
 """
-Boolean expression to compare columns of type "subject_type_enum". All fields are combined with logical 'AND'.
+Boolean expression to compare columns of type "SubjectTypeEnum". All fields are combined with logical 'AND'.
 """
-input subject_type_enum_comparison_exp {
-  _eq: subject_type_enum
-  _in: [subject_type_enum!]
-  _is_null: Boolean
-  _neq: subject_type_enum
-  _nin: [subject_type_enum!]
+input SubjectTypeEnumComparisonExp {
+  _eq: SubjectTypeEnum
+  _in: [SubjectTypeEnum!]
+  _isNull: Boolean
+  _neq: SubjectTypeEnum
+  _nin: [SubjectTypeEnum!]
 }
 
 """Ordering options when selecting data from "subject_type"."""
-input subject_type_order_by {
-  description: order_by
-  value: order_by
+input SubjectTypeOrderBy {
+  description: OrderBy
+  value: OrderBy
 }
 
 """
 select columns of table "subject_type"
 """
-enum subject_type_select_column {
+enum SubjectTypeSelectColumn {
   """column name"""
   description
 
@@ -2400,19 +1848,601 @@ enum subject_type_select_column {
 """
 Streaming cursor of the table "subject_type"
 """
-input subject_type_stream_cursor_input {
+input SubjectTypeStreamCursorInput {
   """Stream column input with initial value"""
-  initial_value: subject_type_stream_cursor_value_input!
+  initialValue: SubjectTypeStreamCursorValueInput!
 
   """cursor ordering"""
-  ordering: cursor_ordering
+  ordering: CursorOrdering
 }
 
 """Initial value of the column from where the streaming should start"""
-input subject_type_stream_cursor_value_input {
+input SubjectTypeStreamCursorValueInput {
   description: String
   value: String
 }
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input TimestamptzComparisonExp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _isNull: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+"""
+Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
+"""
+input UuidComparisonExp {
+  _eq: uuid
+  _gt: uuid
+  _gte: uuid
+  _in: [uuid!]
+  _isNull: Boolean
+  _lt: uuid
+  _lte: uuid
+  _neq: uuid
+  _nin: [uuid!]
+}
+
+input devicesNotInPoolArgs {
+  poolid: uuid
+}
+
+scalar hstore
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "device_pool"
+  """
+  deleteDevicePool(
+    """filter the rows which have to be deleted"""
+    where: DevicePoolBoolExp!
+  ): DevicePoolMutationResponse
+
+  """
+  delete single row from the table: "device_pool"
+  """
+  deleteDevicePoolByPk(id: uuid!): DevicePool
+
+  """
+  delete data from the table: "pools"
+  """
+  deletePools(
+    """filter the rows which have to be deleted"""
+    where: PoolsBoolExp!
+  ): PoolsMutationResponse
+
+  """
+  delete single row from the table: "pools"
+  """
+  deletePoolsByPk(id: uuid!): Pools
+
+  """
+  insert data into the table: "device_pool"
+  """
+  insertDevicePool(
+    """the rows to be inserted"""
+    objects: [DevicePoolInsertInput!]!
+
+    """upsert condition"""
+    onConflict: DevicePoolOnConflict
+  ): DevicePoolMutationResponse
+
+  """
+  insert a single row into the table: "device_pool"
+  """
+  insertDevicePoolOne(
+    """the row to be inserted"""
+    object: DevicePoolInsertInput!
+
+    """upsert condition"""
+    onConflict: DevicePoolOnConflict
+  ): DevicePool
+
+  """
+  insert data into the table: "policies"
+  """
+  insertPolicies(
+    """the rows to be inserted"""
+    objects: [PoliciesInsertInput!]!
+
+    """upsert condition"""
+    onConflict: PoliciesOnConflict
+  ): PoliciesMutationResponse
+
+  """
+  insert a single row into the table: "policies"
+  """
+  insertPoliciesOne(
+    """the row to be inserted"""
+    object: PoliciesInsertInput!
+
+    """upsert condition"""
+    onConflict: PoliciesOnConflict
+  ): Policies
+
+  """
+  insert data into the table: "pools"
+  """
+  insertPools(
+    """the rows to be inserted"""
+    objects: [PoolsInsertInput!]!
+
+    """upsert condition"""
+    onConflict: PoolsOnConflict
+  ): PoolsMutationResponse
+
+  """
+  insert a single row into the table: "pools"
+  """
+  insertPoolsOne(
+    """the row to be inserted"""
+    object: PoolsInsertInput!
+
+    """upsert condition"""
+    onConflict: PoolsOnConflict
+  ): Pools
+
+  """
+  insert data into the table: "rules"
+  """
+  insertRules(
+    """the rows to be inserted"""
+    objects: [RulesInsertInput!]!
+
+    """upsert condition"""
+    onConflict: RulesOnConflict
+  ): RulesMutationResponse
+
+  """
+  insert a single row into the table: "rules"
+  """
+  insertRulesOne(
+    """the row to be inserted"""
+    object: RulesInsertInput!
+
+    """upsert condition"""
+    onConflict: RulesOnConflict
+  ): Rules
+
+  """
+  update data of the table: "devices"
+  """
+  updateDevices(
+    """sets the columns of the filtered rows to the given values"""
+    _set: DevicesSetInput
+
+    """filter the rows which have to be updated"""
+    where: DevicesBoolExp!
+  ): DevicesMutationResponse
+
+  """
+  update single row of the table: "devices"
+  """
+  updateDevicesByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: DevicesSetInput
+    pkColumns: DevicesPkColumnsInput!
+  ): Devices
+
+  """
+  update multiples rows of table: "devices"
+  """
+  updateDevicesMany(
+    """updates to execute, in order"""
+    updates: [DevicesUpdates!]!
+  ): [DevicesMutationResponse]
+
+  """
+  update data of the table: "policies"
+  """
+  updatePolicies(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: PoliciesIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: PoliciesSetInput
+
+    """filter the rows which have to be updated"""
+    where: PoliciesBoolExp!
+  ): PoliciesMutationResponse
+
+  """
+  update single row of the table: "policies"
+  """
+  updatePoliciesByPk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: PoliciesIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: PoliciesSetInput
+    pkColumns: PoliciesPkColumnsInput!
+  ): Policies
+
+  """
+  update multiples rows of table: "policies"
+  """
+  updatePoliciesMany(
+    """updates to execute, in order"""
+    updates: [PoliciesUpdates!]!
+  ): [PoliciesMutationResponse]
+
+  """
+  update data of the table: "pools"
+  """
+  updatePools(
+    """sets the columns of the filtered rows to the given values"""
+    _set: PoolsSetInput
+
+    """filter the rows which have to be updated"""
+    where: PoolsBoolExp!
+  ): PoolsMutationResponse
+
+  """
+  update single row of the table: "pools"
+  """
+  updatePoolsByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: PoolsSetInput
+    pkColumns: PoolsPkColumnsInput!
+  ): Pools
+
+  """
+  update multiples rows of table: "pools"
+  """
+  updatePoolsMany(
+    """updates to execute, in order"""
+    updates: [PoolsUpdates!]!
+  ): [PoolsMutationResponse]
+
+  """
+  update data of the table: "rules"
+  """
+  updateRules(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: RulesIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: RulesSetInput
+
+    """filter the rows which have to be updated"""
+    where: RulesBoolExp!
+  ): RulesMutationResponse
+
+  """
+  update single row of the table: "rules"
+  """
+  updateRulesByPk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: RulesIncInput
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: RulesSetInput
+    pkColumns: RulesPkColumnsInput!
+  ): Rules
+
+  """
+  update multiples rows of table: "rules"
+  """
+  updateRulesMany(
+    """updates to execute, in order"""
+    updates: [RulesUpdates!]!
+  ): [RulesMutationResponse]
+}
+
+type query_root {
+  """Universities API"""
+  ListUniversities(arg1: ListUniversitiesInput!): [ListUniversitiesOutput]
+
+  """Restrooms API"""
+  SearchRestrooms(arg1: SearchRestroomsInput!): [SearchRestroomsOutput]
+
+  """
+  fetch data from the table: "action"
+  """
+  action(
+    """distinct select on columns"""
+    distinctOn: [ActionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [ActionOrderBy!]
+
+    """filter the rows returned"""
+    where: ActionBoolExp
+  ): [Action!]!
+
+  """fetch data from the table: "action" using primary key columns"""
+  actionByPk(value: String!): Action
+
+  """
+  fetch data from the table: "device_pool"
+  """
+  devicePool(
+    """distinct select on columns"""
+    distinctOn: [DevicePoolSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DevicePoolOrderBy!]
+
+    """filter the rows returned"""
+    where: DevicePoolBoolExp
+  ): [DevicePool!]!
+
+  """fetch data from the table: "device_pool" using primary key columns"""
+  devicePoolByPk(id: uuid!): DevicePool
+
+  """
+  fetch data from the table: "devices"
+  """
+  devices(
+    """distinct select on columns"""
+    distinctOn: [DevicesSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DevicesOrderBy!]
+
+    """filter the rows returned"""
+    where: DevicesBoolExp
+  ): [Devices!]!
+
+  """fetch data from the table: "devices" using primary key columns"""
+  devicesByPk(id: uuid!): Devices
+
+  """
+  execute function "devices_not_in_pool" which returns "devices"
+  """
+  devicesNotInPool(
+    """
+    input parameters for function "devicesNotInPool"
+    """
+    args: devicesNotInPoolArgs!
+
+    """distinct select on columns"""
+    distinctOn: [DevicesSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DevicesOrderBy!]
+
+    """filter the rows returned"""
+    where: DevicesBoolExp
+  ): [Devices!]!
+
+  """
+  fetch data from the table: "direction"
+  """
+  direction(
+    """distinct select on columns"""
+    distinctOn: [DirectionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DirectionOrderBy!]
+
+    """filter the rows returned"""
+    where: DirectionBoolExp
+  ): [Direction!]!
+
+  """
+  fetch aggregated fields from the table: "direction"
+  """
+  directionAggregate(
+    """distinct select on columns"""
+    distinctOn: [DirectionSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [DirectionOrderBy!]
+
+    """filter the rows returned"""
+    where: DirectionBoolExp
+  ): DirectionAggregate!
+
+  """fetch data from the table: "direction" using primary key columns"""
+  directionByPk(value: String!): Direction
+
+  """
+  fetch data from the table: "organization"
+  """
+  organization(
+    """distinct select on columns"""
+    distinctOn: [OrganizationSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [OrganizationOrderBy!]
+
+    """filter the rows returned"""
+    where: OrganizationBoolExp
+  ): [Organization!]!
+
+  """fetch data from the table: "organization" using primary key columns"""
+  organizationByPk(value: String!): Organization
+
+  """
+  fetch data from the table: "policies"
+  """
+  policies(
+    """distinct select on columns"""
+    distinctOn: [PoliciesSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [PoliciesOrderBy!]
+
+    """filter the rows returned"""
+    where: PoliciesBoolExp
+  ): [Policies!]!
+
+  """fetch data from the table: "policies" using primary key columns"""
+  policiesByPk(id: uuid!): Policies
+
+  """
+  fetch data from the table: "pools"
+  """
+  pools(
+    """distinct select on columns"""
+    distinctOn: [PoolsSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [PoolsOrderBy!]
+
+    """filter the rows returned"""
+    where: PoolsBoolExp
+  ): [Pools!]!
+
+  """fetch data from the table: "pools" using primary key columns"""
+  poolsByPk(id: uuid!): Pools
+
+  """
+  fetch data from the table: "protocol"
+  """
+  protocol(
+    """distinct select on columns"""
+    distinctOn: [ProtocolSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [ProtocolOrderBy!]
+
+    """filter the rows returned"""
+    where: ProtocolBoolExp
+  ): [Protocol!]!
+
+  """
+  fetch aggregated fields from the table: "protocol"
+  """
+  protocolAggregate(
+    """distinct select on columns"""
+    distinctOn: [ProtocolSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [ProtocolOrderBy!]
+
+    """filter the rows returned"""
+    where: ProtocolBoolExp
+  ): ProtocolAggregate!
+
+  """fetch data from the table: "protocol" using primary key columns"""
+  protocolByPk(value: String!): Protocol
+
+  """
+  fetch data from the table: "rules"
+  """
+  rules(
+    """distinct select on columns"""
+    distinctOn: [RulesSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [RulesOrderBy!]
+
+    """filter the rows returned"""
+    where: RulesBoolExp
+  ): [Rules!]!
+
+  """fetch data from the table: "rules" using primary key columns"""
+  rulesByPk(id: uuid!): Rules
+
+  """
+  fetch data from the table: "subject_type"
+  """
+  subjectType(
+    """distinct select on columns"""
+    distinctOn: [SubjectTypeSelectColumn!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    orderBy: [SubjectTypeOrderBy!]
+
+    """filter the rows returned"""
+    where: SubjectTypeBoolExp
+  ): [SubjectType!]!
+
+  """fetch data from the table: "subject_type" using primary key columns"""
+  subjectTypeByPk(value: String!): SubjectType
+}
+
+scalar smallint
 
 type subscription_root {
   """
@@ -2420,7 +2450,7 @@ type subscription_root {
   """
   action(
     """distinct select on columns"""
-    distinct_on: [action_select_column!]
+    distinctOn: [ActionSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2429,35 +2459,35 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [action_order_by!]
+    orderBy: [ActionOrderBy!]
 
     """filter the rows returned"""
-    where: action_bool_exp
-  ): [action!]!
+    where: ActionBoolExp
+  ): [Action!]!
 
   """fetch data from the table: "action" using primary key columns"""
-  action_by_pk(value: String!): action
+  actionByPk(value: String!): Action
 
   """
   fetch data from the table in a streaming manner: "action"
   """
-  action_stream(
+  actionStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [action_stream_cursor_input]!
+    cursor: [ActionStreamCursorInput]!
 
     """filter the rows returned"""
-    where: action_bool_exp
-  ): [action!]!
+    where: ActionBoolExp
+  ): [Action!]!
 
   """
   fetch data from the table: "device_pool"
   """
-  device_pool(
+  devicePool(
     """distinct select on columns"""
-    distinct_on: [device_pool_select_column!]
+    distinctOn: [DevicePoolSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2466,35 +2496,35 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [device_pool_order_by!]
+    orderBy: [DevicePoolOrderBy!]
 
     """filter the rows returned"""
-    where: device_pool_bool_exp
-  ): [device_pool!]!
+    where: DevicePoolBoolExp
+  ): [DevicePool!]!
 
   """fetch data from the table: "device_pool" using primary key columns"""
-  device_pool_by_pk(id: uuid!): device_pool
+  devicePoolByPk(id: uuid!): DevicePool
 
   """
   fetch data from the table in a streaming manner: "device_pool"
   """
-  device_pool_stream(
+  devicePoolStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [device_pool_stream_cursor_input]!
+    cursor: [DevicePoolStreamCursorInput]!
 
     """filter the rows returned"""
-    where: device_pool_bool_exp
-  ): [device_pool!]!
+    where: DevicePoolBoolExp
+  ): [DevicePool!]!
 
   """
   fetch data from the table: "devices"
   """
   devices(
     """distinct select on columns"""
-    distinct_on: [devices_select_column!]
+    distinctOn: [DevicesSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2503,26 +2533,26 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [devices_order_by!]
+    orderBy: [DevicesOrderBy!]
 
     """filter the rows returned"""
-    where: devices_bool_exp
-  ): [devices!]!
+    where: DevicesBoolExp
+  ): [Devices!]!
 
   """fetch data from the table: "devices" using primary key columns"""
-  devices_by_pk(id: uuid!): devices
+  devicesByPk(id: uuid!): Devices
 
   """
   execute function "devices_not_in_pool" which returns "devices"
   """
-  devices_not_in_pool(
+  devicesNotInPool(
     """
-    input parameters for function "devices_not_in_pool"
+    input parameters for function "devicesNotInPool"
     """
-    args: devices_not_in_pool_args!
+    args: devicesNotInPoolArgs!
 
     """distinct select on columns"""
-    distinct_on: [devices_select_column!]
+    distinctOn: [DevicesSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2531,32 +2561,32 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [devices_order_by!]
+    orderBy: [DevicesOrderBy!]
 
     """filter the rows returned"""
-    where: devices_bool_exp
-  ): [devices!]!
+    where: DevicesBoolExp
+  ): [Devices!]!
 
   """
   fetch data from the table in a streaming manner: "devices"
   """
-  devices_stream(
+  devicesStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [devices_stream_cursor_input]!
+    cursor: [DevicesStreamCursorInput]!
 
     """filter the rows returned"""
-    where: devices_bool_exp
-  ): [devices!]!
+    where: DevicesBoolExp
+  ): [Devices!]!
 
   """
   fetch data from the table: "direction"
   """
   direction(
     """distinct select on columns"""
-    distinct_on: [direction_select_column!]
+    distinctOn: [DirectionSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2565,18 +2595,18 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [direction_order_by!]
+    orderBy: [DirectionOrderBy!]
 
     """filter the rows returned"""
-    where: direction_bool_exp
-  ): [direction!]!
+    where: DirectionBoolExp
+  ): [Direction!]!
 
   """
   fetch aggregated fields from the table: "direction"
   """
-  direction_aggregate(
+  directionAggregate(
     """distinct select on columns"""
-    distinct_on: [direction_select_column!]
+    distinctOn: [DirectionSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2585,35 +2615,35 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [direction_order_by!]
+    orderBy: [DirectionOrderBy!]
 
     """filter the rows returned"""
-    where: direction_bool_exp
-  ): direction_aggregate!
+    where: DirectionBoolExp
+  ): DirectionAggregate!
 
   """fetch data from the table: "direction" using primary key columns"""
-  direction_by_pk(value: String!): direction
+  directionByPk(value: String!): Direction
 
   """
   fetch data from the table in a streaming manner: "direction"
   """
-  direction_stream(
+  directionStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [direction_stream_cursor_input]!
+    cursor: [DirectionStreamCursorInput]!
 
     """filter the rows returned"""
-    where: direction_bool_exp
-  ): [direction!]!
+    where: DirectionBoolExp
+  ): [Direction!]!
 
   """
   fetch data from the table: "organization"
   """
   organization(
     """distinct select on columns"""
-    distinct_on: [organization_select_column!]
+    distinctOn: [OrganizationSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2622,35 +2652,35 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [organization_order_by!]
+    orderBy: [OrganizationOrderBy!]
 
     """filter the rows returned"""
-    where: organization_bool_exp
-  ): [organization!]!
+    where: OrganizationBoolExp
+  ): [Organization!]!
 
   """fetch data from the table: "organization" using primary key columns"""
-  organization_by_pk(value: String!): organization
+  organizationByPk(value: String!): Organization
 
   """
   fetch data from the table in a streaming manner: "organization"
   """
-  organization_stream(
+  organizationStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [organization_stream_cursor_input]!
+    cursor: [OrganizationStreamCursorInput]!
 
     """filter the rows returned"""
-    where: organization_bool_exp
-  ): [organization!]!
+    where: OrganizationBoolExp
+  ): [Organization!]!
 
   """
   fetch data from the table: "policies"
   """
   policies(
     """distinct select on columns"""
-    distinct_on: [policies_select_column!]
+    distinctOn: [PoliciesSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2659,35 +2689,35 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [policies_order_by!]
+    orderBy: [PoliciesOrderBy!]
 
     """filter the rows returned"""
-    where: policies_bool_exp
-  ): [policies!]!
+    where: PoliciesBoolExp
+  ): [Policies!]!
 
   """fetch data from the table: "policies" using primary key columns"""
-  policies_by_pk(id: uuid!): policies
+  policiesByPk(id: uuid!): Policies
 
   """
   fetch data from the table in a streaming manner: "policies"
   """
-  policies_stream(
+  policiesStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [policies_stream_cursor_input]!
+    cursor: [PoliciesStreamCursorInput]!
 
     """filter the rows returned"""
-    where: policies_bool_exp
-  ): [policies!]!
+    where: PoliciesBoolExp
+  ): [Policies!]!
 
   """
   fetch data from the table: "pools"
   """
   pools(
     """distinct select on columns"""
-    distinct_on: [pools_select_column!]
+    distinctOn: [PoolsSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2696,35 +2726,35 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [pools_order_by!]
+    orderBy: [PoolsOrderBy!]
 
     """filter the rows returned"""
-    where: pools_bool_exp
-  ): [pools!]!
+    where: PoolsBoolExp
+  ): [Pools!]!
 
   """fetch data from the table: "pools" using primary key columns"""
-  pools_by_pk(id: uuid!): pools
+  poolsByPk(id: uuid!): Pools
 
   """
   fetch data from the table in a streaming manner: "pools"
   """
-  pools_stream(
+  poolsStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [pools_stream_cursor_input]!
+    cursor: [PoolsStreamCursorInput]!
 
     """filter the rows returned"""
-    where: pools_bool_exp
-  ): [pools!]!
+    where: PoolsBoolExp
+  ): [Pools!]!
 
   """
   fetch data from the table: "protocol"
   """
   protocol(
     """distinct select on columns"""
-    distinct_on: [protocol_select_column!]
+    distinctOn: [ProtocolSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2733,18 +2763,18 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [protocol_order_by!]
+    orderBy: [ProtocolOrderBy!]
 
     """filter the rows returned"""
-    where: protocol_bool_exp
-  ): [protocol!]!
+    where: ProtocolBoolExp
+  ): [Protocol!]!
 
   """
   fetch aggregated fields from the table: "protocol"
   """
-  protocol_aggregate(
+  protocolAggregate(
     """distinct select on columns"""
-    distinct_on: [protocol_select_column!]
+    distinctOn: [ProtocolSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2753,35 +2783,35 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [protocol_order_by!]
+    orderBy: [ProtocolOrderBy!]
 
     """filter the rows returned"""
-    where: protocol_bool_exp
-  ): protocol_aggregate!
+    where: ProtocolBoolExp
+  ): ProtocolAggregate!
 
   """fetch data from the table: "protocol" using primary key columns"""
-  protocol_by_pk(value: String!): protocol
+  protocolByPk(value: String!): Protocol
 
   """
   fetch data from the table in a streaming manner: "protocol"
   """
-  protocol_stream(
+  protocolStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [protocol_stream_cursor_input]!
+    cursor: [ProtocolStreamCursorInput]!
 
     """filter the rows returned"""
-    where: protocol_bool_exp
-  ): [protocol!]!
+    where: ProtocolBoolExp
+  ): [Protocol!]!
 
   """
   fetch data from the table: "rules"
   """
   rules(
     """distinct select on columns"""
-    distinct_on: [rules_select_column!]
+    distinctOn: [RulesSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2790,35 +2820,35 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [rules_order_by!]
+    orderBy: [RulesOrderBy!]
 
     """filter the rows returned"""
-    where: rules_bool_exp
-  ): [rules!]!
+    where: RulesBoolExp
+  ): [Rules!]!
 
   """fetch data from the table: "rules" using primary key columns"""
-  rules_by_pk(id: uuid!): rules
+  rulesByPk(id: uuid!): Rules
 
   """
   fetch data from the table in a streaming manner: "rules"
   """
-  rules_stream(
+  rulesStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [rules_stream_cursor_input]!
+    cursor: [RulesStreamCursorInput]!
 
     """filter the rows returned"""
-    where: rules_bool_exp
-  ): [rules!]!
+    where: RulesBoolExp
+  ): [Rules!]!
 
   """
   fetch data from the table: "subject_type"
   """
-  subject_type(
+  subjectType(
     """distinct select on columns"""
-    distinct_on: [subject_type_select_column!]
+    distinctOn: [SubjectTypeSelectColumn!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2827,60 +2857,30 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [subject_type_order_by!]
+    orderBy: [SubjectTypeOrderBy!]
 
     """filter the rows returned"""
-    where: subject_type_bool_exp
-  ): [subject_type!]!
+    where: SubjectTypeBoolExp
+  ): [SubjectType!]!
 
   """fetch data from the table: "subject_type" using primary key columns"""
-  subject_type_by_pk(value: String!): subject_type
+  subjectTypeByPk(value: String!): SubjectType
 
   """
   fetch data from the table in a streaming manner: "subject_type"
   """
-  subject_type_stream(
+  subjectTypeStream(
     """maximum number of rows returned in a single batch"""
-    batch_size: Int!
+    batchSize: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [subject_type_stream_cursor_input]!
+    cursor: [SubjectTypeStreamCursorInput]!
 
     """filter the rows returned"""
-    where: subject_type_bool_exp
-  ): [subject_type!]!
+    where: SubjectTypeBoolExp
+  ): [SubjectType!]!
 }
 
 scalar timestamptz
 
-"""
-Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
-"""
-input timestamptz_comparison_exp {
-  _eq: timestamptz
-  _gt: timestamptz
-  _gte: timestamptz
-  _in: [timestamptz!]
-  _is_null: Boolean
-  _lt: timestamptz
-  _lte: timestamptz
-  _neq: timestamptz
-  _nin: [timestamptz!]
-}
-
 scalar uuid
-
-"""
-Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
-"""
-input uuid_comparison_exp {
-  _eq: uuid
-  _gt: uuid
-  _gte: uuid
-  _in: [uuid!]
-  _is_null: Boolean
-  _lt: uuid
-  _lte: uuid
-  _neq: uuid
-  _nin: [uuid!]
-}

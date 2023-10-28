@@ -1,12 +1,13 @@
-import { CreatePoolStore, type pools_insert_input } from '$houdini';
-import { ToastLevel } from '$lib/components/toast';
-import { poolCreateSchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
 import type { RequestEvent } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
+import { Logger, cleanClone } from '$lib/utils';
+import { poolCreateSchema as schema } from '$lib/models/schema';
+import { ToastLevel } from '$lib/components/toast';
+import { CreatePoolStore } from '$houdini';
+import type { pools_insert_input } from '$houdini';
 
 const log = new Logger('pool.create.server');
 
@@ -49,7 +50,7 @@ export const actions = {
 			return setMessage(form, 'Create pool failed');
 		}
 
-		const result = data?.insert_pools_one;
+		const result = data?.insertPoolsOne;
 		if (!result) return setMessage(form, 'Create pool failed: responce empty', { status: 404 });
 
 		const message = {

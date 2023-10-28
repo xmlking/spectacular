@@ -75,6 +75,9 @@ services:
       ## enable debugging mode. It is recommended to disable this in production
       HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## Set default naming convention for all sources
+      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: "naming_convention"
+      HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: "graphql-default"
       ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       ## uncomment next line to set an admin secret
@@ -106,6 +109,21 @@ services:
     volumes:
       - ./infra/hasura/migrations:/hasura-migrations
       - ./infra/hasura/metadata:/hasura-metadata
+
+  mailhog:
+    image: mailhog/mailhog
+    environment:
+      SMTP_HOST: mailhog
+      SMTP_PORT: 1025
+      SMTP_PASS: ${AUTH_SMTP_PASS}
+      SMTP_USER: ${AUTH_SMTP_USER}
+      SMTP_SECURE: '${AUTH_SMTP_SECURE}'
+      SMTP_SENDER: ${AUTH_SMTP_SENDER}
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+    volumes:
+      - ./docker/data/mailhog:/maildir
 
 volumes:
   db_data:

@@ -1,12 +1,13 @@
-import { UpdateDeviceStore, type devices_set_input } from '$houdini';
-import { ToastLevel } from '$lib/components/toast';
-import { updateDeviceSchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
-import { uuidSchema } from '$lib/utils/zod.utils';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
+import { ToastLevel } from '$lib/components/toast';
+import { updateDeviceSchema as schema } from '$lib/models/schema';
+import { Logger, cleanClone } from '$lib/utils';
+import { uuidSchema } from '$lib/utils/zod.utils';
+import { UpdateDeviceStore } from '$houdini';
+import type { DevicesSetInput } from '$houdini';
 
 const log = new Logger('device.update.server');
 
@@ -30,7 +31,7 @@ export const actions = {
 		const dataCopy = cleanClone(form.data, { empty: 'null' });
 		log.debug('after cleanClone with null:', dataCopy);
 
-		const payload: devices_set_input = {
+		const payload: DevicesSetInput = {
 			...(dataCopy.description && { description: dataCopy.description }),
 			...(dataCopy.annotations && { annotations: dataCopy.annotations }),
 			...(dataCopy.tags && { tags: dataCopy.tags })
@@ -49,7 +50,7 @@ export const actions = {
 			return setMessage(form, 'Update device failed');
 		}
 
-		const result = data?.update_devices_by_pk;
+		const result = data?.updateDevicesByPk;
 		if (!result) return setMessage(form, 'Update device failed: responce empty', { status: 404 });
 
 		const message = {

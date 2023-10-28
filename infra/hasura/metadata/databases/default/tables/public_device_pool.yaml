@@ -1,28 +1,6 @@
 table:
   name: device_pool
   schema: public
-configuration:
-  column_config:
-    created_at:
-      custom_name: createdAt
-    created_by:
-      custom_name: createdBy
-    device_id:
-      custom_name: deviceId
-    pool_id:
-      custom_name: poolId
-    updated_at:
-      custom_name: updatedAt
-    updated_by:
-      custom_name: updatedBy
-  custom_column_names:
-    created_at: createdAt
-    created_by: createdBy
-    device_id: deviceId
-    pool_id: poolId
-    updated_at: updatedAt
-    updated_by: updatedBy
-  custom_root_fields: {}
 object_relationships:
   - name: device
     using:

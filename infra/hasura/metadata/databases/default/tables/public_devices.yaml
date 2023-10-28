@@ -1,31 +1,6 @@
 table:
   name: devices
   schema: public
-configuration:
-  column_config:
-    created_at:
-      custom_name: createdAt
-    created_by:
-      custom_name: createdBy
-    deleted_at:
-      custom_name: deletedAt
-    display_name:
-      custom_name: displayName
-    organization:
-      custom_name: organization
-    updated_at:
-      custom_name: updatedAt
-    updated_by:
-      custom_name: updatedBy
-  custom_column_names:
-    created_at: createdAt
-    created_by: createdBy
-    deleted_at: deletedAt
-    display_name: displayName
-    organization: organization
-    updated_at: updatedAt
-    updated_by: updatedBy
-  custom_root_fields: {}
 array_relationships:
   - name: device_pools
     using:

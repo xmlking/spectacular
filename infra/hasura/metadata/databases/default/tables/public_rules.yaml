@@ -1,40 +1,6 @@
 table:
   name: rules
   schema: public
-configuration:
-  column_config:
-    app_id:
-      custom_name: appId
-    created_at:
-      custom_name: createdAt
-    created_by:
-      custom_name: createdBy
-    deleted_at:
-      custom_name: deletedAt
-    destination_port:
-      custom_name: destinationPort
-    display_name:
-      custom_name: displayName
-    source_port:
-      custom_name: sourcePort
-    throttle_rate:
-      custom_name: throttleRate
-    updated_at:
-      custom_name: updatedAt
-    updated_by:
-      custom_name: updatedBy
-  custom_column_names:
-    app_id: appId
-    created_at: createdAt
-    created_by: createdBy
-    deleted_at: deletedAt
-    destination_port: destinationPort
-    display_name: displayName
-    source_port: sourcePort
-    throttle_rate: throttleRate
-    updated_at: updatedAt
-    updated_by: updatedBy
-  custom_root_fields: {}
 insert_permissions:
   - role: manager
     permission:

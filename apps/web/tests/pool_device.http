@@ -39,11 +39,11 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 query SearchPoolsAndDevices($limit: Int = 10, $offset: Int = 0, $filter: String!) {
-  pools(limit: $limit, offset: $offset, where: {displayName: {_like: $filter}}, order_by: [{updatedAt: desc_nulls_last}]) {
+  pools(limit: $limit, offset: $offset, where: {displayName: {_like: $filter}}, orderBy: [{updatedAt: DESC_NULLS_LAST}]) {
     id
     displayName
   }
-  devices(limit: $limit, offset: $offset, where: {displayName: {_like: $filter}}, order_by: [{updatedAt: desc_nulls_last}]) {
+  devices(limit: $limit, offset: $offset, where: {displayName: {_like: $filter}}, orderBy: [{updatedAt: DESC_NULLS_LAST}]) {
     id
     displayName
   }

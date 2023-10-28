@@ -46,10 +46,10 @@ x-hasura-user-id: xmlking@gmail.com
 query ListPolicies(
   $limit: Int = 50
   $offset: Int = 0
-  $orderBy: [policies_order_by!] = [{ updatedAt: desc_nulls_last }]
+  $orderBy: [PoliciesOrderBy!] = [{ updatedAt: DESC_NULLS_LAST }]
 ) {
   policies(
-	order_by: $orderBy
+	orderBy: $orderBy
     limit: $limit
     offset: $offset
   ) {
@@ -110,8 +110,8 @@ x-hasura-role: engine
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-query SearchAgentPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [policies_order_by!] = [{updatedAt: desc_nulls_last}]) {
-  policies(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
+query SearchAgentPolicies($where: PoliciesBoolExp, $limit: Int = 50, $offset: Int = 0, $orderBy: [PoliciesOrderBy!] = [{updatedAt: DESC_NULLS_LAST}]) {
+  policies(orderBy: $orderBy, limit: $limit, offset: $offset, where: $where) {
     id
     weight
     validFrom
@@ -160,8 +160,8 @@ x-hasura-role: manager
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-query SearchPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [policies_order_by!] = [{updatedAt: desc_nulls_last}]) {
-  policies(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
+query SearchPolicies($where: PoliciesBoolExp, $limit: Int = 50, $offset: Int = 0, $orderBy: [PoliciesOrderBy!] = [{updatedAt: desc_nulls_last}]) {
+  policies(where: $where, orderBy: $orderBy, limit: $limit, offset: $offset) {
     id
     weight
     active
@@ -229,7 +229,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 query GetPolicy($id: uuid!) {
-  policies_by_pk(id: $id) {
+  policiesByPk(id: $id) {
     id
     weight
     active
@@ -275,7 +275,7 @@ query GetPolicy($id: uuid!) {
 }
 
 ###
-@firstPolicyRuleId =  {{getPolicy.response.body.$.data.policies_by_pk.rule.id}}
+@firstPolicyRuleId =  {{getPolicy.response.body.$.data.policiesByPk.rule.id}}
 ###
 
 ### update policiy by ID
@@ -292,8 +292,8 @@ x-hasura-role: manager
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $ruleId: uuid!,$ruleData: rules_set_input!) {
-  update_policies_by_pk(pk_columns: {id: $policyId}, _set: $policyData) {
+mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $ruleId: uuid!,$ruleData: RulesSetInput!) {
+  update_policies_by_pk(pkColumns: {id: $policyId}, _set: $policyData) {
    id
     weight
     active
@@ -332,7 +332,7 @@ mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $rule
       organization
     }
   }
-  update_rules_by_pk(pk_columns: {id: $ruleId}, _set: $ruleData) {
+  updateRulesByPk(pkColumns: {id: $ruleId}, _set: $ruleData) {
     id
   }
 }
@@ -492,11 +492,11 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!) {
-  update_policies_by_pk(pk_columns: {id: $policyId}, _set: {deletedAt: $deletedAt}) {
+  update_policies_by_pk(pkColumns: {id: $policyId}, _set: {deletedAt: $deletedAt}) {
     id
   }
-  update_rules(where: {shared: {_eq: false}, id: {_eq: $ruleId}}, _set: {deletedAt: $deletedAt}) {
-    affected_rows
+  updateRules(where: {shared: {_eq: false}, id: {_eq: $ruleId}}, _set: {deletedAt: $deletedAt}) {
+    affectedRows
     returning {
       id
 	  displayName
@@ -513,10 +513,10 @@ mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!
 
 
 # mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!) {
-#   update_policies_by_pk(pk_columns: {id: $policyId}, _set: {deletedAt: $deletedAt}) {
+#   update_policies_by_pk(pkColumns: {id: $policyId}, _set: {deletedAt: $deletedAt}) {
 #     id
 #   }
-#   update_rules_by_pk(pk_columns: {id: $ruleId}, _set: {deletedAt: $deletedAt}) {
+#   updateRulesByPk(pkColumns: {id: $ruleId}, _set: {deletedAt: $deletedAt}) {
 #     id
 #   }
 # }

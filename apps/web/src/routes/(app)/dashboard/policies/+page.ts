@@ -1,9 +1,10 @@
-import { CachePolicy, ListPoliciesStore, order_by } from '$houdini';
-import { policySearchSchema as schema } from '$lib/models/schema';
-import { Logger } from '$lib/utils';
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms/client';
+import { Logger } from '$lib/utils';
+import { policySearchSchema as schema } from '$lib/models/schema';
+import { CachePolicy, ListPoliciesStore } from '$houdini';
+import type {  DESC_NULLS_FIRST } from '$houdini';
 const log = new Logger('rules.list.browser');
 
 const listPoliciesStore = new ListPoliciesStore();
@@ -17,7 +18,7 @@ export const load = async (event) => {
 		data: { limit, offset, subjectType, subjectId }
 	} = form;
 
-	const orderBy = [{ updatedAt: order_by.desc_nulls_first }];
+	const orderBy = [{ updatedAt: DESC_NULLS_FIRST }];
 	const where = {
 		...(subjectType ? { subjectType: { _eq: subjectType } } : {}),
 		...(subjectId ? { subjectId: { _eq: subjectId } } : {})

@@ -1,5 +1,5 @@
 query GetPolicy($id: uuid!) {
-	policies_by_pk(id: $id) {
+	policiesByPk(id: $id) {
 		weight
 		active
 		validFrom

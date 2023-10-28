@@ -1,5 +1,5 @@
 query GetDevice($id: uuid!) {
-	devices_by_pk(id: $id) {
+	devicesByPk(id: $id) {
 		id
 		ip
 		displayName

@@ -4,7 +4,7 @@ mutation UpsertDevice($input: devices_insert_input!) {
 		on_conflict: {
 			update_columns: [ip, version]
 			constraint: devices_display_name_organization_key
-			where: { deletedAt: { _is_null: true } }
+			where: { deletedAt: { _isNull: true } }
 		}
 	) {
 		annotations

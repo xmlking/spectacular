@@ -1,9 +1,9 @@
 query ListPolicies2(
 	$limit: Int = 50
 	$offset: Int = 0
-	$orderBy: [policies_order_by!] = [{ updatedAt: desc_nulls_last }]
+	$orderBy: [PoliciesOrderBy!] = [{ updatedAt: DESC_NULLS_LAST }]
 ) @cache(policy: CacheAndNetwork) @load {
-	policies(order_by: $orderBy, limit: $limit, offset: $offset) @paginate {
+	policies(orderBy: $orderBy, limit: $limit, offset: $offset) @paginate {
 		...Policy_list_fields @mask_disable
 	}
 }

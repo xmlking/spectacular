@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { graphql } from '$houdini';
 	import { onDestroy, onMount } from 'svelte';
+	import { graphql } from '$houdini';
 
 	const schedules = graphql(`
 		subscription StreamPolicy {
 			policies(
-				order_by: [{ updatedAt: desc_nulls_last }]
+				orderBy: [{ updatedAt: DESC_NULLS_LAST }]
 				limit: 50
 				offset: 0
-				where: { updatedAt: { _is_null: true } }
+				where: { updatedAt: { _isNull: true } }
 			) {
 				id
 				active
@@ -18,7 +18,7 @@
 
 	// const livePolicy = graphql(`
 	// 	query LivePolicy {
-	// 		policies(order_by: [{ updatedAt: desc_nulls_last }], limit: 50, offset: 0) @live {
+	// 		policies(orderBy: [{ updatedAt: DESC_NULLS_LAST }], limit: 50, offset: 0) @live {
 	// 			id
 	// 			displayName
 	// 		}

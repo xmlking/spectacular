@@ -55,7 +55,7 @@
 				return setMessage(form, 'Delete rule failed');
 			}
 
-			const result = data?.update_rules_by_pk;
+			const result = data?.updateRulesByPk;
 			if (!result) return setMessage(form, 'Delete rule failed: responce empty', { status: 404 });
 			const message = {
 				message: `Rule: ${result.displayName} deleted`,

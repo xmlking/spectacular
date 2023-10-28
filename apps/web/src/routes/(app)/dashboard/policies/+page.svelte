@@ -1,15 +1,4 @@
 <script lang="ts">
-	import { browser, dev } from '$app/environment';
-	import { goto, invalidateAll } from '$app/navigation';
-	import { DeletePolicyStore, cache } from '$houdini';
-	import { DeleteButton2, Link } from '$lib/components';
-	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
-	import { ErrorMessage } from '$lib/components/form';
-	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-	import { DataTable } from '$lib/components/table';
-	import { ToastLevel, addToast } from '$lib/components/toast';
-	import { subjectTypeOptions } from '$lib/models/enums';
-	import { Logger } from '$lib/utils';
 	import {
 		Breadcrumb,
 		BreadcrumbItem,
@@ -33,6 +22,17 @@
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { Logger } from '$lib/utils';
+	import { subjectTypeOptions } from '$lib/models/enums';
+	import { ToastLevel, addToast } from '$lib/components/toast';
+	import { DataTable } from '$lib/components/table';
+	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+	import { ErrorMessage } from '$lib/components/form';
+	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
+	import { DeleteButton2, Link } from '$lib/components';
+	import { goto, invalidateAll } from '$app/navigation';
+	import { browser, dev } from '$app/environment';
+	import { DeletePolicyStore, cache } from '$houdini';
 
 	const log = new Logger('policies:list:browser');
 	export let data;
@@ -222,9 +222,9 @@
 					ruleId: id2,
 					deletedAt
 				});
-				if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
+				if (data?.updatePoliciesByPk && data?.updateRules?.affectedRows) {
 					addToast({
-						message: `Policy and associated rule: ${data?.update_rules?.returning[0].displayName} deleted`,
+						message: `Policy and associated rule: ${data?.updateRules?.returning[0].displayName} deleted`,
 						dismissible: true,
 						duration: 10000,
 						type: ToastLevel.Info
@@ -233,7 +233,7 @@
 					await invalidateAll();
 				} else if (data?.update_policies_by_pk) {
 					addToast({
-						message: `Policy ${data?.update_policies_by_pk.id} deleted`,
+						message: `Policy ${data?.updatePoliciesByPk.id} deleted`,
 						dismissible: true,
 						duration: 10000,
 						type: ToastLevel.Info

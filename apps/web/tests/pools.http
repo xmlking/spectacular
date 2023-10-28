@@ -38,8 +38,8 @@ x-hasura-role: manager
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-query ListPools($limit: Int = 50, $offset: Int = 0, $order_by: [pools_order_by!] = [{updatedAt: desc_nulls_last}]) {
-  pools(limit: $limit, offset: $offset, order_by: $order_by) {
+query ListPools($limit: Int = 50, $offset: Int = 0, $orderBy: [PoolsOrderBy!] = [{updatedAt: DESC_NULLS_LAST}]) {
+  pools(limit: $limit, offset: $offset, orderBy: $orderBy) {
 	tags
 	createdBy
 	description
@@ -71,8 +71,8 @@ x-hasura-role: manager
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-query SearchPools($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [pools_order_by!] = [{updatedAt: desc_nulls_last}]) {
-  pools(order_by: $orderBy, limit: $limit, offset: $offset, where: {displayName: {_like: $filter}}) {
+query SearchPools($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [PoolsOrderBy!] = [{updatedAt: DESC_NULLS_LAST}]) {
+  pools(orderBy: $orderBy, limit: $limit, offset: $offset, where: {displayName: {_like: $filter}}) {
     tags
     createdBy
     description
@@ -109,7 +109,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 query GetPool($id: uuid!) {
-  pools_by_pk(id: $id) {
+  poolsByPk(id: $id) {
     id
     displayName
     description
@@ -143,7 +143,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 mutation CreatePool($data: pools_insert_input!) {
-  insert_pools_one(object: $data) {
+  insertPoolsOne(object: $data) {
     id
     displayName
 	description
@@ -161,7 +161,7 @@ mutation CreatePool($data: pools_insert_input!) {
   }
 }
 ###
-@createdPoolId =  {{createPool.response.body.$.data.insert_pools_one.id}}
+@createdPoolId =  {{createPool.response.body.$.data.insertPoolsOne.id}}
 ###
 
 ### Update Pool
@@ -179,7 +179,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 mutation UpdatePool($id: uuid!, $data: pools_set_input!) {
-  update_pools_by_pk(pk_columns: {id: $id}, _set: $data) {
+  update_pools_by_pk(pkColumns: {id: $id}, _set: $data) {
     id
     displayName
     description
@@ -212,7 +212,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 mutation DeletePool($id: uuid!, $deletedAt: timestamptz!) {
-	update_pools_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+	update_pools_by_pk(pkColumns: { id: $id }, _set: { deletedAt: $deletedAt }) {
 		displayName
 	}
 }

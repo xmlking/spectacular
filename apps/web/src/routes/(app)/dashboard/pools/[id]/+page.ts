@@ -1,8 +1,8 @@
-import { CachePolicy, GetPoolStore } from '$houdini';
-import { poolUpdateSchema as schema } from '$lib/models/schema';
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { superValidate } from 'sveltekit-superforms/client';
+import { poolUpdateSchema as schema } from '$lib/models/schema';
+import { CachePolicy, GetPoolStore } from '$houdini';
 
 const getPoolStore = new GetPoolStore();
 export const load = async (event) => {
@@ -17,9 +17,9 @@ export const load = async (event) => {
 		variables
 	});
 	if (errors) throw error(400, errors[0] as GraphQLError);
-	const { pools_by_pk, devices_not_in_pool } = data ?? {};
-	if (!pools_by_pk) throw error(404, 'Pool not found');
-	const { displayName, description, tags, annotations, pool_devices } = pools_by_pk;
+	const { poolsByPk, devicesNotInPool } = data ?? {};
+	if (!poolsByPk) throw error(404, 'Pool not found');
+	const { displayName, description, tags, annotations, pool_devices } = poolsByPk;
 
 	const form = await superValidate({ displayName, description, tags, annotations }, schema);
 
@@ -39,5 +39,5 @@ export const load = async (event) => {
 	);
 
 	// Always return { form } in load and form actions.
-	return { poolId: id, inPool, notInPool: devices_not_in_pool, form };
+	return { poolId: id, inPool, notInPool: devicesNotInPool, form };
 };

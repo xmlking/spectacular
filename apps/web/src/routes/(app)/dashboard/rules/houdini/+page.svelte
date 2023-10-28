@@ -1,14 +1,4 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
-	import { invalidateAll } from '$app/navigation';
-	import { cache, DeleteRuleStore } from '$houdini';
-	import { DeleteButton, Link } from '$lib/components';
-	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
-	import { ErrorMessage } from '$lib/components/form';
-	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-	import { DataTable } from '$lib/components/table';
-	import { addToast, ToastLevel } from '$lib/components/toast';
-	import { Logger } from '$lib/utils';
 	import {
 		Breadcrumb,
 		BreadcrumbItem,
@@ -26,6 +16,16 @@
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { Logger } from '$lib/utils';
+	import { addToast, ToastLevel } from '$lib/components/toast';
+	import { DataTable } from '$lib/components/table';
+	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+	import { ErrorMessage } from '$lib/components/form';
+	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
+	import { DeleteButton, Link } from '$lib/components';
+	import { invalidateAll } from '$app/navigation';
+	import { dev } from '$app/environment';
+	import { cache, DeleteRuleStore } from '$houdini';
 	import type { PageData } from './$houdini';
 
 	const log = new Logger('rules:list:browser');
@@ -129,9 +129,9 @@
 				const id = e.detail.id;
 				const deletedAt = new Date();
 				const { data } = await deleteRuleStore.mutate({ id, deletedAt });
-				if (data?.update_rules_by_pk?.displayName) {
+				if (data?.updateRulesByPk?.displayName) {
 					addToast({
-						message: `Rule: ${data?.update_rules_by_pk?.displayName} deleted`,
+						message: `Rule: ${data?.updateRulesByPk?.displayName} deleted`,
 						dismissible: true,
 						duration: 10000,
 						type: ToastLevel.Info

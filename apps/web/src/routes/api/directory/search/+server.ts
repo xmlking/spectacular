@@ -1,16 +1,17 @@
-import { CachePolicy, SearchDevicesStore, SearchPoolsStore, order_by, subject_type_enum } from '$houdini';
-import { DeviceError, NotFoundError } from '$lib/errors';
-import { listGroups, listUsers, type Subject } from '$lib/server/backend/msgraph';
-import { Logger } from '$lib/utils';
 import { json } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
+import { DeviceError, NotFoundError } from '$lib/errors';
+import { listGroups, listUsers } from '$lib/server/backend/msgraph';
+import type { Subject } from '$lib/server/backend/msgraph';
+import { Logger } from '$lib/utils';
+import { CachePolicy, SearchDevicesStore, SearchPoolsStore, orderBy, DESC_NULLS_LAST, subject_type_enum } from '$houdini';
 
 const log = new Logger('api:directory:search');
 const searchDevicesStore = new SearchDevicesStore();
 const searchPoolsStore = new SearchPoolsStore();
 
 const limit = 10;
-const orderBy = [{ updatedAt: order_by.desc_nulls_last }];
+const orderBy = [{ updatedAt: DESC_NULLS_LAST }];
 
 // GET /api/directory/search?subType=user&search=sumo
 export const GET = async (event) => {

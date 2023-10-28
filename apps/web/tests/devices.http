@@ -38,8 +38,8 @@ x-hasura-role: engine
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-query ListDevices($limit: Int = 50, $offset: Int = 0, $order_by: [devices_order_by!] = [{updatedAt: desc_nulls_last}]) {
-  devices(limit: $limit, offset: $offset, order_by: $order_by) {
+query ListDevices($limit: Int = 50, $offset: Int = 0, $orderBy: [devices_orderBy!] = [{updatedAt: DESC_NULLS_LAST}]) {
+  devices(limit: $limit, offset: $offset, orderBy: $orderBy) {
     ip
 	tags
 	createdBy
@@ -73,8 +73,8 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 
-query SearchDevices($where: devices_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [devices_order_by!] = [{updatedAt: desc_nulls_last}]) {
-  devices(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
+query SearchDevices($where: DevicesBoolExp, $limit: Int = 50, $offset: Int = 0, $orderBy: [devices_orderBy!] = [{updatedAt: desc_nulls_last}]) {
+  devices(orderBy: $orderBy, limit: $limit, offset: $offset, where: $where) {
     ip
     tags
     createdBy
@@ -114,7 +114,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 query GetDevice($id: uuid!) {
-  devices_by_pk(id: $id) {
+  devicesByPk(id: $id) {
     id
 	ip
     displayName
@@ -147,8 +147,8 @@ x-hasura-role: engine
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-mutation UpdateDevice($id: uuid!, $data: devices_set_input!) {
-  update_devices_by_pk(pk_columns: { id: $id }, _set: $data) {
+mutation UpdateDevice($id: uuid!, $data: DevicesSetInput!) {
+  updateDevicesByPk(pkColumns: { id: $id }, _set: $data) {
     id
 	displayName
 	description
@@ -179,7 +179,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 mutation CreateDevice($data: devices_insert_input!) {
-  insert_devices_one(object: $data, on_conflict: {update_columns: [ip, description, tags, annotations], constraint: devices_display_name_organization_key, where: {deletedAt: {_is_null: true}}}) {
+  insert_devices_one(object: $data, on_conflict: {update_columns: [ip, description, tags, annotations], constraint: devices_display_name_organization_key, where: {deletedAt: {_isNull: true}}}) {
     annotations
     ip
     id
@@ -222,7 +222,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 mutation DeleteDevice($id: uuid!, $deletedAt: timestamptz!) {
-	update_devices_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+	updateDevicesByPk(pkColumns: { id: $id }, _set: { deletedAt: $deletedAt }) {
 		displayName
 	}
 }
