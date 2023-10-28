@@ -12,7 +12,7 @@ Instructions: Changesets automate our changelog. If you modify files in `/packag
 
 ## Checklist
 
-Please read and apply all [contribution requirements](../CODE_OF_CONDUCT.md).
+Please read and apply all [contribution requirements](https://github.com/xmlking/spectacular/blob/main/CODE_OF_CONDUCT.md).
 
 - [ ] This PR targets the `main` branch
 - [ ] Documentation reflects all relevant changes
