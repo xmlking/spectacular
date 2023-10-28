@@ -1,10 +1,10 @@
 query SearchRules(
-	$where: rules_bool_exp
+	$where: RulesBoolExp
 	$limit: Int = 50
 	$offset: Int = 0
-	$orderBy: [rules_order_by!] = [{ updatedAt: desc_nulls_last }]
+	$orderBy: [RulesOrderBy!] = [{ updatedAt: DESC_NULLS_LAST }]
 ) @cache(policy: NetworkOnly) {
-	rules(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
+	rules(orderBy: $orderBy, limit: $limit, offset: $offset, where: $where) {
 		id
 		displayName
 		description

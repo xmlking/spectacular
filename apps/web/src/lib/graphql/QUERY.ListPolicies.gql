@@ -1,19 +1,19 @@
 # query ListPolicies(
 # 	$limit: Int = 50
 # 	$offset: Int = 0
-# 	$orderBy: [policies_order_by!] = [{ updatedAt: desc_nulls_last }]
+# 	$orderBy: [PoliciesOrderBy!] = [{ updatedAt: DESC_NULLS_LAST }]
 # ) {
-# 	policies(order_by: $orderBy, limit: $limit, offset: $offset) {
+# 	policies(orderBy: $orderBy, limit: $limit, offset: $offset) {
 # 		...Policy_list_fields @mask_disable
 # 	}
 # }
 query ListPolicies(
-	$where: policies_bool_exp
+	$where: PoliciesBoolExp
 	$limit: Int = 50
 	$offset: Int = 0
-	$orderBy: [policies_order_by!] = [{ updatedAt: desc_nulls_last }]
+	$orderBy: [PoliciesOrderBy!] = [{ updatedAt: DESC_NULLS_LAST }]
 ) @cache(policy: NetworkOnly) {
-	policies(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
+	policies(where: $where, orderBy: $orderBy, limit: $limit, offset: $offset) {
 		id
 		weight
 		active

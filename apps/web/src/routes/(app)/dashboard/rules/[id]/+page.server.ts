@@ -1,12 +1,12 @@
-import { UpdateRuleStore, type rules_set_input } from '$houdini';
-import { ToastLevel } from '$lib/components/toast';
-import { updateRuleSchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
-import { uuidSchema } from '$lib/utils/zod.utils';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
+import { ToastLevel } from '$lib/components/toast';
+import { updateRuleSchema as schema } from '$lib/models/schema';
+import { Logger, cleanClone } from '$lib/utils';
+import { uuidSchema } from '$lib/utils/zod.utils';
+import { UpdateRuleStore } from '$houdini';
 
 const log = new Logger('rule.update.server');
 
@@ -30,7 +30,7 @@ export const actions = {
 		const dataCopy = cleanClone(form.data, { empty: 'null' });
 		log.debug('after cleanClone with null:', dataCopy);
 
-		const payload: rules_set_input = {
+		const payload: RulesSetInput = {
 			...dataCopy,
 			shared: true,
 			...(dataCopy.throttleRate && { throttleRate: `${dataCopy.throttleRate}` })
@@ -54,7 +54,7 @@ export const actions = {
 			return setMessage(form, 'Update rule failed');
 		}
 
-		const result = data?.update_rules_by_pk;
+		const result = data?.updateRulesByPk;
 		if (!result) return setMessage(form, 'Update rule failed: responce empty', { status: 404 });
 
 		const message = {

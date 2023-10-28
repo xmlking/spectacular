@@ -20,7 +20,7 @@ CRUD FormData validation usecase:
 /**
  * Loader
  */
-import { CachePolicy, DeletePolicyStore, order_by, SearchPoliciesStore, CreatePolicyStore, UpdatePolicyStore } from '$houdini';
+import { CachePolicy, DeletePolicyStore, orderBy, SearchPoliciesStore, CreatePolicyStore, UpdatePolicyStore } from '$houdini';
 import { handleActionErrors, handleLoadErrors, PolicyError } from '$lib/errors';
 import { fail } from '@sveltejs/kit';
 import { policyDeleteSchema, policySearchSchema, policyCreateSchema, policyUpdateSchema } from '$lib/models/schema';
@@ -39,9 +39,9 @@ export async function load(event) {
 	try {
 		const { limit, offset, subjectType, displayName } = searchSchema.parse(url.searchParams);
 
-		const orderBy = [{ updated_at: order_by.desc_nulls_first }];
+		const orderBy = [{ updated_at: DESC_NULLS_FIRST }];
 		const where = {
-			deleted_at: { _is_null: true },
+			deleted_at: { _isNull: true },
 			subjectType: { _eq: subjectType },
 			...(subjectType ? { subjectType: { _eq: subjectType } } : {}),
 			...(displayName ? { displayName: { _like: `%${displayName}%` } } : {})

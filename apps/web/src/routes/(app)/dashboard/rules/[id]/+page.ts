@@ -1,8 +1,8 @@
-import { CachePolicy, GetRuleStore } from '$houdini';
-import { updateRuleSchema as schema } from '$lib/models/schema';
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { superValidate } from 'sveltekit-superforms/client';
+import { updateRuleSchema as schema } from '$lib/models/schema';
+import { CachePolicy, GetRuleStore } from '$houdini';
 
 const getRuleStore = new GetRuleStore();
 export const load = async (event) => {
@@ -17,7 +17,7 @@ export const load = async (event) => {
 		variables
 	});
 	if (errors) throw error(400, errors[0] as GraphQLError);
-	const rule = data?.rules_by_pk;
+	const rule = data?.rulesByPk;
 	if (!rule) throw error(404, 'Rule not found');
 	const form = await superValidate(rule, schema);
 	return { form };

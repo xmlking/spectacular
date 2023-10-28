@@ -1,5 +1,5 @@
 query GetRule($id: uuid!) {
-	rules_by_pk(id: $id) {
+	rulesByPk(id: $id) {
 		displayName
 		description
 		tags

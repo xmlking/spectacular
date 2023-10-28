@@ -1,8 +1,7 @@
-import { order_by } from '$houdini';
-import { Logger } from '$lib/utils';
-import { zfd } from '$lib/zodfd';
 import { error } from '@sveltejs/kit';
 import { ZodError } from 'zod';
+import { zfd } from '$lib/zodfd';
+import { Logger } from '$lib/utils';
 import type { BeforeLoadEvent, ListPolicies2Variables as Variables } from './$houdini';
 import { policySearchSchema } from './policy.search.schema';
 const log = new Logger('providers.browser');
@@ -12,7 +11,7 @@ export const _ListPolicies2Variables: Variables = ({ url }) => {
 	const limit = parseInt(url.searchParams.get('limit') ?? '');
 	const offset = parseInt(url.searchParams.get('offset') ?? '');
 
-	const orderBy = [{ updated_at: order_by.desc_nulls_first }];
+	const orderBy = [{ updated_at: DESC_NULLS_FIRST }];
 	return {
 		limit,
 		offset,

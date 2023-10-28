@@ -38,8 +38,8 @@ x-hasura-role: manager
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-query ListRules($limit: Int = 50, $offset: Int = 0, $order_by: [rules_order_by!] = [{updatedAt: desc_nulls_last}]) {
-  rules(limit: $limit, offset: $offset, order_by: $order_by) {
+query ListRules($limit: Int = 50, $offset: Int = 0, $orderBy: [RulesOrderBy!] = [{updatedAt: DESC_NULLS_LAST}]) {
+  rules(limit: $limit, offset: $offset, orderBy: $orderBy) {
     tags
     createdBy
     description
@@ -81,8 +81,8 @@ x-hasura-role: manager
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-query SearchSharedRules($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [rules_order_by!] = [{updatedAt: desc_nulls_last}]) {
-  rules(order_by: $orderBy, limit: $limit, offset: $offset, where: {displayName: {_like: $filter}, shared: {_eq: true}}) {
+query SearchSharedRules($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [rules_orderBy!] = [{updatedAt: DESC_NULLS_LAST}]) {
+  rules(orderBy: $orderBy, limit: $limit, offset: $offset, where: {displayName: {_like: $filter}, shared: {_eq: true}}) {
     action
     annotations
     appId
@@ -130,7 +130,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 query GetRule($id: uuid!) {
-  rules_by_pk(id: $id) {
+  rulesByPk(id: $id) {
     action
     annotations
     appId
@@ -237,8 +237,8 @@ x-hasura-role: manager
 x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
-mutation UpdateRule($id: uuid!, $data: rules_set_input!) {
-  update_rules_by_pk(pk_columns: {id: $id}, _set: $data) {
+mutation UpdateRule($id: uuid!, $data: RulesSetInput!) {
+  updateRulesByPk(pkColumns: {id: $id}, _set: $data) {
     action
     annotations
     appId
@@ -286,7 +286,7 @@ x-hasura-org-id: chinthagunta
 x-hasura-user-id: xmlking@gmail.com
 
 mutation DeleteRule($id: uuid!, $deletedAt: timestamptz!) {
-	update_rules_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+	updateRulesByPk(pkColumns: { id: $id }, _set: { deletedAt: $deletedAt }) {
 		displayName
 	}
 }

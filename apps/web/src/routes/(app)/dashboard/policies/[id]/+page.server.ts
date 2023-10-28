@@ -1,13 +1,13 @@
-import type { policies_set_input, rules_set_input } from '$houdini';
-import { UpdatePolicyStore } from '$houdini';
-import { ToastLevel } from '$lib/components/toast';
-import { updatePolicySchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
-import { uuidSchema } from '$lib/utils/zod.utils';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
+import { ToastLevel } from '$lib/components/toast';
+import { updatePolicySchema as schema } from '$lib/models/schema';
+import { Logger, cleanClone } from '$lib/utils';
+import { uuidSchema } from '$lib/utils/zod.utils';
+import { UpdatePolicyStore } from '$houdini';
+import type { PoliciesSetInput, RulesSetInput } from '$houdini';
 
 const log = new Logger('policy.update.server');
 
@@ -46,10 +46,10 @@ export const actions = {
 			restRule.weight = restPolicy.weight;
 		}
 
-		const policyData: policies_set_input = {
+		const policyData: PoliciesSetInput = {
 			...restPolicy
 		};
-		const ruleData: rules_set_input = {
+		const ruleData: RulesSetInput = {
 			...restRule,
 			...(throttleRate && { throttleRate: `${throttleRate}` }),
 			// HINT: only allow changing `shared` property from `false` to `true`
@@ -75,7 +75,7 @@ export const actions = {
 			return setMessage(form, 'Update policy failed');
 		}
 
-		const { update_policies_by_pk: policyResult, update_rules_by_pk: ruleResult } = data || {};
+		const { updatePoliciesByPk: policyResult, updateRulesByPk: ruleResult } = data || {};
 		if (!policyResult) return setMessage(form, 'Update policy failed: responce empty', { status: 404 });
 
 		const message = {

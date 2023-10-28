@@ -3,7 +3,7 @@ query SearchSharedRules1($limit: Int = 50, $offset: Int = 0, $displayName: Strin
 	rules(
 		limit: $limit
 		offset: $offset
-		order_by: [{ updatedAt: desc_nulls_last }]
+		orderBy: [{ updatedAt: DESC_NULLS_LAST }]
 		where: { displayName: { _like: $displayName }, shared: { _eq: true } }
 	) {
 		id

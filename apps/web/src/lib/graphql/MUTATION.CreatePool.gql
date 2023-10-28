@@ -1,5 +1,5 @@
-mutation CreatePool($data: pools_insert_input!) {
-	insert_pools_one(object: $data) {
+mutation CreatePool($data: PoolsInsertInput!) {
+	insertPoolsOne(object: $data) {
 		id
 		displayName
 		description
