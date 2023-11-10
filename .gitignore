@@ -8,7 +8,7 @@ node_modules
 .vercel
 .netlify
 /build
-/functions
+# /functions
 /workers-site
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
@@ -109,3 +109,6 @@ $houdini
 /apps/urara
 
 src/lib/i18n
+
+.secrets
+.nhost

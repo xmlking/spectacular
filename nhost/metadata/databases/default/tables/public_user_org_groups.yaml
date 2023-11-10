@@ -1,0 +1,25 @@
+table:
+  name: user_org_groups
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    deleted_at:
+      custom_name: deletedAt
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    deleted_at: deletedAt
+    updated_at: updatedAt
+    updated_by: updatedBy
+    user_id: userId
+  custom_root_fields: {}

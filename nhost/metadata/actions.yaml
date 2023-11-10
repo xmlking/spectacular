@@ -1,0 +1,54 @@
+actions:
+  - name: ListUniversities
+    definition:
+      kind: ""
+      handler: http://universities.hipolabs.com
+      request_transform:
+        method: GET
+        query_params:
+          country: '{{$body.input?.arg1.country}}'
+          name: '{{$body.input?.arg1.name ?? "middle"}}'
+        request_headers:
+          add_headers: {}
+          remove_headers:
+            - content-type
+        template_engine: Kriti
+        url: '{{$base_url}}/search'
+        version: 2
+    permissions:
+      - role: engine
+      - role: user
+      - role: manager
+    comment: Universities API
+  - name: SearchRestrooms
+    definition:
+      kind: ""
+      handler: https://www.refugerestrooms.org/api/v1
+      request_transform:
+        method: GET
+        query_params:
+          offset: '{{$body.input?.arg1.offset ?? 0}}'
+          page: '{{$body.input?.arg1.page ?? 1}}'
+          per_page: '{{$body.input?.arg1.limit ?? 10}}'
+          query: '{{$body.input?.arg1.city}}'
+        request_headers:
+          add_headers: {}
+          remove_headers:
+            - content-type
+        template_engine: Kriti
+        url: '{{$base_url}}/restrooms/search'
+        version: 2
+    permissions:
+      - role: engine
+      - role: user
+      - role: manager
+    comment: Restrooms API
+custom_types:
+  enums: []
+  input_objects:
+    - name: ListUniversitiesInput
+    - name: SearchRestroomsInput
+  objects:
+    - name: ListUniversitiesOutput
+    - name: SearchRestroomsOutput
+  scalars: []

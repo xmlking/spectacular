@@ -1,0 +1,150 @@
+table:
+  name: devices
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    deleted_at:
+      custom_name: deletedAt
+    display_name:
+      custom_name: displayName
+    organization:
+      custom_name: organization
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    deleted_at: deletedAt
+    display_name: displayName
+    organization: organization
+    updated_at: updatedAt
+    updated_by: updatedBy
+  custom_root_fields: {}
+array_relationships:
+  - name: device_pools
+    using:
+      foreign_key_constraint_on:
+        column: device_id
+        table:
+          name: device_pool
+          schema: public
+insert_permissions:
+  - role: engine
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        organization: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - display_name
+        - description
+        - tags
+        - annotations
+        - ip
+        - version
+select_permissions:
+  - role: engine
+    permission:
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - deleted_at
+        - created_by
+        - updated_by
+        - display_name
+        - description
+        - tags
+        - annotations
+        - ip
+        - organization
+        - version
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-orgs
+          - created_by:
+              _eq: x-hasura-user-id
+          - deleted_at:
+              _is_null: true
+  - role: manager
+    permission:
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - deleted_at
+        - created_by
+        - updated_by
+        - display_name
+        - description
+        - tags
+        - annotations
+        - ip
+        - organization
+        - version
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-orgs
+          - deleted_at:
+              _is_null: true
+  - role: user
+    permission:
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - deleted_at
+        - created_by
+        - updated_by
+        - display_name
+        - description
+        - tags
+        - annotations
+        - ip
+        - organization
+        - version
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-orgs
+          - created_by:
+              _eq: x-hasura-user-id
+          - deleted_at:
+              _is_null: true
+update_permissions:
+  - role: engine
+    permission:
+      columns:
+        - ip
+        - version
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-orgs
+          - created_by:
+              _eq: x-hasura-user-id
+      check: {}
+      set:
+        updated_by: x-hasura-user-id
+  - role: manager
+    permission:
+      columns:
+        - annotations
+        - deleted_at
+        - description
+        - tags
+      filter:
+        organization:
+          _in: x-hasura-orgs
+      check: null
+      set:
+        updated_by: x-hasura-user-id
