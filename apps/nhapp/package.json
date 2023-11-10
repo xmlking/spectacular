@@ -1,0 +1,48 @@
+{
+	"name": "nhapp",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"install-browsers": "pnpm dlx playwright@1.31.0 install --with-deps",
+		"add-nhost-js": "pnpm add @nhost/nhost-js --ignore-workspace",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --check --ignore-path=../../.prettierignore . && eslint .",
+		"format": "prettier --write --ignore-path=../../.prettierignore .",
+		"postinstall": "pnpm add-nhost-js"
+	},
+	"devDependencies": {
+		"@nhost/nhost-js": "2.2.18",
+		"@playwright/test": "1.39.0",
+		"@sveltejs/adapter-auto": "2.1.1",
+		"@sveltejs/kit": "1.27.4",
+		"@types/js-cookie": "3.0.6",
+		"autoprefixer": "10.4.16",
+		"eslint": "8.53.0",
+		"eslint-config-prettier": "9.0.0",
+		"eslint-plugin-svelte": "2.35.0",
+		"postcss": "8.4.31",
+		"prettier": "3.0.3",
+		"prettier-plugin-svelte": "3.1.0",
+		"svelte": "4.2.3",
+		"svelte-check": "3.6.0",
+		"tailwindcss": "3.3.5",
+		"typescript": "5.2.2",
+		"vite": "4.5.0",
+		"vitest": "0.34.6"
+	},
+	"dependencies": {
+		"@apollo/client": "3.8.7",
+		"graphql": "16.8.1",
+		"graphql-tag": "2.12.6",
+		"js-cookie": "3.0.5",
+		"playwright": "1.39.0",
+		"react": "18.2.0",
+		"uuid": "9.0.1",
+		"xstate": "4.38.3"
+	}
+}

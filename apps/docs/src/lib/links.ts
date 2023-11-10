@@ -1,6 +1,6 @@
 // Navigation Sitemap
 
-import type { Menu } from "./types";
+import type { Menu } from './types';
 
 export const menuNavLinks: Menu = {
 	'/docs': [

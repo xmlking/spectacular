@@ -106,8 +106,6 @@ export type Remark42Config = {
 	no_footer?: boolean;
 };
 
-
-
 export type Post = {
 	title: string;
 	slug: string;

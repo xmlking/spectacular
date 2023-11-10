@@ -100,7 +100,7 @@ apps/docs/
  ├ svelte.config.js
  ├ tsconfig.json
  └ vite.config.ts
- ```
+```
 
 ### Developing
 
