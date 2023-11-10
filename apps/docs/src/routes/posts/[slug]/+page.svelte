@@ -5,8 +5,8 @@
 	import { Breadcrumbs, TOC, PagesNavigator } from '@sveltinio/widgets';
 	import { assets, base } from '$app/paths';
 	import { page } from '$app/stores';
-	import { website } from '$config/website.js';
-	import { canonicalPageUrl, getCoverImagePath } from '$lib/utils/strings.js';
+	import { website } from '$config/website';
+	import { canonicalPageUrl, getCoverImagePath } from '$lib/utils/strings';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

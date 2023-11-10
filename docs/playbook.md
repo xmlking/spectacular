@@ -87,6 +87,14 @@ export default defineConfig({
 import Image from 'example.jpg?w=400&h=300&format=webp';
 ```
 
+#### Dynamic OpenGraph images
+
+[docs](https://dev.to/theether0/dynamic-og-image-with-sveltekit-and-satori-4438), [examples](https://github.com/etherCorps/sveltekit-og/tree/main/examples)
+
+```shell
+pnpm add -D @ethercorps/sveltekit-og --filter "./apps/docs"
+```
+
 ### Release
 
 #### changesets

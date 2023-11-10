@@ -35,11 +35,8 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			$sveltin: path.resolve('./src/sveltin'),
 			$config: path.resolve('./config'),
-			$content: path.resolve('./content'),
-			$data: path.resolve('./data'),
-			$themes: path.resolve('./themes')
+			$content: path.resolve('./content')
 		}
 	},
 	plugins: [

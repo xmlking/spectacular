@@ -4,8 +4,8 @@
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
 	import { assets, base } from '$app/paths';
 	import { page } from '$app/stores';
-	import { website } from '$config/website.js';
-	import { canonicalPageUrl, toTitle, getFavicon } from '$lib/utils/strings.js';
+	import { website } from '$config/website';
+	import { canonicalPageUrl, toTitle, getFavicon } from '$lib/utils/strings';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { getModalStore } from '@skeletonlabs/skeleton';
 	import { FileSolid, MagnifyingGlassSolid } from 'svelte-awesome-icons';
-	import { menuNavLinks  } from '$lib/links';
-import type {List} from '$lib/links';
+	import { menuNavLinks } from '$config/menu';
+	import type { SEOMenuItem } from '$lib/types';
 
 	// Classes
 	const cBase =
@@ -22,7 +22,7 @@ import type {List} from '$lib/links';
 	// Elements
 	let elemDocSearch: HTMLElement;
 
-	function filterList(list: List) {
+	function filterList(list: Array<SEOMenuItem>) {
 		return list.filter((rowObj) => {
 			const formattedSearchTerm = searchTerm.toLowerCase() || '';
 			return Object.values(rowObj).join(' ').toLowerCase().includes(formattedSearchTerm);

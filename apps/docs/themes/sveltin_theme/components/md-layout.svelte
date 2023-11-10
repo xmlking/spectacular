@@ -9,9 +9,9 @@
 <script>
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
 	import { PageMetaTags, JsonLdWebPage, JsonLdBreadcrumbs } from '@sveltinio/seo';
-	import { canonicalPageUrl, getFavicon } from '$lib/utils/strings.js';
+	import { canonicalPageUrl, getFavicon } from '$lib/utils/strings';
 	import { page } from '$app/stores';
-	import { website } from '$config/website.js';
+	import { website } from '$config/website';
 
 	/* All values defined in frontmatter are available as props.*/
 	export let title;

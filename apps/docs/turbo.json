@@ -3,7 +3,7 @@
 	"extends": ["//"],
 	"pipeline": {
 		"build": {
-			"env": ["VERCEL", "VERCEL_URL", "VERCEL_ENV", "npm_package_version"]
+			"env": ["VERCEL", "VERCEL_URL", "VERCEL_ENV", "BUILD_VERSION", "npm_package_version"]
 		},
 		"preview": {}
 	}

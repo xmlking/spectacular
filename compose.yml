@@ -78,7 +78,7 @@ services:
       ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       ## uncomment next line to set an admin secret
-      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-myadminsecretkey}
       # HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS512", "jwk_url": "https://www.googleapis.com/oauth2/v3/certs"}'
       # HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "1084d8d404126d641c232604aa27bc756921c07a5869c6de6cfd0c6c455de0fe" }'
       HASURA_GRAPHQL_JWT_SECRET: |
@@ -106,6 +106,45 @@ services:
     volumes:
       - ./infra/hasura/migrations:/hasura-migrations
       - ./infra/hasura/metadata:/hasura-metadata
+
+
+  hasura-auth:
+    container_name: hasura-auth
+    image: onlydustxyz/hasura-auth:latest
+    depends_on:
+      db:
+        condition: service_healthy
+      hasura:
+        condition: service_healthy
+    environment:
+      HASURA_GRAPHQL_JWT_SECRET: ${HASURA_GRAPHQL_JWT_SECRET}
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@db/marketplace_db
+      HASURA_GRAPHQL_GRAPHQL_URL: http://hasura:8080/v1/graphql
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-myadminsecretkey}
+      AUTH_ACCESS_TOKEN_EXPIRES_IN: 604800 # 1 week
+      AUTH_JWT_CUSTOM_CLAIMS: '{"projectsLeaded":"registeredUser.projectsLeaded[].projectId","githubUserId":"registeredUser.githubUserId","odAdmin":"registeredUser.admin","githubAccessToken":"userGithubProvider.accessToken"}'
+      AUTH_USER_DEFAULT_ALLOWED_ROLES: public,me,registered_user
+      AUTH_USER_DEFAULT_ROLE: registered_user
+      AUTH_LOG_LEVEL: info
+      AUTH_CLIENT_URL: http://localhost:5173
+      AUTH_PROVIDER_GITHUB_ENABLED: "true"
+      AUTH_SERVER_URL: http://localhost:4000
+      AUTH_PROVIDER_GITHUB_CLIENT_ID: ${AUTH_PROVIDER_GITHUB_CLIENT_ID:-my_github_client_id}
+      AUTH_PROVIDER_GITHUB_CLIENT_SECRET: ${AUTH_PROVIDER_GITHUB_CLIENT_SECRET:-my_github_client_secret}
+      AUTH_SMTP_HOST: smtp-relay.sendinblue.com
+      AUTH_SMTP_PORT: 587
+      AUTH_SMTP_AUTH_METHOD: LOGIN
+      AUTH_SMTP_SECURE: false
+      AUTH_SMTP_USER: xmlking@gmail.com
+      AUTH_SMTP_PASS: ${AUTH_SMTP_PASS}
+      AUTH_SMTP_SENDER: sumodemo123@gmail.com
+    ports:
+      - "4000:4000"
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:4000/healthz || exit 1
+      interval: 2s
+      timeout: 1s
+      retries: 30
 
 volumes:
   db_data:

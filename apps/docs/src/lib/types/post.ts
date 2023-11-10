@@ -105,3 +105,18 @@ export type Remark42Config = {
 	/** hides footer with signature and links to Remark42,(default: false)  */
 	no_footer?: boolean;
 };
+
+
+
+export type Post = {
+	title: string;
+	slug: string;
+	description: string;
+	date: string;
+	headerImage?: string;
+	categories: string[];
+	published: boolean;
+	// photo: any;
+	// user: string;
+	// avatar: any;
+};

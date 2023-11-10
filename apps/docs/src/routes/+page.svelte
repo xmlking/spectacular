@@ -2,14 +2,13 @@
 	import type { SEOWebPage } from '@sveltinio/seo/types';
 	import { OpenGraphType, TwitterCardType } from '@sveltinio/seo/types';
 	import { PageMetaTags, JsonLdWebPage } from '@sveltinio/seo';
-	import { website } from '$config/website.js';
-	import CTA from '$themes/sveltin_theme/partials/CTA.svelte';
-	import { getFavicon } from '$lib/utils/strings.js';
+	import { website } from '$config/website';
+	import { getFavicon } from '$lib/utils/strings';
 
 	const homePage: SEOWebPage = {
 		url: website.baseURL,
 		title: website.title,
-		description: website.seoDescription,
+		description: website.description,
 		keywords: (website.keywords) ? website.keywords : new Array<string>(),
 		image: getFavicon(website),
 		opengraph: {
@@ -25,5 +24,3 @@
 <PageMetaTags data={homePage} />
 <JsonLdWebPage data={homePage} />
 <!-- End of SEO Section -->
-
-<CTA />

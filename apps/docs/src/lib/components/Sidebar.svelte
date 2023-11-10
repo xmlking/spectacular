@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 
 	import Icon from '$lib/components/icons/Icon.svelte';
-	import { menuNavLinks } from '$lib/links';
+	import { menuNavLinks } from '$config/menu';
 
 	// Local
 	let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;

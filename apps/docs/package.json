@@ -21,6 +21,7 @@
 		"gh-pages": "pnpm run build && echo kashmora.com > ./build/CNAME && touch ./build/.nojekyll && pnpx gh-pages -d build -t true"
 	},
 	"devDependencies": {
+		"@ethercorps/sveltekit-og": "2.0.2",
 		"@floating-ui/dom": "1.5.3",
 		"@indaco/svelte-iconoir": "4.7.2",
 		"@skeletonlabs/skeleton": "2.4.0",

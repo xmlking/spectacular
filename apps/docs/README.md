@@ -74,6 +74,34 @@ turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turb
 
 ## ⚡️ Usage
 
+Project Structure:
+
+```
+apps/docs/
+ ├ config/
+ │ └ [your own config files]
+ ├ content/
+ │ └ [your markdown files]
+ ├ src/
+ │ ├ lib/
+ │ │ └ [your own lib files]
+ │ ├ params/
+ │ │ └ [your own matchers]
+ │ ├ routes/
+ │ │ └ api
+ │ │ │ └ [your own APIs]
+ │ │ └ [your own routes]
+ │ ├ app.html
+ │ ├ app.postcss
+ ├ static/
+ │ └ [your static assets]
+ ├ mdsvex.config.js
+ ├ package.json
+ ├ svelte.config.js
+ ├ tsconfig.json
+ └ vite.config.ts
+ ```
+
 ### Developing
 
 Start a development server:
