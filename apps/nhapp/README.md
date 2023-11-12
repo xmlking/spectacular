@@ -56,7 +56,6 @@ This is a quickstart that showcases how to use the Nhost SDK running on server `
 
 ## Get Started
 
-
 1. Install and build dependencies
 
    ```sh
@@ -71,7 +70,7 @@ This is a quickstart that showcases how to use the Nhost SDK running on server `
    nhost up
    ```
 
-4. Terminal 2: Start the SvelteKit dev server
+3. Terminal 2: Start the SvelteKit dev server
 
    ```sh
    turbo dev --filter=nhapp -- --open

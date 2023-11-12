@@ -60,8 +60,8 @@ PNPM only need `pnpm-workspace.yaml` on your root repository alongside `packages
 
 ```yaml title="pnpm-workspace.yaml" showLineNumbers
 packages:
-    - "apps/*" # support glob pattern
-    - "packages/*"
+    - 'apps/*' # support glob pattern
+    - 'packages/*'
 ```
 
 ```text title="Directory Structure"
@@ -145,32 +145,35 @@ const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 
 module.exports = {
-  add,
-  subtract,
+	add,
+	subtract
 };
 ```
+
 ```js title="apps/calculator/index.js" showLineNumbers
-const { add, subtract } = require("math-lib");
+const { add, subtract } = require('math-lib');
 
 console.log(`9 + 10 = ${add(9, 10)}`);
 console.log(`26 - 9 = ${subtract(26, 9)}`);
 ```
+
 ```bash title="Commands"
 pnpm --filter calculator add math-lib --workspace
 ```
 
 ```json title="apps/calculator/package.json" showLineNumbers
 {
-  "scripts": {
-    "start": "node index.js"
-  }
+	"scripts": {
+		"start": "node index.js"
+	}
 }
 ```
+
 ```json title="package.json" showLineNumbers
 {
-  "scripts": {
-    "calculator:start": "pnpm -F calculator run start"
-  }
+	"scripts": {
+		"calculator:start": "pnpm -F calculator run start"
+	}
 }
 ```
 
