@@ -77,6 +77,9 @@ Awesome **SvelteKit** Links
 
   - [editable-website](https://github.com/michael/editable-website) A SvelteKit template for building CMS-free editable websites. Try [DEMO](https://editable.website)
 
+- Backend
+  - [Remult](https://remult.dev/) - Fullstack Type-safe CRUD & Realtime. setup with [SvelteKit](https://remult.dev/tutorials/sveltekit/)
+
 - General
   - [Svelte Hover Draw SVG](https://github.com/davipon/svelte-hover-draw-svg)
   - [Draggable Sections](https://github.com/TIKramer/svelte-section-list)

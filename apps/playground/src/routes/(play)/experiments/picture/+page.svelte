@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Picture } from 'ui';
 	import { version } from '$app/environment';
-	import VinylImgMeta from '$lib/assets/img/erik-mclean-QzpgqElvSiA-unsplash.jpg?w=200;400;800&format=avif;webp;jpg&as=picture';
+	// import VinylImgMeta from '?w=200;400;800&format=avif;webp;jpg&as=picture';
 	import Page from '$lib/components/layout/Page.svelte';
 	console.log(`Client version: ${version}`);
 </script>
@@ -16,7 +15,7 @@
 		<h1 class="h1">Picture</h1>
 		<p>Showcase image optimization.</p>
 	</header>
-	<Picture meta={VinylImgMeta} alt="Vinyls" sizes="33vw" />
+	<enhanced:img src="$lib/assets/img/erik-mclean-QzpgqElvSiA-unsplash.jpg?blur=25" sizes="min(3493px, 33vw)"  alt="An alt text" />
 </Page>
 
 

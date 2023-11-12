@@ -1,7 +1,7 @@
 import * as child_process from 'node:child_process';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import { imagetools } from 'vite-imagetools';
+import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 
 // const path = fileURLToPath(new URL('package.json', import.meta.url));
@@ -9,7 +9,7 @@ import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 // __APP_VERSION__: JSON.stringify(pkg.version),
 
 export default defineConfig({
-	plugins: [sveltekit(), imagetools(), purgeCss()],
+	plugins: [enhancedImages(), sveltekit(), purgeCss()],
 	define: {
 		// to burn-in release version in the footer.svelte
 		__APP_VERSION__: JSON.stringify(process.env.npm_package_version),

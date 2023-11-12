@@ -2,7 +2,7 @@ import * as child_process from 'node:child_process';
 import path from 'node:path';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
-import { imagetools } from 'vite-imagetools';
+import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { defineConfig } from 'vite';
 
@@ -40,8 +40,8 @@ export default defineConfig({
 		}
 	},
 	plugins: [
+		enhancedImages(),
 		sveltekit(),
-		imagetools(),
 		purgeCss(),
 		SvelteKitPWA({
 			registerType: 'autoUpdate',

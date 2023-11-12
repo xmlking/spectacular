@@ -64,20 +64,21 @@ pnpm add -D svelte-meta-tags --filter "./apps/**"
 
 #### Image Optimization
 
-[vite-imagetools](https://github.com/JonasKruckenberg/imagetools/tree/main/packages/vite) A toolbox of import directives for Vite that can transform your image at compile-time.
+[Svelte Images](https://kit.svelte.dev/docs/images) A toolbox of import directives for Vite that can transform your image at compile-time.
 
 ```shell
-pnpm add -D vite-imagetools --filter "./apps/**"
+# pnpm add -D vite-imagetools --filter "./apps/**"
+pnpm add -D @sveltejs/enhanced-img --filter "./apps/**"
 ```
 
 **Setup**
 
 ```ts
 import { defineConfig } from 'vite';
-import { imagetools } from 'vite-imagetools';
+import { enhancedImages } from '@sveltejs/enhanced-img'
 
 export default defineConfig({
-	plugins: [imagetools()]
+	plugins: [enhancedImages()]
 });
 ```
 
