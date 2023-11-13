@@ -5,7 +5,7 @@
 </script>
 
 <script lang="ts" generics="T extends AnyZodObject">
-	import { Button, ButtonGroup, Helper, Label } from 'flowbite-svelte';
+	import { ButtonGroup, RadioButton, Helper, Label } from 'flowbite-svelte';
 	import type { z } from 'zod';
 	import type { ZodValidation, FormPathLeaves } from 'sveltekit-superforms';
 	import type { SuperForm } from 'sveltekit-superforms/client'
@@ -30,7 +30,7 @@
 <ButtonGroup>
 	{#each items as item}
 		 {@const id = generateId()}
-		<Button outline class="checked-label" {...$$restProps}>
+		<!-- <Button outline class="checked-label" {...$$restProps}>
 			<input
 				type="radio"
 				{id}
@@ -47,7 +47,22 @@
 				{...$$restProps}
 			/>
 			<label for={id} >{item.label}</label>
-	</Button>
+	</Button> -->
+	<RadioButton outline {...$$restProps}
+		{id}
+		name={field}
+		value={item.value}
+		bind:group={$value}
+		on:blur
+		on:change
+		on:click
+		aria-label={item.label}
+		data-invalid={$errors}
+		{...$constraints}
+		{...$$restProps}
+	>
+		{item.label}
+	</RadioButton>
 	{/each}
 </ButtonGroup>
 
