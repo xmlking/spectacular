@@ -2,7 +2,7 @@ import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
-import { imagetools } from 'vite-imagetools';
+import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import houdini from 'houdini/vite';
 import type { UserConfig } from 'vite';
@@ -26,7 +26,7 @@ const config: UserConfig = {
 	plugins: [
 		houdini(),
 		sveltekit(),
-		imagetools(),
+		enhancedImages(),
 		purgeCss(),
 		SvelteKitPWA({
 			// adapterFallback: 'index.html',

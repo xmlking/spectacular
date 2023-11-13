@@ -18,7 +18,7 @@ turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turb
 
 ## ✨ Features
 
-- [x] The starter creates and caches responsive images using the `vite-imagetools` plugin.
+- [x] The starter creates and caches responsive images using the `@sveltejs/enhanced-img` plugin.
 - [x] Out of the box **Atom feed** (WebSub), **Sitemap** support with caching.
 - [ ] Speed up content creation with [sveltin](https://docs.sveltin.io/) CLI.
 - [ ] [Progressive Web App (PWA)](https://rodneylab.com/sveltekit-pwa/)
@@ -55,7 +55,7 @@ turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turb
 
 - [VitePWA](https://github.com/antfu/vite-plugin-pwa) - Zero-config PWA for Vite.
 - [Purge Tailwind CSS](https://github.com/AdrianGonz97/vite-plugin-tailwind-purgecss) -Thoroughly purges excess TailwindCSS using [PurgeCSS](https://purgecss.com/)
-- [vite-imagetools](https://github.com/JonasKruckenberg/imagetools/tree/main/packages/vite) Image tools to Resize Images, Output modern formats, Easy Srcset generation.
+- [@sveltejs/enhanced-img](https://kit.svelte.dev/docs/images) Image tools to Resize Images, Output modern formats, Easy Srcset generation.
 
 ### TailwindCSS Plugins
 

@@ -74,7 +74,6 @@ pnpm add -D svelte-meta-tags --filter "./apps/**"
 [Svelte Images](https://kit.svelte.dev/docs/images) A toolbox of import directives for Vite that can transform your image at compile-time.
 
 ```shell
-# pnpm add -D vite-imagetools --filter "./apps/**"
 pnpm add -D @sveltejs/enhanced-img --filter "./apps/**"
 ```
 
