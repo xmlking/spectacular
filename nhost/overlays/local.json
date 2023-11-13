@@ -1,17 +1,17 @@
 [
-    {
-      "op": "replace",
-      "path": "/auth/redirections/clientUrl",
-      "value": "http://localhost:5173"
-    },
-    {
-      "op": "replace",
-      "path": "/global/environment/0/value",
-      "value": "http://localhost:5173/api/events"
-    },
-    {
-      "op": "replace",
-      "path": "/global/environment/1/value",
-      "value": "http://localhost:5173/api/actions"
-    }
-  ]
+	{
+		"op": "replace",
+		"path": "/auth/redirections/clientUrl",
+		"value": "http://localhost:5173"
+	},
+	{
+		"op": "replace",
+		"path": "/global/environment/0/value",
+		"value": "http://localhost:5173/api/events"
+	},
+	{
+		"op": "replace",
+		"path": "/global/environment/1/value",
+		"value": "http://localhost:5173/api/actions"
+	}
+]

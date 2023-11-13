@@ -36,9 +36,9 @@ docs/              # Developer Documentation
 apps/
 	web/           # Dashboard WebApp
 	docs/          # Documentation website
-	playground/    # App to explore new experemental features 
+	playground/    # App to explore new experemental features
 	offline/        # local-first/offline-first demo app
-patches/           # pnpm patched dependencies 
+patches/           # pnpm patched dependencies
 packages/          # Core packages
 integrations/      # These are packages that rely on the core packages
 ```
@@ -98,7 +98,7 @@ Each package that defines end-to-end tests embeds their own Spectacular configur
 You can run the e2e tests with the following command from the repository root:
 
 ```sh
-$ turbo test:integration  --filter=web... 
+$ turbo test:integration  --filter=web...
 ```
 
 ## Changesets

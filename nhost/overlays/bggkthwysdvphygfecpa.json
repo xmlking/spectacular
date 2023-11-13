@@ -1,17 +1,17 @@
 [
-    {
-      "op": "replace",
-      "path": "/auth/redirections/clientUrl",
-      "value": "https://spectacular-console.vercel.app"
-    },
-    {
-      "op": "replace",
-      "path": "/global/environment/0/value",
-      "value": "https://spectacular-console.vercel.app/api/events"
-    },
-    {
-      "op": "replace",
-      "path": "/global/environment/1/value",
-      "value": "https://spectacular-console.vercel.app/api/actions"
-    }
-  ]
+	{
+		"op": "replace",
+		"path": "/auth/redirections/clientUrl",
+		"value": "https://spectacular-console.vercel.app"
+	},
+	{
+		"op": "replace",
+		"path": "/global/environment/0/value",
+		"value": "https://spectacular-console.vercel.app/api/events"
+	},
+	{
+		"op": "replace",
+		"path": "/global/environment/1/value",
+		"value": "https://spectacular-console.vercel.app/api/actions"
+	}
+]

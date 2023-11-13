@@ -30,10 +30,12 @@ Awesome **SvelteKit** Links
   - [felte](https://felte.dev/) - An extensible form library for Svelte, Solid and React
 
 - Force Graph examples with D3
+
   - [d3 Force Directed Graph demo](https://svelte.dev/repl/c23b43904005457981e78ca5042f7dd4?version=3.29.7)
   - [d3-fdg-svelte](https://github.com/happybeing/d3-fdg-svelte)
   - [redisgraph-navi](https://github.com/jlefebure/redisgraph-navi/tree/master/src/client)
   - [Autosize Textarea](https://github.com/ankurrsinghal/svelte-autoresize-textarea)
+
 - three.js
 
   - [Threlte](https://threlte.xyz/) is a component library for Svelte to build and render `three.js` scenes declaratively and state-driven in Svelte apps.
@@ -78,6 +80,7 @@ Awesome **SvelteKit** Links
   - [editable-website](https://github.com/michael/editable-website) A SvelteKit template for building CMS-free editable websites. Try [DEMO](https://editable.website)
 
 - Backend
+
   - [Remult](https://remult.dev/) - Fullstack Type-safe CRUD & Realtime. setup with [SvelteKit](https://remult.dev/tutorials/sveltekit/)
 
 - General
@@ -106,6 +109,7 @@ Awesome **SvelteKit** Links
 ## internationalization
 
 - [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n), [example with SvelteKit](https://github.com/ivanhofer/typesafe-i18n-demo-sveltekit)
+- [Paraglide JS](https://inlang.com/m/gerre34r/library-inlang-paraglideJs#the-best-i18n-library-for-the-web)
 
 ## GraphQL
 
@@ -132,6 +136,7 @@ Awesome **SvelteKit** Links
 - [SvelteKit Starter with trpc, lucia, skeleton and svelte-headless-table](https://github.com/widiu7omo/my-kit)
 - [Svelte 3.5 + Storybook 7 + TailwindCSS 3](https://github.com/jerriclynsjohn/svelte-storybook-tailwind)
 - [Svelte offline SQLite ](https://github.com/phartenfeller/sveltekit-1.0-sqlite-demo-app)
+- [Svelte runes + Liveblocks demo](https://github.com/CTNicholas/svelte-runes-realtime-drawing)
 
 ## Deployment
 

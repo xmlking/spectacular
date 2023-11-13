@@ -17,6 +17,13 @@ pnpm add -g hasura-cli
 pnpm add -g turbo
 ```
 
+### Chrome Plugins
+
+Install Chrome Plugins
+
+- Svelte [DevTools](https://chromewebstore.google.com/detail/svelte-devtools/kfidecgcdjjfpeckbblhmfkhmlgecoff?pli=1)
+- [GraphQL Network Inspector](https://chromewebstore.google.com/detail/graphql-network-inspector/ndlbedplllcgconngcnfmkadhokfaaln?hl=en-GB)
+
 ### Create
 
 ```shell
@@ -75,7 +82,7 @@ pnpm add -D @sveltejs/enhanced-img --filter "./apps/**"
 
 ```ts
 import { defineConfig } from 'vite';
-import { enhancedImages } from '@sveltejs/enhanced-img'
+import { enhancedImages } from '@sveltejs/enhanced-img';
 
 export default defineConfig({
 	plugins: [enhancedImages()]

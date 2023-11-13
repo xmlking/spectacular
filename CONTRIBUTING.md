@@ -17,7 +17,7 @@ Contributions are made to Spectacular repos via Issues and Pull Requests (PRs). 
 - We work hard to make sure issues are handled on time, but it could take a while to investigate the root cause depending on the impact. A friendly ping in the comment thread to the submitter or a contributor can help draw attention if your issue is blocking.
 - If you've never contributed before, see [the first-timer's guide](https://github.com/firstcontributions/first-contributions) for resources and tips on getting started.
 
-###  Steps to contribute
+### Steps to contribute
 
 1. Fork the repository.
 2. Clone the forked repository and make the changes the push the changes to the forked repository. Make a pull request with description of the changes. If possible, add links to the code changes and screenshots.

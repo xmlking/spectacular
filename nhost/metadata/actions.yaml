@@ -1,7 +1,7 @@
 actions:
   - name: ListUniversities
     definition:
-      kind: ""
+      kind: ''
       handler: http://universities.hipolabs.com
       request_transform:
         method: GET
@@ -22,7 +22,7 @@ actions:
     comment: Universities API
   - name: SearchRestrooms
     definition:
-      kind: ""
+      kind: ''
       handler: https://www.refugerestrooms.org/api/v1
       request_transform:
         method: GET
