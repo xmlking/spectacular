@@ -8,6 +8,7 @@ export interface CrossfadeParams {
 	easing?: EasingFunction;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ClientRectMap = Map<any, { rect: DOMRect }>;
 
 export function crossfade({
@@ -19,12 +20,14 @@ export function crossfade({
 	(
 		node: Element,
 		params: CrossfadeParams & {
+			// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 			key: any;
 		}
 	) => () => TransitionConfig,
 	(
 		node: Element,
 		params: CrossfadeParams & {
+			// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 			key: any;
 		}
 	) => () => TransitionConfig
@@ -63,6 +66,7 @@ export function crossfade({
 	}
 
 	function transition(items: ClientRectMap, counterparts: ClientRectMap, inTransition: boolean) {
+		// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 		return (node: Element, params: CrossfadeParams & { key: any }) => {
 			items.set(params.key, {
 				rect: node.getBoundingClientRect()
@@ -81,7 +85,6 @@ export function crossfade({
 				// then we need to supply an outro
 				items.delete(params.key);
 
-				//@ts-ignore
 				return fallback && fallback(node, params, inTransition);
 			};
 		};

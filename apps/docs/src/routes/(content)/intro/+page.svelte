@@ -6,10 +6,10 @@
 	<title>{data.metadata.title}</title>
 </svelte:head>
 
-<article class="mt-8 prose prose-lg lg:prose-xl dark:prose-invert w-full">
+<article class="prose prose-lg lg:prose-xl dark:prose-invert mt-8 w-full">
 	<hgroup>
 		<h1 class="text-center">{data.metadata.title}</h1>
-        <p>Published {data.metadata.date}</p>
+		<p>Published {data.metadata.date}</p>
 	</hgroup>
 	<svelte:component this={data.content} />
 </article>

@@ -1,10 +1,10 @@
 <script>
-	import TodoItem from '$lib/components/todo-item.svelte'
+	import TodoItem from '$lib/components/todo-item.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
 
-	const { todos, count, page } = data
+	const { todos, count, page } = data;
 </script>
 
 <svelte:head>
@@ -12,12 +12,12 @@
 </svelte:head>
 
 <div class="space-y-4">
-	<div class="flex items-center justify-between w-full">
+	<div class="flex w-full items-center justify-between">
 		<h2 class="text-xl">Todos ({count})</h2>
 
 		<a
 			href={`/protected/todos/new`}
-			class="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+			class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
 		>
 			Add Todo
 		</a>
@@ -26,7 +26,7 @@
 	<ul class="space-y-1">
 		{#each todos as todo}
 			<li>
-				<TodoItem todo={todo} />
+				<TodoItem {todo} />
 			</li>
 		{/each}
 	</ul>
@@ -37,7 +37,7 @@
 				<a
 					href={`/protected/todos?page=${page - 1}`}
 					data-sveltekit-reload
-					class="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+					class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
 				>
 					Previous
 				</a>
@@ -47,7 +47,7 @@
 				<a
 					href={`/protected/todos?page=${page + 1}`}
 					data-sveltekit-reload
-					class="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+					class="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
 				>
 					Next
 				</a>

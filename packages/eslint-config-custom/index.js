@@ -88,11 +88,11 @@ module.exports = {
 		'jsdoc/valid-types': 0,
 		'jsdoc/no-undefined-types': 0,
 		'jsdoc/check-tag-names': 0
-	}
+	},
 
-	// "globals": {
-	// 	'__APP_VERSION__': true,
-	// 	'__GIT_TAG__': true,
-	// 	'__GIT_DATE__': true,
-	// }
+	globals: {
+		__APP_VERSION__: true,
+		__GIT_TAG__: true,
+		__GIT_DATE__: true
+	}
 };

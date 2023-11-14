@@ -1,5 +1,5 @@
-import { getNhost } from '$lib/nhost';
 import { redirect } from '@sveltejs/kit';
+import { getNhost } from '$lib/nhost';
 
 /** @type {import('./$types').Actions} */
 export const actions = {

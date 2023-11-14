@@ -1,6 +1,8 @@
 // Preset Themes
 
+// eslint-disable-next-line  no-unused-vars, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
 const ghPath = 'https://github.com/skeletonlabs/skeleton/blob/master/src/themes';
+// eslint-disable-next-line  no-unused-vars, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
 export const themes: any[] = [
 	// Custom (IMPORTANT: must remain the first option)
 	{

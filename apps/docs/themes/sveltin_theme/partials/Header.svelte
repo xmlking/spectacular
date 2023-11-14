@@ -1,33 +1,197 @@
 <script lang="ts">
-
-export let logoSrc: string;
+	export let logoSrc: string;
 </script>
 
-<header class="w-full text-sm text-skin-muted bg-skin-deep-dark">
+<header class="text-skin-muted bg-skin-deep-dark w-full text-sm">
 	<div class="w-full">
-		<div class="flex flex-col w-full max-w-7xl px-3 py-3 mx-auto lg:py-0 md:items-center md:justify-between md:flex-row md:px-6 lg:px-16 lg:bg-none">
-		<div class="flex flex-row items-center justify-between px-4">
-			<a href="/" class="text-lg font-semibold text-granite focus:outline-none focus:ring">
-			<svg class="h-12" viewBox="0 0 1374 635" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M252.39 452.03C231.16 449.88 216.7 447.72 216.7 432.95C216.7 421.57 231.16 416.95 245.93 416.95C264.7 416.95 281.62 420.64 296.39 431.72L326.54 393.26C303.46 375.11 278.23 367.72 245.93 367.72C200.39 367.72 155.77 387.41 155.77 432.95C155.77 486.49 196.39 498.49 243.46 502.8C267.16 504.95 279.46 511.72 279.46 522.49C279.46 534.49 265.62 541.57 245.62 541.57C227.46 541.57 203.77 537.88 182.54 517.26L149 555.72C178.85 587.11 206.54 593.88 245.31 593.57C293.62 593.26 339.77 572.34 339.77 523.41C339.77 473.88 295.16 456.65 252.39 452.03V452.03Z" fill="#0B7599"></path><path d="M622.54 431.72C581.31 431.72 537.93 456.34 537.93 511.72C537.93 567.11 578.54 590.8 626.54 590.8C652.7 590.8 677.62 582.49 695.77 565.57L668.08 534.49C658.23 541.88 645.62 546.8 629 546.8C616.7 546.8 599.16 540.95 595.16 527.41H701.31C714.23 467.41 676.39 431.72 622.54 431.72V431.72ZM595.46 491.11C599.16 466.18 649 467.11 650.54 491.11H595.46Z" fill="#0B7599"></path><path d="M733.93 371.72V587.41H789.93V371.72H733.93Z" fill="#0B7599"></path><path d="M930.54 539.11C925.93 542.18 919.47 544.34 913.93 544.34C905.31 544.34 899.16 540.34 898.85 529.57V479.72H933.31V436.34H899.16V392.34L842.85 398.49V436.34H818.54V479.72H842.85V529.57C841.93 577.26 869 591.11 899.16 591.11C914.85 591.11 929.93 588.34 942.85 580.95L930.54 539.11Z" fill="#0B7599"></path><path d="M968.39 437.88V587.41H1025.31V437.88H968.39ZM997 367.72C981 367.72 965 377.26 965 396.34C965 415.11 981 424.64 997 424.64C1012.7 424.64 1028.7 415.11 1028.7 396.34C1028.7 377.26 1012.7 367.72 997 367.72Z" fill="#0B7599"></path><path d="M1165.31 431.72C1149.31 431.41 1130.24 436.95 1117.31 452.03L1114.85 435.41H1064.7V587.41H1120.7V507.41C1120.7 487.41 1133.31 478.18 1146.85 478.18C1157.31 478.18 1168.08 484.65 1168.08 503.41V587.41H1224.7V503.11C1224.7 448.95 1197.31 432.03 1165.31 431.72V431.72Z" fill="#0B7599"></path><path d="M469.31 435.41L447.99 497.12L439.54 521.57L466.54 588.34L475.78 565.84L529.31 435.41H469.31Z" fill="black"></path><path d="M573.16 328.57L529.31 435.41L475.78 565.84L466.54 588.34L437.62 527.11L439.54 521.57L447.99 497.12L469.32 435.41L513.62 307.21C518.99 315.51 525.02 323.38 531.67 330.74L538.26 338.03L547.87 335.96C556.49 334.1 564.94 331.62 573.16 328.57V328.57Z" fill="#C13333"></path><path opacity="0.38" d="M475.78 565.84L466.54 588.34L437.62 527.11L447.99 497.12L455.3 515.2L475.78 565.84Z" fill="black"></path><path d="M466.54 588.34H410.23L344.69 435.41H404.69L439.54 521.57L466.54 588.34Z" fill="#C13333"></path><path d="M669.44 206.05C650.29 265.51 601.26 307.03 544.29 319.34C505.21 276.09 489.63 213.76 508.78 154.3C527.93 94.83 576.96 53.31 633.93 41C673.01 84.25 688.59 146.58 669.44 206.05Z" fill="#C13333"></path><path d="M678.57 293.14L639.57 414.24C640.04 363.44 624.09 328.87 611.2 309.3C618.61 304.42 625.67 299 632.33 293.08C642 284.48 650.71 274.91 658.34 264.55L678.57 293.14Z" fill="#C13333"></path><path d="M495.8 272.14C473.91 280.51 440.79 299.27 411.52 340.8L450.53 219.69L483.65 208.28C483.79 221.15 485.28 234.01 488.11 246.63C490.06 255.32 492.64 263.85 495.8 272.14V272.14Z" fill="#C13333"></path><path d="M637.79 131.62C633.05 146.33 618.5 155.15 603.7 153.17C602.13 152.95 600.55 152.62 598.98 152.16C598.73 152.09 598.47 152.01 598.21 151.93C593.72 150.48 589.77 148.12 586.52 145.11C584.12 142.89 582.09 140.33 580.5 137.51C576.31 130.12 575.1 121.07 577.91 112.34C583.21 95.88 600.8 86.8 617.27 91.98C617.34 92 617.42 92.02 617.49 92.05C620.6 93.05 623.44 94.49 625.97 96.27C629.97 99.09 633.2 102.77 635.48 106.96C636.25 108.38 636.91 109.85 637.46 111.38C639.72 117.67 640 124.75 637.79 131.62Z" fill="white"></path><path d="M625.97 96.2599L586.52 145.1C584.12 142.88 582.09 140.32 580.5 137.5L617.27 91.97C617.34 91.99 617.42 92.01 617.49 92.04C620.6 93.04 623.44 94.4799 625.97 96.2599V96.2599Z" fill="#B73940"></path><path d="M637.46 111.36L603.7 153.16C602.13 152.94 600.55 152.61 598.98 152.15L635.49 106.95C636.25 108.37 636.91 109.84 637.46 111.36V111.36Z" fill="#B73940"></path>
-			</svg>
-				<span class="sr-only">Sveltin Logo</span></a> <button name="mobile-menu-open" aria-label="hidden" class="md:hidden focus:outline-none block">
-				<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="none" aria-hidden="true" aria-labelledby="menu icon" class="w-6 h-6 cursor-pointer md:hidden block hover:text-blueGray-600 dark:hover:text-blueGray-300">
-					<path d="M3 5H21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 12H21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 19H21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-				</svg>
-			</button>
-			<button name="mobile-menu-close" aria-label="hidden" class="md:hidden focus:outline-none hidden">
-				<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" stroke-width="1.5" viewBox="0 0 24 24" fill="none" aria-hidden="true" aria-labelledby="cancel icon" class="w-6 h-6 cursor-pointer md:hidden block hover:text-blueGray-600 dark:hover:text-blueGray-300"><path d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+		<div
+			class="mx-auto flex w-full max-w-7xl flex-col px-3 py-3 md:flex-row md:items-center md:justify-between md:px-6 lg:bg-none lg:px-16 lg:py-0"
+		>
+			<div class="flex flex-row items-center justify-between px-4">
+				<a
+					href="/"
+					class="text-granite text-lg font-semibold focus:outline-none focus:ring"
+				>
+					<svg
+						class="h-12"
+						viewBox="0 0 1374 635"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M252.39 452.03C231.16 449.88 216.7 447.72 216.7 432.95C216.7 421.57 231.16 416.95 245.93 416.95C264.7 416.95 281.62 420.64 296.39 431.72L326.54 393.26C303.46 375.11 278.23 367.72 245.93 367.72C200.39 367.72 155.77 387.41 155.77 432.95C155.77 486.49 196.39 498.49 243.46 502.8C267.16 504.95 279.46 511.72 279.46 522.49C279.46 534.49 265.62 541.57 245.62 541.57C227.46 541.57 203.77 537.88 182.54 517.26L149 555.72C178.85 587.11 206.54 593.88 245.31 593.57C293.62 593.26 339.77 572.34 339.77 523.41C339.77 473.88 295.16 456.65 252.39 452.03V452.03Z"
+							fill="#0B7599"
+						></path><path
+							d="M622.54 431.72C581.31 431.72 537.93 456.34 537.93 511.72C537.93 567.11 578.54 590.8 626.54 590.8C652.7 590.8 677.62 582.49 695.77 565.57L668.08 534.49C658.23 541.88 645.62 546.8 629 546.8C616.7 546.8 599.16 540.95 595.16 527.41H701.31C714.23 467.41 676.39 431.72 622.54 431.72V431.72ZM595.46 491.11C599.16 466.18 649 467.11 650.54 491.11H595.46Z"
+							fill="#0B7599"
+						></path><path d="M733.93 371.72V587.41H789.93V371.72H733.93Z" fill="#0B7599"
+						></path><path
+							d="M930.54 539.11C925.93 542.18 919.47 544.34 913.93 544.34C905.31 544.34 899.16 540.34 898.85 529.57V479.72H933.31V436.34H899.16V392.34L842.85 398.49V436.34H818.54V479.72H842.85V529.57C841.93 577.26 869 591.11 899.16 591.11C914.85 591.11 929.93 588.34 942.85 580.95L930.54 539.11Z"
+							fill="#0B7599"
+						></path><path
+							d="M968.39 437.88V587.41H1025.31V437.88H968.39ZM997 367.72C981 367.72 965 377.26 965 396.34C965 415.11 981 424.64 997 424.64C1012.7 424.64 1028.7 415.11 1028.7 396.34C1028.7 377.26 1012.7 367.72 997 367.72Z"
+							fill="#0B7599"
+						></path><path
+							d="M1165.31 431.72C1149.31 431.41 1130.24 436.95 1117.31 452.03L1114.85 435.41H1064.7V587.41H1120.7V507.41C1120.7 487.41 1133.31 478.18 1146.85 478.18C1157.31 478.18 1168.08 484.65 1168.08 503.41V587.41H1224.7V503.11C1224.7 448.95 1197.31 432.03 1165.31 431.72V431.72Z"
+							fill="#0B7599"
+						></path><path
+							d="M469.31 435.41L447.99 497.12L439.54 521.57L466.54 588.34L475.78 565.84L529.31 435.41H469.31Z"
+							fill="black"
+						></path><path
+							d="M573.16 328.57L529.31 435.41L475.78 565.84L466.54 588.34L437.62 527.11L439.54 521.57L447.99 497.12L469.32 435.41L513.62 307.21C518.99 315.51 525.02 323.38 531.67 330.74L538.26 338.03L547.87 335.96C556.49 334.1 564.94 331.62 573.16 328.57V328.57Z"
+							fill="#C13333"
+						></path><path
+							opacity="0.38"
+							d="M475.78 565.84L466.54 588.34L437.62 527.11L447.99 497.12L455.3 515.2L475.78 565.84Z"
+							fill="black"
+						></path><path
+							d="M466.54 588.34H410.23L344.69 435.41H404.69L439.54 521.57L466.54 588.34Z"
+							fill="#C13333"
+						></path><path
+							d="M669.44 206.05C650.29 265.51 601.26 307.03 544.29 319.34C505.21 276.09 489.63 213.76 508.78 154.3C527.93 94.83 576.96 53.31 633.93 41C673.01 84.25 688.59 146.58 669.44 206.05Z"
+							fill="#C13333"
+						></path><path
+							d="M678.57 293.14L639.57 414.24C640.04 363.44 624.09 328.87 611.2 309.3C618.61 304.42 625.67 299 632.33 293.08C642 284.48 650.71 274.91 658.34 264.55L678.57 293.14Z"
+							fill="#C13333"
+						></path><path
+							d="M495.8 272.14C473.91 280.51 440.79 299.27 411.52 340.8L450.53 219.69L483.65 208.28C483.79 221.15 485.28 234.01 488.11 246.63C490.06 255.32 492.64 263.85 495.8 272.14V272.14Z"
+							fill="#C13333"
+						></path><path
+							d="M637.79 131.62C633.05 146.33 618.5 155.15 603.7 153.17C602.13 152.95 600.55 152.62 598.98 152.16C598.73 152.09 598.47 152.01 598.21 151.93C593.72 150.48 589.77 148.12 586.52 145.11C584.12 142.89 582.09 140.33 580.5 137.51C576.31 130.12 575.1 121.07 577.91 112.34C583.21 95.88 600.8 86.8 617.27 91.98C617.34 92 617.42 92.02 617.49 92.05C620.6 93.05 623.44 94.49 625.97 96.27C629.97 99.09 633.2 102.77 635.48 106.96C636.25 108.38 636.91 109.85 637.46 111.38C639.72 117.67 640 124.75 637.79 131.62Z"
+							fill="white"
+						></path><path
+							d="M625.97 96.2599L586.52 145.1C584.12 142.88 582.09 140.32 580.5 137.5L617.27 91.97C617.34 91.99 617.42 92.01 617.49 92.04C620.6 93.04 623.44 94.4799 625.97 96.2599V96.2599Z"
+							fill="#B73940"
+						></path><path
+							d="M637.46 111.36L603.7 153.16C602.13 152.94 600.55 152.61 598.98 152.15L635.49 106.95C636.25 108.37 636.91 109.84 637.46 111.36V111.36Z"
+							fill="#B73940"
+						></path>
+					</svg>
+					<span class="sr-only">Sveltin Logo</span></a
+				>
+				<button
+					name="mobile-menu-open"
+					aria-label="hidden"
+					class="block focus:outline-none md:hidden"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1.5em"
+						height="1.5em"
+						stroke-width="1.5"
+						viewBox="0 0 24 24"
+						fill="none"
+						aria-hidden="true"
+						aria-labelledby="menu icon"
+						class="hover:text-blueGray-600 dark:hover:text-blueGray-300 block h-6 w-6 cursor-pointer md:hidden"
+					>
+						<path
+							d="M3 5H21"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path><path
+							d="M3 12H21"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path><path
+							d="M3 19H21"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path>
+					</svg>
+				</button>
+				<button
+					name="mobile-menu-close"
+					aria-label="hidden"
+					class="hidden focus:outline-none md:hidden"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="1.5em"
+						height="1.5em"
+						stroke-width="1.5"
+						viewBox="0 0 24 24"
+						fill="none"
+						aria-hidden="true"
+						aria-labelledby="cancel icon"
+						class="hover:text-blueGray-600 dark:hover:text-blueGray-300 block h-6 w-6 cursor-pointer md:hidden"
+						><path
+							d="M6.75827 17.2426L12.0009 12M17.2435 6.75736L12.0009 12M12.0009 12L6.75827 6.75736M12.0009 12L17.2435 17.2426"
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path>
 					</svg>
 				</button>
 			</div>
-			<nav class="flex-col items-center justify-end flex-grow px-5 space-x-1 md:pb-0 md:flex md:flex-row hidden">
-				<a href="https://docs.sveltin.io" rel="external noopener noreferrer" target="_blank" data-sveltekit-preload-data="off" class="px-2 py-4 inline-flex items-center content-center gap-1 text-base font-semibold text-granite text-opacity-90 hover:text-river focus:outline-none md:my-0 hover:border-granite border-b-2 border-transparent transition duration-1000 ease-in-out transform lg:text-sm xl:text-base xl:px-6 umami--click--nav-docs" style="" aria-label="docs" data-testid="link" id="nav-docs">docs
-					<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" stroke-width="1.5" fill="none"><path d="M21 3h-6m6 0l-9 9m9-9v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+			<nav
+				class="hidden flex-grow flex-col items-center justify-end space-x-1 px-5 md:flex md:flex-row md:pb-0"
+			>
+				<a
+					href="https://docs.sveltin.io"
+					rel="external noopener noreferrer"
+					target="_blank"
+					data-sveltekit-preload-data="off"
+					class="text-granite hover:text-river hover:border-granite umami--click--nav-docs inline-flex transform content-center items-center gap-1 border-b-2 border-transparent px-2 py-4 text-base font-semibold text-opacity-90 transition duration-1000 ease-in-out focus:outline-none md:my-0 lg:text-sm xl:px-6 xl:text-base"
+					style=""
+					aria-label="docs"
+					data-testid="link"
+					id="nav-docs"
+					>docs
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="12"
+						height="12"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						fill="none"
+						><path
+							d="M21 3h-6m6 0l-9 9m9-9v6"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path><path
+							d="M21 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+						></path>
 					</svg>
 				</a>
-					<a href="https://github.com/sveltinio" rel="external noopener noreferrer" target="_blank" data-sveltekit-preload-data="off" class="px-2 py-4 inline-flex items-center content-center gap-1 text-base font-semibold text-granite text-opacity-90 hover:text-river focus:outline-none md:my-0 hover:border-granite border-b-2 border-transparent transition duration-1000 ease-in-out transform lg:text-sm xl:text-base xl:px-6 umami--click--nav-github" style="" aria-label="github" data-testid="link" id="nav-github">github
-					<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" stroke-width="1.5" fill="none"><path d="M21 3h-6m6 0l-9 9m9-9v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M21 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+				<a
+					href="https://github.com/sveltinio"
+					rel="external noopener noreferrer"
+					target="_blank"
+					data-sveltekit-preload-data="off"
+					class="text-granite hover:text-river hover:border-granite umami--click--nav-github inline-flex transform content-center items-center gap-1 border-b-2 border-transparent px-2 py-4 text-base font-semibold text-opacity-90 transition duration-1000 ease-in-out focus:outline-none md:my-0 lg:text-sm xl:px-6 xl:text-base"
+					style=""
+					aria-label="github"
+					data-testid="link"
+					id="nav-github"
+					>github
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="12"
+						height="12"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						fill="none"
+						><path
+							d="M21 3h-6m6 0l-9 9m9-9v6"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path><path
+							d="M21 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+						></path>
 					</svg>
 				</a>
 			</nav>

@@ -3,4 +3,4 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<h1 class="text-2xl text-center">Hi, login/register to get started</h1>
+<h1 class="text-center text-2xl">Hi, login/register to get started</h1>

@@ -28,7 +28,7 @@
 			{label}
 		</label>
 	{/if}
-	
+
 	<div class="mt-1">
 		<input
 			use:setType
@@ -37,7 +37,7 @@
 			{required}
 			bind:value
 			bind:this={inputRef}
-			class="block w-full p-3 border rounded-md border-slate-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+			class="block w-full rounded-md border border-slate-300 p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
 		/>
 	</div>
 </div>

@@ -4,7 +4,6 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"lint:cspell": "cspell \"**\"",
 		"lint:prettier": "prettier --check --ignore-path=../../.prettierignore .",
 		"lint": "concurrently pnpm:lint:*",
 		"format:prettier": "prettier --write --ignore-path=../../.prettierignore .",

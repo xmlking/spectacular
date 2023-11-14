@@ -9,7 +9,7 @@
 		url: website.baseURL,
 		title: website.title,
 		description: website.description,
-		keywords: (website.keywords) ? website.keywords : new Array<string>(),
+		keywords: website.keywords ? website.keywords : new Array<string>(),
 		image: getFavicon(website),
 		opengraph: {
 			type: OpenGraphType.Website

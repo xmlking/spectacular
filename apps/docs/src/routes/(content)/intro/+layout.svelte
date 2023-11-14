@@ -1,3 +1,3 @@
-<div class="container h-full mx-auto flex justify-center w-full my-auto">
+<div class="container mx-auto my-auto flex h-full w-full justify-center">
 	<slot />
 </div>

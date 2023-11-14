@@ -15,9 +15,12 @@
 		<h1 class="h1">Picture</h1>
 		<p>Showcase image optimization.</p>
 	</header>
-	<enhanced:img src="$lib/assets/img/erik-mclean-QzpgqElvSiA-unsplash.jpg?blur=25" sizes="min(3493px, 33vw)"  alt="An alt text" />
+	<enhanced:img
+		src="$lib/assets/img/erik-mclean-QzpgqElvSiA-unsplash.jpg?blur=25"
+		sizes="min(3493px, 33vw)"
+		alt="An alt text"
+	/>
 </Page>
-
 
 <style lang="postcss">
 </style>

@@ -1,5 +1,5 @@
-import { getNhost, NHOST_SESSION_KEY } from '$lib/nhost';
 import { redirect } from '@sveltejs/kit';
+import { getNhost, NHOST_SESSION_KEY } from '$lib/nhost';
 
 /** @type {import('./$types').Actions} */
 export const actions = {

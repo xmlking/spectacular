@@ -15,6 +15,7 @@
 	$: previous = before;
 	$: next = after;
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 	$: guidesSlugPage = <SEOWebPage>{
 		url: canonicalPageUrl($page.url.pathname, website.baseURL),
 		title: current.metadata.title,
@@ -56,7 +57,8 @@
 	{#if current.metadata.cover}
 		<div class="cover">
 			<img
-				src="{assets}/resources/{current.resource}/{current.metadata.slug}/{current.metadata.cover}"
+				src="{assets}/resources/{current.resource}/{current.metadata.slug}/{current.metadata
+					.cover}"
 				alt="cover image for {current.metadata.title}"
 			/>
 		</div>
@@ -69,19 +71,18 @@
 	</div>
 
 	<PagesNavigator
-		prev={ {
+		prev={{
 			label: previous.metadata.title,
 			href: `${base}/${previous.resource}/${previous.metadata.slug}`,
 			title: `link to ${previous.metadata.title}`
-		} }
-		next={ {
+		}}
+		next={{
 			label: next.metadata.title,
 			href: `${base}/${next.resource}/${next.metadata.slug}`,
 			title: `link to ${next.metadata.title}`
-		} }
+		}}
 	/>
 </article>
-
 
 <style>
 	.entry-meta {

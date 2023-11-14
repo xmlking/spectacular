@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Form } from "formsnap";
+	import { Form } from 'formsnap';
 	import Page from '$lib/components/Page.svelte';
-	import {contactFormSchema } from "./schema";
+	import { contactFormSchema } from './schema';
 	export let data;
 </script>
 
- <svelte:head>
+<svelte:head>
 	<title>Contact</title>
 	<meta name="description" content="Contact Info" />
 </svelte:head>
@@ -21,19 +21,19 @@
 		form={data.form}
 		debug={true}
 		let:config
-		class="container max-w-[750px] mx-auto flex flex-col gap-8"
+		class="container mx-auto flex max-w-[750px] flex-col gap-8"
 	>
 		<Form.Field {config} name="name">
 			<div class="grid gap-2">
 				<Form.Label>Name</Form.Label>
-				<Form.Input class="input" placeholder="Your Name"/>
+				<Form.Input class="input" placeholder="Your Name" />
 				<Form.Validation class="text-destructive" />
 			</div>
 		</Form.Field>
 		<Form.Field {config} name="email">
 			<div class="grid gap-2">
 				<Form.Label>Email</Form.Label>
-				<Form.Input class="input"  placeholder="your@email.com" />
+				<Form.Input class="input" placeholder="your@email.com" />
 				<Form.Validation class="text-destructive" />
 			</div>
 		</Form.Field>
@@ -60,5 +60,4 @@
 </Page>
 
 <style lang="postcss">
-
 </style>

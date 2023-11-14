@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { VERSION } from '@sveltejs/kit';
 
-	const appVersion =  __APP_VERSION__;
-	const gitTag =  __GIT_TAG__;
+	const appVersion = __APP_VERSION__;
+	const gitTag = __GIT_TAG__;
 	const gitDate = __GIT_DATE__;
 
 	// Logo
 	import logo from '$lib/assets/logo/logo.svg';
 
 	// Base Classes
-	const cBase = 'bg-surface-50 dark:bg-surface-900 border-t border-surface-500/10 text-xs md:text-base';
+	const cBase =
+		'bg-surface-50 dark:bg-surface-900 border-t border-surface-500/10 text-xs md:text-base';
 </script>
 
 <footer class="page-footer {cBase}">
@@ -20,7 +21,7 @@
 			title="Go to Homepage"
 			class="title-font flex items-center justify-center font-medium text-gray-900 dark:text-white md:justify-start"
 		>
-			<span class="hidden sm:flex flex-row items-center">
+			<span class="hidden flex-row items-center sm:flex">
 				<img src={logo} alt="Logo" />
 				<span class="ml-3 text-xl">Spectacular</span>
 			</span>

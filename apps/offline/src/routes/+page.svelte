@@ -1,7 +1,7 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-10 text-center flex flex-col items-center">
+<div class="container mx-auto flex h-full items-center justify-center">
+	<div class="flex flex-col items-center space-y-10 text-center">
 		<h2 class="h2">Welcome to Skeleton.</h2>
 		<!-- Animated Logo -->
 		<figure>
@@ -38,15 +38,16 @@
 
 <style lang="postcss">
 	figure {
-		@apply flex relative flex-col;
+		@apply relative flex flex-col;
 	}
 	figure svg,
 	.img-bg {
-		@apply w-64 h-64 md:w-80 md:h-80;
+		@apply h-64 w-64 md:h-80 md:w-80;
 	}
 	.img-bg {
 		@apply absolute z-[-1] rounded-full blur-[50px] transition-all;
-		animation: pulse 5s cubic-bezier(0, 0, 0, 0.5) infinite,
+		animation:
+			pulse 5s cubic-bezier(0, 0, 0, 0.5) infinite,
 			glow 5s linear infinite;
 	}
 	@keyframes glow {

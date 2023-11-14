@@ -1,7 +1,7 @@
-import { env } from '$env/dynamic/public';
 import { NhostClient } from '@nhost/nhost-js';
 import { redirect } from '@sveltejs/kit';
 import { waitFor } from 'xstate/lib/waitFor';
+import { env } from '$env/dynamic/public';
 
 export const NHOST_SESSION_KEY = 'nhostSession';
 

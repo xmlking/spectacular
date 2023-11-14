@@ -3,6 +3,7 @@
 
 	// Props
 	/** Exposes parent props to this component. */
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	export let parent: any;
 
 	// Local
@@ -26,10 +27,14 @@
 	<div class="modal-example-form {cBase}">
 		<header class={cHeader}>{$modalStore[0].title ?? '(title missing)'}</header>
 		<article>{$modalStore[0].body ?? '(body missing)'}</article>
-		<ListBox class="border border-surface-500 p-4 rounded-container-token">
-			<ListBoxItem bind:group={flavor} name="chocolate" value="chocolate">Chocolate</ListBoxItem>
+		<ListBox class="border-surface-500 rounded-container-token border p-4">
+			<ListBoxItem bind:group={flavor} name="chocolate" value="chocolate"
+				>Chocolate</ListBoxItem
+			>
 			<ListBoxItem bind:group={flavor} name="vanilla" value="vanilla">Vanilla</ListBoxItem>
-			<ListBoxItem bind:group={flavor} name="strawberry" value="strawberry">Strawberry</ListBoxItem>
+			<ListBoxItem bind:group={flavor} name="strawberry" value="strawberry"
+				>Strawberry</ListBoxItem
+			>
 			<ListBoxItem bind:group={flavor} name="peach" value="peach">Peach</ListBoxItem>
 		</ListBox>
 		<!-- prettier-ignore -->

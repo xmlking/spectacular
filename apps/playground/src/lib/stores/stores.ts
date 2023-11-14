@@ -1,6 +1,7 @@
-import { browser } from '$app/environment';
 import { localStorageStore } from '@skeletonlabs/skeleton';
-import { writable, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
+import { browser } from '$app/environment';
 
 // Svelte Writable Stores ---
 

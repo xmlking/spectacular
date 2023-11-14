@@ -24,11 +24,14 @@
 
 <header class="bg-indigo-600">
 	<nav class="container mx-auto">
-		<div class="flex items-center justify-between w-full py-4">
+		<div class="flex w-full items-center justify-between py-4">
 			<div class="flex items-center">
 				<div class="ml-10 space-x-8">
 					{#each navigation as link}
-						<a href={link.href} class="text-lg font-medium text-white hover:text-indigo-50">
+						<a
+							href={link.href}
+							class="text-lg font-medium text-white hover:text-indigo-50"
+						>
 							{link.name}
 						</a>
 					{/each}
@@ -36,24 +39,24 @@
 			</div>
 			<div class="ml-10 space-x-4">
 				{#if user}
-				<form action=/auth/sign-out method=post>
-					<button
-						type='submit'
-						class="inline-block px-4 py-2 text-base font-medium text-white bg-indigo-500 border border-transparent rounded-md hover:bg-opacity-75"
-					>
-						Sign out
-					</button>
-				</form>
+					<form action="/auth/sign-out" method="post">
+						<button
+							type="submit"
+							class="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
+						>
+							Sign out
+						</button>
+					</form>
 				{:else}
 					<a
 						href="/auth/sign-in"
-						class="inline-block px-4 py-2 text-base font-medium text-white bg-indigo-500 border border-transparent rounded-md hover:bg-opacity-75"
+						class="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
 					>
 						Sign in
 					</a>
 					<a
 						href="/auth/sign-up"
-						class="inline-block px-4 py-2 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md hover:bg-indigo-50"
+						class="inline-block rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-indigo-600 hover:bg-indigo-50"
 					>
 						Sign up
 					</a>

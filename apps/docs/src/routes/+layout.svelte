@@ -1,9 +1,16 @@
 <script lang="ts">
-	  import { setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 	import type { ModalComponent } from '@skeletonlabs/skeleton';
-	import { storePopup, AppShell, Modal, Toast, initializeStores, prefersReducedMotionStore } from '@skeletonlabs/skeleton';
+	import {
+		storePopup,
+		AppShell,
+		Modal,
+		Toast,
+		initializeStores,
+		prefersReducedMotionStore
+	} from '@skeletonlabs/skeleton';
 	import { inject } from '@vercel/analytics';
 	import { ScrollToTopButton } from '@sveltinio/widgets';
 	import { dev } from '$app/environment';
@@ -22,11 +29,9 @@
 	// Global Stylesheets
 	import '../app.postcss';
 
-
 	// Init Vercel Analytics
 	// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
 	inject({ mode: dev ? 'development' : 'production' });
-
 
 	// Registered list of Components for Modals
 	const modalComponentRegistry: Record<string, ModalComponent> = {
@@ -49,9 +54,11 @@
 	}
 
 	// Lifecycle
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	afterNavigate((params: any) => {
 		// Scroll to top
-		const isNewPage: boolean = params.from && params.to && params.from.route.id !== params.to.route.id;
+		const isNewPage: boolean =
+			params.from && params.to && params.from.route.id !== params.to.route.id;
 		const elemPage = document.querySelector('#page');
 		if (isNewPage && elemPage !== null) {
 			elemPage.scrollTop = 0;
@@ -61,7 +68,9 @@
 	});
 	// Reactive
 	// Disable left sidebar on homepage
-	$: slotSidebarLeft = matchPathWhitelist($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
+	$: slotSidebarLeft = matchPathWhitelist($page.url.pathname)
+		? 'w-0'
+		: 'bg-surface-50-900-token lg:w-auto';
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 
 	// Define your global icon settings
@@ -82,8 +91,6 @@
 <Toast />
 <Drawer />
 
-
-
 <!-- App Shell -->
 <AppShell {slotSidebarLeft} regionPage={allyPageSmoothScroll} slotFooter="bg-black p-4">
 	<!-- Header -->
@@ -93,7 +100,7 @@
 
 	<!-- Sidebar (Left) -->
 	<svelte:fragment slot="sidebarLeft">
-		<Sidebar class="hidden lg:grid w-[360px] overflow-hidden" />
+		<Sidebar class="hidden w-[360px] overflow-hidden lg:grid" />
 	</svelte:fragment>
 
 	<!-- Page Content -->
@@ -107,4 +114,3 @@
 
 <!-- Scroll To Top -->
 <ScrollToTopButton bounce />
-

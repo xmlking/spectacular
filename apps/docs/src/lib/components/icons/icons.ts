@@ -4,6 +4,7 @@
     Copyright 2022 Fonticons, Inc
 */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const icons: any = {
 	// Default Placeholder
 	// Source: https://fontawesome.com/icons/image?s=solid

@@ -18,7 +18,10 @@
 
 <div class="layout-docs {classesBase}">
 	<!-- Content -->
-	<div class="layout-docs-content {classesColLeft}" use:tocCrawler={{ mode: 'generate', scrollTarget: '#page', key: tocKey }}>
+	<div
+		class="layout-docs-content {classesColLeft}"
+		use:tocCrawler={{ mode: 'generate', scrollTarget: '#page', key: tocKey }}
+	>
 		<slot />
 	</div>
 	<!-- Aside -->

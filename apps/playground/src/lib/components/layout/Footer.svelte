@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { VERSION } from '@sveltejs/kit';
 
-	const appVersion =  __APP_VERSION__;
-	const gitTag =  __GIT_TAG__;
+	const appVersion = __APP_VERSION__;
+	const gitTag = __GIT_TAG__;
 	const gitDate = __GIT_DATE__;
 
 	// Logo
 	import DocsLogoIcon from '$lib/components/logos/LogoIcon.svelte';
 
 	// Base Classes
-	const cBase = 'bg-surface-50 dark:bg-surface-900 border-t border-surface-500/10 text-xs md:text-base';
+	const cBase =
+		'bg-surface-50 dark:bg-surface-900 border-t border-surface-500/10 text-xs md:text-base';
 </script>
 
 <footer class="page-footer {cBase}">

@@ -7,6 +7,7 @@ export function getObjectTypeName(value: unknown): string {
  * target: target fields striped or set to `null` (WIP)
  */
 export type CleanOpts = { empty?: 'strip' | 'null'; target?: string[] };
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function cleanClone<T extends Object>(obj: T, opts: CleanOpts): T {
 	// TODO: check 'structuredClone' available in globalThis
 	const cloneObj = structuredClone(obj);

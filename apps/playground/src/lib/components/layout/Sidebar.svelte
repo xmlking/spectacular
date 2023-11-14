@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-
-	import Icon from '$lib/components/icons/Icon.svelte';
-	import { menuNavLinks } from '$lib/links';
 	import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
+	import { menuNavLinks } from '$lib/links';
+	import { page } from '$app/stores';
+	import Icon from '$lib/components/icons/Icon.svelte';
 
 	// Local
 	let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
@@ -21,17 +20,22 @@
 		if (!basePath) return;
 		// Translate base path to link section
 		if (['docs', 'essentials', 'resources'].includes(basePath)) currentRailCategory = '/docs';
-		if (['tokens', 'base', 'elements', 'blocks'].includes(basePath)) currentRailCategory = '/elements';
+		if (['tokens', 'base', 'elements', 'blocks'].includes(basePath))
+			currentRailCategory = '/elements';
 		if (['components', 'actions'].includes(basePath)) currentRailCategory = '/svelte';
 		if (['experiments'].includes(basePath)) currentRailCategory = '/experiments';
 	});
 
 	// Reactive
 	$: submenu = menuNavLinks[currentRailCategory ?? '/docs'];
-	$: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '');
+	$: listboxItemActive = (href: string) =>
+		$page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '';
 </script>
 
-<div class="grid grid-cols-[auto_1fr] h-full bg-surface-50-900-token border-r border-surface-500/30 {$$props.class ?? ''}">
+<div
+	class="bg-surface-50-900-token border-surface-500/30 grid h-full grid-cols-[auto_1fr] border-r {$$props.class ??
+		''}"
+>
 	<!-- App Rail -->
 	<AppRail background="bg-transparent" border="border-r border-surface-500/30">
 		<!-- Mobile Only -->
@@ -47,36 +51,50 @@
 		</AppRailAnchor>
 		<!-- --- / --- -->
 		<AppRailTile bind:group={currentRailCategory} name="docs" value={'/docs'}>
-			<svelte:fragment slot="lead"><Icon name="book" width="w-6" height="h-6" /></svelte:fragment>
+			<svelte:fragment slot="lead"
+				><Icon name="book" width="w-6" height="h-6" /></svelte:fragment
+			>
 			<span>Docs</span>
 		</AppRailTile>
 		<hr class="opacity-30" />
 		<AppRailTile bind:group={currentRailCategory} name="elements" value={'/elements'}>
-			<svelte:fragment slot="lead"><Icon name="tailwind" width="w-6" height="h-6" /></svelte:fragment>
+			<svelte:fragment slot="lead"
+				><Icon name="tailwind" width="w-6" height="h-6" /></svelte:fragment
+			>
 			<span>Tailwind</span>
 		</AppRailTile>
 		<AppRailTile bind:group={currentRailCategory} name="svelte" value={'/svelte'}>
-			<svelte:fragment slot="lead"><Icon name="svelte" width="w-6" height="h-6" /></svelte:fragment>
+			<svelte:fragment slot="lead"
+				><Icon name="svelte" width="w-6" height="h-6" /></svelte:fragment
+			>
 			<span>Svelte</span>
 		</AppRailTile>
 		<AppRailTile bind:group={currentRailCategory} name="experiments" value={'/experiments'}>
-			<svelte:fragment slot="lead"><Icon name="screwdriverWrench" width="w-6" height="h-6" /></svelte:fragment>
+			<svelte:fragment slot="lead"
+				><Icon name="screwdriverWrench" width="w-6" height="h-6" /></svelte:fragment
+			>
 			<span>Experiments</span>
 		</AppRailTile>
 	</AppRail>
 	<!-- Nav Links -->
-	<section class="p-4 pb-20 space-y-4 overflow-y-auto">
+	<section class="space-y-4 overflow-y-auto p-4 pb-20">
 		{#each submenu as segment, i}
 			<!-- Title -->
-			<p class="font-bold pl-4 text-2xl">{segment.title}</p>
+			<p class="pl-4 text-2xl font-bold">{segment.title}</p>
 			<!-- Nav List -->
 			<nav class="list-nav">
 				<ul>
 					{#each segment.list as { href, label, badge }}
 						<li on:keypress on:click={drawerStore.close}>
-							<a {href} class={listboxItemActive(href)} data-sveltekit-preload-data="hover">
+							<a
+								{href}
+								class={listboxItemActive(href)}
+								data-sveltekit-preload-data="hover"
+							>
 								<span class="flex-auto">{@html label}</span>
-								{#if badge}<span class="badge variant-filled-secondary">{badge}</span>{/if}
+								{#if badge}<span class="badge variant-filled-secondary"
+										>{badge}</span
+									>{/if}
 							</a>
 						</li>
 					{/each}

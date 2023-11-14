@@ -30,24 +30,26 @@
 <div>
 	{#each todos as todo}
 		<div
-			class="p-4 flex flex-row items-center w-[500px] justify-between variant-filled-surface my-2"
+			class="variant-filled-surface my-2 flex w-[500px] flex-row items-center justify-between p-4"
 			in:fly={{ y: 100, duration: 500 }}
 			out:fade
 		>
-			<h3 class="font-light text-md">
+			<h3 class="text-md font-light">
 				{todo.name}
 			</h3>
-			<button class="btn variant-filled-error" type="button" on:click={() => removeTodo(todo.id)}
-				>Remove</button
+			<button
+				class="btn variant-filled-error"
+				type="button"
+				on:click={() => removeTodo(todo.id)}>Remove</button
 			>
 		</div>
 	{/each}
 
 	<div class="w-[500px]">
-		<label for="nTodo" class="block font-extralight text-sm pt-10">Add Todo</label>
-		<input type="text" name="nTodo" bind:value={nTodo} class="w-full variant-soft-surface" />
+		<label for="nTodo" class="block pt-10 text-sm font-extralight">Add Todo</label>
+		<input type="text" name="nTodo" bind:value={nTodo} class="variant-soft-surface w-full" />
 	</div>
-	<div class="pt-4 flex flex-row gap-4">
+	<div class="flex flex-row gap-4 pt-4">
 		<button type="button" on:click={() => addTodo(nTodo)} class="btn variant-filled-secondary"
 			>Add Todo</button
 		>

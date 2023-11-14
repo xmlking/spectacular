@@ -4,11 +4,13 @@
 </script>
 
 {#if $page}
-	<div class="w-full h-full flex justify-center items-center">
-		<div class="text-center space-y-4">
+	<div class="flex h-full w-full items-center justify-center">
+		<div class="space-y-4 text-center">
 			<LogoAnim />
 			<h2 class="h2">
-				{$page.status}:{#if $page.error} {$page.error.message} {/if}
+				{$page.status}:{#if $page.error}
+					{$page.error.message}
+				{/if}
 			</h2>
 			<p>We're sorry, something went wrong.</p>
 		</div>

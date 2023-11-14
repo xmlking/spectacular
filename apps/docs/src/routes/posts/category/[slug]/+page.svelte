@@ -14,7 +14,7 @@
 	const mdPageDescription = 'Here the description for the Category slug page.';
 
 	const categorySlugPage: SEOWebPage = {
-		url:   canonicalPageUrl($page.url.pathname, website.baseURL),
+		url: canonicalPageUrl($page.url.pathname, website.baseURL),
 		title: capitalizeFirstLetter(mdName),
 		description: mdPageDescription,
 		image: getFavicon(website)
@@ -24,8 +24,8 @@
 	$: itemsCounter = metadata.items.length;
 </script>
 
-<PageMetaTags data={ categorySlugPage } />
-<JsonLdWebPage data={ categorySlugPage } />
+<PageMetaTags data={categorySlugPage} />
+<JsonLdWebPage data={categorySlugPage} />
 <JsonLdBreadcrumbs url={$page.url.href} />
 
 <div class="page-wrapper">
@@ -35,12 +35,18 @@
 			<h2>{slug}&nbsp;<span>[ Total: {itemsCounter} ]</span></h2>
 			<ul>
 				{#each metadata.items as item}
-					<li><a data-sveltekit-preload-data="hover" href="{base}/posts/{item.slug}">{item.title}</a></li>
+					<li
+						><a data-sveltekit-preload-data="hover" href="{base}/posts/{item.slug}"
+							>{item.title}</a
+						></li
+					>
 				{/each}
 			</ul>
 		{:else}
 			<h2 class="message message--warning">
-				Please, check all your content files ensuring the YAML frontmatter contains "<i>Category</i>".
+				Please, check all your content files ensuring the YAML frontmatter contains "<i
+					>Category</i
+				>".
 			</h2>
 		{/if}
 	</div>

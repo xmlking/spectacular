@@ -6,11 +6,10 @@
 	export let keywords;
 </script>
 
- <svelte:head>
+<svelte:head>
 	<title>Blog | {title}</title>
-	<meta name="description" content={title}/>
+	<meta name="description" content={title} />
 </svelte:head>
-
 
 <!-- Page markup-->
 <Page>

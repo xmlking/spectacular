@@ -1,6 +1,6 @@
-import { getNhost } from '$lib/nhost';
 import { gql } from '@apollo/client';
 import { json } from '@sveltejs/kit';
+import { getNhost } from '$lib/nhost';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies }) {

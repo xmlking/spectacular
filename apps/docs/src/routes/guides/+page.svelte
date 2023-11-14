@@ -16,6 +16,7 @@
 
 	$: ({ resourceName, items } = data);
 	$: pathname = $page.url.pathname.replace(/^(.)|(.)$/g, '');
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 	$: guidesIndexPage = <SEOWebPage>{
 		url: canonicalPageUrl($page.url.pathname, website.baseURL),
 		title: toTitle(resourceName),
@@ -39,24 +40,34 @@
 			<div class="cards">
 				{#each items as item}
 					<Card
-					title={item.metadata.title}
-					content={item.metadata.headline}
-					href="{base}/{item.resource}/{item.metadata.slug}"
+						title={item.metadata.title}
+						content={item.metadata.headline}
+						href="{base}/{item.resource}/{item.metadata.slug}"
 					>
 						<CardImage
 							slot="cardImage"
 							alt={item.metadata.title}
-							src="{assets}/resources/{item.resource}/{item.metadata.slug}/{item.metadata.cover}"
+							src="{assets}/resources/{item.resource}/{item.metadata.slug}/{item
+								.metadata.cover}"
 						/>
-						<CardAction slot="cardAction" href="{base}/{item.resource}/{item.metadata.slug}" />
+						<CardAction
+							slot="cardAction"
+							href="{base}/{item.resource}/{item.metadata.slug}"
+						/>
 					</Card>
 				{/each}
 			</div>
 		{:else}
-		<h2 class="message message--warning">
-			Nothing to show here! Create some content first and reload the page:
-			<span><pre><code class="text-default">sveltin new content {pathname}/getting-started</code></pre></span>
-		</h2>
+			<h2 class="message message--warning">
+				Nothing to show here! Create some content first and reload the page:
+				<span
+					><pre
+						><code class="text-default"
+							>sveltin new content {pathname}/getting-started</code
+						></pre
+					></span
+				>
+			</h2>
 		{/if}
 	</div>
 </section>

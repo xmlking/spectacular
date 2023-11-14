@@ -17,13 +17,12 @@
 	<meta name="description" content="Showcase container queries" />
 </svelte:head>
 
-
 <Page>
 	<header class="space-y-4">
 		<h1 class="h1">Movies</h1>
 		<p>Showcase container queries.</p>
 	</header>
-	<div class="mx-auto max-w-5xl @container">
+	<div class="@container mx-auto max-w-5xl">
 		<div class="@4xl:grid @4xl:grid-cols-[3fr_1fr]">
 			<main class="@container">
 				<Card {...movies[0]} />

@@ -12,7 +12,6 @@
 	"license": "MIT",
 	"scripts": {
 		"lint:js": "eslint .",
-		"lint:cspell": "cspell \"**\"",
 		"lint:prettier": "prettier --check --ignore-path=../../.prettierignore .",
 		"lint": "concurrently pnpm:lint:*",
 		"format:js": "eslint --fix .",

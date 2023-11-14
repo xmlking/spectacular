@@ -5,6 +5,7 @@
 
 	// Props
 	/** Exposes parent props to this component. */
+	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
 	export let parent: any;
 
 	// Base Classes
