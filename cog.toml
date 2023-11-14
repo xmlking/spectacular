@@ -28,6 +28,9 @@ script = """#!/bin/sh
 set -e
 pnpm run format
 
+# npx lint-staged --concurrent false
+# npm test
+
 cog verify -i --file $1
 """
 

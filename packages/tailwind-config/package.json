@@ -1,7 +1,7 @@
 {
 	"name": "tailwind-config",
-	"version": "0.0.0",
 	"description": "tailwind config for use in svelte websites",
+	"version": "0.0.0",
 	"main": "tailwind.config.ts",
 	"types": "tailwind.config.ts",
 	"exports": {
@@ -11,8 +11,13 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"lint": "prettier --check --ignore-path=../../.prettierignore . && eslint \".\"",
-		"format": "prettier --write --ignore-path=../../.prettierignore ."
+		"lint:js": "eslint .",
+		"lint:cspell": "cspell \"**\"",
+		"lint:prettier": "prettier --check --ignore-path=../../.prettierignore .",
+		"lint": "concurrently pnpm:lint:*",
+		"format:js": "eslint --fix .",
+		"format:prettier": "prettier --write --ignore-path=../../.prettierignore .",
+		"format": "concurrently pnpm:format:*"
 	},
 	"devDependencies": {
 		"autoprefixer": "10.4.16",

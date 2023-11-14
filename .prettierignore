@@ -22,11 +22,22 @@ src/lib/models/types/**
 .idea
 dev-dist
 
+## custom
 /infra/helm/templates/deployment.yaml
 infra/helm/templates/ingress.yaml
-schema.graphql
-$houdini
 infra/hasura
-*.min.css
+**/*.min.css
+
+**/.turbo
+/.nhost/
+/nhost/*
+!/nhost/emails/
+/apps/story/storybook-static/
+/apps/*/.svelte-kit
+/apps/*/$houdini/
+/apps/*/schema.graphql
+
 # generated files by typesafe-i18n
-src/lib/i18n
+/apps/**/lib/i18n
+
+

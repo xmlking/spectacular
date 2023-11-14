@@ -127,6 +127,7 @@ Awesome **SvelteKit** Links
 
 ## Project Templates
 
+- [usagizmo's webapp-template](https://github.com/usagizmo/webapp-template) - SvelteKit (w/ Houdini) x Tailwind CSS x Storybook x Nhost x Turborepo (pnpm)
 - [Backoffice template with ShadCN-Svelte, Auth, localization](https://github.com/upperdo/backoffice-template)
 - [Svelte Sirens](https://github.com/Svelte-Sirens/svelte-sirens)
 - [Usagizmo turbo Monorepo](https://github.com/usagizmo/webapp-template)

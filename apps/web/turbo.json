@@ -3,7 +3,16 @@
 	"extends": ["//"],
 	"pipeline": {
 		"build": {
+			"dependsOn": ["generate"],
+			"outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql"],
 			"env": ["VERCEL", "VERCEL_URL", "VERCEL_ENV", "npm_package_version"]
+		},
+		"generate": {
+			"outputs": [".svelte-kit/**", "schema.graphql"]
+		},
+		"lint": {
+			"dependsOn": ["generate"],
+			"outputs": []
 		},
 		"preview": {},
 		"special-task": {}

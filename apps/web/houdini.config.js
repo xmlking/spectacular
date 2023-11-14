@@ -14,7 +14,7 @@ const config = {
 		interval: 0, //  only pull the schema when you first run `turbo dev`
 		// HINT: we need to generate scheam for highest role level that app support.
 		headers: {
-			'x-hasura-admin-secret': 'env:HASURA_GRAPHQL_ADMIN_SECRET',
+			'X-Hasura-Admin-Secret': (env) => env.HASURA_GRAPHQL_ADMIN_SECRET,
 			'x-hasura-allowed-roles': 'user manager',
 			'x-hasura-role': 'manager'
 		}
@@ -28,6 +28,7 @@ const config = {
 		}
 	},
 	scalars: {
+		// ref: https://www.houdinigraphql.com/api/config#custom-scalars
 		DateTime: {
 			// the corresponding typescript type
 			type: 'Date',
