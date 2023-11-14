@@ -1,50 +1,55 @@
 type Query {
-	ListUniversities(arg1: ListUniversitiesInput!): [ListUniversitiesOutput]
+  ListUniversities(
+    arg1: ListUniversitiesInput!
+  ): [ListUniversitiesOutput]
 }
 
 type Query {
-	SearchRestrooms(arg1: SearchRestroomsInput!): [SearchRestroomsOutput]
+  SearchRestrooms(
+    arg1: SearchRestroomsInput!
+  ): [SearchRestroomsOutput]
 }
 
 input ListUniversitiesInput {
-	country: String
-	name: String
+  country: String
+  name: String
 }
 
 input SearchRestroomsInput {
-	limit: Int
-	offset: Int
-	page: Int
-	city: String
+  limit: Int
+  offset: Int
+  page: Int
+  city: String
 }
 
 type ListUniversitiesOutput {
-	alpha_two_code: String
-	country: String
-	domains: [String!]!
-	name: String
-	stateprovince: String
-	web_pages: [String!]!
+  alpha_two_code: String
+  country: String
+  domains: [String!]!
+  name: String
+  stateprovince: String
+  web_pages: [String!]!
 }
 
 type SearchRestroomsOutput {
-	accessible: Boolean
-	approved: Boolean
-	changing_table: Boolean
-	city: String
-	comment: String
-	country: String
-	created_at: String
-	directions: String
-	downvote: Int
-	edit_id: Int
-	id: Int
-	latitude: Float
-	longitude: Float
-	name: String
-	state: String
-	street: String
-	unisex: Boolean
-	updated_at: String
-	upvote: Int
+  accessible: Boolean
+  approved: Boolean
+  changing_table: Boolean
+  city: String
+  comment: String
+  country: String
+  created_at: String
+  directions: String
+  downvote: Int
+  edit_id: Int
+  id: Int
+  latitude: Float
+  longitude: Float
+  name: String
+  state: String
+  street: String
+  unisex: Boolean
+  updated_at: String
+  upvote: Int
 }
+

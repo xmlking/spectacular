@@ -52,5 +52,5 @@
           AND p.deleted_at IS NULL
       returns: device_policies
       root_field_name: device_policies
-  tables: '!include default/tables/tables.yaml'
-  functions: '!include default/functions/functions.yaml'
+  tables: "!include default/tables/tables.yaml"
+  functions: "!include default/functions/functions.yaml"

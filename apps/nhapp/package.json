@@ -8,12 +8,10 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"install-browsers": "pnpm dlx playwright@1.31.0 install --with-deps",
-		"add-nhost-js": "pnpm add @nhost/nhost-js --ignore-workspace",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check --ignore-path=../../.prettierignore . && eslint .",
-		"format": "prettier --write --ignore-path=../../.prettierignore .",
-		"postinstall": "pnpm add-nhost-js"
+		"format": "prettier --write --ignore-path=../../.prettierignore ."
 	},
 	"devDependencies": {
 		"@nhost/nhost-js": "2.2.18",
