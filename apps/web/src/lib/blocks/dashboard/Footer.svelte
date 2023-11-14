@@ -2,7 +2,12 @@
 	import { Footer, FooterCopyright, FooterIcon } from 'flowbite-svelte';
 </script>
 
-<Footer style="view-transition-name: footer;" footerType="socialmedia" color="light" customClass="p-4 sm:p-6 bg-gray-50 dark:bg-gray-700">
+<Footer
+	style="view-transition-name: footer;"
+	footerType="socialmedia"
+	color="light"
+	customClass="p-4 sm:p-6 bg-gray-50 dark:bg-gray-700"
+>
 	<div class="sm:flex sm:items-center sm:justify-between">
 		<FooterCopyright href="/" by="Datablocks, Co" />
 		<div class="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">

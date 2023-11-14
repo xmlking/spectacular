@@ -6,7 +6,7 @@
 	import { setupViewTransition } from 'sveltekit-view-transition';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
-  	import { inject } from '@vercel/analytics';
+	import { inject } from '@vercel/analytics';
 	import { Toasts } from '$lib/components/toast';
 	import { dev } from '$app/environment';
 

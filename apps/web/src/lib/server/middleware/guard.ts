@@ -1,6 +1,7 @@
+import { redirect } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 import { building } from '$app/environment';
 import { Logger, startsWith } from '$lib/utils';
-import { redirect, type Handle } from '@sveltejs/kit';
 /**
  * Protect the route
  * It should be the last middleware

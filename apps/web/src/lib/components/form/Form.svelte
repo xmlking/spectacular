@@ -1,19 +1,23 @@
 <script lang="ts" context="module">
 	// https://superforms.rocks/components#using-a-formfieldproxy
-  	import type { AnyZodObject } from 'zod';
-  	type T = AnyZodObject;
+	import type { AnyZodObject } from 'zod';
+	type T = AnyZodObject;
 </script>
 
 <script lang="ts" generics="T extends AnyZodObject">
 	import { Alert, Button, ButtonGroup, Modal, Spinner } from 'flowbite-svelte';
-	import { AdjustmentsHorizontalOutline, ArrowLeftOutline, CloudArrowUpOutline } from 'flowbite-svelte-icons';
+	import {
+		AdjustmentsHorizontalOutline,
+		ArrowLeftOutline,
+		CloudArrowUpOutline
+	} from 'flowbite-svelte-icons';
 	import { setContext } from 'svelte';
 	import type { HTMLFormAttributes } from 'svelte/elements';
 	import type { ZodValidation } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms/client'
+	import type { SuperForm } from 'sveltekit-superforms/client';
 	import { page } from '$app/stores';
 	import { FORM_KEY } from './forms';
-	import type {  FormContext } from './forms';
+	import type { FormContext } from './forms';
 	interface $$restProps extends HTMLFormAttributes {}
 
 	export let superform: SuperForm<ZodValidation<T>, unknown>;
@@ -78,13 +82,15 @@
 		<ButtonGroup>
 			<Button outline on:click={() => history.back()}>
 				<ArrowLeftOutline
-					width="18" height="18"
+					width="18"
+					height="18"
 					class="mr-2 text-blue-500 dark:text-green-500"
 				/>{backButtonText}
 			</Button>
 			<Button outline disabled={!$tainted} on:click={() => reset()}>
 				<AdjustmentsHorizontalOutline
-					width="18" height="18"
+					width="18"
+					height="18"
 					class="mr-2 text-blue-500 dark:text-green-500"
 				/>{resetButtonText}
 			</Button>

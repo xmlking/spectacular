@@ -5,7 +5,7 @@
 		<div class="flex">
 			<div class="mr-6 pt-1 text-center">
 				<div class="mb-1 border-b border-gray-400 px-2 pb-1">
-					<p class="text-sm text-blue-gray-700">Jul</p>
+					<p class="text-blue-gray-700 text-sm">Jul</p>
 				</div>
 				<div class="px-2"><p class="text-lg font-bold">18</p></div>
 			</div>
@@ -13,7 +13,7 @@
 				<div class="mb-2">
 					<a
 						href="/"
-						class="text-xs font-semibold uppercase tracking-wide text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+						class="text-deep-purple-accent-400 hover:text-deep-purple-800 text-xs font-semibold uppercase tracking-wide transition-colors duration-200"
 						aria-label="Category"
 						title="Delevopment">Delevopment</a
 					>
@@ -22,7 +22,7 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
+						class="hover:text-deep-purple-accent-400 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
 						>Why I love Laravel</a
 					>
 				</div>
@@ -43,7 +43,7 @@
 							href="/"
 							aria-label="Author"
 							title="Author"
-							class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
+							class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
 							>Petru Vîrtos</a
 						>
 						<p class="text-sm font-medium leading-4 text-gray-600">Author</p>
@@ -54,7 +54,7 @@
 		<div class="flex">
 			<div class="mr-6 pt-1 text-center">
 				<div class="mb-1 border-b border-gray-400 px-2 pb-1">
-					<p class="text-sm text-blue-gray-700">May</p>
+					<p class="text-blue-gray-700 text-sm">May</p>
 				</div>
 				<div class="px-2"><p class="text-lg font-bold">6</p></div>
 			</div>
@@ -62,7 +62,7 @@
 				<div class="mb-2">
 					<a
 						href="/"
-						class="text-xs font-semibold uppercase tracking-wide text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+						class="text-deep-purple-accent-400 hover:text-deep-purple-800 text-xs font-semibold uppercase tracking-wide transition-colors duration-200"
 						aria-label="Category"
 						title="Food &amp; Snacks">Food &amp; Snacks</a
 					>
@@ -71,7 +71,7 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
+						class="hover:text-deep-purple-accent-400 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
 						>Pizza, you should try it</a
 					>
 				</div>
@@ -92,7 +92,7 @@
 							href="/"
 							aria-label="Author"
 							title="Author"
-							class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
+							class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
 							>Alex Stratulat</a
 						>
 						<p class="text-sm font-medium leading-4 text-gray-600">Author</p>
@@ -103,7 +103,7 @@
 		<div class="flex">
 			<div class="mr-6 pt-1 text-center">
 				<div class="mb-1 border-b border-gray-400 px-2 pb-1">
-					<p class="text-sm text-blue-gray-700">Feb</p>
+					<p class="text-blue-gray-700 text-sm">Feb</p>
 				</div>
 				<div class="px-2"><p class="text-lg font-bold">27</p></div>
 			</div>
@@ -111,7 +111,7 @@
 				<div class="mb-2">
 					<a
 						href="/"
-						class="text-xs font-semibold uppercase tracking-wide text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+						class="text-deep-purple-accent-400 hover:text-deep-purple-800 text-xs font-semibold uppercase tracking-wide transition-colors duration-200"
 						aria-label="Category"
 						title="Out of this world">Out of this world</a
 					>
@@ -120,7 +120,7 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
+						class="hover:text-deep-purple-accent-400 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
 						>Whatever, just feed me</a
 					>
 				</div>
@@ -141,7 +141,7 @@
 							href="/"
 							aria-label="Author"
 							title="Author"
-							class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
+							class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
 							>Susie the Cat</a
 						>
 						<p class="text-sm font-medium leading-4 text-gray-600">Author</p>

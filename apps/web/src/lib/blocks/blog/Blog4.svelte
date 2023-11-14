@@ -7,7 +7,7 @@
 				<div class="space-y-1 text-xs font-semibold uppercase tracking-wide">
 					<a
 						href="/"
-						class="text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+						class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-200"
 						aria-label="Category">Books</a
 					>
 					<p class="text-gray-600">5 Jan 2020</p>
@@ -18,7 +18,7 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="inline-block text-black transition-colors duration-200 hover:text-deep-purple-accent-700"
+						class="hover:text-deep-purple-accent-700 inline-block text-black transition-colors duration-200"
 					>
 						<p class="text-3xl font-extrabold leading-none sm:text-4xl xl:text-4xl">
 							Tell them I hate them
@@ -36,7 +36,7 @@
 				<div class="space-y-1 text-xs font-semibold uppercase tracking-wide">
 					<a
 						href="/"
-						class="text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+						class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-200"
 						aria-label="Category">Inspiration</a
 					>
 					<p class="text-gray-600">15 Sep 2020</p>
@@ -47,7 +47,7 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="inline-block text-black transition-colors duration-200 hover:text-deep-purple-accent-700"
+						class="hover:text-deep-purple-accent-700 inline-block text-black transition-colors duration-200"
 					>
 						<p class="text-3xl font-extrabold leading-none sm:text-4xl xl:text-4xl">
 							A flower in my green garden
@@ -65,7 +65,7 @@
 				<div class="space-y-1 text-xs font-semibold uppercase tracking-wide">
 					<a
 						href="/"
-						class="text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+						class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-200"
 						aria-label="Category">Detective</a
 					>
 					<p class="text-gray-600">28 Dec 2020</p>
@@ -76,7 +76,7 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="inline-block text-black transition-colors duration-200 hover:text-deep-purple-accent-700"
+						class="hover:text-deep-purple-accent-700 inline-block text-black transition-colors duration-200"
 					>
 						<p class="text-3xl font-extrabold leading-none sm:text-4xl xl:text-4xl">
 							We never had the love we deserve
@@ -94,7 +94,7 @@
 		<a
 			href="/"
 			aria-label=""
-			class="inline-flex items-center font-semibold text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+			class="text-deep-purple-accent-400 hover:text-deep-purple-800 inline-flex items-center font-semibold transition-colors duration-200"
 		>
 			See all articles
 			<svg class="ml-2 inline-block w-3" fill="currentColor" viewBox="0 0 12 12">

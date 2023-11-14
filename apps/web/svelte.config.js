@@ -22,8 +22,8 @@ const config = {
 		adapter: process.env.VERCEL
 			? adapterAuto()
 			: process.env.BUN_ENV
-			? adapterBun()
-			: adapterNode({ polyfill: false }),
+			  ? adapterBun()
+			  : adapterNode({ polyfill: false }),
 		// When hosting SPA on GitHub Pages
 		paths: {
 			// base: dev ? '' : '/hc360-ui',

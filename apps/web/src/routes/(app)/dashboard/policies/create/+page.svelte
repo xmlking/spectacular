@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import { ComputerSpeakerOutline, MobilePhoneOutline, SearchOutline, UserCircleOutline, UserOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
+	import {
+		ComputerSpeakerOutline,
+		MobilePhoneOutline,
+		SearchOutline,
+		UserCircleOutline,
+		UserOutline,
+		UsersGroupOutline
+	} from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms/client';

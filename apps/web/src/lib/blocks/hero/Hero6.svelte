@@ -13,14 +13,14 @@
 			<div class="flex items-center">
 				<button
 					type="submit"
-					class="mr-6 inline-flex h-12 items-center justify-center rounded bg-deep-purple-accent-400 px-6 font-medium tracking-wide text-white shadow-md transition duration-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+					class="bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline mr-6 inline-flex h-12 items-center justify-center rounded px-6 font-medium tracking-wide text-white shadow-md transition duration-200 focus:outline-none"
 				>
 					Get started
 				</button>
 				<a
 					href="/"
 					aria-label=""
-					class="inline-flex items-center font-semibold text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+					class="text-deep-purple-accent-400 hover:text-deep-purple-800 inline-flex items-center font-semibold transition-colors duration-200"
 					>Learn more</a
 				>
 			</div>
@@ -31,7 +31,7 @@
 					class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="h-12 w-12 text-deep-purple-accent-400"
+						class="text-deep-purple-accent-400 h-12 w-12"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>
@@ -55,7 +55,7 @@
 					class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="h-12 w-12 text-deep-purple-accent-400"
+						class="text-deep-purple-accent-400 h-12 w-12"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>
@@ -79,7 +79,7 @@
 					class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="h-12 w-12 text-deep-purple-accent-400"
+						class="text-deep-purple-accent-400 h-12 w-12"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>
@@ -103,7 +103,7 @@
 					class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="h-12 w-12 text-deep-purple-accent-400"
+						class="text-deep-purple-accent-400 h-12 w-12"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>

@@ -1,10 +1,10 @@
-import { HoudiniClient, type ClientPlugin } from '$houdini';
+import { createClient as createWSClient } from 'graphql-ws';
 import { Logger } from '$lib/utils';
 import envPub from '$lib/variables/variables';
-
 import { browser } from '$app/environment';
 import { subscription } from '$houdini/plugins';
-import { createClient as createWSClient } from 'graphql-ws';
+import { HoudiniClient } from '$houdini';
+import type { ClientPlugin } from '$houdini';
 
 const url = envPub.PUBLIC_GRAPHQL_ENDPOINT;
 

@@ -1,10 +1,4 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
-	import { Link } from '$lib/components';
-	import { ErrorMessage } from '$lib/components/form';
-	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-	import { DataTable } from '$lib/components/table';
-	import { Logger } from '$lib/utils';
 	import {
 		Breadcrumb,
 		BreadcrumbItem,
@@ -21,6 +15,12 @@
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { Logger } from '$lib/utils';
+	import { DataTable } from '$lib/components/table';
+	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+	import { ErrorMessage } from '$lib/components/form';
+	import { Link } from '$lib/components';
+	import { dev } from '$app/environment';
 
 	const log = new Logger('devices:list:browser');
 	export let data;
@@ -160,8 +160,7 @@
 			/> -->
 			<input name="limit" bind:value={$form.limit} type="hidden" />
 			<input name="offset" bind:value={$form.offset} type="hidden" />
-			<Button type="submit" color="primary" class="!p-2.5"
-				><SearchOutline size="md" /></Button
+			<Button type="submit" color="primary" class="!p-2.5"><SearchOutline size="md" /></Button
 			>
 		</ButtonGroup>
 		<span />

@@ -6,10 +6,10 @@
 			<div class="mb-16 flex flex-col sm:mb-0 sm:text-center">
 				<a href="/" class="mb-6 sm:mx-auto">
 					<div
-						class="flex h-12 w-12 items-center justify-center rounded-full bg-teal-accent-400"
+						class="bg-teal-accent-400 flex h-12 w-12 items-center justify-center rounded-full"
 					>
 						<svg
-							class="h-10 w-10 text-deep-purple-900"
+							class="text-deep-purple-900 h-10 w-10"
 							stroke="currentColor"
 							viewBox="0 0 52 52"
 						>
@@ -31,7 +31,7 @@
 							<svg
 								viewBox="0 0 52 24"
 								fill="currentColor"
-								class="absolute left-0 top-0 z-0 -ml-20 -mt-8 hidden w-32 text-deep-purple-accent-100 sm:block lg:-ml-28 lg:-mt-10 lg:w-32"
+								class="text-deep-purple-accent-100 absolute left-0 top-0 z-0 -ml-20 -mt-8 hidden w-32 sm:block lg:-ml-28 lg:-mt-10 lg:w-32"
 							>
 								<defs>
 									<pattern
@@ -62,7 +62,7 @@
 				<div>
 					<a
 						href="/"
-						class="inline-flex h-12 items-center justify-center rounded bg-teal-accent-400 px-6 font-semibold tracking-wide text-teal-900 shadow-md transition duration-200 hover:bg-deep-purple-accent-100 hover:text-deep-purple-900 focus:shadow-outline focus:outline-none"
+						class="bg-teal-accent-400 hover:bg-deep-purple-accent-100 hover:text-deep-purple-900 focus:shadow-outline inline-flex h-12 items-center justify-center rounded px-6 font-semibold tracking-wide text-teal-900 shadow-md transition duration-200 focus:outline-none"
 					>
 						Get started
 					</a>

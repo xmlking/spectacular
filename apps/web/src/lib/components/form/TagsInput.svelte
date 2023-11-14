@@ -1,26 +1,26 @@
 <script lang="ts" context="module">
 	// https://superforms.rocks/components#using-a-formfieldproxy
-  	import type { AnyZodObject } from 'zod';
-  	type T = AnyZodObject;
+	import type { AnyZodObject } from 'zod';
+	type T = AnyZodObject;
 </script>
 
 <script lang="ts" generics="T extends AnyZodObject">
 	import { Helper } from 'flowbite-svelte';
 	import type { z } from 'zod';
 	import type { ZodValidation, FormPathLeaves } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms/client'
-	import { formFieldProxy } from 'sveltekit-superforms/client'
+	import type { SuperForm } from 'sveltekit-superforms/client';
+	import { formFieldProxy } from 'sveltekit-superforms/client';
 	import { Tags } from '$lib/components';
 	import { getFormContext } from './forms';
 
 	export let form: SuperForm<ZodValidation<T>, unknown>;
-  	export let field: FormPathLeaves<z.infer<T>>;
+	export let field: FormPathLeaves<z.infer<T>>;
 	export let label = '';
 	export let disabled = false;
 
 	const { superform } = getFormContext();
 	const { path, value, errors, constraints } = formFieldProxy(superform, field);
-	$: console.log($errors)
+	$: console.log($errors);
 </script>
 
 <!-- FIXME: add {...$constraints} -->
@@ -73,7 +73,7 @@
 	}
 
 	.my-tag :global(.svelte-tags-input) {
-		@apply block w-full appearance-none rounded-lg border-gray-300 bg-transparent p-2 text-sm text-gray-900 focus:border-primary-700 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500;
+		@apply focus:border-primary-700 block w-full appearance-none rounded-lg border-gray-300 bg-transparent p-2 text-sm text-gray-900 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500;
 	}
 
 	.my-tag :global(.svelte-tags-input-layout:focus-within) {

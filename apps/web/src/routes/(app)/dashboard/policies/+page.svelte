@@ -1,15 +1,4 @@
 <script lang="ts">
-	import { browser, dev } from '$app/environment';
-	import { goto, invalidateAll } from '$app/navigation';
-	import { DeletePolicyStore, cache } from '$houdini';
-	import { DeleteButton2, Link } from '$lib/components';
-	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
-	import { ErrorMessage } from '$lib/components/form';
-	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-	import { DataTable } from '$lib/components/table';
-	import { ToastLevel, addToast } from '$lib/components/toast';
-	import { subjectTypeOptions } from '$lib/models/enums';
-	import { Logger } from '$lib/utils';
 	import {
 		Breadcrumb,
 		BreadcrumbItem,
@@ -19,7 +8,14 @@
 		Navbar,
 		Select
 	} from 'flowbite-svelte';
-	import { ComputerSpeakerOutline, MobilePhoneOutline, ShieldCheckOutline, UserCircleOutline, UserOutline, UsersGroupOutline } from 'flowbite-svelte-icons';
+	import {
+		ComputerSpeakerOutline,
+		MobilePhoneOutline,
+		ShieldCheckOutline,
+		UserCircleOutline,
+		UserOutline,
+		UsersGroupOutline
+	} from 'flowbite-svelte-icons';
 	import { GraphQLError } from 'graphql';
 	import { createRender, createTable } from 'svelte-headless-table';
 	import {
@@ -33,6 +29,17 @@
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { Logger } from '$lib/utils';
+	import { subjectTypeOptions } from '$lib/models/enums';
+	import { ToastLevel, addToast } from '$lib/components/toast';
+	import { DataTable } from '$lib/components/table';
+	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+	import { ErrorMessage } from '$lib/components/form';
+	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
+	import { DeleteButton2, Link } from '$lib/components';
+	import { goto, invalidateAll } from '$app/navigation';
+	import { browser, dev } from '$app/environment';
+	import { DeletePolicyStore, cache } from '$houdini';
 
 	const log = new Logger('policies:list:browser');
 	export let data;

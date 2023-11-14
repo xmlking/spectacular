@@ -5,7 +5,16 @@
 		"build": {
 			"dependsOn": ["generate"],
 			"outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql"],
-			"env": ["VERCEL", "VERCEL_URL", "VERCEL_ENV", "npm_package_version"]
+			"env": [
+				"VERCEL",
+				"VERCEL_URL",
+				"VERCEL_ENV",
+				"BUILD_VERSION",
+				"BUILD_TIME",
+				"BUN_ENV",
+				"SW_DEV",
+				"npm_package_version"
+			]
 		},
 		"generate": {
 			"outputs": [".svelte-kit/**", "schema.graphql"]

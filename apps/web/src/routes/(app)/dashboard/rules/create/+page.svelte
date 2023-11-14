@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
+	import { superForm } from 'sveltekit-superforms/client';
+	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 	import { dev } from '$app/environment';
 	import {
 		Toggle,
@@ -12,9 +15,6 @@
 	import { actionOptions, directionOptions, protocols } from '$lib/models/enums';
 	import { createRuleKeys as keys } from '$lib/models/schema';
 	import { Logger } from '$lib/utils';
-	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	const log = new Logger('routes:rules:create');
 	export let data;

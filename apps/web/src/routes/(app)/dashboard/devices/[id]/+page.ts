@@ -1,8 +1,8 @@
-import { CachePolicy, GetDeviceStore } from '$houdini';
-import { updateDeviceSchema as schema } from '$lib/models/schema';
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { superValidate } from 'sveltekit-superforms/client';
+import { updateDeviceSchema as schema } from '$lib/models/schema';
+import { CachePolicy, GetDeviceStore } from '$houdini';
 
 const getDeviceStore = new GetDeviceStore();
 export const load = async (event) => {

@@ -4,7 +4,7 @@
 	<div class="mb-10 max-w-xl sm:text-center md:mx-auto md:mb-12 lg:max-w-2xl">
 		<div>
 			<p
-				class="mb-4 inline-block rounded-full bg-teal-accent-400 px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
+				class="bg-teal-accent-400 mb-4 inline-block rounded-full px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
 			>
 				Brand new
 			</p>
@@ -16,7 +16,7 @@
 				<svg
 					viewBox="0 0 52 24"
 					fill="currentColor"
-					class="absolute left-0 top-0 z-0 -ml-20 -mt-8 hidden w-32 text-blue-gray-100 sm:block lg:-ml-28 lg:-mt-10 lg:w-32"
+					class="text-blue-gray-100 absolute left-0 top-0 z-0 -ml-20 -mt-8 hidden w-32 sm:block lg:-ml-28 lg:-mt-10 lg:w-32"
 				>
 					<defs>
 						<pattern
@@ -51,7 +51,7 @@
 			</p>
 			<a
 				href="/"
-				class="mx-auto mb-3 inline-block max-w-xs text-2xl font-extrabold leading-7 transition-colors duration-200 hover:text-deep-purple-accent-400"
+				class="hover:text-deep-purple-accent-400 mx-auto mb-3 inline-block max-w-xs text-2xl font-extrabold leading-7 transition-colors duration-200"
 				aria-label="Read article"
 				title="Nori grape silver beet broccoli kombu beet"
 			>
@@ -64,7 +64,7 @@
 			<a
 				href="/"
 				aria-label=""
-				class="inline-flex items-center font-semibold text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+				class="text-deep-purple-accent-400 hover:text-deep-purple-800 inline-flex items-center font-semibold transition-colors duration-200"
 				>Read more</a
 			>
 		</div>
@@ -74,7 +74,7 @@
 			</p>
 			<a
 				href="/"
-				class="mx-auto mb-3 inline-block max-w-xs text-2xl font-extrabold leading-7 transition-colors duration-200 hover:text-deep-purple-accent-400"
+				class="hover:text-deep-purple-accent-400 mx-auto mb-3 inline-block max-w-xs text-2xl font-extrabold leading-7 transition-colors duration-200"
 				aria-label="Read article"
 				title="Well, the way they make shows is, they make one"
 			>
@@ -86,7 +86,7 @@
 			<a
 				href="/"
 				aria-label=""
-				class="inline-flex items-center font-semibold text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+				class="text-deep-purple-accent-400 hover:text-deep-purple-800 inline-flex items-center font-semibold transition-colors duration-200"
 				>Read more</a
 			>
 		</div>
@@ -96,7 +96,7 @@
 			</p>
 			<a
 				href="/"
-				class="mx-auto mb-3 inline-block max-w-xs text-2xl font-extrabold leading-7 transition-colors duration-200 hover:text-deep-purple-accent-400"
+				class="hover:text-deep-purple-accent-400 mx-auto mb-3 inline-block max-w-xs text-2xl font-extrabold leading-7 transition-colors duration-200"
 				aria-label="Read article"
 				title="Pommy ipsum smeg head whizz morris himer due"
 			>
@@ -109,7 +109,7 @@
 			<a
 				href="/"
 				aria-label=""
-				class="inline-flex items-center font-semibold text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+				class="text-deep-purple-accent-400 hover:text-deep-purple-800 inline-flex items-center font-semibold transition-colors duration-200"
 				>Read more</a
 			>
 		</div>

@@ -1,6 +1,21 @@
 <script lang="ts">
 	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
-	import { ArrowRightToBracketOutline, BellOutline, ChartPieOutline, ClipboardListOutline, CogOutline, ComputerSpeakerOutline, DrawSquareOutline, MobilePhoneOutline, QuestionCircleOutline, ScaleBalancedOutline, ShieldCheckOutline, StarOutline, UsersGroupOutline, UsersOutline } from 'flowbite-svelte-icons';
+	import {
+		ArrowRightToBracketOutline,
+		BellOutline,
+		ChartPieOutline,
+		ClipboardListOutline,
+		CogOutline,
+		ComputerSpeakerOutline,
+		DrawSquareOutline,
+		MobilePhoneOutline,
+		QuestionCircleOutline,
+		ScaleBalancedOutline,
+		ShieldCheckOutline,
+		StarOutline,
+		UsersGroupOutline,
+		UsersOutline
+	} from 'flowbite-svelte-icons';
 	import { page } from '$app/stores';
 	import { Drawer } from '$lib/components';
 	import { sidebarOpen } from '$lib/stores/sidebar.store';
@@ -19,18 +34,14 @@
 		<SidebarWrapper {divClass}>
 			<SidebarGroup>
 				<!--				<SidebarBrand site={{	name: 'Datablocks',href: '/',img: '/logos/6-1.svg' }}/>-->
-				<SidebarItem
-					href="/dashboard"
-					label="Dashboard"
-				>
+				<SidebarItem href="/dashboard" label="Dashboard">
 					<svelte:fragment slot="icon"
 						><ChartPieOutline size="md" class="mr-2 text-red-500 dark:text-blue-500" />
 						<!-- <ChartPieOutline" class="mr-2 text-red-500 dark:text-blue-500" /> -->
-						</svelte:fragment
-					>
+					</svelte:fragment>
 				</SidebarItem>
 				<SidebarItem label="Reports" {spanClass}>
-					<svelte:fragment slot="icon"><DrawSquareOutline  /></svelte:fragment>
+					<svelte:fragment slot="icon"><DrawSquareOutline /></svelte:fragment>
 					<svelte:fragment slot="subtext">
 						<span
 							class="ml-3 inline-flex items-center justify-center rounded-full bg-gray-200 px-2 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300"
@@ -47,23 +58,13 @@
 						>
 					</svelte:fragment>
 				</SidebarItem>
-				<SidebarItem
-					label="Policies"
-					href="/dashboard/policies"
-				>
+				<SidebarItem label="Policies" href="/dashboard/policies">
 					<svelte:fragment slot="icon"><ShieldCheckOutline /></svelte:fragment>
 				</SidebarItem>
-				<SidebarItem
-					label="Golden Rule"
-					href="/dashboard/rules"
-				>
+				<SidebarItem label="Golden Rule" href="/dashboard/rules">
 					<svelte:fragment slot="icon"><ScaleBalancedOutline /></svelte:fragment>
 				</SidebarItem>
-				<SidebarItem
-					label="Devices"
-					{spanClass}
-					href="/dashboard/devices"
-				>
+				<SidebarItem label="Devices" {spanClass} href="/dashboard/devices">
 					<svelte:fragment slot="icon"><MobilePhoneOutline /></svelte:fragment>
 					<svelte:fragment slot="subtext">
 						<span
@@ -72,28 +73,16 @@
 						>
 					</svelte:fragment>
 				</SidebarItem>
-				<SidebarItem
-					label="Device Pools"
-					href="/dashboard/pools"
-				>
+				<SidebarItem label="Device Pools" href="/dashboard/pools">
 					<svelete:fragment slot="icon"><ComputerSpeakerOutline /></svelete:fragment>
 				</SidebarItem>
-				<SidebarItem
-					label="Users"
-					href="/dashboard/users"
-				>
+				<SidebarItem label="Users" href="/dashboard/users">
 					<svelte:fragment slot="icon"><UsersOutline /></svelte:fragment>
 				</SidebarItem>
-				<SidebarItem
-					label="Tenants"
-					href="/dashboard/tenants"
-				>
+				<SidebarItem label="Tenants" href="/dashboard/tenants">
 					<svelte:fragment slot="icon"><UsersGroupOutline /></svelte:fragment>
 				</SidebarItem>
-				<SidebarItem
-					label="Settings"
-					href="/dashboard/settings"
-				>
+				<SidebarItem label="Settings" href="/dashboard/settings">
 					<svelte:fragment slot="icon"><CogOutline /></svelte:fragment>
 				</SidebarItem>
 				<SidebarItem

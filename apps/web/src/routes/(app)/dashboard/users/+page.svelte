@@ -28,7 +28,7 @@
 	<div>
 		<div class="relative hidden md:block">
 			<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-				<SearchOutline size="sm"/>
+				<SearchOutline size="sm" />
 			</div>
 			<Input id="search-navbar" class="pl-10" placeholder="Search Users..." />
 		</div>

@@ -1,13 +1,4 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
-	import { invalidateAll } from '$app/navigation';
-	import { cache, DeleteDevicePoolStore, InsertDevicePoolStore } from '$houdini';
-	import type { CustomEventProps as RemoveCustomEventProps } from '$lib/components/DeleteButton.svelte';
-	import { FloatingTextInput, Form, TagsInput } from '$lib/components/form';
-	import { DataTable } from '$lib/components/table';
-	import { addToast, ToastLevel } from '$lib/components/toast';
-	import { updatePoolKeys as keys } from '$lib/models/schema';
-	import { Logger } from '$lib/utils';
 	import { Breadcrumb, BreadcrumbItem, Heading, Helper, Navbar, NavBrand } from 'flowbite-svelte';
 	import { MobilePhoneOutline } from 'flowbite-svelte-icons';
 	import { GraphQLError } from 'graphql';
@@ -17,7 +8,17 @@
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
-	import AddDevicePoolButton, { type CustomEventProps } from './AddDevicePoolButton.svelte';
+	import { Logger } from '$lib/utils';
+	import { updatePoolKeys as keys } from '$lib/models/schema';
+	import { addToast, ToastLevel } from '$lib/components/toast';
+	import { DataTable } from '$lib/components/table';
+	import { FloatingTextInput, Form, TagsInput } from '$lib/components/form';
+	import type { CustomEventProps as RemoveCustomEventProps } from '$lib/components/DeleteButton.svelte';
+	import { invalidateAll } from '$app/navigation';
+	import { dev } from '$app/environment';
+	import { cache, DeleteDevicePoolStore, InsertDevicePoolStore } from '$houdini';
+	import AddDevicePoolButton from './AddDevicePoolButton.svelte';
+	import type { CustomEventProps } from './AddDevicePoolButton.svelte';
 	import RemoveDevicePoolButton from './RemoveDevicePoolButton.svelte';
 
 	const log = new Logger('routes:pools:update');

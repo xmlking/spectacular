@@ -1,5 +1,5 @@
-import envPub from '$lib/variables/variables';
 import fetch from 'cross-fetch';
+import envPub from '$lib/variables/variables';
 
 interface Post {
 	userId: number;

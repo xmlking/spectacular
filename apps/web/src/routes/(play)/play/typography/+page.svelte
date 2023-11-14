@@ -1,4 +1,4 @@
-<article class="prose mx-auto dark:prose-invert lg:prose-xl">
+<article class="prose dark:prose-invert lg:prose-xl mx-auto">
 	<h1>Try dark mode and see how tailwindcss's typography plugin help style the html elements</h1>
 	<p>
 		For years parents have espoused the health benefits of eating garlic bread with cheese to

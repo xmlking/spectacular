@@ -1,10 +1,10 @@
+import type { HandleFetch, HandleServerError } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
 import { dev } from '$app/environment';
 import { TokenVault } from '$lib/server/backend/TokenVault';
 import { authjs, guard, houdini } from '$lib/server/middleware';
 import { Logger } from '$lib/utils';
 // import envPri from '$lib/variables/variables.server';
-import type { HandleFetch, HandleServerError } from '@sveltejs/kit';
-import { sequence } from '@sveltejs/kit/hooks';
 /**
  * Code in hooks.server.ts will run when the application starts up,
  * making them useful for initializing database clients, Sentry and so on.

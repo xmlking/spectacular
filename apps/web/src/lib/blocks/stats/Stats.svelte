@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ExclamationCircleOutline } from 'flowbite-svelte-icons';
-	</script>
+</script>
 
 <div class="max-w-7xl">
 	<h3 class="text-lg font-medium leading-6 text-gray-900"> Last 30 days </h3>

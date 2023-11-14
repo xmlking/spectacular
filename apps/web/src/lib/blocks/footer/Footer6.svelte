@@ -8,28 +8,28 @@
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>News</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>World</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Games</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>References</a
 							>
 						</li>
@@ -41,35 +41,35 @@
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Web</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>eCommerce</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Business</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Entertainment</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Portfolio</a
 							>
 						</li>
@@ -81,35 +81,35 @@
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Media</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Brochure</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Nonprofit</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Educational</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Projects</a
 							>
 						</li>
@@ -121,28 +121,28 @@
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Infopreneur</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Personal</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Wiki</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-200"
+								class="hover:text-deep-purple-accent-200 text-gray-500 transition-colors duration-300"
 								>Forum</a
 							>
 						</li>
@@ -158,11 +158,11 @@
 						placeholder="Email"
 						required=""
 						type="text"
-						class="mb-3 h-12 w-full flex-grow appearance-none rounded border border-gray-300 bg-white px-4 shadow-sm transition duration-200 focus:border-deep-purple-accent-400 focus:shadow-outline focus:outline-none md:mb-0 md:mr-2"
+						class="focus:border-deep-purple-accent-400 focus:shadow-outline mb-3 h-12 w-full flex-grow appearance-none rounded border border-gray-300 bg-white px-4 shadow-sm transition duration-200 focus:outline-none md:mb-0 md:mr-2"
 					/>
 					<button
 						type="submit"
-						class="inline-flex h-12 items-center justify-center rounded bg-deep-purple-accent-400 px-6 font-medium tracking-wide text-white shadow-md transition duration-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+						class="bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline inline-flex h-12 items-center justify-center rounded px-6 font-medium tracking-wide text-white shadow-md transition duration-200 focus:outline-none"
 					>
 						Subscribe
 					</button>
@@ -178,7 +178,7 @@
 			<div class="mt-4 flex items-center space-x-4 sm:mt-0">
 				<a
 					href="/"
-					class="text-gray-500 transition-colors duration-300 hover:text-teal-accent-400"
+					class="hover:text-teal-accent-400 text-gray-500 transition-colors duration-300"
 				>
 					<svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
 						<path
@@ -188,7 +188,7 @@
 				</a>
 				<a
 					href="/"
-					class="text-gray-500 transition-colors duration-300 hover:text-teal-accent-400"
+					class="hover:text-teal-accent-400 text-gray-500 transition-colors duration-300"
 				>
 					<svg viewBox="0 0 30 30" fill="currentColor" class="h-6">
 						<circle cx="15" cy="15" r="4" />
@@ -199,7 +199,7 @@
 				</a>
 				<a
 					href="/"
-					class="text-gray-500 transition-colors duration-300 hover:text-teal-accent-400"
+					class="hover:text-teal-accent-400 text-gray-500 transition-colors duration-300"
 				>
 					<svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
 						<path

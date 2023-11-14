@@ -1,6 +1,6 @@
 // import { encrypt } from '$lib/utils';
-import { dev } from '$app/environment';
 import type { Cookies } from '@sveltejs/kit';
+import { dev } from '$app/environment';
 
 export function setCookie(cookies: Cookies, name: string, value: string, expiresIn = 0) {
 	cookies.set(name, value, {

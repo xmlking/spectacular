@@ -1,4 +1,5 @@
-import { z, ZodArray, ZodEffects, ZodNumber, ZodObject, ZodString, ZodType, type ZodTypeAny } from 'zod';
+import { z, ZodArray, ZodEffects, ZodNumber, ZodObject, ZodString, ZodType } from 'zod';
+import type { ZodTypeAny } from 'zod';
 import { setPath } from './setPath';
 
 type InputType<DefaultType extends ZodTypeAny> = {

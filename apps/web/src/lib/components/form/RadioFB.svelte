@@ -1,21 +1,21 @@
 <script lang="ts" context="module">
 	// https://superforms.rocks/components#using-a-formfieldproxy
-  	import type { AnyZodObject } from 'zod';
-  	type T = AnyZodObject;
+	import type { AnyZodObject } from 'zod';
+	type T = AnyZodObject;
 </script>
 
 <script lang="ts" generics="T extends AnyZodObject">
 	import { ButtonGroup, RadioButton, Helper, Label } from 'flowbite-svelte';
 	import type { z } from 'zod';
 	import type { ZodValidation, FormPathLeaves } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms/client'
+	import type { SuperForm } from 'sveltekit-superforms/client';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
 	import generateId from '$lib/utils/generateId';
 	import { getFormContext } from './forms';
-	import type {RadioOptionType} from './forms';
+	import type { RadioOptionType } from './forms';
 
 	export let form: SuperForm<ZodValidation<T>, unknown>;
-  	export let field: FormPathLeaves<z.infer<T>>;
+	export let field: FormPathLeaves<z.infer<T>>;
 	export let label = '';
 	export let labelClasses = '';
 	export let items: RadioOptionType[] = [];
@@ -29,7 +29,7 @@
 {/if}
 <ButtonGroup>
 	{#each items as item}
-		 {@const id = generateId()}
+		{@const id = generateId()}
 		<!-- <Button outline class="checked-label" {...$$restProps}>
 			<input
 				type="radio"
@@ -48,21 +48,23 @@
 			/>
 			<label for={id} >{item.label}</label>
 	</Button> -->
-	<RadioButton outline {...$$restProps}
-		{id}
-		name={field}
-		value={item.value}
-		bind:group={$value}
-		on:blur
-		on:change
-		on:click
-		aria-label={item.label}
-		data-invalid={$errors}
-		{...$constraints}
-		{...$$restProps}
-	>
-		{item.label}
-	</RadioButton>
+		<RadioButton
+			outline
+			{...$$restProps}
+			{id}
+			name={field}
+			value={item.value}
+			bind:group={$value}
+			on:blur
+			on:change
+			on:click
+			aria-label={item.label}
+			data-invalid={$errors}
+			{...$constraints}
+			{...$$restProps}
+		>
+			{item.label}
+		</RadioButton>
 	{/each}
 </ButtonGroup>
 
@@ -71,8 +73,8 @@
 {/if}
 
 <style lang="postcss">
-/* TODO: has to define in apps/web/src/app.postcss */
-/* @layer components {
+	/* TODO: has to define in apps/web/src/app.postcss */
+	/* @layer components {
   .checked-label:has(input:checked) {
     @apply bg-primary-700 text-white;
   }

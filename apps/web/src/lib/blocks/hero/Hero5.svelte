@@ -6,7 +6,7 @@
 			<div class="mb-6 max-w-xl">
 				<div>
 					<p
-						class="mb-4 inline-block rounded-full bg-teal-accent-400 px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
+						class="bg-teal-accent-400 mb-4 inline-block rounded-full px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
 					>
 						Brand new
 					</p>
@@ -16,7 +16,7 @@
 				>
 					Innovative analytics<br class="hidden md:block" />
 					that you
-					<span class="inline-block text-deep-purple-accent-400">will love</span>
+					<span class="text-deep-purple-accent-400 inline-block">will love</span>
 				</h2>
 				<p class="text-base text-gray-700 md:text-lg">
 					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
@@ -26,7 +26,7 @@
 			<a
 				href="/dashboard"
 				aria-label="dashboard-link"
-				class="inline-flex items-center font-semibold text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+				class="text-deep-purple-accent-400 hover:text-deep-purple-800 inline-flex items-center font-semibold transition-colors duration-200"
 			>
 				Get Started
 				<svg class="ml-2 inline-block w-3" fill="currentColor" viewBox="0 0 12 12">
@@ -38,7 +38,7 @@
 		</div>
 		<div class="relative">
 			<svg
-				class="absolute w-full text-teal-accent-400"
+				class="text-teal-accent-400 absolute w-full"
 				fill="currentColor"
 				viewBox="0 0 600 392"
 			>
@@ -50,7 +50,7 @@
 				<rect x="315" y="0" width="75" height="392" rx="8" />
 			</svg>
 			<svg
-				class="relative w-full text-deep-purple-accent-400"
+				class="text-deep-purple-accent-400 relative w-full"
 				fill="currentColor"
 				viewBox="0 0 600 392"
 			>

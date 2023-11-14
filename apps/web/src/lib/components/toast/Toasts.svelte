@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { twMerge } from 'tailwind-merge';
 	import { CloseButton } from 'flowbite-svelte';
-	import { CheckSolid, CloseCircleSolid, ExclamationCircleOutline, InfoCircleOutline } from 'flowbite-svelte-icons';
+	import {
+		CheckSolid,
+		CloseCircleSolid,
+		ExclamationCircleOutline,
+		InfoCircleOutline
+	} from 'flowbite-svelte-icons';
 	import { slide } from 'svelte/transition';
 	import { default as Frame } from '$lib/components/utils/Frame.svelte';
 	import { ToastLevel, dismissToast, toasts } from './store';
@@ -42,17 +47,18 @@
 				transition={slide}
 				class="mb-2 w-full max-w-xs p-4"
 				{...$$restProps}
-				role="alert"			>
+				role="alert"
+			>
 				<div class="flex items-center">
 					<Frame color={toast.type} rounded class={iconClass}>
 						{#if toast.type === ToastLevel.Success}
-							<CheckSolid size='xs' ariaLabel="Success icon" />
+							<CheckSolid size="xs" ariaLabel="Success icon" />
 						{:else if toast.type === ToastLevel.Error}
-							<CloseCircleSolid size='xs' ariaLabel="Error icon" />
+							<CloseCircleSolid size="xs" ariaLabel="Error icon" />
 						{:else if toast.type === ToastLevel.Warning}
-							<ExclamationCircleOutline  size='xs' ariaLabel="Warning icon" />
+							<ExclamationCircleOutline size="xs" ariaLabel="Warning icon" />
 						{:else}
-							<InfoCircleOutline  size='xs' ariaLabel="Info icon" />
+							<InfoCircleOutline size="xs" ariaLabel="Info icon" />
 						{/if}
 					</Frame>
 					<div class="w-full text-sm font-normal">

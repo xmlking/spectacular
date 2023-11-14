@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import { Avatar } from 'flowbite-svelte';
+	import { page } from '$app/stores';
 </script>
 
 <svelte:head>

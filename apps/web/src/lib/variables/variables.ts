@@ -1,6 +1,6 @@
+import { z } from 'zod';
 import { env as dynPubEnv } from '$env/dynamic/public';
 import * as statPubEnv from '$env/static/public';
-import { z } from 'zod';
 
 /**
  * To use any type besides string, you need to use zod's `coerce` method.

@@ -4,11 +4,11 @@
 	<div class="row-gap-8 grid gap-10 lg:grid-cols-3">
 		<div>
 			<div class="flex">
-				<h6 class="mr-2 text-4xl font-bold text-deep-purple-accent-400 md:text-5xl">
+				<h6 class="text-deep-purple-accent-400 mr-2 text-4xl font-bold md:text-5xl">
 					86K
 				</h6>
 				<div
-					class="flex h-7 w-7 items-center justify-center rounded-full bg-teal-accent-400"
+					class="bg-teal-accent-400 flex h-7 w-7 items-center justify-center rounded-full"
 				>
 					<svg class="h-7 w-7 text-teal-900" stroke="currentColor" viewBox="0 0 52 52">
 						<polygon
@@ -29,11 +29,11 @@
 		</div>
 		<div>
 			<div class="flex">
-				<h6 class="mr-2 text-4xl font-bold text-deep-purple-accent-400 md:text-5xl">
+				<h6 class="text-deep-purple-accent-400 mr-2 text-4xl font-bold md:text-5xl">
 					1.3K
 				</h6>
 				<div
-					class="flex h-7 w-7 items-center justify-center rounded-full bg-teal-accent-400"
+					class="bg-teal-accent-400 flex h-7 w-7 items-center justify-center rounded-full"
 				>
 					<svg class="h-7 w-7 text-teal-900" stroke="currentColor" viewBox="0 0 52 52">
 						<polygon
@@ -54,11 +54,11 @@
 		</div>
 		<div>
 			<div class="flex">
-				<h6 class="mr-2 text-4xl font-bold text-deep-purple-accent-400 md:text-5xl">
+				<h6 class="text-deep-purple-accent-400 mr-2 text-4xl font-bold md:text-5xl">
 					52M
 				</h6>
 				<div
-					class="flex h-7 w-7 items-center justify-center rounded-full bg-teal-accent-400"
+					class="bg-teal-accent-400 flex h-7 w-7 items-center justify-center rounded-full"
 				>
 					<svg class="h-7 w-7 text-teal-900" stroke="currentColor" viewBox="0 0 52 52">
 						<polygon

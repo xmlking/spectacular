@@ -6,7 +6,7 @@
 			<p class="mb-3 text-xs font-semibold uppercase tracking-wide">
 				<a
 					href="/"
-					class="text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-200"
 					aria-label="Category">weekend</a
 				>
 				<span class="text-gray-600">— 1 Feb 2020</span>
@@ -15,7 +15,7 @@
 				href="/"
 				aria-label="Article"
 				title="Jingle Bells"
-				class="mb-3 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
+				class="hover:text-deep-purple-accent-400 mb-3 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
 				>Jingle Bells</a
 			>
 			<p class="mb-5 text-gray-700">
@@ -34,7 +34,7 @@
 						href="/"
 						aria-label="Author"
 						title="Author"
-						class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
+						class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
 						>Vasile Melinte</a
 					>
 					<p class="text-sm font-medium leading-4 text-gray-600">Author</p>
@@ -45,7 +45,7 @@
 			<p class="mb-3 text-xs font-semibold uppercase tracking-wide">
 				<a
 					href="/"
-					class="text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-200"
 					aria-label="Category">holidays</a
 				>
 				<span class="text-gray-600">— 15 Nov 2020</span>
@@ -54,7 +54,7 @@
 				href="/"
 				aria-label="Article"
 				title="Happy new Year"
-				class="mb-3 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
+				class="hover:text-deep-purple-accent-400 mb-3 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
 				>Happy new Year</a
 			>
 			<p class="mb-5 text-gray-700">
@@ -74,7 +74,7 @@
 						href="/"
 						aria-label="Author"
 						title="Author"
-						class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
+						class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
 						>John Doe</a
 					>
 					<p class="text-sm font-medium leading-4 text-gray-600">Author</p>
@@ -85,7 +85,7 @@
 			<p class="mb-3 text-xs font-semibold uppercase tracking-wide">
 				<a
 					href="/"
-					class="text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
+					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-200"
 					aria-label="Category">programming</a
 				>
 				<span class="text-gray-600">— 28 Dec 2020</span>
@@ -94,7 +94,7 @@
 				href="/"
 				aria-label="Article"
 				title="Why i love C++"
-				class="mb-3 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
+				class="hover:text-deep-purple-accent-400 mb-3 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
 				>Why i love C++</a
 			>
 			<p class="mb-5 text-gray-700">
@@ -114,7 +114,7 @@
 						href="/"
 						aria-label="Author"
 						title="Author"
-						class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
+						class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
 						>Andrew Larkin</a
 					>
 					<p class="text-sm font-medium leading-4 text-gray-600">Author</p>

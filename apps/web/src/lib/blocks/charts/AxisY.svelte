@@ -1,7 +1,7 @@
 <script>
+	import { LayerCake, Svg } from 'layercake';
 	import AxisY from '$lib/components/layercake/AxisY.svelte';
 	import data from '$mocks/data/points';
-	import { LayerCake, Svg } from 'layercake';
 	const xKey = 'myX';
 	const yKey = 'myY';
 </script>

@@ -47,6 +47,7 @@ test.describe.serial('Home page', () => {
 		await expect(page.getByRole('heading', { name: 'Combine GraphQL APIs into a unified supergraph' })).toBeVisible();
 
 		// Recording...
+		// eslint-disable-next-line turbo/no-undeclared-env-vars
 		const { USERNAME = 'sumo', PASSWORD = 'demo' } = process.env;
 		await page.getByRole('link', { name: 'dashboard-link' }).click();
 		await expect(page).toHaveURL(/login/);

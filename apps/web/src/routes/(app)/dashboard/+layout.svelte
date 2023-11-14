@@ -70,7 +70,10 @@
 		<SideMenu />
 		<!--   end::Sidebar      -->
 		<!--   start::Main Content     -->
-		<main use:transition={'main'} class="container mx-auto overflow-y-auto px-8 py-32 dark:text-white">
+		<main
+			use:transition={'main'}
+			class="container mx-auto overflow-y-auto px-8 py-32 dark:text-white"
+		>
 			<slot />
 		</main>
 		<!--   end::Main Content      -->

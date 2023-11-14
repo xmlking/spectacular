@@ -3,7 +3,7 @@
 		<div class="relative flex items-center justify-between">
 			<a href="/" aria-label="Company" title="Company" class="inline-flex items-center">
 				<svg
-					class="w-8 text-deep-purple-accent-400 dark:text-teal-accent-400"
+					class="text-deep-purple-accent-400 dark:text-teal-accent-400 w-8"
 					viewBox="0 0 24 24"
 					stroke-linejoin="round"
 					stroke-width="2"
@@ -28,7 +28,7 @@
 						href="/"
 						aria-label="Our product"
 						title="Our product"
-						class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400 dark:text-gray-100 dark:hover:text-teal-accent-400"
+						class="hover:text-deep-purple-accent-400 dark:hover:text-teal-accent-400 font-medium tracking-wide text-gray-700 transition-colors duration-200 dark:text-gray-100"
 						>Product</a
 					></li
 				>
@@ -37,7 +37,7 @@
 						href="/"
 						aria-label="Our product"
 						title="Our product"
-						class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400 dark:text-gray-100 dark:hover:text-teal-accent-400"
+						class="hover:text-deep-purple-accent-400 dark:hover:text-teal-accent-400 font-medium tracking-wide text-gray-700 transition-colors duration-200 dark:text-gray-100"
 						>Features</a
 					></li
 				>
@@ -46,7 +46,7 @@
 						href="/"
 						aria-label="Product pricing"
 						title="Product pricing"
-						class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400 dark:text-gray-100 dark:hover:text-teal-accent-400"
+						class="hover:text-deep-purple-accent-400 dark:hover:text-teal-accent-400 font-medium tracking-wide text-gray-700 transition-colors duration-200 dark:text-gray-100"
 						>Pricing</a
 					></li
 				>
@@ -55,14 +55,14 @@
 						href="/"
 						aria-label="About us"
 						title="About us"
-						class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400 dark:text-gray-100 dark:hover:text-teal-accent-400"
+						class="hover:text-deep-purple-accent-400 dark:hover:text-teal-accent-400 font-medium tracking-wide text-gray-700 transition-colors duration-200 dark:text-gray-100"
 						>About us</a
 					></li
 				>
 				<li>
 					<a
 						href="/"
-						class="inline-flex h-12 items-center justify-center rounded bg-deep-purple-accent-400 px-6 font-medium tracking-wide text-white shadow-md transition duration-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+						class="bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline inline-flex h-12 items-center justify-center rounded px-6 font-medium tracking-wide text-white shadow-md transition duration-200 focus:outline-none"
 						aria-label="Sign up"
 						title="Sign up"
 					>
@@ -75,7 +75,7 @@
 				<button
 					aria-label="Open Menu"
 					title="Open Menu"
-					class="-mr-1 rounded p-2 transition duration-200 hover:bg-deep-purple-50 focus:bg-deep-purple-50 focus:shadow-outline focus:outline-none"
+					class="hover:bg-deep-purple-50 focus:bg-deep-purple-50 focus:shadow-outline -mr-1 rounded p-2 transition duration-200 focus:outline-none"
 				>
 					<svg class="w-5 text-gray-600" viewBox="0 0 24 24">
 						<path

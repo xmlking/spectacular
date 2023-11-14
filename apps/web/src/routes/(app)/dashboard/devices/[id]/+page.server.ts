@@ -1,12 +1,13 @@
-import { UpdateDeviceStore, type devices_set_input } from '$houdini';
-import { ToastLevel } from '$lib/components/toast';
-import { updateDeviceSchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
-import { uuidSchema } from '$lib/utils/zod.utils';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
+import { ToastLevel } from '$lib/components/toast';
+import { updateDeviceSchema as schema } from '$lib/models/schema';
+import { Logger, cleanClone } from '$lib/utils';
+import { uuidSchema } from '$lib/utils/zod.utils';
+import { UpdateDeviceStore } from '$houdini';
+import type { devices_set_input } from '$houdini';
 
 const log = new Logger('device.update.server');
 

@@ -5,7 +5,7 @@
 		<div class="sm:col-span-2">
 			<a href="/" aria-label="Go home" title="Company" class="inline-flex items-center">
 				<svg
-					class="w-8 text-deep-purple-accent-400"
+					class="text-deep-purple-accent-400 w-8"
 					viewBox="0 0 24 24"
 					stroke-linejoin="round"
 					stroke-width="2"
@@ -42,7 +42,7 @@
 					href="tel:850-123-5021"
 					aria-label="Our phone"
 					title="Our phone"
-					class="text-deep-purple-accent-400 transition-colors duration-300 hover:text-deep-purple-800"
+					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-300"
 					>850-123-5021</a
 				>
 			</div>
@@ -52,7 +52,7 @@
 					href="mailto:info@lorem.mail"
 					aria-label="Our email"
 					title="Our email"
-					class="text-deep-purple-accent-400 transition-colors duration-300 hover:text-deep-purple-800"
+					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-300"
 					>info@lorem.mail</a
 				>
 			</div>
@@ -64,7 +64,7 @@
 					rel="noopener noreferrer"
 					aria-label="Our address"
 					title="Our address"
-					class="text-deep-purple-accent-400 transition-colors duration-300 hover:text-deep-purple-800"
+					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-300"
 				>
 					312 Lovely Street, NY
 				</a>
@@ -75,7 +75,7 @@
 			<div class="mt-1 flex items-center space-x-3">
 				<a
 					href="/"
-					class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+					class="hover:text-deep-purple-accent-400 text-gray-500 transition-colors duration-300"
 				>
 					<svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
 						<path
@@ -85,7 +85,7 @@
 				</a>
 				<a
 					href="/"
-					class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+					class="hover:text-deep-purple-accent-400 text-gray-500 transition-colors duration-300"
 				>
 					<svg viewBox="0 0 30 30" fill="currentColor" class="h-6">
 						<circle cx="15" cy="15" r="4" />
@@ -96,7 +96,7 @@
 				</a>
 				<a
 					href="/"
-					class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+					class="hover:text-deep-purple-accent-400 text-gray-500 transition-colors duration-300"
 				>
 					<svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
 						<path
@@ -116,21 +116,21 @@
 			<li>
 				<a
 					href="/"
-					class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+					class="hover:text-deep-purple-accent-400 text-sm text-gray-600 transition-colors duration-300"
 					>F.A.Q</a
 				>
 			</li>
 			<li>
 				<a
 					href="/"
-					class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+					class="hover:text-deep-purple-accent-400 text-sm text-gray-600 transition-colors duration-300"
 					>Privacy Policy</a
 				>
 			</li>
 			<li>
 				<a
 					href="/"
-					class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+					class="hover:text-deep-purple-accent-400 text-sm text-gray-600 transition-colors duration-300"
 					>Terms &amp; Conditions</a
 				>
 			</li>

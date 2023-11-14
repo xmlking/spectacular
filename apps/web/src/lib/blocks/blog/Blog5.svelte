@@ -16,7 +16,7 @@
 			>
 				<div class="mb-5 flex items-center justify-between text-gray-500">
 					<span
-						class="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800"
+						class="bg-primary-100 text-primary-800 dark:bg-primary-200 dark:text-primary-800 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium"
 					>
 						<svg
 							class="mr-1 h-3 w-3"
@@ -49,7 +49,7 @@
 						<span class="font-medium dark:text-white"> Jese Leos </span>
 					</div>
 					<a
-						class="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
+						class="text-primary-600 dark:text-primary-500 inline-flex items-center font-medium hover:underline"
 						href={'#'}
 					>
 						Read more
@@ -73,7 +73,7 @@
 			>
 				<div class="mb-5 flex items-center justify-between text-gray-500">
 					<span
-						class="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800"
+						class="bg-primary-100 text-primary-800 dark:bg-primary-200 dark:text-primary-800 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium"
 					>
 						<svg
 							class="mr-1 h-3 w-3"
@@ -108,7 +108,7 @@
 						<span class="font-medium dark:text-white"> Bonnie Green </span>
 					</div>
 					<a
-						class="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
+						class="text-primary-600 dark:text-primary-500 inline-flex items-center font-medium hover:underline"
 						href={'#'}
 					>
 						Read more

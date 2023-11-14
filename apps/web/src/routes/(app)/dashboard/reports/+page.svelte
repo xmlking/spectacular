@@ -75,7 +75,7 @@
 							type="text"
 							name="email"
 							id="topbar-search"
-							class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+							class="focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
 							placeholder="Search"
 						/>
 					</div>
@@ -145,7 +145,7 @@
 									alt="Bonnie Green avatar"
 								/>
 								<div
-									class="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700"
+									class="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700"
 								>
 									<svg
 										aria-hidden="true"
@@ -173,7 +173,7 @@
 									>: "Hey, what's up? All set for the presentation?"
 								</div>
 								<div
-									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
 								>
 									a few moments ago
 								</div>
@@ -219,7 +219,7 @@
 									started following you.
 								</div>
 								<div
-									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
 								>
 									10 minutes ago
 								</div>
@@ -267,7 +267,7 @@
 									love your story. See it and view more stories.
 								</div>
 								<div
-									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
 								>
 									44 minutes ago
 								</div>
@@ -309,13 +309,13 @@
 										>Leslie Livingston</span
 									>
 									mentioned you in a comment:
-									<span class="font-medium text-primary-600 dark:text-primary-500"
+									<span class="text-primary-600 dark:text-primary-500 font-medium"
 										>@bonnie.green</span
 									>
 									what do you say?
 								</div>
 								<div
-									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
 								>
 									1 hour ago
 								</div>
@@ -355,7 +355,7 @@
 									design trend.
 								</div>
 								<div
-									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
 								>
 									3 hours ago
 								</div>
@@ -680,7 +680,7 @@
 								<span class="flex items-center">
 									<svg
 										aria-hidden="true"
-										class="mr-2 h-5 w-5 text-primary-600 dark:text-primary-500"
+										class="text-primary-600 dark:text-primary-500 mr-2 h-5 w-5"
 										fill="currentColor"
 										viewBox="0 0 20 20"
 										xmlns="http://www.w3.org/2000/svg"
@@ -754,7 +754,7 @@
 						type="text"
 						name="search"
 						id="sidebar-search"
-						class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+						class="focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
 						placeholder="Search"
 					/>
 				</div>
@@ -917,7 +917,7 @@
 						</svg>
 						<span class="ml-3 flex-1 whitespace-nowrap">Messages</span>
 						<span
-							class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary-100 text-xs font-semibold text-primary-800 dark:bg-primary-200 dark:text-primary-800"
+							class="bg-primary-100 text-primary-800 dark:bg-primary-200 dark:text-primary-800 inline-flex h-5 w-5 items-center justify-center rounded-full text-xs font-semibold"
 						>
 							4
 						</span>

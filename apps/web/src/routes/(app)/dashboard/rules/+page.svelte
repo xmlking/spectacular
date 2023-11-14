@@ -1,14 +1,4 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
-	import { invalidateAll } from '$app/navigation';
-	import { cache, DeleteRuleStore } from '$houdini';
-	import { DeleteButton, Link } from '$lib/components';
-	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
-	import { ErrorMessage } from '$lib/components/form';
-	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-	import { DataTable } from '$lib/components/table';
-	import { addToast, ToastLevel } from '$lib/components/toast';
-	import { Logger } from '$lib/utils';
 	import {
 		Breadcrumb,
 		BreadcrumbItem,
@@ -26,6 +16,16 @@
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { Logger } from '$lib/utils';
+	import { addToast, ToastLevel } from '$lib/components/toast';
+	import { DataTable } from '$lib/components/table';
+	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+	import { ErrorMessage } from '$lib/components/form';
+	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
+	import { DeleteButton, Link } from '$lib/components';
+	import { invalidateAll } from '$app/navigation';
+	import { dev } from '$app/environment';
+	import { cache, DeleteRuleStore } from '$houdini';
 
 	const log = new Logger('rules:list:browser');
 	export let data;
@@ -213,8 +213,7 @@
 			/> -->
 			<input name="limit" bind:value={$form.limit} type="hidden" />
 			<input name="offset" bind:value={$form.offset} type="hidden" />
-			<Button type="submit" color="primary" class="!p-2.5"
-				><SearchOutline  size="md" /></Button
+			<Button type="submit" color="primary" class="!p-2.5"><SearchOutline size="md" /></Button
 			>
 		</ButtonGroup>
 		<Button href="/dashboard/rules/create">Add Rule</Button>

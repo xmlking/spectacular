@@ -26,7 +26,14 @@
 		| undefined;
 </script>
 
-<Navbar style="view-transition-name: header;" let:hidden let:toggle fluid={true} border={false} color="light">
+<Navbar
+	style="view-transition-name: header;"
+	let:hidden
+	let:toggle
+	fluid={true}
+	border={false}
+	color="light"
+>
 	<div class="flex items-center">
 		<Hamburger />
 		<NavBrand href="/">

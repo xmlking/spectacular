@@ -84,7 +84,7 @@ export async function listGroups(fetch: Fetch, search: string, filter?: string) 
 }
 
 export async function listUsers1(fetch: Fetch, search: string, filter?: string) {
-	var url = new URL(envPri.MICROSOFT_GRAPH_ENDPOINT + '/v1.0/users?$count=true&$top=10');
+	const url = new URL(envPri.MICROSOFT_GRAPH_ENDPOINT + '/v1.0/users?$count=true&$top=10');
 	url.searchParams.append('$select', 'id,displayName,userPrincipalName');
 	url.searchParams.append('$filter', filter || defaultUserFilter);
 	url.searchParams.append('$search', `"displayName:${search}"`);
@@ -106,7 +106,7 @@ export async function listUsers1(fetch: Fetch, search: string, filter?: string) 
 }
 
 export async function listGroups1(fetch: Fetch, search: string, filter?: string) {
-	var url = new URL(envPri.MICROSOFT_GRAPH_ENDPOINT + '/v1.0/groups?$count=true&$top=10');
+	const url = new URL(envPri.MICROSOFT_GRAPH_ENDPOINT + '/v1.0/groups?$count=true&$top=10');
 	url.searchParams.append('$select', 'id,displayName,securityIdentifier');
 	url.searchParams.append('$filter', filter || defaultUserFilter);
 	url.searchParams.append('$search', `"displayName:${search}"`);

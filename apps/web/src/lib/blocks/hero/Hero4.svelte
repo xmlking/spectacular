@@ -6,7 +6,7 @@
 			<div class="mb-10 max-w-xl sm:text-center md:mx-auto md:mb-12 lg:max-w-2xl">
 				<div>
 					<p
-						class="mb-4 inline-block rounded-full bg-teal-accent-400 px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
+						class="bg-teal-accent-400 mb-4 inline-block rounded-full px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
 					>
 						Brand new
 					</p>
@@ -49,14 +49,14 @@
 			<div class="flex items-center sm:justify-center">
 				<button
 					type="submit"
-					class="mr-6 inline-flex h-12 items-center justify-center rounded bg-deep-purple-accent-400 px-6 font-medium tracking-wide text-white shadow-md transition duration-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+					class="bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline mr-6 inline-flex h-12 items-center justify-center rounded px-6 font-medium tracking-wide text-white shadow-md transition duration-200 focus:outline-none"
 				>
 					Get started
 				</button>
 				<a
 					href="/"
 					aria-label=""
-					class="inline-flex items-center font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
+					class="hover:text-deep-purple-accent-700 inline-flex items-center font-semibold text-gray-800 transition-colors duration-200"
 					>Learn more</a
 				>
 			</div>
@@ -72,7 +72,7 @@
 					class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="h-10 w-10 text-deep-purple-accent-400"
+						class="text-deep-purple-accent-400 h-10 w-10"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>
@@ -92,7 +92,7 @@
 					class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="h-10 w-10 text-deep-purple-accent-400"
+						class="text-deep-purple-accent-400 h-10 w-10"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>
@@ -112,7 +112,7 @@
 					class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="h-10 w-10 text-deep-purple-accent-400"
+						class="text-deep-purple-accent-400 h-10 w-10"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>

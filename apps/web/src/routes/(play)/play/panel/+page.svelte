@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { writable } from 'svelte/store';
 	import { browser } from '$app/environment';
 	import { ContextMenu, SplitPanel } from '$lib/components';
-	import { writable } from 'svelte/store';
 
 	let width = browser ? window.innerWidth : 1000;
 	let selected_view = 0;
