@@ -7,14 +7,15 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    env_file:
+      - apps/web/.env
+      - .secrets
     environment:
       NODE_ENV: production
       ORIGIN: http://localhost:3000
       NEXTAUTH_URL: http://localhost:3000
       AUTH_TRUST_HOST: true
       PUBLIC_GRAPHQL_ENDPOINT: http://0.0.0.0:8080/v1/graphql
-    env_file:
-      - .env
     ports:
       - 3000:3000
 
@@ -80,11 +81,11 @@ services:
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-myadminsecretkey}
       # HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS512", "jwk_url": "https://www.googleapis.com/oauth2/v3/certs"}'
-      # HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "1084d8d404126d641c232604aa27bc756921c07a5869c6de6cfd0c6c455de0fe" }'
+      # HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key":  "${HASURA_GRAPHQL_JWT_SECRET_KEY}" }'
       HASURA_GRAPHQL_JWT_SECRET: |
         {
           "type": "HS256",
-          "key": "1084d8d404126d641c232604aa27bc756921c07a5869c6de6cfd0c6c455de0fe",
+          "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}",
           "claims_map": {
             "x-hasura-allowed-roles": { "path": "$.roles" },
             "x-hasura-default-role": "anonymous",
@@ -111,12 +112,12 @@ services:
     container_name: hasura-auth
     image: onlydustxyz/hasura-auth:latest
     depends_on:
-      db:
+      postgres:
         condition: service_healthy
       hasura:
         condition: service_healthy
     environment:
-      HASURA_GRAPHQL_JWT_SECRET: ${HASURA_GRAPHQL_JWT_SECRET}
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key":  "${HASURA_GRAPHQL_JWT_SECRET_KEY}" }'
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@db/marketplace_db
       HASURA_GRAPHQL_GRAPHQL_URL: http://hasura:8080/v1/graphql
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-myadminsecretkey}

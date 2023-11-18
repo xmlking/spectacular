@@ -2,7 +2,18 @@
 	"$schema": "https://turbo.build/schema.json",
 	"extends": ["//"],
 	"pipeline": {
+		"dev": {
+			"dotEnv": [".env", ".secrets"]
+		},
 		"build": {
+			"dependsOn": ["generate"],
+			"outputs": [
+				".svelte-kit/**",
+				".vercel/**",
+				"$houdini/**",
+				"schema.graphql",
+				"src/lib/i18n"
+			],
 			"env": [
 				"VERCEL",
 				"VERCEL_URL",
@@ -10,10 +21,13 @@
 				"BUILD_VERSION",
 				"BUILD_TIME",
 				"BUN_ENV",
+				"SW_DEV",
 				"npm_package_version"
 			]
 		},
-		"i18n": {},
+		"generate": {
+			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/lib/i18n"]
+		},
 		"preview": {}
 	}
 }

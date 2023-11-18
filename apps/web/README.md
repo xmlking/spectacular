@@ -20,6 +20,14 @@ turbo dev:debug --filter=./apps/web
 PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 turbo dev
 ```
 
+## Generate
+
+Generate `i18n` types, `schema.graphql` etc...
+
+```shell
+turbo run generate --filter=playground
+```
+
 ## Maintenance
 
 ### Update

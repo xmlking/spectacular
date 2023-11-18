@@ -2,9 +2,18 @@
 	"$schema": "https://turbo.build/schema.json",
 	"extends": ["//"],
 	"pipeline": {
+		"dev": {
+			"dotEnv": [".env", ".secrets"]
+		},
 		"build": {
 			"dependsOn": ["generate"],
-			"outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql"],
+			"outputs": [
+				".svelte-kit/**",
+				".vercel/**",
+				"$houdini/**",
+				"schema.graphql",
+				"src/lib/i18n"
+			],
 			"env": [
 				"VERCEL",
 				"VERCEL_URL",
@@ -17,7 +26,7 @@
 			]
 		},
 		"generate": {
-			"outputs": [".svelte-kit/**", "schema.graphql"]
+			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/lib/i18n"]
 		},
 		"lint": {
 			"dependsOn": ["generate"],

@@ -82,10 +82,18 @@ Once you've cloned the project and installed dependencies with `pnpm i`, start a
 
 ```shell
 docker compose up hasura
+docker compose --env-file .env --env-file .secrets up hasura
 # shutdown
 docker compose down
 # (optional) shutdown and reset volume
 docker compose down -v
+
+# verify if docker `compose` getting correctly resolved application config from .env
+docker compose config # implicitly set `env-file` to `.env`
+docker compose --env-file .env --env-file .secrets config  # explicitly set `env-file` to `.env` and `.secrets`
+
+# ssh to container (if needed to debug)
+docker compose --env-file .env --env-file .secrets exec -it hasura /bin/bash
 ```
 
 ### Start apps/web

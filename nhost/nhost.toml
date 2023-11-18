@@ -14,7 +14,7 @@ webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 
 [[hasura.jwtSecrets]]
 type = 'HS256'
-key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
+key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET_KEY }}'
 
 # # hasura-auth not ready for claims_map
 # [[hasura.jwtSecrets.claims_map]]
@@ -54,7 +54,7 @@ httpPoolSize = 100
 version = 18
 
 [auth]
-version = '0.21.2'
+version = '0.23.0'
 
 [auth.redirections]
 clientUrl = '{{ secrets.CLIENT_URL }}'
@@ -62,6 +62,7 @@ allowedUrls = ['http://localhost:5173', 'https://*.vercel.app/']
 
 [auth.signUp]
 enabled = true
+# disableNewUsers = true
 
 [auth.user]
 [auth.user.roles]
@@ -194,7 +195,7 @@ secure = false
 method = 'LOGIN'
 
 [storage]
-version = '0.4.0'
+version = '0.4.1'
 
 [observability]
 [observability.grafana]

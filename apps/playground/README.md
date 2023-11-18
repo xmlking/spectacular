@@ -25,10 +25,12 @@ turbo dev --filter=playground
 turbo dev --filter=playground -- --open
 ```
 
-Generate `i18n` types.
+## Generate
+
+Generate `i18n` types, `schema.graphql` etc...
 
 ```shell
-turbo i18n --filter=playground
+turbo run generate --filter=playground
 ```
 
 ## Building
