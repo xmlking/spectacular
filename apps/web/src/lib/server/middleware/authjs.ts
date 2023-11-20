@@ -23,8 +23,9 @@ const log = new Logger('middleware:auth');
 export const authjs = SvelteKitAuth({
 	debug: dev,
 	trustHost: true,
+	secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY,
 	// adapter: HasuraAdapter({
-	// 	endpoint: envPri.HASURA_GRAPHQL_ENDPOINT,
+	// 	endpoint: envPri.PUBLIC_GRAPHQL_ENDPOINT,
 	// 	adminSecret: envPri.HASURA_GRAPHQL_ADMIN_SECRET
 	// }),
 	providers: [
@@ -35,7 +36,7 @@ export const authjs = SvelteKitAuth({
 						credentials: {
 							username: { label: 'Username', type: 'text', placeholder: 'type any username / password' },
 							password: { label: 'Password', type: 'password' },
-							domain: { label: 'Domain', type: 'select', value: envPub.PUBLIC_ORGANIZATION }
+							domain: { label: 'Domain', type: 'select', value: envPub.PUBLIC_DEFAULT_ORGANIZATION }
 						},
 						async authorize(credentials, req) {
 							const user = {
@@ -51,18 +52,18 @@ export const authjs = SvelteKitAuth({
 			  ]
 			: []),
 		Google({
-			clientId: envPri.GOOGLE_ID,
-			clientSecret: envPri.GOOGLE_SECRET,
+			clientId: envPri.AUTH_PROVIDER_GOOGLE_CLIENT_ID,
+			clientSecret: envPri.AUTH_PROVIDER_GOOGLE_CLIENT_SECRET,
 			authorization: { params: { prompt: 'consent' } }
 		}),
 		AzureAD({
-			clientId: envPri.AZURE_AD_CLIENT_ID,
-			clientSecret: envPri.AZURE_AD_CLIENT_SECRET,
-			tenantId: envPri.AZURE_AD_TENANT_ID,
+			clientId: envPri.AUTH_PROVIDER_AZUREAD_CLIENT_ID,
+			clientSecret: envPri.AUTH_PROVIDER_AZUREAD_CLIENT_SECRET,
+			tenantId: envPri.AUTH_PROVIDER_AZUREAD_TENANT,
 			authorization: { params: { scope: 'openid profile User.Read email' } }
 			// client: {},
 		}),
-		GitHub({ clientId: envPri.GITHUB_ID, clientSecret: envPri.GITHUB_SECRET })
+		GitHub({ clientId: envPri.AUTH_PROVIDER_GITHUB_CLIENT_ID, clientSecret: envPri.AUTH_PROVIDER_GITHUB_CLIENT_SECRET })
 	] as Provider[],
 	callbacks: {
 		async redirect({ url, baseUrl }) {
@@ -99,8 +100,9 @@ export const authjs = SvelteKitAuth({
 				// to support nhost. FIXME: https://github.com/nhost/nhost/issues/1738
 				token['https://hasura.io/jwt/claims'] = {
 					'x-hasura-allowed-roles': token.roles,
-					'x-hasura-default-role': 'anonymous',
-					'x-hasura-org-id': token.org,
+					'x-hasura-default-role': 'user',
+					'x-hasura-default-org': token.org,
+					'x-hasura-orgs': `{${token.org}}`,
 					'x-hasura-user-id': token.email
 				};
 				// -------- END: Remove when NOT using nhost ------------ //

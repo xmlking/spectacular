@@ -9,7 +9,7 @@ sources:
   #         operationHeaders:
   #           Content-Type: application/json
   #           x-hasura-admin-secret: {env.HASURA_GRAPHQL_ADMIN_SECRET}
-  #           x-hasura-allowed-roles: ["anonymous","user","manager" ]
+  #           x-hasura-allowed-roles: ["user","me","manager" ]
   #           x-hasura-default-role: "user"
   #           x-hasura-default-org: "chinthagunta"
   #           x-hasura-orgs: "{chinthagunta}"

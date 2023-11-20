@@ -14,7 +14,7 @@ const schema = z.object({
 	PUBLIC_GRAPHQL_ENDPOINT: z.string().url().regex(new RegExp('^\\S*$'), {
 		message: 'No spaces allowed'
 	}),
-	PUBLIC_ORGANIZATION: z.string().regex(new RegExp('^\\S*$'), {
+	PUBLIC_DEFAULT_ORGANIZATION: z.string().regex(new RegExp('^\\S*$'), {
 		message: 'No spaces allowed'
 	})
 });

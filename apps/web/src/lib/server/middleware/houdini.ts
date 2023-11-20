@@ -16,8 +16,8 @@ export const houdini = (async ({ event, resolve }) => {
 	const roles = session?.roles;
 
 	// FIXME: always return null with @auth/core/jwt's getToken
-	// const token = await getToken({req: { cookies: event.cookies, headers: event.request.headers },secret: dynPriEnv.AUTH_SECRET,raw: true});
-	// const token = await getToken({ req: request, secret: dynPriEnv.AUTH_SECRET, raw: true });
+	// const token = await getToken({req: { cookies: event.cookies, headers: event.request.headers },secret: dynPriEnv.HASURA_GRAPHQL_JWT_SECRET_KEY,raw: true});
+	// const token = await getToken({ req: request, secret: dynPriEnv.HASURA_GRAPHQL_JWT_SECRET_KEY, raw: true });
 	// const token = await getToken(cookies);
 	// const token = await getToken(cookies, true); // raw = true
 	const token = await getSignedToken(cookies);
