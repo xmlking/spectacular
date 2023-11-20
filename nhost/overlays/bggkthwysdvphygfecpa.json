@@ -13,5 +13,9 @@
 		"op": "replace",
 		"path": "/global/environment/1/value",
 		"value": "https://spectacular-console.vercel.app/api/actions"
+	},
+	{
+		"op": "remove",
+		"path": "/provider/smtp"
 	}
 ]
