@@ -8,8 +8,8 @@
 		"dev": "dotenv-run -r ../.. -- vite dev",
 		"dev:debug": "DEBUG=* vite dev",
 		"dev:sw": "SW_DEV=true vite dev",
-		"build": "vite build",
-		"preview": "NEXTAUTH_URL=http://localhost:4173 vite preview",
+		"build": "dotenv-run -r ../.. vite build",
+		"preview": "NEXTAUTH_URL=http://localhost:4173 dotenv-run -r ../.. vite preview",
 		"test": "pnpm run test:integration && pnpm run test:unit",
 		"test:unit": "vitest",
 		"test:unit:ui": "vitest --ui",
@@ -25,7 +25,7 @@
 		"format:prettier": "prettier --write --ignore-path=../../.prettierignore .",
 		"format": "concurrently pnpm:format:*",
 		"generate:svelte": "svelte-kit sync",
-		"generate:pull-schema": "houdini pull-schema",
+		"generate:pull-schema": "dotenv-run -r ../.. houdini pull-schema",
 		"generate": "concurrently pnpm:generate:*"
 	},
 	"devDependencies": {
