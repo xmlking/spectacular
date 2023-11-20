@@ -38,6 +38,11 @@ const config = {
 			$mocks: 'src/mocks',
 			$houdini: './$houdini'
 		}
+		// env: {
+		// 	dir: '../..',
+		// 	privatePrefix: 'PRIVATE_',
+		// 	publicPrefix: 'PUBLIC_'
+		// }
 	}
 };
 export default config;

@@ -1,5 +1,5 @@
 ###
-@graphqlEndpoint =  {{$dotenv HASURA_GRAPHQL_ENDPOINT}}/v1/graphql
+@graphqlEndpoint =  {{$dotenv PUBLIC_GRAPHQL_ENDPOINT}}
 @graphqlAdminToken =  {{$dotenv HASURA_GRAPHQL_ADMIN_SECRET}}
 @graphqlUserToken =  'get me from OAuth flow'
 ###
@@ -111,7 +111,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles:  user manager
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 query MyQuery {
@@ -147,7 +148,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles:  user manager
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 query MyQuery {

@@ -2,9 +2,6 @@
 	"$schema": "https://turbo.build/schema.json",
 	"extends": ["//"],
 	"pipeline": {
-		"dev": {
-			"dotEnv": [".env", ".secrets"]
-		},
 		"build": {
 			"dependsOn": ["generate"],
 			"outputs": [
@@ -26,11 +23,14 @@
 			]
 		},
 		"generate": {
-			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/lib/i18n"]
+			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/lib/i18n"],
+			"inputs": ["src/**/*.{html,js,svelte,mvx,ts}"]
 		},
 		"lint": {
-			"dependsOn": ["generate"],
 			"outputs": []
+		},
+		"test:unit:coverage": {
+			"outputs": ["coverage/**"]
 		},
 		"preview": {},
 		"special-task": {}

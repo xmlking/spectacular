@@ -31,6 +31,11 @@ const config = {
 		version: {
 			name: process.env.npm_package_version
 		}
+		// env: {
+		// 	dir: '../..',
+		// 	privatePrefix: 'PRIVATE_',
+		// 	publicPrefix: 'PUBLIC_'
+		// }
 	}
 };
 export default config;

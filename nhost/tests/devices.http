@@ -1,5 +1,5 @@
 ###
-@graphqlEndpoint =  {{$dotenv HASURA_GRAPHQL_ENDPOINT}}/v1/graphql
+@graphqlEndpoint =  {{$dotenv PUBLIC_GRAPHQL_ENDPOINT}}
 @graphqlAdminToken = {{$dotenv HASURA_GRAPHQL_ADMIN_SECRET}}
 # set token without `''`
 @graphqlUserToken =
@@ -35,7 +35,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user manager engine
 x-hasura-role: engine
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 query ListDevices($limit: Int = 50, $offset: Int = 0, $order_by: [devices_order_by!] = [{updatedAt: desc_nulls_last}]) {
@@ -69,7 +70,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user manager engine
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 
@@ -110,7 +112,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user manager engine
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 query GetDevice($id: uuid!) {
@@ -135,7 +138,7 @@ query GetDevice($id: uuid!) {
 }
 
 ### update device by ID
-# organization = x-hasura-org-id 	updated_by = x-hasura-user-id
+# organization = x-hasura-default-org 	updated_by = x-hasura-user-id
 # @name updateDevice
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
@@ -144,7 +147,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user manager engine
 x-hasura-role: engine
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 mutation UpdateDevice($id: uuid!, $data: devices_set_input!) {
@@ -166,7 +170,7 @@ mutation UpdateDevice($id: uuid!, $data: devices_set_input!) {
 }
 
 ### UPSERT: create new device if displayName not already exist, otherwise update
-# organization = x-hasura-org-id 	created_by = x-hasura-user-id
+# organization = x-hasura-default-org 	created_by = x-hasura-user-id
 # @name createDevice
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
@@ -175,7 +179,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user manager engine
 x-hasura-role: engine
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 mutation CreateDevice($data: devices_insert_input!) {
@@ -218,7 +223,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user manager engine admin
 x-hasura-role: admin
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 mutation DeleteDevice($id: uuid!, $deletedAt: timestamptz!) {

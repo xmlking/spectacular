@@ -9,8 +9,10 @@ sources:
   #         operationHeaders:
   #           Content-Type: application/json
   #           x-hasura-admin-secret: {env.HASURA_GRAPHQL_ADMIN_SECRET}
-  #           x-hasura-role: user
-  #           x-hasura-org-id: chinthagunta
+  #           x-hasura-allowed-roles: ["anonymous","user","manager" ]
+  #           x-hasura-default-role: "user"
+  #           x-hasura-default-org: "chinthagunta"
+  #           x-hasura-orgs: "{chinthagunta}"
   #           x-hasura-user-id: xmlking@gmail.com
   - name: Countries
     handler:

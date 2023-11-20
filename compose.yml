@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   webapp:
-    image: ghcr.io/xmlking/spectacular:latest
+    image: ghcr.io/xmlking/spectacular/web:latest
     init: true
     build:
       context: .
@@ -13,8 +13,8 @@ services:
     environment:
       NODE_ENV: production
       ORIGIN: http://localhost:3000
-      NEXTAUTH_URL: http://localhost:3000
-      AUTH_TRUST_HOST: true
+    #   NEXTAUTH_URL: http://localhost:3000
+    #   AUTH_TRUST_HOST: true
       PUBLIC_GRAPHQL_ENDPOINT: http://0.0.0.0:8080/v1/graphql
     ports:
       - 3000:3000
@@ -81,18 +81,7 @@ services:
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-myadminsecretkey}
       # HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS512", "jwk_url": "https://www.googleapis.com/oauth2/v3/certs"}'
-      # HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key":  "${HASURA_GRAPHQL_JWT_SECRET_KEY}" }'
-      HASURA_GRAPHQL_JWT_SECRET: |
-        {
-          "type": "HS256",
-          "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}",
-          "claims_map": {
-            "x-hasura-allowed-roles": { "path": "$.roles" },
-            "x-hasura-default-role": "anonymous",
-            "x-hasura-user-id": { "path": "$.email" },
-            "x-hasura-org-id":  { "path": "$.org", "default": "public" }
-          }
-        }
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key":  "${HASURA_GRAPHQL_JWT_SECRET_KEY}" }'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
       HASURA_GRAPHQL_CORS_DOMAIN: '*'
       HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: 'true'

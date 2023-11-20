@@ -15,6 +15,7 @@ Install following CLI tools globally
 pnpm add -g tsx
 pnpm add -g hasura-cli
 pnpm add -g turbo
+pnpm add -g @dotenv-run/cli
 ```
 
 ### Chrome Plugins
@@ -38,6 +39,15 @@ Next steps:
 2. pnpm run dev -- --open
 
 In this Playbook, we will be using [svelte-add](https://github.com/svelte-add/svelte-add) to easily add and integrate 3rd party tools to this Svelte App.
+
+### Workspace
+
+[dotenv-run](https://github.com/chihab/dotenv-run) helps loading *nested* `.env` files in monorepo.
+
+```shell
+# pnpm add  -D dotenv-cli -w
+pnpm add -D @dotenv-run/cli  -w
+```
 
 ### Testing
 

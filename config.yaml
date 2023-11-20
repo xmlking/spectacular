@@ -1,9 +1,0 @@
-version: 3
-endpoint: PUBLIC_GRAPHQL_ENDPOINT
-admin_secret: HASURA_GRAPHQL_ADMIN_SECRET
-metadata_directory: infra/hasura/metadata
-migrations_directory: infra/hasura/migrations
-seeds_directory: infra/hasura/seeds
-actions:
-  kind: synchronous
-  handler_webhook_baseurl: http://localhost:3000

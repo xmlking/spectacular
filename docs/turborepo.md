@@ -58,6 +58,15 @@ npx turbo link
 
 ## Usage
 
+### Environment
+
+### App Environment Variables
+
+> Turbo is working on [first-class solution](https://turbo.build/repo/docs/handbook/dev#using-environment-variables) to load **dotEnv** files.  
+Meanwhile we recommend using a library called [dotenv-run](https://github.com/chihab/dotenv-run) to solve this problem.
+
+~~turbo automatically include environment variables from `.env` , `.secrets` as we set them at `globalDotEnv` in `turbo.json`~~
+
 ### Run
 
 ```shell
@@ -89,19 +98,21 @@ migrate command which both upgrades your repo to the specified version (latest b
 pnpx  @turbo/codemod migrate
 ```
 
-### Other
+### Docker Build
 
 ```shell
+# for dockerfile
 turbo prune --scope=playground --docker
 ```
 
-## pnpm
+## Guides
 
 ```shell
 turbo build
 turbo dev
 turbo dev  --filter=playground
 turbo lint
+turbo run generate
 pnpx turbo login
 
 turbo prune --scope=playground --docker

@@ -1,5 +1,5 @@
 ###
-@graphqlEndpoint =  {{$dotenv HASURA_GRAPHQL_ENDPOINT}}/v1/graphql
+@graphqlEndpoint =  {{$dotenv PUBLIC_GRAPHQL_ENDPOINT}}
 @graphqlAdminToken = {{$dotenv HASURA_GRAPHQL_ADMIN_SECRET}}
 # set token without `''`
 @graphqlUserToken =
@@ -35,7 +35,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles:  user manager
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 query ListPools($limit: Int = 50, $offset: Int = 0, $order_by: [pools_order_by!] = [{updatedAt: desc_nulls_last}]) {
@@ -68,7 +69,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles:  user manager
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 query SearchPools($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [pools_order_by!] = [{updatedAt: desc_nulls_last}]) {
@@ -105,7 +107,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles:  user manager
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 query GetPool($id: uuid!) {
@@ -129,7 +132,7 @@ query GetPool($id: uuid!) {
 }
 
 ### Create Pool
-# organization = x-hasura-org-id
+# organization = x-hasura-default-org
 # createdBy = x-hasura-user-id
 # @name createPool
 POST  {{graphqlEndpoint}}
@@ -139,7 +142,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles:  user manager
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 mutation CreatePool($data: pools_insert_input!) {
@@ -165,7 +169,7 @@ mutation CreatePool($data: pools_insert_input!) {
 ###
 
 ### Update Pool
-# organization = x-hasura-org-id
+# organization = x-hasura-default-org
 # createdBy = x-hasura-user-id
 # @name updatePool
 POST  {{graphqlEndpoint}}
@@ -175,7 +179,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles:  user manager
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 mutation UpdatePool($id: uuid!, $data: pools_set_input!) {
@@ -208,7 +213,8 @@ Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles:  user manager
 x-hasura-role: manager
-x-hasura-org-id: chinthagunta
+x-hasura-default-org: chinthagunta
+x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
 
 mutation DeletePool($id: uuid!, $deletedAt: timestamptz!) {
