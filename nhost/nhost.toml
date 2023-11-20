@@ -185,14 +185,14 @@ issuer = 'Spectacular'
 version = '14.6-20231031-1'
 
 [provider]
-[provider.smtp]
-host = '{{ secrets.AUTH_SMTP_HOST }}'
-port = 587
-user = '{{ secrets.AUTH_SMTP_USER }}'
-password = '{{ secrets.AUTH_SMTP_PASS }}'
-sender = '{{ secrets.AUTH_SMTP_SENDER }}'
-secure = false
-method = 'LOGIN'
+# [provider.smtp]
+# host = '{{ secrets.AUTH_SMTP_HOST }}'
+# port = 587
+# user = '{{ secrets.AUTH_SMTP_USER }}'
+# password = '{{ secrets.AUTH_SMTP_PASS }}'
+# sender = '{{ secrets.AUTH_SMTP_SENDER }}'
+# secure = false
+# method = 'LOGIN'
 
 [storage]
 version = '0.4.1'
