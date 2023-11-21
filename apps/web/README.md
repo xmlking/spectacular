@@ -1,6 +1,6 @@
-# Docs
+# Web
 
-A static portfolio site built with SvelteKit + Skeleton UI + MDsveX.
+A static portfolio / marketing site built with SvelteKit + Skeleton UI + MDsveX.
 
 ## 🎉 Try it now!
 
@@ -9,12 +9,12 @@ A static portfolio site built with SvelteKit + Skeleton UI + MDsveX.
 ```shell
 npx degit xmlking/spectacular my-app && cd my-app # create a new project in my-app
 pnpm i # if u don't have pnpm installed, run: npm i -g pnpm
-turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turbo
+turbo dev --filter=web # if u don't have turbo installed, run: pnpm add -g turbo
 ```
 
 ### Remote
 
-[Spectacular on Vercel](https://spectacular-docs.vercel.app/)
+[Spectacular on Vercel](https://spectacular-web.vercel.app/)
 
 ## ✨ Features
 
@@ -77,7 +77,7 @@ turbo dev --filter=docs # if u don't have turbo installed, run: pnpm add -g turb
 Project Structure:
 
 ```
-apps/docs/
+apps/web/
  ├ config/
  │ └ [your own config files]
  ├ content/
@@ -107,7 +107,7 @@ apps/docs/
 Start a development server:
 
 ```shell
-turbo dev --filter=docs
+turbo dev --filter=web
 ```
 
 ### Building
@@ -115,10 +115,10 @@ turbo dev --filter=docs
 Create a production version of ur blog:
 
 ```shell
-turbo build --filter=docs...
+turbo build --filter=web...
 ```
 
-You can preview the built app with `turbo prevew --filter=docs`
+You can preview the built app with `turbo prevew --filter=web`
 
 ## References
 
