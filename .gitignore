@@ -82,6 +82,13 @@ pids
 !.env.local.example
 !.env.production.example
 !.env.test.example
+!.env.project
+!.env.vault
+.secrets
+
+# nhost #
+##########################
+.nhost
 
 # turborepo #
 ##########################
@@ -104,8 +111,3 @@ $houdini
 .pnp.js
 /apps/swyxkit
 /apps/urara
-
-src/lib/i18n
-
-.secrets
-.nhost

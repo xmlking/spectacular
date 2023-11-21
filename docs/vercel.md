@@ -41,6 +41,12 @@ this guide will walk you through the steps to automate deployments via tags inst
 
 [Can you deploy based on tags/releases on Vercel?](https://vercel.com/guides/can-you-deploy-based-on-tags-releases-on-vercel)
 
+### Manual Deploy
+```shell
+vercel deploy --prod
+```
+
+
 ## Environment Variables
 
 Vercel provides a set of [System Environment Variables](https://vercel.com/docs/projects/environment-variables/system-environment-variables) that are automatically populated by the System, such as the URL of the Deployment or the name of the Git branch deployed. e.g.,:

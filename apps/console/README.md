@@ -7,13 +7,13 @@ Demo app build with `tailwind`, `flowbite`, `graphql`, `houdini`, `superforms`
 Once you've cloned the project and installed dependencies with `pnpm i`, start a development server:
 
 ```shell
-turbo dev --filter=./apps/web
+turbo dev --filter=./apps/console
 
 # or start the server and open the app in a new browser tab
-turbo dev --filter=./apps/web -- --open
+turbo dev --filter=./apps/console -- --open
 
 # run in debug mode
-turbo dev:debug --filter=./apps/web
+turbo dev:debug --filter=./apps/console
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
@@ -45,8 +45,8 @@ pnpm audit --fix
 Format and lint code
 
 ```shell
-turbo format --filter=web
-turbo lint --filter=web
+turbo format --filter=console
+turbo lint --filter=console
 ```
 
 ## Testing
@@ -54,27 +54,27 @@ turbo lint --filter=web
 ### Unit/Component Tests
 
 ```shell
-turbo test --filter=web
+turbo test --filter=console
 
-turbo test:ui --filter=web
+turbo test:ui --filter=console
 #Then, you can visit the Vitest UI at http://localhost:51204/__vitest__/.
 
 # test coverage
-turbo test:coverage --filter=web
+turbo test:coverage --filter=console
 
 # updating Snapshots
-pnpx vitest -u --filter=web
+pnpx vitest -u --filter=console
 
 # test specific folder
-pnpx vitest apps/web/src/lib/utils
+pnpx vitest apps/console/src/lib/utils
 (or)
-./node_modules/.bin/vitest run apps/web/src/lib/utils
+./node_modules/.bin/vitest run apps/console/src/lib/utils
 ```
 
 ### E2E Tests
 
 ```shell
-turbo test:e2e --filter=web
+turbo test:e2e --filter=console
 ```
 
 ## Building
@@ -84,9 +84,9 @@ To create a production version of your app:
 ```shell
 turbo build
 # run build
-turbo build  --filter=web...
-turbo build  --filter=web... --dry
-turbo build --filter=web... --graph
+turbo build  --filter=console...
+turbo build  --filter=console... --dry
+turbo build --filter=console... --graph
 ```
 
 Run from the local build directory:
@@ -103,7 +103,7 @@ ORIGIN=https://my.site \
 node build
 ```
 
-You can preview the production build with `turbo preview --filter=web...`.
+You can preview the production build with `turbo preview --filter=console...`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
 > environment.
