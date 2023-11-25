@@ -1,4 +1,5 @@
 // DOCS: https://turbo.build/repo/docs/handbook/linting/eslint
+/** @type { import("eslint").Linter.FlatConfig } */
 module.exports = {
 	parser: '@typescript-eslint/parser',
 	extends: [
