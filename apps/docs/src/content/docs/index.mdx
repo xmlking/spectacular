@@ -3,10 +3,14 @@ title: Welcome to Starlight
 description: Get started building your docs site with Starlight.
 template: splash
 hero:
- title: |
+  title: |
     Welcome to Starlight with
     <span
-      class="font-black text-transparent bg-clip-text bg-gradient-to-b from-accent-700 to-accent-400  dark:from-accent-500 dark:to-accent-200">
+      class="font-black text-transparent
+        bg-clip-text bg-gradient-to-b
+        from-accent-700 to-accent-400
+        dark:from-accent-500 dark:to-accent-200"
+    >
       Tailwind
     </span>
   tagline: Congrats on setting up a new Starlight project!
@@ -22,7 +26,9 @@ hero:
       icon: external
 ---
 
-Next steps
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Next steps
 
 <CardGrid stagger>
   <Card title="Update content" icon="pencil">

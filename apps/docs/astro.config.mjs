@@ -2,8 +2,6 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
 
-const SITE_URL = 'https://xmlking.github.io';
-
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
