@@ -1,17 +1,28 @@
 {
-  "name": "web",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/tailwind": "5.0.0",
-    "astro": "3.6.0",
-    "tailwindcss": "3.3.3"
-  }
+	"name": "web",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"lint:js": "eslint .",
+		"lint:prettier": "prettier --check --ignore-path=../../.prettierignore --plugin=prettier-plugin-astro --plugin=prettier-plugin-svelte .",
+		"lint": "concurrently pnpm:lint:*",
+		"format:js": "eslint --fix .",
+		"format:prettier": "prettier --write --ignore-path=../../.prettierignore .",
+		"format": "concurrently pnpm:format:*",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/svelte": "4.0.4",
+		"@astrojs/tailwind": "5.0.0",
+		"astro": "3.6.0",
+		"svelte": "5.0.0-next.13",
+		"tailwindcss": "3.3.3"
+	},
+	"devDependencies": {
+		"eslint-config-custom": "*"
+	}
 }
