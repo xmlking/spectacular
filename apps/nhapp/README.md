@@ -13,16 +13,16 @@ This is a quickstart that showcases how to use the Nhost SDK running on server `
    Create a server hook `src/hook.server.js` that calls the helper method `manageAuthSession`. Feel free to copy paste the `src/lib/nhost.js` to your project. The second argument for `manageAuthSession` is for handling the case where there's an error refreshing the current session with the `refreshToken` stored in the cookie.
 
    ```typescript
-   import { manageAuthSession } from '$lib/nhost';
    import { redirect } from '@sveltejs/kit';
+   import { manageAuthSession } from '$lib/nhost';
 
    /** @type {import('@sveltejs/kit').Handle} */
    export async function handle({ event, resolve }) {
-   	await manageAuthSession(event, () => {
-   		throw redirect(303, '/auth/sign-in');
-   	});
+     await manageAuthSession(event, () => {
+       throw redirect(303, '/auth/sign-in');
+     });
 
-   	return resolve(event);
+     return resolve(event);
    }
    ```
 
@@ -31,27 +31,24 @@ This is a quickstart that showcases how to use the Nhost SDK running on server `
    To make sure only authenticated users access certain pages, you need to create a server root layout file `src/routes/+layout.server.js`. Within that file you define your public routes, so any other route would redirect if there's no session.
 
    ```typescript
-    import { getNhost } from '$lib/nhost'
-    import { redirect } from '@sveltejs/kit'
-    const publicRoutes = [
-      '/auth/sign-in',
-      '/auth/sign-up',
-      ...
-    ]
+   import { redirect } from '@sveltejs/kit';
+   import { getNhost } from '$lib/nhost';
 
-    /** @type {import('./$types').LayoutServerLoad} */
-    export async function load({ cookies, route }) {
-      const nhost = await getNhost(cookies)
-      const session = nhost.auth.getSession()
+   const publicRoutes = ['/auth/sign-in', '/auth/sign-up'];
 
-      if (!publicRoutes.includes(route.id ?? '') && !session) {
-        throw redirect(303, '/auth/sign-in')
-      }
+   /** @type {import('./$types').LayoutServerLoad} */
+   export async function load({ cookies, route }) {
+     const nhost = await getNhost(cookies);
+     const session = nhost.auth.getSession();
 
-      return {
-        user: session?.user
-      }
-    }
+     if (!publicRoutes.includes(route.id ?? '') && !session) {
+       throw redirect(303, '/auth/sign-in');
+     }
+
+     return {
+       user: session?.user
+     };
+   }
    ```
 
 ## Get Started

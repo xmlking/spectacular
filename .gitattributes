@@ -213,6 +213,9 @@ Procfile          text
 .yarn/* linguist-vendored
 .pnp.js linguist-vendored
 *.test.ts linguist-vendored
+.vscode/*.json linguist-language=JSON-with-Comments
+biome.json linguist-language=JSON-with-Comments
 
 # Bun
 *.lockb 		binary diff=lockb
+

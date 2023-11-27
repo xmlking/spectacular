@@ -1,0 +1,29 @@
+{
+	"name": "docs",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"lint:js": "eslint .",
+		"lint:prettier": "prettier --check --ignore-path=../../.prettierignore --plugin=prettier-plugin-astro .",
+		"lint": "concurrently pnpm:lint:*",
+		"format:js": "eslint --fix .",
+		"format:prettier": "prettier --write --ignore-path=../../.prettierignore .",
+		"format": "concurrently pnpm:format:*",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/starlight": "0.13.0",
+		"@astrojs/starlight-tailwind": "2.0.1",
+		"@astrojs/tailwind": "5.0.0",
+		"astro": "3.2.3",
+		"sharp": "0.32.5",
+		"tailwindcss": "3.3.3"
+	},
+	"devDependencies": {
+		"eslint-config-custom": "*"
+	}
+}
