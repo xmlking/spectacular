@@ -51,9 +51,9 @@ module.exports = {
 		{
 			files: ['*.d.ts'],
 			rules: {
-				'@typescript-eslint/triple-slash-reference': 'off',
-			},
-    	},
+				'@typescript-eslint/triple-slash-reference': 'off'
+			}
+		},
 		{
 			files: ['*.mdx', '*.md'],
 			extends: ['plugin:mdx/recommended'],

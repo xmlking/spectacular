@@ -6,20 +6,20 @@
 
    ```svelte
    <script lang="ts">
-   	import { Toasts } from '$lib/components/toast';
+     import { Toasts } from '$lib/components/toast';
    </script>
 
    <Toasts placements="bottom-right" />
 
    <div>
-   	<Header />
-   	<div>
-   		<SideMenu />
-   		<main>
-   			<slot />
-   		</main>
-   	</div>
-   	<Footer />
+     <Header />
+     <div>
+       <SideMenu />
+       <main>
+         <slot />
+       </main>
+     </div>
+     <Footer />
    </div>
    ```
 
@@ -27,51 +27,51 @@
 
    ```svelte
    <script lang="ts">
-   	import { addToast, ToastLevel } from '$lib/components/toast';
-   	import { Button } from 'flowbite-svelte';
+     import { Button } from 'flowbite-svelte';
+     import { addToast, ToastLevel } from '$lib/components/toast';
    </script>
 
    <svelte:head>
-   	<title>Dashboard/test</title>
-   	<meta name="description" content="Dashboard test" />
+     <title>Dashboard/test</title>
+     <meta name="description" content="Dashboard test" />
    </svelte:head>
 
    <h2>Settings</h2>
    <Button
-   	on:click={() =>
-   		addToast({
-   			message: 'Hello, World!',
-   			dismissible: false,
-   			duration: 6000,
-   			type: ToastLevel.Error
-   		})}>Error</Button
+     on:click={() =>
+       addToast({
+         message: 'Hello, World!',
+         dismissible: false,
+         duration: 6000,
+         type: ToastLevel.Error
+       })}>Error</Button
    >
    <Button
-   	on:click={() =>
-   		addToast({
-   			message: 'Hello, World!',
-   			dismissible: true,
-   			duration: 6000,
-   			type: ToastLevel.Warning
-   		})}>Warning</Button
+     on:click={() =>
+       addToast({
+         message: 'Hello, World!',
+         dismissible: true,
+         duration: 6000,
+         type: ToastLevel.Warning
+       })}>Warning</Button
    >
    <Button
-   	on:click={() =>
-   		addToast({
-   			message: 'Hello, World!',
-   			dismissible: false,
-   			duration: 6000,
-   			type: ToastLevel.Success
-   		})}>Success</Button
+     on:click={() =>
+       addToast({
+         message: 'Hello, World!',
+         dismissible: false,
+         duration: 6000,
+         type: ToastLevel.Success
+       })}>Success</Button
    >
    <Button
-   	on:click={() =>
-   		addToast({
-   			message: 'Hello, World!',
-   			dismissible: true,
-   			duration: 6000,
-   			type: ToastLevel.Info
-   		})}>Info</Button
+     on:click={() =>
+       addToast({
+         message: 'Hello, World!',
+         dismissible: true,
+         duration: 6000,
+         type: ToastLevel.Info
+       })}>Info</Button
    >
    ```
 
@@ -90,14 +90,14 @@
 ```svelte
 <!-- +page.svelte -->
 <script lang="ts">
-	function newToast() {
-		new Slice({
-			message: 'Hello, World!',
-			dismissible: false,
-			duration: 6000,
-			type: ToastLevel.Warning
-		});
-	}
+  function newToast() {
+    new Slice({
+      message: 'Hello, World!',
+      dismissible: false,
+      duration: 6000,
+      type: ToastLevel.Warning
+    });
+  }
 </script>
 ```
 
