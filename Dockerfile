@@ -45,7 +45,7 @@ COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 # https://playwright.dev/docs/browsers
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
 
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Build the project
 COPY --from=pruner /app/out/full/ .

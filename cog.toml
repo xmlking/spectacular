@@ -26,10 +26,10 @@ post_bump_hooks = [
 [git_hooks.commit-msg]
 script = """#!/bin/sh
 set -e
-pnpm run format
+turbo format
 
 # npx lint-staged --concurrent false
-# npm test
+# turbo test
 
 cog verify -i --file $1
 """
