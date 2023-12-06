@@ -58,7 +58,7 @@ services:
 
   hasura:
     ## User `cli-migrations-v3` only in local dev env. It will automatically apply Migrations and Metadata to a Hasura GraphQL Engine
-    image: hasura/graphql-engine:v2.34.0.cli-migrations-v3
+    image: hasura/graphql-engine:v2.35.1.cli-migrations-v3
     platform: linux/arm64/v8
     ports:
       - '8080:8080'
