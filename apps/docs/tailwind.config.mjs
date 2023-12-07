@@ -1,5 +1,6 @@
 import colors from 'tailwindcss/colors';
 import starlightPlugin from '@astrojs/starlight-tailwind';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,6 +12,10 @@ export default {
 				accent: colors.indigo,
 				// Your preferred gray scale. Zinc is closest to Starlight’s defaults.
 				gray: colors.zinc
+			},
+			fontFamily: {
+				sans: ['InterVariable', 'Inter', ...defaultTheme.fontFamily.sans],
+				mono: ['Source Code Pro', 'monospace']
 			}
 		}
 	},

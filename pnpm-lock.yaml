@@ -319,6 +319,9 @@ importers:
 
   apps/docs:
     dependencies:
+      '@astrojs/check':
+        specifier: 0.3.1
+        version: 0.3.1(prettier-plugin-astro@0.12.2)(prettier@3.1.0)(typescript@5.3.3)
       '@astrojs/starlight':
         specifier: 0.15.0
         version: 0.15.0(astro@4.0.3)
@@ -328,6 +331,15 @@ importers:
       '@astrojs/tailwind':
         specifier: 5.0.3
         version: 5.0.3(astro@4.0.3)(tailwindcss@3.3.6)
+      '@astrojs/vercel':
+        specifier: 6.0.1
+        version: 6.0.1(astro@4.0.3)
+      '@fontsource-variable/inter':
+        specifier: 5.0.16
+        version: 5.0.16
+      '@fontsource/source-code-pro':
+        specifier: 5.0.16
+        version: 5.0.16
       astro:
         specifier: 4.0.3
         version: 4.0.3(@types/node@20.10.3)(typescript@5.3.3)
@@ -337,6 +349,9 @@ importers:
       tailwindcss:
         specifier: 3.3.6
         version: 3.3.6
+      typescript:
+        specifier: 5.3.3
+        version: 5.3.3
     devDependencies:
       eslint-config-custom:
         specifier: workspace:*
@@ -3887,6 +3902,14 @@ packages:
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
     dev: true
+
+  /@fontsource-variable/inter@5.0.16:
+    resolution: {integrity: sha512-k+BUNqksTL+AN+o+OV7ILeiE9B5M5X+/jA7LWvCwjbV9ovXTqZyKRhA/x7uYv/ml8WQ0XNLBM7cRFIx4jW0/hg==}
+    dev: false
+
+  /@fontsource/source-code-pro@5.0.16:
+    resolution: {integrity: sha512-ErErGXjKo9/fAJE49fyU8M6DuJUpdqR5YLM8jGJOC5ZcKIDSTQ5m+R3DTa0VYHAGGFbk2qLWVWD/r5sfCLA/jQ==}
+    dev: false
 
   /@graphql-tools/executor@1.2.0(graphql@15.8.0):
     resolution: {integrity: sha512-SKlIcMA71Dha5JnEWlw4XxcaJ+YupuXg0QCZgl2TOLFz4SkGCwU/geAsJvUJFwK2RbVLpQv/UMq67lOaBuwDtg==}
