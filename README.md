@@ -80,6 +80,21 @@ Once you've cloned the project and installed dependencies with `pnpm i`, start a
 
 ### Start local Hasura
 
+via `nhost`
+
+```shell
+nhost up
+# shutdown
+nhost down
+# (optional) shutdown and reset volume
+nhost down --volumes
+
+#  (optional) nhost first time when started, will load seeds but you can force with `--apply-seeds`
+nhost up --apply-seeds
+```
+
+via `docker compose`
+
 ```shell
 docker compose up hasura
 docker compose --env-file .env --env-file .secrets up hasura
@@ -96,16 +111,16 @@ docker compose --env-file .env --env-file .secrets config  # explicitly set `env
 docker compose --env-file .env --env-file .secrets exec -it hasura /bin/bash
 ```
 
-### Start apps/web
+### Start apps/console
 
 ```shell
-turbo dev --filter=web
+turbo dev --filter=console
 
 # or start the server and open the app in a new browser tab
-turbo dev --filter=web -- --open
+turbo dev --filter=console -- --open
 
 # run in debug mode
-turbo dev:debug --filter=web
+turbo dev:debug --filter=console
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
