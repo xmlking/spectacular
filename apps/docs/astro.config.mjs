@@ -4,7 +4,10 @@ import tailwind from '@astrojs/tailwind';
 // import vercel from "@astrojs/vercel/serverless";
 import vercel from '@astrojs/vercel/static';
 
-const SITE_URL = 'https://spectacular-docs.vercel.app/';
+const SITE_URL =
+	process.env.VERCEL_ENV === 'production'
+		? 'https://spectacular-docs.vercel.app/'
+		: 'http://localhost:4321/';
 
 // https://astro.build/config
 export default defineConfig({

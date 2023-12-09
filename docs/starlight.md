@@ -29,7 +29,7 @@ https://docs.astro.build/en/guides/integrations-guide/svelte/
 
 Add other tools `Prettier` `ESLint `
 ```shell
-pnpm add -D prettier prettier-plugin-astro
+pnpm add -D prettier prettier-plugin-astro -w
 # use
 prettier --write . --plugin=prettier-plugin-astro
 ```

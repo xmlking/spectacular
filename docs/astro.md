@@ -16,8 +16,16 @@
 # create a new project with pnpm
 pnpm create astro@latest
 
+# 
+# 
 pnpm astro add svelte tailwind partytown
-https://docs.astro.build/en/guides/integrations-guide/svelte/
+pnpm astro add starlight
+```
+#### Add optional integrations
+
+See optional addable [integrations](https://docs.astro.build/en/guides/integrations-guide/svelte/) 
+```shell
+pnpm astro add svelte tailwind partytown
 pnpm astro add starlight
 ```
 
@@ -26,7 +34,7 @@ pnpm astro add starlight
 Add [eslint-plugin-astro](https://github.com/withastro/prettier-plugin-astro)
 
 ```shell
-pnpm add -D prettier prettier-plugin-astro
+pnpm add -D prettier prettier-plugin-astro -w
 # use
 prettier --write . --plugin=prettier-plugin-astro
 ```
