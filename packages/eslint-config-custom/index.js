@@ -55,16 +55,17 @@ module.exports = {
 			}
 		},
 		{
-			files: ['*.mdx', '*.md'],
+			files: ['**/*.md?(x)'],
 			extends: ['plugin:mdx/recommended'],
-			rules: {
-				'@typescript-eslint/no-unused-vars': ['warn'],
-				'no-unused-vars': ['off'],
-				'mdx/no-unused-expressions': ['off']
-			},
+
 			settings: {
-				'mdx/code-blocks': true,
-				'mdx/language-mapper': {}
+				'mdx/code-blocks': false
+			},
+			rules: {
+				'no-unused-vars': 'off',
+				'@typescript-eslint/no-unused-vars': 'off',
+				'unused-imports/no-unused-imports': 'off',
+				'mdx/no-unused-expressions': ['off']
 			}
 		},
 		{
