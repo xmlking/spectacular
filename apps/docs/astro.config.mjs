@@ -5,9 +5,7 @@ import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel/static';
 
 const SITE_URL =
-	process.env.VERCEL_ENV === 'production'
-		? 'https://spectacular-docs.vercel.app/'
-		: 'http://localhost:4321/';
+	process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL : 'http://localhost:4321/';
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,6 +19,22 @@ export default defineConfig({
 				dark: '/src/assets/athena-dark-logo.svg'
 			},
 			head: [
+				// {
+				// 	tag: 'script',
+				// 	attrs: {
+				// 		async: true,
+				// 		src: 'https://www.googletagmanager.com/gtag/js?id=G-4BD76ZZBR6'
+				// 	}
+				// },
+				// {
+				// 	tag: 'script',
+				// 	content: `
+				// 	window.dataLayer = window.dataLayer || [];
+				// 	function gtag(){dataLayer.push(arguments);}
+				// 	gtag('js', new Date());
+
+				// 	gtag('config', 'G-4BD76ZZBR6');`
+				// },
 				{
 					tag: 'meta',
 					attrs: {
