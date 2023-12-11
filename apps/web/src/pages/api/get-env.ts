@@ -3,7 +3,7 @@ export const prerender = false;
 // import { Response } from 'astro/runtime';
 
 export async function GET() {
-	const siteUrl = process.env.SUTE_URL;
+	const siteUrl = process.env.SITE_URL;
 
 	const responseBody = JSON.stringify({
 		siteUrl

@@ -49,8 +49,8 @@ turbo dev  --filter=web --  --verbose
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
+| Command                    | Action                                           |
+| :------------------------- | :----------------------------------------------- |
 | `pnpm install`             | Installs dependencies                            |
 | `pnpm run dev`             | Starts local dev server at `localhost:4321`      |
 | `pnpm run build`           | Build your production site to `./dist/`          |
@@ -62,8 +62,8 @@ All commands are run from the root of the project, from a terminal:
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
-##  References
-- [astro-theme](https://github.com/Tailus-UI/astro-theme) template 
+## References
+
+- [astro-theme](https://github.com/Tailus-UI/astro-theme) template
 - [astroship](https://github.com/surjithctly/astroship) template
 - [astro-ink](https://github.com/one-aalam/astro-ink/tree/main) template
-
