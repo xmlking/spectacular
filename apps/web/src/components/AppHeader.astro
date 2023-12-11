@@ -21,25 +21,25 @@ const links = [
 	const navlinks = document.querySelector('#navlinks');
 	const hamburger = document.querySelector('#hamburger');
 	const layer = document.querySelector('#navLayer');
-	const links = [...navlinks.querySelector('ul').children];
+	const links = [...navlinks!.querySelector('ul')!.children];
 
 	function toggleNavlinks() {
 		if (isToggled) {
-			navlinks.classList.add('!visible', '!scale-100', '!opacity-100', '!lg:translate-y-0');
-			hamburger.classList.add('toggled');
-			layer.classList.add('origin-top', 'scale-y-100');
+			navlinks!.classList.add('!visible', '!scale-100', '!opacity-100', '!lg:translate-y-0');
+			hamburger!.classList.add('toggled');
+			layer!.classList.add('origin-top', 'scale-y-100');
 		} else {
-			navlinks.classList.remove(
+			navlinks!.classList.remove(
 				'!visible',
 				'!scale-100',
 				'!opacity-100',
 				'!lg:translate-y-0'
 			);
-			hamburger.classList.remove('toggled');
-			layer.classList.remove('origin-top', 'scale-y-100');
+			hamburger!.classList.remove('toggled');
+			layer!.classList.remove('origin-top', 'scale-y-100');
 		}
 	}
-	hamburger.addEventListener('click', () => {
+	hamburger!.addEventListener('click', () => {
 		isToggled = !isToggled;
 		toggleNavlinks();
 	});
