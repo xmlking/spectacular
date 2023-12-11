@@ -14,8 +14,12 @@ export default {
 				gray: colors.zinc
 			},
 			fontFamily: {
-				sans: ['InterVariable', 'Inter', ...defaultTheme.fontFamily.sans],
-				mono: ['Source Code Pro', 'monospace']
+				sans: ['Inter Variable', 'Inter', ...defaultTheme.fontFamily.sans],
+				mono: [
+					'Source Code Pro Variable',
+					'Source Code Pro',
+					...defaultTheme.fontFamily.mono
+				]
 			}
 		}
 	},

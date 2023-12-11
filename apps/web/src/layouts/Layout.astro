@@ -1,8 +1,18 @@
 ---
+// import '@fontsource-variable/inter';
+// import '@fontsource/source-code-pro';
+import '@styles/tailwind.css';
+import { SEO } from 'astro-seo';
+import AppFooter from '@components/AppFooter.astro';
+import AppHeader from '@components/AppHeader.astro';
+import { ViewTransitions } from 'astro:transitions';
+
 interface Props {
 	title: string;
 }
 
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const resolvedImageWithDomain = new URL('/opengraph.jpg', Astro.site).toString();
 const { title } = Astro.props;
 ---
 
@@ -10,42 +20,46 @@ const { title } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content="Template built with tailwindcss using Tailus blocks v2" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+				<SEO
+			title={title}
+			description="Astroship is a starter website template for Astro built with TailwindCSS."
+			canonical={canonicalURL}
+			twitter={{
+				creator: '@sumo',
+				site: '@spectacular',
+				card: 'summary_large_image'
+			}}
+			openGraph={{
+				basic: {
+					url: canonicalURL,
+					type: 'website',
+					title: 'Starter Template for Astro',
+					image: resolvedImageWithDomain
+				},
+				image: {
+					alt: 'Spectacular Homepage Screenshot'
+				}
+			}}
+		/>
+		<ViewTransitions />
 	</head>
-	<body>
+	<body class="bg-white dark:bg-gray-900">
+		<AppHeader />
 		<slot />
-	</body>
-</html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>
+		<AppFooter />
+		<style>
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				margin: 0;
+			}
+		</style>
+	</body></html
+>

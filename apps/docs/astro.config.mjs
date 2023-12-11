@@ -15,8 +15,8 @@ export default defineConfig({
 			title: 'Docs',
 			description: 'Spectacular, a SvelteKit monorepo template project.',
 			logo: {
-				light: '/src/assets/athena-light-logo.svg',
-				dark: '/src/assets/athena-dark-logo.svg'
+				light: '/src/assets/astro-logo-dark.svg',
+				dark: '/src/assets/astro-logo-light-gradient.svg'
 			},
 			head: [
 				// {
@@ -126,6 +126,8 @@ export default defineConfig({
 		}),
 		tailwind({
 			// Disable the default base styles:
+			// Example: Disable injecting a basic `base.css` import on every page.
+			// Useful if you need to define and/or import your own custom `base.css`.
 			applyBaseStyles: false
 		})
 	],
