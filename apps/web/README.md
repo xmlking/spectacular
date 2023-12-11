@@ -66,4 +66,5 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 - [astro-theme](https://github.com/Tailus-UI/astro-theme) template
 - [astroship](https://github.com/surjithctly/astroship) template
+- [play-astro](https://github.com/TailGrids/play-astro) template
 - [astro-ink](https://github.com/one-aalam/astro-ink/tree/main) template
