@@ -23,6 +23,20 @@ module.exports = {
 			}
 		},
 		{
+			files: ['*.svelte.js'],
+			parser: 'svelte-eslint-parser',
+			parserOptions: {
+				parser: '@typescript-eslint/parser'
+			}
+		},
+		{
+			files: ['*.svelte.ts'],
+			parser: 'svelte-eslint-parser',
+			parserOptions: {
+				parser: '@typescript-eslint/parser'
+			}
+		},
+		{
 			files: ['*.astro'],
 			parser: 'astro-eslint-parser',
 			extends: ['eslint:recommended', 'plugin:astro/recommended'],
