@@ -1,4 +1,5 @@
 <script lang="ts">
+	// let count = $state(0);
 	let count = 0;
 
 	function add() {
