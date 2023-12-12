@@ -1,5 +1,7 @@
 ---
 import Container from './Container.astro';
+// import LightSwitcher from './LightSwitcher.astro';
+import LightSwitcher from './LightSwitcher.svelte';
 const links = [
 	{
 		to: '/#features',
@@ -113,7 +115,7 @@ const links = [
 							}
 						</ul>
 					</div>
-
+					<LightSwitcher client:load class="mr-2 lg:mr-1" />
 					<div class="mt-12 lg:mt-0">
 						<a
 							href="/register"
