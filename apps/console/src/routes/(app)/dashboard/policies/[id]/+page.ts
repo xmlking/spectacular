@@ -16,9 +16,9 @@ export const load = async (event) => {
 		policy: CachePolicy.CacheAndNetwork,
 		variables
 	});
-	if (errors) throw error(400, errors[0] as GraphQLError);
+	if (errors) error(400, errors[0] as GraphQLError);
 	const policy = data?.policies_by_pk;
-	if (!policy) throw error(404, 'policy not found');
+	if (!policy) error(404, 'policy not found');
 	const form = await superValidate(policy, schema);
 	// we need `originalShared` to track if `rule.shared` is changeing from false ==> true
 	form.data.originalShared = form.data.rule.shared;

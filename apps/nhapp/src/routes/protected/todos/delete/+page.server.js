@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client/index.js';
 import { redirect } from '@sveltejs/kit';
 import { getNhost } from '$lib/nhost';
 
@@ -30,6 +30,6 @@ export const actions = {
 			};
 		}
 
-		throw redirect(303, '/protected/todos');
+		redirect(303, '/protected/todos');
 	}
 };

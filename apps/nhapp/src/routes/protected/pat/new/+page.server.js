@@ -14,6 +14,6 @@ export const actions = {
 
 		await nhost.auth.createPAT(expirationDate, { name });
 
-		throw redirect(303, '/protected/pat');
+		redirect(303, '/protected/pat');
 	}
 };

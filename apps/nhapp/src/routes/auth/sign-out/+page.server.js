@@ -9,6 +9,6 @@ export const actions = {
 		await nhost.auth.signOut();
 		event.cookies.set(NHOST_SESSION_KEY, '', { httpOnly: true, path: '/', maxAge: 0 });
 
-		throw redirect(303, '/auth/sign-in');
+		redirect(303, '/auth/sign-in');
 	}
 };

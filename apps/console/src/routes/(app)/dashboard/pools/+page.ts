@@ -38,6 +38,6 @@ export const load = async (event) => {
 		return { status: 500, form };
 	}
 	const items = data?.pools;
-	if (!items) throw error(404, 'pools not found');
+	if (!items) error(404, 'pools not found');
 	return { form, items };
 };

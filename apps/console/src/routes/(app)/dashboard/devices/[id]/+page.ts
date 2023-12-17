@@ -16,9 +16,9 @@ export const load = async (event) => {
 		policy: CachePolicy.NetworkOnly,
 		variables
 	});
-	if (errors) throw error(400, errors[0] as GraphQLError);
+	if (errors) error(400, errors[0] as GraphQLError);
 	const device = data?.devices_by_pk;
-	if (!device) throw error(404, 'Device not found');
+	if (!device) error(404, 'Device not found');
 	const form = await superValidate(device, schema);
 	return { form };
 };

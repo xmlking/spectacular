@@ -20,7 +20,7 @@ export async function load({ cookies, route }) {
 	const session = nhost.auth.getSession();
 
 	if (!publicRoutes.includes(route.id ?? '') && !session) {
-		throw redirect(303, '/auth/sign-in');
+		redirect(303, '/auth/sign-in');
 	}
 
 	return {

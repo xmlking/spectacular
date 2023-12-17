@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client/index.js';
 import { json } from '@sveltejs/kit';
 import { getNhost } from '$lib/nhost';
 

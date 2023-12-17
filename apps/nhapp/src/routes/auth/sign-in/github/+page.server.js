@@ -21,7 +21,7 @@ export const actions = {
 		});
 
 		if (providerUrl) {
-			throw redirect(307, providerUrl);
+			redirect(307, providerUrl);
 		}
 	}
 };

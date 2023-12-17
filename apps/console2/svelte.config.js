@@ -1,11 +1,10 @@
 import adapterNode from '@sveltejs/adapter-node';
 import adapterAuto from '@sveltejs/adapter-auto';
 import adapterBun from 'svelte-adapter-bun';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: ['.svelte'],
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: [vitePreprocess()],
@@ -22,8 +21,8 @@ const config = {
 		adapter: process.env.VERCEL
 			? adapterAuto()
 			: process.env.BUN_ENV
-			  ? adapterBun()
-			  : adapterNode({ polyfill: false }),
+				? adapterBun()
+				: adapterNode({ polyfill: false }),
 		prerender: { crawl: false }, // FIXME: remove after all links are corrected.
 		output: {
 			preloadStrategy: 'preload-mjs'
@@ -38,4 +37,5 @@ const config = {
 		// }
 	}
 };
+
 export default config;

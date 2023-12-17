@@ -10,7 +10,7 @@ export async function GET({ url }) {
 	const d = max - min;
 
 	if (isNaN(d) || d < 0) {
-		throw error(400, { message: 'min and max must be numbers, and min must be less than max' });
+		error(400, { message: 'min and max must be numbers, and min must be less than max' });
 	}
 
 	const random = min + Math.random() * d;

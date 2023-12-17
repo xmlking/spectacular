@@ -53,7 +53,7 @@ export const manageAuthSession = async (event, onError) => {
 
 		if (refreshToken) {
 			event.url.searchParams.delete('refreshToken');
-			throw redirect(303, event.url.pathname);
+			redirect(303, event.url.pathname);
 		}
 	}
 };

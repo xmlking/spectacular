@@ -32,7 +32,7 @@ export function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
 			return { formErrors, fieldErrors };
 		} else {
 			log.error('search:_houdini_beforeLoad:', err);
-			throw error(500, err as Error);
+			error(500, err as Error);
 		}
 	}
 }

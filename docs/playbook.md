@@ -155,7 +155,7 @@ Add and configure tailwindcss via [svelte-add](https://github.com/svelte-add/tai
 pnpx svelte-add@latest tailwindcss  --typography --daisyui
 # NOTE: tailwindcss's forms plugin and daisyui wont work together
 # also add other tailwind plugins and include them in `tailwind.config.cjs`
-pnpm add --save-peer @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter ./packages/tailwind-config
+pnpm add --save-peer @tailwindcss/container-queries tailwindcss-animate tailwind-merge clsx --filter ./packages/tailwind-config
 pnpm add --save-peer  flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter ./packages/tailwind-config
 pnpm add -D @tailwindcss/container-queries tailwindcss-animate tailwind-merge --filter "./apps/**"
 pnpm add -D flowbite-svelte flowbite-svelte-blocks flowbite-svelte-icons flowbite-typography --filter "./apps/**"
@@ -190,7 +190,7 @@ Add `postcssPresetEnv` plugin for `postcss` and include it in [postcss.config.cj
 We will be using [Flowbite](https://flowbite.com/) its [Svelte UI Components](https://flowbite-svelte.com/)  
 Follow **flowbite-svelte** [getting-started](https://flowbite-svelte.com/pages/getting-started) guild, install and configure `tailwind.config.cjs`
 
-We will be using [Flowbite icons](https://flowbite.com/icons/) via [lowbite-svelte-icons](https://github.com/themesberg/flowbite-svelte-icons) Icon Components.
+We will be using [Flowbite icons](https://flowbite.com/icons/) via [flowbite-svelte-icons](https://github.com/themesberg/flowbite-svelte-icons) Icon Components.
 
 Use [clsx](https://github.com/lukeed/clsx) in place of [classnames](https://github.com/JedWatson/classnames) utility lib for constructing _className_ strings conditionally.
 
@@ -232,6 +232,12 @@ pnpm add -D @skeletonlabs/skeleton
 
 And follow **skeleton** specific sveltekit [changes](https://www.skeleton.dev/guides/frameworks/sveltekit)
 
+#### shadcn-svelte
+
+```
+pnpm add -D tailwind-variants clsx tailwind-merge --filter "./apps/console3"
+pnpm add -D mode-watcher --filter "./apps/web"
+```
 ### UI Blocks
 
 - [Kometa UI Kit](https://kitwind.io/products/kometa) (Free) [Blocks](https://kitwind.io/products/kometa/components)

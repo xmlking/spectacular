@@ -38,6 +38,6 @@ export const load = async (event) => {
 		return { status: 500, form };
 	}
 	const items = data?.devices;
-	if (!items) throw error(404, 'devices not found');
+	if (!items) error(404, 'devices not found');
 	return { form, items };
 };

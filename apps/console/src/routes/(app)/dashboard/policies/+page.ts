@@ -45,6 +45,6 @@ export const load = async (event) => {
 		return { status: 500, form };
 	}
 	const items = data?.policies;
-	if (!items) throw error(404, 'policies not found');
+	if (!items) error(404, 'policies not found');
 	return { form, items };
 };

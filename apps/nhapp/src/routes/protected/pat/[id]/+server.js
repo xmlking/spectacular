@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client/index.js';
 import { json, redirect } from '@sveltejs/kit';
 import { getNhost } from '$lib/nhost.js';
 
@@ -21,7 +21,7 @@ export const DELETE = async ({ cookies, params }) => {
 	);
 
 	if (!error) {
-		throw redirect(303, '/protected/pat');
+		redirect(303, '/protected/pat');
 	}
 
 	return json({ error });

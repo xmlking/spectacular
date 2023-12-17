@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client/index.js';
 import { getNhost } from '$lib/nhost';
 
 /** @type {import('./$types').PageServerLoad} */

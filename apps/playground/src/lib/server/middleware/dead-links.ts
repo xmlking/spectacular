@@ -18,7 +18,7 @@ export const deadLinks = (async ({ event, resolve }) => {
 	const redirectTo = dead_links_redirect_to[event.url.pathname];
 	if (redirectTo) {
 		log.debug(`redirecting ${event.url.pathname} to  ${redirectTo}`);
-		throw redirect(303, `${event.url.origin}${redirectTo}`);
+		redirect(303, `${event.url.origin}${redirectTo}`);
 	}
 	return await resolve(event);
 }) satisfies Handle;

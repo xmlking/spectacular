@@ -34,20 +34,20 @@ export const guard = (async ({ event, resolve }) => {
 
 	if (!user) {
 		// FIXME: redirect from middleware may cause recursion
-		throw redirect(303, `${origin}/auth/signin?callbackUrl=${pathname}`);
+		redirect(303, `${origin}/auth/signin?callbackUrl=${pathname}`);
 	}
 	if (expires && new Date(expires) < new Date()) {
 		log.debug('session expired at: ', expires);
-		throw redirect(303, `${origin}/auth/signout?callbackUrl=/blog`);
+		redirect(303, `${origin}/auth/signout?callbackUrl=/blog`);
 	}
 	if (startsWith(pathname, userPaths)) {
 		if (!roles?.includes('user')) {
-			throw redirect(303, `${origin}/home`);
+			redirect(303, `${origin}/home`);
 		}
 	}
 	if (startsWith(pathname, adminPaths)) {
 		if (!roles?.includes('Policy.Write')) {
-			throw redirect(303, `${origin}/dashboard`);
+			redirect(303, `${origin}/dashboard`);
 		}
 	}
 

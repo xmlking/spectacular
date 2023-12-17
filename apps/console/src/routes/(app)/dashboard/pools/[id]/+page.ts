@@ -16,9 +16,9 @@ export const load = async (event) => {
 		policy: CachePolicy.NetworkOnly,
 		variables
 	});
-	if (errors) throw error(400, errors[0] as GraphQLError);
+	if (errors) error(400, errors[0] as GraphQLError);
 	const { pools_by_pk, devices_not_in_pool } = data ?? {};
-	if (!pools_by_pk) throw error(404, 'Pool not found');
+	if (!pools_by_pk) error(404, 'Pool not found');
 	const { displayName, description, tags, annotations, pool_devices } = pools_by_pk;
 
 	const form = await superValidate({ displayName, description, tags, annotations }, schema);

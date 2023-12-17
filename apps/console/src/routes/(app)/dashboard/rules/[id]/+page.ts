@@ -16,9 +16,9 @@ export const load = async (event) => {
 		policy: CachePolicy.NetworkOnly,
 		variables
 	});
-	if (errors) throw error(400, errors[0] as GraphQLError);
+	if (errors) error(400, errors[0] as GraphQLError);
 	const rule = data?.rules_by_pk;
-	if (!rule) throw error(404, 'Rule not found');
+	if (!rule) error(404, 'Rule not found');
 	const form = await superValidate(rule, schema);
 	return { form };
 };

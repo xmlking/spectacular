@@ -8,28 +8,28 @@ import { getAppError, isAppError, isHttpError, isRedirect, ResponseError, Valida
 export function handleLoadErrors(err: unknown) {
 	// console.error(error.stack);
 	if (err instanceof NotFoundError && err.name === 'NOT_FOUND_ERROR') {
-		throw error(404, { message: err.message, context: err.toJSON() });
+		error(404, { message: err.message, context: err.toJSON() });
 	} else if (err instanceof ResponseError) {
 		switch (err.response.status) {
 			case 401:
 			case 403: {
-				throw error(err.response.status, err.response.statusText);
+				error(err.response.status, err.response.statusText);
 			}
 			case 400:
 			case 404:
 			case 405: {
-				throw error(err.response.status, err.response.statusText);
+				error(err.response.status, err.response.statusText);
 			}
 			default: {
-				throw error(err.response.status, err.response.statusText);
+				error(err.response.status, err.response.statusText);
 			}
 		}
 	} else if (isHttpError(err)) {
-		throw error(err.status, err.body);
+		error(err.status, err.body);
 	} else if (isAppError(err)) {
-		throw error(500, err);
+		error(500, err);
 	} else {
-		throw error(500, getAppError(err));
+		error(500, getAppError(err));
 	}
 }
 
@@ -47,8 +47,8 @@ export function handleActionErrors(err: unknown) {
 	} else if (isRedirect(err)) {
 		if (err.status < 310) throw err;
 	} else if (isHttpError(err)) {
-		throw error(err.status, err.body);
+		error(err.status, err.body);
 	} else {
-		throw error(500, getAppError(err));
+		error(500, getAppError(err));
 	}
 }

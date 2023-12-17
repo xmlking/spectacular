@@ -38,6 +38,6 @@ export const load = async (event) => {
 		return { status: 500, form };
 	}
 	const items = data?.rules;
-	if (!items) throw error(404, 'rules not found');
+	if (!items) error(404, 'rules not found');
 	return { form, items };
 };
