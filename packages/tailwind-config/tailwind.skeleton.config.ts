@@ -4,6 +4,7 @@ import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
+import { custom } from './custom';
 // import { join } from 'path';
 
 export default {
@@ -17,7 +18,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Inter', ...defaultTheme.fontFamily.sans]
+				sans: ['Inter Variable', 'Inter', ...defaultTheme.fontFamily.sans]
 			}
 		}
 	},
@@ -38,7 +39,8 @@ export default {
 					{ name: 'skeleton', enhancements: true },
 					{ name: 'vintage', enhancements: true },
 					{ name: 'wintry', enhancements: true }
-				]
+				],
+				custom: [custom]
 			}
 		})
 	]

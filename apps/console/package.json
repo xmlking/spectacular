@@ -4,8 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"//": "FIXME: https://github.com/chihab/dotenv-run/issues/14 CHANGE_TO: dotenv-run -- vite dev",
-		"dev": "dotenv-run -- vite dev",
+		"dev": "dotenv-run vite dev",
 		"dev:debug": "DEBUG=* vite dev",
 		"dev:sw": "SW_DEV=true vite dev",
 		"build": "dotenv-run vite build",

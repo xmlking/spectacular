@@ -54,7 +54,7 @@ httpPoolSize = 100
 version = 18
 
 [auth]
-version = '0.23.0'
+version = '0.24.0'
 
 [auth.redirections]
 clientUrl = '{{ secrets.CLIENT_URL }}'
@@ -171,7 +171,8 @@ enabled = false
 enabled = true
 
 [auth.method.webauthn.relyingParty]
-name = 'spectacular-console'
+name = 'Spectacular Console App'
+id = 'Spectacular'
 # origins = ['http://localhost:5173']
 
 [auth.method.webauthn.attestation]
@@ -195,7 +196,7 @@ secure = false
 method = 'LOGIN'
 
 [storage]
-version = '0.4.1'
+version = '0.5.0'
 
 [storage.antivirus]
 server = 'tcp://run-clamav:3310'
