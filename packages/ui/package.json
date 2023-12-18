@@ -41,7 +41,11 @@
 	],
 	"exports": {
 		"./package.json": "./package.json",
-		".": "./src/index.ts"
+		".": "./src/index.ts",
+		"./components/*": "./src/lib/components/*/index.ts",
+		"./components/shadcn/*": "./src/lib/components/ui/*/index.ts",
+		"./components/skeleton/*": "./src/lib/components/skeleton/*/index.ts",
+		"./components/flowbite/*": "./src/lib/components/flowbite/*/index.ts"
 	},
 	"peerDependencies": {
 		"svelte": "4.0.0"
@@ -54,17 +58,22 @@
 		"@sveltejs/adapter-auto": "3.0.0",
 		"@sveltejs/kit": "2.0.1",
 		"@sveltejs/package": "2.2.3",
+		"clsx": "2.0.0",
 		"eslint-config-custom": "workspace:*",
+		"lucide-svelte": "0.298.0",
 		"publint": "0.2.6",
 		"svelte": "4.2.8",
 		"svelte-check": "3.6.2",
 		"tailwind-config": "workspace:*",
+		"tailwind-merge": "2.1.0",
+		"tailwind-variants": "0.1.19",
 		"tailwindcss": "3.3.6",
 		"tsconfig": "workspace:*",
 		"tslib": "2.6.2",
 		"typescript": "5.3.3",
 		"vite": "5.0.10",
-		"vitest": "1.0.4"
+		"vitest": "1.0.4",
+		"bits-ui": "0.11.8"
 	},
 	"publishConfig": {
 		"svelte": "./dist/index.js",

@@ -4,7 +4,7 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 	extends: ['eslint:recommended', 'plugin:import/recommended', 'prettier', 'turbo'],
 	plugins: ['@typescript-eslint', 'unused-imports'],
-	ignorePatterns: ['*.cjs', '/apps/**/src/lib/i18n'],
+	ignorePatterns: ['*.cjs', '/apps/**/src/lib/i18n', 'packages/ui/src/lib/components/ui'],
 	overrides: [
 		{
 			files: ['*.svelte'],

@@ -5,6 +5,7 @@ import '@styles/tailwind.css';
 import { SEO } from 'astro-seo';
 import AppFooter from '@components/AppFooter.astro';
 import AppHeader from '@components/AppHeader.astro';
+import { ModeWatcher } from "mode-watcher";
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
@@ -48,6 +49,7 @@ const { title } = Astro.props;
 		/>
 		<ViewTransitions />
 	</head>
+	<ModeWatcher />
 	<body class="bg-white dark:bg-gray-900">
 		<AppHeader />
 		<slot />
