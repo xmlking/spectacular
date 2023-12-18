@@ -22,7 +22,7 @@ const config = {
 			? adapterAuto()
 			: process.env.BUN_ENV
 				? adapterBun()
-				: adapterNode({ polyfill: false }),
+				: adapterNode({ polyfill: false, precompress: true }),
 		// When hosting SPA on GitHub Pages
 		paths: {
 			// base: dev ? '' : '/hc360-ui',
