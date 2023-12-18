@@ -1,7 +1,6 @@
 export { default as Address } from './Address.svelte';
 export { default as Analytics } from './Analytics.svelte';
 export { default as ContextMenu } from './ContextMenu.svelte';
-export { default as DarkMode } from './DarkMode.svelte';
 export { default as Debug } from './Debug.svelte';
 export { default as DeleteButton } from './DeleteButton.svelte';
 export { default as DeleteButton2 } from './DeleteButton2.svelte';

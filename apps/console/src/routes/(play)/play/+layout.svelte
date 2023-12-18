@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DarkMode } from '$lib/components';
+	import { DarkMode } from 'flowbite-svelte';
 
 	// HINT: added `right-4 top-24` to original `btnClass`
 	let btnClass =
