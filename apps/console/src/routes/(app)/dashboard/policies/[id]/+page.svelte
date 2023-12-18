@@ -68,7 +68,7 @@
 				id: $form.subjectId,
 				displayName: $form.subjectDisplayName,
 				secondaryId: $form.subjectSecondaryId
-		  }
+			}
 		: null;
 	// rule settings
 	const disabled = $form?.originalShared;

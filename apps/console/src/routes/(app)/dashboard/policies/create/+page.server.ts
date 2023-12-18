@@ -50,7 +50,7 @@ export const actions = {
 								...(throttleRate && { throttleRate: `${throttleRate}` })
 							}
 						}
-				  })
+					})
 		};
 		// if we are creating Policy with new Rule, overwrite Rule's weight with Policy's weight.
 		if (payload.rule?.data && payload.weight) {

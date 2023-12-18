@@ -49,7 +49,7 @@ export const authjs = SvelteKitAuth({
 							return user;
 						}
 					})
-			  ]
+				]
 			: []),
 		Google({
 			clientId: envPri.AUTH_PROVIDER_GOOGLE_CLIENT_ID,

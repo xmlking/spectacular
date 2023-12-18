@@ -192,7 +192,7 @@
 				id: $form.subjectId,
 				displayName: $form.subjectDisplayName,
 				secondaryId: ''
-		  }
+			}
 		: null;
 
 	async function fetchSubjects(filterText: string) {

@@ -22,8 +22,8 @@ const config = {
 		adapter: process.env.VERCEL
 			? adapterAuto()
 			: process.env.BUN_ENV
-			  ? adapterBun()
-			  : adapterNode({ polyfill: false }),
+				? adapterBun()
+				: adapterNode({ polyfill: false }),
 		prerender: { crawl: false }, // FIXME: remove after all links are corrected.
 		output: {
 			preloadStrategy: 'preload-mjs'

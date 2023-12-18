@@ -84,7 +84,7 @@
 				id: $form.subjectId,
 				displayName: $form.subjectDisplayName,
 				secondaryId: $form.subjectSecondaryId
-		  }
+			}
 		: null;
 	/**
 	 * Search Subjects by displayName
@@ -131,7 +131,7 @@
 		? {
 				id: $form.ruleId,
 				displayName: $form.rule.displayName
-		  }
+			}
 		: null;
 
 	// $: disabled=$form.rule.shared
