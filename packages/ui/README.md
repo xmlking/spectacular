@@ -28,4 +28,4 @@ Use **shadcn** component in your app
 ## Reference
 
 - Sample global ESLint configuration file: [.eslintrc.cjs](https://gist.github.com/huntabyte/b73073a93a7a664f3cbad7c50376c9c9)
-- shadcn-svelte, Superforms [sample project](https://github.com/delay/sveltekit-auth) 
+- shadcn-svelte, Superforms [sample project](https://github.com/delay/sveltekit-auth)

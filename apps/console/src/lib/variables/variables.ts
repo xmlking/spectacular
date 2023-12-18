@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { building } from '$app/environment';
 import { env as dynPubEnv } from '$env/dynamic/public';
 import * as statPubEnv from '$env/static/public';
 
@@ -19,7 +20,7 @@ const schema = z.object({
 	})
 });
 
-const parsed = schema.safeParse({ ...statPubEnv, ...dynPubEnv });
+const parsed = schema.safeParse({ ...statPubEnv, ...(!building && dynPubEnv) });
 
 if (!parsed.success) {
 	// TODO: check is `building` and skip `exit` if missing environment variables?

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { building } from '$app/environment';
 import { env as dynPriEnv } from '$env/dynamic/private';
 import * as statPriEnv from '$env/static/private';
 
@@ -74,7 +75,7 @@ const schema = z.object({
 		.default('https://graph.microsoft.com/.default')
 });
 
-const parsed = schema.safeParse({ ...statPriEnv, ...dynPriEnv });
+const parsed = schema.safeParse({ ...statPriEnv, ...(!building && dynPriEnv) });
 
 if (!parsed.success) {
 	// TODO: check is `building` and skip `exit` if missing environment variables?
