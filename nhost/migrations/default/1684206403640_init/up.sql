@@ -1,10 +1,13 @@
 SET check_function_bodies = false;
 ---ALTER DATABASE postgres SET rules.soft_deletion TO on;
 SET SESSION "rules.soft_deletion" = 'on';
+SET ROLE postgres;
 -- CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 -- COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings';
 CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+CREATE EXTENSION IF NOT EXISTS vector WITH SCHEMA public;
+COMMENT ON EXTENSION vector IS 'Open-source vector similarity search for Postgres';
 -- CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
 -- COMMENT ON EXTENSION ltree IS 'data type for storing hierarchical data path';
 -- CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;

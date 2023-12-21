@@ -17,5 +17,13 @@
 	{
 		"op": "remove",
 		"path": "/provider/smtp"
+	},
+	{
+		"op": "remove",
+		"path": "/postgres/settings/maxWalSenders"
+	},
+	{
+		"op": "remove",
+		"path": "/postgres/settings/maxReplicationSlots"
 	}
 ]

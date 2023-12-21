@@ -7,6 +7,18 @@ value = 'http://localhost:5173/api/events'
 name = 'ACTION_BASE_URL'
 value = 'http://localhost:5173/api/actions'
 
+[dashboard]
+version = '0.21.1'
+
+[postgres]
+version = '14.6-20231218-1'
+
+[postgres.settings]
+maxConnections = 100
+walLevel = 'logical'
+maxWalSenders = 1
+maxReplicationSlots = 1
+
 [hasura]
 version = 'v2.33.4-ce'
 adminSecret = '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
@@ -181,9 +193,6 @@ timeout = 60000
 [auth.totp]
 enabled = true
 issuer = 'Spectacular'
-
-[postgres]
-version = '14.6-20231031-1'
 
 [provider]
 [provider.smtp]
