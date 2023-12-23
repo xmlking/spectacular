@@ -2,7 +2,7 @@
 	<div class="container mx-auto px-5 py-24">
 		<div class="mb-20 flex w-full flex-col text-center">
 			<h1
-				class="title-font mb-4 text-2xl font-medium text-gray-900 dark:text-white sm:text-3xl"
+				class="title-font mb-4 text-2xl font-medium text-gray-900 sm:text-3xl dark:text-white"
 				>Master Cleanse Reliac Heirloom</h1
 			>
 			<p class="mx-auto text-base leading-relaxed lg:w-2/3"

@@ -150,12 +150,12 @@
 		<div class="container mx-auto flex flex-col items-center px-5 py-6 sm:flex-row">
 			<a
 				href={'#'}
-				class="title-font flex items-center justify-center font-medium text-gray-900 dark:text-white md:justify-start"
+				class="title-font flex items-center justify-center font-medium text-gray-900 md:justify-start dark:text-white"
 			>
 				<Stack />
 				<span class="ml-3 text-xl">Datablocks</span>
 			</a>
-			<p class="mt-4 text-sm text-gray-500 dark:text-gray-400 sm:ml-6 sm:mt-0"
+			<p class="mt-4 text-sm text-gray-500 sm:ml-6 sm:mt-0 dark:text-gray-400"
 				>© 2020 Datablocks —
 				<a
 					href="https://twitter.com/xmlking"

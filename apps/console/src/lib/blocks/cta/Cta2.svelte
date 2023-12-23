@@ -2,7 +2,7 @@
 	<div class="container mx-auto px-5 py-24">
 		<div class="mx-auto flex flex-col items-start sm:flex-row sm:items-center lg:w-2/3">
 			<h1
-				class="title-font flex-grow text-2xl font-medium text-gray-900 dark:text-white sm:pr-16"
+				class="title-font flex-grow text-2xl font-medium text-gray-900 sm:pr-16 dark:text-white"
 				>Slow-carb next level shoindxgoitch ethical authentic, scenester sriracha forage.</h1
 			>
 			<button

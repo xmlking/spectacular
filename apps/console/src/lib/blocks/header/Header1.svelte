@@ -5,7 +5,7 @@
 	<div class="container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
 		<a
 			href="/#"
-			class="title-font mb-4 flex items-center font-medium text-gray-900 dark:text-white md:mb-0"
+			class="title-font mb-4 flex items-center font-medium text-gray-900 md:mb-0 dark:text-white"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

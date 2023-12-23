@@ -130,7 +130,7 @@ export const authjs = SvelteKitAuth({
 	// 			sameSite: 'lax',
 	// 			path: '/',
 	// 			domain: domain == 'localhost' ? domain : '.' + domain,
-	// 			secure: useSecureCookie
+	// 			secure: useSecureCookie // process.env.NODE_ENV === 'production'
 	// 		}
 	// 	}
 	// }

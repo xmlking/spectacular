@@ -2,7 +2,7 @@
 	<div class="container mx-auto px-5 py-24">
 		<div class="mb-20 text-center">
 			<h1
-				class="title-font mb-4 text-2xl font-medium text-gray-900 dark:text-white sm:text-3xl"
+				class="title-font mb-4 text-2xl font-medium text-gray-900 sm:text-3xl dark:text-white"
 				>Raw Denim Heirloom Man Braid</h1
 			>
 			<p class="text-gray-500s mx-auto text-base leading-relaxed lg:w-3/4 xl:w-2/4"

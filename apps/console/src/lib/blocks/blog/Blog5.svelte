@@ -2,10 +2,10 @@
 	<div class="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
 		<div class="mx-auto mb-8 max-w-screen-sm text-center lg:mb-16">
 			<h2
-				class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white lg:text-4xl"
+				class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl dark:text-white"
 				>Our Blog</h2
 			>
-			<p class="font-light text-gray-500 dark:text-gray-400 sm:text-xl"
+			<p class="font-light text-gray-500 sm:text-xl dark:text-gray-400"
 				>We use an agile approach to test assumptions and connect with the needs of your
 				audience early and often.</p
 			>

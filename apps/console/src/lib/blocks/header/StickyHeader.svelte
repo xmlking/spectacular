@@ -20,14 +20,14 @@
 <svelte:window bind:scrollY={currentY} />
 
 <header
-	class="bg-surface-1/50 body-font sticky top-0 flex h-[var(--header-height)] items-center px-2 text-lg text-gray-600 backdrop-blur-sm transition-transform ease-in dark:bg-gray-900 dark:text-gray-400 md:px-0"
+	class="bg-surface-1/50 body-font sticky top-0 flex h-[var(--header-height)] items-center px-2 text-lg text-gray-600 backdrop-blur-sm transition-transform ease-in md:px-0 dark:bg-gray-900 dark:text-gray-400"
 	class:motion-safe:-translate-y-full={offscreen}
 	bind:clientHeight
 >
 	<div class="container mx-auto flex flex-col flex-wrap items-center p-5 md:flex-row">
 		<a
 			href="/#"
-			class="title-font mb-4 flex items-center font-medium text-gray-900 dark:text-white md:mb-0"
+			class="title-font mb-4 flex items-center font-medium text-gray-900 md:mb-0 dark:text-white"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
