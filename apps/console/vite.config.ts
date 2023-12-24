@@ -1,28 +1,12 @@
-import { exec } from 'node:child_process';
-import { promisify } from 'node:util';
+import * as child_process from 'node:child_process';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { SvelteKitPWA } from '@vite-pwa/sveltekit';
+import { defineConfig, configDefaults } from 'vitest/config';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import houdini from 'houdini/vite';
-import type { UserConfig } from 'vite';
-import { configDefaults } from 'vitest/config';
 
-// Get current tag/commit and last commit date from git
-const pexec = promisify(exec);
-
-const [gitTag, gitDate] = (
-	await Promise.allSettled([
-		pexec('git describe --tags || git rev-parse --short HEAD'),
-		pexec('git log -1 --format=%cd --date=format:"%Y-%m-%d %H:%M"')
-	])
-).map((v) =>
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	JSON.stringify(v.value?.stdout.trim())
-);
-
-const config: UserConfig = {
+export default defineConfig({
 	plugins: [
 		houdini(),
 		sveltekit(),
@@ -84,6 +68,9 @@ const config: UserConfig = {
 				// globPatterns: ['posts.json', '**/*.{js,css,ico,png,svg,webp,avif,woff,woff2,html}'],
 				// globIgnores: ["**/node_modules/**/*", '**/sw*', '**/workbox-*']
 				navigateFallbackDenylist: [/^\/auth/, /^\/dashboard/]
+			},
+			kit: {
+				includeVersionFile: true
 			}
 		})
 	],
@@ -93,8 +80,12 @@ const config: UserConfig = {
 		// to burn-in release version in the footer.svelte
 		__APP_VERSION__: JSON.stringify(process.env.npm_package_version),
 		// fallback values: BUILD_VERSION and BUILD_TIME are passed as --build-arg to docker build
-		__GIT_TAG__: gitTag ?? JSON.stringify(process.env.BUILD_VERSION),
-		__GIT_DATE__: gitDate ?? JSON.stringify(process.env.BUILD_TIME)
+		__GIT_TAG__: JSON.stringify(
+			child_process.execSync('git describe --tags || git rev-parse --short HEAD').toString().trim() ?? process.env.BUILD_VERSION
+		),
+		__GIT_DATE__: JSON.stringify(
+			child_process.execSync('git log -1 --format=%cd --date=format:"%Y-%m-%d %H:%M"').toString().trim() ?? process.env.BUILD_TIME
+		)
 	},
 	test: {
 		// jest like globals
@@ -120,6 +111,4 @@ const config: UserConfig = {
 	optimizeDeps: {
 		exclude: ['fsevents']
 	}
-};
-
-export default config;
+});

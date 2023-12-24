@@ -70,6 +70,7 @@ bun pm cache
 bun pm cache rm
 
 bun update
+bun update -g
 ```
 
 ```shell

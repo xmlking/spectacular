@@ -1,6 +1,6 @@
 import * as child_process from 'node:child_process';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 

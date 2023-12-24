@@ -2,6 +2,9 @@
 	"$schema": "https://turbo.build/schema.json",
 	"extends": ["//"],
 	"pipeline": {
+		"dev": {
+			"dotEnv": [".env", ".secrets"]
+		},
 		"build": {
 			"dependsOn": ["generate"],
 			"outputs": [

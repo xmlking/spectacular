@@ -1,7 +1,10 @@
 <script lang="ts">
+	import  { Debug } from 'ui/skeleton';
 	import { version } from '$app/environment';
 	console.log(`Client version: ${version}`);
 </script>
+
+<Debug data={{a: 1}}/>
 
 <div class="container mx-auto flex h-full items-center justify-center">
 	<h1 class="h1">

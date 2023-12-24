@@ -4,7 +4,8 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "dotenv-run vite dev",
+		"//FIXME": "https://github.com/HoudiniGraphql/houdini/issues/1246",
+		"dev": "svelte-kit sync && dotenv-run vite dev",
 		"dev:debug": "DEBUG=* vite dev",
 		"dev:sw": "SW_DEV=true vite dev",
 		"build": "dotenv-run vite build",

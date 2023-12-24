@@ -26,8 +26,16 @@
 			]
 		},
 		"generate": {
-			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/lib/i18n"]
+			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/lib/i18n"],
+			"inputs": ["src/**/*.{html,js,svelte,mvx,ts}"]
 		},
-		"preview": {}
+		"lint": {
+			"outputs": []
+		},
+		"test:unit:coverage": {
+			"outputs": ["coverage/**"]
+		},
+		"preview": {},
+		"special-task": {}
 	}
 }

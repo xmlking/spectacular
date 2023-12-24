@@ -13,7 +13,6 @@
 		"//": "TODO: build not working ",
 		"//build": "vite build && pnpm run package",
 		"package": "svelte-kit sync && svelte-package && publint",
-		"#package": "svelte-kit sync && svelte-package && publint && tsx --esm ./scripts/cleanupPackage.ts && rm ./dist/package.json",
 		"prepublishOnly": "pnpm run package",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
@@ -42,13 +41,13 @@
 	"exports": {
 		"./package.json": "./package.json",
 		".": "./src/index.ts",
-		"./components/*": "./src/lib/components/*/index.ts",
-		"./components/shadcn/*": "./src/lib/components/ui/*/index.ts",
-		"./components/skeleton/*": "./src/lib/components/skeleton/*/index.ts",
-		"./components/flowbite/*": "./src/lib/components/flowbite/*/index.ts"
+		"./skeleton": "./src/lib/components/skeleton/index.ts",
+		"./flowbite": "./src/lib/components/flowbite/index.ts",
+		"./shadcn/*": "./src/lib/components/ui/*/index.ts"
 	},
 	"peerDependencies": {
-		"svelte": "4.0.0"
+		"@sveltejs/kit": "^2.0.0",
+		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
 		"@floating-ui/dom": "1.5.3",
@@ -65,6 +64,7 @@
 		"publint": "0.2.7",
 		"svelte": "4.2.8",
 		"svelte-check": "3.6.2",
+		"sveltekit-superforms": "1.13.1",
 		"tailwind-config": "workspace:*",
 		"tailwind-merge": "2.2.0",
 		"tailwind-variants": "0.1.19",
