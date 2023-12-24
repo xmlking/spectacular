@@ -969,8 +969,8 @@ importers:
         specifier: 2.0.2
         version: 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
       '@sveltejs/package':
-        specifier: 2.2.3
-        version: 2.2.3(svelte@4.2.8)(typescript@5.3.3)
+        specifier: 2.2.4
+        version: 2.2.4(svelte@4.2.8)(typescript@5.3.3)
       bits-ui:
         specifier: 0.11.8
         version: 0.11.8(svelte@4.2.8)
@@ -5176,7 +5176,7 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
-      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
+      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@4.5.1)
       import-meta-resolve: 4.0.0
     dev: true
 
@@ -5188,7 +5188,7 @@ packages:
       '@rollup/plugin-commonjs': 25.0.7(rollup@4.9.1)
       '@rollup/plugin-json': 6.1.0(rollup@4.9.1)
       '@rollup/plugin-node-resolve': 15.2.3(rollup@4.9.1)
-      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
+      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@4.5.1)
       rollup: 4.9.1
     dev: true
 
@@ -5197,7 +5197,7 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
-      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
+      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@4.5.1)
       '@vercel/nft': 0.26.0
       esbuild: 0.19.9
     transitivePeerDependencies:
@@ -5296,8 +5296,8 @@ packages:
       vite: 5.0.10(@types/node@20.10.5)
     dev: true
 
-  /@sveltejs/package@2.2.3(svelte@4.2.8)(typescript@5.3.3):
-    resolution: {integrity: sha512-iZEC5qw+2RIjfIAHR3O+IeokJIjVM/ieoxPxj6YmZCwu5JKFADtC4jzjSUJ7GkCMUQ4HqE7u4/3cCxXBocxi8A==}
+  /@sveltejs/package@2.2.4(svelte@4.2.8)(typescript@5.3.3):
+    resolution: {integrity: sha512-Mu0YeLCEM76BM36rqtPSw1sMXW+GS2t0eGaiQ0/ZHWXgte03OIdkQogCKzSxCWXmj0qyY1udTB2oZDZ7MkGsRw==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     peerDependencies:
@@ -15110,7 +15110,7 @@ packages:
       '@sveltejs/kit': 1.x
     dependencies:
       '@isaacs/ttlcache': 1.4.1
-      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
+      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@4.5.1)
     dev: true
 
   /sveltekit-superforms@1.12.0(@sveltejs/kit@2.0.2)(svelte@4.2.8)(zod@3.22.4):
@@ -15120,7 +15120,7 @@ packages:
       svelte: 3.x || 4.x
       zod: 3.x
     dependencies:
-      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
+      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@4.5.1)
       svelte: 4.2.8
       zod: 3.22.4
     dev: true
@@ -15131,7 +15131,7 @@ packages:
       '@sveltejs/kit': ^1.20.4 || ^2.0.0
       svelte: ^4.0.0 || ^5.0.0
     dependencies:
-      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
+      '@sveltejs/kit': 2.0.2(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@4.5.1)
       svelte: 4.2.8
     dev: true
 
