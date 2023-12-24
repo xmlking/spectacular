@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { twMerge } from 'tailwind-merge';
 	import { setContext } from 'svelte';
-	import type { Action , TransitionConfig } from 'svelte/action';
+	import type { Action, TransitionConfig } from 'svelte/action';
 	import { noop } from 'svelte/internal';
-	
+
 	setContext('background', true);
 	$: setContext('color', color);
 

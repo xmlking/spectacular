@@ -1,5 +1,5 @@
 // import daisyui from 'daisyui';
-import baseConfig from 'tailwind-config/tailwind.config';
+import baseConfig from '@spectacular/tailwind-config/tailwind.config';
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 // @ts-expect-error 7016 TODO

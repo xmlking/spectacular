@@ -26,6 +26,9 @@ importers:
       '@spectacular/eslint-config':
         specifier: workspace:*
         version: link:packages/config-eslint
+      '@spectacular/tsconfig':
+        specifier: workspace:*
+        version: link:packages/tsconfig
       '@types/eslint':
         specifier: 8.56.0
         version: 8.56.0
@@ -59,9 +62,6 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: 0.5.9
         version: 0.5.9(prettier-plugin-astro@0.12.2)(prettier-plugin-svelte@3.1.2)(prettier@3.1.1)
-      tsconfig:
-        specifier: workspace:*
-        version: link:packages/tsconfig
       turbo:
         specifier: 1.11.2
         version: 1.11.2
@@ -109,6 +109,12 @@ importers:
       '@spectacular/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
+      '@spectacular/helpers':
+        specifier: workspace:*
+        version: link:../../packages/helpers
+      '@spectacular/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       '@svelte-put/resize':
         specifier: 3.0.0
         version: 3.0.0
@@ -208,9 +214,6 @@ importers:
       graphql-ws:
         specifier: 5.14.3
         version: 5.14.3(graphql@16.8.1)
-      helpers:
-        specifier: workspace:*
-        version: link:../../packages/helpers
       houdini:
         specifier: 1.2.34
         version: 1.2.34
@@ -280,9 +283,6 @@ importers:
       sveltekit-view-transition:
         specifier: 0.5.3
         version: 0.5.3(@sveltejs/kit@2.0.6)(svelte@4.2.8)
-      tailwind-config:
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
       tailwind-merge:
         specifier: 2.2.0
         version: 2.2.0
@@ -344,6 +344,12 @@ importers:
       '@spectacular/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
+      '@spectacular/helpers':
+        specifier: workspace:*
+        version: link:../../packages/helpers
+      '@spectacular/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       '@spectacular/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -401,9 +407,6 @@ importers:
       formsnap:
         specifier: 0.4.1
         version: 0.4.1(svelte@4.2.8)(sveltekit-superforms@1.13.1)(zod@3.22.4)
-      helpers:
-        specifier: workspace:*
-        version: link:../../packages/helpers
       postcss:
         specifier: 8.4.32
         version: 8.4.32
@@ -440,9 +443,6 @@ importers:
       sveltekit-view-transition:
         specifier: 0.5.3
         version: 0.5.3(@sveltejs/kit@2.0.6)(svelte@4.2.8)
-      tailwind-config:
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
       tailwind-merge:
         specifier: 2.2.0
         version: 2.2.0
@@ -620,6 +620,12 @@ importers:
       '@spectacular/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint
+      '@spectacular/helpers':
+        specifier: workspace:*
+        version: link:../../packages/helpers
+      '@spectacular/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
       '@spectacular/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -680,9 +686,6 @@ importers:
       formsnap:
         specifier: 0.4.1
         version: 0.4.1(svelte@4.2.8)(sveltekit-superforms@1.13.1)(zod@3.22.4)
-      helpers:
-        specifier: workspace:*
-        version: link:../../packages/helpers
       highlight.js:
         specifier: 11.9.0
         version: 11.9.0
@@ -725,9 +728,6 @@ importers:
       sveltekit-view-transition:
         specifier: 0.5.3
         version: 0.5.3(@sveltejs/kit@2.0.6)(svelte@4.2.8)
-      tailwind-config:
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
       tailwind-merge:
         specifier: 2.2.0
         version: 2.2.0
@@ -880,7 +880,7 @@ importers:
       '@spectacular/eslint-config':
         specifier: workspace:*
         version: link:../config-eslint
-      tsconfig:
+      '@spectacular/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
 
@@ -889,12 +889,12 @@ importers:
       '@spectacular/eslint-config':
         specifier: workspace:*
         version: link:../config-eslint
+      '@spectacular/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
       '@sveltejs/kit':
         specifier: 2.0.6
         version: 2.0.6(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
 
   packages/tailwind-config:
     dependencies:
@@ -904,6 +904,9 @@ importers:
       '@spectacular/eslint-config':
         specifier: workspace:*
         version: link:../config-eslint
+      '@spectacular/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
       '@tailwindcss/container-queries':
         specifier: 0.1.1
         version: 0.1.1(tailwindcss@3.4.0)
@@ -928,9 +931,6 @@ importers:
       tailwindcss-animate:
         specifier: 1.0.6
         version: 1.0.6(tailwindcss@3.4.0)
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
     devDependencies:
       autoprefixer:
         specifier: 10.4.16
@@ -961,6 +961,12 @@ importers:
       '@spectacular/eslint-config':
         specifier: workspace:*
         version: link:../config-eslint
+      '@spectacular/tailwind-config':
+        specifier: workspace:*
+        version: link:../tailwind-config
+      '@spectacular/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
       '@sveltejs/adapter-auto':
         specifier: 3.0.1
         version: 3.0.1(@sveltejs/kit@2.0.6)
@@ -991,9 +997,6 @@ importers:
       sveltekit-superforms:
         specifier: 1.13.1
         version: 1.13.1(@sveltejs/kit@2.0.6)(svelte@4.2.8)(zod@3.22.4)
-      tailwind-config:
-        specifier: workspace:*
-        version: link:../tailwind-config
       tailwind-merge:
         specifier: 2.2.0
         version: 2.2.0
@@ -1003,9 +1006,6 @@ importers:
       tailwindcss:
         specifier: 3.4.0
         version: 3.4.0
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
       tslib:
         specifier: 2.6.2
         version: 2.6.2

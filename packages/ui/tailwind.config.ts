@@ -1,4 +1,4 @@
-import baseConfig from 'tailwind-config/tailwind.skeleton.config';
+import baseConfig from '@spectacular/tailwind-config/tailwind.skeleton.config';
 import type { Config } from 'tailwindcss';
 
 export default {
