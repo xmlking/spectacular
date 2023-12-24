@@ -19,5 +19,13 @@ export default defineConfig({
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	optimizeDeps: {
+		include: ['@spectacular/ui']
+	},
+	build: {
+		commonjsOptions: {
+			include: [/@spectacular-ui/, /node_modules/]
+		}
 	}
 });

@@ -24,6 +24,14 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
+	optimizeDeps: {
+		include: ['@spectacular/ui']
+	},
+	build: {
+		commonjsOptions: {
+			include: [/@spectacular-ui/, /node_modules/]
+		}
+	},
 	ssr: {
 		// add all tsparticles libraries here, they're not made for SSR, they're client only
 		noExternal: ['tsparticles', 'tsparticles-slim', 'tsparticles-engine', 'svelte-particles']
