@@ -3,11 +3,11 @@
 	"style": "default",
 	"tailwind": {
 		"config": "tailwind.config.js",
-		"css": "src/app.pcss",
-		"baseColor": "gray"
+		"css": "styles/default.style.postcss",
+		"baseColor": "zinc"
 	},
 	"aliases": {
-		"components": "$lib/components",
-		"utils": "$lib/utils"
+		"components": "$ui/components",
+		"utils": "$ui/utils"
 	}
 }

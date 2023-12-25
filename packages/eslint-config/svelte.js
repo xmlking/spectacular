@@ -1,4 +1,4 @@
-/** @type { import("eslint").Linter.FlatConfig } */
+/** @type { import("eslint").Linter.Config } */
 module.exports = {
 	root: true,
 	extends: [
@@ -28,5 +28,5 @@ module.exports = {
 			}
 		}
 	],
-	ignorePatterns: ["node_modules/", ".sveltekit/"],
+	ignorePatterns: ["node_modules/", ".svelte-kit/"],
 };
