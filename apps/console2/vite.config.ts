@@ -3,9 +3,10 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-	plugins: [enhancedImages(), sveltekit(), purgeCss()],
+	plugins: [enhancedImages(), sveltekit(), purgeCss(), tsconfigPaths()],
 	define: {
 		// to burn-in release version in the footer.svelte
 		__APP_VERSION__: JSON.stringify(process.env.npm_package_version),
@@ -19,13 +20,5 @@ export default defineConfig({
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
-	},
-	optimizeDeps: {
-		include: ['@spectacular/ui']
-	},
-	build: {
-		commonjsOptions: {
-			include: [/@spectacular-ui/, /node_modules/]
-		}
 	}
 });

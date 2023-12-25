@@ -3,12 +3,16 @@
 	"globalDependencies": ["**/.env", "**/.secrets"],
 	"globalDotEnv": [".env", ".secrets"],
 	"pipeline": {
+		"dev": {
+			"cache": false,
+			"persistent": true
+		},
 		"build": {
 			"dependsOn": ["^build"],
-			"outputs": [".svelte-kit/**", ".vercel/**"]
+			"outputs": ["dist/**", ".svelte-kit/**", ".vercel/**"]
 		},
-		"format": {},
 		"lint": {},
+		"format": {},
 		"test": {
 			"dotEnv": ["**/.env", "**/.env.test"]
 		},
@@ -22,10 +26,7 @@
 		"clean": {
 			"cache": false
 		},
-		"dev": {
-			"cache": false,
-			"persistent": true
-		},
+
 		"preview": {}
 	}
 }

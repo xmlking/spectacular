@@ -1,0 +1,30 @@
+{
+	"name": "@spectacular/utils",
+	"description": "utils functions",
+	"main": "src/index.ts",
+	"types": "src/index.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		}
+	},
+	"scripts": {
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write . && eslint --fix .",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"zod": "3.22.4",
+		"zod-validation-error": "2.1.0"
+	},
+	"peerDependencies": {
+		"typescript": "5.3.3"
+	},
+	"devDependencies": {
+		"@spectacular/eslint-config": "workspace:*",
+		"@spectacular/prettier-config": "workspace:*",
+		"@spectacular/typescript-config": "workspace:*"
+	}
+}

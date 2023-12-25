@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { OutClick } from '@spectacular/ui';
+	import { OutClick } from '@spectacular/skeleton/components';
 	import { count } from './components/count.js';
 </script>
 

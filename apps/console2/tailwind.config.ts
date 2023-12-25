@@ -1,7 +1,17 @@
-import baseConfig from '@spectacular/tailwind-config/tailwind.skeleton.config';
+import baseConfig from '@spectacular/skeleton/tailwind.config';
 import type { Config } from 'tailwindcss';
 
 export default {
-	content: [...baseConfig.content, './src/**/*.{html,js,svelte,ts}'],
-	presets: [baseConfig]
+	presets: [baseConfig],
+	content: [...baseConfig.content],
+	theme: {
+		extend: {
+			fontFamily: {
+				heading: "'Sora Variable', sans-serif",
+				sans: "'Inter Variable', sans-serif",
+				mono: "'JetBrains Mono', monospace",
+				serif: "'Roboto Slab Variable', sans-serif"
+			}
+		}
+	}
 } satisfies Config;

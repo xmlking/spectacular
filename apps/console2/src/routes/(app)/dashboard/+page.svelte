@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Debug } from '@spectacular/ui/skeleton';
+	import { Debug } from '@spectacular/skeleton/components';
 	import { version } from '$app/environment';
 	console.log(`Client version: ${version}`);
 </script>

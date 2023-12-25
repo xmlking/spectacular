@@ -23,24 +23,9 @@ src/lib/models/types/**
 dev-dist
 
 ## custom
-/infra/helm/templates/deployment.yaml
-infra/helm/templates/ingress.yaml
-infra/hasura
-**/*.min.css
-
-**/.turbo
+/apps/
+/packages/
 /.nhost/
 /nhost/*
 !/nhost/emails/
-/apps/story/storybook-static/
-/apps/*/.svelte-kit
-/apps/*/$houdini/
-/apps/*/schema.graphql
-
-.vercel/
-.astro/
-
-# generated files by typesafe-i18n
-/apps/**/lib/i18n
-# generated files by shadcn
-packages/ui/src/lib/components/ui
+.turbo

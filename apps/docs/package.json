@@ -8,10 +8,10 @@
 		"build": "astro check && astro build",
 		"preview": "astro preview",
 		"lint:js": "eslint .",
-		"lint:prettier": "prettier --check --ignore-path=../../.prettierignore --plugin=prettier-plugin-astro .",
+		"lint:prettier": "prettier --check --plugin=prettier-plugin-astro .",
 		"lint": "concurrently pnpm:lint:*",
 		"format:js": "eslint --fix .",
-		"format:prettier": "prettier --write --ignore-path=../../.prettierignore .",
+		"format:prettier": "prettier --write .",
 		"format": "concurrently pnpm:format:*",
 		"astro": "astro"
 	},

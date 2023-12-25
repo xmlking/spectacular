@@ -1,0 +1,66 @@
+{
+	"name": "@spectacular/skeleton",
+	"description": "Shared skeleton UI components",
+	"type": "module",
+	"types": "./index.d.ts",
+	"exports": {
+		".": {
+			"types": "./index.d.ts"
+		},
+		"./components": {
+			"default": "./components/index.ts"
+		},
+		"./utils": {
+			"default": "./utils/index.ts"
+		},
+		"./theme": {
+			"default": "./styles/theme.postcss"
+		},
+		"./postcss.config": {
+			"default": "./postcss.config.cjs"
+		},
+		"./tailwind.config": {
+			"default": "./tailwind.config.ts"
+		}
+	},
+	"scripts": {
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write . && eslint --fix .",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"peerDependencies": {
+		"@sveltejs/kit": "^2.0.0",
+		"svelte": "^4.0.0"
+	},
+	"dependencies": {
+		"lucide-svelte": "0.301.0"
+	},
+	"devDependencies": {
+		"@floating-ui/dom": "1.5.3",
+		"@playwright/test": "1.40.1",
+		"@skeletonlabs/skeleton": "2.6.1",
+		"@skeletonlabs/tw-plugin": "0.3.0",
+		"@tsconfig/svelte": "5.0.2",
+		"@spectacular/eslint-config": "workspace:*",
+		"@spectacular/typescript-config": "workspace:*",
+		"clsx": "2.0.0",
+		"formsnap": "0.4.1",
+		"postcss-import": "15.1.0",
+		"postcss-load-config": "5.0.2",
+		"sveltekit-superforms": "1.13.1",
+		"tailwind-merge": "2.2.0",
+		"tailwind-variants": "0.1.19",
+		"tailwindcss": "3.4.0",
+		"tslib": "2.6.2",
+		"vite": "5.0.10",
+		"vitest": "1.1.0",
+		"autoprefixer": "10.4.16",
+		"postcss": "8.4.32",
+		"@tailwindcss/container-queries": "0.1.1",
+		"@tailwindcss/forms": "0.5.5",
+		"@tailwindcss/line-clamp": "0.4.4",
+		"@tailwindcss/typography": "0.5.9",
+		"typescript": "5.3.3"
+	}
+}

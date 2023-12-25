@@ -1,0 +1,24 @@
+{
+	"extends": "@tsconfig/svelte/tsconfig.json",
+	"include": ["."],
+	"exclude": ["node_modules", "styles", "./*.cjs"],
+	"compilerOptions": {
+		"baseUrl": ".",
+		"allowJs": true,
+		"checkJs": false,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"strict": true,
+		"target": "esnext",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"ignoreDeprecations": "5.0",
+		"lib": ["esnext", "DOM", "DOM.Iterable"],
+		"paths": {
+			"$ui/components": ["./components"],
+			"$ui/components/*": ["./components/*"],
+			"$ui/utils": ["./utils"],
+			"$ui/utils/*": ["./utils/*"]
+		}
+	}
+}

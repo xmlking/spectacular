@@ -1,15 +1,16 @@
 import * as child_process from 'node:child_process';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // const path = fileURLToPath(new URL('package.json', import.meta.url));
 // const pkg = JSON.parse(readFileSync(path, 'utf8'));
 // __APP_VERSION__: JSON.stringify(pkg.version),
 
 export default defineConfig({
-	plugins: [enhancedImages(), sveltekit(), purgeCss()],
+	plugins: [enhancedImages(), sveltekit(), purgeCss(), tsconfigPaths()],
 	define: {
 		// to burn-in release version in the footer.svelte
 		__APP_VERSION__: JSON.stringify(process.env.npm_package_version),
@@ -24,16 +25,8 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
-	optimizeDeps: {
-		include: ['@spectacular/ui']
-	},
-	build: {
-		commonjsOptions: {
-			include: [/@spectacular-ui/, /node_modules/]
-		}
-	},
 	ssr: {
 		// add all tsparticles libraries here, they're not made for SSR, they're client only
-		noExternal: ['tsparticles', 'tsparticles-slim', 'tsparticles-engine', 'svelte-particles']
+		noExternal: ["tsparticles", "@tsparticles/slim", "@tsparticles/engine", "@tsparticles/svelte"]
 	}
 });
