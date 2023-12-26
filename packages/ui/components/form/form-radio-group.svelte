@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { getFormField } from 'formsnap';
-	import type { RadioGroup as RadioGroupPrimitive } from 'bits-ui';
-	import { RadioGroup } from '$ui/components/radio-group';
+	import { getFormField } from "formsnap";
+	import type { RadioGroup as RadioGroupPrimitive } from "bits-ui";
+	import * as RadioGroup from "$ui/components/radio-group";
 
 	type $$Props = RadioGroupPrimitive.Props;
 	const { attrStore, setValue, name, value } = getFormField();
 
-	export let onValueChange: $$Props['onValueChange'] = undefined;
+	export let onValueChange: $$Props["onValueChange"] = undefined;
 </script>
 
 <RadioGroup.Root

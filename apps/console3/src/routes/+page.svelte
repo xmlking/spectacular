@@ -1,2 +1,7 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import { Button } from '@spectacular/ui/components/button';
+	import { DashboardPage } from '$lib/components/dashboard';
+</script>
+<DashboardPage />>
+<Button>Button</Button>
+

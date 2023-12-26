@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { getFormField } from 'formsnap';
-	import type { HTMLInputAttributes } from 'svelte/elements';
-	import { Input, type InputEvents } from '$ui/components/input';
+	import { getFormField } from "formsnap";
+	import type { HTMLInputAttributes } from "svelte/elements";
+	import { Input, type InputEvents } from "$ui/components/input";
 
 	type $$Props = HTMLInputAttributes;
 	type $$Events = InputEvents;

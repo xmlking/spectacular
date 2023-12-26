@@ -1,20 +1,25 @@
 <script lang="ts">
-	import { Slider as SliderPrimitive } from 'bits-ui';
-	import { cn } from '$ui/utils';
+	import { Slider as SliderPrimitive } from "bits-ui";
+	import { cn } from "$ui/utils";
 
 	type $$Props = SliderPrimitive.Props;
 
-	let className: $$Props['class'] = undefined;
-	export let value: $$Props['value'] = [0];
+	let className: $$Props["class"] = undefined;
+	export let value: $$Props["value"] = [0];
 	export { className as class };
 </script>
 
 <SliderPrimitive.Root
 	bind:value
-	class={cn('relative flex w-full touch-none select-none items-center', className)}
+	class={cn(
+		"relative flex w-full touch-none select-none items-center",
+		className
+	)}
 	{...$$restProps}
 >
-	<span class="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary">
+	<span
+		class="relative h-2 w-full grow overflow-hidden rounded-full bg-secondary"
+	>
 		<SliderPrimitive.Range class="absolute h-full bg-primary" />
 	</span>
 	<SliderPrimitive.Thumb

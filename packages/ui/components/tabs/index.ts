@@ -1,9 +1,18 @@
-import { Tabs as TabsPrimitive } from 'bits-ui';
-import Content from './tabs-content.svelte';
-import List from './tabs-list.svelte';
-import Trigger from './tabs-trigger.svelte';
+import { Tabs as TabsPrimitive } from "bits-ui";
+import Content from "./tabs-content.svelte";
+import List from "./tabs-list.svelte";
+import Trigger from "./tabs-trigger.svelte";
 
 const Root = TabsPrimitive.Root;
 
-export const Tabs = { Root, Content, List, Trigger };
-export { Root as TabsRoot, Content as TabsContent, List as TabsList, Trigger as TabsTrigger };
+export {
+	Root,
+	Content,
+	List,
+	Trigger,
+	//
+	Root as Tabs,
+	Content as TabsContent,
+	List as TabsList,
+	Trigger as TabsTrigger
+};

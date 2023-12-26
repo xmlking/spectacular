@@ -1,68 +1,65 @@
-import { Form as FormPrimitive, getFormField } from 'formsnap';
-import { RadioGroupItem as RadioGroupCompItem } from '$ui/components/radio-group';
-import {
-	SelectContent as SelectCompContent,
-	SelectLabel as SelectCompLabel,
-	SelectGroup as SelectCompGroup,
-	SelectItem as SelectCompItem,
-	SelectSeparator as SelectCompSeparator
-} from '$ui/components/select';
-import type { Writable } from 'svelte/store';
-import Item from './form-item.svelte';
-import Input from './form-input.svelte';
-import Textarea from './form-textarea.svelte';
-import Description from './form-description.svelte';
-import Label from './form-label.svelte';
-import Validation from './form-validation.svelte';
-import Checkbox from './form-checkbox.svelte';
-import Switch from './form-switch.svelte';
-import NativeSelect from './form-native-select.svelte';
-import RadioGroup from './form-radio-group.svelte';
-import Select from './form-select.svelte';
-import SelectTrigger from './form-select-trigger.svelte';
-import Button from './form-button.svelte';
+import { Form as FormPrimitive, getFormField } from "formsnap";
+import * as RadioGroupComp from "$ui/components/radio-group";
+import * as SelectComp from "$ui/components/select";
+import type { Writable } from "svelte/store";
+import Item from "./form-item.svelte";
+import Input from "./form-input.svelte";
+import Textarea from "./form-textarea.svelte";
+import Description from "./form-description.svelte";
+import Label from "./form-label.svelte";
+import Validation from "./form-validation.svelte";
+import Checkbox from "./form-checkbox.svelte";
+import Switch from "./form-switch.svelte";
+import NativeSelect from "./form-native-select.svelte";
+import RadioGroup from "./form-radio-group.svelte";
+import Select from "./form-select.svelte";
+import SelectTrigger from "./form-select-trigger.svelte";
+import Button from "./form-button.svelte";
 
 const Root = FormPrimitive.Root;
 const Field = FormPrimitive.Field;
 const Control = FormPrimitive.Control;
-const RadioItem = RadioGroupCompItem;
+const RadioItem = RadioGroupComp.Item;
 const NativeRadio = FormPrimitive.Radio;
-const SelectContent = SelectCompContent;
-const SelectLabel = SelectCompLabel;
-const SelectGroup = SelectCompGroup;
-const SelectItem = SelectCompItem;
-const SelectSeparator = SelectCompSeparator;
+const SelectContent = SelectComp.Content;
+const SelectLabel = SelectComp.Label;
+const SelectGroup = SelectComp.Group;
+const SelectItem = SelectComp.Item;
+const SelectSeparator = SelectComp.Separator;
 
-export type TextareaGetFormField = Omit<ReturnType<typeof getFormField>, 'value'> & {
+export type TextareaGetFormField = Omit<
+	ReturnType<typeof getFormField>,
+	"value"
+> & {
 	value: Writable<string>;
 };
 
-export const Form = {
+export {
 	Root,
 	Field,
 	Control,
 	Item,
 	Input,
-	Textarea,
-	Description,
 	Label,
-	Validation,
-	Checkbox,
+	Button,
 	Switch,
-	NativeSelect,
-	NativeRadio,
+	Select,
+	Checkbox,
+	Textarea,
+	Validation,
 	RadioGroup,
 	RadioItem,
-	Select,
+	Description,
 	SelectContent,
 	SelectLabel,
 	SelectGroup,
 	SelectItem,
 	SelectSeparator,
 	SelectTrigger,
-	Button
-};
-export {
+	NativeSelect,
+	NativeRadio,
+	//
+	Root as Form,
 	Field as FormField,
 	Control as FormControl,
 	Item as FormItem,
