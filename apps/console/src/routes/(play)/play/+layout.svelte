@@ -15,5 +15,5 @@
 	<main class="flex-grow px-3 pt-1">
 		<slot />
 	</main>
-	<footer class="flex justify-center border-t-2 p-5"> Social links </footer>
+	<footer class="flex justify-center border-t-2 p-5">Social links</footer>
 </div>

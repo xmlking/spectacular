@@ -79,7 +79,10 @@ const parsed = schema.safeParse({ ...statPriEnv, ...(!building && dynPriEnv) });
 
 if (!parsed.success) {
 	// TODO: check is `building` and skip `exit` if missing environment variables?
-	console.error('❌ Invalid environment variables:', JSON.stringify(parsed.error.format(), null, 4));
+	console.error(
+		'❌ Invalid environment variables:',
+		JSON.stringify(parsed.error.format(), null, 4)
+	);
 	process.exit(1);
 }
 

@@ -21,9 +21,7 @@
 <Navbar let:hidden let:toggle border={true} rounded={true}>
 	<NavBrand>
 		<UsersOutline />
-		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-			Users
-		</span>
+		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"> Users </span>
 	</NavBrand>
 	<div>
 		<div class="relative hidden md:block">
@@ -55,9 +53,7 @@
 								>Admin</span
 							>
 						</div>
-						<p class="mt-1 truncate text-sm text-gray-500"
-							>Regional Paradigm Technician</p
-						>
+						<p class="mt-1 truncate text-sm text-gray-500">Regional Paradigm Technician</p>
 					</div>
 					<img
 						class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
@@ -82,9 +78,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -122,8 +116,7 @@
 								>Admin</span
 							>
 						</div>
-						<p class="mt-1 truncate text-sm text-gray-500">Product Directives Officer</p
-						>
+						<p class="mt-1 truncate text-sm text-gray-500">Product Directives Officer</p>
 					</div>
 					<img
 						class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
@@ -148,9 +141,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -182,15 +173,13 @@
 				<div class="flex w-full items-center justify-between space-x-6 p-6">
 					<div class="flex-1 truncate">
 						<div class="flex items-center space-x-3">
-							<h3 class="truncate text-sm font-medium text-gray-900">Esther Howard</h3
-							>
+							<h3 class="truncate text-sm font-medium text-gray-900">Esther Howard</h3>
 							<span
 								class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</div>
-						<p class="mt-1 truncate text-sm text-gray-500">Forward Response Developer</p
-						>
+						<p class="mt-1 truncate text-sm text-gray-500">Forward Response Developer</p>
 					</div>
 					<img
 						class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
@@ -215,9 +204,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -280,9 +267,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -314,17 +299,13 @@
 				<div class="flex w-full items-center justify-between space-x-6 p-6">
 					<div class="flex-1 truncate">
 						<div class="flex items-center space-x-3">
-							<h3 class="truncate text-sm font-medium text-gray-900"
-								>Kristin Watson</h3
-							>
+							<h3 class="truncate text-sm font-medium text-gray-900">Kristin Watson</h3>
 							<span
 								class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</div>
-						<p class="mt-1 truncate text-sm text-gray-500"
-							>Lead Implementation Liaison</p
-						>
+						<p class="mt-1 truncate text-sm text-gray-500">Lead Implementation Liaison</p>
 					</div>
 					<img
 						class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
@@ -349,9 +330,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -383,17 +362,13 @@
 				<div class="flex w-full items-center justify-between space-x-6 p-6">
 					<div class="flex-1 truncate">
 						<div class="flex items-center space-x-3">
-							<h3 class="truncate text-sm font-medium text-gray-900"
-								>Cameron Williamson</h3
-							>
+							<h3 class="truncate text-sm font-medium text-gray-900">Cameron Williamson</h3>
 							<span
 								class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</div>
-						<p class="mt-1 truncate text-sm text-gray-500"
-							>Internal Applications Engineer</p
-						>
+						<p class="mt-1 truncate text-sm text-gray-500">Internal Applications Engineer</p>
 					</div>
 					<img
 						class="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
@@ -418,9 +393,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>

@@ -35,7 +35,10 @@ describe('Test zod validations', () => {
 			['key2', 'value2']
 		]);
 		expect(stringToMap(annotations)).toStrictEqual(annotationsMap);
-		const schema = z.preprocess(stringToMap, z.map(z.string().trim().min(3), z.string().trim().min(3)).nullish());
+		const schema = z.preprocess(
+			stringToMap,
+			z.map(z.string().trim().min(3), z.string().trim().min(3)).nullish()
+		);
 		expect(schema.parse(annotations)).toStrictEqual(annotationsMap);
 
 		// const annotations2 = `{ sumo: 'demo' }`;

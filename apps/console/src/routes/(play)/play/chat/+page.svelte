@@ -71,12 +71,10 @@
 	use:draggable={{ axis: 'both', bounds: 'parent', handle: '.handle' }}
 >
 	<Card padding="lg" class="chat h-96">
-		<div class="flex justify-between"
-			><h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">Eliza Chat</h3><Badge
-				large={true}
-				color="pink">Drag Me</Badge
-			></div
-		>
+		<div class="flex justify-between">
+			<h3 class="p-0 text-xl font-medium text-gray-900 dark:text-white">Eliza Chat</h3>
+			<Badge large={true} color="pink">Drag Me</Badge>
+		</div>
 		<Hr class="my-8" height="h-px" />
 		<div class="scrollable" bind:this={div}>
 			{#each comments as comment}
@@ -85,13 +83,7 @@
 				</article>
 			{/each}
 		</div>
-		<Input
-			on:keydown={handleKeydown}
-			type="text"
-			placeholder="Type here"
-			color="green"
-			size="lg"
-		/>
+		<Input on:keydown={handleKeydown} type="text" placeholder="Type here" color="green" size="lg" />
 	</Card>
 </div>
 

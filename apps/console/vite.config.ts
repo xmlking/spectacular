@@ -81,10 +81,16 @@ export default defineConfig({
 		__APP_VERSION__: JSON.stringify(process.env.npm_package_version),
 		// fallback values: BUILD_VERSION and BUILD_TIME are passed as --build-arg to docker build
 		__GIT_TAG__: JSON.stringify(
-			child_process.execSync('git describe --tags || git rev-parse --short HEAD').toString().trim() ?? process.env.BUILD_VERSION
+			child_process
+				.execSync('git describe --tags || git rev-parse --short HEAD')
+				.toString()
+				.trim() ?? process.env.BUILD_VERSION
 		),
 		__GIT_DATE__: JSON.stringify(
-			child_process.execSync('git log -1 --format=%cd --date=format:"%Y-%m-%d %H:%M"').toString().trim() ?? process.env.BUILD_TIME
+			child_process
+				.execSync('git log -1 --format=%cd --date=format:"%Y-%m-%d %H:%M"')
+				.toString()
+				.trim() ?? process.env.BUILD_TIME
 		)
 	},
 	test: {

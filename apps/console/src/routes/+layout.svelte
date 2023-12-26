@@ -43,6 +43,7 @@
 </script>
 
 <svelte:head>
+	<!-- eslint-disable svelte/no-at-html-tags  -->
 	{@html webManifest}
 </svelte:head>
 

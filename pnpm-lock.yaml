@@ -154,6 +154,9 @@ importers:
       '@types/js-cookie':
         specifier: 3.0.6
         version: 3.0.6
+      '@types/node':
+        specifier: 20.10.5
+        version: 20.10.5
       '@typescript-eslint/eslint-plugin':
         specifier: 6.15.0
         version: 6.15.0(@typescript-eslint/parser@6.15.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -199,6 +202,9 @@ importers:
       eslint-plugin-svelte:
         specifier: 2.35.1
         version: 2.35.1(eslint@8.56.0)(svelte@4.2.8)
+      flowbite:
+        specifier: 2.2.1
+        version: 2.2.1
       flowbite-svelte:
         specifier: 0.44.21
         version: 0.44.21(svelte@4.2.8)
@@ -1012,7 +1018,7 @@ importers:
         specifier: 1.11.2
         version: 1.11.2(eslint@8.56.0)
       eslint-import-resolver-typescript:
-        specifier: ^3.6.1
+        specifier: 3.6.1
         version: 3.6.1(@typescript-eslint/parser@6.15.0)(eslint-plugin-import@2.29.1)(eslint@8.56.0)
       eslint-plugin-astro:
         specifier: 0.31.0
@@ -6201,7 +6207,7 @@ packages:
   /@types/sax@1.2.7:
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 20.10.5
 
   /@types/semver@7.5.6:
     resolution: {integrity: sha512-dn1l8LaMea/IjDoHNd9J52uBbInB796CDffS6VdIxvqYCPSG0V0DzHp76GpaWnlhg88uYyPbXCDIowa86ybd5A==}

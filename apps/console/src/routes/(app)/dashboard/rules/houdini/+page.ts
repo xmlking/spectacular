@@ -2,7 +2,11 @@ import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/client';
 import { ruleSearchSchema as schema } from '$lib/models/schema';
 import { Logger } from '$lib/utils';
-import type { AfterLoadEvent, BeforeLoadEvent, SearchSharedRules1Variables as Variables } from './$houdini';
+import type {
+	AfterLoadEvent,
+	BeforeLoadEvent,
+	SearchSharedRules1Variables as Variables
+} from './$houdini';
 const log = new Logger('rule.browser');
 
 export const _SearchSharedRules1Variables: Variables = async ({ url }) => {

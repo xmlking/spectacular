@@ -1,7 +1,11 @@
 import envPri from '$lib/variables/variables.server';
 
-const defaultUserFilter = envPri.DIRECTORY_FILTER_USER_SUFFIX ? `endswith(userPrincipalName,'${envPri.DIRECTORY_FILTER_USER_SUFFIX}')` : '';
-const defaultGroupFilter = envPri.DIRECTORY_FILTER_GROUP_PREFIX ? `startswith(displayName,'${envPri.DIRECTORY_FILTER_GROUP_PREFIX}')` : '';
+const defaultUserFilter = envPri.DIRECTORY_FILTER_USER_SUFFIX
+	? `endswith(userPrincipalName,'${envPri.DIRECTORY_FILTER_USER_SUFFIX}')`
+	: '';
+const defaultGroupFilter = envPri.DIRECTORY_FILTER_GROUP_PREFIX
+	? `startswith(displayName,'${envPri.DIRECTORY_FILTER_GROUP_PREFIX}')`
+	: '';
 const defaultDeviceFilter = envPri.DIRECTORY_FILTER_DEVICE_PREFIX
 	? `startswith(displayName,'${envPri.DIRECTORY_FILTER_DEVICE_PREFIX}')`
 	: '';
@@ -98,7 +102,11 @@ export async function listUsers1(fetch: Fetch, search: string, filter?: string) 
 	});
 	if (res.ok) {
 		const data: MSGraphResponse<User> = await res.json();
-		return data.value.map(({ id, displayName, userPrincipalName }) => ({ id, displayName, secondaryId: userPrincipalName }));
+		return data.value.map(({ id, displayName, userPrincipalName }) => ({
+			id,
+			displayName,
+			secondaryId: userPrincipalName
+		}));
 	} else {
 		console.log(`Error ${res.status} calling MSGraphAPI in getUsers: ${res.statusText}`);
 		throw `Error code: ${res.status} statusText: ${res.statusText}`;
@@ -120,7 +128,11 @@ export async function listGroups1(fetch: Fetch, search: string, filter?: string)
 	});
 	if (res.ok) {
 		const data: MSGraphResponse<Group> = await res.json();
-		return data.value.map(({ id, displayName, securityIdentifier }) => ({ id, displayName, secondaryId: securityIdentifier }));
+		return data.value.map(({ id, displayName, securityIdentifier }) => ({
+			id,
+			displayName,
+			secondaryId: securityIdentifier
+		}));
 	} else {
 		console.log(`Error ${res.status} calling MSGraphAPI in getUsers: ${res.statusText}`);
 		throw `Error code: ${res.status} statusText: ${res.statusText}`;

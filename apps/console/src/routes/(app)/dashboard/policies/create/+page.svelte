@@ -274,11 +274,7 @@
 					{/if}
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
-					<input
-						type="hidden"
-						name="subjectDisplayName"
-						value={value ? value.displayName : null}
-					/>
+					<input type="hidden" name="subjectDisplayName" value={value ? value.displayName : null} />
 				</svelte:fragment>
 			</Select>
 			{#if $errors.subjectId || $errors.subjectSecondaryId || $errors.subjectDisplayName}
@@ -303,11 +299,7 @@
 					<SearchOutline />
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
-					<input
-						type="hidden"
-						name="ruleDisplayName"
-						value={value ? value.displayName : null}
-					/>
+					<input type="hidden" name="ruleDisplayName" value={value ? value.displayName : null} />
 				</svelte:fragment>
 			</Select>
 			{#if $errors.ruleId}
@@ -351,11 +343,8 @@
 			<Radio field="rule.direction" items={directionOptions} {disabled} />
 		</div>
 		<div class="col-start-5 flex justify-end">
-			<Toggle
-				field="rule.shared"
-				class="toggle-secondary toggle"
-				labelPosition="before"
-				{disabled}>Shared</Toggle
+			<Toggle field="rule.shared" class="toggle-secondary toggle" labelPosition="before" {disabled}
+				>Shared</Toggle
 			>
 		</div>
 		<div class="col-end-7">

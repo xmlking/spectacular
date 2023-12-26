@@ -16,12 +16,12 @@
 	<p class="font-bold">FieldErrors</p>
 	<ul>
 		{#each Object.entries(fieldErrors) as [fieldName, errors]}
-			<li
-				><p
-					><span class="font-bold">{fieldName}:</span>
-					<span class="text-ellipsis">{errors}</span></p
-				></li
-			>
+			<li>
+				<p>
+					<span class="font-bold">{fieldName}:</span>
+					<span class="text-ellipsis">{errors}</span>
+				</p>
+			</li>
 		{/each}
 	</ul>
 {/if}

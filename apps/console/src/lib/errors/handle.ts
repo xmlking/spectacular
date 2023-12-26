@@ -3,7 +3,14 @@
 import { error, fail } from '@sveltejs/kit';
 import { ZodError } from 'zod';
 import { NotFoundError } from './custom';
-import { getAppError, isAppError, isHttpError, isRedirect, ResponseError, ValidationError } from '.';
+import {
+	getAppError,
+	isAppError,
+	isHttpError,
+	isRedirect,
+	ResponseError,
+	ValidationError
+} from '.';
 
 export function handleLoadErrors(err: unknown) {
 	// console.error(error.stack);

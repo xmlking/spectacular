@@ -23,7 +23,11 @@ export function cleanClone<T extends Object>(obj: T, opts: CleanOpts): T {
 function stripEmptyProperties(obj) {
 	for (const key in obj) {
 		if (obj.hasOwnProperty(key)) {
-			if (obj[key] === null || obj[key] === undefined || (typeof obj[key] === 'string' && obj[key].trim() === '')) {
+			if (
+				obj[key] === null ||
+				obj[key] === undefined ||
+				(typeof obj[key] === 'string' && obj[key].trim() === '')
+			) {
 				delete obj[key];
 			} else if (typeof obj[key] === 'object' && !(obj[key] instanceof Date)) {
 				stripEmptyProperties(obj[key]); // Recursively check nested objects
@@ -37,7 +41,11 @@ function stripEmptyProperties(obj) {
 function nullifyEmptyProperties(obj) {
 	for (const key in obj) {
 		if (obj.hasOwnProperty(key)) {
-			if (obj[key] === null || obj[key] === undefined || (typeof obj[key] === 'string' && obj[key].trim() === '')) {
+			if (
+				obj[key] === null ||
+				obj[key] === undefined ||
+				(typeof obj[key] === 'string' && obj[key].trim() === '')
+			) {
 				obj[key] = null;
 			} else if (typeof obj[key] === 'object' && !(obj[key] instanceof Date)) {
 				nullifyEmptyProperties(obj[key]); // Recursively check nested objects
@@ -68,6 +76,10 @@ if (import.meta.vitest) {
 			occupation: undefined
 		};
 		const cloneObj = cleanClone(jsonObject, { empty: 'strip' });
-		expect(cloneObj).toStrictEqual({ name: 'John', dob: new Date('2023-06-05T07:07:00.000Z'), address: { street: '123 Main St' } });
+		expect(cloneObj).toStrictEqual({
+			name: 'John',
+			dob: new Date('2023-06-05T07:07:00.000Z'),
+			address: { street: '123 Main St' }
+		});
 	});
 }

@@ -101,7 +101,10 @@ function checkTemplates(words: string[]): string[] {
 					for (let i = 0; i < newWordsSplit.length; i += 1) {
 						words[rememberIndex1 + i] = newWordsSplit[i];
 					}
-					words.splice(rememberIndex1 + newWordsSplit.length, index1 - rememberIndex1 + newWordsSplit.length);
+					words.splice(
+						rememberIndex1 + newWordsSplit.length,
+						index1 - rememberIndex1 + newWordsSplit.length
+					);
 				} else if (index1 > words.length) {
 					check = false;
 				} else if (words[index1] == list[index2]) {

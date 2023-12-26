@@ -56,7 +56,13 @@ export const actions = {
 			...(originalShared == false && shared == true && { shared })
 		};
 
-		const variables = { policyId: id, policyData, ruleId, ruleData, skipRuleUpdate: originalShared };
+		const variables = {
+			policyId: id,
+			policyData,
+			ruleId,
+			ruleData,
+			skipRuleUpdate: originalShared
+		};
 		log.debug('UPDATE action variables:', variables);
 		const { errors, data } = await updatePolicyStore.mutate(variables, {
 			metadata: { logResult: true },
@@ -76,7 +82,8 @@ export const actions = {
 		}
 
 		const { update_policies_by_pk: policyResult, update_rules_by_pk: ruleResult } = data || {};
-		if (!policyResult) return setMessage(form, 'Update policy failed: responce empty', { status: 404 });
+		if (!policyResult)
+			return setMessage(form, 'Update policy failed: responce empty', { status: 404 });
 
 		const message = {
 			message: `Policy for Subject: ${policyResult.subjectDisplayName} ${

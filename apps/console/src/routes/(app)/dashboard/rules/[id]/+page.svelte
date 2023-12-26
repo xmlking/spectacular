@@ -98,11 +98,8 @@
 				<Radio field={keys.direction} items={directionOptions} />
 			</div>
 			<div class="col-start-5 flex justify-end">
-				<Toggle
-					field={keys.shared}
-					class="toggle-secondary toggle"
-					labelPosition="before"
-					disabled>Shared</Toggle
+				<Toggle field={keys.shared} class="toggle-secondary toggle" labelPosition="before" disabled
+					>Shared</Toggle
 				>
 			</div>
 			<div class="col-end-7">

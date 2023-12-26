@@ -6,6 +6,7 @@
 	let width = browser ? window.innerWidth : 1000;
 	let selected_view = 0;
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	$: mobile = writable(false);
 	$: $mobile = width < 768;
 </script>

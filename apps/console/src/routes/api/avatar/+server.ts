@@ -6,7 +6,12 @@ import { env as dynPriEnv } from '$env/dynamic/private';
 export const prerender = false;
 
 export async function GET({ request, fetch }) {
-	const token = await getToken({ req: request, secret: dynPriEnv.HASURA_GRAPHQL_JWT_SECRET_KEY, salt: '', raw: true });
+	const token = await getToken({
+		req: request,
+		secret: dynPriEnv.HASURA_GRAPHQL_JWT_SECRET_KEY,
+		salt: '',
+		raw: true
+	});
 	const res = await fetch('https://graph.microsoft.com/v1.0/me/photos/48x48/$value', {
 		headers: {
 			Authorization: `Bearer ${token}`,

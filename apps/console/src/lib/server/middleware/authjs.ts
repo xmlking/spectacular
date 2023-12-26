@@ -34,7 +34,11 @@ export const authjs = SvelteKitAuth({
 					CredentialsProvider({
 						name: 'Dummy Account',
 						credentials: {
-							username: { label: 'Username', type: 'text', placeholder: 'type any username / password' },
+							username: {
+								label: 'Username',
+								type: 'text',
+								placeholder: 'type any username / password'
+							},
 							password: { label: 'Password', type: 'password' },
 							domain: { label: 'Domain', type: 'select', value: envPub.PUBLIC_DEFAULT_ORGANIZATION }
 						},
@@ -63,7 +67,10 @@ export const authjs = SvelteKitAuth({
 			authorization: { params: { scope: 'openid profile User.Read email' } }
 			// client: {},
 		}),
-		GitHub({ clientId: envPri.AUTH_PROVIDER_GITHUB_CLIENT_ID, clientSecret: envPri.AUTH_PROVIDER_GITHUB_CLIENT_SECRET })
+		GitHub({
+			clientId: envPri.AUTH_PROVIDER_GITHUB_CLIENT_ID,
+			clientSecret: envPri.AUTH_PROVIDER_GITHUB_CLIENT_SECRET
+		})
 	] as Provider[],
 	callbacks: {
 		async redirect({ url, baseUrl }) {

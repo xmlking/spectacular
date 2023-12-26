@@ -27,7 +27,11 @@ export const actions = {
 
 		// TODO: validate incoming data with business rules
 		if (form.data.ruleId && form.data.rule.shared == false) {
-			return setError(form, 'ruleId', 'Only shared rules are allowed to pick from. Chose a shared rule');
+			return setError(
+				form,
+				'ruleId',
+				'Only shared rules are allowed to pick from. Chose a shared rule'
+			);
 		}
 
 		//const dataCopy = { ...form.data };

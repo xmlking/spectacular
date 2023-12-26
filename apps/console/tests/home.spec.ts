@@ -12,7 +12,9 @@ test.describe.serial('Home page', () => {
 		await page.close();
 	});
 
-	test('has Home in title and get started link linking to the dashboard page @fast', async ({ page }) => {
+	test('has Home in title and get started link linking to the dashboard page @fast', async ({
+		page
+	}) => {
 		await page.goto('/');
 
 		// Expect a title "to contain" a substring.
@@ -44,10 +46,11 @@ test.describe.serial('Home page', () => {
 		// This test is not run
 		await page.goto('/');
 		await page.bringToFront();
-		await expect(page.getByRole('heading', { name: 'Combine GraphQL APIs into a unified supergraph' })).toBeVisible();
+		await expect(
+			page.getByRole('heading', { name: 'Combine GraphQL APIs into a unified supergraph' })
+		).toBeVisible();
 
 		// Recording...
-		// eslint-disable-next-line turbo/no-undeclared-env-vars
 		const { USERNAME = 'sumo', PASSWORD = 'demo' } = process.env;
 		await page.getByRole('link', { name: 'dashboard-link' }).click();
 		await expect(page).toHaveURL(/login/);

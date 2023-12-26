@@ -15,9 +15,9 @@
 				>Filled success</label
 			>
 		</div>
-		<p id="filled_success_help" class="mt-2 text-xs text-green-600 dark:text-green-400"
-			><span class="font-medium">Well done!</span> Some success message.</p
-		>
+		<p id="filled_success_help" class="mt-2 text-xs text-green-600 dark:text-green-400">
+			<span class="font-medium">Well done!</span> Some success message.
+		</p>
 	</div>
 	<div>
 		<div class="relative">
@@ -34,9 +34,9 @@
 				>Outlined success</label
 			>
 		</div>
-		<p id="outlined_success_help" class="mt-2 text-xs text-green-600 dark:text-green-400"
-			><span class="font-medium">Well done!</span> Some success message.</p
-		>
+		<p id="outlined_success_help" class="mt-2 text-xs text-green-600 dark:text-green-400">
+			<span class="font-medium">Well done!</span> Some success message.
+		</p>
 	</div>
 	<div>
 		<div class="relative z-0">
@@ -53,9 +53,9 @@
 				>Standard success</label
 			>
 		</div>
-		<p id="standard_success_help" class="mt-2 text-xs text-green-600 dark:text-green-400"
-			><span class="font-medium">Well done!</span> Some success message.</p
-		>
+		<p id="standard_success_help" class="mt-2 text-xs text-green-600 dark:text-green-400">
+			<span class="font-medium">Well done!</span> Some success message.
+		</p>
 	</div>
 </div>
 
@@ -76,9 +76,9 @@
 				>Filled error</label
 			>
 		</div>
-		<p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"
-			><span class="font-medium">Oh, snapp!</span> Some error message.</p
-		>
+		<p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+			<span class="font-medium">Oh, snapp!</span> Some error message.
+		</p>
 	</div>
 	<div>
 		<div class="relative">
@@ -95,9 +95,9 @@
 				>Outlined error</label
 			>
 		</div>
-		<p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"
-			><span class="font-medium">Oh, snapp!</span> Some error message.</p
-		>
+		<p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+			<span class="font-medium">Oh, snapp!</span> Some error message.
+		</p>
 	</div>
 	<div>
 		<div class="relative z-0">
@@ -114,8 +114,8 @@
 				>Standard error</label
 			>
 		</div>
-		<p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"
-			><span class="font-medium">Oh, snapp!</span> Some error message.</p
-		>
+		<p id="standard_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+			<span class="font-medium">Oh, snapp!</span> Some error message.
+		</p>
 	</div>
 </div>

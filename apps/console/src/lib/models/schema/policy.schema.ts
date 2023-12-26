@@ -14,7 +14,9 @@ export const policySchema = z.object({
 	subjectDisplayName: z.string().trim().nonempty(),
 	subjectId: z.string().trim().nonempty(),
 	subjectSecondaryId: z.string().trim().nonempty(),
-	subjectType: z.enum(['user', 'group', 'device', 'service_account', 'device_pool']).default('user'),
+	subjectType: z
+		.enum(['user', 'group', 'device', 'service_account', 'device_pool'])
+		.default('user'),
 	active: z.boolean().optional().default(true),
 	ruleId: z.string().trim().uuid(),
 	rule: z.object({
@@ -29,8 +31,12 @@ export const policySchema = z.object({
 		sourcePort: z.string().trim().nullish(),
 		destination: z.string().ip().nullish(),
 		destinationPort: z.string().trim().nullish(),
-		protocol: z.enum(['Any', 'IP', 'ICMP', 'IGMP', 'TCP', 'UDP', 'IPV6', 'ICMPV6', 'RM']).default('Any'),
-		action: z.enum(['permit', 'block', 'callout_inspection', 'callout_terminating', 'callout_unknown']).default('block'),
+		protocol: z
+			.enum(['Any', 'IP', 'ICMP', 'IGMP', 'TCP', 'UDP', 'IPV6', 'ICMPV6', 'RM'])
+			.default('Any'),
+		action: z
+			.enum(['permit', 'block', 'callout_inspection', 'callout_terminating', 'callout_unknown'])
+			.default('block'),
 		direction: z.enum(['egress', 'ingress']).default('egress'),
 		appId: z.string().trim().nullish(),
 		throttleRate: z.coerce.number().min(0).max(100).optional().default(80),
@@ -105,7 +111,11 @@ export const updatePolicyKeys = updatePolicySchema.innerType().keyof().Enum;
  * Refine functions
  */
 
-function checkValidStringDates(ctx: z.RefinementCtx, validFrom: string | undefined | null, validTo: string | undefined | null) {
+function checkValidStringDates(
+	ctx: z.RefinementCtx,
+	validFrom: string | undefined | null,
+	validTo: string | undefined | null
+) {
 	if (validFrom && validTo && new Date(validTo) < new Date(validFrom)) {
 		ctx.addIssue({
 			code: z.ZodIssueCode.custom,
@@ -115,7 +125,11 @@ function checkValidStringDates(ctx: z.RefinementCtx, validFrom: string | undefin
 	}
 }
 
-function checkValidDates(ctx: z.RefinementCtx, validFrom: Date | undefined | null, validTo: Date | undefined | null) {
+function checkValidDates(
+	ctx: z.RefinementCtx,
+	validFrom: Date | undefined | null,
+	validTo: Date | undefined | null
+) {
 	if (validFrom && validTo && validTo < validFrom) {
 		ctx.addIssue({
 			code: z.ZodIssueCode.custom,

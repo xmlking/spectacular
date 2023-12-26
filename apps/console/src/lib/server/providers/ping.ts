@@ -16,14 +16,20 @@ export interface PingProfile extends Record<string, any> {
 	'pi.sri': string;
 }
 
-export default function Ping<P extends PingProfile>(options: OAuthUserConfig<P> & { issuer: string; acr_values: string }): OAuthConfig<P> {
+export default function Ping<P extends PingProfile>(
+	options: OAuthUserConfig<P> & { issuer: string; acr_values: string }
+): OAuthConfig<P> {
 	const { acr_values, ...rest } = options;
 	return {
 		id: 'ping',
 		name: 'Ping ID',
 		type: 'oidc',
 		authorization: {
-			params: { scope: 'profile openid email address phone', acr_values, ...rest.authorization?.params }
+			params: {
+				scope: 'profile openid email address phone',
+				acr_values,
+				...rest.authorization?.params
+			}
 		},
 		profile(profile: PingProfile) {
 			return {

@@ -47,17 +47,14 @@
 						class="mr-3 h-8"
 						alt="Flowbite Logo"
 					/>
-					<span
-						class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
+					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
 						>Flowbite</span
 					>
 				</a>
 				<form action="#" method="GET" class="hidden md:block md:pl-2">
 					<label for="topbar-search" class="sr-only">Search</label>
 					<div class="relative md:w-64 md:w-96">
-						<div
-							class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
-						>
+						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
 							<svg
 								class="h-5 w-5 text-gray-500 dark:text-gray-400"
 								fill="currentColor"
@@ -75,7 +72,7 @@
 							type="text"
 							name="email"
 							id="topbar-search"
-							class="focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+							class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
 							placeholder="Search"
 						/>
 					</div>
@@ -145,7 +142,7 @@
 									alt="Bonnie Green avatar"
 								/>
 								<div
-									class="bg-primary-700 absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white dark:border-gray-700"
+									class="absolute -mt-5 ml-6 flex h-5 w-5 items-center justify-center rounded-full border border-white bg-primary-700 dark:border-gray-700"
 								>
 									<svg
 										aria-hidden="true"
@@ -164,17 +161,12 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div
-									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
-								>
+								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
 									New message from
-									<span class="font-semibold text-gray-900 dark:text-white"
-										>Bonnie Green</span
-									>: "Hey, what's up? All set for the presentation?"
+									<span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span>:
+									"Hey, what's up? All set for the presentation?"
 								</div>
-								<div
-									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
-								>
+								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
 									a few moments ago
 								</div>
 							</div>
@@ -206,21 +198,13 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div
-									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
-								>
-									<span class="font-semibold text-gray-900 dark:text-white"
-										>Jese leos</span
-									>
+								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<span class="font-semibold text-gray-900 dark:text-white">Jese leos</span>
 									and
-									<span class="font-medium text-gray-900 dark:text-white"
-										>5 others</span
-									>
+									<span class="font-medium text-gray-900 dark:text-white">5 others</span>
 									started following you.
 								</div>
-								<div
-									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
-								>
+								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
 									10 minutes ago
 								</div>
 							</div>
@@ -254,21 +238,13 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div
-									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
-								>
-									<span class="font-semibold text-gray-900 dark:text-white"
-										>Joseph Mcfall</span
-									>
+								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<span class="font-semibold text-gray-900 dark:text-white">Joseph Mcfall</span>
 									and
-									<span class="font-medium text-gray-900 dark:text-white"
-										>141 others</span
-									>
+									<span class="font-medium text-gray-900 dark:text-white">141 others</span>
 									love your story. See it and view more stories.
 								</div>
-								<div
-									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
-								>
+								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
 									44 minutes ago
 								</div>
 							</div>
@@ -302,21 +278,15 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div
-									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
-								>
-									<span class="font-semibold text-gray-900 dark:text-white"
-										>Leslie Livingston</span
-									>
+								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<span class="font-semibold text-gray-900 dark:text-white">Leslie Livingston</span>
 									mentioned you in a comment:
-									<span class="text-primary-600 dark:text-primary-500 font-medium"
+									<span class="font-medium text-primary-600 dark:text-primary-500"
 										>@bonnie.green</span
 									>
 									what do you say?
 								</div>
-								<div
-									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
-								>
+								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
 									1 hour ago
 								</div>
 							</div>
@@ -345,18 +315,11 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div
-									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
-								>
-									<span class="font-semibold text-gray-900 dark:text-white"
-										>Robert Brown</span
-									>
-									posted a new video: Glassmorphism - learn how to implement the new
-									design trend.
+								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+									<span class="font-semibold text-gray-900 dark:text-white">Robert Brown</span>
+									posted a new video: Glassmorphism - learn how to implement the new design trend.
 								</div>
-								<div
-									class="text-primary-600 dark:text-primary-500 text-xs font-medium"
-								>
+								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
 									3 hours ago
 								</div>
 							</div>
@@ -487,7 +450,7 @@
 									clip-rule="evenodd"
 								/>
 							</svg>
-							<div class="text-sm text-gray-900 dark:text-white"> Profile </div>
+							<div class="text-sm text-gray-900 dark:text-white">Profile</div>
 						</a>
 						<a
 							href="#"
@@ -506,7 +469,7 @@
 									clip-rule="evenodd"
 								/>
 							</svg>
-							<div class="text-sm text-gray-900 dark:text-white"> Settings </div>
+							<div class="text-sm text-gray-900 dark:text-white">Settings</div>
 						</a>
 						<a
 							href="#"
@@ -526,7 +489,7 @@
 									clip-rule="evenodd"
 								/>
 							</svg>
-							<div class="text-sm text-gray-900 dark:text-white"> Products </div>
+							<div class="text-sm text-gray-900 dark:text-white">Products</div>
 						</a>
 						<a
 							href="#"
@@ -548,7 +511,7 @@
 									clip-rule="evenodd"
 								/>
 							</svg>
-							<div class="text-sm text-gray-900 dark:text-white"> Pricing </div>
+							<div class="text-sm text-gray-900 dark:text-white">Pricing</div>
 						</a>
 						<a
 							href="#"
@@ -567,7 +530,7 @@
 									clip-rule="evenodd"
 								/>
 							</svg>
-							<div class="text-sm text-gray-900 dark:text-white"> Billing </div>
+							<div class="text-sm text-gray-900 dark:text-white">Billing</div>
 						</a>
 						<a
 							href="#"
@@ -588,7 +551,7 @@
 									d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
 								/>
 							</svg>
-							<div class="text-sm text-gray-900 dark:text-white"> Logout </div>
+							<div class="text-sm text-gray-900 dark:text-white">Logout</div>
 						</a>
 					</div>
 				</div>
@@ -612,9 +575,7 @@
 					id="dropdown"
 				>
 					<div class="px-4 py-3">
-						<span class="block text-sm font-semibold text-gray-900 dark:text-white"
-							>Neil Sims</span
-						>
+						<span class="block text-sm font-semibold text-gray-900 dark:text-white">Neil Sims</span>
 						<span class="block truncate text-sm text-gray-900 dark:text-white"
 							>name@flowbite.com</span
 						>
@@ -680,7 +641,7 @@
 								<span class="flex items-center">
 									<svg
 										aria-hidden="true"
-										class="text-primary-600 dark:text-primary-500 mr-2 h-5 w-5"
+										class="mr-2 h-5 w-5 text-primary-600 dark:text-primary-500"
 										fill="currentColor"
 										viewBox="0 0 20 20"
 										xmlns="http://www.w3.org/2000/svg"
@@ -734,9 +695,7 @@
 			<form action="#" method="GET" class="mb-2 md:hidden">
 				<label for="sidebar-search" class="sr-only">Search</label>
 				<div class="relative">
-					<div
-						class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
-					>
+					<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
 						<svg
 							class="h-5 w-5 text-gray-500 dark:text-gray-400"
 							fill="currentColor"
@@ -754,7 +713,7 @@
 						type="text"
 						name="search"
 						id="sidebar-search"
-						class="focus:border-primary-500 focus:ring-primary-500 dark:focus:border-primary-500 dark:focus:ring-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+						class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
 						placeholder="Search"
 					/>
 				</div>
@@ -917,7 +876,7 @@
 						</svg>
 						<span class="ml-3 flex-1 whitespace-nowrap">Messages</span>
 						<span
-							class="bg-primary-100 text-primary-800 dark:bg-primary-200 dark:text-primary-800 inline-flex h-5 w-5 items-center justify-center rounded-full text-xs font-semibold"
+							class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary-100 text-xs font-semibold text-primary-800 dark:bg-primary-200 dark:text-primary-800"
 						>
 							4
 						</span>
@@ -1171,11 +1130,7 @@
 												transform="scale(3.9385)"
 											/>
 										</g>
-										<path
-											fill="#192f5d"
-											d="M0 0h98.8v70H0z"
-											transform="scale(3.9385)"
-										/>
+										<path fill="#192f5d" d="M0 0h98.8v70H0z" transform="scale(3.9385)" />
 										<path
 											fill="#fff"
 											d="M8.2 3l1 2.8H12L9.7 7.5l.9 2.7-2.4-1.7L6 10.2l.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7L74 8.5l-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 7.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 24.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 21.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 38.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 35.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 52.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 49.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 66.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 63.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9z"
@@ -1249,11 +1204,7 @@
 									viewBox="0 0 512 512"
 								>
 									<defs>
-										<path
-											id="a"
-											fill="#ffde00"
-											d="M1-.3L-.7.8 0-1 .6.8-1-.3z"
-										/>
+										<path id="a" fill="#ffde00" d="M1-.3L-.7.8 0-1 .6.8-1-.3z" />
 									</defs>
 									<path fill="#de2910" d="M0 0h512v512H0z" />
 									<use
@@ -1311,9 +1262,7 @@
 				class="h-32 rounded-lg border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"
 			/>
 		</div>
-		<div
-			class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"
-		/>
+		<div class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600" />
 		<div class="mb-4 grid grid-cols-2 gap-4">
 			<div
 				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
@@ -1328,9 +1277,7 @@
 				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
 			/>
 		</div>
-		<div
-			class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"
-		/>
+		<div class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600" />
 		<div class="grid grid-cols-2 gap-4">
 			<div
 				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"

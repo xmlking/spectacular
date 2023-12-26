@@ -21,9 +21,7 @@
 <Navbar let:hidden let:toggle border={true} rounded={true}>
 	<NavBrand>
 		<UsersOutline />
-		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-			Users
-		</span>
+		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"> Users </span>
 	</NavBrand>
 	<div>
 		<div class="relative hidden md:block">
@@ -59,8 +57,7 @@
 						<dd class="text-sm text-gray-500">Paradigm Representative</dd>
 						<dt class="sr-only">Role</dt>
 						<dd class="mt-3">
-							<span
-								class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
+							<span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</dd>
@@ -83,9 +80,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -128,8 +123,7 @@
 						<dd class="text-sm text-gray-500">Lead Security Associate</dd>
 						<dt class="sr-only">Role</dt>
 						<dd class="mt-3">
-							<span
-								class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
+							<span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</dd>
@@ -152,9 +146,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -197,8 +189,7 @@
 						<dd class="text-sm text-gray-500">Assurance Administrator</dd>
 						<dt class="sr-only">Role</dt>
 						<dd class="mt-3">
-							<span
-								class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
+							<span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</dd>
@@ -221,9 +212,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -266,8 +255,7 @@
 						<dd class="text-sm text-gray-500">Chief Accountability Analyst</dd>
 						<dt class="sr-only">Role</dt>
 						<dd class="mt-3">
-							<span
-								class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
+							<span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</dd>
@@ -290,9 +278,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -335,8 +321,7 @@
 						<dd class="text-sm text-gray-500">Investor Data Orchestrator</dd>
 						<dt class="sr-only">Role</dt>
 						<dd class="mt-3">
-							<span
-								class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
+							<span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</dd>
@@ -359,9 +344,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -404,8 +387,7 @@
 						<dd class="text-sm text-gray-500">Product Infrastructure Executive</dd>
 						<dt class="sr-only">Role</dt>
 						<dd class="mt-3">
-							<span
-								class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
+							<span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</dd>
@@ -428,9 +410,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -473,8 +453,7 @@
 						<dd class="text-sm text-gray-500">Investor Factors Associate</dd>
 						<dt class="sr-only">Role</dt>
 						<dd class="mt-3">
-							<span
-								class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
+							<span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</dd>
@@ -497,9 +476,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>
@@ -542,8 +519,7 @@
 						<dd class="text-sm text-gray-500">Global Division Officer</dd>
 						<dt class="sr-only">Role</dt>
 						<dd class="mt-3">
-							<span
-								class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
+							<span class="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800"
 								>Admin</span
 							>
 						</dd>
@@ -566,9 +542,7 @@
 									<path
 										d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
 									/>
-									<path
-										d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-									/>
+									<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
 								</svg>
 								<span class="ml-3">Email</span>
 							</a>

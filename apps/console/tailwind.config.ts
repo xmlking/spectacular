@@ -8,8 +8,7 @@ import * as defaultTheme from 'tailwindcss/defaultTheme';
 
 import * as containerQueries from '@tailwindcss/container-queries';
 import * as animate from 'tailwindcss-animate';
-// @ts-expect-error 7016 TODO
-import flowbite from 'flowbite/plugin';
+// import * as flowbitePlugin from 'flowbite/plugin';
 import flowbiteTypography from 'flowbite-typography';
 
 export default {
@@ -19,8 +18,17 @@ export default {
 		'./node_modules/flowbite-svelte-icons/**/*.{html,js,svelte,ts}',
 		'./node_modules/flowbite-svelte-blocks/**/*.{html,js,svelte,ts}'
 	],
-
-	plugins: [containerQueries, animate, flowbite({ charts: false, forms: true }), flowbiteTypography],
+	plugins: [
+		containerQueries,
+		animate,
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
+		require('flowbite/plugin')({
+			charts: false,
+			forms: true
+		}),
+		// flowbitePlugin({ charts: false, forms: true }),
+		flowbiteTypography
+	],
 
 	darkMode: 'class', // or 'media' or false
 	theme: {

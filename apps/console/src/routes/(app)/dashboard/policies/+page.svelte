@@ -329,11 +329,7 @@
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
 					<input type="hidden" name="subjectId" value={value ? value.id : null} />
-					<input
-						type="hidden"
-						name="subjectDisplayName"
-						value={value ? value.displayName : null}
-					/>
+					<input type="hidden" name="subjectDisplayName" value={value ? value.displayName : null} />
 				</svelte:fragment>
 			</SelectFetch>
 		</ButtonGroup>

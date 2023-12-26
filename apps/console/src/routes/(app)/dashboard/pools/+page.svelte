@@ -213,8 +213,7 @@
 			/> -->
 			<input name="limit" bind:value={$form.limit} type="hidden" />
 			<input name="offset" bind:value={$form.offset} type="hidden" />
-			<Button type="submit" color="primary" class="!p-2.5"><SearchOutline size="md" /></Button
-			>
+			<Button type="submit" color="primary" class="!p-2.5"><SearchOutline size="md" /></Button>
 		</ButtonGroup>
 		<Button href="/dashboard/pools/create">Add Pool</Button>
 	</Navbar>

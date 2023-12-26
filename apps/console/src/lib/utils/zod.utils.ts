@@ -32,14 +32,18 @@ export function ifNonEmptyString(fn: (value: string) => unknown): (value: unknow
  * schemas
  */
 export const uuidSchema = z.string().uuid();
-export const dbOffsetDate = z.preprocess((arg) => (arg === '' ? null : arg), z.string().datetime({ offset: true }).nullish());
+export const dbOffsetDate = z.preprocess(
+	(arg) => (arg === '' ? null : arg),
+	z.string().datetime({ offset: true }).nullish()
+);
 
 /**
  * Converters / type coercion
  */
 export const stringToBoolean = ifNonEmptyString((arg) => arg.toLowerCase() === 'true');
 
-export const stringToNumber = (arg: unknown) => (typeof arg == 'string' && /^\d+$/.test(arg) ? parseInt(arg, 10) : undefined);
+export const stringToNumber = (arg: unknown) =>
+	typeof arg == 'string' && /^\d+$/.test(arg) ? parseInt(arg, 10) : undefined;
 export const stringToNumber2 = (arg: unknown) => {
 	const processed = z.string().trim().regex(/^\d+$/).transform(Number).safeParse(arg);
 	return processed.success ? processed.data : arg;
@@ -53,7 +57,8 @@ export const stringToSet = ifNonEmptyString((arg) => new Set(arg.split(',')));
 export const stringToArray = ifNonEmptyString((arg) => arg.split(','));
 export const arrayToString = (arg: string[]) => `{${arg.join(',')}}`;
 export const stringToMap = ifNonEmptyString((arg) => new Map(Object.entries(JSON.parse(arg))));
-export const mapToString = (arg: Map<string, string>) => Array.from(arg, ([k, v]) => `"${k}"=>"${v}"`).join(',');
+export const mapToString = (arg: Map<string, string>) =>
+	Array.from(arg, ([k, v]) => `"${k}"=>"${v}"`).join(',');
 export const stringToJSON = ifNonEmptyString((arg) => JSON.parse(arg));
 
 /**
