@@ -1194,6 +1194,9 @@ importers:
       '@spectacular/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@tailwindcss/typography':
+        specifier: 0.5.10
+        version: 0.5.10(tailwindcss@3.4.0)
       '@tsconfig/svelte':
         specifier: 5.0.2
         version: 5.0.2
@@ -1221,6 +1224,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: 0.5.9
         version: 0.5.9(prettier-plugin-astro@0.12.2)(prettier-plugin-svelte@3.1.2)(prettier@3.1.1)
+      tailwindcss:
+        specifier: 3.4.0
+        version: 3.4.0
       typescript:
         specifier: 5.3.3
         version: 5.3.3

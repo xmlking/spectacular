@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from 'tailwindcss';
 
