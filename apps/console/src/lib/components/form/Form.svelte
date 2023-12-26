@@ -28,18 +28,8 @@
 	export let backButtonText = 'Back';
 	export let className = 'space-y-6';
 
-	const {
-		posted,
-		allErrors,
-		form,
-		errors,
-		enhance,
-		delayed,
-		message,
-		reset,
-		tainted,
-		submitting
-	} = superform;
+	const { posted, allErrors, form, errors, enhance, delayed, message, reset, tainted, submitting } =
+		superform;
 	setContext<FormContext<T>>(FORM_KEY, { superform });
 </script>
 
@@ -47,11 +37,7 @@
 	<slot />
 
 	{#if showAlerts && ($message || $errors._errors)}
-		<Alert
-			color={$page.status >= 400 ? 'red' : 'blue'}
-			dismissable={false}
-			class="!items-start"
-		>
+		<Alert color={$page.status >= 400 ? 'red' : 'blue'} dismissable={false} class="!items-start">
 			<span slot="icon"
 				><svg
 					aria-hidden="true"
@@ -99,9 +85,7 @@
 				{#if $submitting}
 					<Spinner class="mr-3" size="4" color="white" />Saveing ...
 				{:else}
-					<CloudArrowUpOutline
-						class="mr-2 text-blue-500 dark:text-green-500"
-					/>{submitButtonText}
+					<CloudArrowUpOutline class="mr-2 text-blue-500 dark:text-green-500" />{submitButtonText}
 				{/if}
 			</Button>
 		</ButtonGroup>

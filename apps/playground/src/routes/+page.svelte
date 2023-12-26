@@ -14,7 +14,7 @@
 		<LogoAnim />
 		<!-- / -->
 		<div class="flex justify-center space-x-2">
-			<a class="btn variant-filled" href="/dashboard"> Launch Dashboard </a>
+			<a class="variant-filled btn" href="/dashboard"> Launch Dashboard </a>
 		</div>
 	</div>
 </div>

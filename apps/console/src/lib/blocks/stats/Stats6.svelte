@@ -16,9 +16,7 @@
 		</div>
 		<div class="text-center md:border-r">
 			<h6 class="text-4xl font-bold lg:text-5xl xl:text-6xl">48.3K</h6>
-			<p class="text-sm font-medium uppercase tracking-widest text-gray-800 lg:text-base">
-				Users
-			</p>
+			<p class="text-sm font-medium uppercase tracking-widest text-gray-800 lg:text-base">Users</p>
 		</div>
 		<div class="text-center">
 			<h6 class="text-4xl font-bold lg:text-5xl xl:text-6xl">24.5K</h6>

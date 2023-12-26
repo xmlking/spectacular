@@ -22,7 +22,7 @@
 		<h1 class="h1">Movies</h1>
 		<p>Showcase container queries.</p>
 	</header>
-	<div class="@container mx-auto max-w-5xl">
+	<div class="mx-auto max-w-5xl @container">
 		<div class="@4xl:grid @4xl:grid-cols-[3fr_1fr]">
 			<main class="@container">
 				<Card {...movies[0]} />

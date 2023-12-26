@@ -18,11 +18,11 @@ This is a quickstart that showcases how to use the Nhost SDK running on server `
 
    /** @type {import('@sveltejs/kit').Handle} */
    export async function handle({ event, resolve }) {
-     await manageAuthSession(event, () => {
-       throw redirect(303, '/auth/sign-in');
-     });
+   	await manageAuthSession(event, () => {
+   		throw redirect(303, '/auth/sign-in');
+   	});
 
-     return resolve(event);
+   	return resolve(event);
    }
    ```
 
@@ -38,16 +38,16 @@ This is a quickstart that showcases how to use the Nhost SDK running on server `
 
    /** @type {import('./$types').LayoutServerLoad} */
    export async function load({ cookies, route }) {
-     const nhost = await getNhost(cookies);
-     const session = nhost.auth.getSession();
+   	const nhost = await getNhost(cookies);
+   	const session = nhost.auth.getSession();
 
-     if (!publicRoutes.includes(route.id ?? '') && !session) {
-       throw redirect(303, '/auth/sign-in');
-     }
+   	if (!publicRoutes.includes(route.id ?? '') && !session) {
+   		throw redirect(303, '/auth/sign-in');
+   	}
 
-     return {
-       user: session?.user
-     };
+   	return {
+   		user: session?.user
+   	};
    }
    ```
 

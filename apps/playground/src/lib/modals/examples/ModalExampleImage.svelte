@@ -11,7 +11,7 @@
 
 {#if $modalStore[0]}
 	<!-- Button -->
-	<button class="btn-icon variant-filled {cButton}" on:click={parent.onClose}>×</button>
+	<button class="variant-filled btn-icon {cButton}" on:click={parent.onClose}>×</button>
 	<!-- Image -->
 	<img
 		src={$modalStore[0]?.image}

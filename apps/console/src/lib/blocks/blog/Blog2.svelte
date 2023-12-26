@@ -13,7 +13,7 @@
 				<div class="mb-2">
 					<a
 						href="/"
-						class="text-deep-purple-accent-400 hover:text-deep-purple-800 text-xs font-semibold uppercase tracking-wide transition-colors duration-200"
+						class="text-xs font-semibold uppercase tracking-wide text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
 						aria-label="Category"
 						title="Delevopment">Delevopment</a
 					>
@@ -22,13 +22,13 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="hover:text-deep-purple-accent-400 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
+						class="inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
 						>Why I love Laravel</a
 					>
 				</div>
 				<p class="mb-5 text-gray-700">
-					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni
-					voluptatem doloremque.
+					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem
+					doloremque.
 				</p>
 				<div class="flex items-center">
 					<a href="/" aria-label="Author" title="Author" class="mr-3">
@@ -43,7 +43,7 @@
 							href="/"
 							aria-label="Author"
 							title="Author"
-							class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
+							class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
 							>Petru Vîrtos</a
 						>
 						<p class="text-sm font-medium leading-4 text-gray-600">Author</p>
@@ -62,7 +62,7 @@
 				<div class="mb-2">
 					<a
 						href="/"
-						class="text-deep-purple-accent-400 hover:text-deep-purple-800 text-xs font-semibold uppercase tracking-wide transition-colors duration-200"
+						class="text-xs font-semibold uppercase tracking-wide text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
 						aria-label="Category"
 						title="Food &amp; Snacks">Food &amp; Snacks</a
 					>
@@ -71,13 +71,13 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="hover:text-deep-purple-accent-400 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
+						class="inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
 						>Pizza, you should try it</a
 					>
 				</div>
 				<p class="mb-5 text-gray-700">
-					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni
-					voluptatem doloremque.
+					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem
+					doloremque.
 				</p>
 				<div class="flex items-center">
 					<a href="/" aria-label="Author" title="Author" class="mr-3">
@@ -92,7 +92,7 @@
 							href="/"
 							aria-label="Author"
 							title="Author"
-							class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
+							class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
 							>Alex Stratulat</a
 						>
 						<p class="text-sm font-medium leading-4 text-gray-600">Author</p>
@@ -111,7 +111,7 @@
 				<div class="mb-2">
 					<a
 						href="/"
-						class="text-deep-purple-accent-400 hover:text-deep-purple-800 text-xs font-semibold uppercase tracking-wide transition-colors duration-200"
+						class="text-xs font-semibold uppercase tracking-wide text-deep-purple-accent-400 transition-colors duration-200 hover:text-deep-purple-800"
 						aria-label="Category"
 						title="Out of this world">Out of this world</a
 					>
@@ -120,13 +120,13 @@
 					<a
 						href="/"
 						aria-label="Article"
-						class="hover:text-deep-purple-accent-400 inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200"
+						class="inline-block text-2xl font-bold leading-5 text-black transition-colors duration-200 hover:text-deep-purple-accent-400"
 						>Whatever, just feed me</a
 					>
 				</div>
 				<p class="mb-5 text-gray-700">
-					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni
-					voluptatem doloremque.
+					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem
+					doloremque.
 				</p>
 				<div class="flex items-center">
 					<a href="/" aria-label="Author" title="Author" class="mr-3">
@@ -141,7 +141,7 @@
 							href="/"
 							aria-label="Author"
 							title="Author"
-							class="hover:text-deep-purple-accent-400 font-semibold text-gray-800 transition-colors duration-200"
+							class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
 							>Susie the Cat</a
 						>
 						<p class="text-sm font-medium leading-4 text-gray-600">Author</p>

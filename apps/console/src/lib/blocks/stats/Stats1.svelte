@@ -9,7 +9,7 @@
 			<!-- Value + Change -->
 			<div class="flex items-end gap-2">
 				<!-- Value -->
-				<div class="text-2xl font-bold"> 24.57 % </div>
+				<div class="text-2xl font-bold">24.57 %</div>
 				<!-- Change -->
 				<div class="mb-0.5 flex items-center gap-0.5 text-sm font-semibold text-green-500">
 					<!--{{ if gt .Change 0.0 }}-->

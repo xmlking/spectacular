@@ -43,9 +43,7 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 			<div class="p-4">
 				<label for="table-search" class="sr-only">Search</label>
 				<div class="relative mt-1">
-					<div
-						class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
-					>
+					<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
 						<svg
 							class="h-5 w-5 text-gray-500 dark:text-gray-400"
 							fill="currentColor"
@@ -70,19 +68,12 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 		</div>
 	{/if}
 	<table {...$tableAttrs} class="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-		<thead
-			class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
-		>
+		<thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
 			{#each $headerRows as headerRow (headerRow.id)}
 				<Subscribe attrs={headerRow.attrs()} let:attrs>
 					<tr {...attrs}>
 						{#each headerRow.cells as cell (cell.id)}
-							<Subscribe
-								attrs={cell.attrs()}
-								let:attrs
-								props={cell.props()}
-								let:props
-							>
+							<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
 								<!-- < {...attrs} on:click={props.sort.toggle} class="px-6 py-3" use:props.resize> -->
 								<th {...attrs} on:click={props.sort.toggle} class="px-6 py-3">
 									<div class="flex items-center">
@@ -111,12 +102,7 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 						class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
 					>
 						{#each row.cells as cell (cell.id)}
-							<Subscribe
-								attrs={cell.attrs()}
-								let:attrs
-								props={cell.props()}
-								let:props
-							>
+							<Subscribe attrs={cell.attrs()} let:attrs props={cell.props()} let:props>
 								<!-- class="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white" -->
 								<td
 									{...attrs}
@@ -138,9 +124,7 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 				<span class="pr-2">Rows ({$pageSize}): </span>
 				<Select items={rows} bind:value={$pageSize} size="sm" class="w-1/6 p-1 text-xs" />
 				<span class="pl-4">
-					Showing <span class="font-semibold text-gray-900 dark:text-white"
-						>{$pageIndex + 1}</span
-					>
+					Showing <span class="font-semibold text-gray-900 dark:text-white">{$pageIndex + 1}</span>
 					out of
 					<span class="font-semibold text-gray-900 dark:text-white">{$pageCount}</span> Pages
 				</span>

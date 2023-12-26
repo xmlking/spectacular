@@ -38,7 +38,7 @@
 				{todo.name}
 			</h3>
 			<button
-				class="btn variant-filled-error"
+				class="variant-filled-error btn"
 				type="button"
 				on:click={() => removeTodo(todo.id)}>Remove</button
 			>
@@ -50,7 +50,7 @@
 		<input type="text" name="nTodo" bind:value={nTodo} class="variant-soft-surface w-full" />
 	</div>
 	<div class="flex flex-row gap-4 pt-4">
-		<button type="button" on:click={() => addTodo(nTodo)} class="btn variant-filled-secondary"
+		<button type="button" on:click={() => addTodo(nTodo)} class="variant-filled-secondary btn"
 			>Add Todo</button
 		>
 		<a href="/experiments/animations" class="btn bg-secondary-100 text-surface-900">Home</a>

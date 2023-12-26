@@ -8,8 +8,9 @@
 			<div class="w-full px-4 md:w-1/2 lg:w-1/4">
 				<h2
 					class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900 dark:text-white"
-					>CATEGORIES</h2
 				>
+					CATEGORIES
+				</h2>
 				<nav class="mb-10 list-none">
 					<li>
 						<a
@@ -44,8 +45,9 @@
 			<div class="w-full px-4 md:w-1/2 lg:w-1/4">
 				<h2
 					class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900 dark:text-white"
-					>CATEGORIES</h2
 				>
+					CATEGORIES
+				</h2>
 				<nav class="mb-10 list-none">
 					<li>
 						<a
@@ -80,8 +82,9 @@
 			<div class="w-full px-4 md:w-1/2 lg:w-1/4">
 				<h2
 					class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900 dark:text-white"
-					>CATEGORIES</h2
 				>
+					CATEGORIES
+				</h2>
 				<nav class="mb-10 list-none">
 					<li>
 						<a
@@ -116,15 +119,14 @@
 			<div class="w-full px-4 md:w-1/2 lg:w-1/4">
 				<h2
 					class="title-font mb-3 text-sm font-medium tracking-widest text-gray-900 dark:text-white"
-					>SUBSCRIBE</h2
 				>
+					SUBSCRIBE
+				</h2>
 				<div
 					class="flex flex-wrap items-end justify-center md:flex-nowrap md:justify-start lg:flex-wrap xl:flex-nowrap"
 				>
 					<div class="relative mr-2 w-40 sm:mr-4 sm:w-auto lg:mr-0 xl:mr-4">
-						<label
-							for="footer-field"
-							class="text-sm leading-7 text-gray-600 dark:text-gray-400"
+						<label for="footer-field" class="text-sm leading-7 text-gray-600 dark:text-gray-400"
 							>Placeholder</label
 						>
 						<input
@@ -139,8 +141,8 @@
 						>Button</button
 					>
 				</div>
-				<p class="mt-2 text-center text-sm text-gray-500 md:text-left"
-					>Bitters chicharrones fanny pack
+				<p class="mt-2 text-center text-sm text-gray-500 md:text-left">
+					Bitters chicharrones fanny pack
 					<br class="hidden lg:block" />waistcoat green juice
 				</p>
 			</div>
@@ -155,8 +157,8 @@
 				<Stack />
 				<span class="ml-3 text-xl">Datablocks</span>
 			</a>
-			<p class="mt-4 text-sm text-gray-500 sm:ml-6 sm:mt-0 dark:text-gray-400"
-				>© 2020 Datablocks —
+			<p class="mt-4 text-sm text-gray-500 sm:ml-6 sm:mt-0 dark:text-gray-400">
+				© 2020 Datablocks —
 				<a
 					href="https://twitter.com/xmlking"
 					class="ml-1 text-gray-600 dark:text-gray-500"

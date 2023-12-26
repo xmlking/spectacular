@@ -6,7 +6,7 @@
 			<div class="mb-10 max-w-xl sm:text-center md:mx-auto md:mb-12 lg:max-w-2xl">
 				<div>
 					<p
-						class="bg-teal-accent-400 mb-4 inline-block rounded-full px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
+						class="mb-4 inline-block rounded-full bg-teal-accent-400 px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
 					>
 						Brand new
 					</p>
@@ -31,32 +31,28 @@
 									<circle cx="1" cy="1" r=".7" />
 								</pattern>
 							</defs>
-							<rect
-								fill="url(#dc223fcc-6d72-4ebc-b4ef-abe121034d6e)"
-								width="52"
-								height="24"
-							/>
+							<rect fill="url(#dc223fcc-6d72-4ebc-b4ef-abe121034d6e)" width="52" height="24" />
 						</svg>
 						<span class="relative">The</span>
 					</span>
 					quick, brown fox jumps over a lazy dog
 				</h2>
 				<p class="text-base text-gray-700 md:text-lg">
-					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-					doloremque rem aperiam, eaque ipsa quae.
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem
+					aperiam, eaque ipsa quae.
 				</p>
 			</div>
 			<div class="flex items-center sm:justify-center">
 				<button
 					type="submit"
-					class="bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline mr-6 inline-flex h-12 items-center justify-center rounded px-6 font-medium tracking-wide text-white shadow-md transition duration-200 focus:outline-none"
+					class="mr-6 inline-flex h-12 items-center justify-center rounded bg-deep-purple-accent-400 px-6 font-medium tracking-wide text-white shadow-md transition duration-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
 				>
 					Get started
 				</button>
 				<a
 					href="/"
 					aria-label=""
-					class="hover:text-deep-purple-accent-700 inline-flex items-center font-semibold text-gray-800 transition-colors duration-200"
+					class="inline-flex items-center font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
 					>Learn more</a
 				>
 			</div>
@@ -72,7 +68,7 @@
 					class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="text-deep-purple-accent-400 h-10 w-10"
+						class="h-10 w-10 text-deep-purple-accent-400"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>
@@ -92,7 +88,7 @@
 					class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="text-deep-purple-accent-400 h-10 w-10"
+						class="h-10 w-10 text-deep-purple-accent-400"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>
@@ -112,7 +108,7 @@
 					class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50"
 				>
 					<svg
-						class="text-deep-purple-accent-400 h-10 w-10"
+						class="h-10 w-10 text-deep-purple-accent-400"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>

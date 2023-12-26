@@ -33,7 +33,7 @@
 </script>
 
 <div
-	class="bg-surface-50-900-token border-surface-500/30 grid h-full grid-cols-[auto_1fr] border-r {$$props.class ??
+	class="bg-surface-50-900-token grid h-full grid-cols-[auto_1fr] border-r border-surface-500/30 {$$props.class ??
 		''}"
 >
 	<!-- App Rail -->
@@ -92,7 +92,7 @@
 								data-sveltekit-preload-data="hover"
 							>
 								<span class="flex-auto">{@html label}</span>
-								{#if badge}<span class="badge variant-filled-secondary"
+								{#if badge}<span class="variant-filled-secondary badge"
 										>{badge}</span
 									>{/if}
 							</a>

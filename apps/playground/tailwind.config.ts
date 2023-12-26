@@ -3,5 +3,5 @@ import type { Config } from 'tailwindcss';
 
 export default {
 	presets: [baseConfig],
-	content: [...baseConfig.content],
+	content: [...baseConfig.content]
 } satisfies Config;

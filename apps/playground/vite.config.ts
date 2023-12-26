@@ -27,6 +27,6 @@ export default defineConfig({
 	},
 	ssr: {
 		// add all tsparticles libraries here, they're not made for SSR, they're client only
-		noExternal: ["tsparticles", "@tsparticles/slim", "@tsparticles/engine", "@tsparticles/svelte"]
+		noExternal: ['tsparticles', '@tsparticles/slim', '@tsparticles/engine', '@tsparticles/svelte']
 	}
 });

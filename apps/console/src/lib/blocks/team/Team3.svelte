@@ -2,10 +2,10 @@
 	<div class="container mx-auto px-5 py-24">
 		<div class="mb-20 flex w-full flex-col text-center">
 			<h1 class="title-font mb-4 text-2xl font-medium text-gray-900">OUR TEAM</h1>
-			<p class="mx-auto text-base leading-relaxed lg:w-2/3"
-				>Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway
-				tile poke farm-to-table. Franzen you probably haven't heard of them.</p
-			>
+			<p class="mx-auto text-base leading-relaxed lg:w-2/3">
+				Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke
+				farm-to-table. Franzen you probably haven't heard of them.
+			</p>
 		</div>
 		<div class="-m-4 flex flex-wrap">
 			<div class="p-4 md:w-1/2 lg:w-1/4">
@@ -18,10 +18,9 @@
 					<div class="w-full">
 						<h2 class="title-font text-lg font-medium text-gray-900">Alper Kamu</h2>
 						<h3 class="mb-3 text-gray-500">UI Developer</h3>
-						<p class="mb-4"
-							>DIY tote bag drinking vinegar cronut adaptogen squid fanny pack
-							vaporware.</p
-						>
+						<p class="mb-4">
+							DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.
+						</p>
 						<span class="inline-flex">
 							<a href={'#'} class="text-gray-500">
 								<svg
@@ -33,9 +32,7 @@
 									class="h-5 w-5"
 									viewBox="0 0 24 24"
 								>
-									<path
-										d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-									/>
+									<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
 								</svg>
 							</a>
 							<a href={'#'} class="ml-2 text-gray-500">
@@ -80,14 +77,11 @@
 						src="https://dummyimage.com/201x201"
 					/>
 					<div class="w-full">
-						<h2 class="title-font text-lg font-medium text-gray-900"
-							>Holden Caulfield</h2
-						>
+						<h2 class="title-font text-lg font-medium text-gray-900">Holden Caulfield</h2>
 						<h3 class="mb-3 text-gray-500">UI Developer</h3>
-						<p class="mb-4"
-							>DIY tote bag drinking vinegar cronut adaptogen squid fanny pack
-							vaporware.</p
-						>
+						<p class="mb-4">
+							DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.
+						</p>
 						<span class="inline-flex">
 							<a href={'#'} class="text-gray-500">
 								<svg
@@ -99,9 +93,7 @@
 									class="h-5 w-5"
 									viewBox="0 0 24 24"
 								>
-									<path
-										d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-									/>
+									<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
 								</svg>
 							</a>
 							<a href={'#'} class="ml-2 text-gray-500">
@@ -148,10 +140,9 @@
 					<div class="w-full">
 						<h2 class="title-font text-lg font-medium text-gray-900">Atticus Finch</h2>
 						<h3 class="mb-3 text-gray-500">UI Developer</h3>
-						<p class="mb-4"
-							>DIY tote bag drinking vinegar cronut adaptogen squid fanny pack
-							vaporware.</p
-						>
+						<p class="mb-4">
+							DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.
+						</p>
 						<span class="inline-flex">
 							<a href={'#'} class="text-gray-500">
 								<svg
@@ -163,9 +154,7 @@
 									class="h-5 w-5"
 									viewBox="0 0 24 24"
 								>
-									<path
-										d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-									/>
+									<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
 								</svg>
 							</a>
 							<a href={'#'} class="ml-2 text-gray-500">
@@ -212,10 +201,9 @@
 					<div class="w-full">
 						<h2 class="title-font text-lg font-medium text-gray-900">Henry Letham</h2>
 						<h3 class="mb-3 text-gray-500">UI Developer</h3>
-						<p class="mb-4"
-							>DIY tote bag drinking vinegar cronut adaptogen squid fanny pack
-							vaporware.</p
-						>
+						<p class="mb-4">
+							DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.
+						</p>
 						<span class="inline-flex">
 							<a href={'#'} class="text-gray-500">
 								<svg
@@ -227,9 +215,7 @@
 									class="h-5 w-5"
 									viewBox="0 0 24 24"
 								>
-									<path
-										d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
-									/>
+									<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
 								</svg>
 							</a>
 							<a href={'#'} class="ml-2 text-gray-500">

@@ -73,7 +73,7 @@
 	}
 
 	.my-tag :global(.svelte-tags-input) {
-		@apply focus:border-primary-700 block w-full appearance-none rounded-lg border-gray-300 bg-transparent p-2 text-sm text-gray-900 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500;
+		@apply block w-full appearance-none rounded-lg border-gray-300 bg-transparent p-2 text-sm text-gray-900 focus:border-primary-700 focus:outline-none focus:ring-0 dark:border-gray-600 dark:text-white dark:focus:border-blue-500;
 	}
 
 	.my-tag :global(.svelte-tags-input-layout:focus-within) {

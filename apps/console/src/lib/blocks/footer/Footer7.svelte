@@ -1,6 +1,6 @@
-<div class="bg-deep-purple-accent-400 relative mt-16 mt-auto">
+<div class="relative mt-16 mt-auto bg-deep-purple-accent-400">
 	<svg
-		class="text-deep-purple-accent-400 absolute top-0 -mt-5 h-6 w-full sm:-mt-10 sm:h-16"
+		class="absolute top-0 -mt-5 h-6 w-full text-deep-purple-accent-400 sm:-mt-10 sm:h-16"
 		preserveAspectRatio="none"
 		viewBox="0 0 1440 54"
 	>
@@ -14,7 +14,7 @@
 			<div class="md:max-w-md lg:col-span-2">
 				<a href="/" aria-label="Go home" title="Company" class="inline-flex items-center">
 					<svg
-						class="text-teal-accent-400 w-8"
+						class="w-8 text-teal-accent-400"
 						viewBox="0 0 24 24"
 						stroke-linejoin="round"
 						stroke-width="2"
@@ -28,163 +28,161 @@
 						<rect x="14" y="1" width="7" height="6" />
 						<rect x="14" y="11" width="7" height="12" />
 					</svg>
-					<span class="ml-2 text-xl font-bold uppercase tracking-wide text-gray-100"
-						>Company</span
-					>
+					<span class="ml-2 text-xl font-bold uppercase tracking-wide text-gray-100">Company</span>
 				</a>
 				<div class="mt-4 lg:max-w-sm">
-					<p class="text-deep-purple-50 text-sm">
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-						doloremque laudantium, totam rem aperiam.
+					<p class="text-sm text-deep-purple-50">
+						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+						laudantium, totam rem aperiam.
 					</p>
-					<p class="text-deep-purple-50 mt-4 text-sm">
-						Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-						dicta sunt explicabo.
+					<p class="mt-4 text-sm text-deep-purple-50">
+						Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+						explicabo.
 					</p>
 				</div>
 			</div>
 			<div class="row-gap-8 grid grid-cols-2 gap-5 md:grid-cols-4 lg:col-span-4">
 				<div>
-					<p class="text-teal-accent-400 font-semibold tracking-wide"> Category </p>
+					<p class="font-semibold tracking-wide text-teal-accent-400">Category</p>
 					<ul class="mt-2 space-y-2">
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>News</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>World</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Games</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>References</a
 							>
 						</li>
 					</ul>
 				</div>
 				<div>
-					<p class="text-teal-accent-400 font-semibold tracking-wide">Cherry</p>
+					<p class="font-semibold tracking-wide text-teal-accent-400">Cherry</p>
 					<ul class="mt-2 space-y-2">
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Web</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>eCommerce</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Business</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Entertainment</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Portfolio</a
 							>
 						</li>
 					</ul>
 				</div>
 				<div>
-					<p class="text-teal-accent-400 font-semibold tracking-wide">Apples</p>
+					<p class="font-semibold tracking-wide text-teal-accent-400">Apples</p>
 					<ul class="mt-2 space-y-2">
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Media</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Brochure</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Nonprofit</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Educational</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Projects</a
 							>
 						</li>
 					</ul>
 				</div>
 				<div>
-					<p class="text-teal-accent-400 font-semibold tracking-wide"> Business </p>
+					<p class="font-semibold tracking-wide text-teal-accent-400">Business</p>
 					<ul class="mt-2 space-y-2">
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Infopreneur</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Personal</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Wiki</a
 							>
 						</li>
 						<li>
 							<a
 								href="/"
-								class="text-deep-purple-50 hover:text-teal-accent-400 transition-colors duration-300"
+								class="text-deep-purple-50 transition-colors duration-300 hover:text-teal-accent-400"
 								>Forum</a
 							>
 						</li>
@@ -193,13 +191,13 @@
 			</div>
 		</div>
 		<div
-			class="border-deep-purple-accent-200 flex flex-col justify-between border-t pb-10 pt-5 sm:flex-row"
+			class="flex flex-col justify-between border-t border-deep-purple-accent-200 pb-10 pt-5 sm:flex-row"
 		>
-			<p class="text-sm text-gray-100"> © Copyright 2020 Lorem Inc. All rights reserved. </p>
+			<p class="text-sm text-gray-100">© Copyright 2020 Lorem Inc. All rights reserved.</p>
 			<div class="mt-4 flex items-center space-x-4 sm:mt-0">
 				<a
 					href="/"
-					class="text-deep-purple-100 hover:text-teal-accent-400 transition-colors duration-300"
+					class="text-deep-purple-100 transition-colors duration-300 hover:text-teal-accent-400"
 				>
 					<svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
 						<path
@@ -209,7 +207,7 @@
 				</a>
 				<a
 					href="/"
-					class="text-deep-purple-100 hover:text-teal-accent-400 transition-colors duration-300"
+					class="text-deep-purple-100 transition-colors duration-300 hover:text-teal-accent-400"
 				>
 					<svg viewBox="0 0 30 30" fill="currentColor" class="h-6">
 						<circle cx="15" cy="15" r="4" />
@@ -220,7 +218,7 @@
 				</a>
 				<a
 					href="/"
-					class="text-deep-purple-100 hover:text-teal-accent-400 transition-colors duration-300"
+					class="text-deep-purple-100 transition-colors duration-300 hover:text-teal-accent-400"
 				>
 					<svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
 						<path

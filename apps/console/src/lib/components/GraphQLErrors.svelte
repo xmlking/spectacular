@@ -5,10 +5,10 @@
 </script>
 
 {#if errors.length}
-	<p
-		><span class="font-bold">Error:</span>
-		<span class="text-ellipsis">{errors[0].message}</span></p
-	>
+	<p>
+		<span class="font-bold">Error:</span>
+		<span class="text-ellipsis">{errors[0].message}</span>
+	</p>
 	<!-- <p><span class="font-bold">Extensions:</span> <span class="text-ellipsis">{JSON.stringify(errors[0].extensions)}</span></p> -->
 	<details>
 		<summary>Raw Errors </summary>

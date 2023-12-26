@@ -6,7 +6,7 @@
 			<a href="/" class="mb-6 sm:mx-auto">
 				<div class="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50">
 					<svg
-						class="text-deep-purple-accent-400 h-10 w-10"
+						class="h-10 w-10 text-deep-purple-accent-400"
 						stroke="currentColor"
 						viewBox="0 0 52 52"
 					>
@@ -41,25 +41,21 @@
 									<circle cx="1" cy="1" r=".7" />
 								</pattern>
 							</defs>
-							<rect
-								fill="url(#e77df901-b9d7-4b9b-822e-16b2d410795b)"
-								width="52"
-								height="24"
-							/>
+							<rect fill="url(#e77df901-b9d7-4b9b-822e-16b2d410795b)" width="52" height="24" />
 						</svg>
 						<span class="relative">The</span>
 					</span>
 					quick, brown fox jumps over a lazy dog
 				</h2>
 				<p class="text-base text-gray-700 md:text-lg">
-					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-					doloremque rem aperiam, eaque ipsa quae.
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem
+					aperiam, eaque ipsa quae.
 				</p>
 			</div>
 			<div>
 				<a
 					href="/"
-					class="bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline inline-flex h-12 items-center justify-center rounded px-6 font-medium tracking-wide text-white shadow-md transition duration-200 focus:outline-none"
+					class="inline-flex h-12 items-center justify-center rounded bg-deep-purple-accent-400 px-6 font-medium tracking-wide text-white shadow-md transition duration-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
 				>
 					Get started
 				</a>

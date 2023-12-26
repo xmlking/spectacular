@@ -3,19 +3,19 @@
 >
 	<div class="row-gap-8 grid grid-cols-2 md:grid-cols-4">
 		<div class="text-center">
-			<h6 class="text-deep-purple-accent-400 text-3xl font-bold">144K</h6>
+			<h6 class="text-3xl font-bold text-deep-purple-accent-400">144K</h6>
 			<p class="font-bold">Downloads</p>
 		</div>
 		<div class="text-center">
-			<h6 class="text-deep-purple-accent-400 text-3xl font-bold">32.1K</h6>
+			<h6 class="text-3xl font-bold text-deep-purple-accent-400">32.1K</h6>
 			<p class="font-bold">Users</p>
 		</div>
 		<div class="text-center">
-			<h6 class="text-deep-purple-accent-400 text-3xl font-bold">12.9K</h6>
+			<h6 class="text-3xl font-bold text-deep-purple-accent-400">12.9K</h6>
 			<p class="font-bold">Subscribers</p>
 		</div>
 		<div class="text-center">
-			<h6 class="text-deep-purple-accent-400 text-3xl font-bold">24.5K</h6>
+			<h6 class="text-3xl font-bold text-deep-purple-accent-400">24.5K</h6>
 			<p class="font-bold">Cookies</p>
 		</div>
 	</div>

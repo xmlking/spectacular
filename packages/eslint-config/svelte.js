@@ -28,5 +28,5 @@ module.exports = {
 			}
 		}
 	],
-	ignorePatterns: ["node_modules/", ".svelte-kit/"],
+	ignorePatterns: ['node_modules/', '.svelte-kit/']
 };

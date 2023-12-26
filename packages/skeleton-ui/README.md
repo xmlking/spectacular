@@ -15,11 +15,11 @@ Use **shadcn** component in your app
 
 ```svelte
 <script lang="ts">
-  import { Button } from 'ui/components/shadcn/button';
-  import * as DropdownMenu from 'ui/components/shadcn/dropdown-menu';
-  import { Sun, Moon } from 'lucide-svelte';
+	import { Button } from 'ui/components/shadcn/button';
+	import * as DropdownMenu from 'ui/components/shadcn/dropdown-menu';
+	import { Sun, Moon } from 'lucide-svelte';
 
-  import { setMode, resetMode } from 'mode-watcher';
+	import { setMode, resetMode } from 'mode-watcher';
 </script>
 
 <Button variant="outline">Button</Button>

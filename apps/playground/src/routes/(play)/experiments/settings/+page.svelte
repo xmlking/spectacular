@@ -115,7 +115,7 @@
 				<Form.Validation class="text-destructive" />
 			</div>
 		</Form.Field>
-		<button type="submit" class="btn variant-filled">Submit</button>
+		<button type="submit" class="variant-filled btn">Submit</button>
 	</Form.Root>
 </Page>
 

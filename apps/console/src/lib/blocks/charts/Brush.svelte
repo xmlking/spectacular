@@ -18,10 +18,7 @@
 			(brushExtents[1] || 1) * data.length
 		);
 		if (brushedData.length < 2) {
-			brushedData = data.slice(
-				brushExtents[0] * data.length,
-				brushExtents[0] * data.length + 2
-			);
+			brushedData = data.slice(brushExtents[0] * data.length, brushExtents[0] * data.length + 2);
 		}
 	}
 </script>

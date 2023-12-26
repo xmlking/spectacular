@@ -1,16 +1,12 @@
 <script lang="ts">
-	import * as DropdownMenu from "@spectacular/ui/components/dropdown-menu";
-	import * as Avatar from "@spectacular/ui/components/avatar";
+	import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
+	import * as Avatar from '@spectacular/ui/components/avatar';
 	import { Button } from '@spectacular/ui/components/button';
 </script>
 
 <DropdownMenu.Root>
 	<DropdownMenu.Trigger asChild let:builder>
-		<Button
-			variant="ghost"
-			builders={[builder]}
-			class="relative h-8 w-8 rounded-full"
-		>
+		<Button variant="ghost" builders={[builder]} class="relative h-8 w-8 rounded-full">
 			<Avatar.Root class="h-8 w-8">
 				<Avatar.Image src="/avatars/01.png" alt="@shadcn" />
 				<Avatar.Fallback>SC</Avatar.Fallback>
@@ -21,9 +17,7 @@
 		<DropdownMenu.Label class="font-normal">
 			<div class="flex flex-col space-y-1">
 				<p class="text-sm font-medium leading-none">shadcn</p>
-				<p class="text-xs leading-none text-muted-foreground">
-					m@example.com
-				</p>
+				<p class="text-xs leading-none text-muted-foreground">m@example.com</p>
 			</div>
 		</DropdownMenu.Label>
 		<DropdownMenu.Separator />

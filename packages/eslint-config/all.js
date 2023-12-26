@@ -5,7 +5,13 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 	extends: ['eslint:recommended', 'plugin:import/recommended', 'prettier', 'turbo'],
 	plugins: ['@typescript-eslint', 'unused-imports'],
-	ignorePatterns: ["node_modules/", ".sveltekit/", '*.cjs', '/apps/**/src/lib/i18n', 'packages/ui/src/lib/components/ui'],
+	ignorePatterns: [
+		'node_modules/',
+		'.sveltekit/',
+		'*.cjs',
+		'/apps/**/src/lib/i18n',
+		'packages/ui/src/lib/components/ui'
+	],
 	settings: {
 		'import/parsers': {
 			'@typescript-eslint/parser': ['.ts', '.tsx'],

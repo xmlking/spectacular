@@ -9,21 +9,18 @@
 		<img class="h-v50" src="./coverImage.png" alt="cover" />
 	</div>
 	<div class="flex flex-col justify-around md:flex-row">
-		<div class="stats mt-12 md:mt-0"
-			><h1>250+</h1><h3 class="mt-4 text-xl text-gray-500" style="letter-spacing:5px"
-				>COMPONENTS</h3
-			></div
-		>
-		<div class="stats mt-9 md:mt-0"
-			><h1>170+</h1><h3 class="mt-4 text-xl text-gray-500" style="letter-spacing:5px"
-				>ICONS</h3
-			></div
-		>
-		<div class="stats mt-9 md:mt-0"
-			><h1>200+</h1><h3 class="mt-4 text-xl text-gray-500" style="letter-spacing:5px"
-				>SCREENS</h3
-			></div
-		>
+		<div class="stats mt-12 md:mt-0">
+			<h1>250+</h1>
+			<h3 class="mt-4 text-xl text-gray-500" style="letter-spacing:5px">COMPONENTS</h3>
+		</div>
+		<div class="stats mt-9 md:mt-0">
+			<h1>170+</h1>
+			<h3 class="mt-4 text-xl text-gray-500" style="letter-spacing:5px">ICONS</h3>
+		</div>
+		<div class="stats mt-9 md:mt-0">
+			<h1>200+</h1>
+			<h3 class="mt-4 text-xl text-gray-500" style="letter-spacing:5px">SCREENS</h3>
+		</div>
 	</div>
 </div>
 

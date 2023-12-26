@@ -204,7 +204,7 @@
 										>
 											<span>{icon}</span>
 											<span class="flex-auto text-left">{name}</span>
-											{#if badge}<span class="badge variant-filled-secondary"
+											{#if badge}<span class="variant-filled-secondary badge"
 													>{badge}</span
 												>{/if}
 										</button>
@@ -224,7 +224,7 @@
 		<!-- Search -->
 		<div class="md:ml-4 md:inline">
 			<button
-				class="btn variant-soft hover:variant-soft-primary space-x-4"
+				class="variant-soft btn space-x-4 hover:variant-soft-primary"
 				on:click={triggerSearch}
 			>
 				<MagnifyingGlassSolid />

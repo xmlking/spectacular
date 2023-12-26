@@ -3,12 +3,13 @@
 		<div class="mx-auto mb-8 max-w-screen-sm text-center lg:mb-16">
 			<h2
 				class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl dark:text-white"
-				>Our Blog</h2
 			>
-			<p class="font-light text-gray-500 sm:text-xl dark:text-gray-400"
-				>We use an agile approach to test assumptions and connect with the needs of your
-				audience early and often.</p
-			>
+				Our Blog
+			</h2>
+			<p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+				We use an agile approach to test assumptions and connect with the needs of your audience
+				early and often.
+			</p>
 		</div>
 		<div class="grid gap-8 lg:grid-cols-2">
 			<article
@@ -16,7 +17,7 @@
 			>
 				<div class="mb-5 flex items-center justify-between text-gray-500">
 					<span
-						class="bg-primary-100 text-primary-800 dark:bg-primary-200 dark:text-primary-800 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium"
+						class="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800"
 					>
 						<svg
 							class="mr-1 h-3 w-3"
@@ -31,14 +32,14 @@
 					</span>
 					<span class="text-sm">14 days ago</span>
 				</div>
-				<h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-					><a href={'#'}>How to quickly deploy a static website</a></h2
-				>
-				<p class="mb-5 font-light text-gray-500 dark:text-gray-400"
-					>Static websites are now used to bootstrap lots of websites and are becoming the
-					basis for a variety of tools that even influence both web designers and
-					developers influence both web designers and developers.</p
-				>
+				<h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+					<a href={'#'}>How to quickly deploy a static website</a>
+				</h2>
+				<p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+					Static websites are now used to bootstrap lots of websites and are becoming the basis for
+					a variety of tools that even influence both web designers and developers influence both
+					web designers and developers.
+				</p>
 				<div class="flex items-center justify-between">
 					<div class="flex items-center space-x-4">
 						<img
@@ -49,7 +50,7 @@
 						<span class="font-medium dark:text-white"> Jese Leos </span>
 					</div>
 					<a
-						class="text-primary-600 dark:text-primary-500 inline-flex items-center font-medium hover:underline"
+						class="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
 						href={'#'}
 					>
 						Read more
@@ -73,7 +74,7 @@
 			>
 				<div class="mb-5 flex items-center justify-between text-gray-500">
 					<span
-						class="bg-primary-100 text-primary-800 dark:bg-primary-200 dark:text-primary-800 inline-flex items-center rounded px-2.5 py-0.5 text-xs font-medium"
+						class="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800"
 					>
 						<svg
 							class="mr-1 h-3 w-3"
@@ -90,14 +91,14 @@
 					</span>
 					<span class="text-sm">14 days ago</span>
 				</div>
-				<h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-					><a href={'#'}>Our first project with React</a></h2
-				>
-				<p class="mb-5 font-light text-gray-500 dark:text-gray-400"
-					>Static websites are now used to bootstrap lots of websites and are becoming the
-					basis for a variety of tools that even influence both web designers and
-					developers influence both web designers and developers.</p
-				>
+				<h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+					<a href={'#'}>Our first project with React</a>
+				</h2>
+				<p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+					Static websites are now used to bootstrap lots of websites and are becoming the basis for
+					a variety of tools that even influence both web designers and developers influence both
+					web designers and developers.
+				</p>
 				<div class="flex items-center justify-between">
 					<div class="flex items-center space-x-4">
 						<img
@@ -108,7 +109,7 @@
 						<span class="font-medium dark:text-white"> Bonnie Green </span>
 					</div>
 					<a
-						class="text-primary-600 dark:text-primary-500 inline-flex items-center font-medium hover:underline"
+						class="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
 						href={'#'}
 					>
 						Read more

@@ -17,32 +17,22 @@
 			/>
 			<div class="relative flex flex-wrap rounded bg-white py-6 shadow-md">
 				<div class="px-6 lg:w-1/2">
-					<h2 class="title-font text-xs font-semibold tracking-widest text-gray-900"
-						>ADDRESS</h2
-					>
-					<p class="mt-1"
-						>Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter</p
-					>
+					<h2 class="title-font text-xs font-semibold tracking-widest text-gray-900">ADDRESS</h2>
+					<p class="mt-1">Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter</p>
 				</div>
 				<div class="mt-4 px-6 lg:mt-0 lg:w-1/2">
-					<h2 class="title-font text-xs font-semibold tracking-widest text-gray-900"
-						>EMAIL</h2
-					>
+					<h2 class="title-font text-xs font-semibold tracking-widest text-gray-900">EMAIL</h2>
 					<a href={'#'} class="leading-relaxed text-indigo-500">example@email.com</a>
-					<h2 class="title-font mt-4 text-xs font-semibold tracking-widest text-gray-900"
-						>PHONE</h2
-					>
+					<h2 class="title-font mt-4 text-xs font-semibold tracking-widest text-gray-900">PHONE</h2>
 					<p class="leading-relaxed">123-456-7890</p>
 				</div>
 			</div>
 		</div>
-		<div
-			class="mt-8 flex w-full flex-col bg-white md:ml-auto md:mt-0 md:w-1/2 md:py-8 lg:w-1/3"
-		>
+		<div class="mt-8 flex w-full flex-col bg-white md:ml-auto md:mt-0 md:w-1/2 md:py-8 lg:w-1/3">
 			<h2 class="title-font mb-1 text-lg font-medium text-gray-900">Feedback</h2>
-			<p class="mb-5 leading-relaxed text-gray-600"
-				>Post-ironic portland shabby chic echo park, banjo fashion axe</p
-			>
+			<p class="mb-5 leading-relaxed text-gray-600">
+				Post-ironic portland shabby chic echo park, banjo fashion axe
+			</p>
 			<div class="relative mb-4">
 				<label for="name" class="text-sm leading-7 text-gray-600">Name</label>
 				<input
@@ -73,9 +63,9 @@
 				class="rounded border-0 bg-indigo-500 px-6 py-2 text-lg text-white hover:bg-indigo-600 focus:outline-none"
 				>Button</button
 			>
-			<p class="mt-3 text-xs text-gray-500"
-				>Chicharrones blog helvetica normcore iceland tousled brook viral artisan.</p
-			>
+			<p class="mt-3 text-xs text-gray-500">
+				Chicharrones blog helvetica normcore iceland tousled brook viral artisan.
+			</p>
 		</div>
 	</div>
 </section>

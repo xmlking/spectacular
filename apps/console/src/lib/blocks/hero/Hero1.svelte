@@ -5,14 +5,8 @@
 		<div class="max-w-xl sm:mx-auto lg:max-w-2xl">
 			<div class="mb-16 flex flex-col sm:mb-0 sm:text-center">
 				<a href="/" class="mb-6 sm:mx-auto">
-					<div
-						class="bg-teal-accent-400 flex h-12 w-12 items-center justify-center rounded-full"
-					>
-						<svg
-							class="text-deep-purple-900 h-10 w-10"
-							stroke="currentColor"
-							viewBox="0 0 52 52"
-						>
+					<div class="flex h-12 w-12 items-center justify-center rounded-full bg-teal-accent-400">
+						<svg class="h-10 w-10 text-deep-purple-900" stroke="currentColor" viewBox="0 0 52 52">
 							<polygon
 								stroke-width="3"
 								stroke-linecap="round"
@@ -31,7 +25,7 @@
 							<svg
 								viewBox="0 0 52 24"
 								fill="currentColor"
-								class="text-deep-purple-accent-100 absolute left-0 top-0 z-0 -ml-20 -mt-8 hidden w-32 sm:block lg:-ml-28 lg:-mt-10 lg:w-32"
+								class="absolute left-0 top-0 z-0 -ml-20 -mt-8 hidden w-32 text-deep-purple-accent-100 sm:block lg:-ml-28 lg:-mt-10 lg:w-32"
 							>
 								<defs>
 									<pattern
@@ -44,25 +38,21 @@
 										<circle cx="1" cy="1" r=".7" />
 									</pattern>
 								</defs>
-								<rect
-									fill="url(#700c93bf-0068-4e32-aafe-ef5b6a647708)"
-									width="52"
-									height="24"
-								/>
+								<rect fill="url(#700c93bf-0068-4e32-aafe-ef5b6a647708)" width="52" height="24" />
 							</svg>
 							<span class="relative">The</span>
 						</span>
 						quick, brown fox jumps over a lazy dog
 					</h2>
 					<p class="text-base text-indigo-100 md:text-lg">
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-						doloremque rem aperiam, eaque ipsa quae.
+						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+						rem aperiam, eaque ipsa quae.
 					</p>
 				</div>
 				<div>
 					<a
 						href="/"
-						class="bg-teal-accent-400 hover:bg-deep-purple-accent-100 hover:text-deep-purple-900 focus:shadow-outline inline-flex h-12 items-center justify-center rounded px-6 font-semibold tracking-wide text-teal-900 shadow-md transition duration-200 focus:outline-none"
+						class="inline-flex h-12 items-center justify-center rounded bg-teal-accent-400 px-6 font-semibold tracking-wide text-teal-900 shadow-md transition duration-200 hover:bg-deep-purple-accent-100 hover:text-deep-purple-900 focus:shadow-outline focus:outline-none"
 					>
 						Get started
 					</a>

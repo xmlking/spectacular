@@ -12,7 +12,7 @@ export default {
 	content: [
 		'./src/**/*.{html,js,svelte,ts,md,svx}',
 		'./node_modules/@skeletonlabs/skeleton/**/*.{html,js,svelte,ts}',
-		 '../../packages/skeleton-ui/components/**/*.{svelte,ts}'
+		'../../packages/skeleton-ui/components/**/*.{svelte,ts}'
 		// join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
 	],
 	theme: {

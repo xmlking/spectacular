@@ -18,10 +18,9 @@
 		</a>
 		<p
 			class="mt-4 text-sm text-gray-500 sm:ml-4 sm:mt-0 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:pl-4"
-			>© 2020 Datablocks —
-			<a href="https://twitter.com/xmlking" class="ml-1 text-gray-600" rel="external"
-				>@sumanth</a
-			>
+		>
+			© 2020 Datablocks —
+			<a href="https://twitter.com/xmlking" class="ml-1 text-gray-600" rel="external">@sumanth</a>
 		</p>
 		<p
 			class="mt-4 inline-flex justify-center text-xs text-gray-500 sm:ml-auto sm:mt-0 sm:justify-start"

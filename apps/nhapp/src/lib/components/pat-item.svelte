@@ -2,9 +2,7 @@
 	/** @type {import('../types').PersonalAccessToken}*/
 	export let pat;
 	const handleDeletePAT = () =>
-		fetch(`/protected/pat/${pat.id}`, { method: 'DELETE' }).then(() =>
-			window.location.reload()
-		);
+		fetch(`/protected/pat/${pat.id}`, { method: 'DELETE' }).then(() => window.location.reload());
 </script>
 
 <div class="flex flex-row items-center justify-between bg-slate-100 p-2">
@@ -17,13 +15,7 @@
 	</div>
 
 	<button on:click={handleDeletePAT}>
-		<svg
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke-width={1.5}
-			stroke="currentColor"
-			class="h-6 w-6"
-		>
+		<svg fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="h-6 w-6">
 			<path
 				stroke-linecap="round"
 				stroke-linejoin="round"

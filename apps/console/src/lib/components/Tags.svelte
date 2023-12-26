@@ -300,9 +300,7 @@
 			});
 		} else {
 			if (autoCompleteFilter !== false) {
-				matchs = autoCompleteValues.filter((e) =>
-					e.toLowerCase().includes(value.toLowerCase())
-				);
+				matchs = autoCompleteValues.filter((e) => e.toLowerCase().includes(value.toLowerCase()));
 			}
 			matchs = matchs.map((matchTag) => {
 				return {
@@ -388,8 +386,8 @@
 	.svelte-tags-input-tag,
 	.svelte-tags-input-matchs,
 	.svelte-tags-input-layout label {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-			Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+			'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 		font-size: 14px;
 		padding: 2px 5px;
 	}

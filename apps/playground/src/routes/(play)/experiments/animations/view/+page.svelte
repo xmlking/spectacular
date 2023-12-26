@@ -4,8 +4,8 @@
 	const { transition } = setupViewTransition();
 </script>
 
-<div class="variant-ghost-primary card p-4" use:transition={'viewLink'}>
-	<h1 class="card-header text-surface-100 pb-10 text-2xl font-semibold">View Transitions</h1>
+<div class="card variant-ghost-primary p-4" use:transition={'viewLink'}>
+	<h1 class="card-header pb-10 text-2xl font-semibold text-surface-100">View Transitions</h1>
 	<p class="card-content px-8 pb-10">
 		These are a clean way to animate the flow between pages creating a super clean look/flow.
 	</p>

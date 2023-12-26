@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CarrotIcon,  Check, PlusCircle } from "lucide-svelte";
+	import { CarrotIcon, Check, PlusCircle } from 'lucide-svelte';
 	import { cn } from '@spectacular/ui/utils';
 	import { Avatar } from '@spectacular/ui/components/avatar';
 	import { Button } from '@spectacular/ui/components/button';
@@ -9,37 +9,37 @@
 	import { Label } from '@spectacular/ui/components/label';
 	import { Popover } from '@spectacular/ui/components/popover';
 	import { Select } from '@spectacular/ui/components/select';
-	import { tick } from "svelte";
+	import { tick } from 'svelte';
 
 	let className: string | undefined | null = undefined;
 	export { className as class };
 
 	const groups = [
 		{
-			label: "Personal Account",
+			label: 'Personal Account',
 			teams: [
 				{
-					label: "Alicia Koch",
-					value: "personal"
+					label: 'Alicia Koch',
+					value: 'personal'
 				}
 			]
 		},
 		{
-			label: "Teams",
+			label: 'Teams',
 			teams: [
 				{
-					label: "Acme Inc.",
-					value: "acme-inc"
+					label: 'Acme Inc.',
+					value: 'acme-inc'
 				},
 				{
-					label: "Monsters Inc.",
-					value: "monsters"
+					label: 'Monsters Inc.',
+					value: 'monsters'
 				}
 			]
 		}
 	];
 
-	type Team = (typeof groups)[number]["teams"][number];
+	type Team = (typeof groups)[number]['teams'][number];
 
 	let open = false;
 	let showTeamDialog = false;
@@ -62,7 +62,7 @@
 				role="combobox"
 				aria-expanded={open}
 				aria-label="Select a team"
-				class={cn("w-[200px] justify-between", className)}
+				class={cn('w-[200px] justify-between', className)}
 			>
 				<Avatar.Root class="mr-2 h-5 w-5">
 					<Avatar.Image
@@ -102,9 +102,8 @@
 									{team.label}
 									<Check
 										class={cn(
-											"ml-auto h-4 w-4",
-											selectedTeam.value !== team.value &&
-												"text-transparent"
+											'ml-auto h-4 w-4',
+											selectedTeam.value !== team.value && 'text-transparent'
 										)}
 									/>
 								</Command.Item>
@@ -132,9 +131,7 @@
 	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title>Create team</Dialog.Title>
-			<Dialog.Description>
-				Add a new team to manage products and customers.
-			</Dialog.Description>
+			<Dialog.Description>Add a new team to manage products and customers.</Dialog.Description>
 		</Dialog.Header>
 		<div>
 			<div class="space-y-4 py-2 pb-4">
@@ -150,17 +147,13 @@
 						</Select.Trigger>
 						<Select.Content>
 							<Select.Item value="free">
-								<span class="font-medium">Free </span>-<span
-									class="text-muted-foreground"
-								>
+								<span class="font-medium">Free </span>-<span class="text-muted-foreground">
 									Trial for two weeks
 								</span>
 							</Select.Item>
 							<Select.Item value="pro">
 								<span class="font-medium">Pro</span> -
-								<span class="text-muted-foreground">
-									$9/month per user
-								</span>
+								<span class="text-muted-foreground"> $9/month per user </span>
 							</Select.Item>
 						</Select.Content>
 					</Select.Root>
@@ -168,9 +161,7 @@
 			</div>
 		</div>
 		<Dialog.Footer>
-			<Button variant="outline" on:click={() => (showTeamDialog = false)}>
-				Cancel
-			</Button>
+			<Button variant="outline" on:click={() => (showTeamDialog = false)}>Cancel</Button>
 			<Button type="submit">Continue</Button>
 		</Dialog.Footer>
 	</Dialog.Content>

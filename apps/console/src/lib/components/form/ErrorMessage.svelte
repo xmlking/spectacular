@@ -8,6 +8,7 @@
 		{...$$restProps}
 		class={twMerge('mt-2 text-xs font-normal text-red-700 dark:text-red-500', $$props.class)}
 	>
-		<span class="font-medium">Oh, snapp!</span> {error}</p
-	>
+		<span class="font-medium">Oh, snapp!</span>
+		{error}
+	</p>
 {/if}

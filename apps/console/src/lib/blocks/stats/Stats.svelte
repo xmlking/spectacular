@@ -3,7 +3,7 @@
 </script>
 
 <div class="max-w-7xl">
-	<h3 class="text-lg font-medium leading-6 text-gray-900"> Last 30 days </h3>
+	<h3 class="text-lg font-medium leading-6 text-gray-900">Last 30 days</h3>
 	<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 		<div class="flex flex-col overflow-hidden rounded-lg bg-white shadow">
 			<div class="flex-grow px-4 py-5 sm:p-6">
@@ -26,15 +26,11 @@
 						</svg>
 					</div>
 					<div class="ml-5 w-0 flex-1">
-						<dt class="truncate text-sm font-medium text-gray-500">
-							Total Subscribers
-						</dt>
+						<dt class="truncate text-sm font-medium text-gray-500">Total Subscribers</dt>
 						<dd class="flex items-baseline">
-							<div class="text-2xl font-semibold text-gray-900"> 8,892 </div>
+							<div class="text-2xl font-semibold text-gray-900">8,892</div>
 
-							<div
-								class="ml-2 flex items-baseline text-sm font-semibold text-green-600"
-							>
+							<div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
 								<svg
 									class="h-5 w-5 flex-shrink-0 self-center text-green-500"
 									fill="currentColor"
@@ -70,15 +66,11 @@
 						<ExclamationCircleOutline color="#ffffff" />
 					</div>
 					<div class="ml-5 w-0 flex-1">
-						<dt class="truncate text-sm font-medium text-gray-500">
-							Avg. Block Rate
-						</dt>
+						<dt class="truncate text-sm font-medium text-gray-500">Avg. Block Rate</dt>
 						<dd class="flex items-baseline">
 							<di class="text-2xl font-semibold text-gray-900"> 38.12% </di>
 
-							<div
-								class="ml-2 flex items-baseline text-sm font-semibold text-green-600"
-							>
+							<div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
 								<svg
 									class="h-5 w-5 flex-shrink-0 self-center text-green-500"
 									fill="currentColor"
@@ -128,15 +120,11 @@
 						</svg>
 					</div>
 					<div class="ml-5 w-0 flex-1">
-						<dt class="truncate text-sm font-medium text-gray-500">
-							Total Threat Blocked
-						</dt>
+						<dt class="truncate text-sm font-medium text-gray-500">Total Threat Blocked</dt>
 						<dd class="flex items-baseline">
-							<div class="text-2xl font-semibold text-gray-900"> 87,343 </div>
+							<div class="text-2xl font-semibold text-gray-900">87,343</div>
 
-							<div
-								class="ml-2 flex items-baseline text-sm font-semibold text-red-600"
-							>
+							<div class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
 								<svg
 									class="h-5 w-5 flex-shrink-0 self-center text-red-500"
 									fill="currentColor"

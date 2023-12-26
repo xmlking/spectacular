@@ -27,7 +27,7 @@
 	<div class="modal-example-form {cBase}">
 		<header class={cHeader}>{$modalStore[0].title ?? '(title missing)'}</header>
 		<article>{$modalStore[0].body ?? '(body missing)'}</article>
-		<ListBox class="border-surface-500 rounded-container-token border p-4">
+		<ListBox class="border border-surface-500 p-4 rounded-container-token">
 			<ListBoxItem bind:group={flavor} name="chocolate" value="chocolate"
 				>Chocolate</ListBoxItem
 			>

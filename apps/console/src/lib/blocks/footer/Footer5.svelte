@@ -5,7 +5,7 @@
 		<div class="sm:col-span-2">
 			<a href="/" aria-label="Go home" title="Company" class="inline-flex items-center">
 				<svg
-					class="text-deep-purple-accent-400 w-8"
+					class="w-8 text-deep-purple-accent-400"
 					viewBox="0 0 24 24"
 					stroke-linejoin="round"
 					stroke-width="2"
@@ -19,18 +19,16 @@
 					<rect x="14" y="1" width="7" height="6" />
 					<rect x="14" y="11" width="7" height="12" />
 				</svg>
-				<span class="ml-2 text-xl font-bold uppercase tracking-wide text-gray-800"
-					>Company</span
-				>
+				<span class="ml-2 text-xl font-bold uppercase tracking-wide text-gray-800">Company</span>
 			</a>
 			<div class="mt-6 lg:max-w-sm">
 				<p class="text-sm text-gray-800">
-					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-					doloremque laudantium, totam rem aperiam.
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+					laudantium, totam rem aperiam.
 				</p>
 				<p class="mt-4 text-sm text-gray-800">
-					Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-					dicta sunt explicabo.
+					Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+					explicabo.
 				</p>
 			</div>
 		</div>
@@ -42,7 +40,7 @@
 					href="tel:850-123-5021"
 					aria-label="Our phone"
 					title="Our phone"
-					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-300"
+					class="text-deep-purple-accent-400 transition-colors duration-300 hover:text-deep-purple-800"
 					>850-123-5021</a
 				>
 			</div>
@@ -52,7 +50,7 @@
 					href="mailto:info@lorem.mail"
 					aria-label="Our email"
 					title="Our email"
-					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-300"
+					class="text-deep-purple-accent-400 transition-colors duration-300 hover:text-deep-purple-800"
 					>info@lorem.mail</a
 				>
 			</div>
@@ -64,7 +62,7 @@
 					rel="noopener noreferrer"
 					aria-label="Our address"
 					title="Our address"
-					class="text-deep-purple-accent-400 hover:text-deep-purple-800 transition-colors duration-300"
+					class="text-deep-purple-accent-400 transition-colors duration-300 hover:text-deep-purple-800"
 				>
 					312 Lovely Street, NY
 				</a>
@@ -75,7 +73,7 @@
 			<div class="mt-1 flex items-center space-x-3">
 				<a
 					href="/"
-					class="hover:text-deep-purple-accent-400 text-gray-500 transition-colors duration-300"
+					class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
 				>
 					<svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
 						<path
@@ -85,7 +83,7 @@
 				</a>
 				<a
 					href="/"
-					class="hover:text-deep-purple-accent-400 text-gray-500 transition-colors duration-300"
+					class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
 				>
 					<svg viewBox="0 0 30 30" fill="currentColor" class="h-6">
 						<circle cx="15" cy="15" r="4" />
@@ -96,7 +94,7 @@
 				</a>
 				<a
 					href="/"
-					class="hover:text-deep-purple-accent-400 text-gray-500 transition-colors duration-300"
+					class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
 				>
 					<svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
 						<path
@@ -111,26 +109,26 @@
 		</div>
 	</div>
 	<div class="flex flex-col-reverse justify-between border-t pb-10 pt-5 lg:flex-row">
-		<p class="text-sm text-gray-600"> © Copyright 2020 Lorem Inc. All rights reserved. </p>
+		<p class="text-sm text-gray-600">© Copyright 2020 Lorem Inc. All rights reserved.</p>
 		<ul class="mb-3 flex flex-col space-y-2 sm:flex-row sm:space-x-5 sm:space-y-0 lg:mb-0">
 			<li>
 				<a
 					href="/"
-					class="hover:text-deep-purple-accent-400 text-sm text-gray-600 transition-colors duration-300"
+					class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
 					>F.A.Q</a
 				>
 			</li>
 			<li>
 				<a
 					href="/"
-					class="hover:text-deep-purple-accent-400 text-sm text-gray-600 transition-colors duration-300"
+					class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
 					>Privacy Policy</a
 				>
 			</li>
 			<li>
 				<a
 					href="/"
-					class="hover:text-deep-purple-accent-400 text-sm text-gray-600 transition-colors duration-300"
+					class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
 					>Terms &amp; Conditions</a
 				>
 			</li>

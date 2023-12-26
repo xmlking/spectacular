@@ -31,15 +31,7 @@
 </script>
 
 <g transform="translate({$width / 2}, {$height / 2})">
-	<circle
-		cx="0"
-		cy="0"
-		r={max}
-		stroke="#ccc"
-		stroke-width="1"
-		fill="#CDCDCD"
-		fill-opacity="0.1"
-	/>
+	<circle cx="0" cy="0" r={max} stroke="#ccc" stroke-width="1" fill="#CDCDCD" fill-opacity="0.1" />
 	<circle cx="0" cy="0" r={max / 2} stroke="#ccc" stroke-width="1" fill="none" />
 
 	{#each $config.x as label, i}

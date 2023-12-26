@@ -62,7 +62,7 @@
 	}
 
 	:is(h1, h2, h3, h4) {
-		@apply scroll-m-20 font-heading tracking-normal;
+		@apply font-heading scroll-m-20 tracking-normal;
 	}
 
 	h1 {
@@ -85,7 +85,7 @@
 		@apply leading-7 [&:not(:first-child)]:mt-6;
 
 		&.lead {
-			@apply text-xl text-muted-foreground;
+			@apply text-muted-foreground text-xl;
 		}
 	}
 
@@ -98,7 +98,7 @@
 	}
 
 	code {
-		@apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+		@apply bg-muted relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
 	}
 
 	:is(div, span, small, p, h1, h2, h3, h4) {
@@ -107,7 +107,7 @@
 		}
 
 		&.muted {
-			@apply text-sm text-muted-foreground;
+			@apply text-muted-foreground text-sm;
 		}
 
 		&.text-balance {

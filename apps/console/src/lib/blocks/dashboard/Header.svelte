@@ -93,9 +93,7 @@
 			active={path == '/dashboard/policies'}>Policies</NavLi
 		>
 		<NavLi href="/dashboard/users" active={path == '/dashboard/users'}>Users</NavLi>
-		<NavLi data-sveltekit-preload-data="" href="/play" active={path == '/play'}
-			>Playground</NavLi
-		>
+		<NavLi data-sveltekit-preload-data="" href="/play" active={path == '/play'}>Playground</NavLi>
 	</NavUl>
 
 	{#if user}
@@ -109,8 +107,7 @@
 			>
 			<Dropdown arrowIcon={false} inline={true}>
 				<DropdownHeader>
-					<span class="block truncate text-sm font-medium" aria-label={user.email}
-						>{user.name}</span
+					<span class="block truncate text-sm font-medium" aria-label={user.email}>{user.name}</span
 					>
 				</DropdownHeader>
 				<DropdownItem><a href="/dashboard/profile">Profile</a></DropdownItem>

@@ -13,8 +13,11 @@
 		"./utils": {
 			"default": "./utils/index.ts"
 		},
+		"./default": {
+			"default": "./styles/default.pcss"
+		},
 		"./theme": {
-			"default": "./styles/theme.postcss"
+			"default": "./styles/theme.pcss"
 		},
 		"./postcss.config": {
 			"default": "./postcss.config.cjs"

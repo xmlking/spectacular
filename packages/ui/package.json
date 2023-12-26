@@ -28,7 +28,6 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write . && eslint --fix .",
 		"ui:add": "pnpx shadcn-svelte@latest add"
-
 	},
 	"peerDependencies": {
 		"@sveltejs/kit": "^2.0.0",
