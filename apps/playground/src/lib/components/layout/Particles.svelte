@@ -1,19 +1,26 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	//import { loadFull } from 'tsparticles'; // if you are going to use `loadFull`, install the "tsparticles" package too.
-	import { loadSlim } from '@tsparticles/slim'; // if you are going to use `loadSlim`, install the "tsparticles-slim" package too.
-	import type { ComponentType } from 'svelte';
+	// if you are going to use `loadFull`, install the "tsparticles" package.
+	//import { loadFull } from 'tsparticles';
+	// if you are going to use `loadSlim`, install the "tsparticles-slim" package.
+	import { loadSlim } from '@tsparticles/slim';
+  import type { EventHandler } from "svelte/elements";
+	import { particlesInit } from "@tsparticles/svelte";
+	import type {Engine} from "@tsparticles/engine";
+	import { browser } from '$app/environment';
 
 	export let count = 200;
 	export let size = 2;
 
-	let ParticlesComponent: ComponentType;
 	let loaded = false;
 
-	onMount(async () => {
-		const module = await import("@tsparticles/svelte");
-		ParticlesComponent = module.default;
-	});
+	void particlesInit(async (engine: Engine) => {
+    await loadSlim(engine);
+  });
+
+
+	const ParticlesConstructor = browser
+		? import('@tsparticles/svelte').then((module) => module.default)
+		: new Promise(() => {});
 
 	const particlesConfig = {
 		particles: {
@@ -107,32 +114,30 @@
 		}
 	};
 
-	// eslint-disable-next-line  @typescript-eslint/no-unused-vars
-	const onParticlesLoaded = (event) => {
+	const onParticlesLoaded =  (e: EventHandler<Container | undefined>) => {
+		console.log('onParticlesLoaded...');
 		// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-		const particlesContainer = event.detail.particles;
+		const particlesContainer = e.detail.particles;
 		// you can use particlesContainer to call all the Container class
 		// (from the core library) methods like play, pause, refresh, start, stop
 		loaded = true;
 	};
-	const particlesInit = async (engine) => {
-		// you can use main to customize the tsParticles instance adding presets or custom shapes
-		// this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-		// starting from v2 you can add only the features you need reducing the bundle size
-		//await loadFull(engine);
-		await loadSlim(engine);
-	};
 </script>
 
 <div style="display: contents">
-	<svelte:component
-		this={ParticlesComponent}
-		id="particles"
-		class={loaded ? 'particles particles-loaded' : 'particles'}
-		options={particlesConfig}
-		on:particlesLoaded={onParticlesLoaded}
-		{particlesInit}
-	/>
+	{#await ParticlesConstructor}
+		<p>Loading...</p>
+	{:then component}
+		<svelte:component
+			this={component}
+			id="tsparticles"
+			options={particlesConfig}
+			class={loaded ? 'particles particles-loaded' : 'particles'}
+			on:particlesLoaded={onParticlesLoaded}
+		/>
+	{:catch error}
+		<p>Something went wrong: {error.message}</p>
+	{/await}
 </div>
 
 <style lang="postcss">
