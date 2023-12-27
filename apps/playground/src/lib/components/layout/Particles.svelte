@@ -11,7 +11,7 @@
 	let loaded = false;
 
 	onMount(async () => {
-		const module = await import('svelte-particles');
+		const module = await import("@tsparticles/svelte");
 		ParticlesComponent = module.default;
 	});
 
