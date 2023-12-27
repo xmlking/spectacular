@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { version } from '$app/environment';
+	// eslint-disable-next-line import/no-named-as-default
 	import LL from '$lib/i18n/i18n-svelte';
 	import LogoAnim from '$lib/components/logos/LogoAnim.svelte';
 	console.log(`Client version: ${version}`);

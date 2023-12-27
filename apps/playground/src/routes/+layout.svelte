@@ -1,7 +1,19 @@
 <!-- Layout: (root) -->
 <script lang="ts">
-	/* eslint-disable import/order */
 	import { setContext } from 'svelte';
+	// eslint-disable-next-line import/no-named-as-default
+	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
+	import { MetaTags } from 'svelte-meta-tags';
+	import type { ModalComponent } from '@skeletonlabs/skeleton';
+	import {
+		storePopup,
+		AppShell,
+		Modal,
+		Toast,
+		initializeStores,
+		prefersReducedMotionStore
+	} from '@skeletonlabs/skeleton';
+	import { inject } from '@vercel/analytics';
 	import LL, { setLocale } from '$lib/i18n/i18n-svelte';
 
 	export let data;
@@ -10,12 +22,10 @@
 	console.info($LL.log({ fileName: '+layout.svelte' }));
 
 	// Dependency: Floating UI for Popups
-	import { storePopup } from '@skeletonlabs/skeleton';
-	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
+
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 
 	// 3rd party
-	import { MetaTags } from 'svelte-meta-tags';
 
 	// SvelteKit Imports
 	import { dev } from '$app/environment';
@@ -23,16 +33,8 @@
 	import { afterNavigate } from '$app/navigation';
 
 	// Types
-	import type { ModalComponent } from '@skeletonlabs/skeleton';
 
 	// Components & Utilities
-	import {
-		AppShell,
-		Modal,
-		Toast,
-		initializeStores,
-		prefersReducedMotionStore
-	} from '@skeletonlabs/skeleton';
 	initializeStores();
 
 	// Docs Components
@@ -59,7 +61,6 @@
 	storeVercelProductionMode.set(data.vercelEnv === 'production');
 	// Init Vercel Analytics
 	// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
-	import { inject } from '@vercel/analytics';
 	inject({ mode: dev ? 'development' : 'production' });
 
 	// SEO Meta tags

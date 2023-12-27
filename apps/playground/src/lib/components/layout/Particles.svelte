@@ -3,9 +3,9 @@
 	//import { loadFull } from 'tsparticles';
 	// if you are going to use `loadSlim`, install the "tsparticles-slim" package.
 	import { loadSlim } from '@tsparticles/slim';
-  import type { EventHandler } from "svelte/elements";
-	import { particlesInit } from "@tsparticles/svelte";
-	import type {Engine} from "@tsparticles/engine";
+	import type { EventHandler } from 'svelte/elements';
+	import { particlesInit } from '@tsparticles/svelte';
+	import type { Container, Engine } from '@tsparticles/engine';
 	import { browser } from '$app/environment';
 
 	export let count = 200;
@@ -14,9 +14,8 @@
 	let loaded = false;
 
 	void particlesInit(async (engine: Engine) => {
-    await loadSlim(engine);
-  });
-
+		await loadSlim(engine);
+	});
 
 	const ParticlesConstructor = browser
 		? import('@tsparticles/svelte').then((module) => module.default)
@@ -114,10 +113,9 @@
 		}
 	};
 
-	const onParticlesLoaded =  (e: EventHandler<Container | undefined>) => {
-		console.log('onParticlesLoaded...');
-		// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+	const onParticlesLoaded = (e: EventHandler<Container | undefined>) => {
 		const particlesContainer = e.detail.particles;
+		console.log('onParticlesLoaded...', particlesContainer);
 		// you can use particlesContainer to call all the Container class
 		// (from the core library) methods like play, pause, refresh, start, stop
 		loaded = true;
