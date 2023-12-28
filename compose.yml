@@ -13,8 +13,8 @@ services:
     environment:
       NODE_ENV: production
       ORIGIN: http://localhost:3000
-    #   NEXTAUTH_URL: http://localhost:3000
-    #   AUTH_TRUST_HOST: true
+      #   NEXTAUTH_URL: http://localhost:3000
+      #   AUTH_TRUST_HOST: true
       PUBLIC_GRAPHQL_ENDPOINT: http://0.0.0.0:8080/v1/graphql
     ports:
       - 3000:3000

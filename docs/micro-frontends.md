@@ -1,20 +1,22 @@
-#  Micro-Frontends
+# Micro-Frontends
 
 > You (probably) don't need Micro-Frontends
 
-This is the "Distributed and Decoupled Spectrum" 
+This is the "Distributed and Decoupled Spectrum"
 
 Make sure that you explore all the other options before trying to implement a fully distributed system
 
 ![The Evolution of Micro Frontends](./images/micro-frontends-evolution.jpeg 'Title')
 
-##  The Evolution of Micro Frontends
+## The Evolution of Micro Frontends
+
 ### Monolith Micro-Frontends
+
 Let's start with the Monolith.
 
 Either a backend and frontend together or a frontend monolith connecting to APIs.
 
-Great for solo devs and small teams. 
+Great for solo devs and small teams.
 
 Monoliths can definitely scale to millions of users
 
@@ -26,7 +28,7 @@ However, the application still has to be deployed as a single unit.
 
 ### Integrated Applications
 
-They could be developed and deployed independently but often there is an integration step at build time where all the pieces come together and get deployed as a single unit. 
+They could be developed and deployed independently but often there is an integration step at build time where all the pieces come together and get deployed as a single unit.
 
 Monorepos are a great tool for integrated applications.
 
@@ -44,5 +46,6 @@ This type allows you to compose vertically and horizontally. The app works and f
 
 There is no full page refresh, the perfect balance of UX and DX.
 
-## Reference 
--  [The Evolution of Micro Frontends ](https://twitter.com/Infoxicador/status/1606382229764116483) by Ruben Casas, [Video](https://www.youtube.com/watch?v=MGpTUx8MKMY)
+## Reference
+
+- [The Evolution of Micro Frontends ](https://twitter.com/Infoxicador/status/1606382229764116483) by Ruben Casas, [Video](https://www.youtube.com/watch?v=MGpTUx8MKMY)

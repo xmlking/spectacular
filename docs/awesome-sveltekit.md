@@ -138,7 +138,7 @@ Awesome **SvelteKit** Links
 - [Svelte 3.5 + Storybook 7 + TailwindCSS 3](https://github.com/jerriclynsjohn/svelte-storybook-tailwind)
 - [Svelte offline SQLite ](https://github.com/phartenfeller/sveltekit-1.0-sqlite-demo-app)
 - [Svelte runes + Liveblocks demo](https://github.com/CTNicholas/svelte-runes-realtime-drawing)
-- [shadcn-svelte, Superforms sample project](https://github.com/delay/sveltekit-auth) 
+- [shadcn-svelte, Superforms sample project](https://github.com/delay/sveltekit-auth)
 
 ## Deployment
 

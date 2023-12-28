@@ -42,7 +42,7 @@ In this Playbook, we will be using [svelte-add](https://github.com/svelte-add/sv
 
 ### Workspace
 
-[dotenv-run](https://github.com/chihab/dotenv-run) helps loading *nested* `.env` files in monorepo.
+[dotenv-run](https://github.com/chihab/dotenv-run) helps loading _nested_ `.env` files in monorepo.
 
 ```shell
 # pnpm add  -D dotenv-cli -w
@@ -238,6 +238,7 @@ And follow **skeleton** specific sveltekit [changes](https://www.skeleton.dev/gu
 pnpm add -D tailwind-variants clsx tailwind-merge --filter "./apps/console3"
 pnpm add -D mode-watcher --filter "./apps/web"
 ```
+
 ### UI Blocks
 
 - [Kometa UI Kit](https://kitwind.io/products/kometa) (Free) [Blocks](https://kitwind.io/products/kometa/components)

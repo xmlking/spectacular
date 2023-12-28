@@ -5,6 +5,7 @@ This document provide guidelines when creating tables in **PostgreSQL** database
 ## Style guide
 
 ### Best Practices
+
 - Use lower-case names for tables. E.g. `customers` instead of `Customers`.
 - Use plural names for tables. E.g. `customers` instead of `customer`.
 - use underscore (`_`) instead of camelCase for table names. E.g. `customer_invoices` instead of `customerInvoices`.

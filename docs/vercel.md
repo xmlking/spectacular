@@ -42,10 +42,10 @@ this guide will walk you through the steps to automate deployments via tags inst
 [Can you deploy based on tags/releases on Vercel?](https://vercel.com/guides/can-you-deploy-based-on-tags-releases-on-vercel)
 
 ### Manual Deploy
+
 ```shell
 vercel deploy --prod
 ```
-
 
 ## Environment Variables
 
