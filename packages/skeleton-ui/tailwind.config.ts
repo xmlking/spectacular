@@ -1,4 +1,5 @@
 import { skeleton } from '@skeletonlabs/tw-plugin';
+// import colors from 'tailwindcss/colors';
 import containerQueries from '@tailwindcss/container-queries';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
@@ -19,7 +20,11 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter Variable', 'Inter', ...defaultTheme.fontFamily.sans]
-			}
+			},
+			// colors: {
+			// 	// Your preferred accent color. Indigo is closest to Starlight’s defaults.
+			// 	accent: colors.indigo
+			// }
 		}
 	},
 	plugins: [

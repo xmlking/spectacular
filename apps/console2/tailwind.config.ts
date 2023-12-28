@@ -8,13 +8,8 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				accent: colors.indigo
-			},
-			fontFamily: {
-				heading: "'Sora Variable', sans-serif",
-				sans: "'Inter Variable', sans-serif",
-				mono: "'JetBrains Mono', monospace",
-				serif: "'Roboto Slab Variable', sans-serif"
+				// Your preferred accent color. Indigo is closest to Starlight’s defaults.
+				accent: colors.amber
 			}
 		}
 	},

@@ -16,9 +16,6 @@
 		"./default": {
 			"default": "./styles/default.pcss"
 		},
-		"./theme": {
-			"default": "./styles/theme.pcss"
-		},
 		"./postcss.config": {
 			"default": "./postcss.config.cjs"
 		},
@@ -41,11 +38,14 @@
 	},
 	"devDependencies": {
 		"@floating-ui/dom": "1.5.3",
+		"@fontsource-variable/inter": "5.0.16",
 		"@playwright/test": "1.40.1",
 		"@skeletonlabs/skeleton": "2.6.1",
 		"@skeletonlabs/tw-plugin": "0.3.0",
 		"@spectacular/eslint-config": "workspace:*",
+		"@spectacular/prettier-config": "workspace:*",
 		"@spectacular/typescript-config": "workspace:*",
+		"@spectacular/utils": "workspace:*",
 		"@tailwindcss/container-queries": "0.1.1",
 		"@tailwindcss/forms": "0.5.7",
 		"@tailwindcss/line-clamp": "0.4.4",
