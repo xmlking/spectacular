@@ -20,7 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter Variable', 'Inter', ...defaultTheme.fontFamily.sans]
-			},
+			}
 			// colors: {
 			// 	// Your preferred accent color. Indigo is closest to Starlight’s defaults.
 			// 	accent: colors.indigo
