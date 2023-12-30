@@ -1,7 +1,6 @@
 <!-- Layout: (root) -->
 <script lang="ts">
 	import { setContext } from 'svelte';
-	// eslint-disable-next-line import/no-named-as-default
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import { MetaTags } from 'svelte-meta-tags';
 	import type { ModalComponent } from '@skeletonlabs/skeleton';
@@ -14,50 +13,39 @@
 		prefersReducedMotionStore
 	} from '@skeletonlabs/skeleton';
 	import { inject } from '@vercel/analytics';
-	import LL, { setLocale } from '$lib/i18n/i18n-svelte';
-
-	export let data;
-	// at the very top, set the locale before you access the store and before the actual rendering takes place
-	setLocale(data.locale);
-	console.info($LL.log({ fileName: '+layout.svelte' }));
-
-	// Dependency: Floating UI for Popups
-
-	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
-
-	// 3rd party
-
-	// SvelteKit Imports
 	import { dev } from '$app/environment';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
-
-	// Types
-
-	// Components & Utilities
-	initializeStores();
-
-	// Docs Components
+	import { LL, setLocale } from '$lib/i18n/i18n-svelte';
 	import AppBar from '$lib/components/layout/AppBar.svelte';
 	import Drawer from '$lib/components/layout/Drawer.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';
-
-	// Modal Components
 	import Search from '$lib/modals/Search.svelte';
-
-	// NOTE: (forms example uses direct method)
 	import ModalExampleEmbed from '$lib/modals/examples/ModalExampleEmbed.svelte';
 	import ModalExampleImage from '$lib/modals/examples/ModalExampleImage.svelte';
 	import ModalExampleList from '$lib/modals/examples/ModalExampleList.svelte';
+	import { storeVercelProductionMode } from '$lib/stores/stores';
+	import type { LayoutData } from './$types';
 
 	// Global Stylesheets
-	import '../app.postcss';
+	import '../app.pcss';
+
+	export let data: LayoutData;
+
+	// at the very top, set the locale before you access the store and before the actual rendering takes place
+	setLocale(data.locale);
+	console.info($LL.log({ fileName: '+layout.svelte' }));
+
+	// Floating UI for Popups
+	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
+
+	initializeStores();
 
 	// Handle Vercel Production Mode
 	// Pass to Store for Ad Conditionals
 	// IMPORTANT: DO NOT MODIFY THIS UNLESS YOU KNOW WHAT YOU'RE DOING
-	import { storeVercelProductionMode } from '$lib/stores/stores';
+
 	storeVercelProductionMode.set(data.vercelEnv === 'production');
 	// Init Vercel Analytics
 	// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());

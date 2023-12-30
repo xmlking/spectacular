@@ -1,6 +1,6 @@
 <script lang="ts">
+	import LogoAnim from '@spectacular/skeleton/components/logos/LogoAnim.svelte';
 	import { page } from '$app/stores';
-	import LogoAnim from '$lib/components/logos/LogoAnim.svelte';
 </script>
 
 {#if $page}

@@ -1,8 +1,9 @@
+import { join } from 'path';
 import { skeleton } from '@skeletonlabs/tw-plugin';
 // import colors from 'tailwindcss/colors';
-import containerQueries from '@tailwindcss/container-queries';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
+import containerQueries from '@tailwindcss/container-queries';
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 import { customTheme } from './custom.theme';
@@ -13,8 +14,8 @@ export default {
 	content: [
 		'./src/**/*.{html,js,svelte,ts,md,svx}',
 		'./node_modules/@skeletonlabs/skeleton/**/*.{html,js,svelte,ts}',
+		join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}'),
 		'../../packages/skeleton-ui/components/**/*.{svelte,ts}'
-		// join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
 	],
 	theme: {
 		extend: {

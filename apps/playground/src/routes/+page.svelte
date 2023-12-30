@@ -1,12 +1,9 @@
 <script lang="ts">
+	import LogoAnim from '@spectacular/skeleton/components/logos/LogoAnim.svelte';
 	import { version } from '$app/environment';
-	// eslint-disable-next-line import/no-named-as-default
-	import LL from '$lib/i18n/i18n-svelte';
-	import LogoAnim from '$lib/components/logos/LogoAnim.svelte';
+	import { LL } from '$lib/i18n/i18n-svelte';
 	console.log(`Client version: ${version}`);
 </script>
-
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 
 <div class="container mx-auto flex h-full items-center justify-center">
 	<div class="flex flex-col items-center space-y-10 text-center">

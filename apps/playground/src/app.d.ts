@@ -12,6 +12,7 @@ declare global {
 			LL: TranslationFunctions;
 		}
 		// interface PageData {}
+		// interface PageState {}
 		// interface Platform {}
 	}
 

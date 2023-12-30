@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BarsSolid } from 'svelte-awesome-icons';
+	import { Menu } from 'lucide-svelte';
 	import { OutClick } from '@spectacular/skeleton/components';
 	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -21,7 +21,7 @@
 	bind:this={toggleBtn}
 	on:click={() => (isOpen = !isOpen)}
 >
-	<BarsSolid />
+	<Menu />
 </button>
 
 <OutClick on:outclick={() => (isOpen = false)} excludeElements={toggleBtn}>
