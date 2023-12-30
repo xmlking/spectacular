@@ -1,6 +1,5 @@
 <!-- Layout: (root) -->
 <script lang="ts">
-	import { setContext } from 'svelte';
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import { MetaTags } from 'svelte-meta-tags';
 	import type { ModalComponent } from '@skeletonlabs/skeleton';
@@ -102,14 +101,6 @@
 		? 'w-0'
 		: 'bg-surface-50-900-token lg:w-auto';
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
-
-	// Define your global icon settings
-	const iconCtx = {
-		size: '16', // Icon size in pixels
-		// color: '#ff4488', // Icon color in hexadecimal or CSS color name
-		role: 'svg icon image' // Accessible role for the icon
-	};
-	setContext('iconCtx', iconCtx);
 </script>
 
 <MetaTags
