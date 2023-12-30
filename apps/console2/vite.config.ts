@@ -6,6 +6,8 @@ import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+	// TODO: evaluate if we still need 'vite-tsconfig-paths' as sveltekit can handel this with `Path aliases`.
+	// b.t.w packages/ui/tsconfig.json has paths.
 	plugins: [enhancedImages(), sveltekit(), purgeCss(), tsconfigPaths()],
 	define: {
 		// to burn-in release version in the footer.svelte

@@ -227,6 +227,10 @@ Awesome **SvelteKit** Links
   });
   ```
 
+- Best practices for Createing [Svelte Component Library](https://blog.robino.dev/posts/svelte-component-library)
+
+  add `sideEffects` to `package.json`
+
 ## Blogs
 
 - [https://joyofcode.xyz/](https://joyofcode.xyz/)
