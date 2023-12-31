@@ -2,7 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
 	webServer: {
-		command: 'turbo build && turbo preview',
+		command: 'pnpm run build && pnpm run preview',
 		port: 4173
 	},
 	testDir: 'tests',

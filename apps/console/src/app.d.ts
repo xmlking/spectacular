@@ -1,42 +1,19 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
-import { DefaultSession } from '@auth/core/types';
+type Locales = import('$i18n/i18n-types').Locales;
+type TranslationFunctions = import('$i18n/i18n-types').TranslationFun;
+
 declare global {
 	namespace App {
-		interface Session {
-			user?: {
-				id?: string;
-			} & DefaultSession['user'];
-			expires?: DefaultSession['expires'];
-			token?: string;
-			roles?: string[];
-		}
-		interface Error {
-			message: string; // this property is always required, to provide a sensible fallback
-			context?: Record<string, any>;
-		}
+		// interface Error {}
 		interface Locals {
-			// session: Session;
-			getSession(): Promise<Session | null>;
+			locale: Locales;
+			LL: TranslationFunctions;
 		}
-		export interface Toast {
-			message: string;
-			type?: ToastLevel;
-			duration?: number;
-			dismissible?: boolean;
-		}
-		interface PageData {
-			session: Session | null;
-			flash?: Toast;
-		}
+		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
-		interface Metadata {
-			logResult?: boolean | null;
-			backendToken?: string | null;
-			useRole?: string | null;
-		}
 	}
 
 	// App version from package.json

@@ -22,21 +22,20 @@ const config = {
 			? adapterAuto()
 			: process.env.BUN_ENV
 				? adapterBun()
-				: adapterNode({ polyfill: false, precompress: true }),
-		// When hosting SPA on GitHub Pages
-		paths: {
-			// base: dev ? '' : '/hc360-ui',
-			// relative: false
-		},
+				: adapterNode({ polyfill: false }),
+		prerender: { crawl: false }, // FIXME: remove after all links are corrected.
 		output: {
 			preloadStrategy: 'preload-mjs'
 		},
-
-		// prerender: { entries: [] },
-		alias: {
-			$mocks: 'src/mocks',
-			$houdini: './$houdini'
+		version: {
+			name: process.env.npm_package_version
 		}
+		// TODO: This alias should not be needed, but without it, VSCode show `Cannot find module` error!!!
+		// Ref: https://github.com/vercel/turbo/discussions/620
+		// alias: {
+		// 	"@spectacular/skeleton/components/*": "../../packages/skeleton-ui/components/*"
+		// }
+
 		// env: {
 		// 	dir: '../..',
 		// 	privatePrefix: 'PRIVATE_',

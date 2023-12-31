@@ -3,7 +3,7 @@
 	import { ToggleGroup as ToggleGroupPrimitive } from "bits-ui";
 	import type { toggleVariants } from "$ui/components/toggle";
 	import { setToggleGroupCtx } from ".";
-	import { cn } from "$lib/utils";
+	import { cn } from "$ui/utils";
 
 	type T = $$Generic<"single" | "multiple">;
 	type $$Props = ToggleGroupPrimitive.Props<T> &

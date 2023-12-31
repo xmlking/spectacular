@@ -10,7 +10,6 @@ vite.config.js*
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml
-pnpm-workspace.yaml
 package-lock.json
 yarn.lock
 vite.config.*.timestamp-*
@@ -23,3 +22,4 @@ static/**
 CHANGELOG.md
 schema.graphql
 $houdini
+src/lib/i18n

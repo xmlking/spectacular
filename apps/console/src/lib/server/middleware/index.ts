@@ -1,4 +1,3 @@
-export { authjs } from './authjs';
-export { guard } from './guard';
-export { houdini } from './houdini';
+export { handleDetectLocale } from './detect-locale';
+export { handleDetectTheme } from './detect-theme';
 export { logger } from './logger';

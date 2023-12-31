@@ -2,7 +2,7 @@
 	import { RangeCalendar as RangeCalendarPrimitive } from "bits-ui";
 	import { ChevronRight } from "lucide-svelte";
 	import { buttonVariants } from "$ui/components/button";
-	import { cn } from "$lib/utils";
+	import { cn } from "$ui/utils";
 
 	type $$Props = RangeCalendarPrimitive.NextButtonProps;
 	type $$Events = RangeCalendarPrimitive.NextButtonEvents;

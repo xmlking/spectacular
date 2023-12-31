@@ -8,7 +8,7 @@
 		type Side
 	} from ".";
 	import { X } from "lucide-svelte";
-	import { cn } from "$lib/utils";
+	import { cn } from "$ui/utils";
 	import { fly } from "svelte/transition";
 
 	type $$Props = SheetPrimitive.ContentProps & {
