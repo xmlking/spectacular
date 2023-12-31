@@ -8,7 +8,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
 	// TODO: evaluate if we still need 'vite-tsconfig-paths' as sveltekit can handel this with `Path aliases`.
 	// b.t.w packages/ui/tsconfig.json has paths.
-	plugins: [enhancedImages(), sveltekit(), purgeCss(), tsconfigPaths()],
+	plugins: [enhancedImages(), sveltekit(), purgeCss(), tsconfigPaths({ignoreConfigErrors: true})],
 	define: {
 		// to burn-in release version in the footer.svelte
 		__APP_VERSION__: JSON.stringify(process.env.npm_package_version),

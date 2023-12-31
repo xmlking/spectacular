@@ -49,7 +49,7 @@
 	</footer>
 </div>
 
-<Table.Root {handler}>
+<Table.Root {handler} search={true} rowsPerPage={true}>
 	<table class="table table-hover table-compact w-full table-auto">
 		<thead>
 			<tr>

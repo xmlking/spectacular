@@ -4,7 +4,6 @@
 </script>
 
 <script lang="ts" generics="T extends Row">
-	import { onMount } from 'svelte';
 	import type { DataHandler } from '@vincjo/datatables';
 	import type { HTMLTableAttributes } from 'svelte/elements';
 	import { setContext } from '@spectacular/utils';
@@ -36,19 +35,13 @@
 	handler.on('change', () => {
 		if (element) element.scrollTop = 0;
 	});
-
-	onMount(() => {
-		console.log('position', element.style.position)
-		if (element) element.style.position=""
-		console.log('position', element.style.position)
-	})
-
 </script>
 
-<!-- FIXME: clientWidth https://github.com/sveltejs/svelte/issues/4776 -->
+<!-- FIXME: clientWidth `position:inherit` https://github.com/sveltejs/svelte/issues/4776 -->
 <section
 	bind:clientWidth
 	class={cn('mx-[10%] my-4 space-y-2 overflow-x-auto', className)}
+	style="position:inherit"
 	{...$$restProps}
 >
 	<header class="flex justify-between">
