@@ -4,6 +4,7 @@
 	"main": "src/index.ts",
 	"types": "src/index.ts",
 	"type": "module",
+	"sideEffects": false,
 	"exports": {
 		".": {
 			"default": "./src/index.ts"
@@ -15,14 +16,13 @@
 		"test": "vitest run",
 		"test:watch": "vitest"
 	},
-	"dependencies": {
-		"zod": "3.22.4",
-		"zod-validation-error": "2.1.0"
-	},
 	"peerDependencies": {
-		"typescript": "5.3.3"
+		"@sveltejs/kit": "^2.0.0",
+		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
+		"zod": "3.22.4",
+		"zod-validation-error": "2.1.0",
 		"@spectacular/eslint-config": "workspace:*",
 		"@spectacular/prettier-config": "workspace:*",
 		"@spectacular/typescript-config": "workspace:*"

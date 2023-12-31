@@ -16,6 +16,8 @@ Awesome **SvelteKit** Links
 
 - Tables
 
+  - [svelte simple datatables](https://github.com/vincjo/datatables)
+  - [simple-datatables-skeleton](https://github.com/kmalloy24/simple-datatables-skeleton)
   - [Svelte Headless Table](https://svelte-headless-table.bryanmylee.com/)
   - [svelte-generic-crud-table](https://github.com/ivosdc/svelte-generic-crud-table/)
 

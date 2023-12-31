@@ -407,6 +407,9 @@ importers:
       '@vercel/analytics':
         specifier: 1.1.1
         version: 1.1.1
+      '@vincjo/datatables':
+        specifier: 1.14.2
+        version: 1.14.2(svelte@4.2.8)
       '@vitest/coverage-v8':
         specifier: 1.1.0
         version: 1.1.0(vitest@1.1.0)
@@ -460,7 +463,7 @@ importers:
         version: 0.5.1
       svelte-check:
         specifier: 3.6.2
-        version: 3.6.2(@babel/core@7.23.7)(postcss@8.4.32)(svelte@4.2.8)
+        version: 3.6.2(postcss-load-config@5.0.2)(postcss@8.4.32)(svelte@4.2.8)
       svelte-meta-tags:
         specifier: 3.1.0
         version: 3.1.0(svelte@4.2.8)(typescript@5.3.3)
@@ -759,7 +762,7 @@ importers:
         version: 4.2.8
       svelte-check:
         specifier: 3.6.2
-        version: 3.6.2(@babel/core@7.23.7)(postcss@8.4.32)(svelte@4.2.8)
+        version: 3.6.2(postcss-load-config@5.0.2)(postcss@8.4.32)(svelte@4.2.8)
       tailwindcss:
         specifier: 3.4.0
         version: 3.4.0
@@ -913,7 +916,7 @@ importers:
         version: 0.5.1
       svelte-check:
         specifier: 3.6.2
-        version: 3.6.2(@babel/core@7.23.7)(postcss@8.4.32)(svelte@4.2.8)
+        version: 3.6.2(postcss-load-config@5.0.2)(postcss@8.4.32)(svelte@4.2.8)
       svelte-meta-tags:
         specifier: 3.1.0
         version: 3.1.0(svelte@4.2.8)(typescript@5.3.3)
@@ -1161,6 +1164,9 @@ importers:
       '@types/node':
         specifier: 20.10.6
         version: 20.10.6
+      '@vincjo/datatables':
+        specifier: 1.14.2
+        version: 1.14.2(svelte@4.2.8)
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.32)
@@ -1305,15 +1311,12 @@ importers:
 
   packages/utils:
     dependencies:
-      typescript:
-        specifier: 5.3.3
-        version: 5.3.3
-      zod:
-        specifier: 3.22.4
-        version: 3.22.4
-      zod-validation-error:
-        specifier: 2.1.0
-        version: 2.1.0(zod@3.22.4)
+      '@sveltejs/kit':
+        specifier: ^2.0.0
+        version: 2.0.6(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.8)(vite@5.0.10)
+      svelte:
+        specifier: ^4.0.0
+        version: 4.2.8
     devDependencies:
       '@spectacular/eslint-config':
         specifier: workspace:*
@@ -1324,6 +1327,12 @@ importers:
       '@spectacular/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      zod:
+        specifier: 3.22.4
+        version: 3.22.4
+      zod-validation-error:
+        specifier: 2.1.0
+        version: 2.1.0(zod@3.22.4)
 
 packages:
 
@@ -6891,6 +6900,14 @@ packages:
       '@resvg/resvg-wasm': 2.6.0
       satori: 0.10.9
       yoga-wasm-web: 0.3.3
+    dev: true
+
+  /@vincjo/datatables@1.14.2(svelte@4.2.8):
+    resolution: {integrity: sha512-g+wKmU/npUkovkZSIxO+Dd8odpbse2VEFwGVbXvik2wYb8g8Wz+bIIRj6eeeXYM43N4tm/lOAj8eTUHRALRUNg==}
+    peerDependencies:
+      svelte: '>=3.54.0'
+    dependencies:
+      svelte: 4.2.8
     dev: true
 
   /@vite-pwa/sveltekit@0.3.0(@sveltejs/kit@2.0.6)(vite-plugin-pwa@0.17.4):
@@ -18194,7 +18211,7 @@ packages:
       zod: ^3.18.0
     dependencies:
       zod: 3.22.4
-    dev: false
+    dev: true
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
