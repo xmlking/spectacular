@@ -1,5 +1,7 @@
 # Turborepo
 
+A **monorepo** is a single repository containing multiple distinct projects, with well-defined relationships. learn more at [monorepo.tools](https://monorepo.tools/)
+
 [Turborepo](https://turbo.build/repo/docs/handbook)enable managing deployable **apps** and associated [Sharing Code](https://turbo.build/repo/docs/handbook/sharing-code) in single git repo.  
 Sharing Code cab be either [Internal Packages](https://turbo.build/repo/docs/handbook/sharing-code/internal-packages) or [External Packages](https://turbo.build/repo/docs/handbook/publishing-packages)
 
@@ -13,14 +15,16 @@ This Turborepo includes the following packages/apps:
 ### Apps and Packages
 
 - WebApps
-  - `playground`: an experimental [svelte-kit](https://kit.svelte.dev/) web app to play with new ideas.
-  - `docs`: a sample documentation [svelte-kit](https://kit.svelte.dev/) web app
-  - `web`: a sample [svelte-kit](https://kit.svelte.dev/) web app
+  - `playground`: an **experimental** [svelte-kit](https://kit.svelte.dev/) web app to play with new ideas.
+  - `docs`: a sample **documentation** web app build with astro's [starlight](https://starlight.astro.build/)
+  - `web`: a sample **landing page** web app build with [astro](https://astro.build/)
+  - `console`: a sample **dashboard** web app build with [svelte-kit](https://kit.svelte.dev/)
 - Packages
   - `ui`: a stub Svelte component library shared by both `web` and `docs` applications
-  - `eslint-config-custom`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
-  - `tailwind-config`: shared `tailwindcss` configurations (includes etc...)
-  - `helpers`: utility functions used throughout the monorepo
+  - `eslint-config`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
+  - `prettier-config`: shared `prettier` configurations (plugins etc...)
+  - `typescript-config`: shared `tsconfig` files
+  - `utils`: utility functions used throughout the monorepo
 
 ### Utilities
 

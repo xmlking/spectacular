@@ -13,5 +13,5 @@ export default {
 			}
 		}
 	},
-	plugins: [...baseConfig.plugins, require('svelte-ux/plugins/tailwind.cjs')]
+	plugins: [...baseConfig.plugins /* require('svelte-ux/plugins/tailwind.cjs') */]
 } satisfies Config;
