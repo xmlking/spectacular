@@ -22,5 +22,15 @@ export default defineConfig({
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
-	}
+	},
+	// Ref: https://vitejs.dev/guide/dep-pre-bundling#monorepos-and-linked-dependencies
+	// Ref: https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/faq.md#what-is-going-on-with-vite-and-pre-bundling-dependencies
+	optimizeDeps: {
+    include: ['@spectacular/skeleton'],
+  },
+  build: {
+    commonjsOptions: {
+      include: [/@spectacular-skeleton/, /node_modules/],
+    },
+  },
 });

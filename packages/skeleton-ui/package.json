@@ -2,16 +2,20 @@
 	"name": "@spectacular/skeleton",
 	"description": "Shared skeleton UI components",
 	"type": "module",
+  "module": "./components/index.ts",
+  "main": "./components/index.ts",
+  "svelte": "./components/index.ts",
 	"sideEffects": false,
-	"types": "./index.d.ts",
 	"exports": {
 		".": {
-			"types": "./index.d.ts"
+			 "svelte": "./components/index.ts"
 		},
 		"./components": {
 			"default": "./components/index.ts"
 		},
-		"./components/*": "./components/*",
+		"./components/*": {
+			"default": "./components/*"
+		},
 		"./utils": {
 			"default": "./utils/index.ts"
 		},
