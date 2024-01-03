@@ -4,11 +4,10 @@
 </script>
 
 <script lang="ts" generics="T extends Row">
-	import { getContext } from '@spectacular/utils';
 	import type { DataHandler, Field } from '@vincjo/datatables';
 	import type { HTMLThAttributes } from 'svelte/elements';
 	import { cn } from '$ui/utils';
-	import { handlerKey } from './keys';
+	import { getCtx } from './ctx';
 
 	type $$Props = HTMLThAttributes;
 	let className: $$Props['class'] = undefined;
@@ -19,7 +18,7 @@
 	export let align: 'left' | 'right' | 'center' = 'left';
 	export let rowSpan: number = 1;
 
-	handler ??= getContext(handlerKey);
+	handler ??= getCtx();
 
 	const identifier = orderBy?.toString();
 	const sort = handler.getSort();

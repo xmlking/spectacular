@@ -1,7 +1,40 @@
 # Shared util functions
 
+## Development 
 ```shell
 turbo run format --filter=@spectacular/utils
 turbo run lint --filter=@spectacular/utils
 turbo run test --filter=@spectacular/utils
+```
+
+## Usage
+
+### Context
+
+keys.ts
+```ts
+import type { InjectionKey } from '@spectacular/utils';
+import type { DataHandler, Row } from '@vincjo/datatables';
+type T = Row;
+
+export const handlerKey: InjectionKey<DataHandler<T>> = Symbol('DataHandler type');
+```
+
+table.svelte
+```svelte
+<script lang="ts" generics="T extends Row">
+	import { handlerKey } from './keys';
+
+	export let handler: DataHandler<T>;
+	setContext(handlerKey, handler);
+</script>
+```
+
+table-head.svelte
+```svelte
+<script lang="ts" generics="T extends Row">
+	import { handlerKey } from './keys';
+	
+	export let handler: DataHandler<T>;
+	handler ??= getContext(handlerKey);
 ```

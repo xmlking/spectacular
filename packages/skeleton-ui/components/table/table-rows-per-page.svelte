@@ -4,11 +4,10 @@
 </script>
 
 <script lang="ts" generics="T extends Row">
-	import { getContext } from '@spectacular/utils';
 	import type { DataHandler } from '@vincjo/datatables';
 	import type { HTMLSelectAttributes } from 'svelte/elements';
 	import { cn } from '$ui/utils';
-	import { handlerKey } from './keys';
+	import { getCtx } from './ctx';
 
 	type $$Props = HTMLSelectAttributes;
 	let className: $$Props['class'] = undefined;
@@ -17,7 +16,7 @@
 	export let handler: DataHandler<T>;
 	export let small = false;
 
-	handler ??= getContext(handlerKey);
+	handler ??= getCtx();
 
 	const rowsPerPage = handler.getRowsPerPage();
 

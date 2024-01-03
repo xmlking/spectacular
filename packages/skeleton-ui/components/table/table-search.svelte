@@ -4,11 +4,10 @@
 </script>
 
 <script lang="ts" generics="T extends Row">
-	import { getContext } from '@spectacular/utils';
 	import type { DataHandler } from '@vincjo/datatables';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { cn } from '$ui/utils';
-	import { handlerKey } from './keys';
+	import { getCtx } from './ctx';
 
 	type $$Props = HTMLInputAttributes;
 	let className: $$Props['class'] = undefined;
@@ -17,7 +16,7 @@
 	export let handler: DataHandler<T>;
 	let value = '';
 
-	handler ??= getContext(handlerKey);
+	handler ??= getCtx();
 
 	handler.on('clearSearch', () => (value = ''));
 </script>
@@ -27,6 +26,7 @@
 	type="search"
 	placeholder={handler.i18n.search}
 	spellcheck="false"
+	{...$$restProps}
 	bind:value
 	on:input={() => handler.search(value)}
 />

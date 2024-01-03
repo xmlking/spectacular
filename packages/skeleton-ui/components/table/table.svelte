@@ -6,13 +6,12 @@
 <script lang="ts" generics="T extends Row">
 	import type { DataHandler } from '@vincjo/datatables';
 	import type { HTMLTableAttributes } from 'svelte/elements';
-	import { setContext } from '@spectacular/utils';
 	import { cn } from '$ui/utils';
 	import Search from './table-search.svelte';
 	import RowCount from './table-row-count.svelte';
 	import RowsPerPage from './table-rows-per-page.svelte';
 	import Pagination from './table-pagination.svelte';
-	import { handlerKey } from './keys';
+	import { setCtx } from './ctx';
 
 	type $$Props = HTMLTableAttributes;
 	let className: $$Props['class'] = undefined;
@@ -28,7 +27,7 @@
 	let element: HTMLElement;
 	let clientWidth = 1000;
 
-	setContext(handlerKey, handler);
+	setCtx(handler);
 
 	const height = (search || rowsPerPage ? 48 : 8) + (rowCount || pagination ? 48 : 8);
 
