@@ -50,6 +50,12 @@ pnpm add -D eslint-plugin-astro --filter "eslint-config-custom"
 ```shell
 pnpm run dev
 ```
+## Upgrade
+Anytime a new version of astro released, we can upgrade to latest version with:
+```shell
+cd apps/web
+pnpx @astrojs/upgrade
+```
 
 ## Referencwe
 
