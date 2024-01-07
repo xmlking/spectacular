@@ -6,7 +6,7 @@
 			>
 				FEDERATED DATA MICROSERVICES
 			</h2>
-			<h1 class="title-font text-2xl font-medium text-gray-900 sm:text-3xl dark:text-white">
+			<h1 class="title-font text-2xl font-medium text-gray-900 dark:text-white sm:text-3xl">
 				Combine GraphQL APIs into a unified supergraph
 			</h1>
 		</div>

@@ -10,7 +10,7 @@
 		<div
 			class="flex flex-col items-center text-center md:w-1/2 md:items-start md:pl-16 md:text-left lg:flex-grow lg:pl-24"
 		>
-			<h1 class="title-font mb-4 text-3xl font-medium text-gray-900 sm:text-4xl dark:text-white">
+			<h1 class="title-font mb-4 text-3xl font-medium text-gray-900 dark:text-white sm:text-4xl">
 				Before they sold out
 				<br class="hidden lg:inline-block" />readymade gluten
 			</h1>
