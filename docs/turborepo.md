@@ -36,10 +36,14 @@ This Turborepo has some additional tools already setup for you:
 
 ## Prerequisite
 
-```shell
-# pnpm add -g turbo@latest
-pnpm add -g turbo@latest
-```
+1. Turbo CLI
+  ```shell
+  pnpm add -g turbo@latest
+  ```
+2. VS Code monorepo plugin: [Monorepo Focus Workspace](https://marketplace.visualstudio.com/items?itemName=alberto-varela.monorepo-focus-workspace)
+  ```shell
+  code --install-extension alberto-varela.monorepo-focus-workspace
+  ```
 
 ## Setup
 
