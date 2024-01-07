@@ -141,6 +141,7 @@ Awesome **SvelteKit** Links
 - [Svelte offline SQLite ](https://github.com/phartenfeller/sveltekit-1.0-sqlite-demo-app)
 - [Svelte runes + Liveblocks demo](https://github.com/CTNicholas/svelte-runes-realtime-drawing)
 - [shadcn-svelte, Superforms sample project](https://github.com/delay/sveltekit-auth)
+- Sveltekit Auth Template - with shadcn: [sveltekit-auth](https://github.com/delay/sveltekit-auth), with SkeletonUI: [sveltekit-auth-starter](https://github.com/delay/sveltekit-auth-starter)
 
 ## Deployment
 

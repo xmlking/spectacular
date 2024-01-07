@@ -16,7 +16,8 @@ export const handleDetectTheme = (async ({ event, resolve }) => {
 	}
 
 	log.debug({ theme });
-	return await resolve(event, {
+	const result = await resolve(event, {
 		transformPageChunk: ({ html }) => html.replace('data-theme=""', `data-theme="${theme}"`)
 	});
+	return result;
 }) satisfies Handle;

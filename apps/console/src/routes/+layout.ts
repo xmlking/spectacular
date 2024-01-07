@@ -6,7 +6,7 @@ import type { LayoutLoad } from './$types';
 
 const log = new Logger('client:layout');
 
-export const load = (async ({ data: { locale } }) => {
+export const load = (async ({ data: { vercelEnv, locale, user } }) => {
 	// load dictionary into memory
 	await loadLocaleAsync(locale);
 	// if you need to output a localized string in a `load` function,
@@ -17,5 +17,5 @@ export const load = (async ({ data: { locale } }) => {
 	log.info(LL.log({ fileName: '+layout.ts' }));
 
 	// pass locale to the "rendering context"
-	return { locale };
+	return { vercelEnv, locale, user };
 }) satisfies LayoutLoad<{ locale: Locales }>;

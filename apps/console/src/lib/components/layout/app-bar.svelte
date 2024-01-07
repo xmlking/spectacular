@@ -21,11 +21,14 @@
 		ChevronDown
 	} from 'lucide-svelte';
 	import LogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
+	import type { User } from '@nhost/nhost-js';
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import { storeTheme } from '$lib/stores/stores';
-	import LocaleSwitcher from '$lib/components/layout/LocaleSwitcher.svelte';
+	import LocaleSwitcher from '$lib/components/layout/locale-switcher.svelte';
 	const drawerStore = getDrawerStore();
+
+	export let user: User | undefined;
 
 	// Local
 	let isOsMac = false;
@@ -104,6 +107,32 @@
 		</div>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
+		<!-- Login -->
+		<div class="ml-10 space-x-4">
+			{#if user}
+				<form action="/logout" method="post">
+					<button
+						type="submit"
+						class="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
+					>
+						Sign out
+					</button>
+				</form>
+			{:else}
+				<a
+					href="/login"
+					class="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
+				>
+					Sign in
+				</a>
+				<a
+					href="/signup"
+					class="inline-block rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-indigo-600 hover:bg-indigo-50"
+				>
+					Sign up
+				</a>
+			{/if}
+		</div>
 		<!-- Explore -->
 		<div class="relative hidden lg:block">
 			<!-- trigger -->
@@ -154,7 +183,6 @@
 				<!-- <div class="arrow bg-surface-100-800-token" /> -->
 			</div>
 		</div>
-
 		<!-- Theme -->
 		<div>
 			<!-- trigger -->

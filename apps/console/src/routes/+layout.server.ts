@@ -4,12 +4,14 @@ import type { LayoutServerLoad } from './$types';
 
 const log = new Logger('server:layout');
 
-export const load = (({ locals: { locale, LL } }) => {
+export const load = (({ locals: { locale, LL, nhost } }) => {
 	log.info(LL.log({ fileName: '+layout.server.ts' }));
+	const session = nhost.auth.getSession();
 
 	// pass locale information from "server-context" to "shared server + client context"
 	return {
 		vercelEnv: VERCEL_ENV,
-		locale
+		locale,
+		user: session?.user
 	};
 }) satisfies LayoutServerLoad;

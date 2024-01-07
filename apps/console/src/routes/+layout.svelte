@@ -17,14 +17,14 @@
 	import { dev, browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
-	import AppBar from '$lib/components/layout/AppBar.svelte';
-	import Footer from '$lib/components/layout/Footer.svelte';
-	import Sidebar from '$lib/components/layout/Sidebar.svelte';
-	import Drawer from '$lib/components/layout/Drawer.svelte';
-	import type { LayoutData } from './$types';
+	import AppBar from '$lib/components/layout/app-bar.svelte';
+	import Footer from '$lib/components/layout/footer.svelte';
+	import Sidebar from '$lib/components/layout/sidebar.svelte';
+	import Drawer from '$lib/components/layout/drawer.svelte';
+	// import HeadHrefLangs from '$lib/components/layout/head-href-langs.svelte';
 	import '../app.pcss';
 
-	export let data: LayoutData;
+	export let data;
 
 	// at the very top, set the locale before you access the store and before the actual rendering takes place
 	setLocale(data.locale);
@@ -88,16 +88,20 @@
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 </script>
 
+<svelte:head>
+	<!-- <HeadHrefLangs /> -->
+</svelte:head>
+
 <!-- Overlays -->
 <Modal components={modalComponentRegistry} />
-<Toast />
+<Toast position="tr" />
 <Drawer />
 
 <!-- App Shell -->
 <AppShell {slotSidebarLeft} regionPage={allyPageSmoothScroll} slotFooter="bg-black p-4">
 	<!-- Header -->
 	<svelte:fragment slot="header">
-		<AppBar />
+		<AppBar user={data?.user} />
 	</svelte:fragment>
 
 	<!-- Sidebar (Left) -->

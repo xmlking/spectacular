@@ -10,7 +10,19 @@
 	"explorer.fileNesting.expand": false,
 	"explorer.fileNesting.patterns": {
 		"+layout.svelte": "+layout.ts,+layout.js,+layout.server.ts,+layout.server.js,+layout.gql",
-		"+page.svelte": "+page.ts,+page.js,+page.server.ts,+page.server.js,+page.gql"
+		"+page.svelte": "+page.ts,+page.js,+page.server.ts,+page.server.js,+page.gql",
+		"*.svelte": "${capture}.stories.ts",
+		".eslintrc.cjs": ".eslint*,.markuplintrc.cjs,.markdownlintignore,.lintstagedrc.cjs,.editorconfig",
+		".prettierrc.cjs": ".prettier*",
+		".env": ".env*,.secrets*",
+		".gitignore": ".gitattributes,.textlintignore,.vercelignore,.dockerignore",
+		"README.md": "DEVELOPERS.md,CHANGELOG.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,LICENSE",
+		"Dockerfile": "*.Dockerfile,Dockerfile.*,compose.yml",
+		"vitest.config.ts": "vitest.*",
+		"package.json": "pnpm-lock.yaml,pnpm-workspace.yaml",
+		"tailwind.config.*": "postcss.config*",
+		"flake.nix": "flake.lock",
+		"turbo.json": "vercel.json"
 	},
 	////////// scm //////////
 	"scm.defaultViewMode": "tree",
@@ -60,12 +72,16 @@
 		"**/node_modules": true,
 		"pnpm-lock.yaml": true,
 		"**/.turbo": true,
+		".nhost": true,
 		"**/.svelte-kit": true,
+		"**/$houdini": true,
+		"**/vercel": true,
 		".eslintcache": true,
 		".prettiercache": true,
 		"_": true,
 		"**/coverage": true,
-		"**/build": true
+		"**/build": true,
+		"**/dist": true
 	},
 	////////// Terminal //////////
 	"terminal.integrated.fontFamily": "MesloLGM Nerd Font Mono, Monospace",
@@ -82,6 +98,13 @@
 	"files.exclude": {
 		"**/.git": true,
 		"**/.DS_Store": true,
+		".idea": true,
+		"**/.svelte-kit": true,
+		"**/$houdini": true,
+		"**/.turbo": true,
+		"**/.astro": true,
+		"**/.vercel": true,
+		"**/node_modules": true,
 		"**/*.js": {
 			"when": "$(basename).ts"
 		},
@@ -106,22 +129,6 @@
 	"go.useLanguageServer": true,
 	"go.lintTool": "golangci-lint",
 	"go.lintFlags": ["--fast", "--config=.github/linters/.golangci.yml"],
-	////////// Rust //////////
-	"rust-analyzer.inlayHints.chainingHints": false,
-	"rust-analyzer.inlayHints.typeHints": false,
-
-	////////// Terraform //////////
-	"terraform.telemetry.enabled": false,
-	"terraform.indexing": {
-		"enabled": true,
-		"liveIndexing": false,
-		"delay": 500,
-		"exclude": [".terraform/**/*", "**/.terraform/**/*"]
-	},
-	"terraform.languageServer": {
-		"external": true,
-		"args": ["serve"]
-	},
 
 	////////// Spell checker //////////
 	// Map spelling errors to Hints so that they don't show up in the Problems pane.

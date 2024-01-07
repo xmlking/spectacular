@@ -21,7 +21,7 @@
 	} from 'layerchart';
 	import { createDateSeries } from '$lib/utils/genData';
 	import { temperature as temperatureData } from '$lib/utils/dateSeries';
-	import Preview from '$lib/components/Preview.svelte';
+	import Preview from '$lib/components/preview.svelte';
 
 	const data = createDateSeries({
 		count: 30,
