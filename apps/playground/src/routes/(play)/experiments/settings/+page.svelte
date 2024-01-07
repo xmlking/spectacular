@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Form } from 'formsnap';
-	import Page from '$lib/components/layout/Page.svelte';
+	import Page from '$lib/components/layout/page.svelte';
 	import type { PageData } from './$types';
 	import { someFormSchema } from './schema';
 	export let data: PageData;

@@ -12,39 +12,37 @@
 		prefersReducedMotionStore
 	} from '@skeletonlabs/skeleton';
 	import { inject } from '@vercel/analytics';
-	import { dev } from '$app/environment';
+	import { storeTheme, storeVercelProductionMode } from '$lib/stores/stores';
+	import { dev, browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
 	import { LL, setLocale } from '$lib/i18n/i18n-svelte';
-	import AppBar from '$lib/components/layout/AppBar.svelte';
-	import Drawer from '$lib/components/layout/Drawer.svelte';
-	import Footer from '$lib/components/layout/Footer.svelte';
-	import Sidebar from '$lib/components/layout/Sidebar.svelte';
+	import AppBar from '$lib/components/layout/app-bar.svelte';
+	import Drawer from '$lib/components/layout/drawer.svelte';
+	import Footer from '$lib/components/layout/footer.svelte';
+	import Sidebar from '$lib/components/layout/sidebar.svelte';
 	import Search from '$lib/modals/Search.svelte';
 	import ModalExampleEmbed from '$lib/modals/examples/ModalExampleEmbed.svelte';
 	import ModalExampleImage from '$lib/modals/examples/ModalExampleImage.svelte';
 	import ModalExampleList from '$lib/modals/examples/ModalExampleList.svelte';
-	import { storeVercelProductionMode } from '$lib/stores/stores';
-	import type { LayoutData } from './$types';
+	// import HeadHrefLangs from '$lib/components/layout/head-href-langs.svelte';
 
 	// Global Stylesheets
 	import '../app.pcss';
 
-	export let data: LayoutData;
+	export let data;
 
 	// at the very top, set the locale before you access the store and before the actual rendering takes place
 	setLocale(data.locale);
 	console.info($LL.log({ fileName: '+layout.svelte' }));
 
 	// Floating UI for Popups
-	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
+	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
+	// initialize overlay components
 	initializeStores();
 
 	// Handle Vercel Production Mode
-	// Pass to Store for Ad Conditionals
-	// IMPORTANT: DO NOT MODIFY THIS UNLESS YOU KNOW WHAT YOU'RE DOING
-
 	storeVercelProductionMode.set(data.vercelEnv === 'production');
 	// Init Vercel Analytics
 	// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
@@ -75,6 +73,13 @@
 		return false;
 	}
 
+	// Set body `data-theme` based on current theme status
+	storeTheme.subscribe(setBodyThemeAttribute);
+	function setBodyThemeAttribute(): void {
+		if (!browser) return;
+		document.body.setAttribute('data-theme', $storeTheme);
+	}
+
 	// Scroll heading into view
 	function scrollHeadingIntoView(): void {
 		if (!window.location.hash) return;
@@ -83,11 +88,9 @@
 	}
 
 	// Lifecycle
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	afterNavigate((params: any) => {
+	afterNavigate((params) => {
 		// Scroll to top
-		const isNewPage: boolean =
-			params.from && params.to && params.from.route.id !== params.to.route.id;
+		const isNewPage = params.from?.url.pathname !== params.to?.url.pathname;
 		const elemPage = document.querySelector('#page');
 		if (isNewPage && elemPage !== null) {
 			elemPage.scrollTop = 0;
@@ -102,6 +105,10 @@
 		: 'bg-surface-50-900-token lg:w-auto';
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 </script>
+
+<svelte:head>
+	<!-- <HeadHrefLangs /> -->
+</svelte:head>
 
 <MetaTags
 	title="Home"
@@ -156,7 +163,7 @@
 
 <!-- Overlays -->
 <Modal components={modalComponentRegistry} />
-<Toast />
+<Toast position="tr" />
 <Drawer />
 
 <!-- App Shell -->

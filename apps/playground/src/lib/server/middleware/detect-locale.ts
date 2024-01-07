@@ -20,7 +20,10 @@ export const handleDetectLocale = (async ({ event, resolve }) => {
 	log.info({ locale });
 
 	// replace html lang attribute with correct language
-	return resolve(event, { transformPageChunk: ({ html }) => html.replace('%lang%', locale) });
+	const result = await resolve(event, {
+		transformPageChunk: ({ html }) => html.replace('%lang%', locale)
+	});
+	return result;
 }) satisfies Handle;
 
 const getPreferredLocale = ({ request }: RequestEvent) => {

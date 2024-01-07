@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { version } from '$app/environment';
 	// import VinylImgMeta from '?w=200;400;800&format=avif;webp;jpg&as=picture';
-	import Page from '$lib/components/layout/Page.svelte';
+	import Page from '$lib/components/layout/page.svelte';
 	console.log(`Client version: ${version}`);
 </script>
 

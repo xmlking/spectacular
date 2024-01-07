@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { navigating, page } from '$app/stores';
-	import Page from '$lib/components/layout/Page.svelte';
+	import Page from '$lib/components/layout/page.svelte';
 	import Counter from './components/Counter.svelte';
 	import Menu from './components/Menu.svelte';
 	import { description } from './components/description.js';

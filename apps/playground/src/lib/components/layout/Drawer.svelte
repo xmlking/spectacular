@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getDrawerStore, Drawer } from '@skeletonlabs/skeleton';
-	import DocsSidebar from './Sidebar.svelte';
+	import DocsSidebar from './sidebar.svelte';
 
 	const drawerStore = getDrawerStore();
 

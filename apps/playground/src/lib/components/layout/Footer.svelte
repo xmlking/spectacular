@@ -17,7 +17,7 @@
 	<div class="container mx-auto flex flex-col items-center px-5 py-8 sm:flex-row">
 		<a
 			href={'#'}
-			class="title-font flex items-center justify-center font-medium text-gray-900 md:justify-start dark:text-white"
+			class="title-font flex items-center justify-center font-medium text-gray-900 dark:text-white md:justify-start"
 		>
 			<DocsLogoIcon />
 			<span class="ml-3 text-xl">Datablocks</span>

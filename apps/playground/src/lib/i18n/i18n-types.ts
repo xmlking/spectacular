@@ -15,6 +15,10 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
+	 * L​a​n​g​u​a​g​e
+	 */
+	language: string
+	/**
 	 * H​i​ ​{​n​a​m​e​}​!​ ​P​l​e​a​s​e​ ​l​e​a​v​e​ ​a​ ​s​t​a​r​ ​i​f​ ​y​o​u​ ​l​i​k​e​ ​t​h​i​s​ ​p​r​o​j​e​c​t​:​ ​h​t​t​p​s​:​/​/​g​i​t​h​u​b​.​c​o​m​/​i​v​a​n​h​o​f​e​r​/​t​y​p​e​s​a​f​e​-​i​1​8​n
 	 * @param {string} name
 	 */
@@ -71,6 +75,22 @@ type RootTranslation = {
 		 * F​i​l​t​e​r
 		 */
 		filter: string
+		/**
+		 * P​r​i​v​a​c​y
+		 */
+		privacy: string
+		/**
+		 * T​e​r​m​s
+		 */
+		terms: string
+	}
+	forms: {
+		email: {
+			/**
+			 * E​m​a​i​l
+			 */
+			placeholder: string
+		}
 	}
 	enums: {
 		visibility: {
@@ -108,78 +128,169 @@ type RootTranslation = {
 		 */
 		pleaseWait: string
 	}
-	pages: {
-		root: {
-			loggedIn: {
-				messages: {
-					/**
-					 * C​l​i​c​k​ ​C​r​e​a​t​e​ ​t​o​ ​g​e​t​ ​s​t​a​r​t​e​d​.
-					 */
-					createList: string
-				}
-			}
-			messages: {
-				/**
-				 * P​r​e​s​e​n​t​i​n​g​ ​t​h​e​ ​u​l​t​i​m​a​t​e​ ​Y​o​u​T​u​b​e​ ​e​x​p​e​r​i​e​n​c​e​.​ ​W​h​e​t​h​e​r​ ​y​o​u​'​r​e​ ​l​o​o​k​i​n​g​ ​f​o​r​ ​n​e​w​ ​c​o​n​t​e​n​t​ ​t​o​ ​w​a​t​c​h​ ​o​r​ ​w​a​n​t​ ​t​o​ ​s​h​a​r​e​ ​y​o​u​r​ ​o​w​n​ ​c​u​r​a​t​e​d​ ​l​i​s​t​ ​w​i​t​h​ ​f​r​i​e​n​d​s​,​ ​o​u​r​ ​a​p​p​ ​h​a​s​ ​g​o​t​ ​y​o​u​ ​c​o​v​e​r​e​d​.
-				 */
-				tagline: string
-			}
-		}
-		onboarding: {
-			buttons: {
-				/**
-				 * L​e​t​s​ ​G​o​!
-				 */
-				letsGo: string
-			}
-			labels: {
-				/**
-				 * U​s​e​r​n​a​m​e
-				 */
-				username: string
-				/**
-				 * U​p​l​o​a​d​ ​F​i​l​e
-				 */
-				uploadFile: string
-			}
-			messages: {
-				/**
-				 * W​e​l​c​o​m​e​ ​t​o​ ​l​i​s​t​d​!​ ​L​e​t​'​s​ ​s​e​t​u​p​ ​y​o​u​r​ ​p​r​o​f​i​l​e​.
-				 */
-				main: string
-				/**
-				 * U​p​l​o​a​d​ ​y​o​u​r​ ​a​v​a​t​a​r​.
-				 */
-				avatar: string
-				/**
-				 * T​h​a​t​'​s​ ​a​l​l​!​ ​L​e​t​'​s​ ​g​e​t​ ​s​t​a​r​t​e​d​!
-				 */
-				final: string
-			}
-		}
-		create: {
-			labels: {
-				/**
-				 * C​h​a​n​n​e​l​ ​S​e​a​r​c​h
-				 */
-				channelSearch: string
-			}
-			messages: {
-				/**
-				 * S​e​a​r​c​h​ ​f​o​r​ ​a​ ​c​h​a​n​n​e​l​.​.​.
-				 */
-				channelSearch: string
-			}
-		}
-	}
 	/**
 	 * T​h​i​s​ ​l​o​g​ ​w​a​s​ ​c​a​l​l​e​d​ ​f​r​o​m​ ​'​{​f​i​l​e​N​a​m​e​}​'
 	 * @param {string} fileName
 	 */
 	log: RequiredParams<'fileName'>
+	home: {
+		labels: {
+		}
+		messages: {
+		}
+	}
+	auth: {
+		labels: {
+			/**
+			 * S​i​g​n​ ​I​n
+			 */
+			signin: string
+			/**
+			 * S​i​g​n​ ​I​n​ ​P​r​o​b​l​e​m
+			 */
+			signinProblem: string
+			/**
+			 * S​i​g​n​ ​U​p
+			 */
+			signup: string
+			/**
+			 * S​i​g​n​ ​O​u​t
+			 */
+			signout: string
+			/**
+			 * F​o​r​g​o​t​ ​P​a​s​s​w​o​r​d​?
+			 */
+			forgotPassword: string
+			/**
+			 * C​h​a​n​g​e​ ​Y​o​u​r​ ​P​a​s​s​w​o​r​d
+			 */
+			changePassword: string
+			/**
+			 * C​h​a​n​g​e​ ​P​a​s​s​w​o​r​d​ ​P​r​o​b​l​e​m
+			 */
+			passwordProblem: string
+			/**
+			 * U​p​d​a​t​e​ ​P​a​s​s​w​o​r​d
+			 */
+			updatePassword: string
+			/**
+			 * R​e​s​e​t​ ​P​a​s​s​w​o​r​d​ ​P​r​o​b​l​e​m
+			 */
+			resetProblem: string
+			/**
+			 * S​e​n​d​ ​P​a​s​s​w​o​r​d​ ​R​e​s​e​t​ ​E​m​a​i​l
+			 */
+			sendResetEmail: string
+		}
+		messages: {
+		}
+		forms: {
+			firstName: {
+				/**
+				 * F​i​r​s​t​ ​N​a​m​e
+				 */
+				label: string
+				/**
+				 * F​i​r​s​t​ ​N​a​m​e
+				 */
+				placeholder: string
+			}
+			lastName: {
+				/**
+				 * L​a​s​t​ ​N​a​m​e
+				 */
+				label: string
+				/**
+				 * L​a​s​t​ ​N​a​m​e
+				 */
+				placeholder: string
+			}
+			email: {
+				/**
+				 * E​m​a​i​l
+				 */
+				label: string
+				/**
+				 * E​m​a​i​l​ ​A​d​d​r​e​s​s
+				 */
+				placeholder: string
+			}
+			password: {
+				label: string
+				/**
+				 * P​a​s​s​w​o​r​d
+				 */
+				placeholder: string
+			}
+		}
+	}
+	dashboard: {
+		labels: {
+			/**
+			 * C​l​i​c​k​ ​C​r​e​a​t​e​ ​t​o​ ​g​e​t​ ​s​t​a​r​t​e​d​.
+			 */
+			createList: string
+		}
+		messages: {
+			/**
+			 * P​r​e​s​e​n​t​i​n​g​ ​t​h​e​ ​u​l​t​i​m​a​t​e​ ​Y​o​u​T​u​b​e​ ​e​x​p​e​r​i​e​n​c​e​.​ ​W​h​e​t​h​e​r​ ​y​o​u​'​r​e​ ​l​o​o​k​i​n​g​ ​f​o​r​ ​n​e​w​ ​c​o​n​t​e​n​t​ ​t​o​ ​w​a​t​c​h​ ​o​r​ ​w​a​n​t​ ​t​o​ ​s​h​a​r​e​ ​y​o​u​r​ ​o​w​n​ ​c​u​r​a​t​e​d​ ​l​i​s​t​ ​w​i​t​h​ ​f​r​i​e​n​d​s​,​ ​o​u​r​ ​a​p​p​ ​h​a​s​ ​g​o​t​ ​y​o​u​ ​c​o​v​e​r​e​d​.
+			 */
+			tagline: string
+		}
+	}
+	onboarding: {
+		buttons: {
+			/**
+			 * L​e​t​s​ ​G​o​!
+			 */
+			letsGo: string
+		}
+		labels: {
+			/**
+			 * U​s​e​r​n​a​m​e
+			 */
+			username: string
+			/**
+			 * U​p​l​o​a​d​ ​F​i​l​e
+			 */
+			uploadFile: string
+		}
+		messages: {
+			/**
+			 * W​e​l​c​o​m​e​ ​t​o​ ​l​i​s​t​d​!​ ​L​e​t​'​s​ ​s​e​t​u​p​ ​y​o​u​r​ ​p​r​o​f​i​l​e​.
+			 */
+			main: string
+			/**
+			 * U​p​l​o​a​d​ ​y​o​u​r​ ​a​v​a​t​a​r​.
+			 */
+			avatar: string
+			/**
+			 * T​h​a​t​'​s​ ​a​l​l​!​ ​L​e​t​'​s​ ​g​e​t​ ​s​t​a​r​t​e​d​!
+			 */
+			final: string
+		}
+	}
+	create: {
+		labels: {
+			/**
+			 * C​h​a​n​n​e​l​ ​S​e​a​r​c​h
+			 */
+			channelSearch: string
+		}
+		messages: {
+			/**
+			 * S​e​a​r​c​h​ ​f​o​r​ ​a​ ​c​h​a​n​n​e​l​.​.​.
+			 */
+			channelSearch: string
+		}
+	}
 }
 
 export type TranslationFunctions = {
+	/**
+	 * Language
+	 */
+	language: () => LocalizedString
 	/**
 	 * Hi {name}! Please leave a star if you like this project: https://github.com/ivanhofer/typesafe-i18n
 	 */
@@ -235,6 +346,22 @@ export type TranslationFunctions = {
 		 * Filter
 		 */
 		filter: () => LocalizedString
+		/**
+		 * Privacy
+		 */
+		privacy: () => LocalizedString
+		/**
+		 * Terms
+		 */
+		terms: () => LocalizedString
+	}
+	forms: {
+		email: {
+			/**
+			 * Email
+			 */
+			placeholder: () => LocalizedString
+		}
 	}
 	enums: {
 		visibility: {
@@ -272,74 +399,161 @@ export type TranslationFunctions = {
 		 */
 		pleaseWait: () => LocalizedString
 	}
-	pages: {
-		root: {
-			loggedIn: {
-				messages: {
-					/**
-					 * Click Create to get started.
-					 */
-					createList: () => LocalizedString
-				}
-			}
-			messages: {
-				/**
-				 * Presenting the ultimate YouTube experience. Whether you're looking for new content to watch or want to share your own curated list with friends, our app has got you covered.
-				 */
-				tagline: () => LocalizedString
-			}
-		}
-		onboarding: {
-			buttons: {
-				/**
-				 * Lets Go!
-				 */
-				letsGo: () => LocalizedString
-			}
-			labels: {
-				/**
-				 * Username
-				 */
-				username: () => LocalizedString
-				/**
-				 * Upload File
-				 */
-				uploadFile: () => LocalizedString
-			}
-			messages: {
-				/**
-				 * Welcome to listd! Let's setup your profile.
-				 */
-				main: () => LocalizedString
-				/**
-				 * Upload your avatar.
-				 */
-				avatar: () => LocalizedString
-				/**
-				 * That's all! Let's get started!
-				 */
-				final: () => LocalizedString
-			}
-		}
-		create: {
-			labels: {
-				/**
-				 * Channel Search
-				 */
-				channelSearch: () => LocalizedString
-			}
-			messages: {
-				/**
-				 * Search for a channel...
-				 */
-				channelSearch: () => LocalizedString
-			}
-		}
-	}
 	/**
 	 * This log was called from '{fileName}'
 	 */
 	log: (arg: { fileName: string }) => LocalizedString
+	home: {
+		labels: {
+		}
+		messages: {
+		}
+	}
+	auth: {
+		labels: {
+			/**
+			 * Sign In
+			 */
+			signin: () => LocalizedString
+			/**
+			 * Sign In Problem
+			 */
+			signinProblem: () => LocalizedString
+			/**
+			 * Sign Up
+			 */
+			signup: () => LocalizedString
+			/**
+			 * Sign Out
+			 */
+			signout: () => LocalizedString
+			/**
+			 * Forgot Password?
+			 */
+			forgotPassword: () => LocalizedString
+			/**
+			 * Change Your Password
+			 */
+			changePassword: () => LocalizedString
+			/**
+			 * Change Password Problem
+			 */
+			passwordProblem: () => LocalizedString
+			/**
+			 * Update Password
+			 */
+			updatePassword: () => LocalizedString
+			/**
+			 * Reset Password Problem
+			 */
+			resetProblem: () => LocalizedString
+			/**
+			 * Send Password Reset Email
+			 */
+			sendResetEmail: () => LocalizedString
+		}
+		messages: {
+		}
+		forms: {
+			firstName: {
+				/**
+				 * First Name
+				 */
+				label: () => LocalizedString
+				/**
+				 * First Name
+				 */
+				placeholder: () => LocalizedString
+			}
+			lastName: {
+				/**
+				 * Last Name
+				 */
+				label: () => LocalizedString
+				/**
+				 * Last Name
+				 */
+				placeholder: () => LocalizedString
+			}
+			email: {
+				/**
+				 * Email
+				 */
+				label: () => LocalizedString
+				/**
+				 * Email Address
+				 */
+				placeholder: () => LocalizedString
+			}
+			password: {
+				label: () => LocalizedString
+				/**
+				 * Password
+				 */
+				placeholder: () => LocalizedString
+			}
+		}
+	}
+	dashboard: {
+		labels: {
+			/**
+			 * Click Create to get started.
+			 */
+			createList: () => LocalizedString
+		}
+		messages: {
+			/**
+			 * Presenting the ultimate YouTube experience. Whether you're looking for new content to watch or want to share your own curated list with friends, our app has got you covered.
+			 */
+			tagline: () => LocalizedString
+		}
+	}
+	onboarding: {
+		buttons: {
+			/**
+			 * Lets Go!
+			 */
+			letsGo: () => LocalizedString
+		}
+		labels: {
+			/**
+			 * Username
+			 */
+			username: () => LocalizedString
+			/**
+			 * Upload File
+			 */
+			uploadFile: () => LocalizedString
+		}
+		messages: {
+			/**
+			 * Welcome to listd! Let's setup your profile.
+			 */
+			main: () => LocalizedString
+			/**
+			 * Upload your avatar.
+			 */
+			avatar: () => LocalizedString
+			/**
+			 * That's all! Let's get started!
+			 */
+			final: () => LocalizedString
+		}
+	}
+	create: {
+		labels: {
+			/**
+			 * Channel Search
+			 */
+			channelSearch: () => LocalizedString
+		}
+		messages: {
+			/**
+			 * Search for a channel...
+			 */
+			channelSearch: () => LocalizedString
+		}
+	}
 }
 
 export type Formatters = {}

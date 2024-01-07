@@ -32,7 +32,9 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 			list: [
 				{ href: '/docs/generator', label: 'Theme Generator', keywords: 'create, custom, style, css, design' },
 				{ href: '/docs/purgecss', label: 'PurgeCSS', keywords: 'purgecss, vite, tree, shaking, bundle, optimize', badge: 'New' },
-				{ href: '/docs/contributing', label: 'Contributing', keywords: 'branch, pr' }
+				{ href: '/docs/contributing', label: 'Contributing', keywords: 'branch, pr' },
+				{ href: '/dashboard/reports', label: 'Reports', keywords: 'reports, graph' },
+				{ href: '/dashboard/customers', label: 'Customers', keywords: 'customers, users' }
 			]
 		}
 	],

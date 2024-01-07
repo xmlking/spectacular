@@ -21,11 +21,11 @@
 		ChevronDown
 	} from 'lucide-svelte';
 	import DocsIcon from '@spectacular/skeleton/components/icons/Icon.svelte';
-	import LogoIcon from '@spectacular/skeleton/components/logos/LogoFull.svelte';
+	import LogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import { storeTheme } from '$lib/stores/stores';
-	import LocaleSwitcher from '$lib/components/layout/LocaleSwitcher.svelte';
+	import LocaleSwitcher from '$lib/components/layout/locale-switcher.svelte';
 	const drawerStore = getDrawerStore();
 
 	// Local
@@ -90,13 +90,7 @@
 
 <!-- NOTE: using stopPropagation to override Chrome for Windows search shortcut -->
 <svelte:window on:keydown|stopPropagation={onWindowKeydown} />
-
-<AppBar
-	shadow="shadow-2xl"
-	gridColumns="grid-cols-3"
-	slotDefault="place-self-center"
-	slotTrail="place-content-end !space-x-2"
->
+<AppBar shadow="shadow-2xl" slotTrail="!space-x-2">
 	<svelte:fragment slot="lead">
 		<div class="flex items-center space-x-4">
 			<!-- Hamburger Menu -->
@@ -107,6 +101,7 @@
 			<a class="w-[32px] overflow-hidden lg:!ml-0 lg:w-auto" href="/" title="Go to Homepage">
 				<LogoIcon />
 			</a>
+			<h2 class="hidden font-serif text-2xl md:block">Datablocks</h2>
 		</div>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
@@ -168,7 +163,6 @@
 				<!-- <div class="arrow bg-surface-100-800-token" /> -->
 			</div>
 		</div>
-
 		<!-- Theme -->
 		<div>
 			<!-- trigger -->

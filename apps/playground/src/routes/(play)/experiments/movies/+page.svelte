@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Page from '$lib/components/layout/Page.svelte';
+	import Page from '$lib/components/layout/page.svelte';
 	import { default as Card } from './Card.svelte';
 	import movies_json from './movies.json';
 
