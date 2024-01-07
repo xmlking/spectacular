@@ -4,7 +4,7 @@
 
 [Hasrua](https://hasura.io/) is used as main _GraphQL_ backend to expose CRUD APIs on **PostgreSQL** Database.  
 In case, if application need to consumer multiple federated backend APIs (i.e., REST, GraphQL, gRPC) [GraphQL Mesh](https://the-guild.dev/graphql/mesh) us as Gateway and schema-stitching tool.  
-Check [[.meshrc.yml](../.meshrc.yml)] file for GraphQL Mesh configuration.
+
 
 ## Client
 

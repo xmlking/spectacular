@@ -19,16 +19,16 @@ services:
     ports:
       - 3000:3000
 
-  mesh:
-    image: ghcr.io/xmlking/graphql-mesh:v0.1.0
+  tailcall:
+    image: ghcr.io/tailcallhq/tailcall/tc-server:v0.17.0
     restart: always
     ports:
-      - '4000:4000'
+      - '8080:8080'
+      - '8081:8081'
     environment:
-      NODE_ENV: production
-      NODE_TLS_REJECT_UNAUTHORIZED: '0'
+      TAILCALL_LOG_LEVEL: error
     volumes:
-      - ./.meshrc.yml:/app/.meshrc.yml:ro
+      - ./.nhost/tailcall/jsonplaceholder.graphql:/jsonplaceholder.graphql
     tmpfs:
       - /app/.mesh:exec,mode=777
 

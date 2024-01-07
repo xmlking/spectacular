@@ -60,7 +60,7 @@ cd apps/web
 pnpx @astrojs/upgrade
 ```
 
-## Referencwe
+## Reference
 
 - [Astro Launchpad](https://github.com/kyr0/astro-launchpad/tree/main) - Astro monorepo with vercel, turbo
 - [Turbo Hybrid Astro on Vercel](https://github.com/kyr0/turbo-hybrid-astro-on-vercel/tree/main)

@@ -12,7 +12,7 @@ Awesome **SvelteKit** Links
   - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSS
   - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
   - [Melt UI](https://www.melt-ui.com/) strives to be the de-facto headless UI library for Svelte.
-  - [svelte-headlessu](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit
+  - [svelte-headlessui](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit
 
 - Tables
 
@@ -191,12 +191,12 @@ Awesome **SvelteKit** Links
 
 - How to fix `Cross-site POST form submissions are forbidden` aks CSRF
 
-  Add ORIGIN Env Varaible i.e., `ORIGIN=http://localhost:3000 node build/index.js`
+  Add ORIGIN Env Variable i.e., `ORIGIN=http://localhost:3000 node build/index.js`
 
 - How to make SvelteKit WebApp as PWA
 
   - **Option 1:** add `src/service-worker.js` as documented in SvelteKit [Docs](https://kit.svelte.dev/docs/service-workers)
-  - **Option 2:** If you need a more full-flegded but also more opinionated solution, we recommend looking at solutions like [Vite PWA plugin](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html), which uses [Workbox](https://web.dev/learn/pwa/workbox).
+  - **Option 2:** If you need a more full-fledged but also more opinionated solution, we recommend looking at solutions like [Vite PWA plugin](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html), which uses [Workbox](https://web.dev/learn/pwa/workbox).
 
 - How to set up [Svelte-Inspector](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/inspector.md)?
 

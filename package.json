@@ -33,7 +33,7 @@
 		"dev": "dotenv -- turbo run dev --parallel",
 		"build": "turbo run build",
 		"preview": "turbo run preview",
-		"lint:cspell": "cspell --exclude \"apps/**/*\" --exclude \"packages/**/*\" \"**/*\"",
+		"lint:cspell": "cspell lint -c .vscode/cspell.json **",
 		"lint:prettier": "prettier --check .",
 		"lint:packages": "turbo run lint",
 		"lint": "concurrently pnpm:lint:*",
