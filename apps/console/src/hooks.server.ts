@@ -1,4 +1,5 @@
 import { sequence } from '@sveltejs/kit/hooks';
-import { handleDetectLocale, handleDetectTheme } from '$lib/server/middleware';
+import { auth, guard, lang, theme } from '$lib/server/middleware';
 
-export const handle = sequence(handleDetectLocale, handleDetectTheme);
+// NOTE: Order is impotent! `auth` middleware sets `nhost` into `local` which is used by `guard` middleware
+export const handle = sequence(auth, guard, lang, theme);

@@ -1,19 +1,36 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
-type Locales = import('$lib/i18n/i18n-types').Locales;
-type TranslationFunctions = import('$lib/i18n/i18n-types').TranslationFun;
 type NhostClient = import('@nhost/nhost-js').NhostClient;
 
 declare global {
 	namespace App {
+		namespace Superforms {
+			type Message = {
+				type: 'error' | 'success';
+				closeDelay?: number;
+				message: string;
+			};
+		}
 		// interface Error {}
 		interface Locals {
-			locale: Locales;
-			LL: TranslationFunctions;
+			/**
+			 * Client's language as determined by the i18n middleware.
+			 */
+			lang: AvailableLanguageTag;
 			nhost: NhostClient;
 		}
-		// interface PageData {}
+		interface PageData {
+			/**
+			 * Client-forwarded locals.lang.
+			 */
+			lang: App.Locals['lang'];
+			// user?: Omit<User, 'userId'>;
+			/**
+			 * Short-life cookie-persisted flash message.
+			 */
+			flash?: App.Superforms.Message;
+		}
 		// interface PageState {}
 		// interface Platform {}
 	}

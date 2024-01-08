@@ -34,7 +34,9 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 				{ href: '/docs/purgecss', label: 'PurgeCSS', keywords: 'purgecss, vite, tree, shaking, bundle, optimize', badge: 'New' },
 				{ href: '/docs/contributing', label: 'Contributing', keywords: 'branch, pr' },
 				{ href: '/dashboard/reports', label: 'Reports', keywords: 'reports, graph' },
-				{ href: '/dashboard/customers', label: 'Customers', keywords: 'customers, users' }
+				{ href: '/dashboard/customers', label: 'Customers', keywords: 'customers, users' },
+				{ href: '/sign-up', label: 'Signup', keywords: 'login, users' },
+				{ href: '/sign-in', label: 'Signin', keywords: 'login, users' }
 			]
 		}
 	],

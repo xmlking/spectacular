@@ -29,13 +29,13 @@ const config = {
 		},
 		version: {
 			name: process.env.npm_package_version
+		},
+		alias: {
+			$i18n: 'src/i18n'
+			// TODO: This alias should not be needed, but without it, VSCode show `Cannot find module` error!!!
+			// Ref: https://github.com/vercel/turbo/discussions/620
+			// 	"@spectacular/skeleton/components/*": "../../packages/skeleton-ui/components/*"
 		}
-		// TODO: This alias should not be needed, but without it, VSCode show `Cannot find module` error!!!
-		// Ref: https://github.com/vercel/turbo/discussions/620
-		// alias: {
-		// 	"@spectacular/skeleton/components/*": "../../packages/skeleton-ui/components/*"
-		// }
-
 		// env: {
 		// 	dir: '../..',
 		// 	privatePrefix: 'PRIVATE_',
