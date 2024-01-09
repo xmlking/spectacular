@@ -28,7 +28,7 @@
 		subjectTypeOptions2
 	} from '$lib/models/enums';
 	import { updatePolicyKeys as keys } from '$lib/models/schema';
-	import { Logger } from '$lib/utils';
+	import { Logger } from '@spectacular/utils';
 
 	const log = new Logger('routes:policies:update');
 	export let data;

@@ -8,7 +8,7 @@ import { SvelteKitAuth } from '@auth/sveltekit';
 import type { Handle } from '@sveltejs/kit';
 import envPri from '$lib/variables/variables.server';
 import envPub from '$lib/variables/variables';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 import { dev } from '$app/environment';
 import { getOrg } from './org-mapper';
 import { appRoles } from './role-mapper';

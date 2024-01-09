@@ -3,7 +3,7 @@ import type { GraphQLError } from 'graphql';
 import { DeviceError, NotFoundError } from '$lib/errors';
 import { listGroups, listUsers } from '$lib/server/backend/msgraph';
 import type { Subject } from '$lib/server/backend/msgraph';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 import {
 	CachePolicy,
 	SearchDevicesStore,

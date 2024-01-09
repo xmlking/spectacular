@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms/client';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 import { ruleSearchSchema as schema } from '$lib/models/schema';
 import { CachePolicy, ListPoolsStore } from '$houdini';
 const log = new Logger('rules.list.browser');

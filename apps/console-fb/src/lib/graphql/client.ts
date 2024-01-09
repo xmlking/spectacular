@@ -1,5 +1,5 @@
 import { createClient as createWSClient } from 'graphql-ws';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 import envPub from '$lib/variables/variables';
 import { browser } from '$app/environment';
 import { subscription } from '$houdini/plugins';

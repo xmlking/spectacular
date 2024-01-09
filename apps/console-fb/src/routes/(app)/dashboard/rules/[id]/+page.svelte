@@ -14,7 +14,7 @@
 	} from '$lib/components/form';
 	import { actionOptions, directionOptions, protocols } from '$lib/models/enums';
 	import { updateRuleKeys as keys } from '$lib/models/schema';
-	import { Logger } from '$lib/utils';
+	import { Logger } from '@spectacular/utils';
 
 	const log = new Logger('routes:rules:update');
 	export let data;

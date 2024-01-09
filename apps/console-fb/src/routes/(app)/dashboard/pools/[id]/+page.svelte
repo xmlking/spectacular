@@ -8,7 +8,7 @@
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
-	import { Logger } from '$lib/utils';
+	import { Logger } from '@spectacular/utils';
 	import { updatePoolKeys as keys } from '$lib/models/schema';
 	import { addToast, ToastLevel } from '$lib/components/toast';
 	import { DataTable } from '$lib/components/table';

@@ -18,7 +18,7 @@
 	import { DeleteRuleStore } from '$houdini';
 	import { ToastLevel } from '$lib/components/toast';
 	import { ruleDeleteSchema as schema } from '$lib/models/schema';
-	import { Logger } from '$lib/utils';
+	import { Logger } from '@spectacular/utils';
 	import { fail } from '@sveltejs/kit';
 	import type { GraphQLError } from 'graphql';
 	import { redirect } from 'sveltekit-flash-message/server';

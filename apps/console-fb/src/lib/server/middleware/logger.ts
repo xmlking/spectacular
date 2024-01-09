@@ -1,5 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 
 export const log = new Logger('middleware:request');
 

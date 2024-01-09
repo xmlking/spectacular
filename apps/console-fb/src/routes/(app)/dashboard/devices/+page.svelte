@@ -15,7 +15,7 @@
 	import { writable } from 'svelte/store';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
-	import { Logger } from '$lib/utils';
+	import { Logger } from '@spectacular/utils';
 	import { DataTable } from '$lib/components/table';
 	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
 	import { ErrorMessage } from '$lib/components/form';

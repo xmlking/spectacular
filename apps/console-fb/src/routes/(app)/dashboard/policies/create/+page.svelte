@@ -12,7 +12,7 @@
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms/client';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
-	import { Logger } from '$lib/utils';
+	import { Logger } from '@spectacular/utils';
 	import type { Subject } from '$lib/models/types';
 	import { createPolicyKeys as keys } from '$lib/models/schema';
 	import {

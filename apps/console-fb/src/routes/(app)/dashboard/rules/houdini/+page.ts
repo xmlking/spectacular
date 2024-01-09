@@ -1,7 +1,7 @@
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/client';
 import { ruleSearchSchema as schema } from '$lib/models/schema';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 import type {
 	AfterLoadEvent,
 	BeforeLoadEvent,

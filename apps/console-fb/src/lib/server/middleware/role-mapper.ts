@@ -4,7 +4,7 @@
  * Note: if you get CHUNKING_SESSION_COOKIE (session cookie exceeds allowed 4096 bytes) error,
  * reduce number of app roles returned.
  */
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 const log = new Logger('middleware:roll-mapper');
 
 // TODO: set managers, testers via environment

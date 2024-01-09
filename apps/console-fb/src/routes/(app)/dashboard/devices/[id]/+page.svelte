@@ -5,7 +5,7 @@
 	import { dev } from '$app/environment';
 	import { FloatingTextInput, Form, TagsInput } from '$lib/components/form';
 	import { updateDeviceKeys as keys } from '$lib/models/schema';
-	import { Logger } from '$lib/utils';
+	import { Logger } from '@spectacular/utils';
 
 	const log = new Logger('routes:devices:update');
 	export let data;

@@ -1,6 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { ZodError } from 'zod';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 import { zfd } from '$lib/zodfd';
 import { order_by } from '$houdini';
 import type { BeforeLoadEvent, ListPolicies2Variables as Variables } from './$houdini';

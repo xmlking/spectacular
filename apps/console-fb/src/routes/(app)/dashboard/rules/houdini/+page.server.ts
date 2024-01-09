@@ -2,7 +2,7 @@ import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 import { ruleDeleteSchema as schema } from '$lib/models/schema';
 import { ToastLevel } from '$lib/components/toast';
 import { DeleteRuleStore } from '$houdini';

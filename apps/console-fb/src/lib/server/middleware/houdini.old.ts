@@ -1,6 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
 import { building } from '$app/environment';
-import { Logger } from '$lib/utils';
+import { Logger } from '@spectacular/utils';
 import { setSession } from '$houdini';
 // import { getToken } from '@auth/core/jwt';
 // import { getToken } from '$lib/server/middleware/authjs-helper';
