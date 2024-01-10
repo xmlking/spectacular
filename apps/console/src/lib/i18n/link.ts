@@ -3,7 +3,7 @@ import type { Page } from '@sveltejs/kit';
 import { derived } from 'svelte/store';
 import { resolveRoute } from '$app/paths';
 import { sourceLanguageTag } from '$i18n/runtime';
-import type {AvailableLanguageTag} from '$i18n/runtime';
+import type { AvailableLanguageTag } from '$i18n/runtime';
 import { page } from '$app/stores';
 import { LANG_PARAM } from './constants';
 
@@ -24,7 +24,7 @@ export function localize<T extends string | URL>(location: T, lang: AvailableLan
 	// As it is, the locale param is prepended whenever the href points to a non-default-locale.
 	// This could be fine-tuned to, for example, account for user's preferences in localstorage / cookies / page.data.
 	return resolveRoute(`/[[${LANG_PARAM}]]${str}`, {
-		['lang']: lang === sourceLanguageTag ? '' : lang,
+		['lang']: lang === sourceLanguageTag ? '' : lang
 	});
 }
 
@@ -69,10 +69,10 @@ export function deriveLink($page: Page) {
 		const currentPage = $page.url.pathname === path || undefined;
 		const currentHash = currentPage && '#' + hash === $page.url.hash;
 		return {
-			'href': _href,
-			'hreflang': lang || undefined,
+			href: _href,
+			hreflang: lang || undefined,
 			'data-current': currentHash ? 'step' : currentPage ? 'page' : undefined,
-			'aria-current': currentHash ? 'step' : currentPage ? 'page' : undefined,
+			'aria-current': currentHash ? 'step' : currentPage ? 'page' : undefined
 			// Add more attributes if relevant.
 		} satisfies Partial<HTMLAnchorAttributes>;
 	};

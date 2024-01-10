@@ -49,7 +49,7 @@
 	};
 
 	function matchPathWhitelist(routeId: string | null): boolean {
-		console.log({routeId})
+		console.log({ routeId });
 		// If homepage route
 		if (routeId === '/[[lang=lang]]') return true;
 		// If any blog route `/[[lang=lang]]/blog`
@@ -130,6 +130,8 @@
 	<!--
 		Rerender the page whenever the language changes
 		TODO: https://github.com/CUPUM/nplex/blob/main/src/lib/components/LangKey.svelte
+		https://github.com/opral/monorepo/tree/paraglide-js-adapter-sveltekit/inlang/source-code/paraglide/paraglide-js-adapter-sveltekit
+
 	-->
 	{#key lang}
 		<slot />

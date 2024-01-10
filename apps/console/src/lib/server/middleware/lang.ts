@@ -1,7 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { Logger } from '@spectacular/utils';
 import { getTextDirection } from '$lib/i18n';
-import { sourceLanguageTag , setLanguageTag } from '$i18n/runtime';
+import { sourceLanguageTag, setLanguageTag } from '$i18n/runtime';
 import type { AvailableLanguageTag } from '$i18n/runtime';
 import { getEventLang } from '$lib/i18n/event';
 
@@ -30,4 +30,3 @@ export const lang = (async ({ event, resolve }) => {
 	});
 	return result;
 }) satisfies Handle;
-

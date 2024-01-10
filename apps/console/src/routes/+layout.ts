@@ -9,6 +9,6 @@ export const load = async (event) => {
 	}
 	return {
 		lang,
-		user: event.data.user,
+		user: event.data.user
 	};
 };
