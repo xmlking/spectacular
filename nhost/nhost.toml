@@ -207,6 +207,29 @@ version = '0.5.0'
 [storage.antivirus]
 server = 'tcp://run-clamav:3310'
 
+[ai]
+version = '0.3.1'
+# Used to validate requests between postgres and the AI service.
+# The AI service will also include the header X-Graphite-Webhook-Secret
+# with this value set when calling external webhooks so the source of
+# the request can be validated.
+webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
+
+[ai.autoEmbeddings]
+# How often to run the job that keeps embeddings up to date
+synchPeriodMinutes = 5
+
+[ai.openai]
+# Key to use for authenticating API requests to OpenAI.
+apiKey = '{{ secrets.OPENAI_API_KEY }}'
+# OpenAI organization to use.
+organization = 'my-org'
+
+[ai.resources.compute]
+# Dedicated resources allocated for the service
+cpu = 128
+memory = 256
+
 [observability]
 [observability.grafana]
 adminPassword = '{{ secrets.GRAFANA_ADMIN_PASSWORD }}'
