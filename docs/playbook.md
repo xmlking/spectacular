@@ -12,12 +12,14 @@ Install following CLI tools globally
 - [hasura-cli](https://hasura.io/docs/latest/hasura-cli/install-hasura-cli/) as GitOps tool for Hasura
 - [dotenv](https://dotenv.run/)
 - [turbo](https://turbo.build/repo/docs)
+- [vercel](https://vercel.com/docs/cli)
 
 ```shell
 pnpm add -g tsx
 pnpm add -g hasura-cli
 pnpm add -g turbo
 pnpm add -g @dotenv-run/cli
+pnpm add -g vercel
 ```
 
 ### Chrome Plugins

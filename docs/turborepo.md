@@ -75,6 +75,24 @@ npx turbo link
 
 ~~turbo automatically include environment variables from `.env` , `.secrets` as we set them at `globalDotEnv` in `turbo.json`~~
 
+Add `dotenv-run ` to your `package.json`
+
+```json filename="package.json" highlight=3
+{
+	"scripts": {
+		"dev": "dotenv-run -p .env,.secrets -- vite dev",
+		"build": "dotenv-run -p .env,.secrets -- vite build",
+		"preview": "dotenv-run -p .env,.secrets -- vite preview",
+	}
+}
+```
+
+Testing
+```shell
+cd apps/console
+dotenv-run -p .env,.secrets -d '.*'
+```
+
 ### Run
 
 ```shell

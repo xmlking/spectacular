@@ -4,6 +4,20 @@
 
 <p style="text-align: center;">The architecture of a monorepo deployed to Vercel</p>
 
+## Prerequisites  
+
+Install following CLI tools globally
+
+- [dotenv](https://dotenv.run/)
+- [turbo](https://turbo.build/repo/docs)
+- [vercel](https://vercel.com/docs/cli)
+- 
+```shell
+pnpm add -g turbo
+pnpm add -g @dotenv-run/cli
+pnpm add -g vercel
+```
+
 ## Setup
 
 Follow [SvelteKit on Vercel](https://vercel.com/docs/frameworks/sveltekit)
@@ -24,6 +38,12 @@ Follow [SvelteKit on Vercel](https://vercel.com/docs/frameworks/sveltekit)
 12. Edge Middleware
     1. We recommend using SvelteKit's server hooks to modify responses.
 
+## CLI
+
+```shell
+# You can link your entire repo to all you Vercel projects in one command.
+vc link --repo
+```
 ## Build
 
 **Incremental Static Regeneration (ISR)** is a modern web development strategy that allows developers to create and update static pages on-demand, after the initial build.
