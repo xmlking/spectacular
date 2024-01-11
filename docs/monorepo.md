@@ -10,8 +10,7 @@ Learn more about monorepo at [monorepo.tools](https://monorepo.tools/)
 
 In this document, we will using [Turborepo](https://turbo.build/) to implement Monorepos
 
-
-**Turborepo** is a high performant and blazing-fast build tool for monorepo for *Typescript* and *Javascript* projects.  
+**Turborepo** is a high performant and blazing-fast build tool for monorepo for _Typescript_ and _Javascript_ projects.  
 It provides some powerful features like:
 
 - Fast incremental build.
@@ -22,16 +21,19 @@ It provides some powerful features like:
 - Source code sharing.
 
 ## Why Turborepo?
+
 The main idea behind monorepo is to never recompute the work that has already been done before. It keeps a cache of previous builds for each project and then uses it for subsequent builds. . It keeps track of the output of any task you execute and then skips the work that is already done.
 
-Some of the other features of *Turborepo* include:
+Some of the other features of _Turborepo_ include:
+
 - **Incremental builds** - Turborepo will remember what you have built and skip the existing computations
 - C**ontext-aware hashing** - Turborepo keeps track of the contents of your files, not date/time, to identify what needs to be built.
 - **Zero runtime overhead** - Turborepo will not interfere with your runtime code or alter your sourcemaps
-Pruned subsets. 
+  Pruned subsets.
 - **Profile in your browser** - You can create build profiles and import them in Edge or chrome browser to identify which tasks are running the longest.
 
 ## Turborepo project structure
+
 - apps/**web** - (Public marketing website / landing page - low JS)
 - apps/**docs** - (User Docs, Dev Docs, Support Docs - no JS)
 - apps/**console** - (Dashboard, protected webapp, heavy JS)
@@ -40,40 +42,49 @@ Pruned subsets.
 - packages/**typescript-config** (Typescript configuration)
 - packages/**eslint-config** (Linter configuration)
 - packages/**prettier-config** (Formater configuration)
-- 
+-
+
 ## How to use Turborepo?
+
 Following are some of the commands to use Turborepo:
 
 - `npx create-turbo@latest turbo-demo` scaffolds a monorepo with apps (`docs`, `web`) and packages (design system and shared configs (`eslint`, `tsconfig)
-- `turbo run build`  builds all apps simultaneously. When you execute this command again, the second build completes in just 100ms because everything is cached. There are many [variations](https://turborepo.org/docs/reference/command-line-reference) of `turbo run` command.
+- `turbo run build` builds all apps simultaneously. When you execute this command again, the second build completes in just 100ms because everything is cached. There are many [variations](https://turborepo.org/docs/reference/command-line-reference) of `turbo run` command.
 - `turbo prune --scope=<target>` creates a sparse/partial monorepo with a pruned lockfile for a target package.
 - Remote Caching commands: `turbo login` and `turbo link`
 
 ### Prerequisites
 
 1. turbo CLI
-  ```shell
-  pnpm install turbo --global
-  ```
-2. VS Code monorepo plugin: [Monorepo Focus Workspace](https://marketplace.visualstudio.com/items?itemName=alberto-varela.monorepo-focus-workspace)
-  ```shell
-  code --install-extension alberto-varela.monorepo-focus-workspace
-  ```
-> Before code **commit**, restore the tree view with:  
-	Open VS Code open command palette (`Shift + Command + P`) and select: `Monorepo: Reset Workspace Focus` 
 
-## Playbook  
+```shell
+pnpm install turbo --global
+```
+
+2. VS Code monorepo plugin: [Monorepo Focus Workspace](https://marketplace.visualstudio.com/items?itemName=alberto-varela.monorepo-focus-workspace)
+
+```shell
+code --install-extension alberto-varela.monorepo-focus-workspace
+```
+
+> Before code **commit**, restore the tree view with:
+
+    Open VS Code open command palette (`Shift + Command + P`) and select: `Monorepo: Reset Workspace Focus`
+
+## Playbook
+
 ```shell
 # create a fresh svelte turborepo
 pnpm dlx create-turbo@latest -e with-svelte
-# update all dependencies 
+# update all dependencies
  pnpm up --latest -r
 
 ```
 
-## Maintenance  
+## Maintenance
+
 ```shell
-# update all dependencies 
+# update all dependencies
  pnpm up --latest -r
 ```
 

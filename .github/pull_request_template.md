@@ -29,7 +29,7 @@ Commit type: [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, 
 
 | Commit message                                                                                             | Release type     |
 | ---------------------------------------------------------------------------------------------------------- | ---------------- |
-| `fix(module): short description of change`                                                                  | Patch Release    |
+| `fix(module): short description of change`                                                                 | Patch Release    |
 | `feat(module): short description of change`                                                                | Feature Release  |
 | `feat(module): short description of change`<br><br>`BREAKING CHANGE: Long description of what is breaking` | Breaking Release |
 | `ci(module): short description of change`                                                                  | Feature Release  |

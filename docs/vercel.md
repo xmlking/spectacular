@@ -4,14 +4,15 @@
 
 <p style="text-align: center;">The architecture of a monorepo deployed to Vercel</p>
 
-## Prerequisites  
+## Prerequisites
 
 Install following CLI tools globally
 
 - [dotenv](https://dotenv.run/)
 - [turbo](https://turbo.build/repo/docs)
 - [vercel](https://vercel.com/docs/cli)
-- 
+-
+
 ```shell
 pnpm add -g turbo
 pnpm add -g @dotenv-run/cli
@@ -44,6 +45,7 @@ Follow [SvelteKit on Vercel](https://vercel.com/docs/frameworks/sveltekit)
 # You can link your entire repo to all you Vercel projects in one command.
 vc link --repo
 ```
+
 ## Build
 
 **Incremental Static Regeneration (ISR)** is a modern web development strategy that allows developers to create and update static pages on-demand, after the initial build.
