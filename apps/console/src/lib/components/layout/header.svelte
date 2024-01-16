@@ -27,6 +27,7 @@
 	import { enhance } from '$app/forms';
 	import { storeTheme } from '$lib/stores/stores';
 	import LangSwitch from '$lib/components/layout/lang-switch.svelte';
+	import Avatar from './avatar.svelte';
 	const drawerStore = getDrawerStore();
 
 	export let user: User | undefined;
@@ -260,6 +261,20 @@
 			>
 				<Github />
 			</a>
+		</section>
+		<section class="flex items-center justify-between gap-4">
+			{#if user}
+				{#if user?.avatarUrl}
+					<Avatar src={user?.avatarUrl || undefined} />
+				{:else}
+					<Avatar initials={user.email} />
+				{/if}
+			{:else}
+				<a
+					href="/auth/sign-in"
+					class="bg-primary-hover-token btn text-xl font-semibold uppercase">Login</a
+				>
+			{/if}
 		</section>
 	</svelte:fragment>
 </AppBar>

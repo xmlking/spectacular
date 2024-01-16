@@ -233,7 +233,7 @@ importers:
         version: 0.5.1
       svelte-check:
         specifier: 3.6.3
-        version: 3.6.3(@babel/core@7.23.7)(postcss@8.4.33)(svelte@4.2.8)
+        version: 3.6.3(postcss-load-config@5.0.2)(postcss@8.4.33)(svelte@4.2.8)
       svelte-meta-tags:
         specifier: 3.1.0
         version: 3.1.0(svelte@4.2.8)(typescript@5.3.3)
@@ -829,7 +829,7 @@ importers:
         version: 4.2.8
       svelte-check:
         specifier: 3.6.3
-        version: 3.6.3(@babel/core@7.23.7)(postcss@8.4.33)(svelte@4.2.8)
+        version: 3.6.3(postcss-load-config@5.0.2)(postcss@8.4.33)(svelte@4.2.8)
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -995,7 +995,7 @@ importers:
         version: 0.5.1
       svelte-check:
         specifier: 3.6.3
-        version: 3.6.3(@babel/core@7.23.7)(postcss@8.4.33)(svelte@4.2.8)
+        version: 3.6.3(postcss-load-config@5.0.2)(postcss@8.4.33)(svelte@4.2.8)
       svelte-meta-tags:
         specifier: 3.1.0
         version: 3.1.0(svelte@4.2.8)(typescript@5.3.3)
@@ -1303,7 +1303,7 @@ importers:
         version: 6.0.3(postcss@8.4.33)
       formsnap:
         specifier: 0.4.2
-        version: 0.4.2(svelte@4.2.8)(sveltekit-superforms@1.13.3)(zod@3.22.4)
+        version: 0.4.2(svelte@4.2.8)(sveltekit-superforms@2.0.0-alpha.18)(zod@3.22.4)
       lucide-svelte:
         specifier: 0.309.0
         version: 0.309.0(svelte@4.2.8)
@@ -1317,8 +1317,8 @@ importers:
         specifier: 5.0.2
         version: 5.0.2(postcss@8.4.33)
       sveltekit-superforms:
-        specifier: 1.13.3
-        version: 1.13.3(@sveltejs/kit@2.3.2)(svelte@4.2.8)(zod@3.22.4)
+        specifier: 2.0.0-alpha.18
+        version: 2.0.0-alpha.18(@sveltejs/kit@2.3.2)(svelte@4.2.8)(vite@5.0.11)
       tailwind-merge:
         specifier: 2.2.0
         version: 2.2.0
@@ -1340,6 +1340,9 @@ importers:
       vitest:
         specifier: 1.2.0
         version: 1.2.0(@types/node@20.11.3)(@vitest/ui@1.2.0)(jsdom@23.2.0)
+      zod:
+        specifier: 3.22.4
+        version: 3.22.4
 
   packages/typescript-config:
     dependencies:
