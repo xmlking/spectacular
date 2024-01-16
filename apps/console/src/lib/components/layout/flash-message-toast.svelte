@@ -3,7 +3,8 @@
 	import { getFlash } from 'sveltekit-flash-message/client';
 	import { Toast, getToastStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import { isLoadingPage } from '$lib/stores/loading';
 	import { handleMessage } from './toast-manager';
 
 	const toastStore = getToastStore();
@@ -13,9 +14,19 @@
 		// flashCookieOptions: { sameSite: 'lax' }
 	});
 
+	beforeNavigate(({ from, to }) => {
+		if ($flash && from?.url.toString() != to?.url.toString()) {
+			$flash = undefined;
+		}
+		if (to?.route.id) {
+			isLoadingPage.set(true);
+		}
+	});
+
 	let isGotoNavigated = false;
 	afterNavigate(({ type }) => {
 		isGotoNavigated = ['goto'].includes(type as string);
+		isLoadingPage.set(false);
 	});
 
 	flash.subscribe(($flash) => {

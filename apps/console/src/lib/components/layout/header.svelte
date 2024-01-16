@@ -22,6 +22,7 @@
 	} from 'lucide-svelte';
 	import LogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
 	import type { User } from '@nhost/nhost-js';
+	import PageLoadSpinner from '$lib/components/layout/page-load-spinner.svelte';
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import { storeTheme } from '$lib/stores/stores';
@@ -104,6 +105,7 @@
 				<LogoIcon />
 			</a>
 			<h2 class="hidden font-serif text-2xl md:block">Datablocks</h2>
+			<PageLoadSpinner />
 		</div>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">

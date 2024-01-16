@@ -3,12 +3,16 @@
 	import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { Logger } from '@spectacular/utils';
+	import { getToastStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import * as m from '$i18n/messages';
 	import { dev } from '$app/environment';
+	import { isLoadingForm } from '$lib/stores/loading';
+	import { handleMessage } from '$lib/components/layout/toast-manager';
 
 	export let data;
 	const log = new Logger('auth:signup');
+	const toastStore = getToastStore();
 
 	const {
 		form,
@@ -27,12 +31,17 @@
 		dataType: 'json',
 		taintedMessage: null,
 		syncFlashMessage: false,
-		delayMs: 100,
+		delayMs: 150,
 		timeoutMs: 4000,
 		onError({ result }) {
 			// TODO:
 			// message.set(result.error.message)
 			log.error('superForm', { result });
+		},
+		onUpdated({ form }) {
+			if (form.message) {
+				handleMessage(form.message, toastStore);
+			}
 		}
 	});
 
@@ -40,6 +49,8 @@
 
 	let termsAccept = false;
 	// $: termsValue = $form.terms as Writable<boolean>;
+	// Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
+	delayed.subscribe((v) => ($isLoadingForm = v));
 </script>
 
 <svelte:head>

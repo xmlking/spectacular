@@ -8,6 +8,7 @@ export const load = async (event) => {
 		setLanguageTag(lang);
 	}
 	return {
+		vercelEnv: event.data.vercelEnv,
 		lang,
 		user: event.data.user
 	};
