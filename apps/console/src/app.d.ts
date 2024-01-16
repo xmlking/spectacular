@@ -2,14 +2,13 @@
 // for information about these interfaces
 
 type NhostClient = import('@nhost/nhost-js').NhostClient;
+type ToastSettings = import('@skeletonlabs/skeleton').ToastSettings;
 
 declare global {
 	namespace App {
 		namespace Superforms {
-			type Message = {
-				type: 'error' | 'success';
-				closeDelay?: number;
-				message: string;
+			type Message = Pick<ToastSettings, 'message' | 'hideDismiss' | 'timeout'> & {
+				type: 'error' | 'success' | 'warning';
 			};
 		}
 		// interface Error {}

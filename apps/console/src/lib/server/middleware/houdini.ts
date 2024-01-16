@@ -3,7 +3,7 @@ import { Logger } from '@spectacular/utils';
 import { building } from '$app/environment';
 import { setSession } from '$houdini';
 
-const log = new Logger('middleware:houdini');
+const log = new Logger('server:middleware:houdini');
 export const houdini = (async ({ event, resolve }) => {
 	// skip auth logic on build to prevent infinite redirection in production mode
 	// FIXME: https://github.com/nextauthjs/next-auth/discussions/6186

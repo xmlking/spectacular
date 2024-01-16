@@ -9,7 +9,7 @@ import { getEventLang } from '$lib/i18n/event';
 We set the `lang` and `dir` attributes on the `<html>` element using a hook.
 the `app.html` file contains placeholders for these attributes, which we just find and replace.
 */
-export const log = new Logger('middleware:detect-lang');
+export const log = new Logger('server:middleware:detect-lang');
 
 export const lang = (async ({ event, resolve }) => {
 	const lang: AvailableLanguageTag = (event.params.lang as AvailableLanguageTag) ?? sourceLanguageTag;

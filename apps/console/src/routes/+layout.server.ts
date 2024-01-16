@@ -1,9 +1,10 @@
 import { Logger } from '@spectacular/utils';
+import { loadFlash } from 'sveltekit-flash-message/server';
 import { VERCEL_ENV } from '$env/static/private';
 
 const log = new Logger('server:layout');
 
-export const load = ({ locals: { lang, nhost } }) => {
+export const load = loadFlash(async ({ locals: { lang, nhost } }) => {
 	log.debug(lang);
 	const session = nhost.auth.getSession();
 
@@ -13,4 +14,4 @@ export const load = ({ locals: { lang, nhost } }) => {
 		lang,
 		user: session?.user
 	};
-};
+});

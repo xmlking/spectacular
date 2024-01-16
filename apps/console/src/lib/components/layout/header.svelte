@@ -110,7 +110,7 @@
 		<!-- Login -->
 		<div class="ml-10 space-x-4">
 			{#if user}
-				<form action="/logout" method="post">
+				<form action="/auth/sign-out" method="post">
 					<button
 						type="submit"
 						class="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
@@ -120,13 +120,13 @@
 				</form>
 			{:else}
 				<a
-					href="/login"
+					href="/auth/sign-in"
 					class="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
 				>
 					Sign in
 				</a>
 				<a
-					href="/signup"
+					href="/auth/sign-up"
 					class="inline-block rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-indigo-600 hover:bg-indigo-50"
 				>
 					Sign up

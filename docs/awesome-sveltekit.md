@@ -142,6 +142,8 @@ Awesome **SvelteKit** Links
 - [Svelte runes + Liveblocks demo](https://github.com/CTNicholas/svelte-runes-realtime-drawing)
 - [shadcn-svelte, Superforms sample project](https://github.com/delay/sveltekit-auth)
 - Sveltekit Auth Template - with shadcn: [sveltekit-auth](https://github.com/delay/sveltekit-auth), with SkeletonUI: [sveltekit-auth-starter](https://github.com/delay/sveltekit-auth-starter)
+- Sveltekit Auth Template [sveltekit-shadcn-auth-starter](https://github.com/gribard/sveltekit-shadcn-auth-starter), i18n , superforms
+- [Svelte Vietnam](https://github.com/sveltevietnam/sveltevietnam.dev/tree/main) - Use: monorepo, turbo, changesets, i18n, hooks
 
 ## Deployment
 

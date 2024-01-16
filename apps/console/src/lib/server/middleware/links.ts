@@ -1,7 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
 import { Logger } from '@spectacular/utils';
-export const log = new Logger('middleware:dead-links');
+export const log = new Logger('server:middleware:dead-links');
 
 const dead_links_redirect_to: Record<string, string> = {
 	'/api/fragments': '/api/fragment',

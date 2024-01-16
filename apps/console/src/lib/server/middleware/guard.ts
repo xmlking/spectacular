@@ -6,7 +6,7 @@ import { building } from '$app/environment';
  * Protect the route
  * This should be the next middleware after auth middleware.
  */
-const log = new Logger('middleware:guard');
+const log = new Logger('server:middleware:guard');
 const protectedPaths = ['/dashboard', '/account', '/api', '/downloads'];
 const adminPaths = ['/dashboard/admin'];
 const userPaths = ['/downloads'];
@@ -34,7 +34,7 @@ export const guard = (async ({ event, resolve }) => {
 	const { isAuthenticated, isLoading } = nhost.auth.getAuthenticationStatus();
 	log.debug({ isAuthenticated, isLoading });
 	if (!isAuthenticated) {
-		redirect(303, `${origin}/login?callbackUrl=${pathname}`);
+		redirect(303, `${origin}/auth/sign-in?callbackUrl=${pathname}`);
 	}
 
 	const session = nhost.auth.getSession();

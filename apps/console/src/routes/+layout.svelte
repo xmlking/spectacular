@@ -1,7 +1,6 @@
 <!-- Layout: (root) -->
 <script lang="ts">
 	import {
-		Toast,
 		Modal,
 		AppShell,
 		storePopup,
@@ -23,6 +22,7 @@
 	import Sidebar from '$lib/components/layout/sidebar.svelte';
 	import Drawer from '$lib/components/layout/drawer.svelte';
 	import LangHeader from '$lib/components/layout/lang-header.svelte';
+	import FlashMessageToast from '$lib/components/layout/flash-message-toast.svelte';
 	import '../app.pcss';
 	import { getTextDirection } from '$lib/i18n';
 
@@ -111,7 +111,8 @@
 
 <!-- Overlays -->
 <Modal components={modalComponentRegistry} />
-<Toast position="tr" />
+<!-- Display flash toast message -->
+<FlashMessageToast />
 <Drawer />
 
 <!-- App Shell -->

@@ -1,0 +1,215 @@
+<script lang="ts">
+	import { fade } from 'svelte/transition';
+	import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
+	import SuperDebug, { superForm } from 'sveltekit-superforms';
+	import { Logger } from '@spectacular/utils';
+	import { page } from '$app/stores';
+	import * as m from '$i18n/messages';
+	import { dev } from '$app/environment';
+
+	export let data;
+	const log = new Logger('auth:signup');
+
+	const {
+		form,
+		delayed,
+		timeout,
+		enhance,
+		errors,
+		constraints,
+		message,
+		tainted,
+		posted,
+		submitting,
+		capture,
+		restore
+	} = superForm(data.form, {
+		dataType: 'json',
+		taintedMessage: null,
+		syncFlashMessage: false,
+		delayMs: 100,
+		timeoutMs: 4000,
+		onError({ result }) {
+			// TODO:
+			// message.set(result.error.message)
+			log.error('superForm', { result });
+		}
+	});
+
+	export const snapshot = { capture, restore };
+
+	let termsAccept = false;
+	// $: termsValue = $form.terms as Writable<boolean>;
+</script>
+
+<svelte:head>
+	<title>Datablocks | Signup</title>
+	<meta name="description" content="Create Account" />
+</svelte:head>
+
+<!-- Form Level Errors / Messages -->
+{#if $message || $errors._errors}
+	<aside class="alert variant-filled-error mt-6" transition:fade|local={{ duration: 200 }}>
+		<!-- Icon -->
+		<!-- <AlertTriangle /> -->
+		<!-- Message -->
+		<div class="alert-message" class:invalid={$page.status >= 400}>
+			{#if $message}
+				<p class="font-medium" class:invalid={$page.status >= 400}>{$message.message}</p>
+			{/if}
+			{#if $errors._errors}
+				<ul class="list">
+					{#each $errors._errors as error}
+						<li>
+							<span><AlertTriangle /></span>
+							<span class="flex-auto">{error}</span>
+						</li>
+					{/each}
+				</ul>
+			{/if}
+		</div>
+		<!-- Actions -->
+		<!-- <div class="alert-actions">
+		<button class="btn-icon variant-filled"><X /></button>
+	</div> -->
+	</aside>
+{/if}
+
+<form method="POST" use:enhance>
+	<div class="mt-6">
+		<label class="label">
+			<span class="sr-only">{m.auth_forms_first_name_label()}</span>
+			<input
+				id="firstName"
+				name="firstName"
+				type="text"
+				class="input"
+				autocomplete="given-name"
+				placeholder={m.auth_forms_first_name_placeholder()}
+				data-invalid={$errors.firstName}
+				bind:value={$form.firstName}
+				class:input-error={$errors.firstName}
+				{...$constraints.firstName}
+			/>
+			{#if $errors.firstName}
+				<small>{$errors.firstName}</small>
+			{/if}
+		</label>
+	</div>
+	<div class="mt-6">
+		<label class="label">
+			<span class="sr-only">{m.auth_forms_last_name_label()}</span>
+			<input
+				id="lastName"
+				name="lastName"
+				type="text"
+				class="input"
+				autocomplete="family-name"
+				placeholder={m.auth_forms_last_name_placeholder()}
+				data-invalid={$errors.lastName}
+				bind:value={$form.lastName}
+				class:input-error={$errors.lastName}
+				{...$constraints.lastName}
+			/>
+			{#if $errors.lastName}
+				<small>{$errors.lastName}</small>
+			{/if}
+		</label>
+	</div>
+	<div class="mt-6">
+		<label class="label">
+			<span class="sr-only">{m.auth_forms_email_label()}</span>
+			<input
+				id="email"
+				name="email"
+				type="email"
+				class="input"
+				autocomplete="email"
+				placeholder={m.auth_forms_email_placeholder()}
+				data-invalid={$errors.email}
+				bind:value={$form.email}
+				class:input-error={$errors.email}
+				{...$constraints.email}
+			/>
+			{#if $errors.email}
+				<small>{$errors.email}</small>
+			{/if}
+		</label>
+	</div>
+
+	<div class="mt-6">
+		<label class="label">
+			<span class="sr-only">{m.auth_forms_password_label()}</span>
+			<input
+				id="password"
+				name="password"
+				type="password"
+				class="input"
+				placeholder={m.auth_forms_password_placeholder()}
+				data-invalid={$errors.password}
+				bind:value={$form.password}
+				class:input-error={$errors.password}
+				{...$constraints.password}
+			/>
+			{#if $errors.password}
+				<small>{$errors.password}</small>
+			{/if}
+		</label>
+	</div>
+	<div class="mt-6">
+		<label for="terms" class="label">
+			<input
+				id="terms"
+				name="terms"
+				type="checkbox"
+				class="checkbox"
+				bind:checked={termsAccept}
+			/>
+			<span class="ml-2">
+				I accept the
+				<a href="/terms" class="text-primaryHover underline">terms</a>
+				and
+				<a href="/privacy" class="text-primaryHover underline">privacy policy</a>
+				<!--{#if $errors.terms}
+					<small>{$errors.terms}</small>
+				{/if}-->
+			</span>
+		</label>
+	</div>
+	<div class="mt-6">
+		<button type="submit" disabled={!termsAccept} class="variant-filled-primary btn w-full">
+			{#if $timeout}
+				<MoreHorizontal class="animate-ping" />
+			{:else if $delayed}
+				<Loader class="animate-spin" />
+			{:else}
+				{m.auth_labels_signup()}
+			{/if}
+		</button>
+	</div>
+</form>
+
+{#if dev}
+	<br />
+	<SuperDebug
+		label="Miscellaneous"
+		status={false}
+		data={{
+			message: $message,
+			submitting: $submitting,
+			delayed: $delayed,
+			timeout: $timeout,
+			posted: $posted
+		}}
+	/>
+	<br />
+	<SuperDebug label="Form" data={$form} />
+	<br />
+	<SuperDebug label="Tainted" status={false} data={$tainted} />
+	<br />
+	<SuperDebug label="Errors" status={false} data={$errors} />
+	<br />
+	<SuperDebug label="Constraints" status={false} data={$constraints} />
+	<!-- <br />
+ 	<SuperDebug label="$page data" status={false} data={$page} /> -->
+{/if}
