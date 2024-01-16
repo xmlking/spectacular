@@ -1,3 +1,12 @@
+<script lang="ts" context="module">
+	// Scroll heading into view
+	function scrollHeadingIntoView(): void {
+		if (!window.location.hash) return;
+		const elemTarget: HTMLElement | null = document.querySelector(window.location.hash);
+		if (elemTarget) elemTarget.scrollIntoView({ behavior: 'smooth' });
+	}
+</script>
+
 <script lang="ts">
 	// Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/FlashMessageToast.svelte
 	import { getFlash } from 'sveltekit-flash-message/client';
@@ -14,6 +23,7 @@
 		// flashCookieOptions: { sameSite: 'lax' }
 	});
 
+	// Lifecycle
 	beforeNavigate(({ from, to }) => {
 		if ($flash && from?.url.toString() != to?.url.toString()) {
 			$flash = undefined;
@@ -24,9 +34,19 @@
 	});
 
 	let isGotoNavigated = false;
-	afterNavigate(({ type }) => {
+	afterNavigate(({ type, from, to }) => {
+		// Flash Messages
 		isGotoNavigated = ['goto'].includes(type as string);
+		// Loading Animation
 		isLoadingPage.set(false);
+		// Scroll to top
+		const isNewPage = from?.url.pathname !== to?.url.pathname;
+		const elemPage = document.querySelector('#page');
+		if (isNewPage && elemPage !== null) {
+			elemPage.scrollTop = 0;
+		}
+		// Scroll heading into view
+		scrollHeadingIntoView();
 	});
 
 	flash.subscribe(($flash) => {

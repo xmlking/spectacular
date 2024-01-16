@@ -8,6 +8,7 @@
 		prefersReducedMotionStore
 	} from '@skeletonlabs/skeleton';
 	import type { ModalComponent } from '@skeletonlabs/skeleton';
+	import { setupViewTransition } from 'sveltekit-view-transition';
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { inject } from '@vercel/analytics';
 	import Search from '$lib/modals/Search.svelte';
@@ -16,7 +17,6 @@
 	import { page } from '$app/stores';
 	import { setLanguageTag, sourceLanguageTag } from '$i18n/runtime';
 	import type { AvailableLanguageTag } from '$i18n/runtime';
-	import { afterNavigate } from '$app/navigation';
 	import Header from '$lib/components/layout/header.svelte';
 	import Footer from '$lib/components/layout/footer.svelte';
 	import Sidebar from '$lib/components/layout/sidebar.svelte';
@@ -64,24 +64,9 @@
 		document.body.setAttribute('data-theme', $storeTheme);
 	}
 
-	// Scroll heading into view
-	function scrollHeadingIntoView(): void {
-		if (!window.location.hash) return;
-		const elemTarget: HTMLElement | null = document.querySelector(window.location.hash);
-		if (elemTarget) elemTarget.scrollIntoView({ behavior: 'smooth' });
-	}
+	// View Transitions
+	setupViewTransition();
 
-	// Lifecycle
-	afterNavigate((params) => {
-		// Scroll to top
-		const isNewPage = params.from?.url.pathname !== params.to?.url.pathname;
-		const elemPage = document.querySelector('#page');
-		if (isNewPage && elemPage !== null) {
-			elemPage.scrollTop = 0;
-		}
-		// Scroll heading into view
-		scrollHeadingIntoView();
-	});
 	// Reactive
 	// Disable left sidebar on homepage
 	$: slotSidebarLeft = matchPathWhitelist($page.route.id)
