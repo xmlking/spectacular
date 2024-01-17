@@ -1,6 +1,4 @@
 <script lang="ts">
-	// TODO: Add Page Top Loading Bar. e,g., https://saibotsivad.github.io/svelte-progress-bar/
-	// https://www.cssscript.com/demo/multipurpose-top-progress-bar-pure-javascript/
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
 	import { fade } from 'svelte/transition';
 	import { isLoadingForm, isLoadingPage } from '$lib/stores/loading';

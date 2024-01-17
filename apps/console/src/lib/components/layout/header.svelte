@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
-	import type { SubmitFunction } from '@sveltejs/kit';
 	import {
 		AppBar,
 		LightSwitch,
@@ -8,6 +7,7 @@
 		popup,
 		getDrawerStore
 	} from '@skeletonlabs/skeleton';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import {
 		Home,
 		BookText,
@@ -22,7 +22,8 @@
 	} from 'lucide-svelte';
 	import LogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
 	import type { User } from '@nhost/nhost-js';
-	import PageLoadSpinner from '$lib/components/layout/page-load-spinner.svelte';
+	// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
+	import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import { storeTheme } from '$lib/stores/stores';
@@ -94,6 +95,8 @@
 
 <!-- NOTE: using stopPropagation to override Chrome for Windows search shortcut -->
 <svelte:window on:keydown|stopPropagation={onWindowKeydown} />
+<!-- LoadingIndicatorBar should be placed here -->
+<LoadingIndicatorBar />
 <AppBar shadow="shadow-2xl" slotTrail="!space-x-2">
 	<svelte:fragment slot="lead">
 		<div class="flex items-center space-x-4">
@@ -106,7 +109,8 @@
 				<LogoIcon />
 			</a>
 			<h2 class="hidden font-serif text-2xl md:block">Datablocks</h2>
-			<PageLoadSpinner />
+			<!-- LoadingIndicatorSpinner should be placed here -->
+			<!-- <LoadingIndicatorSpinner /> -->
 		</div>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">

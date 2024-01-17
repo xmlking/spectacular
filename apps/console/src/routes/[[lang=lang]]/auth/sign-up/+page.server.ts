@@ -40,7 +40,7 @@ export const actions = {
 			cookies,
 			locals: { lang, nhost }
 		} = event;
-		// Every call to isLimited counts as a hit towards the rate limit for the event.
+		// Every call to `isLimited` counts as a hit towards the rate limit for the event.
 		if (await limiter.isLimited(event)) swError(429);
 
 		const form = await superValidate(request, zod(signUpSchema));
