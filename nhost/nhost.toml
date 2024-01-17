@@ -225,6 +225,11 @@ apiKey = '{{ secrets.OPENAI_API_KEY }}'
 # OpenAI organization to use.
 organization = 'my-org'
 
+[ai.resources.compute]
+# Dedicated resources allocated for the service
+cpu = 128
+memory = 256
+
 [observability]
 [observability.grafana]
 adminPassword = '{{ secrets.GRAFANA_ADMIN_PASSWORD }}'

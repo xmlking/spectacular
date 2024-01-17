@@ -19,7 +19,7 @@ Please read and apply all [contribution requirements](https://github.com/xmlking
 - [ ] Branch is prefixed with: `docs/`, `feat/`, `chore/`, `fix/`
 - [ ] Ensure Svelte and Typescript linting is current - run `turbo lint`
 - [ ] Ensure Prettier linting is current - run `turbo format`
-- [ ] All test cases are passing - run `turbo turtest`
+- [ ] All test cases are passing - run `turbo test`
 - [ ] Includes a changeset (if relevant; see above)
 
 ### Commit message format
