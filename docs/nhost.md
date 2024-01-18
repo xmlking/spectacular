@@ -40,11 +40,14 @@ nhost config example
 nhost config validate
 # Shows configuration after resolving secrets
 nhost config show
-nhost config show subdomain local
-nhost config show subdomain bggkthwysdvphygfecpa
+nhost config show --subdomain local
+# This command is mostly useful to verify configuration overlays.
+nhost config show --subdomain bggkthwysdvphygfecpa
 # Get cloud configuration
 nhost config pull
 ```
+
+Refer: [configuration-overlays](https://docs.nhost.io/guides/cli/configuration-overlays)
 
 #### Run
 

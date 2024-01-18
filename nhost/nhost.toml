@@ -215,6 +215,12 @@ version = '0.3.1'
 # the request can be validated.
 webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
 
+[ai.resources]
+[ai.resources.compute]
+# Dedicated resources allocated for the service
+cpu = 128
+memory = 256
+
 [ai.autoEmbeddings]
 # How often to run the job that keeps embeddings up to date
 synchPeriodMinutes = 5
@@ -225,10 +231,7 @@ apiKey = '{{ secrets.OPENAI_API_KEY }}'
 # OpenAI organization to use.
 organization = 'my-org'
 
-[ai.resources.compute]
-# Dedicated resources allocated for the service
-cpu = 128
-memory = 256
+
 
 [observability]
 [observability.grafana]

@@ -1,4 +1,4 @@
-import { fail, error as swError } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -40,13 +40,25 @@ export const actions = {
 			cookies,
 			locals: { lang, nhost }
 		} = event;
-		// Every call to `isLimited` counts as a hit towards the rate limit for the event.
-		if (await limiter.isLimited(event)) swError(429);
 
 		const form = await superValidate(request, zod(signUpSchema));
 
+		const status = await limiter.check(event);
+		if (status.limited) {
+			event.setHeaders({
+				'Retry-After': status.retryAfter.toString()
+			});
+			return message(
+				form,
+				{
+					type: 'error',
+					message: `Rate limit has been reached. Please retry after ${status.retryAfter} seconds`
+				},
+				{ status: 429 }
+			);
+		}
+
 		log.debug({ lang, nhost });
-		log.debug('raw form:', form);
 		// await sleep(8000)
 
 		if (!form.valid) return fail(400, { form });

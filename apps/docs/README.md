@@ -41,14 +41,14 @@ Static assets, like favicons, can be placed in the `public/` directory.
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                    | Action                                           |
-| :------------------------- | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `turbo dev`                | Starts local dev server at `localhost:4321`      |
-| `turbo build`              | Build your production site to `./dist/`          |
-| `turbo preview`            | Preview your build locally, before deploying     |
-| `turbo astro ...`          | Run CLI commands like `astro add`, `astro check` |
-| `turbo astro -- --help`    | Get help using the Astro CLI                     |
+| Command                 | Action                                           |
+| :---------------------- | :----------------------------------------------- |
+| `pnpm install`          | Installs dependencies                            |
+| `turbo dev`             | Starts local dev server at `localhost:4321`      |
+| `turbo build`           | Build your production site to `./dist/`          |
+| `turbo preview`         | Preview your build locally, before deploying     |
+| `turbo astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `turbo astro -- --help` | Get help using the Astro CLI                     |
 
 ## 👀 Want to learn more?
 

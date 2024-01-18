@@ -134,7 +134,6 @@ PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 turbo dev
 To update the packages to their latest versions in `package.json`
 
 ```shell
-# TODO: not at available for pnpm
 pnpm up --latest -r
 pnpm audit --fix
 ```
