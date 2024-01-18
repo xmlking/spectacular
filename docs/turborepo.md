@@ -94,7 +94,11 @@ Testing
 
 ```shell
 cd apps/console
-dotenv-run -p .env,.secrets -d '.*'
+dotenv-run -f .env,.secrets -v '.*'
+# Use unsecure mode to print values
+dotenv-run -f .env,.secrets -v '.*' -u
+# using printenv
+dotenv-run -f .env,.secrets -v -- printenv
 ```
 
 ### Run

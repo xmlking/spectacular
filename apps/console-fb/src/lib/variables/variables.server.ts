@@ -16,6 +16,9 @@ const schema = z.object({
 		message: 'No spaces allowed'
 	}),
 	VERCEL: z.coerce.boolean(),
+	AUTH_REDIRECT_PROXY_URL: z.string().regex(new RegExp('^\\S*$'), {
+		message: 'No spaces allowed'
+	}),
 	AUTH_PROVIDER_AZUREAD_CLIENT_ID: z.string().regex(new RegExp('^\\S*$'), {
 		message: 'No spaces allowed'
 	}),
