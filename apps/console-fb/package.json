@@ -9,7 +9,7 @@
 		"dev:debug": "DEBUG=* vite dev",
 		"dev:sw": "SW_DEV=true vite dev",
 		"build": "dotenv-run -vf .env,.secrets -- vite build",
-		"preview": "NEXTAUTH_URL=http://localhost:4173 dotenv-run -vf .env,.secrets -- vite preview",
+		"preview": "NEXTAUTH_URL=http://localhost:4173 AUTH_REDIRECT_PROXY_URL=http://localhost:4173/auth dotenv-run -vf .env,.secrets -- vite preview",
 		"test": "pnpm run test:integration && pnpm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

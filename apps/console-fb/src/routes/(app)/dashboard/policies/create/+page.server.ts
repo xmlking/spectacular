@@ -14,7 +14,7 @@ const createPolicyStore = new CreatePolicyStore();
 export const actions = {
 	default: async (event) => {
 		const { request, locals } = event;
-		const session = await locals.getSession();
+		const session = await locals.auth();
 		if (session?.user == undefined) {
 			throw redirect(307, '/auth/signin?callbackUrl=/dashboard/policies/create');
 		}

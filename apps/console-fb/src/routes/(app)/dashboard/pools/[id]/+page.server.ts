@@ -16,7 +16,7 @@ export const actions = {
 	default: async (event) => {
 		const { params, request, locals } = event;
 		const id = uuidSchema.parse(params.id);
-		const session = await locals.getSession();
+		const session = await locals.auth();
 		if (session?.user == undefined) {
 			throw redirect(307, `/auth/signin?callbackUrl=/dashboard/pools/${id}`);
 		}

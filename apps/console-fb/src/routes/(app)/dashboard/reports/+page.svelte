@@ -11,7 +11,7 @@
 					data-drawer-target="drawer-navigation"
 					data-drawer-toggle="drawer-navigation"
 					aria-controls="drawer-navigation"
-					class="mr-2 cursor-pointer rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700"
+					class="mr-2 cursor-pointer rounded-lg p-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:bg-gray-700 dark:focus:ring-gray-700 md:hidden"
 				>
 					<svg
 						aria-hidden="true"
@@ -83,7 +83,7 @@
 					type="button"
 					data-drawer-toggle="drawer-navigation"
 					aria-controls="drawer-navigation"
-					class="mr-1 rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 md:hidden dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600"
+					class="mr-1 rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-600 md:hidden"
 				>
 					<span class="sr-only">Toggle search</span>
 					<svg
@@ -557,7 +557,7 @@
 				</div>
 				<button
 					type="button"
-					class="mx-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 md:mr-0 dark:focus:ring-gray-600"
+					class="mx-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0"
 					id="user-menu-button"
 					aria-expanded="false"
 					data-dropdown-toggle="dropdown"
@@ -687,7 +687,7 @@
 	<!-- Sidebar -->
 
 	<aside
-		class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full border-r border-gray-200 bg-white pt-14 transition-transform md:translate-x-0 dark:border-gray-700 dark:bg-gray-800"
+		class="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full border-r border-gray-200 bg-white pt-14 transition-transform dark:border-gray-700 dark:bg-gray-800 md:translate-x-0"
 		aria-label="Sidenav"
 		id="drawer-navigation"
 	>
@@ -1008,7 +1008,7 @@
 			</ul>
 		</div>
 		<div
-			class="absolute bottom-0 left-0 z-20 hidden w-full justify-center space-x-4 bg-white p-4 lg:flex dark:bg-gray-800"
+			class="absolute bottom-0 left-0 z-20 hidden w-full justify-center space-x-4 bg-white p-4 dark:bg-gray-800 lg:flex"
 		>
 			<a
 				href="#"
@@ -1250,46 +1250,46 @@
 	<main class="h-auto p-4 pt-20 md:ml-64">
 		<div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 			<div
-				class="h-32 rounded-lg border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"
+				class="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"
 			/>
 			<div
-				class="h-32 rounded-lg border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"
+				class="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"
 			/>
 			<div
-				class="h-32 rounded-lg border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"
+				class="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"
 			/>
 			<div
-				class="h-32 rounded-lg border-2 border-dashed border-gray-300 md:h-64 dark:border-gray-600"
+				class="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"
 			/>
 		</div>
 		<div class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600" />
 		<div class="mb-4 grid grid-cols-2 gap-4">
 			<div
-				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
+				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 			<div
-				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
+				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 			<div
-				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
+				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 			<div
-				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
+				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 		</div>
 		<div class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600" />
 		<div class="grid grid-cols-2 gap-4">
 			<div
-				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
+				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 			<div
-				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
+				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 			<div
-				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
+				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 			<div
-				class="h-48 rounded-lg border-2 border-dashed border-gray-300 md:h-72 dark:border-gray-600"
+				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 		</div>
 	</main>

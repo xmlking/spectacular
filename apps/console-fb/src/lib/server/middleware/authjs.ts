@@ -24,7 +24,7 @@ export const authjs = SvelteKitAuth({
 	debug: dev,
 	trustHost: true,
 	secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY,
-	redirectProxyUrl:  envPri.AUTH_REDIRECT_PROXY_URL,
+	redirectProxyUrl: envPri.AUTH_REDIRECT_PROXY_URL,
 	// adapter: HasuraAdapter({
 	// 	endpoint: envPri.PUBLIC_GRAPHQL_ENDPOINT,
 	// 	adminSecret: envPri.HASURA_GRAPHQL_ADMIN_SECRET

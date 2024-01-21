@@ -12,7 +12,7 @@ export const houdini = (async ({ event, resolve }) => {
 	if (building) return await resolve(event);
 
 	const { locals, cookies } = event;
-	const { token } = (await locals.getSession()) ?? {};
+	const { token } = (await locals.auth()) ?? {};
 
 	// FIXME: always return null with @auth/core/jwt's getToken
 	// const token = await getToken({req: { cookies: event.cookies, headers: event.request.headers },secret: dynPriEnv.HASURA_GRAPHQL_JWT_SECRET_KEY,raw: true});

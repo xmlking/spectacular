@@ -12,7 +12,7 @@ export const houdini = (async ({ event, resolve }) => {
 	if (building) return await resolve(event);
 
 	const { cookies, locals } = event;
-	const session = await locals.getSession();
+	const session = await locals.auth();
 	const roles = session?.roles;
 
 	// FIXME: always return null with @auth/core/jwt's getToken

@@ -29,7 +29,7 @@ export const guard = (async ({ event, resolve }) => {
 		return await resolve(event);
 	}
 
-	const { user, roles, expires } = (await locals.getSession()) ?? {};
+	const { user, roles, expires } = (await locals.auth()) ?? {};
 	// log.debug('Session roles-->', roles);
 
 	if (!user) {

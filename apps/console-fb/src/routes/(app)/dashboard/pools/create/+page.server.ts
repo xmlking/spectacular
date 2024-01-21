@@ -15,7 +15,7 @@ const createPoolStore: CreatePoolStore = new CreatePoolStore();
 export const actions = {
 	default: async (event: RequestEvent) => {
 		const { request, locals } = event;
-		const session = await locals.getSession();
+		const session = await locals.auth();
 		if (session?.user == undefined) {
 			throw redirect(307, '/auth/signin?callbackUrl=/dashboard/pools/create');
 		}

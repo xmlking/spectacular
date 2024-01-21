@@ -18,7 +18,7 @@ declare global {
 		}
 		interface Locals {
 			// session: Session;
-			getSession(): Promise<Session | null>;
+			auth(): Promise<Session | null>;
 		}
 		export interface Toast {
 			message: string;

@@ -1,9 +1,8 @@
 const defaultMarshall = {
-	// @ts-ignore
 	unmarshal(val) {
 		return val;
 	},
-	// @ts-ignore
+
 	marshal(val) {
 		return val;
 	}
@@ -12,12 +11,10 @@ const defaultMarshall = {
 /** @type {import('houdini').ConfigFile} */
 const config = {
 	watchSchema: {
-		// @ts-ignore
 		url: (env) => env.PUBLIC_GRAPHQL_ENDPOINT,
 		interval: 0, //  only pull the schema when you first run `turbo dev`
 		// HINT: we need to generate scheam for highest role level that app support.
 		headers: {
-			// @ts-ignore
 			'X-Hasura-Admin-Secret': (env) => env.HASURA_GRAPHQL_ADMIN_SECRET,
 			'x-hasura-allowed-roles': 'user manager',
 			'x-hasura-role': 'manager'

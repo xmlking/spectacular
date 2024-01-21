@@ -202,13 +202,13 @@ secure = false
 method = 'LOGIN'
 
 [storage]
-version = '0.5.0'
+version = '0.5.1'
 
 [storage.antivirus]
 server = 'tcp://run-clamav:3310'
 
 [ai]
-version = '0.3.1'
+version = '0.3.2'
 # Used to validate requests between postgres and the AI service.
 # The AI service will also include the header X-Graphite-Webhook-Secret
 # with this value set when calling external webhooks so the source of
