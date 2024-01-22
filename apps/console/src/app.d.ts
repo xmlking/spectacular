@@ -32,6 +32,11 @@ declare global {
 		}
 		// interface PageState {}
 		// interface Platform {}
+		interface Metadata {
+			logResult?: boolean | null;
+			backendToken?: string | null;
+			useRole?: string | null;
+		}
 	}
 
 	// App version from package.json

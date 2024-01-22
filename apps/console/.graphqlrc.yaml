@@ -1,0 +1,11 @@
+projects:
+  default:
+    schema:
+      - ./schema.graphql
+      - ./$houdini/graphql/schema.graphql
+      # - ../../nhost/tailcall/jsonplaceholder.graphql
+      # - ../../nhost/tailcall/.tailcallrc.graphql
+    documents:
+      - '**/*.gql'
+      - '**/*.svelte'
+      - ./$houdini/graphql/documents.gql

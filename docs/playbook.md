@@ -349,7 +349,7 @@ Houdini Plugins
 pnpm add -D houdini graphql-ws
 
 # pnpx houdini init
-pnpx houdini init --headers "x-hasura-admin-secret=<HASURA_GRAPHQL_ADMIN_SECRET>"
+pnpx houdini@latest init --headers "x-hasura-admin-secret=<HASURA_GRAPHQL_ADMIN_SECRET>"
 
 # To updated your local schema with latest from the graphql server, run:
 # HINT: it will use `apiUrl` and `schemaPollHeaders` in `houdini.config.js`

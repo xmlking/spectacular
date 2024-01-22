@@ -5,11 +5,13 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { paraglide } from '@inlang/paraglide-js-adapter-vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import houdini from 'houdini/vite';
 
 export default defineConfig({
 	// TODO: evaluate if we still need 'vite-tsconfig-paths' as sveltekit can handel this with `Path aliases`.
 	// b.t.w packages/ui/tsconfig.json has paths.
 	plugins: [
+		houdini(),
 		enhancedImages(),
 		sveltekit(),
 		purgeCss(),

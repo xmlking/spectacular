@@ -12,7 +12,8 @@ const signUpSchema = userSchema.pick({
 	lastName: true,
 	email: true,
 	password: true,
-	terms: true
+	terms: true,
+	organization: true
 });
 
 const log = new Logger('server:auth:signup');
@@ -63,7 +64,7 @@ export const actions = {
 
 		if (!form.valid) return fail(400, { form });
 
-		const { firstName, lastName, email, password } = form.data;
+		const { organization, firstName, lastName, email, password } = form.data;
 
 		const { session, error } = await nhost.auth.signUp({
 			email,
@@ -76,7 +77,7 @@ export const actions = {
 				locale: lang,
 				metadata: {
 					plan: 'free',
-					org: 'chinthagunta'
+					org: organization
 				}
 			}
 		});

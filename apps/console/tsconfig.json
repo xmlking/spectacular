@@ -16,7 +16,8 @@
 			"vitest/importMeta",
 			"@testing-library/jest-dom",
 			"vite-plugin-pwa/client"
-		]
+		],
+		"rootDirs": [".", "./.svelte-kit/types", "./$houdini/types"]
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	//

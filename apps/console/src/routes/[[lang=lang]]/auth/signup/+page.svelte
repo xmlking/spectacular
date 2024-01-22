@@ -9,9 +9,11 @@
 	import * as m from '$i18n/messages';
 	import { isLoadingForm } from '$lib/stores/loading';
 	import { handleMessage } from '$lib/components/layout/toast-manager';
+	import { organization_enum } from '$houdini';
 
 	export let data;
 	const log = new Logger('auth:signup');
+	const organizations = Object.values(organization_enum);
 	const toastStore = getToastStore();
 
 	const {
@@ -101,6 +103,28 @@
 {/if}
 
 <form method="POST" use:enhance>
+	<div class="mt-6">
+		<label class="label">
+			<span class="sr-only">{m.auth_forms_first_organization_label()}</span>
+			<select
+				name="organization"
+				class="select"
+				placeholder={m.auth_forms_first_organization_placeholder()}
+				data-invalid={$errors.organization}
+				class:input-error={$errors.organization}
+				bind:value={$form.organization}
+				{...$constraints.organization}
+			>
+				<option value="">Select Organization</option>
+				{#each organizations as org}
+					<option value={org}>{org}</option>
+				{/each}
+			</select>
+			{#if $errors.organization}
+				<small>{$errors.organization}</small>
+			{/if}
+		</label>
+	</div>
 	<div class="mt-6">
 		<label class="label">
 			<span class="sr-only">{m.auth_forms_first_name_label()}</span>
