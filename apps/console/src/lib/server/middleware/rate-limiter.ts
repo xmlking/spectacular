@@ -8,7 +8,7 @@ import { limiter } from '$lib/server/limiter/limiter';
  * This should be the first middleware.
  */
 const log = new Logger('server:middleware:limiter');
-const rateLimitedPaths = ['/auth/sign-up', '/auth/forgot-password', '/auth/change-password', '/downlaod'];
+const rateLimitedPaths = ['/auth/signup', '/auth/forgot-password', '/auth/change-password', '/downlaod'];
 
 export const rateLimiter = (async ({ event, resolve }) => {
 	const {

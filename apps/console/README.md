@@ -14,9 +14,34 @@ npm create svelte@latest
 npm create svelte@latest my-app
 ```
 
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Backend
+
+Start backend services:
+
+```shell
+# start all
+nhost up
+# shutdown all
+nhsot down
+nhost logs auth -f
+```
+
+| Service   | URL                                               |
+| --------- | ------------------------------------------------- |
+| Postgres  | postgres://postgres:postgres@localhost:5432/local |
+| Hasura    | https://local.hasura.nhost.run                    |
+| GraphQL   | https://local.graphql.nhost.run                   |
+| Auth      | https://local.auth.nhost.run                      |
+| Storage   | https://local.storage.nhost.run                   |
+| Functions | https://local.functions.nhost.run                 |
+| Dashboard | https://local.dashboard.nhost.run                 |
+| Mailhog   | https://local.mailhog.nhost.run                   |
+
+### Frontend
 
 ```bash
 npm run dev

@@ -16,7 +16,6 @@
 		Scroll,
 		Menu,
 		Palette,
-		Github,
 		Search,
 		ChevronDown
 	} from 'lucide-svelte';
@@ -108,38 +107,14 @@
 			<a class="w-[32px] overflow-hidden lg:!ml-0 lg:w-auto" href="/" title="Go to Homepage">
 				<LogoIcon />
 			</a>
-			<h2 class="hidden font-serif text-2xl md:block">Datablocks</h2>
+			<a href="/" title="Go to Homepage">
+				<h2 class="hidden font-serif text-2xl md:block">Datablocks</h2>
+			</a>
 			<!-- LoadingIndicatorSpinner should be placed here -->
 			<!-- <LoadingIndicatorSpinner /> -->
 		</div>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
-		<!-- Login -->
-		<div class="ml-10 space-x-4">
-			{#if user}
-				<form action="/auth/sign-out" method="post">
-					<button
-						type="submit"
-						class="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
-					>
-						Sign out
-					</button>
-				</form>
-			{:else}
-				<a
-					href="/auth/sign-in"
-					class="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
-				>
-					Sign in
-				</a>
-				<a
-					href="/auth/sign-up"
-					class="inline-block rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-indigo-600 hover:bg-indigo-50"
-				>
-					Sign up
-				</a>
-			{/if}
-		</div>
 		<!-- Explore -->
 		<div class="relative hidden lg:block">
 			<!-- trigger -->
@@ -255,17 +230,7 @@
 			</button>
 		</div>
 
-		<!-- Social -->
-		<section class="hidden space-x-1 sm:inline-flex">
-			<a
-				class="btn-icon hover:variant-soft-primary"
-				href="https://github.com/xmlking/spectacular"
-				target="_blank"
-				rel="noreferrer"
-			>
-				<Github />
-			</a>
-		</section>
+		<!-- Login/Avatar -->
 		<section class="flex items-center justify-between gap-4">
 			{#if user}
 				{#if user?.avatarUrl}
@@ -274,10 +239,7 @@
 					<Avatar initials={user.email} />
 				{/if}
 			{:else}
-				<a
-					href="/auth/sign-in"
-					class="bg-primary-hover-token btn text-xl font-semibold uppercase">Login</a
-				>
+				<a href="/auth/signin" class="variant-filled-primary btn">Sign in</a>
 			{/if}
 		</section>
 	</svelte:fragment>

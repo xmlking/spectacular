@@ -15,7 +15,8 @@ export const userSchema = z.object({
 	token: z.string().optional(),
 	receiveEmail: z.boolean().default(true),
 	createdAt: z.date().optional(),
-	updatedAt: z.date().optional()
+	updatedAt: z.date().optional(),
+	// organization: z.nativeEnum(organization_enum);
 });
 
 export const userUpdatePasswordSchema = userSchema

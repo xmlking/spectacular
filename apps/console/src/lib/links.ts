@@ -35,10 +35,8 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 				{ href: '/docs/contributing', label: 'Contributing', keywords: 'branch, pr' },
 				{ href: '/dashboard/reports', label: 'Reports', keywords: 'reports, graph' },
 				{ href: '/dashboard/customers', label: 'Customers', keywords: 'customers, users' },
-				{ href: '/auth/sign-up', label: 'Signup', keywords: 'signup, users' },
-				{ href: '/auth/sign-in', label: 'Signin', keywords: 'signin, login, users' },
-				{ href: '/auth/sign-out', label: 'Signout', keywords: 'signout, logout, users' },
-				{ href: '/auth/login', label: 'login', keywords: 'login, users' }
+				{ href: '/auth/signup', label: 'Signup', keywords: 'signup, users' },
+				{ href: '/auth/signin', label: 'Signin', keywords: 'signin, login, users' }
 			]
 		}
 	],

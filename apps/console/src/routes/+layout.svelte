@@ -54,6 +54,8 @@
 		if (routeId === '/[[lang=lang]]') return true;
 		// If any blog route `/[[lang=lang]]/blog`
 		if (routeId?.includes('/blog')) return true;
+		// If any blog route `/[[lang=lang]]/auth`
+		if (routeId?.includes('/auth')) return true;
 		return false;
 	}
 

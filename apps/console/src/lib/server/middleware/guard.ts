@@ -34,7 +34,7 @@ export const guard = (async ({ event, resolve }) => {
 	const { isAuthenticated, isLoading } = nhost.auth.getAuthenticationStatus();
 	log.debug({ isAuthenticated, isLoading });
 	if (!isAuthenticated) {
-		redirect(303, `${origin}/auth/sign-in?callbackUrl=${pathname}`);
+		redirect(303, `${origin}/auth/signin?callbackUrl=${pathname}`);
 	}
 
 	const session = nhost.auth.getSession();

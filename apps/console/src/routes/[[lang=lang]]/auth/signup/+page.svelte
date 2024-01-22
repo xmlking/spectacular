@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
+	import DebugShell from '@spectacular/skeleton/components/debug-shell.svelte';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { Logger } from '@spectacular/utils';
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 	import * as m from '$i18n/messages';
-	import { dev } from '$app/environment';
 	import { isLoadingForm } from '$lib/stores/loading';
 	import { handleMessage } from '$lib/components/layout/toast-manager';
 
@@ -36,7 +36,7 @@
 		onError({ result }) {
 			// TODO:
 			// message.set(result.error.message)
-			log.error('superForm', { result });
+			log.error('signup error:', { result });
 		},
 		onUpdated({ form }) {
 			if (form.message) {
@@ -59,30 +59,44 @@
 </svelte:head>
 
 <!-- Form Level Errors / Messages -->
-{#if $message || $errors._errors}
-	<aside class="alert variant-filled-error mt-6" transition:fade|local={{ duration: 200 }}>
+{#if $message}
+	<aside
+		class="alert mt-6"
+		class:variant-filled-success={$message.type == 'success'}
+		class:variant-filled-error={$message.type == 'error'}
+		class:variant-filled-warning={$message.type == 'warning'}
+		transition:fade|local={{ duration: 200 }}
+	>
 		<!-- Icon -->
 		<!-- <AlertTriangle /> -->
 		<!-- Message -->
-		<div class="alert-message" class:invalid={$page.status >= 400}>
+		<div class="alert-message">
 			{#if $message}
-				<p class="font-medium" class:invalid={$page.status >= 400}>{$message.message}</p>
-			{/if}
-			{#if $errors._errors}
-				<ul class="list">
-					{#each $errors._errors as error}
-						<li>
-							<span><AlertTriangle /></span>
-							<span class="flex-auto">{error}</span>
-						</li>
-					{/each}
-				</ul>
+				<p class="font-medium">{$message.message}</p>
 			{/if}
 		</div>
 		<!-- Actions -->
 		<!-- <div class="alert-actions">
-		<button class="btn-icon variant-filled"><X /></button>
-	</div> -->
+			<button class="btn-icon variant-filled"><X /></button>
+		</div> -->
+	</aside>
+{/if}
+{#if $errors._errors}
+	<aside
+		class="alert mt-6"
+		class:variant-filled-error={$page.status >= 400}
+		transition:fade|local={{ duration: 200 }}
+	>
+		<div class="alert-message">
+			<ul class="list">
+				{#each $errors._errors as error}
+					<li>
+						<span><AlertTriangle /></span>
+						<span class="flex-auto">{error}</span>
+					</li>
+				{/each}
+			</ul>
+		</div>
 	</aside>
 {/if}
 
@@ -91,7 +105,6 @@
 		<label class="label">
 			<span class="sr-only">{m.auth_forms_first_name_label()}</span>
 			<input
-				id="firstName"
 				name="firstName"
 				type="text"
 				class="input"
@@ -111,7 +124,6 @@
 		<label class="label">
 			<span class="sr-only">{m.auth_forms_last_name_label()}</span>
 			<input
-				id="lastName"
 				name="lastName"
 				type="text"
 				class="input"
@@ -131,7 +143,6 @@
 		<label class="label">
 			<span class="sr-only">{m.auth_forms_email_label()}</span>
 			<input
-				id="email"
 				name="email"
 				type="email"
 				class="input"
@@ -152,7 +163,6 @@
 		<label class="label">
 			<span class="sr-only">{m.auth_forms_password_label()}</span>
 			<input
-				id="password"
 				name="password"
 				type="password"
 				class="input"
@@ -169,13 +179,7 @@
 	</div>
 	<div class="mt-6">
 		<label for="terms" class="label">
-			<input
-				id="terms"
-				name="terms"
-				type="checkbox"
-				class="checkbox"
-				bind:checked={termsAccept}
-			/>
+			<input name="terms" type="checkbox" class="checkbox" bind:checked={termsAccept} />
 			<span class="ml-2">
 				I accept the
 				<a href="/terms" class="text-primaryHover underline">terms</a>
@@ -200,8 +204,7 @@
 	</div>
 </form>
 
-{#if dev}
-	<br />
+<DebugShell>
 	<SuperDebug
 		label="Miscellaneous"
 		status={false}
@@ -223,4 +226,4 @@
 	<SuperDebug label="Constraints" status={false} data={$constraints} />
 	<!-- <br />
  	<SuperDebug label="$page data" status={false} data={$page} /> -->
-{/if}
+</DebugShell>

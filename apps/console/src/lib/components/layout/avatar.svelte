@@ -30,12 +30,15 @@
 <!-- Pop up -->
 <div class="card w-48 rounded-container-token" data-popup="avatarPopup">
 	<div class="w-full">
-		<a href="/auth/settings" class="bg-primary-hover-token btn w-full rounded-container-token">
+		<a
+			href="/dashboard/settings"
+			class="bg-primary-hover-token btn w-full rounded-container-token"
+		>
 			<iconify-icon class="w-5 justify-center" icon="lucide:settings" />
 			<p class="flex-grow text-justify">Settings</p>
 		</a>
 		<hr />
-		<form method="POST" action="/auth/sign-out">
+		<form method="POST" action="/auth/signout">
 			<button type="submit" class="bg-primary-hover-token btn w-full rounded-container-token">
 				<iconify-icon class="w-5 justify-center" icon="lucide:log-out" />
 				<p class="flex-grow text-justify">Log out</p>
