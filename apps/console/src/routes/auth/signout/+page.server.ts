@@ -13,6 +13,6 @@ export const actions = {
 		cookies.set(NHOST_SESSION_KEY, '', { httpOnly: true, path: '/', maxAge: 0 });
 
 		throw redirect(303, '/');
-		// throw redirect(303, '/sign-in')
+		// throw redirect(303, '/signin')
 	}
 } satisfies Actions;

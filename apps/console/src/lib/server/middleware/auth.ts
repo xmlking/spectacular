@@ -2,6 +2,7 @@ import type { Handle } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
 import { Logger } from '@spectacular/utils';
 import { NHOST_SESSION_KEY, getNhost } from '$lib/nhost';
+import { i18n } from '$lib/i18n';
 export const log = new Logger('server:middleware:auth');
 /**
  * Auth middleware goal is to set `NhostClient` initialized from either session cookie or refreshToken and set it into locals.
@@ -10,6 +11,9 @@ export const log = new Logger('server:middleware:auth');
  */
 export const auth = (async ({ event, resolve }) => {
 	log.debug('auth: pathname:', event.url.pathname);
+	// -- TODO: move this to lang once inlang implement it
+	event.locals.lang = i18n.getLanguageFromUrl(event.url);
+	// -------
 	const nhost = await getNhost(event.cookies);
 
 	const session = nhost.auth.getSession();
@@ -27,7 +31,7 @@ export const auth = (async ({ event, resolve }) => {
 			event.cookies.delete(NHOST_SESSION_KEY, { path: '/' });
 			// TODO: should we throw error and desply error to user?
 			log.error('auth error:', error);
-			redirect(303, 'auth/sign-in');
+			redirect(303, 'auth/signin');
 		}
 
 		event.cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(newSession)), { path: '/' });

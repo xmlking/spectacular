@@ -27,7 +27,9 @@
 	import { enhance } from '$app/forms';
 	import { storeTheme } from '$lib/stores/stores';
 	import LangSwitch from '$lib/components/layout/lang-switch.svelte';
+	import * as m from '$i18n/messages';
 	import Avatar from './avatar.svelte';
+
 	const drawerStore = getDrawerStore();
 
 	export let user: User | undefined;
@@ -132,13 +134,13 @@
 						<li>
 							<a href="/">
 								<span class="w-6 text-center"><Home /> </span>
-								<span>Homepage</span>
+								<span>Home</span>
 							</a>
 						</li>
 						<li>
 							<a href="/docs/get-started">
 								<span class="w-6 text-center"><BookText /></span>
-								<span>Documentation</span>
+								<span>Docs</span>
 							</a>
 						</li>
 						<li>
@@ -239,7 +241,9 @@
 					<Avatar initials={user.email} />
 				{/if}
 			{:else}
-				<a href="/auth/signin" class="variant-filled-primary btn">Sign in</a>
+				<a href="/auth/signin" class="variant-filled-primary btn"
+					>{m.auth_labels_signin()}</a
+				>
 			{/if}
 		</section>
 	</svelte:fragment>

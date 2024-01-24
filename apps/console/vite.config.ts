@@ -3,7 +3,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
-import { paraglide } from '@inlang/paraglide-js-adapter-vite';
+import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import houdini from 'houdini/vite';
 

@@ -3,7 +3,6 @@
 	import Icon from '@spectacular/skeleton/components/icons/Icon.svelte';
 	import { menuNavLinks } from '$lib/links';
 	import { page } from '$app/stores';
-	import { link } from '$lib/i18n/link';
 
 	// Local
 	let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
@@ -88,7 +87,7 @@
 					{#each segment.list as { href, label, badge }}
 						<li on:keypress on:click={drawerStore.close}>
 							<a
-								{...$link(href)}
+								{href}
 								class={listboxItemActive(href)}
 								data-sveltekit-preload-data="hover"
 							>

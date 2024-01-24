@@ -6,10 +6,10 @@
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { availableLanguageTags, sourceLanguageTag } from '$i18n/runtime';
-	import { translatePath } from '$lib/i18n/i18n';
+	import { availableLanguageTags, languageTag } from '$i18n/runtime';
+	import { i18n } from '$lib/i18n';
 
-	let locl: string = sourceLanguageTag;
+	let locl: string = languageTag();
 </script>
 
 <!-- TODO: make it pretty-->
@@ -19,7 +19,8 @@
 			bind:group={locl}
 			name="justify"
 			value={l}
-			on:click={() => goto(translatePath($page.url.pathname, l))}>{l}</RadioItem
+			on:click={() => goto(i18n.resolveRoute(i18n.route($page.url.pathname), l))}
+			>{l}</RadioItem
 		>
 	{/each}
 </RadioGroup>

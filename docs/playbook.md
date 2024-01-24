@@ -408,6 +408,13 @@ turbo i18n --filter=playground -- --no-watch
 # add `locale` `LL` types to `app.d.ts`
 ```
 
+We switched to inlang's [Paraglide JS](https://inlang.com/m/dxnzrydw/library-inlang-paraglideJsAdapterSvelteKit) for i18n
+
+```shell
+npx @inlang/paraglide-js init
+npm i -D @inlang/paraglide-js-adapter-sveltekit
+```
+
 #### Progressive Web Apps (PWA)
 
 check [example](https://github.com/vite-pwa/sveltekit/tree/main/examples/sveltekit-ts) for reference.
