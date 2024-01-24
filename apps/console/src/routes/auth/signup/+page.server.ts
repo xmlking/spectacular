@@ -6,6 +6,7 @@ import { Logger } from '@spectacular/utils';
 import { userSchema } from '$lib/schema/user';
 import { NHOST_SESSION_KEY } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
+import { i18n } from '$lib/i18n';
 
 const signUpSchema = userSchema.pick({
 	firstName: true,
@@ -29,7 +30,7 @@ export const load = async (event) => {
 
 	const session = nhost.auth.getSession();
 	log.debug(session);
-	if (session) redirectWithFlash(302, '/dashboard');
+	if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
 	const form = await superValidate(zod(signUpSchema));
 	return { form };
 };
@@ -89,7 +90,7 @@ export const actions = {
 		if (session) {
 			cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' });
 			const message: App.Superforms.Message = { type: 'success', message: 'Signup sucessfull 😎' } as const;
-			redirectWithFlash(303, '/dashboard', message, event);
+			redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
 		}
 
 		// This line should never reach.

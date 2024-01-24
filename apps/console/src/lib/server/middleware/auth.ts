@@ -31,7 +31,7 @@ export const auth = (async ({ event, resolve }) => {
 			event.cookies.delete(NHOST_SESSION_KEY, { path: '/' });
 			// TODO: should we throw error and desply error to user?
 			log.error('auth error:', error);
-			redirect(303, 'auth/signin');
+			redirect(303, i18n.resolveRoute('auth/signin'));
 		}
 
 		event.cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(newSession)), { path: '/' });

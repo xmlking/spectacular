@@ -25,7 +25,6 @@ export const rateLimiter = (async ({ event, resolve }) => {
 	const status = await limiter.check(event);
 	log.debug({ status });
 
-	console.log(status);
 	if (status.limited) {
 		event.setHeaders({
 			'Retry-After': status.retryAfter.toString()

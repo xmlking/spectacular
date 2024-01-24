@@ -7,6 +7,7 @@ import type { NhostClient, Provider } from '@nhost/nhost-js';
 import { userSchema } from '$lib/schema/user';
 import { NHOST_SESSION_KEY } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
+import { i18n } from '$lib/i18n';
 
 const pwSchema = userSchema.pick({
 	email: true,
@@ -30,7 +31,7 @@ export const load = async (event) => {
 
 	const session = nhost.auth.getSession();
 	log.debug(session);
-	if (session) redirectWithFlash(302, '/dashboard');
+	if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
 	const pwForm = await superValidate(zod(pwSchema));
 	const pwlForm = await superValidate(zod(pwlSchema));
 	return { pwForm, pwlForm };
@@ -77,7 +78,7 @@ export const actions = {
 		if (session) {
 			cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' });
 			const message: App.Superforms.Message = { type: 'success', message: 'Signin sucessfull 😎' } as const;
-			redirectWithFlash(303, '/dashboard', message, event);
+			redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
 		}
 
 		// This line should never reach.

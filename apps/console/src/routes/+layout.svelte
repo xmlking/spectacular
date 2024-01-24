@@ -25,7 +25,6 @@
 	import '../app.pcss';
 
 	export let data;
-	console.log({ data });
 
 	// Floating UI for Popups
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
@@ -45,7 +44,6 @@
 	};
 
 	function matchPathWhitelist(pathname: string): boolean {
-		console.log({ pathname });
 		// If homepage route
 		if (i18n.route(pathname) === '/') return true;
 		// If any blog route `/blog`
