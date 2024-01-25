@@ -11,7 +11,11 @@ declare global {
 				type: 'error' | 'success' | 'warning';
 			};
 		}
-		// interface Error {}
+		interface Error {
+			// e.g., { message: 'Authentication failed.', details: e }
+			message: string;
+			details?: string | Record<unknown, unknown>;
+		}
 		interface Locals {
 			/**
 			 * Client's language as determined by the i18n middleware.

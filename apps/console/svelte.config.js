@@ -23,7 +23,7 @@ const config = {
 			: process.env.BUN_ENV
 				? adapterBun()
 				: adapterNode({ polyfill: false }),
-		prerender: { crawl: false }, // FIXME: remove after all links are corrected.
+		prerender: { crawl: false }, // FIXME: remove after all fake links are removed.
 		output: {
 			preloadStrategy: 'preload-mjs'
 		},

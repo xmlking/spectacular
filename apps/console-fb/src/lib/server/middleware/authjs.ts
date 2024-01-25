@@ -23,6 +23,7 @@ const log = new Logger('middleware:auth');
 export const authjs = SvelteKitAuth({
 	debug: dev,
 	trustHost: true,
+	basePath: '/auth',
 	secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY,
 	redirectProxyUrl: envPri.AUTH_REDIRECT_PROXY_URL,
 	// adapter: HasuraAdapter({
