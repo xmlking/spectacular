@@ -4,7 +4,12 @@ module.exports = {
 	singleQuote: true,
 	trailingComma: 'none',
 	printWidth: 100,
-	plugins: ['prettier-plugin-svelte', 'prettier-plugin-astro', 'prettier-plugin-tailwindcss', 'prettier-plugin-packagejson'],
+	plugins: [
+		'prettier-plugin-svelte',
+		'prettier-plugin-astro',
+		'prettier-plugin-tailwindcss',
+		'prettier-plugin-packagejson'
+	],
 	overrides: [
 		{
 			files: '*.ts',

@@ -1,15 +1,19 @@
 {
 	"name": "@spectacular/eslint-config",
 	"description": "eslint config files",
-	"main": "all.js",
 	"exports": {
 		"./all": "./all.js",
 		"./node": "./node.js",
 		"./svelte": "./svelte.js"
 	},
+	"main": "all.js",
 	"scripts": {
-		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write . && eslint --fix ."
+		"format": "prettier --write . && eslint --fix .",
+		"lint": "prettier --check . && eslint ."
+	},
+	"devDependencies": {
+		"@spectacular/prettier-config": "workspace:*",
+		"@spectacular/typescript-config": "workspace:*"
 	},
 	"peerDependencies": {
 		"@typescript-eslint/eslint-plugin": "6.15.0",
@@ -22,9 +26,5 @@
 		"eslint-plugin-mdx": "3.0.1",
 		"eslint-plugin-svelte": "2.36.0-next.5",
 		"eslint-plugin-unused-imports": "3.0.0"
-	},
-	"devDependencies": {
-		"@spectacular/prettier-config": "workspace:*",
-		"@spectacular/typescript-config": "workspace:*"
 	}
 }

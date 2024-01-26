@@ -4,14 +4,14 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "dotenv-run -vf .env,.secrets -- vite dev",
 		"build": "dotenv-run -vf .env,.secrets -- vite build",
-		"preview": "dotenv-run -vf .env,.secrets -- vite preview",
-		"test": "pnpm run test:integration && pnpm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check . && eslint .",
+		"dev": "dotenv-run -vf .env,.secrets -- vite dev",
 		"format": "prettier --write . && eslint --fix .",
+		"lint": "prettier --check . && eslint .",
+		"preview": "dotenv-run -vf .env,.secrets -- vite preview",
+		"test": "pnpm run test:integration && pnpm run test:unit",
 		"test:integration": "playwright test",
 		"test:unit": "vitest"
 	},

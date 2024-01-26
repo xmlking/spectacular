@@ -1,9 +1,8 @@
 {
 	"name": "@spectacular/ui",
 	"description": "Shared shadcn UI components",
-	"type": "module",
 	"sideEffects": false,
-	"types": "./index.d.ts",
+	"type": "module",
 	"exports": {
 		".": {
 			"types": "./index.d.ts"
@@ -25,14 +24,11 @@
 			"default": "./tailwind.config.ts"
 		}
 	},
+	"types": "./index.d.ts",
 	"scripts": {
-		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write . && eslint --fix .",
+		"lint": "prettier --check . && eslint .",
 		"ui:add": "pnpx shadcn-svelte@latest add"
-	},
-	"peerDependencies": {
-		"@sveltejs/kit": "^2.0.0",
-		"svelte": "^4.0.0"
 	},
 	"dependencies": {
 		"@internationalized/date": "3.5.1",
@@ -64,5 +60,9 @@
 		"prettier-plugin-tailwindcss": "0.5.11",
 		"tailwindcss": "3.4.1",
 		"typescript": "5.3.3"
+	},
+	"peerDependencies": {
+		"@sveltejs/kit": "^2.0.0",
+		"svelte": "^4.0.0"
 	}
 }

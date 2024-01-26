@@ -1,24 +1,24 @@
 {
 	"name": "@spectacular/prettier-config",
 	"description": "prettier config files",
-	"main": "all.js",
 	"exports": {
 		"./all": "./all.js",
 		"./node": "./node.js",
 		"./svelte": "./svelte.js"
 	},
+	"main": "all.js",
 	"scripts": {
-		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write . && eslint --fix ."
-	},
-	"peerDependencies": {
-		"prettier": "3.1.1",
-		"prettier-plugin-packagejson": "2.4.9",
-		"prettier-plugin-astro": "0.12.2",
-		"prettier-plugin-svelte": "3.1.2",
-		"prettier-plugin-tailwindcss": "0.5.9"
+		"format": "prettier --write . && eslint --fix .",
+		"lint": "prettier --check . && eslint ."
 	},
 	"devDependencies": {
 		"@spectacular/typescript-config": "workspace:*"
+	},
+	"peerDependencies": {
+		"prettier": "3.1.1",
+		"prettier-plugin-astro": "0.12.2",
+		"prettier-plugin-packagejson": "2.4.9",
+		"prettier-plugin-svelte": "3.1.2",
+		"prettier-plugin-tailwindcss": "0.5.9"
 	}
 }

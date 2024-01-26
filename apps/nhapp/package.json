@@ -4,14 +4,24 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview",
-		"install-browsers": "pnpm dlx playwright@1.31.0 install --with-deps",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"dev": "vite dev",
+		"format": "prettier --write .",
+		"install-browsers": "pnpm dlx playwright@1.31.0 install --with-deps",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@apollo/client": "3.8.10",
+		"graphql": "16.8.1",
+		"graphql-tag": "2.12.6",
+		"js-cookie": "3.0.5",
+		"playwright": "1.41.1",
+		"react": "18.2.0",
+		"uuid": "9.0.1",
+		"xstate": "4.38.3"
 	},
 	"devDependencies": {
 		"@nhost/nhost-js": "3.0.2",
@@ -34,15 +44,5 @@
 		"typescript": "5.3.3",
 		"vite": "5.0.12",
 		"vitest": "1.2.1"
-	},
-	"dependencies": {
-		"@apollo/client": "3.8.10",
-		"graphql": "16.8.1",
-		"graphql-tag": "2.12.6",
-		"js-cookie": "3.0.5",
-		"playwright": "1.41.1",
-		"react": "18.2.0",
-		"uuid": "9.0.1",
-		"xstate": "4.38.3"
 	}
 }
