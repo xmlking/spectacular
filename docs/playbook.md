@@ -262,6 +262,7 @@ To work around this, `prettier-plugin-tailwindcss` **must** be loaded last, mean
 
 ```shell
 pnpm add -D prettier-plugin-tailwindcss
+pnpm add -D prettier-plugin-packagejson -w 
 ```
 
 ```shell

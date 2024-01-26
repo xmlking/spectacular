@@ -7,7 +7,7 @@ module.exports = {
 			}
 		}
 	],
-	plugins: ['prettier-plugin-svelte', 'prettier-plugin-tailwindcss'],
+	plugins: ['prettier-plugin-svelte', 'prettier-plugin-tailwindcss', 'prettier-plugin-packagejson'],
 	printWidth: 100,
 	singleQuote: true,
 	trailingComma: 'none',
