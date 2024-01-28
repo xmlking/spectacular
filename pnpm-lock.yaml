@@ -88,8 +88,8 @@ importers:
         specifier: 5.0.16
         version: 5.0.16
       '@inlang/cli':
-        specifier: 2.10.0
-        version: 2.10.0
+        specifier: 2.11.0
+        version: 2.11.0(@sinclair/typebox@0.31.28)
       '@inlang/paraglide-js':
         specifier: 1.2.1
         version: 1.2.1(@sinclair/typebox@0.31.28)
@@ -4749,13 +4749,21 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@inlang/cli@2.10.0:
-    resolution: {integrity: sha512-e0O/aTmITora7hophqcBFtj4CGz3/uq9VQaBxf8Rf5a1VpSJRmntWAzN0+n/y8CBE8uNGyFgZYxJlfHSugVsHg==}
+  /@inlang/cli@2.11.0(@sinclair/typebox@0.31.28):
+    resolution: {integrity: sha512-6dmAyYJ8gOXKsPoYRSV/vggaja4f7w//Ebmaem+dNKYH9KNPJpjweQSCjk8F0lDjdd10TmXFVr5EdTV7oXOn/w==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
+      '@inlang/language-tag': 1.4.0(@sinclair/typebox@0.31.28)
+      '@inlang/result': 1.1.0
+      '@inlang/sdk': 0.26.1
+      '@lix-js/client': 0.8.0
+      '@lix-js/fs': 0.6.0
       esbuild-wasm: 0.19.12
       fs-extra: 11.1.1
+    transitivePeerDependencies:
+      - '@sinclair/typebox'
+      - babel-plugin-macros
     dev: true
 
   /@inlang/detect-json-formatting@1.0.0:
@@ -4920,6 +4928,30 @@ packages:
       - babel-plugin-macros
     dev: true
 
+  /@inlang/sdk@0.26.1:
+    resolution: {integrity: sha512-DwxrPM/b8uLt4DYxlmPZwfa6ZzACUV7a7dm4A42lunuxNAAIGm05uQgr4GYzCWEChQ48/lrYT4NWknsFgQjHPA==}
+    engines: {node: '>=18.0.0'}
+    dependencies:
+      '@inlang/json-types': 1.1.0(@sinclair/typebox@0.31.28)
+      '@inlang/language-tag': 1.4.0(@sinclair/typebox@0.31.28)
+      '@inlang/message': 2.0.1(@sinclair/typebox@0.31.28)
+      '@inlang/message-lint-rule': 1.4.1(@sinclair/typebox@0.31.28)
+      '@inlang/module': 1.2.3(@sinclair/typebox@0.31.28)
+      '@inlang/plugin': 2.4.3(@sinclair/typebox@0.31.28)
+      '@inlang/project-settings': 2.2.1(@sinclair/typebox@0.31.28)
+      '@inlang/result': 1.1.0
+      '@inlang/translatable': 1.2.1(@sinclair/typebox@0.31.28)
+      '@lix-js/client': 0.8.0
+      '@lix-js/fs': 0.6.0
+      '@sinclair/typebox': 0.31.28
+      dedent: 1.5.1
+      deepmerge-ts: 5.1.0
+      solid-js: 1.6.12
+      throttle-debounce: 5.0.0
+    transitivePeerDependencies:
+      - babel-plugin-macros
+    dev: true
+
   /@inlang/translatable@1.2.1(@sinclair/typebox@0.31.28):
     resolution: {integrity: sha512-U1Rg283x3kUfDqHIS3kYu14QHbxIC3N6olJHOwpnFm88WRGjikz6h4iHlEEmvMJ3Kp3ianzplFoWH43Ago2muw==}
     peerDependencies:
@@ -5019,6 +5051,16 @@ packages:
 
   /@lix-js/client@0.7.0:
     resolution: {integrity: sha512-x3QjLdeFgBAej5ZIkgonC1f/BfYNmVY/Slx0+26OZKlrFFunCrbRpx5ZoXS4n5GPWtxPEVjNLpN7yovF5C+9RQ==}
+    dependencies:
+      '@lix-js/fs': 0.6.0
+      '@octokit/types': 12.4.0
+      isomorphic-git: 1.24.5
+      octokit: 3.1.2
+      solid-js: 1.7.11
+    dev: true
+
+  /@lix-js/client@0.8.0:
+    resolution: {integrity: sha512-ljcbFeSjcKy3aRvrz/aNKFhXeRM3rLmG0cm3BREEfi8P64CF2k9nAFSHjXINbr78g+eK8Lrn0qD2n3J0thJwxw==}
     dependencies:
       '@lix-js/fs': 0.6.0
       '@octokit/types': 12.4.0
@@ -6875,7 +6917,7 @@ packages:
   /@types/concat-stream@2.0.3:
     resolution: {integrity: sha512-3qe4oQAPNwVNwK4C9c8u+VJqv9kez+2MR4qJpoPFfXtgxxif1QbFusvXzK0/Wra2VX07smostI2VMmJNSpZjuQ==}
     dependencies:
-      '@types/node': 20.10.6
+      '@types/node': 20.11.6
     dev: false
 
   /@types/cookie@0.5.4:
@@ -7198,12 +7240,6 @@ packages:
   /@types/node@17.0.45:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
 
-  /@types/node@20.10.6:
-    resolution: {integrity: sha512-Vac8H+NlRNNlAmDfGUP7b5h/KA+AtWIzuXy0E6OyP8f1tCLYAtPvKRRDJjAPqhpCb0t6U2j7/xqAuLEebW2kiw==}
-    dependencies:
-      undici-types: 5.26.5
-    dev: false
-
   /@types/node@20.11.6:
     resolution: {integrity: sha512-+EOokTnksGVgip2PbYbr3xnR7kZigh4LbybAfBAw5BpnQ+FqBYUsvCEjYd70IXKlbohQ64mzEYmMtlWUY8q//Q==}
     dependencies:
@@ -7233,7 +7269,7 @@ packages:
   /@types/sax@1.2.7:
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 20.11.6
 
   /@types/semver@7.5.6:
     resolution: {integrity: sha512-dn1l8LaMea/IjDoHNd9J52uBbInB796CDffS6VdIxvqYCPSG0V0DzHp76GpaWnlhg88uYyPbXCDIowa86ybd5A==}
@@ -18345,7 +18381,7 @@ packages:
       '@types/concat-stream': 2.0.3
       '@types/debug': 4.1.12
       '@types/is-empty': 1.2.3
-      '@types/node': 20.10.6
+      '@types/node': 20.11.6
       '@types/unist': 3.0.2
       '@ungap/structured-clone': 1.2.0
       concat-stream: 2.0.0
