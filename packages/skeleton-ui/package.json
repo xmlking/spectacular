@@ -1,11 +1,8 @@
 {
 	"name": "@spectacular/skeleton",
 	"description": "Shared skeleton UI components",
-	"type": "module",
-	"module": "./components/index.ts",
-	"main": "./components/index.ts",
-	"svelte": "./components/index.ts",
 	"sideEffects": false,
+	"type": "module",
 	"exports": {
 		".": {
 			"svelte": "./components/index.ts"
@@ -29,15 +26,14 @@
 			"default": "./tailwind.config.ts"
 		}
 	},
+	"main": "./components/index.ts",
+	"svelte": "./components/index.ts",
+	"module": "./components/index.ts",
 	"scripts": {
-		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write . && eslint --fix .",
+		"lint": "prettier --check . && eslint .",
 		"test": "vitest run",
 		"test:watch": "vitest"
-	},
-	"peerDependencies": {
-		"@sveltejs/kit": "^2.0.0",
-		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
 		"@floating-ui/dom": "1.5.4",
@@ -73,5 +69,9 @@
 		"vite": "5.0.12",
 		"vitest": "1.2.1",
 		"zod": "3.22.4"
+	},
+	"peerDependencies": {
+		"@sveltejs/kit": "^2.0.0",
+		"svelte": "^4.0.0"
 	}
 }

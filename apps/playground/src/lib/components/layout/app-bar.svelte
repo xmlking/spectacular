@@ -24,7 +24,7 @@
 	import LogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
-	import { storeTheme } from '$lib/stores/stores';
+	import { storeTheme } from '$lib/stores';
 	import LocaleSwitcher from '$lib/components/layout/locale-switcher.svelte';
 	const drawerStore = getDrawerStore();
 

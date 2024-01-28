@@ -5,26 +5,29 @@
 	"type": "module",
 	"scripts": {
 		"//FIXME": "https://github.com/HoudiniGraphql/houdini/issues/1246",
+		"build": "dotenv-run -vf .env,.secrets -- vite build",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"dev": "dotenv-run -vf .env,.secrets -- vite dev",
 		"dev:debug": "DEBUG=* vite dev",
 		"dev:sw": "SW_DEV=true vite dev",
-		"build": "dotenv-run -vf .env,.secrets -- vite build",
+		"format": "prettier --write . && eslint --fix .",
+		"generate": "concurrently pnpm:generate:*",
+		"generate:pull-schema": "dotenv-run -vf .env,.secrets -- houdini pull-schema",
+		"generate:svelte": "svelte-kit sync",
+		"lint": "concurrently pnpm:lint:*",
+		"lint:js": "eslint .",
+		"lint:markup": "markuplint --config ../../.markuplintrc.cjs \"**\"",
+		"lint:prettier": "prettier --check .",
 		"preview": "NEXTAUTH_URL=http://localhost:4173 AUTH_REDIRECT_PROXY_URL=http://localhost:4173/auth dotenv-run -vf .env,.secrets -- vite preview",
 		"test": "pnpm run test:integration && pnpm run test:unit",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"format": "prettier --write . && eslint --fix .",
-		"test:unit": "vitest",
-		"test:unit:ui": "vitest --ui",
-		"test:unit:coverage": "vitest run --coverage",
 		"test:integration": "playwright test",
-		"lint:markup": "markuplint --config ../../.markuplintrc.cjs \"**\"",
-		"lint:js": "eslint .",
-		"lint:prettier": "prettier --check .",
-		"lint": "concurrently pnpm:lint:*",
-		"generate:svelte": "svelte-kit sync",
-		"generate:pull-schema": "dotenv-run -vf .env,.secrets -- houdini pull-schema",
-		"generate": "concurrently pnpm:generate:*"
+		"test:unit": "vitest",
+		"test:unit:coverage": "vitest run --coverage",
+		"test:unit:ui": "vitest --ui"
+	},
+	"dependencies": {
+		"cookie": "0.6.0"
 	},
 	"devDependencies": {
 		"@auth/core": "0.23.0",
@@ -112,8 +115,5 @@
 	"optionalDependencies": {
 		"@playwright/test": "1.41.1",
 		"@vitest/ui": "1.2.1"
-	},
-	"dependencies": {
-		"cookie": "0.6.0"
 	}
 }

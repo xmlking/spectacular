@@ -1,19 +1,19 @@
 {
 	"name": "docs",
-	"type": "module",
 	"version": "0.0.1",
+	"type": "module",
 	"scripts": {
-		"dev": "astro dev",
-		"start": "astro dev",
+		"astro": "astro",
 		"build": "astro check && astro build",
-		"preview": "astro preview",
-		"lint:js": "eslint .",
-		"lint:prettier": "prettier --check --plugin=prettier-plugin-astro .",
-		"lint": "concurrently pnpm:lint:*",
+		"dev": "astro dev",
+		"format": "concurrently pnpm:format:*",
 		"format:js": "eslint --fix .",
 		"format:prettier": "prettier --write .",
-		"format": "concurrently pnpm:format:*",
-		"astro": "astro"
+		"lint": "concurrently pnpm:lint:*",
+		"lint:js": "eslint .",
+		"lint:prettier": "prettier --check --plugin=prettier-plugin-astro .",
+		"preview": "astro preview",
+		"start": "astro dev"
 	},
 	"dependencies": {
 		"@astrojs/check": "0.4.1",

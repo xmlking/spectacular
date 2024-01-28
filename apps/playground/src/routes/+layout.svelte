@@ -12,7 +12,7 @@
 		prefersReducedMotionStore
 	} from '@skeletonlabs/skeleton';
 	import { inject } from '@vercel/analytics';
-	import { storeTheme, storeVercelProductionMode } from '$lib/stores/stores';
+	import { storeTheme, storeVercelProductionMode } from '$lib/stores';
 	import { dev, browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';

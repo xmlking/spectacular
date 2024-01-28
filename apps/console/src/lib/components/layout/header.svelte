@@ -25,7 +25,7 @@
 	import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
-	import { storeTheme } from '$lib/stores/stores';
+	import { storeTheme } from '$lib/stores';
 	import LangSwitch from '$lib/components/layout/lang-switch.svelte';
 	import * as m from '$i18n/messages';
 	import Avatar from './avatar.svelte';

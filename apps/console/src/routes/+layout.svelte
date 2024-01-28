@@ -7,14 +7,16 @@
 		initializeStores,
 		prefersReducedMotionStore
 	} from '@skeletonlabs/skeleton';
+	import type { ComponentEvents } from 'svelte';
 	import type { ModalComponent } from '@skeletonlabs/skeleton';
 	import { setupViewTransition } from 'sveltekit-view-transition';
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { inject } from '@vercel/analytics';
 	import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
+	import GotoTop from '$lib/components/layout/go-to-top.svelte';
 	import { i18n } from '$lib/i18n';
+	import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 	import Search from '$lib/modals/Search.svelte';
-	import { storeTheme, storeVercelProductionMode } from '$lib/stores/stores';
 	import { dev, browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import Header from '$lib/components/layout/header.svelte';
@@ -63,6 +65,16 @@
 	// View Transitions
 	setupViewTransition();
 
+	/**
+	 * bind current scrollX scrollY value to store
+	 */
+	function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
+		scroll.set({
+			x: event.currentTarget.scrollLeft,
+			y: event.currentTarget.scrollTop
+		});
+	}
+
 	// Reactive
 	// Disable left sidebar on homepage
 	$: slotSidebarLeft = matchPathWhitelist($page.url.pathname)
@@ -79,7 +91,12 @@
 
 <ParaglideJS {i18n}>
 	<!-- App Shell -->
-	<AppShell {slotSidebarLeft} regionPage={allyPageSmoothScroll} slotFooter="bg-black p-4">
+	<AppShell
+		{slotSidebarLeft}
+		regionPage={allyPageSmoothScroll}
+		slotFooter="bg-black p-4"
+		on:scroll={scrollHandler}
+	>
 		<!-- Header -->
 		<svelte:fragment slot="header">
 			<Header user={data?.user} />
@@ -105,3 +122,5 @@
 		</svelte:fragment>
 	</AppShell>
 </ParaglideJS>
+<!-- Change showAtPixel to 0 to show the button right after scroll -->
+<GotoTop class="bottom-10 right-10" showAtPixel={300} />

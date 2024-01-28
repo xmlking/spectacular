@@ -20,3 +20,8 @@ export const storeOnboardMethod: Writable<string> = localStorageStore('storeOnbo
  * Narrowing reactivity scope.
  */
 export const lang = derived(page, ($page) => $page.data.lang);
+
+/**
+ * current scrollLeft and scrollTop values
+ */
+export const scroll = writable<{ x: number; y: number }>({ x: 0, y: 0 });
