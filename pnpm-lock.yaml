@@ -441,8 +441,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(svelte@4.2.9)
       flowbite-svelte-icons:
-        specifier: 1.0.2
-        version: 1.0.2(svelte@4.2.9)(tailwind-merge@2.2.1)(tailwindcss@3.4.1)
+        specifier: 1.0.3
+        version: 1.0.3(svelte@4.2.9)(tailwind-merge@2.2.1)(tailwindcss@3.4.1)
       flowbite-typography:
         specifier: 1.0.3
         version: 1.0.3(tailwindcss@3.4.1)
@@ -11037,10 +11037,10 @@ packages:
       tailwind-merge: 2.2.1
     dev: true
 
-  /flowbite-svelte-icons@1.0.2(svelte@4.2.9)(tailwind-merge@2.2.1)(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-LRzL5loYNPl7NAHZybs/CRdU+NNXZZtIuLbaiTecxZ8O3oZbf0skh5XFnbvRtw9+pmBRfSy1vwDakugubRyR+w==}
+  /flowbite-svelte-icons@1.0.3(svelte@4.2.9)(tailwind-merge@2.2.1)(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-ugYuZzq8GjvktAeRFvWinen1bRJ/lvhwLdV6cLznqqp7mF7BdiG9yJ6+bf5CrIdmeZ94hJ391C6tyGovjGfVzA==}
     peerDependencies:
-      svelte: ^3.54.0 || ^4.0.0
+      svelte: ^3.54.0 || ^4.0.0 || ^5.0.0
       tailwind-merge: ^2.0.0
       tailwindcss: ^3.3.2
     dependencies:
