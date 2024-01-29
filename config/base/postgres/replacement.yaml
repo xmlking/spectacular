@@ -1,0 +1,6 @@
+source:
+  kind: Deployment
+  fieldPath: metadata.name
+targets:
+  - select:
+      name: my-resource

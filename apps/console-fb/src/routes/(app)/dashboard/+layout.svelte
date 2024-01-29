@@ -61,7 +61,7 @@
 
 <DarkMode {btnClass} />
 
-<div class="flex h-screen flex-col">
+<div class="flex  flex-col h-screen">
 	<!--  start::navbar   -->
 	<Header {user} />
 	<!--  end::navbar     -->

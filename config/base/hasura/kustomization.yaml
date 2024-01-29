@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+labels:
+- pairs:
+    app.kubernetes.io/name: hasura
+    app.kubernetes.io/instance: hasura-abcxzy
+    app.kubernetes.io/component: infra
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+# vars:
+#   - name: HASURA_SERVICE_ENDPOINT
+#     objref:
+#       kind: Service
+#       name: hasura
+#       apiVersion: v1
+#     fieldref:
+#       fieldpath: metadata.name
