@@ -292,8 +292,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(@types/node@20.11.8)(@vitest/ui@1.2.2)(jsdom@24.0.0)
       xstate:
-        specifier: 4.38.3
-        version: 4.38.3
+        specifier: 5.5.2
+        version: 5.5.2
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -788,8 +788,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1
       xstate:
-        specifier: 4.38.3
-        version: 4.38.3
+        specifier: 5.5.2
+        version: 5.5.2
     devDependencies:
       '@nhost/nhost-js':
         specifier: 3.0.2
@@ -19459,6 +19459,10 @@ packages:
 
   /xstate@4.38.3:
     resolution: {integrity: sha512-SH7nAaaPQx57dx6qvfcIgqKRXIh4L0A1iYEqim4s1u7c9VoCgzZc+63FY90AKU4ZzOC2cfJzTnpO4zK7fCUzzw==}
+    dev: true
+
+  /xstate@5.5.2:
+    resolution: {integrity: sha512-RLf9wc5HDO0pvj2TQQ+lY6tDW8CU8Entfgmtzzo6NhkC8qOEBXSN6WUSvnUM7NHZgdih06+by1b4nbaHVu1c+g==}
 
   /y18n@4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}
