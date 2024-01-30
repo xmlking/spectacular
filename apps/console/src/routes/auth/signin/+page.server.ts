@@ -42,7 +42,10 @@ export const actions = {
 		const {
 			request,
 			cookies,
-			locals: { lang, nhost }
+			locals: {
+				paraglide: { lang },
+				nhost
+			}
 		} = event;
 
 		const form = await superValidate(request, zod(pwSchema));
@@ -88,7 +91,10 @@ export const actions = {
 	passwordless: async (event) => {
 		const {
 			request,
-			locals: { lang, nhost }
+			locals: {
+				paraglide: { lang },
+				nhost
+			}
 		} = event;
 
 		const form = await superValidate(request, zod(pwlSchema));
@@ -125,18 +131,36 @@ export const actions = {
 		}
 	},
 
-	google: async ({ request, locals: { lang, nhost } }) => {
+	google: async ({
+		request,
+		locals: {
+			paraglide: { lang },
+			nhost
+		}
+	}) => {
 		// TODO check if already login? session is valid
 		log.debug('in login with google');
 		await login(nhost, new URL(request.url).origin, lang, 'google');
 	},
 
-	github: async ({ request, locals: { lang, nhost } }) => {
+	github: async ({
+		request,
+		locals: {
+			paraglide: { lang },
+			nhost
+		}
+	}) => {
 		log.debug('in login with github');
 		await login(nhost, new URL(request.url).origin, lang, 'github');
 	},
 
-	azuread: async ({ request, locals: { lang, nhost } }) => {
+	azuread: async ({
+		request,
+		locals: {
+			paraglide: { lang },
+			nhost
+		}
+	}) => {
 		log.debug('in login with azuread');
 		await login(nhost, new URL(request.url).origin, lang, 'azuread');
 	}

@@ -40,7 +40,10 @@ export const actions = {
 		const {
 			request,
 			cookies,
-			locals: { lang, nhost }
+			locals: {
+				paraglide: { lang },
+				nhost
+			}
 		} = event;
 
 		const form = await superValidate(request, zod(signUpSchema));
@@ -61,7 +64,7 @@ export const actions = {
 		}
 
 		log.debug({ lang, nhost });
-		// await sleep(8000)
+		await sleep(8000);
 
 		if (!form.valid) return fail(400, { form });
 

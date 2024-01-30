@@ -4,14 +4,20 @@ import { VERCEL_ENV } from '$env/static/private';
 
 const log = new Logger('server:layout');
 
-export const load = loadFlash(async ({ locals: { lang, nhost } }) => {
-	log.debug(lang);
-	const session = nhost.auth.getSession();
+export const load = loadFlash(
+	async ({
+		locals: {
+			paraglide: { lang, textDirection },
+			nhost
+		}
+	}) => {
+		log.debug(lang, textDirection);
+		const session = nhost.auth.getSession();
 
-	// pass locale information from "server-context" to "shared server + client context"
-	return {
-		vercelEnv: VERCEL_ENV,
-		lang,
-		user: session?.user
-	};
-});
+		// pass locale information from "server-context" to "shared server + client context"
+		return {
+			vercelEnv: VERCEL_ENV,
+			user: session?.user
+		};
+	}
+);

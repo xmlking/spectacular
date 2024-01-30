@@ -7,7 +7,13 @@ import type { Actions } from './$types';
 const log = new Logger('server:auth:signout');
 
 export const actions = {
-	default: async ({ cookies, locals: { lang, nhost } }) => {
+	default: async ({
+		cookies,
+		locals: {
+			paraglide: { lang },
+			nhost
+		}
+	}) => {
 		log.debug('signout', lang);
 
 		await nhost.auth.signOut();

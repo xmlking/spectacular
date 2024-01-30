@@ -11,9 +11,7 @@ export const log = new Logger('server:middleware:auth');
  */
 export const auth = (async ({ event, resolve }) => {
 	log.debug('auth: pathname:', event.url.pathname);
-	// -- TODO: move this to lang once inlang implement it
-	event.locals.lang = i18n.getLanguageFromUrl(event.url);
-	// -------
+
 	const nhost = await getNhost(event.cookies);
 
 	const session = nhost.auth.getSession();

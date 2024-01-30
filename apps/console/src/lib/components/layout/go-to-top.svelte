@@ -7,7 +7,7 @@
 	import { browser } from '$app/environment';
 
 	interface $$Props extends HTMLButtonAttributes {
-			showAtPixel: number
+		showAtPixel: number;
 	}
 	let className: $$Props['class'] = undefined;
 	export { className as class };

@@ -3,6 +3,7 @@
 
 type NhostClient = import('@nhost/nhost-js').NhostClient;
 type ToastSettings = import('@skeletonlabs/skeleton').ToastSettings;
+type AvailableLanguageTag = import('$i18n/runtime').AvailableLanguageTag;
 
 declare global {
 	namespace App {
@@ -17,10 +18,10 @@ declare global {
 			details?: string | Record<unknown, unknown>;
 		}
 		interface Locals {
-			/**
-			 * Client's language as determined by the i18n middleware.
-			 */
-			lang: AvailableLanguageTag;
+			paraglide: {
+				lang: AvailableLanguageTag;
+				textDirection: 'ltr' | 'rtl';
+			};
 			nhost: NhostClient;
 		}
 		interface PageData {
