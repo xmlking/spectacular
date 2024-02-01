@@ -2,8 +2,6 @@
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-
-
 ## Developing
 
 ### Backend
@@ -34,7 +32,7 @@ nhost logs auth -f
 ```bash
 cd apps/console
 turbo dev
-# or run with `prod` profile and 
+# or run with `prod` profile and
 # overload envelopment variables from `.env.prod`
 NODE_ENV=prod turbo dev
 ```
