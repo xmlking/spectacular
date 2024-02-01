@@ -18,10 +18,6 @@ declare global {
 			details?: string | Record<unknown, unknown>;
 		}
 		interface Locals {
-			paraglide: {
-				lang: AvailableLanguageTag;
-				textDirection: 'ltr' | 'rtl';
-			};
 			nhost: NhostClient;
 		}
 		interface PageData {

@@ -12,8 +12,5 @@ export const i18n = createI18n(runtime, {
 	textDirection: {
 		en: 'ltr',
 		de: 'ltr'
-	},
-	seo: {
-		noAlternateLinks: false
 	}
 });

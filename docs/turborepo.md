@@ -83,9 +83,9 @@ Add `dotenv-run ` to your `package.json`
 ```json filename="package.json" highlight=3
 {
 	"scripts": {
-		"dev": "dotenv-run -vf .env,.secrets -- vite dev",
-		"build": "dotenv-run -vf .env,.secrets -- vite build",
-		"preview": "dotenv-run -vf .env,.secrets -- vite preview"
+		"dev": "dotenv-run -v -f .env -f .secrets -- vite dev",
+		"build": "dotenv-run -v -f .env -f .secrets -- vite build",
+		"preview": "dotenv-run -v -f .env -f .secrets -- vite preview"
 	}
 }
 ```
