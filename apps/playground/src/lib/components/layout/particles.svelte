@@ -128,7 +128,7 @@
 		<svelte:component
 			this={component}
 			id="tsparticles"
-			options={particlesConfig2}
+			options={particlesConfig}
 			class={loaded ? 'particles particles-loaded' : 'particles'}
 			on:particlesLoaded={onParticlesLoaded}
 		/>
