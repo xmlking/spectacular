@@ -8,7 +8,7 @@ name = 'ACTION_BASE_URL'
 value = 'http://localhost:5173/api/actions'
 
 [postgres]
-version = '14.6-20231218-1'
+version = '14.6-20240129-1'
 
 [postgres.settings]
 maxConnections = 100
@@ -63,7 +63,7 @@ httpPoolSize = 100
 version = 18
 
 [auth]
-version = '0.24.0'
+version = '0.24.1'
 
 [auth.redirections]
 clientUrl = '{{ secrets.CLIENT_URL }}'
@@ -202,7 +202,7 @@ secure = false
 method = 'LOGIN'
 
 [storage]
-version = '0.5.1'
+version = '0.6.0'
 
 [storage.antivirus]
 server = 'tcp://run-clamav:3310'

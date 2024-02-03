@@ -2,7 +2,7 @@
 	// import { dev } from '$app/environment';
 	// import { Analytics } from '$lib/components';
 	// import envPub from '$lib/variables/variables';
-	import '../app.postcss';
+	import '../app.pcss';
 	import { setupViewTransition } from 'sveltekit-view-transition';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
@@ -15,8 +15,6 @@
 
 	setupViewTransition();
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	let ReloadPrompt: any;
 	onMount(async () => {
 		if (pwaInfo) {
 			const { registerSW } = await import('virtual:pwa-register');
@@ -34,8 +32,6 @@
 					console.log('SW registration error', error);
 				}
 			});
-
-			ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default;
 		}
 	});
 
@@ -55,9 +51,9 @@
 
 <slot />
 
-{#if ReloadPrompt}
-	<svelte:component this={ReloadPrompt} />
-{/if}
+{#await import('$lib/components/ReloadPrompt.svelte') then { default: ReloadPrompt }}
+	<ReloadPrompt />
+{/await}
 
 <style lang="postcss">
 	/*** view-transition animations for ROOT ***/

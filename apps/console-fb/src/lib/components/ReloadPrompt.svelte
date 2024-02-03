@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { useRegisterSW } from 'virtual:pwa-register/svelte';
+
+	// replaced dynamically
+	const buildDate = __GIT_DATE__;
 	const { needRefresh, updateServiceWorker, offlineReady } = useRegisterSW({
 		onRegistered(r) {
 			// uncomment following code if you want check for updates
@@ -36,7 +39,14 @@
 	</div>
 {/if}
 
+<div class="pwa-date">
+	{buildDate}
+</div>
+
 <style>
+	.pwa-date {
+		visibility: hidden;
+	}
 	.pwa-toast {
 		position: fixed;
 		right: 0;

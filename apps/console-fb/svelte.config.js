@@ -23,15 +23,15 @@ const config = {
 			: process.env.BUN_ENV
 				? adapterBun()
 				: adapterNode({ polyfill: false, precompress: true }),
+		// for `PWA Vite Plugin`
+		serviceWorker: {
+			register: false
+		},
 		// When hosting SPA on GitHub Pages
 		paths: {
 			// base: dev ? '' : '/hc360-ui',
 			// relative: false
 		},
-		output: {
-			preloadStrategy: 'preload-mjs'
-		},
-
 		// prerender: { entries: [] },
 		alias: {
 			$mocks: 'src/mocks',

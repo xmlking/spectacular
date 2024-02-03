@@ -13,6 +13,7 @@ export default defineConfig({
 		enhancedImages(),
 		purgeCss(),
 		SvelteKitPWA({
+			srcDir: './src',
 			// adapterFallback: 'index.html',
 			base: '/',
 			scope: '/',

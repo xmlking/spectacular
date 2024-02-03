@@ -24,9 +24,6 @@ const config = {
 				? adapterBun()
 				: adapterNode({ polyfill: false }),
 		prerender: { crawl: false }, // FIXME: remove after all fake links are removed.
-		output: {
-			preloadStrategy: 'preload-mjs'
-		},
 		version: {
 			name: process.env.npm_package_version
 		},
