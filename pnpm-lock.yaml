@@ -782,9 +782,6 @@ importers:
       '@inlang/paraglide-js-adapter-sveltekit':
         specifier: 0.3.3
         version: 0.3.3(@sinclair/typebox@0.31.28)(@sveltejs/kit@2.5.0)
-      '@nhost/nhost-js':
-        specifier: 3.0.2
-        version: 3.0.2(graphql@16.8.1)
       '@skeletonlabs/skeleton':
         specifier: 2.8.0
         version: 2.8.0(svelte@4.2.9)
@@ -834,11 +831,11 @@ importers:
         specifier: 0.5.10
         version: 0.5.10(tailwindcss@3.4.1)
       '@tsparticles/engine':
-        specifier: 3.2.1
-        version: 3.2.1
+        specifier: 3.1.0
+        version: 3.1.0
       '@tsparticles/slim':
-        specifier: 3.2.1
-        version: 3.2.1
+        specifier: 3.1.0
+        version: 3.1.0
       '@tsparticles/svelte':
         specifier: 3.0.0
         version: 3.0.0(svelte@4.2.9)
@@ -6489,6 +6486,11 @@ packages:
       '@tsparticles/updater-size': 3.2.1
     dev: true
 
+  /@tsparticles/engine@3.1.0:
+    resolution: {integrity: sha512-sQR79T76Y+0bdwMOQgJxA5jC+Na2XGJ8wABS4NsS3oYqD/Bdh7pwHFdoMkQu86uRrsvH5jdpqlHCMmZb7laXIQ==}
+    requiresBuild: true
+    dev: true
+
   /@tsparticles/engine@3.2.1:
     resolution: {integrity: sha512-mVzdwkOtRdT6/UOS0+GPGcKJsdvYCkqTTwg7df43TfXixsdZedpUkuVg30rwtNhTgPMH2nimOXqx2wmgL7bAZw==}
     deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
@@ -6656,12 +6658,11 @@ packages:
       '@tsparticles/engine': 3.2.1
     dev: true
 
-  /@tsparticles/slim@3.2.1:
-    resolution: {integrity: sha512-XChPCNOybUFRp7SSbHICnlxGfG0ay0iFBH3kKn5hJ4Wsp8SOGg5vaJlLoArLvL7A555J4kEc5uFdpSRsJDdwKg==}
-    deprecated: 3.2.0 and 3.2.1 have issues with some bundlers, deprecating those until solved with 3.2.2
+  /@tsparticles/slim@3.1.0:
+    resolution: {integrity: sha512-qPA6SbugTJp3+xR9MXfUnBC0bT8RHQMHjwu8Y6mU6FvVH/G81TPSCBO/qP5VBqB1M/kIVsOPoAjB226cOw/IMg==}
     dependencies:
       '@tsparticles/basic': 3.2.1
-      '@tsparticles/engine': 3.2.1
+      '@tsparticles/engine': 3.1.0
       '@tsparticles/interaction-external-attract': 3.2.1
       '@tsparticles/interaction-external-bounce': 3.2.1
       '@tsparticles/interaction-external-bubble': 3.2.1
@@ -6693,7 +6694,7 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
     dependencies:
-      '@tsparticles/engine': 3.2.1
+      '@tsparticles/engine': 3.1.0
       svelte: 4.2.9
     dev: true
 
