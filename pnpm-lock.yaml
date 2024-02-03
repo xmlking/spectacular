@@ -699,9 +699,6 @@ importers:
       tslib:
         specifier: 2.6.2
         version: 2.6.2
-      typesafe-i18n:
-        specifier: 5.26.2
-        version: 5.26.2(typescript@5.3.3)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -18092,15 +18089,6 @@ packages:
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: false
-
-  /typesafe-i18n@5.26.2(typescript@5.3.3):
-    resolution: {integrity: sha512-2QAriFmiY5JwUAJtG7yufoE/XZ1aFBY++wj7YFS2yo89a3jLBfKoWSdq5JfQYk1V2BS7V2c/u+KEcaCQoE65hw==}
-    hasBin: true
-    peerDependencies:
-      typescript: '>=3.5.1'
-    dependencies:
-      typescript: 5.3.3
-    dev: true
 
   /typesafe-path@0.2.2:
     resolution: {integrity: sha512-OJabfkAg1WLZSqJAJ0Z6Sdt3utnbzr/jh+NAHoyWHJe8CMSy79Gm085094M9nvTPy22KzTVn5Zq5mbapCI/hPA==}

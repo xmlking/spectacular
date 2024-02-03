@@ -46,7 +46,7 @@
   - [ ] Use [Bob.Build](https://bob.build/) for Smart Builds, Build Cache etc and Bob's [github-actions](https://bob.build/docs/ci-recipes/github-actions/)
   - [ ] Use [earthly.dev](https://earthly.dev/) - Great for monorepos, Compatible with Every Language, Framework, and Build Tool
 - [x] Use [sveltekit-og](https://github.com/etherCorps/sveltekit-og) for Open Graph Image Generation
-- [ ] Internationalization(i18n) with [typesafe-i18n](https://github.com/ivanhofer/typesafe-i18n)
+- [x] Internationalization(i18n) with [inlang](https://inlang.com/c/libraries) `Paraglide JS Adapter SvelteKit`
 
 ## Experementing
 
