@@ -113,8 +113,8 @@
 		}
 	};
 
-	const onParticlesLoaded = (e: EventHandler<Container | undefined>) => {
-		const particlesContainer = e.detail.particles;
+	const onParticlesLoaded = (event: { detail: { particles: any } }) => {
+		const particlesContainer = event.detail.particles;
 		console.log('onParticlesLoaded...', particlesContainer);
 		// you can use particlesContainer to call all the Container class
 		// (from the core library) methods like play, pause, refresh, start, stop
@@ -129,7 +129,7 @@
 		<svelte:component
 			this={component}
 			id="tsparticles"
-			options={particlesConfig}
+			options={particlesConfig2}
 			class={loaded ? 'particles particles-loaded' : 'particles'}
 			on:particlesLoaded={onParticlesLoaded}
 		/>

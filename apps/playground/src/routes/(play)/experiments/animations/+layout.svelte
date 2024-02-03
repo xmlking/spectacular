@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Page from '$lib/components/layout/page.svelte';
+	import Preview from '$lib/components/preview.svelte';
 </script>
 
-<Page>
+<Preview>
 	<header class="space-y-4">
 		<h1 class="h1">Animations</h1>
 		<p>Showcase Animations.</p>
 	</header>
 
 	<slot />
-</Page>
+</Preview>

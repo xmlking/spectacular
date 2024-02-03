@@ -1,16 +1,27 @@
 <script lang="ts">
 	import { VERSION } from '@sveltejs/kit';
+	import DocsLogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
+	import { Twitter, Youtube, Github, Linkedin } from 'lucide-svelte';
 
 	const appVersion = __APP_VERSION__;
 	const gitTag = __GIT_TAG__;
 	const gitDate = __GIT_DATE__;
 
-	// Logo
-	import DocsLogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
-	import { TwitterIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from 'lucide-svelte';
 	// Base Classes
 	const cBase =
 		'bg-surface-50 dark:bg-surface-900 border-t border-surface-500/10 text-xs md:text-base';
+
+	// Social Icons
+	const socialLinks = [
+		{ title: 'GitHub', href: 'https://github.com/xmlking/spectacular', icon: Github },
+		{ title: 'X (Twitter)', href: 'https://x.com/xmlking', icon: Twitter },
+		{
+			title: 'Linkedin',
+			href: 'https://www.linkedin.com/in/sumanth-c-bb41a93/',
+			icon: Linkedin
+		},
+		{ title: 'YouTube', href: 'https://www.youtube.com/@SumanthChinthagunta', icon: Youtube }
+	];
 </script>
 
 <footer class="page-footer {cBase}">
@@ -35,18 +46,17 @@
 			Version: {appVersion}, Kit: {VERSION} <br /> Tag: {gitTag} <br /> Date: {gitDate}
 		</p>
 		<span class="mt-4 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start">
-			<a href={'#'} class="text-gray-500">
-				<FacebookIcon />
-			</a>
-			<a href={'#'} class="ml-3 text-gray-500">
-				<TwitterIcon />
-			</a>
-			<a href={'#'} class="ml-3 text-gray-500">
-				<InstagramIcon />
-			</a>
-			<a href={'#'} class="ml-3 text-gray-500">
-				<LinkedinIcon />
-			</a>
+			{#each socialLinks as sl}
+				<a
+					class="ml-3 text-gray-500"
+					href={sl.href}
+					target="_blank"
+					rel="noreferrer"
+					title={sl.title}
+				>
+					<svelte:component this={sl.icon} />
+				</a>
+			{/each}
 		</span>
 	</div>
 </footer>

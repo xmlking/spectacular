@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { version } from '$app/environment';
 	// import VinylImgMeta from '?w=200;400;800&format=avif;webp;jpg&as=picture';
-	import Page from '$lib/components/layout/page.svelte';
+	import Preview from '$lib/components/preview.svelte';
 	console.log(`Client version: ${version}`);
 </script>
 
@@ -10,7 +10,7 @@
 	<meta name="description" content="Showcase image optimization" />
 </svelte:head>
 
-<Page>
+<Preview>
 	<header class="space-y-4">
 		<h1 class="h1">Picture</h1>
 		<p>Showcase image optimization.</p>
@@ -20,7 +20,7 @@
 		sizes="min(3493px, 33vw)"
 		alt="An alt text"
 	/>
-</Page>
+</Preview>
 
 <style lang="postcss">
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { navigating, page } from '$app/stores';
-	import Page from '$lib/components/layout/page.svelte';
+	import Preview from '$lib/components/preview.svelte';
 	import Counter from './components/Counter.svelte';
 	import Menu from './components/Menu.svelte';
 	import { description } from './components/description.js';
@@ -20,7 +20,7 @@
 	}
 </script>
 
-<Page>
+<Preview>
 	<header class="space-y-4">
 		<h1 class="h1">Outclick</h1>
 		<p>Showcase Outclick.</p>
@@ -45,4 +45,4 @@
 			</p>
 		{/if}
 	{/key}
-</Page>
+</Preview>

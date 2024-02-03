@@ -3,18 +3,23 @@ import { z } from 'zod';
 export const someFormSchema = z.object({
 	username: z.string().min(3, 'Username must be at least 3 characters').max(20, 'Username must be at most 20 characters'),
 	email: z.string().email('Invalid email address'),
-	notifications: z.enum(['all', 'mentions', 'none'], {
-		required_error: 'You need to select a notification type'
-	}),
-	language: z.enum(['en', 'es', 'fr'], {
-		required_error: 'You need to select a language.'
-	}),
+	notifications: z
+		.enum(['all', 'mentions', 'none'], {
+			required_error: 'You need to select a notification type'
+		})
+		.default('all'),
+	language: z
+		.enum(['en', 'es', 'fr'], {
+			required_error: 'You need to select a language.'
+		})
+		.default('en'),
 	bio: z.string().max(250, 'Bio must be at most 250 characters').optional(),
 	website: z.string().url('Invalid URL').optional(),
 	theme: z
 		.enum(['light', 'dark'], {
 			required_error: 'You need to select a theme'
 		})
+		.default('light')
 		.default('light'),
 	usage: z.boolean().default(true)
 });
@@ -22,9 +27,11 @@ export const someFormSchema = z.object({
 export const simpleFormSchema = z.object({
 	username: z.string().min(3, 'Username must be at least 3 characters').max(20, 'Username must be at most 20 characters'),
 	email: z.string().email('Invalid email address'),
-	notifications: z.enum(['all', 'mentions', 'none'], {
-		required_error: 'You need to select a notification type'
-	}),
+	notifications: z
+		.enum(['all', 'mentions', 'none'], {
+			required_error: 'You need to select a notification type'
+		})
+		.default('all'),
 	bio: z.string().max(250, 'Bio must be at most 250 characters').optional(),
 	website: z.string().url('Invalid URL').optional(),
 	terms: z

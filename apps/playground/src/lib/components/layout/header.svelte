@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
-	import type { SubmitFunction } from '@sveltejs/kit';
 	import {
 		AppBar,
 		LightSwitch,
@@ -8,6 +7,7 @@
 		popup,
 		getDrawerStore
 	} from '@skeletonlabs/skeleton';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import {
 		Home,
 		BookText,
@@ -16,17 +16,23 @@
 		Scroll,
 		Menu,
 		Palette,
-		Github,
 		Search,
 		ChevronDown
 	} from 'lucide-svelte';
-	import DocsIcon from '@spectacular/skeleton/components/icons/Icon.svelte';
 	import LogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
+	import type { User } from '@nhost/nhost-js';
+	// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
+	import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
 	import { browser } from '$app/environment';
 	import { enhance } from '$app/forms';
 	import { storeTheme } from '$lib/stores';
-	import LocaleSwitcher from '$lib/components/layout/locale-switcher.svelte';
+	import LangSwitch from '$lib/components/layout/lang-switch.svelte';
+	import * as m from '$i18n/messages';
+	import Avatar from './avatar.svelte';
+
 	const drawerStore = getDrawerStore();
+
+	export let user: User | undefined;
 
 	// Local
 	let isOsMac = false;
@@ -90,6 +96,8 @@
 
 <!-- NOTE: using stopPropagation to override Chrome for Windows search shortcut -->
 <svelte:window on:keydown|stopPropagation={onWindowKeydown} />
+<!-- LoadingIndicatorBar should be placed here -->
+<LoadingIndicatorBar />
 <AppBar shadow="shadow-2xl" slotTrail="!space-x-2">
 	<svelte:fragment slot="lead">
 		<div class="flex items-center space-x-4">
@@ -101,7 +109,11 @@
 			<a class="w-[32px] overflow-hidden lg:!ml-0 lg:w-auto" href="/" title="Go to Homepage">
 				<LogoIcon />
 			</a>
-			<h2 class="hidden font-serif text-2xl md:block">Datablocks</h2>
+			<a href="/" title="Go to Homepage">
+				<h2 class="hidden font-serif text-2xl md:block">Datablocks</h2>
+			</a>
+			<!-- LoadingIndicatorSpinner should be placed here -->
+			<!-- <LoadingIndicatorSpinner /> -->
 		</div>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
@@ -122,13 +134,13 @@
 						<li>
 							<a href="/">
 								<span class="w-6 text-center"><Home /> </span>
-								<span>Homepage</span>
+								<span>Home</span>
 							</a>
 						</li>
 						<li>
 							<a href="/docs/get-started">
 								<span class="w-6 text-center"><BookText /></span>
-								<span>Documentation</span>
+								<span>Docs</span>
 							</a>
 						</li>
 						<li>
@@ -139,23 +151,15 @@
 						</li>
 						<hr class="!my-4" />
 						<li>
-							<a href="/experiments/picture">
+							<a href="/about">
 								<span class="w-6 text-center"><PersonStanding /></span>
-								<span>Picture</span>
+								<span>About</span>
 							</a>
 						</li>
 						<li>
-							<a href="/experiments/movies">
-								<span class="w-6 text-center"
-									><DocsIcon name="svelte" width="w-6" height="h-6" /></span
-								>
-								<span>Movies</span>
-							</a>
-						</li>
-						<li>
-							<a href="/experiments/picture">
+							<a href="/contact">
 								<span class="w-6 text-center"><PhoneOutgoing size={20} /></span>
-								<span>Experiments</span>
+								<span>Contact</span>
 							</a>
 						</li>
 					</ul>
@@ -186,7 +190,7 @@
 					<section class="flex items-center justify-between">
 						<h6 class="h6">Lang</h6>
 						<!-- locale -->
-						<LocaleSwitcher />
+						<LangSwitch />
 					</section>
 					<hr />
 					<nav class="list-nav -m-4 max-h-64 overflow-y-auto p-4 lg:max-h-[500px]">
@@ -227,17 +231,5 @@
 				<small class="hidden md:inline-block">{isOsMac ? '⌘' : 'Ctrl'}+K</small>
 			</button>
 		</div>
-
-		<!-- Social -->
-		<section class="hidden space-x-1 sm:inline-flex">
-			<a
-				class="btn-icon hover:variant-soft-primary"
-				href="https://github.com/xmlking/spectacular"
-				target="_blank"
-				rel="noreferrer"
-			>
-				<Github />
-			</a>
-		</section>
 	</svelte:fragment>
 </AppBar>

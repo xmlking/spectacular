@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Form } from 'formsnap';
-	import Page from '$lib/components/layout/page.svelte';
+	import Preview from '$lib/components/preview.svelte';
 	import type { PageData } from './$types';
 	import { someFormSchema } from './schema';
 	export let data: PageData;
@@ -11,7 +11,7 @@
 	<meta name="description" content="Showcase formsnap" />
 </svelte:head>
 
-<Page>
+<Preview>
 	<header class="space-y-4">
 		<h1 class="h1">Settings</h1>
 		<p>Showcase formsnap.</p>
@@ -117,7 +117,7 @@
 		</Form.Field>
 		<button type="submit" class="variant-filled btn">Submit</button>
 	</Form.Root>
-</Page>
+</Preview>
 
 <style lang="postcss">
 </style>

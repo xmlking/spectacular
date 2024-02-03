@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Page from '$lib/components/layout/page.svelte';
+	import Preview from '$lib/components/preview.svelte';
 	import { default as Card } from './Card.svelte';
 	import movies_json from './movies.json';
 
@@ -17,7 +17,7 @@
 	<meta name="description" content="Showcase container queries" />
 </svelte:head>
 
-<Page>
+<Preview>
 	<header class="space-y-4">
 		<h1 class="h1">Movies</h1>
 		<p>Showcase container queries.</p>
@@ -36,4 +36,4 @@
 			</article>
 		</div>
 	</div>
-</Page>
+</Preview>

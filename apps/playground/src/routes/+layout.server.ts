@@ -1,15 +1,20 @@
 import { Logger } from '@spectacular/utils';
+import { loadFlash } from 'sveltekit-flash-message/server';
 import { VERCEL_ENV } from '$env/static/private';
-import type { LayoutServerLoad } from './$types';
 
 const log = new Logger('server:layout');
 
-export const load = (({ locals: { locale, LL } }) => {
-	log.info(LL.log({ fileName: '+layout.server.ts' }));
+export const load = loadFlash(
+	async ({
+		locals: {
+			paraglide: { lang, textDirection }
+		}
+	}) => {
+		log.debug(lang, textDirection);
 
-	// pass locale information from "server-context" to "shared server + client context"
-	return {
-		vercelEnv: VERCEL_ENV,
-		locale
-	};
-}) satisfies LayoutServerLoad;
+		// pass locale information from "server-context" to "shared server + client context"
+		return {
+			vercelEnv: VERCEL_ENV
+		};
+	}
+);
