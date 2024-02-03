@@ -292,8 +292,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(@types/node@20.11.16)(@vitest/ui@1.2.2)(jsdom@24.0.0)
       xstate:
-        specifier: 4.38.3
-        version: 4.38.3
+        specifier: 5.6.0
+        version: 5.6.0
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -19263,6 +19263,10 @@ packages:
 
   /xstate@4.38.3:
     resolution: {integrity: sha512-SH7nAaaPQx57dx6qvfcIgqKRXIh4L0A1iYEqim4s1u7c9VoCgzZc+63FY90AKU4ZzOC2cfJzTnpO4zK7fCUzzw==}
+    dev: true
+
+  /xstate@5.6.0:
+    resolution: {integrity: sha512-l62p4ZHM/fkGl68574s1dFzFmY8B3BeOff9EqBZbuonTSOXGx1fWTnh4SHSrS8Vhr5wyRT9afqWliMoO6Q+hUQ==}
     dev: true
 
   /y18n@4.0.3:
