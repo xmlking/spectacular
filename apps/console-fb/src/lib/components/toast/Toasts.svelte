@@ -3,7 +3,7 @@
 	import { CloseButton } from 'flowbite-svelte';
 	import {
 		CheckSolid,
-		CloseCircleSolid,
+		CircleCheckSolid,
 		ExclamationCircleOutline,
 		InfoCircleOutline
 	} from 'flowbite-svelte-icons';
@@ -54,7 +54,7 @@
 						{#if toast.type === ToastLevel.Success}
 							<CheckSolid size="xs" ariaLabel="Success icon" />
 						{:else if toast.type === ToastLevel.Error}
-							<CloseCircleSolid size="xs" ariaLabel="Error icon" />
+							<CircleCheckSolid size="xs" ariaLabel="Error icon" />
 						{:else if toast.type === ToastLevel.Warning}
 							<ExclamationCircleOutline size="xs" ariaLabel="Warning icon" />
 						{:else}

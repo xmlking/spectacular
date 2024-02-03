@@ -3,7 +3,7 @@
 	import {
 		ArrowRightToBracketOutline,
 		BellOutline,
-		ChartPieOutline,
+		PieChartSolid,
 		ClipboardListOutline,
 		CogOutline,
 		ComputerSpeakerOutline,
@@ -36,7 +36,7 @@
 				<!--				<SidebarBrand site={{	name: 'Datablocks',href: '/',img: '/logos/6-1.svg' }}/>-->
 				<SidebarItem href="/dashboard" label="Dashboard">
 					<svelte:fragment slot="icon"
-						><ChartPieOutline size="md" class="mr-2 text-red-500 dark:text-blue-500" />
+						><PieChartSolid size="md" class="mr-2 text-red-500 dark:text-blue-500" />
 						<!-- <ChartPieOutline" class="mr-2 text-red-500 dark:text-blue-500" /> -->
 					</svelte:fragment>
 				</SidebarItem>
