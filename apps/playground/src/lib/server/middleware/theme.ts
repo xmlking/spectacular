@@ -1,9 +1,9 @@
 import type { Handle } from '@sveltejs/kit';
 import { Logger } from '@spectacular/utils';
 
-export const log = new Logger('middleware:detect-theme');
+export const log = new Logger('server:middleware:detect-theme');
 
-export const handleDetectTheme = (async ({ event, resolve }) => {
+export const theme = (async ({ event, resolve }) => {
 	let theme = '';
 
 	const cookieTheme = event.cookies.get('theme');

@@ -1,67 +1,11 @@
-/* Global Stylesheet */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
-
-@layer base {
-	/* Google Fonts */
-	@font-face {
-		font-family: 'Quicksand';
-		src: url('/fonts/Quicksand.ttf');
-		font-display: swap;
-	}
-	@font-face {
-		font-family: 'Space Grotesk';
-		src: url('/fonts/SpaceGrotesk.ttf');
-		font-display: swap;
-	}
-	@font-face {
-		font-family: 'Playfair Display';
-		src: url('/fonts/PlayfairDisplay-Italic.ttf');
-		font-display: swap;
-	}
-	/* vintage theme */
-	@font-face {
-		font-family: 'Abril Fatface';
-		src: url('/fonts/AbrilFatface.ttf');
-		font-display: swap;
-	}
-
-	html,
-	body {
-		@apply h-full overflow-hidden;
-	}
-}
+@import '@spectacular/skeleton/default';
 
 @layer components {
 	/* Page Styles */
 	/* Use these to define common page styles. */
-	.page-container {
-		@apply page-padding container mx-auto space-y-10;
-	}
-	.page-container-wide {
-		@apply mx-auto w-full max-w-7xl space-y-10;
-	}
-	.page-container-aside {
-		@apply mx-auto w-full max-w-4xl space-y-10;
-	}
-	.page-padding {
-		@apply p-4 md:p-10;
-	}
-	.page-section {
-		@apply space-y-4;
-	}
 
 	/* For OutClick page */
 	.box {
 		@apply relative z-10 flex h-20 items-center justify-center rounded border-2 border-dashed border-gray-700 bg-gray-100 text-center text-xs;
-	}
-}
-
-@layer utilities {
-	.content-auto1 {
-		content-visibility: auto;
 	}
 }

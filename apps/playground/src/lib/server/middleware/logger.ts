@@ -1,7 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { Logger } from '@spectacular/utils';
 
-export const log = new Logger('middleware:request');
+export const log = new Logger('server:middleware:request');
 
 export const logger = (async ({ event, resolve }) => {
 	const timestamp = Date.now();

@@ -5,7 +5,6 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	extensions: ['.svelte'],
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: [vitePreprocess()],
@@ -24,9 +23,16 @@ const config = {
 			: process.env.BUN_ENV
 				? adapterBun()
 				: adapterNode({ polyfill: false }),
-		prerender: { crawl: false }, // FIXME: remove after all links are corrected.
+		prerender: { crawl: false }, // FIXME: remove after all fake links are removed.
 		version: {
 			name: process.env.npm_package_version
+		},
+		alias: {
+			$houdini: './$houdini',
+			$i18n: 'src/i18n'
+			// TODO: This alias should not be needed, but without it, VSCode show `Cannot find module` error!!!
+			// Ref: https://github.com/vercel/turbo/discussions/620
+			// 	"@spectacular/skeleton/components/*": "../../packages/skeleton-ui/components/*"
 		}
 		// env: {
 		// 	dir: '../..',

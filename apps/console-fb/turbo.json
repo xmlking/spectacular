@@ -7,7 +7,13 @@
 		},
 		"build": {
 			"dependsOn": ["generate"],
-			"outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/lib/i18n"],
+			"outputs": [
+				".svelte-kit/**",
+				".vercel/**",
+				"$houdini/**",
+				"schema.graphql",
+				"src/i18n"
+			],
 			"env": [
 				"VERCEL",
 				"VERCEL_URL",
@@ -20,7 +26,7 @@
 			]
 		},
 		"generate": {
-			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/lib/i18n"],
+			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"],
 			"inputs": ["src/**/*.{html,js,svelte,mvx,ts}"]
 		},
 		"lint": {

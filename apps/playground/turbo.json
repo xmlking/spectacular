@@ -12,7 +12,7 @@
 				".vercel/**",
 				"$houdini/**",
 				"schema.graphql",
-				"src/lib/i18n"
+				"src/i18n"
 			],
 			"env": [
 				"VERCEL",
@@ -26,12 +26,16 @@
 			]
 		},
 		"generate": {
-			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/lib/i18n"],
+			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"],
 			"inputs": ["src/**/*.{html,js,svelte,mvx,ts}"]
 		},
 		"lint": {
 			"outputs": []
 		},
+		"lang:lint": {},
+		"lang:validate": {},
+		"lang:translate": {},
+		"lang:studio": {},
 		"test:unit:coverage": {
 			"outputs": ["coverage/**"]
 		},

@@ -4,7 +4,8 @@ import { Logger } from '@spectacular/utils';
 import { ZodError } from 'zod';
 import { GraphQLError } from 'graphql';
 import { dev } from '$app/environment';
-import { auth, guard, lang, theme } from '$lib/server/middleware';
+import { auth, guard, theme } from '$lib/server/middleware';
+import { i18n } from '$lib/i18n';
 
 /**
  * Code in hooks.server.ts will run when the application starts up,
@@ -19,7 +20,7 @@ if (!dev) {
 const log = new Logger('hooks:server');
 
 // NOTE: Order is impotent! `auth` middleware sets `nhost` into `local` which is used by `guard` middleware
-export const handle: Handle = sequence(lang, auth, guard, theme);
+export const handle: Handle = sequence(i18n.handle(), auth, guard, theme);
 
 /**
  * handle server-side errors

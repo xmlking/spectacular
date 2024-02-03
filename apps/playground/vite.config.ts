@@ -3,16 +3,22 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
+import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
-
-// const path = fileURLToPath(new URL('package.json', import.meta.url));
-// const pkg = JSON.parse(readFileSync(path, 'utf8'));
-// __APP_VERSION__: JSON.stringify(pkg.version),
 
 export default defineConfig({
 	// TODO: evaluate if we still need 'vite-tsconfig-paths' as sveltekit can handel this with `Path aliases`.
 	// b.t.w packages/ui/tsconfig.json has paths.
-	plugins: [enhancedImages(), sveltekit(), purgeCss(), tsconfigPaths({ ignoreConfigErrors: true })],
+	plugins: [
+		enhancedImages(),
+		sveltekit(),
+		purgeCss(),
+		tsconfigPaths({ ignoreConfigErrors: true }),
+		paraglide({
+			project: './project.inlang',
+			outdir: './src/i18n'
+		})
+	],
 	define: {
 		// to burn-in release version in the footer.svelte
 		__APP_VERSION__: JSON.stringify(process.env.npm_package_version),
