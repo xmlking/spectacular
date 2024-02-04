@@ -2,7 +2,7 @@ ARG SCOPE=playground
 ###################################################################
 # Stage 0: base image											                        #
 ###################################################################
-FROM oven/bun:1.0.21 AS base
+FROM oven/bun:1.0.26 AS base
 ENV GIT_SSL_NO_VERIFY 1
 RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
