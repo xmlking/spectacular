@@ -30,6 +30,17 @@ SELECT *
 FROM devices
 WHERE id NOT IN (SELECT device_id FROM device_pool WHERE pool_id = poolid)
 $$;
+CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+  _new record;
+BEGIN
+  _new := NEW;
+  _new."updated_at" = NOW();
+  RETURN _new;
+END;
+$$;
 CREATE TABLE public.action (
     value text NOT NULL,
     description text NOT NULL
