@@ -93,7 +93,7 @@ services:
       - POSTGRES_DB=postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
-      # - ./infra/base/postgres/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./infra/base/postgres/initdb.d:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U postgres -d postgres -q']
       # test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
