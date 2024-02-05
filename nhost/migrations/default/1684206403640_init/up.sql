@@ -2,24 +2,11 @@ SET check_function_bodies = false;
 SET ROLE postgres;
 ---ALTER DATABASE postgres SET rules.soft_deletion TO on;
 SET SESSION "rules.soft_deletion" = 'on';
--- AI service data will be stored in this schema
-CREATE SCHEMA IF NOT EXISTS graphite;
--- We need this extension to store and work with embeddings
-CREATE EXTENSION IF NOT EXISTS vector WITH SCHEMA public;
-COMMENT ON EXTENSION vector IS 'Open-source vector similarity search for Postgres';
--- This extension is used to be able to call the AI service to
--- generate embeddings directly from a postgres function
-CREATE EXTENSION IF NOT EXISTS http WITH SCHEMA public;
-COMMENT ON EXTENSION http IS 'This extension is used to be able to call the AI service to generate embeddings directly from a postgres function';
--- This extension is used to be able to call the AI service to
+CREATE SCHEMA IF NOT EXISTS auth;
+CREATE SCHEMA IF NOT EXISTS storage;
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
-COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
--- CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
--- COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings';
--- CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
--- COMMENT ON EXTENSION ltree IS 'data type for storing hierarchical data path';
--- CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
--- COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 CREATE TABLE public.devices (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,

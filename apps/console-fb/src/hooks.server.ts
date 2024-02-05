@@ -17,13 +17,16 @@ if (!dev) {
 	Logger.enableProductionMode();
 }
 
+const log = new Logger('hooks:server');
+
 // for graceful termination
-process.on('SIGINT', function () {
+function shutdownGracefully() {
+	// anything you need to clean up manually goes in here
+	log.info('Shutdown Gracefully ...');
 	process.exit();
-}); // Ctrl+C
-process.on('SIGTERM', function () {
-	process.exit();
-}); // docker stop
+}
+process.on('SIGINT', shutdownGracefully); // Ctrl+C
+process.on('SIGTERM', shutdownGracefully); // docker stop
 
 // Read: https://github.com/sveltejs/kit/blob/master/documentation/docs/07-hooks.md
 

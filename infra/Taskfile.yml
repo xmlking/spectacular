@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  deploy:
+    desc: deploy k8s resources
+    dir: service
+    cmds:
+      - echo "doing..."
+      - pwd

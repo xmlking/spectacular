@@ -22,7 +22,7 @@ const config = {
 			? adapterAuto()
 			: process.env.BUN_ENV
 				? adapterBun()
-				: adapterNode({ polyfill: false }),
+				: adapterNode({ precompress: true }),
 		prerender: { crawl: false }, // FIXME: remove after all fake links are removed.
 		version: {
 			name: process.env.npm_package_version

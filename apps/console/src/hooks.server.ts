@@ -19,6 +19,15 @@ if (!dev) {
 
 const log = new Logger('hooks:server');
 
+// for graceful termination
+function shutdownGracefully() {
+	// anything you need to clean up manually goes in here
+	log.info('Shutdown Gracefully ...');
+	process.exit();
+}
+process.on('SIGINT', shutdownGracefully); // Ctrl+C
+process.on('SIGTERM', shutdownGracefully); // docker stop
+
 // NOTE: Order is impotent! `auth` middleware sets `nhost` into `local` which is used by `guard` middleware
 export const handle: Handle = sequence(i18n.handle(), auth, guard, theme);
 

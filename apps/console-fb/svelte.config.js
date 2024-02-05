@@ -22,7 +22,7 @@ const config = {
 			? adapterAuto()
 			: process.env.BUN_ENV
 				? adapterBun()
-				: adapterNode({ polyfill: false, precompress: true }),
+				: adapterNode({ precompress: true }),
 		// for `PWA Vite Plugin`
 		serviceWorker: {
 			register: false
