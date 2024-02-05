@@ -23,9 +23,9 @@ Start backend services:
 docker compose config # implicitly set `env-file` to `.env`
 docker compose --env-file .env --env-file .secrets config  # explicitly set `env-file` to `.env` and `.secrets`
 # start all services
-docker compose --env-file .env --env-file .secrets up hasura
+docker compose --env-file .env --env-file .secrets up
 
-# open traefik dashboard 
+# open traefik dashboard
 open https://traefik.localhost.direct/dashboard/#/
 open https://hasura.localhost.direct/console
 open https://mailhog.localhost.direct/
@@ -35,17 +35,11 @@ open https://minio.localhost.direct/
 open https://dashboard.localhost.direct/
 open https://storage.localhost.direct/healthz
 ```
-minio
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
 
 Stop backend services:
 
 ```shell
-docker compose down
+docker compose --env-file .env --env-file .secrets down
 # if you want to remove volumes and clear all data
 docker compose down -v
 ```

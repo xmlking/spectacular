@@ -7,7 +7,7 @@ import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import houdini from 'houdini/vite';
 
-// if (!existsSync('./../../nhost/traefik/certs/localhost.direct.crt')) {
+// if (!existsSync('./../../infra/base/traefik/certs/localhost.direct.crt')) {
 // 	console.log('Missing HTTPS key/cert. You may need to run:  npm run cert');
 // }
 
@@ -16,9 +16,9 @@ export default defineConfig({
 	// b.t.w packages/ui/tsconfig.json has paths.
 	server: {
 		host: 'console.localhost.direct',
-		https : {
-				cert: './../../nhost/traefik/certs/localhost.direct.crt',
-				key: './../../nhost/traefik/certs/localhost.direct.key',
+		https: {
+			cert: './../../infra/base/traefik/certs/localhost.direct.crt',
+			key: './../../infra/base/traefik/certs/localhost.direct.key'
 		},
 		proxy: {}
 	},
