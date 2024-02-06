@@ -168,7 +168,7 @@
 {/if}
 
 <!-- Signin with email/password -->
-<form method="POST" action="?/password" use:enhance>
+<form method="POST" action="/auth/signin?/password" use:enhance>
 	<input type="hidden" name="__superform_id" bind:value={$formId} />
 	<div class="mt-6">
 		<label class="label">
@@ -233,7 +233,7 @@
 </div>
 
 <!-- Signin with email : Magic Link Passwordless Authentication -->
-<form method="POST" action="?/passwordless" use:pwlEnhance>
+<form method="POST" action="/auth/signin?/passwordless" use:pwlEnhance>
 	<input type="hidden" name="__superform_id" bind:value={$pwlFormId} />
 	<div class="mt-6">
 		<label class="label">
@@ -277,13 +277,13 @@
 <!-- Signin with social -->
 <form method="POST">
 	<div class="flex flex-row justify-evenly">
-		<button type="submit" formaction="?/google" class="variant-filled-warning btn-icon"
+		<button type="submit" formaction="/auth/signin?/google" class="variant-filled-warning btn-icon"
 			><Icon name="google" /></button
 		>
-		<button type="submit" formaction="?/github" class="variant-filled-secondary btn-icon"
+		<button type="submit" formaction="/auth/signin?/github" class="variant-filled-secondary btn-icon"
 			><Github /></button
 		>
-		<button type="submit" formaction="?/azuread" class="variant-filled-error btn-icon"
+		<button type="submit" formaction="/auth/signin?/azuread" class="variant-filled-error btn-icon"
 			><Icon name="microsoft" /></button
 		>
 	</div>

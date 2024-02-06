@@ -162,6 +162,7 @@ services:
     expose:
       - ${AUTH_SMTP_PORT:-1025}
       - 8025
+      - 587
     volumes:
       - mailhog:/maildir
     # healthcheck:

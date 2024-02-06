@@ -34,7 +34,7 @@ open https://traefik.localhost.direct/dashboard/#/
 | Service   | URL                                               |
 | --------- | ------------------------------------------------- |
 | Postgres  | postgres://postgres:postgres@localhost:5432/local |
-| Traefik   | https://traefik.localhost.direct/dashboard/#/     |
+| Traefik   | https://traefik.localhost.direct/dashboard/#/       |
 | Hasura    | https://hasura.localhost.direct                   |
 | Auth      | https://auth.localhost.direct                     |
 | Storage   | https://storage.localhost.direct/healthz          |
