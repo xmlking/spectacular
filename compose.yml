@@ -64,7 +64,7 @@ services:
     healthcheck:
       test: ["CMD", "traefik", "healthcheck", "--ping"]
       timeout: 60s
-      interval: 5s
+      interval: 15s
       start_period: 60s
     labels:
       traefik.enable: "true"
@@ -98,7 +98,7 @@ services:
       test: ['CMD-SHELL', 'pg_isready -U postgres -d postgres -q']
       # test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
       timeout: 60s
-      interval: 5s
+      interval: 15s
       start_period: 60s
     depends_on:
       traefik:
@@ -109,7 +109,7 @@ services:
   hasura:
     ## User `cli-migrations-v3` only in local dev env.
     ## It will automatically apply Migrations and Metadata to a Hasura GraphQL Engine
-    image: hasura/graphql-engine:v2.35.1.cli-migrations-v3
+    image: hasura/graphql-engine:v2.37.0.cli-migrations-v3
     hostname: hasura
     container_name: hasura
     restart: always
@@ -124,13 +124,13 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
       HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
-      HASURA_GRAPHQL_LOG_LEVEL: debug
+      HASURA_GRAPHQL_LOG_LEVEL: info
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
       HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
     healthcheck:
       test: curl --fail -s http://localhost:8080/healthz || exit 1
       timeout: 60s
-      interval: 5s
+      interval: 15s
       start_period: 60s
     depends_on:
       traefik:
@@ -258,7 +258,7 @@ services:
           - -S
           - http://localhost:4000/healthz
       timeout: 60s
-      interval: 5s
+      interval: 15s
       start_period: 60s
     depends_on:
       traefik:
@@ -293,7 +293,7 @@ services:
       - 9001
     healthcheck:
       test: ["CMD", "mc", "ready", "local"]
-      interval: 5s
+      interval: 15s
       timeout: 5s
       retries: 5
     depends_on:
@@ -345,7 +345,7 @@ services:
     # healthcheck:
     #   test: curl --fail -s http://localhost:8000/healthz || exit 1
     #   timeout: 60s
-    #   interval: 5s
+    #   interval: 15s
     #   start_period: 60s
     labels:
       traefik.enable: "true"
