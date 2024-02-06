@@ -277,14 +277,20 @@
 <!-- Signin with social -->
 <form method="POST">
 	<div class="flex flex-row justify-evenly">
-		<button type="submit" formaction="/auth/signin?/google" class="variant-filled-warning btn-icon"
-			><Icon name="google" /></button
+		<button
+			type="submit"
+			formaction="/auth/signin?/google"
+			class="variant-filled-warning btn-icon"><Icon name="google" /></button
 		>
-		<button type="submit" formaction="/auth/signin?/github" class="variant-filled-secondary btn-icon"
-			><Github /></button
+		<button
+			type="submit"
+			formaction="/auth/signin?/github"
+			class="variant-filled-secondary btn-icon"><Github /></button
 		>
-		<button type="submit" formaction="/auth/signin?/azuread" class="variant-filled-error btn-icon"
-			><Icon name="microsoft" /></button
+		<button
+			type="submit"
+			formaction="/auth/signin?/azuread"
+			class="variant-filled-error btn-icon"><Icon name="microsoft" /></button
 		>
 	</div>
 </form>
