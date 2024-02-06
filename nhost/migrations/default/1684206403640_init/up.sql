@@ -237,6 +237,3 @@ ALTER TABLE ONLY public.rules
     ADD CONSTRAINT rules_protocol_fkey FOREIGN KEY (protocol) REFERENCES public.protocol(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.user_org_groups
     ADD CONSTRAINT user_org_groups_organization_fkey FOREIGN KEY (organization) REFERENCES public.organization(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
--- run this statement manually after all docker services started for the first time.
--- ALTER TABLE ONLY public.user_org_groups
---     ADD CONSTRAINT user_org_groups_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;

@@ -191,6 +191,7 @@ services:
     volumes:
       - ./nhost/emails:/app/email-templates
     environment:
+      AUTH_LOG_LEVEL: info
       AUTH_ACCESS_CONTROL_ALLOWED_EMAIL_DOMAINS: ""
       AUTH_ACCESS_CONTROL_ALLOWED_EMAILS: ""
       AUTH_ACCESS_CONTROL_ALLOWED_REDIRECT_URLS: https://console.localhost.direct:5173,https://*.vercel.app/

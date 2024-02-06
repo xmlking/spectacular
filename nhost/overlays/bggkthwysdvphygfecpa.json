@@ -6,6 +6,11 @@
 	},
 	{
 		"op": "replace",
+		"path": "/auth/redirections/allowedUrls",
+		"value": ["https://spectacular-console.vercel.app", "https://*.vercel.app/"]
+	},
+	{
+		"op": "replace",
 		"path": "/global/environment/0/value",
 		"value": "https://spectacular-console.vercel.app/api/events"
 	},

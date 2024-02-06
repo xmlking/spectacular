@@ -1,11 +1,11 @@
 [global]
 [[global.environment]]
 name = 'EVENTS_BASE_URL'
-value = 'http://localhost:5173/api/events'
+value = 'https://console.localhost.direct:5173/api/events'
 
 [[global.environment]]
 name = 'ACTION_BASE_URL'
-value = 'http://localhost:5173/api/actions'
+value = 'https://console.localhost.direct:5173/api/actions'
 
 [postgres]
 version = '14.6-20240129-1'
@@ -66,8 +66,8 @@ version = 18
 version = '0.24.1'
 
 [auth.redirections]
-clientUrl = '{{ secrets.CLIENT_URL }}'
-allowedUrls = ['http://localhost:5173', 'https://*.vercel.app/']
+clientUrl = 'https://console.localhost.direct:5173'
+allowedUrls = ['https://console.localhost.direct:5173', 'https://*.vercel.app/']
 
 [auth.signUp]
 enabled = true

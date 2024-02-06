@@ -16,7 +16,7 @@ unzip -P localhost infra/base/traefik/certs/localhost.direct.zip -d infra/base/t
 
 ### Backend
 
-Start backend services:
+#### Start backend services with Docker Compose
 
 ```shell
 # verify compose file
@@ -27,14 +27,21 @@ docker compose --env-file .env --env-file .secrets up
 
 # open traefik dashboard
 open https://traefik.localhost.direct/dashboard/#/
-open https://hasura.localhost.direct/console
-open https://mailhog.localhost.direct/
-open https://auth.localhost.direct/
-# login into minio with username: STORAGE_ACCESS_KEY password: STORAGE_SECRET_KEY
-open https://minio.localhost.direct/
-open https://dashboard.localhost.direct/
-open https://storage.localhost.direct/healthz
 ```
+
+> login into **minio** with username: `STORAGE_ACCESS_KEY` password: `STORAGE_SECRET_KEY`
+
+| Service   | URL                                               |
+| --------- | ------------------------------------------------- |
+| Postgres  | postgres://postgres:postgres@localhost:5432/local |
+| Traefik   | https://traefik.localhost.direct/dashboard/#/     |
+| Hasura    | https://hasura.localhost.direct                   |
+| Auth      | https://auth.localhost.direct                     |
+| Storage   | https://storage.localhost.direct/healthz          |
+| minio     | https://minio.localhost.direct                    |
+| Functions | https://functions.localhost.direct                |
+| Dashboard | https://dashboard.localhost.direct                |
+| Mailhog   | https://mailhog.localhost.direct                  |
 
 Stop backend services:
 
@@ -43,6 +50,8 @@ docker compose --env-file .env --env-file .secrets down
 # if you want to remove volumes and clear all data
 docker compose down -v
 ```
+
+#### (Or) Start backend services with nhost cli
 
 ```shell
 # start all
