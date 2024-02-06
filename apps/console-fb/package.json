@@ -17,7 +17,7 @@
 		"generate:svelte": "svelte-kit sync",
 		"lint": "concurrently pnpm:lint:*",
 		"lint:js": "eslint .",
-		"lint:markup": "markuplint --config ../../.markuplintrc.cjs \"**\"",
+		"lint:markup": "markuplint --config ../../.markuplintrc.cjs 'src/**/*.svelte'",
 		"lint:prettier": "prettier --check .",
 		"preview": "NEXTAUTH_URL=http://localhost:4173 AUTH_REDIRECT_PROXY_URL=http://localhost:4173/auth dotenv-run -v -f .env -f .secrets -- vite preview",
 		"test": "pnpm run test:integration && pnpm run test:unit",

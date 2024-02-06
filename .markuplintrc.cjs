@@ -1,6 +1,8 @@
 module.exports = {
 	parser: {
-		'\\.svelte$': '@markuplint/svelte-parser'
+		'\\.svelte$': '@markuplint/svelte-parser',
+		'\\.html$': '@markuplint/svelte-parser/kit',
+		'\\.astro$': '@markuplint/astro-parser'
 	},
 	extends: ['markuplint:recommended'],
 	excludeFiles: [
