@@ -7,6 +7,11 @@ type AvailableLanguageTag = import('$i18n/runtime').AvailableLanguageTag;
 
 declare global {
 	namespace App {
+		// houdini session
+		interface Session {
+			token?: string;
+			roles?: string | string[] | null;
+		}
 		namespace Superforms {
 			type Message = Pick<ToastSettings, 'message' | 'hideDismiss' | 'timeout'> & {
 				type: 'error' | 'success' | 'warning';
@@ -21,10 +26,6 @@ declare global {
 			nhost: NhostClient;
 		}
 		interface PageData {
-			/**
-			 * Client-forwarded locals.lang.
-			 */
-			lang: App.Locals['lang'];
 			// user?: Omit<User, 'userId'>;
 			/**
 			 * Short-life cookie-persisted flash message.

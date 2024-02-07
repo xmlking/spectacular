@@ -4,7 +4,7 @@ import { Logger } from '@spectacular/utils';
 import { ZodError } from 'zod';
 import { GraphQLError } from 'graphql';
 import { dev } from '$app/environment';
-import { auth, guard, theme } from '$lib/server/middleware';
+import { auth, guard, houdini, theme } from '$lib/server/middleware';
 import { i18n } from '$lib/i18n';
 
 /**
@@ -29,7 +29,7 @@ process.on('SIGINT', shutdownGracefully); // Ctrl+C
 process.on('SIGTERM', shutdownGracefully); // docker stop
 
 // NOTE: Order is impotent! `auth` middleware sets `nhost` into `local` which is used by `guard` middleware
-export const handle: Handle = sequence(i18n.handle(), auth, guard, theme);
+export const handle: Handle = sequence(i18n.handle(), auth, guard, houdini, theme);
 
 /**
  * handle server-side errors

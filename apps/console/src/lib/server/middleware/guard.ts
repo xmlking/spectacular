@@ -24,7 +24,7 @@ export const guard = (async ({ event, resolve }) => {
 
 	const {
 		url: { pathname },
-		locals: { lang, nhost }
+		locals: { paraglide: { lang }, nhost }
 	} = event;
 	const canonicalPath = i18n.route(pathname);
 	// bypass guard for all unprotected routes.
