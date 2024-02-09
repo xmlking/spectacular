@@ -185,7 +185,7 @@ services:
   # hasura auth
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.24.1
+    image: nhost/hasura-auth:0.25
     hostname: auth
     container_name: auth
     restart: always
@@ -358,32 +358,32 @@ services:
   ###########################################################################
   # dashboard
   ###########################################################################
-  # dashboard:
-  #   image: nhost/dashboard:1.6.3
-  #   hostname: dashboard
-  #   container_name: dashboard
-  #   restart: always
-  #   environment:
-  #     NEXT_PUBLIC_NHOST_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
-  #     NEXT_PUBLIC_NHOST_AUTH_URL: https://auth.localhost.direct/v1
-  #     NEXT_PUBLIC_NHOST_FUNCTIONS_URL: https://functions.localhost.direct/v1
-  #     NEXT_PUBLIC_NHOST_GRAPHQL_URL: https://hasura.localhost.direct/v1
-  #     NEXT_PUBLIC_NHOST_HASURA_API_URL: https://hasura.localhost.direct
-  #     NEXT_PUBLIC_NHOST_HASURA_CONSOLE_URL: https://hasura.localhost.direct/console
-  #     NEXT_PUBLIC_NHOST_HASURA_MIGRATIONS_API_URL: https://hasura.localhost.direct
-  #     NEXT_PUBLIC_NHOST_STORAGE_URL: https://storage.localhost.direct/v1
-  #   expose:
-  #     - 3000
-  #   depends_on:
-  #     traefik:
-  #       condition: service_healthy
-  #   labels:
-  #     traefik.enable: "true"
-  #     traefik.http.routers.dashboard.entrypoints: websecure
-  #     traefik.http.routers.dashboard.rule: Host(`dashboard.localhost.direct`)
-  #     traefik.http.routers.dashboard.service: dashboard
-  #     traefik.http.routers.dashboard.tls: "true"
-  #     traefik.http.services.dashboard.loadbalancer.server.port: "3000"
+  dashboard:
+    image: nhost/dashboard:1.6.3
+    hostname: dashboard
+    container_name: dashboard
+    restart: always
+    environment:
+      NEXT_PUBLIC_NHOST_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
+      NEXT_PUBLIC_NHOST_AUTH_URL: https://auth.localhost.direct/v1
+      NEXT_PUBLIC_NHOST_FUNCTIONS_URL: https://functions.localhost.direct/v1
+      NEXT_PUBLIC_NHOST_GRAPHQL_URL: https://hasura.localhost.direct/v1
+      NEXT_PUBLIC_NHOST_HASURA_API_URL: https://hasura.localhost.direct
+      NEXT_PUBLIC_NHOST_HASURA_CONSOLE_URL: https://hasura.localhost.direct/console
+      NEXT_PUBLIC_NHOST_HASURA_MIGRATIONS_API_URL: https://hasura.localhost.direct
+      NEXT_PUBLIC_NHOST_STORAGE_URL: https://storage.localhost.direct/v1
+    expose:
+      - 3000
+    depends_on:
+      traefik:
+        condition: service_healthy
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.dashboard.entrypoints: websecure
+      traefik.http.routers.dashboard.rule: Host(`dashboard.localhost.direct`)
+      traefik.http.routers.dashboard.service: dashboard
+      traefik.http.routers.dashboard.tls: "true"
+      traefik.http.services.dashboard.loadbalancer.server.port: "3000"
   ###########################################################################
   # tailcall
   ###########################################################################
