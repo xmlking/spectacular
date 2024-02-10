@@ -30,7 +30,7 @@
 		"packages/*"
 	],
 	"scripts": {
-		"dev": "dotenv -- turbo run dev --parallel",
+		"dev": "turbo run dev --parallel",
 		"build": "turbo run build",
 		"preview": "turbo run preview",
 		"lint:cspell": "cspell lint -c .vscode/cspell.json **",

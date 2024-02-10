@@ -3,7 +3,9 @@
 	"extends": ["//"],
 	"pipeline": {
 		"dev": {
-			"dotEnv": [".env", ".secrets"]
+			"dotEnv": [".env", ".secrets"],
+			"cache": false,
+			"persistent": true
 		},
 		"build": {
 			"outputs": ["dist/**", ".vercel/output/**"],
@@ -19,7 +21,8 @@
 				"SITE_URL"
 			]
 		},
+		"astro": {},
 		"preview": {},
-		"astro": {}
+		"test:integration": {}
 	}
 }

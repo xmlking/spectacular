@@ -143,4 +143,4 @@ export const authHookConfig: SvelteKitAuthConfig = {
 	// 	}
 	// }
 }
-export const authjs = SvelteKitAuth(authHookConfig)
+export const { handle, signIn, signOut } = SvelteKitAuth(authHookConfig)

@@ -3,10 +3,6 @@
 	"globalDependencies": ["**/.env", "**/.secrets"],
 	"globalDotEnv": [".env", ".secrets"],
 	"pipeline": {
-		"dev": {
-			"cache": false,
-			"persistent": true
-		},
 		"build": {
 			"dependsOn": ["^build"],
 			"outputs": ["dist/**", ".svelte-kit/**", ".vercel/**"]
@@ -14,19 +10,19 @@
 		"lint": {},
 		"format": {},
 		"test": {
-			"dotEnv": ["**/.env", "**/.env.test"]
+			"dotEnv": ["**/.env", "**/.env.test"],
+			"inputs": ["src/**", "tests/**"]
 		},
 		"test:unit": {},
-		"test:unit:coverage": {},
-		"test:integration": {},
-		"test:watch": {
-			"cache": false
+		"test:unit:coverage": {
+			"outputs": ["coverage/**"]
 		},
-		"check": {},
+		"test:watch": {
+			"cache": false,
+			"persistent": true
+		},
 		"clean": {
 			"cache": false
-		},
-
-		"preview": {}
+		}
 	}
 }

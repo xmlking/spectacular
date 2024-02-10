@@ -67,11 +67,7 @@ npx turbo link
 # bunx turbo login
 ```
 
-## Usage
-
-### Environment
-
-### App Environment Variables
+### Environment Variables
 
 > Turbo is working on [first-class solution](https://turbo.build/repo/docs/handbook/dev#using-environment-variables) to load **dotEnv** files.  
 > Meanwhile we recommend using a library called [dotenv-run](https://github.com/chihab/dotenv-run) to solve this problem.
@@ -83,14 +79,14 @@ Add `dotenv-run ` to your `package.json`
 ```json filename="package.json" highlight=3
 {
 	"scripts": {
-		"dev": "dotenv-run -v -f .env -f .secrets -- vite dev",
-		"build": "dotenv-run -v -f .env -f .secrets -- vite build",
-		"preview": "dotenv-run -v -f .env -f .secrets -- vite preview"
+		"dev": "dotenv-run -f .env -f .secrets -v -- vite dev",
+		"build": "dotenv-run -f .env -f .secrets -v -- vite build",
+		"preview": "dotenv-run -f .env -f .secrets -v -- vite preview"
 	}
 }
 ```
 
-Testing
+#### Verify App Environment Variables
 
 ```shell
 cd apps/console
@@ -99,7 +95,19 @@ dotenv-run -f .env,.secrets -v '.*'
 dotenv-run -f .env,.secrets -v '.*' -u
 # using printenv
 dotenv-run -f .env,.secrets -v -- printenv
+# using node script
+dotenv-run -f .env -f .secrets -v -- node -e "console.log(process.env.PUBLIC_NHOST_SUBDOMAIN)"
 ```
+
+### Guidelines
+Guidelines for configuring `turbo.json`
+1. Don't keep workspace specific tasks in root `turbo.json`  e.g., `check` task only apply to `sveltekit` workspace, `preview` task don't apply to `packages` workspaces. Instead, move them to workspace's turbo.json file i.e., `/apps/web/turbo.json`
+2. If you don't include a key in workspace specific tasks, the configuration is **inherited** from the extended `turbo.json`.
+3. Use `dependsOn` to enforce order of execution
+
+## Usage
+
+> You can use `--dry-run` flag with any **turbo** commands, to preview what tasks will execute without really running them. 
 
 ### Run
 
@@ -120,7 +128,7 @@ turbo test --filter=helpers
 ```shell
 turbo build --filter=playground...
 turbo build --filter=playground... --summarize
-turbo build --filter=playground... --dry
+turbo build --filter=playground... --dry-run
 turbo build --filter=playground... --graph
 ```
 
@@ -147,6 +155,7 @@ turbo dev
 turbo dev  --filter=playground
 turbo lint
 turbo run generate
+turbo run generate  --dry-run
 pnpx turbo login
 
 turbo prune --scope=playground --docker

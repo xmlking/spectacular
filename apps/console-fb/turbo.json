@@ -2,12 +2,35 @@
 	"$schema": "https://turbo.build/schema.json",
 	"extends": ["//"],
 	"pipeline": {
+    "check:watch": {
+			"persistent": true,
+      "outputs": [".svelte-kit/**"]
+    },
+    "check": {
+      "outputs": [".svelte-kit/**"]
+    },
+    "sync": {
+      "outputs": [".svelte-kit/**"]
+    },
 		"dev": {
+			// FIXME: https://github.com/HoudiniGraphql/houdini/issues/1246 REMOVE  dependency on `sync`
+			"dependsOn": ["sync"],
+			"cache": false,
+			"persistent": true,
 			"dotEnv": [".env", ".secrets"]
+		},
+		"generate": {
+			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
 		},
 		"build": {
 			"dependsOn": ["generate"],
-			"outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
+			"outputs": [
+				".svelte-kit/**",
+				".vercel/**",
+				"$houdini/**",
+				"schema.graphql",
+				"src/i18n"
+			],
 			"env": [
 				"VERCEL",
 				"VERCEL_URL",
@@ -19,17 +42,7 @@
 				"npm_package_version"
 			]
 		},
-		"generate": {
-			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"],
-			"inputs": ["src/**/*.{html,js,svelte,mvx,ts}"]
-		},
-		"lint": {
-			"outputs": []
-		},
-		"test:unit:coverage": {
-			"outputs": ["coverage/**"]
-		},
 		"preview": {},
-		"special-task": {}
+		"test:integration": {}
 	}
 }
