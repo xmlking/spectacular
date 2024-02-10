@@ -13,3 +13,10 @@ if [[ -f "$FILE" || -n "$CI" ]]; then
 else
 	cp -n apps/console-fb/.env.example apps/console-fb/.env && echo 'Generated: apps/console/.env'
 fi
+
+FILE=.secrets
+if [[ -f "$FILE" || -n "$CI" ]]; then
+    echo "'$FILE' exists."
+else
+	cp -n .secrets.example .secrets && echo 'Generated: .secrets'
+fi

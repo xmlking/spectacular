@@ -9,8 +9,8 @@ import houdini from 'houdini/vite';
 export default defineConfig({
 	plugins: [
 		houdini(),
-		sveltekit(),
 		enhancedImages(),
+		sveltekit(),
 		purgeCss(),
 		SvelteKitPWA({
 			srcDir: './src',
