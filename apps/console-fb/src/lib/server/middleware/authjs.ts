@@ -4,8 +4,7 @@ import CredentialsProvider from '@auth/core/providers/credentials';
 import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
 // import { HasuraAdapter } from '@auth/hasura-adapter';
-import { SvelteKitAuth } from '@auth/sveltekit';
-import type { Handle } from '@sveltejs/kit';
+import { SvelteKitAuth, type SvelteKitAuthConfig } from '@auth/sveltekit'
 import envPri from '$lib/variables/variables.server';
 import envPub from '$lib/variables/variables';
 import { Logger } from '@spectacular/utils';
@@ -20,7 +19,7 @@ import { appRoles } from './role-mapper';
 
 const log = new Logger('middleware:auth');
 
-export const authjs = SvelteKitAuth({
+export const authHookConfig: SvelteKitAuthConfig = {
 	debug: dev,
 	trustHost: true,
 	basePath: '/auth',
@@ -143,4 +142,5 @@ export const authjs = SvelteKitAuth({
 	// 		}
 	// 	}
 	// }
-}) satisfies Handle;
+}
+export const authjs = SvelteKitAuth(authHookConfig)
