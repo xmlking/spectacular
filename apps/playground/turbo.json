@@ -2,13 +2,13 @@
 	"$schema": "https://turbo.build/schema.json",
 	"extends": ["//"],
 	"pipeline": {
-    "check:watch": {
+		"check:watch": {
 			"persistent": true,
-      "outputs": [".svelte-kit/**"]
-    },
-    "check": {
-      "outputs": [".svelte-kit/**"]
-    },
+			"outputs": [".svelte-kit/**"]
+		},
+		"check": {
+			"outputs": [".svelte-kit/**"]
+		},
 		"dev": {
 			"dotEnv": [".env", ".secrets"],
 			"cache": false,

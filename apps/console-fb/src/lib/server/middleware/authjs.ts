@@ -4,14 +4,17 @@ import CredentialsProvider from '@auth/core/providers/credentials';
 import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
 // import { HasuraAdapter } from '@auth/hasura-adapter';
-import { SvelteKitAuth, type SvelteKitAuthConfig } from '@auth/sveltekit'
+import { SvelteKitAuth, type SvelteKitAuthConfig } from '@auth/sveltekit';
 import envPri from '$lib/variables/variables.server';
-import envPub from '$lib/variables/variables';
 import { Logger } from '@spectacular/utils';
 import { dev } from '$app/environment';
 import { getOrg } from './org-mapper';
 import { appRoles } from './role-mapper';
+import users from '$mocks/data/users';
+
 // import { HasuraAdapter } from 'next-auth-hasura-adapter';
+
+// Reference: https://authjs.dev/reference/sveltekit
 
 // TODO: https://hasura.io/learn/graphql/hasura-authentication/integrations/nextjs-auth/
 // https://github.com/yaroslavnosenko/recode-ui/blob/main/pages/api/auth/%5B...nextauth%5D.ts
@@ -33,25 +36,29 @@ export const authHookConfig: SvelteKitAuthConfig = {
 		...(dev
 			? [
 					CredentialsProvider({
-						name: 'Dummy Account',
+						name: 'Password',
 						credentials: {
-							username: {
-								label: 'Username',
+							email: {
+								label: 'Email',
 								type: 'text',
-								placeholder: 'type any username / password'
+								placeholder: 'enter your email'
 							},
-							password: { label: 'Password', type: 'password' },
-							domain: { label: 'Domain', type: 'select', value: envPub.PUBLIC_DEFAULT_ORGANIZATION }
+							password: { label: 'Password', type: 'password' }
 						},
-						async authorize(credentials, req) {
-							const user = {
-								id: '1',
-								name: 'Sumo Demo',
-								org: credentials.domain,
-								roles: ['user', 'tester'],
-								email: 'sumo@gmail.com'
-							};
-							return user;
+						async authorize({ email, password }) {
+							const user = users.get(email as string);
+							if (user) {
+								if (user.validPassword(password as string)) {
+									return {
+										id: email as string,
+										name: user.name,
+										org: user.org,
+										roles: user.roles,
+										email: email as string
+									};
+								}
+							}
+							return null;
 						}
 					})
 				]
@@ -105,7 +112,6 @@ export const authHookConfig: SvelteKitAuthConfig = {
 				// token.accessToken = account.access_token; // account.id_token
 
 				// -------- START: Remove when NOT using nhost ------------ //
-				// to support nhost. FIXME: https://github.com/nhost/nhost/issues/1738
 				token['https://hasura.io/jwt/claims'] = {
 					'x-hasura-allowed-roles': token.roles,
 					'x-hasura-default-role': 'user',
@@ -142,5 +148,5 @@ export const authHookConfig: SvelteKitAuthConfig = {
 	// 		}
 	// 	}
 	// }
-}
-export const { handle, signIn, signOut } = SvelteKitAuth(authHookConfig)
+};
+export const { handle, signIn, signOut } = SvelteKitAuth(authHookConfig);
