@@ -1,21 +1,20 @@
 <script lang="ts" context="module">
-	// https://superforms.rocks/components#using-a-formfieldproxy
-	import type { AnyZodObject } from 'zod';
-	type T = AnyZodObject;
+	type T = Record<string, unknown>;
 </script>
 
-<script lang="ts" generics="T extends AnyZodObject">
+<!-- <script lang="ts" generics="T extends Record<string, unknown>"> -->
+<script lang="ts">
 	import { ButtonGroup, RadioButton, Helper, Label } from 'flowbite-svelte';
-	import type { z } from 'zod';
-	import type { ZodValidation, FormPathLeaves } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms/client';
-	import { formFieldProxy } from 'sveltekit-superforms/client';
+	import type { FormPathLeaves } from 'sveltekit-superforms';
+	import type { SuperForm } from 'sveltekit-superforms';
+	import { formFieldProxy } from 'sveltekit-superforms';
 	import generateId from '$lib/utils/generateId';
 	import { getFormContext } from './forms';
 	import type { RadioOptionType } from './forms';
 
-	export let form: SuperForm<ZodValidation<T>, unknown>;
-	export let field: FormPathLeaves<z.infer<T>>;
+	export let form: SuperForm<T, unknown>;
+	export let field: FormPathLeaves<T>;
+
 	export let label = '';
 	export let labelClasses = '';
 	export let items: RadioOptionType[] = [];

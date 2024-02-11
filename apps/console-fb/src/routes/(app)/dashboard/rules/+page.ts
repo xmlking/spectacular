@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
-import { setError, setMessage, superValidate } from 'sveltekit-superforms/client';
+import { setError, setMessage, superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import { Logger } from '@spectacular/utils';
 import { ruleSearchSchema as schema } from '$lib/models/schema';
 import { CachePolicy, SearchSharedRulesStore } from '$houdini';
@@ -9,7 +10,7 @@ const log = new Logger('rules.list.browser');
 const searchSharedRulesStore = new SearchSharedRulesStore();
 export const load = async (event) => {
 	const { url } = event;
-	const form = await superValidate(url, schema);
+	const form = await superValidate(url, zod(schema));
 
 	if (!form.valid) return { status: 400, form }; // return fail(400, { form }); // FIXME
 

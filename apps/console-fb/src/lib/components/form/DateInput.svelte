@@ -1,21 +1,17 @@
 <script lang="ts" context="module">
-	// https://superforms.rocks/components#using-a-formfieldproxy
-	import type { AnyZodObject } from 'zod';
-	type T = AnyZodObject;
+	type T = Record<string, unknown>;
 </script>
 
-<script lang="ts" generics="T extends AnyZodObject">
+<!-- <script lang="ts" generics="T extends Record<string, unknown>"> -->
+<script lang="ts">
 	import type { Writable } from 'svelte/store';
-
 	import { FloatingLabelInput, Helper } from 'flowbite-svelte';
-	import type { z } from 'zod';
-	import type { ZodValidation, FormPathLeaves } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms/client';
-	import { dateProxy, formFieldProxy } from 'sveltekit-superforms/client';
+	import type { SuperForm, FormPathLeaves } from 'sveltekit-superforms';
+	import { dateProxy, formFieldProxy } from 'sveltekit-superforms';
 	import { getFormContext } from './forms';
 
-	export let form: SuperForm<ZodValidation<T>, unknown>;
-	export let field: FormPathLeaves<z.infer<T>>;
+	export let form: SuperForm<T, unknown>;
+	export let field: FormPathLeaves<T>;
 	export let label = '';
 	export let type: 'date' | 'datetime-local' = 'date';
 	export let size: 'small' | 'default' = 'default';

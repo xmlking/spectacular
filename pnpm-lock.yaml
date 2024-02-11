@@ -206,7 +206,7 @@ importers:
         version: 2.36.0-next.5(eslint@8.56.0)(svelte@4.2.10)
       formsnap:
         specifier: 0.4.3
-        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0-alpha.52)(zod@3.22.4)
+        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0)(zod@3.22.4)
       graphql:
         specifier: 16.8.1
         version: 16.8.1
@@ -223,8 +223,8 @@ importers:
         specifier: 0.27.1
         version: 0.27.1(@fortawesome/free-regular-svg-icons@6.5.1)(@fortawesome/free-solid-svg-icons@6.5.1)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.10)(typescript@5.3.3)
       lucide-svelte:
-        specifier: 0.323.0
-        version: 0.323.0(svelte@4.2.10)
+        specifier: 0.324.0
+        version: 0.324.0(svelte@4.2.10)
       postcss:
         specifier: 8.4.35
         version: 8.4.35
@@ -259,8 +259,8 @@ importers:
         specifier: 0.4.3
         version: 0.4.3(@sveltejs/kit@2.5.0)
       sveltekit-superforms:
-        specifier: 2.0.0-alpha.52
-        version: 2.0.0-alpha.52(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
+        specifier: 2.0.0
+        version: 2.0.0(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
       sveltekit-view-transition:
         specifier: 0.5.3
         version: 0.5.3(@sveltejs/kit@2.5.0)(svelte@4.2.10)
@@ -268,8 +268,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       tailwind-variants:
-        specifier: 0.1.20
-        version: 0.1.20(tailwindcss@3.4.1)
+        specifier: 0.2.0
+        version: 0.2.0(tailwindcss@3.4.1)
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -400,7 +400,7 @@ importers:
         version: 1.1.3
       '@vite-pwa/sveltekit':
         specifier: 0.3.0
-        version: 0.3.0(@sveltejs/kit@2.5.0)(vite-plugin-pwa@0.18.0)
+        version: 0.3.0(@sveltejs/kit@2.5.0)(vite-plugin-pwa@0.18.1)
       '@vitest/coverage-v8':
         specifier: 1.2.2
         version: 1.2.2(vitest@1.2.2)
@@ -519,14 +519,17 @@ importers:
         specifier: 0.4.3
         version: 0.4.3(@sveltejs/kit@2.5.0)
       sveltekit-superforms:
-        specifier: 1.13.4
-        version: 1.13.4(@sveltejs/kit@2.5.0)(svelte@4.2.10)(zod@3.22.4)
+        specifier: 2.0.0
+        version: 2.0.0(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
       sveltekit-view-transition:
         specifier: 0.5.3
         version: 0.5.3(@sveltejs/kit@2.5.0)(svelte@4.2.10)
       tailwind-merge:
         specifier: 2.2.1
         version: 2.2.1
+      tailwind-variants:
+        specifier: 0.2.0
+        version: 0.2.0(tailwindcss@3.4.1)
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -543,8 +546,8 @@ importers:
         specifier: 5.1.1
         version: 5.1.1(@types/node@20.11.17)
       vite-plugin-pwa:
-        specifier: 0.18.0
-        version: 0.18.0(vite@5.1.1)(workbox-build@7.0.0)(workbox-window@7.0.0)
+        specifier: 0.18.1
+        version: 0.18.1(vite@5.1.1)(workbox-build@7.0.0)(workbox-window@7.0.0)
       vite-plugin-tailwind-purgecss:
         specifier: 0.2.0
         version: 0.2.0(vite@5.1.1)
@@ -647,10 +650,10 @@ importers:
         version: 2.36.0-next.5(eslint@8.56.0)(svelte@4.2.10)
       formsnap:
         specifier: 0.4.3
-        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@1.13.4)(zod@3.22.4)
+        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0)(zod@3.22.4)
       lucide-svelte:
-        specifier: 0.323.0
-        version: 0.323.0(svelte@4.2.10)
+        specifier: 0.324.0
+        version: 0.324.0(svelte@4.2.10)
       postcss:
         specifier: 8.4.35
         version: 8.4.35
@@ -682,8 +685,8 @@ importers:
         specifier: 0.4.3
         version: 0.4.3(@sveltejs/kit@2.5.0)
       sveltekit-superforms:
-        specifier: 1.13.4
-        version: 1.13.4(@sveltejs/kit@2.5.0)(svelte@4.2.10)(zod@3.22.4)
+        specifier: 2.0.0
+        version: 2.0.0(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
       sveltekit-view-transition:
         specifier: 0.5.3
         version: 0.5.3(@sveltejs/kit@2.5.0)(svelte@4.2.10)
@@ -691,8 +694,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       tailwind-variants:
-        specifier: 0.1.20
-        version: 0.1.20(tailwindcss@3.4.1)
+        specifier: 0.2.0
+        version: 0.2.0(tailwindcss@3.4.1)
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -898,13 +901,13 @@ importers:
         version: 2.36.0-next.5(eslint@8.56.0)(svelte@4.2.10)
       formsnap:
         specifier: 0.4.3
-        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0-alpha.52)(zod@3.22.4)
+        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0)(zod@3.22.4)
       layerchart:
         specifier: 0.27.1
         version: 0.27.1(@fortawesome/free-regular-svg-icons@6.5.1)(@fortawesome/free-solid-svg-icons@6.5.1)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.10)(typescript@5.3.3)
       lucide-svelte:
-        specifier: 0.323.0
-        version: 0.323.0(svelte@4.2.10)
+        specifier: 0.324.0
+        version: 0.324.0(svelte@4.2.10)
       postcss:
         specifier: 8.4.35
         version: 8.4.35
@@ -939,8 +942,8 @@ importers:
         specifier: 0.4.3
         version: 0.4.3(@sveltejs/kit@2.5.0)
       sveltekit-superforms:
-        specifier: 2.0.0-alpha.52
-        version: 2.0.0-alpha.52(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
+        specifier: 2.0.0
+        version: 2.0.0(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
       sveltekit-view-transition:
         specifier: 0.5.3
         version: 0.5.3(@sveltejs/kit@2.5.0)(svelte@4.2.10)
@@ -948,8 +951,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       tailwind-variants:
-        specifier: 0.1.20
-        version: 0.1.20(tailwindcss@3.4.1)
+        specifier: 0.2.0
+        version: 0.2.0(tailwindcss@3.4.1)
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -1036,8 +1039,8 @@ importers:
         specifier: 0.8.0
         version: 0.8.0
       lucide-svelte:
-        specifier: 0.323.0
-        version: 0.323.0(svelte@4.2.10)
+        specifier: 0.324.0
+        version: 0.324.0(svelte@4.2.10)
       mode-watcher:
         specifier: 0.2.0
         version: 0.2.0(svelte@4.2.10)
@@ -1193,10 +1196,10 @@ importers:
         version: 6.0.3(postcss@8.4.35)
       formsnap:
         specifier: 0.4.3
-        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0-alpha.52)(zod@3.22.4)
+        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0)(zod@3.22.4)
       lucide-svelte:
-        specifier: 0.323.0
-        version: 0.323.0(svelte@4.2.10)
+        specifier: 0.324.0
+        version: 0.324.0(svelte@4.2.10)
       postcss:
         specifier: 8.4.35
         version: 8.4.35
@@ -1207,14 +1210,14 @@ importers:
         specifier: 5.0.3
         version: 5.0.3(postcss@8.4.35)
       sveltekit-superforms:
-        specifier: 2.0.0-alpha.52
-        version: 2.0.0-alpha.52(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
+        specifier: 2.0.0
+        version: 2.0.0(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
       tailwind-merge:
         specifier: 2.2.1
         version: 2.2.1
       tailwind-variants:
-        specifier: 0.1.20
-        version: 0.1.20(tailwindcss@3.4.1)
+        specifier: 0.2.0
+        version: 0.2.0(tailwindcss@3.4.1)
       tailwindcss:
         specifier: 3.4.1
         version: 3.4.1
@@ -1259,16 +1262,16 @@ importers:
         version: 0.0.13(svelte@4.2.10)
       formsnap:
         specifier: 0.4.3
-        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@1.13.4)(zod@3.22.4)
+        version: 0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0)(zod@3.22.4)
       lucide-svelte:
-        specifier: 0.323.0
-        version: 0.323.0(svelte@4.2.10)
+        specifier: 0.324.0
+        version: 0.324.0(svelte@4.2.10)
       svelte:
         specifier: ^4.0.0
         version: 4.2.10
       sveltekit-superforms:
-        specifier: 1.13.4
-        version: 1.13.4(@sveltejs/kit@2.5.0)(svelte@4.2.10)(zod@3.22.4)
+        specifier: 2.0.0
+        version: 2.0.0(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
       swiper:
         specifier: 11.0.6
         version: 11.0.6
@@ -1276,8 +1279,8 @@ importers:
         specifier: 2.2.1
         version: 2.2.1
       tailwind-variants:
-        specifier: 0.1.20
-        version: 0.1.20(tailwindcss@3.4.1)
+        specifier: 0.2.0
+        version: 0.2.0(tailwindcss@3.4.1)
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -2913,7 +2916,7 @@ packages:
       '@changesets/types': 6.0.0
       '@changesets/write': 0.3.0
       '@manypkg/get-packages': 1.1.3
-      '@types/semver': 7.5.6
+      '@types/semver': 7.5.7
       ansi-colors: 4.1.3
       chalk: 2.4.2
       ci-info: 3.9.0
@@ -3762,7 +3765,7 @@ packages:
     resolution: {integrity: sha512-U/jCYwpzaRjKPhuMj5VdIiIFiIBtiX7lqkyqA+WjpG6S1j91N+5c6LOPUYC54b/N6bKr+fmTj9f05CpWRIuPXw==}
     dependencies:
       chalk: 4.1.2
-      dotenv: 16.4.1
+      dotenv: 16.4.2
       dotenv-expand: 10.0.0
       find-up: 5.0.0
     dev: true
@@ -3816,7 +3819,6 @@ packages:
     cpu: [ppc64]
     os: [aix]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-arm64@0.18.20:
@@ -3842,7 +3844,6 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-arm@0.18.20:
@@ -3868,7 +3869,6 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-x64@0.18.20:
@@ -3894,7 +3894,6 @@ packages:
     cpu: [x64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/darwin-arm64@0.18.20:
@@ -3920,7 +3919,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/darwin-x64@0.18.20:
@@ -3946,7 +3944,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/freebsd-arm64@0.18.20:
@@ -3972,7 +3969,6 @@ packages:
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/freebsd-x64@0.18.20:
@@ -3998,7 +3994,6 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-arm64@0.18.20:
@@ -4024,7 +4019,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-arm@0.18.20:
@@ -4050,7 +4044,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-ia32@0.18.20:
@@ -4076,7 +4069,6 @@ packages:
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-loong64@0.18.20:
@@ -4102,7 +4094,6 @@ packages:
     cpu: [loong64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-mips64el@0.18.20:
@@ -4128,7 +4119,6 @@ packages:
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-ppc64@0.18.20:
@@ -4154,7 +4144,6 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-riscv64@0.18.20:
@@ -4180,7 +4169,6 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-s390x@0.18.20:
@@ -4206,7 +4194,6 @@ packages:
     cpu: [s390x]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-x64@0.18.20:
@@ -4232,7 +4219,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/netbsd-x64@0.18.20:
@@ -4258,7 +4244,6 @@ packages:
     cpu: [x64]
     os: [netbsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/openbsd-x64@0.18.20:
@@ -4284,7 +4269,6 @@ packages:
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/sunos-x64@0.18.20:
@@ -4310,7 +4294,6 @@ packages:
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-arm64@0.18.20:
@@ -4336,7 +4319,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-ia32@0.18.20:
@@ -4362,7 +4344,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-x64@0.18.20:
@@ -4388,7 +4369,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.56.0):
@@ -4532,7 +4512,6 @@ packages:
       esbuild: 0.20.0
       esbuild-runner: 2.2.2(esbuild@0.20.0)
       valibot: 0.28.1
-    dev: true
     optional: true
 
   /@graphql-tools/executor@1.2.0(graphql@15.8.0):
@@ -4662,7 +4641,6 @@ packages:
   /@hapi/hoek@9.3.0:
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /@hapi/topo@5.1.0:
@@ -4670,7 +4648,6 @@ packages:
     requiresBuild: true
     dependencies:
       '@hapi/hoek': 9.3.0
-    dev: true
     optional: true
 
   /@humanwhocodes/config-array@0.11.14:
@@ -6267,19 +6244,16 @@ packages:
     requiresBuild: true
     dependencies:
       '@hapi/hoek': 9.3.0
-    dev: true
     optional: true
 
   /@sideway/formula@3.0.1:
     resolution: {integrity: sha512-/poHZJJVjx3L+zVD6g9KgHfYnb443oi7wLu/XKojDviHy6HOEOA6z1Trk5aR1dGcmPenJEgb2sK2I80LeS3MIg==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /@sideway/pinpoint@2.0.0:
     resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /@simplewebauthn/browser@6.2.2:
@@ -6294,10 +6268,9 @@ packages:
     resolution: {integrity: sha512-/s55Jujywdw/Jpan+vsy6JZs1z2ZTGxTmbZTPiuSL2wz9mfzA2gN1zzaqmvfi4pq+uOt7Du85fkiwv5ymW84aQ==}
     dev: true
 
-  /@sinclair/typebox@0.32.13:
-    resolution: {integrity: sha512-6gfhrgov2RWxPIlGyFcCVn1DejhmQvObIiBIx/Qx3FRnxlLS/RuoyDxK1hhhVU+S5+1Xmul32QALLErVfinyxw==}
+  /@sinclair/typebox@0.32.14:
+    resolution: {integrity: sha512-EC77Mw8huT2z9YlYbWfpIQgN6shZE1tH4NP4/Trig8UBel9FZNMZRJ42ubJI8PLor2uIU+waLml1dce5ReCOPg==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /@skeletonlabs/skeleton@2.8.0(svelte@4.2.10):
@@ -6320,7 +6293,6 @@ packages:
   /@sodaru/yup-to-json-schema@2.0.1:
     resolution: {integrity: sha512-lWb0Wiz8KZ9ip/dY1eUqt7fhTPmL24p6Hmv5Fd9pzlzAdw/YNcWZr+tiCT4oZ4Zyxzi9+1X4zv82o7jYvcFxYA==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /@surma/rollup-plugin-off-main-thread@2.2.3:
@@ -7352,6 +7324,11 @@ packages:
 
   /@types/semver@7.5.6:
     resolution: {integrity: sha512-dn1l8LaMea/IjDoHNd9J52uBbInB796CDffS6VdIxvqYCPSG0V0DzHp76GpaWnlhg88uYyPbXCDIowa86ybd5A==}
+    dev: false
+
+  /@types/semver@7.5.7:
+    resolution: {integrity: sha512-/wdoPq1QqkSj9/QOeKkFquEuPzQbHTWAMPH/PaUMB+JuR31lXhlWXRZ52IpfDYVlDOUBvX09uBrPwxGT1hjNBg==}
+    dev: true
 
   /@types/statuses@2.0.4:
     resolution: {integrity: sha512-eqNDvZsCNY49OAXB0Firg/Sc2BgoWsntsLUdybGFOhAfCD6QJ2n9HXUIHGqt5qjrxmMv4wS8WLAw43ZkKcJ8Pw==}
@@ -7626,7 +7603,7 @@ packages:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.56.0)
       '@types/json-schema': 7.0.15
-      '@types/semver': 7.5.6
+      '@types/semver': 7.5.7
       '@typescript-eslint/scope-manager': 6.21.0
       '@typescript-eslint/types': 6.21.0
       '@typescript-eslint/typescript-estree': 6.21.0(typescript@5.3.3)
@@ -7718,7 +7695,7 @@ packages:
       svelte: 4.2.10
     dev: true
 
-  /@vite-pwa/sveltekit@0.3.0(@sveltejs/kit@2.5.0)(vite-plugin-pwa@0.18.0):
+  /@vite-pwa/sveltekit@0.3.0(@sveltejs/kit@2.5.0)(vite-plugin-pwa@0.18.1):
     resolution: {integrity: sha512-cqVqHBm7kn3CQvNuBj21CSjf8Ub8rWhYJrYqr3qzQeWAm70ODASyaPc4vY8rwoxYGTnwWpgZ/ivJXmYV2G3j6Q==}
     engines: {node: '>=16.14 || >=18.13'}
     peerDependencies:
@@ -7727,7 +7704,7 @@ packages:
     dependencies:
       '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.10)(vite@5.1.1)
       kolorist: 1.8.0
-      vite-plugin-pwa: 0.18.0(vite@5.1.1)(workbox-build@7.0.0)(workbox-window@7.0.0)
+      vite-plugin-pwa: 0.18.1(vite@5.1.1)(workbox-build@7.0.0)(workbox-window@7.0.0)
     dev: true
 
   /@vitest/coverage-v8@1.2.2(vitest@1.2.2):
@@ -8115,7 +8092,6 @@ packages:
   /arktype@1.0.29-alpha:
     resolution: {integrity: sha512-glMLgVhIQRSkR3tymiS+POAcWVJH09sfrgic0jHnyFL8BlhHAJZX2BzdImU9zYr1y9NBqy+U93ZNrRTHXsKRDw==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /array-buffer-byte-length@1.0.1:
@@ -10132,8 +10108,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /dotenv@16.4.1:
-    resolution: {integrity: sha512-CjA3y+Dr3FyFDOAMnxZEGtnW9KBR2M0JvvUtXNW+dYJL5ROWxP9DUHCwgFqpMk0OXCc0ljhaNTr2w/kutYIcHQ==}
+  /dotenv@16.4.2:
+    resolution: {integrity: sha512-rZSSFxke7d9nYQ5NeMIwp5PP+f8wXgKNljpOb7KtH6SKW1cEqcXAz9VSJYVLKe7Jhup/gUYOkaeSVyK8GJ+nBg==}
     engines: {node: '>=12'}
     dev: true
 
@@ -10236,7 +10212,7 @@ packages:
       has-property-descriptors: 1.0.1
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.1
       internal-slot: 1.0.7
       is-array-buffer: 3.0.4
       is-callable: 1.2.7
@@ -10289,12 +10265,12 @@ packages:
     dependencies:
       get-intrinsic: 1.2.4
       has-tostringtag: 1.0.2
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /es-shim-unscopables@1.0.2:
     resolution: {integrity: sha512-J3yBRXCzDu4ULnQwxyToo/OjdMx6akgVC7K6few0a7F/0wLtmKKN7I73AH5T2836UuXRqN7Qg+IIUw/+YJksRw==}
     dependencies:
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /es-to-primitive@1.2.1:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
@@ -10351,7 +10327,6 @@ packages:
       esbuild: 0.20.0
       source-map-support: 0.5.21
       tslib: 2.4.0
-    dev: true
     optional: true
 
   /esbuild-wasm@0.19.12:
@@ -10449,7 +10424,6 @@ packages:
       '@esbuild/win32-arm64': 0.20.0
       '@esbuild/win32-ia32': 0.20.0
       '@esbuild/win32-x64': 0.20.0
-    dev: true
     optional: true
 
   /escalade@3.1.2:
@@ -11265,7 +11239,7 @@ packages:
       fetch-blob: 3.2.0
     dev: true
 
-  /formsnap@0.4.3(svelte@4.2.10)(sveltekit-superforms@1.13.4)(zod@3.22.4):
+  /formsnap@0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0)(zod@3.22.4):
     resolution: {integrity: sha512-PWVq78XVUHhAU1tcVGKeGamk6B4Opkk1uVNRW2YofiQpnA5Bry1c3TQjB9cVDw5u4oAwmDvIoAzVHlrAIgc+tw==}
     peerDependencies:
       svelte: ^4.0.0
@@ -11273,20 +11247,8 @@ packages:
       zod: ^3.22.2
     dependencies:
       svelte: 4.2.10
-      sveltekit-superforms: 1.13.4(@sveltejs/kit@2.5.0)(svelte@4.2.10)(zod@3.22.4)
+      sveltekit-superforms: 2.0.0(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
       zod: 3.22.4
-
-  /formsnap@0.4.3(svelte@4.2.10)(sveltekit-superforms@2.0.0-alpha.52)(zod@3.22.4):
-    resolution: {integrity: sha512-PWVq78XVUHhAU1tcVGKeGamk6B4Opkk1uVNRW2YofiQpnA5Bry1c3TQjB9cVDw5u4oAwmDvIoAzVHlrAIgc+tw==}
-    peerDependencies:
-      svelte: ^4.0.0
-      sveltekit-superforms: ^1.7.1
-      zod: ^3.22.2
-    dependencies:
-      svelte: 4.2.10
-      sveltekit-superforms: 2.0.0-alpha.52(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10)
-      zod: 3.22.4
-    dev: true
 
   /fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
@@ -11452,7 +11414,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /get-own-enumerable-property-symbols@3.0.2:
     resolution: {integrity: sha512-I0UBV/XOz1XkIJHEUDMZAbzCThU/H8DxmSfmdGcKPnVhu2VfFqr34jr9777IyaTYvxjedWhqVIilEDsCdP5G6g==}
@@ -11727,6 +11689,13 @@ packages:
 
   /hasown@2.0.0:
     resolution: {integrity: sha512-vUptKVTpIJhcczKBbgnS+RtcuYMB8+oNzPK2/Hp3hanz8JmpATdmmgLgSaadVREkDm+e2giHwY3ZRkyjSIDDFA==}
+    engines: {node: '>= 0.4'}
+    dependencies:
+      function-bind: 1.1.2
+    dev: false
+
+  /hasown@2.0.1:
+    resolution: {integrity: sha512-1/th4MHjnwncwXsIW6QMzlvYL9kG5e/CpVvLRZe4XPa8TOUNbCELqmvhDmnkNsAjwaG4+I8gJJL0JBvTTLO9qA==}
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
@@ -12230,7 +12199,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       es-errors: 1.3.0
-      hasown: 2.0.0
+      hasown: 2.0.1
       side-channel: 1.0.5
 
   /internmap@1.0.1:
@@ -12324,7 +12293,7 @@ packages:
   /is-core-module@2.13.1:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
     dependencies:
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /is-date-object@1.0.5:
     resolution: {integrity: sha512-9YQaSxsAiSwcvS33MBk3wTCVnWK+HhF8VZR2jRxehM16QcVOdHqPn4VPHmRK4lSr38n9JriurInLcP90xsYNfQ==}
@@ -12702,7 +12671,6 @@ packages:
       '@sideway/address': 4.1.5
       '@sideway/formula': 3.0.1
       '@sideway/pinpoint': 2.0.0
-    dev: true
     optional: true
 
   /jose@5.2.1:
@@ -12873,7 +12841,6 @@ packages:
 
   /just-clone@6.2.0:
     resolution: {integrity: sha512-1IynUYEc/HAwxhi3WDpIpxJbZpMCvvrrmZVqvj9EhpvbH8lls7HhdhiByjL7DkAaWlLIzpC0Xc/VPvy/UxLNjA==}
-    dev: true
 
   /jwa@1.4.1:
     resolution: {integrity: sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==}
@@ -12910,10 +12877,6 @@ packages:
   /kleur@4.1.5:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
-
-  /klona@2.0.6:
-    resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
-    engines: {node: '>= 8'}
 
   /known-css-properties@0.29.0:
     resolution: {integrity: sha512-Ne7wqW7/9Cz54PDt4I3tcV+hAyat8ypyOGzYRJQfdxnnjeWsTxt1cy8pjvvKeI5kfXuyvULyeeAvwvvtAX3ayQ==}
@@ -12962,7 +12925,7 @@ packages:
       date-fns: 2.30.0
       layercake: 8.0.2(svelte@4.2.10)(typescript@5.3.3)
       lodash-es: 4.17.21
-      posthog-js: 1.105.6
+      posthog-js: 1.105.7
       shapefile: 0.6.6
       svelte: 4.2.10
       svelte-ux: 0.56.0(@fortawesome/free-regular-svg-icons@6.5.1)(@fortawesome/free-solid-svg-icons@6.5.1)(@mdi/js@7.4.47)(prism-svelte@0.5.0)(prism-themes@1.9.0)(prismjs@1.29.0)(sveld@0.18.1)(svelte@4.2.10)
@@ -13224,8 +13187,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucide-svelte@0.323.0(svelte@4.2.10):
-    resolution: {integrity: sha512-3GEFk1vCwB8BtHTHZTocFJfX6AtTLQw9a74JSuihAGx+MzhxqeWk8W1TkM4WUlvE0x9UdONM2rJGRyx9IyjkJg==}
+  /lucide-svelte@0.324.0(svelte@4.2.10):
+    resolution: {integrity: sha512-mR1yEA+aG0KGl6oc2AV9yYRjoK6N1pVhDJgI/jVOrEo0HVn0UqdLnmgKKYYS3iTX1OeFZGltj3a0/5OCaZz5wA==}
     peerDependencies:
       svelte: ^3 || ^4 || ^5.0.0-next.42
     dependencies:
@@ -13566,7 +13529,6 @@ packages:
 
   /memoize-weak@1.0.2:
     resolution: {integrity: sha512-gj39xkrjEw7nCn4nJ1M5ms6+MyMlyiGmttzsqAUsAKn6bYKwuTHh/AO3cKPF8IBrTIYTxb0wWXFs3E//Y8VoWQ==}
-    dev: true
 
   /memoizee@0.4.15:
     resolution: {integrity: sha512-UBWmJpLZd5STPm7PMUlOw/TSy972M+z8gcyQ5veOnSDRREz/0bmpyTfKt3/51DhEBqCZQn1udM/5flcSPYhkdQ==}
@@ -15537,8 +15499,8 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
-  /posthog-js@1.105.6:
-    resolution: {integrity: sha512-5ITXsh29XIuNohHLy21nawGnfFZDpyt+yfnWge9sJl5yv0nNuoUmLiDgw1tJafoqGrfd5CUasKyzSI21HxsSeQ==}
+  /posthog-js@1.105.7:
+    resolution: {integrity: sha512-skpVufQrYllZ4Hi5bdBfe1F9pzeym1rlXUuvKbEYbMhmA+FCz47ZZ0zDX6a72A5hqPW5h7ZBTEJZbwad7jYt1A==}
     dependencies:
       fflate: 0.4.8
       preact: 10.19.4
@@ -15859,7 +15821,6 @@ packages:
   /property-expr@2.0.6:
     resolution: {integrity: sha512-SVtmxhRE/CGkn3eZY1T6pC8Nln6Fr/lu1mKSgRud0eC73whjGfoAogbn78LkD8aFL0zz3bAFerKSnOl7NlErBA==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /property-information@6.4.1:
@@ -16868,12 +16829,10 @@ packages:
     dependencies:
       buffer-from: 1.1.2
       source-map: 0.6.1
-    dev: true
 
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /source-map@0.7.4:
     resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
@@ -17191,7 +17150,6 @@ packages:
     resolution: {integrity: sha512-8iTn3oSS8nRGn+C2pgXSKPI3jmpm6FExNazNpjvqS6ZUJQCej3PUXEKM8NjHBOs54ExM+LPW/FBRhymrdcCiSg==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
-    dev: true
     optional: true
 
   /supports-color@5.5.0:
@@ -17661,7 +17619,7 @@ packages:
       date-fns: 2.30.0
       immer: 10.0.3
       lodash-es: 4.17.21
-      posthog-js: 1.105.6
+      posthog-js: 1.105.7
       prism-svelte: 0.5.0
       prism-themes: 1.9.0
       prismjs: 1.29.0
@@ -17756,21 +17714,8 @@ packages:
       '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.10)(vite@5.1.1)
     dev: true
 
-  /sveltekit-superforms@1.13.4(@sveltejs/kit@2.5.0)(svelte@4.2.10)(zod@3.22.4):
-    resolution: {integrity: sha512-rM2+Ictaw7OAIorCLmvg82orci/mtO9ZouI4emtx8SyYngx9aED+eNZlHPLufgB6D7geL2a+hMSFtM3zmMQixQ==}
-    peerDependencies:
-      '@sveltejs/kit': 1.x || 2.x
-      svelte: 3.x || 4.x
-      zod: 3.x
-    dependencies:
-      '@sveltejs/kit': 2.5.0(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.10)(vite@5.1.1)
-      devalue: 4.3.2
-      klona: 2.0.6
-      svelte: 4.2.10
-      zod: 3.22.4
-
-  /sveltekit-superforms@2.0.0-alpha.52(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10):
-    resolution: {integrity: sha512-bgzGXSkaplybQsgK7VxYU+qLLXZ/aa2zbxeaZXwKKizAdCOGUrOxjZlfrP4jfjAisBUojXoqCZvVWDC4zlotaA==}
+  /sveltekit-superforms@2.0.0(@sveltejs/kit@2.5.0)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(svelte@4.2.10):
+    resolution: {integrity: sha512-xCFTpvDl8rBSlD3OtMJU3aFy8aKIoRZyxDyaYyuTIE7w97X+gUM89ACcUOd8MOd0ZYxSchZxOLb9zk/l9MruAA==}
     requiresBuild: true
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
@@ -17799,7 +17744,7 @@ packages:
       ts-deepmerge: 7.0.0
     optionalDependencies:
       '@gcornut/valibot-json-schema': 0.0.22(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.0)(valibot@0.28.1)
-      '@sinclair/typebox': 0.32.13
+      '@sinclair/typebox': 0.32.14
       '@sodaru/yup-to-json-schema': 2.0.1
       arktype: 1.0.29-alpha
       joi: 17.12.1
@@ -17812,7 +17757,6 @@ packages:
       - '@types/json-schema'
       - esbuild
       - esbuild-runner
-    dev: true
 
   /sveltekit-view-transition@0.5.3(@sveltejs/kit@2.5.0)(svelte@4.2.10):
     resolution: {integrity: sha512-qm8NDhpgIyiM3TJfO26iMGZWcWW3/GqsX9KctNWJaZ5ySdnkzZ4p74fkYWelaM2LLEpLDJqzouQLyrgnbszfVA==}
@@ -17918,21 +17862,18 @@ packages:
   /tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
-  /tailwind-merge@1.14.0:
-    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
-
   /tailwind-merge@2.2.1:
     resolution: {integrity: sha512-o+2GTLkthfa5YUt4JxPfzMIpQzZ3adD1vLVkvKE1Twl9UAhGsEbIZhHHZVRttyW177S8PDJI3bTQNaebyofK3Q==}
     dependencies:
       '@babel/runtime': 7.23.9
 
-  /tailwind-variants@0.1.20(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-AMh7x313t/V+eTySKB0Dal08RHY7ggYK0MSn/ad8wKWOrDUIzyiWNayRUm2PIJ4VRkvRnfNuyRuKbLV3EN+ewQ==}
+  /tailwind-variants@0.2.0(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-EuW5Sic7c0tzp+p5rJwAgb7398Jb0hi4zkyCstOoZPW0DWwr+EWkNtnZYEo5CjgE1tazHUzyt4oIhss64UXRVA==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
     peerDependencies:
       tailwindcss: '*'
     dependencies:
-      tailwind-merge: 1.14.0
+      tailwind-merge: 2.2.1
       tailwindcss: 3.4.1
 
   /tailwindcss-animate@1.0.7(tailwindcss@3.4.1):
@@ -18109,7 +18050,6 @@ packages:
   /tiny-case@1.0.3:
     resolution: {integrity: sha512-Eet/eeMhkO6TX8mnUteS9zgPbUMQa4I6Kkp5ORiBD5476/m+PIRiumP5tmh5ioJpH7k51Kehawy2UDfsnxxY8Q==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /tiny-glob@0.2.9:
@@ -18165,7 +18105,6 @@ packages:
   /toposort@2.0.2:
     resolution: {integrity: sha512-0a5EOkAUp8D4moMi2W8ZF8jcga7BgZd91O/yabJCFY8az+XSzeGyTKs0Aoo897iV1Nj6guFq8orWDS96z91oGg==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /totalist@3.0.1:
@@ -18237,7 +18176,6 @@ packages:
   /ts-deepmerge@7.0.0:
     resolution: {integrity: sha512-WZ/iAJrKDhdINv1WG6KZIGHrZDar6VfhftG1QJFpVbOYZMYJLJOvZOo1amictRXVdBXZIgBHKswMTXzElngprA==}
     engines: {node: '>=14.13.1'}
-    dev: true
 
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
@@ -18265,7 +18203,6 @@ packages:
 
   /tslib@2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
-    dev: true
     optional: true
 
   /tslib@2.6.2:
@@ -18809,7 +18746,6 @@ packages:
   /valibot@0.28.1:
     resolution: {integrity: sha512-zQnjwNJuXk6362Leu0+4eFa/SMwRom3/hEvH6s1EGf3oXIPbo2WFKDra9ymnbVh3clLRvd8hw4sKF5ruI2Lyvw==}
     requiresBuild: true
-    dev: true
     optional: true
 
   /validate-npm-package-license@3.0.4:
@@ -18927,8 +18863,8 @@ packages:
       - supports-color
       - terser
 
-  /vite-plugin-pwa@0.18.0(vite@5.1.1)(workbox-build@7.0.0)(workbox-window@7.0.0):
-    resolution: {integrity: sha512-4ReE3KHz3sSXT3o0kpcNHirOYPbbCcnOgJGZX64jFxOvaOmkHXEorm5h1b6XU6/i48f2xzurSGU7w2+4HnziMQ==}
+  /vite-plugin-pwa@0.18.1(vite@5.1.1)(workbox-build@7.0.0)(workbox-window@7.0.0):
+    resolution: {integrity: sha512-2A3BF52l9F8hCkdPy/VP2C+hA+fmBvzJGynCZc9XS6mHTcMvo9046FKc2NqlnkKwTOGtQEwXLEIduML/+eYtdw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0 || ^5.0.0
@@ -19780,7 +19716,6 @@ packages:
       tiny-case: 1.0.3
       toposort: 2.0.2
       type-fest: 2.19.0
-    dev: true
     optional: true
 
   /zod-to-json-schema@3.22.4(zod@3.22.4):
@@ -19790,7 +19725,6 @@ packages:
       zod: ^3.22.4
     dependencies:
       zod: 3.22.4
-    dev: true
     optional: true
 
   /zod-validation-error@3.0.0(zod@3.22.4):

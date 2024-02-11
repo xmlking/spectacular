@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
-import { superValidate } from 'sveltekit-superforms/client';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import { poolUpdateSchema as schema } from '$lib/models/schema';
 import { CachePolicy, GetPoolStore } from '$houdini';
 
@@ -21,7 +22,7 @@ export const load = async (event) => {
 	if (!pools_by_pk) error(404, 'Pool not found');
 	const { displayName, description, tags, annotations, pool_devices } = pools_by_pk;
 
-	const form = await superValidate({ displayName, description, tags, annotations }, schema);
+	const form = await superValidate({ displayName, description, tags, annotations }, zod(schema));
 
 	const inPool = pool_devices?.map(
 		({

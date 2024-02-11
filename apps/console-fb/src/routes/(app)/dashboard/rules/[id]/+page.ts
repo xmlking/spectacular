@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
-import { superValidate } from 'sveltekit-superforms/client';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import { updateRuleSchema as schema } from '$lib/models/schema';
 import { CachePolicy, GetRuleStore } from '$houdini';
 
@@ -19,6 +20,6 @@ export const load = async (event) => {
 	if (errors) error(400, errors[0] as GraphQLError);
 	const rule = data?.rules_by_pk;
 	if (!rule) error(404, 'Rule not found');
-	const form = await superValidate(rule, schema);
+	const form = await superValidate(rule, zod(schema));
 	return { form };
 };

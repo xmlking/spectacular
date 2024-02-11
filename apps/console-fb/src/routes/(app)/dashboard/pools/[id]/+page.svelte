@@ -6,8 +6,8 @@
 	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
 	import { TimeDistance } from 'svelte-time-distance';
 	import { writable } from 'svelte/store';
-	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug from 'sveltekit-superforms';
 	import { Logger } from '@spectacular/utils';
 	import { updatePoolKeys as keys } from '$lib/models/schema';
 	import { addToast, ToastLevel } from '$lib/components/toast';

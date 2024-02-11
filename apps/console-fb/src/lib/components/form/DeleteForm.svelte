@@ -22,7 +22,7 @@
 	import { fail } from '@sveltejs/kit';
 	import type { GraphQLError } from 'graphql';
 	import { redirect } from 'sveltekit-flash-message/server';
-	import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
+	import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 
 	const log = new Logger('rule.action.server');
 

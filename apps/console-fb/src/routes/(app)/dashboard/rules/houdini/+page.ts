@@ -1,5 +1,6 @@
 import { fail } from '@sveltejs/kit';
-import { superValidate } from 'sveltekit-superforms/client';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import { ruleSearchSchema as schema } from '$lib/models/schema';
 import { Logger } from '@spectacular/utils';
 import type {
@@ -23,7 +24,7 @@ export const _SearchSharedRules1Variables: Variables = async ({ url }) => {
 };
 
 export async function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
-	const form = await superValidate(url, schema);
+	const form = await superValidate(url, zod(schema));
 	log.debug('in _houdini_beforeLoad', form);
 	if (!form.valid) return fail(400, { form });
 	// if (!form.valid) throw error(400, 'invalid input');
@@ -36,7 +37,7 @@ export async function _houdini_afterLoad({ event, input, data }: AfterLoadEvent)
 	const {
 		SearchSharedRules1: { rules }
 	} = data;
-	const form = await superValidate(url, schema);
+	const form = await superValidate(url, zod(schema));
 	return {
 		rules,
 		form

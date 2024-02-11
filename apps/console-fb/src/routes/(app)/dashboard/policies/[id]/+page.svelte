@@ -8,8 +8,8 @@
 		UsersGroupOutline
 	} from 'flowbite-svelte-icons';
 	import Select from 'svelte-select';
-	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug from 'sveltekit-superforms';
 	import { dev } from '$app/environment';
 	import {
 		DateInput,

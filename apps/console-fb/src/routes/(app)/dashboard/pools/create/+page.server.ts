@@ -2,7 +2,8 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect } from 'sveltekit-flash-message/server';
-import { setError, setMessage, superValidate } from 'sveltekit-superforms/server';
+import { setError, setMessage, superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import { Logger, cleanClone } from '$lib/utils';
 import { poolCreateSchema as schema } from '$lib/models/schema';
 import { ToastLevel } from '$lib/components/toast';
@@ -20,7 +21,7 @@ export const actions = {
 			throw redirect(307, '/auth/signin?callbackUrl=/dashboard/pools/create');
 		}
 
-		const form = await superValidate(request, schema);
+		const form = await superValidate(request, zod(schema));
 		log.debug({ form });
 
 		// superform validation

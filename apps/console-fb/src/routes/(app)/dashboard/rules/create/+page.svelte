@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug from 'sveltekit-superforms';
 	import { dev } from '$app/environment';
 	import {
 		Toggle,

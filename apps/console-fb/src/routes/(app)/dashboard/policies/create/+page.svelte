@@ -10,8 +10,8 @@
 	} from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
 	import Select from 'svelte-select';
-	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug from 'sveltekit-superforms';
 	import { Logger } from '@spectacular/utils';
 	import type { Subject } from '$lib/models/types';
 	import { createPolicyKeys as keys } from '$lib/models/schema';
@@ -40,7 +40,6 @@
 	// Client API:
 	const superform = superForm(data.form, {
 		dataType: 'json',
-		taintedMessage: null,
 		syncFlashMessage: false,
 		onError({ result, message }) {
 			log.error('superForm', { result }, { message });
@@ -53,6 +52,7 @@
 		errors,
 		constraints,
 		message,
+		isTainted,
 		tainted,
 		posted,
 		allErrors,
@@ -68,7 +68,7 @@
 
 	// FIXME: tags component is not untainting when reset or on initialization.
 	function untaintTags() {
-		if ($tainted?.rule?.tags) {
+		if (isTainted($tainted?.rule?.tags)) {
 			console.log('untaint tags');
 			$tainted = undefined;
 		}

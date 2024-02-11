@@ -1,10 +1,9 @@
 <script lang="ts" context="module">
-	// https://superforms.rocks/components#using-a-formfieldproxy
-	import type { AnyZodObject } from 'zod';
-	type T = AnyZodObject;
+	type T = Record<string, unknown>;
 </script>
 
-<script lang="ts" generics="T extends AnyZodObject">
+<!-- <script lang="ts" generics="T extends Record<string, unknown>"> -->
+<script lang="ts">
 	import { Alert, Button, ButtonGroup, Modal, Spinner } from 'flowbite-svelte';
 	import {
 		AdjustmentsHorizontalOutline,
@@ -13,14 +12,13 @@
 	} from 'flowbite-svelte-icons';
 	import { setContext } from 'svelte';
 	import type { HTMLFormAttributes } from 'svelte/elements';
-	import type { ZodValidation } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms/client';
+	import type { SuperForm } from 'sveltekit-superforms';
 	import { page } from '$app/stores';
 	import { FORM_KEY } from './forms';
 	import type { FormContext } from './forms';
 	interface $$restProps extends HTMLFormAttributes {}
 
-	export let superform: SuperForm<ZodValidation<T>, unknown>;
+	export let superform: SuperForm<T, unknown>;
 	export let showButtons = true;
 	export let showAlerts = true;
 	export let submitButtonText = 'Submit';

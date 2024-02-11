@@ -1,7 +1,5 @@
 import { getContext, hasContext } from 'svelte';
-import type { SuperForm } from 'sveltekit-superforms/client';
-import type { AnyZodObject } from 'zod';
-
+import type { SuperForm } from 'sveltekit-superforms';
 export const FORM_KEY = Symbol('form');
 
 export type RadioOptionType = {
@@ -9,11 +7,11 @@ export type RadioOptionType = {
 	label: string;
 };
 
-export type FormContext<T extends AnyZodObject> = {
+export type FormContext<T extends Record<string, unknown>> = {
 	superform: SuperForm<T, unknown>;
 };
 
-export function getFormContext<T extends AnyZodObject>(): FormContext<T> {
+export function getFormContext<T extends Record<string, unknown>>(): FormContext<T> {
 	if (!hasContext(FORM_KEY)) {
 		throw new Error('FormField must be used within a Form component');
 	}

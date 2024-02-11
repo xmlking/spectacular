@@ -27,8 +27,8 @@
 	import { default as SelectFetch } from 'svelte-select';
 	import { TimeDistance } from 'svelte-time-distance';
 	import { writable } from 'svelte/store';
-	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug from 'sveltekit-superforms';
 	import { Logger } from '@spectacular/utils';
 	import { subjectTypeOptions } from '$lib/models/enums';
 	import { ToastLevel, addToast } from '$lib/components/toast';

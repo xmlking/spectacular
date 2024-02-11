@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
-import { superValidate } from 'sveltekit-superforms/client';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 import { updateDeviceSchema as schema } from '$lib/models/schema';
 import { CachePolicy, GetDeviceStore } from '$houdini';
 
@@ -19,6 +20,6 @@ export const load = async (event) => {
 	if (errors) error(400, errors[0] as GraphQLError);
 	const device = data?.devices_by_pk;
 	if (!device) error(404, 'Device not found');
-	const form = await superValidate(device, schema);
+	const form = await superValidate(device, zod(schema));
 	return { form };
 };
