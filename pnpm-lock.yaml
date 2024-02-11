@@ -295,8 +295,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(@types/node@20.11.17)(@vitest/ui@1.2.2)(jsdom@24.0.0)
       xstate:
-        specifier: 4.38.3
-        version: 4.38.3
+        specifier: 5.6.2
+        version: 5.6.2
       zod:
         specifier: 3.22.4
         version: 3.22.4
@@ -19551,6 +19551,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
@@ -19691,6 +19692,10 @@ packages:
 
   /xstate@4.38.3:
     resolution: {integrity: sha512-SH7nAaaPQx57dx6qvfcIgqKRXIh4L0A1iYEqim4s1u7c9VoCgzZc+63FY90AKU4ZzOC2cfJzTnpO4zK7fCUzzw==}
+    dev: true
+
+  /xstate@5.6.2:
+    resolution: {integrity: sha512-cXYrnP5vrlY4PFkS1l8uP+LY9XAX/7rdVQlWfqfi/gQJEJgCX5AYk5UI/QQfewQ2mrPREBVTmy4QeMlSubepxw==}
     dev: true
 
   /y18n@4.0.3:
