@@ -2,8 +2,8 @@
 	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
 	import {
 		ArrowRightToBracketOutline,
+		GridOutline,
 		BellOutline,
-		PieChartSolid,
 		ClipboardListOutline,
 		CogOutline,
 		ComputerSpeakerOutline,
@@ -35,9 +35,8 @@
 			<SidebarGroup>
 				<!--				<SidebarBrand site={{	name: 'Datablocks',href: '/',img: '/logos/6-1.svg' }}/>-->
 				<SidebarItem href="/dashboard" label="Dashboard">
-					<svelte:fragment slot="icon"
-						><PieChartSolid size="md" class="mr-2 text-red-500 dark:text-blue-500" />
-						<!-- <ChartPieOutline" class="mr-2 text-red-500 dark:text-blue-500" /> -->
+					<svelte:fragment slot="icon">
+						<GridOutline size="md" class="mr-2 text-red-500 dark:text-blue-500" />
 					</svelte:fragment>
 				</SidebarItem>
 				<SidebarItem label="Reports" {spanClass}>
