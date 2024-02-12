@@ -112,9 +112,11 @@
 		dataType: 'json',
 		taintedMessage: null,
 		syncFlashMessage: false,
-		onError({ result, message }) {
+		onError({ result }) {
 			// the onError event allows you to act on ActionResult errors.
-			log.error('superForm', { result }, { message });
+			// TODO:
+			// message.set(result.error.message)
+			log.error('superForm:', { result });
 		}
 	});
 	const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;

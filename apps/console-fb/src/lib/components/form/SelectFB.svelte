@@ -24,18 +24,18 @@
 
 <Label color={$errors ? 'red' : 'gray'} for={field} class={labelClasses}>
 	{label ?? path}
-	<Select
-		name={field}
-		bind:value={$value}
-		data-invalid={$errors}
-		{items}
-		aria-invalid={Boolean($errors)}
-		aria-errormessage={Array($errors).join('. ')}
-		aria-required="{$constraints?.required},"
-		{...$constraints}
-		{...$$restProps}
-	/>
 </Label>
+<Select
+	name={field}
+	bind:value={$value}
+	data-invalid={$errors}
+	{items}
+	aria-invalid={Boolean($errors)}
+	aria-errormessage={Array($errors).join('. ')}
+	aria-required={$constraints?.required}
+	{...$constraints}
+	{...$$restProps}
+/>
 {#if $errors}
 	<Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

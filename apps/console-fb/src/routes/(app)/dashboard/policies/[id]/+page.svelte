@@ -15,7 +15,7 @@
 		DateInput,
 		FloatingTextInput,
 		Form,
-		Select as FormSelect,
+		SelectFB as FormSelect,
 		Radio,
 		Range,
 		TagsInput,
@@ -37,8 +37,11 @@
 		dataType: 'json',
 		taintedMessage: null,
 		syncFlashMessage: false,
-		onError({ result, message }) {
-			log.error('superForm', { result }, { message });
+		onError({ result }) {
+			// the onError event allows you to act on ActionResult errors.
+			// TODO:
+			// message.set(result.error.message)
+			log.error('superForm:', { result });
 		}
 	});
 	const {

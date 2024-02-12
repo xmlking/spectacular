@@ -11,6 +11,7 @@
 	import { formFieldProxy } from 'sveltekit-superforms';
 	import { getFormContext } from './forms';
 
+	// eslint-disable-next-line no-undef
 	export let form: SuperForm<T, unknown>;
 	export let field: FormPathLeaves<T>;
 	export let label = '';

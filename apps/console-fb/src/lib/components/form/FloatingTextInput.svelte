@@ -26,11 +26,9 @@
 	{type}
 	{style}
 	{size}
-	{label}
 	name={field}
 	bind:value={$value}
 	data-invalid={$errors}
-	class="input-bordered input"
 	color={$errors ? 'red' : 'base'}
 	aria-describedby={`${path}_help`}
 	aria-invalid={Boolean($errors)}
@@ -38,7 +36,9 @@
 	aria-required="{$constraints?.required},"
 	{...$constraints}
 	{...$$restProps}
-/>
+>
+	{label}
+</FloatingLabelInput>
 {#if $errors}
 	<Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

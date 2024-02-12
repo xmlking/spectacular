@@ -11,7 +11,7 @@
 	import { default as Frame } from '$lib/components/utils/Frame.svelte';
 	import { ToastLevel, dismissToast, toasts } from './store';
 
-	export let divClass = 'w-full max-w-xs p-4 ';
+	export let divClass = 'w-full max-w-xs p-4 z-50';
 
 	export let placement:
 		| 'top-left'
