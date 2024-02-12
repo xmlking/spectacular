@@ -120,7 +120,7 @@
 						</svg>
 					</div>
 					<div class="ml-5 w-0 flex-1">
-						<dt class="truncate text-sm font-medium text-gray-500">Total Threat Blocked</dt>
+						<dt class="truncate text-sm font-medium text-gray-500">Total Risks Blocked</dt>
 						<dd class="flex items-baseline">
 							<div class="text-2xl font-semibold text-gray-900">87,343</div>
 

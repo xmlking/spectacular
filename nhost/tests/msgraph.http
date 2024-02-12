@@ -39,7 +39,7 @@ ConsistencyLevel: eventual
 GET {{graphEndpoint}}/groups
 ?$count=true
 &$top=10
-&$search="displayName:threatzero"
+&$search="displayName:sumo"
 &$select=id,displayName,securityIdentifier
 Authorization: Bearer {{token}}
 ConsistencyLevel: eventual
