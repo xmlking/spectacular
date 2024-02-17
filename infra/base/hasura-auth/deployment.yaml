@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+spec:
+  template:
+    spec:
+      containers:
+        - name: auth
+          image: hasura/graphql-engine:v2.37.0-ce
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: env-vars
+            - configMapRef:
+                name: env-vars-common
+            - secretRef:
+                name: secrets
+          env:
+            - name: HASURA_GRAPHQL_DATABASE_URL
+              value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_SERVICE_NAME):5432/$(POSTGRES_DB)
+            - name: HASURA_GRAPHQL_JWT_SECRET
+              value: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          resources: {}
+          volumeMounts:
+            - mountPath: /nhost/emails/bg/email-confirm-change
+              name: nhost-emails-configmap
+      volumes:
+        - name: nhost-emails-configmap
+          configMap:
+            name: nhost-emails-configmap

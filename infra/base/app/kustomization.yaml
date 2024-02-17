@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - console
+  - docs
+  - web
+
+configMapGenerator:
+  #  - name: env-vars
+  - name: env-vars-common
+    literals:
+      - CONFY_ENV=development
+      - CONFY_LOG_LEVEL=debug
+      - CONFY_LOG_FORMAT=text
+#secretGenerator:
+#   - name: app-tls
+#     files:
+#       - secret/tls.cert
+#       - secret/tls.key

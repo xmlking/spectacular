@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  publishNotReadyAddresses: true  # We want the servers to become available even if they're not ready
+  # type: NodePort
+  ports:
+  - name: tcp-pg
+    port: 5432
+    targetPort: tcp-pg
+    # nodePort: 31432
