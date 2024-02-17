@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+labels:
+  - includeSelectors: true
+    pairs:
+      app.kubernetes.io/name: hasura-auth
+      app.kubernetes.io/instance: hasura-auth-abcxzy
+      app.kubernetes.io/component: microservice
+
+namePrefix: hasura1-
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+configMapGenerator:
+  - name: env-vars
+    literals:
+      - HASURA_GRAPHQL_LOG_LEVEL=info
+  - name: nhost-emails-configmap
+    files:
+      - '../../../nhost/emails/bg/email-confirm-change/body.html'
+      - '../../../nhost/emails/bg/email-confirm-change/subject.txt'
+# vars:
+#   - name: ENVOY_SERVICE_ENDPOINT
+#     objref:
+#       kind: Service
+#       name: envoy
+#       apiVersion: v1
+#     fieldref:
+#       fieldpath: metadata.name

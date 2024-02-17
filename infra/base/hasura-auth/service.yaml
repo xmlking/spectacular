@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth
+spec:
+  publishNotReadyAddresses: true # We want the servers to become available even if they're not ready
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http

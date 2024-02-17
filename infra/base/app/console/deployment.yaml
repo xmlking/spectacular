@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: xmlking/console-app:latest
+          # image: ko://github.com/xmlking/spectaqular/apps/console
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: env-vars
+            - configMapRef:
+                name: env-vars-common
+            - secretRef:
+                name: secrets
+          readinessProbe:
+            exec:
+              command: ['/bin/grpc_health_probe', '-addr=:8080']
+            initialDelaySeconds: 1
+          livenessProbe:
+            exec:
+              command: ['/bin/grpcurl', '-plaintext', 'localhost:8080', 'ping.Pinger/Ping']
+            initialDelaySeconds: 1

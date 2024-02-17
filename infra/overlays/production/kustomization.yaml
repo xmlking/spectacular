@@ -7,9 +7,11 @@ namespace: production
 namePrefix: prod-
 nameSuffix: -v1
 
-commonLabels:
-  environment: production
-  app.kubernetes.io/version: v1
+labels:
+  - includeSelectors: true
+    pairs:
+      environment: production
+      app.kubernetes.io/version: v1
 commonAnnotations:
   note: Hello, I am production!
 
@@ -17,33 +19,25 @@ resources:
   - ../../base/service
 
 configMapGenerator:
-#  - name: env-vars
+  #  - name: env-vars
   - name: env-vars-common
     behavior: merge
     literals:
-      - CONFY_ENV=production
-      - CONFY_LOG_LEVEL=debug
-      - CONFY_LOG_FORMAT=gcp
-      - CONFY_FILE_PATH=/config/config.yml
-      - CONFY_DEBUG_MODE=true
-      - CONFY_VERBOSE_MODE=true
-      - CONFY_USE_PKGER=true
-      - CONFY_FEATURES_TLS_ENABLED=true
-      - CONFY_FEATURES_RPCLOG_ENABLED=false
-      - MICRO_BROKER=googlepubsub
-      - GRPC_GO_LOG_SEVERITY_LEVEL="info"
-      - GRPC_GO_LOG_VERBOSITY_LEVEL="99"
-      # - INSECURE_SKIP_VERIFY=true
-      # following endpoint overwrites (in config.yml)
-      # - CONFY_SERVICES_ACCOUNT_ENDPOINT=$(ACCOUNT_SERVICE_ENDPOINT)
-      # - CONFY_SERVICES_GREETER_ENDPOINT=$(GREETER_SERVICE_ENDPOINT)
-      # - CONFY_SERVICES_EMAILER_SERVICE_ENDPOINT=$(EMAILER_SERVICE_ENDPOINT)
-      # - CONFY_SERVICES_RECORDER_ENDPOINT=$(RECORDER_SERVICE_ENDPOINT)
+      - PUBLIC_GRAPHQL_ENDPOINT=https://hasura.localhost.direct/v1/graphql
+      - AUTH_CLIENT_URL=https://console.localhost.direct:5173
+      - PUBLIC_NHOST_SUBDOMAIN=local
+      - PUBLIC_NHOST_REGION=
+      - NHOST_HASURA_URL=https://hasura.localhost.direct/console
+      - NHOST_AUTH_URL=https://auth.localhost.direct/v1
+      - NHOST_GRAPHQL_URL=https://hasura.localhost.direct/v1
+      - NHOST_STORAGE_URL=https://storage.localhost.direct/v1
+      - NHOST_FUNCTIONS_URL=https://functions.localhost.direct/v1
+
 secretGenerator:
   - name: secrets
-    behavior: replace
+    behavior: merge
     literals:
-      - DATABASE_PASSWORD=prod-real-pass
+      - POSTGRES_PASSWORD=prod-real-pass
   # - name: registry-credentials
   #   files:
   #       - ".dockerconfigjson=docker.secret.json"

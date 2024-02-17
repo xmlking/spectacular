@@ -1,8 +1,35 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-commonLabels:
-  app.kubernetes.io/part-of: grpc-starter-kit
-  app.kubernetes.io/managed-by: kustomize
+resources:
+  - postgres
+  - hasura
+  - hasura-auth
+  - app
+
+labels:
+  - includeSelectors: true
+    pairs:
+      app.kubernetes.io/part-of: signals
+      app.kubernetes.io/managed-by: kustomize
 commonAnnotations:
-  org: acmeCorporation
+  org: home-and-community
+
+configMapGenerator:
+  #  - name: env-vars
+  #    behavior: merge
+  - name: env-vars-common
+    behavior: merge
+    literals:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+
+configurations:
+  - kconfig.yaml
+
+secretGenerator:
+  - name: secrets
+    literals:
+      - POSTGRES_PASSWORD=postgres
+      - HASURA_GRAPHQL_ADMIN_SECRET=nhost-admin-secret
+      - HASURA_GRAPHQL_JWT_SECRET_KEY=fake

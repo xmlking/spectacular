@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+labels:
+  - includeSelectors: true
+    pairs:
+      app.kubernetes.io/name: hasura-graphql
+      app.kubernetes.io/instance: hasura-graphql-abcxzy
+      app.kubernetes.io/component: microservice
+
+namePrefix: hasura-
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+configMapGenerator:
+  - name: env-vars
+    literals:
+      - HASURA_GRAPHQL_LOG_LEVEL=info
+      - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=public
+      - HASURA_GRAPHQL_DEV_MODE='true'
+      - HASURA_GRAPHQL_ENABLE_CONSOLE='true'
+      - HASURA_GRAPHQL_ENABLE_TELEMETRY='false'
