@@ -412,7 +412,10 @@ check [example](https://github.com/vite-pwa/sveltekit/tree/main/examples/sveltek
 
 ```shell
 # pnpm add -D @vite-pwa/sveltekit
-pnpm add -D @vite-pwa/sveltekit vite-plugin-pwa workbox-window
+pnpm add -D @vite-pwa/sveltekit @vite-pwa/assets-generator vite-plugin-pwa workbox-window --filter "./apps/console-fb"
+```
+
+add `pwa-assets.config.ts` to project root
 ```
 
 #### Enable https (optional)

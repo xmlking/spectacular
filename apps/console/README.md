@@ -41,7 +41,7 @@ open https://traefik.localhost.direct/dashboard/#/
 | minio     | https://minio.localhost.direct                    |
 | Functions | https://functions.localhost.direct                |
 | Dashboard | https://dashboard.localhost.direct                |
-| Mailhog   | https://mailhog.localhost.direct                  |
+| Mailpit   | https://mailpit.localhost.direct                  |
 
 Stop backend services:
 

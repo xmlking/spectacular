@@ -13,16 +13,20 @@ export default defineConfig({
 		sveltekit(),
 		purgeCss(),
 		SvelteKitPWA({
-			srcDir: './src',
-			// adapterFallback: 'index.html',
+			mode: 'development',
 			base: '/',
 			scope: '/',
+			srcDir: './src',
+			// adapterFallback: 'index.html',
 			/* enable sw on development */
 			devOptions: {
 				enabled: process.env.SW_DEV === 'true',
 				suppressWarnings: true,
 				type: 'module',
 				navigateFallback: '/'
+			},
+			pwaAssets: {
+				config: true,
 			},
 			includeAssets: [
 				'favicon.ico',

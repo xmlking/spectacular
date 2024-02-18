@@ -6,6 +6,7 @@
 	import { setupViewTransition } from 'sveltekit-view-transition';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
+		import { pwaAssetsHead } from 'virtual:pwa-assets/head';
 	import { inject } from '@vercel/analytics';
 	import { Toasts } from '$lib/components/toast';
 	import { dev } from '$app/environment';
@@ -39,13 +40,15 @@
 </script>
 
 <svelte:head>
+	{#if pwaAssetsHead.themeColor}
+		<meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
+	{/if}
+	{#each pwaAssetsHead.links as link}
+		<link {...link} />
+	{/each}
 	<!-- eslint-disable svelte/no-at-html-tags  -->
 	{@html webManifest}
 </svelte:head>
-
-<!-- {#if !dev && envPub.PUBLIC_GOOGLE_ANALYTICS_TARGET_ID}
-	<Analytics gid={envPub.PUBLIC_GOOGLE_ANALYTICS_TARGET_ID} />
-{/if} -->
 
 <Toasts placement="bottom-right" />
 

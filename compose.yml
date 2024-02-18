@@ -145,42 +145,38 @@ services:
       traefik.http.routers.hasura.tls: "true"
       traefik.http.services.hasura.loadbalancer.server.port: "8080"
   ###########################################################################
-  # mailhog
+  # mailpit
   ###########################################################################
-  mailhog:
-    image: jcalonso/mailhog:v1.0.1
-    hostname: mailhog
-    container_name: mailhog
+  mailpit:
+    image: axllent/mailpit:v1.13
+    hostname: mailpit
+    container_name: mailpit
     restart: always
     environment:
-      SMTP_HOST: ${AUTH_SMTP_HOST:-mailhog}
-      SMTP_PORT: ${AUTH_SMTP_PORT:-1025}
-      SMTP_USER: ${AUTH_SMTP_USER:-user}
-      SMTP_PASS: ${AUTH_SMTP_PASS:-password}
-      SMTP_SECURE: "${AUTH_SMTP_SECURE:-false}"
-      SMTP_SENDER: ${AUTH_SMTP_SENDER:-hasura-auth@example.com}
+      MP_SMTP_AUTH: 'user:password'
+      # MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      TZ: ${CONTAINER_TIMEZONE:-America/Los_Angeles}
     expose:
-      - ${AUTH_SMTP_PORT:-1025}
-      - 8025
-      - 587
+      - 1025 # MP_SMTP_BIND_ADDR
+      - 8025 # MP_UI_BIND_ADDR
     volumes:
-      - mailhog:/maildir
-    # healthcheck:
-    #   test: [ "CMD", "nc", "-z", "localhost", "8025" ]
-    #   timeout: 60s
-    #   interval: 15s
-    #   retries: 3
-    #   start_period: 60s
+      - mailpit:/data
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-S", "http://localhost:8025/livez"] # for k8 /readyz
+      timeout: 60s
+      interval: 15s
+      retries: 3
     depends_on:
       traefik:
         condition: service_healthy
     labels:
       traefik.enable: "true"
-      traefik.http.routers.mailhog.entrypoints: websecure
-      traefik.http.routers.mailhog.rule: Host(`mailhog.localhost.direct`)
-      traefik.http.routers.mailhog.service: mailhog
-      traefik.http.routers.mailhog.tls: "true"
-      traefik.http.services.mailhog.loadbalancer.server.port: "8025"
+      traefik.http.routers.mailpit.entrypoints: websecure
+      traefik.http.routers.mailpit.rule: Host(`mailpit.localhost.direct`)
+      traefik.http.routers.mailpit.service: mailpit
+      traefik.http.routers.mailpit.tls: "true"
+      traefik.http.services.mailpit.loadbalancer.server.port: "8025"
   ###########################################################################
   # hasura auth
   ###########################################################################
@@ -232,12 +228,12 @@ services:
       AUTH_REFRESH_TOKEN_EXPIRES_IN: "43200"
       AUTH_SERVER_URL: https://auth.localhost.direct/v1
       AUTH_SMTP_AUTH_METHOD: LOGIN
-      AUTH_SMTP_HOST: ${AUTH_SMTP_HOST:-mailhog}
-      AUTH_SMTP_PASS: ${AUTH_SMTP_PASS:-password}
+      AUTH_SMTP_HOST: ${AUTH_SMTP_HOST:-mailpit}
       AUTH_SMTP_PORT: ${AUTH_SMTP_PORT:-1025}
+      AUTH_SMTP_USER: ${AUTH_SMTP_USER:-user}
+      AUTH_SMTP_PASS: ${AUTH_SMTP_PASS:-password}
       AUTH_SMTP_SECURE: ${AUTH_SMTP_SECURE:-false}
       AUTH_SMTP_SENDER: ${AUTH_SMTP_SENDER:-hasura-auth@example.com}
-      AUTH_SMTP_USER: ${AUTH_SMTP_USER:-user}
       AUTH_USER_DEFAULT_ALLOWED_ROLES: user,me,manager,supervisor,engine
       AUTH_USER_DEFAULT_ROLE: user
       AUTH_WEBAUTHN_ATTESTATION_TIMEOUT: "60000"
@@ -263,6 +259,8 @@ services:
       start_period: 60s
     depends_on:
       traefik:
+        condition: service_healthy
+      mailpit:
         condition: service_healthy
       postgres:
         condition: service_healthy
@@ -413,5 +411,5 @@ services:
 ###########################################################################
 volumes:
     pgdata: {}
-    mailhog: {}
+    mailpit: {}
     minio: {}
