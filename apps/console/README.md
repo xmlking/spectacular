@@ -36,7 +36,7 @@ open https://traefik.localhost.direct/dashboard/#/
 | Postgres  | postgres://postgres:postgres@localhost:5432/local |
 | Traefik   | https://traefik.localhost.direct/dashboard/#/     |
 | Hasura    | https://hasura.localhost.direct                   |
-| Auth      | https://auth.localhost.direct                     |
+| Auth      | https://auth.localhost.direct/healthz             |
 | Storage   | https://storage.localhost.direct/healthz          |
 | minio     | https://minio.localhost.direct                    |
 | Functions | https://functions.localhost.direct                |

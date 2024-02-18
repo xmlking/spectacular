@@ -227,7 +227,7 @@ services:
       AUTH_PROVIDER_GOOGLE_SCOPE: ""
       AUTH_REFRESH_TOKEN_EXPIRES_IN: "43200"
       AUTH_SERVER_URL: https://auth.localhost.direct/v1
-      AUTH_SMTP_AUTH_METHOD: LOGIN
+      AUTH_SMTP_AUTH_METHOD: ${AUTH_SMTP_AUTH_METHOD:-LOGIN}
       AUTH_SMTP_HOST: ${AUTH_SMTP_HOST:-mailpit}
       AUTH_SMTP_PORT: ${AUTH_SMTP_PORT:-1025}
       AUTH_SMTP_USER: ${AUTH_SMTP_USER:-user}
@@ -355,9 +355,10 @@ services:
       traefik.http.services.storage.loadbalancer.server.port: "8000"
   ###########################################################################
   # dashboard
+  # NOTE: after `nhost/dashboard:1.6.1` version, CSP is enforced
   ###########################################################################
   dashboard:
-    image: nhost/dashboard:1.6.3
+    image: nhost/dashboard:1.6.1
     hostname: dashboard
     container_name: dashboard
     restart: always
@@ -373,7 +374,7 @@ services:
     expose:
       - 3000
     depends_on:
-      traefik:
+      auth:
         condition: service_healthy
     labels:
       traefik.enable: "true"

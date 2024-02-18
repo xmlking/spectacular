@@ -194,12 +194,12 @@ issuer = 'Spectacular'
 [provider]
 [provider.smtp]
 host = '{{ secrets.AUTH_SMTP_HOST }}'
-port = 587
+# port = '{{ secrets.AUTH_SMTP_PORT }}'
 user = '{{ secrets.AUTH_SMTP_USER }}'
 password = '{{ secrets.AUTH_SMTP_PASS }}'
 sender = '{{ secrets.AUTH_SMTP_SENDER }}'
-secure = false
-method = 'LOGIN'
+# secure = '{{ secrets.AUTH_SMTP_SECURE }}'
+method = '{{ secrets.AUTH_SMTP_AUTH_METHOD }}'
 
 [storage]
 version = '0.6.0'

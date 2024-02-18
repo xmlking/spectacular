@@ -80,7 +80,8 @@ export default defineConfig({
 						{ label: 'Interpret results', link: '/user/actionability/' },
 						{ label: 'Static vs dynamic assessment', link: '/user/assessment-mode/' },
 						{ label: 'Validation', link: '/user/validation/' },
-						{ label: 'Configuration', link: '/user/config/' }
+						{ label: 'Configuration', link: '/user/config/' },
+						{ label: 'Custom Page', link: '/custom/example' }
 					]
 				},
 				{
