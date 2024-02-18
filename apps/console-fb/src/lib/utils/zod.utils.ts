@@ -1,6 +1,12 @@
 import { z } from 'zod';
 
 /**
+ * preprocesses
+ * emptyStringToNull
+ */
+export const NullableFormString = z.preprocess((v) => v === "" ? null: v, z.string().nullish())
+
+/**
  * Utility functions
  */
 export function emptyToNull(arg: unknown) {

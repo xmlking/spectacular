@@ -18,6 +18,5 @@ Insert the following code in the `head` section of your pages:
     <meta name="apple-mobile-web-app-title" content="spectacular">
     <meta name="application-name" content="spectacular">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
 
 _Optional_ - Check your favicon with the [favicon checker](https://realfavicongenerator.net/favicon_checker)
