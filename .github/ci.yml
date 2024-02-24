@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.2.2
+      - uses: pnpm/action-setup@v3
         with:
           version: 8
 
@@ -53,7 +53,7 @@ jobs:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.2.2
+      - uses: pnpm/action-setup@v3
         with:
           version: 7
 
