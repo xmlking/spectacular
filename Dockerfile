@@ -37,30 +37,42 @@ RUN turbo prune --scope=${SCOPE} --docker
 FROM base AS builder
 
 WORKDIR /app
-# First install the dependencies (as they change less often)
+## First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
+
+## scripts/init.sh will copy .env, .secrets needed during build
+COPY scripts scripts
+COPY .env.example .env.example
+COPY .secrets.example .secrets.example
+COPY apps/console/.env.example apps/console/.env.example
+COPY apps/console/.secrets.example apps/console/.secrets.example
+COPY apps/console-fb/.env.example apps/console-fb/.env.example
+COPY apps/console-fb/.secrets.example apps/console-fb/.secrets.example
+
 COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
-# https://playwright.dev/docs/browsers
+## https://playwright.dev/docs/browsers
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
 
-# RUN pnpm install --frozen-lockfile FIXME: https://github.com/vercel/turbo/pull/7512
-RUN pnpm install --no-frozen-lockfile --ignore-scripts
+## FIXME: https://github.com/vercel/turbo/pull/7512
+# RUN pnpm install --frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
+# RUN pnpm install --no-frozen-lockfile --ignore-scripts
 
-# Build the project
+## Build the project
 COPY --from=pruner /app/out/full/ .
 COPY --from=pruner /app/.git .git
 COPY turbo.json turbo.json
 
-# Uncomment and use build args to enable remote caching
+## Uncomment and use build args to enable remote caching
 ARG TURBO_TEAM
 ENV TURBO_TEAM=$TURBO_TEAM
 
 ARG TURBO_TOKEN
 ENV TURBO_TOKEN=$TURBO_TOKEN
 
-# TODO: set any extra ENV needed for build
+## TODO: set any extra ENV needed for build
 # ENV ENCRYPTION_SECRET=encryption_secret_placeholder123 NEXTAUTH_URL=http://localhost:3000 NEXT_PUBLIC_VIEWER_URL=http://localhost:3001
 RUN pnpm turbo run build --filter=${SCOPE}...
 
@@ -76,23 +88,23 @@ WORKDIR /app
 ENV NODE_ENV production
 ARG SCOPE
 
-# copy tini
+## copy tini
 COPY --from=builder --chown=node:node /usr/bin/tini /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "-s", "--", "/usr/bin/node"]
 
-# copy runtime needed config files???
+## copy runtime needed config files???
 COPY --from=builder --chown=node:node /app/apps/${SCOPE}/package.json .
 # COPY --from=builder --chown=node:node /app/config ./config
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
+## Automatically leverage output traces to reduce image size
+## https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=node:node /app/apps/${SCOPE}/build ./build
 
 
 EXPOSE 3000
 ENV PORT 3000
 
-# Metadata params
+## Metadata params
 ARG DOCKER_REGISTRY=ghcr.io
 ARG VCS_CONTEXT_PATH=xmlking/spectacular
 ARG BUILD_TIME
@@ -100,10 +112,10 @@ ARG BUILD_VERSION
 ARG VCS_REF=1
 ARG VENDOR=xmlking
 
-# for faster docker shutdown
+## for faster docker shutdown
 STOPSIGNAL SIGINT
 
-# Metadata
+## Metadata
 LABEL org.opencontainers.image.created=$BUILD_TIME \
 	org.opencontainers.image.name="${SCOPE}" \
 	org.opencontainers.image.title="${SCOPE}" \
