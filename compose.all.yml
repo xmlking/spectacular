@@ -69,8 +69,8 @@ services:
       -c ssl_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
       -c ssl_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
       -c wal_level=logical
-      -c max_wal_senders=1
-      -c max_replication_slots=1
+      -c max_wal_senders=10
+      -c max_replication_slots=10
     #   -c listen_addresses = '*'
     ports:
       - '5432:5432'
@@ -96,13 +96,10 @@ services:
   hasura:
     ## User `cli-migrations-v3` only in local dev env.
     ## It will automatically apply Migrations and Metadata to a Hasura GraphQL Engine
-    image: hasura/graphql-engine:v2.37.0.cli-migrations-v3
+    image: hasura/graphql-engine:v2.37.0
     hostname: hasura
     container_name: hasura
     restart: always
-    volumes:
-      - ./nhost/migrations:/hasura-migrations
-      - ./nhost/metadata:/hasura-metadata
     expose:
       - 8080
     environment:
@@ -113,7 +110,7 @@ services:
       HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
       HASURA_GRAPHQL_LOG_LEVEL: info
-      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
       HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
       HASURA_GRAPHQL_CORS_DOMAIN: '*'
@@ -135,39 +132,6 @@ services:
       traefik.http.routers.hasura.tls: "true"
       traefik.http.services.hasura.loadbalancer.server.port: "8080"
   ###########################################################################
-  # mailpit
-  ###########################################################################
-  mailpit:
-    image: axllent/mailpit:v1.13
-    hostname: mailpit
-    container_name: mailpit
-    restart: always
-    environment:
-      MP_SMTP_AUTH: 'user:password'
-      # MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
-      TZ: ${CONTAINER_TIMEZONE:-America/Los_Angeles}
-    expose:
-      - 1025 # MP_SMTP_BIND_ADDR
-      - 8025 # MP_UI_BIND_ADDR
-    volumes:
-      - mailpit:/data
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "-S", "http://localhost:8025/livez"] # for k8 /readyz
-      timeout: 60s
-      interval: 15s
-      retries: 3
-    depends_on:
-      traefik:
-        condition: service_healthy
-    labels:
-      traefik.enable: "true"
-      traefik.http.routers.mailpit.entrypoints: websecure
-      traefik.http.routers.mailpit.rule: Host(`mailpit.${BASE_HOSTNAME}`)
-      traefik.http.routers.mailpit.service: mailpit
-      traefik.http.routers.mailpit.tls: "true"
-      traefik.http.services.mailpit.loadbalancer.server.port: "8025"
-  ###########################################################################
   # hasura auth
   ###########################################################################
   auth:
@@ -181,13 +145,13 @@ services:
       AUTH_LOG_LEVEL: info
       AUTH_ACCESS_CONTROL_ALLOWED_EMAIL_DOMAINS: ""
       AUTH_ACCESS_CONTROL_ALLOWED_EMAILS: ""
-      AUTH_ACCESS_CONTROL_ALLOWED_REDIRECT_URLS: https://console.${BASE_HOSTNAME}:5173,https://*.vercel.app/
+      AUTH_ACCESS_CONTROL_ALLOWED_REDIRECT_URLS: https://console.${BASE_HOSTNAME},https://*.vercel.app/
       AUTH_ACCESS_CONTROL_BLOCKED_EMAIL_DOMAINS: ""
       AUTH_ACCESS_CONTROL_BLOCKED_EMAILS: ""
       AUTH_ACCESS_TOKEN_EXPIRES_IN: "900"
       AUTH_ANONYMOUS_USERS_ENABLED: "false"
       AUTH_API_PREFIX: /v1
-      AUTH_CLIENT_URL: ${AUTH_CLIENT_URL:-https://console.${BASE_HOSTNAME}:5173}
+      AUTH_CLIENT_URL: ${AUTH_CLIENT_URL:-https://console.${BASE_HOSTNAME}}
       AUTH_DISABLE_NEW_USERS: "false"
       AUTH_DISABLE_SIGNUP: "false"
       AUTH_EMAIL_PASSWORDLESS_ENABLED: "true"
@@ -230,7 +194,7 @@ services:
       AUTH_WEBAUTHN_ENABLED: "true"
       AUTH_WEBAUTHN_RP_ID: Spectacular
       AUTH_WEBAUTHN_RP_NAME: Spectacular Console App
-      AUTH_WEBAUTHN_RP_ORIGINS: ${AUTH_CLIENT_URL:-https://console.${BASE_HOSTNAME}:5173}
+      AUTH_WEBAUTHN_RP_ORIGINS: ${AUTH_CLIENT_URL:-https://console.${BASE_HOSTNAME}}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       HASURA_GRAPHQL_GRAPHQL_URL: http://hasura:8080/v1/graphql
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
@@ -250,8 +214,6 @@ services:
     depends_on:
       traefik:
         condition: service_healthy
-      mailpit:
-        condition: service_healthy
       postgres:
         condition: service_healthy
       hasura:
@@ -264,103 +226,31 @@ services:
       traefik.http.routers.auth.tls: "true"
       traefik.http.services.auth.loadbalancer.server.port: "4000"
   ###########################################################################
-  # minio
+  # console WebApp
   ###########################################################################
-  minio:
-    image: minio/minio:RELEASE.2024-02-04T22-36-13Z
-    hostname: minio
-    container_name: minio
+  console:
+    image: ghcr.io/xmlking/spectacular/console:latest
+    hostname: console
+    container_name: console
     restart: always
-    volumes:
-     - minio:/data
-    command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY}
-      MINIO_ROOT_PASSWORD: ${STORAGE_SECRET_KEY}
-    expose:
-      - 9000
-      - 9001
-    healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
-      interval: 15s
-      timeout: 5s
-      retries: 5
-    depends_on:
-      traefik:
-        condition: service_healthy
-    labels:
-      traefik.enable: "true"
-      traefik.http.routers.minio.entrypoints: websecure
-      traefik.http.routers.minio.rule: Host(`minio.${BASE_HOSTNAME}`)
-      traefik.http.routers.minio.service: minio
-      traefik.http.routers.minio.tls: "true"
-      traefik.http.services.minio.loadbalancer.server.port: "9001"
-  ###########################################################################
-  # storage
-  ###########################################################################
-  storage:
-    image: nhost/hasura-storage:0.6.0
-    hostname: storage
-    container_name: storage
-    restart: always
-    command:
-      - serve
-    expose:
-      - 8000
-    environment:
-      # BIND: :5000
-      DEBUG: "true"
-      HASURA_ENDPOINT: http://hasura:8080/v1
+      AUTH_CLIENT_URL: https://console.${BASE_HOSTNAME}
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
-      HASURA_METADATA: "1"
-      POSTGRES_MIGRATIONS: "1"
-      POSTGRES_MIGRATIONS_SOURCE: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=disable
-      PUBLIC_URL: https://storage.${BASE_HOSTNAME}
-      S3_ACCESS_KEY: ${STORAGE_ACCESS_KEY}
-      S3_BUCKET: nhost
-      S3_ENDPOINT: http://minio:9000
-      S3_REGION: ""
-      S3_ROOT_FOLDER: ""
-      S3_SECRET_KEY: ${STORAGE_SECRET_KEY}
-    depends_on:
-      traefik:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
-      hasura:
-        condition: service_healthy
-    # healthcheck:
-    #   test: curl --fail -s http://localhost:8000/healthz || exit 1
-    #   timeout: 60s
-    #   interval: 15s
-    #   start_period: 60s
-    labels:
-      traefik.enable: "true"
-      traefik.http.routers.storage.entrypoints: websecure
-      traefik.http.routers.storage.rule: Host(`storage.${BASE_HOSTNAME}`)
-      traefik.http.routers.storage.service: storage
-      traefik.http.routers.storage.tls: "true"
-      traefik.http.services.storage.loadbalancer.server.port: "8000"
-  ###########################################################################
-  # dashboard
-  # NOTE: after `nhost/dashboard:1.6.1` version, CSP is enforced
-  ###########################################################################
-  dashboard:
-    image: nhost/dashboard:1.6.1
-    hostname: dashboard
-    container_name: dashboard
-    restart: always
-    environment:
-      NEXT_PUBLIC_NHOST_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
-      NEXT_PUBLIC_NHOST_AUTH_URL: https://auth.${BASE_HOSTNAME}/v1
-      NEXT_PUBLIC_NHOST_FUNCTIONS_URL: https://functions.${BASE_HOSTNAME}/v1
-      NEXT_PUBLIC_NHOST_GRAPHQL_URL: https://hasura.${BASE_HOSTNAME}/v1
-      NEXT_PUBLIC_NHOST_HASURA_API_URL: https://hasura.${BASE_HOSTNAME}
-      NEXT_PUBLIC_NHOST_HASURA_CONSOLE_URL: https://hasura.${BASE_HOSTNAME}/console
-      NEXT_PUBLIC_NHOST_HASURA_MIGRATIONS_API_URL: https://hasura.${BASE_HOSTNAME}
-      NEXT_PUBLIC_NHOST_STORAGE_URL: https://storage.${BASE_HOSTNAME}/v1
+      NHOST_AUTH_URL: https://auth.${BASE_HOSTNAME}/v1
+      NHOST_FUNCTIONS_URL: https://functions.${BASE_HOSTNAME}/v1
+      NHOST_GRAPHQL_URL: https://hasura.${BASE_HOSTNAME}/v1
+      NHOST_HASURA_URL: https://hasura.${BASE_HOSTNAME}/console
+      NHOST_STORAGE_URL: https://storage.${BASE_HOSTNAME}/v1
+      NODE_ENV: production
+      PUBLIC_BASE_URL: https://lockboard.${BASE_HOSTNAME}
+      PUBLIC_GRAPHQL_ENDPOINT: https://hasura.${BASE_HOSTNAME}/v1/graphql
+      PUBLIC_TERMS_PRIVACY_APP_NAME: 'Your App'
+      PUBLIC_TERMS_PRIVACY_APP_PRICING_AND_SUBSCRIPTIONS: '[Details about the pricing, subscription model, refund policy]'
+      PUBLIC_TERMS_PRIVACY_COMPANY: 'Your Company'
+      PUBLIC_TERMS_PRIVACY_CONTACT_EMAIL: 'yourname@email.com'
+      PUBLIC_TERMS_PRIVACY_COUNTRY: 'United States'
+      PUBLIC_TERMS_PRIVACY_EFFECTIVE_DATE: 'January 1, 2024'
+      PUBLIC_TERMS_PRIVACY_WEBSITE: 'yourdomain.com'
     expose:
       - 3000
     depends_on:
@@ -369,39 +259,13 @@ services:
     <<: *extra_hosts
     labels:
       traefik.enable: "true"
-      traefik.http.routers.dashboard.entrypoints: websecure
-      traefik.http.routers.dashboard.rule: Host(`dashboard.${BASE_HOSTNAME}`)
-      traefik.http.routers.dashboard.service: dashboard
-      traefik.http.routers.dashboard.tls: "true"
-      traefik.http.services.dashboard.loadbalancer.server.port: "3000"
-  ###########################################################################
-  # tailcall
-  ###########################################################################
-  # tailcall:
-  #   image: ghcr.io/tailcallhq/tailcall/tc-server:v0.18.0
-  #   hostname: tailcall
-  #   container_name: tailcall
-  #   restart: always
-  #   expose:
-  #     - 8080
-  #     - 8081
-  #   environment:
-  #     TAILCALL_LOG_LEVEL: error
-  #   volumes:
-  #     - ./infra/base/tailcall/jsonplaceholder.graphql:/jsonplaceholder.graphql
-  #   tmpfs:
-  #     - /app/.mesh:exec,mode=777
-  #   labels:
-  #     traefik.enable: "true"
-  #     traefik.http.routers.tailcall.entrypoints: websecure
-  #     traefik.http.routers.tailcall.rule: Host(`tailcall.${BASE_HOSTNAME}`)
-  #     traefik.http.routers.tailcall.service: tailcall
-  #     traefik.http.routers.tailcall.tls: "true"
-  #     traefik.http.services.tailcall.loadbalancer.server.port: "8080"
+      traefik.http.routers.console.entrypoints: websecure
+      traefik.http.routers.console.rule: Host(`console.${BASE_HOSTNAME}`) && PathPrefix(`/`)
+      traefik.http.routers.console.service: console
+      traefik.http.routers.console.tls: "true"
+      traefik.http.services.console.loadbalancer.server.port: "3000"
 ###########################################################################
 # volumes
 ###########################################################################
 volumes:
     pgdata: {}
-    mailpit: {}
-    minio: {}

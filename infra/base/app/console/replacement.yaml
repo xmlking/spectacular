@@ -1,0 +1,26 @@
+- source:
+    kind: ConfigMap
+    name: pipeline-variables
+    fieldPath: data.DEPLOYMENT_NAME
+  targets:
+  - select:
+      kind: Service
+    fieldPaths:
+    - metadata.name
+    - spec.selector.app
+- source:
+    kind: ConfigMap
+    name: pipeline-variables
+    fieldPath: data.COLOR
+  targets:
+  - select:
+      kind: Service
+    fieldPaths:
+    - metadata.name
+    options:
+      delimiter: '-'
+      index: 10 # Use index greater than the length to create suffix
+  - select:
+      kind: Service
+    fieldPaths:
+    - spec.selector.col
