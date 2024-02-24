@@ -85,7 +85,15 @@ pids
 !.env.test.example
 !.env.project
 !.env.vault
+
 .secrets
+.secrets.*
+.secrets.local
+.secrets.*.local
+!.secrets.example
+!.secrets.local.example
+!.secrets.production.example
+!.secrets.test.example
 
 # nhost #
 ##########################
