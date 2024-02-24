@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
 
       - name: Conventional commits check
-        uses: cocogitto/cocogitto-action@v3.5
+        uses: cocogitto/cocogitto-action@v3.6
         with:
           check-latest-tag-only: true
   #   linter:
@@ -59,7 +59,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v3
         with:
           version: 8
       - uses: actions/setup-node@v4
