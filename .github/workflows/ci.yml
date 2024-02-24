@@ -5,7 +5,7 @@ on:
     inputs:
       version:
         description: Build with the given version.
-        default: v1.0.0
+        default: 0.1.0
         required: true
       app:
         type: choice
@@ -81,6 +81,13 @@ jobs:
             org.opencontainers.image.name=${{ env.IMAGE_NAME }}
             org.opencontainers.image.title=${{ env.SCOPE }}
             org.opencontainers.image.authors=Sumanth
+          tags: |
+            ## only enabled for v* tags:
+            type=semver,pattern={{ version }},enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+            ## only enabled on workflow_dispatch:
+            type=semver,pattern={{version}},prefix=v,value=${{ github.event.inputs.version }},enable=${{ github.event_name == 'workflow_dispatch' }}
+            ## only enabled in main branch:
+            type=raw,value=latest,enable={{is_default_branch}}
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
