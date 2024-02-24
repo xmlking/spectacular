@@ -20,7 +20,7 @@ on:
       dryrun:
         description: Build with dey-run.
         type: boolean
-        default: true
+        default: false
         required: false
   push:
     tags:
@@ -86,4 +86,4 @@ jobs:
             BUILD_TIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
             BUILD_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
             BUILD_REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
-            SCOPE==${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.title'] }}
+            SCOPE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.title'] }}
