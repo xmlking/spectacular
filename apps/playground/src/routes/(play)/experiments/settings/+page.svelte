@@ -3,7 +3,6 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { Field, Control, Label, Description, FieldErrors, Fieldset, Legend } from 'formsnap';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import type { PageData } from './$types.js';
 	import { allergies, schema, themes } from './schema.js';
 	import SuperDebug from 'sveltekit-superforms';
 	import DebugShell from '@spectacular/skeleton/components/debug-shell.svelte';
