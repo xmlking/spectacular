@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
+	import { AlertTriangle } from 'lucide-svelte';
 	import { page } from '$app/stores';
 
 	export let message: App.Superforms.Message | undefined;

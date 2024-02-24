@@ -42,7 +42,7 @@ export const load = async (event) => {
 			// NOTE: you can add multiple errors, send all along with a message
 			setError(form, '', (error as GraphQLError).message);
 		});
-		setMessage(form,  { type: 'error', message: 'Backend error 😎' });
+		setMessage(form, { type: 'error', message: 'Backend error 😎' });
 		return { status: 500, form };
 	}
 	const items = data?.policies;

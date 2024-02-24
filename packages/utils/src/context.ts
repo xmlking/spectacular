@@ -14,6 +14,7 @@ declare const isChecked: unique symbol;
 /**
  * Provided as key to getContext and setContext in order to enable strict typing
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface InjectionKey<T = unknown> {}
 
 export interface CheckedInjectionKey<T> extends InjectionKey<T> {

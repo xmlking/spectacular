@@ -4,7 +4,7 @@ import * as m from '$i18n/messages';
 
 export const i18n = createI18n(runtime, {
 	pathnames: {
-		"/about": m.about_path,
+		'/about': m.about_path
 	},
 	exclude: ['/base/not-translated'],
 	textDirection: {

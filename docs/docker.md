@@ -28,13 +28,13 @@ Build and publish docker image to ghcr.io
 
 ```shell
 #VERSION=$(git describe --tags || echo "HEAD")
-VERSION=v0.4.0
+VERSION=v0.1.3
 BUILD_TIME=$(date +%FT%T%Z)
 REGISTRY=ghcr.io
 #REGISTRY=us-west1-docker.pkg.dev/<project_id>/docker
 TURBO_TEAM=cloudbusters
 TURBO_TOKEN=r5tgcj65H0sBLx7E1ki9jDr4
-SCOPE=web
+SCOPE=console
 IMAGE_NAME=xmlking/spectacular
 DOCKER_IMAGE=$REGISTRY/$IMAGE_NAME/$SCOPE
 

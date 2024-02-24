@@ -22,17 +22,17 @@ const config = {
 			? adapterAuto()
 			: process.env.BUN_ENV
 				? adapterBun()
-				: adapterNode({ polyfill: false }),
+				: adapterNode({ precompress: true, polyfill: false }),
 		prerender: { crawl: false }, // FIXME: remove after all fake links are removed.
 		version: {
 			name: process.env.npm_package_version
 		},
 		alias: {
 			$houdini: './$houdini',
-			$i18n: 'src/i18n'
+			$i18n: 'src/i18n',
 			// TODO: This alias should not be needed, but without it, VSCode show `Cannot find module` error!!!
 			// Ref: https://github.com/vercel/turbo/discussions/620
-			// 	"@spectacular/skeleton/components/*": "../../packages/skeleton-ui/components/*"
+			"@spectacular/skeleton/components/*": "../../packages/skeleton-ui/components/*"
 		}
 		// env: {
 		// 	dir: '../..',
