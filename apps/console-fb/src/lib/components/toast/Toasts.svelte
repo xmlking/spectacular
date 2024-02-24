@@ -3,7 +3,7 @@
 	import { CloseButton } from 'flowbite-svelte';
 	import {
 		CheckSolid,
-		CheckCircleSolid ,
+		CheckCircleSolid,
 		ExclamationCircleOutline,
 		InfoCircleOutline
 	} from 'flowbite-svelte-icons';
