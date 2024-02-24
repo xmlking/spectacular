@@ -1,9 +1,31 @@
 <script lang="ts">
-	import { Form } from 'formsnap';
 	import Preview from '$lib/components/preview.svelte';
-	import type { PageData } from './$types';
-	import { someFormSchema } from './schema';
-	export let data: PageData;
+	import { superForm } from 'sveltekit-superforms';
+	import { Field, Control, Label, Description, FieldErrors, Fieldset, Legend } from 'formsnap';
+	import { zodClient } from 'sveltekit-superforms/adapters';
+	import type { PageData } from './$types.js';
+	import { allergies, schema, themes } from './schema.js';
+	import SuperDebug from 'sveltekit-superforms';
+	import DebugShell from '@spectacular/skeleton/components/debug-shell.svelte';
+
+	export let data;
+
+	const form = superForm(data.form, {
+		validators: zodClient(schema)
+	});
+	const {
+		form: formData,
+		message,
+		errors,
+		tainted,
+		isTainted,
+		submitting,
+		delayed,
+		timeout,
+		posted,
+		constraints,
+		enhance
+	} = form;
 </script>
 
 <svelte:head>
@@ -18,105 +40,119 @@
 	</header>
 
 	<h1 class="pb-8 text-3xl font-semibold tracking-tight">Account Settings</h1>
-	<Form.Root
-		schema={someFormSchema}
-		form={data.form}
-		debug={true}
-		let:config
-		class="container mx-auto flex max-w-[750px] flex-col gap-8"
-	>
-		<Form.Field {config} name="email">
-			<div class="grid gap-2">
-				<Form.Label>Email</Form.Label>
-				<Form.Input
-					class="bg-background border-border text-foreground h-9 rounded border p-2"
-				/>
-				<Form.Validation class="text-destructive" />
-			</div>
-		</Form.Field>
-		<Form.Field {config} name="username">
-			<div class="grid gap-2">
-				<Form.Label>Username</Form.Label>
-				<Form.Input
-					class="bg-background border-border text-foreground h-9 rounded border p-2"
-				/>
-				<Form.Validation class="text-destructive" />
-			</div>
-		</Form.Field>
-		<Form.Field {config} name="bio">
-			<div class="grid gap-2">
-				<Form.Label>Bio</Form.Label>
-				<Form.Textarea
-					rows={4}
-					class="bg-background border-border text-foreground resize-none rounded border p-2"
-				/>
-				<Form.Validation class="text-destructive" />
-			</div>
-		</Form.Field>
-		<Form.Field {config} name="website">
-			<div class="grid gap-2">
-				<Form.Label>Website</Form.Label>
-				<Form.Input
-					class="bg-background border-border text-foreground h-9 rounded border p-2"
-				/>
-				<Form.Validation class="text-destructive" />
-			</div>
-		</Form.Field>
-		<Form.Field {config} name="notifications">
-			<div class="grid gap-2">
-				<Form.Label>Notifications</Form.Label>
-				<Form.Select
-					class="bg-background border-border text-foreground h-9 rounded border p-2"
-				>
-					<option value="all">All</option>
-					<option value="mentions">Mentions</option>
-					<option value="none">None</option>
-				</Form.Select>
-				<Form.Validation class="text-destructive" />
-			</div>
-		</Form.Field>
-		<Form.Field {config} name="language">
-			<div class="grid gap-2">
-				<Form.Label>Language</Form.Label>
-				<Form.Select
-					class="bg-background border-border text-foreground h-9 rounded border p-2"
-				>
-					<option value="en">English</option>
-					<option value="es">Spanish</option>
-					<option value="fr">French</option>
-				</Form.Select>
-				<Form.Validation class="text-destructive" />
-			</div>
-		</Form.Field>
-		<Form.Field {config} name="usage">
-			<div class="grid gap-2">
-				<div class="flex items-center gap-4">
-					<Form.Checkbox />
-					<Form.Label>Send crash reports & statistics</Form.Label>
+	<form method="POST" class="container mx-auto flex max-w-[750px] flex-col gap-8" use:enhance>
+		<Field {form} name="email">
+			<Control let:attrs>
+				<div class="grid gap-2">
+					<Label>Email</Label>
+					<input {...attrs} type="email" class="data-fs-[error=true]:input-error" bind:value={$formData.email} />
+					<Description class="sr-only">Company email is preferred</Description>
+					<FieldErrors class="data-fs-[error=true]:bg-red-200" />
 				</div>
-				<Form.Validation class="text-destructive" />
-			</div>
-		</Form.Field>
-		<Form.Field {config} name="theme">
-			<div class="grid gap-2">
-				<div class="flex items-center gap-4">
-					<Form.Radio value="light" />
-					<Form.Label>Light</Form.Label>
+			</Control>
+		</Field>
+		<Field {form} name="bio">
+			<Control let:attrs>
+				<div class="grid gap-2">
+					<Label>Bio</Label>
+					<textarea rows={4} {...attrs} bind:value={$formData.bio} />
 				</div>
-				<Form.Validation class="text-destructive" />
-			</div>
-		</Form.Field>
-		<Form.Field {config} name="theme">
-			<div class="grid gap-2">
-				<div class="flex items-center gap-4">
-					<Form.Radio value="dark" />
-					<Form.Label>Dark</Form.Label>
+			</Control>
+			<Description class="sr-only">Tell us a bit about yourself.</Description>
+			<FieldErrors />
+		</Field>
+		<Field {form} name="language">
+			<Control let:attrs>
+				<div class="grid gap-2">
+					<Label>Language</Label>
+					<select {...attrs} bind:value={$formData.language}>
+						<option value="fr">French</option>
+						<option value="es">Spanish</option>
+						<option value="en">English</option>
+					</select>
 				</div>
-				<Form.Validation class="text-destructive" />
+			</Control>
+			<Description class="sr-only">Help us address you properly.</Description>
+			<FieldErrors />
+		</Field>
+		<Fieldset {form} name="theme">
+			<Legend>Select your theme</Legend>
+			{#each themes as theme}
+				<Control let:attrs>
+					<div class="flex items-center space-x-2">
+						<Label>{theme}</Label>
+						<input
+							{...attrs}
+							type="radio"
+							value={theme}
+							bind:group={$formData.theme}
+						/>
+					</div>
+				</Control>
+			{/each}
+			<Description class="sr-only">We prefer dark mode, but the choice is yours.</Description>
+			<FieldErrors />
+		</Fieldset>
+		<Field {form} name="marketingEmails">
+			<Control let:attrs>
+				<div class="flex items-center gap-4">
+					<input
+						{...attrs}
+						type="checkbox"
+						bind:checked={$formData.marketingEmails}
+					/>
+					<Label>I want to receive marketing emails</Label>
+				</div>
+			</Control>
+			<Description class="sr-only"
+				>Stay up to date with our latest news and offers.</Description
+			>
+			<FieldErrors />
+		</Field>
+		<Fieldset {form} name="allergies">
+			<Legend>Food allergies</Legend>
+			<div class="flex items-center gap-4">
+				{#each allergies as allergy}
+					<Control let:attrs>
+						<input
+							{...attrs}
+							type="checkbox"
+							bind:group={$formData.allergies}
+							value={allergy}
+						/>
+						<Label>{allergy}</Label>
+					</Control>
+				{/each}
 			</div>
-		</Form.Field>
+			<Description class="sr-only"
+				>When we provide lunch, we'll accommodate your needs.</Description
+			>
+			<FieldErrors />
+		</Fieldset>
 		<button type="submit" class="variant-filled btn">Submit</button>
-	</Form.Root>
+	</form>
+	<DebugShell>
+		<SuperDebug
+			label="Miscellaneous"
+			status={false}
+			data={{
+				message: $message,
+				isTainted: isTainted,
+				submitting: $submitting,
+				delayed: $delayed,
+				timeout: $timeout,
+				posted: $posted
+			}}
+		/>
+		<br />
+		<SuperDebug label="Form" data={$formData} />
+		<br />
+		<SuperDebug label="Tainted" status={false} data={$tainted} />
+		<br />
+		<SuperDebug label="Errors" status={false} data={$errors} />
+		<br />
+		<SuperDebug label="Constraints" status={false} data={$constraints} />
+	</DebugShell>
 </Preview>
 
 <style lang="postcss">

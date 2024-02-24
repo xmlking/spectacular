@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable */ // FIXME: remove
 	import { GraphQLError } from 'graphql';
 	// import { default as SelectFetch } from 'svelte-select';
 	// import { TimeDistance } from 'svelte-time-distance';
@@ -27,7 +28,7 @@
 			// TODO:
 			// message.set(result.error.message)
 			log.error('policy superForm error:', { result });
-		},
+		}
 	});
 	const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;
 
@@ -75,30 +76,39 @@
 					deletedAt
 				});
 				if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
-					handleMessage({
-						message: `Policy and associated rule: ${data?.update_rules?.returning[0].displayName} deleted`,
-						hideDismiss: false,
-						timeout: 10000,
-						type: 'success'
-					}, toastStore)
+					handleMessage(
+						{
+							message: `Policy and associated rule: ${data?.update_rules?.returning[0].displayName} deleted`,
+							hideDismiss: false,
+							timeout: 10000,
+							type: 'success'
+						},
+						toastStore
+					);
 					cache.markStale();
 					await invalidateAll();
 				} else if (data?.update_policies_by_pk) {
-					handleMessage({
-						message: `Policy ${data?.update_policies_by_pk.id} deleted`,
-						hideDismiss: false,
-						timeout: 10000,
-						type:  'success'
-					}, toastStore);
+					handleMessage(
+						{
+							message: `Policy ${data?.update_policies_by_pk.id} deleted`,
+							hideDismiss: false,
+							timeout: 10000,
+							type: 'success'
+						},
+						toastStore
+					);
 					cache.markStale();
 					await invalidateAll();
 				} else {
-					handleMessage({
-						message: `Policy not found for ID: ${id}`,
-						hideDismiss: false,
-						timeout: 50000,
-						type: 'error'
-					}, toastStore);
+					handleMessage(
+						{
+							message: `Policy not found for ID: ${id}`,
+							hideDismiss: false,
+							timeout: 50000,
+							type: 'error'
+						},
+						toastStore
+					);
 				}
 			} else {
 				log.error('id missing in event!');
@@ -120,14 +130,11 @@
 	<meta name="description" content="policies" />
 </svelte:head>
 
-
-
 <form data-sveltekit-noscroll bind:this={searchForm}>
-
-			<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-				Policies
-			</span>
-<!--
+	<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+		Policies
+	</span>
+	<!--
 		<ButtonGroup class="w-1/3">
 			<Select
 				name="subjectType"
@@ -177,13 +184,11 @@
 	<input name="limit" bind:value={$form.limit} type="hidden" />
 	<input name="offset" bind:value={$form.offset} type="hidden" />
 	<Form.ErrorMessage error={$errors?.subjectType?.[0]} />
-	<Form.ErrorMessage  error={$errors?.subjectId?.[0]} />
-	<Form.ErrorMessage  error={$errors?.limit?.[0]} />
-	<Form.ErrorMessage  error={$errors?.offset?.[0]} />
+	<Form.ErrorMessage error={$errors?.subjectId?.[0]} />
+	<Form.ErrorMessage error={$errors?.limit?.[0]} />
+	<Form.ErrorMessage error={$errors?.offset?.[0]} />
 	<Form.FormAlerts message={$message} errors={$errors._errors} />
 </form>
-
-
 
 <DebugShell>
 	<SuperDebug

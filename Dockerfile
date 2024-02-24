@@ -45,7 +45,8 @@ COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 # https://playwright.dev/docs/browsers
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
 
-RUN pnpm install --frozen-lockfile
+# RUN pnpm install --frozen-lockfile FIXME: https://github.com/vercel/turbo/pull/7512
+RUN pnpm install --no-frozen-lockfile --ignore-scripts
 
 # Build the project
 COPY --from=pruner /app/out/full/ .

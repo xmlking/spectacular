@@ -3,17 +3,16 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { fail } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
-import { someFormSchema } from './schema.js';
+import { schema } from './schema.js';
 
 export const load: PageServerLoad = async () => {
-	return {
-		form: superValidate(zod(someFormSchema))
-	};
+	const form = await superValidate(zod(schema));
+	return { form };
 };
 
 export const actions: Actions = {
 	default: async (event) => {
-		const form = await superValidate(event, zod(someFormSchema));
+		const form = await superValidate(event, zod(schema));
 		if (!form.valid) {
 			return fail(400, { form });
 		}
