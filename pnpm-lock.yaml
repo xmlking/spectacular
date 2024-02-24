@@ -225,6 +225,9 @@ importers:
       lucide-svelte:
         specifier: 0.338.0
         version: 0.338.0(svelte@4.2.12)
+      paneforge:
+        specifier: 0.0.2
+        version: 0.0.2(svelte@4.2.12)
       postcss:
         specifier: 8.4.35
         version: 8.4.35
@@ -911,6 +914,9 @@ importers:
       lucide-svelte:
         specifier: 0.338.0
         version: 0.338.0(svelte@4.2.12)
+      paneforge:
+        specifier: 0.0.2
+        version: 0.0.2(svelte@4.2.12)
       postcss:
         specifier: 8.4.35
         version: 8.4.35
@@ -14175,6 +14181,15 @@ packages:
 
   /pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
+    dev: true
+
+  /paneforge@0.0.2(svelte@4.2.12):
+    resolution: {integrity: sha512-1xNMq+uslstqum4D8CzzkPGqnTWUlevjYtMjUhuEOiuz7E0fJHFuM8ogk8+LJnVbAg3hMJJ/9Mu4A1KaxK38oQ==}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      nanoid: 5.0.6
+      svelte: 4.2.12
     dev: true
 
   /parent-module@1.0.1:

@@ -161,7 +161,8 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 					label: 'Outclick',
 					keywords: 'outclick, click, half-click',
 					badge: 'Beta'
-				}
+				},
+				{ href: '/experiments/paneforge', label: 'Paneforge', keywords: 'paneforge, pane, code', badge: 'New' }
 				// DELISTED UNTIL FURTHER NOTICE
 				// { href: '/experiments/data-tables', label: 'Data Tables', keywords: 'search, sort, page, pagination, async', badge: 'Experimental' }
 			]
