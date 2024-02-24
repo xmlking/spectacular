@@ -1,5 +1,5 @@
 import { sequence } from '@sveltejs/kit/hooks';
-import type { Handle, HandleServerError } from '@sveltejs/kit';
+import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { Logger } from '@spectacular/utils';
 import { ZodError } from 'zod';
 import { GraphQLError } from 'graphql';
@@ -60,7 +60,7 @@ export const handleError: HandleServerError = async ({ error, status, message /*
  * This function allows you to modify (or replace) a fetch request
  * that happens inside a `load` or `action` function that runs on the server (or during pre-rendering).
  */
-export const handleFetch = async ({ event, request, fetch }) => {
+export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	console.debug('handleFetch:', event.url.toString());
 	/*
 	if (request.url.startsWith('https://graph.microsoft.com')) {

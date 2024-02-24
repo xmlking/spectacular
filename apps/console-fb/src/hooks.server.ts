@@ -1,4 +1,4 @@
-import type { HandleFetch, HandleServerError } from '@sveltejs/kit';
+import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { dev } from '$app/environment';
 import { TokenVault } from '$lib/server/backend/TokenVault';
@@ -51,18 +51,22 @@ TokenVault.init([
 
 // Invoked for each endpoint called and initially for SSR router
 // export const handle = sequence(setUser, guard, houdini, logger);
-export const handle = sequence(authjs, guard, houdini);
+export const handle: Handle = sequence(authjs, guard, houdini);
 
-export const handleServerError = (({ error, event }) => {
+export const handleError: HandleServerError = async ({ error }) => {
 	console.error('hooks:server:handleServerError:', error);
 	const err = error as App.Error;
 	return {
 		message: err.message ?? 'Whoops!',
 		context: err.context
 	};
-}) satisfies HandleServerError;
+};
 
-export const handleFetch = (async ({ event, request, fetch }) => {
+/**
+ * This function allows you to modify (or replace) a fetch request
+ * that happens inside a `load` or `action` function that runs on the server (or during pre-rendering).
+ */
+export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 	console.debug('hooks.server.ts, HandleFetch: pageUrl:', event.url.toString());
 
 	const token = TokenVault.getToken(request.url);
@@ -83,4 +87,4 @@ export const handleFetch = (async ({ event, request, fetch }) => {
 	}
 	*/
 	return fetch(request);
-}) satisfies HandleFetch;
+};

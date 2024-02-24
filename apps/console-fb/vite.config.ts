@@ -26,7 +26,7 @@ export default defineConfig({
 				navigateFallback: '/'
 			},
 			pwaAssets: {
-				config: true,
+				config: true
 			},
 			includeAssets: [
 				'favicon.ico',
