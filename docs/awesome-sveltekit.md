@@ -138,7 +138,7 @@ Awesome **SvelteKit** Links
 - [SvelteKit SaaS Demo](https://github.com/joshnuss/sveltekit-saas) - Auth.js, Prisma, Stripe
 - [SvelteKit Starter with trpc, lucia, skeleton and svelte-headless-table](https://github.com/widiu7omo/my-kit)
 - [Svelte 3.5 + Storybook 7 + TailwindCSS 3](https://github.com/jerriclynsjohn/svelte-storybook-tailwind)
-- [Svelte offline SQLite ](https://github.com/phartenfeller/sveltekit-1.0-sqlite-demo-app)
+- [Svelte offline SQLite ](https://github.com/phartenfeller/sveltekit-1.0-sqlite-demo-app), [PGlite - Postgres in WASM](https://github.com/electric-sql/pglite)
 - [Svelte runes + Liveblocks demo](https://github.com/CTNicholas/svelte-runes-realtime-drawing)
 - [shadcn-svelte, Superforms sample project](https://github.com/delay/sveltekit-auth)
 - Sveltekit Auth Template - with shadcn: [sveltekit-auth](https://github.com/delay/sveltekit-auth), with SkeletonUI: [sveltekit-auth-starter](https://github.com/delay/sveltekit-auth-starter)
