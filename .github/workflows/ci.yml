@@ -17,8 +17,10 @@ on:
           - web
           - docs
           - console
-      dey-run:
+      dryrun:
         description: Build with dey-run.
+        type: boolean
+        default: true
         required: false
   push:
     tags:
@@ -67,18 +69,21 @@ jobs:
             org.opencontainers.image.licenses=MIT
             org.opencontainers.image.documentation=docker run -it -e NODE_ENV=production -p 3000:3000 ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             org.opencontainers.image.name=${{ env.IMAGE_NAME }}
-            org.opencontainers.image.authors=sumanth
+            org.opencontainers.image.title=${{ env.SCOPE }}
+            org.opencontainers.image.authors=Sumanth
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: true
+          push: ${{ !inputs.dryrun }}
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
             BUILD_TIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
             BUILD_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
             BUILD_REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+            SCOPE==${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.title'] }}

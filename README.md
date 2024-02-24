@@ -25,12 +25,14 @@
   - [x] Smart caching with Service Works
   - [ ] Re-engage customers with Push Notifications
   - [x] Push Application Updates
+  - [ ] Offline app with [pglite](https://github.com/electric-sql/pglite)
 - [ ] Fonts and Image Optimization: edge caching, Lazy-loading images
 - [x] **SEO Ready**
   - [x] **Meta Tags** and **Json-LD** with [svelte-meta-tags](https://github.com/oekazuma/svelte-meta-tags#readme)
   - [ ] Dynamic **OpenGraph** images with [sveltekit-og](https://github.com/etherCorps/sveltekit-og#create-svelte)
   - [x] Image Optimization with [sveltejs/enhanced-img](https://kit.svelte.dev/docs/images)
 - [x] **GraphQL:** [Houdini](https://www.houdinigraphql.com/) the disappearing GraphQL client for SvelteKit. and [nHost](https://nhost.io/) as BaaS
+  - [ ] [Elevated Permissions](https://nhost.io/blog/elevated-permissions)
 - [x] **Forms:** Form handling with [[superforms](https://superforms.vercel.app/), [source](https://github.com/ciscoheat/sveltekit-superforms)] and Validation with `zod`
 - [ ] **Error Handling:**
   - [x] Strongly Typed Error Handling with [generic errors](./src/lib/errors#readme)
