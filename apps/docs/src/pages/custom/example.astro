@@ -4,24 +4,26 @@ import Card from '../../components/Card.astro';
 ---
 
 <StarlightPage frontmatter={{ title: 'My custom page' }}>
-  <p>This is a custom page with a custom component:</p>
-<ul role="list" class="link-card-grid">
-			<Card background="neutral" isLink>
-				<h3>Integrations</h3>
-				<a href="https://starlight.astro.build/guides/pages/#content-pages">read content-pages</a>
-				<p>Learn how Astro works and explore the official API docs.</p>
-			</Card>
-			<Card background="blue-purple">
-				<h3>Community</h3>
-				<p>Supercharge your project with new frameworks and libraries.</p>
-			</Card>
-			<Card background="blue-green">
-				<h3>Themes</h3>
-				<p>Explore a galaxy of community-built starter themes.</p>
-			</Card>
-			<Card background="red-pink">
-				<h3>Community</h3>
-				<p>Come say hi to our amazing Discord community. ❤️</p>
-			</Card>
-		</ul>
+	<p>This is a custom page with a custom component:</p>
+	<ul role="list" class="link-card-grid">
+		<Card background="neutral" isLink>
+			<h3>Integrations</h3>
+			<a href="https://starlight.astro.build/guides/pages/#content-pages"
+				>read content-pages</a
+			>
+			<p>Learn how Astro works and explore the official API docs.</p>
+		</Card>
+		<Card background="blue-purple">
+			<h3>Community</h3>
+			<p>Supercharge your project with new frameworks and libraries.</p>
+		</Card>
+		<Card background="blue-green">
+			<h3>Themes</h3>
+			<p>Explore a galaxy of community-built starter themes.</p>
+		</Card>
+		<Card background="red-pink">
+			<h3>Community</h3>
+			<p>Come say hi to our amazing Discord community. ❤️</p>
+		</Card>
+	</ul>
 </StarlightPage>

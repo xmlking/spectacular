@@ -10,7 +10,7 @@ on:
       app:
         type: choice
         description: Target application
-        default: 'playground'
+        default: 'console'
         required: true
         options:
           - playground
@@ -26,8 +26,8 @@ on:
 
 env:
   GHCR_REGISTRY: ghcr.io
-  SCOPE: ${{ inputs.app || 'playground' }}
-  IMAGE_NAME: ${{ github.repository }}/${{ inputs.app || 'playground' }}
+  SCOPE: ${{ inputs.app || 'console' }}
+  IMAGE_NAME: ${{ github.repository }}/${{ inputs.app || 'console' }}
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 

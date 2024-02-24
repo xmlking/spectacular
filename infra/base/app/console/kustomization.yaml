@@ -18,6 +18,10 @@ configMapGenerator:
       - MICRO_SERVER_NAME=gkit.service.console
       # - MICRO_SERVER_ADVERTISE="$(CONSOLE_SERVICE_ENDPOINT):3000"
       # - DATABASE_HOST=$(DATABASE_ENDPOINT)
+
+replacements:
+  - path: replacement.yaml
+	
 # vars:
 #   - name: CONSOLE_SERVICE_ENDPOINT
 #     objref:

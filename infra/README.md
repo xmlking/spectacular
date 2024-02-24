@@ -166,6 +166,7 @@ Following are the important points you should know about the `Kustomize`
 1. [Application Manager brings GitOps to GKE](https://www.youtube.com/watch?v=r5_xYtbZPfc)
 1. Kustomize
    1. [Kustomize Cheat Sheet](https://itnext.io/kubernetes-kustomize-cheat-sheet-8e2d31b74d8f)
+   2. [ConfigGenerator Patching example](https://elatov.github.io/2021/08/using-kustomize/)
 
 ## TODO
 

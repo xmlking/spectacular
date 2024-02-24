@@ -45,7 +45,12 @@
 			<Control let:attrs>
 				<div class="grid gap-2">
 					<Label>Email</Label>
-					<input {...attrs} type="email" class="data-fs-[error=true]:input-error" bind:value={$formData.email} />
+					<input
+						{...attrs}
+						type="email"
+						class="data-fs-[error=true]:input-error"
+						bind:value={$formData.email}
+					/>
 					<Description class="sr-only">Company email is preferred</Description>
 					<FieldErrors class="data-fs-[error=true]:bg-red-200" />
 				</div>
@@ -81,12 +86,7 @@
 				<Control let:attrs>
 					<div class="flex items-center space-x-2">
 						<Label>{theme}</Label>
-						<input
-							{...attrs}
-							type="radio"
-							value={theme}
-							bind:group={$formData.theme}
-						/>
+						<input {...attrs} type="radio" value={theme} bind:group={$formData.theme} />
 					</div>
 				</Control>
 			{/each}
@@ -96,11 +96,7 @@
 		<Field {form} name="marketingEmails">
 			<Control let:attrs>
 				<div class="flex items-center gap-4">
-					<input
-						{...attrs}
-						type="checkbox"
-						bind:checked={$formData.marketingEmails}
-					/>
+					<input {...attrs} type="checkbox" bind:checked={$formData.marketingEmails} />
 					<Label>I want to receive marketing emails</Label>
 				</div>
 			</Control>
