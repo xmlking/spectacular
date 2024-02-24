@@ -40,7 +40,7 @@ WORKDIR /app
 ## First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
 
-## scripts/init.sh will copy .env, .secrets needed during build
+## prepare: `scripts/init.sh` will copy `.env`, `.secrets` needed during build
 COPY scripts scripts
 COPY .env.example .env.example
 COPY .secrets.example .secrets.example
