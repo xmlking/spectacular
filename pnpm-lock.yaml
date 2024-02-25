@@ -202,8 +202,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.0)
       eslint-plugin-svelte:
-        specifier: 2.36.0-next.5
-        version: 2.36.0-next.5(eslint@8.57.0)(svelte@4.2.12)
+        specifier: 2.36.0-next.6
+        version: 2.36.0-next.6(eslint@8.57.0)(svelte@4.2.12)
       formsnap:
         specifier: 0.5.0
         version: 0.5.0(svelte@4.2.12)(sveltekit-superforms@2.5.0)
@@ -435,8 +435,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.0)
       eslint-plugin-svelte:
-        specifier: 2.36.0-next.5
-        version: 2.36.0-next.5(eslint@8.57.0)(svelte@4.2.12)
+        specifier: 2.36.0-next.6
+        version: 2.36.0-next.6(eslint@8.57.0)(svelte@4.2.12)
       flowbite:
         specifier: 2.3.0
         version: 2.3.0
@@ -649,8 +649,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.0)
       eslint-plugin-svelte:
-        specifier: 2.36.0-next.5
-        version: 2.36.0-next.5(eslint@8.57.0)(svelte@4.2.12)
+        specifier: 2.36.0-next.6
+        version: 2.36.0-next.6(eslint@8.57.0)(svelte@4.2.12)
       formsnap:
         specifier: 0.5.0
         version: 0.5.0(svelte@4.2.12)(sveltekit-superforms@2.5.0)
@@ -900,8 +900,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.0)
       eslint-plugin-svelte:
-        specifier: 2.36.0-next.5
-        version: 2.36.0-next.5(eslint@8.57.0)(svelte@4.2.12)
+        specifier: 2.36.0-next.6
+        version: 2.36.0-next.6(eslint@8.57.0)(svelte@4.2.12)
       formsnap:
         specifier: 0.5.0
         version: 0.5.0(svelte@4.2.12)(sveltekit-superforms@2.5.0)
@@ -10499,6 +10499,36 @@ packages:
     transitivePeerDependencies:
       - supports-color
       - ts-node
+    dev: false
+
+  /eslint-plugin-svelte@2.36.0-next.6(eslint@8.57.0)(svelte@4.2.12):
+    resolution: {integrity: sha512-OFEKGckpZHeMdD4xf9JTBLjzemcl4YI+whpQPZ1LrqVy0d95OuyeMhAKqO0fc1rsbOi0eYvje90mVNCvfHBCCQ==}
+    engines: {node: ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: ^7.0.0 || ^8.0.0-0 || ^9.0.0-0
+      svelte: ^3.37.0 || ^4.0.0 || ^5.0.0-next.68
+    peerDependenciesMeta:
+      svelte:
+        optional: true
+    dependencies:
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
+      '@jridgewell/sourcemap-codec': 1.4.15
+      debug: 4.3.4
+      eslint: 8.57.0
+      eslint-compat-utils: 0.4.1(eslint@8.57.0)
+      esutils: 2.0.3
+      known-css-properties: 0.29.0
+      postcss: 8.4.35
+      postcss-load-config: 3.1.4(postcss@8.4.35)
+      postcss-safe-parser: 6.0.0(postcss@8.4.35)
+      postcss-selector-parser: 6.0.15
+      semver: 7.6.0
+      svelte: 4.2.12
+      svelte-eslint-parser: 0.34.0-next.9(svelte@4.2.12)
+    transitivePeerDependencies:
+      - supports-color
+      - ts-node
+    dev: true
 
   /eslint-plugin-turbo@1.12.4(eslint@8.57.0):
     resolution: {integrity: sha512-3AGmXvH7E4i/XTWqBrcgu+G7YKZJV/8FrEn79kTd50ilNsv+U3nS2IlcCrQB6Xm2m9avGD9cadLzKDR1/UF2+g==}
@@ -16999,6 +17029,23 @@ packages:
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      '@vinejs/vine':
+        optional: true
+      arktype:
+        optional: true
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
     dependencies:
       '@sveltejs/kit': 2.5.1(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.1.4)
       devalue: 4.3.2
@@ -18728,6 +18775,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
