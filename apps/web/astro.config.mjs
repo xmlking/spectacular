@@ -2,8 +2,11 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import svelte from '@astrojs/svelte';
 import vercel from '@astrojs/vercel/serverless';
+import node from '@astrojs/node';
+import starlight from '@astrojs/starlight';
 import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
+import expressiveCode from 'astro-expressive-code';
 import mdx from '@astrojs/mdx';
 
 const SITE_URL =
@@ -13,6 +16,7 @@ const SITE_URL =
 export default defineConfig({
 	site: SITE_URL,
 	integrations: [
+		starlight({ title: 'Web' }),
 		tailwind({
 			// Disable the default base styles:
 			// Example: Disable injecting a basic `base.css` import on every page.
@@ -22,15 +26,26 @@ export default defineConfig({
 		svelte(),
 		sitemap(),
 		partytown(),
+		expressiveCode(),
 		mdx()
 	],
 	output: 'hybrid',
-	adapter: vercel({
-		webAnalytics: {
-			enabled: true
-		},
-		speedInsights: {
-			enabled: true
-		}
-	})
+	// HINT: To set build output, same way like sveltekit for Dockerfile
+	build: {
+		server: './build',
+		client: './build/client',
+		serverEntry: 'index.js'
+	},
+	adapter: process.env.VERCEL
+		? vercel({
+				webAnalytics: {
+					enabled: true
+				},
+				speedInsights: {
+					enabled: true
+				}
+			})
+		: node({
+				mode: 'standalone'
+			})
 });

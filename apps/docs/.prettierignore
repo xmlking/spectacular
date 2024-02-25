@@ -18,7 +18,9 @@ vite.config.*.timestamp-*
 # Project files #
 #############################
 .vercel_build_output/**
-dist
+dist/
+.vercel
+build
 public/**
 tests/fixtures
 /coverage

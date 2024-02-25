@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
+import node from '@astrojs/node';
 // import vercel from "@astrojs/vercel/serverless";
 import vercel from '@astrojs/vercel/static';
 
@@ -132,13 +133,23 @@ export default defineConfig({
 			applyBaseStyles: false
 		})
 	],
-	output: 'static',
-	adapter: vercel({
-		webAnalytics: {
-			enabled: true
-		},
-		speedInsights: {
-			enabled: true
-		}
-	})
+	output: process.env.VERCEL ? 'static' : 'hybrid',
+	// HINT: To set build output, same way like sveltekit for Dockerfile
+	build: {
+		server: './build',
+		client: './build/client',
+		serverEntry: 'index.js'
+	},
+	adapter: process.env.VERCEL
+		? vercel({
+				webAnalytics: {
+					enabled: true
+				},
+				speedInsights: {
+					enabled: true
+				}
+			})
+		: node({
+				mode: 'standalone'
+			})
 });

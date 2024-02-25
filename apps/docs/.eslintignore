@@ -1,5 +1,7 @@
 # build output
 dist/
+.vercel
+build
 
 # dependencies
 node_modules/
@@ -23,11 +25,20 @@ bun.*
 
 functions/*.js
 
-_
+# Ignore files for PNPM, NPM and YARN
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
 
+# Jest files #
+#############################
+coverage
+coverage/*
+
+# Project files #
+#############################
 .dev.vars
 yarn-error.log
 out
 dev-dist
 pnpm-lock.yaml
-.vercel

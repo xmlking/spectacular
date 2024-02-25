@@ -100,7 +100,7 @@ COPY --from=builder --chown=node:node /app/apps/${SCOPE}/package.json .
 ## https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=node:node /app/apps/${SCOPE}/build ./build
 
-
+ENV HOST=0.0.0.0
 EXPOSE 3000
 ENV PORT 3000
 
