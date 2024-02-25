@@ -736,11 +736,11 @@ importers:
         specifier: 8.2.1
         version: 8.2.1(astro@4.4.4)
       '@astrojs/starlight':
-        specifier: 0.20.0
-        version: 0.20.0(astro@4.4.4)
+        specifier: 0.20.1
+        version: 0.20.1(astro@4.4.4)
       '@astrojs/starlight-tailwind':
         specifier: 2.0.1
-        version: 2.0.1(@astrojs/starlight@0.20.0)(@astrojs/tailwind@5.1.0)(tailwindcss@3.4.1)
+        version: 2.0.1(@astrojs/starlight@0.20.1)(@astrojs/tailwind@5.1.0)(tailwindcss@3.4.1)
       '@astrojs/tailwind':
         specifier: 5.1.0
         version: 5.1.0(astro@4.4.4)(tailwindcss@3.4.1)
@@ -1012,8 +1012,8 @@ importers:
         specifier: 3.1.1
         version: 3.1.1
       '@astrojs/starlight':
-        specifier: 0.20.0
-        version: 0.20.0(astro@4.4.4)
+        specifier: 0.20.1
+        version: 0.20.1(astro@4.4.4)
       '@astrojs/svelte':
         specifier: 5.0.3
         version: 5.0.3(astro@4.4.4)(svelte@4.2.12)(typescript@5.3.3)(vite@5.1.4)
@@ -1544,20 +1544,20 @@ packages:
       sitemap: 7.1.1
       zod: 3.22.4
 
-  /@astrojs/starlight-tailwind@2.0.1(@astrojs/starlight@0.20.0)(@astrojs/tailwind@5.1.0)(tailwindcss@3.4.1):
+  /@astrojs/starlight-tailwind@2.0.1(@astrojs/starlight@0.20.1)(@astrojs/tailwind@5.1.0)(tailwindcss@3.4.1):
     resolution: {integrity: sha512-niMgFcR7NHcsBVy8UAN3F2gqhmoN5v83st5Hu4YzvUL+6SNwjQmIipXppXdN9+iVneRjPr6PLGzDfI+wnjSBWQ==}
     peerDependencies:
       '@astrojs/starlight': '>=0.9.0'
       '@astrojs/tailwind': ^5.0.0
       tailwindcss: ^3.3.3
     dependencies:
-      '@astrojs/starlight': 0.20.0(astro@4.4.4)
+      '@astrojs/starlight': 0.20.1(astro@4.4.4)
       '@astrojs/tailwind': 5.1.0(astro@4.4.4)(tailwindcss@3.4.1)
       tailwindcss: 3.4.1
     dev: false
 
-  /@astrojs/starlight@0.20.0(astro@4.4.4):
-    resolution: {integrity: sha512-8uxLMXjol1HD0xF6hTvLBmj4rRJrujpd+l7UwfG5fS76leC+i+bf//9Q5bIAvpqTqX+aCB46bYzpP61yHapCdw==}
+  /@astrojs/starlight@0.20.1(astro@4.4.4):
+    resolution: {integrity: sha512-MRkX937Q50H6Ly2QnYn+VmG2O+RjsdZl4gAXpfknWpDcxhB8pdUdddgTVAKfrc0czlhm9kzd/sF05CRB9nakqQ==}
     peerDependencies:
       astro: ^4.2.7
     dependencies:
@@ -17104,6 +17104,23 @@ packages:
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      '@vinejs/vine':
+        optional: true
+      arktype:
+        optional: true
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
     dependencies:
       '@sveltejs/kit': 2.5.1(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.1.4)
       devalue: 4.3.2
@@ -18837,6 +18854,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
