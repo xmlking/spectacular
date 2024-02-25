@@ -36,7 +36,7 @@ services:
   # traefik proxy
   ###########################################################################
   traefik:
-    image: traefik:v3.0
+    image: traefik:v3.0.0-rc1
     hostname: traefik
     container_name: traefik
     ports:
