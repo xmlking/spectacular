@@ -29,7 +29,7 @@ const config = {
 		},
 		// When hosting SPA on GitHub Pages
 		paths: {
-			// base: dev ? '' : '/hc360-ui',
+			// base: dev ? '' : '/console',
 			// relative: false
 		},
 		// prerender: { entries: [] },

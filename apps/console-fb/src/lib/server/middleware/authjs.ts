@@ -24,6 +24,8 @@ const log = new Logger('middleware:auth');
 
 export const authHookConfig: SvelteKitAuthConfig = {
 	debug: dev,
+	// HINT: when using https (local dev or prod) set this to true
+	useSecureCookies: true,
 	trustHost: true,
 	basePath: '/auth',
 	secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY,

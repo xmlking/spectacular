@@ -7,6 +7,15 @@ import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import houdini from 'houdini/vite';
 
 export default defineConfig({
+	server: {
+		host: 'console.localhost.direct',
+		// host: 'console-192-168-50-34.traefik.me',
+		https: {
+			cert: './../../infra/base/traefik/certs/localhost.direct.crt',
+			key: './../../infra/base/traefik/certs/localhost.direct.key'
+		},
+		proxy: {}
+	},
 	plugins: [
 		houdini(),
 		enhancedImages(),

@@ -16,6 +16,7 @@ export default defineConfig({
 	// b.t.w packages/ui/tsconfig.json has paths.
 	server: {
 		host: 'console.localhost.direct',
+		// host: 'console-192-168-50-34.traefik.me',
 		https: {
 			cert: './../../infra/base/traefik/certs/localhost.direct.crt',
 			key: './../../infra/base/traefik/certs/localhost.direct.key'
