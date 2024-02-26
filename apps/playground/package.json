@@ -17,6 +17,7 @@
 		"lang:validate": "pnpm inlang validate --project ./project.inlang",
 		"lint": "prettier --check . && eslint .",
 		"preview": "dotenv-run -f .env -f .secrets -v -- vite preview",
+		"sync": "dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
 		"test": "pnpm run test:integration && pnpm run test:unit",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
