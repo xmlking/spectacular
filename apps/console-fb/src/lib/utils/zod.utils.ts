@@ -42,7 +42,14 @@ export const dbOffsetDate = z.preprocess(
 	(arg) => (arg === '' ? null : arg),
 	z.string().datetime({ offset: true }).nullish()
 );
+// export const booleanSchema = z
+// 		.union([z.boolean(), z.literal('true'), z.literal('false')])
+// 		.transform((value) => value === true || value === 'true');
 
+export const booleanSchema = z
+	.enum(['true', 'false'])
+	.nullish()
+	.transform((v) => v === 'true');
 /**
  * Converters / type coercion
  */

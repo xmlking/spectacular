@@ -23,15 +23,15 @@ configMapGenerator:
   - name: env-vars-common
     behavior: merge
     literals:
-      - PUBLIC_GRAPHQL_ENDPOINT=https://hasura.localhost.direct/v1/graphql
-      - AUTH_CLIENT_URL=https://console.localhost.direct:5173
+      - PUBLIC_GRAPHQL_ENDPOINT=https://hasura.traefik.me/v1/graphql
+      - AUTH_CLIENT_URL=https://console.traefik.me:5173
       - PUBLIC_NHOST_SUBDOMAIN=local
       - PUBLIC_NHOST_REGION=
-      - NHOST_HASURA_URL=https://hasura.localhost.direct/console
-      - NHOST_AUTH_URL=https://auth.localhost.direct/v1
-      - NHOST_GRAPHQL_URL=https://hasura.localhost.direct/v1
-      - NHOST_STORAGE_URL=https://storage.localhost.direct/v1
-      - NHOST_FUNCTIONS_URL=https://functions.localhost.direct/v1
+      - NHOST_HASURA_URL=https://hasura.traefik.me/console
+      - NHOST_AUTH_URL=https://auth.traefik.me/v1
+      - NHOST_GRAPHQL_URL=https://hasura.traefik.me/v1
+      - NHOST_STORAGE_URL=https://storage.traefik.me/v1
+      - NHOST_FUNCTIONS_URL=https://functions.traefik.me/v1
 
 secretGenerator:
   - name: secrets

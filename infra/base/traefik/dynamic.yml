@@ -1,13 +1,13 @@
 ## DYNAMIC CONFIGURATION
 tls:
   certificates:
-    - certFile: /etc/traefik/certs/localhost.direct.crt
-      keyFile: /etc/traefik/certs/localhost.direct.key
+    - certFile: /etc/ssl/traefik/traefik.me.crt
+      keyFile: /etc/ssl/traefik/traefik.me.key
   stores:
     default:
       defaultCertificate:
-        certFile: /etc/traefik/certs/localhost.direct.crt
-        keyFile: /etc/traefik/certs/localhost.direct.key
+        certFile: /etc/ssl/traefik/traefik.me.crt
+        keyFile: /etc/ssl/traefik/traefik.me.key
   # when troubleshooting certs, enable this so traefik doesn't use
   # its own self-signed. By default if it can't find a matching
   # cert, it'll just create its own which will cause cert warnings
