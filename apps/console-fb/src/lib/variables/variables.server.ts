@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { building } from '$app/environment';
 import { env as dynPriEnv } from '$env/dynamic/private';
 import * as statPriEnv from '$env/static/private';
+import { booleanSchema } from '$lib/utils/zod.utils';
 
 /**
  * To use any type besides string, you need to use zod's `coerce` method.
@@ -9,16 +10,10 @@ import * as statPriEnv from '$env/static/private';
 
 const schema = z.object({
 	// Add your private env variables here
-	HASURA_GRAPHQL_ADMIN_SECRET: z.string().regex(new RegExp('^\\S*$'), {
-		message: 'No spaces allowed'
-	}),
 	HASURA_GRAPHQL_JWT_SECRET_KEY: z.string().regex(new RegExp('^\\S*$'), {
 		message: 'No spaces allowed'
 	}),
 	VERCEL: z.coerce.boolean(),
-	AUTH_REDIRECT_PROXY_URL: z.string().regex(new RegExp('^\\S*$'), {
-		message: 'No spaces allowed'
-	}),
 	AUTH_PROVIDER_AZUREAD_CLIENT_ID: z.string().regex(new RegExp('^\\S*$'), {
 		message: 'No spaces allowed'
 	}),
@@ -75,7 +70,9 @@ const schema = z.object({
 		.regex(new RegExp('^\\S*$'), {
 			message: 'No spaces allowed'
 		})
-		.default('https://graph.microsoft.com/.default')
+		.default('https://graph.microsoft.com/.default'),
+	FEATURE_ENABLE_PASSWORD_LOGIN: booleanSchema,
+	FEATURE_ENABLE_AZURE_LOGIN: booleanSchema
 });
 
 const parsed = schema.safeParse({ ...statPriEnv, ...(!building && dynPriEnv) });
@@ -88,5 +85,10 @@ if (!parsed.success) {
 	);
 	process.exit(1);
 }
+
+console.info('FEATURE_FLAGS', {
+	enablePasswordLogin: parsed.data.FEATURE_ENABLE_PASSWORD_LOGIN,
+	enableAzureLogin: parsed.data.FEATURE_ENABLE_AZURE_LOGIN
+});
 
 export default parsed.data;

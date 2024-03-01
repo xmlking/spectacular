@@ -61,7 +61,8 @@ export const handleError: HandleServerError = async ({ error, status, message /*
  * that happens inside a `load` or `action` function that runs on the server (or during pre-rendering).
  */
 export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
-	console.debug('handleFetch:', event.url.toString());
+	log.debug(`HandleFetch: pageUrl: ${event.url.toString()} clientAddress: ${event.getClientAddress()}`);
+
 	/*
 	if (request.url.startsWith('https://graph.microsoft.com')) {
 		request.headers.set('Authorization', `Bearer ${microsoft_token}`);

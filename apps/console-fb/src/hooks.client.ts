@@ -18,7 +18,7 @@ if (!dev) {
  * TODO: Error monitoring via Sentry
  */
 export const handleError: HandleClientError = ({ error }) => {
-	log.error('hooks:client:handleClientError:', error);
+	log.error('handleClientError:', error);
 	const err = error as App.Error;
 	return {
 		message: err.message ?? 'Whoops!',

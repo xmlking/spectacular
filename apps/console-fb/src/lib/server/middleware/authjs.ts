@@ -6,6 +6,7 @@ import Google from '@auth/core/providers/google';
 // import { HasuraAdapter } from '@auth/hasura-adapter';
 import { SvelteKitAuth, type SvelteKitAuthConfig } from '@auth/sveltekit';
 import envPri from '$lib/variables/variables.server';
+import envPub from '$lib/variables/variables';
 import { Logger } from '@spectacular/utils';
 import { dev } from '$app/environment';
 import { getOrg } from './org-mapper';
@@ -21,6 +22,7 @@ import users from '$mocks/data/users';
 // https://github.com/artizen-fund/artizen-frontend/blob/main/src/lib/apollo/apolloClient.ts
 
 const log = new Logger('middleware:auth');
+const redirectProxyUrl = `${envPub.PUBLIC_BASE_URL}/auth`;
 
 export const authHookConfig: SvelteKitAuthConfig = {
 	debug: dev,
@@ -29,7 +31,7 @@ export const authHookConfig: SvelteKitAuthConfig = {
 	trustHost: true,
 	basePath: '/auth',
 	secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY,
-	redirectProxyUrl: envPri.AUTH_REDIRECT_PROXY_URL,
+	redirectProxyUrl,
 	// adapter: HasuraAdapter({
 	// 	endpoint: envPri.PUBLIC_GRAPHQL_ENDPOINT,
 	// 	adminSecret: envPri.HASURA_GRAPHQL_ADMIN_SECRET

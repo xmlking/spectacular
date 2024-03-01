@@ -82,35 +82,17 @@ Once you've cloned the project and installed dependencies with `pnpm i`, start a
 
 ### Start local Hasura
 
-via `nhost`
-
-```shell
-nhost up
-# shutdown
-nhost down
-# (optional) shutdown and reset volume
-nhost down --volumes
-
-#  (optional) nhost first time when started, will load seeds but you can force with `--apply-seeds`
-nhost up --apply-seeds
-```
-
-via `docker compose`
-
-```shell
-docker compose up hasura
-docker compose --env-file .env --env-file .secrets up hasura
-# shutdown
-docker compose down
-# (optional) shutdown and reset volume
-docker compose down -v
-
-# verify if docker `compose` getting correctly resolved application config from .env
-docker compose config # implicitly set `env-file` to `.env`
-docker compose --env-file .env --env-file .secrets config  # explicitly set `env-file` to `.env` and `.secrets`
-
-# ssh to container (if needed to debug)
-docker compose --env-file .env --env-file .secrets exec -it hasura /bin/bash
+```sh
+# stat all services in background and show logs
+make up # for first time use `make boot` then `make up`
+# verify status/health of services
+make ps
+# shotdown all services
+make down
+# DANGER: run this if you want to reset database and other persistent volumes
+make teardown
+# verify if docker `compose` getting correctly resolved application config from .env files
+make check
 ```
 
 ### Start apps/console

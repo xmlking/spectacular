@@ -34,8 +34,22 @@
 	import { browser, dev } from '$app/environment';
 	import { CachePolicy, SearchRulesStore, order_by } from '$houdini';
 	// import { Datepicker } from 'flowbite-svelte';
+	import envPub from '$lib/variables/variables';
 
 	const log = new Logger('routes:policies:create');
+	const enableAzureAd = envPub.PUBLIC_FEATURE_ENABLE_AZURE_AD;
+	const subjectTypes = enableAzureAd
+		? [
+				{ value: 'user', label: 'User' },
+				{ value: 'group', label: 'Group' },
+				{ value: 'device', label: 'Device' },
+				{ value: 'device_pool', label: 'Device Pool' }
+			]
+		: [
+				{ value: 'device', label: 'Device' },
+				{ value: 'device_pool', label: 'Device Pool' }
+			];
+
 	export let data;
 	// Client API:
 	const superform = superForm(data.form, {
@@ -247,7 +261,7 @@
 
 	<div class="mb-6 grid gap-6 md:grid-cols-3 lg:grid-cols-6">
 		<div class="col-span-2">
-			<Radio field={keys.subjectType} items={subjectTypeOptions2} on:change={clearSubject} />
+			<Radio field={keys.subjectType} items={subjectTypes} on:change={clearSubject} />
 		</div>
 		<div class="col-span-2">
 			<Select

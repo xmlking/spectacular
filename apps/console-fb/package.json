@@ -18,7 +18,7 @@
 		"lint:js": "eslint .",
 		"lint:markup": "markuplint --config ../../.markuplintrc.cjs 'src/**/*.svelte'",
 		"lint:prettier": "prettier --check .",
-		"preview": "NEXTAUTH_URL=http://localhost:4173 AUTH_REDIRECT_PROXY_URL=http://localhost:4173/auth dotenv-run -f .env -f .secrets -v -- vite preview",
+		"preview": "NEXTAUTH_URL=http://localhost:4173 dotenv-run -f .env -f .secrets -v -- vite preview",
 		"sync": "dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
 		"test": "pnpm run test:integration && pnpm run test:unit",
 		"test:integration": "playwright test",

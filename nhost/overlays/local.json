@@ -2,22 +2,22 @@
 	{
 		"op": "replace",
 		"path": "/auth/redirections/clientUrl",
-		"value": "https://console.localhost.direct:5173"
+		"value": "https://console.traefik.me:5173"
 	},
 	{
 		"op": "replace",
 		"path": "/auth/redirections/allowedUrls",
-		"value": ["https://console.localhost.direct:5173", "https://*.vercel.app/"]
+		"value": ["https://console.traefik.me:5173","https://console.traefik.me", "https://*.vercel.app/"]
 	},
 	{
 		"op": "replace",
 		"path": "/global/environment/0/value",
-		"value": "https://console.localhost.direct:5173/api/events"
+		"value": "https://console.traefik.me:5173/api/events"
 	},
 	{
 		"op": "replace",
 		"path": "/global/environment/1/value",
-		"value": "https://console.localhost.direct:5173/api/actions"
+		"value": "https://console.traefik.me:5173/api/actions"
 	},
 	{
 		"op": "replace",

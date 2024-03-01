@@ -119,8 +119,8 @@ Check the status
 
 ```shell
 cd nhost
-asura metadata diff --endpoint https://hasura.localhost.direct --admin-secret <admin-secret>
-hasura migrate status --database-name default --endpoint https://hasura.localhost.direct --admin-secret <admin-secret>
+asura metadata diff --endpoint https://hasura.traefik.me --admin-secret <admin-secret>
+hasura migrate status --database-name default --endpoint https://hasura.traefik.me --admin-secret <admin-secret>
 ```
 
 ### Export Metadata

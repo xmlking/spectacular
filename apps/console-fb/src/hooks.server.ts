@@ -54,7 +54,7 @@ TokenVault.init([
 export const handle: Handle = sequence(authjs, guard, houdini);
 
 export const handleError: HandleServerError = async ({ error }) => {
-	console.error('hooks:server:handleServerError:', error);
+	log.error('handleServerError:', error);
 	const err = error as App.Error;
 	return {
 		message: err.message ?? 'Whoops!',
@@ -67,11 +67,13 @@ export const handleError: HandleServerError = async ({ error }) => {
  * that happens inside a `load` or `action` function that runs on the server (or during pre-rendering).
  */
 export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
-	console.debug('hooks.server.ts, HandleFetch: pageUrl:', event.url.toString());
+	log.info(
+		`HandleFetch: pageUrl: ${event.url.toString()} clientAddress: ${event.getClientAddress()}`
+	);
 
 	const token = TokenVault.getToken(request.url);
 	if (token) {
-		console.debug('hooks.server.ts, HandleFetch: adding token for:', request.url);
+		log.info(' HandleFetch: adding token for:', request.url);
 		request.headers.set('Authorization', `Bearer ${token}`);
 	}
 	/*
