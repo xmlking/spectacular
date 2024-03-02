@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
-	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import SuperDebug from 'sveltekit-superforms';
 	import Icon from '$ui/components/icons/icon.svelte';
 	import { dev } from '$app/environment';
 
