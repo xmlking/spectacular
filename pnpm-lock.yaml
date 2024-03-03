@@ -733,8 +733,8 @@ importers:
         specifier: 0.5.6
         version: 0.5.6(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.3.3)
       '@astrojs/node':
-        specifier: 8.2.1
-        version: 8.2.1(astro@4.4.6)
+        specifier: 8.2.3
+        version: 8.2.3(astro@4.4.6)
       '@astrojs/starlight':
         specifier: 0.20.1
         version: 0.20.1(astro@4.4.6)
@@ -1003,8 +1003,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1(astro@4.4.6)
       '@astrojs/node':
-        specifier: 8.2.1
-        version: 8.2.1(astro@4.4.6)
+        specifier: 8.2.3
+        version: 8.2.3(astro@4.4.6)
       '@astrojs/partytown':
         specifier: 2.0.4
         version: 2.0.4
@@ -1514,8 +1514,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/node@8.2.1(astro@4.4.6):
-    resolution: {integrity: sha512-n3VWx34V5te6g/Jm2rbpXzTdpCW86CmstaGbsPutOs6VaXvvWwk+ZibA/bFl7XgNpxqQ5d6Pqacnsn+xkZ/Kag==}
+  /@astrojs/node@8.2.3(astro@4.4.6):
+    resolution: {integrity: sha512-VQQy7QIv4X+5dlKCEchYIxMFryS+BwDOFGNzeRmHe1/P819TlNup9/M8XqnWW4aZPxV7P6CoDeFxX6HuT/kOmQ==}
     peerDependencies:
       astro: ^4.2.0
     dependencies:
@@ -17387,6 +17387,23 @@ packages:
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      '@vinejs/vine':
+        optional: true
+      arktype:
+        optional: true
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
     dependencies:
       '@sveltejs/kit': 2.5.2(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.1.4)
       devalue: 4.3.2
@@ -19120,6 +19137,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
