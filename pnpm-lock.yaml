@@ -447,8 +447,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(svelte@4.2.12)
       flowbite-svelte-icons:
-        specifier: 1.4.0
-        version: 1.4.0(svelte@4.2.12)(tailwind-merge@2.2.1)(tailwindcss@3.4.1)
+        specifier: 1.4.1
+        version: 1.4.1(svelte@4.2.12)(tailwind-merge@2.2.1)(tailwindcss@3.4.1)
       flowbite-typography:
         specifier: 1.0.3
         version: 1.0.3(tailwindcss@3.4.1)
@@ -11218,8 +11218,8 @@ packages:
       tailwind-merge: 2.2.1
     dev: true
 
-  /flowbite-svelte-icons@1.4.0(svelte@4.2.12)(tailwind-merge@2.2.1)(tailwindcss@3.4.1):
-    resolution: {integrity: sha512-grdew5+TD5KRu5zj4N5rDUhjoHDBRH3Wqib7BtlT4uJkZ7jNBOnbKiBwh2Uhl5fd2J3WNuY1t1pOGxMoPr4bpQ==}
+  /flowbite-svelte-icons@1.4.1(svelte@4.2.12)(tailwind-merge@2.2.1)(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-ZjOD/xlSczkkleqqbZ2w8BazfAyx536+lefNTAxkSY2Q4D/g+d+TbzjQ05eil81sa26krUyJUPumZ5+d2pXfvA==}
     peerDependencies:
       svelte: ^3.54.0 || ^4.0.0 || ^5.0.0
       tailwind-merge: ^2.0.0
@@ -17387,6 +17387,23 @@ packages:
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      '@vinejs/vine':
+        optional: true
+      arktype:
+        optional: true
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
     dependencies:
       '@sveltejs/kit': 2.5.2(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.1.4)
       devalue: 4.3.2
@@ -19120,6 +19137,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
