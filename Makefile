@@ -1,22 +1,28 @@
-envfiles := --env-file .env --env-file .secrets --env-file apps/console/.secrets --env-file apps/console/.env
+ALL_PROFILES := all,storage,donotstart
+export COMPOSE_ENV_FILES ?= .env,.secrets,apps/console/.env,apps/console/.secrets
 
-check:
-	@docker compose $(envfiles) --profile all config
+# Target for running the action
+TARGET = $(word 1,$(subst -, ,$*))
 
-ps:
-	@docker compose $(envfiles) ps
+export COMPOSE_PROFILES ?= $(TARGET)
+
+check check-%:
+	@docker compose config
 
 boot:
-	@docker compose $(envfiles) up update-certs-helper
+	@docker compose up update-certs-helper
 
-up:
-	@docker compose $(envfiles) up -d
-	@docker compose $(envfiles) logs -f
+up up-%:
+	@docker compose up
 
+ps: export COMPOSE_PROFILES=$(ALL_PROFILES)
+ps:
+	@docker compose ps
+
+down: export COMPOSE_PROFILES=$(ALL_PROFILES)
 down:
-	@docker compose $(envfiles) down update-certs-helper
-	@docker compose $(envfiles) down
+	@docker compose down
 
+teardown: export COMPOSE_PROFILES=$(ALL_PROFILES)
 teardown:
-	@docker compose $(envfiles) down update-certs-helper -v
-	@docker compose $(envfiles) down -v
+	@docker compose down -v

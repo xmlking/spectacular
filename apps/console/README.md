@@ -17,11 +17,13 @@ curl traefik.me/privkey.pem -o infra/base/traefik/certs/traefik.me.key
 
 #### Start backend services with Docker Compose
 
+Start `default` profile services: `postgres`, `hasura`, `auth` and `console`  for local development.
+
 ```sh
-# Start up to start the service and get the certificates. When that finishes, start the containers.
+# get the certificates and start all default services
 docker compose up update-certs-helper \
-docker compose --env-file .env --env-file .secrets --env-file apps/console/.secrets --env-file apps/console/.env up -d \
-docker compose --env-file .env --env-file .secrets --env-file apps/console/.secrets --env-file apps/console/.env logs -f
+COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets docker compose up -d \
+COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets docker compose logs -f
 
 # Or, utilize the Makefile.
 # stat all services in background and show logs
@@ -32,11 +34,13 @@ make ps
 make down
 # DANGER: run this if you want to reset database and other persistent volumes
 make teardown
-# verify if docker `compose` getting correctly resolved application config from .env files
+# verify if docker `compose` getting correctly resolved application config from .env and .secrests files
 make check
+```
 
+```shell
 # ssh to container (if needed to debug)
-docker compose --env-file .env --env-file .secrets --env-file apps/console/.secrets --env-file apps/console/.env exec -it hasura /bin/bash
+COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets docker compose exec -it hasura /bin/bash
 # debug: check for files in image
 crane export ghcr.io/xmlking/spectacular/console:v0.1.3 - | tar -tvf - | grep -v zoneinfo
 ```
@@ -80,6 +84,15 @@ nhost up --apply-seeds
 | Functions | https://local.functions.nhost.run                 |
 | Dashboard | https://local.dashboard.nhost.run                 |
 | Mailhog   | https://local.mailhog.nhost.run                   |
+
+#### Apply user schema
+> this step only needed first time when database got initialized  
+got to `https://hasura.traefik.me/console/data/sql` and apply
+
+```sql
+ALTER TABLE ONLY public.user_org_groups
+    ADD CONSTRAINT user_org_groups_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+```
 
 ### Frontend
 
