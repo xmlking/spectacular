@@ -134,7 +134,7 @@ services:
     hostname: mailpit
     container_name: mailpit
     restart: unless-stopped
-    profiles: [all]
+    # profiles: [optional]
     environment:
       MP_SMTP_AUTH: 'user:password'
       # MP_SMTP_AUTH_ACCEPT_ANY: 1
@@ -259,7 +259,7 @@ services:
     hostname: minio
     container_name: minio
     restart: unless-stopped
-    profiles: [all]
+    # profiles: [optional]
     volumes:
      - minio:/data
     command: server /data --console-address ":9001"
@@ -292,7 +292,7 @@ services:
     hostname: storage
     container_name: storage
     restart: unless-stopped
-    profiles: [all]
+    # profiles: [optional]
     command:
       - serve
     expose:
