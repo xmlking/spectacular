@@ -6,7 +6,8 @@ Everything you need to build a Svelte project, powered by [`create-svelte`](http
 
 ### First Step
 
-download latest `traefik.me` certs. NOTE: they will expire every 60 days
+download latest `traefik.me` certs for *svelte* dev server. 
+> NOTE: they will expire every 60 days
 
 ```shell
 curl traefik.me/fullchain.pem -o infra/base/traefik/certs/traefik.me.crt
@@ -17,15 +18,19 @@ curl traefik.me/privkey.pem -o infra/base/traefik/certs/traefik.me.key
 
 #### Start backend services with Docker Compose
 
-Start `default` profile services: `postgres`, `hasura`, `auth` and `console`  for local development.
+Start `default` profile services: `postgres`, `hasura`, `auth`,  `console` and `traefik` for local development.
 
 ```sh
-# get the certificates and start all default services
+# get the certificates and start all default services in background
+export COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets
 docker compose up update-certs-helper \
-COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets docker compose up -d \
-COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets docker compose logs -f
+docker compose up -d \
+docker compose logs -f
+```
 
-# Or, utilize the Makefile.
+ **Or**, utilize the **Makefile**.
+
+```sh
 # stat all services in background and show logs
 make up # for first time use `make boot` then `make up`
 # verify status/health of services
@@ -40,7 +45,8 @@ make check
 
 ```shell
 # ssh to container (if needed to debug)
-COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets docker compose exec -it hasura /bin/bash
+export COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets
+docker compose exec -it hasura /bin/bash
 # debug: check for files in image
 crane export ghcr.io/xmlking/spectacular/console:v0.1.3 - | tar -tvf - | grep -v zoneinfo
 ```
