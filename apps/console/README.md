@@ -6,7 +6,8 @@ Everything you need to build a Svelte project, powered by [`create-svelte`](http
 
 ### First Step
 
-download latest `traefik.me` certs for *svelte* dev server. 
+download latest `traefik.me` certs for _svelte_ dev server.
+
 > NOTE: they will expire every 60 days
 
 ```shell
@@ -18,7 +19,7 @@ curl traefik.me/privkey.pem -o infra/base/traefik/certs/traefik.me.key
 
 #### Start backend services with Docker Compose
 
-Start `default` profile services: `postgres`, `hasura`, `auth`,  `console` and `traefik` for local development.
+Start `default` profile services: `postgres`, `hasura`, `auth`, `console` and `traefik` for local development.
 
 ```sh
 # get the certificates and start all default services in background
@@ -28,7 +29,7 @@ docker compose up -d \
 docker compose logs -f
 ```
 
- **Or**, utilize the **Makefile**.
+**Or**, utilize the **Makefile**.
 
 ```sh
 # stat all services in background and show logs
@@ -60,10 +61,10 @@ crane export ghcr.io/xmlking/spectacular/console:v0.1.3 - | tar -tvf - | grep -v
 | Hasura    | https://hasura.traefik.me                         |
 | Auth      | https://auth.traefik.me/healthz                   |
 | Storage   | https://storage.traefik.me/healthz                |
-| minio     | https://minio.traefik.me                          |
-| Functions | https://functions.traefik.me                      |
-| Dashboard | https://dashboard.traefik.me                      |
+| Minio     | https://minio.traefik.me                          |
 | Mailpit   | https://mailpit.traefik.me                        |
+| Dashboard | https://dashboard.traefik.me                      |
+| Tailcall  | https://tailcall.traefik.me                       |
 
 #### (Or) Start backend services with nhost cli
 
@@ -92,8 +93,9 @@ nhost up --apply-seeds
 | Mailhog   | https://local.mailhog.nhost.run                   |
 
 #### Apply user schema
+
 > this step only needed first time when database got initialized  
-got to `https://hasura.traefik.me/console/data/sql` and apply
+> got to `https://hasura.traefik.me/console/data/sql` and apply
 
 ```sql
 ALTER TABLE ONLY public.user_org_groups
