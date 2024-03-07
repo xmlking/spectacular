@@ -13,7 +13,8 @@ boot:
 	@docker compose up update-certs-helper
 
 up up-%:
-	@docker compose up
+	@docker compose up -d
+	@docker compose logs -f
 
 ps: export COMPOSE_PROFILES=$(ALL_PROFILES)
 ps:
