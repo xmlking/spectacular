@@ -34,6 +34,8 @@ docker compose logs -f
 ```sh
 # stat all services in background and show logs
 make up # for first time use `make boot` then `make up`
+# this will start all services with default profile + services with `optional` profile.
+make up PROFILES=optional 
 # verify status/health of services
 make ps
 # shotdown all services
@@ -44,6 +46,37 @@ make teardown
 make check
 ```
 
+If you want to run above tasks for **single** service only:
+```shell
+# this will start only hasura service
+make up-hasura
+# this will start only postgres service
+make up-postgres
+# this will show only hasura service
+make logs-hasura
+# this will stop only console service
+make down-console
+```
+
+To also start optional services like `all` and/or `optional`, use `COMPOSE_PROFILES` or `make` task.
+```shell
+# to start default profile services and benthos,postgres services
+COMPOSE_ENV_FILES=.env,.secrets COMPOSE_PROFILES=all,optional docker compose up
+# (or)
+make up PROFILES=all,optional
+make up PROFILES=optional
+```
+
+To verify resolved `compose` config, use `COMPOSE_PROFILES` or `make` task.
+
+```shell
+COMPOSE_ENV_FILES=.env,.secrets COMPOSE_PROFILES=all,optional docker compose config
+# (or)
+make check PROFILES=all,optional
+make check PROFILES=optional
+```
+
+#### Debug
 ```shell
 # ssh to container (if needed to debug)
 export COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets
