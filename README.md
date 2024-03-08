@@ -85,14 +85,17 @@ Once you've cloned the project and installed dependencies with `pnpm i`, start a
 ```sh
 # stat all services in background and show logs
 make up # for first time use `make boot` then `make up`
+# this will start all services with default profile + services with benthos profile.
+make up PROFILES=benthos 
 # verify status/health of services
 make ps
 # shotdown all services
 make down
 # DANGER: run this if you want to reset database and other persistent volumes
 make teardown
-# verify if docker `compose` getting correctly resolved application config from .env files
+# verify if docker `compose` getting correctly resolved application config from .env and .secrests files
 make check
+make check PROFILES=all,optional
 ```
 
 ### Start apps/console
