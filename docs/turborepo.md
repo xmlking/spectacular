@@ -79,9 +79,9 @@ Add `dotenv-run ` to your `package.json`
 ```json filename="package.json" highlight=3
 {
 	"scripts": {
-		"dev": "dotenv-run -f .env -f .secrets -v -- vite dev",
-		"build": "dotenv-run -f .env -f .secrets -v -- vite build",
-		"preview": "dotenv-run -f .env -f .secrets -v -- vite preview"
+		"dev": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite dev",
+		"build": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite build",
+		"preview": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite preview"
 	}
 }
 ```
@@ -96,7 +96,7 @@ dotenv-run -f .env,.secrets -v '.*' -u
 # using printenv
 dotenv-run -f .env,.secrets -v -- printenv
 # using node script
-dotenv-run -f .env -f .secrets -v -- node -e "console.log(process.env.PUBLIC_NHOST_SUBDOMAIN)"
+dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- node -e "console.log(process.env.PUBLIC_NHOST_SUBDOMAIN)"
 ```
 
 ### Guidelines
