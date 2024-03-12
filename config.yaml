@@ -1,0 +1,9 @@
+version: 3
+endpoint: HASURA_GRAPHQL_ENDPOINT
+admin_secret: HASURA_GRAPHQL_ADMIN_SECRET
+metadata_directory: nhost/metadata
+migrations_directory: nhost/migrations
+seeds_directory: nhost/seeds
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: https://hasura.traefik.me

@@ -27,7 +27,7 @@ NOTE: You can pass `--endpoint <hasura-endpoint> --admin-secret <admin-secret> c
 # use `''` to escape if `admin-secret` has special characters
 hasura init hasura --project infra --endpoint https://twirbianfvhmxhqfjtvi.hasura.us-east-1.nhost.run --admin-secret '<my-admin-secret>'
 # from localhost
-hasura init hasura --project infra --endpoint http://localhost:8080
+hasura init hasura --project infra --endpoint https://hasura.traefik.me
 # move infra/hasura/config.yaml to project root and edit metadata_directory, migrations_directory, seeds_directory paths in it
 
 hasura version
@@ -106,13 +106,13 @@ To apply all the **Metadata** and **Migrations** present in the `infra/hasura` d
 
 ```shell
 # only apply metadata
-hasura metadata apply --endpoint http://localhost:8080
+hasura metadata apply --endpoint https://hasura.traefik.me
 # apply metadata, DB migrations and seed data
-hasura deploy --endpoint http://localhost:8080
-hasura seed apply --file 1684709181893_devices.sql --database-name default --database-name default --endpoint http://localhost:8080
-hasura seed apply --file 1684709183467_pools.sql --database-name default --database-name default --endpoint http://localhost:8080
-hasura seed apply --file 1685396655834_rules.sql --database-name default --database-name default --endpoint http://localhost:8080
-hasura seed apply --file 1684206620559_policies.sql --database-name default --database-name default --endpoint http://localhost:8080
+hasura deploy --endpoint https://hasura.traefik.me
+hasura seed apply --file 1_devices.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 2_rules.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 3_pools.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 4_policies.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
 ```
 
 Check the status
@@ -128,7 +128,7 @@ hasura migrate status --database-name default --endpoint https://hasura.traefik.
 To export **Metadata** and **Migrations** from your local Hasura to `infra/hasura` directory, for sharing with the team:
 
 ```shell
-hasura metadata export --endpoint http://localhost:8080
+hasura metadata export --endpoint https://hasura.traefik.me
 ```
 
 ### Reset Hasura Migrations and Metadata

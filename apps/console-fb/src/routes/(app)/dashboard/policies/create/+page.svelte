@@ -12,6 +12,7 @@
 	import Select from 'svelte-select';
 	import { superForm } from 'sveltekit-superforms';
 	import SuperDebug from 'sveltekit-superforms';
+	// import { debounce } from 'throttle-debounce';
 	import { Logger } from '@spectacular/utils';
 	import type { Subject } from '$lib/models/types';
 	import { createPolicyKeys as keys } from '$lib/models/schema';
@@ -117,6 +118,7 @@
 		if (!data) throw new Error('no data');
 		return data.results as Subject[];
 	}
+
 	async function onSubjectChange(changedSubject: CustomEvent) {
 		log.debug('onSubjectChange', changedSubject.detail);
 		if (browser) {
@@ -177,6 +179,9 @@
 		if (!data) throw new Error('no data');
 		return data.rules;
 	}
+	// TODO: https://stackblitz.com/edit/superforms-2-debounced-username?file=src%2Froutes%2F%2Bpage.server.ts,src%2Froutes%2F%2Bpage.svelte
+	// const fetchRuleDebounce = debounce(300, fetchRule);
+
 	async function onRuleChange(changedSubject: CustomEvent) {
 		log.debug('onRuleChange', changedSubject.detail);
 		if (browser) {
