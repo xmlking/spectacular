@@ -8,6 +8,7 @@ import { userSchema } from '$lib/schema/user';
 import { NHOST_SESSION_KEY } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
 import { i18n } from '$lib/i18n';
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 
 const pwSchema = userSchema.pick({
 	email: true,
@@ -177,7 +178,7 @@ async function login(nhost: NhostClient, redirectTo: string, lang: string, provi
 			locale: lang,
 			metadata: {
 				plan: 'free',
-				org: 'chinthagunta'
+				org: PUBLIC_DEFAULT_ORGANIZATION
 			}
 		}
 	});

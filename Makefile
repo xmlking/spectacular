@@ -49,3 +49,7 @@ down down-%:
 teardown: export COMPOSE_PROFILES=$(ALL_PROFILES)
 teardown:
 	@docker compose down -v
+
+# ssh to target container
+exec-%:
+	@docker compose exec -it $(TARGET) sh

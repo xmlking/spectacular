@@ -10,7 +10,7 @@ resources:
 labels:
   - includeSelectors: true
     pairs:
-      app.kubernetes.io/part-of: signals
+      app.kubernetes.io/part-of: spectacular
       app.kubernetes.io/managed-by: kustomize
 commonAnnotations:
   org: home-and-community

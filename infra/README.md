@@ -171,4 +171,4 @@ Following are the important points you should know about the `Kustomize`
 ## TODO
 
 1. https://github.com/yrobla/apps/tree/master/cluster-scope
-2.
+2. Ideas from [nhost-helm](https://github.com/fpoussin/nhost-helm) repo

@@ -13,3 +13,10 @@ services:
     environment:
       HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+  ###########################################################################
+  # hasura auth
+  ###########################################################################
+  auth:
+    environment:
+      # AUTH_DEBUG: true
+      AUTH_SHOW_LOG_QUERY_PARAMS: true

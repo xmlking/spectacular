@@ -49,9 +49,11 @@ services:
       - certs:/etc/ssl/traefik:ro
     healthcheck:
       test: ['CMD', 'traefik', 'healthcheck', '--ping']
-      timeout: 60s
-      interval: 15s
-      start_period: 60s
+      interval: 60s
+      start_period: 1m
+      start_interval: 10s
+      timeout: 15s
+      retries: 5
     labels:
       traefik.enable: "true"
       traefik.http.routers.traefik.entrypoints: web,websecure
@@ -85,8 +87,10 @@ services:
       # - ./infra/base/postgres/initdb.d:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB -q']
-      interval: 5s
-      timeout: 5s
+      interval: 60s
+      start_period: 1m
+      start_interval: 10s
+      timeout: 15s
       retries: 5
   ###########################################################################
   # hasura service
@@ -113,10 +117,14 @@ services:
       HASURA_GRAPHQL_CORS_DOMAIN: '*'
     healthcheck:
       test: curl --fail -s http://localhost:8080/healthz || exit 1
-      interval: 30s
+      interval: 60s
+      start_period: 1m
+      start_interval: 10s
       timeout: 15s
-      retries: 3
+      retries: 5
     depends_on:
+      traefik:
+        condition: service_healthy
       postgres:
         condition: service_healthy
     labels:
@@ -130,7 +138,7 @@ services:
   # mailpit
   ###########################################################################
   mailpit:
-    image: axllent/mailpit:v1.13
+    image: axllent/mailpit:v1.14.4
     hostname: mailpit
     container_name: mailpit
     restart: unless-stopped
@@ -147,9 +155,14 @@ services:
       - mailpit:/data
     healthcheck:
       test: ["CMD", "wget", "--spider", "-S", "http://localhost:8025/livez"] # for k8 /readyz
-      timeout: 60s
-      interval: 15s
-      retries: 3
+      interval: 60s
+      start_period: 1m
+      start_interval: 10s
+      timeout: 15s
+      retries: 5
+    depends_on:
+      traefik:
+        condition: service_healthy
     labels:
       traefik.enable: "true"
       traefik.http.routers.mailpit.entrypoints: websecure
@@ -159,9 +172,11 @@ services:
       traefik.http.services.mailpit.loadbalancer.server.port: "8025"
   ###########################################################################
   # hasura auth
+  # Environment Variables:
+  # https://github.com/nhost/hasura-auth/blob/main/docs/environment-variables.md
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.27.0-beta1
+    image: nhost/hasura-auth:0.27.0
     hostname: auth
     container_name: auth
     restart: unless-stopped
@@ -207,15 +222,15 @@ services:
       AUTH_PROVIDER_GOOGLE_SCOPE: ""
       AUTH_REFRESH_TOKEN_EXPIRES_IN: "43200"
       AUTH_SERVER_URL: https://auth${BASE_HOSTNAME}/v1
-      AUTH_SMTP_AUTH_METHOD: ${AUTH_SMTP_AUTH_METHOD:-LOGIN}
+      AUTH_SMTP_AUTH_METHOD: ${AUTH_SMTP_AUTH_METHOD:-PLAIN}
       AUTH_SMTP_HOST: ${AUTH_SMTP_HOST:-mailpit}
       AUTH_SMTP_PORT: ${AUTH_SMTP_PORT:-1025}
       AUTH_SMTP_USER: ${AUTH_SMTP_USER:-user}
       AUTH_SMTP_PASS: ${AUTH_SMTP_PASS:-password}
       AUTH_SMTP_SECURE: ${AUTH_SMTP_SECURE:-false}
       AUTH_SMTP_SENDER: ${AUTH_SMTP_SENDER:-hasura-auth@example.com}
-      AUTH_USER_DEFAULT_ALLOWED_ROLES: user,me,manager,supervisor,engine
-      AUTH_USER_DEFAULT_ROLE: user
+      AUTH_USER_DEFAULT_ALLOWED_ROLES: me,user,manager,supervisor,engine
+      AUTH_USER_DEFAULT_ROLE: manager
       AUTH_WEBAUTHN_ATTESTATION_TIMEOUT: "60000"
       AUTH_WEBAUTHN_ENABLED: "true"
       AUTH_WEBAUTHN_RP_ID: Spectacular
@@ -234,10 +249,14 @@ services:
           - --spider
           - -S
           - http://localhost:4000/healthz
-      timeout: 60s
-      interval: 15s
-      start_period: 60s
+      interval: 60s
+      start_period: 1m
+      start_interval: 10s
+      timeout: 15s
+      retries: 5
     depends_on:
+      traefik:
+        condition: service_healthy
       # mailpit:
       #   condition: service_healthy
       postgres:
@@ -255,7 +274,7 @@ services:
   # minio
   ###########################################################################
   minio:
-    image: minio/minio:RELEASE.2024-02-04T22-36-13Z
+    image: minio/minio:RELEASE.2024-03-10T02-53-48Z
     hostname: minio
     container_name: minio
     restart: unless-stopped
@@ -271,8 +290,10 @@ services:
       - 9001
     healthcheck:
       test: ["CMD", "mc", "ready", "local"]
-      interval: 15s
-      timeout: 5s
+      interval: 60s
+      start_period: 1m
+      start_interval: 10s
+      timeout: 15s
       retries: 5
     depends_on:
       traefik:
@@ -323,9 +344,11 @@ services:
         condition: service_healthy
     # healthcheck:
     #   test: curl --fail -s http://localhost:8000/healthz || exit 1
-    #   timeout: 60s
-    #   interval: 15s
-    #   start_period: 60s
+    #   interval: 60s
+    #   start_period: 1m
+    #   start_interval: 10s
+    #   timeout: 15s
+    #   retries: 5
     labels:
       traefik.enable: "true"
       traefik.http.routers.storage.entrypoints: websecure
@@ -355,6 +378,8 @@ services:
     expose:
       - 3000
     depends_on:
+      traefik:
+        condition: service_healthy
       auth:
         condition: service_healthy
     <<: *extra_hosts
@@ -424,6 +449,8 @@ services:
     expose:
       - 3000
     depends_on:
+      traefik:
+        condition: service_healthy
       hasura:
         condition: service_healthy
       auth:

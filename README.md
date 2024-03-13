@@ -85,8 +85,8 @@ Once you've cloned the project and installed dependencies with `pnpm i`, start a
 ```sh
 # stat all services in background and show logs
 make up # for first time use `make boot` then `make up`
-# this will start all services with default profile + services with benthos profile.
-make up PROFILES=benthos 
+# this will start all services with default profile + services with `optional` profile.
+make up PROFILES=optional 
 # verify status/health of services
 make ps
 # shotdown all services
@@ -96,6 +96,10 @@ make teardown
 # verify if docker `compose` getting correctly resolved application config from .env and .secrests files
 make check
 make check PROFILES=all,optional
+# ssch to a container to debug
+#make exec-<target>
+make exec-hasura
+make exec-auth
 ```
 
 ### Start apps/console

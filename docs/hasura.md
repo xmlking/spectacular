@@ -36,18 +36,18 @@ hasura version
 hasura console
 
 # Create a new seed by exporting data from tables already present in the database:
-hasura seed create devices --database-name default --from-table devices
-hasura seed create pools --database-name default --from-table pools
-hasura seed create rules --database-name default --from-table rules
-hasura seed create policies --database-name default --from-table policies
+hasura seed create devices --database-name default --from-table devices --endpoint https://hasura.traefik.me
+hasura seed create pools --database-name default --from-table pools --endpoint https://hasura.traefik.me
+hasura seed create rules --database-name default --from-table rules --endpoint https://hasura.traefik.me
+hasura seed create policies --database-name default --from-table policies --endpoint https://hasura.traefik.me
 
 # Export data from multiple tables:
 # hasura seed create policies_organization --database-name default --from-table policies --from-table organization
 # Apply only a particular file:
-hasura seed apply --file 1684709181893_devices.sql --database-name default
-hasura seed apply --file 1684709183467_pools.sql --database-name default
-hasura seed apply --file 1685396655834_rules.sql --database-name default
-hasura seed apply --file 1684206620559_policies.sql --database-name default
+hasura seed apply --file 1_devices.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 2_rules.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 3_pools.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 4_policies.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
 
 # hasura seed apply --file 1684101975415_policies_organization.sql --database-name default
 
@@ -161,10 +161,10 @@ GRANT ALL ON SCHEMA public TO public;
 # apply metadata, DB migrations
 hasura deploy
 # optionally apply seeds
-hasura seed apply --file 1684709181893_devices.sql --database-name default --database-name default
-hasura seed apply --file 1684709183467_pools.sql --database-name default --database-name default
-hasura seed apply --file 1685396655834_rules.sql --database-name default --database-name default
-hasura seed apply --file 1684206620559_policies.sql --database-name default --database-name default
+hasura seed apply --file 1_devices.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 2_rules.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 3_pools.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura seed apply --file 4_policies.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
 ```
 
 ## Configuration

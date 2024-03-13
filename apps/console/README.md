@@ -138,6 +138,13 @@ ALTER TABLE ONLY public.user_org_groups
     ADD CONSTRAINT user_org_groups_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ```
 
+TODO: After user record created for first-time (i.e., after user login), have admins assign `organization` and `groups`  via Web UI:
+```sql
+INSERT INTO public.user_org_groups (id, user_id, groups, organization, created_at, created_by, updated_at, updated_by, deleted_at) VALUES ('271db270-6202-4c9a-82f8-7be326bf8be1', 'e9f249b0-5c86-446b-bb34-5cc24c1d398c', '{sig_admin,app_mgr}', 'chinthagunta', '2012-08-24 12:00:00+00', 'sumo@demo.com', '2024-03-13 06:47:14.718862+00','sumo@demo.com', NULL);
+INSERT INTO public.user_org_groups (id, user_id, groups, organization, created_at, created_by, updated_at, updated_by, deleted_at) VALUES ('52b10e5f-77fb-4718-ac7e-a6960553dc50', 'e9f249b0-5c86-446b-bb34-5cc24c1d398c', '{aaa}', 'example', '2023-05-21 22:28:18.535229+00', 'sumo@demo.com', '2024-03-13 06:53:10.144137+00', 'sumo@demo.com', NULL);
+```
+
+
 ### Frontend
 
 ```bash

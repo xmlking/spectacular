@@ -115,7 +115,6 @@ export const authHookConfig: SvelteKitAuthConfig = {
 
 				// token.accessToken = account.access_token; // account.id_token
 
-				// -------- START: Remove when NOT using nhost ------------ //
 				token['https://hasura.io/jwt/claims'] = {
 					'x-hasura-allowed-roles': token.roles,
 					'x-hasura-default-role': 'user',
@@ -123,7 +122,6 @@ export const authHookConfig: SvelteKitAuthConfig = {
 					'x-hasura-orgs': `{${token.org}}`,
 					'x-hasura-user-id': token.email
 				};
-				// -------- END: Remove when NOT using nhost ------------ //
 
 				// FIXME: for Azure AD picture is base64 and it is too big to fit in cookie.
 				// will through `431 Request Header Fields Too Large` unless we remove it.
