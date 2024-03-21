@@ -10,22 +10,16 @@
 			"outputs": [".svelte-kit/**"]
 		},
 		"dev": {
-			"dotEnv": [".env", ".secrets"],
 			"cache": false,
-			"persistent": true
+			"persistent": true,
+			"dotEnv": [".env", ".secrets"]
 		},
 		"generate": {
 			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
 		},
 		"build": {
 			"dependsOn": ["generate"],
-			"outputs": [
-				".svelte-kit/**",
-				".vercel/**",
-				"$houdini/**",
-				"schema.graphql",
-				"src/i18n"
-			],
+			"outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
 			"env": [
 				"VERCEL",
 				"VERCEL_URL",
