@@ -16,13 +16,13 @@
 		"lang:translate": "pnpm inlang machine translate --project ./project.inlang -f",
 		"lang:validate": "pnpm inlang validate --project ./project.inlang",
 		"lint": "prettier --check . && eslint .",
-		"preview": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite preview",
+		"preview": "ORIGIN=https://console.traefik.me:4173 dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite preview",
 		"sync": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- svelte-kit sync",
 		"test": "pnpm run test:integration && pnpm run test:unit",
-		"test:integration": "playwright test",
-		"test:unit": "vitest",
-		"test:unit:coverage": "vitest run --coverage",
-		"test:unit:ui": "vitest --ui"
+		"test:integration": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- playwright test",
+		"test:unit": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vitest",
+		"test:unit:coverage": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vitest run --coverage",
+		"test:unit:ui": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vitest --ui"
 	},
 	"devDependencies": {
 		"@floating-ui/dom": "1.6.3",

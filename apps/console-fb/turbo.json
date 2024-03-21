@@ -37,6 +37,8 @@
 			]
 		},
 		"preview": {},
-		"test:integration": {}
+		"test:integration": {
+			"dependsOn": ["build"]
+		}
 	}
 }

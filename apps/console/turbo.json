@@ -43,7 +43,9 @@
 			]
 		},
 		"preview": {},
-		"test:integration": {},
+		"test:integration": {
+			"dependsOn": ["build"]
+		},
 		"lang:lint": {},
 		"lang:validate": {},
 		"lang:translate": {},
