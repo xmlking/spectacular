@@ -3,28 +3,22 @@
 	"description": "Shared shadcn UI components",
 	"sideEffects": false,
 	"type": "module",
+	"imports": {
+		"#*": "./src/*"
+	},
 	"exports": {
 		".": {
-			"types": "./index.d.ts"
+			"types": "./index.ts",
+			"svelte": "./index.ts",
+			"default": "./index.ts"
 		},
-		"./components/*": "./components/*/index.ts",
-		"./utils": {
-			"default": "./utils/index.ts"
-		},
-		"./default": {
-			"default": "./styles/default.pcss"
-		},
-		"./theme": {
-			"default": "./styles/theme.pcss"
-		},
-		"./postcss.config": {
-			"default": "./postcss.config.cjs"
-		},
-		"./tailwind.config": {
-			"default": "./tailwind.config.ts"
-		}
+		"./components/*": "./src/components/ui/*/index.ts",
+		"./utils": "./src/utils.ts",
+		"./styles/default": "./styles/default.pcss",
+		"./styles/theme": "./styles/theme.pcss",
+		"./postcss.config": "./postcss.config.cjs",
+		"./tailwind.config": "./tailwind.config.ts"
 	},
-	"types": "./index.d.ts",
 	"scripts": {
 		"format": "prettier --write . && eslint --fix .",
 		"lint": "prettier --check . && eslint .",
@@ -35,12 +29,18 @@
 		"bits-ui": "0.19.6",
 		"clsx": "2.1.0",
 		"cmdk-sv": "0.0.15",
+		"embla-carousel-svelte": "^8.0.0",
 		"formsnap": "0.5.1",
 		"lucide-svelte": "0.356.0",
+		"mode-watcher": "0.2.2",
+		"paneforge": "0.0.2",
+		"svelte-radix": "1.1.0",
+		"svelte-sonner": "^0.3.19",
 		"sveltekit-superforms": "2.9.0",
 		"swiper": "11.0.7",
 		"tailwind-merge": "2.2.1",
 		"tailwind-variants": "0.2.0",
+		"vaul-svelte": "^0.3.0",
 		"zod": "3.22.4"
 	},
 	"devDependencies": {

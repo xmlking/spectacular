@@ -29,10 +29,7 @@ const config = {
 		},
 		alias: {
 			$houdini: './$houdini',
-			$i18n: 'src/i18n',
-			// TODO: This alias should not be needed, but without it, VSCode show `Cannot find module` error!!!
-			// Ref: https://github.com/vercel/turbo/discussions/620
-			'@spectacular/skeleton/components/*': '../../packages/skeleton-ui/components/*'
+			$i18n: 'src/i18n'
 		}
 		// env: {
 		// 	dir: '../..',

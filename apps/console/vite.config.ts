@@ -4,7 +4,6 @@ import { defineConfig } from 'vitest/config';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import houdini from 'houdini/vite';
 
 // if (!existsSync('./../../infra/base/traefik/certs/traefik.me.crt')) {
@@ -12,8 +11,6 @@ import houdini from 'houdini/vite';
 // }
 
 export default defineConfig({
-	// TODO: evaluate if we still need 'vite-tsconfig-paths' as sveltekit can handel this with `Path aliases`.
-	// b.t.w packages/ui/tsconfig.json has paths.
 	server: {
 		host: 'console.traefik.me',
 		// host: 'console-192-168-50-34.traefik.me',
@@ -28,7 +25,6 @@ export default defineConfig({
 		enhancedImages(),
 		sveltekit(),
 		purgeCss(),
-		tsconfigPaths({ ignoreConfigErrors: true }),
 		paraglide({
 			project: './project.inlang',
 			outdir: './src/i18n'

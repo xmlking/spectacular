@@ -3,11 +3,11 @@
 	import { GraphQLError } from 'graphql';
 	// import { default as SelectFetch } from 'svelte-select';
 	// import { TimeDistance } from 'svelte-time-distance';
-	import DebugShell from '@spectacular/skeleton/components/debug-shell.svelte';
+	import { DebugShell } from '@spectacular/skeleton/components';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { Logger } from '@spectacular/utils';
 	import { getToastStore } from '@skeletonlabs/skeleton';
-	import * as Form from '@spectacular/skeleton/components/form/index.ts';
+	import * as Form from '@spectacular/skeleton/components/form';
 	import { handleMessage } from '$lib/components/layout/toast-manager';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { browser, dev } from '$app/environment';

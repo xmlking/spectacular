@@ -19,7 +19,7 @@
 		Search,
 		ChevronDown
 	} from 'lucide-svelte';
-	import LogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
+	import { LogoIcon } from '@spectacular/skeleton/components/logos';
 	import type { User } from '@nhost/nhost-js';
 	// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
 	import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';

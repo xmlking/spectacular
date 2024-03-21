@@ -10,15 +10,9 @@
 		"resolveJsonModule": true,
 		"strict": true,
 		"target": "esnext",
-		"module": "esnext",
-		"moduleResolution": "node",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"ignoreDeprecations": "5.0",
-		"lib": ["esnext", "DOM", "DOM.Iterable"],
-		"paths": {
-			"$ui/components": ["./components"],
-			"$ui/components/*": ["./components/*"],
-			"$ui/utils": ["./utils"],
-			"$ui/utils/*": ["./utils/*"]
-		}
+		"lib": ["esnext", "DOM", "DOM.Iterable"]
 	}
 }

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { VERSION } from '@sveltejs/kit';
-	import DocsLogoIcon from '@spectacular/skeleton/components/logos/LogoIcon.svelte';
+	import { LogoIcon } from '@spectacular/skeleton/components/logos';
 	import { Twitter, Youtube, Github, Linkedin } from 'lucide-svelte';
 
 	const appVersion = __APP_VERSION__;
@@ -30,7 +30,7 @@
 			href={'#'}
 			class="title-font flex items-center justify-center font-medium text-gray-900 dark:text-white md:justify-start"
 		>
-			<DocsLogoIcon />
+			<LogoIcon />
 			<span class="ml-3 text-xl">Datablocks</span>
 		</a>
 		<p

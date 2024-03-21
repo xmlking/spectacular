@@ -5,8 +5,8 @@ import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import containerQueries from '@tailwindcss/container-queries';
 import type { Config } from 'tailwindcss';
-import defaultTheme from 'tailwindcss/defaultTheme';
-import { customTheme } from './custom.theme';
+import defaultTheme from 'tailwindcss/defaultTheme.js';
+import { customTheme } from './custom.theme.js';
 // import { join } from 'path';
 
 export default {

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { AlertTriangle, Loader, Github, MoreHorizontal } from 'lucide-svelte';
-	import Icon from '@spectacular/skeleton/components/icons/icon.svelte';
-	import DebugShell from '@spectacular/skeleton/components/debug-shell.svelte';
+	import { Icon } from '@spectacular/skeleton/components/icons';
+	import { DebugShell } from '@spectacular/skeleton/components';
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { Logger } from '@spectacular/utils';
 	import { getToastStore } from '@skeletonlabs/skeleton';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Debug from '@spectacular/skeleton/components/debug.svelte';
+	import { Debug } from '@spectacular/skeleton/components';
 
 	export let data;
 </script>

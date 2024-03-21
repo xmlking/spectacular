@@ -5,7 +5,7 @@
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { allergies, schema, themes } from './schema.js';
 	import SuperDebug from 'sveltekit-superforms';
-	import DebugShell from '@spectacular/skeleton/components/debug-shell.svelte';
+	import { DebugShell } from '@spectacular/skeleton/components';
 
 	export let data;
 

@@ -4,16 +4,21 @@ import { defineConfig } from 'vitest/config';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-	// TODO: evaluate if we still need 'vite-tsconfig-paths' as sveltekit can handel this with `Path aliases`.
-	// b.t.w packages/ui/tsconfig.json has paths.
+	server: {
+		host: 'playground.traefik.me',
+		// host: 'playground-192-168-50-34.traefik.me',
+		https: {
+			cert: './../../infra/base/traefik/certs/traefik.me.crt',
+			key: './../../infra/base/traefik/certs/traefik.me.key'
+		},
+		proxy: {}
+	},
 	plugins: [
 		enhancedImages(),
 		sveltekit(),
 		purgeCss(),
-		tsconfigPaths({ ignoreConfigErrors: true }),
 		paraglide({
 			project: './project.inlang',
 			outdir: './src/i18n'

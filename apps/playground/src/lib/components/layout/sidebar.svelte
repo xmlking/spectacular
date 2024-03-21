@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
-	import Icon from '@spectacular/skeleton/components/icons/icon.svelte';
+	import { Icon } from '@spectacular/skeleton/components/icons';
 	import { menuNavLinks } from '$lib/links';
 	import { page } from '$app/stores';
 

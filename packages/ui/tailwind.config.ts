@@ -1,10 +1,10 @@
 // eslint-disable-next-line import/named
-import { fontFamily } from 'tailwindcss/defaultTheme';
+import { fontFamily } from 'tailwindcss/defaultTheme.js';
 import type { Config } from 'tailwindcss';
 
 export default {
 	darkMode: ['class'],
-	content: ['./src/**/*.{html,js,svelte,ts}', '../../packages/ui/components/**/*.{svelte,ts}'],
+	content: ['./src/**/*.{html,js,svelte,ts}', '../../packages/ui/src/components/**/*.{svelte,ts}'],
 	safelist: ['dark'],
 	theme: {
 		container: {

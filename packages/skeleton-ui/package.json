@@ -3,32 +3,23 @@
 	"description": "Shared skeleton UI components",
 	"sideEffects": false,
 	"type": "module",
+	"imports": {
+		"#utils": "./src/utils/index.js",
+		"#*": "./src/*"
+	},
 	"exports": {
 		".": {
-			"svelte": "./components/index.ts"
+			"types": "./src/components/index.ts",
+			"svelte": "./src/components/index.ts",
+			"default": "./src/components/index.ts"
 		},
-		"./components": {
-			"default": "./components/index.ts"
-		},
-		"./components/*": {
-			"default": "./components/*"
-		},
-		"./utils": {
-			"default": "./utils/index.ts"
-		},
-		"./default": {
-			"default": "./styles/default.pcss"
-		},
-		"./postcss.config": {
-			"default": "./postcss.config.cjs"
-		},
-		"./tailwind.config": {
-			"default": "./tailwind.config.ts"
-		}
+		"./components": "./src/components/index.ts",
+		"./components/*": "./src/components/*/index.ts",
+		"./utils": "./src/utils/index.ts",
+		"./styles/default": "./styles/default.pcss",
+		"./postcss.config": "./postcss.config.cjs",
+		"./tailwind.config": "./tailwind.config.ts"
 	},
-	"main": "./components/index.ts",
-	"svelte": "./components/index.ts",
-	"module": "./components/index.ts",
 	"scripts": {
 		"format": "prettier --write . && eslint --fix .",
 		"lint": "prettier --check . && eslint .",
