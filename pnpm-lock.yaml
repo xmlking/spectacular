@@ -395,6 +395,9 @@ importers:
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2
+      '@vercel/speed-insights':
+        specifier: 1.0.10
+        version: 1.0.10(@sveltejs/kit@2.5.4)(svelte@4.2.12)
       '@vite-pwa/assets-generator':
         specifier: 0.2.4
         version: 0.2.4
@@ -7760,6 +7763,34 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  /@vercel/speed-insights@1.0.10(@sveltejs/kit@2.5.4)(svelte@4.2.12):
+    resolution: {integrity: sha512-4uzdKB0RW6Ff2FkzshzjZ+RlJfLPxgm/00i0XXgxfMPhwnnsk92YgtqsxT9OcPLdJUyVU1DqFlSWWjIQMPkh0g==}
+    requiresBuild: true
+    peerDependencies:
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19
+      svelte: ^4
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
+    dependencies:
+      '@sveltejs/kit': 2.5.4(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.2.2)
+      svelte: 4.2.12
+    dev: true
 
   /@vincjo/datatables@1.14.5(svelte@4.2.12):
     resolution: {integrity: sha512-kvjr8ggRTRzwDTgOqK3bQPe5ZJo68h30SHcx0WS3daLVt/IUzN2132wtH2JZQkpxyjmh9EiblugOzUv/36Xpug==}

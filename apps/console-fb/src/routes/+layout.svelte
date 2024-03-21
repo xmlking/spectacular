@@ -8,11 +8,13 @@
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { pwaAssetsHead } from 'virtual:pwa-assets/head';
 	import { inject } from '@vercel/analytics';
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 	import { Toasts } from '$lib/components/toast';
 	import { dev } from '$app/environment';
 
 	// Init Vercel Analytics
 	inject({ mode: dev ? 'development' : 'production' });
+	injectSpeedInsights();
 
 	setupViewTransition();
 
