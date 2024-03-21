@@ -2,7 +2,7 @@
 	import { twMerge } from 'tailwind-merge';
 	import { CloseButton } from 'flowbite-svelte';
 	import {
-		CheckSolid,
+		CloseCircleSolid,
 		CheckCircleSolid,
 		ExclamationCircleOutline,
 		InfoCircleOutline
@@ -52,9 +52,9 @@
 				<div class="flex items-center">
 					<Frame color={toast.type} rounded class={iconClass}>
 						{#if toast.type === ToastLevel.Success}
-							<CheckSolid size="xs" ariaLabel="Success icon" />
+							<CheckCircleSolid size="xs" ariaLabel="Success icon" />
 						{:else if toast.type === ToastLevel.Error}
-							<CheckCircleSolid size="xs" ariaLabel="Error icon" />
+							<CloseCircleSolid size="xs" ariaLabel="Error icon" />
 						{:else if toast.type === ToastLevel.Warning}
 							<ExclamationCircleOutline size="xs" ariaLabel="Warning icon" />
 						{:else}
