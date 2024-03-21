@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { XCircleOutline } from 'flowbite-svelte-icons';
+	import { CloseCircleOutline } from 'flowbite-svelte-icons';
 	import { createEventDispatcher } from 'svelte';
 	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
 
@@ -13,7 +13,7 @@
 </script>
 
 <button on:click={handleDeleteButton}>
-	<XCircleOutline color="red" />
+	<CloseCircleOutline color="red" />
 </button>
 
 <!-- For Debugging -->
