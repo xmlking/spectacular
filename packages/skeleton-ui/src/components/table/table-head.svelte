@@ -6,8 +6,8 @@
 <script lang="ts" generics="T extends Row">
 	import type { DataHandler, Field } from '@vincjo/datatables';
 	import type { HTMLThAttributes } from 'svelte/elements';
-	import { cn } from '#utils';
 	import { getCtx } from './ctx.js';
+	import { cn } from '#utils';
 
 	type $$Props = HTMLThAttributes;
 	let className: $$Props['class'] = undefined;
