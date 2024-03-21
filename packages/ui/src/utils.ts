@@ -1,5 +1,5 @@
-import {  clsx } from 'clsx';
-import type {ClassValue} from 'clsx';
+import { clsx } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { cubicOut } from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';
