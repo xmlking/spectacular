@@ -100,8 +100,8 @@ importers:
         specifier: 0.5.11
         version: 0.5.11(@sveltejs/kit@2.5.4)(svelte@4.2.12)
       '@nhost/nhost-js':
-        specifier: 3.0.9
-        version: 3.0.9(graphql@16.8.1)
+        specifier: 3.0.10
+        version: 3.0.10(graphql@16.8.1)
       '@skeletonlabs/skeleton':
         specifier: 2.9.0
         version: 2.9.0(svelte@4.2.12)
@@ -5583,10 +5583,10 @@ packages:
       - encoding
     dev: true
 
-  /@nhost/hasura-auth-js@2.3.1:
-    resolution: {integrity: sha512-OrNlfaUDbUaacl/MraHNdXN2A60W20zEgo8GKdEtHT8rvguBsivwHyXhJpy/oAsvXm3OnDsUY7lOHjiSWNqOtw==}
+  /@nhost/hasura-auth-js@2.4.0:
+    resolution: {integrity: sha512-4iPNjt2QaCfTwHF9LHs5B6GrSw7fgVXNd+RTcUikv4Zht6I2Nr2/+z5u/jMGtrsiLwtu1CTZygfej7vfeQUDtg==}
     dependencies:
-      '@simplewebauthn/browser': 6.2.2
+      '@simplewebauthn/browser': 9.0.1
       fetch-ponyfill: 7.1.0
       jose: 5.2.3
       js-cookie: 3.0.5
@@ -5606,13 +5606,13 @@ packages:
       - encoding
     dev: true
 
-  /@nhost/nhost-js@3.0.9(graphql@16.8.1):
-    resolution: {integrity: sha512-HqQU8PkV/4zT5P/5fREO0P+qWkJMBo8J/69kjEeCYZhS/EyelmbsetRZHobY893f/shGMp9/pH+KTeeb1DY+mA==}
+  /@nhost/nhost-js@3.0.10(graphql@16.8.1):
+    resolution: {integrity: sha512-hqfek0nnM8kWYJ6YIz1cqWLAh9kGLC17kCftf1seUAqjPeXZpbIfqfOUV4WEZrKrXDDE4yxEllHbqjNH65I9Hw==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@nhost/graphql-js': 0.1.9(graphql@16.8.1)
-      '@nhost/hasura-auth-js': 2.3.1
+      '@nhost/hasura-auth-js': 2.4.0
       '@nhost/hasura-storage-js': 2.4.0
       graphql: 16.8.1
       isomorphic-unfetch: 3.1.0
@@ -6408,8 +6408,14 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@simplewebauthn/browser@6.2.2:
-    resolution: {integrity: sha512-VUtne7+s6BmW4usnbitjZEI1VNT/PNh6bYg+AI4OMdfpo5z+yAq+6iVAWBJlIUGVk5InetEQvTUp6OefBam8qg==}
+  /@simplewebauthn/browser@9.0.1:
+    resolution: {integrity: sha512-wD2WpbkaEP4170s13/HUxPcAV5y4ZXaKo1TfNklS5zDefPinIgXOpgz1kpEvobAsaLPa2KeH7AKKX/od1mrBJw==}
+    dependencies:
+      '@simplewebauthn/types': 9.0.1
+    dev: true
+
+  /@simplewebauthn/types@9.0.1:
+    resolution: {integrity: sha512-tGSRP1QvsAvsJmnOlRQyw/mvK9gnPtjEc5fg2+m8n+QUa+D7rvrKkOYyfpy42GTs90X3RDOnqJgfHt+qO67/+w==}
     dev: true
 
   /@sinclair/typebox@0.27.8:
@@ -17670,6 +17676,23 @@ packages:
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      '@vinejs/vine':
+        optional: true
+      arktype:
+        optional: true
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
     dependencies:
       '@sveltejs/kit': 2.5.4(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.2.2)
       devalue: 4.3.2
@@ -19418,6 +19441,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
