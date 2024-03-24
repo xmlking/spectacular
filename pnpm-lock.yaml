@@ -640,8 +640,8 @@ importers:
         specifier: 2.1.0
         version: 2.1.0
       cmdk-sv:
-        specifier: 0.0.15
-        version: 0.0.15(svelte@4.2.12)
+        specifier: 0.0.16
+        version: 0.0.16(svelte@4.2.12)
       cssnano:
         specifier: 6.1.1
         version: 6.1.1(postcss@8.4.38)
@@ -1270,8 +1270,8 @@ importers:
         specifier: 2.1.0
         version: 2.1.0
       cmdk-sv:
-        specifier: 0.0.15
-        version: 0.0.15(svelte@4.2.12)
+        specifier: 0.0.16
+        version: 0.0.16(svelte@4.2.12)
       embla-carousel-svelte:
         specifier: ^8.0.0
         version: 8.0.0(svelte@4.2.12)
@@ -9072,8 +9072,8 @@ packages:
     resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
     engines: {node: '>=6'}
 
-  /cmdk-sv@0.0.15(svelte@4.2.12):
-    resolution: {integrity: sha512-WDEGJwjW30XZnfNXONeh7kQtmPF6e4UTNrDXQCiAWuafDu9odY3qhQpfNrq4pb5mqaZeKQgVtx+4LIojUv7GJw==}
+  /cmdk-sv@0.0.16(svelte@4.2.12):
+    resolution: {integrity: sha512-erlrIrRPaPgiiCFYZgWxTbqgfaLKjiwAC4tKNJH4eUpMBilGqEe2Ruiip9oYakWcZM14JQhcuiYqOl9ee4KI1Q==}
     peerDependencies:
       svelte: ^4.0.0
     dependencies:
@@ -17670,6 +17670,23 @@ packages:
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      '@vinejs/vine':
+        optional: true
+      arktype:
+        optional: true
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
     dependencies:
       '@sveltejs/kit': 2.5.4(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.2.2)
       devalue: 4.3.2
@@ -19418,6 +19435,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
