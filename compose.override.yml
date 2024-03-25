@@ -6,7 +6,7 @@ services:
   hasura:
     ## User `cli-migrations-v3` only in local dev env.
     ## It will automatically apply Migrations and Metadata to a Hasura GraphQL Engine
-    image: hasura/graphql-engine:v2.37.0.cli-migrations-v3
+    image: hasura/graphql-engine:v2.37.1.cli-migrations-v3
     volumes:
       - ./nhost/migrations:/hasura-migrations
       - ./nhost/metadata:/hasura-metadata
