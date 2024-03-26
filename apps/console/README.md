@@ -93,14 +93,15 @@ crane export ghcr.io/xmlking/spectacular/console:v0.1.3 - | tar -tvf - | grep -v
 | Service   | URL                                               |
 | --------- | ------------------------------------------------- |
 | Postgres  | postgres://postgres:postgres@localhost:5432/local |
-| Traefik   | https://traefik.traefik.me/dashboard/#/           |
+| Traefik   | https://traefik.traefik.me/dashboard/             |
 | Hasura    | https://hasura.traefik.me                         |
+| GraphQL   | https://graphql.traefik.me                        |
 | Auth      | https://auth.traefik.me/healthz                   |
 | Storage   | https://storage.traefik.me/healthz                |
 | Minio     | https://minio.traefik.me                          |
 | Mailpit   | https://mailpit.traefik.me                        |
 | Dashboard | https://dashboard.traefik.me                      |
-| Tailcall  | https://tailcall.traefik.me                       |
+| Tailcall  | https://gateway.traefik.me                        |
 
 #### (Or) Start backend services with nhost cli
 
@@ -131,7 +132,7 @@ nhost up --apply-seeds
 #### Apply user schema
 
 > this step only needed first time when database got initialized  
-> got to `https://hasura.traefik.me/console/data/sql` and apply
+> got to `https://hasura.traefik.me/console/data/sql` and apply (un check: `This is a migration` )
 
 ```sql
 ALTER TABLE ONLY public.user_org_groups

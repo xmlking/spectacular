@@ -50,6 +50,7 @@ devMode = true
 enableAllowList = false
 enableConsole = true
 enableRemoteSchemaPermissions = false
+liveQueriesMultiplexedRefetchInterval = 3000
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
 
 [hasura.logs]
@@ -63,7 +64,7 @@ httpPoolSize = 100
 version = 18
 
 [auth]
-version = '0.25'
+version = '0.27.0'
 
 [auth.redirections]
 clientUrl = 'https://console.traefik.me:5173'
@@ -75,12 +76,12 @@ enabled = true
 
 [auth.user]
 [auth.user.roles]
-default = 'user'
-allowed = ['user', 'me', 'manager', 'supervisor', 'engine']
+default = 'manager'
+# allowed = ['user', 'me', 'manager', 'supervisor', 'engine']
 
 [auth.user.locale]
 default = 'en'
-allowed = ['en']
+allowed = ['en', 'de', 'es']
 
 [auth.user.gravatar]
 enabled = true
@@ -95,6 +96,9 @@ rating = 'g'
 [auth.session.accessToken]
 expiresIn = 900
 
+[auth.session.refreshToken]
+expiresIn = 2592000
+
 [[auth.session.accessToken.customClaims]]
 key = 'orgs'
 value = 'organizations[].organization'
@@ -104,9 +108,6 @@ value = 'metadata.org'
 [[auth.session.accessToken.customClaims]]
 key = 'user-email'
 value = 'email'
-
-[auth.session.refreshToken]
-expiresIn = 43200
 
 [auth.method]
 [auth.method.anonymous]
@@ -206,6 +207,30 @@ version = '0.6.0'
 
 [storage.antivirus]
 server = 'tcp://run-clamav:3310'
+
+[ai]
+version = '0.4.0'
+# Used to validate requests between postgres and the AI service.
+# The AI service will also include the header X-Graphite-Webhook-Secret
+# with this value set when calling external webhooks so the source of
+# the request can be validated.
+webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
+
+[ai.resources]
+[ai.resources.compute]
+# Dedicated resources allocated for the service
+cpu = 128
+memory = 256
+
+[ai.autoEmbeddings]
+# How often to run the job that keeps embeddings up to date
+synchPeriodMinutes = 10
+
+[ai.openai]
+# Key to use for authenticating API requests to OpenAI.
+apiKey = '{{ secrets.OPENAI_API_KEY }}'
+# OpenAI organization to use.
+organization = 'my-org'
 
 [observability]
 [observability.grafana]

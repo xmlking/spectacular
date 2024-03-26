@@ -1,17 +1,91 @@
 version: '3.9'
 services:
   ###########################################################################
-  # hasura service - dev mode
+  # hasura console and migrates - dev mode
   ###########################################################################
-  hasura:
+  console:
     ## User `cli-migrations-v3` only in local dev env.
     ## It will automatically apply Migrations and Metadata to a Hasura GraphQL Engine
-    image: hasura/graphql-engine:v2.37.1.cli-migrations-v3
+    image: hasura/graphql-engine:v2.38.0.cli-migrations-v3
+    hostname: console
+    container_name: console
+    restart: unless-stopped
+    expose:
+      - 9695
+      - 443
     volumes:
       - ./nhost/migrations:/hasura-migrations
       - ./nhost/metadata:/hasura-metadata
+    command:
+      - bash
+      - -c
+      - |4-
+          hasura-cli \
+            console \
+            --no-browser \
+            --endpoint http://graphql:8080 \
+            --address 0.0.0.0 \
+            --console-port 9695 \
+            --api-port 443 \
+            --api-host https://hasura${BASE_HOSTNAME} \
+            --console-hge-endpoint https://hasura${BASE_HOSTNAME}
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=allow
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_LOG_LEVEL: warn
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup,http-log,webhook-log,websocket-log
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
+      HASURA_GRAPHQL_STRINGIFY_NUMERIC_TYPES: 'false'
+      HASURA_GRAPHQL_TX_ISOLATION: read-committed
+      HASURA_GRAPHQL_CORS_DOMAIN: '*'
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 1s bash -c ':> /dev/tcp/127.0.0.1/9695' || exit 1"]
+      interval: 60s
+      start_period: 1m
+      start_interval: 10s
+      timeout: 15s
+      retries: 5
+    depends_on:
+      traefik:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      graphql:
+        condition: service_healthy
+    extra_hosts:
+      - host.docker.internal:host-gateway
+      - auth${BASE_HOSTNAME}:host-gateway
+      - console${BASE_HOSTNAME}:host-gateway
+      - db${BASE_HOSTNAME}:host-gateway
+      - functions${BASE_HOSTNAME}:host-gateway
+      - gateway${BASE_HOSTNAME}:host-gateway
+      - graphql${BASE_HOSTNAME}:host-gateway
+      - hasura${BASE_HOSTNAME}:0.0.0.0
+      - storage${BASE_HOSTNAME}:host-gateway
+      - traefik${BASE_HOSTNAME}:host-gateway
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.console.entrypoints: websecure
+      traefik.http.routers.console.rule: Host(`hasura${BASE_HOSTNAME}`)
+      traefik.http.routers.console.service: console
+      traefik.http.routers.console.tls: "true"
+      traefik.http.services.console.loadbalancer.server.port: "9695"
+      traefik.http.routers.migrate.entrypoints: websecure
+      traefik.http.routers.migrate.rule: PathPrefix(`/apis/`) && Host(`hasura${BASE_HOSTNAME}`)
+      traefik.http.routers.migrate.service: migrate
+      traefik.http.routers.migrate.tls: "true"
+      traefik.http.services.migrate.loadbalancer.server.port: "443"
+  ###########################################################################
+  # hasura service - dev mode
+  ###########################################################################
+  graphql:
     environment:
       HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_LOG_LEVEL: info
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
   ###########################################################################
   # hasura auth
@@ -19,4 +93,4 @@ services:
   auth:
     environment:
       # AUTH_DEBUG: true
-      AUTH_SHOW_LOG_QUERY_PARAMS: true
+      AUTH_SHOW_LOG_QUERY_PARAMS: 'true'
