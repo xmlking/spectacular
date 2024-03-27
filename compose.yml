@@ -431,13 +431,14 @@ services:
       traefik.http.services.configserver.loadbalancer.server.port: "8088"
   ###########################################################################
   # graphite - nhost AI
+  # graphite depends on old version of postgres ???
   ###########################################################################
   ai:
     image: nhost/graphite:0.4.0
     hostname: ai
     container_name: ai
     restart: unless-stopped
-    profiles: [all]
+    profiles: [optional]
     command:
       - serve
     expose:
@@ -450,7 +451,7 @@ services:
       NHOST_GRAPHQL_URL: http://graphql:8080/v1/graphql
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       OPENAI_ORG: my-org
-      POSTGRES_CONNECTION: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=allow
+      POSTGRES_CONNECTION: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=disable
       SYNCH_PERIOD: 10m
     healthcheck:
       test:
