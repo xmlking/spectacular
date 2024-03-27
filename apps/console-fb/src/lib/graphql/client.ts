@@ -51,7 +51,7 @@ export default new HoudiniClient({
 		return {
 			headers: {
 				...(token ? { Authorization: `Bearer ${token}` } : {}),
-				...(useRole ? { 'x-hasura-role': useRole } : { 'x-hasura-role': 'anonymous' }),
+				...(useRole ? { 'x-hasura-role': useRole } : { 'x-hasura-role': 'public' }),
 				...(backendToken ? { backendToken } : {})
 			}
 		};
@@ -64,7 +64,7 @@ export default new HoudiniClient({
 });
 
 function getHighestRole(roles: string[] | undefined) {
-	if (!roles) return 'anonymous';
+	if (!roles) return 'public';
 	if (roles?.includes('tester')) return 'tester';
 	if (roles?.includes('manager')) return 'manager';
 	if (roles?.includes('user')) return 'user';
