@@ -166,3 +166,11 @@ turbo build
 ```
 
 You can preview the production build with `turbo preview`.
+
+## Deploy
+
+[adapter-auto](https://kit.svelte.dev/docs/adapter-auto) now support **Zero-config deployments** to `Vercel`, `Azure Static Web Apps`, `Google Cloud Run` etc
+
+```shell
+gcloud run deploy --allow-unauthenticated
+```

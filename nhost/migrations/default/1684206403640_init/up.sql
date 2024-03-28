@@ -7,6 +7,8 @@ CREATE SCHEMA IF NOT EXISTS storage;
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+-- CREATE EXTENSION IF NOT EXISTS vector WITH SCHEMA public;
+-- CREATE EXTENSION IF NOT EXISTS http WITH SCHEMA public;
 CREATE TABLE public.devices (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,

@@ -13,6 +13,8 @@ GraphQL APIs with Hasura
 ### Install
 
 ```shell
+brew install hasura-cli
+# (OR)
 pnpm add -g hasura-cli
 # (OR)
 go install github.com/hasura/graphql-engine/cli/cmd/hasura@latest

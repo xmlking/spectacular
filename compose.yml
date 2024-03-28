@@ -68,6 +68,7 @@ services:
   ###########################################################################
   postgres:
     image: postgres:16
+    # image: pgvector/pgvector:pg16
     hostname: postgres
     container_name: postgres
     restart: unless-stopped
@@ -419,6 +420,15 @@ services:
       - ./.secrets:/tmp/secrets.toml
     expose:
       - 8088
+    # environment:
+    #   GIN_MODE: release
+    # healthcheck: # this works in k8 but not in compose, because there is no curl in image.
+    #   test: curl --fail -s http://localhost:8088/healthz || exit 1
+    #   interval: 60s
+    #   start_period: 1m
+    #   start_interval: 10s
+    #   timeout: 15s
+    #   retries: 5
     depends_on:
       traefik:
         condition: service_healthy
@@ -431,7 +441,8 @@ services:
       traefik.http.services.configserver.loadbalancer.server.port: "8088"
   ###########################################################################
   # graphite - nhost AI
-  # graphite depends on old version of postgres ???
+  # NOTE: graphite need postgres with `http` and `pgvector` extentions
+  # Ref: https://github.com/pramsey/pgsql-http
   ###########################################################################
   ai:
     image: nhost/graphite:0.4.0
