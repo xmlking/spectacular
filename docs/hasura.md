@@ -73,13 +73,13 @@ hasura migrate apply --database-name default
 hasura metadata apply
 hasura metadata reload
 # Take pg_dump of schema and hasura metadata from server while specifying the schemas to include
-hasura migrate create init --from-server --database-name default --schema public --project infra --endpoint https://hasura.traefik.me --admin-secret="<HASURA_GRAPHQL_ADMIN_SECRET>"
+hasura migrate create init --from-server --database-name default --schema public --project nhsot --endpoint https://hasura.traefik.me --admin-secret="<HASURA_GRAPHQL_ADMIN_SECRET>"
 # rollback/rollup last migrate
 hasura migrate apply --down 1
 hasura migrate apply --up 1
 hasura migrate apply --version 1686378049757 --type down --database-name default
 # Export Hasura GraphQL Engine metadata from the database
-hasura metadata export --project infra --endpoint https://hasura.traefik.me --admin-secret "<HASURA_GRAPHQL_ADMIN_SECRET>"
+hasura metadata export --endpoint https://hasura.traefik.me --admin-secret "<HASURA_GRAPHQL_ADMIN_SECRET>"
 # Show changes between server metadata and the exported metadata file:
 hasura metadata diff
 # Reload Hasura GraphQL Engine metadata on the database.
