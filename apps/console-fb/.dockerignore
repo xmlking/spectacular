@@ -7,7 +7,7 @@
 !/pnpm-workspace.yaml
 !/bun.lockb
 !/svelte.config.js
-!/tailwind.config.cjs
+!/tailwind.config.ts
 !/vite.config.js
 !/postcss.config.cjs
 !/src
@@ -15,7 +15,11 @@
 !/patches
 !/config
 !/tsconfig.json
+!/pwa-assets.config.ts
 !/vite.config.ts
 # we need some static/build-time environment variables during build
 !.env
 !.npmrc
+!.env.example
+!.secrets
+!.secrets.example
