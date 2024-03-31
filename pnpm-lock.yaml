@@ -1294,8 +1294,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(svelte@4.2.12)
       svelte-sonner:
-        specifier: ^0.3.19
-        version: 0.3.19(svelte@4.2.12)
+        specifier: ^0.3.20
+        version: 0.3.20(svelte@4.2.12)
       sveltekit-superforms:
         specifier: 2.12.2
         version: 2.12.2(@sveltejs/kit@2.5.5)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.2)(svelte@4.2.12)
@@ -17632,8 +17632,8 @@ packages:
       svelte-floating-ui: 1.5.8
     dev: true
 
-  /svelte-sonner@0.3.19(svelte@4.2.12):
-    resolution: {integrity: sha512-jpPOgLtHwRaB6Vqo2dUQMv15/yUV/BQWTjKpEqQ11uqRSHKjAYUKZyGrHB2cQsGmyjR0JUzBD58btpgNqINQ/Q==}
+  /svelte-sonner@0.3.20(svelte@4.2.12):
+    resolution: {integrity: sha512-Ya5sI/OLwjlh9cHxUpQJN9NpeNY1iWEVfA4mk+sGjyZAqEKNvf01KrI+edWTPGi42q+TS2ANN22e691uk5cg4w==}
     peerDependencies:
       svelte: '>=3 <5'
     dependencies:
@@ -17749,6 +17749,23 @@ packages:
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      '@vinejs/vine':
+        optional: true
+      arktype:
+        optional: true
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
     dependencies:
       '@sveltejs/kit': 2.5.5(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.2.7)
       devalue: 4.3.2
@@ -19510,6 +19527,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
