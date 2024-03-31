@@ -46,6 +46,21 @@ https://github.com/pevey/saluna/blob/0258967cdcae3bfdfb61f5fa991fcc4921b7290c/sr
 @layer components {
 	/* Page Styles */
 	/* Use these to define common page styles. */
+	.page-container {
+		@apply page-padding container mx-auto space-y-10;
+	}
+	.page-container-wide {
+		@apply mx-auto w-full max-w-7xl space-y-10;
+	}
+	.page-container-aside {
+		@apply mx-auto w-full max-w-4xl space-y-10;
+	}
+	.page-padding {
+		@apply p-4 md:p-10;
+	}
+	.page-section {
+		@apply space-y-4;
+	}
 
 	/* apply skeleton FORM styles */
 	form {

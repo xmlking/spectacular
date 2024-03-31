@@ -35,6 +35,7 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 				{ href: '/docs/contributing', label: 'Contributing', keywords: 'branch, pr' },
 				{ href: '/dashboard/reports', label: 'Reports', keywords: 'reports, graph' },
 				{ href: '/dashboard/customers', label: 'Customers', keywords: 'customers, users' },
+				{ href: '/dashboard/play', label: 'Play', keywords: 'play, users' },
 				{ href: '/dashboard/policies', label: 'Policies', keywords: 'policies, rules' },
 				{ href: '/auth/signup', label: 'Signup', keywords: 'signup, users' },
 				{ href: '/auth/signin', label: 'Signin', keywords: 'signin, login, users' }

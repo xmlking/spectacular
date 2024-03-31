@@ -39,7 +39,7 @@
 <!-- FIXME: clientWidth `position:inherit` https://github.com/sveltejs/svelte/issues/4776 -->
 <section
 	bind:clientWidth
-	class={cn('mx-[10%] my-4 space-y-2 overflow-x-auto', className)}
+	class={cn('space-y-4', className)}
 	style="position:inherit"
 	{...$$restProps}
 >
