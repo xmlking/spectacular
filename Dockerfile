@@ -81,7 +81,7 @@ RUN pnpm turbo run build --filter=${SCOPE}...
 ###################################################################
 # FROM gcr.io/distroless/nodejs:20 as final
 # FROM gcr.io/distroless/nodejs:20-debug as final
-FROM cgr.dev/chainguard/node:20 AS runner
+FROM cgr.dev/chainguard/node:latest AS runner
 # FROM base AS runner
 
 WORKDIR /app
