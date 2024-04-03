@@ -17,6 +17,7 @@ providers: # You can add more than one provider if needed
   docker:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false # Only expose explicitly enabled containers
+    watch: true
     defaultRule: "HostRegexp(`{{ index .Labels \"com.docker.compose.service\"}}.traefik.me`,`{{ index .Labels \"com.docker.compose.service\"}}-{dashed-ip:.*}.traefik.me`)"
   file:
     filename: /etc/traefik/dynamic.yml

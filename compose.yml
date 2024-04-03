@@ -16,23 +16,6 @@ x-extra_hosts: &extra_hosts
       - hasura${BASE_HOSTNAME}:host-gateway
       - storage${BASE_HOSTNAME}:host-gateway
       - traefik${BASE_HOSTNAME}:host-gateway
-###########################################################################
-# top-level Config
-# `user` password: user
-# `admin` password: admin
-###########################################################################
-configs:
-  .htpasswd:
-    content: |
-      user:$$apr1$$YOwuFkyc$$Exhx4Xoe0c.5SEDKjC3kz1
-      admin:$$apr1$$6Rri7sub$$PmETYWtbZZaiL6QdtELte1
-
-###########################################################################
-# top-level Secrets
-###########################################################################
-secrets:
-  authorized_keys:
-    file: .secrets
 
 services:
   ###########################################################################
@@ -62,7 +45,10 @@ services:
       traefik.http.routers.traefik.entrypoints: web,websecure
       traefik.http.routers.traefik.rule: Host(`traefik${BASE_HOSTNAME}`)
       traefik.http.routers.traefik.tls: "true"
+      traefik.http.routers.traefik.middlewares: traefik-auth
       traefik.http.services.traefik.loadbalancer.server.port: "8080"
+      traefik.http.middlewares.traefik-auth.basicauth.usersfile: /etc/traefik/.htpasswd
+      traefik.http.middlewares.traefik-auth.basicauth.removeheader: true
   ###########################################################################
   # postgres database
   ###########################################################################
@@ -401,6 +387,7 @@ services:
       traefik.http.routers.dashboard.rule: Host(`dashboard${BASE_HOSTNAME}`)
       traefik.http.routers.dashboard.service: dashboard
       traefik.http.routers.dashboard.tls: "true"
+      traefik.http.routers.dashboard.middlewares: traefik-auth
       traefik.http.services.dashboard.loadbalancer.server.port: "3000"
   ###########################################################################
   # configserver
