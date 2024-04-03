@@ -20,7 +20,14 @@
 		"proto3",
 		"svelte"
 	],
-	"dictionaries": ["html", "css", "typescript", "node", "softwareTerms", "companies"],
+	"dictionaries": [
+		"html",
+		"css",
+		"typescript",
+		"node",
+		"softwareTerms",
+		"companies"
+	],
 	"words": [
 		"astro",
 		"astrojs",
@@ -43,6 +50,7 @@
 		"inlang",
 		"Kometa",
 		"Konsta",
+		"Kustomize",
 		"legos",
 		"log",
 		"lucide",
@@ -80,8 +88,14 @@
 	// This makes the spell checker more lenient when two words are jammed together.
 	"allowCompoundWords": true,
 	"useGitignore": true,
-	"files": ["**/*.md"],
-	"ignoreRegExpList": ["Email", "\\_\\w+", "\\#\\w+"],
+	"files": [
+		"**/*.md"
+	],
+	"ignoreRegExpList": [
+		"Email",
+		"\\_\\w+",
+		"\\#\\w+"
+	],
 	"ignorePaths": [
 		".git",
 		"**/build/**",
