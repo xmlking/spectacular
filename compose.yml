@@ -233,7 +233,7 @@ services:
       AUTH_WEBAUTHN_ENABLED: "true"
       AUTH_WEBAUTHN_RP_ID: Spectacular
       AUTH_WEBAUTHN_RP_NAME: Spectacular Console App
-      AUTH_WEBAUTHN_RP_ORIGINS: ${AUTH_CLIENT_URL:-https://console${BASE_HOSTNAME}:5173}
+      AUTH_WEBAUTHN_RP_ORIGINS: ${AUTH_CLIENT_URL:-https://console${BASE_HOSTNAME}:5173,https://console.traefik.me}
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       HASURA_GRAPHQL_GRAPHQL_URL: http://graphql:8080/v1/graphql

@@ -4,10 +4,15 @@
 		"path": "/auth/redirections/clientUrl",
 		"value": "https://spectacular-console.vercel.app"
 	},
+  {
+    "op": "replace",
+    "path": "/auth/method/webauthn/relyingParty/origins/0",
+    "value": "https://spectacular-console.vercel.app"
+  },
 	{
 		"op": "replace",
 		"path": "/auth/redirections/allowedUrls",
-		"value": ["https://spectacular-console.vercel.app", "https://*.vercel.app/"]
+		"value": ["https://spectacular-console.vercel.app", "https://spectacular-console.vercel.app/dashboard/profile", "https://*.vercel.app"]
 	},
 	{
 		"op": "replace",

@@ -17,7 +17,7 @@ maxWalSenders = 1
 maxReplicationSlots = 1
 
 [hasura]
-version = 'v2.33.4-ce'
+version = 'v2.38.0-ce'
 adminSecret = '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
 webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 
@@ -64,20 +64,24 @@ httpPoolSize = 100
 version = 18
 
 [auth]
-version = '0.27.0'
+version = '0.28.0'
+
+[auth.elevatedPrivileges]
+mode = 'required'
 
 [auth.redirections]
 clientUrl = 'https://console.traefik.me:5173'
-allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me', 'https://*.vercel.app/']
+allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:5173/dashboard/profile', 'https://console.traefik.me:3000', 'https://console.traefik.me:3000/dashboard/profile', 'https://console.traefik.me', 'https://console.traefik.me/dashboard/profile', 'https://*.vercel.app']
+# allowedUrls = ['http://localhost:5173', 'http://localhost:5173/dashboard/profile', 'http://localhost:3000', 'http://localhost:3000/dashboard/profile', 'https://console.traefik.me', 'https://console.traefik.me/dashboard/profile', 'https://*.vercel.app']
 
 [auth.signUp]
 enabled = true
-# disableNewUsers = true
+disableNewUsers = false
 
 [auth.user]
 [auth.user.roles]
 default = 'manager'
-# allowed = ['user', 'me', 'manager', 'supervisor', 'engine']
+allowed = ['user', 'me', 'manager', 'supervisor', 'engine']
 
 [auth.user.locale]
 default = 'en'
@@ -183,7 +187,7 @@ enabled = true
 [auth.method.webauthn.relyingParty]
 name = 'Spectacular Console App'
 id = 'Spectacular'
-# origins = ['https://console.traefik.me:5173']
+origins = ['https://console.traefik.me:5173', 'https://console.traefik.me']
 
 [auth.method.webauthn.attestation]
 timeout = 60000
