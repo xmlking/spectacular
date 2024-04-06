@@ -74,7 +74,7 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - pg_data:/var/lib/postgresql/data
-      # - ./infra/base/postgres/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./infra/base/postgres/initdb.d:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB -q']
       interval: 60s
@@ -172,7 +172,7 @@ services:
   # https://github.com/nhost/hasura-auth/blob/main/docs/environment-variables.md
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.28.0
+    image: nhost/hasura-auth:0.28.1
     hostname: auth
     container_name: auth
     restart: unless-stopped

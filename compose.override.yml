@@ -56,6 +56,10 @@ services:
         condition: service_healthy
       graphql:
         condition: service_healthy
+      auth:
+        condition: service_healthy
+      # storage:
+      #   condition: service_healthy
     extra_hosts:
       - host.docker.internal:host-gateway
       - auth${BASE_HOSTNAME}:host-gateway
