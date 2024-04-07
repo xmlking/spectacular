@@ -134,6 +134,7 @@ nhost up --apply-seeds
 Optionally apply all seed files
 
 > NOTE: make sure `HASURA_GRAPHQL_ENDPOINT`, `HASURA_GRAPHQL_ADMIN_SECRET` in root `.env` pointing to **local** hasura service.
+
 ```shell
 hasura seed apply --database-name default --insecure-skip-tls-verify
 ```
@@ -147,6 +148,8 @@ turbo dev
 # overload envelopment variables from `.env.prod`
 NODE_ENV=prod turbo dev
 ```
+
+Default demo user's **username:** `sumo@demo.com` **password:** `sumodemo123`
 
 ## Building
 
