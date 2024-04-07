@@ -133,8 +133,9 @@ nhost up --apply-seeds
 
 Optionally apply all seed files
 
+> NOTE: make sure `HASURA_GRAPHQL_ENDPOINT`, `HASURA_GRAPHQL_ADMIN_SECRET` in root `.env` pointing to **local** hasura service.
 ```shell
-hasura seed apply --database-name default --endpoint https://hasura.traefik.me --insecure-skip-tls-verify
+hasura seed apply --database-name default --insecure-skip-tls-verify
 ```
 
 ### Frontend

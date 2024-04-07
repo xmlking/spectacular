@@ -8,7 +8,7 @@ import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
 export default defineConfig({
 	server: {
 		host: 'playground.traefik.me',
-		// host: 'playground-192-168-50-34.traefik.me',
+		// host: 'playground-192-168-XX-XX.traefik.me',
 		https: {
 			cert: './../../infra/base/traefik/certs/traefik.me.crt',
 			key: './../../infra/base/traefik/certs/traefik.me.key'

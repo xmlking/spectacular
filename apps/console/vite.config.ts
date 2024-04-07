@@ -13,7 +13,7 @@ import houdini from 'houdini/vite';
 export default defineConfig({
 	server: {
 		host: 'console.traefik.me',
-		// host: 'console-192-168-50-34.traefik.me',
+		// host: 'console-192-168-XX-XX.traefik.me',
 		https: {
 			cert: './../../infra/base/traefik/certs/traefik.me.crt',
 			key: './../../infra/base/traefik/certs/traefik.me.key'
