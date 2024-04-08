@@ -5,7 +5,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { Logger } from '@spectacular/utils';
 import { policySearchSchema as schema } from '$lib/schema/policy';
 import { CachePolicy, ListPoliciesStore, order_by } from '$houdini';
-const log = new Logger('rules.list.browser');
+const log = new Logger('policies.list.browser');
 
 const listPoliciesStore = new ListPoliciesStore();
 export const load = async (event) => {
