@@ -748,8 +748,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(astro@4.5.16)(tailwindcss@3.4.3)
       '@astrojs/vercel':
-        specifier: 7.5.2
-        version: 7.5.2(astro@4.5.16)
+        specifier: 7.5.3
+        version: 7.5.3(astro@4.5.16)
       '@fontsource-variable/inter':
         specifier: 5.0.17
         version: 5.0.17
@@ -1021,8 +1021,8 @@ importers:
         specifier: 5.1.0
         version: 5.1.0(astro@4.5.16)(tailwindcss@3.4.3)
       '@astrojs/vercel':
-        specifier: 7.5.2
-        version: 7.5.2(astro@4.5.16)
+        specifier: 7.5.3
+        version: 7.5.3(astro@4.5.16)
       '@fontsource-variable/inter':
         specifier: 5.0.17
         version: 5.0.17
@@ -1649,8 +1649,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/vercel@7.5.2(astro@4.5.16):
-    resolution: {integrity: sha512-Wvz5wCvmc1iu22KcVEpEAXsyzAWrVIkcXOReqd6QAUTJ5Kj1oYsZdZqJuibjbM6hDfnhTF78W64XXUKH+Wb0cg==}
+  /@astrojs/vercel@7.5.3(astro@4.5.16):
+    resolution: {integrity: sha512-rIqcoGoW+SJv+rOjMjMq5ICdBZP+zbuenXyNhTa6UIUZldm4pZLLImuBDvTxB/A3JvJZRoTwZtsEgORXav1bbg==}
     peerDependencies:
       astro: ^4.2.0
     dependencies:
@@ -5683,7 +5683,7 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       '@npmcli/name-from-folder': 2.0.0
-      glob: 10.3.10
+      glob: 10.3.12
       minimatch: 9.0.4
       read-package-json-fast: 3.0.2
     dev: false
@@ -11768,18 +11768,6 @@ packages:
     dependencies:
       is-glob: 4.0.3
 
-  /glob@10.3.10:
-    resolution: {integrity: sha512-fa46+tv1Ak0UPK1TOy/pZrIybNNt4HCv7SDzwyfiOZkvZLEbjsZkJBPtDHVshZjbecAoAGSC20MjLDG/qr679g==}
-    engines: {node: '>=16 || 14 >=14.17'}
-    hasBin: true
-    dependencies:
-      foreground-child: 3.1.1
-      jackspeak: 2.3.6
-      minimatch: 9.0.4
-      minipass: 7.0.4
-      path-scurry: 1.10.2
-    dev: false
-
   /glob@10.3.12:
     resolution: {integrity: sha512-TCNv8vJ+xz4QiqTpfOJA7HvYv+tNIRHKfUWw/q+v2jdgN4ebz+KY9tGx5J4rHP0o84mNP+ApH66HRX8us3Khqg==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -17753,6 +17741,23 @@ packages:
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
+    peerDependenciesMeta:
+      '@sinclair/typebox':
+        optional: true
+      '@vinejs/vine':
+        optional: true
+      arktype:
+        optional: true
+      joi:
+        optional: true
+      superstruct:
+        optional: true
+      valibot:
+        optional: true
+      yup:
+        optional: true
+      zod:
+        optional: true
     dependencies:
       '@sveltejs/kit': 2.5.5(@sveltejs/vite-plugin-svelte@3.0.2)(svelte@4.2.12)(vite@5.2.8)
       devalue: 4.3.2
@@ -18515,7 +18520,7 @@ packages:
       '@ungap/structured-clone': 1.2.0
       concat-stream: 2.0.0
       debug: 4.3.4
-      glob: 10.3.10
+      glob: 10.3.12
       ignore: 5.3.1
       is-empty: 1.2.0
       is-plain-obj: 4.1.0
@@ -19512,6 +19517,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
