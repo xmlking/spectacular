@@ -8,7 +8,7 @@ name = 'ACTION_BASE_URL'
 value = 'https://console.traefik.me:5173/api/actions'
 
 [postgres]
-version = '14.6-20240129-1'
+version = '14.6-20240412-1'
 
 [postgres.settings]
 maxConnections = 100
@@ -59,12 +59,16 @@ level = 'warn'
 [hasura.events]
 httpPoolSize = 100
 
+[graphql.security]
+# forbidAminSecret = true
+maxDepthQueries = 4
+
 [functions]
 [functions.node]
 version = 18
 
 [auth]
-version = '0.28.0'
+version = '0.29.1'
 
 [auth.elevatedPrivileges]
 mode = 'required'
@@ -81,7 +85,7 @@ disableNewUsers = false
 [auth.user]
 [auth.user.roles]
 default = 'manager'
-allowed = ['user', 'me', 'manager', 'supervisor', 'engine']
+allowed = ['user', 'me', 'supervisor', 'manager', 'engine']
 
 [auth.user.locale]
 default = 'en'
@@ -209,11 +213,9 @@ method = '{{ secrets.AUTH_SMTP_AUTH_METHOD }}'
 [storage]
 version = '0.6.0'
 
-[storage.antivirus]
-server = 'tcp://run-clamav:3310'
 
 [ai]
-version = '0.4.0'
+version = '0.5.0'
 # Used to validate requests between postgres and the AI service.
 # The AI service will also include the header X-Graphite-Webhook-Secret
 # with this value set when calling external webhooks so the source of

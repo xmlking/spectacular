@@ -1,5 +1,3 @@
-version: '3.9'
-
 ###########################################################################
 # top-level Extensions
 ###########################################################################
@@ -100,7 +98,7 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
       HASURA_GRAPHQL_LOG_LEVEL: warn
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
       HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
       HASURA_GRAPHQL_CORS_DOMAIN: '*'
     healthcheck:
@@ -134,7 +132,7 @@ services:
   # mailpit
   ###########################################################################
   mailpit:
-    image: axllent/mailpit:v1.14.4
+    image: axllent/mailpit:v1.16.0
     hostname: mailpit
     container_name: mailpit
     restart: unless-stopped
@@ -172,7 +170,7 @@ services:
   # https://github.com/nhost/hasura-auth/blob/main/docs/environment-variables.md
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.28.1
+    image: nhost/hasura-auth:0.29.1
     hostname: auth
     container_name: auth
     restart: unless-stopped
@@ -227,7 +225,7 @@ services:
       AUTH_SMTP_PASS: ${AUTH_SMTP_PASS:-password}
       AUTH_SMTP_SECURE: ${AUTH_SMTP_SECURE:-false}
       AUTH_SMTP_SENDER: ${AUTH_SMTP_SENDER:-hasura-auth@example.com}
-      # AUTH_USER_DEFAULT_ALLOWED_ROLES: me,user,manager,supervisor,engine
+      # AUTH_USER_DEFAULT_ALLOWED_ROLES: me,user,supervisor,manager,engine
       AUTH_USER_DEFAULT_ROLE: manager
       AUTH_WEBAUTHN_ATTESTATION_TIMEOUT: "60000"
       AUTH_WEBAUTHN_ENABLED: "true"
@@ -273,17 +271,17 @@ services:
   # minio
   ###########################################################################
   minio:
-    image: minio/minio:RELEASE.2024-03-10T02-53-48Z
+    image: bitnami/minio:2024.4.6
     hostname: minio
     container_name: minio
     restart: unless-stopped
     profiles: [all]
     volumes:
-     - minio:/data
-    command: server /data --console-address ":9001"
+     - minio:/bitnami/minio/data
     environment:
       MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY}
       MINIO_ROOT_PASSWORD: ${STORAGE_SECRET_KEY}
+      MINIO_DEFAULT_BUCKETS: ${STORAGE_DEFAULT_BUCKETS:-apps:download,public:public}
     expose:
       - 9000
       - 9001
@@ -320,6 +318,7 @@ services:
     environment:
       BIND: :5000
       DEBUG: "true"
+      # CLAMAV_SERVER: tcp://run-clamav:3310
       HASURA_ENDPOINT: http://graphql:8080/v1
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
       HASURA_METADATA: "1"
@@ -327,7 +326,7 @@ services:
       POSTGRES_MIGRATIONS_SOURCE: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=disable
       PUBLIC_URL: https://storage${BASE_HOSTNAME}
       S3_ACCESS_KEY: ${STORAGE_ACCESS_KEY}
-      S3_BUCKET: nhost
+      S3_BUCKET: public
       S3_ENDPOINT: http://minio:9000
       S3_REGION: ""
       S3_ROOT_FOLDER: ""
@@ -348,6 +347,7 @@ services:
     #   start_interval: 10s
     #   timeout: 15s
     #   retries: 5
+    <<: *extra_hosts
     labels:
       traefik.enable: "true"
       traefik.http.routers.storage.entrypoints: websecure
@@ -359,7 +359,7 @@ services:
   # dashboard
   ###########################################################################
   dashboard:
-    image: nhost/dashboard:1.12.0
+    image: nhost/dashboard:1.12.2
     hostname: dashboard
     container_name: dashboard
     restart: unless-stopped
@@ -393,7 +393,7 @@ services:
   # configserver
   ###########################################################################
   configserver:
-    image: nhost/cli:1.15.3
+    image: nhost/cli:1.16.0
     hostname: configserver
     container_name: configserver
     restart: unless-stopped
@@ -403,8 +403,8 @@ services:
       - --enable-playground
       - --debug
     volumes:
-      - ./nhost/nhost.toml:/tmp/config.toml
-      - ./.secrets:/tmp/secrets.toml
+      - ./nhost:/tmp/root/nhost
+      - .:/tmp/root
     expose:
       - 8088
     # environment:
@@ -432,7 +432,7 @@ services:
   # Ref: https://github.com/pramsey/pgsql-http
   ###########################################################################
   ai:
-    image: nhost/graphite:0.4.0
+    image: nhost/graphite:0.5.0
     hostname: ai
     container_name: ai
     restart: unless-stopped
