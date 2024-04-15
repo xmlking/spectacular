@@ -13,6 +13,8 @@ download latest `traefik.me` certs for _svelte_ dev server.
 ```shell
 curl traefik.me/fullchain.pem -o infra/base/traefik/certs/traefik.me.crt
 curl traefik.me/privkey.pem -o infra/base/traefik/certs/traefik.me.key
+# make sure docker has read access to those files:
+chmod ugo+r infra/base/traefik/.htpasswd
 ```
 
 ### Backend
