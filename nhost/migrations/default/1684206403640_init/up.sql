@@ -9,17 +9,6 @@ CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 -- CREATE EXTENSION IF NOT EXISTS vector WITH SCHEMA public;
 -- CREATE EXTENSION IF NOT EXISTS http WITH SCHEMA public;
-CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
-	LANGUAGE plpgsql
-    AS $$
-DECLARE
-_new record;
-BEGIN
-  _new := NEW;
-  _new."updated_at" = NOW();
-RETURN _new;
-END;
-$$;
 CREATE TABLE public.devices (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     display_name text NOT NULL,
@@ -43,20 +32,17 @@ SELECT *
 FROM devices
 WHERE id NOT IN (SELECT device_id FROM public.device_pool WHERE pool_id = poolid)
 	$$;
-CREATE TABLE public.pools (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    display_name text NOT NULL,
-    description text,
-    tags text[],
-    annotations public.hstore,
-    organization text NOT NULL,
-    created_by text NOT NULL,
-    updated_by text NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    deleted_at timestamp with time zone
-);
-COMMENT ON TABLE public.pools IS 'Device pools';
+CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+_new record;
+BEGIN
+  _new := NEW;
+  _new."updated_at" = NOW();
+RETURN _new;
+END;
+$$;
 CREATE TABLE public.action (
     value text NOT NULL,
     description text NOT NULL
@@ -101,6 +87,20 @@ CREATE TABLE public.policies (
     rule_id uuid NOT NULL
 );
 COMMENT ON TABLE public.policies IS 'Joint table associating subjects polymorphically with rules';
+CREATE TABLE public.pools (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    display_name text NOT NULL,
+    description text,
+    tags text[],
+    annotations public.hstore,
+    organization text NOT NULL,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    deleted_at timestamp with time zone
+);
+COMMENT ON TABLE public.pools IS 'Device pools';
 CREATE TABLE public.protocol (
     value text NOT NULL,
     description text NOT NULL
