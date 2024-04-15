@@ -75,7 +75,7 @@ hasura migrate apply --database-name default
 hasura metadata apply
 hasura metadata reload
 # Take pg_dump of schema and hasura metadata from server while specifying the schemas to include
-hasura migrate create init --from-server --database-name default --schema public --project nhsot --endpoint https://hasura.traefik.me --admin-secret="<HASURA_GRAPHQL_ADMIN_SECRET>"
+hasura migrate create init --from-server --database-name default --schema public --project nhost --endpoint https://hasura.traefik.me --admin-secret="<HASURA_GRAPHQL_ADMIN_SECRET>"
 # rollback/rollup last migrate
 hasura migrate apply --down 1
 hasura migrate apply --up 1

@@ -136,7 +136,8 @@ Optionally apply all seed files
 > NOTE: make sure `HASURA_GRAPHQL_ENDPOINT`, `HASURA_GRAPHQL_ADMIN_SECRET` in root `.env` pointing to **local** hasura service.
 
 ```shell
-hasura seed apply --database-name default --insecure-skip-tls-verify
+# add `--insecure-skip-tls-verify` option if needed
+hasura seed apply --database-name default
 ```
 
 ### Frontend

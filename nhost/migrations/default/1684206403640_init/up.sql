@@ -4,72 +4,92 @@ SET ROLE postgres;
 SET SESSION "rules.soft_deletion" = 'on';
 CREATE SCHEMA IF NOT EXISTS auth;
 CREATE SCHEMA IF NOT EXISTS storage;
-CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 -- CREATE EXTENSION IF NOT EXISTS vector WITH SCHEMA public;
 -- CREATE EXTENSION IF NOT EXISTS http WITH SCHEMA public;
+CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
+	LANGUAGE plpgsql
+    AS $$
+DECLARE
+_new record;
+BEGIN
+  _new := NEW;
+  _new."updated_at" = NOW();
+RETURN _new;
+END;
+$$;
 CREATE TABLE public.devices (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    deleted_at timestamp with time zone,
-    created_by text NOT NULL,
-    updated_by text NOT NULL,
     display_name text NOT NULL,
     description text,
     tags text[],
     annotations public.hstore,
-    ip text NOT NULL,
     organization text NOT NULL,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    deleted_at timestamp with time zone,
+    ip text NOT NULL,
     version text
 );
-COMMENT ON TABLE public.devices IS 'devices metadata';
+COMMENT ON TABLE public.devices IS 'Devices Metadata';
 CREATE FUNCTION public.devices_not_in_pool(poolid uuid) RETURNS SETOF public.devices
     LANGUAGE sql STABLE
     AS $$
 SELECT *
 FROM devices
-WHERE id NOT IN (SELECT device_id FROM device_pool WHERE pool_id = poolid)
-$$;
-CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-  _new record;
-BEGIN
-  _new := NEW;
-  _new."updated_at" = NOW();
-  RETURN _new;
-END;
-$$;
+WHERE id NOT IN (SELECT device_id FROM public.device_pool WHERE pool_id = poolid)
+	$$;
+CREATE TABLE public.pools (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    display_name text NOT NULL,
+    description text,
+    tags text[],
+    annotations public.hstore,
+    organization text NOT NULL,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    deleted_at timestamp with time zone
+);
+COMMENT ON TABLE public.pools IS 'Device pools';
 CREATE TABLE public.action (
     value text NOT NULL,
     description text NOT NULL
 );
-COMMENT ON TABLE public.action IS 'action type';
+COMMENT ON TABLE public.action IS 'action enum';
 CREATE TABLE public.device_pool (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     pool_id uuid NOT NULL,
-    device_id uuid NOT NULL,
-    created_by text NOT NULL,
-    updated_by text NOT NULL
+    device_id uuid NOT NULL
 );
 COMMENT ON TABLE public.device_pool IS 'device to pool bridge table ';
 CREATE TABLE public.direction (
     value text NOT NULL,
     description text NOT NULL
 );
-COMMENT ON TABLE public.direction IS 'direction type';
+COMMENT ON TABLE public.direction IS 'direction enum';
 CREATE TABLE public.organization (
     value text NOT NULL,
     description text NOT NULL
 );
-COMMENT ON TABLE public.organization IS 'organizations are enums';
+COMMENT ON TABLE public.organization IS 'organization enums';
 CREATE TABLE public.policies (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
+    organization text NOT NULL,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    deleted_at timestamp with time zone,
     active boolean DEFAULT true NOT NULL,
     valid_from timestamp with time zone DEFAULT now() NOT NULL,
     valid_to timestamp with time zone,
@@ -78,29 +98,9 @@ CREATE TABLE public.policies (
     subject_secondary_id text NOT NULL,
     subject_display_name text NOT NULL,
     subject_type text NOT NULL,
-    rule_id uuid NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    created_by text NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_by text NOT NULL,
-    deleted_at timestamp with time zone,
-    organization text NOT NULL
+    rule_id uuid NOT NULL
 );
-COMMENT ON TABLE public.policies IS 'policies is a joint table to connect a Subject polymorphically  and a Rule';
-CREATE TABLE public.pools (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    created_by text NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_by text NOT NULL,
-    deleted_at timestamp with time zone,
-    organization text NOT NULL,
-    tags text[],
-    annotations public.hstore,
-    display_name text NOT NULL,
-    description text
-);
-COMMENT ON TABLE public.pools IS 'Device pools';
+COMMENT ON TABLE public.policies IS 'Joint table associating subjects polymorphically with rules';
 CREATE TABLE public.protocol (
     value text NOT NULL,
     description text NOT NULL
@@ -112,6 +112,12 @@ CREATE TABLE public.rules (
     description text,
     tags text[],
     annotations public.hstore,
+    organization text NOT NULL,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    deleted_at timestamp with time zone,
     shared boolean DEFAULT false NOT NULL,
     source text,
     source_port text,
@@ -122,29 +128,23 @@ CREATE TABLE public.rules (
     direction text DEFAULT 'egress'::text NOT NULL,
     app_id text,
     throttle_rate text,
-    weight smallint DEFAULT 1000 NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    created_by text NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_by text NOT NULL,
-    deleted_at timestamp with time zone,
-    organization text NOT NULL
+    weight smallint DEFAULT 1000 NOT NULL
 );
 COMMENT ON TABLE public.rules IS '5-tuple firewalls rules';
 CREATE TABLE public.subject_type (
     value text NOT NULL,
     description text NOT NULL
 );
-COMMENT ON TABLE public.subject_type IS 'Subject Type';
+COMMENT ON TABLE public.subject_type IS 'subject enum';
 CREATE TABLE public.user_org_groups (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     groups text[],
     organization text NOT NULL,
-    created_at timestamp with time zone NOT NULL,
     created_by text NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_by text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     deleted_at timestamp with time zone
 );
 COMMENT ON TABLE public.user_org_groups IS 'User, Org, Groups join table';
