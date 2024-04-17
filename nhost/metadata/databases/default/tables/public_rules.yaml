@@ -84,29 +84,6 @@ insert_permissions:
         - throttle_rate
         - weight
 select_permissions:
-  - role: engine
-    permission:
-      columns:
-        - action
-        - app_id
-        - description
-        - destination
-        - destination_port
-        - direction
-        - display_name
-        - id
-        - organization
-        - protocol
-        - source
-        - source_port
-        - throttle_rate
-        - weight
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-orgs
   - role: manager
     permission:
       columns:
@@ -130,6 +107,29 @@ select_permissions:
         - throttle_rate
         - updated_at
         - updated_by
+        - weight
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-orgs
+  - role: supervisor
+    permission:
+      columns:
+        - action
+        - app_id
+        - description
+        - destination
+        - destination_port
+        - direction
+        - display_name
+        - id
+        - organization
+        - protocol
+        - source
+        - source_port
+        - throttle_rate
         - weight
       filter:
         _and:

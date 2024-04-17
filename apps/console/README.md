@@ -127,7 +127,7 @@ nhost up --apply-seeds
 | GraphQL   | https://local.graphql.nhost.run                   |
 | Auth      | https://local.auth.nhost.run                      |
 | Storage   | https://local.storage.nhost.run                   |
-| Functions | https://local.functions.nhost.run                 |
+| Functions | https://local.functions.nhost.run/v1/echo         |
 | Dashboard | https://local.dashboard.nhost.run                 |
 | Mailhog   | https://local.mailhog.nhost.run                   |
 

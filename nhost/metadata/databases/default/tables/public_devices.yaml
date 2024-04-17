@@ -35,7 +35,7 @@ array_relationships:
           name: device_pool
           schema: public
 insert_permissions:
-  - role: engine
+  - role: supervisor
     permission:
       check: {}
       set:
@@ -50,7 +50,29 @@ insert_permissions:
         - ip
         - version
 select_permissions:
-  - role: engine
+  - role: manager
+    permission:
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - deleted_at
+        - created_by
+        - updated_by
+        - display_name
+        - description
+        - tags
+        - annotations
+        - ip
+        - organization
+        - version
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-orgs
+          - deleted_at:
+              _is_null: true
+  - role: supervisor
     permission:
       columns:
         - id
@@ -72,28 +94,6 @@ select_permissions:
               _in: x-hasura-orgs
           - created_by:
               _eq: x-hasura-user-id
-          - deleted_at:
-              _is_null: true
-  - role: manager
-    permission:
-      columns:
-        - id
-        - created_at
-        - updated_at
-        - deleted_at
-        - created_by
-        - updated_by
-        - display_name
-        - description
-        - tags
-        - annotations
-        - ip
-        - organization
-        - version
-      filter:
-        _and:
-          - organization:
-              _in: x-hasura-orgs
           - deleted_at:
               _is_null: true
   - role: user
@@ -121,20 +121,6 @@ select_permissions:
           - deleted_at:
               _is_null: true
 update_permissions:
-  - role: engine
-    permission:
-      columns:
-        - ip
-        - version
-      filter:
-        _and:
-          - organization:
-              _in: x-hasura-orgs
-          - created_by:
-              _eq: x-hasura-user-id
-      check: {}
-      set:
-        updated_by: x-hasura-user-id
   - role: manager
     permission:
       columns:
@@ -146,5 +132,19 @@ update_permissions:
         organization:
           _in: x-hasura-orgs
       check: null
+      set:
+        updated_by: x-hasura-user-id
+  - role: supervisor
+    permission:
+      columns:
+        - ip
+        - version
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-orgs
+          - created_by:
+              _eq: x-hasura-user-id
+      check: {}
       set:
         updated_by: x-hasura-user-id

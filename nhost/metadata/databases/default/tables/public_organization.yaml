@@ -3,13 +3,13 @@ table:
   schema: public
 is_enum: true
 select_permissions:
-  - role: engine
+  - role: manager
     permission:
       columns:
         - description
         - value
       filter: {}
-  - role: manager
+  - role: supervisor
     permission:
       columns:
         - description

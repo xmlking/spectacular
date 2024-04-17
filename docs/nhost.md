@@ -58,3 +58,20 @@ nhost down
 # danger: delete docker volumes. Use it to reset postgres/hasura
 nhost down --volumes
 ```
+
+#### nhost Run 
+nhost `Run`  allow running custom containers along with standared nhost stack.
+[Local development](https://docs.nhost.io/guides/run/local-development)
+
+```shell
+# show config for given overlay
+nhost run config-show --config nhost/nginx-service.toml --overlay-name local
+# validate config for given overlay
+nhost run config-validate --config nhost/nginx-service.toml --overlay-name local
+# generate service specific .env for given overlay
+nhost run env --config nhost/nginx-service.toml --overlay-name local > .env1
+# run service locally
+# nhost up --run-service path/to/run-service.toml[:overlay_name]
+nhost up --run-service ./nhost/nginx-service.toml:local
+```
+ 

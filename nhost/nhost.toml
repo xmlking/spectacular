@@ -1,20 +1,11 @@
 [global]
 [[global.environment]]
-name = 'EVENTS_BASE_URL'
-value = 'https://console.traefik.me:5173/api/events'
+name = 'APP_NAME'
+value = 'Spectacular'
 
 [[global.environment]]
-name = 'ACTION_BASE_URL'
-value = 'https://console.traefik.me:5173/api/actions'
-
-[postgres]
-version = '14.6-20240412-1'
-
-[postgres.settings]
-maxConnections = 100
-walLevel = 'logical'
-maxWalSenders = 1
-maxReplicationSlots = 1
+name = 'APP_DESCRIPTION'
+value = 'Spectacular Console App'
 
 [hasura]
 version = 'v2.38.0-ce'
@@ -25,33 +16,14 @@ webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 type = 'HS256'
 key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET_KEY }}'
 
-# # hasura-auth not ready for claims_map
-# [[hasura.jwtSecrets.claims_map]]
-# claim = "x-hasura-allowed-roles"
-# path = "$.roles"
-# [[hasura.jwtSecrets.claims_map]]
-# claim = "x-hasura-default-role"
-# value = "user"
-# [[hasura.jwtSecrets.claims_map]]
-# claim = "x-hasura-user-id"
-# path = "$.email"
-# [[hasura.jwtSecrets.claims_map]]
-# claim = "x-hasura-org-id"
-# path = "$.org"
-# default = "public"
-# [[hasura.jwtSecrets.claims_map]]
-# claim = "x-other-claim"
-# path = "$.user.claim.id"
-# default = "default-value"
-
 [hasura.settings]
 corsDomain = ['*']
 devMode = true
 enableAllowList = false
 enableConsole = true
 enableRemoteSchemaPermissions = false
-liveQueriesMultiplexedRefetchInterval = 3000
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
+liveQueriesMultiplexedRefetchInterval = 3000
 
 [hasura.logs]
 level = 'warn'
@@ -59,8 +31,8 @@ level = 'warn'
 [hasura.events]
 httpPoolSize = 100
 
+[graphql]
 [graphql.security]
-# forbidAminSecret = true
 maxDepthQueries = 4
 
 [functions]
@@ -76,7 +48,6 @@ mode = 'required'
 [auth.redirections]
 clientUrl = 'https://console.traefik.me:5173'
 allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:5173/dashboard/profile', 'https://console.traefik.me:3000', 'https://console.traefik.me:3000/dashboard/profile', 'https://console.traefik.me', 'https://console.traefik.me/dashboard/profile', 'https://*.vercel.app']
-# allowedUrls = ['http://localhost:5173', 'http://localhost:5173/dashboard/profile', 'http://localhost:3000', 'http://localhost:3000/dashboard/profile', 'https://console.traefik.me', 'https://console.traefik.me/dashboard/profile', 'https://*.vercel.app']
 
 [auth.signUp]
 enabled = true
@@ -84,8 +55,6 @@ disableNewUsers = false
 
 [auth.user]
 [auth.user.roles]
-default = 'manager'
-allowed = ['user', 'me', 'supervisor', 'manager', 'engine']
 
 [auth.user.locale]
 default = 'en'
@@ -104,18 +73,20 @@ rating = 'g'
 [auth.session.accessToken]
 expiresIn = 900
 
-[auth.session.refreshToken]
-expiresIn = 2592000
-
 [[auth.session.accessToken.customClaims]]
-key = 'orgs'
+key = 'allowed-orgs'
 value = 'organizations[].organization'
+
 [[auth.session.accessToken.customClaims]]
 key = 'default-org'
 value = 'metadata.org'
+
 [[auth.session.accessToken.customClaims]]
 key = 'user-email'
 value = 'email'
+
+[auth.session.refreshToken]
+expiresIn = 2592000
 
 [auth.method]
 [auth.method.anonymous]
@@ -137,8 +108,8 @@ enabled = false
 enabled = false
 
 [auth.method.oauth.azuread]
-enabled = true
 tenant = '{{ secrets.AUTH_PROVIDER_AZUREAD_TENANT }}'
+enabled = true
 clientId = '{{ secrets.AUTH_PROVIDER_AZUREAD_CLIENT_ID }}'
 clientSecret = '{{ secrets.AUTH_PROVIDER_AZUREAD_CLIENT_SECRET }}'
 
@@ -189,8 +160,8 @@ enabled = false
 enabled = true
 
 [auth.method.webauthn.relyingParty]
-name = 'Spectacular Console App'
 id = 'Spectacular'
+name = 'Spectacular Console App'
 origins = ['https://console.traefik.me:5173', 'https://console.traefik.me']
 
 [auth.method.webauthn.attestation]
@@ -200,43 +171,43 @@ timeout = 60000
 enabled = true
 issuer = 'Spectacular'
 
+[postgres]
+version = '14.6-20240412-1'
+
+[postgres.settings]
+maxConnections = 100
+walLevel = 'logical'
+maxWalSenders = 1
+maxReplicationSlots = 1
+
 [provider]
 [provider.smtp]
-host = '{{ secrets.AUTH_SMTP_HOST }}'
-# port = '{{ secrets.AUTH_SMTP_PORT }}'
 user = '{{ secrets.AUTH_SMTP_USER }}'
 password = '{{ secrets.AUTH_SMTP_PASS }}'
 sender = '{{ secrets.AUTH_SMTP_SENDER }}'
-# secure = '{{ secrets.AUTH_SMTP_SECURE }}'
+host = '{{ secrets.AUTH_SMTP_HOST }}'
+port = 1025
+secure = false
 method = '{{ secrets.AUTH_SMTP_AUTH_METHOD }}'
 
 [storage]
 version = '0.6.0'
 
-
 [ai]
-version = '0.5.0'
-# Used to validate requests between postgres and the AI service.
-# The AI service will also include the header X-Graphite-Webhook-Secret
-# with this value set when calling external webhooks so the source of
-# the request can be validated.
+version = '0.5.1'
 webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
 
 [ai.resources]
 [ai.resources.compute]
-# Dedicated resources allocated for the service
-cpu = 128
+cpu = 125
 memory = 256
 
-[ai.autoEmbeddings]
-# How often to run the job that keeps embeddings up to date
-synchPeriodMinutes = 10
-
 [ai.openai]
-# Key to use for authenticating API requests to OpenAI.
-apiKey = '{{ secrets.OPENAI_API_KEY }}'
-# OpenAI organization to use.
 organization = 'my-org'
+apiKey = '{{ secrets.OPENAI_API_KEY }}'
+
+[ai.autoEmbeddings]
+synchPeriodMinutes = 10
 
 [observability]
 [observability.grafana]

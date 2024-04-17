@@ -16,8 +16,8 @@ actions:
         url: '{{$base_url}}/search'
         version: 2
     permissions:
-      - role: engine
       - role: user
+      - role: supervisor
       - role: manager
     comment: Universities API
   - name: SearchRestrooms
@@ -39,8 +39,8 @@ actions:
         url: '{{$base_url}}/restrooms/search'
         version: 2
     permissions:
-      - role: engine
       - role: user
+      - role: supervisor
       - role: manager
     comment: Restrooms API
 custom_types:

@@ -1,0 +1,29 @@
+name = 'nginx-service'
+
+[image]
+image = 'cgr.dev/chainguard/nginx:latest'
+
+[[environment]]
+name = 'HASURA_GRAPHQL_URL'
+value = 'http://hasura-service:8080/v1/graphql'
+
+[[environment]]
+name = 'OPENAI_API_KEY'
+value = '{{ secrets.OPENAI_API_KEY }}'
+
+[[ports]]
+port = 8080
+type = 'http'
+publish = true
+
+# [healthCheck]
+# port = 8080
+# initialDelaySeconds = 30
+# probePeriodSeconds = 60
+
+[resources]
+replicas = 1
+
+[resources.compute]
+cpu = 62
+memory = 128

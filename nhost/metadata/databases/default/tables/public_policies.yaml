@@ -82,28 +82,6 @@ insert_permissions:
         - valid_to
         - weight
 select_permissions:
-  - role: engine
-    permission:
-      columns:
-        - id
-        - valid_from
-        - valid_to
-        - weight
-        - subject_id
-        - subject_secondary_id
-        - subject_type
-        - rule_id
-        - updated_at
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - active:
-              _eq: true
-          - organization:
-              _in: x-hasura-orgs
-          - valid_from:
-              _lte: now()
   - role: manager
     permission:
       columns:
@@ -128,6 +106,28 @@ select_permissions:
               _is_null: true
           - organization:
               _in: x-hasura-orgs
+  - role: supervisor
+    permission:
+      columns:
+        - id
+        - valid_from
+        - valid_to
+        - weight
+        - subject_id
+        - subject_secondary_id
+        - subject_type
+        - rule_id
+        - updated_at
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - active:
+              _eq: true
+          - organization:
+              _in: x-hasura-orgs
+          - valid_from:
+              _lte: now()
   - role: user
     permission:
       columns:

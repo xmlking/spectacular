@@ -107,8 +107,8 @@ X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager engine
-x-hasura-role: engine
+x-hasura-allowed-roles: user supervisor manager
+x-hasura-role: supervisor
 x-hasura-default-org: chinthagunta
 x-hasura-orgs: {chinthagunta}
 x-hasura-user-id: xmlking@gmail.com
