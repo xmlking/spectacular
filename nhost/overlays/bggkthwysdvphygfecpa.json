@@ -17,12 +17,12 @@
 	{
 		"op": "replace",
 		"path": "/global/environment/0/value",
-		"value": "https://spectacular-console.vercel.app/api/events"
+		"value": "Spectacular"
 	},
 	{
 		"op": "replace",
 		"path": "/global/environment/1/value",
-		"value": "https://spectacular-console.vercel.app/api/actions"
+		"value": "Spectacular Console App"
 	},
 	{
 		"op": "remove",
@@ -39,5 +39,21 @@
 	{
 		"op": "remove",
 		"path": "/ai"
+	},
+	{
+		"op": "remove",
+		"path": "/hasura/resources"
+	},
+	{
+		"op": "remove",
+		"path": "/auth/resources"
+	},
+		{
+		"op": "remove",
+		"path": "/postgres/resources"
+	},
+		{
+		"op": "remove",
+		"path": "/storage/resources"
 	}
 ]

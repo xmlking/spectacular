@@ -31,6 +31,13 @@ level = 'warn'
 [hasura.events]
 httpPoolSize = 100
 
+[hasura.resources]
+replicas = 1
+
+[hasura.resources.compute]
+cpu = 500
+memory = 1536
+
 [graphql]
 [graphql.security]
 maxDepthQueries = 4
@@ -41,6 +48,13 @@ version = 18
 
 [auth]
 version = '0.29.1'
+
+[auth.resources]
+replicas = 1
+
+[auth.resources.compute]
+cpu = 250
+memory = 256
 
 [auth.elevatedPrivileges]
 mode = 'required'
@@ -174,6 +188,13 @@ issuer = 'Spectacular'
 [postgres]
 version = '14.6-20240412-1'
 
+[postgres.resources]
+replicas = 1
+
+[postgres.resources.compute]
+cpu = 1000
+memory = 2048
+
 [postgres.settings]
 maxConnections = 100
 walLevel = 'logical'
@@ -192,6 +213,13 @@ method = '{{ secrets.AUTH_SMTP_AUTH_METHOD }}'
 
 [storage]
 version = '0.6.0'
+
+[storage.resources]
+replicas = 1
+
+[storage.resources.compute]
+cpu = 250
+memory = 256
 
 [ai]
 version = '0.5.1'
