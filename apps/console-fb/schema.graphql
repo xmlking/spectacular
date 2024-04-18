@@ -144,10 +144,27 @@ input String_comparison_exp {
   _similar: String
 }
 
-"""action type"""
+"""action enum"""
 type action {
   description: String!
   value: String!
+}
+
+"""
+aggregated selection of "action"
+"""
+type action_aggregate {
+  aggregate: action_aggregate_fields
+  nodes: [action!]!
+}
+
+"""
+aggregate fields of "action"
+"""
+type action_aggregate_fields {
+  count(columns: [action_select_column!], distinct: Boolean): Int!
+  max: action_max_fields
+  min: action_min_fields
 }
 
 """
@@ -187,6 +204,18 @@ input action_enum_comparison_exp {
   _is_null: Boolean
   _neq: action_enum
   _nin: [action_enum!]
+}
+
+"""aggregate max on columns"""
+type action_max_fields {
+  description: String
+  value: String
+}
+
+"""aggregate min on columns"""
+type action_min_fields {
+  description: String
+  value: String
 }
 
 """Ordering options when selecting data from "action"."""
@@ -305,6 +334,7 @@ enum device_pool_constraint {
 input type for inserting data into table "device_pool"
 """
 input device_pool_insert_input {
+  device: devices_obj_rel_insert_input
   deviceId: uuid
   pool: pools_obj_rel_insert_input
   poolId: uuid
@@ -425,12 +455,11 @@ enum device_pool_update_column {
   _PLACEHOLDER
 }
 
-"""devices metadata"""
+"""Devices Metadata"""
 type devices {
   annotations: hstore
   createdAt: timestamptz!
   createdBy: String!
-  deletedAt: timestamptz
   description: String
 
   """An array relationship"""
@@ -470,7 +499,6 @@ input devices_bool_exp {
   annotations: hstore_comparison_exp
   createdAt: timestamptz_comparison_exp
   createdBy: String_comparison_exp
-  deletedAt: timestamptz_comparison_exp
   description: String_comparison_exp
   device_pools: device_pool_bool_exp
   displayName: String_comparison_exp
@@ -481,6 +509,34 @@ input devices_bool_exp {
   updatedAt: timestamptz_comparison_exp
   updatedBy: String_comparison_exp
   version: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "devices"
+"""
+enum devices_constraint {
+  """
+  unique or primary key constraint on columns "organization", "display_name"
+  """
+  devices_display_name_organization_key
+
+  """
+  unique or primary key constraint on columns "id"
+  """
+  devices_pkey
+}
+
+"""
+input type for inserting data into table "devices"
+"""
+input devices_insert_input {
+  annotations: hstore
+  description: String
+  device_pools: device_pool_arr_rel_insert_input
+  displayName: String
+  organization: organization_enum
+  tags: [String!]
+  version: String
 }
 
 """
@@ -498,12 +554,30 @@ input devices_not_in_pool_args {
   poolid: uuid
 }
 
+"""
+input type for inserting object relation for remote table "devices"
+"""
+input devices_obj_rel_insert_input {
+  data: devices_insert_input!
+
+  """upsert condition"""
+  on_conflict: devices_on_conflict
+}
+
+"""
+on_conflict condition type for table "devices"
+"""
+input devices_on_conflict {
+  constraint: devices_constraint!
+  update_columns: [devices_update_column!]! = []
+  where: devices_bool_exp
+}
+
 """Ordering options when selecting data from "devices"."""
 input devices_order_by {
   annotations: order_by
   createdAt: order_by
   createdBy: order_by
-  deletedAt: order_by
   description: order_by
   device_pools_aggregate: device_pool_aggregate_order_by
   displayName: order_by
@@ -533,9 +607,6 @@ enum devices_select_column {
 
   """column name"""
   createdBy
-
-  """column name"""
-  deletedAt
 
   """column name"""
   description
@@ -572,6 +643,7 @@ input devices_set_input {
   annotations: hstore
   deletedAt: timestamptz
   description: String
+  organization: organization_enum
   tags: [String!]
 }
 
@@ -591,7 +663,6 @@ input devices_stream_cursor_value_input {
   annotations: hstore
   createdAt: timestamptz
   createdBy: String
-  deletedAt: timestamptz
   description: String
   displayName: String
   id: uuid
@@ -603,6 +674,26 @@ input devices_stream_cursor_value_input {
   version: String
 }
 
+"""
+update columns of table "devices"
+"""
+enum devices_update_column {
+  """column name"""
+  annotations
+
+  """column name"""
+  deletedAt
+
+  """column name"""
+  description
+
+  """column name"""
+  organization
+
+  """column name"""
+  tags
+}
+
 input devices_updates {
   """sets the columns of the filtered rows to the given values"""
   _set: devices_set_input
@@ -611,7 +702,7 @@ input devices_updates {
   where: devices_bool_exp!
 }
 
-"""direction type"""
+"""direction enum"""
 type direction {
   description: String!
   value: String!
@@ -743,19 +834,6 @@ type mutation_root {
   delete_device_pool_by_pk(id: uuid!): device_pool
 
   """
-  delete data from the table: "pools"
-  """
-  delete_pools(
-    """filter the rows which have to be deleted"""
-    where: pools_bool_exp!
-  ): pools_mutation_response
-
-  """
-  delete single row from the table: "pools"
-  """
-  delete_pools_by_pk(id: uuid!): pools
-
-  """
   insert data into the table: "device_pool"
   """
   insert_device_pool(
@@ -776,6 +854,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: device_pool_on_conflict
   ): device_pool
+
+  """
+  insert data into the table: "devices"
+  """
+  insert_devices(
+    """the rows to be inserted"""
+    objects: [devices_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: devices_on_conflict
+  ): devices_mutation_response
+
+  """
+  insert a single row into the table: "devices"
+  """
+  insert_devices_one(
+    """the row to be inserted"""
+    object: devices_insert_input!
+
+    """upsert condition"""
+    on_conflict: devices_on_conflict
+  ): devices
 
   """
   insert data into the table: "policies"
@@ -842,6 +942,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: rules_on_conflict
   ): rules
+
+  """
+  insert data into the table: "user_org_groups"
+  """
+  insert_user_org_groups(
+    """the rows to be inserted"""
+    objects: [user_org_groups_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: user_org_groups_on_conflict
+  ): user_org_groups_mutation_response
+
+  """
+  insert a single row into the table: "user_org_groups"
+  """
+  insert_user_org_groups_one(
+    """the row to be inserted"""
+    object: user_org_groups_insert_input!
+
+    """upsert condition"""
+    on_conflict: user_org_groups_on_conflict
+  ): user_org_groups
 
   """
   update data of the table: "devices"
@@ -966,6 +1088,34 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [rules_updates!]!
   ): [rules_mutation_response]
+
+  """
+  update data of the table: "user_org_groups"
+  """
+  update_user_org_groups(
+    """sets the columns of the filtered rows to the given values"""
+    _set: user_org_groups_set_input
+
+    """filter the rows which have to be updated"""
+    where: user_org_groups_bool_exp!
+  ): user_org_groups_mutation_response
+
+  """
+  update single row of the table: "user_org_groups"
+  """
+  update_user_org_groups_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: user_org_groups_set_input
+    pk_columns: user_org_groups_pk_columns_input!
+  ): user_org_groups
+
+  """
+  update multiples rows of table: "user_org_groups"
+  """
+  update_user_org_groups_many(
+    """updates to execute, in order"""
+    updates: [user_org_groups_updates!]!
+  ): [user_org_groups_mutation_response]
 }
 
 """column ordering options"""
@@ -989,7 +1139,7 @@ enum order_by {
   desc_nulls_last
 }
 
-"""organizations are enums"""
+"""organization enums"""
 type organization {
   description: String!
   value: String!
@@ -1059,9 +1209,7 @@ input organization_stream_cursor_value_input {
   value: String
 }
 
-"""
-policies is a joint table to connect a Subject polymorphically  and a Rule
-"""
+"""Joint table associating subjects polymorphically with rules"""
 type policies {
   active: Boolean!
   createdAt: timestamptz!
@@ -1135,6 +1283,7 @@ input type for inserting data into table "policies"
 """
 input policies_insert_input {
   active: Boolean
+  organization: organization_enum
   rule: rules_obj_rel_insert_input
   ruleId: uuid
   subjectDisplayName: String
@@ -1318,7 +1467,6 @@ type pools {
   annotations: hstore
   createdAt: timestamptz!
   createdBy: String!
-  deletedAt: timestamptz
   description: String
   displayName: String!
   id: uuid!
@@ -1356,7 +1504,6 @@ input pools_bool_exp {
   annotations: hstore_comparison_exp
   createdAt: timestamptz_comparison_exp
   createdBy: String_comparison_exp
-  deletedAt: timestamptz_comparison_exp
   description: String_comparison_exp
   displayName: String_comparison_exp
   id: uuid_comparison_exp
@@ -1389,6 +1536,7 @@ input pools_insert_input {
   annotations: hstore
   description: String
   displayName: String
+  organization: organization_enum
   pool_devices: device_pool_arr_rel_insert_input
   tags: [String!]
 }
@@ -1428,7 +1576,6 @@ input pools_order_by {
   annotations: order_by
   createdAt: order_by
   createdBy: order_by
-  deletedAt: order_by
   description: order_by
   displayName: order_by
   id: order_by
@@ -1456,9 +1603,6 @@ enum pools_select_column {
 
   """column name"""
   createdBy
-
-  """column name"""
-  deletedAt
 
   """column name"""
   description
@@ -1490,6 +1634,7 @@ input pools_set_input {
   deletedAt: timestamptz
   description: String
   displayName: String
+  organization: organization_enum
   tags: [String!]
 }
 
@@ -1509,7 +1654,6 @@ input pools_stream_cursor_value_input {
   annotations: hstore
   createdAt: timestamptz
   createdBy: String
-  deletedAt: timestamptz
   description: String
   displayName: String
   id: uuid
@@ -1534,6 +1678,9 @@ enum pools_update_column {
 
   """column name"""
   displayName
+
+  """column name"""
+  organization
 
   """column name"""
   tags
@@ -1693,6 +1840,26 @@ type query_root {
     """filter the rows returned"""
     where: action_bool_exp
   ): [action!]!
+
+  """
+  fetch aggregated fields from the table: "action"
+  """
+  action_aggregate(
+    """distinct select on columns"""
+    distinct_on: [action_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [action_order_by!]
+
+    """filter the rows returned"""
+    where: action_bool_exp
+  ): action_aggregate!
 
   """fetch data from the table: "action" using primary key columns"""
   action_by_pk(value: String!): action
@@ -1968,6 +2135,29 @@ type query_root {
 
   """fetch data from the table: "subject_type" using primary key columns"""
   subject_type_by_pk(value: String!): subject_type
+
+  """
+  fetch data from the table: "user_org_groups"
+  """
+  user_org_groups(
+    """distinct select on columns"""
+    distinct_on: [user_org_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_org_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_org_groups_bool_exp
+  ): [user_org_groups!]!
+
+  """fetch data from the table: "user_org_groups" using primary key columns"""
+  user_org_groups_by_pk(id: uuid!): user_org_groups
 }
 
 """5-tuple firewalls rules"""
@@ -2059,6 +2249,7 @@ input rules_insert_input {
   destinationPort: String
   direction: direction_enum
   displayName: String
+  organization: organization_enum
   protocol: protocol_enum
   shared: Boolean
   source: String
@@ -2209,6 +2400,7 @@ input rules_set_input {
   destinationPort: String
   direction: direction_enum
   displayName: String
+  organization: organization_enum
   protocol: protocol_enum
   shared: Boolean
   source: String
@@ -2286,6 +2478,9 @@ enum rules_update_column {
   displayName
 
   """column name"""
+  organization
+
+  """column name"""
   protocol
 
   """column name"""
@@ -2335,7 +2530,7 @@ input smallint_comparison_exp {
   _nin: [smallint!]
 }
 
-"""Subject Type"""
+"""subject enum"""
 type subject_type {
   description: String!
   value: String!
@@ -2434,6 +2629,26 @@ type subscription_root {
     """filter the rows returned"""
     where: action_bool_exp
   ): [action!]!
+
+  """
+  fetch aggregated fields from the table: "action"
+  """
+  action_aggregate(
+    """distinct select on columns"""
+    distinct_on: [action_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [action_order_by!]
+
+    """filter the rows returned"""
+    where: action_bool_exp
+  ): action_aggregate!
 
   """fetch data from the table: "action" using primary key columns"""
   action_by_pk(value: String!): action
@@ -2849,6 +3064,43 @@ type subscription_root {
     """filter the rows returned"""
     where: subject_type_bool_exp
   ): [subject_type!]!
+
+  """
+  fetch data from the table: "user_org_groups"
+  """
+  user_org_groups(
+    """distinct select on columns"""
+    distinct_on: [user_org_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_org_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_org_groups_bool_exp
+  ): [user_org_groups!]!
+
+  """fetch data from the table: "user_org_groups" using primary key columns"""
+  user_org_groups_by_pk(id: uuid!): user_org_groups
+
+  """
+  fetch data from the table in a streaming manner: "user_org_groups"
+  """
+  user_org_groups_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [user_org_groups_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: user_org_groups_bool_exp
+  ): [user_org_groups!]!
 }
 
 scalar timestamptz
@@ -2866,6 +3118,179 @@ input timestamptz_comparison_exp {
   _lte: timestamptz
   _neq: timestamptz
   _nin: [timestamptz!]
+}
+
+"""User, Org, Groups join table"""
+type user_org_groups {
+  createdAt: timestamptz!
+  createdBy: String!
+  groups: [String!]
+  id: uuid!
+  organization: organization_enum!
+  updatedAt: timestamptz!
+  updatedBy: String!
+  userId: uuid!
+}
+
+"""
+Boolean expression to filter rows from the table "user_org_groups". All fields are combined with a logical 'AND'.
+"""
+input user_org_groups_bool_exp {
+  _and: [user_org_groups_bool_exp!]
+  _not: user_org_groups_bool_exp
+  _or: [user_org_groups_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  createdBy: String_comparison_exp
+  groups: String_array_comparison_exp
+  id: uuid_comparison_exp
+  organization: organization_enum_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: String_comparison_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "user_org_groups"
+"""
+enum user_org_groups_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  user_org_groups_pkey
+
+  """
+  unique or primary key constraint on columns "user_id", "organization"
+  """
+  user_org_groups_user_id_organization_unique
+}
+
+"""
+input type for inserting data into table "user_org_groups"
+"""
+input user_org_groups_insert_input {
+  groups: [String!]
+  organization: organization_enum
+  userId: uuid
+}
+
+"""
+response of any mutation on the table "user_org_groups"
+"""
+type user_org_groups_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [user_org_groups!]!
+}
+
+"""
+on_conflict condition type for table "user_org_groups"
+"""
+input user_org_groups_on_conflict {
+  constraint: user_org_groups_constraint!
+  update_columns: [user_org_groups_update_column!]! = []
+  where: user_org_groups_bool_exp
+}
+
+"""Ordering options when selecting data from "user_org_groups"."""
+input user_org_groups_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  groups: order_by
+  id: order_by
+  organization: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: user_org_groups"""
+input user_org_groups_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "user_org_groups"
+"""
+enum user_org_groups_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  createdBy
+
+  """column name"""
+  groups
+
+  """column name"""
+  id
+
+  """column name"""
+  organization
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  updatedBy
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "user_org_groups"
+"""
+input user_org_groups_set_input {
+  deletedAt: timestamptz
+  groups: [String!]
+  organization: organization_enum
+}
+
+"""
+Streaming cursor of the table "user_org_groups"
+"""
+input user_org_groups_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: user_org_groups_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input user_org_groups_stream_cursor_value_input {
+  createdAt: timestamptz
+  createdBy: String
+  groups: [String!]
+  id: uuid
+  organization: organization_enum
+  updatedAt: timestamptz
+  updatedBy: String
+  userId: uuid
+}
+
+"""
+update columns of table "user_org_groups"
+"""
+enum user_org_groups_update_column {
+  """column name"""
+  deletedAt
+
+  """column name"""
+  groups
+
+  """column name"""
+  organization
+}
+
+input user_org_groups_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: user_org_groups_set_input
+
+  """filter the rows which have to be updated"""
+  where: user_org_groups_bool_exp!
 }
 
 scalar uuid
