@@ -37,26 +37,43 @@ insert_permissions:
         _and:
           - device:
               organization:
-                _in: x-hasura-orgs
+                _in: x-hasura-allowed-orgs
           - pool:
               organization:
-                _in: x-hasura-orgs
+                _in: x-hasura-allowed-orgs
       set:
         created_by: x-hasura-user-id
         updated_by: x-hasura-user-id
       columns:
         - device_id
         - pool_id
+  - role: supervisor
+    permission:
+      check:
+        _and:
+          - device:
+              organization:
+                _eq: x-hasura-default-org
+          - pool:
+              organization:
+                _eq: x-hasura-default-org
+      set:
+        created_by: x-hasura-user-id
+        updated_by: x-hasura-user-id
+      columns:
+        - device_id
+        - pool_id
+    comment: ""
   - role: user
     permission:
       check:
         _and:
           - device:
               organization:
-                _in: x-hasura-orgs
+                _eq: x-hasura-default-org
           - pool:
               organization:
-                _in: x-hasura-orgs
+                _eq: x-hasura-default-org
           - pool:
               created_by:
                 _eq: x-hasura-user-id
@@ -84,10 +101,10 @@ select_permissions:
         _and:
           - device:
               organization:
-                _in: x-hasura-orgs
+                _in: x-hasura-allowed-orgs
           - pool:
               organization:
-                _in: x-hasura-orgs
+                _in: x-hasura-allowed-orgs
   - role: supervisor
     permission:
       columns:
@@ -102,10 +119,10 @@ select_permissions:
         _and:
           - device:
               organization:
-                _in: x-hasura-orgs
+                _eq: x-hasura-default-org
           - pool:
               organization:
-                _in: x-hasura-orgs
+                _eq: x-hasura-default-org
   - role: user
     permission:
       columns:
@@ -120,10 +137,10 @@ select_permissions:
         _and:
           - device:
               organization:
-                _in: x-hasura-orgs
+                _eq: x-hasura-default-org
           - pool:
               organization:
-                _in: x-hasura-orgs
+                _eq: x-hasura-default-org
           - pool:
               created_by:
                 _eq: x-hasura-user-id
@@ -137,20 +154,31 @@ delete_permissions:
         _and:
           - device:
               organization:
-                _in: x-hasura-orgs
+                _in: x-hasura-allowed-orgs
           - pool:
               organization:
-                _in: x-hasura-orgs
+                _in: x-hasura-allowed-orgs
+  - role: supervisor
+    permission:
+      filter:
+        _and:
+          - device:
+              organization:
+                _eq: x-hasura-default-org
+          - pool:
+              organization:
+                _eq: x-hasura-default-org
+    comment: ""
   - role: user
     permission:
       filter:
         _and:
           - device:
               organization:
-                _in: x-hasura-orgs
+                _eq: x-hasura-default-org
           - pool:
               organization:
-                _in: x-hasura-orgs
+                _eq: x-hasura-default-org
           - pool:
               created_by:
                 _eq: x-hasura-user-id

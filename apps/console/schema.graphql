@@ -144,10 +144,27 @@ input String_comparison_exp {
   _similar: String
 }
 
-"""action type"""
+"""action enum"""
 type action {
   description: String!
   value: String!
+}
+
+"""
+aggregated selection of "action"
+"""
+type action_aggregate {
+  aggregate: action_aggregate_fields
+  nodes: [action!]!
+}
+
+"""
+aggregate fields of "action"
+"""
+type action_aggregate_fields {
+  count(columns: [action_select_column!], distinct: Boolean): Int!
+  max: action_max_fields
+  min: action_min_fields
 }
 
 """
@@ -187,6 +204,18 @@ input action_enum_comparison_exp {
   _is_null: Boolean
   _neq: action_enum
   _nin: [action_enum!]
+}
+
+"""aggregate max on columns"""
+type action_max_fields {
+  description: String
+  value: String
+}
+
+"""aggregate min on columns"""
+type action_min_fields {
+  description: String
+  value: String
 }
 
 """Ordering options when selecting data from "action"."""
@@ -425,7 +454,7 @@ enum device_pool_update_column {
   _PLACEHOLDER
 }
 
-"""devices metadata"""
+"""Devices Metadata"""
 type devices {
   annotations: hstore
   createdAt: timestamptz!
@@ -611,7 +640,7 @@ input devices_updates {
   where: devices_bool_exp!
 }
 
-"""direction type"""
+"""direction enum"""
 type direction {
   description: String!
   value: String!
@@ -989,7 +1018,7 @@ enum order_by {
   desc_nulls_last
 }
 
-"""organizations are enums"""
+"""organization enums"""
 type organization {
   description: String!
   value: String!
@@ -1059,9 +1088,7 @@ input organization_stream_cursor_value_input {
   value: String
 }
 
-"""
-policies is a joint table to connect a Subject polymorphically  and a Rule
-"""
+"""Joint table associating subjects polymorphically with rules"""
 type policies {
   active: Boolean!
   createdAt: timestamptz!
@@ -1693,6 +1720,26 @@ type query_root {
     """filter the rows returned"""
     where: action_bool_exp
   ): [action!]!
+
+  """
+  fetch aggregated fields from the table: "action"
+  """
+  action_aggregate(
+    """distinct select on columns"""
+    distinct_on: [action_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [action_order_by!]
+
+    """filter the rows returned"""
+    where: action_bool_exp
+  ): action_aggregate!
 
   """fetch data from the table: "action" using primary key columns"""
   action_by_pk(value: String!): action
@@ -2335,7 +2382,7 @@ input smallint_comparison_exp {
   _nin: [smallint!]
 }
 
-"""Subject Type"""
+"""subject enum"""
 type subject_type {
   description: String!
   value: String!
@@ -2434,6 +2481,26 @@ type subscription_root {
     """filter the rows returned"""
     where: action_bool_exp
   ): [action!]!
+
+  """
+  fetch aggregated fields from the table: "action"
+  """
+  action_aggregate(
+    """distinct select on columns"""
+    distinct_on: [action_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [action_order_by!]
+
+    """filter the rows returned"""
+    where: action_bool_exp
+  ): action_aggregate!
 
   """fetch data from the table: "action" using primary key columns"""
   action_by_pk(value: String!): action

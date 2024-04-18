@@ -51,11 +51,10 @@ insert_permissions:
       check: {}
       set:
         created_by: x-hasura-user-id
-        organization: x-hasura-default-org
         updated_by: x-hasura-user-id
       columns:
         - active
-        - created_by
+        - organization
         - rule_id
         - subject_display_name
         - subject_id
@@ -64,6 +63,24 @@ insert_permissions:
         - valid_from
         - valid_to
         - weight
+  - role: supervisor
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        organization: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - active
+        - rule_id
+        - subject_display_name
+        - subject_id
+        - subject_secondary_id
+        - subject_type
+        - valid_from
+        - valid_to
+        - weight
+    comment: ""
   - role: user
     permission:
       check: {}
@@ -105,29 +122,31 @@ select_permissions:
           - deleted_at:
               _is_null: true
           - organization:
-              _in: x-hasura-orgs
+              _in: x-hasura-allowed-orgs
   - role: supervisor
     permission:
       columns:
+        - active
+        - created_at
+        - created_by
         - id
-        - valid_from
-        - valid_to
-        - weight
+        - organization
+        - rule_id
+        - subject_display_name
         - subject_id
         - subject_secondary_id
         - subject_type
-        - rule_id
         - updated_at
+        - updated_by
+        - valid_from
+        - valid_to
+        - weight
       filter:
         _and:
           - deleted_at:
               _is_null: true
-          - active:
-              _eq: true
           - organization:
-              _in: x-hasura-orgs
-          - valid_from:
-              _lte: now()
+              _eq: x-hasura-default-org
   - role: user
     permission:
       columns:
@@ -151,9 +170,9 @@ select_permissions:
           - deleted_at:
               _is_null: true
           - organization:
-              _in: x-hasura-orgs
+              _in: x-hasura-allowed-orgs
           - created_by:
-              _eq: x-hasura-user-email
+              _eq: x-hasura-user-id
 update_permissions:
   - role: manager
     permission:
@@ -168,10 +187,28 @@ update_permissions:
           - deleted_at:
               _is_null: true
           - organization:
-              _in: x-hasura-orgs
+              _in: x-hasura-allowed-orgs
       check: null
       set:
         updated_by: x-hasura-user-id
+  - role: supervisor
+    permission:
+      columns:
+        - active
+        - deleted_at
+        - valid_from
+        - valid_to
+        - weight
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _eq: x-hasura-default-org
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
   - role: user
     permission:
       columns:
@@ -185,7 +222,7 @@ update_permissions:
           - deleted_at:
               _is_null: true
           - organization:
-              _in: x-hasura-orgs
+              _in: x-hasura-allowed-orgs
           - created_by:
               _eq: x-hasura-user-id
       check: null

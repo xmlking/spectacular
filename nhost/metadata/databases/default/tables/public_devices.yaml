@@ -35,6 +35,20 @@ array_relationships:
           name: device_pool
           schema: public
 insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        updated_by: x-hasura-user-id
+      columns:
+        - annotations
+        - description
+        - display_name
+        - organization
+        - tags
+        - version
+    comment: ""
   - role: supervisor
     permission:
       check: {}
@@ -49,77 +63,86 @@ insert_permissions:
         - annotations
         - ip
         - version
+  - role: user
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        organization: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - annotations
+        - description
+        - display_name
+        - tags
+        - version
+    comment: ""
 select_permissions:
   - role: manager
     permission:
       columns:
-        - id
-        - created_at
-        - updated_at
-        - deleted_at
-        - created_by
-        - updated_by
-        - display_name
-        - description
-        - tags
         - annotations
+        - created_at
+        - created_by
+        - description
+        - display_name
+        - id
         - ip
         - organization
+        - tags
+        - updated_at
+        - updated_by
         - version
       filter:
         _and:
-          - organization:
-              _in: x-hasura-orgs
           - deleted_at:
               _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
   - role: supervisor
     permission:
       columns:
-        - id
-        - created_at
-        - updated_at
-        - deleted_at
-        - created_by
-        - updated_by
-        - display_name
-        - description
-        - tags
         - annotations
+        - created_at
+        - created_by
+        - description
+        - display_name
+        - id
         - ip
         - organization
+        - tags
+        - updated_at
+        - updated_by
         - version
       filter:
         _and:
-          - organization:
-              _in: x-hasura-orgs
-          - created_by:
-              _eq: x-hasura-user-id
           - deleted_at:
               _is_null: true
+          - organization:
+              _eq: x-hasura-default-org
   - role: user
     permission:
       columns:
-        - id
-        - created_at
-        - updated_at
-        - deleted_at
-        - created_by
-        - updated_by
-        - display_name
-        - description
-        - tags
         - annotations
+        - created_at
+        - created_by
+        - description
+        - display_name
+        - id
         - ip
         - organization
+        - tags
+        - updated_at
+        - updated_by
         - version
       filter:
         _and:
-          - organization:
-              _in: x-hasura-orgs
-          - created_by:
-              _eq: x-hasura-user-id
           - deleted_at:
               _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+          - created_by:
+              _eq: x-hasura-user-id
 update_permissions:
   - role: manager
     permission:
@@ -127,24 +150,30 @@ update_permissions:
         - annotations
         - deleted_at
         - description
+        - organization
         - tags
       filter:
-        organization:
-          _in: x-hasura-orgs
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
       check: null
       set:
         updated_by: x-hasura-user-id
   - role: supervisor
     permission:
       columns:
-        - ip
-        - version
+        - annotations
+        - deleted_at
+        - description
+        - tags
       filter:
         _and:
+          - deleted_at:
+              _is_null: true
           - organization:
-              _in: x-hasura-orgs
-          - created_by:
-              _eq: x-hasura-user-id
+              _eq: x-hasura-default-org
       check: {}
       set:
         updated_by: x-hasura-user-id

@@ -41,13 +41,36 @@ insert_permissions:
       check: {}
       set:
         created_by: x-hasura-user-id
-        organization: x-hasura-default-org
         updated_by: x-hasura-user-id
       columns:
         - action
         - annotations
         - app_id
         - created_by
+        - description
+        - destination
+        - destination_port
+        - direction
+        - display_name
+        - organization
+        - protocol
+        - shared
+        - source
+        - source_port
+        - tags
+        - throttle_rate
+        - weight
+  - role: supervisor
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        organization: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - action
+        - annotations
+        - app_id
         - description
         - destination
         - destination_port
@@ -60,6 +83,7 @@ insert_permissions:
         - tags
         - throttle_rate
         - weight
+    comment: ""
   - role: user
     permission:
       check: {}
@@ -113,12 +137,15 @@ select_permissions:
           - deleted_at:
               _is_null: true
           - organization:
-              _in: x-hasura-orgs
+              _in: x-hasura-allowed-orgs
   - role: supervisor
     permission:
       columns:
         - action
+        - annotations
         - app_id
+        - created_at
+        - created_by
         - description
         - destination
         - destination_port
@@ -127,16 +154,20 @@ select_permissions:
         - id
         - organization
         - protocol
+        - shared
         - source
         - source_port
+        - tags
         - throttle_rate
+        - updated_at
+        - updated_by
         - weight
       filter:
         _and:
           - deleted_at:
               _is_null: true
           - organization:
-              _in: x-hasura-orgs
+              _eq: x-hasura-default-org
   - role: user
     permission:
       columns:
@@ -163,14 +194,43 @@ select_permissions:
         - weight
       filter:
         _and:
-          - organization:
-              _in: x-hasura-orgs
-          - created_by:
-              _eq: x-hasura-user-Id
           - deleted_at:
               _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+          - created_by:
+              _eq: x-hasura-user-id
 update_permissions:
   - role: manager
+    permission:
+      columns:
+        - action
+        - annotations
+        - app_id
+        - deleted_at
+        - description
+        - destination
+        - destination_port
+        - direction
+        - display_name
+        - organization
+        - protocol
+        - shared
+        - source
+        - source_port
+        - tags
+        - throttle_rate
+        - weight
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+      check: {}
+      set:
+        updated_by: x-hasura-user-id
+  - role: supervisor
     permission:
       columns:
         - action
@@ -194,10 +254,11 @@ update_permissions:
           - deleted_at:
               _is_null: true
           - organization:
-              _in: x-hasura-orgs
-      check: {}
+              _eq: x-hasura-default-org
+      check: null
       set:
         updated_by: x-hasura-user-id
+    comment: ""
   - role: user
     permission:
       columns:
@@ -219,12 +280,12 @@ update_permissions:
         - weight
       filter:
         _and:
-          - organization:
-              _in: x-hasura-orgs
-          - created_by:
-              _eq: x-hasura-user-Id
           - deleted_at:
               _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+          - created_by:
+              _eq: x-hasura-user-id
       check: {}
       set:
         updated_by: x-hasura-user-id

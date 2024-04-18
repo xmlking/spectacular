@@ -34,9 +34,19 @@ array_relationships:
 insert_permissions:
   - role: manager
     permission:
-      check:
-        organization:
-          _in: x-hasura-orgs
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        updated_by: x-hasura-user-id
+      columns:
+        - annotations
+        - description
+        - display_name
+        - organization
+        - tags
+  - role: supervisor
+    permission:
+      check: {}
       set:
         created_by: x-hasura-user-id
         organization: x-hasura-default-org
@@ -46,11 +56,10 @@ insert_permissions:
         - description
         - display_name
         - tags
+    comment: ""
   - role: user
     permission:
-      check:
-        organization:
-          _in: x-hasura-orgs
+      check: {}
       set:
         created_by: x-hasura-user-id
         organization: x-hasura-default-org
@@ -64,45 +73,63 @@ select_permissions:
   - role: manager
     permission:
       columns:
-        - tags
+        - annotations
+        - created_at
         - created_by
         - description
         - display_name
-        - organization
-        - updated_by
-        - created_at
-        - deleted_at
-        - updated_at
-        - annotations
         - id
+        - organization
+        - tags
+        - updated_at
+        - updated_by
       filter:
         _and:
           - deleted_at:
               _is_null: true
           - organization:
-              _in: x-hasura-orgs
+              _in: x-hasura-allowed-orgs
+  - role: supervisor
+    permission:
+      columns:
+        - annotations
+        - created_at
+        - created_by
+        - description
+        - display_name
+        - id
+        - organization
+        - tags
+        - updated_at
+        - updated_by
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _eq: x-hasura-default-org
+    comment: ""
   - role: user
     permission:
       columns:
-        - tags
+        - annotations
+        - created_at
         - created_by
         - description
         - display_name
-        - organization
-        - updated_by
-        - created_at
-        - deleted_at
-        - updated_at
-        - annotations
         - id
+        - organization
+        - tags
+        - updated_at
+        - updated_by
       filter:
         _and:
-          - created_by:
-              _eq: x-hasura-user-id
-          - organization:
-              _in: x-hasura-orgs
           - deleted_at:
               _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+          - created_by:
+              _eq: x-hasura-user-id
 update_permissions:
   - role: manager
     permission:
@@ -111,34 +138,51 @@ update_permissions:
         - deleted_at
         - description
         - display_name
+        - organization
         - tags
       filter:
-        organization:
-          _in: x-hasura-orgs
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
       check: null
       set:
-        organization: x-hasura-default-org
         updated_by: x-hasura-user-id
+  - role: supervisor
+    permission:
+      columns:
+        - annotations
+        - deleted_at
+        - description
+        - display_name
+        - tags
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _eq: x-hasura-default-org
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
   - role: user
     permission:
       columns:
         - annotations
         - deleted_at
         - description
+        - display_name
         - tags
       filter:
         _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
           - created_by:
               _eq: x-hasura-user-id
-          - organization:
-              _in: x-hasura-orgs
       check: null
       set:
-        organization: x-hasura-default-org
         updated_by: x-hasura-user-id
-delete_permissions:
-  - role: manager
-    permission:
-      filter:
-        organization:
-          _in: x-hasura-orgs

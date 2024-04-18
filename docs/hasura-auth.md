@@ -1,18 +1,20 @@
 # Hasura Auth
 
-We are using [hasure-auth](https://docs.nhost.io/guides/auth/overview) as **Identity Broker** which use *Identry Providers* (IDPs) such as *Google*, *AzureAD*, *GitHub* etc for login/SSO and issue *Hasura* friendly JWT *accessToken*, *refreshToken* and optionally *Personal Access Tokens* (PAT) to use as `bearer` token with backend services. 
+We are using [hasure-auth](https://docs.nhost.io/guides/auth/overview) as **Identity Broker** which use _Identry Providers_ (IDPs) such as _Google_, _AzureAD_, _GitHub_ etc for login/SSO and issue _Hasura_ friendly JWT _accessToken_, _refreshToken_ and optionally _Personal Access Tokens_ (PAT) to use as `bearer` token with backend services.
 
 ![Auth Flow](./images/hasura-auth.png)
 
 ## Authentication (AuthN)
 
 ### Human Accounts
+
 Users login from WebApp form with `username/password` or Social Login (e.g., Google, AzureAD, GitHub etc), then `hasura-auth` issue JWT Session token.  
-JWT token issued during `SignIn` step is used as `Session` token to access backend services during user session. JWT `Session` tokens has short lifetime. 
+JWT token issued during `SignIn` step is used as `Session` token to access backend services during user session. JWT `Session` tokens has short lifetime.
 
 ### Service Accounts
-We create Service Account (with role: device) when a new device is provisioned and generate PAT token.   
-**PAT** token (secret) issued during `SignUp` step is used as `API_KEY` to access backend services. *PATs* have longer lifetime.
+
+We create Service Account (with role: device) when a new device is provisioned and generate PAT token.  
+**PAT** token (secret) issued during `SignUp` step is used as `API_KEY` to access backend services. _PATs_ have longer lifetime.
 
 ## Authorization (AuthZ)
 
@@ -27,17 +29,17 @@ Recommended roles:
 - **Supervisors**: users who are mainly using the application to manage users and their access of their _organization_.
 - **Administrators**: this users are able to grant additional organizations or departments and elect supervisors.
 
-| Role       | Description                                                            | Allowed Activity                                                     |
-| ---------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| anonymous  | A user who is not logged-in                                            | Only read from some restricted tables/views  or public data                       |
-| user       | A user who is logged in                                                | Allow access to personally created data and any public data                              |
-| me       | A user who is logged in                                                | Allow access to personally created data                              |
+| Role       | Description                                                            | Allowed Activity                                                                   |
+| ---------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| anonymous  | A user who is not logged-in                                            | Only read from some restricted tables/views or public data                         |
+| user       | A user who is logged in                                                | Allow access to personally created data and any public data                        |
+| me         | A user who is logged in                                                | Allow access to personally created data                                            |
 | supervisor | A user that has access to other users' data with in their organization | Allow access to personally created data, their organization's data and public data |
-| manager    | A user that has access to any users' data across all organizations     | Allow access to all users' data and public data                                      |
+| manager    | A user that has access to any users' data across all organizations     | Allow access to all users' data and public data                                    |
 
 See [this section](https://hasura.io/docs/latest/auth/authorization/permissions/) on how to configure permissions.
 
-> Note: Roles are meant for internal business logic and therefore need to be defined per application. User's `Groups` provided by tenant or IDP can be used to derive `Roles` for User. 
+> Note: Roles are meant for internal business logic and therefore need to be defined per application. User's `Groups` provided by tenant or IDP can be used to derive `Roles` for User.
 
 By default, users have two allowed roles:
 
@@ -90,9 +92,23 @@ await nhost.graphql.request(
 );
 ```
 
+### Permissions
+
+| Role       | Action | Permissions                                                                                                                             |
+| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| user       | select | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
+| manage     | select | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}}]}                                           |
+| superwiser | select | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                            |
+| user       | update | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
+| manage     | update | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}}]}                                           |
+| superwiser | update | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                            |
+
+> `delete` action is desable for most cases, as we do `soft-delete`
+
 ## Organizations
+
 Generally a user belongs to and is managed by one organization, however the user can receive authorizations from multiple other organizations (delegated authorizations).
-Anyways, a user should be able to use the same identity to switch between organizations. 
+Anyways, a user should be able to use the same identity to switch between organizations.
 
 When use `SignUp`, the system will assgin **default** `Organization` in metadata field in `Users` table. Same way allowed `Roles` also be assigned during `SignUp`.  
 Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Administrators` after user account is created. This data is stored in `public.user_org` table.

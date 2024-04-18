@@ -23,3 +23,104 @@ configuration:
     updated_by: updatedBy
     user_id: userId
   custom_root_fields: {}
+insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        updated_by: x-hasura-user-id
+      columns:
+        - groups
+        - organization
+        - user_id
+    comment: ""
+select_permissions:
+  - role: manager
+    permission:
+      columns:
+        - created_at
+        - created_by
+        - groups
+        - id
+        - organization
+        - updated_at
+        - updated_by
+        - user_id
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - created_at
+        - created_by
+        - groups
+        - id
+        - organization
+        - updated_at
+        - updated_by
+        - user_id
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _eq: x-hasura-default-org
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - created_by
+        - groups
+        - id
+        - organization
+        - updated_at
+        - updated_by
+        - user_id
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+          - user_id:
+              _eq: x-hasura-user-id
+    comment: ""
+update_permissions:
+  - role: manager
+    permission:
+      columns:
+        - deleted_at
+        - groups
+        - organization
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - deleted_at
+        - groups
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _eq: x-hasura-default-org
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
