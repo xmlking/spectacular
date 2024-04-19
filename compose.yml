@@ -175,6 +175,7 @@ services:
     hostname: auth
     container_name: auth
     restart: unless-stopped
+    # user: 1000:1000
     volumes:
       - ./nhost/emails:/app/email-templates
     environment:
@@ -311,6 +312,7 @@ services:
     hostname: storage
     container_name: storage
     restart: unless-stopped
+    # user: 1000:1000
     profiles: [all]
     command:
       - serve
