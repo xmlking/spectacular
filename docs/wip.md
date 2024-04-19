@@ -5,6 +5,7 @@ git clean -dfx -e TODO  -e .env.local  -e .env -e .env.prod -e .env.test -e .sec
 pnpm up --latest -r
 # convert docker-compose file to helm
 mkdir -p infra/helm
+export COMPOSE_PROFILES=all
 export COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets
 docker compose config | kompose convert -c -f - -o ./infra/helm --volumes hostPath --profile all
 # to run compose file in k8 directly
