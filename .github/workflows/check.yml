@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
 
       - name: Conventional commits check
-        uses: cocogitto/cocogitto-action@v3.6
+        uses: cocogitto/cocogitto-action@v3.7
         with:
           check-latest-tag-only: true
   #   linter:
