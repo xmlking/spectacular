@@ -47,7 +47,7 @@ maxDepthQueries = 4
 version = 18
 
 [auth]
-version = '0.29.1'
+version = '0.29.2'
 
 [auth.resources]
 replicas = 1
@@ -186,7 +186,7 @@ enabled = true
 issuer = 'Spectacular'
 
 [postgres]
-version = '14.6-20240412-1'
+version = '14.6-20240422-1'
 
 [postgres.resources]
 replicas = 1
@@ -222,13 +222,13 @@ cpu = 250
 memory = 256
 
 [ai]
-version = '0.5.1'
+version = '0.5.2'
 webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
 
 [ai.resources]
 [ai.resources.compute]
-cpu = 125
-memory = 256
+cpu = 187
+memory = 384
 
 [ai.openai]
 organization = 'my-org'
