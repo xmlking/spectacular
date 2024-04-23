@@ -116,7 +116,8 @@ Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Adminis
 ### Deligation
 
 **Deligation** is the process where higher role users can assign elevated roles (superwiser, manager) to other users via custom UI with in his/her default `Organization` or diffrent `Organization` with in multi-tenant deployment.
-**Assumptions:** there will be `public.user_roles_orgs` table that manage user-role assignment for a give `Organization` 
+
+> **Assumptions:** there will be `public.user_roles_orgs` table that manage `user-role` assignment for a give `Organization` 
 
 ## Reference
 

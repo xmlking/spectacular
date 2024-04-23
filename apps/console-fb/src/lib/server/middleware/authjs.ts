@@ -118,8 +118,8 @@ export const authHookConfig: SvelteKitAuthConfig = {
 				token['https://hasura.io/jwt/claims'] = {
 					'x-hasura-allowed-roles': token.roles,
 					'x-hasura-default-role': 'user',
+					'x-hasura-allowed-orgs': `{${token.org}}`,
 					'x-hasura-default-org': token.org,
-					'x-hasura-orgs': `{${token.org}}`,
 					'x-hasura-user-id': token.email
 				};
 

@@ -31,13 +31,13 @@ query IntrospectionQuery {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 query ListRules($limit: Int = 50, $offset: Int = 0, $order_by: [rules_order_by!] = [{updatedAt: desc_nulls_last}]) {
   rules(limit: $limit, offset: $offset, order_by: $order_by) {
@@ -75,13 +75,13 @@ query ListRules($limit: Int = 50, $offset: Int = 0, $order_by: [rules_order_by!]
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 query SearchSharedRules($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [rules_order_by!] = [{updatedAt: desc_nulls_last}]) {
   rules(order_by: $orderBy, limit: $limit, offset: $offset, where: {displayName: {_like: $filter}, shared: {_eq: true}}) {
@@ -124,13 +124,14 @@ query SearchSharedRules($filter: String!, $limit: Int = 50, $offset: Int = 0, $o
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+
 
 query GetRule($id: uuid!) {
   rules_by_pk(id: $id) {
@@ -169,13 +170,14 @@ query GetRule($id: uuid!) {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+
 
 mutation CreateRule($data: rules_insert_input!) {
   insert_rules_one(object: $data) {
@@ -234,13 +236,14 @@ mutation CreateRule($data: rules_insert_input!) {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+
 
 mutation UpdateRule($id: uuid!, $data: rules_set_input!) {
   update_rules_by_pk(pk_columns: {id: $id}, _set: $data) {
@@ -283,13 +286,13 @@ mutation UpdateRule($id: uuid!, $data: rules_set_input!) {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 mutation DeleteRule($id: uuid!, $deletedAt: timestamptz!) {
 	update_rules_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {

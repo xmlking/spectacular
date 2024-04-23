@@ -31,13 +31,13 @@ query IntrospectionQuery {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 query ListPools($limit: Int = 50, $offset: Int = 0, $order_by: [pools_order_by!] = [{updatedAt: desc_nulls_last}]) {
   pools(limit: $limit, offset: $offset, order_by: $order_by) {
@@ -65,13 +65,13 @@ query ListPools($limit: Int = 50, $offset: Int = 0, $order_by: [pools_order_by!]
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 query SearchPools($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [pools_order_by!] = [{updatedAt: desc_nulls_last}]) {
   pools(order_by: $orderBy, limit: $limit, offset: $offset, where: {displayName: {_like: $filter}}) {
@@ -103,13 +103,13 @@ query SearchPools($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 query GetPool($id: uuid!) {
   pools_by_pk(id: $id) {
@@ -138,13 +138,13 @@ query GetPool($id: uuid!) {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 mutation CreatePool($data: pools_insert_input!) {
   insert_pools_one(object: $data) {
@@ -175,13 +175,13 @@ mutation CreatePool($data: pools_insert_input!) {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 mutation UpdatePool($id: uuid!, $data: pools_set_input!) {
   update_pools_by_pk(pk_columns: {id: $id}, _set: $data) {
@@ -209,13 +209,13 @@ mutation UpdatePool($id: uuid!, $data: pools_set_input!) {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles:  user manager
+x-hasura-allowed-roles: user manager
+x-hasura-default-role: manager
 x-hasura-role: manager
+x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
-x-hasura-orgs: {chinthagunta}
-x-hasura-user-id: xmlking@gmail.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
 mutation DeletePool($id: uuid!, $deletedAt: timestamptz!) {
 	update_pools_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
