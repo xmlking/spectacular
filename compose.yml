@@ -94,7 +94,7 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=allow
       # HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=allow
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
       HASURA_GRAPHQL_LOG_LEVEL: warn
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup
@@ -130,18 +130,18 @@ services:
       traefik.http.routers.hasura.tls: "true"
       traefik.http.services.hasura.loadbalancer.server.port: "8080"
   ###########################################################################
-  # mailpit
+  # mailpit - but named as mailhog
   ###########################################################################
   mailpit:
     image: axllent/mailpit:v1.16.0
-    hostname: mailpit
-    container_name: mailpit
+    hostname: mailhog
+    container_name: mailhog
     restart: unless-stopped
     profiles: [all]
     environment:
       MP_SMTP_AUTH: 'user:password'
       # MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 'true'
       TZ: ${CONTAINER_TIMEZONE:-America/Los_Angeles}
     expose:
       - 1025 # MP_SMTP_BIND_ADDR
@@ -160,15 +160,16 @@ services:
         condition: service_healthy
     labels:
       traefik.enable: "true"
-      traefik.http.routers.mailpit.entrypoints: websecure
-      traefik.http.routers.mailpit.rule: Host(`mailpit${BASE_HOSTNAME}`)
-      traefik.http.routers.mailpit.service: mailpit
-      traefik.http.routers.mailpit.tls: "true"
-      traefik.http.services.mailpit.loadbalancer.server.port: "8025"
+      traefik.http.routers.mailhog.entrypoints: websecure
+      traefik.http.routers.mailhog.rule: Host(`mailpit${BASE_HOSTNAME}`)
+      traefik.http.routers.mailhog.service: mailpit
+      traefik.http.routers.mailhog.tls: "true"
+      traefik.http.services.mailhog.loadbalancer.server.port: "8025"
   ###########################################################################
   # hasura auth
   # Environment Variables:
   # https://github.com/nhost/hasura-auth/blob/main/docs/environment-variables.md
+  # If SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
     image: nhost/hasura-auth:0.29.2
@@ -221,7 +222,7 @@ services:
       AUTH_REQUIRE_ELEVATED_CLAIM: required
       AUTH_SERVER_URL: https://auth${BASE_HOSTNAME}/v1
       AUTH_SMTP_AUTH_METHOD: ${AUTH_SMTP_AUTH_METHOD:-PLAIN}
-      AUTH_SMTP_HOST: ${AUTH_SMTP_HOST:-mailpit}
+      AUTH_SMTP_HOST: ${AUTH_SMTP_HOST:-mailhog}
       AUTH_SMTP_PORT: ${AUTH_SMTP_PORT:-1025}
       AUTH_SMTP_USER: ${AUTH_SMTP_USER:-user}
       AUTH_SMTP_PASS: ${AUTH_SMTP_PASS:-password}
@@ -234,7 +235,7 @@ services:
       AUTH_WEBAUTHN_RP_ID: ${APP_NAME}
       AUTH_WEBAUTHN_RP_NAME: ${APP_DESCRIPTION}
       AUTH_WEBAUTHN_RP_ORIGINS: ${AUTH_CLIENT_URL:-https://console${BASE_HOSTNAME}:5173,https://console.traefik.me}
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       HASURA_GRAPHQL_GRAPHQL_URL: http://graphql:8080/v1/graphql
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
@@ -323,7 +324,7 @@ services:
       DEBUG: "true"
       # CLAMAV_SERVER: tcp://run-clamav:3310
       HASURA_ENDPOINT: http://graphql:8080/v1
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
       HASURA_METADATA: "1"
       POSTGRES_MIGRATIONS: "1"
       POSTGRES_MIGRATIONS_SOURCE: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=disable
@@ -369,7 +370,7 @@ services:
     profiles: [all]
     environment:
       NEXT_PUBLIC_ENV: dev
-      NEXT_PUBLIC_NHOST_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
+      NEXT_PUBLIC_NHOST_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
       NEXT_PUBLIC_NHOST_AUTH_URL: https://auth${BASE_HOSTNAME}/v1
       NEXT_PUBLIC_NHOST_CONFIGSERVER_URL: https://dashboard${BASE_HOSTNAME}/v1/configserver/graphql
       NEXT_PUBLIC_NHOST_FUNCTIONS_URL: https://functions${BASE_HOSTNAME}/v1
@@ -450,7 +451,7 @@ services:
     environment:
       GRAPHITE_BASE_URL: http://ai:8090
       GRAPHITE_WEBHOOK_SECRET: ${GRAPHITE_WEBHOOK_SECRET}
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-nhost-admin-secret}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
       LICENSE: ""
       NHOST_GRAPHQL_URL: http://graphql:8080/v1/graphql
       OPENAI_API_KEY: ${OPENAI_API_KEY}
