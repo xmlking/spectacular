@@ -132,7 +132,7 @@ services:
   ###########################################################################
   # mailpit - but named as mailhog
   ###########################################################################
-  mailpit:
+  mailhog:
     image: axllent/mailpit:v1.16.0
     hostname: mailhog
     container_name: mailhog
@@ -147,7 +147,7 @@ services:
       - 1025 # MP_SMTP_BIND_ADDR
       - 8025 # MP_UI_BIND_ADDR
     volumes:
-      - mailpit:/data
+      - mailhog:/data
     healthcheck:
       test: ["CMD", "wget", "--spider", "-S", "http://localhost:8025/livez"] # for k8 /readyz
       interval: 60s
@@ -161,8 +161,8 @@ services:
     labels:
       traefik.enable: "true"
       traefik.http.routers.mailhog.entrypoints: websecure
-      traefik.http.routers.mailhog.rule: Host(`mailpit${BASE_HOSTNAME}`)
-      traefik.http.routers.mailhog.service: mailpit
+      traefik.http.routers.mailhog.rule: Host(`mailhog${BASE_HOSTNAME}`)
+      traefik.http.routers.mailhog.service: mailhog
       traefik.http.routers.mailhog.tls: "true"
       traefik.http.services.mailhog.loadbalancer.server.port: "8025"
   ###########################################################################
@@ -256,7 +256,7 @@ services:
     depends_on:
       traefik:
         condition: service_healthy
-      # mailpit:
+      # mailhog:
       #   condition: service_healthy
       postgres:
         condition: service_healthy
@@ -580,5 +580,5 @@ services:
 volumes:
   certs: {}
   pg_data: {}
-  mailpit: {}
+  mailhog: {}
   minio: {}

@@ -101,7 +101,7 @@ crane export ghcr.io/xmlking/spectacular/console:v0.1.3 - | tar -tvf - | grep -v
 | Auth      | https://auth.traefik.me/healthz                   |
 | Storage   | https://storage.traefik.me/healthz                |
 | Minio     | https://minio.traefik.me                          |
-| Mailpit   | https://mailhog.traefik.me                        |
+| Mailhog   | https://mailhog.traefik.me                        |
 | Dashboard | https://dashboard.traefik.me                      |
 | Tailcall  | https://gateway.traefik.me                        |
 
