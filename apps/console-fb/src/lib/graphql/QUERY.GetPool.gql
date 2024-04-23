@@ -3,7 +3,6 @@ query GetPool($id: uuid!) @cache(policy: NetworkOnly) {
 		annotations
 		createdAt
 		createdBy
-		deletedAt
 		description
 		displayName
 		id
