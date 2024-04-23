@@ -113,6 +113,11 @@ Anyways, a user should be able to use the same identity to switch between organi
 When use `SignUp`, the system will assgin **default** `Organization` in metadata field in `Users` table. Same way allowed `Roles` also be assigned during `SignUp`.  
 Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Administrators` after user account is created. This data is stored in `public.user_org` table.
 
+### Deligation
+
+**Deligation** is the process where higher role users can assign elevated roles (superwiser, manager) to other users via custom UI with in his/her default `Organization` or diffrent `Organization` with in multi-tenant deployment.
+**Assumptions:** there will be `public.user_roles_orgs` table that manage user-role assignment for a give `Organization` 
+
 ## Reference
 
 - [Authentication and authorization in multi-tenancy B2B scenarios](https://zitadel.com/docs/guides/solution-scenarios/b2b)
