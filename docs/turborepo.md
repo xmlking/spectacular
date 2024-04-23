@@ -70,7 +70,7 @@ npx turbo link
 ### Environment Variables
 
 > Turbo is working on [first-class solution](https://turbo.build/repo/docs/handbook/dev#using-environment-variables) to load **dotEnv** files.  
-> Meanwhile we recommend using a library called [dotenv-run](https://github.com/chihab/dotenv-run) to solve this problem.
+> Meanwhile we recommend using a library called [dotenv-run](https://dotenv.run/) to solve this problem.
 
 ~~turbo automatically include environment variables from `.env` , `.secrets` as we set them at `globalDotEnv` in `turbo.json`~~
 
