@@ -20,7 +20,7 @@ jobs:
 
       - name: SemVer release
         id: release
-        uses: cocogitto/cocogitto-action@v3.6
+        uses: cocogitto/cocogitto-action@v3.7
         with:
           check-latest-tag-only: true
           release: true
