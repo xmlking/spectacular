@@ -10,7 +10,7 @@ login to GHCR first.
 
 ```shell
 export GITHUB_PACKAGES_TOKEN=<ghp_XXX>
-echo $GITHUB_PACKAGES_TOKEN | docker login ghcr.io -u xmlking --password-stdin
+echo $GITHUB_PACKAGES_TOKEN | docker login ghcr.io -u <username> --password-stdin
 ```
 
 (Optional) Prefetch and cache base images to speedup docker builds
@@ -112,6 +112,32 @@ COSIGN_EXPERIMENTAL=1 cosign verify $DOCKER_IMAGE:$VERSION
 ### GitHub Action
 Build environment variables are needed during docker build in `GitHub Action`  
 **TODO:** pass `GitHub Sectets` as described in `Reference` and [example 1](https://github.com/SSHOC/gl-autodevops-minimal-port/blob/main/.github/workflows/build-herokuish-and-push-to-registry.yaml#L95)
+
+## Run
+
+### Local
+
+To run hasura stack locally
+
+```shell
+make teardown
+make boot
+make up
+```
+
+### Prod
+
+To run hasura stack locally with prod config
+
+```shell
+export COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets,.env.prod,.secrets.prod
+docker compose -f compose-nonprod.yml up traefik
+docker compose -f compose-nonprod.yml up graphql
+docker compose -f compose-nonprod.yml up auth
+docker compose -f compose-nonprod.yml up storage
+# to ssh to container
+docker debug storage
+```
 
 ## Reference
 - [Sharing environment variables using Github Action secrets](https://andrei-calazans.com/posts/2021-06-23-passing-secrets-github-actions-docker/)

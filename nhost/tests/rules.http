@@ -132,7 +132,6 @@ x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
-
 query GetRule($id: uuid!) {
   rules_by_pk(id: $id) {
     action
@@ -177,7 +176,6 @@ x-hasura-role: manager
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
-
 
 mutation CreateRule($data: rules_insert_input!) {
   insert_rules_one(object: $data) {
@@ -243,7 +241,6 @@ x-hasura-role: manager
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
-
 
 mutation UpdateRule($id: uuid!, $data: rules_set_input!) {
   update_rules_by_pk(pk_columns: {id: $id}, _set: $data) {

@@ -31,6 +31,7 @@ query IntrospectionQuery {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
+Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user manager
 x-hasura-default-role: manager

@@ -107,7 +107,7 @@ Guidelines for configuring `turbo.json`
 
 ## Usage
 
-> You can use `--dry-run` flag with any **turbo** commands, to preview what tasks will execute without really running them. 
+> You can use `--dry-run` flag with any **turbo** commands, to preview what tasks will execute without really running them.
 
 ### Run
 

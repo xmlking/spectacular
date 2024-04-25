@@ -176,7 +176,7 @@ services:
     hostname: auth
     container_name: auth
     restart: unless-stopped
-    # user: 1000:1000
+    user: 1000:1000
     volumes:
       - ./nhost/emails:/app/email-templates
     environment:
@@ -313,13 +313,16 @@ services:
     hostname: storage
     container_name: storage
     restart: unless-stopped
-    # user: 1000:1000
+    user: 1000:1000
+    volumes:
+      - .nhost/data/main/govips:/govips
     profiles: [all]
     command:
       - serve
     expose:
       - 5000
     environment:
+      TMPDIR: /govips
       BIND: :5000
       DEBUG: "true"
       # CLAMAV_SERVER: tcp://run-clamav:3310
@@ -344,13 +347,13 @@ services:
         condition: service_healthy
       graphql:
         condition: service_healthy
-    # healthcheck:
-    #   test: curl --fail -s http://localhost:5000/healthz || exit 1
-    #   interval: 60s
-    #   start_period: 1m
-    #   start_interval: 10s
-    #   timeout: 15s
-    #   retries: 5
+#    healthcheck:
+#      test: curl --fail -s http://localhost:5000/healthz || exit 1
+#      interval: 60s
+#      start_period: 1m
+#      start_interval: 10s
+#      timeout: 15s
+#      retries: 5
     <<: *extra_hosts
     labels:
       traefik.enable: "true"

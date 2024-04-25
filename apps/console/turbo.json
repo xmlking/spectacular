@@ -19,6 +19,12 @@
 			"persistent": true,
 			"dotEnv": [".env", ".secrets"]
 		},
+		"dev:prod": {
+			"dependsOn": ["sync"],
+			"cache": false,
+			"persistent": true,
+			"dotEnv": [".env", ".env.prod", ".secrets", ".secrets.prod"]
+		},
 		"generate": {
 			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
 		},
