@@ -84,7 +84,7 @@ services:
   # hasura service
   ###########################################################################
   graphql:
-    image: hasura/graphql-engine:v2.38.1
+    image: hasura/graphql-engine:v2.38.1-ce
     hostname: graphql
     container_name: graphql
     restart: unless-stopped
@@ -137,7 +137,6 @@ services:
     hostname: mailhog
     container_name: mailhog
     restart: unless-stopped
-    profiles: [all]
     environment:
       MP_SMTP_AUTH: 'user:password'
       # MP_SMTP_AUTH_ACCEPT_ANY: 1
@@ -278,7 +277,6 @@ services:
     hostname: minio
     container_name: minio
     restart: unless-stopped
-    profiles: [all]
     volumes:
      - minio:/bitnami/minio/data
     environment:
@@ -316,7 +314,6 @@ services:
     user: 1000:1000
     volumes:
       - .nhost/data/main/govips:/govips
-    profiles: [all]
     command:
       - serve
     expose:
@@ -366,7 +363,7 @@ services:
   # dashboard
   ###########################################################################
   dashboard:
-    image: nhost/dashboard:1.13.3
+    image: nhost/dashboard:1.14.0
     hostname: dashboard
     container_name: dashboard
     restart: unless-stopped
@@ -403,7 +400,7 @@ services:
   # configserver
   ###########################################################################
   configserver:
-    image: nhost/cli:v1.16.3
+    image: nhost/cli:v1.16.4
     hostname: configserver
     container_name: configserver
     restart: unless-stopped
@@ -436,58 +433,6 @@ services:
       traefik.http.routers.configserver.service: configserver
       traefik.http.routers.configserver.tls: "true"
       traefik.http.services.configserver.loadbalancer.server.port: "8088"
-  ###########################################################################
-  # graphite - nhost AI
-  # NOTE: graphite need postgres with `http` and `pgvector` extentions
-  # Ref: https://github.com/pramsey/pgsql-http
-  ###########################################################################
-  ai:
-    image: nhost/graphite:0.5.2
-    hostname: ai
-    container_name: ai
-    restart: unless-stopped
-    profiles: [optional]
-    command:
-      - serve
-    expose:
-      - 8090
-    environment:
-      GRAPHITE_BASE_URL: http://ai:8090
-      GRAPHITE_WEBHOOK_SECRET: ${GRAPHITE_WEBHOOK_SECRET}
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
-      LICENSE: ""
-      NHOST_GRAPHQL_URL: http://graphql:8080/v1/graphql
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
-      OPENAI_ORG: ${APP_NAME}
-      POSTGRES_CONNECTION: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=disable
-      SYNCH_PERIOD: 10m
-    healthcheck:
-      test:
-        - CMD
-        - graphite
-        - healthcheck
-      interval: 60s
-      start_period: 1m
-      start_interval: 10s
-      timeout: 15s
-      retries: 5
-    <<: *extra_hosts
-    depends_on:
-      traefik:
-        condition: service_healthy
-      auth:
-        condition: service_healthy
-      graphql:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
-    labels:
-      traefik.enable: "true"
-      traefik.http.routers.ai.entrypoints: websecure
-      traefik.http.routers.ai.rule: Host(`ai${BASE_HOSTNAME}`)
-      traefik.http.routers.ai.service: ai
-      traefik.http.routers.ai.tls: "true"
-      traefik.http.services.ai.loadbalancer.server.port: "8090"
   ###########################################################################
   # tailcall gateway
   ###########################################################################

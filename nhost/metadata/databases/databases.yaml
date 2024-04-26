@@ -11,46 +11,5 @@
         max_connections: 50
         retries: 1
       use_prepared_statements: true
-  logical_models:
-    - fields:
-        - name: id
-          type:
-            nullable: true
-            scalar: uuid
-      name: device_policies
-      select_permissions:
-        - permission:
-            columns:
-              - id
-            filter: {}
-          role: user
-  native_queries:
-    - arguments:
-        device_id:
-          description: device UUID
-          nullable: false
-          type: uuid
-      code: |-
-        SELECT p.id
-        FROM public.policies p
-                 INNER JOIN
-             public.device_pool dp ON p.subject_id = dp.pool_id
-                 INNER JOIN
-             public.rules r on p.rule_id = r.id
-        WHERE dp.device_id = {{device_id}}
-          AND p.subject_type = 'device_pool'
-          AND p.active = true
-          AND p.deleted_at IS NULL
-        UNION ALL
-        SELECT p.id
-        FROM public.policies p
-                 INNER JOIN
-             public.rules r on r.id = p.rule_id
-        WHERE p.subject_id =  {{device_id}}
-          AND p.subject_type = 'device'
-          AND p.active = true
-          AND p.deleted_at IS NULL
-      returns: device_policies
-      root_field_name: device_policies
   tables: "!include default/tables/tables.yaml"
   functions: "!include default/functions/functions.yaml"

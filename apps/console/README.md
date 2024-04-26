@@ -36,8 +36,8 @@ docker compose logs -f
 ```sh
 # stat all services in background and show logs
 make up # for first time use `make boot` then `make up`
-# this will start all services with default profile + services with `optional` profile.
-make up PROFILES=optional
+# this will start all services with default profile + services with `all` profile.
+make up PROFILES=all
 # verify status/health of services
 make ps
 # shotdown all services
@@ -67,8 +67,8 @@ To also start optional services like `all` and/or `optional`, use `COMPOSE_PROFI
 # to start default profile services and benthos,postgres services
 COMPOSE_ENV_FILES=.env,.secrets COMPOSE_PROFILES=all,optional docker compose up
 # (or)
+make up PROFILES=all
 make up PROFILES=all,optional
-make up PROFILES=optional
 ```
 
 To verify resolved `compose` config, use `COMPOSE_PROFILES` or `make` task.
