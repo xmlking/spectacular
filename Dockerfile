@@ -2,7 +2,7 @@ ARG SCOPE=console
 ###################################################################
 # Stage 0: base image											                        #
 ###################################################################
-FROM node:21-slim AS base
+FROM node:22-slim AS base
 ENV GIT_SSL_NO_VERIFY 1
 RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
