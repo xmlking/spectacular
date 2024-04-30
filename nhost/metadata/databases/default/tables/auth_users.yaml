@@ -127,3 +127,82 @@ array_relationships:
         table:
           name: user_providers
           schema: auth
+select_permissions:
+  - role: manager
+    permission:
+      columns:
+        - active_mfa_type
+        - avatar_url
+        - created_at
+        - default_role
+        - disabled
+        - display_name
+        - email
+        - email_verified
+        - id
+        - is_anonymous
+        - last_seen
+        - locale
+        - metadata
+        - new_email
+        - otp_hash_expires_at
+        - otp_method_last_used
+        - phone_number
+        - phone_number_verified
+        - ticket
+        - ticket_expires_at
+        - updated_at
+        - webauthn_current_challenge
+      filter: {}
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - active_mfa_type
+        - avatar_url
+        - created_at
+        - default_role
+        - disabled
+        - display_name
+        - email
+        - email_verified
+        - id
+        - is_anonymous
+        - last_seen
+        - locale
+        - metadata
+        - new_email
+        - otp_hash_expires_at
+        - otp_method_last_used
+        - phone_number
+        - phone_number_verified
+        - ticket
+        - ticket_expires_at
+        - updated_at
+        - webauthn_current_challenge
+      filter: {}
+    comment: ""
+update_permissions:
+  - role: manager
+    permission:
+      columns:
+        - display_name
+      filter: {}
+      check: null
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - display_name
+      filter: {}
+      check: null
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - display_name
+      filter:
+        id:
+          _eq: x-hasura-user-id
+      check: null
+    comment: ""

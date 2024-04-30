@@ -178,7 +178,7 @@ async function login(nhost: NhostClient, redirectTo: string, lang: string, provi
 			locale: lang,
 			metadata: {
 				plan: 'free',
-				org: PUBLIC_DEFAULT_ORGANIZATION
+				default_org: PUBLIC_DEFAULT_ORGANIZATION
 			}
 		}
 	});

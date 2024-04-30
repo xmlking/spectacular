@@ -81,7 +81,7 @@ export const actions = {
 				locale: lang,
 				metadata: {
 					plan: 'free',
-					org: organization
+					default_org: organization
 				}
 			}
 		});

@@ -93,7 +93,7 @@ value = 'organizations[].organization'
 
 [[auth.session.accessToken.customClaims]]
 key = 'default-org'
-value = 'metadata.org'
+value = 'metadata.default_org'
 
 [[auth.session.accessToken.customClaims]]
 key = 'user-email'

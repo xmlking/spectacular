@@ -27,7 +27,7 @@ NOTE: You can pass `--endpoint <hasura-endpoint> --admin-secret <HASURA_GRAPHQL_
 ```shell
 # Create a directory to store migrations (with endpoint and admin secret configured):
 # use `''` to escape if `admin-secret` has special characters
-hasura init hasura --project infra --endpoint https://twirbianfvhmxhqfjtvi.hasura.us-east-1.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura init hasura --project infra --endpoint  https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # from localhost
 hasura init hasura --project infra --endpoint https://hasura.traefik.me
 # move infra/hasura/config.yaml to project root and edit metadata_directory, migrations_directory, seeds_directory paths in it
@@ -58,9 +58,9 @@ hasura seed apply --file 4_policies.sql --database-name default --endpoint https
 
 # To apply all the Migrations present in the `migrations/` directory and the Metadata present in the `metadata/` directory on a new, "fresh",
 # instance of the Hasura Server at http://another-server-instance.hasura.app:
-hasura deploy --endpoint https://twirbianfvhmxhqfjtvi.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura deploy --endpoint  https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # To apply only apply metadata
-hasura metadata apply --endpoint https://twirbianfvhmxhqfjtvi.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura metadata apply --endpoint  https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # NOTE:
 # if you get error: "permission denied to create extension \"hstore\"", Run `create extension hstore;` in hasura console
 # if you get error: "must be owner of extension hstore",  Run `alter role nhost_hasura with superuser;` in hasura console
@@ -76,6 +76,8 @@ hasura metadata apply
 hasura metadata reload
 # Take pg_dump of schema and hasura metadata from server while specifying the schemas to include
 hasura migrate create init --from-server --database-name default --schema public --project nhost --endpoint https://hasura.traefik.me --admin-secret=<HASURA_GRAPHQL_ADMIN_SECRET>
+hasura migrate create init --from-server --database-name default --schema auth --project nhost --endpoint https://hasura.traefik.me  --admin-secret=<HASURA_GRAPHQL_ADMIN_SECRET>
+hasura migrate create init --from-server --database-name default --schema storage --project nhost --endpoint https://hasura.traefik.me  --admin-secret=<HASURA_GRAPHQL_ADMIN_SECRET>
 # rollback/rollup last migrate
 hasura migrate apply --down 1
 hasura migrate apply --up 1
