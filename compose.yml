@@ -20,7 +20,7 @@ services:
   # traefik proxy
   ###########################################################################
   traefik:
-    image: traefik:v3.0.0-rc5
+    image: traefik:v3.0.0
     hostname: traefik
     container_name: traefik
     restart: unless-stopped
@@ -171,7 +171,7 @@ services:
   # If SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.29.2
+    image: nhost/hasura-auth:0.29.3
     hostname: auth
     container_name: auth
     restart: unless-stopped

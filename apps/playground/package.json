@@ -25,9 +25,9 @@
 		"test:unit:ui": "dotenv-run -f .env -f .secrets -v -- vitest --ui"
 	},
 	"devDependencies": {
-		"@floating-ui/dom": "1.6.3",
+		"@floating-ui/dom": "1.6.4",
 		"@fontsource-variable/inter": "5.0.18",
-		"@inlang/cli": "2.15.2",
+		"@inlang/cli": "2.16.1",
 		"@inlang/paraglide-js": "1.7.2",
 		"@inlang/paraglide-js-adapter-sveltekit": "0.6.7",
 		"@skeletonlabs/skeleton": "2.9.2",
@@ -45,18 +45,18 @@
 		"@sveltejs/vite-plugin-svelte": "3.1.0",
 		"@tailwindcss/container-queries": "0.1.1",
 		"@tailwindcss/forms": "0.5.7",
-		"@tailwindcss/typography": "0.5.12",
+		"@tailwindcss/typography": "0.5.13",
 		"@tsparticles/engine": "3.3.0",
 		"@tsparticles/slim": "3.3.0",
 		"@tsparticles/svelte": "3.0.0",
 		"@types/d3-scale": "4.0.8",
 		"@types/eslint": "8.56.10",
-		"@types/node": "20.12.7",
-		"@typescript-eslint/eslint-plugin": "7.7.1",
-		"@typescript-eslint/parser": "7.7.1",
+		"@types/node": "20.12.8",
+		"@typescript-eslint/eslint-plugin": "7.8.0",
+		"@typescript-eslint/parser": "7.8.0",
 		"@vercel/analytics": "1.2.2",
 		"@vincjo/datatables": "1.14.5",
-		"@vitest/coverage-v8": "1.5.2",
+		"@vitest/coverage-v8": "1.5.3",
 		"@xyflow/svelte": "0.0.41",
 		"autoprefixer": "10.4.19",
 		"d3-array": "3.2.4",
@@ -69,7 +69,7 @@
 		"eslint-plugin-svelte": "2.38.0",
 		"formsnap": "1.0.0",
 		"layerchart": "0.36.2",
-		"lucide-svelte": "0.373.0",
+		"lucide-svelte": "0.376.1",
 		"paneforge": "0.0.4",
 		"postcss": "8.4.38",
 		"prettier": "3.2.5",
@@ -79,7 +79,7 @@
 		"svelte-adapter-bun": "0.5.2",
 		"svelte-check": "3.7.0",
 		"svelte-meta-tags": "3.1.2",
-		"svelte-ux": "0.62.8",
+		"svelte-ux": "0.62.9",
 		"sveltekit-flash-message": "2.4.4",
 		"sveltekit-rate-limiter": "0.5.1",
 		"sveltekit-superforms": "2.12.6",
@@ -92,11 +92,11 @@
 		"typescript": "5.4.5",
 		"vite": "5.2.10",
 		"vite-plugin-tailwind-purgecss": "0.3.3",
-		"vitest": "1.5.2",
-		"zod": "3.23.4"
+		"vitest": "1.5.3",
+		"zod": "3.23.5"
 	},
 	"optionalDependencies": {
 		"@playwright/test": "1.43.1",
-		"@vitest/ui": "1.5.2"
+		"@vitest/ui": "1.5.3"
 	}
 }
