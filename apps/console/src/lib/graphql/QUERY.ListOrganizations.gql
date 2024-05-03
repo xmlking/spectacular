@@ -1,0 +1,12 @@
+query ListOrganizations(
+	$limit: Int = 50
+	$offset: Int = 0
+	$orderBy: [organizations_order_by!] = [{ organization: desc_nulls_last }]
+) @cache(policy: NetworkOnly) {
+	organizations(order_by: $orderBy, limit: $limit, offset: $offset) {
+		organization
+		description
+		allowedEmailDomains
+		allowedEmails
+	}
+}

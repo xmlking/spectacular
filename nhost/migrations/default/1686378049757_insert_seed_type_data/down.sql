@@ -18,4 +18,4 @@ DELETE FROM public.subject_type;
 --
 DELETE FROM public.protocol;
 --
-DELETE FROM public.organization;
+DELETE FROM public.organizations;

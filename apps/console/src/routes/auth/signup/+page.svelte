@@ -9,11 +9,10 @@
 	import * as m from '$i18n/messages';
 	import { isLoadingForm } from '$lib/stores/loading';
 	import { handleMessage } from '$lib/components/layout/toast-manager';
-	import { organization_enum } from '$houdini';
 
 	export let data;
 	const log = new Logger('auth:signup');
-	const organizations = Object.values(organization_enum);
+	const organizations = data.organizations;
 	const toastStore = getToastStore();
 
 	const {

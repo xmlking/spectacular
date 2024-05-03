@@ -252,6 +252,61 @@ input action_stream_cursor_value_input {
   value: String
 }
 
+scalar citext
+
+"""
+Boolean expression to compare columns of type "citext". All fields are combined with logical 'AND'.
+"""
+input citext_comparison_exp {
+  _eq: citext
+  _gt: citext
+  _gte: citext
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: citext
+  _in: [citext!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: citext
+  _is_null: Boolean
+
+  """does the column match the given pattern"""
+  _like: citext
+  _lt: citext
+  _lte: citext
+  _neq: citext
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: citext
+  _nin: [citext!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: citext
+
+  """does the column NOT match the given pattern"""
+  _nlike: citext
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: citext
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: citext
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: citext
+
+  """does the column match the given SQL regular expression"""
+  _similar: citext
+}
+
 """ordering argument of a cursor"""
 enum cursor_ordering {
   """ascending ordering of the cursor"""
@@ -482,7 +537,7 @@ type devices {
   displayName: String!
   id: uuid!
   ip: String!
-  organization: organization_enum!
+  organization: String!
   tags: [String!]
   updatedAt: timestamptz!
   updatedBy: String!
@@ -504,7 +559,7 @@ input devices_bool_exp {
   displayName: String_comparison_exp
   id: uuid_comparison_exp
   ip: String_comparison_exp
-  organization: organization_enum_comparison_exp
+  organization: String_comparison_exp
   tags: String_array_comparison_exp
   updatedAt: timestamptz_comparison_exp
   updatedBy: String_comparison_exp
@@ -534,7 +589,7 @@ input devices_insert_input {
   description: String
   device_pools: device_pool_arr_rel_insert_input
   displayName: String
-  organization: organization_enum
+  organization: String
   tags: [String!]
   version: String
 }
@@ -643,7 +698,7 @@ input devices_set_input {
   annotations: hstore
   deletedAt: timestamptz
   description: String
-  organization: organization_enum
+  organization: String
   tags: [String!]
 }
 
@@ -667,7 +722,7 @@ input devices_stream_cursor_value_input {
   displayName: String
   id: uuid
   ip: String
-  organization: organization_enum
+  organization: String
   tags: [String!]
   updatedAt: timestamptz
   updatedBy: String
@@ -818,6 +873,43 @@ input hstore_comparison_exp {
   _nin: [hstore!]
 }
 
+scalar jsonb
+
+input jsonb_cast_exp {
+  String: String_comparison_exp
+}
+
+"""
+Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'.
+"""
+input jsonb_comparison_exp {
+  _cast: jsonb_cast_exp
+
+  """is the column contained in the given json value"""
+  _contained_in: jsonb
+
+  """does the column contain the given json value at the top level"""
+  _contains: jsonb
+  _eq: jsonb
+  _gt: jsonb
+  _gte: jsonb
+
+  """does the string exist as a top-level key in the column"""
+  _has_key: String
+
+  """do all of these strings exist as top-level keys in the column"""
+  _has_keys_all: [String!]
+
+  """do any of these strings exist as top-level keys in the column"""
+  _has_keys_any: [String!]
+  _in: [jsonb!]
+  _is_null: Boolean
+  _lt: jsonb
+  _lte: jsonb
+  _neq: jsonb
+  _nin: [jsonb!]
+}
+
 """mutation root"""
 type mutation_root {
   """
@@ -832,6 +924,19 @@ type mutation_root {
   delete single row from the table: "device_pool"
   """
   delete_device_pool_by_pk(id: uuid!): device_pool
+
+  """
+  delete data from the table: "user_org_roles"
+  """
+  delete_user_org_roles(
+    """filter the rows which have to be deleted"""
+    where: user_org_roles_bool_exp!
+  ): user_org_roles_mutation_response
+
+  """
+  delete single row from the table: "user_org_roles"
+  """
+  delete_user_org_roles_by_pk(id: uuid!): user_org_roles
 
   """
   insert data into the table: "device_pool"
@@ -944,26 +1049,46 @@ type mutation_root {
   ): rules
 
   """
-  insert data into the table: "user_org_groups"
+  insert data into the table: "user_org_roles"
   """
-  insert_user_org_groups(
+  insert_user_org_roles(
     """the rows to be inserted"""
-    objects: [user_org_groups_insert_input!]!
+    objects: [user_org_roles_insert_input!]!
 
     """upsert condition"""
-    on_conflict: user_org_groups_on_conflict
-  ): user_org_groups_mutation_response
+    on_conflict: user_org_roles_on_conflict
+  ): user_org_roles_mutation_response
 
   """
-  insert a single row into the table: "user_org_groups"
+  insert a single row into the table: "user_org_roles"
   """
-  insert_user_org_groups_one(
+  insert_user_org_roles_one(
     """the row to be inserted"""
-    object: user_org_groups_insert_input!
+    object: user_org_roles_insert_input!
 
     """upsert condition"""
-    on_conflict: user_org_groups_on_conflict
-  ): user_org_groups
+    on_conflict: user_org_roles_on_conflict
+  ): user_org_roles
+
+  """
+  update single row of the table: "auth.users"
+  """
+  updateUser(
+    """sets the columns of the filtered rows to the given values"""
+    _set: users_set_input
+    pk_columns: users_pk_columns_input!
+  ): users
+
+  """
+  update data of the table: "auth.users"
+  """
+  updateUsers(
+    """sets the columns of the filtered rows to the given values"""
+    _set: users_set_input
+
+    """filter the rows which have to be updated"""
+    where: users_bool_exp!
+  ): users_mutation_response
 
   """
   update data of the table: "devices"
@@ -1090,32 +1215,12 @@ type mutation_root {
   ): [rules_mutation_response]
 
   """
-  update data of the table: "user_org_groups"
+  update multiples rows of table: "auth.users"
   """
-  update_user_org_groups(
-    """sets the columns of the filtered rows to the given values"""
-    _set: user_org_groups_set_input
-
-    """filter the rows which have to be updated"""
-    where: user_org_groups_bool_exp!
-  ): user_org_groups_mutation_response
-
-  """
-  update single row of the table: "user_org_groups"
-  """
-  update_user_org_groups_by_pk(
-    """sets the columns of the filtered rows to the given values"""
-    _set: user_org_groups_set_input
-    pk_columns: user_org_groups_pk_columns_input!
-  ): user_org_groups
-
-  """
-  update multiples rows of table: "user_org_groups"
-  """
-  update_user_org_groups_many(
+  update_users_many(
     """updates to execute, in order"""
-    updates: [user_org_groups_updates!]!
-  ): [user_org_groups_mutation_response]
+    updates: [users_updates!]!
+  ): [users_mutation_response]
 }
 
 """column ordering options"""
@@ -1140,73 +1245,68 @@ enum order_by {
 }
 
 """organization enums"""
-type organization {
+type organizations {
+  allowedEmailDomains: [String!]
+  allowedEmails: [String!]
   description: String!
-  value: String!
+  organization: String!
 }
 
 """
-Boolean expression to filter rows from the table "organization". All fields are combined with a logical 'AND'.
+Boolean expression to filter rows from the table "organizations". All fields are combined with a logical 'AND'.
 """
-input organization_bool_exp {
-  _and: [organization_bool_exp!]
-  _not: organization_bool_exp
-  _or: [organization_bool_exp!]
+input organizations_bool_exp {
+  _and: [organizations_bool_exp!]
+  _not: organizations_bool_exp
+  _or: [organizations_bool_exp!]
+  allowedEmailDomains: String_array_comparison_exp
+  allowedEmails: String_array_comparison_exp
   description: String_comparison_exp
-  value: String_comparison_exp
+  organization: String_comparison_exp
 }
 
-enum organization_enum {
-  """chinthagunta org"""
-  chinthagunta
-
-  """example org"""
-  example
-}
-
-"""
-Boolean expression to compare columns of type "organization_enum". All fields are combined with logical 'AND'.
-"""
-input organization_enum_comparison_exp {
-  _eq: organization_enum
-  _in: [organization_enum!]
-  _is_null: Boolean
-  _neq: organization_enum
-  _nin: [organization_enum!]
-}
-
-"""Ordering options when selecting data from "organization"."""
-input organization_order_by {
+"""Ordering options when selecting data from "organizations"."""
+input organizations_order_by {
+  allowedEmailDomains: order_by
+  allowedEmails: order_by
   description: order_by
-  value: order_by
+  organization: order_by
 }
 
 """
-select columns of table "organization"
+select columns of table "organizations"
 """
-enum organization_select_column {
+enum organizations_select_column {
+  """column name"""
+  allowedEmailDomains
+
+  """column name"""
+  allowedEmails
+
   """column name"""
   description
 
   """column name"""
-  value
+  organization
 }
 
 """
-Streaming cursor of the table "organization"
+Streaming cursor of the table "organizations"
 """
-input organization_stream_cursor_input {
+input organizations_stream_cursor_input {
   """Stream column input with initial value"""
-  initial_value: organization_stream_cursor_value_input!
+  initial_value: organizations_stream_cursor_value_input!
 
   """cursor ordering"""
   ordering: cursor_ordering
 }
 
 """Initial value of the column from where the streaming should start"""
-input organization_stream_cursor_value_input {
+input organizations_stream_cursor_value_input {
+  allowedEmailDomains: [String!]
+  allowedEmails: [String!]
   description: String
-  value: String
+  organization: String
 }
 
 """Joint table associating subjects polymorphically with rules"""
@@ -1215,7 +1315,7 @@ type policies {
   createdAt: timestamptz!
   createdBy: String!
   id: uuid!
-  organization: organization_enum!
+  organization: String!
 
   """An object relationship"""
   rule: rules!
@@ -1242,7 +1342,7 @@ input policies_bool_exp {
   createdAt: timestamptz_comparison_exp
   createdBy: String_comparison_exp
   id: uuid_comparison_exp
-  organization: organization_enum_comparison_exp
+  organization: String_comparison_exp
   rule: rules_bool_exp
   ruleId: uuid_comparison_exp
   subjectDisplayName: String_comparison_exp
@@ -1283,7 +1383,7 @@ input type for inserting data into table "policies"
 """
 input policies_insert_input {
   active: Boolean
-  organization: organization_enum
+  organization: String
   rule: rules_obj_rel_insert_input
   ruleId: uuid
   subjectDisplayName: String
@@ -1418,7 +1518,7 @@ input policies_stream_cursor_value_input {
   createdAt: timestamptz
   createdBy: String
   id: uuid
-  organization: organization_enum
+  organization: String
   ruleId: uuid
   subjectDisplayName: String
   subjectId: uuid
@@ -1470,7 +1570,7 @@ type pools {
   description: String
   displayName: String!
   id: uuid!
-  organization: organization_enum!
+  organization: String!
 
   """An array relationship"""
   pool_devices(
@@ -1507,7 +1607,7 @@ input pools_bool_exp {
   description: String_comparison_exp
   displayName: String_comparison_exp
   id: uuid_comparison_exp
-  organization: organization_enum_comparison_exp
+  organization: String_comparison_exp
   pool_devices: device_pool_bool_exp
   tags: String_array_comparison_exp
   updatedAt: timestamptz_comparison_exp
@@ -1536,7 +1636,7 @@ input pools_insert_input {
   annotations: hstore
   description: String
   displayName: String
-  organization: organization_enum
+  organization: String
   pool_devices: device_pool_arr_rel_insert_input
   tags: [String!]
 }
@@ -1634,7 +1734,7 @@ input pools_set_input {
   deletedAt: timestamptz
   description: String
   displayName: String
-  organization: organization_enum
+  organization: String
   tags: [String!]
 }
 
@@ -1657,7 +1757,7 @@ input pools_stream_cursor_value_input {
   description: String
   displayName: String
   id: uuid
-  organization: organization_enum
+  organization: String
   tags: [String!]
   updatedAt: timestamptz
   updatedBy: String
@@ -1979,11 +2079,11 @@ type query_root {
   direction_by_pk(value: String!): direction
 
   """
-  fetch data from the table: "organization"
+  fetch data from the table: "organizations"
   """
-  organization(
+  organizations(
     """distinct select on columns"""
-    distinct_on: [organization_select_column!]
+    distinct_on: [organizations_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -1992,14 +2092,14 @@ type query_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [organization_order_by!]
+    order_by: [organizations_order_by!]
 
     """filter the rows returned"""
-    where: organization_bool_exp
-  ): [organization!]!
+    where: organizations_bool_exp
+  ): [organizations!]!
 
-  """fetch data from the table: "organization" using primary key columns"""
-  organization_by_pk(value: String!): organization
+  """fetch data from the table: "organizations" using primary key columns"""
+  organizations_by_pk(organization: String!): organizations
 
   """
   fetch data from the table: "policies"
@@ -2136,12 +2236,15 @@ type query_root {
   """fetch data from the table: "subject_type" using primary key columns"""
   subject_type_by_pk(value: String!): subject_type
 
+  """fetch data from the table: "auth.users" using primary key columns"""
+  user(id: uuid!): users
+
   """
-  fetch data from the table: "user_org_groups"
+  fetch data from the table: "user_org_roles"
   """
-  user_org_groups(
+  user_org_roles(
     """distinct select on columns"""
-    distinct_on: [user_org_groups_select_column!]
+    distinct_on: [user_org_roles_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2150,14 +2253,32 @@ type query_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [user_org_groups_order_by!]
+    order_by: [user_org_roles_order_by!]
 
     """filter the rows returned"""
-    where: user_org_groups_bool_exp
-  ): [user_org_groups!]!
+    where: user_org_roles_bool_exp
+  ): [user_org_roles!]!
 
-  """fetch data from the table: "user_org_groups" using primary key columns"""
-  user_org_groups_by_pk(id: uuid!): user_org_groups
+  """fetch data from the table: "user_org_roles" using primary key columns"""
+  user_org_roles_by_pk(id: uuid!): user_org_roles
+
+  """An array relationship"""
+  users(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): [users!]!
 }
 
 """5-tuple firewalls rules"""
@@ -2173,7 +2294,7 @@ type rules {
   direction: direction_enum!
   displayName: String!
   id: uuid!
-  organization: organization_enum!
+  organization: String!
   protocol: protocol_enum!
   shared: Boolean!
   source: String
@@ -2203,7 +2324,7 @@ input rules_bool_exp {
   direction: direction_enum_comparison_exp
   displayName: String_comparison_exp
   id: uuid_comparison_exp
-  organization: organization_enum_comparison_exp
+  organization: String_comparison_exp
   protocol: protocol_enum_comparison_exp
   shared: Boolean_comparison_exp
   source: String_comparison_exp
@@ -2249,7 +2370,7 @@ input rules_insert_input {
   destinationPort: String
   direction: direction_enum
   displayName: String
-  organization: organization_enum
+  organization: String
   protocol: protocol_enum
   shared: Boolean
   source: String
@@ -2400,7 +2521,7 @@ input rules_set_input {
   destinationPort: String
   direction: direction_enum
   displayName: String
-  organization: organization_enum
+  organization: String
   protocol: protocol_enum
   shared: Boolean
   source: String
@@ -2434,7 +2555,7 @@ input rules_stream_cursor_value_input {
   direction: direction_enum
   displayName: String
   id: uuid
-  organization: organization_enum
+  organization: String
   protocol: protocol_enum
   shared: Boolean
   source: String
@@ -2824,11 +2945,11 @@ type subscription_root {
   ): [direction!]!
 
   """
-  fetch data from the table: "organization"
+  fetch data from the table: "organizations"
   """
-  organization(
+  organizations(
     """distinct select on columns"""
-    distinct_on: [organization_select_column!]
+    distinct_on: [organizations_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -2837,28 +2958,28 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [organization_order_by!]
+    order_by: [organizations_order_by!]
 
     """filter the rows returned"""
-    where: organization_bool_exp
-  ): [organization!]!
+    where: organizations_bool_exp
+  ): [organizations!]!
 
-  """fetch data from the table: "organization" using primary key columns"""
-  organization_by_pk(value: String!): organization
+  """fetch data from the table: "organizations" using primary key columns"""
+  organizations_by_pk(organization: String!): organizations
 
   """
-  fetch data from the table in a streaming manner: "organization"
+  fetch data from the table in a streaming manner: "organizations"
   """
-  organization_stream(
+  organizations_stream(
     """maximum number of rows returned in a single batch"""
     batch_size: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [organization_stream_cursor_input]!
+    cursor: [organizations_stream_cursor_input]!
 
     """filter the rows returned"""
-    where: organization_bool_exp
-  ): [organization!]!
+    where: organizations_bool_exp
+  ): [organizations!]!
 
   """
   fetch data from the table: "policies"
@@ -3065,12 +3186,15 @@ type subscription_root {
     where: subject_type_bool_exp
   ): [subject_type!]!
 
+  """fetch data from the table: "auth.users" using primary key columns"""
+  user(id: uuid!): users
+
   """
-  fetch data from the table: "user_org_groups"
+  fetch data from the table: "user_org_roles"
   """
-  user_org_groups(
+  user_org_roles(
     """distinct select on columns"""
-    distinct_on: [user_org_groups_select_column!]
+    distinct_on: [user_org_roles_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -3079,28 +3203,60 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [user_org_groups_order_by!]
+    order_by: [user_org_roles_order_by!]
 
     """filter the rows returned"""
-    where: user_org_groups_bool_exp
-  ): [user_org_groups!]!
+    where: user_org_roles_bool_exp
+  ): [user_org_roles!]!
 
-  """fetch data from the table: "user_org_groups" using primary key columns"""
-  user_org_groups_by_pk(id: uuid!): user_org_groups
+  """fetch data from the table: "user_org_roles" using primary key columns"""
+  user_org_roles_by_pk(id: uuid!): user_org_roles
 
   """
-  fetch data from the table in a streaming manner: "user_org_groups"
+  fetch data from the table in a streaming manner: "user_org_roles"
   """
-  user_org_groups_stream(
+  user_org_roles_stream(
     """maximum number of rows returned in a single batch"""
     batch_size: Int!
 
     """cursor to stream the results returned by the query"""
-    cursor: [user_org_groups_stream_cursor_input]!
+    cursor: [user_org_roles_stream_cursor_input]!
 
     """filter the rows returned"""
-    where: user_org_groups_bool_exp
-  ): [user_org_groups!]!
+    where: user_org_roles_bool_exp
+  ): [user_org_roles!]!
+
+  """An array relationship"""
+  users(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): [users!]!
+
+  """
+  fetch data from the table in a streaming manner: "auth.users"
+  """
+  users_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [users_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): [users!]!
 }
 
 scalar timestamptz
@@ -3120,108 +3276,147 @@ input timestamptz_comparison_exp {
   _nin: [timestamptz!]
 }
 
-"""User, Org, Groups join table"""
-type user_org_groups {
+"""Roles of User for a given Org."""
+type user_org_roles {
   createdAt: timestamptz!
-  createdBy: String!
-  groups: [String!]
+  createdBy: uuid!
   id: uuid!
-  organization: organization_enum!
-  updatedAt: timestamptz!
-  updatedBy: String!
+  organization: String!
+  role: String!
   userId: uuid!
+
+  """An array relationship"""
+  users(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): [users!]!
 }
 
 """
-Boolean expression to filter rows from the table "user_org_groups". All fields are combined with a logical 'AND'.
+order by aggregate values of table "user_org_roles"
 """
-input user_org_groups_bool_exp {
-  _and: [user_org_groups_bool_exp!]
-  _not: user_org_groups_bool_exp
-  _or: [user_org_groups_bool_exp!]
+input user_org_roles_aggregate_order_by {
+  count: order_by
+  max: user_org_roles_max_order_by
+  min: user_org_roles_min_order_by
+}
+
+"""
+Boolean expression to filter rows from the table "user_org_roles". All fields are combined with a logical 'AND'.
+"""
+input user_org_roles_bool_exp {
+  _and: [user_org_roles_bool_exp!]
+  _not: user_org_roles_bool_exp
+  _or: [user_org_roles_bool_exp!]
   createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
-  groups: String_array_comparison_exp
+  createdBy: uuid_comparison_exp
   id: uuid_comparison_exp
-  organization: organization_enum_comparison_exp
-  updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
+  organization: String_comparison_exp
+  role: String_comparison_exp
   userId: uuid_comparison_exp
+  users: users_bool_exp
 }
 
 """
-unique or primary key constraints on table "user_org_groups"
+unique or primary key constraints on table "user_org_roles"
 """
-enum user_org_groups_constraint {
+enum user_org_roles_constraint {
   """
   unique or primary key constraint on columns "id"
   """
-  user_org_groups_pkey
+  user_org_roles_pkey
 
   """
-  unique or primary key constraint on columns "user_id", "organization"
+  unique or primary key constraint on columns "user_id", "organization", "role"
   """
-  user_org_groups_user_id_organization_unique
+  user_org_roles_user_id_role_organization_key
 }
 
 """
-input type for inserting data into table "user_org_groups"
+input type for inserting data into table "user_org_roles"
 """
-input user_org_groups_insert_input {
-  groups: [String!]
-  organization: organization_enum
+input user_org_roles_insert_input {
+  organization: String
+  role: String
   userId: uuid
 }
 
 """
-response of any mutation on the table "user_org_groups"
+order by max() on columns of table "user_org_roles"
 """
-type user_org_groups_mutation_response {
+input user_org_roles_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  id: order_by
+  organization: order_by
+  role: order_by
+  userId: order_by
+}
+
+"""
+order by min() on columns of table "user_org_roles"
+"""
+input user_org_roles_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  id: order_by
+  organization: order_by
+  role: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "user_org_roles"
+"""
+type user_org_roles_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
 
   """data from the rows affected by the mutation"""
-  returning: [user_org_groups!]!
+  returning: [user_org_roles!]!
 }
 
 """
-on_conflict condition type for table "user_org_groups"
+on_conflict condition type for table "user_org_roles"
 """
-input user_org_groups_on_conflict {
-  constraint: user_org_groups_constraint!
-  update_columns: [user_org_groups_update_column!]! = []
-  where: user_org_groups_bool_exp
+input user_org_roles_on_conflict {
+  constraint: user_org_roles_constraint!
+  update_columns: [user_org_roles_update_column!]! = []
+  where: user_org_roles_bool_exp
 }
 
-"""Ordering options when selecting data from "user_org_groups"."""
-input user_org_groups_order_by {
+"""Ordering options when selecting data from "user_org_roles"."""
+input user_org_roles_order_by {
   createdAt: order_by
   createdBy: order_by
-  groups: order_by
   id: order_by
   organization: order_by
-  updatedAt: order_by
-  updatedBy: order_by
+  role: order_by
   userId: order_by
-}
-
-"""primary key columns input for table: user_org_groups"""
-input user_org_groups_pk_columns_input {
-  id: uuid!
+  users_aggregate: users_aggregate_order_by
 }
 
 """
-select columns of table "user_org_groups"
+select columns of table "user_org_roles"
 """
-enum user_org_groups_select_column {
+enum user_org_roles_select_column {
   """column name"""
   createdAt
 
   """column name"""
   createdBy
-
-  """column name"""
-  groups
 
   """column name"""
   id
@@ -3230,67 +3425,341 @@ enum user_org_groups_select_column {
   organization
 
   """column name"""
-  updatedAt
-
-  """column name"""
-  updatedBy
+  role
 
   """column name"""
   userId
 }
 
 """
-input type for updating data in table "user_org_groups"
+Streaming cursor of the table "user_org_roles"
 """
-input user_org_groups_set_input {
-  deletedAt: timestamptz
-  groups: [String!]
-  organization: organization_enum
-}
-
-"""
-Streaming cursor of the table "user_org_groups"
-"""
-input user_org_groups_stream_cursor_input {
+input user_org_roles_stream_cursor_input {
   """Stream column input with initial value"""
-  initial_value: user_org_groups_stream_cursor_value_input!
+  initial_value: user_org_roles_stream_cursor_value_input!
 
   """cursor ordering"""
   ordering: cursor_ordering
 }
 
 """Initial value of the column from where the streaming should start"""
-input user_org_groups_stream_cursor_value_input {
+input user_org_roles_stream_cursor_value_input {
   createdAt: timestamptz
-  createdBy: String
-  groups: [String!]
+  createdBy: uuid
   id: uuid
-  organization: organization_enum
-  updatedAt: timestamptz
-  updatedBy: String
+  organization: String
+  role: String
   userId: uuid
 }
 
 """
-update columns of table "user_org_groups"
+placeholder for update columns of table "user_org_roles" (current role has no relevant permissions)
 """
-enum user_org_groups_update_column {
-  """column name"""
-  deletedAt
-
-  """column name"""
-  groups
-
-  """column name"""
-  organization
+enum user_org_roles_update_column {
+  """placeholder (do not use)"""
+  _PLACEHOLDER
 }
 
-input user_org_groups_updates {
+"""
+User account information. Don't modify its structure as Hasura Auth relies on it to function properly.
+"""
+type users {
+  activeMfaType: String
+  avatarUrl: String!
+  createdAt: timestamptz!
+  currentChallenge: String
+  defaultRole: String!
+  disabled: Boolean!
+  displayName: String!
+  email: citext
+  emailVerified: Boolean!
+  id: uuid!
+  isAnonymous: Boolean!
+  lastSeen: timestamptz
+  locale: String!
+  metadata(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  newEmail: citext
+
+  """An array relationship"""
+  organizations(
+    """distinct select on columns"""
+    distinct_on: [user_org_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_org_roles_order_by!]
+
+    """filter the rows returned"""
+    where: user_org_roles_bool_exp
+  ): [user_org_roles!]!
+  otpHashExpiresAt: timestamptz!
+  otpMethodLastUsed: String
+  phoneNumber: String
+  phoneNumberVerified: Boolean!
+  ticket: String
+  ticketExpiresAt: timestamptz!
+  updatedAt: timestamptz!
+}
+
+"""
+order by aggregate values of table "auth.users"
+"""
+input users_aggregate_order_by {
+  count: order_by
+  max: users_max_order_by
+  min: users_min_order_by
+}
+
+"""
+Boolean expression to filter rows from the table "auth.users". All fields are combined with a logical 'AND'.
+"""
+input users_bool_exp {
+  _and: [users_bool_exp!]
+  _not: users_bool_exp
+  _or: [users_bool_exp!]
+  activeMfaType: String_comparison_exp
+  avatarUrl: String_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  currentChallenge: String_comparison_exp
+  defaultRole: String_comparison_exp
+  disabled: Boolean_comparison_exp
+  displayName: String_comparison_exp
+  email: citext_comparison_exp
+  emailVerified: Boolean_comparison_exp
+  id: uuid_comparison_exp
+  isAnonymous: Boolean_comparison_exp
+  lastSeen: timestamptz_comparison_exp
+  locale: String_comparison_exp
+  metadata: jsonb_comparison_exp
+  newEmail: citext_comparison_exp
+  organizations: user_org_roles_bool_exp
+  otpHashExpiresAt: timestamptz_comparison_exp
+  otpMethodLastUsed: String_comparison_exp
+  phoneNumber: String_comparison_exp
+  phoneNumberVerified: Boolean_comparison_exp
+  ticket: String_comparison_exp
+  ticketExpiresAt: timestamptz_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+}
+
+"""
+order by max() on columns of table "auth.users"
+"""
+input users_max_order_by {
+  activeMfaType: order_by
+  avatarUrl: order_by
+  createdAt: order_by
+  currentChallenge: order_by
+  defaultRole: order_by
+  displayName: order_by
+  email: order_by
+  id: order_by
+  lastSeen: order_by
+  locale: order_by
+  newEmail: order_by
+  otpHashExpiresAt: order_by
+  otpMethodLastUsed: order_by
+  phoneNumber: order_by
+  ticket: order_by
+  ticketExpiresAt: order_by
+  updatedAt: order_by
+}
+
+"""
+order by min() on columns of table "auth.users"
+"""
+input users_min_order_by {
+  activeMfaType: order_by
+  avatarUrl: order_by
+  createdAt: order_by
+  currentChallenge: order_by
+  defaultRole: order_by
+  displayName: order_by
+  email: order_by
+  id: order_by
+  lastSeen: order_by
+  locale: order_by
+  newEmail: order_by
+  otpHashExpiresAt: order_by
+  otpMethodLastUsed: order_by
+  phoneNumber: order_by
+  ticket: order_by
+  ticketExpiresAt: order_by
+  updatedAt: order_by
+}
+
+"""
+response of any mutation on the table "auth.users"
+"""
+type users_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [users!]!
+}
+
+"""Ordering options when selecting data from "auth.users"."""
+input users_order_by {
+  activeMfaType: order_by
+  avatarUrl: order_by
+  createdAt: order_by
+  currentChallenge: order_by
+  defaultRole: order_by
+  disabled: order_by
+  displayName: order_by
+  email: order_by
+  emailVerified: order_by
+  id: order_by
+  isAnonymous: order_by
+  lastSeen: order_by
+  locale: order_by
+  metadata: order_by
+  newEmail: order_by
+  organizations_aggregate: user_org_roles_aggregate_order_by
+  otpHashExpiresAt: order_by
+  otpMethodLastUsed: order_by
+  phoneNumber: order_by
+  phoneNumberVerified: order_by
+  ticket: order_by
+  ticketExpiresAt: order_by
+  updatedAt: order_by
+}
+
+"""primary key columns input for table: auth.users"""
+input users_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "auth.users"
+"""
+enum users_select_column {
+  """column name"""
+  activeMfaType
+
+  """column name"""
+  avatarUrl
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  currentChallenge
+
+  """column name"""
+  defaultRole
+
+  """column name"""
+  disabled
+
+  """column name"""
+  displayName
+
+  """column name"""
+  email
+
+  """column name"""
+  emailVerified
+
+  """column name"""
+  id
+
+  """column name"""
+  isAnonymous
+
+  """column name"""
+  lastSeen
+
+  """column name"""
+  locale
+
+  """column name"""
+  metadata
+
+  """column name"""
+  newEmail
+
+  """column name"""
+  otpHashExpiresAt
+
+  """column name"""
+  otpMethodLastUsed
+
+  """column name"""
+  phoneNumber
+
+  """column name"""
+  phoneNumberVerified
+
+  """column name"""
+  ticket
+
+  """column name"""
+  ticketExpiresAt
+
+  """column name"""
+  updatedAt
+}
+
+"""
+input type for updating data in table "auth.users"
+"""
+input users_set_input {
+  displayName: String
+}
+
+"""
+Streaming cursor of the table "users"
+"""
+input users_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: users_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input users_stream_cursor_value_input {
+  activeMfaType: String
+  avatarUrl: String
+  createdAt: timestamptz
+  currentChallenge: String
+  defaultRole: String
+  disabled: Boolean
+  displayName: String
+  email: citext
+  emailVerified: Boolean
+  id: uuid
+  isAnonymous: Boolean
+  lastSeen: timestamptz
+  locale: String
+  metadata: jsonb
+  newEmail: citext
+  otpHashExpiresAt: timestamptz
+  otpMethodLastUsed: String
+  phoneNumber: String
+  phoneNumberVerified: Boolean
+  ticket: String
+  ticketExpiresAt: timestamptz
+  updatedAt: timestamptz
+}
+
+input users_updates {
   """sets the columns of the filtered rows to the given values"""
-  _set: user_org_groups_set_input
+  _set: users_set_input
 
   """filter the rows which have to be updated"""
-  where: user_org_groups_bool_exp!
+  where: users_bool_exp!
 }
 
 scalar uuid

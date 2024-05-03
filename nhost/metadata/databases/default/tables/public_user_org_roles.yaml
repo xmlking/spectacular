@@ -1,0 +1,112 @@
+table:
+  name: user_org_roles
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    user_id: userId
+  custom_root_fields: {}
+array_relationships:
+  - name: users
+    using:
+      manual_configuration:
+        column_mapping:
+          user_id: id
+        insertion_order: null
+        remote_table:
+          name: users
+          schema: auth
+insert_permissions:
+  - role: manager
+    permission:
+      check:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+      set:
+        created_by: x-hasura-user-id
+      columns:
+        - organization
+        - role
+        - user_id
+    comment: ""
+  - role: supervisor
+    permission:
+      check:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+      set:
+        created_by: x-hasura-user-id
+      columns:
+        - organization
+        - role
+        - user_id
+    comment: ""
+select_permissions:
+  - role: manager
+    permission:
+      columns:
+        - organization
+        - role
+        - created_at
+        - created_by
+        - id
+        - user_id
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - organization
+        - role
+        - created_at
+        - created_by
+        - id
+        - user_id
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - id
+        - organization
+        - role
+        - user_id
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+          - user_id:
+              _eq: x-hasura-user-id
+    comment: ""
+delete_permissions:
+  - role: manager
+    permission:
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+    comment: ""
+  - role: supervisor
+    permission:
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+    comment: ""

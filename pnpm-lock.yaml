@@ -67,10 +67,10 @@ importers:
         version: 2.5.0(prettier@3.2.5)
       prettier-plugin-svelte:
         specifier: 3.2.3
-        version: 3.2.3(prettier@3.2.5)(svelte@4.2.15)
+        version: 3.2.3(prettier@3.2.5)(svelte@5.0.0-next.121)
       prettier-plugin-tailwindcss:
         specifier: 0.5.14
-        version: 0.5.14(prettier-plugin-astro@0.13.0)(prettier-plugin-svelte@3.2.3(prettier@3.2.5)(svelte@4.2.15))(prettier@3.2.5)
+        version: 0.5.14(prettier-plugin-astro@0.13.0)(prettier-plugin-svelte@3.2.3(prettier@3.2.5)(svelte@5.0.0-next.121))(prettier@3.2.5)
       turbo:
         specifier: 1.13.3
         version: 1.13.3
@@ -1051,7 +1051,7 @@ importers:
         specifier: 4.7.0
         version: 4.7.0(@types/node@20.12.8)(terser@5.31.0)(typescript@5.4.5)
       astro-expressive-code:
-        specifier: ^0.35.3
+        specifier: 0.35.3
         version: 0.35.3(astro@4.7.0(@types/node@20.12.8)(terser@5.31.0)(typescript@5.4.5))
       astro-seo:
         specifier: 0.8.3
@@ -1137,10 +1137,10 @@ importers:
         version: 2.4.12(prettier@3.2.5)
       prettier-plugin-svelte:
         specifier: 3.2.1
-        version: 3.2.1(prettier@3.2.5)(svelte@4.2.15)
+        version: 3.2.1(prettier@3.2.5)(svelte@5.0.0-next.121)
       prettier-plugin-tailwindcss:
         specifier: 0.5.11
-        version: 0.5.11(prettier-plugin-astro@0.13.0)(prettier-plugin-svelte@3.2.1(prettier@3.2.5)(svelte@4.2.15))(prettier@3.2.5)
+        version: 0.5.11(prettier-plugin-astro@0.13.0)(prettier-plugin-svelte@3.2.1(prettier@3.2.5)(svelte@5.0.0-next.121))(prettier@3.2.5)
     devDependencies:
       '@spectacular/typescript-config':
         specifier: workspace:*
@@ -4787,6 +4787,11 @@ packages:
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
 
+  acorn-typescript@1.4.13:
+    resolution: {integrity: sha512-xsc9Xv0xlVfwp2o7sQ+GCQ1PgbkdcpWdTzrwXxO3xDMTAywVS3oXVOcOHuRjAPkS4P9b+yc/qNF15460v+jp4Q==}
+    peerDependencies:
+      acorn: '>=8.9.0'
+
   acorn-walk@8.3.2:
     resolution: {integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==}
     engines: {node: '>=0.4.0'}
@@ -6370,6 +6375,9 @@ packages:
   esquery@1.5.0:
     resolution: {integrity: sha512-YQLXUplAwJgCydQ78IMJywZCceoqk1oH01OERdSAJc/7U2AylwjhSCLDEtqwg811idIS/9fIU5GjG73IgjKMVg==}
     engines: {node: '>=0.10'}
+
+  esrap@1.2.2:
+    resolution: {integrity: sha512-F2pSJklxx1BlQIQgooczXCPHmcWpn6EsP5oo73LQfonG9fIlIENQ8vMmfGXeojP9MrkzUNAfyU5vdFlR9shHAw==}
 
   esrecurse@4.3.0:
     resolution: {integrity: sha512-KmfKL3b6G+RXvP8N1vr3Tq1kL/oCFgn2NYXEtqP8/L3pKapUA4G8cFVaoF3SU323CD4XypR/ffioHmkti6/Tag==}
@@ -9918,6 +9926,10 @@ packages:
     resolution: {integrity: sha512-j9KJSccHgLeRERPlhMKrCXpk2TqL2m5Z+k+OBTQhZOhIdCCd3WfqV+ylPWeipEwq17P/ekiSFWwrVQv93i3bsg==}
     engines: {node: '>=16'}
 
+  svelte@5.0.0-next.121:
+    resolution: {integrity: sha512-dWxr42t8wv6iUmgKrYDG9RwQd2lf3vF2+ACYT7ziDnLeYItPM4sABmM8ptMaYL8czwtqpNzfCsxQR7ShN5PS9A==}
+    engines: {node: '>=18'}
+
   sveltekit-flash-message@2.4.4:
     resolution: {integrity: sha512-CFN03chH/FMEJcBZ/8zKm7RqGee/pwb57Spbbx8QCQPhe7N9ofZHd9iYV2vVy4E9glBo/oQ1IG7VQje6L092wg==}
     peerDependencies:
@@ -11008,6 +11020,9 @@ packages:
 
   yup@1.4.0:
     resolution: {integrity: sha512-wPbgkJRCqIf+OHyiTBQoJiP5PFuAXaWiJK6AmYkzQAh5/c2K9hzSApBZG5wV9KoKSePF7sAxmNSvh/13YHkFDg==}
+
+  zimmerframe@1.1.2:
+    resolution: {integrity: sha512-rAbqEGa8ovJy4pyBxZM70hg4pE6gDgaQ0Sl9M3enG3I0d6H4XSAM3GeNGLKnsBpuijUow064sf7ww1nutC5/3w==}
 
   zod-to-json-schema@3.23.0:
     resolution: {integrity: sha512-az0uJ243PxsRIa2x1WmNE/pnuA05gUq/JB8Lwe1EDCCL/Fz9MgjYQ0fPlyc2Tcv6aF2ZA7WM5TWaRZVEFaAIag==}
@@ -15264,6 +15279,10 @@ snapshots:
     dependencies:
       acorn: 8.11.3
 
+  acorn-typescript@1.4.13(acorn@8.11.3):
+    dependencies:
+      acorn: 8.11.3
+
   acorn-walk@8.3.2: {}
 
   acorn@8.11.3: {}
@@ -17288,6 +17307,11 @@ snapshots:
   esquery@1.5.0:
     dependencies:
       estraverse: 5.3.0
+
+  esrap@1.2.2:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.15
+      '@types/estree': 1.0.5
 
   esrecurse@4.3.0:
     dependencies:
@@ -20369,22 +20393,27 @@ snapshots:
     optionalDependencies:
       prettier: 3.2.5
 
-  prettier-plugin-svelte@3.2.1(prettier@3.2.5)(svelte@4.2.15):
+  prettier-plugin-svelte@3.2.1(prettier@3.2.5)(svelte@5.0.0-next.121):
     dependencies:
       prettier: 3.2.5
-      svelte: 4.2.15
+      svelte: 5.0.0-next.121
 
   prettier-plugin-svelte@3.2.3(prettier@3.2.5)(svelte@4.2.15):
     dependencies:
       prettier: 3.2.5
       svelte: 4.2.15
 
-  prettier-plugin-tailwindcss@0.5.11(prettier-plugin-astro@0.13.0)(prettier-plugin-svelte@3.2.1(prettier@3.2.5)(svelte@4.2.15))(prettier@3.2.5):
+  prettier-plugin-svelte@3.2.3(prettier@3.2.5)(svelte@5.0.0-next.121):
+    dependencies:
+      prettier: 3.2.5
+      svelte: 5.0.0-next.121
+
+  prettier-plugin-tailwindcss@0.5.11(prettier-plugin-astro@0.13.0)(prettier-plugin-svelte@3.2.1(prettier@3.2.5)(svelte@5.0.0-next.121))(prettier@3.2.5):
     dependencies:
       prettier: 3.2.5
     optionalDependencies:
       prettier-plugin-astro: 0.13.0
-      prettier-plugin-svelte: 3.2.1(prettier@3.2.5)(svelte@4.2.15)
+      prettier-plugin-svelte: 3.2.1(prettier@3.2.5)(svelte@5.0.0-next.121)
 
   prettier-plugin-tailwindcss@0.5.14(prettier-plugin-astro@0.13.0)(prettier-plugin-svelte@3.2.3(prettier@3.2.5)(svelte@4.2.15))(prettier@3.2.5):
     dependencies:
@@ -20392,6 +20421,13 @@ snapshots:
     optionalDependencies:
       prettier-plugin-astro: 0.13.0
       prettier-plugin-svelte: 3.2.3(prettier@3.2.5)(svelte@4.2.15)
+
+  prettier-plugin-tailwindcss@0.5.14(prettier-plugin-astro@0.13.0)(prettier-plugin-svelte@3.2.3(prettier@3.2.5)(svelte@5.0.0-next.121))(prettier@3.2.5):
+    dependencies:
+      prettier: 3.2.5
+    optionalDependencies:
+      prettier-plugin-astro: 0.13.0
+      prettier-plugin-svelte: 3.2.3(prettier@3.2.5)(svelte@5.0.0-next.121)
 
   prettier@2.8.3: {}
 
@@ -21498,6 +21534,22 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.10
       periscopic: 3.1.0
+
+  svelte@5.0.0-next.121:
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@jridgewell/sourcemap-codec': 1.4.15
+      '@types/estree': 1.0.5
+      acorn: 8.11.3
+      acorn-typescript: 1.4.13(acorn@8.11.3)
+      aria-query: 5.3.0
+      axobject-query: 4.0.0
+      esm-env: 1.0.0
+      esrap: 1.2.2
+      is-reference: 3.0.2
+      locate-character: 3.0.0
+      magic-string: 0.30.10
+      zimmerframe: 1.1.2
 
   sveltekit-flash-message@2.4.4(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(@types/node@20.12.8)(terser@5.31.0)))(svelte@4.2.15)(vite@5.2.10(@types/node@20.12.8)(terser@5.31.0)))(svelte@4.2.15):
     dependencies:
@@ -22752,6 +22804,8 @@ snapshots:
       toposort: 2.0.2
       type-fest: 2.19.0
     optional: true
+
+  zimmerframe@1.1.2: {}
 
   zod-to-json-schema@3.23.0(zod@3.23.5):
     dependencies:

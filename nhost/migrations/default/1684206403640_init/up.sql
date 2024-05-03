@@ -63,11 +63,13 @@ CREATE TABLE public.direction (
     description text NOT NULL
 );
 COMMENT ON TABLE public.direction IS 'direction enum';
-CREATE TABLE public.organization (
-    value text NOT NULL,
-    description text NOT NULL
+CREATE TABLE public.organizations (
+    organization text NOT NULL,
+    description text NOT NULL,
+    allowed_email_domains text[],
+    allowed_emails text[]
 );
-COMMENT ON TABLE public.organization IS 'organization enums';
+COMMENT ON TABLE public.organizations IS 'organization enums';
 CREATE TABLE public.policies (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     organization text NOT NULL,
@@ -136,18 +138,15 @@ CREATE TABLE public.subject_type (
     description text NOT NULL
 );
 COMMENT ON TABLE public.subject_type IS 'subject enum';
-CREATE TABLE public.user_org_groups (
+CREATE TABLE public.user_org_roles (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    user_id uuid NOT NULL,
-    groups text[],
-    organization text NOT NULL,
-    created_by text NOT NULL,
-    updated_by text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    deleted_at timestamp with time zone
+    created_by uuid NOT NULL,
+    user_id uuid NOT NULL,
+    role text NOT NULL,
+    organization text NOT NULL
 );
-COMMENT ON TABLE public.user_org_groups IS 'User, Org, Groups join table';
+COMMENT ON TABLE public.user_org_roles IS 'Roles of User for a given Org.';
 ALTER TABLE ONLY public.action
     ADD CONSTRAINT action_pkey PRIMARY KEY (value);
 ALTER TABLE ONLY public.device_pool
@@ -160,8 +159,8 @@ ALTER TABLE ONLY public.devices
     ADD CONSTRAINT devices_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.direction
     ADD CONSTRAINT direction_pkey PRIMARY KEY (value);
-ALTER TABLE ONLY public.organization
-    ADD CONSTRAINT organization_pkey PRIMARY KEY (value);
+ALTER TABLE ONLY public.organizations
+    ADD CONSTRAINT organization_pkey PRIMARY KEY (organization);
 ALTER TABLE ONLY public.policies
     ADD CONSTRAINT policies_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.pools
@@ -172,12 +171,13 @@ ALTER TABLE ONLY public.rules
     ADD CONSTRAINT rules_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.subject_type
     ADD CONSTRAINT subject_type_pkey PRIMARY KEY (value);
-ALTER TABLE ONLY public.user_org_groups
-    ADD CONSTRAINT user_org_groups_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.user_org_roles
+    ADD CONSTRAINT user_org_roles_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.user_org_roles
+    ADD CONSTRAINT user_org_roles_user_id_role_organization_key UNIQUE (user_id, role, organization);
 CREATE UNIQUE INDEX policies_subject_id_subject_type_rule_id_organization_unique ON public.policies USING btree (subject_id, subject_type, rule_id, organization) WHERE (deleted_at IS NULL);
 CREATE UNIQUE INDEX pools_display_name_organization_unique ON public.pools USING btree (display_name, organization) WHERE (deleted_at IS NULL);
 CREATE UNIQUE INDEX rules_display_name_organization_unique ON public.rules USING btree (display_name, organization) WHERE (deleted_at IS NULL);
-CREATE UNIQUE INDEX user_org_groups_user_id_organization_unique ON public.user_org_groups USING btree (user_id, organization) WHERE (deleted_at IS NULL);
 CREATE RULE devices_soft_deletion_rule AS
     ON DELETE TO public.devices
    WHERE (current_setting('rules.soft_deletion'::text) = 'on'::text) DO INSTEAD  UPDATE public.devices SET deleted_at = now()
@@ -198,11 +198,6 @@ CREATE RULE rules_soft_deletion_rule AS
    WHERE (current_setting('rules.soft_deletion'::text) = 'on'::text) DO INSTEAD  UPDATE public.rules SET deleted_at = now()
   WHERE (rules.id = old.id);
 COMMENT ON RULE rules_soft_deletion_rule ON public.rules IS 'Make soft instead of hard deletion';
-CREATE RULE user_org_groups_soft_deletion_rule AS
-    ON DELETE TO public.user_org_groups
-   WHERE (current_setting('rules.soft_deletion'::text) = 'on'::text) DO INSTEAD  UPDATE public.user_org_groups SET deleted_at = now()
-  WHERE (user_org_groups.id = old.id);
-COMMENT ON RULE user_org_groups_soft_deletion_rule ON public.user_org_groups IS 'Make soft instead of hard deletion';
 CREATE TRIGGER set_public_device_pool_updated_at BEFORE UPDATE ON public.device_pool FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
 COMMENT ON TRIGGER set_public_device_pool_updated_at ON public.device_pool IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 CREATE TRIGGER set_public_devices_updated_at BEFORE UPDATE ON public.devices FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
@@ -213,31 +208,31 @@ CREATE TRIGGER set_public_pools_updated_at BEFORE UPDATE ON public.pools FOR EAC
 COMMENT ON TRIGGER set_public_pools_updated_at ON public.pools IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 CREATE TRIGGER set_public_rules_updated_at BEFORE UPDATE ON public.rules FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
 COMMENT ON TRIGGER set_public_rules_updated_at ON public.rules IS 'trigger to set value of column "updated_at" to current timestamp on row update';
-CREATE TRIGGER set_public_user_org_groups_updated_at BEFORE UPDATE ON public.user_org_groups FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
-COMMENT ON TRIGGER set_public_user_org_groups_updated_at ON public.user_org_groups IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 ALTER TABLE ONLY public.device_pool
     ADD CONSTRAINT device_pool_device_id_fkey FOREIGN KEY (device_id) REFERENCES public.devices(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.device_pool
     ADD CONSTRAINT device_pool_pool_id_fkey FOREIGN KEY (pool_id) REFERENCES public.pools(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.devices
-    ADD CONSTRAINT devices_organization_fkey FOREIGN KEY (organization) REFERENCES public.organization(value);
+    ADD CONSTRAINT devices_organization_fkey FOREIGN KEY (organization) REFERENCES public.organizations(organization);
 ALTER TABLE ONLY public.policies
-    ADD CONSTRAINT policies_organization_fkey FOREIGN KEY (organization) REFERENCES public.organization(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT policies_organization_fkey FOREIGN KEY (organization) REFERENCES public.organizations(organization) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.policies
     ADD CONSTRAINT policies_rule_id_fkey FOREIGN KEY (rule_id) REFERENCES public.rules(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.policies
     ADD CONSTRAINT policies_subject_type_fkey FOREIGN KEY (subject_type) REFERENCES public.subject_type(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.pools
-    ADD CONSTRAINT pools_organization_fkey FOREIGN KEY (organization) REFERENCES public.organization(value);
+    ADD CONSTRAINT pools_organization_fkey FOREIGN KEY (organization) REFERENCES public.organizations(organization);
 ALTER TABLE ONLY public.rules
     ADD CONSTRAINT rules_action_fkey FOREIGN KEY (action) REFERENCES public.action(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.rules
     ADD CONSTRAINT rules_direction_fkey FOREIGN KEY (direction) REFERENCES public.direction(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.rules
-    ADD CONSTRAINT rules_organization_fkey FOREIGN KEY (organization) REFERENCES public.organization(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT rules_organization_fkey FOREIGN KEY (organization) REFERENCES public.organizations(organization) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.rules
     ADD CONSTRAINT rules_protocol_fkey FOREIGN KEY (protocol) REFERENCES public.protocol(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
-ALTER TABLE ONLY public.user_org_groups
-    ADD CONSTRAINT user_org_groups_organization_fkey FOREIGN KEY (organization) REFERENCES public.organization(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
-ALTER TABLE ONLY public.user_org_groups
-    ADD CONSTRAINT user_org_groups_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.user_org_roles
+    ADD CONSTRAINT user_org_roles_organization_fkey FOREIGN KEY (organization) REFERENCES public.organizations(organization) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY public.user_org_roles
+    ADD CONSTRAINT user_org_roles_role_fkey FOREIGN KEY (role) REFERENCES auth.roles(role) ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE ONLY public.user_org_roles
+    ADD CONSTRAINT user_org_roles_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE CASCADE ON DELETE CASCADE;

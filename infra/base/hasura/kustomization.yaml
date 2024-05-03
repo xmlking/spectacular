@@ -18,7 +18,7 @@ configMapGenerator:
   - name: env-vars
     literals:
       - HASURA_GRAPHQL_LOG_LEVEL=info
-      - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=public
+      - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=anonymous
       - HASURA_GRAPHQL_DEV_MODE='true'
       - HASURA_GRAPHQL_ENABLE_CONSOLE='true'
       - HASURA_GRAPHQL_ENABLE_TELEMETRY='false'

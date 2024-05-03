@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { organization_enum } from '$houdini';
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 
 export const userSchema = z.object({
 	firstName: z.string({ required_error: 'First Name is required' }).min(1, { message: 'First Name is required' }).trim(),
@@ -17,7 +17,7 @@ export const userSchema = z.object({
 	receiveEmail: z.boolean().default(true),
 	createdAt: z.date().optional(),
 	updatedAt: z.date().optional(),
-	organization: z.nativeEnum(organization_enum).default('chinthagunta')
+	organization: z.string().default(PUBLIC_DEFAULT_ORGANIZATION)
 });
 
 export const userUpdatePasswordSchema = userSchema

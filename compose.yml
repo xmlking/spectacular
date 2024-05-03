@@ -101,6 +101,8 @@ services:
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
       HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
       HASURA_GRAPHQL_CORS_DOMAIN: '*'
+      # HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
+      # HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
     healthcheck:
       test: curl --fail -s http://localhost:8080/healthz || exit 1
       interval: 60s

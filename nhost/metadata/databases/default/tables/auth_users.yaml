@@ -97,7 +97,7 @@ array_relationships:
       foreign_key_constraint_on:
         column: user_id
         table:
-          name: user_org_groups
+          name: user_org_roles
           schema: public
   - name: refreshTokens
     using:

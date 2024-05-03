@@ -1,22 +1,25 @@
-import { fail } from '@sveltejs/kit';
+import { fail , error} from '@sveltejs/kit';
+import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
-import { message, setError, superValidate } from 'sveltekit-superforms';
+import { message, setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { Logger } from '@spectacular/utils';
 import { userSchema } from '$lib/schema/user';
 import { NHOST_SESSION_KEY } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
 import { i18n } from '$lib/i18n';
+import { CachePolicy, ListOrganizationsStore, order_by } from '$houdini';
 
 const signUpSchema = userSchema.pick({
 	firstName: true,
 	lastName: true,
 	email: true,
 	password: true,
-	terms: true,
+	// terms: true,
 	organization: true
 });
 
+const listOrganizationsStore = new ListOrganizationsStore();
 const log = new Logger('server:auth:signup');
 
 export const load = async (event) => {
@@ -32,7 +35,26 @@ export const load = async (event) => {
 	log.debug(session);
 	if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
 	const form = await superValidate(zod(signUpSchema));
-	return { form };
+
+	const { errors, data } = await listOrganizationsStore.fetch({
+		event,
+		blocking: true,
+		policy: CachePolicy.CacheAndNetwork,
+		// variables: {}
+	});
+
+	if (errors) {
+		errors.forEach((error) => {
+			log.error('list rule api error', error);
+			// NOTE: you can add multiple errors, send all along with a message
+			setError(form, '', (error as GraphQLError).message);
+		});
+		setMessage(form, { type: 'error', message: 'List organizations failed' });
+		return { status: 500, form };
+	}
+	const organizations = data?.organizations.map((x) => x.organization);
+	if (!organizations) error(404, 'organizations not found');
+	return { organizations, form };
 };
 
 export const actions = {

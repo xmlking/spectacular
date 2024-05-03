@@ -1,0 +1,49 @@
+table:
+  name: organizations
+  schema: public
+configuration:
+  column_config:
+    allowed_email_domains:
+      custom_name: allowedEmailDomains
+    allowed_emails:
+      custom_name: allowedEmails
+  custom_column_names:
+    allowed_email_domains: allowedEmailDomains
+    allowed_emails: allowedEmails
+  custom_root_fields: {}
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - description
+        - organization
+      filter: {}
+    comment: ""
+  - role: manager
+    permission:
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - description
+        - organization
+      filter: {}
+  - role: supervisor
+    permission:
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - description
+        - organization
+      filter:
+        organization:
+          _in: x-hasura-allowed-orgs
+  - role: user
+    permission:
+      columns:
+        - description
+        - organization
+      filter:
+        organization:
+          _in: x-hasura-allowed-orgs

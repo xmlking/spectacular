@@ -36,11 +36,13 @@ services:
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_LOG_LEVEL: warn
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup,http-log,webhook-log,websocket-log
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
       HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
       HASURA_GRAPHQL_STRINGIFY_NUMERIC_TYPES: 'false'
       HASURA_GRAPHQL_TX_ISOLATION: read-committed
       HASURA_GRAPHQL_CORS_DOMAIN: '*'
+      # HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
+      # HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
     healthcheck:
       test: ["CMD-SHELL", "timeout 1s bash -c ':> /dev/tcp/127.0.0.1/9695' || exit 1"]
       interval: 60s

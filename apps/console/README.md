@@ -139,7 +139,7 @@ Optionally apply all seed files
 
 ```shell
 # add `--insecure-skip-tls-verify` option if needed
-hasura seed apply --database-name default
+hasura seed apply --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 ```
 
 ### Frontend
