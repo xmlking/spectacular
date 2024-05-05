@@ -8,9 +8,7 @@ import { userSchema } from '$lib/schema/user';
 import { NHOST_SESSION_KEY } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
 import { i18n } from '$lib/i18n';
-import { env as secrets } from '$env/dynamic/private';
-import { CachePolicy, ListOrganizationsStore, type ListOrganizations$result, order_by } from '$houdini';
-import type { NhostClient } from '@nhost/nhost-js';
+import { getOrgs } from '$lib/server/utils/getOrgs';
 
 const log = new Logger('server:auth:signup');
 
@@ -22,31 +20,6 @@ const signUpSchema = userSchema.pick({
 	// terms: true,
 	organization: true
 });
-
-const listOrganizationsStore = new ListOrganizationsStore();
-const ADMIN_SECRET = secrets.HASURA_GRAPHQL_ADMIN_SECRET;
-const ORGS_QUERY = listOrganizationsStore.artifact.raw;
-const ORGS_HASH = listOrganizationsStore.artifact.hash;
-const cache = new Map();
-
-async function getOrgs(nhost: NhostClient) {
-	if (!cache.has(ORGS_HASH)) {
-		const { data, error } = await nhost.graphql.request(
-			ORGS_QUERY,
-			{},
-			{
-				headers: {
-					'X-Hasura-Admin-Secret': ADMIN_SECRET
-				}
-			}
-		);
-		if (error) {
-			return { errors: error as GraphQLError[], data: null };
-		}
-		cache.set(ORGS_HASH, data);
-	}
-	return { errors: null, data: cache.get(ORGS_HASH) as ListOrganizations$result };
-}
 
 export const load = async (event) => {
 	const {
@@ -61,9 +34,8 @@ export const load = async (event) => {
 	// log.debug(session);
 	if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
 	const form = await superValidate(zod(signUpSchema));
-
+	// fetch orgs and render errors if backend throw error.
 	const { errors, data } = await getOrgs(nhost);
-
 	if (errors) {
 		errors.forEach((error) => {
 			log.error('list orgs api error', error);
@@ -75,6 +47,7 @@ export const load = async (event) => {
 	}
 	const organizations = data.organizations.map((x) => x.organization);
 	if (!organizations) error(404, 'organizations not found');
+
 	return { organizations, form };
 };
 
