@@ -2,7 +2,7 @@ ARG SCOPE=console
 ###################################################################
 # Stage 0: base image											                        #
 ###################################################################
-FROM node:21-slim AS base
+FROM node:22-slim AS base
 ENV GIT_SSL_NO_VERIFY 1
 RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
@@ -79,8 +79,8 @@ RUN pnpm turbo run build --filter=${SCOPE}...
 ###################################################################
 # Stage 4: Run the app (prod)                                     #
 ###################################################################
-# FROM gcr.io/distroless/nodejs:20 as final
-# FROM gcr.io/distroless/nodejs:20-debug as final
+# FROM gcr.io/distroless/nodejs:22 as final
+# FROM gcr.io/distroless/nodejs:22-debug as final
 FROM cgr.dev/chainguard/node:latest AS runner
 # FROM base AS runner
 
