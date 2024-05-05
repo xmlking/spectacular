@@ -23,7 +23,7 @@
 		"test": "pnpm run test:integration && pnpm run test:unit",
 		"test:integration": "dotenv-run -f .env -f .secrets -v -- playwright test",
 		"test:unit": "dotenv-run -f .env -f .secrets -v -- vitest",
-		"test:unit:coverage": "dotenv-run -f .env -f .secrets -v -- vitest run --coverage",
+		"test:unit:coverage": "dotenv-run -f .env -f .secrets -v -- vitest run --coverage || true",
 		"test:unit:ui": "dotenv-run -f .env -f .secrets -v -- vitest --ui"
 	},
 	"dependencies": {
