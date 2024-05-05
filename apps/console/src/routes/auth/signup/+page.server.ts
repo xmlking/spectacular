@@ -1,4 +1,4 @@
-import { fail , error} from '@sveltejs/kit';
+import { fail, error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, setMessage, superValidate } from 'sveltekit-superforms';
@@ -8,7 +8,11 @@ import { userSchema } from '$lib/schema/user';
 import { NHOST_SESSION_KEY } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
 import { i18n } from '$lib/i18n';
-import { CachePolicy, ListOrganizationsStore, order_by } from '$houdini';
+import { env as secrets } from '$env/dynamic/private';
+import { CachePolicy, ListOrganizationsStore, type ListOrganizations$result, order_by } from '$houdini';
+import type { NhostClient } from '@nhost/nhost-js';
+
+const log = new Logger('server:auth:signup');
 
 const signUpSchema = userSchema.pick({
 	firstName: true,
@@ -20,7 +24,29 @@ const signUpSchema = userSchema.pick({
 });
 
 const listOrganizationsStore = new ListOrganizationsStore();
-const log = new Logger('server:auth:signup');
+const ADMIN_SECRET = secrets.HASURA_GRAPHQL_ADMIN_SECRET;
+const ORGS_QUERY = listOrganizationsStore.artifact.raw;
+const ORGS_HASH = listOrganizationsStore.artifact.hash;
+const cache = new Map();
+
+async function getOrgs(nhost: NhostClient) {
+	if (!cache.has(ORGS_HASH)) {
+		const { data, error } = await nhost.graphql.request(
+			ORGS_QUERY,
+			{},
+			{
+				headers: {
+					'X-Hasura-Admin-Secret': ADMIN_SECRET
+				}
+			}
+		);
+		if (error) {
+			return { errors: error as GraphQLError[], data: null };
+		}
+		cache.set(ORGS_HASH, data);
+	}
+	return { errors: null, data: cache.get(ORGS_HASH) as ListOrganizations$result };
+}
 
 export const load = async (event) => {
 	const {
@@ -32,27 +58,22 @@ export const load = async (event) => {
 	await limiter.cookieLimiter?.preflight(event);
 
 	const session = nhost.auth.getSession();
-	log.debug(session);
+	// log.debug(session);
 	if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
 	const form = await superValidate(zod(signUpSchema));
 
-	const { errors, data } = await listOrganizationsStore.fetch({
-		event,
-		blocking: true,
-		policy: CachePolicy.CacheAndNetwork,
-		// variables: {}
-	});
+	const { errors, data } = await getOrgs(nhost);
 
 	if (errors) {
 		errors.forEach((error) => {
-			log.error('list rule api error', error);
+			log.error('list orgs api error', error);
 			// NOTE: you can add multiple errors, send all along with a message
 			setError(form, '', (error as GraphQLError).message);
 		});
-		setMessage(form, { type: 'error', message: 'List organizations failed' });
+		setMessage(form, { type: 'error', message: 'List organizations failed' }, { status: 500 });
 		return { status: 500, form };
 	}
-	const organizations = data?.organizations.map((x) => x.organization);
+	const organizations = data.organizations.map((x) => x.organization);
 	if (!organizations) error(404, 'organizations not found');
 	return { organizations, form };
 };

@@ -9,10 +9,11 @@
 	import * as m from '$i18n/messages';
 	import { isLoadingForm } from '$lib/stores/loading';
 	import { handleMessage } from '$lib/components/layout/toast-manager';
+	import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 
 	export let data;
 	const log = new Logger('auth:signup');
-	const organizations = data.organizations;
+	const organizations = data.organizations ?? [PUBLIC_DEFAULT_ORGANIZATION];
 	const toastStore = getToastStore();
 
 	const {

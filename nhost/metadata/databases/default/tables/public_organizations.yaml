@@ -12,15 +12,6 @@ configuration:
     allowed_emails: allowedEmails
   custom_root_fields: {}
 select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-        - allowed_email_domains
-        - allowed_emails
-        - description
-        - organization
-      filter: {}
-    comment: ""
   - role: manager
     permission:
       columns:

@@ -1,3 +1,4 @@
+import { error } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
 import { Logger } from '@spectacular/utils';
 import { env } from '$env/dynamic/public';
@@ -57,8 +58,11 @@ export default new HoudiniClient({
 		};
 	},
 	// throwOnError: {
+	// 	// can be any combination of
+	// 	// query, mutation, subscription, and all
 	// 	operations: ['all'],
-	// 	error: (errors) => error(500, errors.map((error) => error.message).join('. ') + '.')
+	// 	// the function to call
+	// 	error: (errors, ctx) => error(500, `(${ctx.artifact.name}): ` + errors.map((err) => err.message).join('. ') + '.')
 	// },
 	plugins: [subClient, ...(browser ? [logMetadata] : [])]
 });
