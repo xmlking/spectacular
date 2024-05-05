@@ -60,7 +60,7 @@ function nullifyEmptyProperties(obj) {
 	}
 }
 
-// RUN: turbo run test --filter=./packages/helpers
+// RUN: turbo run test --filter=./packages/utils
 // in-source testing
 if (import.meta.vitest) {
 	const { it, expect } = import.meta.vitest;

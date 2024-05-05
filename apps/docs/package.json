@@ -6,7 +6,6 @@
 		"astro": "astro",
 		"build": "astro check && astro build",
 		"dev": "astro dev",
-		"test:unit:coverage": "echo OK",
 		"format": "concurrently pnpm:format:*",
 		"format:js": "eslint --fix .",
 		"format:prettier": "prettier --write .",
@@ -14,7 +13,8 @@
 		"lint:js": "eslint .",
 		"lint:prettier": "prettier --check --plugin=prettier-plugin-astro .",
 		"preview": "astro preview",
-		"start": "astro dev"
+		"start": "astro dev",
+		"test:unit:coverage": "echo OK"
 	},
 	"dependencies": {
 		"@astrojs/check": "0.5.10",
