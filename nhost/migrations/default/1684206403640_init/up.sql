@@ -9,6 +9,19 @@ CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 -- CREATE EXTENSION IF NOT EXISTS vector WITH SCHEMA public;
 -- CREATE EXTENSION IF NOT EXISTS http WITH SCHEMA public;
+CREATE FUNCTION public.delete_user_org_roles_when_user_roles_deleted() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE
+    FROM public.user_org_roles USING auth.users
+    WHERE auth.users.id = OLD.user_id
+      AND user_id = OLD.user_id
+      AND role = OLD.role
+      AND organization = auth.users.metadata->>'default_org';
+    RETURN OLD;
+END;
+$$;
 CREATE TABLE public.devices (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     display_name text NOT NULL,
@@ -31,7 +44,18 @@ CREATE FUNCTION public.devices_not_in_pool(poolid uuid) RETURNS SETOF public.dev
 SELECT *
 FROM devices
 WHERE id NOT IN (SELECT device_id FROM public.device_pool WHERE pool_id = poolid)
-	$$;
+$$;
+CREATE FUNCTION public.insert_user_org_roles_when_user_roles_inserted() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO public.user_org_roles (created_by, user_id, role, organization)
+    SELECT 'c0c0a000-0000-4000-a000-000000000000', NEW.user_id, NEW.role, auth.users.metadata ->> 'default_org'
+    FROM auth.users
+    WHERE NEW.user_id = auth.users.id;
+    RETURN NULL;
+END;
+$$;
 CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
@@ -198,6 +222,8 @@ CREATE RULE rules_soft_deletion_rule AS
    WHERE (current_setting('rules.soft_deletion'::text) = 'on'::text) DO INSTEAD  UPDATE public.rules SET deleted_at = now()
   WHERE (rules.id = old.id);
 COMMENT ON RULE rules_soft_deletion_rule ON public.rules IS 'Make soft instead of hard deletion';
+CREATE TRIGGER delete_public_user_org_roles_when_auth_user_roles_deleted AFTER DELETE ON auth.user_roles FOR EACH ROW EXECUTE FUNCTION public.delete_user_org_roles_when_user_roles_deleted();
+CREATE TRIGGER insert_public_user_org_roles_when_auth_user_roles_inserted AFTER INSERT ON auth.user_roles FOR EACH ROW EXECUTE FUNCTION public.insert_user_org_roles_when_user_roles_inserted();
 CREATE TRIGGER set_public_device_pool_updated_at BEFORE UPDATE ON public.device_pool FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
 COMMENT ON TRIGGER set_public_device_pool_updated_at ON public.device_pool IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 CREATE TRIGGER set_public_devices_updated_at BEFORE UPDATE ON public.devices FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
