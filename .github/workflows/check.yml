@@ -67,8 +67,8 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm run build --filter=docs
-      - run: pnpm run test:unit:coverage --filter=docs
+      - run: pnpm run --filter=docs build
+      - run: pnpm run --filter=docs test:unit:coverage
 #     steps:
 #       - name: Check out code
 #         uses: actions/checkout@v4
