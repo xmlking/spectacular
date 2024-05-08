@@ -47,6 +47,7 @@ permissions:
   contents: write # needed to write releases
   id-token: write # needed for keyless signing
   packages: write # needed for ghcr access
+  attestations: write # needed for ghcr to sign artifacts
 
 jobs:
   build-and-push-image:
@@ -104,3 +105,8 @@ jobs:
             BUILD_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
             BUILD_REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
             SCOPE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.title'] }}
+# TODO: https://github.blog/2024-05-02-introducing-artifact-attestations-now-in-public-beta/
+#      - name: Attest Build Provenance
+#        uses: actions/attest-build-provenance@897ed5eab6ed058a474202017ada7f40bfa52940 # v1.0.0
+#        with:
+#          subject-path: "bin/my-artifact.tar.gz"

@@ -93,7 +93,7 @@ CREATE TABLE public.organizations (
     allowed_email_domains text[],
     allowed_emails text[]
 );
-COMMENT ON TABLE public.organizations IS 'organization enums';
+COMMENT ON TABLE public.organizations IS 'organizations in multitenant env';
 CREATE TABLE public.policies (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     organization text NOT NULL,

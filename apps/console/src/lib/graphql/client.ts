@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit';
+// import { error } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
 import { Logger } from '@spectacular/utils';
 import { env } from '$env/dynamic/public';
