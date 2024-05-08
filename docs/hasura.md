@@ -78,10 +78,21 @@ hasura metadata reload
 hasura migrate create init --from-server --database-name default --schema public --project nhost --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 hasura migrate create init --from-server --database-name default --schema auth --project nhost --endpoint https://hasura.traefik.me  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 hasura migrate create init --from-server --database-name default --schema storage --project nhost --endpoint https://hasura.traefik.me  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-# rollback/rollup last migrate
-hasura migrate apply --down 1 --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura migrate apply --up 1 --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+## rollback/rollup last migrate
+# Apply last 1 down migrations:
+hasura migrate apply --down 1 --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# Apply last 1 up migrations:
+hasura migrate apply --up 1  --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# Apply only a particular `down` version
 hasura migrate apply --version 1686378049757 --type down --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# Rollback all migrations:
+hasura migrate apply --down all -endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# Check status of migrations
+hasura migrate status --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# Usage to delete all migration versions
+hasura migrate delete --all --database-name default --server --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# Apply all migrations
+hasura migrate apply --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Export Hasura GraphQL Engine metadata from the database
 hasura metadata export --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Show changes between server metadata and the exported metadata file:
