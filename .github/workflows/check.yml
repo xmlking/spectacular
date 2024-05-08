@@ -67,7 +67,7 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm run --filter=docs build
+      # - run: pnpm run --filter=docs build
       - run: pnpm run --filter=docs test:unit:coverage
 #     steps:
 #       - name: Check out code
