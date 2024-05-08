@@ -1,4 +1,5 @@
 // DOCS: https://turbo.build/repo/docs/handbook/linting/eslint
+// TODO: eslint v9 https://github.com/usagizmo/webapp-template/blob/main/packages/eslint-config/eslint.config.js
 /** @type { import("eslint").Linter.FlatConfig } */
 module.exports = {
 	root: true,

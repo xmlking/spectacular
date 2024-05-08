@@ -9,6 +9,7 @@ import houdini from 'houdini/vite';
 // if (!existsSync('./../../infra/base/traefik/certs/traefik.me.crt')) {
 // 	console.log('Missing HTTPS key/cert. You may need to run:  npm run cert');
 // }
+// TODO Lightning CSS  and tailwind v4 https://twitter.com/devongovett/status/1701097560155549756
 
 export default defineConfig({
 	server: {

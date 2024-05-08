@@ -1244,7 +1244,7 @@ enum order_by {
   desc_nulls_last
 }
 
-"""organization enums"""
+"""organizations in multitenant env"""
 type organizations {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
