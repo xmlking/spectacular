@@ -28,6 +28,7 @@ FROM base AS pruner
 WORKDIR /app
 RUN pnpm add -g turbo
 COPY . .
+RUN mv .git dotgit
 RUN turbo prune --scope=${SCOPE} --docker
 
 ###################################################################
@@ -62,7 +63,7 @@ RUN pnpm install --no-frozen-lockfile
 
 ## Build the project
 COPY --from=pruner /app/out/full/ .
-COPY --from=pruner /app/.git .git
+COPY --from=pruner /app/dotgit .git
 COPY turbo.json turbo.json
 
 ## Uncomment and use build args to enable remote caching
