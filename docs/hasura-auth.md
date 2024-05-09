@@ -11,6 +11,11 @@ We are using [hasure-auth](https://docs.nhost.io/guides/auth/overview) as **Iden
 Users login from WebApp form with `username/password` or Social Login (e.g., Google, AzureAD, GitHub etc), then `hasura-auth` issue JWT Session token.  
 JWT token issued during `SignIn` step is used as `Session` token to access backend services during user session. JWT `Session` tokens has short lifetime.
 
+Users can `SugnUp` via **WebApp** to a specific `organization`  with an email in `allowed email domains` or `allowed emails` defined in `public.organizations` for that  `organization`.  
+They will automatically get *allowed roles* defined in `AUTH_USER_DEFAULT_ALLOWED_ROLES` i.e.,  `user,me` and *default role* defined in `AUTH_USER_DEFAULT_ROLE` i.e., `user`
+
+Optionally, additional higher roles can be added to user's *allowed roles* by administrator (manager) by [Deligation](#Deligation) UI.
+
 ### Service Accounts
 
 We create Service Account (with role: device) when a new device is provisioned and generate PAT token.  
@@ -98,10 +103,10 @@ await nhost.graphql.request(
 | ---------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | user       | select | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
 | manage     | select | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}}]}                                           |
-| superwiser | select | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                            |
+| supervisor | select | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                            |
 | user       | update | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
 | manage     | update | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}}]}                                           |
-| superwiser | update | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                            |
+| supervisor | update | {"\_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                            |
 
 > `delete` action is desable for most cases, as we do `soft-delete`
 
@@ -115,9 +120,13 @@ Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Adminis
 
 ### Deligation
 
-**Deligation** is the process where higher role users can assign elevated roles (superwiser, manager) to other users via custom UI with in his/her default `Organization` or diffrent `Organization` with in multi-tenant deployment.
+**Deligation** is the process where higher role users can assign elevated roles (supervisor, manager) to other users via custom UI with in his/her default `Organization` or diffrent `Organization` with in multi-tenant deployment.
 
 > **Assumptions:** there will be `public.user_roles_orgs` table that manage `user-role` assignment for a give `Organization` 
+
+#### Types of Deligation
+1. Additional higher roles can be added to user's *allowed roles* by administrator (manager) in the same user's `default_org` and optionally set it as user's `default_role`
+2. Administrator (manager) can also assign other  `Organizations`  to existing user with `manager` role in `public.user_roles_orgs` table.
 
 ## Reference
 

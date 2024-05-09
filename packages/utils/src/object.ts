@@ -53,7 +53,7 @@ function nullifyEmptyProperties(obj) {
 			} else if (typeof obj[key] === 'object' && !(obj[key] instanceof Date)) {
 				nullifyEmptyProperties(obj[key]); // Recursively check nested objects
 				if (Object.keys(obj[key]).length === 0) {
-					delete obj[key];
+					obj[key] = null;
 				}
 			}
 		}
@@ -68,7 +68,8 @@ if (import.meta.vitest) {
 	it('Test cleanClone with strip option', async () => {
 		const jsonObject = {
 			name: 'John',
-			age: null,
+			age: 0,
+			gender: false,
 			dob: new Date('2023-06-05T07:07:00.000Z'),
 			address: {
 				street: '123 Main St',
@@ -76,13 +77,49 @@ if (import.meta.vitest) {
 				country: undefined,
 				postalCode: null
 			},
-			occupation: undefined
+			occupation: undefined,
+			friends: ['sumo', 'demo']
 		};
 		const cloneObj = cleanClone(jsonObject, { empty: 'strip' });
 		expect(cloneObj).toStrictEqual({
 			name: 'John',
+			age: 0,
+			gender: false,
 			dob: new Date('2023-06-05T07:07:00.000Z'),
-			address: { street: '123 Main St' }
+			address: { street: '123 Main St' },
+			friends: ['sumo', 'demo']
+		});
+	});
+
+	it('Test cleanClone with null option', async () => {
+		const jsonObject = {
+			name: 'John',
+			age: 0,
+			gender: false,
+			dob: new Date('2023-06-05T07:07:00.000Z'),
+			address: {
+				street: '123 Main St',
+				city: '',
+				country: undefined,
+				postalCode: null
+			},
+			occupation: undefined,
+			friends: []
+		};
+		const cloneObj = cleanClone(jsonObject, { empty: 'null' });
+		expect(cloneObj).toStrictEqual({
+			name: 'John',
+			age: 0,
+			gender: false,
+			dob: new Date('2023-06-05T07:07:00.000Z'),
+			address: {
+				street: '123 Main St',
+				city: null,
+				country: null,
+				postalCode: null
+			},
+			occupation: null,
+			friends: null
 		});
 	});
 }

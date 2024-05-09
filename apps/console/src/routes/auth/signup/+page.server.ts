@@ -3,7 +3,7 @@ import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { Logger } from '@spectacular/utils';
+import { Logger, sleep } from '@spectacular/utils';
 import { userSchema } from '$lib/schema/user';
 import { NHOST_SESSION_KEY } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
@@ -116,8 +116,3 @@ export const actions = {
 		return message(form, { type: 'success', message: 'Signup sucessfull 😎' });
 	}
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}

@@ -39,22 +39,24 @@ hasura console
 
 # Create a new seed by exporting data from tables already present in the database:
 # use `--insecure-skip-tls-verify` if needed
-hasura seed create devices --database-name default --from-table devices --endpoint https://hasura.traefik.me
-hasura seed create pools --database-name default --from-table pools --endpoint https://hasura.traefik.me
-hasura seed create rules --database-name default --from-table rules --endpoint https://hasura.traefik.me
-hasura seed create policies --database-name default --from-table policies --endpoint https://hasura.traefik.me
-hasura seed create users --database-name default --from-table auth.users --endpoint https://hasura.traefik.me --insecure-skip-tls-verify
-hasura seed create user_roles --database-name default --from-table auth.user_roles --endpoint https://hasura.traefik.me --insecure-skip-tls-verify
+hasura seed create organizations --database-name default --from-table organizations --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed create users --database-name default --from-table users --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed create devices --database-name default --from-table devices --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed create rules --database-name default --from-table rules --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed create pools --database-name default --from-table pools --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed create policies --database-name default --from-table policies --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 
 # Export data from multiple tables:
 # hasura seed create policies_organization --database-name default --from-table policies --from-table organization
 # Apply all seed file:
 hasura seed apply --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # (Or) Apply only a particular files:
-hasura seed apply --file 1_devices.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 2_rules.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 3_pools.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 4_policies.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 002_users.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 011_devices.sql --database-name default  --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 012_rules.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 013_pools.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 014_policies.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 
 # To apply all the Migrations present in the `migrations/` directory and the Metadata present in the `metadata/` directory on a new, "fresh",
 # instance of the Hasura Server at http://another-server-instance.hasura.app:
@@ -84,7 +86,9 @@ hasura migrate apply --down 1 --database-name default --endpoint https://hasura.
 # Apply last 1 up migrations:
 hasura migrate apply --up 1  --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Apply only a particular `down` version
+# this will reset tables in `public` schema and apply type data into `type` tables
 hasura migrate apply --version 1686378049757 --type down --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura migrate apply --version 1686378049757 --type up --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Rollback all migrations:
 hasura migrate apply --down all -endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Check status of migrations
@@ -126,10 +130,15 @@ To apply all the **Metadata** and **Migrations** present in the `infra/hasura` d
 hasura metadata apply --endpoint https://hasura.traefik.me
 # apply metadata, DB migrations and seed data
 hasura deploy --endpoint https://hasura.traefik.me
-hasura seed apply --file 1_devices.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
-hasura seed apply --file 2_rules.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
-hasura seed apply --file 3_pools.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
-hasura seed apply --file 4_policies.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+# Apply all seed file:
+hasura seed apply --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# (Or) Apply only a particular files:
+hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 002_users.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 011_devices.sql --database-name default  --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 012_rules.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 013_pools.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 014_policies.sql --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 ```
 
 Check the status

@@ -2,7 +2,7 @@ import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { Logger } from '@spectacular/utils';
+import { Logger, sleep } from '@spectacular/utils';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
 import { userSchema } from '$lib/schema/user';
 import { NHOST_SESSION_KEY } from '$lib/nhost';
@@ -187,9 +187,4 @@ async function login(nhost: NhostClient, redirectTo: string, lang: string, provi
 	if (providerUrl) {
 		redirectWithFlash(307, providerUrl);
 	}
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
 }

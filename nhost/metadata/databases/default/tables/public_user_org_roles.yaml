@@ -14,16 +14,6 @@ configuration:
     created_by: createdBy
     user_id: userId
   custom_root_fields: {}
-array_relationships:
-  - name: users
-    using:
-      manual_configuration:
-        column_mapping:
-          user_id: id
-        insertion_order: null
-        remote_table:
-          name: users
-          schema: auth
 insert_permissions:
   - role: manager
     permission:

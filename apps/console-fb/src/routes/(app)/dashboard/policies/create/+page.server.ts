@@ -3,7 +3,7 @@ import type { GraphQLError } from 'graphql';
 import { redirect } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { Logger, cleanClone } from '$lib/utils';
+import { Logger, cleanClone } from '@spectacular/utils';
 import { createPolicySchema as schema } from '$lib/models/schema';
 import { ToastLevel } from '$lib/components/toast';
 import { CreatePolicyStore } from '$houdini';
@@ -94,7 +94,3 @@ export const actions = {
 		throw redirect(302, '/dashboard/policies', message, event);
 	}
 };
-
-async function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}

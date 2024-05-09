@@ -1,4 +1,4 @@
-// import { encrypt } from '$lib/utils';
+// import { encrypt } '@spectacular/utils';
 import type { Cookies } from '@sveltejs/kit';
 import { dev } from '$app/environment';
 

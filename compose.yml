@@ -173,7 +173,7 @@ services:
   # If SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.29.3
+    image: nhost/hasura-auth:0.29.4
     hostname: auth
     container_name: auth
     restart: unless-stopped
@@ -200,7 +200,7 @@ services:
       AUTH_GRAVATAR_ENABLED: "true"
       AUTH_GRAVATAR_RATING: g
       AUTH_HOST: 0.0.0.0
-      AUTH_JWT_CUSTOM_CLAIMS: '{"allowed-orgs":"organizations[].organization","default-org":"metadata.default_org","user-email":"email"}'
+      AUTH_JWT_CUSTOM_CLAIMS: '{"allowed-orgs":"allowedOrgs[].organization","default-org":"metadata.default_org","user-email":"email"}'
       AUTH_LOCALE_ALLOWED_LOCALES: en,de,es
       AUTH_LOCALE_DEFAULT: en
       AUTH_MFA_ENABLED: "true"

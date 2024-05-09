@@ -5,7 +5,7 @@ import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ToastLevel } from '$lib/components/toast';
 import { poolUpdateSchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
+import { Logger, cleanClone } from '@spectacular/utils';
 import { uuidSchema } from '$lib/utils/zod.utils';
 import { UpdatePoolStore } from '$houdini';
 import type { pools_set_input } from '$houdini';

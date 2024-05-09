@@ -1253,6 +1253,15 @@ type organizations {
 }
 
 """
+order by aggregate values of table "organizations"
+"""
+input organizations_aggregate_order_by {
+  count: order_by
+  max: organizations_max_order_by
+  min: organizations_min_order_by
+}
+
+"""
 Boolean expression to filter rows from the table "organizations". All fields are combined with a logical 'AND'.
 """
 input organizations_bool_exp {
@@ -1263,6 +1272,26 @@ input organizations_bool_exp {
   allowedEmails: String_array_comparison_exp
   description: String_comparison_exp
   organization: String_comparison_exp
+}
+
+"""
+order by max() on columns of table "organizations"
+"""
+input organizations_max_order_by {
+  allowedEmailDomains: order_by
+  allowedEmails: order_by
+  description: order_by
+  organization: order_by
+}
+
+"""
+order by min() on columns of table "organizations"
+"""
+input organizations_min_order_by {
+  allowedEmailDomains: order_by
+  allowedEmails: order_by
+  description: order_by
+  organization: order_by
 }
 
 """Ordering options when selecting data from "organizations"."""
@@ -2262,7 +2291,9 @@ type query_root {
   """fetch data from the table: "user_org_roles" using primary key columns"""
   user_org_roles_by_pk(id: uuid!): user_org_roles
 
-  """An array relationship"""
+  """
+  fetch data from the table: "auth.users"
+  """
   users(
     """distinct select on columns"""
     distinct_on: [users_select_column!]
@@ -3226,7 +3257,9 @@ type subscription_root {
     where: user_org_roles_bool_exp
   ): [user_org_roles!]!
 
-  """An array relationship"""
+  """
+  fetch data from the table: "auth.users"
+  """
   users(
     """distinct select on columns"""
     distinct_on: [users_select_column!]
@@ -3284,33 +3317,6 @@ type user_org_roles {
   organization: String!
   role: String!
   userId: uuid!
-
-  """An array relationship"""
-  users(
-    """distinct select on columns"""
-    distinct_on: [users_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [users_order_by!]
-
-    """filter the rows returned"""
-    where: users_bool_exp
-  ): [users!]!
-}
-
-"""
-order by aggregate values of table "user_org_roles"
-"""
-input user_org_roles_aggregate_order_by {
-  count: order_by
-  max: user_org_roles_max_order_by
-  min: user_org_roles_min_order_by
 }
 
 """
@@ -3326,7 +3332,6 @@ input user_org_roles_bool_exp {
   organization: String_comparison_exp
   role: String_comparison_exp
   userId: uuid_comparison_exp
-  users: users_bool_exp
 }
 
 """
@@ -3351,30 +3356,6 @@ input user_org_roles_insert_input {
   organization: String
   role: String
   userId: uuid
-}
-
-"""
-order by max() on columns of table "user_org_roles"
-"""
-input user_org_roles_max_order_by {
-  createdAt: order_by
-  createdBy: order_by
-  id: order_by
-  organization: order_by
-  role: order_by
-  userId: order_by
-}
-
-"""
-order by min() on columns of table "user_org_roles"
-"""
-input user_org_roles_min_order_by {
-  createdAt: order_by
-  createdBy: order_by
-  id: order_by
-  organization: order_by
-  role: order_by
-  userId: order_by
 }
 
 """
@@ -3405,7 +3386,6 @@ input user_org_roles_order_by {
   organization: order_by
   role: order_by
   userId: order_by
-  users_aggregate: users_aggregate_order_by
 }
 
 """
@@ -3465,6 +3445,26 @@ User account information. Don't modify its structure as Hasura Auth relies on it
 """
 type users {
   activeMfaType: String
+
+  """
+  A computed field, executes function "user_allowed_orgs"
+  """
+  allowedOrgs(
+    """distinct select on columns"""
+    distinct_on: [organizations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [organizations_order_by!]
+
+    """filter the rows returned"""
+    where: organizations_bool_exp
+  ): [organizations!]
   avatarUrl: String!
   createdAt: timestamptz!
   currentChallenge: String
@@ -3482,24 +3482,6 @@ type users {
     path: String
   ): jsonb
   newEmail: citext
-
-  """An array relationship"""
-  organizations(
-    """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
-
-    """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): [user_org_roles!]!
   otpHashExpiresAt: timestamptz!
   otpMethodLastUsed: String
   phoneNumber: String
@@ -3510,15 +3492,6 @@ type users {
 }
 
 """
-order by aggregate values of table "auth.users"
-"""
-input users_aggregate_order_by {
-  count: order_by
-  max: users_max_order_by
-  min: users_min_order_by
-}
-
-"""
 Boolean expression to filter rows from the table "auth.users". All fields are combined with a logical 'AND'.
 """
 input users_bool_exp {
@@ -3526,6 +3499,7 @@ input users_bool_exp {
   _not: users_bool_exp
   _or: [users_bool_exp!]
   activeMfaType: String_comparison_exp
+  allowedOrgs: organizations_bool_exp
   avatarUrl: String_comparison_exp
   createdAt: timestamptz_comparison_exp
   currentChallenge: String_comparison_exp
@@ -3540,7 +3514,6 @@ input users_bool_exp {
   locale: String_comparison_exp
   metadata: jsonb_comparison_exp
   newEmail: citext_comparison_exp
-  organizations: user_org_roles_bool_exp
   otpHashExpiresAt: timestamptz_comparison_exp
   otpMethodLastUsed: String_comparison_exp
   phoneNumber: String_comparison_exp
@@ -3548,52 +3521,6 @@ input users_bool_exp {
   ticket: String_comparison_exp
   ticketExpiresAt: timestamptz_comparison_exp
   updatedAt: timestamptz_comparison_exp
-}
-
-"""
-order by max() on columns of table "auth.users"
-"""
-input users_max_order_by {
-  activeMfaType: order_by
-  avatarUrl: order_by
-  createdAt: order_by
-  currentChallenge: order_by
-  defaultRole: order_by
-  displayName: order_by
-  email: order_by
-  id: order_by
-  lastSeen: order_by
-  locale: order_by
-  newEmail: order_by
-  otpHashExpiresAt: order_by
-  otpMethodLastUsed: order_by
-  phoneNumber: order_by
-  ticket: order_by
-  ticketExpiresAt: order_by
-  updatedAt: order_by
-}
-
-"""
-order by min() on columns of table "auth.users"
-"""
-input users_min_order_by {
-  activeMfaType: order_by
-  avatarUrl: order_by
-  createdAt: order_by
-  currentChallenge: order_by
-  defaultRole: order_by
-  displayName: order_by
-  email: order_by
-  id: order_by
-  lastSeen: order_by
-  locale: order_by
-  newEmail: order_by
-  otpHashExpiresAt: order_by
-  otpMethodLastUsed: order_by
-  phoneNumber: order_by
-  ticket: order_by
-  ticketExpiresAt: order_by
-  updatedAt: order_by
 }
 
 """
@@ -3610,6 +3537,7 @@ type users_mutation_response {
 """Ordering options when selecting data from "auth.users"."""
 input users_order_by {
   activeMfaType: order_by
+  allowedOrgs_aggregate: organizations_aggregate_order_by
   avatarUrl: order_by
   createdAt: order_by
   currentChallenge: order_by
@@ -3624,7 +3552,6 @@ input users_order_by {
   locale: order_by
   metadata: order_by
   newEmail: order_by
-  organizations_aggregate: user_org_roles_aggregate_order_by
   otpHashExpiresAt: order_by
   otpMethodLastUsed: order_by
   phoneNumber: order_by

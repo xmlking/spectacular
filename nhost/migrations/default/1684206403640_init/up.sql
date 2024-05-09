@@ -67,6 +67,22 @@ BEGIN
 RETURN _new;
 END;
 $$;
+CREATE TABLE public.organizations (
+    organization text NOT NULL,
+    description text NOT NULL,
+    allowed_email_domains text[],
+    allowed_emails text[]
+);
+COMMENT ON TABLE public.organizations IS 'organizations in multitenant env';
+CREATE FUNCTION public.user_allowed_orgs(user_row auth.users) RETURNS SETOF public.organizations
+    LANGUAGE sql STABLE
+    AS $$
+SELECT DISTINCT o.*
+FROM public.organizations o
+         JOIN public.user_org_roles ur USING (organization)
+WHERE ur.user_id = user_row.id
+ORDER BY o.organization
+$$;
 CREATE TABLE public.action (
     value text NOT NULL,
     description text NOT NULL
@@ -87,13 +103,6 @@ CREATE TABLE public.direction (
     description text NOT NULL
 );
 COMMENT ON TABLE public.direction IS 'direction enum';
-CREATE TABLE public.organizations (
-    organization text NOT NULL,
-    description text NOT NULL,
-    allowed_email_domains text[],
-    allowed_emails text[]
-);
-COMMENT ON TABLE public.organizations IS 'organizations in multitenant env';
 CREATE TABLE public.policies (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     organization text NOT NULL,

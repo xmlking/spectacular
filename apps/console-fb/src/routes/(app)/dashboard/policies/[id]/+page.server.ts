@@ -5,7 +5,7 @@ import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ToastLevel } from '$lib/components/toast';
 import { updatePolicySchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
+import { Logger, cleanClone } from '@spectacular/utils';
 import { uuidSchema } from '$lib/utils/zod.utils';
 import { UpdatePolicyStore } from '$houdini';
 import type { policies_set_input, rules_set_input } from '$houdini';
@@ -31,9 +31,11 @@ export const actions = {
 		log.debug('before cleanClone with null:', form.data);
 		const dataCopy = cleanClone(form.data, { empty: 'null' });
 		log.debug('after cleanClone with null:', dataCopy);
+		// HINT: don't remove `subjectDisplayName`, `subjectId`, `subjectSecondaryId`, `subjectType` and `rid` below.
+		/* eslint-disable @typescript-eslint/no-unused-vars */
 		const {
 			subjectDisplayName,
-			subjectId,
+			subjectId,  /* eslint-disable-line */
 			subjectSecondaryId,
 			subjectType,
 			ruleId,
@@ -41,6 +43,7 @@ export const actions = {
 			rule: { id: rid, shared, throttleRate, ...restRule },
 			...restPolicy
 		} = dataCopy;
+		/* eslint-enable @typescript-eslint/no-unused-vars */
 
 		// if we are updating Policy with exclusive Rule, overwrite Rule's weight with Policy's weight.
 		if (!originalShared && restPolicy.weight) {
@@ -97,7 +100,3 @@ export const actions = {
 		throw redirect(302, '/dashboard/policies', message, event);
 	}
 };
-
-async function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}

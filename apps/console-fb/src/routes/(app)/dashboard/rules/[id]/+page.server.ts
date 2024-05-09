@@ -5,7 +5,7 @@ import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ToastLevel } from '$lib/components/toast';
 import { updateRuleSchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
+import { Logger, cleanClone } from '@spectacular/utils';
 import { uuidSchema } from '$lib/utils/zod.utils';
 import { UpdateRuleStore } from '$houdini';
 import type { rules_set_input } from '$houdini';

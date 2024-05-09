@@ -76,7 +76,7 @@ if (import.meta.vitest) {
 		email: string;
 	}
 
-	it('test myFetch', async ({}) => {
+	it('test myFetch', async () => {
 		try {
 			const person = await myFetch<Person>('https://jsonplaceholder.typicode.com/users/1');
 			expect(person.username).toBe('Bret');

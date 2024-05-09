@@ -47,7 +47,7 @@ maxDepthQueries = 4
 version = 18
 
 [auth]
-version = '0.29.3'
+version = '0.29.4'
 
 [auth.resources]
 replicas = 1
@@ -89,7 +89,7 @@ expiresIn = 900
 
 [[auth.session.accessToken.customClaims]]
 key = 'allowed-orgs'
-value = 'organizations[].organization'
+value = 'allowedOrgs[].organization'
 
 [[auth.session.accessToken.customClaims]]
 key = 'default-org'

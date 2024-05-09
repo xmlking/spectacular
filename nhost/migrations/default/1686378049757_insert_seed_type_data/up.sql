@@ -23,5 +23,3 @@ INSERT INTO public.protocol (value, description) VALUES ('IPV6', 'IPV6');
 INSERT INTO public.protocol (value, description) VALUES ('ICMPV6', 'ICMPV6');
 INSERT INTO public.protocol (value, description) VALUES ('RM', 'RM');
 
-INSERT INTO public.organizations (organization, description, allowed_email_domains, allowed_emails) VALUES ('chinthagunta', 'chinthagunta org', NULL, NULL);
-INSERT INTO public.organizations (organization, description,allowed_email_domains, allowed_emails) VALUES ('example', 'example org', NULL, NULL);

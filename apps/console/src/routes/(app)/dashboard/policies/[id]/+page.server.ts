@@ -96,6 +96,3 @@ export const actions = {
 	}
 };
 
-async function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-}

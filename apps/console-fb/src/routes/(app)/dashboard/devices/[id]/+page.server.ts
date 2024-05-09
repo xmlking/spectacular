@@ -5,7 +5,7 @@ import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ToastLevel } from '$lib/components/toast';
 import { updateDeviceSchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '$lib/utils';
+import { Logger, cleanClone } from '@spectacular/utils';
 import { uuidSchema } from '$lib/utils/zod.utils';
 import { UpdateDeviceStore } from '$houdini';
 import type { devices_set_input } from '$houdini';
@@ -32,7 +32,7 @@ export const actions = {
 		const dataCopy = cleanClone(form.data, { empty: 'null' });
 		log.debug('after cleanClone with null:', dataCopy);
 
-		const payload: devices_set_input = {
+		const payload: devices_set_input = { // FIXME organization should not be changed.
 			...(dataCopy.description && { description: dataCopy.description }),
 			...(dataCopy.annotations && { annotations: dataCopy.annotations }),
 			...(dataCopy.tags && { tags: dataCopy.tags })
