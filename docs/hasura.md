@@ -189,7 +189,7 @@ GRANT ALL ON SCHEMA public TO public;
 
 ```shell
 # apply metadata, DB migrations
-hasura deploy --endpoint https://hasura.traefik.me --endpoint https://mscymynlefhgknffvdzk.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura deploy  --with-seeds --endpoint https://mscymynlefhgknffvdzk.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # (optionally) Apply all seed file:
 hasura seed apply --database-name default --endpoint https://mscymynlefhgknffvdzk.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # (Or) Apply only a particular files:
