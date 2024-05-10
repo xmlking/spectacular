@@ -36,13 +36,13 @@ nhost sw upgrade
 ```shell
 # Shows an example config file
 nhost config example
-# alidate configuration
+# validate configuration
 nhost config validate
 # Shows configuration after resolving secrets
 nhost config show
 nhost config show --subdomain local
 # This command is mostly useful to verify configuration overlays.
-nhost config show --subdomain bggkthwysdvphygfecpa
+nhost config show --subdomain mscymynlefhgknffvdzk
 # Get cloud configuration
 nhost config pull
 ```
