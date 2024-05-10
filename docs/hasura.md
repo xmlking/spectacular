@@ -127,9 +127,9 @@ To apply all the **Metadata** and **Migrations** present in the `infra/hasura` d
 
 ```shell
 # only apply metadata
-hasura metadata apply --endpoint https://hasura.traefik.me
+hasura metadata apply --endpoint https://hasura.traefik.me  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # apply metadata, DB migrations and seed data
-hasura deploy --endpoint https://hasura.traefik.me
+hasura deploy --endpoint https://hasura.traefik.me  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Apply all seed file:
 hasura seed apply --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # (Or) Apply only a particular files:
@@ -165,9 +165,9 @@ hasura metadata export --endpoint https://hasura.traefik.me
 
 ```shell
 # reset migrations on server only
-hasura migrate delete --all --server --database-name default
+hasura migrate delete --all --server --database-name default --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Verify the status of the Migrations
-hasura migrate status --database-name default
+hasura migrate status --database-name default --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 ```
 
 #### Step 2: recreate public schema
@@ -175,6 +175,10 @@ hasura migrate status --database-name default
 > via hasura console SQL interface or via postgres CLI
 
 ```sql
+-- SET ROLE postgres;
+-- DROP SCHEMA storage CASCADE;
+-- DROP SCHEMA auth CASCADE;
+-- apply storage and auth schemas manually
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 GRANT ALL ON SCHEMA public TO postgres;
@@ -185,12 +189,16 @@ GRANT ALL ON SCHEMA public TO public;
 
 ```shell
 # apply metadata, DB migrations
-hasura deploy
-# optionally apply seeds
-hasura seed apply --file 1_devices.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
-hasura seed apply --file 2_rules.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
-hasura seed apply --file 3_pools.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
-hasura seed apply --file 4_policies.sql --database-name default --database-name default --endpoint https://hasura.traefik.me
+hasura deploy --endpoint https://hasura.traefik.me --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# (optionally) Apply all seed file:
+hasura seed apply --database-name default --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+# (Or) Apply only a particular files:
+hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 002_users.sql --database-name default --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 011_devices.sql --database-name default  --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 012_rules.sql --database-name default --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 013_pools.sql --database-name default --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 014_policies.sql --database-name default --endpoint https://bggkthwysdvphygfecpa.hasura.us-east-1.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 ```
 
 ## Configuration

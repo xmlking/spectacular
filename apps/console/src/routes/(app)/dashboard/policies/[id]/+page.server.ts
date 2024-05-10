@@ -95,4 +95,3 @@ export const actions = {
 		redirectWithFlash(302, '/dashboard/policies', message, event);
 	}
 };
-

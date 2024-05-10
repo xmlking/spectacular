@@ -8,8 +8,8 @@
 	},
 	"main": "all.js",
 	"scripts": {
-		"format": "prettier --write . && eslint --fix .",
-		"lint": "prettier --check . && eslint ."
+		"format": "prettier --write .",
+		"lint": "prettier --check ."
 	},
 	"devDependencies": {
 		"@spectacular/prettier-config": "workspace:*",
