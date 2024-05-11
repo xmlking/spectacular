@@ -1,7 +1,7 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
-import { redirect } from 'sveltekit-flash-message/server';
+import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { Logger, cleanClone } from '@spectacular/utils';
@@ -60,6 +60,6 @@ export const actions = {
 			duration: 10000,
 			type: ToastLevel.Success
 		} as const;
-		throw redirect(302, '/dashboard/pools', message, event);
+		redirectWithFlash(302, '/dashboard/pools', message, event);
 	}
 };

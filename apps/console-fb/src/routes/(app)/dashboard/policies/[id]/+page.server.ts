@@ -1,6 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
-import { redirect } from 'sveltekit-flash-message/server';
+import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { ToastLevel } from '$lib/components/toast';
@@ -19,7 +19,7 @@ export const actions = {
 		const id = uuidSchema.parse(params.id);
 		const session = await locals.auth();
 		if (session?.user == undefined) {
-			throw redirect(307, `/auth/signin?callbackUrl=/dashboard/policies/${id}`);
+			redirectWithFlash(307, `/auth/signin?callbackUrl=/dashboard/policies/${id}`);
 		}
 
 		const form = await superValidate(request, zod(schema));
@@ -35,7 +35,7 @@ export const actions = {
 		/* eslint-disable @typescript-eslint/no-unused-vars */
 		const {
 			subjectDisplayName,
-			subjectId,  /* eslint-disable-line */
+			subjectId /* eslint-disable-line */,
 			subjectSecondaryId,
 			subjectType,
 			ruleId,
@@ -97,6 +97,6 @@ export const actions = {
 			duration: 10000,
 			type: ToastLevel.Success
 		} as const;
-		throw redirect(302, '/dashboard/policies', message, event);
+		redirectWithFlash(302, '/dashboard/policies', message, event);
 	}
 };

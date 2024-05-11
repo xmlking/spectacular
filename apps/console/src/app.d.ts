@@ -11,6 +11,7 @@ declare global {
 		interface Session {
 			token?: string;
 			roles?: string | string[] | null;
+			// TODO: currentOrg?: string; // active user's org. default value is user's default_org
 		}
 		namespace Superforms {
 			type Message = Pick<ToastSettings, 'message' | 'hideDismiss' | 'timeout'> & {

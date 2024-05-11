@@ -21,7 +21,7 @@
 	import { Logger } from '@spectacular/utils';
 	import { fail } from '@sveltejs/kit';
 	import type { GraphQLError } from 'graphql';
-	import { redirect } from 'sveltekit-flash-message/server';
+  import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 	import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 
 	const log = new Logger('rule.action.server');

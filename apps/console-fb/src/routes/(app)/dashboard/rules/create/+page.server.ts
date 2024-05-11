@@ -1,6 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
-import { redirect } from 'sveltekit-flash-message/server';
+import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { Logger, cleanClone } from '@spectacular/utils';
@@ -17,7 +17,7 @@ export const actions = {
 		const { request, locals } = event;
 		const session = await locals.auth();
 		if (session?.user == undefined) {
-			throw redirect(307, '/auth/signin?callbackUrl=/dashboard/rules/create');
+			redirectWithFlash(307, '/auth/signin?callbackUrl=/dashboard/rules/create');
 		}
 
 		const form = await superValidate(request, zod(schema));
@@ -63,6 +63,6 @@ export const actions = {
 			duration: 10000,
 			type: ToastLevel.Success
 		} as const;
-		throw redirect(302, '/dashboard/rules', message, event);
+		redirectWithFlash(302, '/dashboard/rules', message, event);
 	}
 };
