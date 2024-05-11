@@ -111,6 +111,7 @@ export const updatePolicyKeys = updatePolicySchema.innerType().keyof().Enum;
  * Refine functions
  */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function checkValidStringDates(
 	ctx: z.RefinementCtx,
 	validFrom: string | undefined | null,

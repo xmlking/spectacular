@@ -173,7 +173,7 @@ services:
   # If SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.29.4
+    image: nhost/hasura-auth:0.29.5
     hostname: auth
     container_name: auth
     restart: unless-stopped

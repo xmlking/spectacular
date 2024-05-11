@@ -49,7 +49,6 @@
 
 	export const snapshot = { capture, restore };
 
-	let termsAccept = false;
 	// $: termsValue = $form.terms as Writable<boolean>;
 	// Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
 	delayed.subscribe((v) => ($isLoadingForm = v));
@@ -182,7 +181,6 @@
 			{/if}
 		</label>
 	</div>
-
 	<div class="mt-6">
 		<label class="label">
 			<span class="sr-only">{m.auth_forms_password_label()}</span>
@@ -202,21 +200,47 @@
 		</label>
 	</div>
 	<div class="mt-6">
+		<label class="label">
+			<span class="sr-only">{m.auth_forms_confirm_password_label()}</span>
+			<input
+				name="confirmPassword"
+				type="password"
+				class="input"
+				placeholder={m.auth_forms_confirm_password_placeholder()}
+				data-invalid={$errors.confirmPassword}
+				bind:value={$form.confirmPassword}
+				class:input-error={$errors.password}
+				{...$constraints.confirmPassword}
+			/>
+			{#if $errors.confirmPassword}
+				<small>{$errors.confirmPassword}</small>
+			{/if}
+		</label>
+	</div>
+	<div class="mt-6">
 		<label for="terms" class="label">
-			<input name="terms" type="checkbox" class="checkbox" bind:checked={termsAccept} />
+			<input
+				name="terms"
+				type="checkbox"
+				class="checkbox"
+				data-invalid={$errors.terms}
+				bind:checked={$form.terms}
+				class:input-error={$errors.terms}
+				{...$constraints.terms}
+			/>
 			<span class="ml-2">
 				I accept the
 				<a href="/terms" class="text-primaryHover underline">terms</a>
 				and
 				<a href="/privacy" class="text-primaryHover underline">privacy policy</a>
-				<!--{#if $errors.terms}
-					<small>{$errors.terms}</small>
-				{/if}-->
+				{#if $errors.terms}
+					<small class="text-error-500">{$errors.terms}</small>
+				{/if}
 			</span>
 		</label>
 	</div>
 	<div class="mt-6">
-		<button type="submit" disabled={!termsAccept} class="variant-filled-primary btn w-full">
+		<button type="submit" disabled={!$form.terms} class="variant-filled-primary btn w-full">
 			{#if $timeout}
 				<MoreHorizontal class="animate-ping" />
 			{:else if $delayed}

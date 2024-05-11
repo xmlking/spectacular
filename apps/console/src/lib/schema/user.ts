@@ -2,15 +2,28 @@ import { z } from 'zod';
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 
 export const userSchema = z.object({
-	firstName: z.string({ required_error: 'First Name is required' }).min(1, { message: 'First Name is required' }).trim(),
-	lastName: z.string({ required_error: 'Last Name is required' }).min(1, { message: 'Last Name is required' }).trim(),
-	email: z.string({ required_error: 'Email is required' }).email({ message: 'Please enter a valid email address' }),
-	password: z.string({ required_error: 'Password is required' }).min(6, { message: 'Password must be at least 6 characters' }).trim(),
-	confirmPassword: z
-		.string({ required_error: 'Password is required' })
-		.min(6, { message: 'Password must be at least 6 characters' })
+	firstName: z
+		.string({ required_error: 'First Name is required' })
+		.min(2, { message: 'First Name must contain at least 2 character(s)' })
+		.max(256)
 		.trim(),
-	//terms: z.boolean({ required_error: 'You must accept the terms and privacy policy' }),
+	lastName: z
+		.string({ required_error: 'Last Name is required' })
+		.min(2, { message: 'Last Name must contain at least 2 character(s)' })
+		.max(256)
+		.trim(),
+	email: z.string({ required_error: 'Email is required' }).email({ message: 'Please enter a valid email address' }).max(256).trim(),
+	password: z
+		.string({ required_error: 'Password is required' })
+		.min(9, { message: 'Password must be at least 9 characters' })
+		.max(256)
+		.trim(),
+	confirmPassword: z
+		.string({ required_error: 'Confirm Password is required' })
+		.min(9, { message: 'Confirm Password must be at least 9 characters' })
+		.max(256)
+		.trim(),
+	terms: z.literal<boolean>(true, { errorMap: () => ({ message: 'Please accept Terms of Service to continue' }) }).default(false),
 	role: z.enum(['USER', 'PREMIUM', 'ADMIN'], { required_error: 'You must have a role' }).default('USER'),
 	verified: z.boolean().default(false),
 	token: z.string().optional(),
@@ -20,19 +33,36 @@ export const userSchema = z.object({
 	organization: z.string().default(PUBLIC_DEFAULT_ORGANIZATION)
 });
 
+export const signUpSchema = userSchema
+	.pick({
+		firstName: true,
+		lastName: true,
+		email: true,
+		password: true,
+		confirmPassword: true,
+		terms: true,
+		organization: true
+	})
+	.superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
+
 export const userUpdatePasswordSchema = userSchema
 	.pick({ password: true, confirmPassword: true })
-	.superRefine(({ confirmPassword, password }, ctx) => {
-		if (confirmPassword !== password) {
-			ctx.addIssue({
-				code: 'custom',
-				message: 'Password and Confirm Password must match',
-				path: ['password']
-			});
-			ctx.addIssue({
-				code: 'custom',
-				message: 'Password and Confirm Password must match',
-				path: ['confirmPassword']
-			});
-		}
-	});
+	.superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
+
+/**
+ * Refine functions
+ */
+function checkConfirmPassword(ctx: z.RefinementCtx, confirmPassword: string, password: string) {
+	if (confirmPassword !== password) {
+		ctx.addIssue({
+			code: 'custom',
+			message: 'Password and Confirm Password must match',
+			path: ['password']
+		});
+		ctx.addIssue({
+			code: 'custom',
+			message: 'Password and Confirm Password must match',
+			path: ['confirmPassword']
+		});
+	}
+}

@@ -4,22 +4,13 @@ import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { Logger, sleep } from '@spectacular/utils';
-import { userSchema } from '$lib/schema/user';
-import { NHOST_SESSION_KEY } from '$lib/nhost';
+import { signUpSchema } from '$lib/schema/user';
+import { setNhostSessionInCookie } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
 import { i18n } from '$lib/i18n';
 import { getOrgs } from '$lib/server/utils/getOrgs';
 
 const log = new Logger('server:auth:signup');
-
-const signUpSchema = userSchema.pick({
-	firstName: true,
-	lastName: true,
-	email: true,
-	password: true,
-	// terms: true,
-	organization: true
-});
 
 export const load = async (event) => {
 	const {
@@ -107,7 +98,7 @@ export const actions = {
 		}
 
 		if (session) {
-			cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' });
+			setNhostSessionInCookie(cookies, session);
 			const message: App.Superforms.Message = { type: 'success', message: 'Signup sucessfull 😎' } as const;
 			redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
 		}
