@@ -27,7 +27,7 @@ const subClient: ClientPlugin = subscription(({ session }) =>
 		connectionParams: () => {
 			return {
 				headers: {
-					Authorization: `Bearer ${session?.token}`
+					Authorization: `Bearer ${session?.accessToken}`
 				}
 			};
 		}
@@ -44,15 +44,14 @@ export default new HoudiniClient({
 		if (session) {
 			log.debug('session...', session);
 		}
-		const token = session?.token;
-		const roles = session?.roles;
+		const accessToken = session?.accessToken;
 		const backendToken = metadata?.backendToken;
-		const useRole = metadata?.useRole ?? getHighestRole(roles);
+		const useRole = metadata?.useRole
 
 		return {
 			headers: {
-				...(token ? { Authorization: `Bearer ${token}` } : {}),
-				...(useRole ? { 'x-hasura-role': useRole } : { 'x-hasura-role': 'anonymous' }),
+				...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+				...(useRole ? { 'x-hasura-role': useRole } : {}),
 				...(backendToken ? { backendToken } : {})
 			}
 		};
@@ -66,12 +65,3 @@ export default new HoudiniClient({
 	// },
 	plugins: [subClient, ...(browser ? [logMetadata] : [])]
 });
-
-function getHighestRole(roles: string[] | undefined) {
-	if (!roles) return 'public';
-	if (roles?.includes('tester')) return 'tester';
-	if (roles?.includes('manager')) return 'manager';
-	if (roles?.includes('user')) return 'user';
-	log.error(`unsupported role in user roles: ${roles}`);
-	throw Error(`unsupported role in user roles: ${roles}`);
-}

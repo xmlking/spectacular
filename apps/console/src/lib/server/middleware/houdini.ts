@@ -10,11 +10,10 @@ export const houdini = (async ({ event, resolve }) => {
 	if (building) return await resolve(event);
 
 	const { locals } = event;
-	const token = locals.nhost.auth.getAccessToken();
-	const roles = locals.nhost.auth.getHasuraClaim('allowed-roles');
+	const accessToken = locals.nhost.auth.getAccessToken();
 
-	log.debug('setting token and roles......', token, roles);
-	if (token) setSession(event, { token, roles });
+	log.debug('setting accessToken:', accessToken);
+	if (accessToken) setSession(event, { accessToken });
 	const response = await resolve(event);
 	return response;
 }) satisfies Handle;

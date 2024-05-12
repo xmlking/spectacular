@@ -9,8 +9,7 @@ declare global {
 	namespace App {
 		// houdini session
 		interface Session {
-			token?: string;
-			roles?: string | string[] | null;
+			accessToken?: string;
 			// TODO: currentOrg?: string; // active user's org. default value is user's default_org
 		}
 		namespace Superforms {

@@ -7,11 +7,14 @@ configuration:
       custom_name: createdAt
     created_by:
       custom_name: createdBy
+    is_default_role:
+      custom_name: isDefaultRole
     user_id:
       custom_name: userId
   custom_column_names:
     created_at: createdAt
     created_by: createdBy
+    is_default_role: isDefaultRole
     user_id: userId
   custom_root_fields: {}
 insert_permissions:
@@ -24,6 +27,7 @@ insert_permissions:
       set:
         created_by: x-hasura-user-id
       columns:
+        - is_default_role
         - organization
         - role
         - user_id
@@ -37,6 +41,7 @@ insert_permissions:
       set:
         created_by: x-hasura-user-id
       columns:
+        - is_default_role
         - organization
         - role
         - user_id
@@ -45,11 +50,12 @@ select_permissions:
   - role: manager
     permission:
       columns:
-        - organization
-        - role
         - created_at
         - created_by
         - id
+        - is_default_role
+        - organization
+        - role
         - user_id
       filter:
         _and:
@@ -59,11 +65,12 @@ select_permissions:
   - role: supervisor
     permission:
       columns:
-        - organization
-        - role
         - created_at
         - created_by
         - id
+        - is_default_role
+        - organization
+        - role
         - user_id
       filter:
         _and:
@@ -75,6 +82,7 @@ select_permissions:
       columns:
         - created_at
         - id
+        - is_default_role
         - organization
         - role
         - user_id
@@ -84,6 +92,27 @@ select_permissions:
               _in: x-hasura-allowed-orgs
           - user_id:
               _eq: x-hasura-user-id
+    comment: ""
+update_permissions:
+  - role: manager
+    permission:
+      columns:
+        - is_default_role
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+      check: null
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - is_default_role
+      filter:
+        _and:
+          - organization:
+              _in: x-hasura-allowed-orgs
+      check: null
     comment: ""
 delete_permissions:
   - role: manager

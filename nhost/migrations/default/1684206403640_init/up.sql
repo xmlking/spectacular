@@ -49,8 +49,12 @@ CREATE FUNCTION public.insert_user_org_roles_when_user_roles_inserted() RETURNS 
     LANGUAGE plpgsql
     AS $$
 BEGIN
-    INSERT INTO public.user_org_roles (created_by, user_id, role, organization)
-    SELECT 'c0c0a000-0000-4000-a000-000000000000', NEW.user_id, NEW.role, auth.users.metadata ->> 'default_org'
+    INSERT INTO public.user_org_roles (created_by, user_id, role, is_default_role, organization)
+    SELECT
+			'c0c0a000-0000-4000-a000-000000000000',
+			NEW.user_id, NEW.role,
+			(CASE WHEN auth.users.default_role = NEW.role THEN true ELSE false END) AS is_default_role,
+			auth.users.metadata ->> 'default_org'
     FROM auth.users
     WHERE NEW.user_id = auth.users.id;
     RETURN NULL;
@@ -177,6 +181,7 @@ CREATE TABLE public.user_org_roles (
     created_by uuid NOT NULL,
     user_id uuid NOT NULL,
     role text NOT NULL,
+    is_default_role boolean DEFAULT false NOT NULL,
     organization text NOT NULL
 );
 COMMENT ON TABLE public.user_org_roles IS 'Roles of User for a given Org.';
@@ -211,6 +216,7 @@ ALTER TABLE ONLY public.user_org_roles
 CREATE UNIQUE INDEX policies_subject_id_subject_type_rule_id_organization_unique ON public.policies USING btree (subject_id, subject_type, rule_id, organization) WHERE (deleted_at IS NULL);
 CREATE UNIQUE INDEX pools_display_name_organization_unique ON public.pools USING btree (display_name, organization) WHERE (deleted_at IS NULL);
 CREATE UNIQUE INDEX rules_display_name_organization_unique ON public.rules USING btree (display_name, organization) WHERE (deleted_at IS NULL);
+CREATE UNIQUE INDEX user_org_roles_user_id_organization_default_role_unique ON public.user_org_roles USING btree (user_id, organization) WHERE (is_default_role = true);
 CREATE RULE devices_soft_deletion_rule AS
     ON DELETE TO public.devices
    WHERE (current_setting('rules.soft_deletion'::text) = 'on'::text) DO INSTEAD  UPDATE public.devices SET deleted_at = now()
@@ -266,8 +272,8 @@ ALTER TABLE ONLY public.rules
 ALTER TABLE ONLY public.rules
     ADD CONSTRAINT rules_protocol_fkey FOREIGN KEY (protocol) REFERENCES public.protocol(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.user_org_roles
-    ADD CONSTRAINT user_org_roles_organization_fkey FOREIGN KEY (organization) REFERENCES public.organizations(organization) ON UPDATE CASCADE ON DELETE RESTRICT;
+    ADD CONSTRAINT user_org_roles_organization_fkey FOREIGN KEY (organization) REFERENCES public.organizations(organization) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.user_org_roles
-    ADD CONSTRAINT user_org_roles_role_fkey FOREIGN KEY (role) REFERENCES auth.roles(role) ON UPDATE CASCADE ON DELETE RESTRICT;
+    ADD CONSTRAINT user_org_roles_role_fkey FOREIGN KEY (role) REFERENCES auth.roles(role) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.user_org_roles
     ADD CONSTRAINT user_org_roles_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id) ON UPDATE CASCADE ON DELETE CASCADE;

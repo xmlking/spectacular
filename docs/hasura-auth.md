@@ -125,8 +125,9 @@ Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Adminis
 > **Assumptions:** there will be `public.user_roles_orgs` table that manage `user-role` assignment for a give `Organization` 
 
 #### Types of Deligation
-1. Additional higher roles can be added to user's *allowed roles* by administrator (manager) in the same user's `default_org` and optionally set it as user's `default_role`
-2. Administrator (manager) can also assign other  `Organizations`  to existing user with `manager` role in `public.user_roles_orgs` table.
+1. Administrator (manager) can add additional higher roles to existing user's `allowed_roles` in the same user's `default_org` and optionally set it as user's `default_role`
+	e.g., Administrator can promote a regular `user` to `supervisor`, by adding  1.  `supervisor` role to `auth.user_roles` table and 2. by setting user's `default_role` as `supervisor` in `auth.users` table. aA databse trigger should also create/update corresponding rows in `public.user_roles_orgs`
+2. Administrator (manager) can also assign **other**  `Organizations` to existing user with **manager** role in `public.user_roles_orgs` table and set user's `allowed_roles` and `default_role` flag for that `Organizations`
 
 ## Reference
 
