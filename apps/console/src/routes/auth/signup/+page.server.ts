@@ -5,7 +5,7 @@ import { message, setError, setMessage, superValidate } from 'sveltekit-superfor
 import { zod } from 'sveltekit-superforms/adapters';
 import { Logger, sleep } from '@spectacular/utils';
 import { signUpSchema } from '$lib/schema/user';
-import { setNhostSessionInCookie } from '$lib/nhost';
+import { setNhostSessionInCookies } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
 import { i18n } from '$lib/i18n';
 import { getOrgs } from '$lib/server/utils/getOrgs';
@@ -98,7 +98,7 @@ export const actions = {
 		}
 
 		if (session) {
-			setNhostSessionInCookie(cookies, session);
+			setNhostSessionInCookies(cookies, session);
 			const message: App.Superforms.Message = { type: 'success', message: 'Signup sucessfull 😎' } as const;
 			redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
 		}

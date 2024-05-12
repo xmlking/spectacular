@@ -1,7 +1,7 @@
 import { Logger } from '@spectacular/utils';
 import { redirect } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
-import { NHOST_SESSION_KEY } from '$lib/nhost';
+import { NHOST_SESSION_KEY, removeNhostSessionInCookies } from '$lib/nhost';
 import { i18n } from '$lib/i18n';
 import type { Actions } from './$types';
 
@@ -19,7 +19,8 @@ export const actions = {
 		log.debug('signout', lang);
 
 		await nhost.auth.signOut();
-		cookies.set(NHOST_SESSION_KEY, '', { httpOnly: true, path: '/', maxAge: 0 });
+		removeNhostSessionInCookies(cookies);
+		// cookies.set(NHOST_SESSION_KEY, '', { httpOnly: true, path: '/', maxAge: 0 });
 		const message: App.Superforms.Message = { type: 'success', message: 'Signout sucessfull 😎' } as const;
 		redirectWithFlash(303, i18n.resolveRoute('/'), message, event);
 		// redirectWithFlash(303, i18n.resolveRoute('/signin'), message, event);

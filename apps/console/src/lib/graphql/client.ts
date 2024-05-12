@@ -1,6 +1,7 @@
-// import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
+import { invalidateAll } from '$app/navigation';
 import { createClient as createWSClient } from 'graphql-ws';
-import { Logger } from '@spectacular/utils';
+import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacular/utils';
 import { env } from '$env/dynamic/public';
 import { browser } from '$app/environment';
 import { subscription } from '$houdini/plugins';
@@ -46,7 +47,7 @@ export default new HoudiniClient({
 		}
 		const accessToken = session?.accessToken;
 		const backendToken = metadata?.backendToken;
-		const useRole = metadata?.useRole
+		const useRole = metadata?.useRole;
 
 		return {
 			headers: {
@@ -56,12 +57,25 @@ export default new HoudiniClient({
 			}
 		};
 	},
-	// throwOnError: {
-	// 	// can be any combination of
-	// 	// query, mutation, subscription, and all
-	// 	operations: ['all'],
-	// 	// the function to call
-	// 	error: (errors, ctx) => error(500, `(${ctx.artifact.name}): ` + errors.map((err) => err.message).join('. ') + '.')
-	// },
+	throwOnError: {
+		// can be any combination of
+		// query, mutation, subscription, and all
+		operations: ['all'],
+		// GraphQL error handling on client-side
+		error: async (errors, ctx) => {
+			log.error({ ctx, errors });
+			// if accessToken(AT) expires (15min), reloading the page will refresh AT and set new AT into cookie
+			// e.g. goto with invalidateAll on current path
+			if (errors.some(hasErrorMessage('JWTExpired'))) {
+				await invalidateAll();
+			} else if (errors.some(hasErrorTypes(['PERMISSION_DENIED', 'UNAUTHENTICATED']))) {
+				redirect(303, '/auth/signin');
+			} else if (errors.some(isErrorType('NOT_FOUND'))) {
+				error(404);
+			}
+			// be silent for rest of the errors
+			// error(500, `(${ctx.artifact.name}): ` + errors.map((err) => err.message).join('. ') + '.')
+		}
+	},
 	plugins: [subClient, ...(browser ? [logMetadata] : [])]
 });

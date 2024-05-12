@@ -1,13 +1,15 @@
 import type { Handle } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
 import { Logger } from '@spectacular/utils';
-import { NHOST_SESSION_KEY, getNhost } from '$lib/nhost';
+import { getNhost, removeNhostSessionInCookies, setNhostSessionInCookies } from '$lib/nhost';
 import { i18n } from '$lib/i18n';
 export const log = new Logger('server:middleware:auth');
 /**
  * Auth middleware goal is to set `NhostClient` initialized from either session cookie or refreshToken and set it into locals.
  * If either cookie or refreshToken are not present, a dummy `NhostClient` is set into locals.
  * So next middleware or `+server.ts` has to check validity of session.
+ * TODO:
+ * refreshAuthPlugin: https://github.com/SprocketBot/sprocket/blob/dev/clients/web/src/client.ts
  */
 export const auth = (async ({ event, resolve }) => {
 	log.debug('auth: pathname:', event.url.pathname);
@@ -22,17 +24,20 @@ export const auth = (async ({ event, resolve }) => {
 	const tokenExpirationTime = nhost.auth.getDecodedAccessToken()?.exp;
 	const accessTokenExpired = session && tokenExpirationTime && currentTime > tokenExpirationTime;
 
+	// FIXME: https://github.com/nhost/nhost/issues/2028
 	if (accessTokenExpired || refreshToken) {
 		const { session: newSession, error } = await nhost.auth.refreshSession(refreshToken);
 		if (error) {
 			// delete session cookie when the refreshToken has expired
-			event.cookies.delete(NHOST_SESSION_KEY, { path: '/' });
-			// TODO: should we throw error and desply error to user?
+			removeNhostSessionInCookies(event.cookies);
+			// TODO: should we throw error and display error to user?
 			log.error('auth error:', error);
 			redirect(303, i18n.resolveRoute('auth/signin'));
 		}
 
-		event.cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(newSession)), { path: '/' });
+		if (newSession) {
+			setNhostSessionInCookies(event.cookies, newSession);
+		}
 
 		if (refreshToken) {
 			event.url.searchParams.delete('refreshToken');

@@ -5,7 +5,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { Logger, sleep } from '@spectacular/utils';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
 import { userSchema } from '$lib/schema/user';
-import { NHOST_SESSION_KEY } from '$lib/nhost';
+import { setNhostSessionInCookies } from '$lib/nhost';
 import { limiter } from '$lib/server/limiter/limiter';
 import { i18n } from '$lib/i18n';
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
@@ -80,7 +80,7 @@ export const actions = {
 		}
 
 		if (session) {
-			cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' });
+			setNhostSessionInCookies(cookies, session);
 			const message: App.Superforms.Message = { type: 'success', message: 'Signin sucessfull 😎' } as const;
 			redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
 		}

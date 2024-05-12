@@ -54,6 +54,9 @@
 		if (!isGotoNavigated) return;
 
 		handleMessage($flash, toastStore);
+
+		// // Clear the flash message to avoid double-toasting.
+		// $flash = undefined;
 	});
 </script>
 

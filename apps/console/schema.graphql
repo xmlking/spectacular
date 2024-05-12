@@ -1215,6 +1215,34 @@ type mutation_root {
   ): [rules_mutation_response]
 
   """
+  update data of the table: "user_org_roles"
+  """
+  update_user_org_roles(
+    """sets the columns of the filtered rows to the given values"""
+    _set: user_org_roles_set_input
+
+    """filter the rows which have to be updated"""
+    where: user_org_roles_bool_exp!
+  ): user_org_roles_mutation_response
+
+  """
+  update single row of the table: "user_org_roles"
+  """
+  update_user_org_roles_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: user_org_roles_set_input
+    pk_columns: user_org_roles_pk_columns_input!
+  ): user_org_roles
+
+  """
+  update multiples rows of table: "user_org_roles"
+  """
+  update_user_org_roles_many(
+    """updates to execute, in order"""
+    updates: [user_org_roles_updates!]!
+  ): [user_org_roles_mutation_response]
+
+  """
   update multiples rows of table: "auth.users"
   """
   update_users_many(
@@ -3314,6 +3342,7 @@ type user_org_roles {
   createdAt: timestamptz!
   createdBy: uuid!
   id: uuid!
+  isDefaultRole: Boolean!
   organization: String!
   role: String!
   userId: uuid!
@@ -3329,6 +3358,7 @@ input user_org_roles_bool_exp {
   createdAt: timestamptz_comparison_exp
   createdBy: uuid_comparison_exp
   id: uuid_comparison_exp
+  isDefaultRole: Boolean_comparison_exp
   organization: String_comparison_exp
   role: String_comparison_exp
   userId: uuid_comparison_exp
@@ -3344,6 +3374,11 @@ enum user_org_roles_constraint {
   user_org_roles_pkey
 
   """
+  unique or primary key constraint on columns "user_id", "organization"
+  """
+  user_org_roles_user_id_organization_default_role_unique
+
+  """
   unique or primary key constraint on columns "user_id", "organization", "role"
   """
   user_org_roles_user_id_role_organization_key
@@ -3353,6 +3388,7 @@ enum user_org_roles_constraint {
 input type for inserting data into table "user_org_roles"
 """
 input user_org_roles_insert_input {
+  isDefaultRole: Boolean
   organization: String
   role: String
   userId: uuid
@@ -3383,9 +3419,15 @@ input user_org_roles_order_by {
   createdAt: order_by
   createdBy: order_by
   id: order_by
+  isDefaultRole: order_by
   organization: order_by
   role: order_by
   userId: order_by
+}
+
+"""primary key columns input for table: user_org_roles"""
+input user_org_roles_pk_columns_input {
+  id: uuid!
 }
 
 """
@@ -3402,6 +3444,9 @@ enum user_org_roles_select_column {
   id
 
   """column name"""
+  isDefaultRole
+
+  """column name"""
   organization
 
   """column name"""
@@ -3409,6 +3454,13 @@ enum user_org_roles_select_column {
 
   """column name"""
   userId
+}
+
+"""
+input type for updating data in table "user_org_roles"
+"""
+input user_org_roles_set_input {
+  isDefaultRole: Boolean
 }
 
 """
@@ -3427,17 +3479,26 @@ input user_org_roles_stream_cursor_value_input {
   createdAt: timestamptz
   createdBy: uuid
   id: uuid
+  isDefaultRole: Boolean
   organization: String
   role: String
   userId: uuid
 }
 
 """
-placeholder for update columns of table "user_org_roles" (current role has no relevant permissions)
+update columns of table "user_org_roles"
 """
 enum user_org_roles_update_column {
-  """placeholder (do not use)"""
-  _PLACEHOLDER
+  """column name"""
+  isDefaultRole
+}
+
+input user_org_roles_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: user_org_roles_set_input
+
+  """filter the rows which have to be updated"""
+  where: user_org_roles_bool_exp!
 }
 
 """
