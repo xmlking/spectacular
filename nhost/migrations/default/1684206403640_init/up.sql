@@ -56,7 +56,8 @@ BEGIN
 			(CASE WHEN auth.users.default_role = NEW.role THEN true ELSE false END) AS is_default_role,
 			auth.users.metadata ->> 'default_org'
     FROM auth.users
-    WHERE NEW.user_id = auth.users.id;
+    WHERE NEW.user_id = auth.users.id
+		ON CONFLICT DO NOTHING
     RETURN NULL;
 END;
 $$;

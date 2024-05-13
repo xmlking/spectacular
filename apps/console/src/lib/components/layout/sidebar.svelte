@@ -84,12 +84,12 @@
 			<!-- Nav List -->
 			<nav class="list-nav">
 				<ul>
-					{#each segment.list as { href, label, badge }}
+					{#each segment.list as { href, label, badge, preload }}
 						<li on:keypress on:click={drawerStore.close}>
 							<a
 								{href}
 								class={listboxItemActive(href)}
-								data-sveltekit-preload-data="hover"
+								data-sveltekit-preload-data={preload || "hover"}
 							>
 								<span class="flex-auto">{@html label}</span>
 								{#if badge}<span class="variant-filled-secondary badge"

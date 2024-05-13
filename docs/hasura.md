@@ -189,6 +189,7 @@ If needed
 ```sql
 SET ROLE postgres;
 GRANT ALL ON SCHEMA auth TO nhost_auth_admin;
+GRANT ALL PRIVILEGES ON SCHEMA auth TO nhost_auth_admin;
 GRANT USAGE ON SCHEMA auth TO nhost_hasura;
 ALTER DEFAULT PRIVILEGES FOR ROLE nhost_auth_admin IN SCHEMA auth GRANT ALL ON TABLES TO nhost_hasura;
 ```

@@ -1,6 +1,7 @@
 // Navigation Sitemap
+// `blockPreload: 'false'` means adding data-sveltekit-preload-data="false" to link.
 
-export type List = Array<{ href: string; label: string; keywords: string; badge?: string }>;
+export type List = Array<{ href: string; label: string; keywords: string; badge?: string, preload?: string }>;
 export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> = {
 	'/docs': [
 		{
@@ -36,7 +37,7 @@ export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> 
 				{ href: '/dashboard/reports', label: 'Reports', keywords: 'reports, graph' },
 				{ href: '/dashboard/customers', label: 'Customers', keywords: 'customers, users' },
 				{ href: '/dashboard/play', label: 'Play', keywords: 'play, users' },
-				{ href: '/dashboard/policies', label: 'Policies', keywords: 'policies, rules' },
+				{ href: '/dashboard/policies', label: 'Policies', keywords: 'policies, rules', preload: 'false' },
 				{ href: '/auth/signup', label: 'Signup', keywords: 'signup, users' },
 				{ href: '/auth/signin', label: 'Signin', keywords: 'signin, login, users' }
 			]

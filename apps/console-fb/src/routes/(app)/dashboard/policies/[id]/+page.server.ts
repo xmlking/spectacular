@@ -35,7 +35,7 @@ export const actions = {
 		/* eslint-disable @typescript-eslint/no-unused-vars */
 		const {
 			subjectDisplayName,
-			subjectId /* eslint-disable-line */,
+			subjectId,
 			subjectSecondaryId,
 			subjectType,
 			ruleId,
