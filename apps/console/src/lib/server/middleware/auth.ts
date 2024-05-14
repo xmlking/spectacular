@@ -10,6 +10,9 @@ export const log = new Logger('server:middleware:auth');
  * So next middleware or `+server.ts` has to check validity of session.
  * TODO:
  * refreshAuthPlugin: https://github.com/SprocketBot/sprocket/blob/dev/clients/web/src/client.ts
+ * Use nhost.setRole('manager'), nhost.setRole('superviser'), nhost.unsetRole('manager') etc to
+ * to set/unset/switch the user role for all subsequent graphql, storage and functions calls temporarily.
+ * by default, user's default_role is used.
  */
 export const auth = (async ({ event, resolve }) => {
 	log.debug('auth: pathname:', event.url.pathname);

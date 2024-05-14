@@ -57,7 +57,7 @@ BEGIN
 			auth.users.metadata ->> 'default_org'
     FROM auth.users
     WHERE NEW.user_id = auth.users.id
-		ON CONFLICT DO NOTHING
+		ON CONFLICT DO NOTHING;
     RETURN NULL;
 END;
 $$;
