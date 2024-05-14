@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.2.2](https://github.com/xmlking/spectacular/compare/09bd06e226a8b7b1bf70446548a3ada4f4be6728..v0.2.2) - 2024-05-14
+#### Bug Fixes
+- **(actions)** pnpm version missmatch in CI with COREPACK_ENABLE_STRICT=0 [skip ci] - ([09bd06e](https://github.com/xmlking/spectacular/commit/09bd06e226a8b7b1bf70446548a3ada4f4be6728)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.2.1](https://github.com/xmlking/spectacular/compare/8aedb8c29d1f99ddaf964aa70a18347751557486..v0.2.1) - 2024-05-14
 #### Bug Fixes
 - **(actions)** pnpm version missmatch in CI with COREPACK_ENABLE_STRICT=0 - ([8aedb8c](https://github.com/xmlking/spectacular/commit/8aedb8c29d1f99ddaf964aa70a18347751557486)) - [@xmlking](https://github.com/xmlking)
