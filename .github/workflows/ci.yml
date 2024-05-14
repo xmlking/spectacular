@@ -13,10 +13,10 @@ on:
         default: 'console'
         required: true
         options:
-          - playground
           - web
           - docs
           - console
+          - console-fb
       dryrun:
         description: Build with dey-run.
         type: boolean
@@ -27,6 +27,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
 env:
+  COREPACK_ENABLE_STRICT: 0
   GHCR_REGISTRY: ghcr.io
   SCOPE: ${{ inputs.app || 'console' }}
   IMAGE_NAME: ${{ github.repository }}/${{ inputs.app || 'console' }}
