@@ -3,172 +3,66 @@
 
 export type List = Array<{ href: string; label: string; keywords: string; badge?: string, preload?: string }>;
 export const menuNavLinks: Record<string, Array<{ title: string; list: List }>> = {
-	'/docs': [
+	'/policies': [
 		{
-			title: 'Docs',
+			title: 'Policies',
 			list: [
-				{ href: '/docs/introduction', label: 'Introduction', keywords: 'svelte, sirens, license, release' },
-				{ href: '/docs/get-started', label: 'Get Started', keywords: 'start, install, cli, tailwind, themes, stylesheets' },
-				{ href: '/docs/quickstart', label: 'Quickstart', keywords: 'start, setup, tutorial, guide' }
+				{ href: '/dashboard/policies', label: 'Policies', keywords: 'svelte, sirens, license, release', preload: 'false' },
+				{ href: '/dashboard/rules', label: 'Golden Rules', keywords: 'start, install, cli, tailwind, themes, stylesheets' },
+				{ href: '/dashboard/agents', label: 'Agents', keywords: 'start, setup, tutorial, guide' }
 			]
 		},
 		{
-			title: 'Essentials',
+			title: 'Experiments',
 			list: [
-				{ href: '/docs/themes', label: 'Themes', keywords: 'theme, customize, fonts, gradient, background' },
-				{ href: '/docs/colors', label: 'Colors', keywords: 'theme, colors, swatches' },
-				{ href: '/docs/styling', label: 'Styling', keywords: 'styles, styling, props, classes, class, css' },
-				{ href: '/docs/tokens', label: 'Design Tokens', keywords: 'theme, color, pairing, css, utility' },
-				{ href: '/docs/variants', label: 'Variants', keywords: 'variant, variants, presets, backgrounds, classes' },
-				{
-					href: '/docs/transitions',
-					label: 'Transitions',
-					keywords: 'transition, transitions, blur, fade, fly, slide, scale, draw, crossfade, prefers, reduced, motion',
-					badge: 'New'
-				}
-			]
-		},
-		{
-			title: 'Resources',
-			list: [
-				{ href: '/docs/generator', label: 'Theme Generator', keywords: 'create, custom, style, css, design' },
-				{ href: '/docs/purgecss', label: 'PurgeCSS', keywords: 'purgecss, vite, tree, shaking, bundle, optimize', badge: 'New' },
-				{ href: '/docs/contributing', label: 'Contributing', keywords: 'branch, pr' },
-				{ href: '/dashboard/reports', label: 'Reports', keywords: 'reports, graph' },
 				{ href: '/dashboard/customers', label: 'Customers', keywords: 'customers, users' },
 				{ href: '/dashboard/play', label: 'Play', keywords: 'play, users' },
-				{ href: '/dashboard/policies', label: 'Policies', keywords: 'policies, rules', preload: 'false' },
 				{ href: '/auth/signup', label: 'Signup', keywords: 'signup, users' },
 				{ href: '/auth/signin', label: 'Signin', keywords: 'signin, login, users' }
 			]
 		}
 	],
-	'/elements': [
+	'/flows': [
 		{
-			title: 'Globals',
+			title: 'Visualization',
 			list: [
-				{ href: '/elements/core', label: 'Core', keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider' },
-				{
-					href: '/elements/typography',
-					label: 'Typography',
-					keywords: 'headings, paragraph, anchor, blockquote, pre, code, keyboard, ins, del'
-				},
-				{
-					href: '/elements/forms',
-					label: 'Forms',
-					keywords: 'plugin, label, input, select, checkbox, radio, date, color, picker, slider, range, file'
-				}
+				{ href: '/dashboard/network', label: 'Network', keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider' },
+				{ href: '/dashboard/segments', label: 'Segments', keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider' }
 			]
 		},
 		{
-			title: 'Elements',
+			title: 'Auth',
 			list: [
-				{ href: '/elements/alerts', label: 'Alerts', keywords: 'message, notification' },
-				{ href: '/elements/badges', label: 'Badges', keywords: 'sup, sub, overlay, favorite, icon' },
-				{ href: '/elements/breadcrumbs', label: 'Breadcrumbs', keywords: 'nav, navigation, separator, hierarchy' },
-				{ href: '/elements/buttons', label: 'Buttons', keywords: 'click, anchor, icon, preload' },
-				{ href: '/elements/cards', label: 'Cards', keywords: 'header, footer, background, cell, region' },
-				{ href: '/elements/chips', label: 'Chips', keywords: 'action, select, selection, filter, filtering, interactive' },
-				{
-					href: '/elements/lists',
-					label: 'Lists',
-					keywords: 'unordered, ordered, description, nav, navigation, ul, ol, li, dd, dt'
-				},
-				{ href: '/elements/logo-clouds', label: 'Logo Clouds', keywords: 'logo, brand, branding, links' },
-				{
-					href: '/elements/placeholders',
-					label: 'Placeholders',
-					keywords: 'skeleton, spacer, text, image, avatar, animate, animate'
-				},
-				{ href: '/elements/tables', label: 'Tables', keywords: 'data, entry' }
-			]
-		},
-		{
-			title: 'Blocks',
-			list: [
-				{ href: '/elements/chat', label: 'Chat', keywords: 'message, conversation, prompt, ai' },
-				{ href: '/elements/gradient-headings', label: 'Gradient Headings', keywords: 'header, h1, h2, h3' },
-				{ href: '/elements/image-layouts', label: 'Image Layouts', keywords: 'image, layout, blocks, masonry, grid' },
-				{ href: '/elements/scroll-containers', label: 'Scroll Containers', keywords: 'carousel, scroll, snap, container' }
+				{ href: '/auth/signup', label: 'Signup', keywords: 'signup, users' },
+				{ href: '/auth/signin', label: 'Signin', keywords: 'signin, login, users' }
 			]
 		}
 	],
-	'/svelte': [
+	'/reports': [
 		{
-			title: 'Actions',
+			title: 'Reports',
 			list: [
-				{ href: '/actions/clipboard', label: 'Clipboard', keywords: 'copy, contenteditable, html, input' },
-				{ href: '/actions/filters', label: 'Filters', keywords: 'svg, filtering, image, images, effect' },
-				{ href: '/actions/focus-trap', label: 'Focus Trap', keywords: 'form, modal, a11y, accessibility, keyboard, interaction' }
-			]
-		},
-		{
-			title: 'Components',
-			list: [
-				{ href: '/components/accordions', label: 'Accordions', keywords: 'collapse' },
-				{ href: '/components/app-bar', label: 'App Bar', keywords: 'header, top, bar, title' },
-				{ href: '/components/app-rail', label: 'App Rail', keywords: 'nav, navigation, tile, sidebar' },
-				{ href: '/components/app-shell', label: 'App Shell', keywords: 'layout, header, footer, sidebar, page, content' },
-				{ href: '/components/autocomplete', label: 'Autocomplete', keywords: 'input, filter, fuzzy, auto, complete, suggest' },
-				{ href: '/components/avatars', label: 'Avatars', keywords: 'image, initial, filter' },
-				{ href: '/components/conic-gradients', label: 'Conic Gradients', keywords: 'chart, graph, circle, pie, spinner, legend' },
-				{ href: '/components/file-buttons', label: 'File Buttons', keywords: 'upload, form, input, file, media' },
-				{ href: '/components/file-dropzone', label: 'File Dropzone', keywords: 'upload, form, input, file, media, drag, drop' },
-				{ href: '/components/input-chips', label: 'Input Chips', keywords: 'multi, multiple, select, tags, form, validation' },
-				{ href: '/components/listboxes', label: 'Listboxes', keywords: 'list, select, multi, multiple' },
-				{ href: '/components/paginators', label: 'Paginators', keywords: 'nav, navigation, table, data, list' },
-				{
-					href: '/components/progress-bars',
-					label: 'Progress Bars',
-					keywords: 'meter, track, indeterminate, determinate, min, max'
-				},
-				{
-					href: '/components/progress-radials',
-					label: 'Progress Radials',
-					keywords: 'meter, track, indeterminate, determinate, spin'
-				},
-				{ href: '/components/ratings', label: 'Ratings', keywords: 'rating, rate, ratings, bar, star' },
-				{ href: '/components/radio-groups', label: 'Radio Groups', keywords: 'input, form, select, selection' },
-				{ href: '/components/range-sliders', label: 'Range Sliders', keywords: 'value, min, max, step,, tick, input, form' },
-				{ href: '/components/slide-toggles', label: 'Slide Toggles', keywords: 'check, checkbox, toggle, input, form' },
-				{ href: '/components/steppers', label: 'Steppers', keywords: 'intro, onboard, onboarding, form, progress' },
-				{ href: '/components/tabs', label: 'Tabs', keywords: 'select, selection, panel' },
-				{ href: '/components/tables', label: 'Tables', keywords: 'data, entry' },
-				{ href: '/components/tree-views', label: 'Tree Views', keywords: 'tree, view, node', badge: 'Beta' }
+				{ href: '/dashboard', label: 'Stats', keywords: 'reports, graph' },
+				{ href: '/dashboard/reports', label: 'Access Reports', keywords: 'copy, contenteditable, html, input' },
+				{ href: '/dashboard/usage-reports', label: 'Usage Reports', keywords: 'usage' }
 			]
 		}
 	],
-	'/experiments': [
+	'/account': [
 		{
-			title: 'Experiments',
+			title: 'Settings',
 			list: [
-				{ href: '/experiments/picture', label: 'Picture', keywords: 'highlight, syntax, code' },
-				{ href: '/experiments/movies', label: 'Movies', keywords: 'overlay, slide, panel, sidebar' },
-				{ href: '/experiments/settings', label: 'Settings', keywords: 'light, dark, toggle, prefer, color, scheme' },
-				{
-					href: '/experiments/transitions',
-					label: 'Transitions',
-					keywords: 'svelte, writable, get, cache, persist'
-				},
-				{
-					href: '/experiments/animations',
-					label: 'Animations',
-					keywords: 'overlay, dialog, animations, notification, alert, confirm, prompt, multiple, form, list, embed, video'
-				},
-				{ href: '/experiments/lazy', label: 'Lazy', keywords: 'menu, tooltip, overlay, dropdown, combobox, drop, down, select' },
-				{
-					href: '/experiments/particles',
-					label: 'Particles',
-					keywords: 'overlay, Particles, snackbar, bar, action, alert, notification'
-				},
-				{
-					href: '/experiments/outclick',
-					label: 'Outclick',
-					keywords: 'outclick, click, half-click',
-					badge: 'Beta'
-				}
-				// DELISTED UNTIL FURTHER NOTICE
-				// { href: '/experiments/data-tables', label: 'Data Tables', keywords: 'search, sort, page, pagination, async', badge: 'Experimental' }
+				{ href: '/dashboard/profile', label: 'Profile', keywords: 'account, settings, profile' },
+				{ href: '/dashboard/feature-flags', label: 'Flags', keywords: 'account, settings, flags' }
+			]
+		},
+		{
+			title: 'Admin',
+			list: [
+				{ href: '/dashboard/organizations', label: 'Organizations', keywords: 'account, organization' },
+				{ href: '/dashboard/delegation', label: 'Delegations', keywords: 'account, delegation' },
+				{ href: '/dashboard/users', label: 'Users', keywords: 'account, user, admin' },
+				{ href: '/dashboard/groups', label: 'Groups', keywords: 'account, group, admin' }
 			]
 		}
 	]

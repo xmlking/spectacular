@@ -19,15 +19,15 @@
 		let basePath: string = page.url.pathname.split('/')[1];
 		if (!basePath) return;
 		// Translate base path to link section
-		if (['docs', 'essentials', 'resources'].includes(basePath)) currentRailCategory = '/docs';
-		if (['tokens', 'base', 'elements', 'blocks'].includes(basePath))
-			currentRailCategory = '/elements';
-		if (['components', 'actions'].includes(basePath)) currentRailCategory = '/svelte';
-		if (['experiments'].includes(basePath)) currentRailCategory = '/experiments';
+		if (['policies', 'rules', 'zones', 'segments'].includes(basePath)) currentRailCategory = '/policies';
+		if (['network', 'segments'].includes(basePath)) currentRailCategory = '/flows';
+		if (['reports', 'access-reports', 'usage-reports'].includes(basePath)) currentRailCategory = '/reports';
+		if (['profile', 'eature-flags', 'organizations', 'delegation', 'users', 'groups'].includes(basePath))
+			currentRailCategory = '/account';
 	});
 
 	// Reactive
-	$: submenu = menuNavLinks[currentRailCategory ?? '/docs'];
+	$: submenu = menuNavLinks[currentRailCategory ?? '/catalog'];
 	$: listboxItemActive = (href: string) =>
 		$page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '';
 </script>
@@ -50,30 +50,30 @@
 			<span>Blog</span>
 		</AppRailAnchor>
 		<!-- --- / --- -->
-		<AppRailTile bind:group={currentRailCategory} name="docs" value={'/docs'}>
+		<AppRailTile bind:group={currentRailCategory} name="catalog" value={'/catalog'}>
 			<svelte:fragment slot="lead"
 				><Icon name="book" width="w-6" height="h-6" /></svelte:fragment
 			>
-			<span>Docs</span>
+			<span>Catalog</span>
 		</AppRailTile>
 		<hr class="opacity-30" />
-		<AppRailTile bind:group={currentRailCategory} name="elements" value={'/elements'}>
+		<AppRailTile bind:group={currentRailCategory} name="flows" value={'/flows'}>
 			<svelte:fragment slot="lead"
 				><Icon name="tailwind" width="w-6" height="h-6" /></svelte:fragment
 			>
-			<span>Tailwind</span>
+			<span>Flows</span>
 		</AppRailTile>
-		<AppRailTile bind:group={currentRailCategory} name="svelte" value={'/svelte'}>
+		<AppRailTile bind:group={currentRailCategory} name="reports" value={'/reports'}>
 			<svelte:fragment slot="lead"
 				><Icon name="svelte" width="w-6" height="h-6" /></svelte:fragment
 			>
-			<span>Svelte</span>
+			<span>Reports</span>
 		</AppRailTile>
-		<AppRailTile bind:group={currentRailCategory} name="experiments" value={'/experiments'}>
+		<AppRailTile bind:group={currentRailCategory} name="account" value={'/account'}>
 			<svelte:fragment slot="lead"
 				><Icon name="screwdriverWrench" width="w-6" height="h-6" /></svelte:fragment
 			>
-			<span>Experiments</span>
+			<span>Account</span>
 		</AppRailTile>
 	</AppRail>
 	<!-- Nav Links -->
@@ -85,6 +85,7 @@
 			<nav class="list-nav">
 				<ul>
 					{#each segment.list as { href, label, badge, preload }}
+						<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 						<li on:keypress on:click={drawerStore.close}>
 							<a
 								{href}

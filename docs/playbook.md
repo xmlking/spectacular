@@ -243,6 +243,15 @@ pnpm add -D tailwind-variants clsx tailwind-merge --filter "./apps/console3"
 pnpm add -D mode-watcher --filter "./apps/web"
 ```
 
+### Util
+
+#### Stores
+
+```shell
+pnpm add -D svelte-persisted-store --filter "./apps/console"
+```
+
+
 ### UI Blocks
 
 - [Kometa UI Kit](https://kitwind.io/products/kometa) (Free) [Blocks](https://kitwind.io/products/kometa/components)
