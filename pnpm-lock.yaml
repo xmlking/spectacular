@@ -255,6 +255,9 @@ importers:
       svelte-meta-tags:
         specifier: 3.1.2
         version: 3.1.2(svelte@4.2.16)(typescript@5.4.5)
+      svelte-persisted-store:
+        specifier: 0.9.2
+        version: 0.9.2(svelte@4.2.16)
       svelte-ux:
         specifier: 0.62.12
         version: 0.62.12(@babel/core@7.24.5)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.16)
@@ -959,6 +962,9 @@ importers:
       svelte-meta-tags:
         specifier: 3.1.2
         version: 3.1.2(svelte@4.2.16)(typescript@5.4.5)
+      svelte-persisted-store:
+        specifier: 0.9.2
+        version: 0.9.2(svelte@4.2.16)
       svelte-ux:
         specifier: 0.62.12
         version: 0.62.12(@babel/core@7.24.5)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.16)
@@ -9935,6 +9941,12 @@ packages:
     resolution: {integrity: sha512-DycY7DJr7VqofiJ63ut1/NEG92HrWWL56VWITn/cJCu+LlZhMoBkBXT4opUitPEEwbq1nMQbv4vTKUfbOqIW1g==}
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0
+
+  svelte-persisted-store@0.9.2:
+    resolution: {integrity: sha512-jp7W98yMgBhgz5fWnjZBCmCX89Rse13iqVpjK+1ByS6iYkvW9WT+F2vwsep3f0Zy/tnGYbb8MI+9Vx7W0NQsPg==}
+    engines: {node: '>=0.14'}
+    peerDependencies:
+      svelte: ^3.48.0 || ^4.0.0 || ^5.0.0-next.0
 
   svelte-preprocess@5.1.4:
     resolution: {integrity: sha512-IvnbQ6D6Ao3Gg6ftiM5tdbR6aAETwjhHV+UKGf5bHGYR69RQvF1ho0JKPcbUON4vy4R7zom13jPjgdOWCQ5hDA==}
@@ -21667,6 +21679,10 @@ snapshots:
       - typescript
 
   svelte-parse-markup@0.1.2(svelte@4.2.16):
+    dependencies:
+      svelte: 4.2.16
+
+  svelte-persisted-store@0.9.2(svelte@4.2.16):
     dependencies:
       svelte: 4.2.16
 
