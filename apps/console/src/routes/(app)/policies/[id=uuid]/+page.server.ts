@@ -18,7 +18,7 @@ export const actions = {
 		const id = uuidSchema.parse(params.id);
 		const session = await locals.auth();
 		if (session?.user == undefined) {
-			redirect(307, `/auth/signin?callbackUrl=/dashboard/policies/${id}`);
+			redirect(307, `/signin?callbackUrl=/policies/${id}`);
 		}
 
 		const form = await superValidate(request, zod(schema));
@@ -92,6 +92,6 @@ export const actions = {
 			duration: 10000,
 			type: ToastLevel.Success
 		} as const;
-		redirectWithFlash(302, '/dashboard/policies', message, event);
+		redirectWithFlash(302, '/policies', message, event);
 	}
 };

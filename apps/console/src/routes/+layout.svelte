@@ -24,6 +24,7 @@
 	import Sidebar from '$lib/components/layout/sidebar.svelte';
 	import Drawer from '$lib/components/layout/drawer.svelte';
 	import FlashMessageToast from '$lib/components/layout/flash-message-toast.svelte';
+	import { Logger, startsWith } from '@spectacular/utils';
 	import '../app.pcss';
 
 	export let data;
@@ -45,13 +46,12 @@
 		modalSearch: { ref: Search }
 	};
 
-	function matchPathWhitelist(pathname: string): boolean {
-		// If homepage route
-		if (i18n.route(pathname) === '/') return true;
-		// If any blog route `/blog`
-		if (i18n.route(pathname).includes('/blog')) return true;
-		// If any blog route `/auth`
-		if (i18n.route(pathname).includes('/auth')) return true;
+	const noSidebarPaths = ['/signin', '/signup', '/privacy', '/terms', '/blog', '/password-reset'];
+	function matchNoSidebarPaths(pathname: string): boolean {
+		const canonicalPath = i18n.route(pathname);
+		if (canonicalPath == '/' || startsWith(canonicalPath, noSidebarPaths)) {
+			return true;
+		}
 		return false;
 	}
 
@@ -77,7 +77,7 @@
 
 	// Reactive
 	// Disable left sidebar on homepage
-	$: slotSidebarLeft = matchPathWhitelist($page.url.pathname)
+	$: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname)
 		? 'w-0'
 		: 'bg-surface-50-900-token lg:w-auto';
 	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';

@@ -168,7 +168,7 @@
 {/if}
 
 <!-- Signin with email/password -->
-<form method="POST" action="/auth/signin?/password" use:enhance>
+<form method="POST" action="/signin?/password" use:enhance>
 	<input type="hidden" name="__superform_id" bind:value={$formId} />
 	<div class="mt-6">
 		<label class="label">
@@ -222,7 +222,7 @@
 </form>
 
 <div class="mt-5 flex flex-row items-center justify-center">
-	<a href="/auth/forgot-password" class="font-semibold">{m.auth_labels_forgot_password()}</a>
+	<a href="/password-reset" class="font-semibold">{m.auth_labels_forgot_password()}</a>
 </div>
 
 <!-- Divider -->
@@ -233,7 +233,7 @@
 </div>
 
 <!-- Signin with email : Magic Link Passwordless Authentication -->
-<form method="POST" action="/auth/signin?/passwordless" use:pwlEnhance>
+<form method="POST" action="/signin?/passwordless" use:pwlEnhance>
 	<input type="hidden" name="__superform_id" bind:value={$pwlFormId} />
 	<div class="mt-6">
 		<label class="label">
@@ -277,20 +277,14 @@
 <!-- Signin with social -->
 <form method="POST">
 	<div class="flex flex-row justify-evenly">
-		<button
-			type="submit"
-			formaction="/auth/signin?/google"
-			class="variant-filled-warning btn-icon"><Icon name="google" /></button
+		<button type="submit" formaction="/signin?/google" class="variant-filled-warning btn-icon"
+			><Icon name="google" /></button
 		>
-		<button
-			type="submit"
-			formaction="/auth/signin?/github"
-			class="variant-filled-secondary btn-icon"><Github /></button
+		<button type="submit" formaction="/signin?/github" class="variant-filled-secondary btn-icon"
+			><Github /></button
 		>
-		<button
-			type="submit"
-			formaction="/auth/signin?/azuread"
-			class="variant-filled-error btn-icon"><Icon name="microsoft" /></button
+		<button type="submit" formaction="/signin?/azuread" class="variant-filled-error btn-icon"
+			><Icon name="microsoft" /></button
 		>
 	</div>
 </form>

@@ -69,7 +69,7 @@ export default new HoudiniClient({
 			if (errors.some(hasErrorMessage('JWTExpired'))) {
 				await invalidateAll();
 			} else if (errors.some(hasErrorTypes(['PERMISSION_DENIED', 'UNAUTHENTICATED']))) {
-				redirect(303, '/auth/signin');
+				redirect(303, '/signin');
 			} else if (errors.some(isErrorType('NOT_FOUND'))) {
 				error(404);
 			}

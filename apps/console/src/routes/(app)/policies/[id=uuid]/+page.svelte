@@ -58,7 +58,7 @@
 
 <!-- <Breadcrumb aria-label="Default breadcrumb example" class="mb-6">
 	<BreadcrumbItem href="/dashboard" home>Home</BreadcrumbItem>
-	<BreadcrumbItem href="/dashboard/policies">Policy</BreadcrumbItem>
+	<BreadcrumbItem href="/policies">Policy</BreadcrumbItem>
 	<BreadcrumbItem>Update Policy</BreadcrumbItem>
 </Breadcrumb> -->
 
@@ -109,7 +109,7 @@
 		</div>
 		<div class="col-span-2 flex justify-end">
 			{#if $form.originalShared}
-				<A class="btn" href="/dashboard/rules/{$form.ruleId}">edit this golden rule</A>
+				<A class="btn" href="/rules/{$form.ruleId}">edit this golden rule</A>
 			{/if}
 		</div>
 		<div class="col-span-2">

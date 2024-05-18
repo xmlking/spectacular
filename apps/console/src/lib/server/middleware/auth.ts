@@ -35,7 +35,7 @@ export const auth = (async ({ event, resolve }) => {
 			removeNhostSessionInCookies(event.cookies);
 			// TODO: should we throw error and display error to user?
 			log.error('auth error:', error);
-			redirect(303, i18n.resolveRoute('auth/signin'));
+			redirect(303, i18n.resolveRoute('/signin'));
 		}
 
 		if (newSession) {

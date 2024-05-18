@@ -55,7 +55,7 @@
 		subject = null;
 		if (browser) {
 			await goto(
-				`/dashboard/policies?subjectType=${$form.subjectType}&limit=${$form.limit}&offset=${$form.offset}`
+				`/policies?subjectType=${$form.subjectType}&limit=${$form.limit}&offset=${$form.offset}`
 			);
 		}
 	}

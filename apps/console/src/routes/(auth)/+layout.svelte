@@ -14,10 +14,10 @@
 				</div>
 			</div>
 			<TabGroup justify="justify-center">
-				<TabAnchor href="/auth/signin" selected={$page.url.pathname === '/auth/signin'}>
+				<TabAnchor href="/signin" selected={$page.url.pathname === '/signin'}>
 					<span>{m.auth_labels_signin()}</span>
 				</TabAnchor>
-				<TabAnchor href="/auth/signup" selected={$page.url.pathname === '/auth/signup'}>
+				<TabAnchor href="/signup" selected={$page.url.pathname === '/signup'}>
 					<span>{m.auth_labels_signup()}</span>
 				</TabAnchor>
 			</TabGroup>

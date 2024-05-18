@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 	import { Icon } from '@spectacular/skeleton/components/icons';
-	import { menuNavLinks } from '$lib/links';
+	import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
+	import { i18n } from '$lib/i18n';
 	import { page } from '$app/stores';
 
 	// Local
@@ -16,18 +17,15 @@
 	// Lifecycle
 	page.subscribe((page) => {
 		// ex: /basePath/...
-		let basePath: string = page.url.pathname.split('/')[1];
+		const canonicalPath = i18n.route(page.url.pathname);
+		const basePath = canonicalPath.split('/')[1];
 		if (!basePath) return;
 		// Translate base path to link section
-		if (['policies', 'rules', 'zones', 'segments'].includes(basePath)) currentRailCategory = '/policies';
-		if (['network', 'segments'].includes(basePath)) currentRailCategory = '/flows';
-		if (['reports', 'access-reports', 'usage-reports'].includes(basePath)) currentRailCategory = '/reports';
-		if (['profile', 'eature-flags', 'organizations', 'delegation', 'users', 'groups'].includes(basePath))
-			currentRailCategory = '/account';
+		currentRailCategory = hrefToCategoryIndex[basePath] ?? '/policies';
 	});
 
 	// Reactive
-	$: submenu = menuNavLinks[currentRailCategory ?? '/catalog'];
+	$: submenu = menuNavLinks[currentRailCategory ?? '/policies'];
 	$: listboxItemActive = (href: string) =>
 		$page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '';
 </script>
@@ -50,11 +48,11 @@
 			<span>Blog</span>
 		</AppRailAnchor>
 		<!-- --- / --- -->
-		<AppRailTile bind:group={currentRailCategory} name="catalog" value={'/catalog'}>
+		<AppRailTile bind:group={currentRailCategory} name="catalog" value={'/policies'}>
 			<svelte:fragment slot="lead"
 				><Icon name="book" width="w-6" height="h-6" /></svelte:fragment
 			>
-			<span>Catalog</span>
+			<span>Policies</span>
 		</AppRailTile>
 		<hr class="opacity-30" />
 		<AppRailTile bind:group={currentRailCategory} name="flows" value={'/flows'}>
@@ -90,7 +88,7 @@
 							<a
 								{href}
 								class={listboxItemActive(href)}
-								data-sveltekit-preload-data={preload || "hover"}
+								data-sveltekit-preload-data={preload || 'hover'}
 							>
 								<span class="flex-auto">{@html label}</span>
 								{#if badge}<span class="variant-filled-secondary badge"

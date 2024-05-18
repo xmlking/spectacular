@@ -11,7 +11,7 @@
 	 */
 	onMount(async () => {
 		if (data.user == null) {
-			goto('/auth/signin');
+			goto('/signin');
 		}
 	});
 </script>

@@ -241,9 +241,7 @@
 					<Avatar initials={user.email} />
 				{/if}
 			{:else}
-				<a href="/auth/signin" class="variant-filled-primary btn"
-					>{m.auth_labels_signin()}</a
-				>
+				<a href="/signin" class="variant-filled-primary btn">{m.auth_labels_signin()}</a>
 			{/if}
 		</section>
 	</svelte:fragment>
