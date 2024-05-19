@@ -34,24 +34,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup Pages 📄
+      - name: ⚙️ Setup Node
+        uses: ./.github/actions/setup
+      - name: 💎 Setup Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Setup PNPM ⚙️
-        uses: pnpm/action-setup@v3
-      - name: Setup Node 📐
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: 'pnpm'
-      # - name: Filter Docs 📃
-      #   run: pnpm turbo prune --scope=docs
-      - name: Install dependencies 💎
-        run: pnpm install
-      - name: Build 🏗️
-        run: pnpm turbo build --filter=docs
-      - name: Upload Artifact ☁️
+      - name: 🏗️ Build
+        run: turbo build --filter=docs
+      - name: ☁️ Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: apps/docs/dist
