@@ -1,0 +1,21 @@
+name: Report
+
+on:
+  schedule:
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🐾 Audit dependencies
+        uses: snyk/actions/node@master
+        with:
+          args: --all-projects --severity-threshold high --fail-on all
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

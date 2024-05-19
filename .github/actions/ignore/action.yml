@@ -1,0 +1,24 @@
+name: Ignore
+description: Determine if a workspace has new changes that need to be deployed
+
+inputs:
+  workspace:
+    description: Workspace name to check
+    required: true
+
+outputs:
+  ignore:
+    description: Boolean value that indicates if the workspace can be ignored
+    value: ${{ steps.check.outputs.ignore }}
+
+runs:
+  using: composite
+  steps:
+    - id: check
+      run: |
+        if ! pnpm dlx turbo-ignore ${{ inputs.workspace }}; then
+          echo "ignore=false" >> $GITHUB_OUTPUT
+        else
+          echo "ignore=true" >> $GITHUB_OUTPUT
+        fi
+      shell: bash

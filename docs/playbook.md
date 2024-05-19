@@ -53,6 +53,12 @@ In this Playbook, we will be using [svelte-add](https://github.com/svelte-add/sv
 pnpm add -D @dotenv-run/cli  -w
 ```
 
+Add **commitlint** 
+
+```shell
+pnpm add -D @commitlint/cli @commitlint/config-conventional -w
+```
+
 ### Testing
 
 We will use [vitest](https://vitest.dev/) for Component (mocked) testing and

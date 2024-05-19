@@ -11,63 +11,57 @@ on:
       - 'docs'
       - 'infra'
       - 'nhost'
-  pull_request:
-    branches: [main]
-    types: [opened, synchronize]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  cog_check:
-    name: check conventional commit compliance
+  commit:
+    name: Check conventional commit compliance
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Conventional commits check
         uses: cocogitto/cocogitto-action@v3
         with:
           check-latest-tag-only: true
-  #   linter:
-  #     name: Lint Code Base
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #       - name: Checkout Code
-  #         uses: actions/checkout@v4
-  #         with:
-  #           # Full git history is needed to get a proper list of changed files within `super-linter`
-  #           fetch-depth: 0
-  #       - name: Lint Code Base
-  #         uses: github/super-linter@v5
-  #         env:
-  #           VALIDATE_ALL_CODEBASE: false
-  #           IGNORE_GENERATED_FILES: true
-  #           # FILTER_REGEX_EXCLUDE: CHANGELOG.md
-  #           DEFAULT_BRANCH: main
-  #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  build:
-    name: Build and Test
+  # linter:
+  #   name: Lint Code Base
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         # Full git history is needed to get a proper list of changed files within `super-linter`
+  #         fetch-depth: 0
+  #     - name: Lint Code Base
+  #       uses: github/super-linter@v5
+  #       env:
+  #         VALIDATE_ALL_CODEBASE: false
+  #         IGNORE_GENERATED_FILES: true
+  #         # FILTER_REGEX_EXCLUDE: CHANGELOG.md
+  #         DEFAULT_BRANCH: main
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  check:
+    name: Check tests pass
     timeout-minutes: 15
     runs-on: ubuntu-latest
     # To use Remote Caching, uncomment the next lines and follow the steps below.
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-
     steps:
-      - name: Check out code
+      - name: 📥 Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 2 # for turbo only run tasks for changed workspaces.
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: 'pnpm'
-      - run: pnpm install
-      - name: Test with coverage
-        run: pnpm turbo test:unit:coverage
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🧪 Test coverage
+        run: turbo test:unit:coverage --filter='[HEAD^1]'
 #     steps:
 #       - name: Check out code
 #         uses: actions/checkout@v4

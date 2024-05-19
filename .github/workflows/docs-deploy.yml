@@ -38,7 +38,7 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Setup PNPM 📃
+      - name: Setup PNPM ⚙️
         uses: pnpm/action-setup@v3
       - name: Setup Node 📐
         uses: actions/setup-node@v4

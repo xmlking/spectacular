@@ -1,0 +1,19 @@
+inputs:
+  CACHIX_AUTH_TOKEN:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install nix
+      uses: cachix/install-nix-action@v21
+
+    - name: Setup cachix
+      uses: cachix/cachix-action@v12
+      with:
+        name: gerschtli
+        authToken: ${{ inputs.CACHIX_AUTH_TOKEN }}
+
+    - name: Build dev shell
+      shell: bash
+      run: nix develop --profile profile && rm profile

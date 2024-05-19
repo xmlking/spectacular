@@ -1,0 +1,157 @@
+name: Deployment
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  versioning:
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.changesets.outputs.published }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 📝 Process changesets
+        uses: changesets/action@v1
+        id: changesets
+        with:
+          title: 'chore: update versions'
+          commit: 'chore: update versions'
+          version: pnpm exec changeset version
+          publish: pnpm exec changeset tag
+          createGithubReleases: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  status:
+    if: needs.versioning.outputs.published == 'true'
+    needs:
+      - versioning
+    runs-on: ubuntu-latest
+    outputs:
+      express-ignore: ${{ steps.express.outputs.ignore }}
+      keystone-ignore: ${{ steps.keystone.outputs.ignore }}
+      next-ignore: ${{ steps.next.outputs.ignore }}
+      vite-ignore: ${{ steps.vite.outputs.ignore }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🪄 Analyze express app
+        id: express
+        uses: ./.github/actions/ignore
+        with:
+          workspace: express
+      - name: 🪄 Analyze keystone app
+        id: keystone
+        uses: ./.github/actions/ignore
+        with:
+          workspace: keystone
+      - name: 🪄 Analyze next app
+        id: next
+        uses: ./.github/actions/ignore
+        with:
+          workspace: next
+      - name: 🪄 Analyze vite app
+        id: vite
+        uses: ./.github/actions/ignore
+        with:
+          workspace: vite
+
+  express:
+    if: needs.status.outputs.express-ignore == 'false'
+    needs:
+      - status
+    runs-on: ubuntu-latest
+    env:
+      TURBO_API: ${{ vars.TURBO_API }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🏗️ Build
+        run: turbo build --filter express
+      # - name: 🚀 Deploy
+      #   run:
+
+  keystone:
+    if: needs.status.outputs.keystone-ignore == 'false'
+    needs:
+      - status
+    runs-on: ubuntu-latest
+    env:
+      TURBO_API: ${{ vars.TURBO_API }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🏗️ Build
+        run: turbo build --filter keystone
+        env:
+          SKIP_ENV_REQUIRED: 1
+      # - name: 🚀 Deploy
+      #   run:
+
+  next:
+    if: needs.status.outputs.next-ignore == 'false'
+    needs:
+      - status
+    runs-on: ubuntu-latest
+    env:
+      TURBO_API: ${{ vars.TURBO_API }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🏗️ Build
+        run: turbo build --filter next
+      # - name: 🚀 Deploy
+      #   run:
+
+  vite:
+    if: needs.status.outputs.vite-ignore == 'false'
+    needs:
+      - status
+    runs-on: ubuntu-latest
+    env:
+      TURBO_API: ${{ vars.TURBO_API }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🏗️ Build
+        run: turbo build --filter vite
+        # env:
+        #   VITE_CLERK_PUBLISHABLE_KEY: ${{ vars.VITE_CLERK_PUBLISHABLE_KEY }}
+        #   VITE_SENTRY_DSN: ${{ vars.SENTRY_DSN }}
+        #   VITE_TRPC_URL: ${{ vars.VITE_TRPC_URL }}
+      # - name: 🚀 Deploy
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: vite
+      #     path: ./apps/vite/dist
+      #     if-no-files-found: error
+      #     retention-days: 1

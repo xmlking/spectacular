@@ -1,19 +1,15 @@
-inputs:
-  CACHIX_AUTH_TOKEN:
-    required: true
+name: Setup
+description: Setup environment and cache
 
 runs:
   using: composite
   steps:
-    - name: Install nix
-      uses: cachix/install-nix-action@v21
-
-    - name: Setup cachix
-      uses: cachix/cachix-action@v12
+    - uses: pnpm/action-setup@v3
+    - uses: actions/setup-node@v4
       with:
-        name: gerschtli
-        authToken: ${{ inputs.CACHIX_AUTH_TOKEN }}
-
-    - name: Build dev shell
+        node-version: lts/*
+        cache: pnpm
+    - run: pnpm install
       shell: bash
-      run: nix develop --profile profile && rm profile
+    - run: pnpm add --global turbo
+      shell: bash
