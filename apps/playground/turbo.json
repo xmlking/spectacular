@@ -9,6 +9,9 @@
 		"check": {
 			"outputs": [".svelte-kit/**"]
 		},
+		"sync": {
+			"outputs": [".svelte-kit/**"]
+		},
 		"dev": {
 			"cache": false,
 			"persistent": true,
@@ -38,6 +41,9 @@
 			]
 		},
 		"preview": {},
+		"test:unit:coverage": {
+			"dependsOn": ["sync", "^test:unit:coverage"]
+		},
 		"test:integration": {
 			"dependsOn": ["build"]
 		},

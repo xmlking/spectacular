@@ -22,7 +22,7 @@ go install github.com/hasura/graphql-engine/cli/cmd/hasura@latest
 
 ### Usage
 
-NOTE: You can pass `--endpoint <hasura-endpoint> --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET> command-line args for all _Hasura CLI_ commands
+NOTE: You can pass `--endpoint <hasura-endpoint> --admin-secret <HASURA*GRAPHQL_ADMIN_SECRET> command-line args for all \_Hasura CLI* commands
 
 ```shell
 # Create a directory to store migrations (with endpoint and admin secret configured):
@@ -186,6 +186,7 @@ GRANT ALL ON SCHEMA public TO public;
 ```
 
 If needed
+
 ```sql
 SET ROLE postgres;
 GRANT ALL ON SCHEMA auth TO nhost_auth_admin;

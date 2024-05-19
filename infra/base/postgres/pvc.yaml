@@ -6,7 +6,7 @@ metadata:
     component: postgres
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   storageClassName: default
   resources:
     requests:

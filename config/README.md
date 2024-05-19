@@ -1,6 +1,6 @@
 # Deployment
 
-deploying with **appctl**,  **Kustomize** and **[Kustomizer](https://kustomizer.dev)** 
+deploying with **appctl**, **Kustomize** and **[Kustomizer](https://kustomizer.dev)**
 
 ### Structure
 
@@ -47,21 +47,21 @@ e.g., base, envs, <regions/zones>
 
 #### config/base
 
-  Configuration in the directory `config/base` applies to all environments. Additional configuration in `config/envs` can modify this configuration.
+Configuration in the directory `config/base` applies to all environments. Additional configuration in `config/envs` can modify this configuration.
 
 #### config/components
 
 #### config/envs
 
-  The repository contains information on two environments, defined in the directory `config/envs`: `prod` and `staging`.
+The repository contains information on two environments, defined in the directory `config/envs`: `prod` and `staging`.
 
-  The `prod` environment refers only to the configuration in `config/base/myapp.yaml`.
+The `prod` environment refers only to the configuration in `config/base/myapp.yaml`.
 
-  The `staging` environment has an additional customization in `config/envs/staging/patch-replicas.yaml`. This customization is referenced in `config/envs/staging/kustomization.yaml`.
+The `staging` environment has an additional customization in `config/envs/staging/patch-replicas.yaml`. This customization is referenced in `config/envs/staging/kustomization.yaml`.
 
 #### delivery/envs
 
-  Subdirectories in `delivery/envs` contain information on the GKE clusters that host each environment. These files are automatically generated and don't need to be modified directly.
+Subdirectories in `delivery/envs` contain information on the GKE clusters that host each environment. These files are automatically generated and don't need to be modified directly.
 
 ### Install
 
@@ -75,7 +75,7 @@ gcloud components install appctl
 
 ```bash
 # Initialize existing repository
-# make sure the `git remote -v` show `https://github.com/xmlking/spectacular.git`  
+# make sure the `git remote -v` show `https://github.com/xmlking/spectacular.git`
 cd ..
 appctl init spectacular --app-config-repo=github.com/xmlking/spectacular
 cd spectacular
@@ -97,8 +97,8 @@ git push
 # dry run to see what you will create
 # kubectl apply -k config/envs/development  --dry-run=client -o yaml
 mkdir -p {./build/kubernetes/development,./build/kubernetes/production,./build/kubernetes/staging}
-kustomize build config/envs/development --output ./build/kubernetes/development --load_restrictor none 
-kustomize build config/envs/production --output ./build/kubernetes/production --load_restrictor none 
+kustomize build config/envs/development --output ./build/kubernetes/development --load_restrictor none
+kustomize build config/envs/production --output ./build/kubernetes/production --load_restrictor none
 kustomize build config/envs/staging --output ./build/kubernetes/staging --load_restrictor none
 # tag changes
 git tag v0.1.3

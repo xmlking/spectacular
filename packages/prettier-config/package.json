@@ -9,7 +9,8 @@
 	"main": "all.js",
 	"scripts": {
 		"format": "prettier --write . && eslint --fix .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"test:unit:coverage": "echo OK"
 	},
 	"devDependencies": {
 		"@spectacular/typescript-config": "workspace:*"

@@ -29,12 +29,12 @@ spec:
               protocol: TCP
           livenessProbe:
             exec:
-              command: ["pg_isready", "-U", "$(POSTGRES_USER)"]
+              command: ['pg_isready', '-U', '$(POSTGRES_USER)']
             initialDelaySeconds: 3
             timeoutSeconds: 2
           readinessProbe:
             exec:
-              command: ["pg_isready", "-U", "$(POSTGRES_USER)"]
+              command: ['pg_isready', '-U', '$(POSTGRES_USER)']
             initialDelaySeconds: 3
             timeoutSeconds: 2
           # resources:

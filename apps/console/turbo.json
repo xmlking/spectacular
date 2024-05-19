@@ -55,6 +55,9 @@
 			]
 		},
 		"preview": {},
+		"test:unit:coverage": {
+			"dependsOn": ["sync", "^test:unit:coverage"]
+		},
 		"test:integration": {
 			"dependsOn": ["build"]
 		},

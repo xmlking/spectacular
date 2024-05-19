@@ -28,7 +28,7 @@ spec:
               drop: [KILL, MKNOD, SYS_CHROOT]
           env:
             - name: HASURA_GRAPHQL_ENABLE_TELEMETRY
-              value: "false"
+              value: 'false'
           ports:
             - name: http
               containerPort: 8080

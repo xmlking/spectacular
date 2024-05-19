@@ -11,10 +11,10 @@ We are using [hasure-auth](https://docs.nhost.io/guides/auth/overview) as **Iden
 Users login from WebApp form with `username/password` or Social Login (e.g., Google, AzureAD, GitHub etc), then `hasura-auth` issue JWT Session token.  
 JWT token issued during `SignIn` step is used as `Session` token to access backend services during user session. JWT `Session` tokens has short lifetime.
 
-Users can `SugnUp` via **WebApp** to a specific `organization`  with an email in `allowed email domains` or `allowed emails` defined in `public.organizations` for that  `organization`.  
-They will automatically get *allowed roles* defined in `AUTH_USER_DEFAULT_ALLOWED_ROLES` i.e.,  `user,me` and *default role* defined in `AUTH_USER_DEFAULT_ROLE` i.e., `user`
+Users can `SugnUp` via **WebApp** to a specific `organization` with an email in `allowed email domains` or `allowed emails` defined in `public.organizations` for that `organization`.  
+They will automatically get _allowed roles_ defined in `AUTH_USER_DEFAULT_ALLOWED_ROLES` i.e., `user,me` and _default role_ defined in `AUTH_USER_DEFAULT_ROLE` i.e., `user`
 
-Optionally, additional higher roles can be added to user's *allowed roles* by administrator (manager) by [Deligation](#Deligation) UI.
+Optionally, additional higher roles can be added to user's _allowed roles_ by administrator (manager) by [Deligation](#Deligation) UI.
 
 ### Service Accounts
 
@@ -122,14 +122,15 @@ Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Adminis
 
 **Deligation** is the process where higher role users can assign elevated roles (supervisor, manager) to other users via custom UI with in his/her default `Organization` or diffrent `Organization` with in multi-tenant deployment.
 
-> **Assumptions:** there will be `public.user_roles_orgs` table that manage `user-role` assignment for a give `Organization` 
+> **Assumptions:** there will be `public.user_roles_orgs` table that manage `user-role` assignment for a give `Organization`
 
 #### Types of Deligation
+
 1. An administrator (with `manager` role) can add additional higher roles to existing user's `allowed_roles` in the same user's `default_org` and set it as user's `default_role`.
-	e.g., Administrator can promote a regular `user` role up to `supervisor` role with in the user's **default_org**, 1. by setting user's `default_role` as `supervisor` in `auth.users` table and 2. by adding `supervisor` role to `auth.user_roles` table. A databse trigger should also insert corresponding rows in `public.user_roles_orgs` with user's `default_org`. 
+   e.g., Administrator can promote a regular `user` role up to `supervisor` role with in the user's **default_org**, 1. by setting user's `default_role` as `supervisor` in `auth.users` table and 2. by adding `supervisor` role to `auth.user_roles` table. A databse trigger should also insert corresponding rows in `public.user_roles_orgs` with user's `default_org`.
 2. An administrator (with `manager` role) can also assign a role (up to `supervisor`) to existing user to **other** `Organizations` in `public.user_roles_orgs` table and set user's `allowed_roles` and `default_role` flag with that new `Organization` in `public.user_roles_orgs` table.
-3. To assign `manager` role to an user, set `default_role` as `manager` in  `auth.users` and add  `manager` role for that user in `auth.user_roles` table. 
-> Admin users will have exactly one `manager` role defined as `default_role`  in their  `default_org` in `auth.users` table.
+3. To assign `manager` role to an user, set `default_role` as `manager` in `auth.users` and add `manager` role for that user in `auth.user_roles` table.
+   > Admin users will have exactly one `manager` role defined as `default_role` in their `default_org` in `auth.users` table.
 
 ## Reference
 

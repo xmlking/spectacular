@@ -22,6 +22,8 @@
 	"scripts": {
 		"format": "prettier --write . && eslint --fix .",
 		"lint": "prettier --check . && eslint .",
+		"test": "vitest run",
+		"test:unit:coverage": "vitest run --coverage",
 		"ui:add": "pnpx shadcn-svelte@latest add"
 	},
 	"dependencies": {
@@ -51,6 +53,7 @@
 		"@types/node": "20.12.11",
 		"@typescript-eslint/eslint-plugin": "7.8.0",
 		"@typescript-eslint/parser": "7.8.0",
+		"@vitest/coverage-v8": "1.6.0",
 		"cssnano": "7.0.1",
 		"eslint": "8.57.0",
 		"postcss-import": "16.1.0",
@@ -59,7 +62,8 @@
 		"prettier-plugin-svelte": "3.2.3",
 		"prettier-plugin-tailwindcss": "0.5.14",
 		"tailwindcss": "3.4.3",
-		"typescript": "5.4.5"
+		"typescript": "5.4.5",
+		"vitest": "1.6.0"
 	},
 	"peerDependencies": {
 		"@sveltejs/kit": "^2.0.0",

@@ -59,8 +59,9 @@ nhost down
 nhost down --volumes
 ```
 
-#### nhost Run 
-nhost `Run`  allow running custom containers along with standared nhost stack.
+#### nhost Run
+
+nhost `Run` allow running custom containers along with standared nhost stack.
 [Local development](https://docs.nhost.io/guides/run/local-development)
 
 ```shell
@@ -74,4 +75,3 @@ nhost run env --config nhost/nginx-service.toml --overlay-name local > .env1
 # nhost up --run-service path/to/run-service.toml[:overlay_name]
 nhost up --run-service ./nhost/nginx-service.toml:local
 ```
- 

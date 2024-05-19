@@ -33,7 +33,7 @@ services:
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
-      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_LOG_LEVEL: warn
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup,http-log,webhook-log,websocket-log
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
@@ -44,7 +44,7 @@ services:
       # HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
       # HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
     healthcheck:
-      test: ["CMD-SHELL", "timeout 1s bash -c ':> /dev/tcp/127.0.0.1/9695' || exit 1"]
+      test: ['CMD-SHELL', "timeout 1s bash -c ':> /dev/tcp/127.0.0.1/9695' || exit 1"]
       interval: 60s
       start_period: 1m
       start_interval: 10s
@@ -73,17 +73,17 @@ services:
       - storage${BASE_HOSTNAME}:host-gateway
       - traefik${BASE_HOSTNAME}:host-gateway
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.console.entrypoints: websecure
       traefik.http.routers.console.rule: Host(`hasura${BASE_HOSTNAME}`)
       traefik.http.routers.console.service: console
-      traefik.http.routers.console.tls: "true"
-      traefik.http.services.console.loadbalancer.server.port: "9695"
+      traefik.http.routers.console.tls: 'true'
+      traefik.http.services.console.loadbalancer.server.port: '9695'
       traefik.http.routers.migrate.entrypoints: websecure
       traefik.http.routers.migrate.rule: PathPrefix(`/apis/`) && Host(`hasura${BASE_HOSTNAME}`)
       traefik.http.routers.migrate.service: migrate
-      traefik.http.routers.migrate.tls: "true"
-      traefik.http.services.migrate.loadbalancer.server.port: "443"
+      traefik.http.routers.migrate.tls: 'true'
+      traefik.http.services.migrate.loadbalancer.server.port: '443'
   ###########################################################################
   # hasura service - dev mode
   ###########################################################################

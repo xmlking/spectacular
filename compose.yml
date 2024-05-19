@@ -4,16 +4,16 @@
 x-streams-user: &streams-user root
 x-extra_hosts: &extra_hosts
   extra_hosts:
-      - host.docker.internal:host-gateway
-      - auth${BASE_HOSTNAME}:host-gateway
-      - console${BASE_HOSTNAME}:host-gateway
-      - db${BASE_HOSTNAME}:host-gateway
-      - functions${BASE_HOSTNAME}:host-gateway
-      - gateway${BASE_HOSTNAME}:host-gateway
-      - graphql${BASE_HOSTNAME}:host-gateway
-      - hasura${BASE_HOSTNAME}:host-gateway
-      - storage${BASE_HOSTNAME}:host-gateway
-      - traefik${BASE_HOSTNAME}:host-gateway
+    - host.docker.internal:host-gateway
+    - auth${BASE_HOSTNAME}:host-gateway
+    - console${BASE_HOSTNAME}:host-gateway
+    - db${BASE_HOSTNAME}:host-gateway
+    - functions${BASE_HOSTNAME}:host-gateway
+    - gateway${BASE_HOSTNAME}:host-gateway
+    - graphql${BASE_HOSTNAME}:host-gateway
+    - hasura${BASE_HOSTNAME}:host-gateway
+    - storage${BASE_HOSTNAME}:host-gateway
+    - traefik${BASE_HOSTNAME}:host-gateway
 
 services:
   ###########################################################################
@@ -39,12 +39,12 @@ services:
       timeout: 15s
       retries: 5
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.traefik.entrypoints: web,websecure
       traefik.http.routers.traefik.rule: Host(`traefik${BASE_HOSTNAME}`)
-      traefik.http.routers.traefik.tls: "true"
+      traefik.http.routers.traefik.tls: 'true'
       traefik.http.routers.traefik.middlewares: traefik-auth
-      traefik.http.services.traefik.loadbalancer.server.port: "8080"
+      traefik.http.services.traefik.loadbalancer.server.port: '8080'
       traefik.http.middlewares.traefik-auth.basicauth.usersfile: /etc/traefik/.htpasswd
       traefik.http.middlewares.traefik-auth.basicauth.removeheader: true
   ###########################################################################
@@ -117,20 +117,20 @@ services:
         condition: service_healthy
     <<: *extra_hosts
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.middlewares.replace-graphql.replacepathregex.regex: /v1(/|$$)(.*)
       traefik.http.middlewares.replace-graphql.replacepathregex.replacement: /v1/graphql$$2
       traefik.http.routers.graphql.entrypoints: websecure
       traefik.http.routers.graphql.middlewares: replace-graphql
       traefik.http.routers.graphql.rule: PathPrefix(`/v1`) && Host(`graphql${BASE_HOSTNAME}`)
       traefik.http.routers.graphql.service: graphql
-      traefik.http.routers.graphql.tls: "true"
-      traefik.http.services.graphql.loadbalancer.server.port: "8080"
+      traefik.http.routers.graphql.tls: 'true'
+      traefik.http.services.graphql.loadbalancer.server.port: '8080'
       traefik.http.routers.hasura.entrypoints: websecure
       traefik.http.routers.hasura.rule: ( PathPrefix(`/v1`) || PathPrefix(`/v2`) || PathPrefix(`/api/`) || PathPrefix(`/console/assets`) ) && Host(`hasura${BASE_HOSTNAME}`)
       traefik.http.routers.hasura.service: hasura
-      traefik.http.routers.hasura.tls: "true"
-      traefik.http.services.hasura.loadbalancer.server.port: "8080"
+      traefik.http.routers.hasura.tls: 'true'
+      traefik.http.services.hasura.loadbalancer.server.port: '8080'
   ###########################################################################
   # mailpit - but named as mailhog
   ###########################################################################
@@ -150,7 +150,7 @@ services:
     volumes:
       - mailhog:/data
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-S", "http://localhost:8025/livez"] # for k8 /readyz
+      test: ['CMD', 'wget', '--spider', '-S', 'http://localhost:8025/livez'] # for k8 /readyz
       interval: 60s
       start_period: 1m
       start_interval: 10s
@@ -160,12 +160,12 @@ services:
       traefik:
         condition: service_healthy
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.mailhog.entrypoints: websecure
       traefik.http.routers.mailhog.rule: Host(`mailhog${BASE_HOSTNAME}`)
       traefik.http.routers.mailhog.service: mailhog
-      traefik.http.routers.mailhog.tls: "true"
-      traefik.http.services.mailhog.loadbalancer.server.port: "8025"
+      traefik.http.routers.mailhog.tls: 'true'
+      traefik.http.services.mailhog.loadbalancer.server.port: '8025'
   ###########################################################################
   # hasura auth
   # Environment Variables:
@@ -187,39 +187,39 @@ services:
       AUTH_ACCESS_CONTROL_ALLOWED_REDIRECT_URLS: https://console${BASE_HOSTNAME}:5173,https://console${BASE_HOSTNAME},https://*.vercel.app/
       AUTH_ACCESS_CONTROL_BLOCKED_EMAIL_DOMAINS: ${AUTH_ACCESS_CONTROL_BLOCKED_EMAIL_DOMAINS:-}
       AUTH_ACCESS_CONTROL_BLOCKED_EMAILS: ${AUTH_ACCESS_CONTROL_BLOCKED_EMAILS:-}
-      AUTH_ACCESS_TOKEN_EXPIRES_IN: "900"
-      AUTH_ANONYMOUS_USERS_ENABLED: "false"
+      AUTH_ACCESS_TOKEN_EXPIRES_IN: '900'
+      AUTH_ANONYMOUS_USERS_ENABLED: 'false'
       AUTH_API_PREFIX: /v1
       AUTH_CLIENT_URL: ${AUTH_CLIENT_URL:-https://console${BASE_HOSTNAME}:5173}
-      AUTH_DISABLE_NEW_USERS: "false"
-      AUTH_DISABLE_SIGNUP: "false"
-      AUTH_EMAIL_PASSWORDLESS_ENABLED: "true"
-      AUTH_SHOW_LOG_QUERY_PARAMS: "false"
-      AUTH_EMAIL_SIGNIN_EMAIL_VERIFIED_REQUIRED: "false"
+      AUTH_DISABLE_NEW_USERS: 'false'
+      AUTH_DISABLE_SIGNUP: 'false'
+      AUTH_EMAIL_PASSWORDLESS_ENABLED: 'true'
+      AUTH_SHOW_LOG_QUERY_PARAMS: 'false'
+      AUTH_EMAIL_SIGNIN_EMAIL_VERIFIED_REQUIRED: 'false'
       AUTH_GRAVATAR_DEFAULT: mp
-      AUTH_GRAVATAR_ENABLED: "true"
+      AUTH_GRAVATAR_ENABLED: 'true'
       AUTH_GRAVATAR_RATING: g
       AUTH_HOST: 0.0.0.0
       AUTH_JWT_CUSTOM_CLAIMS: '{"allowed-orgs":"allowedOrgs[].organization","default-org":"metadata.default_org","user-email":"email"}'
       AUTH_LOCALE_ALLOWED_LOCALES: en,de,es
       AUTH_LOCALE_DEFAULT: en
-      AUTH_MFA_ENABLED: "true"
+      AUTH_MFA_ENABLED: 'true'
       AUTH_MFA_TOTP_ISSUER: ${APP_NAME}
-      AUTH_PASSWORD_HIBP_ENABLED: "false"
-      AUTH_PASSWORD_MIN_LENGTH: "9"
-      AUTH_PORT: "4000"
+      AUTH_PASSWORD_HIBP_ENABLED: 'false'
+      AUTH_PASSWORD_MIN_LENGTH: '9'
+      AUTH_PORT: '4000'
       AUTH_PROVIDER_AZUREAD_CLIENT_ID: ${AUTH_PROVIDER_AZUREAD_CLIENT_ID}
       AUTH_PROVIDER_AZUREAD_CLIENT_SECRET: ${AUTH_PROVIDER_AZUREAD_CLIENT_SECRET}
-      AUTH_PROVIDER_AZUREAD_ENABLED: "true"
+      AUTH_PROVIDER_AZUREAD_ENABLED: 'true'
       AUTH_PROVIDER_AZUREAD_TENANT: ${AUTH_PROVIDER_AZUREAD_TENANT}
       AUTH_PROVIDER_GITHUB_CLIENT_ID: ${AUTH_PROVIDER_GITHUB_CLIENT_ID}
       AUTH_PROVIDER_GITHUB_CLIENT_SECRET: ${AUTH_PROVIDER_GITHUB_CLIENT_SECRET}
-      AUTH_PROVIDER_GITHUB_ENABLED: "true"
+      AUTH_PROVIDER_GITHUB_ENABLED: 'true'
       AUTH_PROVIDER_GOOGLE_CLIENT_ID: ${AUTH_PROVIDER_GOOGLE_CLIENT_ID}
       AUTH_PROVIDER_GOOGLE_CLIENT_SECRET: ${AUTH_PROVIDER_GOOGLE_CLIENT_SECRET}
-      AUTH_PROVIDER_GOOGLE_ENABLED: "true"
-      AUTH_PROVIDER_GOOGLE_SCOPE: ""
-      AUTH_REFRESH_TOKEN_EXPIRES_IN: "2592000"
+      AUTH_PROVIDER_GOOGLE_ENABLED: 'true'
+      AUTH_PROVIDER_GOOGLE_SCOPE: ''
+      AUTH_REFRESH_TOKEN_EXPIRES_IN: '2592000'
       AUTH_REQUIRE_ELEVATED_CLAIM: required
       AUTH_SERVER_URL: https://auth${BASE_HOSTNAME}/v1
       AUTH_SMTP_AUTH_METHOD: ${AUTH_SMTP_AUTH_METHOD:-PLAIN}
@@ -231,8 +231,8 @@ services:
       AUTH_SMTP_SENDER: ${AUTH_SMTP_SENDER:-hasura-auth@example.com}
       AUTH_USER_DEFAULT_ALLOWED_ROLES: user,me
       AUTH_USER_DEFAULT_ROLE: user
-      AUTH_WEBAUTHN_ATTESTATION_TIMEOUT: "60000"
-      AUTH_WEBAUTHN_ENABLED: "true"
+      AUTH_WEBAUTHN_ATTESTATION_TIMEOUT: '60000'
+      AUTH_WEBAUTHN_ENABLED: 'true'
       AUTH_WEBAUTHN_RP_ID: ${APP_NAME}
       AUTH_WEBAUTHN_RP_NAME: ${APP_DESCRIPTION}
       AUTH_WEBAUTHN_RP_ORIGINS: ${AUTH_CLIENT_URL:-https://console${BASE_HOSTNAME}:5173,https://console.traefik.me}
@@ -244,11 +244,11 @@ services:
       - 4000
     healthcheck:
       test:
-          - CMD
-          - wget
-          - --spider
-          - -S
-          - http://localhost:4000/healthz
+        - CMD
+        - wget
+        - --spider
+        - -S
+        - http://localhost:4000/healthz
       interval: 60s
       start_period: 1m
       start_interval: 10s
@@ -265,12 +265,12 @@ services:
         condition: service_healthy
     <<: *extra_hosts
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.auth.entrypoints: websecure
       traefik.http.routers.auth.rule: Host(`auth${BASE_HOSTNAME}`)
       traefik.http.routers.auth.service: auth
-      traefik.http.routers.auth.tls: "true"
-      traefik.http.services.auth.loadbalancer.server.port: "4000"
+      traefik.http.routers.auth.tls: 'true'
+      traefik.http.services.auth.loadbalancer.server.port: '4000'
   ###########################################################################
   # minio
   ###########################################################################
@@ -289,7 +289,7 @@ services:
       - 9000
       - 9001
     healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
+      test: ['CMD', 'mc', 'ready', 'local']
       interval: 60s
       start_period: 1m
       start_interval: 10s
@@ -299,12 +299,12 @@ services:
       traefik:
         condition: service_healthy
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.minio.entrypoints: websecure
       traefik.http.routers.minio.rule: Host(`minio${BASE_HOSTNAME}`)
       traefik.http.routers.minio.service: minio
-      traefik.http.routers.minio.tls: "true"
-      traefik.http.services.minio.loadbalancer.server.port: "9001"
+      traefik.http.routers.minio.tls: 'true'
+      traefik.http.services.minio.loadbalancer.server.port: '9001'
   ###########################################################################
   # storage
   ###########################################################################
@@ -323,12 +323,12 @@ services:
     environment:
       TMPDIR: /govips
       BIND: :5000
-      DEBUG: "true"
+      DEBUG: 'true'
       # CLAMAV_SERVER: tcp://run-clamav:3310
       HASURA_ENDPOINT: http://graphql:8080/v1
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
-      HASURA_METADATA: "1"
-      POSTGRES_MIGRATIONS: "1"
+      HASURA_METADATA: '1'
+      POSTGRES_MIGRATIONS: '1'
       POSTGRES_MIGRATIONS_SOURCE: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=disable
       PUBLIC_URL: https://storage${BASE_HOSTNAME}
       S3_ACCESS_KEY: ${S3_ACCESS_KEY}
@@ -346,21 +346,21 @@ services:
         condition: service_healthy
       graphql:
         condition: service_healthy
-#    healthcheck:
-#      test: curl --fail -s http://localhost:5000/healthz || exit 1
-#      interval: 60s
-#      start_period: 1m
-#      start_interval: 10s
-#      timeout: 15s
-#      retries: 5
+    #    healthcheck:
+    #      test: curl --fail -s http://localhost:5000/healthz || exit 1
+    #      interval: 60s
+    #      start_period: 1m
+    #      start_interval: 10s
+    #      timeout: 15s
+    #      retries: 5
     <<: *extra_hosts
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.storage.entrypoints: websecure
       traefik.http.routers.storage.rule: PathPrefix(`/v1`) && Host(`storage${BASE_HOSTNAME}`)
       traefik.http.routers.storage.service: storage
-      traefik.http.routers.storage.tls: "true"
-      traefik.http.services.storage.loadbalancer.server.port: "5000"
+      traefik.http.routers.storage.tls: 'true'
+      traefik.http.services.storage.loadbalancer.server.port: '5000'
   ###########################################################################
   # dashboard
   ###########################################################################
@@ -380,7 +380,7 @@ services:
       NEXT_PUBLIC_NHOST_HASURA_API_URL: https://hasura${BASE_HOSTNAME}
       NEXT_PUBLIC_NHOST_HASURA_CONSOLE_URL: https://hasura${BASE_HOSTNAME}
       NEXT_PUBLIC_NHOST_HASURA_MIGRATIONS_API_URL: https://hasura${BASE_HOSTNAME}/migrations
-      NEXT_PUBLIC_NHOST_PLATFORM: "false"
+      NEXT_PUBLIC_NHOST_PLATFORM: 'false'
       NEXT_PUBLIC_NHOST_STORAGE_URL: https://storage${BASE_HOSTNAME}/v1
     expose:
       - 3000
@@ -391,13 +391,13 @@ services:
         condition: service_healthy
     <<: *extra_hosts
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.dashboard.entrypoints: websecure
       traefik.http.routers.dashboard.rule: Host(`dashboard${BASE_HOSTNAME}`)
       traefik.http.routers.dashboard.service: dashboard
-      traefik.http.routers.dashboard.tls: "true"
+      traefik.http.routers.dashboard.tls: 'true'
       traefik.http.routers.dashboard.middlewares: traefik-auth
-      traefik.http.services.dashboard.loadbalancer.server.port: "3000"
+      traefik.http.services.dashboard.loadbalancer.server.port: '3000'
   ###########################################################################
   # configserver
   ###########################################################################
@@ -429,12 +429,12 @@ services:
       traefik:
         condition: service_healthy
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.configserver.entrypoints: websecure
       traefik.http.routers.configserver.rule: Host(`dashboard${BASE_HOSTNAME}`) && PathPrefix(`/v1/configserver`)
       traefik.http.routers.configserver.service: configserver
-      traefik.http.routers.configserver.tls: "true"
-      traefik.http.services.configserver.loadbalancer.server.port: "8088"
+      traefik.http.routers.configserver.tls: 'true'
+      traefik.http.services.configserver.loadbalancer.server.port: '8088'
   ###########################################################################
   # tailcall gateway
   ###########################################################################
@@ -454,12 +454,12 @@ services:
     tmpfs:
       - /app/.mesh:exec,mode=777
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.gateway.entrypoints: websecure
       traefik.http.routers.gateway.rule: Host(`gateway${BASE_HOSTNAME}`)
       traefik.http.routers.gateway.service: gateway
-      traefik.http.routers.gateway.tls: "true"
-      traefik.http.services.gateway.loadbalancer.server.port: "8080"
+      traefik.http.routers.gateway.tls: 'true'
+      traefik.http.services.gateway.loadbalancer.server.port: '8080'
   ###########################################################################
   # webapp - console
   ###########################################################################
@@ -503,12 +503,12 @@ services:
         condition: service_healthy
     <<: *extra_hosts
     labels:
-      traefik.enable: "true"
+      traefik.enable: 'true'
       traefik.http.routers.webapp.entrypoints: websecure
       traefik.http.routers.webapp.rule: Host(`console${BASE_HOSTNAME}`)
       traefik.http.routers.webapp.service: webapp
-      traefik.http.routers.webapp.tls: "true"
-      traefik.http.services.webapp.loadbalancer.server.port: "3000"
+      traefik.http.routers.webapp.tls: 'true'
+      traefik.http.services.webapp.loadbalancer.server.port: '3000'
   ###########################################################################
   # update-certs-helper job
   # Only start once 60 days to refresh certs

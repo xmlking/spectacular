@@ -9,7 +9,8 @@
 	"main": "all.js",
 	"scripts": {
 		"format": "prettier --write .",
-		"lint": "prettier --check ."
+		"lint": "prettier --check .",
+		"test:unit:coverage": "echo OK"
 	},
 	"devDependencies": {
 		"@spectacular/prettier-config": "workspace:*",

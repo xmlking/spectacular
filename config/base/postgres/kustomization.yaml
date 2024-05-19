@@ -2,10 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 labels:
-- pairs:
-    app.kubernetes.io/name: postgres
-    app.kubernetes.io/instance: postgres-abcxzy
-    app.kubernetes.io/component: infra
+  - pairs:
+      app.kubernetes.io/name: postgres
+      app.kubernetes.io/instance: postgres-abcxzy
+      app.kubernetes.io/component: infra
 
 resources:
   - deployment.yaml
@@ -22,7 +22,6 @@ secretGenerator:
       - username=postgres
       - password=postgres
     type: kubernetes.io/basic-auth
-
 # replacements:
 #   - path: replacement.yaml
 # vars:

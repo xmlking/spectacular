@@ -14,12 +14,14 @@
 		"format": "prettier --write . && eslint --fix .",
 		"lint": "prettier --check . && eslint .",
 		"test": "vitest run",
+		"test:unit:coverage": "vitest run --coverage",
 		"test:watch": "vitest"
 	},
 	"devDependencies": {
 		"@spectacular/eslint-config": "workspace:*",
 		"@spectacular/prettier-config": "workspace:*",
 		"@spectacular/typescript-config": "workspace:*",
+		"@vitest/coverage-v8": "1.6.0",
 		"zod": "3.23.8",
 		"zod-validation-error": "3.2.0"
 	},

@@ -15,7 +15,8 @@
 		"lint:prettier": "prettier --check --plugin=prettier-plugin-astro --plugin=prettier-plugin-svelte .",
 		"preview": "astro preview",
 		"start": "astro dev",
-		"test": "vitest"
+		"test": "vitest",
+		"test:unit:coverage": "vitest run --coverage"
 	},
 	"dependencies": {
 		"sharp": "0.33.3"
@@ -37,6 +38,7 @@
 		"@spectacular/typescript-config": "workspace:*",
 		"@spectacular/utils": "workspace:*",
 		"@tailwindcss/typography": "0.5.13",
+		"@vitest/coverage-v8": "1.6.0",
 		"astro": "4.8.2",
 		"astro-expressive-code": "0.35.3",
 		"astro-seo": "0.8.3",

@@ -15,10 +15,10 @@ api:
 
 providers: # You can add more than one provider if needed
   docker:
-    endpoint: "unix:///var/run/docker.sock"
+    endpoint: 'unix:///var/run/docker.sock'
     exposedByDefault: false # Only expose explicitly enabled containers
     watch: true
-    defaultRule: "HostRegexp(`{{ index .Labels \"com.docker.compose.service\"}}.traefik.me`,`{{ index .Labels \"com.docker.compose.service\"}}-{dashed-ip:.*}.traefik.me`)"
+    defaultRule: 'HostRegexp(`{{ index .Labels "com.docker.compose.service"}}.traefik.me`,`{{ index .Labels "com.docker.compose.service"}}-{dashed-ip:.*}.traefik.me`)'
   file:
     filename: /etc/traefik/dynamic.yml
     watch: true
@@ -36,7 +36,6 @@ entryPoints:
           permanent: true
   websecure:
     address: :443
-
 # TODO: https://github.com/mead-team/oknawa-backend-server/blob/main/docker-compose.dev.yml
 #certificatesResolvers:
 #  acme:

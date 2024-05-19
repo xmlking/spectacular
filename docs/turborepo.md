@@ -100,8 +100,10 @@ dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- node -e "co
 ```
 
 ### Guidelines
+
 Guidelines for configuring `turbo.json`
-1. Don't keep workspace specific tasks in root `turbo.json`  e.g., `check` task only apply to `sveltekit` workspace, `preview` task don't apply to `packages` workspaces. Instead, move them to workspace's turbo.json file i.e., `/apps/web/turbo.json`
+
+1. Don't keep workspace specific tasks in root `turbo.json` e.g., `check` task only apply to `sveltekit` workspace, `preview` task don't apply to `packages` workspaces. Instead, move them to workspace's turbo.json file i.e., `/apps/web/turbo.json`
 2. If you don't include a key in workspace specific tasks, the configuration is **inherited** from the extended `turbo.json`.
 3. Use `dependsOn` to enforce order of execution
 

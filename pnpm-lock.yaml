@@ -1065,6 +1065,9 @@ importers:
       '@tailwindcss/typography':
         specifier: 0.5.13
         version: 0.5.13(tailwindcss@3.4.3)
+      '@vitest/coverage-v8':
+        specifier: 1.6.0
+        version: 1.6.0(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(terser@5.31.0))
       astro:
         specifier: 4.8.2
         version: 4.8.2(@types/node@20.12.11)(terser@5.31.0)(typescript@5.4.5)
@@ -1218,6 +1221,9 @@ importers:
       '@vincjo/datatables':
         specifier: 1.14.5
         version: 1.14.5(svelte@4.2.16)
+      '@vitest/coverage-v8':
+        specifier: 1.6.0
+        version: 1.6.0(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(terser@5.31.0))
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -1357,6 +1363,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: 7.8.0
         version: 7.8.0(eslint@8.57.0)(typescript@5.4.5)
+      '@vitest/coverage-v8':
+        specifier: 1.6.0
+        version: 1.6.0(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(terser@5.31.0))
       cssnano:
         specifier: 7.0.1
         version: 7.0.1(postcss@8.4.38)
@@ -1384,6 +1393,9 @@ importers:
       typescript:
         specifier: 5.4.5
         version: 5.4.5
+      vitest:
+        specifier: 1.6.0
+        version: 1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(terser@5.31.0)
 
   packages/utils:
     dependencies:
@@ -1403,6 +1415,9 @@ importers:
       '@spectacular/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@vitest/coverage-v8':
+        specifier: 1.6.0
+        version: 1.6.0(vitest@1.6.0(@types/node@20.12.11)(@vitest/ui@1.6.0)(jsdom@24.0.0)(terser@5.31.0))
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -9498,11 +9513,6 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.6.1:
-    resolution: {integrity: sha512-f/vbBsu+fOiYt+lmwZV0rVwJScl46HppnOA1ZvIuBWKOTlllpyJ3bfVax76/OrhCH38dyxoDIA8K7uB963IYgA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
   semver@7.6.2:
     resolution: {integrity: sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==}
     engines: {node: '>=10'}
@@ -13925,13 +13935,13 @@ snapshots:
       nopt: 7.2.1
       proc-log: 4.2.0
       read-package-json-fast: 3.0.2
-      semver: 7.6.1
+      semver: 7.6.2
       walk-up-path: 3.0.1
 
   '@npmcli/map-workspaces@3.0.6':
     dependencies:
       '@npmcli/name-from-folder': 2.0.0
-      glob: 10.3.12
+      glob: 10.3.14
       minimatch: 9.0.4
       read-package-json-fast: 3.0.2
 
@@ -21122,8 +21132,6 @@ snapshots:
 
   semver@6.3.1: {}
 
-  semver@7.6.1: {}
-
   semver@7.6.2: {}
 
   send@0.18.0:
@@ -22278,7 +22286,7 @@ snapshots:
       concat-stream: 2.0.0
       debug: 4.3.4
       extend: 3.0.2
-      glob: 10.3.12
+      glob: 10.3.14
       ignore: 5.3.1
       is-empty: 1.2.0
       is-plain-obj: 4.1.0

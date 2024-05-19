@@ -251,7 +251,6 @@ pnpm add -D mode-watcher --filter "./apps/web"
 pnpm add -D svelte-persisted-store --filter "./apps/console"
 ```
 
-
 ### UI Blocks
 
 - [Kometa UI Kit](https://kitwind.io/products/kometa) (Free) [Blocks](https://kitwind.io/products/kometa/components)
@@ -271,7 +270,7 @@ To work around this, `prettier-plugin-tailwindcss` **must** be loaded last, mean
 
 ```shell
 pnpm add -D prettier-plugin-tailwindcss
-pnpm add -D prettier-plugin-packagejson -w 
+pnpm add -D prettier-plugin-packagejson -w
 ```
 
 ```shell
@@ -425,7 +424,8 @@ pnpm add -D @vite-pwa/sveltekit @vite-pwa/assets-generator vite-plugin-pwa workb
 ```
 
 add `pwa-assets.config.ts` to project root
-```
+
+````
 
 #### Enable https (optional)
 
@@ -436,7 +436,7 @@ brew install mkcert
 mkcert -install # sudo is needed
 # this will create root CA cert into: `mkcert -CAROOT` output
 mkcert -CAROOT
-```
+````
 
 **Step 2:** Configure **vite** to start with **https**
 

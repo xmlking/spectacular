@@ -53,7 +53,7 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     env:
-        COREPACK_ENABLE_STRICT: 0
+      COREPACK_ENABLE_STRICT: 0
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -107,6 +107,7 @@ jobs:
             BUILD_VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
             BUILD_REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
             SCOPE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.title'] }}
+
 # TODO: https://github.blog/2024-05-02-introducing-artifact-attestations-now-in-public-beta/
 #      - name: Attest Build Provenance
 #        uses: actions/attest-build-provenance@897ed5eab6ed058a474202017ada7f40bfa52940 # v1.0.0

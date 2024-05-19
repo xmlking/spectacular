@@ -110,6 +110,7 @@ COSIGN_EXPERIMENTAL=1 cosign verify $DOCKER_IMAGE:$VERSION
 ```
 
 ### GitHub Action
+
 Build environment variables are needed during docker build in `GitHub Action`  
 **TODO:** pass `GitHub Sectets` as described in `Reference` and [example 1](https://github.com/SSHOC/gl-autodevops-minimal-port/blob/main/.github/workflows/build-herokuish-and-push-to-registry.yaml#L95)
 
@@ -140,5 +141,6 @@ docker debug storage
 ```
 
 ## Reference
+
 - [Sharing environment variables using Github Action secrets](https://andrei-calazans.com/posts/2021-06-23-passing-secrets-github-actions-docker/)
 - [How to use Github Action secrets with your Docker image](https://medium.com/@brian978_dev/effortlessly-secure-passing-secrets-from-github-to-your-docker-image-f1df3b6d0e49)

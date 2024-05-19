@@ -42,4 +42,5 @@ pnpm run dev
 ```
 
 ## Reference
+
 - [Add sponsors to your Starlight site](https://blog.otterlord.dev/posts/starlight-sponsors/) with [Overriding Components](https://starlight.astro.build/guides/overriding-components/)

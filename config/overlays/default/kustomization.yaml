@@ -11,8 +11,8 @@ commonAnnotations:
   note: Hello, I am local!
 
 resources:
-- namespace.yaml
-- ../../base
+  - namespace.yaml
+  - ../../base
 
 # components:
 # - ../../components/console
@@ -23,13 +23,13 @@ resources:
 #   name: service
 
 labels:
-- includeSelectors: true
-  pairs:
-    app.kubernetes.io/version: v1
-    environment: local
+  - includeSelectors: true
+    pairs:
+      app.kubernetes.io/version: v1
+      environment: local
 
 images:
-- name: postgres
-  newTag: "16"
-- name: hasura/graphql-engine
-  newTag: v2.35.1.cli-migrations-v3
+  - name: postgres
+    newTag: '16'
+  - name: hasura/graphql-engine
+    newTag: v2.35.1.cli-migrations-v3

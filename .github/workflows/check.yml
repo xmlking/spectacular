@@ -10,6 +10,7 @@ on:
       - 'README.md'
       - 'docs'
       - 'infra'
+      - 'nhost'
   pull_request:
     branches: [main]
     types: [opened, synchronize]
@@ -25,7 +26,7 @@ jobs:
           fetch-depth: 0
 
       - name: Conventional commits check
-        uses: cocogitto/cocogitto-action@v3.7
+        uses: cocogitto/cocogitto-action@v3
         with:
           check-latest-tag-only: true
   #   linter:
@@ -58,15 +59,15 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 2 # for turbo only run tasks for changed workspaces.
       - uses: pnpm/action-setup@v3
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: 'pnpm'
       - run: pnpm install
-      # - run: pnpm run --filter=docs build
-      - run: pnpm run --filter=docs test:unit:coverage
+      - name: Test with coverage
+        run: pnpm run test:unit:coverage
 #     steps:
 #       - name: Check out code
 #         uses: actions/checkout@v4
@@ -80,4 +81,4 @@ jobs:
 #       #   - run: bun run check --filter=docs
 #       #   - run: bun run lint --filter=docs
 #       - run: bun run build --filter=docs
-#       - run: bun run test:unit:coverage --filter=docs
+#       - run: bun run --filter=docs test:unit:coverage

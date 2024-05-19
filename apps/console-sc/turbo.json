@@ -24,7 +24,13 @@
 		},
 		"build": {
 			"dependsOn": ["generate"],
-			"outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
+			"outputs": [
+				".svelte-kit/**",
+				".vercel/**",
+				"$houdini/**",
+				"schema.graphql",
+				"src/i18n"
+			],
 			"env": [
 				"VERCEL",
 				"VERCEL_URL",
@@ -37,6 +43,9 @@
 			]
 		},
 		"preview": {},
+		"test:unit:coverage": {
+			"dependsOn": ["sync", "^test:unit:coverage"]
+		},
 		"test:integration": {
 			"dependsOn": ["build"]
 		}

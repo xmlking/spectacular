@@ -24,6 +24,7 @@
 		"format": "prettier --write . && eslint --fix .",
 		"lint": "prettier --check . && eslint .",
 		"test": "vitest run",
+		"test:unit:coverage": "vitest run --coverage",
 		"test:watch": "vitest"
 	},
 	"devDependencies": {
@@ -42,6 +43,7 @@
 		"@tsconfig/svelte": "5.0.4",
 		"@types/node": "20.12.11",
 		"@vincjo/datatables": "1.14.5",
+		"@vitest/coverage-v8": "1.6.0",
 		"autoprefixer": "10.4.19",
 		"clsx": "2.1.1",
 		"cssnano": "7.0.1",

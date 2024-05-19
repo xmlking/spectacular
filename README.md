@@ -86,7 +86,7 @@ Once you've cloned the project and installed dependencies with `pnpm i`, start a
 # stat all services in background and show logs
 make up # for first time use `make boot` then `make up`
 # this will start all services with default profile + services with `all` profile.
-make up PROFILES=all 
+make up PROFILES=all
 # verify status/health of services
 make ps
 # shotdown all services
