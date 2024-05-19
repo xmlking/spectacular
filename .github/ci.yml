@@ -29,8 +29,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v3
-        with:
-          version: 9
 
       - name: Install dependencies
         run: pnpm install
@@ -54,8 +52,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v3
-        with:
-          version: 9
 
       - name: Install dependencies
         run: pnpm install

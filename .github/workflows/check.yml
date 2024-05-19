@@ -60,11 +60,9 @@ jobs:
         with:
           fetch-depth: 2
       - uses: pnpm/action-setup@v3
-        with:
-          version: 9
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: lts/*
           cache: 'pnpm'
       - run: pnpm install
       # - run: pnpm run --filter=docs build

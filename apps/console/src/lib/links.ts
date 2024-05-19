@@ -73,7 +73,7 @@ export const menuNavLinks: MenuNavLinks = {
 			]
 		},
 		{
-			title: 'Admin',
+			title: 'Administration',
 			list: [
 				{ href: '/organizations', label: 'Organizations', keywords: 'account, organization', roles: [Role.Manager] },
 				{ href: '/delegation', label: 'Delegations', keywords: 'account, delegation', roles: [Role.Manager] },

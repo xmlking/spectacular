@@ -48,7 +48,7 @@
 			<span>Blog</span>
 		</AppRailAnchor>
 		<!-- --- / --- -->
-		<AppRailTile bind:group={currentRailCategory} name="catalog" value={'/policies'}>
+		<AppRailTile bind:group={currentRailCategory} name="policies" value={'/policies'}>
 			<svelte:fragment slot="lead"
 				><Icon name="book" width="w-6" height="h-6" /></svelte:fragment
 			>
