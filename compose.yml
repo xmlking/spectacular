@@ -84,7 +84,7 @@ services:
   # hasura service
   ###########################################################################
   graphql:
-    image: hasura/graphql-engine:v2.38.1-ce
+    image: hasura/graphql-engine:v2.39.1-ce
     hostname: graphql
     container_name: graphql
     restart: unless-stopped
@@ -135,7 +135,7 @@ services:
   # mailpit - but named as mailhog
   ###########################################################################
   mailhog:
-    image: axllent/mailpit:v1.16.0
+    image: axllent/mailpit:v1.18.3
     hostname: mailhog
     container_name: mailhog
     restart: unless-stopped
@@ -173,7 +173,7 @@ services:
   # If SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.29.5
+    image: nhost/hasura-auth:0.29.6
     hostname: auth
     container_name: auth
     restart: unless-stopped
@@ -275,7 +275,7 @@ services:
   # minio
   ###########################################################################
   minio:
-    image: bitnami/minio:2024.4.6
+    image: bitnami/minio:2024.5.10
     hostname: minio
     container_name: minio
     restart: unless-stopped
@@ -365,7 +365,7 @@ services:
   # dashboard
   ###########################################################################
   dashboard:
-    image: nhost/dashboard:1.14.0
+    image: nhost/dashboard:1.16.1
     hostname: dashboard
     container_name: dashboard
     restart: unless-stopped
@@ -402,7 +402,7 @@ services:
   # configserver
   ###########################################################################
   configserver:
-    image: nhost/cli:v1.16.4
+    image: nhost/cli:v1.17.2
     hostname: configserver
     container_name: configserver
     restart: unless-stopped
