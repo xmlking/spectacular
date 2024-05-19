@@ -1,16 +1,8 @@
 // Navigation Sitemap
 // `blockPreload: 'false'` means adding data-sveltekit-preload-data="false" to link.
 
-enum Role {
-	Me = 'me',
-	Anonymous = 'anonymous',
-	User = 'user',
-	Supervisor = 'supervisor',
-	Manager = 'manager'
-}
+import { Roles, type MenuNavLinks } from './types';
 
-export type List = Array<{ href: string; label: string; keywords: string; badge?: string; preload?: string; roles?: Role[] }>;
-export type MenuNavLinks = Record<string, Array<{ title: string; list: List }>>;
 export const menuNavLinks: MenuNavLinks = {
 	'/policies': [
 		{
@@ -75,10 +67,10 @@ export const menuNavLinks: MenuNavLinks = {
 		{
 			title: 'Administration',
 			list: [
-				{ href: '/organizations', label: 'Organizations', keywords: 'account, organization', roles: [Role.Manager] },
-				{ href: '/delegation', label: 'Delegations', keywords: 'account, delegation', roles: [Role.Manager] },
-				{ href: '/users', label: 'Users', keywords: 'account, user, admin', roles: [Role.Manager] },
-				{ href: '/groups', label: 'Groups', keywords: 'account, group, admin', roles: [Role.Manager] }
+				{ href: '/organizations', label: 'Organizations', keywords: 'account, organization', roles: [Roles.Manager] },
+				{ href: '/delegation', label: 'Delegations', keywords: 'account, delegation', roles: [Roles.Manager] },
+				{ href: '/users', label: 'Users', keywords: 'account, user, admin', roles: [Roles.Manager] },
+				{ href: '/groups', label: 'Groups', keywords: 'account, group, admin', roles: [Roles.Manager] }
 			]
 		}
 	]

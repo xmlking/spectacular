@@ -1,16 +1,20 @@
 <script lang="ts">
+	import type { ZodValidation } from 'node_modules/sveltekit-superforms/dist/adapters/zod.js';
 	// Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/form/TextField.svelte
 	import type { z, AnyZodObject } from 'zod';
-	import type { ZodValidation, FormPathLeaves } from 'sveltekit-superforms';
+	import type { FormPathLeaves } from 'sveltekit-superforms';
 	import { formFieldProxy } from 'sveltekit-superforms/client';
 	import type { SuperForm } from 'sveltekit-superforms/client';
 
+	// eslint-disable-next-line no-undef
 	type T = $$Generic<AnyZodObject>;
 
+	// eslint-disable-next-line no-undef
 	export let form: SuperForm<ZodValidation<T>, App.Superforms.Message>;
 	export let field: FormPathLeaves<z.infer<T>>;
 
 	// Hack to get the types working correctly: See github issue "https://github.com/ciscoheat/sveltekit-superforms/issues/260"
+	// eslint-disable-next-line
 	const { path, value, errors, constraints } = formFieldProxy(
 		form as SuperForm<ZodValidation<T>, unknown>,
 		field

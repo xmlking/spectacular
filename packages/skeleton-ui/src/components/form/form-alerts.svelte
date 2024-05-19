@@ -3,6 +3,7 @@
 	import { AlertTriangle } from 'lucide-svelte';
 	import { page } from '$app/stores';
 
+	// eslint-disable-next-line no-undef
 	export let message: App.Superforms.Message | undefined;
 	export let errors: string[] | undefined;
 </script>

@@ -1,4 +1,4 @@
-import { persisted } from 'svelte-persisted-store'
+import { persisted } from 'svelte-persisted-store';
 import { derived, writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import { browser } from '$app/environment';

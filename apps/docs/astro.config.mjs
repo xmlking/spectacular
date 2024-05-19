@@ -6,17 +6,16 @@ import node from '@astrojs/node';
 import vercel from '@astrojs/vercel/static';
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
-const VERCEL_SITE_URL =
-	process.env.VERCEL_ENV == 'production' &&
-	process.env.VERCEL_URL &&
-	`https://${process.env.VERCEL_URL}`;
+/* https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables */
+const VERCEL_SITE_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined;
+const site = VERCEL_SITE_URL ?? process.env.GH_SITE_URL ?? 'http://localhost:4321';
+const base = process.env.GITHUB_ACTIONS ? process.env.GH_BASE_PATH ?? '/spectacular' : undefined;
 
-const site = VERCEL_SITE_URL || process.env.GH_SITE_URL || 'http://localhost:4321/';
-const base = process.env.GH_SITE_URL ?  '/spectacular' : ''
-
+console.log('which runtime?', { site, base });
 // https://astro.build/config
 export default defineConfig({
 	site,
+	base,
 	integrations: [
 		starlight({
 			title: 'Docs',
@@ -46,14 +45,14 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: {
 						property: 'og:image',
-						content: site + 'og.jpg?v=1'
+						content: site + '/og.jpg?v=1'
 					}
 				},
 				{
 					tag: 'meta',
 					attrs: {
 						property: 'twitter:image',
-						content: site + 'og.jpg?v=1'
+						content: site + '/og.jpg?v=1'
 					}
 				}
 			],
@@ -155,7 +154,9 @@ export default defineConfig({
 					enabled: true
 				}
 			})
-		: node({
-				mode: 'standalone'
-			})
+		: process.env.GITHUB_ACTIONS
+			? undefined
+			: node({
+					mode: 'standalone'
+				})
 });

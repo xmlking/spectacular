@@ -23,6 +23,8 @@ concurrency:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  GH_SITE_URL: ${{ secrets.GH_SITE_URL || 'https://xmlking.github.io' }}
+  GH_BASE_PATH: ${{ secrets.GH_BASE_PATH || '/spectacular' }}
 
 jobs:
   build:

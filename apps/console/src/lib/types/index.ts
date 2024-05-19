@@ -10,15 +10,26 @@ export type Project = {
 /**
  * Side Nav Links
  */
+
+export enum Roles {
+	Me = 'me',
+	Anonymous = 'anonymous',
+	User = 'user',
+	Supervisor = 'supervisor',
+	Manager = 'manager'
+}
+
 export type Link = {
 	href: string;
 	label: string;
 	keywords: string;
 	badge?: string;
+	preload?: string;
+	roles?: Roles[];
 };
 
-type List = Array<{ href: string; label: string; keywords: string; badge?: string }>;
-export type NavLinks = Record<string, Array<{ title: string; list: List }>>;
+export type List = Array<Link>;
+export type MenuNavLinks = Record<string, Array<{ title: string; list: List }>>;
 
 /**
  * Toast flash message
