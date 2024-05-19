@@ -5,12 +5,18 @@ import node from '@astrojs/node';
 // import vercel from "@astrojs/vercel/serverless";
 import vercel from '@astrojs/vercel/static';
 
-const SITE_URL =
-	process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL : 'http://localhost:4321/';
+/* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
+const VERCEL_SITE_URL =
+	process.env.VERCEL_ENV == 'production' &&
+	process.env.VERCEL_URL &&
+	`https://${process.env.VERCEL_URL}`;
+
+const site = VERCEL_SITE_URL || process.env.GH_SITE_URL || 'http://localhost:4321/';
+const base = process.env.GH_SITE_URL ?  '/spectacular' : ''
 
 // https://astro.build/config
 export default defineConfig({
-	site: SITE_URL,
+	site,
 	integrations: [
 		starlight({
 			title: 'Docs',
@@ -40,14 +46,14 @@ export default defineConfig({
 					tag: 'meta',
 					attrs: {
 						property: 'og:image',
-						content: SITE_URL + 'og.jpg?v=1'
+						content: site + 'og.jpg?v=1'
 					}
 				},
 				{
 					tag: 'meta',
 					attrs: {
 						property: 'twitter:image',
-						content: SITE_URL + 'og.jpg?v=1'
+						content: site + 'og.jpg?v=1'
 					}
 				}
 			],

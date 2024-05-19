@@ -67,7 +67,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - name: Test with coverage
-        run: pnpm run test:unit:coverage
+        run: pnpm turbo test:unit:coverage
 #     steps:
 #       - name: Check out code
 #         uses: actions/checkout@v4
