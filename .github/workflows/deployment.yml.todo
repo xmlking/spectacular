@@ -43,7 +43,7 @@ jobs:
       vite-ignore: ${{ steps.vite.outputs.ignore }}
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: ⚙️ Setup
@@ -80,7 +80,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: ⚙️ Setup
         uses: ./.github/actions/setup
       - name: 🏗️ Build
@@ -99,7 +99,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: ⚙️ Setup
         uses: ./.github/actions/setup
       - name: 🏗️ Build
@@ -120,7 +120,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: ⚙️ Setup
         uses: ./.github/actions/setup
       - name: 🏗️ Build
@@ -139,7 +139,7 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
     steps:
       - name: 📥 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: ⚙️ Setup
         uses: ./.github/actions/setup
       - name: 🏗️ Build
