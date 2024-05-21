@@ -16,7 +16,6 @@ Install following CLI tools globally
 
 ```shell
 pnpm add -g tsx
-pnpm add -g hasura-cli
 pnpm add -g turbo
 pnpm add -g @dotenv-run/cli
 pnpm add -g vercel
@@ -51,12 +50,6 @@ In this Playbook, we will be using [svelte-add](https://github.com/svelte-add/sv
 ```shell
 # pnpm add  -D dotenv-cli -w
 pnpm add -D @dotenv-run/cli  -w
-```
-
-Add **commitlint** 
-
-```shell
-pnpm add -D @commitlint/cli @commitlint/config-conventional -w
 ```
 
 ### Testing
@@ -431,8 +424,6 @@ pnpm add -D @vite-pwa/sveltekit @vite-pwa/assets-generator vite-plugin-pwa workb
 
 add `pwa-assets.config.ts` to project root
 
-````
-
 #### Enable https (optional)
 
 **Step 1:** install `mkcert` and initialize RootCA
@@ -442,7 +433,7 @@ brew install mkcert
 mkcert -install # sudo is needed
 # this will create root CA cert into: `mkcert -CAROOT` output
 mkcert -CAROOT
-````
+```
 
 **Step 2:** Configure **vite** to start with **https**
 

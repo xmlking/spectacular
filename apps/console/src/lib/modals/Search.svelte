@@ -18,10 +18,10 @@
 	// Local
 	let searchTerm = '';
 	let resultsCopy = [
-		...menuNavLinks['/docs'],
-		...menuNavLinks['/elements'],
-		...menuNavLinks['/svelte'],
-		...menuNavLinks['/experiments']
+		...menuNavLinks['/policies'],
+		...menuNavLinks['/flows'],
+		...menuNavLinks['/reports'],
+		...menuNavLinks['/account']
 	];
 	let results = resultsCopy;
 	const modalStore = getModalStore();

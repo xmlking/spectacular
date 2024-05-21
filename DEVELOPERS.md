@@ -17,7 +17,6 @@ $ npm install -g pnpm # OR via npm
 # other global packages you will need
 $ pnpm add -g turbo
 $ pnpm add -g tsx
-$ pnpm add -g hasura-cli
 ```
 
 ### [Nhost CLI](https://docs.nhost.io/cli)

@@ -36,7 +36,6 @@ jobs:
   #       env:
   #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-
   test:
     name: Build and Test
     timeout-minutes: 15

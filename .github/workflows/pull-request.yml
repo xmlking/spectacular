@@ -18,15 +18,15 @@ jobs:
         with:
           fetch-depth: 0
       - name: 🖍️ Conventional commits check
-        uses: cocogitto/cocogitto-action@v3
+        uses: cocogitto/cocogitto-action@main
         with:
           check-latest-tag-only: true
-      - name: ⚙️ Setup
-        uses: ./.github/actions/setup
       - name: 🔦 Lint pull request title
-        run: pnpm exec commitlint -x @commitlint/config-conventional <<< "$TITLE"
-        # run: cog check  <<< "$TITLE"
-        env:
-          TITLE: ${{ github.event.pull_request.title }}
+        uses: cocogitto/cocogitto-action@main
+        with:
+          verify: ${{ github.event.pull_request.title }}
+        # run: cog verify  <<< "$TITLE"
+        # env:
+        #   TITLE: ${{ github.event.pull_request.title }}
       # - name: 📝 Check changeset status
       #   run: pnpm exec changeset status --since origin/main
