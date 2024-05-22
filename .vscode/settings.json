@@ -12,8 +12,6 @@
 		"+layout.svelte": "+layout.ts,+layout.js,+layout.server.ts,+layout.server.js,+layout.gql",
 		"+page.svelte": "+page.ts,+page.js,+page.server.ts,+page.server.js,+page.gql",
 		"*.svelte": "${capture}.stories.ts",
-		".eslintrc.cjs": ".eslint*,.markuplintrc.cjs,.markdownlintignore,.lintstagedrc.cjs,.editorconfig,.textlintignore",
-		".prettierrc.cjs": ".prettier*",
 		".env": ".env*,.secrets*",
 		".gitignore": ".gitattributes,.vercelignore",
 		"README.md": "DEVELOPERS.md,CHANGELOG.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,LICENSE",
@@ -41,8 +39,8 @@
 	"editor.autoIndent": "full",
 	"editor.lineHeight": 2,
 	"editor.codeActionsOnSave": {
-		// "source.organizeImports": true,
-		"source.fixAll": "explicit"
+		"quickfix.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
 	},
 	"editor.cursorBlinking": "solid",
 	"editor.cursorSmoothCaretAnimation": "on",
@@ -77,8 +75,6 @@
 		"**/.svelte-kit": true,
 		"**/$houdini": true,
 		"**/vercel": true,
-		".eslintcache": true,
-		".prettiercache": true,
 		"_": true,
 		"**/coverage": true,
 		"**/build": true,
@@ -163,34 +159,6 @@
 	"tailwindCSS.includeLanguages": {
 		"plaintext": "html"
 	},
-	////////// eslint //////////
-	"eslint.runtime": "node",
-	"eslint.options": {
-		"extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"]
-	},
-	"eslint.probe": [
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"html",
-		"vue",
-		"markdown",
-		"svelte",
-		"yaml",
-		"mdx"
-	],
-	"eslint.workingDirectories": [{ "mode": "auto" }],
-	"eslint.validate": [
-		"javascript",
-		"javascriptreact",
-		"svelte",
-		"markdown",
-		"mdx",
-		"astro", // Enable .astro
-		"typescript", // Enable .ts
-		"typescriptreact" // Enable .tsx
-	],
 	////////// TypeScript //////////
 	// astro requires this
 	"typescript.inlayHints.parameterNames.enabled": "all",
@@ -315,37 +283,36 @@
 		"zIndex"
 	],
 
-	////////// Prettier //////////
-	// Make sure we're using prettier for all filetypes
+	////////// biomejs //////////
+	// Make sure we're using biomejs for all filetypes
 	// Need this because we need to override the default json and svelte formatters that folks might have configured
-	"prettier.documentSelectors": ["**/*.svelte", "**/*.astro"],
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.defaultFormatter": "biomejs.biome",
 	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"[jsonc]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"[svelte]": {
 		"editor.defaultFormatter": "svelte.svelte-vscode"
 	},
 	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"[typescriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"[astro]": {
 		"editor.defaultFormatter": "astro-build.astro-vscode"
 	},
 	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"[markdown]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.defaultFormatter": "biomejs.biome",
 		"files.trimTrailingWhitespace": false
 	}
 }

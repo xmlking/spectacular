@@ -6,12 +6,8 @@
 		"astro": "astro",
 		"build": "astro check && astro build",
 		"dev": "astro dev",
-		"format": "concurrently pnpm:format:*",
-		"format:js": "eslint --fix .",
-		"format:prettier": "prettier --write .",
-		"lint": "concurrently pnpm:lint:*",
-		"lint:js": "eslint .",
-		"lint:prettier": "prettier --check --plugin=prettier-plugin-astro .",
+		"format": "biome format . --write",
+		"lint": "biome check .",
 		"preview": "astro preview",
 		"start": "astro dev",
 		"test:unit:coverage": "echo OK"
@@ -30,7 +26,5 @@
 		"tailwindcss": "3.4.3",
 		"typescript": "5.4.5"
 	},
-	"devDependencies": {
-		"@spectacular/eslint-config": "workspace:*"
-	}
+	"devDependencies": {}
 }

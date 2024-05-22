@@ -1,0 +1,62 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"indentStyle": "tab",
+		"indentWidth": 4,
+		"lineEnding": "lf",
+		"lineWidth": 100,
+		"attributePosition": "auto",
+		"ignore": [
+			"**/.DS_Store",
+			"**/node_modules",
+			"./build",
+			"./.svelte-kit",
+			"./package",
+			"**/.env",
+			"**/.env.*",
+			"**/vite.config.js*",
+			"**/pnpm-lock.yaml",
+			"**/package-lock.json",
+			"**/yarn.lock",
+			"**/vite.config.*.timestamp-*",
+			".vercel_build_output/**",
+			"static/**",
+			"./coverage",
+			"**/CHANGELOG.md",
+			"**/schema.graphql",
+			"**/$houdini",
+			"src/i18n"
+		]
+	},
+	"organizeImports": { "enabled": true },
+	"linter": { "enabled": true, "rules": { "recommended": true } },
+	"javascript": {
+		"formatter": {
+			"jsxQuoteStyle": "double",
+			"quoteProperties": "asNeeded",
+			"trailingComma": "none",
+			"semicolons": "asNeeded",
+			"arrowParentheses": "always",
+			"bracketSpacing": true,
+			"bracketSameLine": false,
+			"quoteStyle": "single",
+			"attributePosition": "auto"
+		}
+	},
+	"overrides": [
+		{ "include": ["*.ts"], "formatter": { "lineWidth": 140 } },
+		{ "include": ["*.svelte"] },
+		{
+			"include": ["*.yaml", "*.yml"],
+			"javascript": { "formatter": { "bracketSpacing": false } },
+			"formatter": { "indentWidth": 2 }
+		},
+		{
+			"include": ["*.md", "*.mdx"],
+			"formatter": { "indentStyle": "space", "indentWidth": 2 }
+		},
+		{ "include": ["*.astro"] }
+	]
+}
