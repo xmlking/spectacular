@@ -1,128 +1,128 @@
 <script lang="ts">
-	/* eslint-disable */ // FIXME: remove
-	import { GraphQLError } from 'graphql';
-	// import { default as SelectFetch } from 'svelte-select';
-	// import { TimeDistance } from 'svelte-time-distance';
-	import { DebugShell } from '@spectacular/skeleton/components';
-	import SuperDebug, { superForm } from 'sveltekit-superforms';
-	import { Logger } from '@spectacular/utils';
-	import { getToastStore } from '@skeletonlabs/skeleton';
-	import * as Form from '@spectacular/skeleton/components/form';
-	import { handleMessage } from '$lib/components/layout/toast-manager';
-	import { goto, invalidateAll } from '$app/navigation';
-	import { browser, dev } from '$app/environment';
-	import { DeletePolicyStore, cache } from '$houdini';
+import { browser, dev } from '$app/environment';
+import { goto, invalidateAll } from '$app/navigation';
+import { DeletePolicyStore, cache } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { getToastStore } from '@skeletonlabs/skeleton';
+// import { default as SelectFetch } from 'svelte-select';
+// import { TimeDistance } from 'svelte-time-distance';
+import { DebugShell } from '@spectacular/skeleton/components';
+import * as Form from '@spectacular/skeleton/components/form';
+import { Logger } from '@spectacular/utils';
+/* eslint-disable */ // FIXME: remove
+import { GraphQLError } from 'graphql';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
 
-	const log = new Logger('policies:list:browser');
-	export let data;
+const log = new Logger('policies:list:browser');
+export let data;
 
-	const toastStore = getToastStore();
+const toastStore = getToastStore();
 
-	// Search form
-	const superform = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		onError({ result }) {
-			// the onError event allows you to act on ActionResult errors.
-			// TODO:
-			// message.set(result.error.message)
-			log.error('policy superForm error:', { result });
+// Search form
+const superform = superForm(data.form, {
+	dataType: 'json',
+	taintedMessage: null,
+	syncFlashMessage: false,
+	onError({ result }) {
+		// the onError event allows you to act on ActionResult errors.
+		// TODO:
+		// message.set(result.error.message)
+		log.error('policy superForm error:', { result });
+	}
+});
+const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;
+
+let searchForm: HTMLFormElement;
+let subject = $form.subjectId
+	? {
+			id: $form.subjectId,
+			displayName: $form.subjectDisplayName,
+			secondaryId: ''
 		}
-	});
-	const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;
+	: null;
 
-	let searchForm: HTMLFormElement;
-	let subject = $form.subjectId
-		? {
-				id: $form.subjectId,
-				displayName: $form.subjectDisplayName,
-				secondaryId: ''
-			}
-		: null;
-
-	async function fetchSubjects(filterText: string) {
-		if (!filterText.length) return Promise.resolve([]);
-		const response = await fetch(
-			`/api/directory/search?subType=${$form.subjectType}&filter=&search=${filterText}`
+async function fetchSubjects(filterText: string) {
+	if (!filterText.length) return Promise.resolve([]);
+	const response = await fetch(
+		`/api/directory/search?subType=${$form.subjectType}&filter=&search=${filterText}`
+	);
+	if (!response.ok) throw new Error(`An error has occurred: ${response.status}`);
+	const data = await response.json();
+	if (!data) throw new Error('no data');
+	return data.results;
+}
+async function clearSubject(event: Event) {
+	subject = null;
+	if (browser) {
+		await goto(
+			`/policies?subjectType=${$form.subjectType}&limit=${$form.limit}&offset=${$form.offset}`
 		);
-		if (!response.ok) throw new Error(`An error has occurred: ${response.status}`);
-		const data = await response.json();
-		if (!data) throw new Error('no data');
-		return data.results;
 	}
-	async function clearSubject(event: Event) {
-		subject = null;
-		if (browser) {
-			await goto(
-				`/policies?subjectType=${$form.subjectType}&limit=${$form.limit}&offset=${$form.offset}`
-			);
-		}
-	}
+}
 
-	// delete action
-	const deletePolicyStore = new DeletePolicyStore();
-	let busy = false;
-	const handleDelete = async (e: CustomEvent<any>) => {
-		busy = true;
-		try {
-			if (e.detail.id) {
-				const id = e.detail.id;
-				const id2 = e.detail.id2;
-				const deletedAt = new Date();
-				const { data } = await deletePolicyStore.mutate({
-					policyId: id,
-					ruleId: id2,
-					deletedAt
-				});
-				if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
-					handleMessage(
-						{
-							message: `Policy and associated rule: ${data?.update_rules?.returning[0].displayName} deleted`,
-							hideDismiss: false,
-							timeout: 10000,
-							type: 'success'
-						},
-						toastStore
-					);
-					cache.markStale();
-					await invalidateAll();
-				} else if (data?.update_policies_by_pk) {
-					handleMessage(
-						{
-							message: `Policy ${data?.update_policies_by_pk.id} deleted`,
-							hideDismiss: false,
-							timeout: 10000,
-							type: 'success'
-						},
-						toastStore
-					);
-					cache.markStale();
-					await invalidateAll();
-				} else {
-					handleMessage(
-						{
-							message: `Policy not found for ID: ${id}`,
-							hideDismiss: false,
-							timeout: 50000,
-							type: 'error'
-						},
-						toastStore
-					);
-				}
+// delete action
+const deletePolicyStore = new DeletePolicyStore();
+let busy = false;
+const handleDelete = async (e: CustomEvent<any>) => {
+	busy = true;
+	try {
+		if (e.detail.id) {
+			const id = e.detail.id;
+			const id2 = e.detail.id2;
+			const deletedAt = new Date();
+			const { data } = await deletePolicyStore.mutate({
+				policyId: id,
+				ruleId: id2,
+				deletedAt
+			});
+			if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
+				handleMessage(
+					{
+						message: `Policy and associated rule: ${data?.update_rules?.returning[0].displayName} deleted`,
+						hideDismiss: false,
+						timeout: 10000,
+						type: 'success'
+					},
+					toastStore
+				);
+				cache.markStale();
+				await invalidateAll();
+			} else if (data?.update_policies_by_pk) {
+				handleMessage(
+					{
+						message: `Policy ${data?.update_policies_by_pk.id} deleted`,
+						hideDismiss: false,
+						timeout: 10000,
+						type: 'success'
+					},
+					toastStore
+				);
+				cache.markStale();
+				await invalidateAll();
 			} else {
-				log.error('id missing in event!');
+				handleMessage(
+					{
+						message: `Policy not found for ID: ${id}`,
+						hideDismiss: false,
+						timeout: 50000,
+						type: 'error'
+					},
+					toastStore
+				);
 			}
-		} catch (err) {
-			if (err instanceof GraphQLError) {
-				log.error(err.message);
-			} else {
-				throw err;
-			}
-		} finally {
-			busy = false;
+		} else {
+			log.error('id missing in event!');
 		}
-	};
+	} catch (err) {
+		if (err instanceof GraphQLError) {
+			log.error(err.message);
+		} else {
+			throw err;
+		}
+	} finally {
+		busy = false;
+	}
+};
 </script>
 
 <svelte:head>

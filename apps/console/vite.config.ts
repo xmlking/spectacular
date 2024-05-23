@@ -1,10 +1,10 @@
 import * as child_process from 'node:child_process';
-import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vitest/config';
-import { enhancedImages } from '@sveltejs/enhanced-img';
-import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
+import { enhancedImages } from '@sveltejs/enhanced-img';
+import { sveltekit } from '@sveltejs/kit/vite';
 import houdini from 'houdini/vite';
+import { purgeCss } from 'vite-plugin-tailwind-purgecss';
+import { defineConfig } from 'vitest/config';
 
 // if (!existsSync('./../../infra/base/traefik/certs/traefik.me.crt')) {
 // 	console.log('Missing HTTPS key/cert. You may need to run:  npm run cert');

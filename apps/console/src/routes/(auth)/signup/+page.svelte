@@ -1,57 +1,57 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
-	import { DebugShell } from '@spectacular/skeleton/components';
-	import SuperDebug, { superForm } from 'sveltekit-superforms';
-	import { Logger } from '@spectacular/utils';
-	import { getToastStore } from '@skeletonlabs/skeleton';
-	import { page } from '$app/stores';
-	import * as m from '$i18n/messages';
-	import { isLoadingForm } from '$lib/stores/loading';
-	import { handleMessage } from '$lib/components/layout/toast-manager';
-	import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { page } from '$app/stores';
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { isLoadingForm } from '$lib/stores/loading';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { DebugShell } from '@spectacular/skeleton/components';
+import { Logger } from '@spectacular/utils';
+import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
+import { fade } from 'svelte/transition';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
 
-	export let data;
-	const log = new Logger('auth:signup');
-	const organizations = data.organizations ?? [PUBLIC_DEFAULT_ORGANIZATION];
-	const toastStore = getToastStore();
+export let data;
+const log = new Logger('auth:signup');
+const organizations = data.organizations ?? [PUBLIC_DEFAULT_ORGANIZATION];
+const toastStore = getToastStore();
 
-	const {
-		form,
-		delayed,
-		timeout,
-		enhance,
-		errors,
-		constraints,
-		message,
-		tainted,
-		posted,
-		submitting,
-		capture,
-		restore
-	} = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		delayMs: 150,
-		timeoutMs: 4000,
-		onError({ result }) {
-			// TODO:
-			// message.set(result.error.message)
-			log.error('signup error:', { result });
-		},
-		onUpdated({ form }) {
-			if (form.message) {
-				handleMessage(form.message, toastStore);
-			}
+const {
+	form,
+	delayed,
+	timeout,
+	enhance,
+	errors,
+	constraints,
+	message,
+	tainted,
+	posted,
+	submitting,
+	capture,
+	restore
+} = superForm(data.form, {
+	dataType: 'json',
+	taintedMessage: null,
+	syncFlashMessage: false,
+	delayMs: 150,
+	timeoutMs: 4000,
+	onError({ result }) {
+		// TODO:
+		// message.set(result.error.message)
+		log.error('signup error:', { result });
+	},
+	onUpdated({ form }) {
+		if (form.message) {
+			handleMessage(form.message, toastStore);
 		}
-	});
+	}
+});
 
-	export const snapshot = { capture, restore };
+export const snapshot = { capture, restore };
 
-	// $: termsValue = $form.terms as Writable<boolean>;
-	// Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
-	delayed.subscribe((v) => ($isLoadingForm = v));
+// $: termsValue = $form.terms as Writable<boolean>;
+// Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
+delayed.subscribe((v) => ($isLoadingForm = v));
 </script>
 
 <svelte:head>

@@ -1,27 +1,27 @@
 <script lang="ts">
-	import { VERSION } from '@sveltejs/kit';
-	import { LogoIcon } from '@spectacular/skeleton/components/logos';
-	import { Twitter, Youtube, Github, Linkedin } from 'lucide-svelte';
+import { LogoIcon } from '@spectacular/skeleton/components/logos';
+import { VERSION } from '@sveltejs/kit';
+import { Github, Linkedin, Twitter, Youtube } from 'lucide-svelte';
 
-	const appVersion = __APP_VERSION__;
-	const gitTag = __GIT_TAG__;
-	const gitDate = __GIT_DATE__;
+const appVersion = __APP_VERSION__;
+const gitTag = __GIT_TAG__;
+const gitDate = __GIT_DATE__;
 
-	// Base Classes
-	const cBase =
-		'bg-surface-50 dark:bg-surface-900 border-t border-surface-500/10 text-xs md:text-base';
+// Base Classes
+const cBase =
+	'bg-surface-50 dark:bg-surface-900 border-t border-surface-500/10 text-xs md:text-base';
 
-	// Social Icons
-	const socialLinks = [
-		{ title: 'GitHub', href: 'https://github.com/xmlking/spectacular', icon: Github },
-		{ title: 'X (Twitter)', href: 'https://x.com/xmlking', icon: Twitter },
-		{
-			title: 'Linkedin',
-			href: 'https://www.linkedin.com/in/sumanth-c-bb41a93/',
-			icon: Linkedin
-		},
-		{ title: 'YouTube', href: 'https://www.youtube.com/@SumanthChinthagunta', icon: Youtube }
-	];
+// Social Icons
+const socialLinks = [
+	{ title: 'GitHub', href: 'https://github.com/xmlking/spectacular', icon: Github },
+	{ title: 'X (Twitter)', href: 'https://x.com/xmlking', icon: Twitter },
+	{
+		title: 'Linkedin',
+		href: 'https://www.linkedin.com/in/sumanth-c-bb41a93/',
+		icon: Linkedin
+	},
+	{ title: 'YouTube', href: 'https://www.youtube.com/@SumanthChinthagunta', icon: Youtube }
+];
 </script>
 
 <footer class="page-footer {cBase}">

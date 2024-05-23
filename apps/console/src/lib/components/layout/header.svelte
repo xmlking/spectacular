@@ -1,97 +1,91 @@
 <script lang="ts">
-	import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
-	import {
-		AppBar,
-		LightSwitch,
-		getModalStore,
-		popup,
-		getDrawerStore
-	} from '@skeletonlabs/skeleton';
-	import type { SubmitFunction } from '@sveltejs/kit';
-	import {
-		Home,
-		BookText,
-		PersonStanding,
-		PhoneOutgoing,
-		Scroll,
-		Menu,
-		Palette,
-		Search,
-		ChevronDown
-	} from 'lucide-svelte';
-	import { LogoIcon } from '@spectacular/skeleton/components/logos';
-	import type { User } from '@nhost/nhost-js';
-	// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
-	import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
-	import { browser } from '$app/environment';
-	import { enhance } from '$app/forms';
-	import { storeTheme } from '$lib/stores';
-	import LangSwitch from '$lib/components/layout/lang-switch.svelte';
-	import * as m from '$i18n/messages';
-	import Avatar from './avatar.svelte';
+import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
+import { AppBar, LightSwitch, getModalStore, popup, getDrawerStore } from '@skeletonlabs/skeleton';
+import type { SubmitFunction } from '@sveltejs/kit';
+import {
+	Home,
+	BookText,
+	PersonStanding,
+	PhoneOutgoing,
+	Scroll,
+	Menu,
+	Palette,
+	Search,
+	ChevronDown
+} from 'lucide-svelte';
+import { LogoIcon } from '@spectacular/skeleton/components/logos';
+import type { User } from '@nhost/nhost-js';
+// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
+import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
+import { browser } from '$app/environment';
+import { enhance } from '$app/forms';
+import { storeTheme } from '$lib/stores';
+import LangSwitch from '$lib/components/layout/lang-switch.svelte';
+import * as m from '$i18n/messages';
+import Avatar from './avatar.svelte';
 
-	const drawerStore = getDrawerStore();
+const drawerStore = getDrawerStore();
 
-	export let user: User | undefined;
+export let user: User | undefined;
 
-	// Local
-	let isOsMac = false;
-	const modalStore = getModalStore();
+// Local
+let isOsMac = false;
+const modalStore = getModalStore();
 
-	// Set Search Keyboard Shortcut
-	if (browser) {
-		let os = navigator.userAgent;
-		isOsMac = os.search('Mac') !== -1;
-	}
+// Set Search Keyboard Shortcut
+if (browser) {
+	let os = navigator.userAgent;
+	isOsMac = os.search('Mac') !== -1;
+}
 
-	// Drawer Handler
-	function drawerOpen(): void {
-		const s: DrawerSettings = { id: 'doc-sidenav' };
-		drawerStore.open(s);
-	}
+// Drawer Handler
+function drawerOpen(): void {
+	const s: DrawerSettings = { id: 'doc-sidenav' };
+	drawerStore.open(s);
+}
 
-	// Search
-	function triggerSearch(): void {
-		const modal: ModalSettings = {
-			type: 'component',
-			component: 'modalSearch',
-			position: 'item-start'
-		};
-		modalStore.trigger(modal);
-	}
-
-	// Keyboard Shortcut (CTRL/⌘+K) to Focus Search
-	function onWindowKeydown(e: KeyboardEvent): void {
-		if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-			// Prevent default browser behavior of focusing URL bar
-			e.preventDefault();
-			// If modal currently open, close modal (allows to open/close search with CTRL/⌘+K)
-			$modalStore.length ? modalStore.close() : triggerSearch();
-		}
-	}
-
-	const themes = [
-		{ type: 'skeleton', name: 'Skeleton', icon: '💀' },
-		{ type: 'wintry', name: 'Wintry', icon: '🌨️' },
-		{ type: 'modern', name: 'Modern', icon: '🤖' },
-		{ type: 'rocket', name: 'Rocket', icon: '🚀' },
-		{ type: 'seafoam', name: 'Seafoam', icon: '🧜‍♀️' },
-		{ type: 'vintage', name: 'Vintage', icon: '📺' },
-		{ type: 'sahara', name: 'Sahara', icon: '🏜️' },
-		{ type: 'hamlindigo', name: 'Hamlindigo', icon: '👔' },
-		{ type: 'gold-nouveau', name: 'Gold Nouveau', icon: '💫' },
-		{ type: 'crimson', name: 'Crimson', icon: '⭕' },
-		{ type: 'custom', name: 'Custom', icon: '🎆', badge: 'New' }
-	];
-
-	const setTheme: SubmitFunction = ({ formData }) => {
-		const theme = formData.get('theme')?.toString();
-
-		if (theme) {
-			document.body.setAttribute('data-theme', theme);
-			$storeTheme = theme;
-		}
+// Search
+function triggerSearch(): void {
+	const modal: ModalSettings = {
+		type: 'component',
+		component: 'modalSearch',
+		position: 'item-start'
 	};
+	modalStore.trigger(modal);
+}
+
+// Keyboard Shortcut (CTRL/⌘+K) to Focus Search
+function onWindowKeydown(e: KeyboardEvent): void {
+	if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+		// Prevent default browser behavior of focusing URL bar
+		e.preventDefault();
+		// If modal currently open, close modal (allows to open/close search with CTRL/⌘+K)
+		$modalStore.length ? modalStore.close() : triggerSearch();
+	}
+}
+
+const themes = [
+	{ type: 'skeleton', name: 'Skeleton', icon: '💀' },
+	{ type: 'wintry', name: 'Wintry', icon: '🌨️' },
+	{ type: 'modern', name: 'Modern', icon: '🤖' },
+	{ type: 'rocket', name: 'Rocket', icon: '🚀' },
+	{ type: 'seafoam', name: 'Seafoam', icon: '🧜‍♀️' },
+	{ type: 'vintage', name: 'Vintage', icon: '📺' },
+	{ type: 'sahara', name: 'Sahara', icon: '🏜️' },
+	{ type: 'hamlindigo', name: 'Hamlindigo', icon: '👔' },
+	{ type: 'gold-nouveau', name: 'Gold Nouveau', icon: '💫' },
+	{ type: 'crimson', name: 'Crimson', icon: '⭕' },
+	{ type: 'custom', name: 'Custom', icon: '🎆', badge: 'New' }
+];
+
+const setTheme: SubmitFunction = ({ formData }) => {
+	const theme = formData.get('theme')?.toString();
+
+	if (theme) {
+		document.body.setAttribute('data-theme', theme);
+		$storeTheme = theme;
+	}
+};
 </script>
 
 <!-- NOTE: using stopPropagation to override Chrome for Windows search shortcut -->

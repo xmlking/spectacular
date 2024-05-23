@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Debug } from '@spectacular/skeleton/components';
+import { Debug } from '@spectacular/skeleton/components';
 
-	export let data;
+export let data;
 </script>
 
 <svelte:head>

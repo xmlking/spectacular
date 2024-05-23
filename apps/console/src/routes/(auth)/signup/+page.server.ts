@@ -1,14 +1,14 @@
-import { fail, error } from '@sveltejs/kit';
+import { i18n } from '$lib/i18n';
+import { setNhostSessionInCookies } from '$lib/nhost';
+import { signUpSchema } from '$lib/schema/user';
+import { limiter } from '$lib/server/limiter/limiter';
+import { getOrgs } from '$lib/server/utils/getOrgs';
+import { Logger, sleep } from '@spectacular/utils';
+import { error, fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { Logger, sleep } from '@spectacular/utils';
-import { signUpSchema } from '$lib/schema/user';
-import { setNhostSessionInCookies } from '$lib/nhost';
-import { limiter } from '$lib/server/limiter/limiter';
-import { i18n } from '$lib/i18n';
-import { getOrgs } from '$lib/server/utils/getOrgs';
 
 const log = new Logger('server:auth:signup');
 
@@ -99,7 +99,10 @@ export const actions = {
 
 		if (session) {
 			setNhostSessionInCookies(cookies, session);
-			const message: App.Superforms.Message = { type: 'success', message: 'Signup sucessfull 😎' } as const;
+			const message: App.Superforms.Message = {
+				type: 'success',
+				message: 'Signup sucessfull 😎'
+			} as const;
 			redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
 		}
 

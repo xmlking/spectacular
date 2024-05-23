@@ -8,35 +8,50 @@
 		"lineEnding": "lf",
 		"lineWidth": 100,
 		"attributePosition": "auto",
+		"ignore": []
+	},
+	"organizeImports": { "enabled": true },
+	"files": {
 		"ignore": [
-			"**/.DS_Store",
-			"**/.svelte-kit",
-			"**/node_modules",
-			"./build",
-			"**/.vercel",
 			"./package",
 			"**/.env",
 			"**/.env.*",
 			"**/vite.config.js*",
-			"**/pnpm-lock.yaml",
-			"**/pnpm-workspace.yaml",
-			"**/package-lock.json",
-			"**/yarn.lock",
-			".vercel_build_output/**",
-			"static/**",
+			"**/vite.config.*.timestamp-*",
 			"./coverage",
-			"**/CHANGELOG.md",
-			"src/lib/models/types/**",
-			"**/.idea",
-			"**/dev-dist",
+			"**/src/lib/models/types/**",
 			"./apps/",
 			"./packages/",
 			"./.nhost/",
 			"./nhost/*",
-			"**/.turbo"
+			"**/.turbo",
+			"**/.vercel",
+			"**/.DS_Store",
+			"**/node_modules",
+			"**/pnpm-lock.yaml",
+			"**/package-lock.json",
+			"**/yarn.lock",
+			"./examples",
+			"./functions",
+			"./.vercel_build_output",
+			"**/.vercel_build_output",
+			"./TODO",
+			"**/CHANGELOG.md",
+			"**/.idea",
+			"**/dev-dist",
+			"./infra/helm",
+			"infra/hasura",
+			"./apps/**/src/i18n",
+			"packages/ui/src/lib/components/ui",
+			"node_modules/",
+			".sveltekit/",
+			"*.cjs",
+			"/apps/**/src/i18n",
+			"/apps/**/schema.graphql",
+			"/apps/**/$houdini",
+			"/apps/**/build"
 		]
 	},
-	"organizeImports": { "enabled": true },
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -98,47 +113,43 @@
 				"useGetterReturn": "error",
 				"useValidTypeof": "error"
 			}
-		},
-		"ignore": [
-			"**/.DS_Store",
-			"**/node_modules",
-			"**/pnpm-lock.yaml",
-			"**/package-lock.json",
-			"**/yarn.lock",
-			"./examples",
-			"./functions",
-			"./.vercel_build_output",
-			"**/.vercel_build_output",
-			"./TODO",
-			"**/CHANGELOG.md",
-			"**/.idea",
-			"**/dev-dist",
-			"./infra/helm",
-			"infra/hasura",
-			"./apps/**/src/i18n",
-			"packages/ui/src/lib/components/ui",
-			"node_modules/",
-			".sveltekit/",
-			"*.cjs",
-			"/apps/**/src/lib/i18n"
-		]
+		}
 	},
 	"javascript": {
 		"formatter": {
 			"jsxQuoteStyle": "double",
 			"quoteProperties": "asNeeded",
 			"trailingComma": "none",
-			"semicolons": "asNeeded",
+			// "semicolons": "asNeeded",
+			"semicolons": "always",
 			"arrowParentheses": "always",
 			"bracketSpacing": true,
 			"bracketSameLine": false,
 			"quoteStyle": "single",
 			"attributePosition": "auto"
 		},
-		"globals": ["__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"]
+		"globals": ["Astro", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"]
 	},
 	"overrides": [
-		{ "include": ["*.svelte"], "linter": { "rules": {} } },
+		{
+			"include": ["biome.json", "turbo.json", "tsconfig.json", ".vscode/*"],
+			"json": {
+				"parser": {
+					"allowComments": true,
+					"allowTrailingCommas": true
+				}
+			}
+		},
+		{
+			"include": ["*.svelte"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off"
+					}
+				}
+			}
+		},
 		{ "include": ["*.svelte.js"] },
 		{ "include": ["*.svelte.ts"] },
 		{ "include": ["*.astro"] },

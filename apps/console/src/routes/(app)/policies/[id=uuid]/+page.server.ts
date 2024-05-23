@@ -85,9 +85,7 @@ export const actions = {
 		if (!policyResult) return setMessage(form, { type: 'error', message: 'Update policy failed: responce empty' }, { status: 404 });
 
 		const message = {
-			message: `Policy for Subject: ${policyResult.subjectDisplayName} ${
-				ruleResult ? 'and Rule: ' + ruleResult?.displayName : ''
-			} updated`,
+			message: `Policy for Subject: ${policyResult.subjectDisplayName} ${ruleResult ? 'and Rule: ' + ruleResult?.displayName : ''} updated`,
 			dismissible: true,
 			duration: 10000,
 			type: ToastLevel.Success

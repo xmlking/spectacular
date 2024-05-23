@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { getDrawerStore, Drawer } from '@skeletonlabs/skeleton';
-	import DocsSidebar from './sidebar.svelte';
+import { Drawer, getDrawerStore } from '@skeletonlabs/skeleton';
+import DocsSidebar from './sidebar.svelte';
 
-	const drawerStore = getDrawerStore();
+const drawerStore = getDrawerStore();
 
-	$: classesDrawer = $drawerStore.id === 'doc-sidenav' ? 'lg:hidden' : '';
+$: classesDrawer = $drawerStore.id === 'doc-sidenav' ? 'lg:hidden' : '';
 </script>
 
 <Drawer class={classesDrawer}>

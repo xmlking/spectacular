@@ -1,7 +1,7 @@
 // Navigation Sitemap
 // `blockPreload: 'false'` means adding data-sveltekit-preload-data="false" to link.
 
-import { Roles, type MenuNavLinks } from './types';
+import { type MenuNavLinks, Roles } from './types';
 
 export const menuNavLinks: MenuNavLinks = {
 	'/policies': [

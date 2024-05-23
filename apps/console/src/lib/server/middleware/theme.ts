@@ -1,5 +1,5 @@
-import type { Handle } from '@sveltejs/kit';
 import { Logger } from '@spectacular/utils';
+import type { Handle } from '@sveltejs/kit';
 
 export const log = new Logger('server:middleware:detect-theme');
 

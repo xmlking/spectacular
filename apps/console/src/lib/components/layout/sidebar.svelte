@@ -1,33 +1,33 @@
 <script lang="ts">
-	import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
-	import { Icon } from '@spectacular/skeleton/components/icons';
-	import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
-	import { i18n } from '$lib/i18n';
-	import { page } from '$app/stores';
+import { page } from '$app/stores';
+import { i18n } from '$lib/i18n';
+import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
+import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
+import { Icon } from '@spectacular/skeleton/components/icons';
 
-	// Local
-	let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
-	const drawerStore = getDrawerStore();
+// Local
+let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
+const drawerStore = getDrawerStore();
 
-	function onClickAnchor(): void {
-		currentRailCategory = undefined;
-		drawerStore.close();
-	}
+function onClickAnchor(): void {
+	currentRailCategory = undefined;
+	drawerStore.close();
+}
 
-	// Lifecycle
-	page.subscribe((page) => {
-		// ex: /basePath/...
-		const canonicalPath = i18n.route(page.url.pathname);
-		const basePath = canonicalPath.split('/')[1];
-		if (!basePath) return;
-		// Translate base path to link section
-		currentRailCategory = hrefToCategoryIndex[basePath] ?? '/policies';
-	});
+// Lifecycle
+page.subscribe((page) => {
+	// ex: /basePath/...
+	const canonicalPath = i18n.route(page.url.pathname);
+	const basePath = canonicalPath.split('/')[1];
+	if (!basePath) return;
+	// Translate base path to link section
+	currentRailCategory = hrefToCategoryIndex[basePath] ?? '/policies';
+});
 
-	// Reactive
-	$: submenu = menuNavLinks[currentRailCategory ?? '/policies'];
-	$: listboxItemActive = (href: string) =>
-		$page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '';
+// Reactive
+$: submenu = menuNavLinks[currentRailCategory ?? '/policies'];
+$: listboxItemActive = (href: string) =>
+	$page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '';
 </script>
 
 <div

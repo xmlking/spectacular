@@ -1,14 +1,14 @@
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { i18n } from '$lib/i18n';
+import { setNhostSessionInCookies } from '$lib/nhost';
+import { userSchema } from '$lib/schema/user';
+import { limiter } from '$lib/server/limiter/limiter';
+import type { NhostClient, Provider } from '@nhost/nhost-js';
+import { Logger, sleep } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { Logger, sleep } from '@spectacular/utils';
-import type { NhostClient, Provider } from '@nhost/nhost-js';
-import { userSchema } from '$lib/schema/user';
-import { setNhostSessionInCookies } from '$lib/nhost';
-import { limiter } from '$lib/server/limiter/limiter';
-import { i18n } from '$lib/i18n';
-import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 
 const pwSchema = userSchema.pick({
 	email: true,
@@ -81,7 +81,10 @@ export const actions = {
 
 		if (session) {
 			setNhostSessionInCookies(cookies, session);
-			const message: App.Superforms.Message = { type: 'success', message: 'Signin sucessfull 😎' } as const;
+			const message: App.Superforms.Message = {
+				type: 'success',
+				message: 'Signin sucessfull 😎'
+			} as const;
 			redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
 		}
 
@@ -128,7 +131,10 @@ export const actions = {
 			log.error(error);
 			return setError(form, `Failed signin: ${error.message}`, { status: 409 }); // 424 ???
 		} else {
-			return message(form, { type: 'success', message: '😎 Click the link in the email to finish the sign in process' });
+			return message(form, {
+				type: 'success',
+				message: '😎 Click the link in the email to finish the sign in process'
+			});
 		}
 	},
 
