@@ -769,8 +769,8 @@ importers:
         specifier: 0.23.1
         version: 0.23.1(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5))
       '@astrojs/starlight-tailwind':
-        specifier: 2.0.2
-        version: 2.0.2(@astrojs/starlight@0.23.1(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5)))(@astrojs/tailwind@5.1.0(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5))(tailwindcss@3.4.3))(tailwindcss@3.4.3)
+        specifier: 2.0.3
+        version: 2.0.3(@astrojs/starlight@0.23.1(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5)))(@astrojs/tailwind@5.1.0(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5))(tailwindcss@3.4.3))(tailwindcss@3.4.3)
       '@astrojs/tailwind':
         specifier: 5.1.0
         version: 5.1.0(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5))(tailwindcss@3.4.3)
@@ -1519,8 +1519,8 @@ packages:
   '@astrojs/sitemap@3.1.4':
     resolution: {integrity: sha512-po8CqDCK14O6phU1mB5C8SyVLyQEa+7pJM8oXxs1mVh8DgvxxaA5E7lak1vzOmBcyyyHBW32jakGqNYc66sBRw==}
 
-  '@astrojs/starlight-tailwind@2.0.2':
-    resolution: {integrity: sha512-XJccwk6VLeQZuGQwoiLZLNAPCn2fQobtl10Ra2c2yDLjdYEActcqy0eidZbouAwGlbS9I0iJogeGjHQJ2Casjg==}
+  '@astrojs/starlight-tailwind@2.0.3':
+    resolution: {integrity: sha512-ZwbdXS/9rxYlo3tKZoTZoBPUnaaqek02b341dHwOkmMT0lIR2w+8k0mRUGxnRaYtPdMcaL+nYFd8RUa8sjdyRg==}
     peerDependencies:
       '@astrojs/starlight': '>=0.9.0'
       '@astrojs/tailwind': ^5.0.0
@@ -5126,6 +5126,7 @@ packages:
   are-we-there-yet@2.0.0:
     resolution: {integrity: sha512-Ci/qENmwHnsYo9xKIcUJN5LeDKdJ6R1Z1j9V/J5wyq8nh/mYPEpIKJbBZXtZjG04HiK7zV/p6Vs9952MrMeUIw==}
     engines: {node: '>=10'}
+    deprecated: This package is no longer supported.
 
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
@@ -6923,6 +6924,7 @@ packages:
   gauge@3.0.2:
     resolution: {integrity: sha512-+5J6MS/5XksCuXq++uFRsnUd7Ovu1XenbeuIuNRJxYWjgQbPuFhT14lAvsWfqfAmnwluf1OwMjz39HjfLPci0Q==}
     engines: {node: '>=10'}
+    deprecated: This package is no longer supported.
 
   gensequence@7.0.0:
     resolution: {integrity: sha512-47Frx13aZh01afHJTB3zTtKIlFI6vWY+MYCN9Qpew6i52rfKjnhCF/l1YlC8UmEMvvntZZ6z4PiCcmyuedR2aQ==}
@@ -7314,6 +7316,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -8420,6 +8423,7 @@ packages:
 
   npmlog@5.0.1:
     resolution: {integrity: sha512-AqZtDUWOMKs1G/8lwylVjrdYgqA4d9nu8hc+0gzRxlDb1I10+FHBGMXs6aiQHFdCUUlqH99MUMuLfzWDNDtfxw==}
+    deprecated: This package is no longer supported.
 
   npx-import@1.1.4:
     resolution: {integrity: sha512-3ShymTWOgqGyNlh5lMJAejLuIv3W1K3fbI5Ewc6YErZU3Sp0PqsNs8UIU1O8z5+KVl/Du5ag56Gza9vdorGEoA==}
@@ -11443,7 +11447,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight-tailwind@2.0.2(@astrojs/starlight@0.23.1(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5)))(@astrojs/tailwind@5.1.0(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5))(tailwindcss@3.4.3))(tailwindcss@3.4.3)':
+  '@astrojs/starlight-tailwind@2.0.3(@astrojs/starlight@0.23.1(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5)))(@astrojs/tailwind@5.1.0(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5))(tailwindcss@3.4.3))(tailwindcss@3.4.3)':
     dependencies:
       '@astrojs/starlight': 0.23.1(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5))
       '@astrojs/tailwind': 5.1.0(astro@4.8.6(@types/node@20.12.12)(terser@5.31.0)(typescript@5.4.5))(tailwindcss@3.4.3)
