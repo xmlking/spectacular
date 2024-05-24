@@ -7,7 +7,6 @@ on:
 
 concurrency:
   group: checks-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
-  cancel-in-progress: true
 
 jobs:
   lints:
