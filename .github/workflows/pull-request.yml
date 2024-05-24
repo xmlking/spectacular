@@ -4,6 +4,13 @@ on:
   pull_request:
     types: [opened, reopened, edited, synchronize]
     branches: [main]
+  # allow workflow to be called from github.com UI
+  workflow_dispatch:
+  # push:
+  #   # This should disable running the workflow on tags
+  #   branches: [main]
+  #   tags-ignore:
+  #     - '**'
 
 concurrency:
   group: pr-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}

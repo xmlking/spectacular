@@ -1,20 +1,12 @@
+### Checks Reusable Workflow ###
 name: Checks
 
 on:
   # allow workflow to be called from other workflows
   workflow_call:
-  # allow workflow to be called from github.com UI
-  workflow_dispatch:
-  push:
-    # This should disable running the workflow on tags, according to the
-    branches-ignore: [main]
-    tags-ignore:
-      - '**'
-
 
 concurrency:
   group: checks-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
-  # cancel jobs on PRs only
   cancel-in-progress: true
 
 permissions:
