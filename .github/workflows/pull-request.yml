@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 concurrency:
-  group: checks-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+  group: pr-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
 jobs:
   lints:
@@ -24,5 +24,8 @@ jobs:
       #   run: pnpm exec changeset status --since origin/main
 
   checks:
+    concurrency:
+      group: checks-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+      cancel-in-progress: true
     uses: './.github/workflows/checks.yml'
 
