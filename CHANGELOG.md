@@ -2,6 +2,29 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.2.3](https://github.com/xmlking/spectacular/compare/196e8f924c15c0858d5e2812f8ea37a6ecb6c459..v0.2.3) - 2024-05-24
+#### Bug Fixes
+- **(actions)** move README to workflows [skip ci] - ([0c503ac](https://github.com/xmlking/spectacular/commit/0c503acaeeba2a34205629deb9d63be5011e1ed5)) - [@xmlking](https://github.com/xmlking)
+- **(actions)** using cocogitto for PR linting - ([52cc1c6](https://github.com/xmlking/spectacular/commit/52cc1c620ead0429b055a1f4ea9f0c6c0d04440f)) - [@xmlking](https://github.com/xmlking)
+- adding biome toolchain - ([b5572b9](https://github.com/xmlking/spectacular/commit/b5572b9c5a3966ffb79bf697a6335003ccbb3bdb)) - [@xmlking](https://github.com/xmlking)
+- deps - ([47f4e76](https://github.com/xmlking/spectacular/commit/47f4e7643ce3cbdba78ce208f3f562d62519201c)) - [@xmlking](https://github.com/xmlking)
+- refine github actions - ([36e07b1](https://github.com/xmlking/spectacular/commit/36e07b1ce9f0e61118bfdbec52ba013cec72280c)) - [@xmlking](https://github.com/xmlking)
+- refine github actions - ([52fdff1](https://github.com/xmlking/spectacular/commit/52fdff1ae831034ce631320581cecbbaedccc41c)) - [@xmlking](https://github.com/xmlking)
+- remove versions for pnpm/action-setup as we have packageManager in package.json - ([02072f0](https://github.com/xmlking/spectacular/commit/02072f07497bd3ab457cb6cc44be385f832b3047)) - [@xmlking](https://github.com/xmlking)
+- refactor route directories - ([d9c1b65](https://github.com/xmlking/spectacular/commit/d9c1b651bd616f7a920ce28224b655173bd539c3)) - [@xmlking](https://github.com/xmlking)
+- deps - ([2608a48](https://github.com/xmlking/spectacular/commit/2608a4829397238532729e16ee9fd24380593c89)) - [@xmlking](https://github.com/xmlking)
+- sidebar links - ([196e8f9](https://github.com/xmlking/spectacular/commit/196e8f924c15c0858d5e2812f8ea37a6ecb6c459)) - [@xmlking](https://github.com/xmlking)
+#### Build system
+- deps updated - ([4da0bb2](https://github.com/xmlking/spectacular/commit/4da0bb2dfa17c338b7c7e1dee18faddf61c5060b)) - [@xmlking](https://github.com/xmlking)
+- deploy docs to GH Pages via GitHub Actions - ([d2e428b](https://github.com/xmlking/spectacular/commit/d2e428b1ca257f3f1487fd9d68a13717d25dbf53)) - [@xmlking](https://github.com/xmlking)
+- deploy docs to GH Pages via GitHub Actions - ([461fcf9](https://github.com/xmlking/spectacular/commit/461fcf9b0c8a211f703fdf7a68c2e8a6de53128a)) - [@xmlking](https://github.com/xmlking)
+- deploy docs to GH Pages via GitHub Actions - ([a059918](https://github.com/xmlking/spectacular/commit/a059918b1359de7a9cf51822f27faaa798199b03)) - [@xmlking](https://github.com/xmlking)
+- deploy docs to GH Pages via GitHub Actions - ([2e14368](https://github.com/xmlking/spectacular/commit/2e143681aa11ed0d44c4bd886fb269f163063465)) - [@xmlking](https://github.com/xmlking)
+#### Style
+- fix lint - ([c01cdb1](https://github.com/xmlking/spectacular/commit/c01cdb18dfd45d2d16d0cadc8f51bb0eec1b932b)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.2.2](https://github.com/xmlking/spectacular/compare/09bd06e226a8b7b1bf70446548a3ada4f4be6728..v0.2.2) - 2024-05-14
 #### Bug Fixes
 - **(actions)** pnpm version missmatch in CI with COREPACK_ENABLE_STRICT=0 [skip ci] - ([09bd06e](https://github.com/xmlking/spectacular/commit/09bd06e226a8b7b1bf70446548a3ada4f4be6728)) - [@xmlking](https://github.com/xmlking)
