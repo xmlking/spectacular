@@ -51,7 +51,7 @@ jobs:
         run: biome ci .
 
   tests:
-    name: Build and Test
+    name: 🏗️ Build and Test
     timeout-minutes: 15
     runs-on: ubuntu-latest
     # To use Remote Caching, uncomment the next lines and follow the steps below.
@@ -92,6 +92,7 @@ jobs:
       #   run: bun test:unit:coverage --filter='[HEAD^1]'
 
   audit:
+    name: 🛡️ Audit
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout
