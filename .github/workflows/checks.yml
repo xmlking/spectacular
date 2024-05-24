@@ -101,7 +101,13 @@ jobs:
         uses: ./.github/actions/setup
       - name: 🐾 Audit dependencies
         uses: snyk/actions/node@master
+        continue-on-error: true # To make sure that SARIF upload gets called
         with:
-          args: --all-projects --severity-threshold=high --fail-on=all
+          args: --all-projects --severity-threshold=high --fail-on=all --sarif-file-output=snyk.sarif
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: ☁️ Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: snyk.sarif
+          category: snyk
