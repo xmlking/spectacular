@@ -16,7 +16,8 @@ concurrency:
   group: pr-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
 jobs:
-  lints:
+  compliance:
+    name: 👌 Compliance
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout
@@ -31,6 +32,7 @@ jobs:
       #   run: pnpm exec changeset status --since origin/main
 
   checks:
+    name: 💯 Checks
     concurrency:
       group: checks-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
       cancel-in-progress: true
