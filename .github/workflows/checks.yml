@@ -102,6 +102,6 @@ jobs:
       - name: 🐾 Audit dependencies
         uses: snyk/actions/node@master
         with:
-          args: --all-projects --severity-threshold high --fail-on all
+          args: --all-projects --severity-threshold=high --fail-on=all
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
