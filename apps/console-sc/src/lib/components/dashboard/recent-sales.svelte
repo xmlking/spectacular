@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Avatar from '@spectacular/ui/components/avatar';
+import * as Avatar from '@spectacular/ui/components/avatar';
 </script>
 
 <div class="space-y-8">

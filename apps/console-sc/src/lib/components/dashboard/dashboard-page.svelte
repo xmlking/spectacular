@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { Activity, CreditCard, DollarSign, Download, Users } from 'lucide-svelte';
+import { Activity, CreditCard, DollarSign, Download, Users } from 'lucide-svelte';
 
-	import { Button } from '@spectacular/ui/components/button';
-	import * as Card from '@spectacular/ui/components/card';
-	import * as Tabs from '@spectacular/ui/components/tabs';
-	import {
-		DashboardMainNav,
-		RecentSales,
-		Search,
-		UserNav
-		// TeamSwitcher
-	} from '.';
+import { Button } from '@spectacular/ui/components/button';
+import * as Card from '@spectacular/ui/components/card';
+import * as Tabs from '@spectacular/ui/components/tabs';
+import {
+  DashboardMainNav,
+  RecentSales,
+  Search,
+  UserNav,
+  // TeamSwitcher
+} from '.';
 </script>
 
 <div class="md:hidden">

@@ -1,56 +1,56 @@
 <script lang="ts">
-	import { CarrotIcon, Check, PlusCircle } from 'lucide-svelte';
-	import { cn } from '@spectacular/ui/utils';
-	import { Avatar } from '@spectacular/ui/components/avatar';
-	import { Button } from '@spectacular/ui/components/button';
-	import { Command } from '@spectacular/ui/components/command';
-	import { Dialog } from '@spectacular/ui/components/dialog';
-	import { Input } from '@spectacular/ui/components/input';
-	import { Label } from '@spectacular/ui/components/label';
-	import { Popover } from '@spectacular/ui/components/popover';
-	import { Select } from '@spectacular/ui/components/select';
-	import { tick } from 'svelte';
+import { Avatar } from '@spectacular/ui/components/avatar';
+import { Button } from '@spectacular/ui/components/button';
+import { Command } from '@spectacular/ui/components/command';
+import { Dialog } from '@spectacular/ui/components/dialog';
+import { Input } from '@spectacular/ui/components/input';
+import { Label } from '@spectacular/ui/components/label';
+import { Popover } from '@spectacular/ui/components/popover';
+import { Select } from '@spectacular/ui/components/select';
+import { cn } from '@spectacular/ui/utils';
+import { CarrotIcon, Check, PlusCircle } from 'lucide-svelte';
+import { tick } from 'svelte';
 
-	let className: string | undefined | null = undefined;
-	export { className as class };
+let className: string | undefined | null = undefined;
+export { className as class };
 
-	const groups = [
-		{
-			label: 'Personal Account',
-			teams: [
-				{
-					label: 'Alicia Koch',
-					value: 'personal'
-				}
-			]
-		},
-		{
-			label: 'Teams',
-			teams: [
-				{
-					label: 'Acme Inc.',
-					value: 'acme-inc'
-				},
-				{
-					label: 'Monsters Inc.',
-					value: 'monsters'
-				}
-			]
-		}
-	];
+const groups = [
+  {
+    label: 'Personal Account',
+    teams: [
+      {
+        label: 'Alicia Koch',
+        value: 'personal',
+      },
+    ],
+  },
+  {
+    label: 'Teams',
+    teams: [
+      {
+        label: 'Acme Inc.',
+        value: 'acme-inc',
+      },
+      {
+        label: 'Monsters Inc.',
+        value: 'monsters',
+      },
+    ],
+  },
+];
 
-	type Team = (typeof groups)[number]['teams'][number];
+type Team = (typeof groups)[number]['teams'][number];
 
-	let open = false;
-	let showTeamDialog = false;
+let open = false;
+let showTeamDialog = false;
 
-	let selectedTeam: Team = groups[0].teams[0];
+let selectedTeam: Team = groups[0].teams[0];
 
-	function closeAndRefocusTrigger(triggerId: string) {
-		open = false;
+function closeAndRefocusTrigger(triggerId: string) {
+  open = false;
 
-		tick().then(() => document.getElementById(triggerId)?.focus());
-	}
+  tick().then(() => document.getElementById(triggerId)?.focus());
+}
 </script>
 
 <Dialog.Root bind:open={showTeamDialog}>

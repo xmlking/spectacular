@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { cn } from '@spectacular/ui/utils';
+import { cn } from '@spectacular/ui/utils';
 
-	let className: string | undefined | null = undefined;
-	export { className as class };
+let className: string | undefined | null = undefined;
+export { className as class };
 </script>
 
 <nav class={cn('flex items-center space-x-4 lg:space-x-6', className)}>

@@ -4,29 +4,37 @@ on:
   pull_request:
     types: [opened, reopened, edited, synchronize]
     branches: [main]
+  # allow workflow to be called from github.com UI
+  workflow_dispatch:
+  # push:
+  #   # This should disable running the workflow on tags
+  #   branches: [main]
+  #   tags-ignore:
+  #     - '**'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: pr-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
 jobs:
-  lint:
+  compliance:
+    name: 👌 Compliance
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: 🖍️ Conventional commits check
-        uses: cocogitto/cocogitto-action@main
-        with:
-          check-latest-tag-only: true
-      - name: 🔦 Lint pull request title
+      - name: 🖍️ Lint pull request title
         uses: cocogitto/cocogitto-action@main
         with:
           verify: ${{ github.event.pull_request.title }}
-        # run: cog verify  <<< "$TITLE"
-        # env:
-        #   TITLE: ${{ github.event.pull_request.title }}
-      # - name: 📝 Check changeset status
+      # - name: 🦋 Check changeset status
       #   run: pnpm exec changeset status --since origin/main
+
+  checks:
+    name: 💯 Checks
+    concurrency:
+      group: checks-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+      cancel-in-progress: true
+    uses: './.github/workflows/checks.yml'
+
