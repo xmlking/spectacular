@@ -1,0 +1,106 @@
+name: Checks
+
+on:
+  # allow workflow to be called from other workflows
+  workflow_call:
+  # allow workflow to be called from github.com UI
+  workflow_dispatch:
+  push:
+    # This should disable running the workflow on tags, according to the
+    branches-ignore: [main]
+    tags-ignore:
+      - '**'
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: read
+  # To report GitHub Actions status checks
+  statuses: write
+  pull-requests: write
+  security-events: write
+  id-token: write
+
+env:
+  NODE_OPTIONS: '--no-warnings'
+  # ACTIONS_RUNNER_DEBUG: true
+
+jobs:
+  checks:
+    name: 🔎 Checks
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔑 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 🌼 Conventional Commits
+        uses: cocogitto/cocogitto-action@v3
+        with:
+          check-latest-tag-only: true
+      - name: 🦶 Setup Biome CLI
+        uses: biomejs/setup-biome@v2
+        with:
+          version: 1.7.3
+      - name: 🧹 Lint code
+        run: biome ci .
+
+  tests:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    # To use Remote Caching, uncomment the next lines and follow the steps below.
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # for turbo only run tasks for changed workspaces.
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🧹 Lint
+        run: turbo lint --filter='[HEAD^1]'
+      - name: 🏗️ Build packages
+        run: turbo build --filter './packages/*' --continue
+      - name: 🧪 Test
+        # TODO: remove this once all paths are testing-ready
+        continue-on-error: true
+        run: turbo test:unit:coverage --filter='[HEAD^1]'
+
+      ## Bun ##
+      # - name: 🐰 Setup Bun
+      #   uses: oven-sh/setup-bun@v1
+      #   with:
+      #     bun-version: latest
+      # - name: 📦 Install Dependencies
+      #   run: bun install
+      # - name: 🔧 Build
+      #   run: bun run build  --filter='[HEAD^1]'
+      # - name: 🧪 Test
+      #   # TODO: remove this once all paths are testing-ready
+      #   continue-on-error: true
+      #   env:
+      #     NODE_ENV: test
+      #     API_URL: http://localhost:8787/api/v1
+      #   run: bun test:unit:coverage --filter='[HEAD^1]'
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+      - name: ⚙️ Setup
+        uses: ./.github/actions/setup
+      - name: 🐾 Audit dependencies
+        uses: snyk/actions/node@master
+        with:
+          args: --all-projects --severity-threshold high --fail-on all
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

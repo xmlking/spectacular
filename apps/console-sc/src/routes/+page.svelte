@@ -1,9 +1,9 @@
 <script lang="ts">
-	import * as Button from '@spectacular/ui/components/button';
-	import { DashboardPage } from '$lib/components/dashboard';
+import { DashboardPage } from '$lib/components/dashboard';
+import type * as Button from '@spectacular/ui/components/button';
 
-	type $$Props = Button.Props;
-	type $$Events = Button.Events;
+type $$Props = Button.Props;
+type $$Events = Button.Events;
 </script>
 
 <DashboardPage />

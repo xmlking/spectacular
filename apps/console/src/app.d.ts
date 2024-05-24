@@ -49,4 +49,4 @@ declare global {
 	declare const __GIT_DATE__: string;
 }
 
-export {};
+export type {};

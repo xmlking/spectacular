@@ -3,7 +3,7 @@ root = true
 
 [*]
 charset = utf-8
-indent_style = tab
+indent_style = space
 indent_size = 2
 end_of_line = lf
 insert_final_newline = true
@@ -13,6 +13,8 @@ trim_trailing_whitespace = true
 max_line_length = off
 # http://jonasbn.github.io/til/editorconfig/markdown.html
 trim_trailing_whitespace = false
+# Make only works with tab indentation
+indent_style = tab
 
 [{*.yaml, *.yml}]
 indent_size = 2

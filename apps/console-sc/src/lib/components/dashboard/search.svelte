@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Input } from '@spectacular/ui/components/input';
+import { Input } from '@spectacular/ui/components/input';
 </script>
 
 <div>

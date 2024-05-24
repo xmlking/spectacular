@@ -6,27 +6,24 @@ on:
     branches: [main]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  lint:
+  lints:
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: 🖍️ Conventional commits check
-        uses: cocogitto/cocogitto-action@main
-        with:
-          check-latest-tag-only: true
-      - name: 🔦 Lint pull request title
+      - name: 🖍️ Lint pull request title
         uses: cocogitto/cocogitto-action@main
         with:
           verify: ${{ github.event.pull_request.title }}
-        # run: cog verify  <<< "$TITLE"
-        # env:
-        #   TITLE: ${{ github.event.pull_request.title }}
-      # - name: 📝 Check changeset status
+      # - name: 🦋 Check changeset status
       #   run: pnpm exec changeset status --since origin/main
+
+  checks:
+    uses: './.github/workflows/checks.yml'
+

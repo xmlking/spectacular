@@ -1,7 +1,7 @@
 <script lang="ts">
-	import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
-	import * as Avatar from '@spectacular/ui/components/avatar';
-	import { Button } from '@spectacular/ui/components/button';
+import * as Avatar from '@spectacular/ui/components/avatar';
+import { Button } from '@spectacular/ui/components/button';
+import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
 </script>
 
 <DropdownMenu.Root>

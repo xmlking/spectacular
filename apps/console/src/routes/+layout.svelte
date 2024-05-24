@@ -14,7 +14,7 @@ import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
 import {
-	AppShell,
+	type AppShell,
 	Modal,
 	initializeStores,
 	prefersReducedMotionStore,

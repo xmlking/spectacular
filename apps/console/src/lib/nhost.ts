@@ -45,7 +45,7 @@ export function setNhostSessionInCookies(cookies: Cookies, session: NhostSession
 	// Set cookie expires based on the actual `refreshToken` expire time: 30 days. i.e., `AUTH_REFRESH_TOKEN_EXPIRES_IN`
 	// cookie is not removed when the browser is closed because if `expiers` is omitted, the cookie becomes a session cookie.
 	// Note: the `accessToken` is still refreshed on the client-side or server-side, every 15 minutes. i.e. `AUTH_ACCESS_TOKEN_EXPIRES_IN`
-	let expires = new Date(Date.now() + THIRTY_DAYS);
+	const expires = new Date(Date.now() + THIRTY_DAYS);
 	cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/', expires });
 }
 
