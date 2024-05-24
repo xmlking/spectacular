@@ -14,7 +14,6 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
-  cancel-in-progress: true
 
 permissions:
   actions: read
@@ -103,11 +102,6 @@ jobs:
         uses: snyk/actions/node@master
         continue-on-error: true # To make sure that SARIF upload gets called
         with:
-          args: --all-projects --severity-threshold=high --fail-on=all --sarif-file-output=snyk.sarif
+          args: --all-projects --severity-threshold=high --fail-on=all
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      - name: ☁️ Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: snyk.sarif
-          category: snyk
