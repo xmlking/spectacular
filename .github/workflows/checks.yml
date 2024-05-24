@@ -15,7 +15,7 @@ on:
 concurrency:
   group: checks-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
   # cancel jobs on PRs only
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 
 permissions:
   actions: read
