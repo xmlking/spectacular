@@ -34,6 +34,8 @@ nhost sw upgrade
 #### Config
 
 ```shell
+# nhost login
+nhost login
 # Shows an example config file
 nhost config example
 # validate configuration
@@ -54,6 +56,8 @@ Refer: [configuration-overlays](https://docs.nhost.io/guides/cli/configuration-o
 ```shell
 nhost up
 nhost up --apply-seeds
+# You can also use the Nhost Dashboard:
+nhost up --ui nhost
 nhost down
 # danger: delete docker volumes. Use it to reset postgres/hasura
 nhost down --volumes

@@ -20,7 +20,7 @@ services:
   # traefik proxy
   ###########################################################################
   traefik:
-    image: traefik:v3.0.0
+    image: traefik:v3.0.1
     hostname: traefik
     container_name: traefik
     restart: unless-stopped
@@ -84,7 +84,7 @@ services:
   # hasura service
   ###########################################################################
   graphql:
-    image: hasura/graphql-engine:v2.39.1-ce
+    image: hasura/graphql-engine:v2.39.2-ce
     hostname: graphql
     container_name: graphql
     restart: unless-stopped
@@ -173,7 +173,7 @@ services:
   # If SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.29.6
+    image: nhost/hasura-auth:0.31.0
     hostname: auth
     container_name: auth
     restart: unless-stopped
@@ -238,6 +238,7 @@ services:
       AUTH_WEBAUTHN_RP_ORIGINS: ${AUTH_CLIENT_URL:-https://console${BASE_HOSTNAME}:5173,https://console.traefik.me}
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
+      POSTGRES_MIGRATIONS_CONNECTION: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       HASURA_GRAPHQL_GRAPHQL_URL: http://graphql:8080/v1/graphql
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
     expose:
@@ -365,7 +366,7 @@ services:
   # dashboard
   ###########################################################################
   dashboard:
-    image: nhost/dashboard:1.16.1
+    image: nhost/dashboard:1.16.2
     hostname: dashboard
     container_name: dashboard
     restart: unless-stopped
@@ -402,7 +403,7 @@ services:
   # configserver
   ###########################################################################
   configserver:
-    image: nhost/cli:v1.17.2
+    image: nhost/cli:v1.18.0
     hostname: configserver
     container_name: configserver
     restart: unless-stopped
