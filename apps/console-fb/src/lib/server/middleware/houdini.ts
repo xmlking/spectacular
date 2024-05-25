@@ -1,8 +1,8 @@
 import type { Handle } from '@sveltejs/kit';
+import { Logger } from '@spectacular/utils';
 import { building } from '$app/environment';
 // import { getToken } from '@auth/core/jwt';
 import { getSignedToken } from '$lib/server/middleware/authjs-helper';
-import { Logger } from '@spectacular/utils';
 import { setSession } from '$houdini';
 
 const log = new Logger('middleware:houdini');

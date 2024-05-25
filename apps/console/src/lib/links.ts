@@ -1,7 +1,8 @@
 // Navigation Sitemap
 // `blockPreload: 'false'` means adding data-sveltekit-preload-data="false" to link.
 
-import { Roles, type MenuNavLinks } from './types';
+import { Roles } from './types';
+import type { MenuNavLinks } from './types';
 
 export const menuNavLinks: MenuNavLinks = {
 	'/policies': [
@@ -81,15 +82,13 @@ type InvertedIndex = Record<string, string>;
 
 const buildInvertedIndex = (menu: MenuNavLinks): InvertedIndex => {
 	const invertedIndex: InvertedIndex = {};
-
-	for (const topLevelKey in menu) {
-		if (menu.hasOwnProperty(topLevelKey)) {
-			const sections = menu[topLevelKey];
-			sections.forEach((section) => {
-				section.list.forEach((item) => {
-					invertedIndex[item.href.split('/')[1]] = topLevelKey;
-				});
-			});
+	for (const topLevelKey of Object.keys(menu)) {
+		const sections = menu[topLevelKey];
+		for (const section of sections) {
+			for (const item of section.list) {
+				const key = item.href.split('/')[1];
+				invertedIndex[key] = topLevelKey;
+			}
 		}
 	}
 	return invertedIndex;

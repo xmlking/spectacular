@@ -7,8 +7,8 @@
 				Our Blog
 			</h2>
 			<p class="font-light text-gray-500 dark:text-gray-400 sm:text-xl">
-				We use an agile approach to test assumptions and connect with the needs of your audience
-				early and often.
+				We use an agile approach to test assumptions and connect with the needs of your
+				audience early and often.
 			</p>
 		</div>
 		<div class="grid gap-8 lg:grid-cols-2">
@@ -36,9 +36,9 @@
 					<a href={'#'}>How to quickly deploy a static website</a>
 				</h2>
 				<p class="mb-5 font-light text-gray-500 dark:text-gray-400">
-					Static websites are now used to bootstrap lots of websites and are becoming the basis for
-					a variety of tools that even influence both web designers and developers influence both
-					web designers and developers.
+					Static websites are now used to bootstrap lots of websites and are becoming the
+					basis for a variety of tools that even influence both web designers and
+					developers influence both web designers and developers.
 				</p>
 				<div class="flex items-center justify-between">
 					<div class="flex items-center space-x-4">
@@ -95,9 +95,9 @@
 					<a href={'#'}>Our first project with React</a>
 				</h2>
 				<p class="mb-5 font-light text-gray-500 dark:text-gray-400">
-					Static websites are now used to bootstrap lots of websites and are becoming the basis for
-					a variety of tools that even influence both web designers and developers influence both
-					web designers and developers.
+					Static websites are now used to bootstrap lots of websites and are becoming the
+					basis for a variety of tools that even influence both web designers and
+					developers influence both web designers and developers.
 				</p>
 				<div class="flex items-center justify-between">
 					<div class="flex items-center space-x-4">

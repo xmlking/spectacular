@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { scaleBand } from 'd3-scale';
-	import { LayerCake, Svg } from 'layercake';
-	import Bar from '$lib/components/layercake/Bar.svelte';
-	import data from '$mocks/data/groups';
-	const xKey = 'value';
-	const yKey = 'year';
+import { scaleBand } from 'd3-scale';
+import { LayerCake, Svg } from 'layercake';
+import Bar from '$lib/components/layercake/Bar.svelte';
+import data from '$mocks/data/groups';
+const xKey = 'value';
+const yKey = 'year';
 </script>
 
 <div class="chart-container">
@@ -24,14 +24,14 @@
 </div>
 
 <style>
-	/*
+/*
 		The wrapper div needs to have an explicit width and height in CSS.
 		It can also be a flexbox child or CSS grid element.
 		The point being it needs dimensions since the <LayerCake> element will
 		expand to fill it.
 	*/
-	.chart-container {
-		width: 100%;
-		height: 100%;
-	}
+.chart-container {
+	width: 100%;
+	height: 100%;
+}
 </style>

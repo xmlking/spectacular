@@ -1,19 +1,19 @@
 <script>
-	import { fade } from 'svelte/transition';
-	import { page } from '$app/stores';
-	import TransitionableImage from '../TransitionableImage.svelte';
+import { fade } from 'svelte/transition';
+import { page } from '$app/stores';
+import TransitionableImage from '../TransitionableImage.svelte';
 
-	let { id } = $page.params;
+let { id } = $page.params;
 
-	const images = {
-		a: 'https://picsum.photos/id/400/1200/800',
-		b: 'https://picsum.photos/id/402/1200/800',
-		c: 'https://picsum.photos/id/403/1200/800',
-		d: 'https://picsum.photos/id/404/1200/800',
-		e: 'https://picsum.photos/id/405/1200/800'
-	};
+const images = {
+	a: 'https://picsum.photos/id/400/1200/800',
+	b: 'https://picsum.photos/id/402/1200/800',
+	c: 'https://picsum.photos/id/403/1200/800',
+	d: 'https://picsum.photos/id/404/1200/800',
+	e: 'https://picsum.photos/id/405/1200/800'
+};
 
-	let src = images[id];
+let src = images[id];
 </script>
 
 <div class="container">
@@ -36,36 +36,36 @@
 </div>
 
 <style>
-	.container {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		height: 100vh;
-	}
-	.imgContainer {
-		width: 50vw;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-end;
-		flex-shrink: 0;
-	}
-	.imgContainer > :global(.image) {
-		height: 540px;
-		aspect-ratio: 6 / 8;
-	}
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 100vh;
+}
+.imgContainer {
+	width: 50vw;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	flex-shrink: 0;
+}
+.imgContainer > :global(.image) {
+	height: 540px;
+	aspect-ratio: 6 / 8;
+}
 
-	.content {
-		display: flex;
-		flex-direction: column;
-		flex-grow: 1;
-		padding: 0 400px 0 60px;
-		justify-content: center;
-		font-family: sans-serif;
-	}
+.content {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	padding: 0 400px 0 60px;
+	justify-content: center;
+	font-family: sans-serif;
+}
 
-	.content > p {
-		margin-top: 30px;
-	}
+.content > p {
+	margin-top: 30px;
+}
 </style>

@@ -1,19 +1,18 @@
 <script lang="ts" context="module">
-	type T = Record<string, unknown>;
+type T = Record<string, unknown>;
 </script>
 
 <!-- <script lang="ts" generics="T extends Record<string, unknown>"> -->
 <script lang="ts">
-	import { Helper, Label, Range } from 'flowbite-svelte';
-	import type { FormPathLeaves } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms';
-	import { formFieldProxy } from 'sveltekit-superforms';
-	import { getFormContext } from './forms';
+import { Helper, Label, Range } from 'flowbite-svelte';
+import type { FormPathLeaves , SuperForm } from 'sveltekit-superforms';
+import { formFieldProxy } from 'sveltekit-superforms';
+import { getFormContext } from './forms';
 
-	export let form: SuperForm<T, unknown>;
-	export let field: FormPathLeaves<T>;
-	const { superform } = getFormContext();
-	const { path, value, errors, constraints } = formFieldProxy(superform, field);
+export let form: SuperForm<T, unknown>;
+export let field: FormPathLeaves<T>;
+const { superform } = getFormContext();
+const { path, value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 <Label><slot /></Label>

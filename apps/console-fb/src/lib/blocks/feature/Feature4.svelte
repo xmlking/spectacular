@@ -1,12 +1,14 @@
 <section class="body-font text-gray-600">
 	<div class="container mx-auto px-5 py-24">
 		<div class="mb-20 text-center">
-			<h1 class="title-font mb-4 text-2xl font-medium text-gray-900 dark:text-white sm:text-3xl">
+			<h1
+				class="title-font mb-4 text-2xl font-medium text-gray-900 dark:text-white sm:text-3xl"
+			>
 				Raw Denim Heirloom Man Braid
 			</h1>
 			<p class="text-gray-500s mx-auto text-base leading-relaxed lg:w-3/4 xl:w-2/4">
-				Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo
-				juice poutine, ramps microdosing banh mi pug.
+				Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub
+				indxgo juice poutine, ramps microdosing banh mi pug.
 			</p>
 			<div class="mt-6 flex justify-center">
 				<div class="inline-flex h-1 w-16 rounded-full bg-indigo-500" />
@@ -30,10 +32,11 @@
 					</svg>
 				</div>
 				<div class="flex-grow">
-					<h2 class="title-font mb-3 text-lg font-medium text-gray-900">Shooting Stars</h2>
+					<h2 class="title-font mb-3 text-lg font-medium text-gray-900">Shooting Stars</h2
+					>
 					<p class="text-base leading-relaxed">
-						Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub
-						indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard.
+						Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy.
+						Gastropub indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard.
 					</p>
 					<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500"
 						>Learn More
@@ -72,8 +75,8 @@
 				<div class="flex-grow">
 					<h2 class="title-font mb-3 text-lg font-medium text-gray-900">The Catalyzer</h2>
 					<p class="text-base leading-relaxed">
-						Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub
-						indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard.
+						Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy.
+						Gastropub indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard.
 					</p>
 					<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500"
 						>Learn More
@@ -111,8 +114,8 @@
 				<div class="flex-grow">
 					<h2 class="title-font mb-3 text-lg font-medium text-gray-900">Neptune</h2>
 					<p class="text-base leading-relaxed">
-						Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub
-						indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard.
+						Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy.
+						Gastropub indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard.
 					</p>
 					<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500"
 						>Learn More

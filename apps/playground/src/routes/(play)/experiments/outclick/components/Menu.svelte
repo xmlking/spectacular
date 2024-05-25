@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { Menu } from 'lucide-svelte';
-	import { OutClick } from '@spectacular/skeleton/components';
-	import { beforeNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
+import { Menu } from 'lucide-svelte';
+import { OutClick } from '@spectacular/skeleton/components';
+import { beforeNavigate } from '$app/navigation';
+import { page } from '$app/stores';
 
-	const items = [
-		{ title: 'HOME', href: '/experiments/outclick' },
-		{ title: 'EXCLUDE', href: '/experiments/outclick/exclude' },
-		{ title: 'HALF CLICK', href: '/experiments/outclick/half-click' }
-	];
+const items = [
+	{ title: 'HOME', href: '/experiments/outclick' },
+	{ title: 'EXCLUDE', href: '/experiments/outclick/exclude' },
+	{ title: 'HALF CLICK', href: '/experiments/outclick/half-click' }
+];
 
-	let isOpen = false;
-	let toggleBtn: HTMLButtonElement;
+let isOpen = false;
+let toggleBtn: HTMLButtonElement;
 
-	beforeNavigate(() => (isOpen = false));
+beforeNavigate(() => (isOpen = false));
 </script>
 
 <button
@@ -50,10 +50,10 @@
 </OutClick>
 
 <style lang="postcss">
-	nav li:first-of-type a {
-		@apply pt-3.5;
-	}
-	nav li:last-of-type a {
-		@apply pb-3.5;
-	}
+nav li:first-of-type a {
+	@apply pt-3.5;
+}
+nav li:last-of-type a {
+	@apply pb-3.5;
+}
 </style>

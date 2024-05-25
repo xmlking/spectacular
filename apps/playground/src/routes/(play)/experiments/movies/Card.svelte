@@ -1,8 +1,8 @@
 <script lang="ts">
-	export let image: string;
-	export let title: string;
-	export let subtitle: string;
-	export let description: string;
+export let image: string;
+export let title: string;
+export let subtitle: string;
+export let description: string;
 </script>
 
 <div class="mb-2 @xl:grid @xl:grid-cols-[1fr_3fr]">

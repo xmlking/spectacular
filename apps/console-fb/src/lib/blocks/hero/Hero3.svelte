@@ -10,14 +10,16 @@
 		<div
 			class="flex flex-col items-center text-center md:w-1/2 md:items-start md:pl-16 md:text-left lg:flex-grow lg:pl-24"
 		>
-			<h1 class="title-font mb-4 text-3xl font-medium text-gray-900 dark:text-white sm:text-4xl">
+			<h1
+				class="title-font mb-4 text-3xl font-medium text-gray-900 dark:text-white sm:text-4xl"
+			>
 				Before they sold out
 				<br class="hidden lg:inline-block" />readymade gluten
 			</h1>
 			<p class="mb-8 leading-relaxed">
-				Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos
-				poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic
-				tumeric truffaut hexagon try-hard chambray.
+				Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant
+				cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage
+				hot chicken authentic tumeric truffaut hexagon try-hard chambray.
 			</p>
 			<div class="flex justify-center">
 				<button

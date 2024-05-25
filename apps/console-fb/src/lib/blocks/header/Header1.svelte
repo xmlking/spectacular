@@ -32,7 +32,7 @@
 </header>
 
 <style lang="postcss">
-	header {
-		view-transition-name: header;
-	}
+header {
+	view-transition-name: header;
+}
 </style>

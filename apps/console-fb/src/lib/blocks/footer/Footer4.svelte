@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/icons';
+import { Stack } from '$lib/components/icons';
 </script>
 
 <footer class="body-font mt-auto text-gray-600 dark:bg-gray-900 dark:text-gray-400">
@@ -126,7 +126,9 @@
 					class="flex flex-wrap items-end justify-center md:flex-nowrap md:justify-start lg:flex-wrap xl:flex-nowrap"
 				>
 					<div class="relative mr-2 w-40 sm:mr-4 sm:w-auto lg:mr-0 xl:mr-4">
-						<label for="footer-field" class="text-sm leading-7 text-gray-600 dark:text-gray-400"
+						<label
+							for="footer-field"
+							class="text-sm leading-7 text-gray-600 dark:text-gray-400"
 							>Placeholder</label
 						>
 						<input
@@ -229,7 +231,7 @@
 </footer>
 
 <style lang="postcss">
-	footer {
-		view-transition-name: footer;
-	}
+footer {
+	view-transition-name: footer;
+}
 </style>

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { twMerge } from 'tailwind-merge';
-	import { fly } from 'svelte/transition';
+import { twMerge } from 'tailwind-merge';
+import { fly } from 'svelte/transition';
 
-	export let show = true;
-	export let asideClass = 'w-64';
-	// TODO replace this with flowbite Drawer https://flowbite-svelte.com/components/drawer
+export let show = true;
+export let asideClass = 'w-64';
+// TODO replace this with flowbite Drawer https://flowbite-svelte.com/components/drawer
 </script>
 
 {#if show}

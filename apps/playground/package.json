@@ -10,7 +10,7 @@
 		"dev": "dotenv-run -f .env -f .secrets -v -- vite dev",
 		"dev:debug": "DEBUG=* dotenv-run -f .env -f .secrets -v '.*' -u -- vite dev",
 		"dev:sw": "SW_DEV=true dotenv-run -f .env -f .secrets -v -- vite dev",
-		"format": "prettier --write .",
+		"format": "prettier --write . && eslint --fix .",
 		"lang:lint": "pnpm inlang lint --project ./project.inlang",
 		"lang:studio": "pnpm inlang open editor",
 		"lang:translate": "pnpm inlang machine translate --project ./project.inlang -f",

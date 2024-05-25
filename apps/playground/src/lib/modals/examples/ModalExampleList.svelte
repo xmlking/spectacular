@@ -1,24 +1,24 @@
 <script lang="ts">
-	import { ListBox, ListBoxItem, getModalStore } from '@skeletonlabs/skeleton';
+import { ListBox, ListBoxItem, getModalStore } from '@skeletonlabs/skeleton';
 
-	// Props
-	/** Exposes parent props to this component. */
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	export let parent: any;
+// Props
+/** Exposes parent props to this component. */
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+export let parent: any;
 
-	// Local
-	let flavor = 'chocolate';
-	const modalStore = getModalStore();
+// Local
+let flavor = 'chocolate';
+const modalStore = getModalStore();
 
-	// Handle Form Submission
-	function onFormSubmit(): void {
-		if ($modalStore[0].response) $modalStore[0].response(flavor);
-		modalStore.close();
-	}
+// Handle Form Submission
+function onFormSubmit(): void {
+	if ($modalStore[0].response) $modalStore[0].response(flavor);
+	modalStore.close();
+}
 
-	// Base Classes
-	const cBase = 'card p-4 w-modal shadow-xl space-y-4';
-	const cHeader = 'text-2xl font-bold';
+// Base Classes
+const cBase = 'card p-4 w-modal shadow-xl space-y-4';
+const cHeader = 'text-2xl font-bold';
 </script>
 
 <!-- @component This example creates a simple form modal. -->

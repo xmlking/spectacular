@@ -1,32 +1,32 @@
 <script lang="ts">
-	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
-	import {
-		ArrowRightToBracketOutline,
-		GridOutline,
-		BellOutline,
-		ClipboardListOutline,
-		CogOutline,
-		ComputerSpeakerOutline,
-		DrawSquareOutline,
-		MobilePhoneOutline,
-		QuestionCircleOutline,
-		ScaleBalancedOutline,
-		ShieldCheckOutline,
-		StarOutline,
-		UsersGroupOutline,
-		UsersOutline
-	} from 'flowbite-svelte-icons';
-	import { page } from '$app/stores';
-	import { Drawer } from '$lib/components';
-	import { sidebarOpen } from '$lib/stores/sidebar.store';
+import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
+import {
+	ArrowRightToBracketOutline,
+	GridOutline,
+	BellOutline,
+	ClipboardListOutline,
+	CogOutline,
+	ComputerSpeakerOutline,
+	DrawSquareOutline,
+	MobilePhoneOutline,
+	QuestionCircleOutline,
+	ScaleBalancedOutline,
+	ShieldCheckOutline,
+	StarOutline,
+	UsersGroupOutline,
+	UsersOutline
+} from 'flowbite-svelte-icons';
+import { page } from '$app/stores';
+import { Drawer } from '$lib/components';
+import { sidebarOpen } from '$lib/stores/sidebar.store';
 
-	// custom style
-	let spanClass = 'flex-1 ml-3 whitespace-nowrap';
-	let asideClass = 'w-64 hidden sm:block overflow-y-auto bg-gray-50 dark:bg-gray-700';
-	// change dark:bg-gray-800 -> dark:bg-gray-700
-	let divClass = 'overflow-y-auto py-4 px-3 rounded dark:bg-gray-700';
+// custom style
+let spanClass = 'flex-1 ml-3 whitespace-nowrap';
+let asideClass = 'w-64 hidden sm:block overflow-y-auto bg-gray-50 dark:bg-gray-700';
+// change dark:bg-gray-800 -> dark:bg-gray-700
+let divClass = 'overflow-y-auto py-4 px-3 rounded dark:bg-gray-700';
 
-	$: activeUrl = $page.url.pathname;
+$: activeUrl = $page.url.pathname;
 </script>
 
 <Drawer style="view-transition-name: side-menu;" bind:show={$sidebarOpen} {asideClass}>

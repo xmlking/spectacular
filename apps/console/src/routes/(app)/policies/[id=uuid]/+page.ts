@@ -3,9 +3,9 @@ import type { GraphQLError } from 'graphql';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { Logger } from '@spectacular/utils';
+import { z } from 'zod';
 import { updatePolicySchema as schema, policySchema } from '$lib/schema/policy';
 import { CachePolicy, GetPolicyStore } from '$houdini';
-import { z } from 'zod';
 
 const log = new Logger('policies.get.browser');
 const uuidSchema = z.object({ id: policySchema.shape.id });

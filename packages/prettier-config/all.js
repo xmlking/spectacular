@@ -20,7 +20,8 @@ module.exports = {
 		{
 			files: '*.svelte',
 			options: {
-				parser: 'svelte'
+				parser: 'svelte',
+				svelteIndentScriptAndStyle: false
 			}
 		},
 		{

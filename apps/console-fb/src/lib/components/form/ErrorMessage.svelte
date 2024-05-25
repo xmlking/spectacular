@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { twMerge } from 'tailwind-merge';
-	export let error: string | undefined;
+import { twMerge } from 'tailwind-merge';
+export let error: string | undefined;
 </script>
 
 {#if error}

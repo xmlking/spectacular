@@ -1,30 +1,29 @@
 <script lang="ts">
-	import Preview from '$lib/components/preview.svelte';
-	import { superForm } from 'sveltekit-superforms';
-	import { Field, Control, Label, Description, FieldErrors, Fieldset, Legend } from 'formsnap';
-	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { allergies, schema, themes } from './schema.js';
-	import SuperDebug from 'sveltekit-superforms';
-	import { DebugShell } from '@spectacular/skeleton/components';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { Field, Control, Label, Description, FieldErrors, Fieldset, Legend } from 'formsnap';
+import { zodClient } from 'sveltekit-superforms/adapters';
+import { DebugShell } from '@spectacular/skeleton/components';
+import Preview from '$lib/components/preview.svelte';
+import { allergies, schema, themes } from './schema.js';
 
-	export let data;
+export let data;
 
-	const form = superForm(data.form, {
-		validators: zodClient(schema)
-	});
-	const {
-		form: formData,
-		message,
-		errors,
-		tainted,
-		isTainted,
-		submitting,
-		delayed,
-		timeout,
-		posted,
-		constraints,
-		enhance
-	} = form;
+const form = superForm(data.form, {
+	validators: zodClient(schema)
+});
+const {
+	form: formData,
+	message,
+	errors,
+	tainted,
+	isTainted,
+	submitting,
+	delayed,
+	timeout,
+	posted,
+	constraints,
+	enhance
+} = form;
 </script>
 
 <svelte:head>

@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { DataHandler } from '@vincjo/datatables';
-	import * as Table from '@spectacular/skeleton/components/table';
-	//Import data
-	// export let data: PageData;
-	// $: ({ customers } = data);
-	import customers from './data';
+import { DataHandler } from '@vincjo/datatables';
+import * as Table from '@spectacular/skeleton/components/table';
+//Import data
+// export let data: PageData;
+// $: ({ customers } = data);
+import customers from './data';
 
-	//Datatable handler initialization
-	const handler = new DataHandler(customers, { rowsPerPage: 10 });
-	const rows = handler.getRows();
+//Datatable handler initialization
+const handler = new DataHandler(customers, { rowsPerPage: 10 });
+const rows = handler.getRows();
 
-	// $: handler.setRows(customers);
+// $: handler.setRows(customers);
 </script>
 
 <div class="mx-[10%] my-4 space-y-2 overflow-x-auto">

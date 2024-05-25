@@ -1,15 +1,15 @@
 <script lang="ts">
-	import Preview from '$lib/components/preview.svelte';
-	import { default as Card } from './Card.svelte';
-	import movies_json from './movies.json';
+import Preview from '$lib/components/preview.svelte';
+import { default as Card } from './Card.svelte';
+import movies_json from './movies.json';
 
-	type Movie = {
-		title: string;
-		image: string;
-		subtitle: string;
-		description: string;
-	};
-	const movies = movies_json as Movie[];
+type Movie = {
+	title: string;
+	image: string;
+	subtitle: string;
+	description: string;
+};
+const movies = movies_json as Movie[];
 </script>
 
 <svelte:head>

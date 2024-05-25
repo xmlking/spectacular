@@ -1,275 +1,274 @@
 <script lang="ts">
-	import {
-		Breadcrumb,
-		BreadcrumbItem,
-		Button,
-		ButtonGroup,
-		NavBrand,
-		Navbar,
-		Select
-	} from 'flowbite-svelte';
-	import {
-		ComputerSpeakerOutline,
-		MobilePhoneOutline,
-		ShieldCheckOutline,
-		UserCircleOutline,
-		UserOutline,
-		UsersGroupOutline
-	} from 'flowbite-svelte-icons';
-	import { GraphQLError } from 'graphql';
-	import { createRender, createTable } from 'svelte-headless-table';
-	import {
-		addPagination,
-		addResizedColumns,
-		addSortBy,
-		addTableFilter
-	} from 'svelte-headless-table/plugins';
-	import { default as SelectFetch } from 'svelte-select';
-	import { TimeDistance } from 'svelte-time-distance';
-	import { writable } from 'svelte/store';
-	import { superForm } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
-	import { Logger } from '@spectacular/utils';
-	import { subjectTypeOptions } from '$lib/models/enums';
-	import { ToastLevel, addToast } from '$lib/components/toast';
-	import { DataTable } from '$lib/components/table';
-	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-	import { ErrorMessage } from '$lib/components/form';
-	import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
-	import { DeleteButton2, Link } from '$lib/components';
-	import { goto, invalidateAll } from '$app/navigation';
-	import { browser, dev } from '$app/environment';
-	import { DeletePolicyStore, cache } from '$houdini';
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	Button,
+	ButtonGroup,
+	NavBrand,
+	Navbar,
+	Select
+} from 'flowbite-svelte';
+import {
+	ComputerSpeakerOutline,
+	MobilePhoneOutline,
+	ShieldCheckOutline,
+	UserCircleOutline,
+	UserOutline,
+	UsersGroupOutline
+} from 'flowbite-svelte-icons';
+import { GraphQLError } from 'graphql';
+import { createRender, createTable } from 'svelte-headless-table';
+import {
+	addPagination,
+	addResizedColumns,
+	addSortBy,
+	addTableFilter
+} from 'svelte-headless-table/plugins';
+import { default as SelectFetch } from 'svelte-select';
+import { TimeDistance } from 'svelte-time-distance';
+import { writable } from 'svelte/store';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { Logger } from '@spectacular/utils';
+import { subjectTypeOptions } from '$lib/models/enums';
+import { ToastLevel, addToast } from '$lib/components/toast';
+import { DataTable } from '$lib/components/table';
+import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+import { ErrorMessage } from '$lib/components/form';
+import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
+import { DeleteButton2, Link } from '$lib/components';
+import { goto, invalidateAll } from '$app/navigation';
+import { browser, dev } from '$app/environment';
+import { DeletePolicyStore, cache } from '$houdini';
 
-	const log = new Logger('policies:list:browser');
-	export let data;
-	$: ({ items } = data);
-	$: itemsStore.set(items ?? []);
+const log = new Logger('policies:list:browser');
+export let data;
+$: ({ items } = data);
+$: itemsStore.set(items ?? []);
 
-	const itemsStore = writable(items ?? []);
-	const table = createTable(itemsStore, {
-		page: addPagination({ initialPageSize: 5 }),
-		resize: addResizedColumns(),
-		tableFilter: addTableFilter({
-			fn: ({ filterValue, value }) => {
-				if ('' === filterValue) return true;
+const itemsStore = writable(items ?? []);
+const table = createTable(itemsStore, {
+	page: addPagination({ initialPageSize: 5 }),
+	resize: addResizedColumns(),
+	tableFilter: addTableFilter({
+		fn: ({ filterValue, value }) => {
+			if ('' === filterValue) return true;
 
-				return String(value).toLowerCase().includes(filterValue.toLowerCase());
-			}
-		}),
-		sort: addSortBy()
-		// filter: addTableFilter({ serverSide: true }),
-		// select: addSelectedRows(),
-		// resize: addResizedColumns()
-	});
-
-	const columns = table.createColumns([
-		table.column({
-			header: 'Rule Name',
-			accessor: (item) => item,
-			id: 'name',
-			cell: ({ value }) =>
-				createRender(Link, {
-					url: `/dashboard/policies/${value.id}`,
-					content: value.rule.displayName,
-					title: value.rule.description
-				}),
-			plugins: {
-				resize: { initialWidth: 400 },
-				tableFilter: {
-					getFilterValue: ({ rule }) => rule.displayName
-				},
-				sort: {
-					getSortValue: ({ rule }) => rule.displayName
-				}
-			}
-		}),
-		table.column({
-			header: 'Subject',
-			accessor: 'subjectDisplayName',
-			plugins: {
-				resize: { disable: true }
-			}
-		}),
-		table.column({
-			header: 'Updated',
-			accessor: 'updatedAt',
-			cell: ({ value }) =>
-				createRender(TimeDistance, {
-					timestamp: value,
-					class: 'decoration-solid'
-				}),
-			plugins: {
-				resize: { disable: true },
-				tableFilter: {
-					exclude: true
-				},
-				sort: {
-					getSortValue: (value) => value
-				}
-			}
-		}),
-		table.column({
-			header: 'Source',
-			id: 'source',
-			accessor: (item) => `${item.rule.source ?? ''}:${item.rule.sourcePort ?? ''}`,
-			plugins: {
-				resize: { disable: true }
-			}
-		}),
-		table.column({
-			header: 'Destination',
-			id: 'destination',
-			accessor: (item) => `${item.rule.destination ?? ''}:${item.rule.destinationPort ?? ''}`,
-			plugins: {
-				resize: { disable: true }
-			}
-		}),
-		table.column({
-			header: 'Active',
-			accessor: 'active',
-			plugins: {
-				resize: { disable: true },
-				tableFilter: {
-					exclude: true
-				},
-				sort: {
-					getSortValue: (value) => value
-				}
-			}
-		}),
-		table.column({
-			header: 'Shared',
-			id: 'shared',
-			accessor: (item) => item.rule.shared,
-			plugins: {
-				resize: { disable: true },
-				tableFilter: {
-					exclude: true
-				},
-				sort: {
-					getSortValue: (value) => value
-				}
-			}
-		}),
-		table.column({
-			header: 'Delete',
-			id: 'delete',
-			accessor: (item) => item,
-			cell: ({ value }) =>
-				createRender(DeleteButton2, { id: value.id, id2: value.rule.id })
-					// .slot(value)
-					.on('delete', handleDelete),
-			plugins: {
-				resize: { disable: true },
-				tableFilter: {
-					exclude: true
-				},
-				sort: {
-					disable: true
-				}
-			}
-		})
-	]);
-
-	const tableViewModel = table.createViewModel(columns);
-
-	// Search form
-	const superform = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		onError({ result }) {
-			// the onError event allows you to act on ActionResult errors.
-			// TODO:
-			// message.set(result.error.message)
-			log.error('superForm:', { result });
+			return String(value).toLowerCase().includes(filterValue.toLowerCase());
 		}
-	});
-	const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;
+	}),
+	sort: addSortBy()
+	// filter: addTableFilter({ serverSide: true }),
+	// select: addSelectedRows(),
+	// resize: addResizedColumns()
+});
 
-	let searchForm: HTMLFormElement;
-	let subject = $form.subjectId
-		? {
-				id: $form.subjectId,
-				displayName: $form.subjectDisplayName,
-				secondaryId: ''
+const columns = table.createColumns([
+	table.column({
+		header: 'Rule Name',
+		accessor: (item) => item,
+		id: 'name',
+		cell: ({ value }) =>
+			createRender(Link, {
+				url: `/dashboard/policies/${value.id}`,
+				content: value.rule.displayName,
+				title: value.rule.description
+			}),
+		plugins: {
+			resize: { initialWidth: 400 },
+			tableFilter: {
+				getFilterValue: ({ rule }) => rule.displayName
+			},
+			sort: {
+				getSortValue: ({ rule }) => rule.displayName
 			}
-		: null;
+		}
+	}),
+	table.column({
+		header: 'Subject',
+		accessor: 'subjectDisplayName',
+		plugins: {
+			resize: { disable: true }
+		}
+	}),
+	table.column({
+		header: 'Updated',
+		accessor: 'updatedAt',
+		cell: ({ value }) =>
+			createRender(TimeDistance, {
+				timestamp: value,
+				class: 'decoration-solid'
+			}),
+		plugins: {
+			resize: { disable: true },
+			tableFilter: {
+				exclude: true
+			},
+			sort: {
+				getSortValue: (value) => value
+			}
+		}
+	}),
+	table.column({
+		header: 'Source',
+		id: 'source',
+		accessor: (item) => `${item.rule.source ?? ''}:${item.rule.sourcePort ?? ''}`,
+		plugins: {
+			resize: { disable: true }
+		}
+	}),
+	table.column({
+		header: 'Destination',
+		id: 'destination',
+		accessor: (item) => `${item.rule.destination ?? ''}:${item.rule.destinationPort ?? ''}`,
+		plugins: {
+			resize: { disable: true }
+		}
+	}),
+	table.column({
+		header: 'Active',
+		accessor: 'active',
+		plugins: {
+			resize: { disable: true },
+			tableFilter: {
+				exclude: true
+			},
+			sort: {
+				getSortValue: (value) => value
+			}
+		}
+	}),
+	table.column({
+		header: 'Shared',
+		id: 'shared',
+		accessor: (item) => item.rule.shared,
+		plugins: {
+			resize: { disable: true },
+			tableFilter: {
+				exclude: true
+			},
+			sort: {
+				getSortValue: (value) => value
+			}
+		}
+	}),
+	table.column({
+		header: 'Delete',
+		id: 'delete',
+		accessor: (item) => item,
+		cell: ({ value }) =>
+			createRender(DeleteButton2, { id: value.id, id2: value.rule.id })
+				// .slot(value)
+				.on('delete', handleDelete),
+		plugins: {
+			resize: { disable: true },
+			tableFilter: {
+				exclude: true
+			},
+			sort: {
+				disable: true
+			}
+		}
+	})
+]);
 
-	async function fetchSubjects(filterText: string) {
-		if (!filterText.length) return Promise.resolve([]);
-		const response = await fetch(
-			`/api/directory/search?subType=${$form.subjectType}&filter=&search=${filterText}`
+const tableViewModel = table.createViewModel(columns);
+
+// Search form
+const superform = superForm(data.form, {
+	dataType: 'json',
+	taintedMessage: null,
+	syncFlashMessage: false,
+	onError({ result }) {
+		// the onError event allows you to act on ActionResult errors.
+		// TODO:
+		// message.set(result.error.message)
+		log.error('superForm:', { result });
+	}
+});
+const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;
+
+let searchForm: HTMLFormElement;
+let subject = $form.subjectId
+	? {
+			id: $form.subjectId,
+			displayName: $form.subjectDisplayName,
+			secondaryId: ''
+		}
+	: null;
+
+async function fetchSubjects(filterText: string) {
+	if (!filterText.length) return Promise.resolve([]);
+	const response = await fetch(
+		`/api/directory/search?subType=${$form.subjectType}&filter=&search=${filterText}`
+	);
+	if (!response.ok) throw new Error(`An error has occurred: ${response.status}`);
+	const data = await response.json();
+	if (!data) throw new Error('no data');
+	return data.results;
+}
+async function clearSubject(event: Event) {
+	subject = null;
+	if (browser) {
+		await goto(
+			`/dashboard/policies?subjectType=${$form.subjectType}&limit=${$form.limit}&offset=${$form.offset}`
 		);
-		if (!response.ok) throw new Error(`An error has occurred: ${response.status}`);
-		const data = await response.json();
-		if (!data) throw new Error('no data');
-		return data.results;
 	}
-	async function clearSubject(event: Event) {
-		subject = null;
-		if (browser) {
-			await goto(
-				`/dashboard/policies?subjectType=${$form.subjectType}&limit=${$form.limit}&offset=${$form.offset}`
-			);
-		}
-	}
+}
 
-	// delete action
-	const deletePolicyStore = new DeletePolicyStore();
-	let busy = false;
-	const handleDelete = async (e: CustomEvent<CustomEventProps>) => {
-		busy = true;
-		try {
-			if (e.detail.id) {
-				const id = e.detail.id;
-				const id2 = e.detail.id2;
-				const deletedAt = new Date();
-				const { data } = await deletePolicyStore.mutate({
-					policyId: id,
-					ruleId: id2,
-					deletedAt
+// delete action
+const deletePolicyStore = new DeletePolicyStore();
+let busy = false;
+const handleDelete = async (e: CustomEvent<CustomEventProps>) => {
+	busy = true;
+	try {
+		if (e.detail.id) {
+			const id = e.detail.id;
+			const id2 = e.detail.id2;
+			const deletedAt = new Date();
+			const { data } = await deletePolicyStore.mutate({
+				policyId: id,
+				ruleId: id2,
+				deletedAt
+			});
+			if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
+				addToast({
+					message: `Policy and associated rule: ${data?.update_rules?.returning[0].displayName} deleted`,
+					dismissible: true,
+					duration: 10000,
+					type: ToastLevel.Info
 				});
-				if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
-					addToast({
-						message: `Policy and associated rule: ${data?.update_rules?.returning[0].displayName} deleted`,
-						dismissible: true,
-						duration: 10000,
-						type: ToastLevel.Info
-					});
-					cache.markStale();
-					await invalidateAll();
-				} else if (data?.update_policies_by_pk) {
-					addToast({
-						message: `Policy ${data?.update_policies_by_pk.id} deleted`,
-						dismissible: true,
-						duration: 10000,
-						type: ToastLevel.Info
-					});
-					cache.markStale();
-					await invalidateAll();
-				} else {
-					addToast({
-						message: `Policy not found for ID: ${id}`,
-						dismissible: true,
-						duration: 50000,
-						type: ToastLevel.Error
-					});
-				}
+				cache.markStale();
+				await invalidateAll();
+			} else if (data?.update_policies_by_pk) {
+				addToast({
+					message: `Policy ${data?.update_policies_by_pk.id} deleted`,
+					dismissible: true,
+					duration: 10000,
+					type: ToastLevel.Info
+				});
+				cache.markStale();
+				await invalidateAll();
 			} else {
-				log.error('id missing in event!');
+				addToast({
+					message: `Policy not found for ID: ${id}`,
+					dismissible: true,
+					duration: 50000,
+					type: ToastLevel.Error
+				});
 			}
-		} catch (err) {
-			if (err instanceof GraphQLError) {
-				log.error(err.message);
-			} else {
-				throw err;
-			}
-		} finally {
-			busy = false;
+		} else {
+			log.error('id missing in event!');
 		}
-	};
+	} catch (err) {
+		if (err instanceof GraphQLError) {
+			log.error(err.message);
+		} else {
+			throw err;
+		}
+	} finally {
+		busy = false;
+	}
+};
 </script>
 
 <svelte:head>
@@ -331,7 +330,11 @@
 				</b>
 				<svelte:fragment slot="input-hidden" let:value>
 					<input type="hidden" name="subjectId" value={value ? value.id : null} />
-					<input type="hidden" name="subjectDisplayName" value={value ? value.displayName : null} />
+					<input
+						type="hidden"
+						name="subjectDisplayName"
+						value={value ? value.displayName : null}
+					/>
 				</svelte:fragment>
 			</SelectFetch>
 		</ButtonGroup>
@@ -370,11 +373,11 @@
 {/if}
 
 <style lang="postcss">
-	:global(td.matches) {
-		background: rgba(46, 196, 182, 0.2);
-	}
-	:global(.sv-control) {
-		--sv-min-height: 48px;
-		border-radius: 0.5rem !important;
-	}
+:global(td.matches) {
+	background: rgba(46, 196, 182, 0.2);
+}
+:global(.sv-control) {
+	--sv-min-height: 48px;
+	border-radius: 0.5rem !important;
+}
 </style>

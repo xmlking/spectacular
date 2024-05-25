@@ -47,7 +47,8 @@
 			<h6 class="text-4xl font-bold text-deep-purple-accent-400">1.3K</h6>
 			<p class="text-md mb-2 font-bold">Users</p>
 			<p class="text-gray-700">
-				For many men, the acquisition of wealth does not end their troubles, it only changes them.
+				For many men, the acquisition of wealth does not end their troubles, it only changes
+				them.
 			</p>
 		</div>
 		<div class="text-center">
@@ -71,7 +72,8 @@
 			<h6 class="text-4xl font-bold text-deep-purple-accent-400">91</h6>
 			<p class="text-md mb-2 font-bold">Subscribers</p>
 			<p class="text-gray-700">
-				It's a helluva start, being able to recognize what makes you happy today, in this moment.
+				It's a helluva start, being able to recognize what makes you happy today, in this
+				moment.
 			</p>
 		</div>
 		<div class="text-center">

@@ -1,18 +1,18 @@
 <script lang="ts">
-	// Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/Avatar.svelte
-	import { Avatar, popup } from '@skeletonlabs/skeleton';
-	import type { PopupSettings } from '@skeletonlabs/skeleton';
+// Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/Avatar.svelte
+import { Avatar, popup } from '@skeletonlabs/skeleton';
+import type { PopupSettings } from '@skeletonlabs/skeleton';
 
-	let popupSettings: PopupSettings = {
-		event: 'click',
-		target: 'avatarPopup',
-		placement: 'bottom-end',
-		// Close the popup when the item is clicked
-		closeQuery: '.listbox-item'
-	};
+let popupSettings: PopupSettings = {
+	event: 'click',
+	target: 'avatarPopup',
+	placement: 'bottom-end',
+	// Close the popup when the item is clicked
+	closeQuery: '.listbox-item'
+};
 
-	export let initials: string | undefined = undefined;
-	export let src: string | undefined = undefined;
+export let initials: string | undefined = undefined;
+export let src: string | undefined = undefined;
 </script>
 
 <!-- Avatar button-->

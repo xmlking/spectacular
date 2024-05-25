@@ -1,9 +1,9 @@
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
+import { Logger } from '@spectacular/utils';
 import { dev } from '$app/environment';
 import { TokenVault } from '$lib/server/backend/TokenVault';
 import { authjs, guard, houdini } from '$lib/server/middleware';
-import { Logger } from '@spectacular/utils';
 // import envPri from '$lib/variables/variables.server';
 /**
  * Code in hooks.server.ts will run when the application starts up,
@@ -67,9 +67,7 @@ export const handleError: HandleServerError = async ({ error }) => {
  * that happens inside a `load` or `action` function that runs on the server (or during pre-rendering).
  */
 export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
-	log.info(
-		`HandleFetch: pageUrl: ${event.url.toString()} clientAddress: ${event.getClientAddress()}`
-	);
+	log.info(`HandleFetch: pageUrl: ${event.url.toString()} clientAddress: ${event.getClientAddress()}`);
 
 	const token = TokenVault.getToken(request.url);
 	if (token) {

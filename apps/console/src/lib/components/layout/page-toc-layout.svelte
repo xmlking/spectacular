@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { TableOfContents, tocCrawler } from '@skeletonlabs/skeleton';
+import { TableOfContents, tocCrawler } from '@skeletonlabs/skeleton';
 
-	// Props
-	export let sidebar = true;
-	export let tocKey: unknown = undefined;
+// Props
+export let sidebar = true;
+export let tocKey: unknown = undefined;
 
-	// Classes
-	const cBase = 'page-padding flex items-start gap-10';
-	// const cColLeft = 'page-container-aside';
-	const cColLeft = 'page-container';
-	const cColRight = 'sticky top-10 hidden xl:block space-y-4 w-72';
+// Classes
+const cBase = 'page-padding flex items-start gap-10';
+// const cColLeft = 'page-container-aside';
+const cColLeft = 'page-container';
+const cColRight = 'sticky top-10 hidden xl:block space-y-4 w-72';
 
-	// Reactive
-	$: classesBase = `${cBase} ${$$props.class ?? ''}`;
-	$: classesColLeft = `${cColLeft}`;
-	$: classesColRight = `${cColRight}`;
+// Reactive
+$: classesBase = `${cBase} ${$$props.class ?? ''}`;
+$: classesColLeft = `${cColLeft}`;
+$: classesColRight = `${cColRight}`;
 </script>
 
 <div class={classesBase}>

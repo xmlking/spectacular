@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { GraphQLError } from 'graphql';
+import type { GraphQLError } from 'graphql';
 
-	export let errors: GraphQLError[];
+export let errors: GraphQLError[];
 </script>
 
 {#if errors.length}

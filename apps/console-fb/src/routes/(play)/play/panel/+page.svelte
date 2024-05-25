@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
-	import { browser } from '$app/environment';
-	import { ContextMenu, SplitPanel } from '$lib/components';
+import { writable } from 'svelte/store';
+import { browser } from '$app/environment';
+import { ContextMenu, SplitPanel } from '$lib/components';
 
-	let width = browser ? window.innerWidth : 1000;
-	let selected_view = 0;
+let width = browser ? window.innerWidth : 1000;
+let selected_view = 0;
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	$: mobile = writable(false);
-	$: $mobile = width < 768;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+$: mobile = writable(false);
+$: $mobile = width < 768;
 </script>
 
 <svelte:head>
@@ -48,65 +48,65 @@
 </div>
 
 <style>
-	.container {
-		height: calc(100% - var(--toggle-height));
-		max-height: 100%;
-	}
-	.content {
-		display: flex;
-		flex-direction: column;
-		min-height: 0;
-		height: 100%;
-		max-height: 100%;
-		background: var(--sk-back-2);
-		--menu-width: 5.4rem;
-	}
-	.navigator {
-		position: relative;
-		background: var(--sk-back-2);
-		display: flex;
-		flex-direction: column;
-	}
-	.navigator button {
-		position: relative;
-		background: var(--sk-theme-2);
-		padding: 0.5rem;
-		width: 100%;
-		height: 4rem;
-		border-right: 1px solid var(--sk-back-4);
-		color: white;
-		opacity: 1;
-	}
-	.navigator button:disabled {
-		opacity: 0.5;
-	}
-	.navigator button:not(:disabled) {
-		background: var(--sk-theme-1);
-	}
-	.navigator button.completed {
-		background: var(--sk-theme-2);
-	}
-	.preview {
-		display: flex;
-		flex-direction: column;
-	}
-	.content {
-		position: relative;
-	}
-	iframe {
-		width: 100%;
-		height: 100%;
-		flex: 1;
-		resize: none;
-		box-sizing: border-box;
-		border: none;
-		background: var(--sk-back-2);
-	}
-	.editor-container {
-		position: relative;
-		background-color: var(--sk-back-3);
-	}
-	.hidden {
-		display: none;
-	}
+.container {
+	height: calc(100% - var(--toggle-height));
+	max-height: 100%;
+}
+.content {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	height: 100%;
+	max-height: 100%;
+	background: var(--sk-back-2);
+	--menu-width: 5.4rem;
+}
+.navigator {
+	position: relative;
+	background: var(--sk-back-2);
+	display: flex;
+	flex-direction: column;
+}
+.navigator button {
+	position: relative;
+	background: var(--sk-theme-2);
+	padding: 0.5rem;
+	width: 100%;
+	height: 4rem;
+	border-right: 1px solid var(--sk-back-4);
+	color: white;
+	opacity: 1;
+}
+.navigator button:disabled {
+	opacity: 0.5;
+}
+.navigator button:not(:disabled) {
+	background: var(--sk-theme-1);
+}
+.navigator button.completed {
+	background: var(--sk-theme-2);
+}
+.preview {
+	display: flex;
+	flex-direction: column;
+}
+.content {
+	position: relative;
+}
+iframe {
+	width: 100%;
+	height: 100%;
+	flex: 1;
+	resize: none;
+	box-sizing: border-box;
+	border: none;
+	background: var(--sk-back-2);
+}
+.editor-container {
+	position: relative;
+	background-color: var(--sk-back-3);
+}
+.hidden {
+	display: none;
+}
 </style>

@@ -1,25 +1,25 @@
 <script lang="ts">
-	import { flip } from 'svelte/animate';
-	import colors from './colors';
+import { flip } from 'svelte/animate';
+import colors from './colors';
 
-	let colorNames = pickNewPalette();
-	updateColors();
+let colorNames = pickNewPalette();
+updateColors();
 
-	function updateColors() {
-		colorNames = shuffle(colorNames);
-	}
+function updateColors() {
+	colorNames = shuffle(colorNames);
+}
 
-	function refresh() {
-		colorNames = pickNewPalette();
-	}
+function refresh() {
+	colorNames = pickNewPalette();
+}
 
-	function pickNewPalette() {
-		return shuffle(Object.entries(colors)).slice(0, 50);
-	}
+function pickNewPalette() {
+	return shuffle(Object.entries(colors)).slice(0, 50);
+}
 
-	function shuffle<T>(array: T[]): T[] {
-		return array.sort(() => Math.random() - 0.5);
-	}
+function shuffle<T>(array: T[]): T[] {
+	return array.sort(() => Math.random() - 0.5);
+}
 </script>
 
 <div class="buttons">
@@ -39,35 +39,35 @@
 </div>
 
 <style>
-	:global(*) {
-		box-sizing: border-box;
-	}
+:global(*) {
+	box-sizing: border-box;
+}
 
-	.grid {
-		display: grid;
-		--size: 80px;
-		grid-template-columns: repeat(auto-fit, var(--size));
-		margin-top: 3.5rem;
-	}
+.grid {
+	display: grid;
+	--size: 80px;
+	grid-template-columns: repeat(auto-fit, var(--size));
+	margin-top: 3.5rem;
+}
 
-	.cell {
-		width: var(--size);
-		height: var(--size);
-		padding: 4px;
-	}
+.cell {
+	width: var(--size);
+	height: var(--size);
+	padding: 4px;
+}
 
-	.cell:hover::after {
-		content: var(--name);
-		/* This'll be cool once its supported by all browsers. */
-		color: color-contrast(var(--name) vs black, white);
-		overflow-wrap: anywhere;
-	}
+.cell:hover::after {
+	content: var(--name);
+	/* This'll be cool once its supported by all browsers. */
+	color: color-contrast(var(--name) vs black, white);
+	overflow-wrap: anywhere;
+}
 
-	.buttons {
-		position: fixed;
-		top: 1rem;
-		left: 1rem;
-		display: flex;
-		gap: 1rem;
-	}
+.buttons {
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	display: flex;
+	gap: 1rem;
+}
 </style>

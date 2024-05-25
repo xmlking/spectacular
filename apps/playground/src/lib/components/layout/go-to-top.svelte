@@ -1,31 +1,31 @@
 <script lang="ts">
-	import { derived } from 'svelte/store';
-	import { ArrowUp } from 'lucide-svelte';
-	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import { cn } from '@spectacular/skeleton/utils';
-	import { scroll } from '$lib/stores';
-	import { browser } from '$app/environment';
+import { derived } from 'svelte/store';
+import { ArrowUp } from 'lucide-svelte';
+import type { HTMLButtonAttributes } from 'svelte/elements';
+import { cn } from '@spectacular/skeleton/utils';
+import { scroll } from '$lib/stores';
+import { browser } from '$app/environment';
 
-	interface $$Props extends HTMLButtonAttributes {
-		showAtPixel: number;
+interface $$Props extends HTMLButtonAttributes {
+	showAtPixel: number;
+}
+let className: $$Props['class'] = undefined;
+export { className as class };
+export let showAtPixel: $$Props['showAtPixel'] = 2000;
+
+const elemPage = browser ? document.querySelector('#page') : null;
+
+const gotoTop = () => {
+	if (elemPage !== null) {
+		elemPage.scrollTop = 0;
+		// elemPage.scrollIntoView({ behavior: 'smooth' });
 	}
-	let className: $$Props['class'] = undefined;
-	export { className as class };
-	export let showAtPixel: $$Props['showAtPixel'] = 2000;
+};
 
-	const elemPage = browser ? document.querySelector('#page') : null;
-
-	const gotoTop = () => {
-		if (elemPage !== null) {
-			elemPage.scrollTop = 0;
-			// elemPage.scrollIntoView({ behavior: 'smooth' });
-		}
-	};
-
-	// $: showGotoTop = $scroll.y  > showAtPixel;
-	const showGotoTop = derived(scroll, ($scroll) => {
-		return $scroll.y > showAtPixel;
-	});
+// $: showGotoTop = $scroll.y  > showAtPixel;
+const showGotoTop = derived(scroll, ($scroll) => {
+	return $scroll.y > showAtPixel;
+});
 </script>
 
 {#if $showGotoTop}

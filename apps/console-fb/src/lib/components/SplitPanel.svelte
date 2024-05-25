@@ -1,139 +1,139 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
+const dispatch = createEventDispatcher();
 
-	type Orientation = 'horizontal' | 'vertical';
+type Orientation = 'horizontal' | 'vertical';
 
-	/** @type {'horizontal' | 'vertical'} */
-	export let type: Orientation;
-	export let pos = '50%';
-	export let disabled = false;
-	export let min = '0%';
-	export let max = '100%';
+/** @type {'horizontal' | 'vertical'} */
+export let type: Orientation;
+export let pos = '50%';
+export let disabled = false;
+export let min = '0%';
+export let max = '100%';
 
-	/** @type {'min' | 'max'}*/
-	export let priority = 'min';
+/** @type {'min' | 'max'}*/
+export let priority = 'min';
 
-	/** @type {HTMLElement} */
-	let container;
+/** @type {HTMLElement} */
+let container;
 
-	let dragging = false;
-	let w = 0;
-	let h = 0;
-	let position = pos;
+let dragging = false;
+let w = 0;
+let h = 0;
+let position = pos;
 
-	// constrain position
-	$: if (container) {
-		const size = type === 'horizontal' ? w : h;
+// constrain position
+$: if (container) {
+	const size = type === 'horizontal' ? w : h;
 
-		let min_px = parseFloat(min);
-		let max_px = parseFloat(max);
-		let pos_px = parseFloat(pos);
+	let min_px = parseFloat(min);
+	let max_px = parseFloat(max);
+	let pos_px = parseFloat(pos);
 
-		if (min.endsWith('%')) min_px = (size * min_px) / 100;
-		if (max.endsWith('%')) max_px = (size * max_px) / 100;
-		if (pos.endsWith('%')) pos_px = (size * pos_px) / 100;
+	if (min.endsWith('%')) min_px = (size * min_px) / 100;
+	if (max.endsWith('%')) max_px = (size * max_px) / 100;
+	if (pos.endsWith('%')) pos_px = (size * pos_px) / 100;
 
-		if (min_px < 0) min_px += size;
-		if (max_px < 0) max_px += size;
+	if (min_px < 0) min_px += size;
+	if (max_px < 0) max_px += size;
 
-		pos_px =
-			priority === 'min'
-				? Math.max(min_px, Math.min(max_px, pos_px))
-				: Math.min(max_px, Math.max(min_px, pos_px));
+	pos_px =
+		priority === 'min'
+			? Math.max(min_px, Math.min(max_px, pos_px))
+			: Math.min(max_px, Math.max(min_px, pos_px));
 
-		position = pos.endsWith('%') ? (size ? `${(100 * pos_px) / size}%` : '0%') : `${pos_px}px`;
-	}
+	position = pos.endsWith('%') ? (size ? `${(100 * pos_px) / size}%` : '0%') : `${pos_px}px`;
+}
 
-	/**
-	 * @param {number} x
-	 * @param {number} y
-	 */
-	function update(x, y) {
-		if (disabled) return;
+/**
+ * @param {number} x
+ * @param {number} y
+ */
+function update(x, y) {
+	if (disabled) return;
 
-		const { top, left } = container.getBoundingClientRect();
+	const { top, left } = container.getBoundingClientRect();
 
-		const pos_px = type === 'horizontal' ? x - left : y - top;
-		const size = type === 'horizontal' ? w : h;
+	const pos_px = type === 'horizontal' ? x - left : y - top;
+	const size = type === 'horizontal' ? w : h;
 
-		position = pos.endsWith('%') ? `${(100 * pos_px) / size}%` : `${pos_px}px`;
+	position = pos.endsWith('%') ? `${(100 * pos_px) / size}%` : `${pos_px}px`;
 
-		dispatch('change');
-	}
+	dispatch('change');
+}
 
-	/**
-	 * @param {HTMLElement} node
-	 * @param {(event: MouseEvent) => void} callback
-	 */
-	function drag(node, callback) {
-		/** @param {MouseEvent} event */
-		const mousedown = (event: MouseEvent) => {
-			if (event.button !== 0) return;
+/**
+ * @param {HTMLElement} node
+ * @param {(event: MouseEvent) => void} callback
+ */
+function drag(node, callback) {
+	/** @param {MouseEvent} event */
+	const mousedown = (event: MouseEvent) => {
+		if (event.button !== 0) return;
 
-			event.preventDefault();
+		event.preventDefault();
 
-			dragging = true;
+		dragging = true;
 
-			const onmouseup = () => {
-				dragging = false;
+		const onmouseup = () => {
+			dragging = false;
 
-				window.removeEventListener('mousemove', callback, false);
-				window.removeEventListener('mouseup', onmouseup, false);
-			};
-
-			window.addEventListener('mousemove', callback, false);
-			window.addEventListener('mouseup', onmouseup, false);
+			window.removeEventListener('mousemove', callback, false);
+			window.removeEventListener('mouseup', onmouseup, false);
 		};
 
-		node.addEventListener('mousedown', mousedown, false);
+		window.addEventListener('mousemove', callback, false);
+		window.addEventListener('mouseup', onmouseup, false);
+	};
 
-		return {
-			destroy() {
-				node.removeEventListener('mousedown', mousedown, false);
-			}
+	node.addEventListener('mousedown', mousedown, false);
+
+	return {
+		destroy() {
+			node.removeEventListener('mousedown', mousedown, false);
+		}
+	};
+}
+
+/**
+ * @param {HTMLElement} node
+ * @param {(event: TouchEvent) => void} callback
+ */
+function touchDrag(node, callback) {
+	/** @param {TouchEvent} event */
+	const touchdown = (event: TouchEvent) => {
+		if (event.targetTouches.length > 1) return;
+
+		event.preventDefault();
+
+		dragging = true;
+
+		const ontouchend = () => {
+			dragging = false;
+
+			window.removeEventListener('touchmove', callback, false);
+			window.removeEventListener('touchend', ontouchend, false);
 		};
-	}
 
-	/**
-	 * @param {HTMLElement} node
-	 * @param {(event: TouchEvent) => void} callback
-	 */
-	function touchDrag(node, callback) {
-		/** @param {TouchEvent} event */
-		const touchdown = (event: TouchEvent) => {
-			if (event.targetTouches.length > 1) return;
+		window.addEventListener('touchmove', callback, false);
+		window.addEventListener('touchend', ontouchend, false);
+	};
 
-			event.preventDefault();
+	node.addEventListener('touchstart', touchdown, {
+		capture: true,
+		passive: false
+	});
 
-			dragging = true;
-
-			const ontouchend = () => {
-				dragging = false;
-
-				window.removeEventListener('touchmove', callback, false);
-				window.removeEventListener('touchend', ontouchend, false);
-			};
-
-			window.addEventListener('touchmove', callback, false);
-			window.addEventListener('touchend', ontouchend, false);
-		};
-
-		node.addEventListener('touchstart', touchdown, {
-			capture: true,
-			passive: false
-		});
-
-		return {
-			destroy() {
-				node.removeEventListener('touchstart', touchdown, {
-					capture: true,
-					passive: false
-				});
-			}
-		};
-	}
+	return {
+		destroy() {
+			node.removeEventListener('touchstart', touchdown, {
+				capture: true,
+				passive: false
+			});
+		}
+	};
+}
 </script>
 
 <div
@@ -166,93 +166,93 @@
 {/if}
 
 <style>
-	.container {
-		--sp-thickness: var(--thickness, 8px);
-		/* --sp-color: var(--color, #eee); */
-		--sp-color: transparent;
-		display: grid;
-		position: relative;
-		width: 100%;
-		height: 100%;
-	}
+.container {
+	--sp-thickness: var(--thickness, 8px);
+	/* --sp-color: var(--color, #eee); */
+	--sp-color: transparent;
+	display: grid;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
 
-	.container.vertical {
-		grid-template-rows: var(--pos) 1fr;
-	}
+.container.vertical {
+	grid-template-rows: var(--pos) 1fr;
+}
 
-	.container.horizontal {
-		grid-template-columns: var(--pos) 1fr;
-	}
+.container.horizontal {
+	grid-template-columns: var(--pos) 1fr;
+}
 
-	.pane {
-		width: 100%;
-		height: 100%;
-		overflow: auto;
-	}
+.pane {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
 
-	.pane > :global(*) {
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-	}
+.pane > :global(*) {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
 
-	.mousecatcher {
-		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(255, 255, 255, 0.0001);
-	}
+.mousecatcher {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.0001);
+}
 
-	.divider {
-		position: absolute;
-		z-index: 10;
-	}
+.divider {
+	position: absolute;
+	z-index: 10;
+}
 
-	.divider::after {
-		content: '';
-		position: absolute;
-		background-color: var(--sp-color);
-	}
+.divider::after {
+	content: '';
+	position: absolute;
+	background-color: var(--sp-color);
+}
 
-	.horizontal > .divider {
-		padding: 0 calc(0.5 * var(--sp-thickness));
-		width: 0;
-		height: 100%;
-		cursor: ew-resize;
-		left: var(--pos);
-		transform: translate(calc(-0.5 * var(--sp-thickness)), 0);
-	}
+.horizontal > .divider {
+	padding: 0 calc(0.5 * var(--sp-thickness));
+	width: 0;
+	height: 100%;
+	cursor: ew-resize;
+	left: var(--pos);
+	transform: translate(calc(-0.5 * var(--sp-thickness)), 0);
+}
 
-	.horizontal > .divider.disabled {
-		cursor: default;
-	}
+.horizontal > .divider.disabled {
+	cursor: default;
+}
 
-	.horizontal > .divider::after {
-		left: 50%;
-		top: 0;
-		width: 1px;
-		height: 100%;
-	}
+.horizontal > .divider::after {
+	left: 50%;
+	top: 0;
+	width: 1px;
+	height: 100%;
+}
 
-	.vertical > .divider {
-		padding: calc(0.5 * var(--sp-thickness)) 0;
-		width: 100%;
-		height: 0;
-		cursor: ns-resize;
-		top: var(--pos);
-		transform: translate(0, calc(-0.5 * var(--sp-thickness)));
-	}
+.vertical > .divider {
+	padding: calc(0.5 * var(--sp-thickness)) 0;
+	width: 100%;
+	height: 0;
+	cursor: ns-resize;
+	top: var(--pos);
+	transform: translate(0, calc(-0.5 * var(--sp-thickness)));
+}
 
-	.vertical > .divider.disabled {
-		cursor: default;
-	}
+.vertical > .divider.disabled {
+	cursor: default;
+}
 
-	.vertical > .divider::after {
-		top: 50%;
-		left: 0;
-		width: 100%;
-		height: 1px;
-	}
+.vertical > .divider::after {
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 1px;
+}
 </style>

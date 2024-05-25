@@ -31,13 +31,18 @@
 								<path d="M22 12h-4l-3 9L9 3l-3 9H2" />
 							</svg>
 						</div>
-						<h2 class="title-font text-lg font-medium text-gray-900 dark:text-white">Secure</h2>
+						<h2 class="title-font text-lg font-medium text-gray-900 dark:text-white"
+							>Secure</h2
+						>
 					</div>
 					<div class="flex-grow">
 						<p class="text-base leading-relaxed">
-							Apply & execute policies using a graphical flow diagram or from your CLI.
+							Apply & execute policies using a graphical flow diagram or from your
+							CLI.
 						</p>
-						<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500 dark:text-indigo-400"
+						<a
+							href={'#'}
+							class="mt-3 inline-flex items-center text-indigo-500 dark:text-indigo-400"
 							>Learn More
 							<svg
 								fill="none"
@@ -75,14 +80,18 @@
 								<circle cx="12" cy="7" r="4" />
 							</svg>
 						</div>
-						<h2 class="title-font text-lg font-medium text-gray-900 dark:text-white">Visualize</h2>
+						<h2 class="title-font text-lg font-medium text-gray-900 dark:text-white"
+							>Visualize</h2
+						>
 					</div>
 					<div class="flex-grow">
 						<p class="text-base leading-relaxed">
-							Visualize and understand API usage with the included analytics dashboard or integrate
-							with popular tools like Grafana or Kibana.
+							Visualize and understand API usage with the included analytics dashboard
+							or integrate with popular tools like Grafana or Kibana.
 						</p>
-						<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500 dark:text-indigo-400"
+						<a
+							href={'#'}
+							class="mt-3 inline-flex items-center text-indigo-500 dark:text-indigo-400"
 							>Learn More
 							<svg
 								fill="none"
@@ -127,10 +136,12 @@
 					</div>
 					<div class="flex-grow">
 						<p class="text-base leading-relaxed">
-							Make APIs consumable by publishing your APIs and their documentation to a developer
-							portal.
+							Make APIs consumable by publishing your APIs and their documentation to
+							a developer portal.
 						</p>
-						<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500 dark:text-indigo-400"
+						<a
+							href={'#'}
+							class="mt-3 inline-flex items-center text-indigo-500 dark:text-indigo-400"
 							>Learn More
 							<svg
 								fill="none"

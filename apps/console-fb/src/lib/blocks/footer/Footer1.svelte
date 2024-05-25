@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { VERSION } from '@sveltejs/kit';
-	import { Stack } from '$lib/components/icons';
+import { VERSION } from '@sveltejs/kit';
+import { Stack } from '$lib/components/icons';
 
-	const appVersion = __APP_VERSION__;
-	const gitTag = __GIT_TAG__;
-	const gitDate = __GIT_DATE__;
+const appVersion = __APP_VERSION__;
+const gitTag = __GIT_TAG__;
+const gitDate = __GIT_DATE__;
 </script>
 
 <footer class="body-font mt-auto text-gray-600 dark:bg-gray-900">
@@ -20,7 +20,9 @@
 			class="mt-4 text-sm text-gray-500 sm:ml-4 sm:mt-0 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:pl-4"
 		>
 			© 2020 Datablocks —
-			<a href="https://twitter.com/xmlking" class="ml-1 text-gray-600" rel="external">@sumanth</a>
+			<a href="https://twitter.com/xmlking" class="ml-1 text-gray-600" rel="external"
+				>@sumanth</a
+			>
 		</p>
 		<p
 			class="mt-4 inline-flex justify-center text-xs text-gray-500 sm:ml-auto sm:mt-0 sm:justify-start"
@@ -90,7 +92,7 @@
 </footer>
 
 <style lang="postcss">
-	footer {
-		view-transition-name: footer;
-	}
+footer {
+	view-transition-name: footer;
+}
 </style>

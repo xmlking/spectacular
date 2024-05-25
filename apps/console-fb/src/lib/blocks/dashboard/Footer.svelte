@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Footer, FooterCopyright, FooterIcon } from 'flowbite-svelte';
+import { Footer, FooterCopyright, FooterIcon } from 'flowbite-svelte';
 </script>
 
 <Footer

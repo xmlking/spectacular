@@ -1,5 +1,5 @@
 <script>
-	import TransitionableImage from './TransitionableImage.svelte';
+import TransitionableImage from './TransitionableImage.svelte';
 </script>
 
 <div class="container">
@@ -41,21 +41,21 @@
 </div>
 
 <style>
-	.container {
-		display: flex;
-		flex-direction: row;
-		gap: 20px;
-		width: 100%;
-		justify-content: center;
-		align-items: center;
-		height: 100vh;
-	}
+.container {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
 
-	.container :global(.image) {
-		aspect-ratio: 4 / 12;
-		width: 180px;
-		flex-shrink: 0;
-		align-items: center;
-		object-fit: cover;
-	}
+.container :global(.image) {
+	aspect-ratio: 4 / 12;
+	width: 180px;
+	flex-shrink: 0;
+	align-items: center;
+	object-fit: cover;
+}
 </style>

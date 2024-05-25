@@ -58,8 +58,8 @@
 				>Happy new Year</a
 			>
 			<p class="mb-5 text-gray-700">
-				Pommy ipsum smeg head whizz morris dancers come hither, bugger codswallop gob. Taking the
-				mick middle class bog.
+				Pommy ipsum smeg head whizz morris dancers come hither, bugger codswallop gob.
+				Taking the mick middle class bog.
 			</p>
 			<div class="flex items-center">
 				<a href="/" aria-label="Author" title="Author" class="mr-3">
@@ -98,8 +98,8 @@
 				>Why i love C++</a
 			>
 			<p class="mb-5 text-gray-700">
-				Sportacus andrew weatherall goose Refined gentlemen super mario des lynam alpha trion zap
-				rowsdower.
+				Sportacus andrew weatherall goose Refined gentlemen super mario des lynam alpha
+				trion zap rowsdower.
 			</p>
 			<div class="flex items-center">
 				<a href="/" aria-label="Author" title="Author" class="mr-3">

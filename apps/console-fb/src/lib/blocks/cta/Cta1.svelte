@@ -12,7 +12,9 @@
 		<div
 			class="mt-10 flex w-full flex-col rounded-lg bg-gray-100 p-8 dark:bg-gray-900 dark:bg-opacity-50 md:ml-auto md:mt-0 md:w-1/2 lg:w-2/6"
 		>
-			<h2 class="title-font mb-5 text-lg font-medium text-gray-900 dark:text-white">Sign Up</h2>
+			<h2 class="title-font mb-5 text-lg font-medium text-gray-900 dark:text-white"
+				>Sign Up</h2
+			>
 			<div class="relative mb-4">
 				<label for="full-name" class="text-sm leading-7 text-gray-600 dark:text-gray-400"
 					>Full Name</label

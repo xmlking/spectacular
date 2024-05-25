@@ -1,7 +1,6 @@
 import { Logger } from '@spectacular/utils';
-import { redirect } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
-import { NHOST_SESSION_KEY, removeNhostSessionInCookies } from '$lib/nhost';
+import { removeNhostSessionInCookies } from '$lib/nhost';
 import { i18n } from '$lib/i18n';
 import type { Actions } from './$types';
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stats3 } from '$lib/blocks/stats';
+import { Stats3 } from '$lib/blocks/stats';
 </script>
 
 <svelte:head>

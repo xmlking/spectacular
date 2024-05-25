@@ -1,7 +1,9 @@
 <section class="body-font relative text-gray-600">
 	<div class="container mx-auto px-5 py-24">
 		<div class="mb-12 flex w-full flex-col text-center">
-			<h1 class="title-font mb-4 text-2xl font-medium text-gray-900 sm:text-3xl">Contact Us</h1>
+			<h1 class="title-font mb-4 text-2xl font-medium text-gray-900 sm:text-3xl"
+				>Contact Us</h1
+			>
 			<p class="mx-auto text-base leading-relaxed lg:w-2/3">
 				Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.
 			</p>
@@ -62,7 +64,9 @@
 								class="h-5 w-5"
 								viewBox="0 0 24 24"
 							>
-								<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+								<path
+									d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+								/>
 							</svg>
 						</a>
 						<a href={'#'} class="ml-4 text-gray-500">
@@ -90,7 +94,9 @@
 								viewBox="0 0 24 24"
 							>
 								<rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-								<path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
+								<path
+									d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+								/>
 							</svg>
 						</a>
 						<a class="ml-4 text-gray-500">

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { LogoAnim } from '@spectacular/skeleton/components/logos';
-	import { version } from '$app/environment';
-	import * as m from '$i18n/messages';
-	import { languageTag } from '$i18n/runtime';
-	console.log(`Client version: ${version}`);
+import { LogoAnim } from '@spectacular/skeleton/components/logos';
+import { version } from '$app/environment';
+import * as m from '$i18n/messages';
+import { languageTag } from '$i18n/runtime';
+console.log(`Client version: ${version}`);
 </script>
 
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->

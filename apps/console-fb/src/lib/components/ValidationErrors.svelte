@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let formErrors: string[] | undefined;
-	export let fieldErrors: Record<string, string[] | undefined> | undefined;
+export let formErrors: string[] | undefined;
+export let fieldErrors: Record<string, string[] | undefined> | undefined;
 </script>
 
 {#if formErrors}

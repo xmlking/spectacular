@@ -4,7 +4,6 @@
 
 import { describe, it, beforeEach } from 'vitest';
 // import { render, screen, fireEvent } from '@testing-library/svelte';
-import Signin from './+page.svelte';
 
 describe('signin form', () => {
 	beforeEach(() => {});

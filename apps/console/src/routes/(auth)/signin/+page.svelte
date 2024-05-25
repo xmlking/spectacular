@@ -1,88 +1,88 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { AlertTriangle, Loader, Github, MoreHorizontal } from 'lucide-svelte';
-	import { Icon } from '@spectacular/skeleton/components/icons';
-	import { DebugShell } from '@spectacular/skeleton/components';
-	import SuperDebug, { superForm } from 'sveltekit-superforms';
-	import { Logger } from '@spectacular/utils';
-	import { getToastStore } from '@skeletonlabs/skeleton';
-	import { page } from '$app/stores';
-	import * as m from '$i18n/messages';
-	import { isLoadingForm } from '$lib/stores/loading';
-	import { handleMessage } from '$lib/components/layout/toast-manager';
+import { fade } from 'svelte/transition';
+import { AlertTriangle, Loader, Github, MoreHorizontal } from 'lucide-svelte';
+import { Icon } from '@spectacular/skeleton/components/icons';
+import { DebugShell } from '@spectacular/skeleton/components';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { Logger } from '@spectacular/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { page } from '$app/stores';
+import * as m from '$i18n/messages';
+import { isLoadingForm } from '$lib/stores/loading';
+import { handleMessage } from '$lib/components/layout/toast-manager';
 
-	export let data;
-	const log = new Logger('auth:signin');
-	const toastStore = getToastStore();
+export let data;
+const log = new Logger('auth:signin');
+const toastStore = getToastStore();
 
-	const {
-		form,
-		delayed,
-		timeout,
-		enhance,
-		errors,
-		constraints,
-		message,
-		tainted,
-		posted,
-		submitting,
-		formId,
-		capture,
-		restore
-	} = superForm(data.pwForm, {
-		id: 'password-form',
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		delayMs: 100,
-		timeoutMs: 4000,
-		onError({ result }) {
-			// TODO:
-			// message.set(result.error.message)
-			log.error('signin password error:', { result });
-		},
-		onUpdated({ form }) {
-			if (form.message) {
-				handleMessage(form.message, toastStore);
-			}
+const {
+	form,
+	delayed,
+	timeout,
+	enhance,
+	errors,
+	constraints,
+	message,
+	tainted,
+	posted,
+	submitting,
+	formId,
+	capture,
+	restore
+} = superForm(data.pwForm, {
+	id: 'password-form',
+	dataType: 'json',
+	taintedMessage: null,
+	syncFlashMessage: false,
+	delayMs: 100,
+	timeoutMs: 4000,
+	onError({ result }) {
+		// TODO:
+		// message.set(result.error.message)
+		log.error('signin password error:', { result });
+	},
+	onUpdated({ form }) {
+		if (form.message) {
+			handleMessage(form.message, toastStore);
 		}
-	});
+	}
+});
 
-	export const snapshot = { capture, restore };
+export const snapshot = { capture, restore };
 
-	const {
-		form: pwlForm,
-		delayed: pwlDelayed,
-		timeout: pwlTimeout,
-		enhance: pwlEnhance,
-		errors: pwlErrors,
-		constraints: pwlConstraints,
-		message: pwlMessage,
-		tainted: pwlTainted,
-		posted: pwlPosted,
-		submitting: pwlSubmitting,
-		formId: pwlFormId
-	} = superForm(data.pwlForm, {
-		id: 'passwordless-form',
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		delayMs: 100,
-		timeoutMs: 4000,
-		onError({ result }) {
-			// TODO:
-			// message.set(result.error.message)
-			log.error('signin passwordless error:', { result });
-		},
-		onUpdated({ form }) {
-			if (form.message) {
-				handleMessage(form.message, toastStore);
-			}
+const {
+	form: pwlForm,
+	delayed: pwlDelayed,
+	timeout: pwlTimeout,
+	enhance: pwlEnhance,
+	errors: pwlErrors,
+	constraints: pwlConstraints,
+	message: pwlMessage,
+	tainted: pwlTainted,
+	posted: pwlPosted,
+	submitting: pwlSubmitting,
+	formId: pwlFormId
+} = superForm(data.pwlForm, {
+	id: 'passwordless-form',
+	dataType: 'json',
+	taintedMessage: null,
+	syncFlashMessage: false,
+	delayMs: 100,
+	timeoutMs: 4000,
+	onError({ result }) {
+		// TODO:
+		// message.set(result.error.message)
+		log.error('signin passwordless error:', { result });
+	},
+	onUpdated({ form }) {
+		if (form.message) {
+			handleMessage(form.message, toastStore);
 		}
-	});
+	}
+});
 
-	delayed.subscribe((v) => ($isLoadingForm = v));
-	pwlDelayed.subscribe((v) => ($isLoadingForm = v));
+delayed.subscribe((v) => ($isLoadingForm = v));
+pwlDelayed.subscribe((v) => ($isLoadingForm = v));
 </script>
 
 <svelte:head>

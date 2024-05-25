@@ -1,119 +1,118 @@
 <script lang="ts">
-	import {
-		Breadcrumb,
-		BreadcrumbItem,
-		Button,
-		ButtonGroup,
-		Input,
-		NavBrand,
-		Navbar
-	} from 'flowbite-svelte';
-	import { MobilePhoneOutline, SearchOutline } from 'flowbite-svelte-icons';
-	import { createRender, createTable } from 'svelte-headless-table';
-	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
-	import { TimeDistance } from 'svelte-time-distance';
-	import { writable } from 'svelte/store';
-	import { superForm } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
-	import { Logger } from '@spectacular/utils';
-	import { DataTable } from '$lib/components/table';
-	import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-	import { ErrorMessage } from '$lib/components/form';
-	import { Link } from '$lib/components';
-	import { dev } from '$app/environment';
+import {
+	Breadcrumb,
+	BreadcrumbItem,
+	Button,
+	ButtonGroup,
+	Input,
+	NavBrand,
+	Navbar
+} from 'flowbite-svelte';
+import { MobilePhoneOutline, SearchOutline } from 'flowbite-svelte-icons';
+import { createRender, createTable } from 'svelte-headless-table';
+import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
+import { TimeDistance } from 'svelte-time-distance';
+import { writable } from 'svelte/store';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { Logger } from '@spectacular/utils';
+import { DataTable } from '$lib/components/table';
+import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+import { ErrorMessage } from '$lib/components/form';
+import { Link } from '$lib/components';
+import { dev } from '$app/environment';
 
-	const log = new Logger('devices:list:browser');
-	export let data;
-	$: ({ items } = data);
-	$: itemsStore.set(items ?? []);
+const log = new Logger('devices:list:browser');
+export let data;
+$: ({ items } = data);
+$: itemsStore.set(items ?? []);
 
-	const itemsStore = writable(items ?? []);
-	const table = createTable(itemsStore, {
-		page: addPagination({ initialPageSize: 5 }),
-		tableFilter: addTableFilter({
-			fn: ({ filterValue, value }) => {
-				if ('' === filterValue) return true;
+const itemsStore = writable(items ?? []);
+const table = createTable(itemsStore, {
+	page: addPagination({ initialPageSize: 5 }),
+	tableFilter: addTableFilter({
+		fn: ({ filterValue, value }) => {
+			if ('' === filterValue) return true;
 
-				return String(value).toLowerCase().includes(filterValue.toLowerCase());
-			}
-		}),
-		sort: addSortBy()
-	});
-
-	const columns = table.createColumns([
-		table.column({
-			header: 'Name',
-			accessor: (item) => item,
-			id: 'name',
-			cell: ({ value }) =>
-				createRender(Link, {
-					url: `/dashboard/devices/${value.id}`,
-					content: value.displayName,
-					title: value.description
-				}),
-			plugins: {
-				tableFilter: {
-					getFilterValue: ({ displayName }) => displayName
-				},
-				sort: {
-					getSortValue: ({ displayName }) => displayName
-				}
-			}
-		}),
-		table.column({
-			header: 'Updated At',
-			accessor: 'updatedAt',
-			cell: ({ value }) =>
-				createRender(TimeDistance, {
-					timestamp: value,
-					class: 'decoration-solid'
-				}),
-			plugins: {
-				tableFilter: {
-					exclude: true
-				},
-				sort: {
-					getSortValue: (value) => value
-				}
-			}
-		}),
-		table.column({
-			header: 'Version',
-			accessor: 'version',
-			plugins: {
-				tableFilter: {
-					exclude: true
-				},
-				sort: {
-					disable: true
-				}
-			}
-		}),
-		table.column({
-			header: 'IP',
-			accessor: 'ip'
-		}),
-		table.column({
-			header: 'Tags',
-			accessor: 'tags'
-		})
-	]);
-
-	const tableViewModel = table.createViewModel(columns);
-
-	// Search form
-	const superform = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		onError({ result }) {
-			// the onError event allows you to act on ActionResult errors.
-			// TODO:
-			// message.set(result.error.message)
-			log.error('superForm:', { result });
+			return String(value).toLowerCase().includes(filterValue.toLowerCase());
 		}
-	});
-	const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;
+	}),
+	sort: addSortBy()
+});
+
+const columns = table.createColumns([
+	table.column({
+		header: 'Name',
+		accessor: (item) => item,
+		id: 'name',
+		cell: ({ value }) =>
+			createRender(Link, {
+				url: `/dashboard/devices/${value.id}`,
+				content: value.displayName,
+				title: value.description
+			}),
+		plugins: {
+			tableFilter: {
+				getFilterValue: ({ displayName }) => displayName
+			},
+			sort: {
+				getSortValue: ({ displayName }) => displayName
+			}
+		}
+	}),
+	table.column({
+		header: 'Updated At',
+		accessor: 'updatedAt',
+		cell: ({ value }) =>
+			createRender(TimeDistance, {
+				timestamp: value,
+				class: 'decoration-solid'
+			}),
+		plugins: {
+			tableFilter: {
+				exclude: true
+			},
+			sort: {
+				getSortValue: (value) => value
+			}
+		}
+	}),
+	table.column({
+		header: 'Version',
+		accessor: 'version',
+		plugins: {
+			tableFilter: {
+				exclude: true
+			},
+			sort: {
+				disable: true
+			}
+		}
+	}),
+	table.column({
+		header: 'IP',
+		accessor: 'ip'
+	}),
+	table.column({
+		header: 'Tags',
+		accessor: 'tags'
+	})
+]);
+
+const tableViewModel = table.createViewModel(columns);
+
+// Search form
+const superform = superForm(data.form, {
+	dataType: 'json',
+	taintedMessage: null,
+	syncFlashMessage: false,
+	onError({ result }) {
+		// the onError event allows you to act on ActionResult errors.
+		// TODO:
+		// message.set(result.error.message)
+		log.error('superForm:', { result });
+	}
+});
+const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;
 </script>
 
 <svelte:head>
@@ -162,7 +161,8 @@
 			/> -->
 			<input name="limit" bind:value={$form.limit} type="hidden" />
 			<input name="offset" bind:value={$form.offset} type="hidden" />
-			<Button type="submit" color="primary" class="!p-2.5"><SearchOutline size="md" /></Button>
+			<Button type="submit" color="primary" class="!p-2.5"><SearchOutline size="md" /></Button
+			>
 		</ButtonGroup>
 		<span />
 	</Navbar>

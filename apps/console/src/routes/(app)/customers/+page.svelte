@@ -1,21 +1,21 @@
 <script lang="ts">
-	import { DataHandler } from '@vincjo/datatables';
-	import * as Table from '@spectacular/skeleton/components/table';
-	// import PageToCLayout from '$lib/components/layout/page-toc-layout.svelte';
-	// import PageLayout from '$lib/components/layout/page-layout.svelte';
+import { DataHandler } from '@vincjo/datatables';
+import * as Table from '@spectacular/skeleton/components/table';
+// import PageToCLayout from '$lib/components/layout/page-toc-layout.svelte';
+// import PageLayout from '$lib/components/layout/page-layout.svelte';
 
-	// Props
-	//Import data
-	// export let data: PageData;
-	// $: ({ customers } = data);
-	import customers from './data';
+// Props
+//Import data
+// export let data: PageData;
+// $: ({ customers } = data);
+import customers from './data';
 
-	//Datatable handler initialization
-	const handler = new DataHandler(customers, { rowsPerPage: 10 });
-	const rows = handler.getRows();
+//Datatable handler initialization
+const handler = new DataHandler(customers, { rowsPerPage: 10 });
+const rows = handler.getRows();
 
-	// Reactive
-	// $: handler.setRows(customers);
+// Reactive
+// $: handler.setRows(customers);
 </script>
 
 <div class="page-container">

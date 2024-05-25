@@ -8,7 +8,9 @@
 					src="https://dummyimage.com/820x340"
 				/>
 				<div class="relative z-10 w-full text-center">
-					<h2 class="title-font mb-2 text-2xl font-medium text-gray-900">Shooting Stars</h2>
+					<h2 class="title-font mb-2 text-2xl font-medium text-gray-900"
+						>Shooting Stars</h2
+					>
 					<p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
 					<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500"
 						>Learn More
@@ -28,15 +30,21 @@
 			</div>
 			<div class="-mx-2 flex flex-wrap">
 				<div class="w-1/2 px-2">
-					<div class="relative flex w-full flex-wrap bg-gray-100 px-6 py-16 sm:px-10 sm:py-24">
+					<div
+						class="relative flex w-full flex-wrap bg-gray-100 px-6 py-16 sm:px-10 sm:py-24"
+					>
 						<img
 							alt="gallery"
 							class="absolute inset-0 block h-full w-full object-cover object-center opacity-25"
 							src="https://dummyimage.com/542x460"
 						/>
 						<div class="relative z-10 w-full text-center">
-							<h2 class="title-font mb-2 text-xl font-medium text-gray-900">Shooting Stars</h2>
-							<p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
+							<h2 class="title-font mb-2 text-xl font-medium text-gray-900"
+								>Shooting Stars</h2
+							>
+							<p class="leading-relaxed"
+								>Skateboard +1 mustache fixie paleo lumbersexual.</p
+							>
 							<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500"
 								>Learn More
 								<svg
@@ -55,15 +63,21 @@
 					</div>
 				</div>
 				<div class="w-1/2 px-2">
-					<div class="relative flex w-full flex-wrap bg-gray-100 px-6 py-16 sm:px-10 sm:py-24">
+					<div
+						class="relative flex w-full flex-wrap bg-gray-100 px-6 py-16 sm:px-10 sm:py-24"
+					>
 						<img
 							alt="gallery"
 							class="absolute inset-0 block h-full w-full object-cover object-center opacity-25"
 							src="https://dummyimage.com/542x420"
 						/>
 						<div class="relative z-10 w-full text-center">
-							<h2 class="title-font mb-2 text-xl font-medium text-gray-900">Shooting Stars</h2>
-							<p class="leading-relaxed">Skateboard +1 mustache fixie paleo lumbersexual.</p>
+							<h2 class="title-font mb-2 text-xl font-medium text-gray-900"
+								>Shooting Stars</h2
+							>
+							<p class="leading-relaxed"
+								>Skateboard +1 mustache fixie paleo lumbersexual.</p
+							>
 							<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500"
 								>Learn More
 								<svg

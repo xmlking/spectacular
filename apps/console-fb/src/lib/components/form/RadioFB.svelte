@@ -1,26 +1,25 @@
 <script lang="ts" context="module">
-	type T = Record<string, unknown>;
+type T = Record<string, unknown>;
 </script>
 
 <!-- <script lang="ts" generics="T extends Record<string, unknown>"> -->
 <script lang="ts">
-	import { ButtonGroup, RadioButton, Helper, Label } from 'flowbite-svelte';
-	import type { FormPathLeaves } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms';
-	import { formFieldProxy } from 'sveltekit-superforms';
-	import generateId from '$lib/utils/generateId';
-	import { getFormContext } from './forms';
-	import type { RadioOptionType } from './forms';
+import { ButtonGroup, RadioButton, Helper, Label } from 'flowbite-svelte';
+import type { FormPathLeaves , SuperForm } from 'sveltekit-superforms';
+import { formFieldProxy } from 'sveltekit-superforms';
+import generateId from '$lib/utils/generateId';
+import { getFormContext } from './forms';
+import type { RadioOptionType } from './forms';
 
-	export let form: SuperForm<T, unknown>;
-	export let field: FormPathLeaves<T>;
+export let form: SuperForm<T, unknown>;
+export let field: FormPathLeaves<T>;
 
-	export let label = '';
-	export let labelClasses = '';
-	export let items: RadioOptionType[] = [];
+export let label = '';
+export let labelClasses = '';
+export let items: RadioOptionType[] = [];
 
-	const { superform } = getFormContext();
-	const { path, value, errors, constraints } = formFieldProxy(superform, field);
+const { superform } = getFormContext();
+const { path, value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 {#if label}
@@ -72,8 +71,8 @@
 {/if}
 
 <style lang="postcss">
-	/* TODO: has to define in apps/console/src/app.pcss */
-	/* @layer components {
+/* TODO: has to define in apps/console/src/app.pcss */
+/* @layer components {
   .checked-label:has(input:checked) {
     @apply bg-primary-700 text-white;
   }

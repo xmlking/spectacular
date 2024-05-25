@@ -9,9 +9,7 @@ import envPub from '$lib/variables/variables';
 
 export const useSecureCookie = envPub.PUBLIC_BASE_URL?.startsWith('https://') ?? envPri.VERCEL;
 export const domain = new URL(envPub.PUBLIC_BASE_URL).hostname.replace(/^[^.]+\./g, '');
-export const cookieName = useSecureCookie
-	? '__Secure-authjs.session-token'
-	: 'authjs.session-token';
+export const cookieName = useSecureCookie ? '__Secure-authjs.session-token' : 'authjs.session-token';
 const secret = new TextEncoder().encode(envPri.HASURA_GRAPHQL_JWT_SECRET_KEY);
 const alg = 'HS256';
 

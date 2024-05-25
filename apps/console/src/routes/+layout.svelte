@@ -1,86 +1,86 @@
 <!-- Layout: (root) -->
 <script lang="ts">
-	import {
-		Modal,
-		AppShell,
-		storePopup,
-		initializeStores,
-		prefersReducedMotionStore
-	} from '@skeletonlabs/skeleton';
-	import type { ComponentEvents } from 'svelte';
-	import type { ModalComponent } from '@skeletonlabs/skeleton';
-	import { setupViewTransition } from 'sveltekit-view-transition';
-	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-	import { inject } from '@vercel/analytics';
-	import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
-	import GotoTop from '$lib/components/layout/go-to-top.svelte';
-	import { i18n } from '$lib/i18n';
-	import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
-	import Search from '$lib/modals/Search.svelte';
-	import { dev, browser } from '$app/environment';
-	import { page } from '$app/stores';
-	import Header from '$lib/components/layout/header.svelte';
-	import Footer from '$lib/components/layout/footer.svelte';
-	import Sidebar from '$lib/components/layout/sidebar.svelte';
-	import Drawer from '$lib/components/layout/drawer.svelte';
-	import FlashMessageToast from '$lib/components/layout/flash-message-toast.svelte';
-	import { Logger, startsWith } from '@spectacular/utils';
-	import '../app.pcss';
+import {
+	Modal,
+	AppShell,
+	storePopup,
+	initializeStores,
+	prefersReducedMotionStore
+} from '@skeletonlabs/skeleton';
+import type { ComponentEvents } from 'svelte';
+import type { ModalComponent } from '@skeletonlabs/skeleton';
+import { setupViewTransition } from 'sveltekit-view-transition';
+import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
+import { inject } from '@vercel/analytics';
+import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
+import { startsWith } from '@spectacular/utils';
+import GotoTop from '$lib/components/layout/go-to-top.svelte';
+import { i18n } from '$lib/i18n';
+import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
+import Search from '$lib/modals/Search.svelte';
+import { dev, browser } from '$app/environment';
+import { page } from '$app/stores';
+import Header from '$lib/components/layout/header.svelte';
+import Footer from '$lib/components/layout/footer.svelte';
+import Sidebar from '$lib/components/layout/sidebar.svelte';
+import Drawer from '$lib/components/layout/drawer.svelte';
+import FlashMessageToast from '$lib/components/layout/flash-message-toast.svelte';
+import '../app.pcss';
 
-	export let data;
+export let data;
 
-	// Floating UI for Popups
-	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+// Floating UI for Popups
+storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
-	// initialize overlay components
-	initializeStores();
+// initialize overlay components
+initializeStores();
 
-	// Handle Vercel Production Mode
-	storeVercelProductionMode.set(data.vercelEnv === 'production');
-	// Init Vercel Analytics
-	// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
-	inject({ mode: dev ? 'development' : 'production' });
+// Handle Vercel Production Mode
+storeVercelProductionMode.set(data.vercelEnv === 'production');
+// Init Vercel Analytics
+// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
+inject({ mode: dev ? 'development' : 'production' });
 
-	// Registered list of Components for Modals
-	const modalComponentRegistry: Record<string, ModalComponent> = {
-		modalSearch: { ref: Search }
-	};
+// Registered list of Components for Modals
+const modalComponentRegistry: Record<string, ModalComponent> = {
+	modalSearch: { ref: Search }
+};
 
-	const noSidebarPaths = ['/signin', '/signup', '/privacy', '/terms', '/blog', '/password-reset'];
-	function matchNoSidebarPaths(pathname: string): boolean {
-		const canonicalPath = i18n.route(pathname);
-		if (canonicalPath == '/' || startsWith(canonicalPath, noSidebarPaths)) {
-			return true;
-		}
-		return false;
+const noSidebarPaths = ['/signin', '/signup', '/privacy', '/terms', '/blog', '/password-reset'];
+function matchNoSidebarPaths(pathname: string): boolean {
+	const canonicalPath = i18n.route(pathname);
+	if (canonicalPath == '/' || startsWith(canonicalPath, noSidebarPaths)) {
+		return true;
 	}
+	return false;
+}
 
-	// Set body `data-theme` based on current theme status
-	storeTheme.subscribe(setBodyThemeAttribute);
-	function setBodyThemeAttribute(): void {
-		if (!browser) return;
-		document.body.setAttribute('data-theme', $storeTheme);
-	}
+// Set body `data-theme` based on current theme status
+storeTheme.subscribe(setBodyThemeAttribute);
+function setBodyThemeAttribute(): void {
+	if (!browser) return;
+	document.body.setAttribute('data-theme', $storeTheme);
+}
 
-	// View Transitions
-	setupViewTransition();
+// View Transitions
+setupViewTransition();
 
-	/**
-	 * bind current scrollX scrollY value to store
-	 */
-	function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
-		scroll.set({
-			x: event.currentTarget.scrollLeft,
-			y: event.currentTarget.scrollTop
-		});
-	}
+/**
+ * bind current scrollX scrollY value to store
+ */
+function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
+	scroll.set({
+		x: event.currentTarget.scrollLeft,
+		y: event.currentTarget.scrollTop
+	});
+}
 
-	// Reactive
-	// Disable left sidebar on homepage
-	$: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname)
-		? 'w-0'
-		: 'bg-surface-50-900-token lg:w-auto';
-	$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
+// Reactive
+// Disable left sidebar on homepage
+$: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname)
+	? 'w-0'
+	: 'bg-surface-50-900-token lg:w-auto';
+$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 </script>
 
 <!-- Overlays -->

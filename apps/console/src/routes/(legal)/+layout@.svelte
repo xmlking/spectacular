@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { User2 } from 'lucide-svelte';
+import { User2 } from 'lucide-svelte';
 </script>
 
 <div class="mx-auto flex max-w-2xl flex-col justify-center px-6 py-12 lg:px-8">

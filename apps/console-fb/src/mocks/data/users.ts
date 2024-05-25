@@ -36,16 +36,7 @@ export class User {
 export default new Map<string, User>([
 	['user1@demo.com', new User('user1-pass', 'User1 Demo', 'chinthagunta')],
 	['user2@demo.com', new User('user2-pass', 'User2 Demo', 'chinthagunta')],
-	[
-		'tester@demo.com',
-		new User('tester-pass', 'Tester Demo', 'chinthagunta', [role.user, role.tester])
-	],
-	[
-		'manager@demo.com',
-		new User('manager-pass', 'Manager Demo', 'chinthagunta', [role.user, role.manager])
-	],
-	[
-		'supervisor@demo.com',
-		new User('supervisor-pass', 'Supervisor Demo', 'chinthagunta', [role.user, role.supervisor])
-	]
+	['tester@demo.com', new User('tester-pass', 'Tester Demo', 'chinthagunta', [role.user, role.tester])],
+	['manager@demo.com', new User('manager-pass', 'Manager Demo', 'chinthagunta', [role.user, role.manager])],
+	['supervisor@demo.com', new User('supervisor-pass', 'Supervisor Demo', 'chinthagunta', [role.user, role.supervisor])]
 ]);

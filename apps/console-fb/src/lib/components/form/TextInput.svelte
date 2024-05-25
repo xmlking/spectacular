@@ -1,22 +1,21 @@
 <script lang="ts" context="module">
-	type T = Record<string, unknown>;
+type T = Record<string, unknown>;
 </script>
 
 <script lang="ts">
-	import { Helper, Input, Label } from 'flowbite-svelte';
-	import type { InputType } from 'flowbite-svelte';
-	import type { FormPathLeaves } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms';
-	import { formFieldProxy } from 'sveltekit-superforms';
-	import { getFormContext } from './forms';
+import { Helper, Input, Label } from 'flowbite-svelte';
+import type { InputType } from 'flowbite-svelte';
+import type { FormPathLeaves , SuperForm } from 'sveltekit-superforms';
+import { formFieldProxy } from 'sveltekit-superforms';
+import { getFormContext } from './forms';
 
-	export let form: SuperForm<T, unknown>;
-	export let field: FormPathLeaves<T>;
-	export let label = '';
-	export let type: InputType = 'text';
+export let form: SuperForm<T, unknown>;
+export let field: FormPathLeaves<T>;
+export let label = '';
+export let type: InputType = 'text';
 
-	const { superform } = getFormContext();
-	const { path, value, errors, constraints } = formFieldProxy(superform, field);
+const { superform } = getFormContext();
+const { path, value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 <Label color={$errors ? 'red' : 'gray'} for={field} class="mb-2">{label ?? path}</Label>

@@ -1,8 +1,8 @@
 <script lang="ts">
-	export let street: string;
-	export let city: string;
-	export let state: string;
-	export let zip: string;
+export let street: string;
+export let city: string;
+export let state: string;
+export let zip: string;
 </script>
 
 <div class="ml-3 overflow-hidden">

@@ -25,13 +25,13 @@
 </div>
 
 <style lang="postcss">
-	.bg-cir-grad {
-		background-image: radial-gradient(rgb(75, 85, 99), #000 60%, #000);
-	}
-	.stats {
-		@apply flex flex-col text-center;
-	}
-	.stats > h1 {
-		@apply bg-gradient-to-t from-black to-white bg-clip-text text-5xl font-black text-transparent md:text-6xl;
-	}
+.bg-cir-grad {
+	background-image: radial-gradient(rgb(75, 85, 99), #000 60%, #000);
+}
+.stats {
+	@apply flex flex-col text-center;
+}
+.stats > h1 {
+	@apply bg-gradient-to-t from-black to-white bg-clip-text text-5xl font-black text-transparent md:text-6xl;
+}
 </style>

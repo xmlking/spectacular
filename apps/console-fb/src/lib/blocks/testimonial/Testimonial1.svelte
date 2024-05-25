@@ -12,16 +12,18 @@
 				/>
 			</svg>
 			<p class="text-lg leading-relaxed">
-				Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut
-				+1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote bag drinking vinegar
-				cronut adaptogen squid fanny pack vaporware. Man bun next level coloring book skateboard
-				four loko knausgaard. Kitsch keffiyeh master cleanse direct trade indigo juice before they
-				sold out gentrify plaid gastropub normcore XOXO 90's pickled cindigo jean shorts. Slow-carb
-				next level shoindigoitch ethical authentic, yr scenester sriracha forage franzen organic
-				drinking vinegar.
+				Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's
+				cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote bag
+				drinking vinegar cronut adaptogen squid fanny pack vaporware. Man bun next level
+				coloring book skateboard four loko knausgaard. Kitsch keffiyeh master cleanse direct
+				trade indigo juice before they sold out gentrify plaid gastropub normcore XOXO 90's
+				pickled cindigo jean shorts. Slow-carb next level shoindigoitch ethical authentic,
+				yr scenester sriracha forage franzen organic drinking vinegar.
 			</p>
 			<span class="mb-6 mt-8 inline-block h-1 w-10 rounded bg-indigo-500" />
-			<h2 class="title-font text-sm font-medium tracking-wider text-gray-900">HOLDEN CAULFIELD</h2>
+			<h2 class="title-font text-sm font-medium tracking-wider text-gray-900"
+				>HOLDEN CAULFIELD</h2
+			>
 			<p class="text-gray-500">Senior Product Designer</p>
 		</div>
 	</div>

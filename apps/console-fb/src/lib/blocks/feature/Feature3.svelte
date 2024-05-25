@@ -21,10 +21,12 @@
 						</svg>
 					</div>
 					<div class="flex-grow">
-						<h2 class="title-font mb-3 text-lg font-medium text-gray-900">Shooting Stars</h2>
+						<h2 class="title-font mb-3 text-lg font-medium text-gray-900"
+							>Shooting Stars</h2
+						>
 						<p class="text-base leading-relaxed">
-							Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub
-							indxgo juice poutine.
+							Blue bottle crucifix vinyl post-ironic four dollar toast vegan
+							taxidermy. Gastropub indxgo juice poutine.
 						</p>
 						<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500"
 							>Learn More
@@ -64,10 +66,12 @@
 						</svg>
 					</div>
 					<div class="flex-grow">
-						<h2 class="title-font mb-3 text-lg font-medium text-gray-900">The Catalyzer</h2>
+						<h2 class="title-font mb-3 text-lg font-medium text-gray-900"
+							>The Catalyzer</h2
+						>
 						<p class="text-base leading-relaxed">
-							Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub
-							indxgo juice poutine.
+							Blue bottle crucifix vinyl post-ironic four dollar toast vegan
+							taxidermy. Gastropub indxgo juice poutine.
 						</p>
 						<a href={'#'} class="mt-3 inline-flex items-center text-indigo-500"
 							>Learn More

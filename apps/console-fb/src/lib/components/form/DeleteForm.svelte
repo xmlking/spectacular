@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { ArchiveOutline } from 'flowbite-svelte-icons';
-	import { enhance } from '$app/forms';
+import { ArchiveOutline } from 'flowbite-svelte-icons';
+import { enhance } from '$app/forms';
 
-	export let id: string;
+export let id: string;
 </script>
 
 <form method="POST" action="?/delete" use:enhance>

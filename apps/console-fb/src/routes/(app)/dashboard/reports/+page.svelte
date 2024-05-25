@@ -47,14 +47,17 @@
 						class="mr-3 h-8"
 						alt="Flowbite Logo"
 					/>
-					<span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
+					<span
+						class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
 						>Flowbite</span
 					>
 				</a>
 				<form action="#" method="GET" class="hidden md:block md:pl-2">
 					<label for="topbar-search" class="sr-only">Search</label>
 					<div class="relative md:w-64 md:w-96">
-						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+						<div
+							class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+						>
 							<svg
 								class="h-5 w-5 text-gray-500 dark:text-gray-400"
 								fill="currentColor"
@@ -161,12 +164,17 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
+								<div
+									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
+								>
 									New message from
-									<span class="font-semibold text-gray-900 dark:text-white">Bonnie Green</span>:
-									"Hey, what's up? All set for the presentation?"
+									<span class="font-semibold text-gray-900 dark:text-white"
+										>Bonnie Green</span
+									>: "Hey, what's up? All set for the presentation?"
 								</div>
-								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
+								<div
+									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+								>
 									a few moments ago
 								</div>
 							</div>
@@ -198,13 +206,21 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
-									<span class="font-semibold text-gray-900 dark:text-white">Jese leos</span>
+								<div
+									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
+								>
+									<span class="font-semibold text-gray-900 dark:text-white"
+										>Jese leos</span
+									>
 									and
-									<span class="font-medium text-gray-900 dark:text-white">5 others</span>
+									<span class="font-medium text-gray-900 dark:text-white"
+										>5 others</span
+									>
 									started following you.
 								</div>
-								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
+								<div
+									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+								>
 									10 minutes ago
 								</div>
 							</div>
@@ -238,13 +254,21 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
-									<span class="font-semibold text-gray-900 dark:text-white">Joseph Mcfall</span>
+								<div
+									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
+								>
+									<span class="font-semibold text-gray-900 dark:text-white"
+										>Joseph Mcfall</span
+									>
 									and
-									<span class="font-medium text-gray-900 dark:text-white">141 others</span>
+									<span class="font-medium text-gray-900 dark:text-white"
+										>141 others</span
+									>
 									love your story. See it and view more stories.
 								</div>
-								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
+								<div
+									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+								>
 									44 minutes ago
 								</div>
 							</div>
@@ -278,15 +302,21 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
-									<span class="font-semibold text-gray-900 dark:text-white">Leslie Livingston</span>
+								<div
+									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
+								>
+									<span class="font-semibold text-gray-900 dark:text-white"
+										>Leslie Livingston</span
+									>
 									mentioned you in a comment:
 									<span class="font-medium text-primary-600 dark:text-primary-500"
 										>@bonnie.green</span
 									>
 									what do you say?
 								</div>
-								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
+								<div
+									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+								>
 									1 hour ago
 								</div>
 							</div>
@@ -315,11 +345,18 @@
 								</div>
 							</div>
 							<div class="w-full pl-3">
-								<div class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400">
-									<span class="font-semibold text-gray-900 dark:text-white">Robert Brown</span>
-									posted a new video: Glassmorphism - learn how to implement the new design trend.
+								<div
+									class="mb-1.5 text-sm font-normal text-gray-500 dark:text-gray-400"
+								>
+									<span class="font-semibold text-gray-900 dark:text-white"
+										>Robert Brown</span
+									>
+									posted a new video: Glassmorphism - learn how to implement the new
+									design trend.
 								</div>
-								<div class="text-xs font-medium text-primary-600 dark:text-primary-500">
+								<div
+									class="text-xs font-medium text-primary-600 dark:text-primary-500"
+								>
 									3 hours ago
 								</div>
 							</div>
@@ -575,7 +612,9 @@
 					id="dropdown"
 				>
 					<div class="px-4 py-3">
-						<span class="block text-sm font-semibold text-gray-900 dark:text-white">Neil Sims</span>
+						<span class="block text-sm font-semibold text-gray-900 dark:text-white"
+							>Neil Sims</span
+						>
 						<span class="block truncate text-sm text-gray-900 dark:text-white"
 							>name@flowbite.com</span
 						>
@@ -695,7 +734,9 @@
 			<form action="#" method="GET" class="mb-2 md:hidden">
 				<label for="sidebar-search" class="sr-only">Search</label>
 				<div class="relative">
-					<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+					<div
+						class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+					>
 						<svg
 							class="h-5 w-5 text-gray-500 dark:text-gray-400"
 							fill="currentColor"
@@ -1130,7 +1171,11 @@
 												transform="scale(3.9385)"
 											/>
 										</g>
-										<path fill="#192f5d" d="M0 0h98.8v70H0z" transform="scale(3.9385)" />
+										<path
+											fill="#192f5d"
+											d="M0 0h98.8v70H0z"
+											transform="scale(3.9385)"
+										/>
 										<path
 											fill="#fff"
 											d="M8.2 3l1 2.8H12L9.7 7.5l.9 2.7-2.4-1.7L6 10.2l.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7L74 8.5l-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 7.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 24.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 21.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 38.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 35.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 52.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 49.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm-74.1 7l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7H65zm16.4 0l1 2.8H86l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm-74 7l.8 2.8h3l-2.4 1.7.9 2.7-2.4-1.7L6 66.2l.9-2.7-2.4-1.7h3zm16.4 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8H45l-2.4 1.7 1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9zm16.4 0l1 2.8h2.8l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h3zm16.5 0l.9 2.8h2.9l-2.3 1.7.9 2.7-2.4-1.7-2.3 1.7.9-2.7-2.4-1.7h2.9zm16.5 0l.9 2.8h2.9L92 63.5l1 2.7-2.4-1.7-2.4 1.7 1-2.7-2.4-1.7h2.9z"
@@ -1204,7 +1249,11 @@
 									viewBox="0 0 512 512"
 								>
 									<defs>
-										<path id="a" fill="#ffde00" d="M1-.3L-.7.8 0-1 .6.8-1-.3z" />
+										<path
+											id="a"
+											fill="#ffde00"
+											d="M1-.3L-.7.8 0-1 .6.8-1-.3z"
+										/>
 									</defs>
 									<path fill="#de2910" d="M0 0h512v512H0z" />
 									<use
@@ -1262,7 +1311,9 @@
 				class="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"
 			/>
 		</div>
-		<div class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600" />
+		<div
+			class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"
+		/>
 		<div class="mb-4 grid grid-cols-2 gap-4">
 			<div
 				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
@@ -1277,7 +1328,9 @@
 				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"
 			/>
 		</div>
-		<div class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600" />
+		<div
+			class="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"
+		/>
 		<div class="grid grid-cols-2 gap-4">
 			<div
 				class="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"

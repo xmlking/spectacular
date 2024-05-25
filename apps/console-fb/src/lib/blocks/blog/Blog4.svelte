@@ -26,8 +26,8 @@
 					</a>
 				</div>
 				<p class="text-gray-700">
-					Well, the way they make shows is, they make one show. That show's called a pilot. Then
-					they show that show to the people who make shows.
+					Well, the way they make shows is, they make one show. That show's called a
+					pilot. Then they show that show to the people who make shows.
 				</p>
 			</div>
 		</div>
@@ -55,8 +55,8 @@
 					</a>
 				</div>
 				<p class="text-gray-700">
-					Chase ball of string eat plants, meow, and throw up because I ate plants going to catch
-					the red dot today going.
+					Chase ball of string eat plants, meow, and throw up because I ate plants going
+					to catch the red dot today going.
 				</p>
 			</div>
 		</div>
@@ -84,7 +84,8 @@
 					</a>
 				</div>
 				<p class="text-gray-700">
-					Sportacus andrew weatherall goose Refined gentlemen super mario des lynam alpha trion zap.
+					Sportacus andrew weatherall goose Refined gentlemen super mario des lynam alpha
+					trion zap.
 				</p>
 			</div>
 		</div>

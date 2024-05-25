@@ -3,8 +3,8 @@
 		<div class="mb-20 flex w-full flex-col text-center">
 			<h1 class="title-font mb-4 text-2xl font-medium text-gray-900 sm:text-3xl">Our Team</h1>
 			<p class="mx-auto text-base leading-relaxed lg:w-2/3">
-				Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke
-				farm-to-table. Franzen you probably haven't heard of them.
+				Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway
+				tile poke farm-to-table. Franzen you probably haven't heard of them.
 			</p>
 		</div>
 		<div class="-m-2 flex flex-wrap">

@@ -1,51 +1,50 @@
 <script lang="ts">
-	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import { superForm } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
-	import { dev } from '$app/environment';
-	import {
-		Toggle,
-		FloatingTextInput,
-		Form,
-		SelectFB as FormSelect,
-		Radio,
-		Range,
-		TagsInput
-	} from '$lib/components/form';
-	import { actionOptions, directionOptions, protocols } from '$lib/models/enums';
-	import { createRuleKeys as keys } from '$lib/models/schema';
-	import { Logger } from '@spectacular/utils';
+import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { Logger } from '@spectacular/utils';
+import { dev } from '$app/environment';
+import {
+	Toggle,
+	FloatingTextInput,
+	Form,
+	SelectFB as FormSelect,
+	Radio,
+	Range,
+	TagsInput
+} from '$lib/components/form';
+import { actionOptions, directionOptions, protocols } from '$lib/models/enums';
+import { createRuleKeys as keys } from '$lib/models/schema';
 
-	const log = new Logger('routes:rules:create');
-	export let data;
-	// Client API:
-	const superform = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		onError({ result }) {
-			// the onError event allows you to act on ActionResult errors.
-			// TODO:
-			// message.set(result.error.message)
-			log.error('superForm:', { result });
-		}
-	});
-	const {
-		form,
-		delayed,
-		enhance,
-		errors,
-		constraints,
-		message,
-		tainted,
-		posted,
-		allErrors,
-		reset,
-		submitting,
-		capture,
-		restore
-	} = superform;
-	export const snapshot = { capture, restore };
+const log = new Logger('routes:rules:create');
+export let data;
+// Client API:
+const superform = superForm(data.form, {
+	dataType: 'json',
+	taintedMessage: null,
+	syncFlashMessage: false,
+	onError({ result }) {
+		// the onError event allows you to act on ActionResult errors.
+		// TODO:
+		// message.set(result.error.message)
+		log.error('superForm:', { result });
+	}
+});
+const {
+	form,
+	delayed,
+	enhance,
+	errors,
+	constraints,
+	message,
+	tainted,
+	posted,
+	allErrors,
+	reset,
+	submitting,
+	capture,
+	restore
+} = superform;
+export const snapshot = { capture, restore };
 </script>
 
 <svelte:head>
@@ -100,8 +99,11 @@
 			<Radio field={keys.direction} items={directionOptions} />
 		</div>
 		<div class="col-start-5 flex justify-end">
-			<Toggle field={keys.shared} class="toggle-secondary toggle" labelPosition="before" disabled
-				>Shared</Toggle
+			<Toggle
+				field={keys.shared}
+				class="toggle-secondary toggle"
+				labelPosition="before"
+				disabled>Shared</Toggle
 			>
 		</div>
 		<div class="col-end-7">

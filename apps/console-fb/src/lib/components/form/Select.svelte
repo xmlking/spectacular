@@ -1,25 +1,24 @@
 <script lang="ts" context="module">
-	type T = Record<string, unknown>;
+type T = Record<string, unknown>;
 </script>
 
 <!-- <script lang="ts" generics="T extends Record<string, unknown>"> -->
 <script lang="ts">
-	import { Helper, Label } from 'flowbite-svelte';
-	import type { SelectOptionType } from 'flowbite-svelte';
-	import type { FormPathLeaves } from 'sveltekit-superforms';
-	import type { SuperForm } from 'sveltekit-superforms';
-	import { formFieldProxy } from 'sveltekit-superforms';
-	import { getFormContext } from './forms';
+import { Helper, Label } from 'flowbite-svelte';
+import type { SelectOptionType } from 'flowbite-svelte';
+import type { FormPathLeaves , SuperForm } from 'sveltekit-superforms';
+import { formFieldProxy } from 'sveltekit-superforms';
+import { getFormContext } from './forms';
 
-	// eslint-disable-next-line no-undef
-	export let form: SuperForm<T, unknown>;
-	export let field: FormPathLeaves<T>;
-	export let label = '';
-	export let labelClasses = '';
-	export let items: SelectOptionType<any>[] = [];
+// eslint-disable-next-line no-undef
+export let form: SuperForm<T, unknown>;
+export let field: FormPathLeaves<T>;
+export let label = '';
+export let labelClasses = '';
+export let items: SelectOptionType<any>[] = [];
 
-	const { superform } = getFormContext();
-	const { path, value, errors, constraints } = formFieldProxy(superform, field);
+const { superform } = getFormContext();
+const { path, value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 {#if label}

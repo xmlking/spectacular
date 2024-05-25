@@ -1,54 +1,55 @@
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
-	import { dev } from '$app/environment';
-	import { Logger } from '@spectacular/utils';
+/* FIXME */
+/* eslint-disable no-undef,@typescript-eslint/no-unused-vars,no-unused-vars */
+import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { Logger } from '@spectacular/utils';
+import { dev } from '$app/environment';
 
-	const log = new Logger('routes:policies:update');
-	export let data;
-	// Client API:
-	const superform = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		onError({ result }) {
-			// the onError event allows you to act on ActionResult errors.
-			// TODO:
-			// message.set(result.error.message)
-			log.error('superForm:', { result });
+const log = new Logger('routes:policies:update');
+export let data;
+// Client API:
+const superform = superForm(data.form, {
+	dataType: 'json',
+	taintedMessage: null,
+	syncFlashMessage: false,
+	onError({ result }) {
+		// the onError event allows you to act on ActionResult errors.
+		// TODO:
+		// message.set(result.error.message)
+		log.error('superForm:', { result });
+	}
+});
+const {
+	form,
+	delayed,
+	enhance,
+	errors,
+	constraints,
+	message,
+	tainted,
+	posted,
+	allErrors,
+	reset,
+	submitting,
+	capture,
+	restore
+} = superform;
+export const snapshot = { capture, restore };
+
+// const validFrom = dateProxy(form, "validFrom", { format: "datetime-utc" });
+// const validTo = dateProxy(form, "validTo", { format: "datetime-utc" });
+
+// TODO: reset buttom should also reset `subject & rule search inputs`
+// subject settings
+let subject = $form?.subjectId
+	? {
+			id: $form.subjectId,
+			displayName: $form.subjectDisplayName,
+			secondaryId: $form.subjectSecondaryId
 		}
-	});
-	const {
-		form,
-		delayed,
-		enhance,
-		errors,
-		constraints,
-		message,
-		tainted,
-		posted,
-		allErrors,
-		reset,
-		submitting,
-		capture,
-		restore
-	} = superform;
-	export const snapshot = { capture, restore };
-
-	// const validFrom = dateProxy(form, "validFrom", { format: "datetime-utc" });
-	// const validTo = dateProxy(form, "validTo", { format: "datetime-utc" });
-
-	// TODO: reset buttom should also reset `subject & rule search inputs`
-	// subject settings
-	let subject = $form?.subjectId
-		? {
-				id: $form.subjectId,
-				displayName: $form.subjectDisplayName,
-				secondaryId: $form.subjectSecondaryId
-			}
-		: null;
-	// rule settings
-	const disabled = $form?.originalShared;
+	: null;
+// rule settings
+const disabled = $form?.originalShared;
 </script>
 
 <svelte:head>

@@ -1,10 +1,12 @@
+/* FIXME */
+/* eslint-disable no-undef,@typescript-eslint/no-unused-vars */
 import { fail, redirect } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { updatePolicySchema as schema, policySchema } from '$lib/schema/policy';
 import { Logger, cleanClone } from '@spectacular/utils';
+import { updatePolicySchema as schema, policySchema } from '$lib/schema/policy';
 import { UpdatePolicyStore } from '$houdini';
 import type { policies_set_input, rules_set_input } from '$houdini';
 

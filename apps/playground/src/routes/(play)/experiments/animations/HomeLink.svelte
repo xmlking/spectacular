@@ -1,9 +1,9 @@
 <script>
-	export let linkText = '';
-	export let linkPath = '';
-	import { setupViewTransition } from 'sveltekit-view-transition';
+export let linkText = '';
+export let linkPath = '';
+import { setupViewTransition } from 'sveltekit-view-transition';
 
-	const { transition } = setupViewTransition();
+const { transition } = setupViewTransition();
 </script>
 
 <a

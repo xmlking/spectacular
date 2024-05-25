@@ -3,9 +3,9 @@ import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import { Logger, cleanClone } from '@spectacular/utils';
 import { ToastLevel } from '$lib/components/toast';
 import { updatePolicySchema as schema } from '$lib/models/schema';
-import { Logger, cleanClone } from '@spectacular/utils';
 import { uuidSchema } from '$lib/utils/zod.utils';
 import { UpdatePolicyStore } from '$houdini';
 import type { policies_set_input, rules_set_input } from '$houdini';
@@ -86,8 +86,7 @@ export const actions = {
 		}
 
 		const { update_policies_by_pk: policyResult, update_rules_by_pk: ruleResult } = data || {};
-		if (!policyResult)
-			return setMessage(form, 'Update policy failed: responce empty', { status: 404 });
+		if (!policyResult) return setMessage(form, 'Update policy failed: responce empty', { status: 404 });
 
 		const message = {
 			message: `Policy for Subject: ${policyResult.subjectDisplayName} ${

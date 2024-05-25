@@ -1,29 +1,29 @@
 <script lang="ts">
-	import {
-		Avatar,
-		Dropdown,
-		DropdownDivider,
-		DropdownHeader,
-		DropdownItem,
-		Navbar,
-		NavBrand,
-		NavHamburger,
-		NavLi,
-		NavUl
-	} from 'flowbite-svelte';
-	import { page } from '$app/stores';
-	import { Hamburger } from '$lib/components';
+import {
+	Avatar,
+	Dropdown,
+	DropdownDivider,
+	DropdownHeader,
+	DropdownItem,
+	Navbar,
+	NavBrand,
+	NavHamburger,
+	NavLi,
+	NavUl
+} from 'flowbite-svelte';
+import { page } from '$app/stores';
+import { Hamburger } from '$lib/components';
 
-	let path: string;
-	$: path = $page.url.pathname;
+let path: string;
+$: path = $page.url.pathname;
 
-	export let user:
-		| {
-				name?: string | null;
-				email?: string | null;
-				image?: string | null;
-		  }
-		| undefined;
+export let user:
+	| {
+			name?: string | null;
+			email?: string | null;
+			image?: string | null;
+	  }
+	| undefined;
 </script>
 
 <Navbar
@@ -93,7 +93,9 @@
 			active={path == '/dashboard/policies'}>Policies</NavLi
 		>
 		<NavLi href="/dashboard/users" active={path == '/dashboard/users'}>Users</NavLi>
-		<NavLi data-sveltekit-preload-data="" href="/play" active={path == '/play'}>Playground</NavLi>
+		<NavLi data-sveltekit-preload-data="" href="/play" active={path == '/play'}
+			>Playground</NavLi
+		>
 	</NavUl>
 
 	{#if user}
@@ -107,7 +109,8 @@
 			>
 			<Dropdown arrowIcon={false} inline={true}>
 				<DropdownHeader>
-					<span class="block truncate text-sm font-medium" aria-label={user.email}>{user.name}</span
+					<span class="block truncate text-sm font-medium" aria-label={user.email}
+						>{user.name}</span
 					>
 				</DropdownHeader>
 				<DropdownItem><a href="/dashboard/profile">Profile</a></DropdownItem>

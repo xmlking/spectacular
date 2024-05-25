@@ -1,11 +1,7 @@
 import envPri from '$lib/variables/variables.server';
 
-const defaultUserFilter = envPri.DIRECTORY_FILTER_USER_SUFFIX
-	? `endswith(userPrincipalName,'${envPri.DIRECTORY_FILTER_USER_SUFFIX}')`
-	: '';
-const defaultGroupFilter = envPri.DIRECTORY_FILTER_GROUP_PREFIX
-	? `startswith(displayName,'${envPri.DIRECTORY_FILTER_GROUP_PREFIX}')`
-	: '';
+const defaultUserFilter = envPri.DIRECTORY_FILTER_USER_SUFFIX ? `endswith(userPrincipalName,'${envPri.DIRECTORY_FILTER_USER_SUFFIX}')` : '';
+const defaultGroupFilter = envPri.DIRECTORY_FILTER_GROUP_PREFIX ? `startswith(displayName,'${envPri.DIRECTORY_FILTER_GROUP_PREFIX}')` : '';
 const defaultDeviceFilter = envPri.DIRECTORY_FILTER_DEVICE_PREFIX
 	? `startswith(displayName,'${envPri.DIRECTORY_FILTER_DEVICE_PREFIX}')`
 	: '';

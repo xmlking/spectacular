@@ -1,41 +1,45 @@
 <script lang="ts" context="module">
-	type T = Record<string, unknown>;
+type T = Record<string, unknown>;
 </script>
 
 <!-- <script lang="ts" generics="T extends Record<string, unknown>"> -->
 <script lang="ts">
-	import { Alert, Button, ButtonGroup, Modal, Spinner } from 'flowbite-svelte';
-	import {
-		AdjustmentsHorizontalOutline,
-		ArrowLeftOutline,
-		CloudArrowUpOutline
-	} from 'flowbite-svelte-icons';
-	import { setContext } from 'svelte';
-	import type { HTMLFormAttributes } from 'svelte/elements';
-	import type { SuperForm } from 'sveltekit-superforms';
-	import { page } from '$app/stores';
-	import { FORM_KEY } from './forms';
-	import type { FormContext } from './forms';
-	interface $$restProps extends HTMLFormAttributes {}
+import { Alert, Button, ButtonGroup, Modal, Spinner } from 'flowbite-svelte';
+import {
+	AdjustmentsHorizontalOutline,
+	ArrowLeftOutline,
+	CloudArrowUpOutline
+} from 'flowbite-svelte-icons';
+import { setContext } from 'svelte';
+import type { HTMLFormAttributes } from 'svelte/elements';
+import type { SuperForm } from 'sveltekit-superforms';
+import { page } from '$app/stores';
+import { FORM_KEY } from './forms';
+import type { FormContext } from './forms';
+interface $$restProps extends HTMLFormAttributes {}
 
-	export let superform: SuperForm<T, unknown>;
-	export let showButtons = true;
-	export let showAlerts = true;
-	export let submitButtonText = 'Submit';
-	export let resetButtonText = 'Reset';
-	export let backButtonText = 'Back';
-	export let className = 'space-y-6';
+export let superform: SuperForm<T, unknown>;
+export let showButtons = true;
+export let showAlerts = true;
+export let submitButtonText = 'Submit';
+export let resetButtonText = 'Reset';
+export let backButtonText = 'Back';
+export let className = 'space-y-6';
 
-	const { posted, allErrors, form, errors, enhance, delayed, message, reset, tainted, submitting } =
-		superform;
-	setContext<FormContext<T>>(FORM_KEY, { superform });
+const { posted, allErrors, form, errors, enhance, delayed, message, reset, tainted, submitting } =
+	superform;
+setContext<FormContext<T>>(FORM_KEY, { superform });
 </script>
 
 <form class={className} method="post" {...$$restProps} use:enhance>
 	<slot />
 
 	{#if showAlerts && ($message || $errors._errors)}
-		<Alert color={$page.status >= 400 ? 'red' : 'blue'} dismissable={false} class="!items-start">
+		<Alert
+			color={$page.status >= 400 ? 'red' : 'blue'}
+			dismissable={false}
+			class="!items-start"
+		>
 			<span slot="icon"
 				><svg
 					aria-hidden="true"
@@ -83,7 +87,9 @@
 				{#if $submitting}
 					<Spinner class="mr-3" size="4" color="white" />Saveing ...
 				{:else}
-					<CloudArrowUpOutline class="mr-2 text-blue-500 dark:text-green-500" />{submitButtonText}
+					<CloudArrowUpOutline
+						class="mr-2 text-blue-500 dark:text-green-500"
+					/>{submitButtonText}
 				{/if}
 			</Button>
 		</ButtonGroup>

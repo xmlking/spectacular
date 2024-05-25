@@ -28,16 +28,18 @@
 						<rect x="14" y="1" width="7" height="6" />
 						<rect x="14" y="11" width="7" height="12" />
 					</svg>
-					<span class="ml-2 text-xl font-bold uppercase tracking-wide text-gray-100">Company</span>
+					<span class="ml-2 text-xl font-bold uppercase tracking-wide text-gray-100"
+						>Company</span
+					>
 				</a>
 				<div class="mt-4 lg:max-w-sm">
 					<p class="text-sm text-deep-purple-50">
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-						laudantium, totam rem aperiam.
+						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+						doloremque laudantium, totam rem aperiam.
 					</p>
 					<p class="mt-4 text-sm text-deep-purple-50">
-						Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-						explicabo.
+						Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+						dicta sunt explicabo.
 					</p>
 				</div>
 			</div>

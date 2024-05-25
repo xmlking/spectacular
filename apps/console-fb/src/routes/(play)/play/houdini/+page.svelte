@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { GraphQLErrors } from '$lib/components';
-	import { ErrorMessage } from '$lib/components/form';
-	import { CachePolicy } from '$houdini';
-	import type { PageData } from './$houdini';
+import { GraphQLErrors } from '$lib/components';
+import { ErrorMessage } from '$lib/components/form';
+import { CachePolicy } from '$houdini';
+import type { PageData } from './$houdini';
 
-	export let data: PageData;
-	$: ({ ListPolicies2, formErrors, fieldErrors } = data);
+export let data: PageData;
+$: ({ ListPolicies2, formErrors, fieldErrors } = data);
 </script>
 
 <button class="btn" on:click={() => ListPolicies2.loadNextPage()}>load more</button>

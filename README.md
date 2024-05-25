@@ -135,6 +135,7 @@ Format and lint code
 
 ```shell
 turbo format
+turbo format --filter=!'console-fb'
 turbo lint
 ```
 

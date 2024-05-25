@@ -4,14 +4,15 @@ import CredentialsProvider from '@auth/core/providers/credentials';
 import GitHub from '@auth/core/providers/github';
 import Google from '@auth/core/providers/google';
 // import { HasuraAdapter } from '@auth/hasura-adapter';
-import { SvelteKitAuth, type SvelteKitAuthConfig } from '@auth/sveltekit';
+import { SvelteKitAuth  } from '@auth/sveltekit';
+import type {SvelteKitAuthConfig} from '@auth/sveltekit';
+import { Logger } from '@spectacular/utils';
 import envPri from '$lib/variables/variables.server';
 import envPub from '$lib/variables/variables';
-import { Logger } from '@spectacular/utils';
 import { dev } from '$app/environment';
+import users from '$mocks/data/users';
 import { getOrg } from './org-mapper';
 import { appRoles } from './role-mapper';
-import users from '$mocks/data/users';
 
 // import { HasuraAdapter } from 'next-auth-hasura-adapter';
 

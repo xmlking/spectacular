@@ -19,8 +19,8 @@
 					<span class="inline-block text-deep-purple-accent-400">will love</span>
 				</h2>
 				<p class="text-base text-gray-700 md:text-lg">
-					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-					laudantium, totam rem aperiam, eaque ipsa quae. explicabo.
+					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+					doloremque laudantium, totam rem aperiam, eaque ipsa quae. explicabo.
 				</p>
 			</div>
 			<a
@@ -37,7 +37,11 @@
 			</a>
 		</div>
 		<div class="relative">
-			<svg class="absolute w-full text-teal-accent-400" fill="currentColor" viewBox="0 0 600 392">
+			<svg
+				class="absolute w-full text-teal-accent-400"
+				fill="currentColor"
+				viewBox="0 0 600 392"
+			>
 				<rect x="0" y="211" width="75" height="181" rx="8" />
 				<rect x="525" y="260" width="75" height="132" rx="8" />
 				<rect x="105" y="83" width="75" height="309" rx="8" />

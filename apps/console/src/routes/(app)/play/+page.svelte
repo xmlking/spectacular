@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { DataHandler } from '@vincjo/datatables';
-	import * as Table from '@spectacular/skeleton/components/table';
-	// import PageToCLayout from '$lib/components/layout/page-toc-layout.svelte';
-	// import PageLayout from '$lib/components/layout/page-layout.svelte';
+import { DataHandler } from '@vincjo/datatables';
+import * as Table from '@spectacular/skeleton/components/table';
+// import PageToCLayout from '$lib/components/layout/page-toc-layout.svelte';
+// import PageLayout from '$lib/components/layout/page-layout.svelte';
 
-	import customers from '../customers/data';
+import customers from '../customers/data';
 
-	//Datatable handler initialization
-	const handler = new DataHandler(customers, { rowsPerPage: 10 });
-	const rows = handler.getRows();
+//Datatable handler initialization
+const handler = new DataHandler(customers, { rowsPerPage: 10 });
+const rows = handler.getRows();
 </script>
 
 <div class="page-container">

@@ -2,7 +2,12 @@
 	<div class="mx-auto px-4 py-5 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
 		<div class="relative flex items-center justify-between">
 			<div class="flex items-center">
-				<a href="/" aria-label="Company" title="Company" class="mr-8 inline-flex items-center">
+				<a
+					href="/"
+					aria-label="Company"
+					title="Company"
+					class="mr-8 inline-flex items-center"
+				>
 					<svg
 						class="w-8 text-deep-purple-accent-400 dark:text-teal-accent-400"
 						viewBox="0 0 24 24"

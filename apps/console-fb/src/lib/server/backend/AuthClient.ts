@@ -1,6 +1,6 @@
+import { Logger } from '@spectacular/utils';
 import { ResponseError } from '$lib/errors';
 import type { OAuth2TokenRequest, OAuth2TokenResponse } from '$lib/models/types/auth';
-import { Logger } from '@spectacular/utils';
 
 const log = new Logger('lib:authClient');
 export class AuthClient {

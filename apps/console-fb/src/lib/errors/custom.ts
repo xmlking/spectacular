@@ -15,9 +15,7 @@ export class NotFoundError extends ErrorBase<'NOT_FOUND_ERROR'> {
 	// return should be serializable to JSON
 	toJSON(): App.Error {
 		return {
-			message: this.cause
-				? `${this.name}: ${this.message}; cause: ${this.cause}`
-				: `${this.name}: ${this.message}`
+			message: this.cause ? `${this.name}: ${this.message}; cause: ${this.cause}` : `${this.name}: ${this.message}`
 		} as App.Error;
 	}
 }

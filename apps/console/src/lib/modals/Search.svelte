@@ -1,55 +1,54 @@
 <script lang="ts">
-	import { getModalStore } from '@skeletonlabs/skeleton';
-	import { File, Search } from 'lucide-svelte';
-	import { menuNavLinks } from '$lib/links';
-	import type { List } from '$lib/links';
+import { getModalStore } from '@skeletonlabs/skeleton';
+import { File, Search } from 'lucide-svelte';
+import { menuNavLinks } from '$lib/links';
+import type { List } from '$lib/links';
 
-	// Classes
-	const cBase =
-		'card bg-surface-100/60 dark:bg-surface-500/30 backdrop-blur-lg overflow-hidden w-full max-w-[800px] shadow-xl mt-8 mb-auto';
-	const cHeader = 'bg-surface-300-600-token flex items-center';
-	const cSearchInput = 'bg-transparent border-0 ring-0 focus:ring-0 w-full m-2 ml-4 text-lg';
-	const cResults = 'overflow-x-auto max-h-[480px] hide-scrollbar';
-	const cResultAnchor =
-		'!rounded-none justify-between hover:variant-soft focus:!variant-filled-primary outline-0';
-	const cFooter =
-		'hidden md:flex items-center gap-2 bg-surface-300-600-token p-4 text-xs font-bold';
+// Classes
+const cBase =
+	'card bg-surface-100/60 dark:bg-surface-500/30 backdrop-blur-lg overflow-hidden w-full max-w-[800px] shadow-xl mt-8 mb-auto';
+const cHeader = 'bg-surface-300-600-token flex items-center';
+const cSearchInput = 'bg-transparent border-0 ring-0 focus:ring-0 w-full m-2 ml-4 text-lg';
+const cResults = 'overflow-x-auto max-h-[480px] hide-scrollbar';
+const cResultAnchor =
+	'!rounded-none justify-between hover:variant-soft focus:!variant-filled-primary outline-0';
+const cFooter = 'hidden md:flex items-center gap-2 bg-surface-300-600-token p-4 text-xs font-bold';
 
-	// Local
-	let searchTerm = '';
-	let resultsCopy = [
-		...menuNavLinks['/policies'],
-		...menuNavLinks['/flows'],
-		...menuNavLinks['/reports'],
-		...menuNavLinks['/account']
-	];
-	let results = resultsCopy;
-	const modalStore = getModalStore();
+// Local
+let searchTerm = '';
+let resultsCopy = [
+	...menuNavLinks['/policies'],
+	...menuNavLinks['/flows'],
+	...menuNavLinks['/reports'],
+	...menuNavLinks['/account']
+];
+let results = resultsCopy;
+const modalStore = getModalStore();
 
-	// Elements
-	let elemDocSearch: HTMLElement;
+// Elements
+let elemDocSearch: HTMLElement;
 
-	function filterList(list: List) {
-		return list.filter((rowObj) => {
-			const formattedSearchTerm = searchTerm.toLowerCase() || '';
-			return Object.values(rowObj).join(' ').toLowerCase().includes(formattedSearchTerm);
-		});
+function filterList(list: List) {
+	return list.filter((rowObj) => {
+		const formattedSearchTerm = searchTerm.toLowerCase() || '';
+		return Object.values(rowObj).join(' ').toLowerCase().includes(formattedSearchTerm);
+	});
+}
+
+function onInput(): void {
+	let resultsDeepCopy = structuredClone(resultsCopy);
+	results = resultsDeepCopy.filter((category) => {
+		category.list = filterList(category.list);
+		if (category.list.length) return category;
+	});
+}
+
+function onKeyDown(event: KeyboardEvent): void {
+	if (['Enter', 'ArrowDown'].includes(event.code)) {
+		const queryFirstAnchorElement = elemDocSearch.querySelector('a');
+		if (queryFirstAnchorElement) queryFirstAnchorElement.focus();
 	}
-
-	function onInput(): void {
-		let resultsDeepCopy = structuredClone(resultsCopy);
-		results = resultsDeepCopy.filter((category) => {
-			category.list = filterList(category.list);
-			if (category.list.length) return category;
-		});
-	}
-
-	function onKeyDown(event: KeyboardEvent): void {
-		if (['Enter', 'ArrowDown'].includes(event.code)) {
-			const queryFirstAnchorElement = elemDocSearch.querySelector('a');
-			if (queryFirstAnchorElement) queryFirstAnchorElement.focus();
-		}
-	}
+}
 </script>
 
 <div bind:this={elemDocSearch} class="modal-search {cBase}">

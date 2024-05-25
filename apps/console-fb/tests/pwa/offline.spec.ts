@@ -13,9 +13,7 @@ test('Test offline and trailing slashes', async ({ browser }) => {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			navigator.serviceWorker.ready,
-			new Promise((_, reject) =>
-				setTimeout(() => reject(new Error('Service worker registration failed: time out')), 10000)
-			)
+			new Promise((_, reject) => setTimeout(() => reject(new Error('Service worker registration failed: time out')), 10000))
 		]);
 		// @ts-expect-error registration is of type unknown
 		return registration.active?.scriptURL;

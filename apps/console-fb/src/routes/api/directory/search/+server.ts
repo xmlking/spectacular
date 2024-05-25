@@ -1,16 +1,10 @@
 import { json } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
+import { Logger } from '@spectacular/utils';
 import { DeviceError, NotFoundError } from '$lib/errors';
 import { listGroups, listUsers } from '$lib/server/backend/msgraph';
 import type { Subject } from '$lib/server/backend/msgraph';
-import { Logger } from '@spectacular/utils';
-import {
-	CachePolicy,
-	SearchDevicesStore,
-	SearchPoolsStore,
-	order_by,
-	subject_type_enum
-} from '$houdini';
+import { CachePolicy, SearchDevicesStore, SearchPoolsStore, order_by, subject_type_enum } from '$houdini';
 
 const log = new Logger('api:directory:search');
 const searchDevicesStore = new SearchDevicesStore();
@@ -55,12 +49,7 @@ export const GET = async (event) => {
 					policy: CachePolicy.CacheAndNetwork,
 					variables
 				});
-				if (deviceErrors)
-					throw new DeviceError(
-						'SEARCH_DEVICE_ERROR',
-						'list devices api error',
-						deviceErrors[0] as GraphQLError
-					);
+				if (deviceErrors) throw new DeviceError('SEARCH_DEVICE_ERROR', 'list devices api error', deviceErrors[0] as GraphQLError);
 				if (!deviceData) throw new NotFoundError('devices data is null');
 				results = deviceData.devices.map((obj) => {
 					return {
@@ -79,12 +68,7 @@ export const GET = async (event) => {
 					metadata: { logResult: true },
 					variables
 				});
-				if (poolErrors)
-					throw new DeviceError(
-						'SEARCH_DEVICE_ERROR',
-						'list devices api error',
-						poolErrors[0] as GraphQLError
-					);
+				if (poolErrors) throw new DeviceError('SEARCH_DEVICE_ERROR', 'list devices api error', poolErrors[0] as GraphQLError);
 				if (!poolData) throw new NotFoundError('devices data is null');
 				results = poolData.pools.map((obj) => {
 					return {

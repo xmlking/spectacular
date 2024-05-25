@@ -28,15 +28,19 @@
 								height=".30"><circle cx="1" cy="1" r=".7" /></pattern
 							>
 						</defs>
-						<rect fill="url(#f77828ea-acc7-4b05-89fe-052b4c6b68b2)" width="52" height="24" />
+						<rect
+							fill="url(#f77828ea-acc7-4b05-89fe-052b4c6b68b2)"
+							width="52"
+							height="24"
+						/>
 					</svg>
 					<span class="relative">The</span>
 				</span>
 				quick, brown fox jumps over a lazy dog
 			</h2>
 			<p class="text-base text-gray-700 md:text-lg">
-				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem
-				aperiam, eaque ipsa quae.
+				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+				doloremque rem aperiam, eaque ipsa quae.
 			</p>
 		</div>
 		<div class="space-y-4">
@@ -49,7 +53,10 @@
 				>
 					<p class="text-lg font-medium">The quick, brown fox jumps over a lazy dog?</p>
 					<!-- Add "transform rotate-180" classes on svg, if is open" -->
-					<svg viewBox="0 0 24 24" class="w-3 text-gray-600 transition-transform duration-200">
+					<svg
+						viewBox="0 0 24 24"
+						class="w-3 text-gray-600 transition-transform duration-200"
+					>
 						<polyline
 							fill="none"
 							stroke="currentColor"

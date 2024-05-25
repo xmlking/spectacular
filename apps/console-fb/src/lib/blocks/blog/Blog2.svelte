@@ -27,8 +27,8 @@
 					>
 				</div>
 				<p class="mb-5 text-gray-700">
-					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem
-					doloremque.
+					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni
+					voluptatem doloremque.
 				</p>
 				<div class="flex items-center">
 					<a href="/" aria-label="Author" title="Author" class="mr-3">
@@ -76,8 +76,8 @@
 					>
 				</div>
 				<p class="mb-5 text-gray-700">
-					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem
-					doloremque.
+					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni
+					voluptatem doloremque.
 				</p>
 				<div class="flex items-center">
 					<a href="/" aria-label="Author" title="Author" class="mr-3">
@@ -125,8 +125,8 @@
 					>
 				</div>
 				<p class="mb-5 text-gray-700">
-					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem
-					doloremque.
+					Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni
+					voluptatem doloremque.
 				</p>
 				<div class="flex items-center">
 					<a href="/" aria-label="Author" title="Author" class="mr-3">

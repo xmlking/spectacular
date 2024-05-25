@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ExclamationCircleOutline } from 'flowbite-svelte-icons';
+import { ExclamationCircleOutline } from 'flowbite-svelte-icons';
 </script>
 
 <div class="max-w-7xl">
@@ -26,11 +26,14 @@
 						</svg>
 					</div>
 					<div class="ml-5 w-0 flex-1">
-						<dt class="truncate text-sm font-medium text-gray-500">Total Subscribers</dt>
+						<dt class="truncate text-sm font-medium text-gray-500">Total Subscribers</dt
+						>
 						<dd class="flex items-baseline">
 							<div class="text-2xl font-semibold text-gray-900">8,892</div>
 
-							<div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+							<div
+								class="ml-2 flex items-baseline text-sm font-semibold text-green-600"
+							>
 								<svg
 									class="h-5 w-5 flex-shrink-0 self-center text-green-500"
 									fill="currentColor"
@@ -70,7 +73,9 @@
 						<dd class="flex items-baseline">
 							<di class="text-2xl font-semibold text-gray-900"> 38.12% </di>
 
-							<div class="ml-2 flex items-baseline text-sm font-semibold text-green-600">
+							<div
+								class="ml-2 flex items-baseline text-sm font-semibold text-green-600"
+							>
 								<svg
 									class="h-5 w-5 flex-shrink-0 self-center text-green-500"
 									fill="currentColor"
@@ -120,11 +125,15 @@
 						</svg>
 					</div>
 					<div class="ml-5 w-0 flex-1">
-						<dt class="truncate text-sm font-medium text-gray-500">Total Risks Blocked</dt>
+						<dt class="truncate text-sm font-medium text-gray-500"
+							>Total Risks Blocked</dt
+						>
 						<dd class="flex items-baseline">
 							<div class="text-2xl font-semibold text-gray-900">87,343</div>
 
-							<div class="ml-2 flex items-baseline text-sm font-semibold text-red-600">
+							<div
+								class="ml-2 flex items-baseline text-sm font-semibold text-red-600"
+							>
 								<svg
 									class="h-5 w-5 flex-shrink-0 self-center text-red-500"
 									fill="currentColor"
