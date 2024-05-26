@@ -29,6 +29,7 @@
 		"test:unit:ui": "dotenv-run -f .env -f .secrets -v -- vitest --ui"
 	},
 	"devDependencies": {
+		"@ai-sdk/openai": "0.0.14",
 		"@floating-ui/dom": "1.6.5",
 		"@fontsource-variable/inter": "5.0.18",
 		"@inlang/cli": "2.16.8",
@@ -60,6 +61,7 @@
 		"@vincjo/datatables": "1.14.5",
 		"@vitest/coverage-v8": "1.6.0",
 		"@xyflow/svelte": "0.1.3",
+		"ai": "3.1.14",
 		"autoprefixer": "10.4.19",
 		"d3-array": "3.2.4",
 		"d3-scale": "4.0.2",

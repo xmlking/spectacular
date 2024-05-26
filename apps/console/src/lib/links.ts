@@ -26,9 +26,14 @@ export const menuNavLinks: MenuNavLinks = {
 		},
 		{
 			title: 'Experiments',
+			list: [{ href: '/customers', label: 'Customers', keywords: 'customers, users' }]
+		},
+		{
+			title: 'AI',
 			list: [
-				{ href: '/customers', label: 'Customers', keywords: 'customers, users' },
-				{ href: '/play', label: 'Play', keywords: 'play, users' }
+				{ href: '/magic-spell', label: 'Magic Spell', keywords: 'magic-spell, ai, completion' },
+				{ href: '/assistants', label: 'Assistants', keywords: 'assistants, ai' },
+				{ href: '/chatbot', label: 'Chat Bot', keywords: 'chatbot, OpenAI' }
 			]
 		}
 	],
