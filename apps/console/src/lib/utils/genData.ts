@@ -26,14 +26,14 @@ export function createSeries(options: { count?: number; min: number; max: number
     const keys = options.keys ?? ['y'];
 
     return Array.from({ length: count }).map((_) => {
-      return {
-        x: options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max),
-        ...Object.fromEntries(
-          keys.map((key) => {
-            return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
-          }),
-        ),
-      };
+        return {
+          x: options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max),
+          ...Object.fromEntries(
+            keys.map((key) => {
+              return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
+            }),
+          ),
+        };
     });
 }
 
@@ -72,19 +72,19 @@ export function createTimeSeries(options: { count?: number; min: number; max: nu
     let lastStartDate = startOfDay(new Date());
 
     const timeSeries = Array.from({ length: count }).map((_, i) => {
-      const startDate = addMinutes(lastStartDate, getRandomInteger(0, 60));
-      const endDate = addMinutes(startDate, getRandomInteger(5, 60));
-      lastStartDate = startDate;
-      return {
-        name: `item ${i + 1}`,
-        startDate,
-        endDate,
-        ...Object.fromEntries(
-          keys.map((key) => {
-            return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
-          }),
-        ),
-      };
+        const startDate = addMinutes(lastStartDate, getRandomInteger(0, 60));
+        const endDate = addMinutes(startDate, getRandomInteger(5, 60));
+        lastStartDate = startDate;
+        return {
+          name: `item ${i + 1}`,
+          startDate,
+          endDate,
+          ...Object.fromEntries(
+            keys.map((key) => {
+              return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
+            }),
+          ),
+        };
     });
 
     return timeSeries;
@@ -127,11 +127,11 @@ export function getPhyllotaxis({ radius, count, width, height }) {
 
 export function getSpiral({ angle, radius, count, width, height }) {
     return Array.from({ length: count }, (_, i) => {
-      const r = radius * Math.sqrt(i);
-      const a = degreesToRadians(angle * i);
-      return {
-        x: width / 2 + r * Math.cos(a),
-        y: height / 2 + r * Math.sin(a),
-      };
+        const r = radius * Math.sqrt(i);
+        const a = degreesToRadians(angle * i);
+        return {
+          x: width / 2 + r * Math.cos(a),
+          y: height / 2 + r * Math.sin(a),
+        };
     });
 }

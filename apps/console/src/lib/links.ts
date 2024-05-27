@@ -88,13 +88,13 @@ type InvertedIndex = Record<string, string>;
 const buildInvertedIndex = (menu: MenuNavLinks): InvertedIndex => {
     const invertedIndex: InvertedIndex = {};
     for (const topLevelKey of Object.keys(menu)) {
-      const sections = menu[topLevelKey];
-      for (const section of sections) {
-        for (const item of section.list) {
-          const key = item.href.split('/')[1];
-          invertedIndex[key] = topLevelKey;
+        const sections = menu[topLevelKey];
+        for (const section of sections) {
+          for (const item of section.list) {
+            const key = item.href.split('/')[1];
+            invertedIndex[key] = topLevelKey;
+          }
         }
-      }
     }
     return invertedIndex;
 };

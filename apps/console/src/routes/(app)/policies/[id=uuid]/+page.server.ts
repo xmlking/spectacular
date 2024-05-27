@@ -1,5 +1,5 @@
-import { UpdatePolicyStore } from '$houdini';
 import type { policies_set_input, rules_set_input } from '$houdini';
+import { UpdatePolicyStore } from '$houdini';
 import { policySchema, updatePolicySchema as schema } from '$lib/schema/policy';
 import { Logger, cleanClone } from '@spectacular/utils';
 /* FIXME */

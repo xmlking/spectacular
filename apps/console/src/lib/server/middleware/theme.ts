@@ -9,10 +9,10 @@ export const theme = (async ({ event, resolve }) => {
     const cookieTheme = event.cookies.get('theme');
 
     if (cookieTheme) {
-      theme = cookieTheme;
+        theme = cookieTheme;
     } else {
-      event.cookies.set('theme', 'skeleton', { path: '/' });
-      theme = 'skeleton';
+        event.cookies.set('theme', 'skeleton', { path: '/' });
+        theme = 'skeleton';
     }
 
     log.debug({ theme });

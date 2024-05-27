@@ -1,7 +1,7 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-// import {  MagicSpellTextarea } from '@spectacular/skeleton/components/magic-spell-textarea';
 import { MagicSpellTextarea } from '$lib/components/magic-spell-textarea';
+// import {  MagicSpellTextarea } from '@spectacular/skeleton/components/magic-spell-textarea';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Logger } from '@spectacular/utils';

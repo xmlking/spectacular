@@ -60,15 +60,15 @@ export const userUpdatePasswordSchema = userSchema
  */
 function checkConfirmPassword(ctx: z.RefinementCtx, confirmPassword: string, password: string) {
     if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Password and Confirm Password must match',
-        path: ['password'],
-      });
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Password and Confirm Password must match',
-        path: ['confirmPassword'],
-      });
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Password and Confirm Password must match',
+          path: ['password'],
+        });
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Password and Confirm Password must match',
+          path: ['confirmPassword'],
+        });
     }
 }

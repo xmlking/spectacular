@@ -20,20 +20,20 @@ const cache = new Map();
 
 export async function getOrgs(nhost: NhostClient) {
     if (!cache.has(ORGS_HASH)) {
-      log.info('cache miss, fetching org data');
-      const { data, error } = await nhost.graphql.request(
-        ORGS_QUERY,
-        {},
-        {
-          headers: {
-            'X-Hasura-Admin-Secret': ADMIN_SECRET,
+        log.info('cache miss, fetching org data');
+        const { data, error } = await nhost.graphql.request(
+          ORGS_QUERY,
+          {},
+          {
+            headers: {
+              'X-Hasura-Admin-Secret': ADMIN_SECRET,
+            },
           },
-        },
-      );
-      if (error) {
-        return { errors: error as GraphQLError[], data: null };
-      }
-      cache.set(ORGS_HASH, data);
+        );
+        if (error) {
+          return { errors: error as GraphQLError[], data: null };
+        }
+        cache.set(ORGS_HASH, data);
     }
     return { errors: null, data: cache.get(ORGS_HASH) as ListOrganizations$result };
 }

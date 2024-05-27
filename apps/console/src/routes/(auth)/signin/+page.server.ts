@@ -22,20 +22,20 @@ const pwlSchema = userSchema.pick({
 const log = new Logger('server:auth:signin');
 
 export const load = async (event) => {
-  const {
-    locals: { nhost },
-  } = event;
-  // Preflight prevents direct posting.
-  // If preflight option is true and this function isn't called
-  // before posting, request will be limited:
-  await limiter.cookieLimiter?.preflight(event);
+    const {
+      locals: { nhost },
+    } = event;
+    // Preflight prevents direct posting.
+    // If preflight option is true and this function isn't called
+    // before posting, request will be limited:
+    await limiter.cookieLimiter?.preflight(event);
 
-  const session = nhost.auth.getSession();
-  log.debug(session);
-  if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
-  const pwForm = await superValidate(zod(pwSchema));
-  const pwlForm = await superValidate(zod(pwlSchema));
-  return { pwForm, pwlForm };
+    const session = nhost.auth.getSession();
+    log.debug(session);
+    if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
+    const pwForm = await superValidate(zod(pwSchema));
+    const pwlForm = await superValidate(zod(pwlSchema));
+    return { pwForm, pwlForm };
 };
 
 export const actions = {
@@ -171,23 +171,23 @@ export const actions = {
 };
 
 async function login(nhost: NhostClient, redirectTo: string, lang: string, provider: Provider) {
-  const { providerUrl } = await nhost.auth.signIn({
-    provider,
-    options: {
-      redirectTo,
-      // defaultRole: 'user',
-      // It's possible to give users a subset of allowed roles during signup.
-      // allowedRoles: ['me', 'user'],
-      locale: lang,
-      metadata: {
-        plan: 'free',
-        default_org: PUBLIC_DEFAULT_ORGANIZATION,
+    const { providerUrl } = await nhost.auth.signIn({
+      provider,
+      options: {
+        redirectTo,
+        // defaultRole: 'user',
+        // It's possible to give users a subset of allowed roles during signup.
+        // allowedRoles: ['me', 'user'],
+        locale: lang,
+        metadata: {
+          plan: 'free',
+          default_org: PUBLIC_DEFAULT_ORGANIZATION,
+        },
       },
-    },
-  });
+    });
 
-  log.debug(providerUrl);
-  if (providerUrl) {
-    redirectWithFlash(307, providerUrl);
-  }
+    log.debug(providerUrl);
+    if (providerUrl) {
+      redirectWithFlash(307, providerUrl);
+    }
 }

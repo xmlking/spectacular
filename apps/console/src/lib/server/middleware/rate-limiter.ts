@@ -16,8 +16,8 @@ export const rateLimiter = (async ({ event, resolve }) => {
     } = event;
 
     if (dev || !startsWith(pathname, rateLimitedPaths)) {
-      // bypass limiter for all protected routes.
-      return await resolve(event);
+        // bypass limiter for all protected routes.
+        return await resolve(event);
     }
 
     await limiter.cookieLimiter?.preflight(event);
@@ -26,16 +26,16 @@ export const rateLimiter = (async ({ event, resolve }) => {
     log.debug({ status });
 
     if (status.limited) {
-      event.setHeaders({
-        'Retry-After': status.retryAfter.toString(),
-      });
-      return new Response('Too many requests', {
-        status: 429,
-        headers: {
+        event.setHeaders({
           'Retry-After': status.retryAfter.toString(),
-        },
-        statusText: 'You have made too many requests, please try again later.',
-      });
+        });
+        return new Response('Too many requests', {
+          status: 429,
+          headers: {
+            'Retry-After': status.retryAfter.toString(),
+          },
+          statusText: 'You have made too many requests, please try again later.',
+        });
     }
 
     const response = await resolve(event);

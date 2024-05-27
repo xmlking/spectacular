@@ -20,8 +20,8 @@ const aiSchema = z.object({
 const log = new Logger('server:ai:ms');
 
 export const load = async () => {
-    const form = await superValidate(zod(aiSchema));
-    return { form };
+  const form = await superValidate(zod(aiSchema));
+  return { form };
 };
 
 export const actions = {
