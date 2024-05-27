@@ -87,13 +87,13 @@ If you want to make a GraphQL request using a specific role from `allowedRoles`,
 
 ```js
 await nhost.graphql.request(
-	QUERY,
-	{},
-	{
-		headers: {
-			'x-hasura-role': 'me',
-		},
-	},
+  QUERY,
+  {},
+  {
+    headers: {
+      'x-hasura-role': 'me',
+    },
+  },
 );
 ```
 
