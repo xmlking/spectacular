@@ -32,14 +32,7 @@ const sort = handler.getSort();
   class={cn(' ', className)}
   {...$$restProps}
 >
-  <div
-    class="flex"
-    style:justify-content={align === 'left'
-      ? 'flex-start'
-      : align === 'right'
-        ? 'flex-end'
-        : 'center'}
-  >
+  <div class="flex" style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}>
     <strong>
       <slot />
     </strong>

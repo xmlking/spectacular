@@ -1,3 +1,3 @@
 module.exports = {
-    extends: ['@spectacular/eslint-config/all'],
+  extends: ['@spectacular/eslint-config/all'],
 };

@@ -24,19 +24,8 @@ const pages = handler.getPages({ ellipsis: true });
 </script>
 
 <!-- Desktop buttons -->
-<section
-  class={cn(
-    'variant-ghost-surface btn-group hidden h-10 lg:block [&>*+*]:border-surface-500',
-    className,
-  )}
->
-  <button
-    type="button"
-    class:disabled={$pageNumber === 1}
-    on:click={() => handler.setPage('previous')}
-  >
-    ←
-  </button>
+<section class={cn('variant-ghost-surface btn-group hidden h-10 lg:block [&>*+*]:border-surface-500', className)}>
+  <button type="button" class:disabled={$pageNumber === 1} on:click={() => handler.setPage('previous')}> ← </button>
   {#each $pages as page}
     <button
       type="button"
@@ -47,11 +36,7 @@ const pages = handler.getPages({ ellipsis: true });
       {page ?? '...'}
     </button>
   {/each}
-  <button
-    type="button"
-    class:disabled={$pageNumber === $pageCount}
-    on:click={() => handler.setPage('next')}
-  >
+  <button type="button" class:disabled={$pageNumber === $pageCount} on:click={() => handler.setPage('next')}>
     →
   </button>
 </section>

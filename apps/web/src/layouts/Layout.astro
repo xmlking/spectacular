@@ -9,7 +9,7 @@ import AppFooter from '@components/AppFooter.astro';
 import AppHeader from '@components/AppHeader.astro';
 
 interface Props {
-    title: string;
+  title: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -19,49 +19,49 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="description" content="Template built with tailwindcss using Tailus blocks v2" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-        <SEO
-            title={title}
-            description="Astroship is a starter website template for Astro built with TailwindCSS."
-            canonical={canonicalURL}
-            twitter={{
-                creator: '@sumo',
-                site: '@spectacular',
-                card: 'summary_large_image',
-            }}
-            openGraph={{
-                basic: {
-                    url: canonicalURL,
-                    type: 'website',
-                    title: 'Starter Template for Astro',
-                    image: resolvedImageWithDomain,
-                },
-                image: {
-                    alt: 'Spectacular Homepage Screenshot',
-                },
-            }}
-        />
-        <ViewTransitions />
-    </head>
-    <ModeWatcher />
-    <body class="bg-white dark:bg-gray-900">
-        <AppHeader />
-        <slot />
-        <AppFooter />
-        <style>
-            html {
-                scroll-behavior: smooth;
-            }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Template built with tailwindcss using Tailus blocks v2" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <SEO
+      title={title}
+      description="Astroship is a starter website template for Astro built with TailwindCSS."
+      canonical={canonicalURL}
+      twitter={{
+        creator: '@sumo',
+        site: '@spectacular',
+        card: 'summary_large_image',
+      }}
+      openGraph={{
+        basic: {
+          url: canonicalURL,
+          type: 'website',
+          title: 'Starter Template for Astro',
+          image: resolvedImageWithDomain,
+        },
+        image: {
+          alt: 'Spectacular Homepage Screenshot',
+        },
+      }}
+    />
+    <ViewTransitions />
+  </head>
+  <ModeWatcher />
+  <body class="bg-white dark:bg-gray-900">
+    <AppHeader />
+    <slot />
+    <AppFooter />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
 
-            body {
-                margin: 0;
-            }
-        </style>
-    </body>
+      body {
+        margin: 0;
+      }
+    </style>
+  </body>
 </html>

@@ -10,11 +10,11 @@ An in-built auto-resize functionality for a textarea element using the scroll he
 
 ```svelte
 <script>
-	import { AutoResizeTextarea } from 'svelte-autoresize-textarea';
+  import { AutoResizeTextarea } from 'svelte-autoresize-textarea';
 </script>
 
 <template>
-	<AutoResizeTextarea :maxRows="10" :minRows="4" />
+  <AutoResizeTextarea :maxRows="10" :minRows="4" />
 </template>
 ```
 

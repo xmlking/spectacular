@@ -55,10 +55,7 @@ const didClickOnExcludedElement = (target: HTMLElement): boolean => {
 };
 
 const isOutsideEventHappen = (target: HTMLElement): boolean => {
-  if (
-    (includeSelf && wrapper.contains(target)) ||
-    (!wrapper.contains(target) && !didClickOnExcludedElement(target))
-  ) {
+  if ((includeSelf && wrapper.contains(target)) || (!wrapper.contains(target) && !didClickOnExcludedElement(target))) {
     return true;
   }
 
@@ -106,11 +103,7 @@ function castArray(value: any): any[] {
 </script>
 
 <!-- Have this to capture the events -->
-<svelte:window
-  on:pointerdown={handlePointerdown}
-  on:pointerup={handlePointerup}
-  on:keydown={handleKeydown}
-/>
+<svelte:window on:pointerdown={handlePointerdown} on:pointerup={handlePointerup} on:keydown={handleKeydown} />
 
 <svelte:element
   this={tag}

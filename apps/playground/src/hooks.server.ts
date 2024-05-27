@@ -13,7 +13,7 @@ import { i18n } from '$lib/i18n';
 
 // Setup logger
 if (!dev) {
-    Logger.enableProductionMode();
+  Logger.enableProductionMode();
 }
 
 const log = new Logger('hooks:server');
@@ -26,21 +26,21 @@ export const handle: Handle = sequence(i18n.handle(), theme);
  * TODO: Error monitoring via Sentry
  */
 export const handleError: HandleServerError = async ({ error, status, message /*event*/ }) => {
-    log.error('handleServerError:', status, message, error /*event*/);
+  log.error('handleServerError:', status, message, error /*event*/);
 
-    // example integration with https://sentry.io/
-    // Sentry.captureException(error, {
-    // 	extra: { event, errorId, status },
-    // });
+  // example integration with https://sentry.io/
+  // Sentry.captureException(error, {
+  // 	extra: { event, errorId, status },
+  // });
 
-    if (error instanceof ZodError) {
-        log.debug('ZodError...');
-    }
-    const err = error as App.Error;
-    return {
-        ...err,
-        message: message ?? err.message ?? 'Whoops!',
-    };
+  if (error instanceof ZodError) {
+    log.debug('ZodError...');
+  }
+  const err = error as App.Error;
+  return {
+    ...err,
+    message: message ?? err.message ?? 'Whoops!',
+  };
 };
 
 /**
@@ -48,8 +48,8 @@ export const handleError: HandleServerError = async ({ error, status, message /*
  * that happens inside a `load` or `action` function that runs on the server (or during pre-rendering).
  */
 export const handleFetch = async ({ event, request, fetch }) => {
-    console.debug('handleFetch:', event.url.toString());
-    /*
+  console.debug('handleFetch:', event.url.toString());
+  /*
 	if (request.url.startsWith('https://graph.microsoft.com')) {
 		request.headers.set('Authorization', `Bearer ${microsoft_token}`);
 	}
@@ -61,5 +61,5 @@ export const handleFetch = async ({ event, request, fetch }) => {
 		);
 	}
 	*/
-    return fetch(request);
+  return fetch(request);
 };

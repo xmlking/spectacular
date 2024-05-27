@@ -14,13 +14,12 @@ let locl: string = languageTag();
 
 <!-- TODO: make it pretty-->
 <RadioGroup>
-    {#each availableLanguageTags as l}
-        <RadioItem
-            bind:group={locl}
-            name="justify"
-            value={l}
-            on:click={() => goto(i18n.resolveRoute(i18n.route($page.url.pathname), l))}
-            >{l}</RadioItem
-        >
-    {/each}
+  {#each availableLanguageTags as l}
+    <RadioItem
+      bind:group={locl}
+      name="justify"
+      value={l}
+      on:click={() => goto(i18n.resolveRoute(i18n.route($page.url.pathname), l))}>{l}</RadioItem
+    >
+  {/each}
 </RadioGroup>

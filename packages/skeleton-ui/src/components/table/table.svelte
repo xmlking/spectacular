@@ -37,12 +37,7 @@ handler.on('change', () => {
 </script>
 
 <!-- FIXME: clientWidth `position:inherit` https://github.com/sveltejs/svelte/issues/4776 -->
-<section
-  bind:clientWidth
-  class={cn('space-y-4', className)}
-  style="position:inherit"
-  {...$$restProps}
->
+<section bind:clientWidth class={cn('space-y-4', className)} style="position:inherit" {...$$restProps}>
   <header class="flex justify-between">
     {#if search}
       <Search {handler} />

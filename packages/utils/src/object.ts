@@ -25,11 +25,7 @@ function stripEmptyProperties(obj) {
   for (const key in obj) {
     // eslint-disable-next-line no-prototype-builtins
     if (obj.hasOwnProperty(key)) {
-      if (
-        obj[key] === null ||
-        obj[key] === undefined ||
-        (typeof obj[key] === 'string' && obj[key].trim() === '')
-      ) {
+      if (obj[key] === null || obj[key] === undefined || (typeof obj[key] === 'string' && obj[key].trim() === '')) {
         delete obj[key];
       } else if (typeof obj[key] === 'object' && !(obj[key] instanceof Date)) {
         stripEmptyProperties(obj[key]); // Recursively check nested objects
@@ -44,11 +40,7 @@ function nullifyEmptyProperties(obj) {
   for (const key in obj) {
     // eslint-disable-next-line no-prototype-builtins
     if (obj.hasOwnProperty(key)) {
-      if (
-        obj[key] === null ||
-        obj[key] === undefined ||
-        (typeof obj[key] === 'string' && obj[key].trim() === '')
-      ) {
+      if (obj[key] === null || obj[key] === undefined || (typeof obj[key] === 'string' && obj[key].trim() === '')) {
         obj[key] = null;
       } else if (typeof obj[key] === 'object' && !(obj[key] instanceof Date)) {
         nullifyEmptyProperties(obj[key]); // Recursively check nested objects

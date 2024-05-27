@@ -119,9 +119,7 @@ class ProxyTextareaElement {
     // if not present
     if (ProxyTextareaElement._proxyTextareaElement === undefined) {
       ProxyTextareaElement._proxyTextareaElement = document.createElement('textarea');
-      const contextStyle = CONTEXT_STYLE.map(
-        (name) => `${name}:${styles.getPropertyValue(name)}`,
-      ).join(';');
+      const contextStyle = CONTEXT_STYLE.map((name) => `${name}:${styles.getPropertyValue(name)}`).join(';');
 
       ProxyTextareaElement._proxyTextareaElement.setAttribute(
         'style',
@@ -152,8 +150,7 @@ class ProxyTextareaElement {
 
     if (this._maxRows !== 0 || this._minRows !== 0) {
       ProxyTextareaElement._proxyTextareaElement!.value = '';
-      const singleRowHeight =
-        ProxyTextareaElement._proxyTextareaElement!.scrollHeight - paddingSize;
+      const singleRowHeight = ProxyTextareaElement._proxyTextareaElement!.scrollHeight - paddingSize;
       if (this._minRows !== 0) {
         let minHeight = singleRowHeight * this._minRows;
         if (isBorderBox(boxSizing)) {
