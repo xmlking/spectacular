@@ -7,19 +7,19 @@ import RowsPerPage from './table-rows-per-page.svelte';
 import Search from './table-search.svelte';
 
 export {
-	Root,
-	Head,
-	HeadFilter,
-	Pagination,
-	RowCount,
-	RowsPerPage,
-	Search,
-	//
-	Root as Datatable,
-	Head as TableHead,
-	HeadFilter as TableHeadFilter,
-	Pagination as TablePagination,
-	RowCount as TableRowCount,
-	RowsPerPage as TableRowsPerPage,
-	Search as TableSearch
+  Root,
+  Head,
+  HeadFilter,
+  Pagination,
+  RowCount,
+  RowsPerPage,
+  Search,
+  //
+  Root as Datatable,
+  Head as TableHead,
+  HeadFilter as TableHeadFilter,
+  Pagination as TablePagination,
+  RowCount as TableRowCount,
+  RowsPerPage as TableRowsPerPage,
+  Search as TableSearch,
 };

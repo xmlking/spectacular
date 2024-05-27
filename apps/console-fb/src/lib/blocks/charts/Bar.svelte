@@ -8,19 +8,19 @@ const yKey = 'year';
 </script>
 
 <div class="chart-container">
-	<LayerCake
-		padding={{ top: 10 }}
-		x={xKey}
-		y={yKey}
-		yScale={scaleBand().paddingInner([0.05]).round(true)}
-		yDomain={['1979', '1980', '1981', '1982', '1983']}
-		xDomain={[0, null]}
-		{data}
-	>
-		<Svg>
-			<Bar />
-		</Svg>
-	</LayerCake>
+    <LayerCake
+        padding={{ top: 10 }}
+        x={xKey}
+        y={yKey}
+        yScale={scaleBand().paddingInner([0.05]).round(true)}
+        yDomain={['1979', '1980', '1981', '1982', '1983']}
+        xDomain={[0, null]}
+        {data}
+    >
+        <Svg>
+            <Bar />
+        </Svg>
+    </LayerCake>
 </div>
 
 <style>
@@ -31,7 +31,7 @@ const yKey = 'year';
 		expand to fill it.
 	*/
 .chart-container {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 </style>

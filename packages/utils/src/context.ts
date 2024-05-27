@@ -4,9 +4,9 @@
  * Ref: https://github.com/KamenKolev/svelte-typed-context
  */
 import {
-	getContext as svelteGetContext,
-	setContext as svelteSetContext,
-	hasContext as svelteHasContext
+  getContext as svelteGetContext,
+  setContext as svelteSetContext,
+  hasContext as svelteHasContext,
 } from 'svelte';
 
 declare const isChecked: unique symbol;
@@ -18,12 +18,12 @@ declare const isChecked: unique symbol;
 export interface InjectionKey<T = unknown> {}
 
 export interface CheckedInjectionKey<T> extends InjectionKey<T> {
-	[isChecked]?: never;
+  [isChecked]?: never;
 }
 
 type getContext = {
-	<T>(key: CheckedInjectionKey<T>): T;
-	<T>(key: InjectionKey<T>): undefined | T;
+  <T>(key: CheckedInjectionKey<T>): T;
+  <T>(key: InjectionKey<T>): undefined | T;
 };
 type setContext = <T>(key: InjectionKey<T>, context: T) => void;
 type hasContext = <T>(key: InjectionKey<T>) => key is CheckedInjectionKey<T>;

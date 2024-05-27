@@ -1,11 +1,11 @@
-import { sequence } from '@sveltejs/kit/hooks';
-import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
-import { Logger } from '@spectacular/utils';
-import { ZodError } from 'zod';
-import { GraphQLError } from 'graphql';
 import { dev } from '$app/environment';
-import { auth, guard, houdini, theme } from '$lib/server/middleware';
 import { i18n } from '$lib/i18n';
+import { auth, guard, houdini, theme } from '$lib/server/middleware';
+import { Logger } from '@spectacular/utils';
+import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+import { GraphQLError } from 'graphql';
+import { ZodError } from 'zod';
 
 /**
  * Code in hooks.server.ts will run when the application starts up,
@@ -14,16 +14,16 @@ import { i18n } from '$lib/i18n';
 
 // Setup logger
 if (!dev) {
-	Logger.enableProductionMode();
+  Logger.enableProductionMode();
 }
 
 const log = new Logger('hooks:server');
 
 // for graceful termination
 function shutdownGracefully() {
-	// anything you need to clean up manually goes in here
-	log.info('Shutdown Gracefully ...');
-	process.exit();
+  // anything you need to clean up manually goes in here
+  log.info('Shutdown Gracefully ...');
+  process.exit();
 }
 process.on('SIGINT', shutdownGracefully); // Ctrl+C
 process.on('SIGTERM', shutdownGracefully); // docker stop
@@ -36,24 +36,24 @@ export const handle: Handle = sequence(i18n.handle(), auth, guard, houdini, them
  * TODO: Error monitoring via Sentry
  */
 export const handleError: HandleServerError = async ({ error, status, message /*event*/ }) => {
-	log.error('handleServerError:', status, message, error /*event*/);
+  log.error('handleServerError:', status, message, error /*event*/);
 
-	// example integration with https://sentry.io/
-	// Sentry.captureException(error, {
-	// 	extra: { event, errorId, status },
-	// });
+  // example integration with https://sentry.io/
+  // Sentry.captureException(error, {
+  // 	extra: { event, errorId, status },
+  // });
 
-	if (error instanceof ZodError) {
-		log.debug('ZodError...');
-	}
-	if (error instanceof GraphQLError) {
-		log.debug('GraphQLError...');
-	}
-	const err = error as App.Error;
-	return {
-		...err,
-		message: message ?? err.message ?? 'Whoops!'
-	};
+  if (error instanceof ZodError) {
+    log.debug('ZodError...');
+  }
+  if (error instanceof GraphQLError) {
+    log.debug('GraphQLError...');
+  }
+  const err = error as App.Error;
+  return {
+    ...err,
+    message: message ?? err.message ?? 'Whoops!',
+  };
 };
 
 /**
@@ -61,9 +61,9 @@ export const handleError: HandleServerError = async ({ error, status, message /*
  * that happens inside a `load` or `action` function that runs on the server (or during pre-rendering).
  */
 export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
-	log.debug(`HandleFetch: pageUrl: ${event.url.toString()} clientAddress: ${event.getClientAddress()}`);
+  log.debug(`HandleFetch: pageUrl: ${event.url.toString()} clientAddress: ${event.getClientAddress()}`);
 
-	/*
+  /*
 	if (request.url.startsWith('https://graph.microsoft.com')) {
 		request.headers.set('Authorization', `Bearer ${microsoft_token}`);
 	}
@@ -75,5 +75,5 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 		);
 	}
 	*/
-	return fetch(request);
+  return fetch(request);
 };

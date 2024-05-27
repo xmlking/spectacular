@@ -7,11 +7,11 @@ const yKey = 'myY';
 </script>
 
 <div class="chart-container">
-	<LayerCake padding={{ top: 20, bottom: 20 }} x={xKey} y={yKey} {data}>
-		<Svg>
-			<AxisX baseline={true} />
-		</Svg>
-	</LayerCake>
+    <LayerCake padding={{ top: 20, bottom: 20 }} x={xKey} y={yKey} {data}>
+        <Svg>
+            <AxisX baseline={true} />
+        </Svg>
+    </LayerCake>
 </div>
 
 <style>
@@ -22,7 +22,7 @@ const yKey = 'myY';
 		expand to fill it.
 	*/
 .chart-container {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 </style>

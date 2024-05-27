@@ -6,9 +6,9 @@ export let data;
 <pre>{JSON.stringify(data.quick, null, 2)}</pre>
 <h2>Lazy</h2>
 {#await data.greeting.promise}
-	loading...
+    loading...
 {:then value}
-	<pre>{JSON.stringify(value, null, 2)}</pre>
+    <pre>{JSON.stringify(value, null, 2)}</pre>
 {:catch error}
-	ERROR : {error}
+    ERROR : {error}
 {/await}

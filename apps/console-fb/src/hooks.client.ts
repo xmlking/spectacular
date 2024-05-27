@@ -4,13 +4,13 @@ import { dev } from '$app/environment';
 
 // Setup logger
 if (!dev) {
-	Logger.enableProductionMode();
+    Logger.enableProductionMode();
 }
 
 const log = new Logger('hooks:client');
 // Initialize the Sentry SDK here
 if (!dev) {
-	// TODO
+    // TODO
 }
 
 /**
@@ -18,10 +18,10 @@ if (!dev) {
  * TODO: Error monitoring via Sentry
  */
 export const handleError: HandleClientError = ({ error }) => {
-	log.error('handleClientError:', error);
-	const err = error as App.Error;
-	return {
-		message: err.message ?? 'Whoops!',
-		context: err.context
-	};
+    log.error('handleClientError:', error);
+    const err = error as App.Error;
+    return {
+        message: err.message ?? 'Whoops!',
+        context: err.context,
+    };
 };

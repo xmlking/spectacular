@@ -6,7 +6,7 @@ type T = Record<string, unknown>;
 <script lang="ts">
 import { Helper, Label, Select } from 'flowbite-svelte';
 import type { SelectOptionType } from 'flowbite-svelte';
-import type { FormPathLeaves , SuperForm } from 'sveltekit-superforms';
+import type { FormPathLeaves, SuperForm } from 'sveltekit-superforms';
 import { formFieldProxy } from 'sveltekit-superforms';
 import { getFormContext } from './forms';
 
@@ -22,19 +22,19 @@ const { path, value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 <Label color={$errors ? 'red' : 'gray'} for={field} class={labelClasses}>
-	{label ?? path}
+    {label ?? path}
 </Label>
 <Select
-	name={field}
-	bind:value={$value}
-	data-invalid={$errors}
-	{items}
-	aria-invalid={Boolean($errors)}
-	aria-errormessage={Array($errors).join('. ')}
-	aria-required={$constraints?.required}
-	{...$constraints}
-	{...$$restProps}
+    name={field}
+    bind:value={$value}
+    data-invalid={$errors}
+    {items}
+    aria-invalid={Boolean($errors)}
+    aria-errormessage={Array($errors).join('. ')}
+    aria-required={$constraints?.required}
+    {...$constraints}
+    {...$$restProps}
 />
 {#if $errors}
-	<Helper class="mt-2" color="red">{$errors}</Helper>
+    <Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

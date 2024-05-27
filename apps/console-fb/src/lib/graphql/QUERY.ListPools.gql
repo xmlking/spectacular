@@ -1,20 +1,20 @@
 query ListPools($limit: Int = 50, $offset: Int = 0, $displayName: String = "%%")
 @cache(policy: NetworkOnly) {
-	pools(
-		limit: $limit
-		offset: $offset
-		order_by: [{ updatedAt: desc_nulls_last }]
-		where: { displayName: { _like: $displayName } }
-	) {
-		tags
-		createdBy
-		description
-		displayName
-		organization
-		updatedBy
-		createdAt
-		updatedAt
-		annotations
-		id
-	}
+    pools(
+        limit: $limit
+        offset: $offset
+        order_by: [{ updatedAt: desc_nulls_last }]
+        where: { displayName: { _like: $displayName } }
+    ) {
+        tags
+        createdBy
+        description
+        displayName
+        organization
+        updatedBy
+        createdAt
+        updatedAt
+        annotations
+        id
+    }
 }

@@ -5,7 +5,7 @@ description: 'Ornare cum cursus laoreet sagittis nunc fusce posuere per euismod 
 image:
   {
     src: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?&fit=crop&w=430&h=240',
-    alt: 'frontend master'
+    alt: 'frontend master',
   }
 publishedAt: '2022-11-07 15:39'
 category: 'Tutorials'

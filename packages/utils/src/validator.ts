@@ -10,12 +10,12 @@ import { fromZodError } from 'zod-validation-error';
  * @throws {fromZodError} - Throws an error if the data fails to parse according to the schema.
  */
 export async function zParse<T extends AnyZodObject>(
-	schema: T,
-	data: unknown
+  schema: T,
+  data: unknown,
 ): Promise<z.infer<T>> {
-	try {
-		return await schema.parseAsync(data);
-	} catch (error) {
-		throw fromZodError(error as ZodError);
-	}
+  try {
+    return await schema.parseAsync(data);
+  } catch (error) {
+    throw fromZodError(error as ZodError);
+  }
 }

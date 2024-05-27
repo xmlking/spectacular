@@ -1,7 +1,7 @@
 <!-- Layout: (dashboard) -->
 <script lang="ts">
-import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
+import { onMount } from 'svelte';
 
 export let data;
 
@@ -10,12 +10,12 @@ export let data;
  * Otherwise all authorized graphql queries will get errors.
  */
 onMount(async () => {
-	if (data.user == null) {
-		goto('/signin');
-	}
+    if (data.user == null) {
+        goto('/signin');
+    }
 });
 </script>
 
 {#if data.user}
-	<slot />
+    <slot />
 {/if}

@@ -7,35 +7,35 @@
 @tailwind variants;
 
 @layer base {
-	/* modern theme */
-	@font-face {
-		font-family: 'Quicksand';
-		src: url('/fonts/Quicksand.ttf');
-		font-display: swap;
-	}
-	/* rocket theme */
-	@font-face {
-		font-family: 'Space Grotesk';
-		src: url('/fonts/SpaceGrotesk.ttf');
-		font-display: swap;
-	}
-	/* seafoam theme */
-	@font-face {
-		font-family: 'Playfair Display';
-		src: url('/fonts/PlayfairDisplay-Italic.ttf');
-		font-display: swap;
-	}
-	/* vintage theme */
-	@font-face {
-		font-family: 'Abril Fatface';
-		src: url('/fonts/AbrilFatface.ttf');
-		font-display: swap;
-	}
+  /* modern theme */
+  @font-face {
+    font-family: 'Quicksand';
+    src: url('/fonts/Quicksand.ttf');
+    font-display: swap;
+  }
+  /* rocket theme */
+  @font-face {
+    font-family: 'Space Grotesk';
+    src: url('/fonts/SpaceGrotesk.ttf');
+    font-display: swap;
+  }
+  /* seafoam theme */
+  @font-face {
+    font-family: 'Playfair Display';
+    src: url('/fonts/PlayfairDisplay-Italic.ttf');
+    font-display: swap;
+  }
+  /* vintage theme */
+  @font-face {
+    font-family: 'Abril Fatface';
+    src: url('/fonts/AbrilFatface.ttf');
+    font-display: swap;
+  }
 
-	html,
-	body {
-		@apply h-full overflow-hidden;
-	}
+  html,
+  body {
+    @apply h-full overflow-hidden;
+  }
 }
 
 /* TODO */
@@ -44,56 +44,56 @@ https://github.com/sharmapukar217/onblockit/blob/1d27bf8ef54394efb6e55651a72d6af
 https://github.com/pevey/saluna/blob/0258967cdcae3bfdfb61f5fa991fcc4921b7290c/src/app.pcss#L2 */
 
 @layer components {
-	/* Page Styles */
-	/* Use these to define common page styles. */
-	.page-container {
-		@apply page-padding container mx-auto space-y-10;
-	}
-	.page-container-wide {
-		@apply mx-auto w-full max-w-7xl space-y-10;
-	}
-	.page-container-aside {
-		@apply mx-auto w-full max-w-4xl space-y-10;
-	}
-	.page-padding {
-		@apply p-4 md:p-10;
-	}
-	.page-section {
-		@apply space-y-4;
-	}
+  /* Page Styles */
+  /* Use these to define common page styles. */
+  .page-container {
+    @apply page-padding container mx-auto space-y-10;
+  }
+  .page-container-wide {
+    @apply mx-auto w-full max-w-7xl space-y-10;
+  }
+  .page-container-aside {
+    @apply mx-auto w-full max-w-4xl space-y-10;
+  }
+  .page-padding {
+    @apply p-4 md:p-10;
+  }
+  .page-section {
+    @apply space-y-4;
+  }
 
-	/* apply skeleton FORM styles */
-	form {
-		input[type] {
-			&[data-fs-error='true'] {
-				@apply input-error;
-			}
-		}
-		input[type='email'] {
-			@apply input;
-			&[data-fs-error='true'] {
-				@apply input-error;
-			}
-		}
-		input[type='file'] {
-			@apply input;
-		}
-		input[type='checkbox'] {
-			@apply checkbox;
-		}
-		input[type='radio'] {
-			@apply radio;
-		}
-		label {
-			@apply label;
-		}
-		textarea {
-			@apply textarea;
-		}
-		select {
-			@apply select;
-		}
-	}
+  /* apply skeleton FORM styles */
+  form {
+    input[type] {
+      &[data-fs-error='true'] {
+        @apply input-error;
+      }
+    }
+    input[type='email'] {
+      @apply input;
+      &[data-fs-error='true'] {
+        @apply input-error;
+      }
+    }
+    input[type='file'] {
+      @apply input;
+    }
+    input[type='checkbox'] {
+      @apply checkbox;
+    }
+    input[type='radio'] {
+      @apply radio;
+    }
+    label {
+      @apply label;
+    }
+    textarea {
+      @apply textarea;
+    }
+    select {
+      @apply select;
+    }
+  }
 }
 
 /* @layer utilities {

@@ -2,14 +2,14 @@
 // TODO https://testing-library.com/docs/svelte-testing-library/setup/
 // TODO https://www.freecodecamp.org/news/how-to-do-test-driven-development-with-svelte-and-vitest/
 
-import { describe, it, beforeEach } from 'vitest';
+import { beforeEach, describe, it } from 'vitest';
 // import { render, screen, fireEvent } from '@testing-library/svelte';
 
 describe('signin form', () => {
-	beforeEach(() => {});
+    beforeEach(() => {});
 
-	it('renders page', async () => {});
-	it('with generic error message', async () => {});
-	it('with unverified email error message', async () => {});
-	it('success and redirect', async () => {});
+    it('renders page', async () => {});
+    it('with generic error message', async () => {});
+    it('with unverified email error message', async () => {});
+    it('success and redirect', async () => {});
 });

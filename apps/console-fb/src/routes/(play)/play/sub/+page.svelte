@@ -3,17 +3,17 @@ import { onDestroy, onMount } from 'svelte';
 import { graphql } from '$houdini';
 
 const schedules = graphql(`
-	subscription StreamPolicy {
-		policies(
-			order_by: [{ updatedAt: desc_nulls_last }]
-			limit: 50
-			offset: 0
-			where: { updatedAt: { _is_null: true } }
-		) {
-			id
-			active
-		}
-	}
+    subscription StreamPolicy {
+        policies(
+            order_by: [{ updatedAt: desc_nulls_last }]
+            limit: 50
+            offset: 0
+            where: { updatedAt: { _is_null: true } }
+        ) {
+            id
+            active
+        }
+    }
 `);
 
 // const livePolicy = graphql(`
@@ -26,24 +26,24 @@ const schedules = graphql(`
 // `);
 
 onMount(() => {
-	console.log('sub Mount');
-	schedules.listen();
+    console.log('sub Mount');
+    schedules.listen();
 });
 onDestroy(() => {
-	console.log('sub Destroy');
-	schedules.unlisten();
+    console.log('sub Destroy');
+    schedules.unlisten();
 });
 $: console.log('$schedules.data on load:', $schedules.data);
 </script>
 
 {#if $schedules.fetching}
-	loading...
+    loading...
 {:else if $schedules.errors?.length}
-	{JSON.stringify($schedules)}
+    {JSON.stringify($schedules)}
 {:else}
-	{JSON.stringify($schedules.data)}
+    {JSON.stringify($schedules.data)}
 {/if}
 
 {#if $schedules.data}
-	<pre>{JSON.stringify($schedules.data, null, 4)}</pre>
+    <pre>{JSON.stringify($schedules.data, null, 4)}</pre>
 {/if}

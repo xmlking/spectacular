@@ -1,55 +1,55 @@
 {
-	"$schema": "https://turbo.build/schema.json",
-	"extends": ["//"],
-	"pipeline": {
-		"check:watch": {
-			"persistent": true,
-			"outputs": [".svelte-kit/**"]
-		},
-		"check": {
-			"outputs": [".svelte-kit/**"]
-		},
-		"sync": {
-			"outputs": [".svelte-kit/**"]
-		},
-		"dev": {
-			"cache": false,
-			"persistent": true,
-			"dotEnv": [".env", ".secrets"]
-		},
-		"generate": {
-			"outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
-		},
-		"build": {
-			"dependsOn": ["generate"],
-			"outputs": [
-				".svelte-kit/**",
-				".vercel/**",
-				"$houdini/**",
-				"schema.graphql",
-				"src/i18n"
-			],
-			"env": [
-				"VERCEL",
-				"VERCEL_URL",
-				"VERCEL_ENV",
-				"BUILD_VERSION",
-				"BUILD_TIME",
-				"BUN_ENV",
-				"SW_DEV",
-				"npm_package_version"
-			]
-		},
-		"preview": {},
-		"test:unit:coverage": {
-			"dependsOn": ["sync", "^test:unit:coverage"]
-		},
-		"test:integration": {
-			"dependsOn": ["build"]
-		},
-		"lang:lint": {},
-		"lang:validate": {},
-		"lang:translate": {},
-		"lang:studio": {}
-	}
+    "$schema": "https://turbo.build/schema.json",
+    "extends": ["//"],
+    "pipeline": {
+        "check:watch": {
+            "persistent": true,
+            "outputs": [".svelte-kit/**"]
+        },
+        "check": {
+            "outputs": [".svelte-kit/**"]
+        },
+        "sync": {
+            "outputs": [".svelte-kit/**"]
+        },
+        "dev": {
+            "cache": false,
+            "persistent": true,
+            "dotEnv": [".env", ".secrets"]
+        },
+        "generate": {
+            "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
+        },
+        "build": {
+            "dependsOn": ["generate"],
+            "outputs": [
+                ".svelte-kit/**",
+                ".vercel/**",
+                "$houdini/**",
+                "schema.graphql",
+                "src/i18n"
+            ],
+            "env": [
+                "VERCEL",
+                "VERCEL_URL",
+                "VERCEL_ENV",
+                "BUILD_VERSION",
+                "BUILD_TIME",
+                "BUN_ENV",
+                "SW_DEV",
+                "npm_package_version"
+            ]
+        },
+        "preview": {},
+        "test:unit:coverage": {
+            "dependsOn": ["sync", "^test:unit:coverage"]
+        },
+        "test:integration": {
+            "dependsOn": ["build"]
+        },
+        "lang:lint": {},
+        "lang:validate": {},
+        "lang:translate": {},
+        "lang:studio": {}
+    }
 }

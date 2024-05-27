@@ -7,19 +7,19 @@ import { CachePolicy, GetDeviceStore } from '$houdini';
 
 const getDeviceStore = new GetDeviceStore();
 export const load = async (event) => {
-	const {
-		params: { id }
-	} = event;
-	const variables = { id }; // TODO: validate `id`
-	const { errors, data } = await getDeviceStore.fetch({
-		event,
-		blocking: true,
-		policy: CachePolicy.NetworkOnly,
-		variables
-	});
-	if (errors) error(400, errors[0] as GraphQLError);
-	const device = data?.devices_by_pk;
-	if (!device) error(404, 'Device not found');
-	const form = await superValidate(device, zod(schema));
-	return { form };
+    const {
+        params: { id },
+    } = event;
+    const variables = { id }; // TODO: validate `id`
+    const { errors, data } = await getDeviceStore.fetch({
+        event,
+        blocking: true,
+        policy: CachePolicy.NetworkOnly,
+        variables,
+    });
+    if (errors) error(400, errors[0] as GraphQLError);
+    const device = data?.devices_by_pk;
+    if (!device) error(404, 'Device not found');
+    const form = await superValidate(device, zod(schema));
+    return { form };
 };

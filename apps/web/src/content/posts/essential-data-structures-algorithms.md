@@ -5,7 +5,7 @@ description: 'Ornare cum cursus laoreet sagittis nunc fusce posuere per euismod 
 image:
   {
     src: 'https://images.unsplash.com/photo-1627163439134-7a8c47e08208?&fit=crop&w=430&h=240',
-    alt: 'data structures & algorithms'
+    alt: 'data structures & algorithms',
   }
 publishedAt: '2022-11-09 16:39'
 category: 'Courses'

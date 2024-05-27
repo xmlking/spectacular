@@ -19,37 +19,37 @@ injectSpeedInsights();
 setupViewTransition();
 
 onMount(async () => {
-	if (pwaInfo) {
-		const { registerSW } = await import('virtual:pwa-register');
-		registerSW({
-			immediate: true,
-			onRegistered(r) {
-				// uncomment following code if you want check for updates
-				// r && setInterval(() => {
-				//    console.log('Checking for sw update')
-				//    r.update()
-				// }, 20000 /* 20s for testing purposes */)
-				console.log(`SW Registered: ${r}`);
-			},
-			onRegisterError(error) {
-				console.log('SW registration error', error);
-			}
-		});
-	}
+    if (pwaInfo) {
+        const { registerSW } = await import('virtual:pwa-register');
+        registerSW({
+            immediate: true,
+            onRegistered(r) {
+                // uncomment following code if you want check for updates
+                // r && setInterval(() => {
+                //    console.log('Checking for sw update')
+                //    r.update()
+                // }, 20000 /* 20s for testing purposes */)
+                console.log(`SW Registered: ${r}`);
+            },
+            onRegisterError(error) {
+                console.log('SW registration error', error);
+            },
+        });
+    }
 });
 
 $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
 
 <svelte:head>
-	{#if pwaAssetsHead.themeColor}
-		<meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
-	{/if}
-	{#each pwaAssetsHead.links as link}
-		<link {...link} />
-	{/each}
-	<!-- eslint-disable svelte/no-at-html-tags  -->
-	{@html webManifest}
+    {#if pwaAssetsHead.themeColor}
+        <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
+    {/if}
+    {#each pwaAssetsHead.links as link}
+        <link {...link} />
+    {/each}
+    <!-- eslint-disable svelte/no-at-html-tags  -->
+    {@html webManifest}
 </svelte:head>
 
 <Toasts placement="bottom-right" />
@@ -57,7 +57,7 @@ $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 <slot />
 
 {#await import('$lib/components/ReloadPrompt.svelte') then { default: ReloadPrompt }}
-	<ReloadPrompt />
+    <ReloadPrompt />
 {/await}
 
 <style lang="postcss">
@@ -76,9 +76,9 @@ $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 
 /* Or, slide from right */
 :global(:root::view-transition-old(root)) {
-	animation: 500ms ease-out both fade-out;
+    animation: 500ms ease-out both fade-out;
 }
 :global(:root::view-transition-new(root)) {
-	animation: 500ms ease-out both slide-from-left;
+    animation: 500ms ease-out both slide-from-left;
 }
 </style>

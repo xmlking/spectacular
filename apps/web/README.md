@@ -59,6 +59,7 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm run astro -- --help` | Get help using the Astro CLI                     |
 
 ### Maintenance
+
 ```
 # Recommended:
 npx @astrojs/upgrade

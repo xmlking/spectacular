@@ -7,6 +7,6 @@ $: classesBase = `${cBase} ${$$props.class ?? ''}`;
 </script>
 
 <div class={classesBase}>
-	<!-- Content -->
-	<slot />
+    <!-- Content -->
+    <slot />
 </div>

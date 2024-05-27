@@ -14,18 +14,18 @@ const secret = new TextEncoder().encode(envPri.HASURA_GRAPHQL_JWT_SECRET_KEY);
 const alg = 'HS256';
 
 export async function getToken(cookies: Cookies, raw = false) {
-	const token = cookies.get(cookieName);
-	if (raw) return token;
-	return await decode({ salt: cookieName, secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY, token });
+    const token = cookies.get(cookieName);
+    if (raw) return token;
+    return await decode({ salt: cookieName, secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY, token });
 }
 
 export async function getSignedToken(cookies: Cookies) {
-	const decodedToken = await getToken(cookies);
-	if (decodedToken == null || typeof decodedToken === 'string') return null;
-	const signedToken = new SignJWT(decodedToken)
-		// .setExpirationTime('1d')
-		// .setIssuedAt()
-		.setProtectedHeader({ alg })
-		.sign(secret);
-	return signedToken;
+    const decodedToken = await getToken(cookies);
+    if (decodedToken == null || typeof decodedToken === 'string') return null;
+    const signedToken = new SignJWT(decodedToken)
+        // .setExpirationTime('1d')
+        // .setIssuedAt()
+        .setProtectedHeader({ alg })
+        .sign(secret);
+    return signedToken;
 }

@@ -2,28 +2,28 @@ import fetch from 'cross-fetch';
 import envPub from '$lib/variables/variables';
 
 interface Post {
-	userId: number;
-	id: number;
-	title: string;
-	body: string;
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
 }
 
 export const fetchPosts = async (): Promise<Post> => {
-	const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-	return res.json();
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    return res.json();
 };
 
 // in-source testing
 if (import.meta.vitest) {
-	const { it, expect } = import.meta.vitest;
+    const { it, expect } = import.meta.vitest;
 
-	it.runIf(envPub.PUBLIC_GRAPHQL_ENDPOINT)('only run if secrets enabled', () => {
-		console.log('PUBLIC_GRAPHQL_ENDPOINT is provided');
-	});
+    it.runIf(envPub.PUBLIC_GRAPHQL_ENDPOINT)('only run if secrets enabled', () => {
+        console.log('PUBLIC_GRAPHQL_ENDPOINT is provided');
+    });
 
-	it('Test fetchPosts', async () => {
-		const { posts } = await import('../../mocks/handlers');
-		const result = await fetchPosts();
-		expect(result).toEqual(posts);
-	});
+    it('Test fetchPosts', async () => {
+        const { posts } = await import('../../mocks/handlers');
+        const result = await fetchPosts();
+        expect(result).toEqual(posts);
+    });
 }

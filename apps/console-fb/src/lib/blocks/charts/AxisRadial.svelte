@@ -10,17 +10,17 @@ const padding = 35;
 </script>
 
 <div class="chart-container">
-	<LayerCake
-		padding={{ top: padding, right: padding, bottom: padding, left: padding }}
-		x={xKey}
-		xDomain={[0, 10]}
-		xRange={({ height }) => [0, height / 2]}
-		{data}
-	>
-		<Svg>
-			<AxisRadial />
-		</Svg>
-	</LayerCake>
+    <LayerCake
+        padding={{ top: padding, right: padding, bottom: padding, left: padding }}
+        x={xKey}
+        xDomain={[0, 10]}
+        xRange={({ height }) => [0, height / 2]}
+        {data}
+    >
+        <Svg>
+            <AxisRadial />
+        </Svg>
+    </LayerCake>
 </div>
 
 <style>
@@ -31,7 +31,7 @@ const padding = 35;
 		expand to fill it.
 	*/
 .chart-container {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 </style>

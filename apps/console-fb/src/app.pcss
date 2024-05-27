@@ -7,67 +7,67 @@
 /* Follow: https://tailwindcss.com/docs/adding-custom-styles */
 
 @layer base {
-	/* FIXME: use https://tailwindcss.com/docs/typography-plugin  `prose dark:prose-invert` */
-	p,
-	h1,
-	h2,
-	h3 {
-		@apply dark:text-white;
-	}
+    /* FIXME: use https://tailwindcss.com/docs/typography-plugin  `prose dark:prose-invert` */
+    p,
+    h1,
+    h2,
+    h3 {
+        @apply dark:text-white;
+    }
 
-	pre {
-		//background-color: rgb(242, 242, 242);
-		white-space: pre-wrap;
-		width: 100%;
-	}
+    pre {
+        //background-color: rgb(242, 242, 242);
+        white-space: pre-wrap;
+        width: 100%;
+    }
 
-	/*!* Global CSS Variables *!*/
-	:root {
-		--column-content-hight: 445px;
-		//--column-test-muted: theme(colors.rose.300);
-		//--column-test-muted: theme(colors.rose.300 / 25%);
-	}
+    /*!* Global CSS Variables *!*/
+    :root {
+        --column-content-hight: 445px;
+        //--column-test-muted: theme(colors.rose.300);
+        //--column-test-muted: theme(colors.rose.300 / 25%);
+    }
 
-	,
+    ,
 
 	/*** view-transition animation keyframes ***/
 	@keyframes fade-out {
-		to {
-			opacity: 0;
-		}
-	}
-	@keyframes slide-from-left {
-		from {
-			transform: translateX(-100%);
-			/* transform: translateX(-100%) scale(1.2);
+        to {
+            opacity: 0;
+        }
+    }
+    @keyframes slide-from-left {
+        from {
+            transform: translateX(-100%);
+            /* transform: translateX(-100%) scale(1.2);
 			box-shadow: var(--shadow-elevation-high); */
-		}
-	}
-	@keyframes slide-from-right {
-		from {
-			transform: translateX(100%);
-			/* transform: translateX(100%) scale(1.2);
+        }
+    }
+    @keyframes slide-from-right {
+        from {
+            transform: translateX(100%);
+            /* transform: translateX(100%) scale(1.2);
 			box-shadow: var(--shadow-elevation-high); */
-		}
-	}
+        }
+    }
 }
 
 @layer components {
-	/* for use in  apps/console/src/lib/components/form/Radio.svelte */
-	.checked-label:has(input:checked) {
-		@apply bg-primary-700 text-white;
-	}
+    /* for use in  apps/console/src/lib/components/form/Radio.svelte */
+    .checked-label:has(input:checked) {
+        @apply bg-primary-700 text-white;
+    }
 
-	.logo img {
-		width: 15%;
-		aspect-ration: 3/2;
-		object-fit: contain;
-		mix-blend-mode: color-burn;
-	}
+    .logo img {
+        width: 15%;
+        aspect-ration: 3/2;
+        object-fit: contain;
+        mix-blend-mode: color-burn;
+    }
 }
 
 @layer utilities {
-	.content-auto1 {
-		content-visibility: auto;
-	}
+    .content-auto1 {
+        content-visibility: auto;
+    }
 }

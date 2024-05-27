@@ -1,20 +1,21 @@
 <script lang="ts">
-import { onDestroy } from "svelte";
-import type { HTMLTextareaAttributes } from 'svelte/elements'
+import { onDestroy } from 'svelte';
+import type { HTMLTextareaAttributes } from 'svelte/elements';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
 interface $$Props extends HTMLTextareaAttributes {
   value?: any;
   minRows?: number;
   maxRows?: number;
 }
 
-export let value = '';
-export let minRows: number | undefined = undefined;
-export let maxRows: number | undefined = undefined;
+export const value = '';
+export const minRows: number | undefined = undefined;
+export const maxRows: number | undefined = undefined;
 
-import ProxyTextareaElement from "./core.js";
+import ProxyTextareaElement from './core.js';
 
-let element: HTMLTextAreaElement | null = null;
+const element: HTMLTextAreaElement | null = null;
 
 const instance = new ProxyTextareaElement();
 
@@ -26,7 +27,18 @@ $: {
 onDestroy(() => {
   instance.cleanUp();
 });
-
 </script>
 
-<textarea {...$$props} bind:this={element} bind:value={value} on:blur on:change on:click on:focus on:input on:keydown on:keypress on:keyup />
+<textarea
+  {...$$props}
+  bind:this={element}
+  bind:value
+  on:blur
+  on:change
+  on:click
+  on:focus
+  on:input
+  on:keydown
+  on:keypress
+  on:keyup
+/>

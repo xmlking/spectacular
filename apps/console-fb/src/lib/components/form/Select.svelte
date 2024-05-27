@@ -6,7 +6,7 @@ type T = Record<string, unknown>;
 <script lang="ts">
 import { Helper, Label } from 'flowbite-svelte';
 import type { SelectOptionType } from 'flowbite-svelte';
-import type { FormPathLeaves , SuperForm } from 'sveltekit-superforms';
+import type { FormPathLeaves, SuperForm } from 'sveltekit-superforms';
 import { formFieldProxy } from 'sveltekit-superforms';
 import { getFormContext } from './forms';
 
@@ -22,25 +22,25 @@ const { path, value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 {#if label}
-	<Label color={$errors ? 'red' : 'gray'} for={field} class={labelClasses}>{label ?? path}</Label>
+    <Label color={$errors ? 'red' : 'gray'} for={field} class={labelClasses}>{label ?? path}</Label>
 {/if}
 <select
-	class="select-bordered select w-full focus:outline-none"
-	name={field}
-	bind:value={$value}
-	data-invalid={$errors}
-	aria-invalid={Boolean($errors)}
-	aria-errormessage={Array($errors).join('. ')}
-	aria-required={$constraints?.required}
-	{...$constraints}
-	{...$$restProps}
+    class="select-bordered select w-full focus:outline-none"
+    name={field}
+    bind:value={$value}
+    data-invalid={$errors}
+    aria-invalid={Boolean($errors)}
+    aria-errormessage={Array($errors).join('. ')}
+    aria-required={$constraints?.required}
+    {...$constraints}
+    {...$$restProps}
 >
-	{#each items as item}
-		<option value={item.value}>
-			{item.name}
-		</option>
-	{/each}
+    {#each items as item}
+        <option value={item.value}>
+            {item.name}
+        </option>
+    {/each}
 </select>
 {#if $errors}
-	<Helper class="mt-2" color="red">{$errors}</Helper>
+    <Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

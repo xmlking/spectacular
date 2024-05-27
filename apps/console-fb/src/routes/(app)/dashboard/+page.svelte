@@ -3,8 +3,8 @@ import { Stats3 } from '$lib/blocks/stats';
 </script>
 
 <svelte:head>
-	<title>Dashboard</title>
-	<meta name="description" content="Dashboard Stats" />
+    <title>Dashboard</title>
+    <meta name="description" content="Dashboard Stats" />
 </svelte:head>
 
 <Stats3 />

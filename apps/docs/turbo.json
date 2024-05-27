@@ -1,30 +1,30 @@
 {
-	"$schema": "https://turbo.build/schema.json",
-	"extends": ["//"],
-	"pipeline": {
-		"dev": {
-			"dotEnv": [".env", ".secrets"],
-			"cache": false,
-			"persistent": true
-		},
-		"build": {
-			"outputs": ["dist/**", ".vercel/output/**"],
-			"env": [
-				"VERCEL",
-				"VERCEL_URL",
-				"VERCEL_ENV",
-				"BUILD_VERSION",
-				"BUILD_TIME",
-				"BUN_ENV",
-				"SW_DEV",
-				"npm_package_version",
-				"GH_SITE_URL",
-				"GH_BASE_PATH",
-				"GITHUB_ACTIONS",
-				"CI"
-			]
-		},
-		"astro": {},
-		"preview": {}
-	}
+    "$schema": "https://turbo.build/schema.json",
+    "extends": ["//"],
+    "pipeline": {
+        "dev": {
+            "dotEnv": [".env", ".secrets"],
+            "cache": false,
+            "persistent": true
+        },
+        "build": {
+            "outputs": ["dist/**", ".vercel/output/**"],
+            "env": [
+                "VERCEL",
+                "VERCEL_URL",
+                "VERCEL_ENV",
+                "BUILD_VERSION",
+                "BUILD_TIME",
+                "BUN_ENV",
+                "SW_DEV",
+                "npm_package_version",
+                "GH_SITE_URL",
+                "GH_BASE_PATH",
+                "GITHUB_ACTIONS",
+                "CI"
+            ]
+        },
+        "astro": {},
+        "preview": {}
+    }
 }

@@ -5,7 +5,7 @@ type T = Record<string, unknown>;
 <!-- <script lang="ts" generics="T extends Record<string, unknown>"> -->
 <script lang="ts">
 import { Helper, Label, Range } from 'flowbite-svelte';
-import type { FormPathLeaves , SuperForm } from 'sveltekit-superforms';
+import type { FormPathLeaves, SuperForm } from 'sveltekit-superforms';
 import { formFieldProxy } from 'sveltekit-superforms';
 import { getFormContext } from './forms';
 
@@ -17,14 +17,14 @@ const { path, value, errors, constraints } = formFieldProxy(superform, field);
 
 <Label><slot /></Label>
 <Range
-	name={field}
-	bind:value={$value}
-	data-invalid={$errors}
-	aria-invalid={Boolean($errors)}
-	aria-errormessage={Array($errors).join('. ')}
-	{...$constraints}
-	{...$$restProps}
+    name={field}
+    bind:value={$value}
+    data-invalid={$errors}
+    aria-invalid={Boolean($errors)}
+    aria-errormessage={Array($errors).join('. ')}
+    {...$constraints}
+    {...$$restProps}
 />
 {#if $errors}
-	<Helper class="mt-2" color="red">{$errors}</Helper>
+    <Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

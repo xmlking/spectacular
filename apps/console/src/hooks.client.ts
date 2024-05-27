@@ -1,10 +1,10 @@
-import type { HandleClientError } from '@sveltejs/kit';
-import { Logger } from '@spectacular/utils';
 import { dev } from '$app/environment';
+import { Logger } from '@spectacular/utils';
+import type { HandleClientError } from '@sveltejs/kit';
 
 // Setup logger
 if (!dev) {
-	Logger.enableProductionMode();
+  Logger.enableProductionMode();
 }
 
 const log = new Logger('hooks:client');
@@ -14,15 +14,15 @@ const log = new Logger('hooks:client');
  * TODO: Error monitoring via Sentry
  */
 export const handleError: HandleClientError = async ({ error, status, message, event }) => {
-	log.error('handleClientError:', error, status, message, event);
-	// example integration with https://sentry.io/
-	// Sentry.captureException(error, {
-	// 	extra: { event, errorId, status },
-	// });
+  log.error('handleClientError:', error, status, message, event);
+  // example integration with https://sentry.io/
+  // Sentry.captureException(error, {
+  // 	extra: { event, errorId, status },
+  // });
 
-	const err = error as App.Error;
-	return {
-		...err,
-		message: message ?? err.message ?? 'Whoops!'
-	};
+  const err = error as App.Error;
+  return {
+    ...err,
+    message: message ?? err.message ?? 'Whoops!',
+  };
 };

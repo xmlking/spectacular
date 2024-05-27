@@ -12,35 +12,35 @@ import * as animate from 'tailwindcss-animate';
 import flowbiteTypography from 'flowbite-typography';
 
 export default {
-	content: [
-		'./src/**/*.{html,js,svelte,ts,mdx}',
-		'./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}',
-		'./node_modules/flowbite-svelte-icons/**/*.{html,js,svelte,ts}',
-		'./node_modules/flowbite-svelte-blocks/**/*.{html,js,svelte,ts}'
-	],
-	plugins: [
-		containerQueries,
-		animate,
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
-		require('flowbite/plugin')({
-			charts: false,
-			forms: true
-		}),
-		// flowbitePlugin({ charts: false, forms: true }),
-		flowbiteTypography
-	],
+    content: [
+        './src/**/*.{html,js,svelte,ts,mdx}',
+        './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}',
+        './node_modules/flowbite-svelte-icons/**/*.{html,js,svelte,ts}',
+        './node_modules/flowbite-svelte-blocks/**/*.{html,js,svelte,ts}',
+    ],
+    plugins: [
+        containerQueries,
+        animate,
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        require('flowbite/plugin')({
+            charts: false,
+            forms: true,
+        }),
+        // flowbitePlugin({ charts: false, forms: true }),
+        flowbiteTypography,
+    ],
 
-	darkMode: 'class', // or 'media' or false
-	theme: {
-		extend: {
-			fontFamily: {
-				sans: ['Montserrat', ...defaultTheme.fontFamily.sans]
-			},
-			// custom shades generator https://javisperez.github.io/tailwindcolorshades/?
-			// http://colorcode.is/ - helpful color site
-			// Or - Tailwind CSS Color Generator: https://uicolors.app/create
-			// prettier-ignore
-			colors: {
+    darkMode: 'class', // or 'media' or false
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+            },
+            // custom shades generator https://javisperez.github.io/tailwindcolorshades/?
+            // http://colorcode.is/ - helpful color site
+            // Or - Tailwind CSS Color Generator: https://uicolors.app/create
+            // prettier-ignore
+            colors: {
 				// To change the primary color, simply uncomment the desired color object and modify the corresponding color values as needed.
 				// flowbite-svelte
 				// primary: {"50": "#FFF1EE","100": "#fff1ee","200": "#ffe4de","300": "#ffd5cc","400": "#ffbcad","500": "#fe795d","600": "#ef562f","700": "#eb4f27","800": "#d3330a","900": "#d3330a"},
@@ -143,28 +143,28 @@ export default {
 					'accent-700': '#00bfa5'
 				}
 			},
-			spacing: {
-				7: '1.75rem',
-				9: '2.25rem',
-				28: '7rem',
-				80: '20rem',
-				96: '24rem'
-			},
-			height: {
-				'1/2': '50%'
-			},
-			scale: {
-				30: '.3'
-			},
-			boxShadow: {
-				outline: '0 0 0 3px rgba(101, 31, 255, 0.4)'
-			}
-		}
-	},
-	variants: {
-		scale: ['responsive', 'hover', 'focus', 'group-hover'],
-		textColor: ['responsive', 'hover', 'focus', 'group-hover'],
-		opacity: ['responsive', 'hover', 'focus', 'group-hover'],
-		backgroundColor: ['responsive', 'hover', 'focus', 'group-hover']
-	}
+            spacing: {
+                7: '1.75rem',
+                9: '2.25rem',
+                28: '7rem',
+                80: '20rem',
+                96: '24rem',
+            },
+            height: {
+                '1/2': '50%',
+            },
+            scale: {
+                30: '.3',
+            },
+            boxShadow: {
+                outline: '0 0 0 3px rgba(101, 31, 255, 0.4)',
+            },
+        },
+    },
+    variants: {
+        scale: ['responsive', 'hover', 'focus', 'group-hover'],
+        textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+        opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+        backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    },
 } satisfies Config;

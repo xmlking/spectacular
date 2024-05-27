@@ -7,38 +7,38 @@ import { CachePolicy, GetPoolStore } from '$houdini';
 
 const getPoolStore = new GetPoolStore();
 export const load = async (event) => {
-	const {
-		params: { id }
-	} = event;
-	const variables = { id };
-	const { errors, data } = await getPoolStore.fetch({
-		event,
-		blocking: true,
-		policy: CachePolicy.NetworkOnly,
-		variables
-	});
-	if (errors) error(400, errors[0] as GraphQLError);
-	const { pools_by_pk, devices_not_in_pool } = data ?? {};
-	if (!pools_by_pk) error(404, 'Pool not found');
-	const { displayName, description, tags, annotations, pool_devices } = pools_by_pk;
+    const {
+        params: { id },
+    } = event;
+    const variables = { id };
+    const { errors, data } = await getPoolStore.fetch({
+        event,
+        blocking: true,
+        policy: CachePolicy.NetworkOnly,
+        variables,
+    });
+    if (errors) error(400, errors[0] as GraphQLError);
+    const { pools_by_pk, devices_not_in_pool } = data ?? {};
+    if (!pools_by_pk) error(404, 'Pool not found');
+    const { displayName, description, tags, annotations, pool_devices } = pools_by_pk;
 
-	const form = await superValidate({ displayName, description, tags, annotations }, zod(schema));
+    const form = await superValidate({ displayName, description, tags, annotations }, zod(schema));
 
-	const inPool = pool_devices?.map(
-		({ associationId, device: { id, displayName, ip, description, version, organization, tags, annotations, updatedAt } }) => ({
-			id,
-			associationId,
-			displayName,
-			ip,
-			version,
-			description,
-			organization,
-			tags,
-			annotations,
-			updatedAt
-		})
-	);
+    const inPool = pool_devices?.map(
+        ({ associationId, device: { id, displayName, ip, description, version, organization, tags, annotations, updatedAt } }) => ({
+            id,
+            associationId,
+            displayName,
+            ip,
+            version,
+            description,
+            organization,
+            tags,
+            annotations,
+            updatedAt,
+        }),
+    );
 
-	// Always return { form } in load and form actions.
-	return { poolId: id, inPool, notInPool: devices_not_in_pool, form };
+    // Always return { form } in load and form actions.
+    return { poolId: id, inPool, notInPool: devices_not_in_pool, form };
 };

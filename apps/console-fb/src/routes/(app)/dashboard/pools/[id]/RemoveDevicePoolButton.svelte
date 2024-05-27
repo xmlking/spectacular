@@ -7,13 +7,13 @@ export let id: string;
 
 const dispatch = createEventDispatcher();
 const handleDeleteButton = () => {
-	const props: CustomEventProps = { id };
-	dispatch('delete', props);
+    const props: CustomEventProps = { id };
+    dispatch('delete', props);
 };
 </script>
 
 <button on:click={handleDeleteButton}>
-	<CloseCircleOutline color="red" />
+    <CloseCircleOutline color="red" />
 </button>
 
 <!-- For Debugging -->
