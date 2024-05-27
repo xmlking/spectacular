@@ -294,7 +294,11 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
+    "editor.defaultFormatter": "svelte.svelte-vscode",
+    "editor.codeActionsOnSave": {
+      // FIXME: biome and svelte conflect
+      "source.organizeImports.biome": "never"
+    }
   },
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
