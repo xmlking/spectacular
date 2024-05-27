@@ -28,41 +28,41 @@ import { AuthClient } from './AuthClient';
  * }) satisfies HandleFetch;
  */
 export class TokenVault {
-    public static tokenMap: { [endpoint: string]: AuthClient } = {};
+  public static tokenMap: { [endpoint: string]: AuthClient } = {};
 
-    /**
-     * Create a store.
-     */
-    public static async init(
-        backends: {
-            endpoint: string;
-            authConfig: {
-                auth_endpoint: string;
-                client_id: string;
-                client_secret: string;
-                grant_type: string;
-                scope?: string;
-                resource?: string;
-            };
-        }[],
-    ) {
-        for (const ep of backends) {
-            const {
-                endpoint,
-                authConfig: { auth_endpoint, ...rest },
-            } = ep;
-            this.tokenMap[getbaseUrl(endpoint)] = new AuthClient(auth_endpoint, rest);
-        }
+  /**
+   * Create a store.
+   */
+  public static async init(
+    backends: {
+      endpoint: string;
+      authConfig: {
+        auth_endpoint: string;
+        client_id: string;
+        client_secret: string;
+        grant_type: string;
+        scope?: string;
+        resource?: string;
+      };
+    }[],
+  ) {
+    for (const ep of backends) {
+      const {
+        endpoint,
+        authConfig: { auth_endpoint, ...rest },
+      } = ep;
+      this.tokenMap[getbaseUrl(endpoint)] = new AuthClient(auth_endpoint, rest);
     }
+  }
 
-    public static getToken(endpoint: string) {
-        const backend = this.tokenMap[getbaseUrl(endpoint)];
-        if (backend) return backend.getToken();
-    }
+  public static getToken(endpoint: string) {
+    const backend = this.tokenMap[getbaseUrl(endpoint)];
+    if (backend) return backend.getToken();
+  }
 }
 
 export function getbaseUrl(urlStr: string) {
-    const url = new URL(urlStr);
-    const baseUrl = `${url.protocol}//${url.hostname}`;
-    return baseUrl;
+  const url = new URL(urlStr);
+  const baseUrl = `${url.protocol}//${url.hostname}`;
+  return baseUrl;
 }

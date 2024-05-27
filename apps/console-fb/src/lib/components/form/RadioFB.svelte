@@ -23,12 +23,12 @@ const { path, value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 {#if label}
-    <Label color={$errors ? 'red' : 'gray'} for={field} class={labelClasses}>{label ?? path}</Label>
+  <Label color={$errors ? 'red' : 'gray'} for={field} class={labelClasses}>{label ?? path}</Label>
 {/if}
 <ButtonGroup>
-    {#each items as item}
-        {@const id = generateId()}
-        <!-- <Button outline class="checked-label" {...$$restProps}>
+  {#each items as item}
+    {@const id = generateId()}
+    <!-- <Button outline class="checked-label" {...$$restProps}>
 			<input
 				type="radio"
 				{id}
@@ -46,28 +46,28 @@ const { path, value, errors, constraints } = formFieldProxy(superform, field);
 			/>
 			<label for={id} >{item.label}</label>
 	</Button> -->
-        <RadioButton
-            outline
-            {...$$restProps}
-            {id}
-            name={field}
-            value={item.value}
-            bind:group={$value}
-            on:blur
-            on:change
-            on:click
-            aria-label={item.label}
-            data-invalid={$errors}
-            {...$constraints}
-            {...$$restProps}
-        >
-            {item.label}
-        </RadioButton>
-    {/each}
+    <RadioButton
+      outline
+      {...$$restProps}
+      {id}
+      name={field}
+      value={item.value}
+      bind:group={$value}
+      on:blur
+      on:change
+      on:click
+      aria-label={item.label}
+      data-invalid={$errors}
+      {...$constraints}
+      {...$$restProps}
+    >
+      {item.label}
+    </RadioButton>
+  {/each}
 </ButtonGroup>
 
 {#if $errors}
-    <Helper class="mt-2" color="red">{$errors}</Helper>
+  <Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}
 
 <style lang="postcss">

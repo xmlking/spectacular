@@ -10,52 +10,56 @@ export const NullableFormString = z.preprocess((v) => (v === '' ? null : v), z.s
  * Utility functions
  */
 export function emptyToNull(arg: unknown) {
-    if (typeof arg !== 'string') {
-        return arg;
-    }
-    if (arg.trim() === '') {
-        return null;
-    }
+  if (typeof arg !== 'string') {
     return arg;
+  }
+  if (arg.trim() === '') {
+    return null;
+  }
+  return arg;
 }
 
 export function ifNonEmptyString(fn: (value: string) => unknown): (value: unknown) => unknown {
-    return (value: unknown) => {
-        if (typeof value !== 'string') {
-            return value;
-        }
+  return (value: unknown) => {
+    if (typeof value !== 'string') {
+      return value;
+    }
 
-        if (value.trim() === '') {
-            // return undefined;
-            return null;
-        }
+    if (value.trim() === '') {
+      // return undefined;
+      return null;
+    }
 
-        return fn(value);
-    };
+    return fn(value);
+  };
 }
 
 /**
  * schemas
  */
 export const uuidSchema = z.string().uuid();
-export const dbOffsetDate = z.preprocess((arg) => (arg === '' ? null : arg), z.string().datetime({ offset: true }).nullish());
+export const dbOffsetDate = z.preprocess(
+  (arg) => (arg === '' ? null : arg),
+  z.string().datetime({ offset: true }).nullish(),
+);
 // export const booleanSchema = z
 // 		.union([z.boolean(), z.literal('true'), z.literal('false')])
 // 		.transform((value) => value === true || value === 'true');
 
 export const booleanSchema = z
-    .enum(['true', 'false'])
-    .nullish()
-    .transform((v) => v === 'true');
+  .enum(['true', 'false'])
+  .nullish()
+  .transform((v) => v === 'true');
 /**
  * Converters / type coercion
  */
 export const stringToBoolean = ifNonEmptyString((arg) => arg.toLowerCase() === 'true');
 
-export const stringToNumber = (arg: unknown) => (typeof arg == 'string' && /^\d+$/.test(arg) ? parseInt(arg, 10) : undefined);
+export const stringToNumber = (arg: unknown) =>
+  typeof arg == 'string' && /^\d+$/.test(arg) ? parseInt(arg, 10) : undefined;
 export const stringToNumber2 = (arg: unknown) => {
-    const processed = z.string().trim().regex(/^\d+$/).transform(Number).safeParse(arg);
-    return processed.success ? processed.data : arg;
+  const processed = z.string().trim().regex(/^\d+$/).transform(Number).safeParse(arg);
+  return processed.success ? processed.data : arg;
 };
 
 // export const stringToDate = (arg: unknown) => ((typeof arg == 'string' && arg.length > 0) || arg instanceof Date ? new Date(arg) : undefined);
@@ -76,25 +80,25 @@ export const stringToJSON = ifNonEmptyString((arg) => JSON.parse(arg));
 export const emptyStringToUndefined = z.literal('').transform(() => undefined);
 export const emptyStringToNull = z.literal('').transform(() => null);
 export function asOptionalField<T extends z.ZodTypeAny>(schema: T) {
-    return schema.optional().or(emptyStringToUndefined);
+  return schema.optional().or(emptyStringToUndefined);
 }
 
 // in-source testing
 if (import.meta.vitest) {
-    const { it, expect } = import.meta.vitest;
+  const { it, expect } = import.meta.vitest;
 
-    it('Test arrayToString', async () => {
-        const dataArray = ['sumo', 'demo'];
-        const result = arrayToString(dataArray);
-        expect(result).toBe('{sumo,demo}');
-    });
+  it('Test arrayToString', async () => {
+    const dataArray = ['sumo', 'demo'];
+    const result = arrayToString(dataArray);
+    expect(result).toBe('{sumo,demo}');
+  });
 
-    it('Test mapToString', async () => {
-        const dataMap = new Map<string, string>([
-            ['key1', 'value1'],
-            ['key2', 'value2'],
-        ]);
-        const result = mapToString(dataMap);
-        expect(result).toBe('"key1"=>"value1","key2"=>"value2"');
-    });
+  it('Test mapToString', async () => {
+    const dataMap = new Map<string, string>([
+      ['key1', 'value1'],
+      ['key2', 'value2'],
+    ]);
+    const result = mapToString(dataMap);
+    expect(result).toBe('"key1"=>"value1","key2"=>"value2"');
+  });
 }

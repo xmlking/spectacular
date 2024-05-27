@@ -22,22 +22,22 @@ const { path, value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 <FloatingLabelInput
-    {type}
-    {style}
-    {size}
-    name={field}
-    bind:value={$value}
-    data-invalid={$errors}
-    color={$errors ? 'red' : 'base'}
-    aria-describedby={`${path}_help`}
-    aria-invalid={Boolean($errors)}
-    aria-errormessage={Array($errors).join('. ')}
-    aria-required="{$constraints?.required},"
-    {...$constraints}
-    {...$$restProps}
+  {type}
+  {style}
+  {size}
+  name={field}
+  bind:value={$value}
+  data-invalid={$errors}
+  color={$errors ? 'red' : 'base'}
+  aria-describedby={`${path}_help`}
+  aria-invalid={Boolean($errors)}
+  aria-errormessage={Array($errors).join('. ')}
+  aria-required="{$constraints?.required},"
+  {...$constraints}
+  {...$$restProps}
 >
-    {label}
+  {label}
 </FloatingLabelInput>
 {#if $errors}
-    <Helper class="mt-2" color="red">{$errors}</Helper>
+  <Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

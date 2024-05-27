@@ -20,17 +20,17 @@ const { path, value, errors, constraints } = formFieldProxy(superform, field);
 
 <Label color={$errors ? 'red' : 'gray'} for={field} class="mb-2">{label ?? path}</Label>
 <Input
-    {type}
-    name={field}
-    bind:value={$value}
-    data-invalid={$errors}
-    color={$errors ? 'red' : 'base'}
-    aria-invalid={Boolean($errors)}
-    aria-errormessage={Array($errors).join('. ')}
-    aria-required="{$constraints?.required},"
-    {...$constraints}
-    {...$$restProps}
+  {type}
+  name={field}
+  bind:value={$value}
+  data-invalid={$errors}
+  color={$errors ? 'red' : 'base'}
+  aria-invalid={Boolean($errors)}
+  aria-errormessage={Array($errors).join('. ')}
+  aria-required="{$constraints?.required},"
+  {...$constraints}
+  {...$$restProps}
 />
 {#if $errors}
-    <Helper class="mt-2" color="red">{$errors}</Helper>
+  <Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

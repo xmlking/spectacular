@@ -14,16 +14,16 @@ import { authjs, guard, houdini } from '$lib/server/middleware';
 
 // Setup logger
 if (!dev) {
-    Logger.enableProductionMode();
+  Logger.enableProductionMode();
 }
 
 const log = new Logger('hooks:server');
 
 // for graceful termination
 function shutdownGracefully() {
-    // anything you need to clean up manually goes in here
-    log.info('Shutdown Gracefully ...');
-    process.exit();
+  // anything you need to clean up manually goes in here
+  log.info('Shutdown Gracefully ...');
+  process.exit();
 }
 process.on('SIGINT', shutdownGracefully); // Ctrl+C
 process.on('SIGTERM', shutdownGracefully); // docker stop
@@ -32,21 +32,21 @@ process.on('SIGTERM', shutdownGracefully); // docker stop
 
 // Initialize the Sentry SDK here
 if (!dev) {
-    // TODO
+  // TODO
 }
 
 // Initialize TokenVault
 TokenVault.init([
-    // {
-    // 	endpoint: envPri.MICROSOFT_GRAPH_ENDPOINT,
-    // 	authConfig: {
-    // 		auth_endpoint: `https://login.microsoftonline.com/${envPri.MICROSOFT_GRAPH_TENANT_ID}/oauth2/v2.0/token`,
-    // 		client_id: envPri.MICROSOFT_GRAPH_CLIENT_ID,
-    // 		client_secret: envPri.MICROSOFT_GRAPH_CLIENT_SECRET,
-    // 		grant_type: 'client_credentials',
-    // 		scope: envPri.MICROSOFT_GRAPH_SCOPES
-    // 	}
-    // }
+  // {
+  // 	endpoint: envPri.MICROSOFT_GRAPH_ENDPOINT,
+  // 	authConfig: {
+  // 		auth_endpoint: `https://login.microsoftonline.com/${envPri.MICROSOFT_GRAPH_TENANT_ID}/oauth2/v2.0/token`,
+  // 		client_id: envPri.MICROSOFT_GRAPH_CLIENT_ID,
+  // 		client_secret: envPri.MICROSOFT_GRAPH_CLIENT_SECRET,
+  // 		grant_type: 'client_credentials',
+  // 		scope: envPri.MICROSOFT_GRAPH_SCOPES
+  // 	}
+  // }
 ]);
 
 // Invoked for each endpoint called and initially for SSR router
@@ -54,12 +54,12 @@ TokenVault.init([
 export const handle: Handle = sequence(authjs, guard, houdini);
 
 export const handleError: HandleServerError = async ({ error }) => {
-    log.error('handleServerError:', error);
-    const err = error as App.Error;
-    return {
-        message: err.message ?? 'Whoops!',
-        context: err.context,
-    };
+  log.error('handleServerError:', error);
+  const err = error as App.Error;
+  return {
+    message: err.message ?? 'Whoops!',
+    context: err.context,
+  };
 };
 
 /**
@@ -67,14 +67,14 @@ export const handleError: HandleServerError = async ({ error }) => {
  * that happens inside a `load` or `action` function that runs on the server (or during pre-rendering).
  */
 export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
-    log.info(`HandleFetch: pageUrl: ${event.url.toString()} clientAddress: ${event.getClientAddress()}`);
+  log.info(`HandleFetch: pageUrl: ${event.url.toString()} clientAddress: ${event.getClientAddress()}`);
 
-    const token = TokenVault.getToken(request.url);
-    if (token) {
-        log.info(' HandleFetch: adding token for:', request.url);
-        request.headers.set('Authorization', `Bearer ${token}`);
-    }
-    /*
+  const token = TokenVault.getToken(request.url);
+  if (token) {
+    log.info(' HandleFetch: adding token for:', request.url);
+    request.headers.set('Authorization', `Bearer ${token}`);
+  }
+  /*
 	if (request.url.startsWith('https://graph.microsoft.com')) {
 		request.headers.set('Authorization', `Bearer ${microsoft_token}`);
 	}
@@ -86,5 +86,5 @@ export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
 		);
 	}
 	*/
-    return fetch(request);
+  return fetch(request);
 };

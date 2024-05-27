@@ -8,12 +8,12 @@ export let asideClass = 'w-64';
 </script>
 
 {#if show}
-    <aside
-        transition:fly={{ x: -250, opacity: 1 }}
-        class={twMerge(asideClass, $$props.class)}
-        {...$$restProps}
-        aria-label="Sidebar"
-    >
-        <slot />
-    </aside>
+  <aside
+    transition:fly={{ x: -250, opacity: 1 }}
+    class={twMerge(asideClass, $$props.class)}
+    {...$$restProps}
+    aria-label="Sidebar"
+  >
+    <slot />
+  </aside>
 {/if}

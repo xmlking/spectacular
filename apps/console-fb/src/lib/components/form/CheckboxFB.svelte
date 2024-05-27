@@ -19,18 +19,18 @@ $: checked = value as Writable<boolean>;
 </script>
 
 <Checkbox
-    name={field}
-    color={$errors ? 'red' : 'green'}
-    bind:checked={$checked}
-    data-invalid={$errors}
-    aria-invalid={Boolean($errors)}
-    aria-errormessage={Array($errors).join('. ')}
-    aria-required={$constraints?.required}
-    {...$constraints}
-    {...$$restProps}
+  name={field}
+  color={$errors ? 'red' : 'green'}
+  bind:checked={$checked}
+  data-invalid={$errors}
+  aria-invalid={Boolean($errors)}
+  aria-errormessage={Array($errors).join('. ')}
+  aria-required={$constraints?.required}
+  {...$constraints}
+  {...$$restProps}
 >
-    <span class:text-error={$errors} class="label-text"><slot /></span>
+  <span class:text-error={$errors} class="label-text"><slot /></span>
 </Checkbox>
 {#if $errors}
-    <Helper class="mt-2" color="red">{$errors}</Helper>
+  <Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

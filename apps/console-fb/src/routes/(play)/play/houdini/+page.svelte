@@ -9,9 +9,7 @@ $: ({ ListPolicies2, formErrors, fieldErrors } = data);
 </script>
 
 <button class="btn" on:click={() => ListPolicies2.loadNextPage()}>load more</button>
-<button
-    class="btn-accent btn"
-    on:click={() => ListPolicies2.fetch({ policy: CachePolicy.NetworkOnly })}>refetch</button
+<button class="btn-accent btn" on:click={() => ListPolicies2.fetch({ policy: CachePolicy.NetworkOnly })}>refetch</button
 >
 
 <ErrorMessage error={fieldErrors?.limit?.[0]} />
@@ -20,21 +18,20 @@ $: ({ ListPolicies2, formErrors, fieldErrors } = data);
 <ErrorMessage error={fieldErrors?.displayNme?.[0]} />
 
 {#if $ListPolicies2.fetching}
-    Loading...
+  Loading...
 {:else if $ListPolicies2.errors}
-    <GraphQLErrors errors={$ListPolicies2.errors} />
+  <GraphQLErrors errors={$ListPolicies2.errors} />
 {:else}
-    <details>
-        <summary>raw data with @cache(policy: CacheAndNetwork)</summary>
-        <pre>
+  <details>
+    <summary>raw data with @cache(policy: CacheAndNetwork)</summary>
+    <pre>
     	{JSON.stringify($ListPolicies2.data, null, 2)}
   	</pre>
-    </details>
+  </details>
 {/if}
 
 <div>
-    created_at: {$ListPolicies2.data?.policies?.[0].created_at} // if created_at is date type, use .toISOString()
-    .toLocaleString()
+  created_at: {$ListPolicies2.data?.policies?.[0].created_at} // if created_at is date type, use .toISOString() .toLocaleString()
 </div>
 
 <pre>

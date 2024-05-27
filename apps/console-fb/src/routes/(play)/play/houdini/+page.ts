@@ -9,30 +9,30 @@ const log = new Logger('providers.browser');
 
 // TODO: no need for Variables function with v1.0.0
 export const _ListPolicies2Variables: Variables = ({ url }) => {
-    const limit = parseInt(url.searchParams.get('limit') ?? '');
-    const offset = parseInt(url.searchParams.get('offset') ?? '');
+  const limit = parseInt(url.searchParams.get('limit') ?? '');
+  const offset = parseInt(url.searchParams.get('offset') ?? '');
 
-    const orderBy = [{ updated_at: order_by.desc_nulls_first }];
-    return {
-        limit,
-        offset,
-        orderBy,
-    };
+  const orderBy = [{ updated_at: order_by.desc_nulls_first }];
+  return {
+    limit,
+    offset,
+    orderBy,
+  };
 };
 
 const searchSchema = zfd.formData(policySearchSchema, { empty: 'strip' });
 
 export function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
-    try {
-        const { limit, offset, orderBy, displayNme } = searchSchema.parse(url.searchParams);
-        log.debug(limit, offset, orderBy, displayNme);
-    } catch (err) {
-        if (err instanceof ZodError) {
-            const { formErrors, fieldErrors } = err.flatten();
-            return { formErrors, fieldErrors };
-        } else {
-            log.error('search:_houdini_beforeLoad:', err);
-            error(500, err as Error);
-        }
+  try {
+    const { limit, offset, orderBy, displayNme } = searchSchema.parse(url.searchParams);
+    log.debug(limit, offset, orderBy, displayNme);
+  } catch (err) {
+    if (err instanceof ZodError) {
+      const { formErrors, fieldErrors } = err.flatten();
+      return { formErrors, fieldErrors };
+    } else {
+      log.error('search:_houdini_beforeLoad:', err);
+      error(500, err as Error);
     }
+  }
 }

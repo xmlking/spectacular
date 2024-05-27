@@ -6,11 +6,11 @@ export let id: string;
 </script>
 
 <form method="POST" action="?/delete" use:enhance>
-    <input type="hidden" name="id" hidden value={id} />
-    <!-- <button type="submit" on:click={(e) => !confirm('Are you sure?') && e.preventDefault()}> -->
-    <button type="submit">
-        <ArchiveOutline class="text-pink-700 dark:text-blue-300" />
-    </button>
+  <input type="hidden" name="id" hidden value={id} />
+  <!-- <button type="submit" on:click={(e) => !confirm('Are you sure?') && e.preventDefault()}> -->
+  <button type="submit">
+    <ArchiveOutline class="text-pink-700 dark:text-blue-300" />
+  </button>
 </form>
 
 <!-- <script lang="ts">

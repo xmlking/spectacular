@@ -18,20 +18,20 @@ const { value, errors, constraints } = formFieldProxy(superform, field);
 </script>
 
 {#if label}
-    <Label color={$errors ? 'red' : 'gray'} for={field} class="mb-2">{label}</Label>
+  <Label color={$errors ? 'red' : 'gray'} for={field} class="mb-2">{label}</Label>
 {/if}
 <Textarea
-    name={field}
-    bind:value={$value}
-    data-invalid={$errors}
-    rows="4"
-    color={$errors ? 'red' : 'base'}
-    aria-invalid={Boolean($errors)}
-    aria-errormessage={Array($errors).join('. ')}
-    aria-required="{$constraints?.required},"
-    {...$constraints}
-    {...$$restProps}
+  name={field}
+  bind:value={$value}
+  data-invalid={$errors}
+  rows="4"
+  color={$errors ? 'red' : 'base'}
+  aria-invalid={Boolean($errors)}
+  aria-errormessage={Array($errors).join('. ')}
+  aria-required="{$constraints?.required},"
+  {...$constraints}
+  {...$$restProps}
 />
 {#if $errors}
-    <Helper class="mt-2" color="red">{$errors}</Helper>
+  <Helper class="mt-2" color="red">{$errors}</Helper>
 {/if}

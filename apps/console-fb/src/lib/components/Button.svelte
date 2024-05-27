@@ -10,19 +10,19 @@ export let variant: OwnProps['variant'] = 'primary';
 </script>
 
 <button {...$$restProps} class="{$$restProps.class ?? ''} {variant}">
-    <slot />
+  <slot />
 </button>
 
 <style lang="postcss">
 button {
-    color: white;
+  color: white;
 }
 
 •primary {
-    background: teal;
+  background: teal;
 }
 
 • secondary {
-    background: orange;
+  background: orange;
 }
 </style>

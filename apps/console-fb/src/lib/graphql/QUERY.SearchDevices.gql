@@ -1,11 +1,11 @@
 query SearchDevices(
-    $where: devices_bool_exp
-    $limit: Int = 50
-    $offset: Int = 0
-    $orderBy: [devices_order_by!] = [{ updatedAt: desc_nulls_last }]
+  $where: devices_bool_exp
+  $limit: Int = 50
+  $offset: Int = 0
+  $orderBy: [devices_order_by!] = [{ updatedAt: desc_nulls_last }]
 ) {
-    devices(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
-        id
-        displayName
-    }
+  devices(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
+    id
+    displayName
+  }
 }

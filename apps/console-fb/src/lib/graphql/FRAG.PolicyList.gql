@@ -1,14 +1,14 @@
 fragment Policy_list_fields on policies {
-    id
-    subjectDisplayName
-    active
-    updatedAt
-    createdAt
-    rule {
-        displayName
-        source
-        sourcePort
-        destination
-        destinationPort
-    }
+  id
+  subjectDisplayName
+  active
+  updatedAt
+  createdAt
+  rule {
+    displayName
+    source
+    sourcePort
+    destination
+    destinationPort
+  }
 }

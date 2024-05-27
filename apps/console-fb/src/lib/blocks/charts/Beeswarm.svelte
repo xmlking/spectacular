@@ -10,34 +10,30 @@ const r = 4;
 const seriesNames = new Set();
 const seriesColors = ['#ccc', '#fc0', '#000'];
 const dataTransformed = data.map((d) => {
-    seriesNames.add(d[zKey]);
-    return {
-        [titleKey]: d[titleKey],
-        [xKey]: +d[xKey],
-        [zKey]: d[zKey],
-    };
+  seriesNames.add(d[zKey]);
+  return {
+    [titleKey]: d[titleKey],
+    [xKey]: +d[xKey],
+    [zKey]: d[zKey],
+  };
 });
 </script>
 
 <div class="chart-container">
-    <LayerCake
-        x={xKey}
-        z={zKey}
-        zScale={scaleOrdinal()}
-        zDomain={[...seriesNames].sort()}
-        zRange={seriesColors}
-        data={dataTransformed}
-        let:width
-    >
-        <Svg>
-            <!-- The Beeswarm component transforms the data and nests our original fields under `data` so access the `titleKey` under that -->
-            <Beeswarm
-                r={width < 400 ? r / 1.6 : r}
-                spacing={1}
-                getTitle={(d) => d.data[titleKey]}
-            />
-        </Svg>
-    </LayerCake>
+  <LayerCake
+    x={xKey}
+    z={zKey}
+    zScale={scaleOrdinal()}
+    zDomain={[...seriesNames].sort()}
+    zRange={seriesColors}
+    data={dataTransformed}
+    let:width
+  >
+    <Svg>
+      <!-- The Beeswarm component transforms the data and nests our original fields under `data` so access the `titleKey` under that -->
+      <Beeswarm r={width < 400 ? r / 1.6 : r} spacing={1} getTitle={(d) => d.data[titleKey]} />
+    </Svg>
+  </LayerCake>
 </div>
 
 <style>
@@ -48,7 +44,7 @@ const dataTransformed = data.map((d) => {
 		expand to fill it.
 	*/
 .chart-container {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 </style>

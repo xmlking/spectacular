@@ -9,36 +9,36 @@ const log = new Logger('rules.list.browser');
 
 const searchSharedRulesStore = new SearchSharedRulesStore();
 export const load = async (event) => {
-    const { url } = event;
-    const form = await superValidate(url, zod(schema));
+  const { url } = event;
+  const form = await superValidate(url, zod(schema));
 
-    if (!form.valid) return { status: 400, form }; // return fail(400, { form }); // FIXME
+  if (!form.valid) return { status: 400, form }; // return fail(400, { form }); // FIXME
 
-    const {
-        data: { limit, offset, displayName },
-    } = form;
+  const {
+    data: { limit, offset, displayName },
+  } = form;
 
-    const variables = {
-        limit,
-        offset,
-        ...{ displayName: displayName ? `%${displayName}%` : '%%' },
-    };
-    const { errors, data } = await searchSharedRulesStore.fetch({
-        event,
-        blocking: true,
-        policy: CachePolicy.NetworkOnly,
-        variables,
+  const variables = {
+    limit,
+    offset,
+    ...{ displayName: displayName ? `%${displayName}%` : '%%' },
+  };
+  const { errors, data } = await searchSharedRulesStore.fetch({
+    event,
+    blocking: true,
+    policy: CachePolicy.NetworkOnly,
+    variables,
+  });
+  if (errors) {
+    errors.forEach((error) => {
+      log.error('list rule api error', error);
+      // NOTE: you can add multiple errors, send all along with a message
+      setError(form, '', (error as GraphQLError).message);
     });
-    if (errors) {
-        errors.forEach((error) => {
-            log.error('list rule api error', error);
-            // NOTE: you can add multiple errors, send all along with a message
-            setError(form, '', (error as GraphQLError).message);
-        });
-        setMessage(form, 'Backend error');
-        return { status: 500, form };
-    }
-    const items = data?.rules;
-    if (!items) error(404, 'rules not found');
-    return { form, items };
+    setMessage(form, 'Backend error');
+    return { status: 500, form };
+  }
+  const items = data?.rules;
+  if (!items) error(404, 'rules not found');
+  return { form, items };
 };

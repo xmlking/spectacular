@@ -5,14 +5,14 @@ import { expect, test } from '@playwright/test';
 test.describe.configure({ mode: 'parallel' });
 
 test('Home page should have Login button', async ({ page }) => {
-    await page.goto('/');
+  await page.goto('/');
 
-    await expect(page.getByRole('link', { name: 'dashboard-link' })).toHaveText('Get Started');
+  await expect(page.getByRole('link', { name: 'dashboard-link' })).toHaveText('Get Started');
 });
 
 test.skip('skip this test', async ({ page }) => {
-    // This test is not run
-    await page.bringToFront();
-    // Recording...
-    await expect(page.getByText('Installation')).toBeVisible();
+  // This test is not run
+  await page.bringToFront();
+  // Recording...
+  await expect(page.getByText('Installation')).toBeVisible();
 });

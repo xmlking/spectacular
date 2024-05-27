@@ -1,25 +1,25 @@
 mutation CreateRule($data: rules_insert_input!) {
-    insert_rules_one(object: $data) {
-        id
-        displayName
-        description
-        tags
-        annotations
-        shared
-        source
-        sourcePort
-        destination
-        destinationPort
-        protocol
-        direction
-        action
-        appId
-        throttleRate
-        weight
-        createdBy
-        createdAt
-        updatedAt
-        updatedBy
-        organization
-    }
+  insert_rules_one(object: $data) {
+    id
+    displayName
+    description
+    tags
+    annotations
+    shared
+    source
+    sourcePort
+    destination
+    destinationPort
+    protocol
+    direction
+    action
+    appId
+    throttleRate
+    weight
+    createdBy
+    createdAt
+    updatedAt
+    updatedBy
+    organization
+  }
 }

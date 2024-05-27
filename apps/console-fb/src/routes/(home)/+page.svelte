@@ -4,8 +4,8 @@ import { Hero5 } from '$lib/blocks/hero';
 </script>
 
 <svelte:head>
-    <title>Home</title>
-    <meta name="description" content="Home page" />
+  <title>Home</title>
+  <meta name="description" content="Home page" />
 </svelte:head>
 
 <Hero5 />

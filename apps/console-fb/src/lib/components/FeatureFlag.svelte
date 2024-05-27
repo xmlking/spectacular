@@ -2,8 +2,8 @@
 export let flag: string;
 // TODO: pull from backend
 type Feature = {
-    name: string;
-    active?: boolean;
+  name: string;
+  active?: boolean;
 };
 
 const features: Feature[] = [];
@@ -12,5 +12,5 @@ if (!feature) console.log('flagNotFound:', flag);
 </script>
 
 {#if feature && feature.active}
-    <slot />
+  <slot />
 {/if}

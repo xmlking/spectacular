@@ -7,11 +7,11 @@ const yKey = 'myY';
 </script>
 
 <div class="chart-container">
-    <LayerCake x={xKey} y={yKey} {data}>
-        <Svg>
-            <AxisY ticks={4} />
-        </Svg>
-    </LayerCake>
+  <LayerCake x={xKey} y={yKey} {data}>
+    <Svg>
+      <AxisY ticks={4} />
+    </Svg>
+  </LayerCake>
 </div>
 
 <style>
@@ -22,7 +22,7 @@ const yKey = 'myY';
 		expand to fill it.
 	*/
 .chart-container {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 </style>

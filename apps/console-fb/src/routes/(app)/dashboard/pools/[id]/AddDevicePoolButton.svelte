@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
 export interface CustomEventProps {
-    [key: string]: any;
-    poolId: string | null;
-    deviceId: string | null;
+  [key: string]: any;
+  poolId: string | null;
+  deviceId: string | null;
 }
 </script>
 
@@ -15,13 +15,13 @@ export let deviceId: string;
 
 const dispatch = createEventDispatcher();
 const handleAddButton = () => {
-    const props: CustomEventProps = { poolId, deviceId };
-    dispatch('add', props);
+  const props: CustomEventProps = { poolId, deviceId };
+  dispatch('add', props);
 };
 </script>
 
 <button on:click={handleAddButton}>
-    <CirclePlusOutline color="green" />
+  <CirclePlusOutline color="green" />
 </button>
 <!-- For Debug -->
 <slot />

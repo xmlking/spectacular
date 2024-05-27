@@ -6,7 +6,7 @@ $: result = count * times;
 
 <div>{count} x {times} = {result}</div>
 <button
-    on:click={() => {
-        times += 1;
-    }}>x1</button
+  on:click={() => {
+    times += 1;
+  }}>x1</button
 >

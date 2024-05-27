@@ -4,8 +4,8 @@ import { Gallery1 } from '$lib/blocks/gallery';
 </script>
 
 <svelte:head>
-    <title>Features</title>
-    <meta name="description" content="Features" />
+  <title>Features</title>
+  <meta name="description" content="Features" />
 </svelte:head>
 
 <Gallery1 />
