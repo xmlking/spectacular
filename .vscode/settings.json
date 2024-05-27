@@ -285,7 +285,9 @@
     "zIndex"
   ],
 
-  ////////// biomejs //////////
+  // ##################################################
+  // ###           Language customisations          ###
+  // ##################################################
   // Make sure we're using biomejs for all filetypes
   // Need this because we need to override the default json and svelte formatters that folks might have configured
   "editor.defaultFormatter": "biomejs.biome",
@@ -314,8 +316,12 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "biomejs.biome",
-    "files.trimTrailingWhitespace": false
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    // Trailing whitespace has special meaning
+    "files.trimTrailingWhitespace": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": "explicit"
+    }
   },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
@@ -324,6 +330,7 @@
     "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
   "[yaml]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  }
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "redhat.telemetry.enabled": false
 }

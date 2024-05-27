@@ -14,7 +14,7 @@ JWT token issued during `SignIn` step is used as `Session` token to access backe
 Users can `SugnUp` via **WebApp** to a specific `organization` with an email in `allowed email domains` or `allowed emails` defined in `public.organizations` for that `organization`.  
 They will automatically get _allowed roles_ defined in `AUTH_USER_DEFAULT_ALLOWED_ROLES` i.e., `user,me` and _default role_ defined in `AUTH_USER_DEFAULT_ROLE` i.e., `user`
 
-Optionally, additional higher roles can be added to user's _allowed roles_ by administrator (manager) by [Deligation](#Deligation) UI.
+Optionally, additional higher roles can be added to user's _allowed roles_ by administrator (manager) by [Deligation](#deligation) UI.
 
 ### Service Accounts
 
