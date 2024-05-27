@@ -103,8 +103,8 @@ Awesome **Tailwind CSS** Links
 
   ```html
   <style>
-  	@keyframes -global-my-animation-name {
-  		/* code goes here */
-  	}
+    @keyframes -global-my-animation-name {
+      /* code goes here */
+    }
   </style>
   ```

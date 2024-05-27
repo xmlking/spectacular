@@ -78,11 +78,11 @@ Add `dotenv-run ` to your `package.json`
 
 ```json filename="package.json" highlight=3
 {
-	"scripts": {
-		"dev": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite dev",
-		"build": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite build",
-		"preview": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite preview"
-	}
+  "scripts": {
+    "dev": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite dev",
+    "build": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite build",
+    "preview": "dotenv-run -f ../../.env -f ../../.secrets -f .env -f .secrets -v -- vite preview"
+  }
 }
 ```
 

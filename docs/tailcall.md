@@ -25,34 +25,34 @@ Open `http://127.0.0.1:8000/` and query
 
 ```gql
 query {
-	users {
-		id
-		name
-		posts {
-			title
-		}
-	}
+  users {
+    id
+    name
+    posts {
+      title
+    }
+  }
 }
 ```
 
 ```gql
 query {
-	user(id: 1) {
-		id
-		name
-		posts {
-			title
-		}
-	}
+  user(id: 1) {
+    id
+    name
+    posts {
+      title
+    }
+  }
 }
 ```
 
 ```gql
 query {
-	posts {
-		id
-		title
-		body
-	}
+  posts {
+    id
+    title
+    body
+  }
 }
 ```
