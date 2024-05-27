@@ -1,33 +1,33 @@
 schema
-	# Specify server configuration: Start tailcall server at 0.0.0.0:8000 and enable GraphiQL playground
-	@server(port: 8000, graphiql: true)
-	# Specify a base url for all http requests
-	@upstream(baseURL: "http://jsonplaceholder.typicode.com", httpCache: true) {
-	query: Query
+  # Specify server configuration: Start tailcall server at 0.0.0.0:8000 and enable GraphiQL playground
+  @server(port: 8000, graphiql: true)
+  # Specify a base url for all http requests
+  @upstream(baseURL: "http://jsonplaceholder.typicode.com", httpCache: true) {
+  query: Query
 }
 
 type Query {
-	# Specify the http path for the users query
-	users: [User] @http(path: "/users")
-	user(id: Int!): User @http(path: "/users/{{args.id}}")
-	posts: [Post] @http(path: "/posts")
+  # Specify the http path for the users query
+  users: [User] @http(path: "/users")
+  user(id: Int!): User @http(path: "/users/{{args.id}}")
+  posts: [Post] @http(path: "/posts")
 }
 
 # Create a user type with the fields returned by the users api
 type User {
-	id: Int!
-	name: String!
-	username: String!
-	email: String!
+  id: Int!
+  name: String!
+  username: String!
+  email: String!
 
-	# Extend the user type with the posts field
-	# Use the current user's id to construct the path
-	posts: [Post] @http(path: "/users/{{value.id}}/posts")
+  # Extend the user type with the posts field
+  # Use the current user's id to construct the path
+  posts: [Post] @http(path: "/users/{{value.id}}/posts")
 }
 
 # Create a post type with the fields returned by the posts api
 type Post {
-	id: Int!
-	title: String!
-	body: String!
+  id: Int!
+  title: String!
+  body: String!
 }

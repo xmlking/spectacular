@@ -1,28 +1,28 @@
 {
-	"$schema": "https://turbo.build/schema.json",
-	"globalDependencies": ["**/.env", "**/.secrets"],
-	"globalDotEnv": [".env", ".secrets"],
-	"pipeline": {
-		"build": {
-			"dependsOn": ["^build"],
-			"outputs": ["dist/**", ".svelte-kit/**", ".vercel/**"]
-		},
-		"lint": {},
-		"format": {},
-		"test": {
-			"dotEnv": ["**/.env", "**/.env.test"],
-			"inputs": ["src/**", "tests/**"]
-		},
-		"test:unit": {},
-		"test:unit:coverage": {
-			"outputs": ["coverage/**"]
-		},
-		"test:watch": {
-			"cache": false,
-			"persistent": true
-		},
-		"clean": {
-			"cache": false
-		}
-	}
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env", "**/.secrets"],
+  "globalDotEnv": [".env", ".secrets"],
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".svelte-kit/**", ".vercel/**"]
+    },
+    "lint": {},
+    "format": {},
+    "test": {
+      "dotEnv": ["**/.env", "**/.env.test"],
+      "inputs": ["src/**", "tests/**"]
+    },
+    "test:unit": {},
+    "test:unit:coverage": {
+      "outputs": ["coverage/**"]
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false
+    }
+  }
 }

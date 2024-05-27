@@ -91,9 +91,9 @@ await nhost.graphql.request(
 	{},
 	{
 		headers: {
-			'x-hasura-role': 'me'
-		}
-	}
+			'x-hasura-role': 'me',
+		},
+	},
 );
 ```
 
