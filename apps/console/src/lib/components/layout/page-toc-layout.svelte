@@ -18,19 +18,16 @@ $: classesColRight = `${cColRight}`;
 </script>
 
 <div class={classesBase}>
-    <!-- Content -->
-    <div
-        class={classesColLeft}
-        use:tocCrawler={{ mode: 'generate', scrollTarget: '#page', key: tocKey }}
-    >
-        <slot />
-    </div>
-    <!-- Aside -->
-    {#if sidebar}
-        <!-- Ad Position -->
-        <aside class="layout-cols-aside {classesColRight}">
-            <!-- Table of Contents -->
-            <TableOfContents>On the Page</TableOfContents>
-        </aside>
-    {/if}
+  <!-- Content -->
+  <div class={classesColLeft} use:tocCrawler={{ mode: 'generate', scrollTarget: '#page', key: tocKey }}>
+    <slot />
+  </div>
+  <!-- Aside -->
+  {#if sidebar}
+    <!-- Ad Position -->
+    <aside class="layout-cols-aside {classesColRight}">
+      <!-- Table of Contents -->
+      <TableOfContents>On the Page</TableOfContents>
+    </aside>
+  {/if}
 </div>

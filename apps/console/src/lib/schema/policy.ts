@@ -107,32 +107,36 @@ export const updatePolicyKeys = updatePolicySchema.innerType().keyof().Enum;
  * Refine functions
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function checkValidStringDates(ctx: z.RefinementCtx, validFrom: string | undefined | null, validTo: string | undefined | null) {
-    if (validFrom && validTo && new Date(validTo) < new Date(validFrom)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['validTo'],
-          message: 'validTo should be after validFrom',
-        });
-    }
+function checkValidStringDates(
+  ctx: z.RefinementCtx,
+  validFrom: string | undefined | null,
+  validTo: string | undefined | null,
+) {
+  if (validFrom && validTo && new Date(validTo) < new Date(validFrom)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['validTo'],
+      message: 'validTo should be after validFrom',
+    });
+  }
 }
 
 function checkValidDates(ctx: z.RefinementCtx, validFrom: Date | undefined | null, validTo: Date | undefined | null) {
-    if (validFrom && validTo && validTo < validFrom) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['validTo'],
-          message: 'validTo should be after validFrom',
-        });
-    }
+  if (validFrom && validTo && validTo < validFrom) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['validTo'],
+      message: 'validTo should be after validFrom',
+    });
+  }
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function checkForMissingRule(ctx: z.RefinementCtx, ruleId: string | undefined | null, rule: any) {
-    if (ruleId == null && rule == null) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['ruleId'],
-          message: 'Rule is required',
-        });
-    }
+  if (ruleId == null && rule == null) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['ruleId'],
+      message: 'Rule is required',
+    });
+  }
 }

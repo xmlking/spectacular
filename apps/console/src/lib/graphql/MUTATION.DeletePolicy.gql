@@ -1,15 +1,12 @@
 mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!) {
-    update_policies_by_pk(pk_columns: { id: $policyId }, _set: { deletedAt: $deletedAt }) {
-        id
+  update_policies_by_pk(pk_columns: { id: $policyId }, _set: { deletedAt: $deletedAt }) {
+    id
+  }
+  update_rules(where: { shared: { _eq: false }, id: { _eq: $ruleId } }, _set: { deletedAt: $deletedAt }) {
+    affected_rows
+    returning {
+      id
+      displayName
     }
-    update_rules(
-        where: { shared: { _eq: false }, id: { _eq: $ruleId } }
-        _set: { deletedAt: $deletedAt }
-    ) {
-        affected_rows
-        returning {
-            id
-            displayName
-        }
-    }
+  }
 }

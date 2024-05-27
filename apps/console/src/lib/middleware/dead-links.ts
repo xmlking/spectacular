@@ -19,10 +19,10 @@ const dead_links_redirect_to: Record<string, string> = {
  * use it in hooks.ts
  */
 export const dead_links: Reroute = ({ url }) => {
-    // If we have a value, let's redirect
-    const reroutedPath = dead_links_redirect_to[url.pathname];
-    if (url.pathname in dead_links_redirect_to) {
-        log.debug(`redirecting ${url.pathname} to  ${reroutedPath}`);
-        return dead_links_redirect_to[url.pathname];
-    }
+  // If we have a value, let's redirect
+  const reroutedPath = dead_links_redirect_to[url.pathname];
+  if (url.pathname in dead_links_redirect_to) {
+    log.debug(`redirecting ${url.pathname} to  ${reroutedPath}`);
+    return dead_links_redirect_to[url.pathname];
+  }
 };

@@ -5,8 +5,8 @@ export let data;
 </script>
 
 <svelte:head>
-    <title>Datablocks | Settings</title>
-    <meta name="description" content="Account Settings" />
+  <title>Datablocks | Settings</title>
+  <meta name="description" content="Account Settings" />
 </svelte:head>
 
 <h2 class="h2">Settings</h2>

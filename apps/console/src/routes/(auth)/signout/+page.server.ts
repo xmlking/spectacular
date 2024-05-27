@@ -1,7 +1,7 @@
-import { i18n } from '$lib/i18n';
-import { removeNhostSessionInCookies } from '$lib/nhost';
 import { Logger } from '@spectacular/utils';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
+import { i18n } from '$lib/i18n';
+import { removeNhostSessionInCookies } from '$lib/nhost';
 import type { Actions } from './$types';
 
 const log = new Logger('server:auth:signout');

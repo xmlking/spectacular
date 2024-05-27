@@ -9,6 +9,6 @@ module.exports = {
     },
   ],
   plugins: ['prettier-plugin-svelte', 'prettier-plugin-tailwindcss', 'prettier-plugin-packagejson'],
-  printWidth: 100,
+  printWidth: 120,
   singleQuote: true,
 };

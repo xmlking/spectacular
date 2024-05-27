@@ -6,10 +6,10 @@ import { beforeEach, describe, it } from 'vitest';
 // import { render, screen, fireEvent } from '@testing-library/svelte';
 
 describe('signin form', () => {
-    beforeEach(() => {});
+  beforeEach(() => {});
 
-    it('renders page', async () => {});
-    it('with generic error message', async () => {});
-    it('with unverified email error message', async () => {});
-    it('success and redirect', async () => {});
+  it('renders page', async () => {});
+  it('with generic error message', async () => {});
+  it('with unverified email error message', async () => {});
+  it('success and redirect', async () => {});
 });

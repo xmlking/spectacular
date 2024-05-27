@@ -1,14 +1,14 @@
-import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
-import { i18n } from '$lib/i18n';
-import { setNhostSessionInCookies } from '$lib/nhost';
-import { userSchema } from '$lib/schema/user';
-import { limiter } from '$lib/server/limiter/limiter';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
 import { Logger, sleep } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import { limiter } from '$lib/server/limiter/limiter';
+import { userSchema } from '$lib/schema/user';
+import { setNhostSessionInCookies } from '$lib/nhost';
+import { i18n } from '$lib/i18n';
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 
 const pwSchema = userSchema.pick({
   email: true,
@@ -22,20 +22,20 @@ const pwlSchema = userSchema.pick({
 const log = new Logger('server:auth:signin');
 
 export const load = async (event) => {
-    const {
-      locals: { nhost },
-    } = event;
-    // Preflight prevents direct posting.
-    // If preflight option is true and this function isn't called
-    // before posting, request will be limited:
-    await limiter.cookieLimiter?.preflight(event);
+  const {
+    locals: { nhost },
+  } = event;
+  // Preflight prevents direct posting.
+  // If preflight option is true and this function isn't called
+  // before posting, request will be limited:
+  await limiter.cookieLimiter?.preflight(event);
 
-    const session = nhost.auth.getSession();
-    log.debug(session);
-    if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
-    const pwForm = await superValidate(zod(pwSchema));
-    const pwlForm = await superValidate(zod(pwlSchema));
-    return { pwForm, pwlForm };
+  const session = nhost.auth.getSession();
+  log.debug(session);
+  if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
+  const pwForm = await superValidate(zod(pwSchema));
+  const pwlForm = await superValidate(zod(pwlSchema));
+  return { pwForm, pwlForm };
 };
 
 export const actions = {
@@ -171,23 +171,23 @@ export const actions = {
 };
 
 async function login(nhost: NhostClient, redirectTo: string, lang: string, provider: Provider) {
-    const { providerUrl } = await nhost.auth.signIn({
-      provider,
-      options: {
-        redirectTo,
-        // defaultRole: 'user',
-        // It's possible to give users a subset of allowed roles during signup.
-        // allowedRoles: ['me', 'user'],
-        locale: lang,
-        metadata: {
-          plan: 'free',
-          default_org: PUBLIC_DEFAULT_ORGANIZATION,
-        },
+  const { providerUrl } = await nhost.auth.signIn({
+    provider,
+    options: {
+      redirectTo,
+      // defaultRole: 'user',
+      // It's possible to give users a subset of allowed roles during signup.
+      // allowedRoles: ['me', 'user'],
+      locale: lang,
+      metadata: {
+        plan: 'free',
+        default_org: PUBLIC_DEFAULT_ORGANIZATION,
       },
-    });
+    },
+  });
 
-    log.debug(providerUrl);
-    if (providerUrl) {
-      redirectWithFlash(307, providerUrl);
-    }
+  log.debug(providerUrl);
+  if (providerUrl) {
+    redirectWithFlash(307, providerUrl);
+  }
 }

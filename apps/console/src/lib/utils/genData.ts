@@ -6,7 +6,7 @@ import { degreesToRadians, radiansToDegrees } from './math';
  *   see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_number_between_0_inclusive_and_1_exclusive
  */
 export function getRandomNumber(min: number, max: number) {
-    return Math.random() * (max - min) + min;
+  return Math.random() * (max - min) + min;
 }
 
 /**
@@ -14,27 +14,33 @@ export function getRandomNumber(min: number, max: number) {
  *   see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_integer_between_two_values_inclusive
  */
 export function getRandomInteger(min: number, max: number, includeMax = true) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + (includeMax ? 1 : 0)) + min);
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + (includeMax ? 1 : 0)) + min);
 }
 
-export function createSeries(options: { count?: number; min: number; max: number; keys?: Array<string>; value?: 'number' | 'integer' }) {
-    const count = options.count ?? 10;
-    const min = options.min;
-    const max = options.max;
-    const keys = options.keys ?? ['y'];
+export function createSeries(options: {
+  count?: number;
+  min: number;
+  max: number;
+  keys?: Array<string>;
+  value?: 'number' | 'integer';
+}) {
+  const count = options.count ?? 10;
+  const min = options.min;
+  const max = options.max;
+  const keys = options.keys ?? ['y'];
 
-    return Array.from({ length: count }).map((_) => {
-        return {
-          x: options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max),
-          ...Object.fromEntries(
-            keys.map((key) => {
-              return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
-            }),
-          ),
-        };
-    });
+  return Array.from({ length: count }).map((_) => {
+    return {
+      x: options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max),
+      ...Object.fromEntries(
+        keys.map((key) => {
+          return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
+        }),
+      ),
+    };
+  });
 }
 
 export function createDateSeries(options: {
@@ -63,31 +69,37 @@ export function createDateSeries(options: {
   });
 }
 
-export function createTimeSeries(options: { count?: number; min: number; max: number; keys: Array<string>; value: 'number' | 'integer' }) {
-    const count = options.count ?? 10;
-    const min = options.min;
-    const max = options.max;
-    const keys = options.keys ?? ['value'];
+export function createTimeSeries(options: {
+  count?: number;
+  min: number;
+  max: number;
+  keys: Array<string>;
+  value: 'number' | 'integer';
+}) {
+  const count = options.count ?? 10;
+  const min = options.min;
+  const max = options.max;
+  const keys = options.keys ?? ['value'];
 
-    let lastStartDate = startOfDay(new Date());
+  let lastStartDate = startOfDay(new Date());
 
-    const timeSeries = Array.from({ length: count }).map((_, i) => {
-        const startDate = addMinutes(lastStartDate, getRandomInteger(0, 60));
-        const endDate = addMinutes(startDate, getRandomInteger(5, 60));
-        lastStartDate = startDate;
-        return {
-          name: `item ${i + 1}`,
-          startDate,
-          endDate,
-          ...Object.fromEntries(
-            keys.map((key) => {
-              return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
-            }),
-          ),
-        };
-    });
+  const timeSeries = Array.from({ length: count }).map((_, i) => {
+    const startDate = addMinutes(lastStartDate, getRandomInteger(0, 60));
+    const endDate = addMinutes(startDate, getRandomInteger(5, 60));
+    lastStartDate = startDate;
+    return {
+      name: `item ${i + 1}`,
+      startDate,
+      endDate,
+      ...Object.fromEntries(
+        keys.map((key) => {
+          return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
+        }),
+      ),
+    };
+  });
 
-    return timeSeries;
+  return timeSeries;
 }
 
 export const wideData = [
@@ -120,18 +132,18 @@ export const longData = [
 ];
 
 export function getPhyllotaxis({ radius, count, width, height }) {
-    // Phyllotaxis: https://www.youtube.com/watch?v=KWoJgHFYWxY
-    const rads = Math.PI * (3 - Math.sqrt(5)); // ~2.4 rads or ~137.5 degrees
-    return getSpiral({ angle: radiansToDegrees(rads), radius, count, width, height });
+  // Phyllotaxis: https://www.youtube.com/watch?v=KWoJgHFYWxY
+  const rads = Math.PI * (3 - Math.sqrt(5)); // ~2.4 rads or ~137.5 degrees
+  return getSpiral({ angle: radiansToDegrees(rads), radius, count, width, height });
 }
 
 export function getSpiral({ angle, radius, count, width, height }) {
-    return Array.from({ length: count }, (_, i) => {
-        const r = radius * Math.sqrt(i);
-        const a = degreesToRadians(angle * i);
-        return {
-          x: width / 2 + r * Math.cos(a),
-          y: height / 2 + r * Math.sin(a),
-        };
-    });
+  return Array.from({ length: count }, (_, i) => {
+    const r = radius * Math.sqrt(i);
+    const a = degreesToRadians(angle * i);
+    return {
+      x: width / 2 + r * Math.cos(a),
+      y: height / 2 + r * Math.sin(a),
+    };
+  });
 }

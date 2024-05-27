@@ -1,8 +1,8 @@
-import { env } from '$env/dynamic/public';
 import { NhostClient } from '@nhost/nhost-js';
 import type { NhostSession } from '@nhost/nhost-js';
 import type { Cookies } from '@sveltejs/kit';
 import { waitFor } from 'xstate/lib/waitFor';
+import { env } from '$env/dynamic/public';
 // import { env as secrets } from '$env/dynamic/private';
 
 export const NHOST_SESSION_KEY = 'nhostSession';

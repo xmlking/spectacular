@@ -1,6 +1,3 @@
-import type { policies_set_input, rules_set_input } from '$houdini';
-import { UpdatePolicyStore } from '$houdini';
-import { policySchema, updatePolicySchema as schema } from '$lib/schema/policy';
 import { Logger, cleanClone } from '@spectacular/utils';
 /* FIXME */
 /* eslint-disable no-undef,@typescript-eslint/no-unused-vars */
@@ -9,6 +6,9 @@ import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import { policySchema, updatePolicySchema as schema } from '$lib/schema/policy';
+import { UpdatePolicyStore } from '$houdini';
+import type { policies_set_input, rules_set_input } from '$houdini';
 
 const log = new Logger('policy.update.server');
 

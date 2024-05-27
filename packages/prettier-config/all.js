@@ -1,8 +1,8 @@
 /** @type {import("prettier").Config} */
 module.exports = {
-  tabWidth: 4,
+  tabWidth: 2,
   singleQuote: true,
-  printWidth: 100,
+  printWidth: 120,
   plugins: [
     'prettier-plugin-svelte',
     'prettier-plugin-astro',
@@ -13,7 +13,7 @@ module.exports = {
     {
       files: '*.ts',
       options: {
-        printWidth: 140,
+        printWidth: 120,
       },
     },
     {

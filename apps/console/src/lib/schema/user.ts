@@ -1,5 +1,5 @@
-import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 import { z } from 'zod';
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 
 export const userSchema = z.object({
   firstName: z
@@ -59,16 +59,16 @@ export const userUpdatePasswordSchema = userSchema
  * Refine functions
  */
 function checkConfirmPassword(ctx: z.RefinementCtx, confirmPassword: string, password: string) {
-    if (confirmPassword !== password) {
-        ctx.addIssue({
-          code: 'custom',
-          message: 'Password and Confirm Password must match',
-          path: ['password'],
-        });
-        ctx.addIssue({
-          code: 'custom',
-          message: 'Password and Confirm Password must match',
-          path: ['confirmPassword'],
-        });
-    }
+  if (confirmPassword !== password) {
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Password and Confirm Password must match',
+      path: ['password'],
+    });
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Password and Confirm Password must match',
+      path: ['confirmPassword'],
+    });
+  }
 }
