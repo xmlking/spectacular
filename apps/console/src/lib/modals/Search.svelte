@@ -14,7 +14,7 @@ const cResultAnchor = '!rounded-none justify-between hover:variant-soft focus:!v
 const cFooter = 'hidden md:flex items-center gap-2 bg-surface-300-600-token p-4 text-xs font-bold';
 
 // Local
-const searchTerm = '';
+let searchTerm = '';
 const resultsCopy = [
   ...menuNavLinks['/policies'],
   ...menuNavLinks['/flows'],

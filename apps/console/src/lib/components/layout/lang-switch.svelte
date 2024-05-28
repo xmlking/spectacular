@@ -9,7 +9,7 @@ import { page } from '$app/stores';
 import { availableLanguageTags, languageTag } from '$i18n/runtime';
 import { i18n } from '$lib/i18n';
 
-const locl: string = languageTag();
+let locl: string = languageTag();
 </script>
 
 <!-- TODO: make it pretty-->

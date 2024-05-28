@@ -3,7 +3,9 @@
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
 import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
-import type { AppShell, ModalComponent } from '@skeletonlabs/skeleton';
+import type { ModalComponent } from '@skeletonlabs/skeleton';
+// biome-ignore lint/style/useImportType: biome still don't understand svelte
+import  { AppShell } from '@skeletonlabs/skeleton';
 import { startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
 import type { ComponentEvents } from 'svelte';

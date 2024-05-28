@@ -41,7 +41,7 @@ export const snapshot = { capture, restore };
 
 // TODO: reset buttom should also reset `subject & rule search inputs`
 // subject settings
-const subject = $form?.subjectId
+let subject = $form?.subjectId
   ? {
       id: $form.subjectId,
       displayName: $form.subjectDisplayName,
