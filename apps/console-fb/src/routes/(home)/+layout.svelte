@@ -1,7 +1,7 @@
 <script lang="ts">
-import { DarkMode } from 'flowbite-svelte';
 import { Footer1 } from '$lib/blocks/footer';
 import { StickyHeader } from '$lib/blocks/header';
+import { DarkMode } from 'flowbite-svelte';
 
 // HINT: added `right-4 top-4` to original `btnClass`
 let btnClass =

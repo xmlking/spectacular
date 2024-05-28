@@ -1,13 +1,13 @@
 <script lang="ts">
-import { twMerge } from 'tailwind-merge';
 import { setContext } from 'svelte';
 import type { Action, TransitionConfig } from 'svelte/action';
 import { noop } from 'svelte/internal';
+import { twMerge } from 'tailwind-merge';
 
 setContext('background', true);
 $: setContext('color', color);
 
-export let tag: string = 'div';
+export let tag = 'div';
 export let color:
   | 'gray'
   | 'red'
@@ -25,9 +25,9 @@ export let color:
   | 'navbarUl'
   | 'form'
   | 'none' = 'default';
-export let rounded: boolean = false;
-export let border: boolean = false;
-export let shadow: boolean = false;
+export let rounded = false;
+export let border = false;
+export let shadow = false;
 
 type TransitionFunc = (node: HTMLElement, params: any) => TransitionConfig;
 

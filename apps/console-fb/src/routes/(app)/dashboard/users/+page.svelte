@@ -1,6 +1,6 @@
 <script lang="ts">
-import { Button, Input, Navbar, NavBrand, TableSearch } from 'flowbite-svelte';
-import { UsersOutline, SearchOutline } from 'flowbite-svelte-icons';
+import { Button, Input, NavBrand, Navbar, TableSearch } from 'flowbite-svelte';
+import { SearchOutline, UsersOutline } from 'flowbite-svelte-icons';
 
 let itemEx = [
   ['Apple MacBook Pro 17"', 'Sliver', 'Laptop', '$2999', '<a href="/">Edit</a>'],

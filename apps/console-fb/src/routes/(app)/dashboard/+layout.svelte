@@ -1,12 +1,12 @@
 <script lang="ts">
-import { onMount } from 'svelte';
-import { getFlash } from 'sveltekit-flash-message/client';
-import { setupViewTransition } from 'sveltekit-view-transition';
-import { DarkMode } from 'flowbite-svelte';
 import { page } from '$app/stores';
 import { Footer, Header } from '$lib/blocks/dashboard';
 import { SideMenu } from '$lib/blocks/side';
 import { addToast } from '$lib/components/toast';
+import { DarkMode } from 'flowbite-svelte';
+import { onMount } from 'svelte';
+import { getFlash } from 'sveltekit-flash-message/client';
+import { setupViewTransition } from 'sveltekit-view-transition';
 
 export let data;
 

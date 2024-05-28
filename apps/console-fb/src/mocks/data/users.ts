@@ -1,4 +1,4 @@
-import { randomBytes, pbkdf2Sync } from 'node:crypto';
+import { pbkdf2Sync, randomBytes } from 'node:crypto';
 
 export enum role {
   user = 'user',

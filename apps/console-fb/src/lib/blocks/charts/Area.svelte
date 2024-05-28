@@ -1,6 +1,6 @@
 <script>
-import { LayerCake, Svg } from 'layercake';
 import Area from '$lib/components/layercake/Area.svelte';
+import { LayerCake, Svg } from 'layercake';
 
 import data from '$mocks/data/points';
 

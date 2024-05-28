@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Button, Input, Navbar, NavBrand, TableSearch } from 'flowbite-svelte';
+import { Button, Input, NavBrand, Navbar, TableSearch } from 'flowbite-svelte';
 import { SearchOutline, UsersOutline } from 'flowbite-svelte-icons';
 
 let itemEx = [

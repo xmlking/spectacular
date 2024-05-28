@@ -1,8 +1,8 @@
 <script lang="ts">
-import { scaleBand } from 'd3-scale';
-import { LayerCake, Svg } from 'layercake';
 import Bar from '$lib/components/layercake/Bar.svelte';
 import data from '$mocks/data/groups';
+import { scaleBand } from 'd3-scale';
+import { LayerCake, Svg } from 'layercake';
 const xKey = 'value';
 const yKey = 'year';
 </script>

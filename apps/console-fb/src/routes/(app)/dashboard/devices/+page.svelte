@@ -1,4 +1,10 @@
 <script lang="ts">
+import { dev } from '$app/environment';
+import { Link } from '$lib/components';
+import { ErrorMessage } from '$lib/components/form';
+import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+import { DataTable } from '$lib/components/table';
+import { Logger } from '@spectacular/utils';
 import { Breadcrumb, BreadcrumbItem, Button, ButtonGroup, Input, NavBrand, Navbar } from 'flowbite-svelte';
 import { MobilePhoneOutline, SearchOutline } from 'flowbite-svelte-icons';
 import { createRender, createTable } from 'svelte-headless-table';
@@ -6,12 +12,6 @@ import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/
 import { TimeDistance } from 'svelte-time-distance';
 import { writable } from 'svelte/store';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { Logger } from '@spectacular/utils';
-import { DataTable } from '$lib/components/table';
-import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-import { ErrorMessage } from '$lib/components/form';
-import { Link } from '$lib/components';
-import { dev } from '$app/environment';
 
 const log = new Logger('devices:list:browser');
 export let data;

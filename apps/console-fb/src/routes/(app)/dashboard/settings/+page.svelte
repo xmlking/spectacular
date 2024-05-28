@@ -1,6 +1,6 @@
 <script lang="ts">
+import { ToastLevel, addToast } from '$lib/components/toast';
 import { Button, Heading, P } from 'flowbite-svelte';
-import { addToast, ToastLevel } from '$lib/components/toast';
 </script>
 
 <svelte:head>

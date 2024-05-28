@@ -1,9 +1,9 @@
-import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
-import { sequence } from '@sveltejs/kit/hooks';
-import { Logger } from '@spectacular/utils';
 import { dev } from '$app/environment';
 import { TokenVault } from '$lib/server/backend/TokenVault';
 import { authjs, guard, houdini } from '$lib/server/middleware';
+import { Logger } from '@spectacular/utils';
+import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
 // import envPri from '$lib/variables/variables.server';
 /**
  * Code in hooks.server.ts will run when the application starts up,

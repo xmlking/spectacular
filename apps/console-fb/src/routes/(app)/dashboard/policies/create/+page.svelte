@@ -1,4 +1,22 @@
 <script lang="ts">
+import { browser, dev } from '$app/environment';
+import { CachePolicy, SearchRulesStore, order_by } from '$houdini';
+import {
+  DateInput,
+  FloatingTextInput,
+  Form,
+  SelectFB as FormSelect,
+  Radio,
+  Range,
+  TagsInput,
+  Toggle,
+} from '$lib/components/form';
+import { actionOptions, directionOptions, protocols } from '$lib/models/enums';
+import { createPolicyKeys as keys } from '$lib/models/schema';
+import type { Subject } from '$lib/models/types';
+import envPub from '$lib/variables/variables';
+// import { debounce } from 'throttle-debounce';
+import { Logger } from '@spectacular/utils';
 import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
 import {
   ComputerSpeakerOutline,
@@ -11,24 +29,6 @@ import {
 import { onMount } from 'svelte';
 import Select from 'svelte-select';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
-// import { debounce } from 'throttle-debounce';
-import { Logger } from '@spectacular/utils';
-import type { Subject } from '$lib/models/types';
-import { createPolicyKeys as keys } from '$lib/models/schema';
-import { actionOptions, directionOptions, protocols } from '$lib/models/enums';
-import {
-  DateInput,
-  FloatingTextInput,
-  Form,
-  SelectFB as FormSelect,
-  Radio,
-  Range,
-  TagsInput,
-  Toggle,
-} from '$lib/components/form';
-import { browser, dev } from '$app/environment';
-import envPub from '$lib/variables/variables';
-import { CachePolicy, SearchRulesStore, order_by } from '$houdini';
 // import { Datepicker } from 'flowbite-svelte';
 
 const log = new Logger('routes:policies:create');

@@ -4,7 +4,7 @@ import 'vite-plugin-pwa/svelte';
 import 'vite-plugin-pwa/info';
 import 'vite-plugin-pwa/pwa-assets';
 
-import { DefaultSession } from '@auth/core/types';
+import type { DefaultSession } from '@auth/core/types';
 declare global {
   namespace App {
     interface Session {
@@ -49,5 +49,3 @@ declare global {
   // Date of last commit
   declare const __GIT_DATE__: string;
 }
-
-export {};

@@ -1,6 +1,6 @@
 <script lang="ts">
-import { onDestroy, onMount } from 'svelte';
 import { graphql } from '$houdini';
+import { onDestroy, onMount } from 'svelte';
 
 const schedules = graphql(`
   subscription StreamPolicy {

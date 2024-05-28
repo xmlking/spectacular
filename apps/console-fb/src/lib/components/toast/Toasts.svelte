@@ -1,9 +1,9 @@
 <script lang="ts">
-import { twMerge } from 'tailwind-merge';
-import { CloseButton } from 'flowbite-svelte';
-import { CloseCircleSolid, CheckCircleSolid, ExclamationCircleOutline, InfoCircleOutline } from 'flowbite-svelte-icons';
-import { slide } from 'svelte/transition';
 import { default as Frame } from '$lib/components/utils/Frame.svelte';
+import { CloseButton } from 'flowbite-svelte';
+import { CheckCircleSolid, CloseCircleSolid, ExclamationCircleOutline, InfoCircleOutline } from 'flowbite-svelte-icons';
+import { slide } from 'svelte/transition';
+import { twMerge } from 'tailwind-merge';
 import { ToastLevel, dismissToast, toasts } from './store';
 
 export let divClass = 'w-full max-w-xs p-4 z-50';

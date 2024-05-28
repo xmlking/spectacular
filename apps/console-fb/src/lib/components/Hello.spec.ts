@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, it, expect } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/svelte';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import Hello from './Hello.svelte';
 
 describe('Hello.svelte', () => {

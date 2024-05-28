@@ -1,6 +1,6 @@
 <script lang="ts">
-import { afterUpdate } from 'svelte';
 import { Area, AxisRadial, AxisX, AxisY, Bar, Beeswarm, BeeswarmForce, Brush, Line } from '$lib/blocks/charts';
+import { afterUpdate } from 'svelte';
 
 let container: HTMLElement;
 let positions = [];

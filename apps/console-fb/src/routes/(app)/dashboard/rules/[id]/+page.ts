@@ -1,9 +1,9 @@
+import { CachePolicy, GetRuleStore } from '$houdini';
+import { updateRuleSchema as schema } from '$lib/models/schema';
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { updateRuleSchema as schema } from '$lib/models/schema';
-import { CachePolicy, GetRuleStore } from '$houdini';
 
 const getRuleStore = new GetRuleStore();
 export const load = async (event) => {

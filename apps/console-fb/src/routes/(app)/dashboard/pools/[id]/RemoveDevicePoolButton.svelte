@@ -1,7 +1,7 @@
 <script lang="ts">
+import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
 import { CloseCircleOutline } from 'flowbite-svelte-icons';
 import { createEventDispatcher } from 'svelte';
-import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
 
 export let id: string;
 

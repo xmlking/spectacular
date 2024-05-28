@@ -1,8 +1,8 @@
+import envPub from '$lib/variables/variables';
+import envPri from '$lib/variables/variables.server';
 import { decode } from '@auth/core/jwt';
 import type { Cookies } from '@sveltejs/kit';
 import { SignJWT } from 'jose';
-import envPri from '$lib/variables/variables.server';
-import envPub from '$lib/variables/variables';
 
 // FIXME: temp workaround. remove when fixed.
 // https://github.com/nextauthjs/next-auth/discussions/5595#discussioncomment-4628977

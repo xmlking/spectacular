@@ -1,10 +1,10 @@
 <script lang="ts">
-import { LayerCake, Svg } from 'layercake';
 import Area from '$lib/components/layercake/Area.svelte';
 import AxisX from '$lib/components/layercake/AxisX.svelte';
 import AxisY from '$lib/components/layercake/AxisY.svelte';
 import Line from '$lib/components/layercake/Line.svelte';
 import points from '$mocks/data/points';
+import { LayerCake, Svg } from 'layercake';
 const xKey = 'myX';
 const yKey = 'myY';
 </script>

@@ -1,18 +1,18 @@
 <script lang="ts">
+import { page } from '$app/stores';
+import { Hamburger } from '$lib/components';
 import {
   Avatar,
   Dropdown,
   DropdownDivider,
   DropdownHeader,
   DropdownItem,
-  Navbar,
   NavBrand,
   NavHamburger,
   NavLi,
   NavUl,
+  Navbar,
 } from 'flowbite-svelte';
-import { page } from '$app/stores';
-import { Hamburger } from '$lib/components';
 
 let path: string;
 $: path = $page.url.pathname;

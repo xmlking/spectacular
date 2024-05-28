@@ -1,8 +1,8 @@
-import { z } from 'zod';
 import { building } from '$app/environment';
 import { env as dynPubEnv } from '$env/dynamic/public';
 import * as statPubEnv from '$env/static/public';
 import { booleanSchema } from '$lib/utils/zod.utils';
+import { z } from 'zod';
 
 /**
  * To use any type besides string, you need to use zod's `coerce` method.
@@ -10,13 +10,13 @@ import { booleanSchema } from '$lib/utils/zod.utils';
 
 const schema = z.object({
   // Add your public env variables here
-  PUBLIC_BASE_URL: z.string().url().regex(new RegExp('^\\S*$'), {
+  PUBLIC_BASE_URL: z.string().url().regex(/^\S*$/, {
     message: 'No spaces allowed',
   }),
-  PUBLIC_GRAPHQL_ENDPOINT: z.string().url().regex(new RegExp('^\\S*$'), {
+  PUBLIC_GRAPHQL_ENDPOINT: z.string().url().regex(/^\S*$/, {
     message: 'No spaces allowed',
   }),
-  PUBLIC_DEFAULT_ORGANIZATION: z.string().regex(new RegExp('^\\S*$'), {
+  PUBLIC_DEFAULT_ORGANIZATION: z.string().regex(/^\S*$/, {
     message: 'No spaces allowed',
   }),
   PUBLIC_FEATURE_ENABLE_AZURE_AD: booleanSchema,

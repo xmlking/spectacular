@@ -1,9 +1,9 @@
-import type { Handle } from '@sveltejs/kit';
-import { Logger } from '@spectacular/utils';
 import { building } from '$app/environment';
+import { setSession } from '$houdini';
 // import { getToken } from '@auth/core/jwt';
 import { getSignedToken } from '$lib/server/middleware/authjs-helper';
-import { setSession } from '$houdini';
+import { Logger } from '@spectacular/utils';
+import type { Handle } from '@sveltejs/kit';
 
 const log = new Logger('middleware:houdini');
 export const houdini = (async ({ event, resolve }) => {

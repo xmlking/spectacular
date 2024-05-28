@@ -1,12 +1,12 @@
+import { DeleteRuleStore } from '$houdini';
+import { ToastLevel } from '$lib/components/toast';
+import { ruleDeleteSchema as schema } from '$lib/models/schema';
+import { Logger } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { Logger } from '@spectacular/utils';
-import { ruleDeleteSchema as schema } from '$lib/models/schema';
-import { ToastLevel } from '$lib/components/toast';
-import { DeleteRuleStore } from '$houdini';
 
 const log = new Logger('rule.action.server');
 

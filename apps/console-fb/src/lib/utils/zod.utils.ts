@@ -56,7 +56,7 @@ export const booleanSchema = z
 export const stringToBoolean = ifNonEmptyString((arg) => arg.toLowerCase() === 'true');
 
 export const stringToNumber = (arg: unknown) =>
-  typeof arg == 'string' && /^\d+$/.test(arg) ? parseInt(arg, 10) : undefined;
+  typeof arg == 'string' && /^\d+$/.test(arg) ? Number.parseInt(arg, 10) : undefined;
 export const stringToNumber2 = (arg: unknown) => {
   const processed = z.string().trim().regex(/^\d+$/).transform(Number).safeParse(arg);
   return processed.success ? processed.data : arg;

@@ -1,7 +1,7 @@
+import { dev } from '$app/environment';
 import type { Browser, Page } from '@playwright/test';
 import { chromium } from '@playwright/test';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
-import { dev } from '$app/environment';
 
 let browser: Browser;
 let page: Page;

@@ -1,6 +1,6 @@
 <script lang="ts">
-import { VERSION } from '@sveltejs/kit';
 import { Stack } from '$lib/components/icons';
+import { VERSION } from '@sveltejs/kit';
 
 const appVersion = __APP_VERSION__;
 const gitTag = __GIT_TAG__;

@@ -61,7 +61,7 @@ function setTag(e) {
   const currentTag = e.target.value;
 
   if (addKeys) {
-    addKeys.forEach(function (key) {
+    addKeys.forEach((key) => {
       if (key === e.keyCode) {
         if (currentTag) e.preventDefault();
 
@@ -88,7 +88,7 @@ function setTag(e) {
   }
 
   if (removeKeys) {
-    removeKeys.forEach(function (key) {
+    removeKeys.forEach((key) => {
       if (key === e.keyCode && tag === '') {
         tags.pop();
         tags = tags;

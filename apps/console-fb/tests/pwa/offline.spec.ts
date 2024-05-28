@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const generateSW = true;

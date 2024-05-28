@@ -1,9 +1,9 @@
+import { CachePolicy, GetPolicyStore } from '$houdini';
+import { updatePolicySchema as schema } from '$lib/models/schema';
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { updatePolicySchema as schema } from '$lib/models/schema';
-import { CachePolicy, GetPolicyStore } from '$houdini';
 
 const getPolicyStore = new GetPolicyStore();
 export const load = async (event) => {

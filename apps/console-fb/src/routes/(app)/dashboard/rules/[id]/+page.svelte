@@ -1,11 +1,11 @@
 <script lang="ts">
-import { Breadcrumb, BreadcrumbItem, Heading, Helper, P } from 'flowbite-svelte';
-import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { Logger } from '@spectacular/utils';
 import { dev } from '$app/environment';
-import { Toggle, FloatingTextInput, Form, SelectFB as FormSelect, Radio, Range, TagsInput } from '$lib/components/form';
+import { FloatingTextInput, Form, SelectFB as FormSelect, Radio, Range, TagsInput, Toggle } from '$lib/components/form';
 import { actionOptions, directionOptions, protocols } from '$lib/models/enums';
 import { updateRuleKeys as keys } from '$lib/models/schema';
+import { Logger } from '@spectacular/utils';
+import { Breadcrumb, BreadcrumbItem, Heading, Helper, P } from 'flowbite-svelte';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
 
 const log = new Logger('routes:rules:update');
 export let data;

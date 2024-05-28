@@ -27,9 +27,9 @@ let position = pos;
 $: if (container) {
   const size = type === 'horizontal' ? w : h;
 
-  let min_px = parseFloat(min);
-  let max_px = parseFloat(max);
-  let pos_px = parseFloat(pos);
+  let min_px = Number.parseFloat(min);
+  let max_px = Number.parseFloat(max);
+  let pos_px = Number.parseFloat(pos);
 
   if (min.endsWith('%')) min_px = (size * min_px) / 100;
   if (max.endsWith('%')) max_px = (size * max_px) / 100;

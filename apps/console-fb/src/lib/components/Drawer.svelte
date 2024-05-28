@@ -1,6 +1,6 @@
 <script lang="ts">
-import { twMerge } from 'tailwind-merge';
 import { fly } from 'svelte/transition';
+import { twMerge } from 'tailwind-merge';
 
 export let show = true;
 export let asideClass = 'w-64';

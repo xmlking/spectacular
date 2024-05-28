@@ -3,14 +3,14 @@
 // import { Analytics } from '$lib/components';
 // import envPub from '$lib/variables/variables';
 import '../app.pcss';
-import { setupViewTransition } from 'sveltekit-view-transition';
-import { onMount } from 'svelte';
-import { pwaInfo } from 'virtual:pwa-info';
 import { pwaAssetsHead } from 'virtual:pwa-assets/head';
+import { pwaInfo } from 'virtual:pwa-info';
+import { dev } from '$app/environment';
+import { Toasts } from '$lib/components/toast';
 import { inject } from '@vercel/analytics';
 import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
-import { Toasts } from '$lib/components/toast';
-import { dev } from '$app/environment';
+import { onMount } from 'svelte';
+import { setupViewTransition } from 'sveltekit-view-transition';
 
 // Init Vercel Analytics
 inject({ mode: dev ? 'development' : 'production' });

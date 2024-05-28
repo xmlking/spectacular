@@ -1,8 +1,8 @@
 <script lang="ts">
-import { LayerCake, Svg } from 'layercake';
 import AxisRadial from '$lib/components/layercake/AxisRadial.svelte';
 // This example loads csv data as json using @rollup/plugin-dsv
 import data from '$mocks/data/radarScores';
+import { LayerCake, Svg } from 'layercake';
 const seriesKey = 'name';
 const xKey = ['fastball', 'change', 'slider', 'cutter', 'curve'];
 const seriesNames = Object.keys(data[0]).filter((d) => d !== seriesKey);

@@ -1,13 +1,16 @@
 <script lang="ts">
+import { page } from '$app/stores';
+import { Drawer } from '$lib/components';
+import { sidebarOpen } from '$lib/stores/sidebar.store';
 import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
 import {
   ArrowRightToBracketOutline,
-  GridOutline,
   BellOutline,
   ClipboardListOutline,
   CogOutline,
   ComputerSpeakerOutline,
   DrawSquareOutline,
+  GridOutline,
   MobilePhoneOutline,
   QuestionCircleOutline,
   ScaleBalancedOutline,
@@ -16,9 +19,6 @@ import {
   UsersGroupOutline,
   UsersOutline,
 } from 'flowbite-svelte-icons';
-import { page } from '$app/stores';
-import { Drawer } from '$lib/components';
-import { sidebarOpen } from '$lib/stores/sidebar.store';
 
 // custom style
 let spanClass = 'flex-1 ml-3 whitespace-nowrap';

@@ -1,8 +1,8 @@
 <script>
-import { scaleOrdinal } from 'd3-scale';
-import { LayerCake, Svg } from 'layercake';
 import Beeswarm from '$lib/components/layercake/BeeswarmForce.svelte';
 import data from '$mocks/data/us-senate';
+import { scaleOrdinal } from 'd3-scale';
+import { LayerCake, Svg } from 'layercake';
 const xKey = 'date_of_birth';
 const zKey = 'gender';
 const titleKey = 'name';

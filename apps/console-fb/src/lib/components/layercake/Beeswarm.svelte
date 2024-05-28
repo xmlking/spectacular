@@ -40,7 +40,7 @@ function dodge(data, { rds = 1, x = (d) => d } = {}) {
     // Choose the minimum non-intersecting tangent.
     if (intersects(b.x, (b.y = 0))) {
       let a = head;
-      b.y = Infinity;
+      b.y = Number.POSITIVE_INFINITY;
       do {
         let y = a.y + Math.sqrt(radius2 - (a.x - b.x) ** 2);
         if (y < b.y && !intersects(b.x, y)) b.y = y;

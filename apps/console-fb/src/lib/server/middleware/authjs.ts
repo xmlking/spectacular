@@ -1,3 +1,7 @@
+import { dev } from '$app/environment';
+import envPub from '$lib/variables/variables';
+import envPri from '$lib/variables/variables.server';
+import users from '$mocks/data/users';
 import type { Provider } from '@auth/core/providers';
 import AzureAD from '@auth/core/providers/azure-ad';
 import CredentialsProvider from '@auth/core/providers/credentials';
@@ -7,10 +11,6 @@ import Google from '@auth/core/providers/google';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import type { SvelteKitAuthConfig } from '@auth/sveltekit';
 import { Logger } from '@spectacular/utils';
-import envPri from '$lib/variables/variables.server';
-import envPub from '$lib/variables/variables';
-import { dev } from '$app/environment';
-import users from '$mocks/data/users';
 import { getOrg } from './org-mapper';
 import { appRoles } from './role-mapper';
 

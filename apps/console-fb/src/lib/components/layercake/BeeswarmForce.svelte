@@ -3,8 +3,8 @@
 	Generates an SVG Beeswarm chart using a [d3-force simulation](https://github.com/d3/d3-force).
  -->
 <script>
+import { forceCollide, forceSimulation, forceX, forceY } from 'd3-force';
 import { getContext } from 'svelte';
-import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
 const { data, xGet, height, zGet } = getContext('LayerCake');
 const nodes = $data.map((d) => ({ ...d }));
 /** @type {Number} [r=4] - The circle radius size in pixels. */

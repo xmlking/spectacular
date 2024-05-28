@@ -1,4 +1,15 @@
 <script lang="ts">
+import { browser, dev } from '$app/environment';
+import { goto, invalidateAll } from '$app/navigation';
+import { DeletePolicyStore, cache } from '$houdini';
+import { DeleteButton2, Link } from '$lib/components';
+import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
+import { ErrorMessage } from '$lib/components/form';
+import FormAlerts from '$lib/components/form/FormAlerts.svelte';
+import { DataTable } from '$lib/components/table';
+import { ToastLevel, addToast } from '$lib/components/toast';
+import { subjectTypeOptions } from '$lib/models/enums';
+import { Logger } from '@spectacular/utils';
 import { Breadcrumb, BreadcrumbItem, Button, ButtonGroup, NavBrand, Navbar, Select } from 'flowbite-svelte';
 import {
   ComputerSpeakerOutline,
@@ -15,17 +26,6 @@ import { default as SelectFetch } from 'svelte-select';
 import { TimeDistance } from 'svelte-time-distance';
 import { writable } from 'svelte/store';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { Logger } from '@spectacular/utils';
-import { subjectTypeOptions } from '$lib/models/enums';
-import { ToastLevel, addToast } from '$lib/components/toast';
-import { DataTable } from '$lib/components/table';
-import FormAlerts from '$lib/components/form/FormAlerts.svelte';
-import { ErrorMessage } from '$lib/components/form';
-import type { CustomEventProps } from '$lib/components/DeleteButton.svelte';
-import { DeleteButton2, Link } from '$lib/components';
-import { goto, invalidateAll } from '$app/navigation';
-import { browser, dev } from '$app/environment';
-import { DeletePolicyStore, cache } from '$houdini';
 
 const log = new Logger('policies:list:browser');
 export let data;

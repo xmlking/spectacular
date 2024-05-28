@@ -1,4 +1,4 @@
-import { z, ZodArray, ZodEffects, ZodNumber, ZodObject, ZodString, ZodType } from 'zod';
+import { type ZodArray, type ZodEffects, type ZodNumber, type ZodObject, type ZodString, ZodType, z } from 'zod';
 import type { ZodTypeAny } from 'zod';
 import { setPath } from './setPath';
 

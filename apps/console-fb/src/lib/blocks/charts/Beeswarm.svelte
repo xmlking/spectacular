@@ -1,8 +1,8 @@
 <script lang="ts">
-import { LayerCake, Svg } from 'layercake';
-import { scaleOrdinal } from 'd3-scale';
 import Beeswarm from '$lib/components/layercake/Beeswarm.svelte';
 import data from '$mocks/data/cars';
+import { scaleOrdinal } from 'd3-scale';
+import { LayerCake, Svg } from 'layercake';
 const xKey = 'Weight_in_lbs';
 const zKey = 'Origin';
 const titleKey = 'Name';
