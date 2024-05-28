@@ -21,8 +21,7 @@ This Turborepo includes the following packages/apps:
   - `console`: a sample **dashboard** web app build with [svelte-kit](https://kit.svelte.dev/)
 - Packages
   - `ui`: a stub Svelte component library shared by both `web` and `docs` applications
-  - `eslint-config`: `eslint` configurations (includes `eslint-plugin-svelte` and `eslint-config-prettier`)
-  - `prettier-config`: shared `prettier` configurations (plugins etc...)
+  - `biome-config`: shared `biome.jsonc` files
   - `typescript-config`: shared `tsconfig` files
   - `utils`: utility functions used throughout the monorepo
 
@@ -30,9 +29,9 @@ This Turborepo includes the following packages/apps:
 
 This Turborepo has some additional tools already setup for you:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- [TypeScript](https://www.typescriptlang.org/) for static type checking ✅
+- [Biome](https://biomejs.dev/) for code linting, formatting, and fixing 🌿
+- [Changesets](https://github.com/changesets/changesets) for managing versioning, changelogs, and publishing 📝
 
 ## Prerequisite
 
@@ -74,7 +73,7 @@ npx turbo link
 
 ~~turbo automatically include environment variables from `.env` , `.secrets` as we set them at `globalDotEnv` in `turbo.json`~~
 
-Add `dotenv-run ` to your `package.json`
+Add `dotenv-run` to your `package.json`
 
 ```json filename="package.json" highlight=3
 {

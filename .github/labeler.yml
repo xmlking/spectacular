@@ -37,7 +37,7 @@ env:
   - '**/.env.test'
 workspace:
   - .github/**/*
-  - .prettierrc
   - config.yaml
   - turbo.json
   - package.json
+  - biome.jsonc
