@@ -2,8 +2,8 @@
 import { TableOfContents, tocCrawler } from '@skeletonlabs/skeleton';
 
 // Props
-export const sidebar = true;
-export const tocKey: unknown = undefined;
+export let sidebar = true;
+export let tocKey: unknown = undefined;
 
 // Classes
 const cBase = 'page-padding flex items-start gap-10';

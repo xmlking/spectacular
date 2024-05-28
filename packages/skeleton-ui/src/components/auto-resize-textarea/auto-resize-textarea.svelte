@@ -9,13 +9,13 @@ interface $$Props extends HTMLTextareaAttributes {
   maxRows?: number;
 }
 
-export const value = '';
-export const minRows: number | undefined = undefined;
-export const maxRows: number | undefined = undefined;
+export let value = '';
+export let minRows: number | undefined = undefined;
+export let maxRows: number | undefined = undefined;
 
 import ProxyTextareaElement from './core.js';
 
-const element: HTMLTextAreaElement | null = null;
+let element: HTMLTextAreaElement | null = null;
 
 const instance = new ProxyTextareaElement();
 

@@ -11,8 +11,8 @@ const popupSettings: PopupSettings = {
   closeQuery: '.listbox-item',
 };
 
-export const initials: string | undefined = undefined;
-export const src: string | undefined = undefined;
+export let initials: string | undefined = undefined;
+export let src: string | undefined = undefined;
 </script>
 
 <!-- Avatar button-->

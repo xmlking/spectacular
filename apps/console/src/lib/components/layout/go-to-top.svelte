@@ -11,7 +11,7 @@ interface $$Props extends HTMLButtonAttributes {
 }
 const className: $$Props['class'] = undefined;
 export { className as class };
-export const showAtPixel: $$Props['showAtPixel'] = 2000;
+export let showAtPixel: $$Props['showAtPixel'] = 2000;
 
 const elemPage = browser ? document.querySelector('#page') : null;
 
