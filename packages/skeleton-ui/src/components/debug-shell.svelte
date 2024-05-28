@@ -1,6 +1,6 @@
 <script lang="ts">
-import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 import { dev } from '$app/environment';
+import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 import { Icon } from '#components/icons/index.js';
 
 export let open = false;

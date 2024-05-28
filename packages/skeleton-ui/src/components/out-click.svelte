@@ -4,33 +4,33 @@ import { createEventDispatcher } from 'svelte';
 const dispatch = createEventDispatcher();
 
 // Wrapper tag
-export let tag: string = 'div';
+export let tag = 'div';
 
 // To use it as HTML `class` attr
-let className: string = '';
+let className = '';
 export { className as class };
 
 // DOM elements to exclude from triggering the `outclick` event
 export let excludeElements: HTMLElement | HTMLElement[] = [];
-export let excludeQuerySelectorAll: string = '';
+export let excludeQuerySelectorAll = '';
 
 // Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
 $: excludeElementsArray = excludeElements ? castArray(excludeElements) : [];
 
 // If the wrapper did contain the event target, allow the `outclick` event to dispatch
-export let includeSelf: boolean = false;
+export let includeSelf = false;
 
 // Should the outclick event happen on (`pointerdown`) or (`pointerdown` + `pointerup`)
-export let halfClick: boolean = false;
+export let halfClick = false;
 
 // Using to handle full-click functionality. Simulating the core click event without having this issue: https://github.com/babakfp/svelte-outclick/issues/4
-let isPointerdownTriggered: boolean = false;
+let isPointerdownTriggered = false;
 
 // DOM element that wraps everything that goes inside the component slot
 let wrapper: HTMLElement;
 
 const didClickOnExcludedElement = (target: HTMLElement): boolean => {
-  let status: boolean = false;
+  let status = false;
 
   if (excludeElementsArray && excludeElementsArray.length > 0) {
     for (const element of excludeElementsArray) {
