@@ -271,8 +271,8 @@ importers:
         specifier: 0.9.4
         version: 0.9.4(svelte@4.2.17)
       svelte-ux:
-        specifier: 0.63.4
-        version: 0.63.4(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
+        specifier: 0.64.1
+        version: 0.64.1(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
       sveltekit-flash-message:
         specifier: 2.4.4
         version: 2.4.4(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(terser@5.31.0)))(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(terser@5.31.0)))(svelte@4.2.17)
@@ -981,8 +981,8 @@ importers:
         specifier: 0.9.4
         version: 0.9.4(svelte@4.2.17)
       svelte-ux:
-        specifier: 0.63.4
-        version: 0.63.4(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
+        specifier: 0.64.1
+        version: 0.64.1(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
       sveltekit-flash-message:
         specifier: 2.4.4
         version: 2.4.4(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(terser@5.31.0)))(svelte@4.2.17)(vite@5.2.11(@types/node@20.12.12)(terser@5.31.0)))(svelte@4.2.17)
@@ -7114,10 +7114,12 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@8.1.0:
     resolution: {integrity: sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==}
     engines: {node: '>=12'}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-directory@4.0.1:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
@@ -9731,10 +9733,12 @@ packages:
 
   rimraf@2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   robust-predicates@3.0.2:
@@ -10357,6 +10361,11 @@ packages:
 
   svelte-ux@0.63.4:
     resolution: {integrity: sha512-5dLokmdCj/K3MRQ+QBZh+1nUnqmF7yCsLWZ9KorFSESBpcpw9d1eJ3H+5px+I1FmcZtTpvv5EqciYf/TN6opmg==}
+    peerDependencies:
+      svelte: ^3.56.0 || ^4.0.0
+
+  svelte-ux@0.64.1:
+    resolution: {integrity: sha512-D6vkDB3Lf3ZLK4IY1qca1O13ll4rBWsXjbvrWMXNrpYb/HqViCnK/ydHdQejdC0e4afw96MK/qOfeMwWOTw0oQ==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0
 
@@ -22333,6 +22342,36 @@ snapshots:
       date-fns: 2.30.0
 
   svelte-ux@0.63.4(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17):
+    dependencies:
+      '@floating-ui/dom': 1.6.5
+      '@fortawesome/fontawesome-common-types': 6.5.2
+      '@mdi/js': 7.4.47
+      clsx: 2.1.1
+      culori: 4.0.1
+      d3-array: 3.2.4
+      d3-scale: 4.0.2
+      date-fns: 3.6.0
+      immer: 10.1.1
+      lodash-es: 4.17.21
+      prism-svelte: 0.5.0
+      prism-themes: 1.9.0
+      prismjs: 1.29.0
+      sveld: 0.20.0(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)
+      svelte: 4.2.17
+      tailwind-merge: 2.3.0
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - '@babel/core'
+      - coffeescript
+      - less
+      - postcss
+      - postcss-load-config
+      - pug
+      - sass
+      - stylus
+      - sugarss
+
+  svelte-ux@0.64.1(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17):
     dependencies:
       '@floating-ui/dom': 1.6.5
       '@fortawesome/fontawesome-common-types': 6.5.2
