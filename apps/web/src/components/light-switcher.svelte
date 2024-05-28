@@ -1,7 +1,7 @@
 <script lang="ts">
+import { Moon, Sun } from 'lucide-svelte';
+import { mode, toggleMode } from 'mode-watcher';
 import { twMerge } from 'tailwind-merge';
-import { toggleMode, mode } from 'mode-watcher';
-import { Sun, Moon } from 'lucide-svelte';
 
 export let labelClass =
   'flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600/80';

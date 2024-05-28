@@ -1,7 +1,7 @@
 ---
-import { Icon } from '@astrojs/starlight/components';
-import Container from '@components/Container.astro';
-import Layout from '@layouts/Layout.astro';
+import { Icon } from "@astrojs/starlight/components";
+import Container from "@components/container.astro";
+import Layout from "@layouts/layout.astro";
 ---
 
 <Layout title="404 Not Found">
@@ -10,7 +10,10 @@ import Layout from '@layouts/Layout.astro';
       <div class="mt-16 text-center">
         <h1 class="text-4xl font-bold lg:text-5xl lg:tracking-tight">404</h1>
         <p class="mt-4 text-lg text-slate-600">Page not found.</p>
-        <a href="/" class="flex gap-3 rounded bg-neutral-200 px-4 py-2 text-black hover:bg-neutral-600">
+        <a
+          href="/"
+          class="flex gap-3 rounded bg-neutral-200 px-4 py-2 text-black hover:bg-neutral-600"
+        >
           Go Back to Home
           <Icon size="1.8rem" name="left-arrow" />
         </a>

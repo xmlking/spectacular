@@ -1,13 +1,13 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import svelte from '@astrojs/svelte';
-import vercel from '@astrojs/vercel/serverless';
-import node from '@astrojs/node';
-import starlight from '@astrojs/starlight';
-import sitemap from '@astrojs/sitemap';
-import partytown from '@astrojs/partytown';
-import expressiveCode from 'astro-expressive-code';
 import mdx from '@astrojs/mdx';
+import node from '@astrojs/node';
+import partytown from '@astrojs/partytown';
+import sitemap from '@astrojs/sitemap';
+import starlight from '@astrojs/starlight';
+import svelte from '@astrojs/svelte';
+import tailwind from '@astrojs/tailwind';
+import vercel from '@astrojs/vercel/serverless';
+import expressiveCode from 'astro-expressive-code';
+import { defineConfig } from 'astro/config';
 
 const SITE_URL = process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL : 'http://localhost:4321/';
 

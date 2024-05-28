@@ -1,12 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
-import Layout from '@layouts/Layout.astro';
-import Container from '@components/Container.astro';
-import SectionHead from '@components/SectionHead.astro';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import Container from "@components/container.astro";
+import SectionHead from "@components/section-head.astro";
+import Layout from "@layouts/layout.astro";
 
 // Filter team entries with 'draft: false' & date before current date
-const publishedTeamMembers = await getCollection('team', ({ data }) => {
+const publishedTeamMembers = await getCollection("team", ({ data }) => {
   return !data.draft && data.publishedAt < new Date();
 });
 ---
@@ -20,10 +20,13 @@ const publishedTeamMembers = await getCollection('team', ({ data }) => {
       </SectionHead>
 
       <div class="mx-auto mt-16 flex max-w-4xl flex-col gap-3">
-        <h2 class="text-3xl font-bold text-gray-800"> Empowering the world with Astro.</h2>
+        <h2 class="text-3xl font-bold text-gray-800">
+          Empowering the world with Astro.
+        </h2>
         <p class="text-lg leading-relaxed text-slate-500">
-          We're a multi-cultural team from around the world! We come from diverse backgrounds, bringing different
-          personalities, experiences and skills to the job. This is what makes our team so special.
+          We're a multi-cultural team from around the world! We come from
+          diverse backgrounds, bringing different personalities, experiences and
+          skills to the job. This is what makes our team so special.
         </p>
       </div>
       <div class="mx-auto mt-12 grid max-w-4xl gap-10 md:grid-cols-3">
@@ -43,8 +46,12 @@ const publishedTeamMembers = await getCollection('team', ({ data }) => {
               </div>
 
               <div class="mt-4 text-center">
-                <h2 class="text-lg text-gray-800">{teamMemberEntry.data.name}</h2>
-                <h3 class="text-sm text-slate-500">{teamMemberEntry.data.title}</h3>
+                <h2 class="text-lg text-gray-800">
+                  {teamMemberEntry.data.name}
+                </h2>
+                <h3 class="text-sm text-slate-500">
+                  {teamMemberEntry.data.title}
+                </h3>
               </div>
             </div>
           ))

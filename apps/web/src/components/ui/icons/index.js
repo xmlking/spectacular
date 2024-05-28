@@ -1,1 +1,1 @@
-export { default as Tick } from './Tick.astro';
+export { default as Tick } from './tick.astro';
