@@ -1,23 +1,23 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
-	import { navigating, page } from '$app/stores';
-	import Preview from '$lib/components/preview.svelte';
-	import Counter from './components/Counter.svelte';
-	import Menu from './components/Menu.svelte';
-	import { description } from './components/description.js';
+import { navigating, page } from '$app/stores';
+import Preview from '$lib/components/preview.svelte';
+import { fly } from 'svelte/transition';
+import Counter from './components/Counter.svelte';
+import Menu from './components/Menu.svelte';
+import { description } from './components/description.js';
 
-	$: {
-		if (navigating) {
-			// prettier-ignore
-			if ($page.url.pathname === "/experiments/outclick") {
-				$description = `Click outside of COMPONENT CONTENT to increase the counter. The component captures the event for you, so you can for example use it to close a dropdown, a menu, or do whatever.`
-			} else if ($page.url.pathname === "/experiments/outclick/exclude") {
-				$description = "You can exclude some elements from triggering the event."
-			} else if ($page.url.pathname === "/experiments/outclick/half-click") {
-				$description = "Trigger the event on pointer-down instead of a full click action (pointer-down + pointer-up)."
-			}
-		}
-	}
+$: {
+  if (navigating) {
+    // prettier-ignore
+    if ($page.url.pathname === '/experiments/outclick') {
+      $description = `Click outside of COMPONENT CONTENT to increase the counter. The component captures the event for you, so you can for example use it to close a dropdown, a menu, or do whatever.`;
+    } else if ($page.url.pathname === '/experiments/outclick/exclude') {
+      $description = 'You can exclude some elements from triggering the event.';
+    } else if ($page.url.pathname === '/experiments/outclick/half-click') {
+      $description = 'Trigger the event on pointer-down instead of a full click action (pointer-down + pointer-up).';
+    }
+  }
+}
 </script>
 
 <Preview>

@@ -1,7 +1,7 @@
 type TFormatterProps = {
-	value: string | number | Date;
-	locale?: string;
-	options?: Intl.DateTimeFormatOptions;
+  value: string | number | Date;
+  locale?: string;
+  options?: Intl.DateTimeFormatOptions;
 };
 
 type TDateTemplate = Record<string, Omit<TFormatterProps, 'value'>>;
@@ -10,20 +10,20 @@ type TDateTemplate = Record<string, Omit<TFormatterProps, 'value'>>;
  * Date templates to be used with `dateFormat` function
  */
 export const dateTemplates = {
-	'YYYY-MM-DD': {
-		locale: 'fr-CA',
-		options: {
-			year: 'numeric',
-			month: '2-digit',
-			day: '2-digit'
-		}
-	}
+  'YYYY-MM-DD': {
+    locale: 'fr-CA',
+    options: {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    },
+  },
 } satisfies TDateTemplate;
 
 type TDateFormatterProps = {
-	value: TFormatterProps['value'];
-	options?: TFormatterProps['options'];
-	preset?: keyof typeof dateTemplates;
+  value: TFormatterProps['value'];
+  options?: TFormatterProps['options'];
+  preset?: keyof typeof dateTemplates;
 };
 
 /**
@@ -34,7 +34,7 @@ type TDateFormatterProps = {
  * @returns The formatted date string.
  */
 const formatter = ({ value, locale = 'en-US', options }: TFormatterProps) =>
-	new Intl.DateTimeFormat(locale, options).format(new Date(value));
+  new Intl.DateTimeFormat(locale, options).format(new Date(value));
 
 /**
  * Formats a date string based on a preset or custom template.
@@ -43,4 +43,4 @@ const formatter = ({ value, locale = 'en-US', options }: TFormatterProps) =>
  * @returns The formatted date string.
  */
 export const dateFormat = ({ value, preset, options }: TDateFormatterProps) =>
-	formatter({ value, ...(preset ? dateTemplates[preset] : options) });
+  formatter({ value, ...(preset ? dateTemplates[preset] : options) });

@@ -5,16 +5,16 @@
 	Source code: https://github.com/jmagrippis/with-svelte
 -->
 <script lang="ts">
-	let previousY: number;
-	let currentY: number;
-	let clientHeight: number;
-	const deriveDirection = (y: number) => {
-		const direction = !previousY || previousY < y ? 'down' : 'up';
-		previousY = y;
-		return direction;
-	};
-	$: scrollDirection = deriveDirection(currentY);
-	$: offscreen = scrollDirection === 'down' && currentY > clientHeight * 4;
+let previousY: number;
+let currentY: number;
+let clientHeight: number;
+const deriveDirection = (y: number) => {
+  const direction = !previousY || previousY < y ? 'down' : 'up';
+  previousY = y;
+  return direction;
+};
+$: scrollDirection = deriveDirection(currentY);
+$: offscreen = scrollDirection === 'down' && currentY > clientHeight * 4;
 </script>
 
 <svelte:window bind:scrollY={currentY} />

@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { Pagination as PaginationPrimitive } from "bits-ui";
-	import ChevronRight from "lucide-svelte/icons/chevron-right";
-	import { Button } from "#components/ui/button/index.js";
-	import { cn } from "#utils.js";
+import type { Pagination as PaginationPrimitive } from 'bits-ui';
+import ChevronRight from 'lucide-svelte/icons/chevron-right';
+import { Button } from '#components/ui/button/index.js';
+import { cn } from '#utils.js';
 
-	type $$Props = PaginationPrimitive.NextButtonProps;
-	type $$Events = PaginationPrimitive.NextButtonEvents;
+type $$Props = PaginationPrimitive.NextButtonProps;
+type $$Events = PaginationPrimitive.NextButtonEvents;
 
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export { className as class };
 </script>
 
 <PaginationPrimitive.NextButton asChild let:builder>

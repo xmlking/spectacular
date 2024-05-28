@@ -1,59 +1,49 @@
 <script lang="ts">
-	import { afterUpdate } from 'svelte';
-	import {
-		Area,
-		AxisRadial,
-		AxisX,
-		AxisY,
-		Bar,
-		Beeswarm,
-		BeeswarmForce,
-		Brush,
-		Line
-	} from '$lib/blocks/charts';
+import { Area, AxisRadial, AxisX, AxisY, Bar, Beeswarm, BeeswarmForce, Brush, Line } from '$lib/blocks/charts';
+import { afterUpdate } from 'svelte';
 
-	let container: HTMLElement;
-	let positions = [];
-	let lastId = 'axis';
-	let activeSection = 'axis';
-	let anchors: NodeListOf<HTMLElement>;
-	afterUpdate(() => {
-		if (typeof window !== 'undefined') {
-			anchors = container.querySelectorAll('[id]');
-			lastId = window.location.hash.slice(1);
-			activeSection = lastId || 'axis';
-			onresize();
-			onscroll();
-			window.addEventListener('scroll', onscroll, true);
-			window.addEventListener('resize', onresize, true);
-			// wait for fonts to load...
-			const timeouts = [setTimeout(onresize, 1000), setTimeout(onresize, 5000)];
-		}
-	});
-	function onresize() {
-		if (container) {
-			const { top } = container.getBoundingClientRect();
-			positions = [].map.call(anchors, (anchor) => {
-				return anchor.getBoundingClientRect().top - top;
-			});
-		}
-	}
-	function onscroll() {
-		const top = -window.scrollY;
-		let i = anchors.length;
-		while (i--) {
-			if (positions[i] + top < 100) {
-				const anchor = anchors[i];
-				const { id } = anchor;
-				if (id !== lastId) {
-					activeSection = id;
-					// this.fire('scroll', id);
-					lastId = id;
-				}
-				return;
-			}
-		}
-	}
+let container: HTMLElement;
+let positions = [];
+let lastId = 'axis';
+let activeSection = 'axis';
+let anchors: NodeListOf<HTMLElement>;
+afterUpdate(() => {
+  if (typeof window !== 'undefined') {
+    anchors = container.querySelectorAll('[id]');
+    lastId = window.location.hash.slice(1);
+    activeSection = lastId || 'axis';
+    onresize();
+    onscroll();
+    window.addEventListener('scroll', onscroll, true);
+    window.addEventListener('resize', onresize, true);
+    // wait for fonts to load...
+    const timeouts = [setTimeout(onresize, 1000), setTimeout(onresize, 5000)];
+  }
+});
+function onresize() {
+  if (container) {
+    const { top } = container.getBoundingClientRect();
+    positions = [].map.call(anchors, (anchor) => {
+      return anchor.getBoundingClientRect().top - top;
+    });
+  }
+}
+function onscroll() {
+  const top = -window.scrollY;
+  let i = anchors.length;
+  while (i--) {
+    if (positions[i] + top < 100) {
+      const anchor = anchors[i];
+      const { id } = anchor;
+      if (id !== lastId) {
+        activeSection = id;
+        // this.fire('scroll', id);
+        lastId = id;
+      }
+      return;
+    }
+  }
+}
 </script>
 
 <!-- https://github.com/rbb-data/svelte-starter/tree/main/src/routes/examples -->

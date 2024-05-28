@@ -1,5 +1,5 @@
 <script lang="ts">
-	/**
+/**
 		Generates an SVG x-axis. This component is also configured to detect if your x-scale is an ordinal scale. If so, it will place the markers in the middle of the bandwidth.
 		@type {Boolean} [gridlines=true] - Extend lines from the ticks into the chart space
 		@type {Boolean} [tickMarks=false] - Show a vertical mark for each tick.
@@ -10,35 +10,35 @@
 		@type {Number} [xTick=0] - TK
 		@type {Number} [yTick=16] - The distance from the baseline to place each tick value.
 	*/
-	import { getContext } from 'svelte';
-	const { width, height, xScale, yRange } = getContext('LayerCake');
-	export let gridlines = true;
-	export let tickMarks = false;
-	export let baseline = false;
-	export let snapTicks = false;
-	export let formatTick = (d) => d;
-	export let ticks = undefined;
-	export let xTick = 0;
-	export let yTick = 16;
-	$: isBandwidth = typeof $xScale.bandwidth === 'function';
-	$: tickVals = Array.isArray(ticks)
-		? ticks
-		: isBandwidth
-			? $xScale.domain()
-			: typeof ticks === 'function'
-				? ticks($xScale.ticks())
-				: $xScale.ticks(ticks);
-	function textAnchor(i) {
-		if (snapTicks === true) {
-			if (i === 0) {
-				return 'start';
-			}
-			if (i === tickVals.length - 1) {
-				return 'end';
-			}
-		}
-		return 'middle';
-	}
+import { getContext } from 'svelte';
+const { width, height, xScale, yRange } = getContext('LayerCake');
+export let gridlines = true;
+export let tickMarks = false;
+export let baseline = false;
+export let snapTicks = false;
+export let formatTick = (d) => d;
+export let ticks = undefined;
+export let xTick = 0;
+export let yTick = 16;
+$: isBandwidth = typeof $xScale.bandwidth === 'function';
+$: tickVals = Array.isArray(ticks)
+  ? ticks
+  : isBandwidth
+    ? $xScale.domain()
+    : typeof ticks === 'function'
+      ? ticks($xScale.ticks())
+      : $xScale.ticks(ticks);
+function textAnchor(i) {
+  if (snapTicks === true) {
+    if (i === 0) {
+      return 'start';
+    }
+    if (i === tickVals.length - 1) {
+      return 'end';
+    }
+  }
+  return 'middle';
+}
 </script>
 
 <g class="axis x-axis" class:snapTicks>

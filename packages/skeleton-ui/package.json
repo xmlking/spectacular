@@ -1,68 +1,68 @@
 {
-	"name": "@spectacular/skeleton",
-	"description": "Shared skeleton UI components",
-	"sideEffects": false,
-	"type": "module",
-	"imports": {
-		"#utils": "./src/utils/index.js",
-		"#*": "./src/*"
-	},
-	"exports": {
-		".": {
-			"types": "./src/components/index.ts",
-			"svelte": "./src/components/index.ts",
-			"default": "./src/components/index.ts"
-		},
-		"./components": "./src/components/index.ts",
-		"./components/*": "./src/components/*/index.ts",
-		"./utils": "./src/utils/index.ts",
-		"./styles/default": "./styles/default.pcss",
-		"./postcss.config": "./postcss.config.cjs",
-		"./tailwind.config": "./tailwind.config.ts"
-	},
-	"scripts": {
-		"format": "biome format --write .",
-		"lint": "biome check .",
-		"test": "vitest run",
-		"test:unit:coverage": "vitest run --coverage",
-		"test:watch": "vitest"
-	},
-	"devDependencies": {
-		"@floating-ui/dom": "1.6.5",
-		"@fontsource-variable/inter": "5.0.18",
-		"@skeletonlabs/skeleton": "2.10.0",
-		"@skeletonlabs/tw-plugin": "0.4.0",
-		"@spectacular/biome-config": "workspace:*",
-		"@spectacular/typescript-config": "workspace:*",
-		"@spectacular/utils": "workspace:*",
-		"@tailwindcss/container-queries": "0.1.1",
-		"@tailwindcss/forms": "0.5.7",
-		"@tailwindcss/line-clamp": "0.4.4",
-		"@tailwindcss/typography": "0.5.13",
-		"@tsconfig/svelte": "5.0.4",
-		"@types/node": "20.12.12",
-		"@vincjo/datatables": "1.14.5",
-		"@vitest/coverage-v8": "1.6.0",
-		"autoprefixer": "10.4.19",
-		"clsx": "2.1.1",
-		"cssnano": "7.0.1",
-		"formsnap": "1.0.0",
-		"lucide-svelte": "0.378.0",
-		"postcss": "8.4.38",
-		"postcss-import": "16.1.0",
-		"postcss-load-config": "5.1.0",
-		"sveltekit-superforms": "2.13.1",
-		"tailwind-merge": "2.3.0",
-		"tailwind-variants": "0.2.1",
-		"tailwindcss": "3.4.3",
-		"tslib": "2.6.2",
-		"typescript": "5.4.5",
-		"vite": "5.2.11",
-		"vitest": "1.6.0",
-		"zod": "3.23.8"
-	},
-	"peerDependencies": {
-		"@sveltejs/kit": "^2.0.0",
-		"svelte": "^4.0.0"
-	}
+  "name": "@spectacular/skeleton",
+  "description": "Shared skeleton UI components",
+  "sideEffects": false,
+  "type": "module",
+  "imports": {
+    "#utils": "./src/utils/index.js",
+    "#*": "./src/*"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/components/index.ts",
+      "svelte": "./src/components/index.ts",
+      "default": "./src/components/index.ts"
+    },
+    "./components": "./src/components/index.ts",
+    "./components/*": "./src/components/*/index.ts",
+    "./utils": "./src/utils/index.ts",
+    "./styles/default": "./styles/default.pcss",
+    "./postcss.config": "./postcss.config.cjs",
+    "./tailwind.config": "./tailwind.config.ts"
+  },
+  "scripts": {
+    "format": "biome check --apply .",
+    "lint": "biome check .",
+    "test": "vitest run",
+    "test:unit:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@floating-ui/dom": "1.6.5",
+    "@fontsource-variable/inter": "5.0.18",
+    "@skeletonlabs/skeleton": "2.10.0",
+    "@skeletonlabs/tw-plugin": "0.4.0",
+    "@spectacular/biome-config": "workspace:*",
+    "@spectacular/typescript-config": "workspace:*",
+    "@spectacular/utils": "workspace:*",
+    "@tailwindcss/container-queries": "0.1.1",
+    "@tailwindcss/forms": "0.5.7",
+    "@tailwindcss/line-clamp": "0.4.4",
+    "@tailwindcss/typography": "0.5.13",
+    "@tsconfig/svelte": "5.0.4",
+    "@types/node": "20.12.12",
+    "@vincjo/datatables": "1.14.5",
+    "@vitest/coverage-v8": "1.6.0",
+    "autoprefixer": "10.4.19",
+    "clsx": "2.1.1",
+    "cssnano": "7.0.1",
+    "formsnap": "1.0.0",
+    "lucide-svelte": "0.378.0",
+    "postcss": "8.4.38",
+    "postcss-import": "16.1.0",
+    "postcss-load-config": "5.1.0",
+    "sveltekit-superforms": "2.13.1",
+    "tailwind-merge": "2.3.0",
+    "tailwind-variants": "0.2.1",
+    "tailwindcss": "3.4.3",
+    "tslib": "2.6.2",
+    "typescript": "5.4.5",
+    "vite": "5.2.11",
+    "vitest": "1.6.0",
+    "zod": "3.23.8"
+  },
+  "peerDependencies": {
+    "@sveltejs/kit": "^2.0.0",
+    "svelte": "^4.0.0"
+  }
 }

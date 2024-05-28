@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { AlertDialog as AlertDialogPrimitive } from "bits-ui";
-	import { buttonVariants } from "#components/ui/button/index.js";
-	import { cn } from "#utils.js";
+import type { AlertDialog as AlertDialogPrimitive } from 'bits-ui';
+import { buttonVariants } from '#components/ui/button/index.js';
+import { cn } from '#utils.js';
 
-	type $$Props = AlertDialogPrimitive.ActionProps;
-	type $$Events = AlertDialogPrimitive.ActionEvents;
+type $$Props = AlertDialogPrimitive.ActionProps;
+type $$Events = AlertDialogPrimitive.ActionEvents;
 
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export { className as class };
 </script>
 
 <AlertDialogPrimitive.Action

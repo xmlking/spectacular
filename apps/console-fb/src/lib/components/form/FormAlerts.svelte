@@ -1,12 +1,12 @@
 <script lang="ts">
-	// Usage: To display Form-level message or errors
-	import { Alert } from 'flowbite-svelte';
-	import { page } from '$app/stores';
-	// import { List, Li, Heading } from 'flowbite-svelte';
-	// import { CheckCircleSolid, CloseCircleSolid } from 'flowbite-svelte-icons';
+import { page } from '$app/stores';
+// Usage: To display Form-level message or errors
+import { Alert } from 'flowbite-svelte';
+// import { List, Li, Heading } from 'flowbite-svelte';
+// import { CheckCircleSolid, CloseCircleSolid } from 'flowbite-svelte-icons';
 
-	export let message: string | undefined;
-	export let errors: string[] | undefined;
+export let message: string | undefined;
+export let errors: string[] | undefined;
 </script>
 
 {#if message || errors}

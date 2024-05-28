@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { getModalStore } from '@skeletonlabs/skeleton';
+import { getModalStore } from '@skeletonlabs/skeleton';
 
-	const modalStore = getModalStore();
+const modalStore = getModalStore();
 
-	// Props
-	/** Exposes parent props to this component. */
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	export let parent: any;
+// Props
+/** Exposes parent props to this component. */
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+export let parent: any;
 
-	// Base Classes
-	const cBase = 'relative w-modal-wide shadow-xl';
-	const cButton = 'absolute -top-3 -right-3 z-1 btn-icon variant-filled';
-	const cIframe = 'bg-black w-full aspect-video rounded-container-token overflow-hidden';
+// Base Classes
+const cBase = 'relative w-modal-wide shadow-xl';
+const cButton = 'absolute -top-3 -right-3 z-1 btn-icon variant-filled';
+const cIframe = 'bg-black w-full aspect-video rounded-container-token overflow-hidden';
 </script>
 
 <!-- @component This example creates an embedded video modal. -->

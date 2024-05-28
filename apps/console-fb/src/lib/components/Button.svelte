@@ -1,12 +1,12 @@
 <script lang="ts">
-	// import type { HTMLButtonAttributes } from 'not-decided-where-from-yet'
-	// interface $$Props extends HTMLButtonAttributes {}
+// import type { HTMLButtonAttributes } from 'not-decided-where-from-yet'
+// interface $$Props extends HTMLButtonAttributes {}
 
-	// https://github.com/sveltejs/rfcs/pull/38
-	type OwnProps = { variant: 'primary' | 'secondary' };
-	/** @type {import('svelte-check/dist/svelte-jsx').svelteHTML} */
-	// type $$Props = svelteHTML.IntrinsicElements['button'] & OwnProps;
-	export let variant: OwnProps['variant'] = 'primary';
+// https://github.com/sveltejs/rfcs/pull/38
+type OwnProps = { variant: 'primary' | 'secondary' };
+/** @type {import('svelte-check/dist/svelte-jsx').svelteHTML} */
+// type $$Props = svelteHTML.IntrinsicElements['button'] & OwnProps;
+export let variant: OwnProps['variant'] = 'primary';
 </script>
 
 <button {...$$restProps} class="{$$restProps.class ?? ''} {variant}">

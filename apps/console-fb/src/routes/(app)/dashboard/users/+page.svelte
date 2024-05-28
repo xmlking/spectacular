@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { Button, Input, Navbar, NavBrand, TableSearch } from 'flowbite-svelte';
-	import { UsersOutline, SearchOutline } from 'flowbite-svelte-icons';
+import { Button, Input, NavBrand, Navbar, TableSearch } from 'flowbite-svelte';
+import { SearchOutline, UsersOutline } from 'flowbite-svelte-icons';
 
-	let itemEx = [
-		['Apple MacBook Pro 17"', 'Sliver', 'Laptop', '$2999', '<a href="/">Edit</a>'],
-		['Microsoft Surface Pro', 'White', 'Laptop PC', '$1999', '<a href="/">Edit</a>'],
-		['Magic Mouse 2', 'Black', 'Accessories', '$99', '<a href="/">Edit</a>']
-	];
-	let headerEx = [' Product name', 'Color', 'Category', 'Price', 'Edit'];
+let itemEx = [
+  ['Apple MacBook Pro 17"', 'Sliver', 'Laptop', '$2999', '<a href="/">Edit</a>'],
+  ['Microsoft Surface Pro', 'White', 'Laptop PC', '$1999', '<a href="/">Edit</a>'],
+  ['Magic Mouse 2', 'Black', 'Accessories', '$99', '<a href="/">Edit</a>'],
+];
+let headerEx = [' Product name', 'Color', 'Category', 'Price', 'Edit'];
 
-	// Table
-	let divClass = '';
+// Table
+let divClass = '';
 </script>
 
 <svelte:head>

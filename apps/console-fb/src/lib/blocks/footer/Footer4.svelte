@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Stack } from '$lib/components/icons';
+import { Stack } from '$lib/components/icons';
 </script>
 
 <footer class="body-font mt-auto text-gray-600 dark:bg-gray-900 dark:text-gray-400">

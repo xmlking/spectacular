@@ -1,25 +1,25 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-	/**
-	 * @typedef {{ icon: string; label: string; fn: () => void }} MenuItem
-	 */
+/**
+ * @typedef {{ icon: string; label: string; fn: () => void }} MenuItem
+ */
 
-	/**
-	 * @type {import("svelte/store").Writable<{x: number; y: number; items: MenuItem[]} | null>}
-	 */
-	let menu_items = writable(null);
+/**
+ * @type {import("svelte/store").Writable<{x: number; y: number; items: MenuItem[]} | null>}
+ */
+let menu_items = writable(null);
 
-	/**
-	 * @param {number} x
-	 * @param {number} y
-	 * @param {MenuItem[]} items
-	 */
-	export function open(x, y, items) {
-		if (items.length > 0) {
-			menu_items.set({ x, y, items });
-		}
-	}
+/**
+ * @param {number} x
+ * @param {number} y
+ * @param {MenuItem[]} items
+ */
+export function open(x, y, items) {
+  if (items.length > 0) {
+    menu_items.set({ x, y, items });
+  }
+}
 </script>
 
 {#if $menu_items}

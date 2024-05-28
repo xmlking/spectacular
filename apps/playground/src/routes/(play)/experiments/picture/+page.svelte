@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { version } from '$app/environment';
-	// import VinylImgMeta from '?w=200;400;800&format=avif;webp;jpg&as=picture';
-	import Preview from '$lib/components/preview.svelte';
-	console.log(`Client version: ${version}`);
+import { version } from '$app/environment';
+// import VinylImgMeta from '?w=200;400;800&format=avif;webp;jpg&as=picture';
+import Preview from '$lib/components/preview.svelte';
+console.log(`Client version: ${version}`);
 </script>
 
 <svelte:head>

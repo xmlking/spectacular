@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
-	import { browser } from '$app/environment';
-	import { ContextMenu, SplitPanel } from '$lib/components';
+import { browser } from '$app/environment';
+import { ContextMenu, SplitPanel } from '$lib/components';
+import { writable } from 'svelte/store';
 
-	let width = browser ? window.innerWidth : 1000;
-	let selected_view = 0;
+let width = browser ? window.innerWidth : 1000;
+let selected_view = 0;
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	$: mobile = writable(false);
-	$: $mobile = width < 768;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+$: mobile = writable(false);
+$: $mobile = width < 768;
 </script>
 
 <svelte:head>

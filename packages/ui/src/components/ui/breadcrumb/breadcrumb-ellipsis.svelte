@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { cn } from "#utils.js";
-	import Ellipsis from "lucide-svelte/icons/ellipsis";
-	import type { HTMLAttributes } from "svelte/elements";
+import Ellipsis from 'lucide-svelte/icons/ellipsis';
+import type { HTMLAttributes } from 'svelte/elements';
+import { cn } from '#utils.js';
 
-	type $$Props = HTMLAttributes<HTMLSpanElement> & {
-		el?: HTMLSpanElement;
-	};
+type $$Props = HTMLAttributes<HTMLSpanElement> & {
+  el?: HTMLSpanElement;
+};
 
-	export let el: $$Props["el"] = undefined;
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+export let el: $$Props['el'] = undefined;
+let className: $$Props['class'] = undefined;
+export { className as class };
 </script>
 
 <span

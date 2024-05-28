@@ -1,24 +1,24 @@
 <script lang="ts">
-	import { flip } from 'svelte/animate';
-	let uid = 0;
-	let dogs = [
-		{ id: uid++, url: 'https://source.unsplash.com/collection/3578257/1' },
-		{ id: uid++, url: 'https://source.unsplash.com/collection/3578257/2' },
-		{ id: uid++, url: 'https://source.unsplash.com/collection/3578257/3' },
-		{ id: uid++, url: 'https://source.unsplash.com/collection/3578257/4' },
-		{ id: uid++, url: 'https://source.unsplash.com/collection/3578257/5' },
-		{ id: uid++, url: 'https://source.unsplash.com/collection/3578257/6' }
-	];
+import { flip } from 'svelte/animate';
+let uid = 0;
+let dogs = [
+  { id: uid++, url: 'https://source.unsplash.com/collection/3578257/1' },
+  { id: uid++, url: 'https://source.unsplash.com/collection/3578257/2' },
+  { id: uid++, url: 'https://source.unsplash.com/collection/3578257/3' },
+  { id: uid++, url: 'https://source.unsplash.com/collection/3578257/4' },
+  { id: uid++, url: 'https://source.unsplash.com/collection/3578257/5' },
+  { id: uid++, url: 'https://source.unsplash.com/collection/3578257/6' },
+];
 
-	function swap(index: number) {
-		let first = dogs[0];
-		let selected = dogs[index];
-		dogs = dogs.map((dog, i) => {
-			if (i === 0) return selected;
-			else if (i === index) return first;
-			else return dog;
-		});
-	}
+function swap(index: number) {
+  let first = dogs[0];
+  let selected = dogs[index];
+  dogs = dogs.map((dog, i) => {
+    if (i === 0) return selected;
+    else if (i === index) return first;
+    else return dog;
+  });
+}
 </script>
 
 <main>

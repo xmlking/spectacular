@@ -1,18 +1,17 @@
 {
-	"name": "@spectacular/biome-config",
-	"private": true,
-	"type": "module",
-	"exports": {
-		"./root": "./root.jsonc",
-		"./library": "./library.jsonc",
-		"./svelte": "./svelte.jsonc",
-		"./svelte-library": "./svelte-library.jsonc"
-	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"peerDependencies": {
-		"@biomejs/biome": "^1.7.3"
-	}
+  "name": "@spectacular/biome-config",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./root": "./root.jsonc",
+    "./library": "./library.jsonc",
+    "./svelte": "./svelte.jsonc",
+    "./svelte-library": "./svelte-library.jsonc"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@biomejs/biome": "^1.7.3"
+  }
 }
-

@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { dev } from '$app/environment';
-	import { page } from '$app/stores';
+import { dev } from '$app/environment';
+import { page } from '$app/stores';
 
-	// we don't want to use <svelte:window bind:online> here, because we only care about the online
-	// state when the page first loads
-	let online = typeof navigator !== 'undefined' ? navigator.onLine : true;
+// we don't want to use <svelte:window bind:online> here, because we only care about the online
+// state when the page first loads
+let online = typeof navigator !== 'undefined' ? navigator.onLine : true;
 
-	async function goBack() {
-		history.back();
-	}
+async function goBack() {
+  history.back();
+}
 </script>
 
 <svelte:head>

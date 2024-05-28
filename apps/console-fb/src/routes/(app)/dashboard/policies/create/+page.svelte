@@ -1,251 +1,244 @@
 <script lang="ts">
-	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import {
-		ComputerSpeakerOutline,
-		MobilePhoneOutline,
-		SearchOutline,
-		UserCircleOutline,
-		UserOutline,
-		UsersGroupOutline
-	} from 'flowbite-svelte-icons';
-	import { onMount } from 'svelte';
-	import Select from 'svelte-select';
-	import { superForm } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
-	// import { debounce } from 'throttle-debounce';
-	import { Logger } from '@spectacular/utils';
-	import type { Subject } from '$lib/models/types';
-	import { createPolicyKeys as keys } from '$lib/models/schema';
-	import {
-		actionOptions,
-		directionOptions,
-		protocols,
-		subjectTypeOptions2
-	} from '$lib/models/enums';
-	import {
-		DateInput,
-		FloatingTextInput,
-		Form,
-		SelectFB as FormSelect,
-		Radio,
-		Range,
-		TagsInput,
-		Toggle
-	} from '$lib/components/form';
-	import { browser, dev } from '$app/environment';
-	import { CachePolicy, SearchRulesStore, order_by } from '$houdini';
-	// import { Datepicker } from 'flowbite-svelte';
-	import envPub from '$lib/variables/variables';
+import { browser, dev } from '$app/environment';
+import { CachePolicy, SearchRulesStore, order_by } from '$houdini';
+import {
+  DateInput,
+  FloatingTextInput,
+  Form,
+  SelectFB as FormSelect,
+  Radio,
+  Range,
+  TagsInput,
+  Toggle,
+} from '$lib/components/form';
+import { actionOptions, directionOptions, protocols, subjectTypeOptions2 } from '$lib/models/enums';
+import { createPolicyKeys as keys } from '$lib/models/schema';
+import type { Subject } from '$lib/models/types';
+// import { Datepicker } from 'flowbite-svelte';
+import envPub from '$lib/variables/variables';
+// import { debounce } from 'throttle-debounce';
+import { Logger } from '@spectacular/utils';
+import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
+import {
+  ComputerSpeakerOutline,
+  MobilePhoneOutline,
+  SearchOutline,
+  UserCircleOutline,
+  UserOutline,
+  UsersGroupOutline,
+} from 'flowbite-svelte-icons';
+import { onMount } from 'svelte';
+import Select from 'svelte-select';
+import { superForm } from 'sveltekit-superforms';
+import SuperDebug from 'sveltekit-superforms';
 
-	const log = new Logger('routes:policies:create');
-	const enableAzureAd = envPub.PUBLIC_FEATURE_ENABLE_AZURE_AD;
-	const subjectTypes = enableAzureAd
-		? [
-				{ value: 'user', label: 'User' },
-				{ value: 'group', label: 'Group' },
-				{ value: 'device', label: 'Device' },
-				{ value: 'device_pool', label: 'Device Pool' }
-			]
-		: [
-				{ value: 'device', label: 'Device' },
-				{ value: 'device_pool', label: 'Device Pool' }
-			];
+const log = new Logger('routes:policies:create');
+const enableAzureAd = envPub.PUBLIC_FEATURE_ENABLE_AZURE_AD;
+const subjectTypes = enableAzureAd
+  ? [
+      { value: 'user', label: 'User' },
+      { value: 'group', label: 'Group' },
+      { value: 'device', label: 'Device' },
+      { value: 'device_pool', label: 'Device Pool' },
+    ]
+  : [
+      { value: 'device', label: 'Device' },
+      { value: 'device_pool', label: 'Device Pool' },
+    ];
 
-	export let data;
-	// Client API:
-	const superform = superForm(data.form, {
-		dataType: 'json',
-		syncFlashMessage: false,
-		onError({ result }) {
-			// the onError event allows you to act on ActionResult errors.
-			// TODO:
-			// message.set(result.error.message)
-			log.error('superForm:', { result });
-		}
-	});
-	const {
-		form,
-		delayed,
-		enhance,
-		errors,
-		constraints,
-		message,
-		isTainted,
-		tainted,
-		posted,
-		allErrors,
-		reset,
-		submitting,
-		capture,
-		restore
-	} = superform;
-	export const snapshot = { capture, restore };
+export let data;
+// Client API:
+const superform = superForm(data.form, {
+  dataType: 'json',
+  syncFlashMessage: false,
+  onError({ result }) {
+    // the onError event allows you to act on ActionResult errors.
+    // TODO:
+    // message.set(result.error.message)
+    log.error('superForm:', { result });
+  },
+});
+const {
+  form,
+  delayed,
+  enhance,
+  errors,
+  constraints,
+  message,
+  isTainted,
+  tainted,
+  posted,
+  allErrors,
+  reset,
+  submitting,
+  capture,
+  restore,
+} = superform;
+export const snapshot = { capture, restore };
 
-	// const validFrom = dateProxy(form, "validFrom", { format: "datetime-utc" });
-	// const validTo = dateProxy(form, "validTo", { format: "datetime-utc" });
+// const validFrom = dateProxy(form, "validFrom", { format: "datetime-utc" });
+// const validTo = dateProxy(form, "validTo", { format: "datetime-utc" });
 
-	// FIXME: tags component is not untainting when reset or on initialization.
-	function untaintTags() {
-		if (isTainted($tainted?.rule?.tags)) {
-			console.log('untaint tags');
-			$tainted = undefined;
-		}
-	}
-	onMount(() => {
-		untaintTags();
-	});
+// FIXME: tags component is not untainting when reset or on initialization.
+function untaintTags() {
+  if (isTainted($tainted?.rule?.tags)) {
+    console.log('untaint tags');
+    $tainted = undefined;
+  }
+}
+onMount(() => {
+  untaintTags();
+});
 
-	// TODO: reset buttom should also reset `subject & rule search inputs`
-	// subject settings
-	let subject = $form?.subjectId
-		? {
-				id: $form.subjectId,
-				displayName: $form.subjectDisplayName,
-				secondaryId: $form.subjectSecondaryId
-			}
-		: null;
-	/**
-	 * Search Subjects by displayName
-	 * Note: min filterText length is set to '3'
-	 */
-	async function fetchSubjects(filterText: string) {
-		if (filterText.length < 3) return [];
-		const response = await fetch(
-			`/api/directory/search?subType=${$form.subjectType}&filter=&search=${filterText}`
-		);
-		if (!response.ok) throw new Error(`An error has occurred: ${response.status}`);
-		const data = await response.json();
-		if (!data) throw new Error('no data');
-		return data.results as Subject[];
-	}
+// TODO: reset buttom should also reset `subject & rule search inputs`
+// subject settings
+let subject = $form?.subjectId
+  ? {
+      id: $form.subjectId,
+      displayName: $form.subjectDisplayName,
+      secondaryId: $form.subjectSecondaryId,
+    }
+  : null;
+/**
+ * Search Subjects by displayName
+ * Note: min filterText length is set to '3'
+ */
+async function fetchSubjects(filterText: string) {
+  if (filterText.length < 3) return [];
+  const response = await fetch(`/api/directory/search?subType=${$form.subjectType}&filter=&search=${filterText}`);
+  if (!response.ok) throw new Error(`An error has occurred: ${response.status}`);
+  const data = await response.json();
+  if (!data) throw new Error('no data');
+  return data.results as Subject[];
+}
 
-	async function onSubjectChange(changedSubject: CustomEvent) {
-		log.debug('onSubjectChange', changedSubject.detail);
-		if (browser) {
-			if (changedSubject?.detail) {
-				$form.subjectId = changedSubject.detail.id;
-				$form.subjectDisplayName = changedSubject.detail.displayName;
-				$form.subjectSecondaryId = changedSubject.detail.secondaryId;
-			} else {
-				$form.subjectId = '';
-				$form.subjectDisplayName = '';
-				$form.subjectSecondaryId = '';
-			}
-		}
-	}
-	function clearSubject(event: CustomEvent | Event) {
-		// reset Selected ???
-		// log.debug('onSubjectTypeChange1',event.target?.value);
-		// log.debug('onSubjectTypeChange', event.detail);
-		if (browser) {
-			subject = null;
-			$form.subjectId = '';
-			$form.subjectDisplayName = '';
-			$form.subjectSecondaryId = '';
-		}
-	}
+async function onSubjectChange(changedSubject: CustomEvent) {
+  log.debug('onSubjectChange', changedSubject.detail);
+  if (browser) {
+    if (changedSubject?.detail) {
+      $form.subjectId = changedSubject.detail.id;
+      $form.subjectDisplayName = changedSubject.detail.displayName;
+      $form.subjectSecondaryId = changedSubject.detail.secondaryId;
+    } else {
+      $form.subjectId = '';
+      $form.subjectDisplayName = '';
+      $form.subjectSecondaryId = '';
+    }
+  }
+}
+function clearSubject(event: CustomEvent | Event) {
+  // reset Selected ???
+  // log.debug('onSubjectTypeChange1',event.target?.value);
+  // log.debug('onSubjectTypeChange', event.detail);
+  if (browser) {
+    subject = null;
+    $form.subjectId = '';
+    $form.subjectDisplayName = '';
+    $form.subjectSecondaryId = '';
+  }
+}
 
-	// rule settings
-	let rule = $form?.ruleId
-		? {
-				id: $form.ruleId,
-				displayName: $form.rule.displayName
-			}
-		: null;
+// rule settings
+let rule = $form?.ruleId
+  ? {
+      id: $form.ruleId,
+      displayName: $form.rule.displayName,
+    }
+  : null;
 
-	// $: disabled=$form.rule.shared
-	$: disabled = rule != null;
+// $: disabled=$form.rule.shared
+$: disabled = rule != null;
 
-	/**
-	 * Search Rules by displayName
-	 * Note: min filterText length is set to '3'
-	 */
-	const searchRulesStore = new SearchRulesStore();
-	const orderBy = [{ updatedAt: order_by.desc_nulls_first }];
-	async function fetchRule(filterText: string) {
-		if (filterText.length < 3) return [];
-		const where = {
-			displayName: { _like: `%${filterText}%` },
-			shared: { _eq: true }
-		};
-		const variables = { where, orderBy };
-		const { errors, data } = await searchRulesStore.fetch({
-			blocking: true,
-			policy: CachePolicy.NetworkOnly,
-			variables
-		});
-		if (errors) throw new Error(`An error has occurred: ${errors}`);
+/**
+ * Search Rules by displayName
+ * Note: min filterText length is set to '3'
+ */
+const searchRulesStore = new SearchRulesStore();
+const orderBy = [{ updatedAt: order_by.desc_nulls_first }];
+async function fetchRule(filterText: string) {
+  if (filterText.length < 3) return [];
+  const where = {
+    displayName: { _like: `%${filterText}%` },
+    shared: { _eq: true },
+  };
+  const variables = { where, orderBy };
+  const { errors, data } = await searchRulesStore.fetch({
+    blocking: true,
+    policy: CachePolicy.NetworkOnly,
+    variables,
+  });
+  if (errors) throw new Error(`An error has occurred: ${errors}`);
 
-		if (!data) throw new Error('no data');
-		return data.rules;
-	}
-	// TODO: https://stackblitz.com/edit/superforms-2-debounced-username?file=src%2Froutes%2F%2Bpage.server.ts,src%2Froutes%2F%2Bpage.svelte
-	// const fetchRuleDebounce = debounce(300, fetchRule);
+  if (!data) throw new Error('no data');
+  return data.rules;
+}
+// TODO: https://stackblitz.com/edit/superforms-2-debounced-username?file=src%2Froutes%2F%2Bpage.server.ts,src%2Froutes%2F%2Bpage.svelte
+// const fetchRuleDebounce = debounce(300, fetchRule);
 
-	async function onRuleChange(changedSubject: CustomEvent) {
-		log.debug('onRuleChange', changedSubject.detail);
-		if (browser) {
-			if (changedSubject?.detail) {
-				$form.ruleId = changedSubject.detail.id;
-				$form.rule.shared = changedSubject.detail.shared;
-				$form.rule.displayName = changedSubject.detail.displayName;
-				$form.rule.description = changedSubject.detail.description;
-				$form.rule.tags = changedSubject.detail.tags;
-				$form.rule.annotations = changedSubject.detail.annotations;
-				$form.rule.source = changedSubject.detail.source;
-				$form.rule.sourcePort = changedSubject.detail.sourcePort;
-				$form.rule.destination = changedSubject.detail.destination;
-				$form.rule.destinationPort = changedSubject.detail.destinationPort;
-				$form.rule.protocol = changedSubject.detail.protocol;
-				$form.rule.direction = changedSubject.detail.direction;
-				$form.rule.action = changedSubject.detail.action;
-				$form.rule.appId = changedSubject.detail.appId;
-				$form.rule.weight = changedSubject.detail.weight;
-				// HINT: we copy `rule.weight` to `policy.weight` initially and let users overwrite weightage afterwords.
-				$form.weight = changedSubject.detail.weight;
-			} else {
-				// Reset rule section of form
-				rule = null;
-				$form.ruleId = undefined;
-				$form.rule.shared = false;
-				$form.rule.displayName = '';
-				$form.rule.description = undefined;
-				$form.rule.tags = undefined;
-				$form.rule.annotations = undefined;
-				$form.rule.source = undefined;
-				$form.rule.sourcePort = undefined;
-				$form.rule.destination = undefined;
-				$form.rule.destinationPort = undefined;
-				$form.rule.protocol = 'Any';
-				$form.rule.direction = 'egress';
-				$form.rule.action = 'block';
-				$form.rule.appId = undefined;
-				$form.rule.weight = 1000;
-			}
-		}
-	}
-	function clearRule(event: Event) {
-		log.debug('onRuleClear', event.target);
-		if (browser) {
-			// Reset rule section of form
-			rule = null;
-			$form.ruleId = undefined;
-			$form.rule.shared = false;
-			$form.rule.displayName = '';
-			$form.rule.description = undefined;
-			$form.rule.tags = undefined;
-			$form.rule.annotations = undefined;
-			$form.rule.source = undefined;
-			$form.rule.sourcePort = undefined;
-			$form.rule.destination = undefined;
-			$form.rule.destinationPort = undefined;
-			$form.rule.protocol = 'Any';
-			$form.rule.direction = 'egress';
-			$form.rule.action = 'block';
-			$form.rule.appId = undefined;
-			$form.rule.weight = 1000;
-		}
-	}
+async function onRuleChange(changedSubject: CustomEvent) {
+  log.debug('onRuleChange', changedSubject.detail);
+  if (browser) {
+    if (changedSubject?.detail) {
+      $form.ruleId = changedSubject.detail.id;
+      $form.rule.shared = changedSubject.detail.shared;
+      $form.rule.displayName = changedSubject.detail.displayName;
+      $form.rule.description = changedSubject.detail.description;
+      $form.rule.tags = changedSubject.detail.tags;
+      $form.rule.annotations = changedSubject.detail.annotations;
+      $form.rule.source = changedSubject.detail.source;
+      $form.rule.sourcePort = changedSubject.detail.sourcePort;
+      $form.rule.destination = changedSubject.detail.destination;
+      $form.rule.destinationPort = changedSubject.detail.destinationPort;
+      $form.rule.protocol = changedSubject.detail.protocol;
+      $form.rule.direction = changedSubject.detail.direction;
+      $form.rule.action = changedSubject.detail.action;
+      $form.rule.appId = changedSubject.detail.appId;
+      $form.rule.weight = changedSubject.detail.weight;
+      // HINT: we copy `rule.weight` to `policy.weight` initially and let users overwrite weightage afterwords.
+      $form.weight = changedSubject.detail.weight;
+    } else {
+      // Reset rule section of form
+      rule = null;
+      $form.ruleId = undefined;
+      $form.rule.shared = false;
+      $form.rule.displayName = '';
+      $form.rule.description = undefined;
+      $form.rule.tags = undefined;
+      $form.rule.annotations = undefined;
+      $form.rule.source = undefined;
+      $form.rule.sourcePort = undefined;
+      $form.rule.destination = undefined;
+      $form.rule.destinationPort = undefined;
+      $form.rule.protocol = 'Any';
+      $form.rule.direction = 'egress';
+      $form.rule.action = 'block';
+      $form.rule.appId = undefined;
+      $form.rule.weight = 1000;
+    }
+  }
+}
+function clearRule(event: Event) {
+  log.debug('onRuleClear', event.target);
+  if (browser) {
+    // Reset rule section of form
+    rule = null;
+    $form.ruleId = undefined;
+    $form.rule.shared = false;
+    $form.rule.displayName = '';
+    $form.rule.description = undefined;
+    $form.rule.tags = undefined;
+    $form.rule.annotations = undefined;
+    $form.rule.source = undefined;
+    $form.rule.sourcePort = undefined;
+    $form.rule.destination = undefined;
+    $form.rule.destinationPort = undefined;
+    $form.rule.protocol = 'Any';
+    $form.rule.direction = 'egress';
+    $form.rule.action = 'block';
+    $form.rule.appId = undefined;
+    $form.rule.weight = 1000;
+  }
+}
 </script>
 
 <svelte:head>

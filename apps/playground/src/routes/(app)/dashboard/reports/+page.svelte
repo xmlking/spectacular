@@ -1,44 +1,41 @@
 <script lang="ts">
-	import { formatDate, PeriodType } from 'svelte-ux/utils/date';
-	import { flatten } from 'svelte-ux/utils/array';
-	import { scaleBand, scaleOrdinal, scaleTime, scaleSequential } from 'd3-scale';
-	import { stack } from 'd3-shape';
-	import { extent, ticks } from 'd3-array';
-	import { interpolateTurbo } from 'd3-scale-chromatic';
-	import { format } from 'date-fns';
-	import {
-		Chart,
-		Svg,
-		Axis,
-		Bars,
-		AreaStack,
-		Highlight,
-		Tooltip,
-		TooltipItem,
-		LinearGradient,
-		Spline,
-		Legend
-	} from 'layerchart';
-	import { createDateSeries } from '$lib/utils/genData';
-	import { temperature as temperatureData } from '$lib/utils/dateSeries';
-	import Preview from '$lib/components/preview.svelte';
+import Preview from '$lib/components/preview.svelte';
+import { temperature as temperatureData } from '$lib/utils/dateSeries';
+import { createDateSeries } from '$lib/utils/genData';
+import { extent, ticks } from 'd3-array';
+import { scaleBand, scaleOrdinal, scaleSequential, scaleTime } from 'd3-scale';
+import { interpolateTurbo } from 'd3-scale-chromatic';
+import { stack } from 'd3-shape';
+import { format } from 'date-fns';
+import {
+  AreaStack,
+  Axis,
+  Bars,
+  Chart,
+  Highlight,
+  Legend,
+  LinearGradient,
+  Spline,
+  Svg,
+  Tooltip,
+  TooltipItem,
+} from 'layerchart';
+import { flatten } from 'svelte-ux/utils/array';
+import { PeriodType, formatDate } from 'svelte-ux/utils/date';
 
-	const data = createDateSeries({
-		count: 30,
-		min: 20,
-		max: 100,
-		value: 'integer',
-		keys: ['value', 'baseline']
-	});
+const data = createDateSeries({
+  count: 30,
+  min: 20,
+  max: 100,
+  value: 'integer',
+  keys: ['value', 'baseline'],
+});
 
-	const keys = ['apples', 'bananas', 'oranges'];
-	const data1 = createDateSeries({ count: 30, min: 50, max: 100, value: 'integer', keys });
-	const stackData = stack().keys(keys)(data1);
+const keys = ['apples', 'bananas', 'oranges'];
+const data1 = createDateSeries({ count: 30, min: 50, max: 100, value: 'integer', keys });
+const stackData = stack().keys(keys)(data1);
 
-	const temperatureColor = scaleSequential(
-		extent(temperatureData, (d) => d.value) as [number, number],
-		interpolateTurbo
-	);
+const temperatureColor = scaleSequential(extent(temperatureData, (d) => d.value) as [number, number], interpolateTurbo);
 </script>
 
 <Preview>

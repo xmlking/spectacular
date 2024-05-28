@@ -1,22 +1,22 @@
 <script>
-	import { scaleOrdinal } from 'd3-scale';
-	import { LayerCake, Svg } from 'layercake';
-	import Beeswarm from '$lib/components/layercake/BeeswarmForce.svelte';
-	import data from '$mocks/data/us-senate';
-	const xKey = 'date_of_birth';
-	const zKey = 'gender';
-	const titleKey = 'name';
-	const r = 6;
-	const seriesNames = new Set();
-	const seriesColors = ['#fc0', '#000'];
-	const dataTransformed = data.map((d) => {
-		seriesNames.add(d[zKey]);
-		return {
-			[titleKey]: d[titleKey],
-			[zKey]: d[zKey],
-			[xKey]: +d[xKey].split('-')[0]
-		};
-	});
+import Beeswarm from '$lib/components/layercake/BeeswarmForce.svelte';
+import data from '$mocks/data/us-senate';
+import { scaleOrdinal } from 'd3-scale';
+import { LayerCake, Svg } from 'layercake';
+const xKey = 'date_of_birth';
+const zKey = 'gender';
+const titleKey = 'name';
+const r = 6;
+const seriesNames = new Set();
+const seriesColors = ['#fc0', '#000'];
+const dataTransformed = data.map((d) => {
+  seriesNames.add(d[zKey]);
+  return {
+    [titleKey]: d[titleKey],
+    [zKey]: d[zKey],
+    [xKey]: +d[xKey].split('-')[0],
+  };
+});
 </script>
 
 <div class="chart-container">

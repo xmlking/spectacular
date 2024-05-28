@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { cn } from "#utils.js";
-	import type { HTMLAttributes } from "svelte/elements";
-	import { getEmblaContext } from "./context.js";
-	import emblaCarouselSvelte from "embla-carousel-svelte";
+import emblaCarouselSvelte from 'embla-carousel-svelte';
+import type { HTMLAttributes } from 'svelte/elements';
+import { cn } from '#utils.js';
+import { getEmblaContext } from './context.js';
 
-	type $$Props = HTMLAttributes<HTMLDivElement>;
+type $$Props = HTMLAttributes<HTMLDivElement>;
 
-	let className: string | undefined | null = undefined;
-	export { className as class };
+let className: string | undefined | null = undefined;
+export { className as class };
 
-	const { orientation, options, plugins, onInit } = getEmblaContext("<Carousel.Content/>");
+const { orientation, options, plugins, onInit } = getEmblaContext('<Carousel.Content/>');
 </script>
 
 <div

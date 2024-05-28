@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Team1 } from '$lib/blocks/team';
+import { Team1 } from '$lib/blocks/team';
 </script>
 
 <svelte:head>

@@ -14,26 +14,26 @@ See: https://svelte-headless-table.bryanmylee.com/docs/api/create-view-model
 // TODO https://github.com/tradingstrategy-ai/frontend/blob/master/src/lib/components/datatable/DataTable.svelte
 -->
 <script lang="ts">
-	import { Button, ButtonGroup, Select } from 'flowbite-svelte';
-	import { CaretDownSolid, CaretUpSolid } from 'flowbite-svelte-icons';
-	import type { TableViewModel } from 'svelte-headless-table';
-	import { Render, Subscribe } from 'svelte-headless-table';
+import { Button, ButtonGroup, Select } from 'flowbite-svelte';
+import { CaretDownSolid, CaretUpSolid } from 'flowbite-svelte-icons';
+import type { TableViewModel } from 'svelte-headless-table';
+import { Render, Subscribe } from 'svelte-headless-table';
 
-	export let tableViewModel: TableViewModel<any, any>;
-	export let hasSearch = true;
-	export let hasPagination = true;
+export let tableViewModel: TableViewModel<any, any>;
+export let hasSearch = true;
+export let hasPagination = true;
 
-	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } = tableViewModel;
-	const { pageIndex, pageCount, pageSize, hasNextPage, hasPreviousPage } = pluginStates.page;
-	const { filterValue } = pluginStates.tableFilter;
+const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } = tableViewModel;
+const { pageIndex, pageCount, pageSize, hasNextPage, hasPreviousPage } = pluginStates.page;
+const { filterValue } = pluginStates.tableFilter;
 
-	let rows = [
-		{ value: 5, name: '5' },
-		{ value: 10, name: '10' },
-		{ value: 20, name: '20' },
-		{ value: 50, name: '50' },
-		{ value: 100, name: '100' }
-	];
+let rows = [
+  { value: 5, name: '5' },
+  { value: 10, name: '10' },
+  { value: 20, name: '20' },
+  { value: 50, name: '50' },
+  { value: 100, name: '100' },
+];
 </script>
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

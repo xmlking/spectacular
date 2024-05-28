@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	import type { FormPathLeaves, SuperForm } from "sveltekit-superforms";
-	type T = Record<string, unknown>;
-	type U = unknown;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { FormPathLeaves, SuperForm } from 'sveltekit-superforms';
+type T = Record<string, unknown>;
+type U = unknown;
 </script>
 
 <script lang="ts" generics="T extends Record<string, unknown>, U extends FormPathLeaves<T>">

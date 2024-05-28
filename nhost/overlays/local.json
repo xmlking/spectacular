@@ -1,27 +1,35 @@
 [
-	{
-		"op": "replace",
-		"path": "/auth/redirections/clientUrl",
-		"value": "https://console.traefik.me:5173"
-	},
-	{
-		"op": "replace",
-		"path": "/auth/redirections/allowedUrls",
-		"value": ["https://console.traefik.me:5173", "https://console.traefik.me:5173/dashboard/profile", "https://console.traefik.me:3000", "https://console.traefik.me:3000/dashboard/profile", "https://console.traefik.me", "https://console.traefik.me/dashboard/profile", "https://*.vercel.app"]
-	},
-	{
-		"op": "replace",
-		"path": "/global/environment/0/value",
-		"value": "Spectacular"
-	},
-	{
-		"op": "replace",
-		"path": "/global/environment/1/value",
-		"value": "Spectacular Console App"
-	},
-	{
-		"op": "replace",
-		"path": "/postgres/settings/maxConnections",
-		"value": 99
-	}
+  {
+    "op": "replace",
+    "path": "/auth/redirections/clientUrl",
+    "value": "https://console.traefik.me:5173"
+  },
+  {
+    "op": "replace",
+    "path": "/auth/redirections/allowedUrls",
+    "value": [
+      "https://console.traefik.me:5173",
+      "https://console.traefik.me:5173/dashboard/profile",
+      "https://console.traefik.me:3000",
+      "https://console.traefik.me:3000/dashboard/profile",
+      "https://console.traefik.me",
+      "https://console.traefik.me/dashboard/profile",
+      "https://*.vercel.app"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/global/environment/0/value",
+    "value": "Spectacular"
+  },
+  {
+    "op": "replace",
+    "path": "/global/environment/1/value",
+    "value": "Spectacular Console App"
+  },
+  {
+    "op": "replace",
+    "path": "/postgres/settings/maxConnections",
+    "value": 99
+  }
 ]

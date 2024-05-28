@@ -1,139 +1,136 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
+const dispatch = createEventDispatcher();
 
-	type Orientation = 'horizontal' | 'vertical';
+type Orientation = 'horizontal' | 'vertical';
 
-	/** @type {'horizontal' | 'vertical'} */
-	export let type: Orientation;
-	export let pos = '50%';
-	export let disabled = false;
-	export let min = '0%';
-	export let max = '100%';
+/** @type {'horizontal' | 'vertical'} */
+export let type: Orientation;
+export let pos = '50%';
+export let disabled = false;
+export let min = '0%';
+export let max = '100%';
 
-	/** @type {'min' | 'max'}*/
-	export let priority = 'min';
+/** @type {'min' | 'max'}*/
+export let priority = 'min';
 
-	/** @type {HTMLElement} */
-	let container;
+/** @type {HTMLElement} */
+let container;
 
-	let dragging = false;
-	let w = 0;
-	let h = 0;
-	let position = pos;
+let dragging = false;
+let w = 0;
+let h = 0;
+let position = pos;
 
-	// constrain position
-	$: if (container) {
-		const size = type === 'horizontal' ? w : h;
+// constrain position
+$: if (container) {
+  const size = type === 'horizontal' ? w : h;
 
-		let min_px = parseFloat(min);
-		let max_px = parseFloat(max);
-		let pos_px = parseFloat(pos);
+  let min_px = Number.parseFloat(min);
+  let max_px = Number.parseFloat(max);
+  let pos_px = Number.parseFloat(pos);
 
-		if (min.endsWith('%')) min_px = (size * min_px) / 100;
-		if (max.endsWith('%')) max_px = (size * max_px) / 100;
-		if (pos.endsWith('%')) pos_px = (size * pos_px) / 100;
+  if (min.endsWith('%')) min_px = (size * min_px) / 100;
+  if (max.endsWith('%')) max_px = (size * max_px) / 100;
+  if (pos.endsWith('%')) pos_px = (size * pos_px) / 100;
 
-		if (min_px < 0) min_px += size;
-		if (max_px < 0) max_px += size;
+  if (min_px < 0) min_px += size;
+  if (max_px < 0) max_px += size;
 
-		pos_px =
-			priority === 'min'
-				? Math.max(min_px, Math.min(max_px, pos_px))
-				: Math.min(max_px, Math.max(min_px, pos_px));
+  pos_px = priority === 'min' ? Math.max(min_px, Math.min(max_px, pos_px)) : Math.min(max_px, Math.max(min_px, pos_px));
 
-		position = pos.endsWith('%') ? (size ? `${(100 * pos_px) / size}%` : '0%') : `${pos_px}px`;
-	}
+  position = pos.endsWith('%') ? (size ? `${(100 * pos_px) / size}%` : '0%') : `${pos_px}px`;
+}
 
-	/**
-	 * @param {number} x
-	 * @param {number} y
-	 */
-	function update(x, y) {
-		if (disabled) return;
+/**
+ * @param {number} x
+ * @param {number} y
+ */
+function update(x, y) {
+  if (disabled) return;
 
-		const { top, left } = container.getBoundingClientRect();
+  const { top, left } = container.getBoundingClientRect();
 
-		const pos_px = type === 'horizontal' ? x - left : y - top;
-		const size = type === 'horizontal' ? w : h;
+  const pos_px = type === 'horizontal' ? x - left : y - top;
+  const size = type === 'horizontal' ? w : h;
 
-		position = pos.endsWith('%') ? `${(100 * pos_px) / size}%` : `${pos_px}px`;
+  position = pos.endsWith('%') ? `${(100 * pos_px) / size}%` : `${pos_px}px`;
 
-		dispatch('change');
-	}
+  dispatch('change');
+}
 
-	/**
-	 * @param {HTMLElement} node
-	 * @param {(event: MouseEvent) => void} callback
-	 */
-	function drag(node, callback) {
-		/** @param {MouseEvent} event */
-		const mousedown = (event: MouseEvent) => {
-			if (event.button !== 0) return;
+/**
+ * @param {HTMLElement} node
+ * @param {(event: MouseEvent) => void} callback
+ */
+function drag(node, callback) {
+  /** @param {MouseEvent} event */
+  const mousedown = (event: MouseEvent) => {
+    if (event.button !== 0) return;
 
-			event.preventDefault();
+    event.preventDefault();
 
-			dragging = true;
+    dragging = true;
 
-			const onmouseup = () => {
-				dragging = false;
+    const onmouseup = () => {
+      dragging = false;
 
-				window.removeEventListener('mousemove', callback, false);
-				window.removeEventListener('mouseup', onmouseup, false);
-			};
+      window.removeEventListener('mousemove', callback, false);
+      window.removeEventListener('mouseup', onmouseup, false);
+    };
 
-			window.addEventListener('mousemove', callback, false);
-			window.addEventListener('mouseup', onmouseup, false);
-		};
+    window.addEventListener('mousemove', callback, false);
+    window.addEventListener('mouseup', onmouseup, false);
+  };
 
-		node.addEventListener('mousedown', mousedown, false);
+  node.addEventListener('mousedown', mousedown, false);
 
-		return {
-			destroy() {
-				node.removeEventListener('mousedown', mousedown, false);
-			}
-		};
-	}
+  return {
+    destroy() {
+      node.removeEventListener('mousedown', mousedown, false);
+    },
+  };
+}
 
-	/**
-	 * @param {HTMLElement} node
-	 * @param {(event: TouchEvent) => void} callback
-	 */
-	function touchDrag(node, callback) {
-		/** @param {TouchEvent} event */
-		const touchdown = (event: TouchEvent) => {
-			if (event.targetTouches.length > 1) return;
+/**
+ * @param {HTMLElement} node
+ * @param {(event: TouchEvent) => void} callback
+ */
+function touchDrag(node, callback) {
+  /** @param {TouchEvent} event */
+  const touchdown = (event: TouchEvent) => {
+    if (event.targetTouches.length > 1) return;
 
-			event.preventDefault();
+    event.preventDefault();
 
-			dragging = true;
+    dragging = true;
 
-			const ontouchend = () => {
-				dragging = false;
+    const ontouchend = () => {
+      dragging = false;
 
-				window.removeEventListener('touchmove', callback, false);
-				window.removeEventListener('touchend', ontouchend, false);
-			};
+      window.removeEventListener('touchmove', callback, false);
+      window.removeEventListener('touchend', ontouchend, false);
+    };
 
-			window.addEventListener('touchmove', callback, false);
-			window.addEventListener('touchend', ontouchend, false);
-		};
+    window.addEventListener('touchmove', callback, false);
+    window.addEventListener('touchend', ontouchend, false);
+  };
 
-		node.addEventListener('touchstart', touchdown, {
-			capture: true,
-			passive: false
-		});
+  node.addEventListener('touchstart', touchdown, {
+    capture: true,
+    passive: false,
+  });
 
-		return {
-			destroy() {
-				node.removeEventListener('touchstart', touchdown, {
-					capture: true,
-					passive: false
-				});
-			}
-		};
-	}
+  return {
+    destroy() {
+      node.removeEventListener('touchstart', touchdown, {
+        capture: true,
+        passive: false,
+      });
+    },
+  };
+}
 </script>
 
 <div

@@ -1,14 +1,14 @@
 <script lang="ts">
-	import * as ResizablePrimitive from "paneforge";
-	import { cn } from "#utils.js";
+import type * as ResizablePrimitive from 'paneforge';
+import { cn } from '#utils.js';
 
-	type $$Props = ResizablePrimitive.PaneGroupProps;
+type $$Props = ResizablePrimitive.PaneGroupProps;
 
-	let className: $$Props["class"] = undefined;
-	export let direction: $$Props["direction"];
-	export let paneGroup: $$Props["paneGroup"] = undefined;
-	export let el: $$Props["el"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export let direction: $$Props['direction'];
+export let paneGroup: $$Props['paneGroup'] = undefined;
+export let el: $$Props['el'] = undefined;
+export { className as class };
 </script>
 
 <ResizablePrimitive.PaneGroup

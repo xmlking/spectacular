@@ -1,30 +1,30 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
+import { fade, fly } from 'svelte/transition';
 
-	let nextId = 1;
-	let todos = [
-		{
-			id: 0,
-			name: 'Do Something...'
-		}
-	];
+let nextId = 1;
+let todos = [
+  {
+    id: 0,
+    name: 'Do Something...',
+  },
+];
 
-	const addTodo = (todo: string) => {
-		todos.push({
-			id: nextId,
-			name: todo
-		});
-		nextId += 1;
-		todos = todos;
-	};
+const addTodo = (todo: string) => {
+  todos.push({
+    id: nextId,
+    name: todo,
+  });
+  nextId += 1;
+  todos = todos;
+};
 
-	const removeTodo = (todoId: number) => {
-		const idx = todos.findIndex((todo) => todo.id === todoId);
-		todos.splice(idx, 1);
-		todos = todos;
-	};
+const removeTodo = (todoId: number) => {
+  const idx = todos.findIndex((todo) => todo.id === todoId);
+  todos.splice(idx, 1);
+  todos = todos;
+};
 
-	let nTodo = '';
+let nTodo = '';
 </script>
 
 <div>

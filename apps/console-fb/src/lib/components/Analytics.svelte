@@ -3,9 +3,9 @@ USAGEL: in your +layout.svelte:
 Ref: https://joyofcode.xyz/sveltekit-google-analytics
 
 <script lang="ts">
-	import { dev } from '$app/environment';
-	import { PUBLIC_GOOGLE_ANALYTICS_TARGET_ID } from '$env/static/public';
-	import { Analytics } from '$lib/components';
+import { dev } from '$app/environment';
+import { PUBLIC_GOOGLE_ANALYTICS_TARGET_ID } from '$env/static/public';
+import { Analytics } from '$lib/components';
 </script>
 
 {#if !dev && PUBLIC_GOOGLE_ANALYTICS_TARGET_ID}

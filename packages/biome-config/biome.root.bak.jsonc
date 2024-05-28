@@ -1,0 +1,184 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "tab",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 100,
+    "attributePosition": "auto",
+    "ignore": []
+  },
+  "organizeImports": { "enabled": true },
+  "files": {
+    "ignore": [
+      "**/src/**/__tests__",
+      "./package",
+      "**/.env",
+      "**/.env.*",
+      "**/vite.config.js*",
+      "**/vite.config.*.timestamp-*",
+      "./coverage",
+      "**/src/lib/models/types/**",
+      "./apps/",
+      "./packages/",
+      "./.nhost/",
+      "./nhost/*",
+      "**/.turbo",
+      "**/.vercel",
+      "**/.DS_Store",
+      "**/node_modules",
+      "**/pnpm-lock.yaml",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "./examples",
+      "./functions",
+      "./.vercel_build_output",
+      "**/.vercel_build_output",
+      "./TODO",
+      "**/CHANGELOG.md",
+      "**/.idea",
+      "**/dev-dist",
+      "./infra/helm",
+      "infra/hasura",
+      "./apps/**/src/i18n",
+      "packages/ui/src/lib/components/ui",
+      "node_modules/",
+      ".sveltekit/",
+      "*.cjs",
+      "/apps/**/src/i18n",
+      "/apps/**/schema.graphql",
+      "/apps/**/$houdini",
+      "/apps/**/build"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "complexity": {
+        "noExtraBooleanCast": "error",
+        "noMultipleSpacesInRegularExpressionLiterals": "error",
+        "noUselessCatch": "error",
+        "noWith": "error"
+      },
+      "correctness": {
+        "noConstAssign": "error",
+        "noConstantCondition": "error",
+        "noEmptyCharacterClassInRegex": "error",
+        "noEmptyPattern": "error",
+        "noGlobalObjectCalls": "error",
+        "noInnerDeclarations": "error",
+        "noInvalidConstructorSuper": "error",
+        "noNewSymbol": "error",
+        "noNonoctalDecimalEscape": "error",
+        "noPrecisionLoss": "error",
+        "noSelfAssign": "error",
+        "noSetterReturn": "error",
+        "noSwitchDeclarations": "error",
+        "noUndeclaredVariables": "error",
+        "noUnreachable": "error",
+        "noUnreachableSuper": "error",
+        "noUnsafeFinally": "error",
+        "noUnsafeOptionalChaining": "error",
+        "noUnusedLabels": "error",
+        "noUnusedVariables": "error",
+        "useIsNan": "error",
+        "useValidForDirection": "error",
+        "useYield": "error"
+      },
+      "style": { "useBlockStatements": "off" },
+      "suspicious": {
+        "noAssignInExpressions": "error",
+        "noAsyncPromiseExecutor": "error",
+        "noCatchAssign": "error",
+        "noClassAssign": "error",
+        "noCompareNegZero": "error",
+        "noControlCharactersInRegex": "error",
+        "noDebugger": "error",
+        "noDuplicateCase": "error",
+        "noDuplicateClassMembers": "error",
+        "noDuplicateObjectKeys": "error",
+        "noDuplicateParameters": "error",
+        "noEmptyBlockStatements": "error",
+        "noFallthroughSwitchClause": "error",
+        "noFunctionAssign": "error",
+        "noGlobalAssign": "error",
+        "noImportAssign": "error",
+        "noMisleadingCharacterClass": "error",
+        "noPrototypeBuiltins": "error",
+        "noRedeclare": "error",
+        "noShadowRestrictedNames": "error",
+        "noUnsafeNegation": "error",
+        "useGetterReturn": "error",
+        "useValidTypeof": "error"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingComma": "none",
+      // "semicolons": "asNeeded",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "quoteStyle": "single",
+      "attributePosition": "auto"
+    },
+    "globals": ["Astro", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"]
+  },
+  "overrides": [
+    {
+      "include": ["biome.json", "turbo.json", "tsconfig.json", ".vscode/*"],
+      "json": {
+        "parser": {
+          "allowComments": true,
+          "allowTrailingCommas": true
+        }
+      }
+    },
+    {
+      "include": ["*.svelte"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off"
+          }
+        }
+      }
+    },
+    { "include": ["*.svelte.js"] },
+    { "include": ["*.svelte.ts"] },
+    { "include": ["*.astro"] },
+    {
+      "include": ["*.ts"],
+      "linter": {
+        "rules": {
+          "correctness": { "noUnusedVariables": "error" },
+          "style": { "noNonNullAssertion": "off" }
+        }
+      }
+    },
+    { "include": ["*.d.ts"], "linter": { "rules": {} } },
+    {
+      "include": ["**/*.md?(x)"],
+      "linter": { "rules": { "correctness": { "noUnusedVariables": "off" } } }
+    },
+    {
+      "include": ["*.js", "*.cjs", "*.mjs"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUndeclaredVariables": "off",
+            "noUnusedVariables": "warn"
+          }
+        }
+      }
+    },
+    { "include": ["**/*.astro/*.js", "*.astro/*.js"] }
+  ]
+}

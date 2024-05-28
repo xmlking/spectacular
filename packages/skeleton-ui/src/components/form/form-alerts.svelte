@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { AlertTriangle } from 'lucide-svelte';
-	import { page } from '$app/stores';
+import { page } from '$app/stores';
+import { AlertTriangle } from 'lucide-svelte';
+import { fade } from 'svelte/transition';
 
-	// eslint-disable-next-line no-undef
-	export let message: App.Superforms.Message | undefined;
-	export let errors: string[] | undefined;
+// eslint-disable-next-line no-undef
+export let message: App.Superforms.Message | undefined;
+export let errors: string[] | undefined;
 </script>
 
 <!-- Form Level Errors / Messages -->

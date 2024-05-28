@@ -1,29 +1,29 @@
 <script lang="ts">
-	import {
-		Avatar,
-		Dropdown,
-		DropdownDivider,
-		DropdownHeader,
-		DropdownItem,
-		Navbar,
-		NavBrand,
-		NavHamburger,
-		NavLi,
-		NavUl
-	} from 'flowbite-svelte';
-	import { page } from '$app/stores';
-	import { Hamburger } from '$lib/components';
+import { page } from '$app/stores';
+import { Hamburger } from '$lib/components';
+import {
+  Avatar,
+  Dropdown,
+  DropdownDivider,
+  DropdownHeader,
+  DropdownItem,
+  NavBrand,
+  NavHamburger,
+  NavLi,
+  NavUl,
+  Navbar,
+} from 'flowbite-svelte';
 
-	let path: string;
-	$: path = $page.url.pathname;
+let path: string;
+$: path = $page.url.pathname;
 
-	export let user:
-		| {
-				name?: string | null;
-				email?: string | null;
-				image?: string | null;
-		  }
-		| undefined;
+export let user:
+  | {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    }
+  | undefined;
 </script>
 
 <Navbar

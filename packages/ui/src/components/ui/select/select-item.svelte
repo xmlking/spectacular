@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { cn } from "#utils.js";
-	import Check from "lucide-svelte/icons/check";
-	import { Select as SelectPrimitive } from "bits-ui";
+import type { Select as SelectPrimitive } from 'bits-ui';
+import Check from 'lucide-svelte/icons/check';
+import { cn } from '#utils.js';
 
-	type $$Props = SelectPrimitive.ItemProps;
-	type $$Events = SelectPrimitive.ItemEvents;
+type $$Props = SelectPrimitive.ItemProps;
+type $$Events = SelectPrimitive.ItemEvents;
 
-	let className: $$Props["class"] = undefined;
-	export let value: $$Props["value"];
-	export let label: $$Props["label"] = undefined;
-	export let disabled: $$Props["disabled"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export let value: $$Props['value'];
+export let label: $$Props['label'] = undefined;
+export let disabled: $$Props['disabled'] = undefined;
+export { className as class };
 </script>
 
 <SelectPrimitive.Item

@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { Menubar as MenubarPrimitive } from "bits-ui";
-	import { cn, flyAndScale } from "#utils.js";
+import type { Menubar as MenubarPrimitive } from 'bits-ui';
+import { cn, flyAndScale } from '#utils.js';
 
-	type $$Props = MenubarPrimitive.SubContentProps;
-	type $$Events = MenubarPrimitive.SubContentEvents;
+type $$Props = MenubarPrimitive.SubContentProps;
+type $$Events = MenubarPrimitive.SubContentEvents;
 
-	let className: $$Props["class"] = undefined;
-	export let transition: $$Props["transition"] = flyAndScale;
-	export let transitionConfig: $$Props["transitionConfig"] = { x: -10, y: 0 };
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export let transition: $$Props['transition'] = flyAndScale;
+export let transitionConfig: $$Props['transitionConfig'] = { x: -10, y: 0 };
+export { className as class };
 </script>
 
 <MenubarPrimitive.SubContent

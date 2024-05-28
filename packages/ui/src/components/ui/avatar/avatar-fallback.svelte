@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { Avatar as AvatarPrimitive } from "bits-ui";
-	import { cn } from "#utils.js";
+import type { Avatar as AvatarPrimitive } from 'bits-ui';
+import { cn } from '#utils.js';
 
-	type $$Props = AvatarPrimitive.FallbackProps;
+type $$Props = AvatarPrimitive.FallbackProps;
 
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export { className as class };
 </script>
 
 <AvatarPrimitive.Fallback

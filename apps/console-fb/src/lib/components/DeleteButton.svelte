@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
-	export interface CustomEventProps {
-		[key: string]: any;
-		id: string | null;
-	}
+export interface CustomEventProps {
+  [key: string]: any;
+  id: string | null;
+}
 </script>
 
 <script lang="ts">

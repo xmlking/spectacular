@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ExclamationCircleOutline } from 'flowbite-svelte-icons';
+import { ExclamationCircleOutline } from 'flowbite-svelte-icons';
 </script>
 
 <div class="max-w-7xl">

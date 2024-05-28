@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Avatar as AvatarPrimitive } from "bits-ui";
-	import { cn } from "#utils.js";
+import type { Avatar as AvatarPrimitive } from 'bits-ui';
+import { cn } from '#utils.js';
 
-	type $$Props = AvatarPrimitive.ImageProps;
+type $$Props = AvatarPrimitive.ImageProps;
 
-	let className: $$Props["class"] = undefined;
-	export let src: $$Props["src"] = undefined;
-	export let alt: $$Props["alt"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export let src: $$Props['src'] = undefined;
+export let alt: $$Props['alt'] = undefined;
+export { className as class };
 </script>
 
 <AvatarPrimitive.Image

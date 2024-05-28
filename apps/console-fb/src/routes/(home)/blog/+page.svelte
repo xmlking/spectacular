@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Blog4 } from '$lib/blocks/blog';
+import { Blog4 } from '$lib/blocks/blog';
 </script>
 
 <svelte:head>

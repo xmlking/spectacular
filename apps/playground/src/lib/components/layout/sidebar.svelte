@@ -1,35 +1,33 @@
 <script lang="ts">
-	import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
-	import { Icon } from '@spectacular/skeleton/components/icons';
-	import { menuNavLinks } from '$lib/links';
-	import { page } from '$app/stores';
+import { page } from '$app/stores';
+import { menuNavLinks } from '$lib/links';
+import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
+import { Icon } from '@spectacular/skeleton/components/icons';
 
-	// Local
-	let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
-	const drawerStore = getDrawerStore();
+// Local
+let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
+const drawerStore = getDrawerStore();
 
-	function onClickAnchor(): void {
-		currentRailCategory = undefined;
-		drawerStore.close();
-	}
+function onClickAnchor(): void {
+  currentRailCategory = undefined;
+  drawerStore.close();
+}
 
-	// Lifecycle
-	page.subscribe((page) => {
-		// ex: /basePath/...
-		let basePath: string = page.url.pathname.split('/')[1];
-		if (!basePath) return;
-		// Translate base path to link section
-		if (['docs', 'essentials', 'resources'].includes(basePath)) currentRailCategory = '/docs';
-		if (['tokens', 'base', 'elements', 'blocks'].includes(basePath))
-			currentRailCategory = '/elements';
-		if (['components', 'actions'].includes(basePath)) currentRailCategory = '/svelte';
-		if (['experiments'].includes(basePath)) currentRailCategory = '/experiments';
-	});
+// Lifecycle
+page.subscribe((page) => {
+  // ex: /basePath/...
+  let basePath: string = page.url.pathname.split('/')[1];
+  if (!basePath) return;
+  // Translate base path to link section
+  if (['docs', 'essentials', 'resources'].includes(basePath)) currentRailCategory = '/docs';
+  if (['tokens', 'base', 'elements', 'blocks'].includes(basePath)) currentRailCategory = '/elements';
+  if (['components', 'actions'].includes(basePath)) currentRailCategory = '/svelte';
+  if (['experiments'].includes(basePath)) currentRailCategory = '/experiments';
+});
 
-	// Reactive
-	$: submenu = menuNavLinks[currentRailCategory ?? '/docs'];
-	$: listboxItemActive = (href: string) =>
-		$page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '';
+// Reactive
+$: submenu = menuNavLinks[currentRailCategory ?? '/docs'];
+$: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '');
 </script>
 
 <div

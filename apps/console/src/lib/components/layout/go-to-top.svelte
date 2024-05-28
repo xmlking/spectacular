@@ -1,10 +1,10 @@
 <script lang="ts">
-import { browser } from '$app/environment';
-import { scroll } from '$lib/stores';
 import { cn } from '@spectacular/skeleton/utils';
 import { ArrowUp } from 'lucide-svelte';
 import type { HTMLButtonAttributes } from 'svelte/elements';
 import { derived } from 'svelte/store';
+import { scroll } from '$lib/stores';
+import { browser } from '$app/environment';
 
 interface $$Props extends HTMLButtonAttributes {
 	showAtPixel: number;

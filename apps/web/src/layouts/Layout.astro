@@ -2,14 +2,14 @@
 // import '@fontsource-variable/inter';
 // import '@fontsource/source-code-pro';
 import '@styles/tailwind.css';
-import { SEO } from 'astro-seo';
-import { ModeWatcher } from 'mode-watcher';
 import { ViewTransitions } from 'astro:transitions';
 import AppFooter from '@components/AppFooter.astro';
 import AppHeader from '@components/AppHeader.astro';
+import { SEO } from 'astro-seo';
+import { ModeWatcher } from 'mode-watcher';
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();

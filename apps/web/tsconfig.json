@@ -1,17 +1,17 @@
 {
-	"extends": "astro/tsconfigs/strict",
-	"compilerOptions": {
-		"baseUrl": "src",
-		"strictNullChecks": true,
-		"paths": {
-			"@assets/*": ["assets/*"],
-			"@components/*": ["components/*"],
-			"@content/*": ["content/*"],
-			"@lib/*": ["lib/*"],
-			"@layouts/*": ["layouts/*"],
-			"@pages/*": ["pages/*"],
-			"@styles/*": ["styles/*"]
-		}
-	},
-	"exclude": ["node_modules", "dist", ".vercel"]
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": "src",
+    "strictNullChecks": true,
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@content/*": ["content/*"],
+      "@lib/*": ["lib/*"],
+      "@layouts/*": ["layouts/*"],
+      "@pages/*": ["pages/*"],
+      "@styles/*": ["styles/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".vercel"]
 }

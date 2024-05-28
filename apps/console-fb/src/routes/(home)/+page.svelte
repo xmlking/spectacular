@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Feature2 } from '$lib/blocks/feature';
-	import { Hero5 } from '$lib/blocks/hero';
+import { Feature2 } from '$lib/blocks/feature';
+import { Hero5 } from '$lib/blocks/hero';
 </script>
 
 <svelte:head>

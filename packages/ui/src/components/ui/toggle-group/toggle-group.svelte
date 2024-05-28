@@ -1,23 +1,23 @@
 <script lang="ts">
-	import type { VariantProps } from "tailwind-variants";
-	import { ToggleGroup as ToggleGroupPrimitive } from "bits-ui";
-	import type { toggleVariants } from "#components/ui/toggle/index.js";
-	import { setToggleGroupCtx } from "./index.js";
-	import { cn } from "#utils.js";
+import type { ToggleGroup as ToggleGroupPrimitive } from 'bits-ui';
+import type { VariantProps } from 'tailwind-variants';
+import type { toggleVariants } from '#components/ui/toggle/index.js';
+import { cn } from '#utils.js';
+import { setToggleGroupCtx } from './index.js';
 
-	type T = $$Generic<"single" | "multiple">;
-	type $$Props = ToggleGroupPrimitive.Props<T> & VariantProps<typeof toggleVariants>;
+type T = $$Generic<'single' | 'multiple'>;
+type $$Props = ToggleGroupPrimitive.Props<T> & VariantProps<typeof toggleVariants>;
 
-	let className: string | undefined | null = undefined;
-	export { className as class };
-	export let variant: $$Props["variant"] = "default";
-	export let size: $$Props["size"] = "default";
-	export let value: $$Props["value"] = undefined;
+let className: string | undefined | null = undefined;
+export { className as class };
+export let variant: $$Props['variant'] = 'default';
+export let size: $$Props['size'] = 'default';
+export let value: $$Props['value'] = undefined;
 
-	setToggleGroupCtx({
-		variant,
-		size,
-	});
+setToggleGroupCtx({
+  variant,
+  size,
+});
 </script>
 
 <ToggleGroupPrimitive.Root

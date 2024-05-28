@@ -1,7 +1,7 @@
 <script>
-	import { setupViewTransition } from 'sveltekit-view-transition';
+import { setupViewTransition } from 'sveltekit-view-transition';
 
-	const { transition } = setupViewTransition();
+const { transition } = setupViewTransition();
 </script>
 
 <div class="card variant-ghost-primary p-4" use:transition={'viewLink'}>

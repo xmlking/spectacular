@@ -1,80 +1,75 @@
 <script lang="ts">
-	import { A, Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import {
-		ComputerSpeakerOutline,
-		MobilePhoneOutline,
-		UserCircleOutline,
-		UserOutline,
-		UsersGroupOutline
-	} from 'flowbite-svelte-icons';
-	import Select from 'svelte-select';
-	import { superForm } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
-	import { dev } from '$app/environment';
-	import {
-		DateInput,
-		FloatingTextInput,
-		Form,
-		SelectFB as FormSelect,
-		Radio,
-		Range,
-		TagsInput,
-		Toggle
-	} from '$lib/components/form';
-	import {
-		actionOptions,
-		directionOptions,
-		protocols,
-		subjectTypeOptions2
-	} from '$lib/models/enums';
-	import { updatePolicyKeys as keys } from '$lib/models/schema';
-	import { Logger } from '@spectacular/utils';
+import { dev } from '$app/environment';
+import {
+  DateInput,
+  FloatingTextInput,
+  Form,
+  SelectFB as FormSelect,
+  Radio,
+  Range,
+  TagsInput,
+  Toggle,
+} from '$lib/components/form';
+import { actionOptions, directionOptions, protocols, subjectTypeOptions2 } from '$lib/models/enums';
+import { updatePolicyKeys as keys } from '$lib/models/schema';
+import { Logger } from '@spectacular/utils';
+import { A, Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
+import {
+  ComputerSpeakerOutline,
+  MobilePhoneOutline,
+  UserCircleOutline,
+  UserOutline,
+  UsersGroupOutline,
+} from 'flowbite-svelte-icons';
+import Select from 'svelte-select';
+import { superForm } from 'sveltekit-superforms';
+import SuperDebug from 'sveltekit-superforms';
 
-	const log = new Logger('routes:policies:update');
-	export let data;
-	// Client API:
-	const superform = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		onError({ result }) {
-			// the onError event allows you to act on ActionResult errors.
-			// TODO:
-			// message.set(result.error.message)
-			log.error('superForm:', { result });
-		}
-	});
-	const {
-		form,
-		delayed,
-		enhance,
-		errors,
-		constraints,
-		message,
-		tainted,
-		posted,
-		allErrors,
-		reset,
-		submitting,
-		capture,
-		restore
-	} = superform;
-	export const snapshot = { capture, restore };
+const log = new Logger('routes:policies:update');
+export let data;
+// Client API:
+const superform = superForm(data.form, {
+  dataType: 'json',
+  taintedMessage: null,
+  syncFlashMessage: false,
+  onError({ result }) {
+    // the onError event allows you to act on ActionResult errors.
+    // TODO:
+    // message.set(result.error.message)
+    log.error('superForm:', { result });
+  },
+});
+const {
+  form,
+  delayed,
+  enhance,
+  errors,
+  constraints,
+  message,
+  tainted,
+  posted,
+  allErrors,
+  reset,
+  submitting,
+  capture,
+  restore,
+} = superform;
+export const snapshot = { capture, restore };
 
-	// const validFrom = dateProxy(form, "validFrom", { format: "datetime-utc" });
-	// const validTo = dateProxy(form, "validTo", { format: "datetime-utc" });
+// const validFrom = dateProxy(form, "validFrom", { format: "datetime-utc" });
+// const validTo = dateProxy(form, "validTo", { format: "datetime-utc" });
 
-	// TODO: reset buttom should also reset `subject & rule search inputs`
-	// subject settings
-	let subject = $form?.subjectId
-		? {
-				id: $form.subjectId,
-				displayName: $form.subjectDisplayName,
-				secondaryId: $form.subjectSecondaryId
-			}
-		: null;
-	// rule settings
-	const disabled = $form?.originalShared;
+// TODO: reset buttom should also reset `subject & rule search inputs`
+// subject settings
+let subject = $form?.subjectId
+  ? {
+      id: $form.subjectId,
+      displayName: $form.subjectDisplayName,
+      secondaryId: $form.subjectSecondaryId,
+    }
+  : null;
+// rule settings
+const disabled = $form?.originalShared;
 </script>
 
 <svelte:head>

@@ -1,61 +1,60 @@
 {
-	// See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
-	// Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+  // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
 
-	// List of extensions which should be recommended for users of this workspace.
-	"recommendations": [
-		// General
-		"eamodio.gitlens",
-		"github.github-vscode-theme",
-		"github.vscode-pull-request-github",
-		"yzhang.markdown-all-in-one",
-		"EditorConfig.EditorConfig",
-		"humao.rest-client",
-		"PKief.material-icon-theme",
-		"hediet.vscode-drawio",
-		"mikestead.dotenv",
-		"vivaxy.vscode-conventional-commits",
-		"alberto-varela.monorepo-focus-workspace",
-		"biomejs.biome",
-		// inlang (i18n)
-		"inlang.vs-code-extension",
-		// markdown
-		"unifiedjs.vscode-mdx",
-		"bierner.markdown-mermaid",
-		"bpruitt-goddard.mermaid-markdown-syntax-highlighting",
-		// Rust
-		"tamasfe.even-better-toml",
-		// GolLang
-		"golang.go",
-		"paulvarache.vscode-taskfile",
-		"bufbuild.vscode-buf",
-		"ms-azuretools.vscode-docker",
-		"zxh404.vscode-proto3",
-		"xaver.clang-format",
-		// WebApps
-		"bradlc.vscode-tailwindcss",
-		"codezombiech.gitignore",
-		"GitHub.vscode-github-actions",
-		"csstools.postcss",
-		"ms-playwright.playwright",
-		"ms-vsliveshare.vsliveshare",
-		"streetsidesoftware.code-spell-checker",
-		"stylelint.vscode-stylelint",
-		"svelte.svelte-vscode",
-		"ardenivanov.svelte-intellisense",
-		"JakobKruse.svelte-kit-snippets",
-		"pivaszbs.svelte-autoimport",
-		"Selemondev.vscode-shadcn-svelte",
-		"Tyriar.sort-lines",
-		"VisualStudioExptTeam.vscodeintellicode",
-		"vunguyentuan.vscode-css-variables",
-		"wix.vscode-import-cost",
-		"wmaurer.change-case",
-		"vitest.explorer",
-		"GraphQL.vscode-graphql",
-		// astro
-		"astro-build.astro-vscode"
-	],
-	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
-	"unwantedRecommendations": ["ardenivanov.svelte-intellisense", "moalamri.inline-fold"]
+  // List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    // General
+    "eamodio.gitlens",
+    "github.github-vscode-theme",
+    "github.vscode-pull-request-github",
+    "EditorConfig.EditorConfig",
+    "humao.rest-client",
+    "PKief.material-icon-theme",
+    "hediet.vscode-drawio",
+    "mikestead.dotenv",
+    "alberto-varela.monorepo-focus-workspace",
+    "biomejs.biome",
+    // inlang (i18n)
+    "inlang.vs-code-extension",
+    // markdown
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "unifiedjs.vscode-mdx",
+    "bierner.markdown-mermaid",
+    "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+    // Rust
+    "tamasfe.even-better-toml",
+    // GolLang
+    "golang.go",
+    "paulvarache.vscode-taskfile",
+    "bufbuild.vscode-buf",
+    "ms-azuretools.vscode-docker",
+    "zxh404.vscode-proto3",
+    "xaver.clang-format",
+    // WebApps
+    "bradlc.vscode-tailwindcss",
+    "codezombiech.gitignore",
+    "GitHub.vscode-github-actions",
+    "csstools.postcss",
+    "ms-playwright.playwright",
+    "ms-vsliveshare.vsliveshare",
+    "streetsidesoftware.code-spell-checker",
+    "svelte.svelte-vscode",
+    "ardenivanov.svelte-intellisense",
+    "JakobKruse.svelte-kit-snippets",
+    "pivaszbs.svelte-autoimport",
+    "Selemondev.vscode-shadcn-svelte",
+    "Tyriar.sort-lines",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "vunguyentuan.vscode-css-variables",
+    "wix.vscode-import-cost",
+    "wmaurer.change-case",
+    "vitest.explorer",
+    "GraphQL.vscode-graphql",
+    // astro
+    "astro-build.astro-vscode"
+  ],
+  // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+  "unwantedRecommendations": ["ardenivanov.svelte-intellisense", "moalamri.inline-fold"]
 }

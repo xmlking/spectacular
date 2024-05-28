@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Preview from '$lib/components/preview.svelte';
+import Preview from '$lib/components/preview.svelte';
 </script>
 
 <Preview>

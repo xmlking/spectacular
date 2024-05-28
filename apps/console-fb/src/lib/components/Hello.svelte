@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let count;
-	let times = 2;
-	$: result = count * times;
+export let count;
+let times = 2;
+$: result = count * times;
 </script>
 
 <div>{count} x {times} = {result}</div>

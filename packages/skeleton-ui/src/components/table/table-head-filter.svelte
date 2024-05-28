@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-	import type { Row } from '@vincjo/datatables';
-	type T = Row;
+import type { Row } from '@vincjo/datatables';
+type T = Row;
 </script>
 
 <script lang="ts" generics="T extends Row">

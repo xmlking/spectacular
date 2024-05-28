@@ -1,25 +1,25 @@
 <script lang="ts">
-	import { flip } from 'svelte/animate';
-	import colors from './colors';
+import { flip } from 'svelte/animate';
+import colors from './colors';
 
-	let colorNames = pickNewPalette();
-	updateColors();
+let colorNames = pickNewPalette();
+updateColors();
 
-	function updateColors() {
-		colorNames = shuffle(colorNames);
-	}
+function updateColors() {
+  colorNames = shuffle(colorNames);
+}
 
-	function refresh() {
-		colorNames = pickNewPalette();
-	}
+function refresh() {
+  colorNames = pickNewPalette();
+}
 
-	function pickNewPalette() {
-		return shuffle(Object.entries(colors)).slice(0, 50);
-	}
+function pickNewPalette() {
+  return shuffle(Object.entries(colors)).slice(0, 50);
+}
 
-	function shuffle<T>(array: T[]): T[] {
-		return array.sort(() => Math.random() - 0.5);
-	}
+function shuffle<T>(array: T[]): T[] {
+  return array.sort(() => Math.random() - 0.5);
+}
 </script>
 
 <div class="buttons">

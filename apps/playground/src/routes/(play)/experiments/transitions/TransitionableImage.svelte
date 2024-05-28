@@ -1,18 +1,18 @@
 <script lang="ts" context="module">
-	import { fade } from 'svelte/transition';
-	import { crossfade } from './crossfade';
-	// import { circOut } from 'svelte/easing';
+import { fade } from 'svelte/transition';
+import { crossfade } from './crossfade';
+// import { circOut } from 'svelte/easing';
 
-	let [send, receive] = crossfade({
-		fallback: (node, params, flyingTo) =>
-			fade(node, {
-				...params,
-				duration: 300,
-				delay: flyingTo ? 200 : 0
-			}),
-		delay: 0,
-		duration: (d) => Math.max(700, Math.sqrt(d) * 30)
-	});
+let [send, receive] = crossfade({
+  fallback: (node, params, flyingTo) =>
+    fade(node, {
+      ...params,
+      duration: 300,
+      delay: flyingTo ? 200 : 0,
+    }),
+  delay: 0,
+  duration: (d) => Math.max(700, Math.sqrt(d) * 30),
+});
 </script>
 
 <script lang="ts">

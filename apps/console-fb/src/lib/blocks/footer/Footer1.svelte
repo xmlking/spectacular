@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { VERSION } from '@sveltejs/kit';
-	import { Stack } from '$lib/components/icons';
+import { Stack } from '$lib/components/icons';
+import { VERSION } from '@sveltejs/kit';
 
-	const appVersion = __APP_VERSION__;
-	const gitTag = __GIT_TAG__;
-	const gitDate = __GIT_DATE__;
+const appVersion = __APP_VERSION__;
+const gitTag = __GIT_TAG__;
+const gitDate = __GIT_DATE__;
 </script>
 
 <footer class="body-font mt-auto text-gray-600 dark:bg-gray-900">

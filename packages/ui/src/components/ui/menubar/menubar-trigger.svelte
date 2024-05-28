@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { Menubar as MenubarPrimitive } from "bits-ui";
-	import { cn } from "#utils.js";
+import type { Menubar as MenubarPrimitive } from 'bits-ui';
+import { cn } from '#utils.js';
 
-	type $$Props = MenubarPrimitive.TriggerProps;
-	type $$Events = MenubarPrimitive.TriggerEvents;
+type $$Props = MenubarPrimitive.TriggerProps;
+type $$Events = MenubarPrimitive.TriggerEvents;
 
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export { className as class };
 </script>
 
 <MenubarPrimitive.Trigger

@@ -1,5 +1,5 @@
 <script>
-	import HomeLink from './HomeLink.svelte';
+import HomeLink from './HomeLink.svelte';
 </script>
 
 <div class="flex flex-row justify-center gap-4">

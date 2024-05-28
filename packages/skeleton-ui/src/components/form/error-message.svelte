@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { cn } from '#utils';
-	export let error: string | undefined;
+import { cn } from '#utils';
+export let error: string | undefined;
 </script>
 
 {#if error}

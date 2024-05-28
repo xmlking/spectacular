@@ -1,63 +1,63 @@
 <script lang="ts">
-	import { draggable } from '@neodrag/svelte';
-	import { resize } from '@svelte-put/resize';
-	import { Badge, Card, Hr, Input } from 'flowbite-svelte';
-	import { afterUpdate, beforeUpdate } from 'svelte';
-	import * as eliza from './elizabot';
+import { draggable } from '@neodrag/svelte';
+import { resize } from '@svelte-put/resize';
+import { Badge, Card, Hr, Input } from 'flowbite-svelte';
+import { afterUpdate, beforeUpdate } from 'svelte';
+import * as eliza from './elizabot';
 
-	let div: HTMLElement;
-	let autoscroll: boolean;
+let div: HTMLElement;
+let autoscroll: boolean;
 
-	beforeUpdate(() => {
-		autoscroll = div && div.offsetHeight + div.scrollTop > div.scrollHeight - 20;
-	});
+beforeUpdate(() => {
+  autoscroll = div && div.offsetHeight + div.scrollTop > div.scrollHeight - 20;
+});
 
-	afterUpdate(() => {
-		if (autoscroll) div.scrollTo(0, div.scrollHeight);
-	});
+afterUpdate(() => {
+  if (autoscroll) div.scrollTo(0, div.scrollHeight);
+});
 
-	let comments: { author: string; text: string; placeholder?: boolean }[] = [
-		{ author: 'eliza', text: 'How do you do. Please tell me your problem.' }
-	];
+let comments: { author: string; text: string; placeholder?: boolean }[] = [
+  { author: 'eliza', text: 'How do you do. Please tell me your problem.' },
+];
 
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Enter') {
-			const text = (event.target as HTMLButtonElement).value;
-			if (!text) return;
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Enter') {
+    const text = (event.target as HTMLButtonElement).value;
+    if (!text) return;
 
-			comments = comments.concat({
-				author: 'user',
-				text
-			});
+    comments = comments.concat({
+      author: 'user',
+      text,
+    });
 
-			(event.target as HTMLButtonElement).value = '';
+    (event.target as HTMLButtonElement).value = '';
 
-			const reply = eliza.answer(text);
+    const reply = eliza.answer(text);
 
-			setTimeout(
-				() => {
-					comments = comments.concat({
-						author: 'eliza',
-						text: '...',
-						placeholder: true
-					});
+    setTimeout(
+      () => {
+        comments = comments.concat({
+          author: 'eliza',
+          text: '...',
+          placeholder: true,
+        });
 
-					setTimeout(
-						() => {
-							comments = comments
-								.filter((comment) => !comment.placeholder)
-								.concat({
-									author: 'eliza',
-									text: reply
-								});
-						},
-						500 + Math.random() * 500
-					);
-				},
-				200 + Math.random() * 200
-			);
-		}
-	}
+        setTimeout(
+          () => {
+            comments = comments
+              .filter((comment) => !comment.placeholder)
+              .concat({
+                author: 'eliza',
+                text: reply,
+              });
+          },
+          500 + Math.random() * 500,
+        );
+      },
+      200 + Math.random() * 200,
+    );
+  }
+}
 </script>
 
 <svelte:head>

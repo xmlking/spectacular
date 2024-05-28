@@ -1,22 +1,22 @@
 {
-	"extends": "@tsconfig/svelte/tsconfig.json",
-	"include": ["."],
-	"exclude": ["node_modules", "styles", "./*.cjs"],
-	"compilerOptions": {
-		"baseUrl": ".",
-		"allowJs": true,
-		"checkJs": false,
-		"isolatedModules": true,
-		"resolveJsonModule": true,
-		"strict": true,
-		"target": "esnext",
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
-		"ignoreDeprecations": "5.0",
-		"lib": ["esnext", "DOM", "DOM.Iterable"],
-		"paths": {
-			"#components": ["./src/components"],
-			"#utils": ["./src/utils"]
-		}
-	}
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "include": ["."],
+  "exclude": ["node_modules", "styles", "./*.cjs"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "checkJs": false,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "esnext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "ignoreDeprecations": "5.0",
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
+    "paths": {
+      "#components": ["./src/components"],
+      "#utils": ["./src/utils"]
+    }
+  }
 }

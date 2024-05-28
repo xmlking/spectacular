@@ -1,14 +1,14 @@
 <script lang="ts">
-	import * as FormPrimitive from "formsnap";
-	import { cn } from "#utils.js";
+import type * as FormPrimitive from 'formsnap';
+import { cn } from '#utils.js';
 
-	type $$Props = FormPrimitive.FieldErrorsProps & {
-		errorClasses?: string | undefined | null;
-	};
+type $$Props = FormPrimitive.FieldErrorsProps & {
+  errorClasses?: string | undefined | null;
+};
 
-	let className: $$Props["class"] = undefined;
-	export { className as class };
-	export let errorClasses: $$Props["class"] = undefined;
+let className: $$Props['class'] = undefined;
+export { className as class };
+export let errorClasses: $$Props['class'] = undefined;
 </script>
 
 <FormPrimitive.FieldErrors

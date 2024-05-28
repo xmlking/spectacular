@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { RangeCalendar as RangeCalendarPrimitive } from "bits-ui";
-	import ChevronLeft from "lucide-svelte/icons/chevron-left";
-	import { buttonVariants } from "#components/ui/button/index.js";
-	import { cn } from "#utils.js";
+import type { RangeCalendar as RangeCalendarPrimitive } from 'bits-ui';
+import ChevronLeft from 'lucide-svelte/icons/chevron-left';
+import { buttonVariants } from '#components/ui/button/index.js';
+import { cn } from '#utils.js';
 
-	type $$Props = RangeCalendarPrimitive.PrevButtonProps;
-	type $$Events = RangeCalendarPrimitive.PrevButtonEvents;
+type $$Props = RangeCalendarPrimitive.PrevButtonProps;
+type $$Events = RangeCalendarPrimitive.PrevButtonEvents;
 
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export { className as class };
 </script>
 
 <RangeCalendarPrimitive.PrevButton

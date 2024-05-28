@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { cn } from "#utils.js";
-	import type { HTMLAttributes } from "svelte/elements";
+import type { HTMLAttributes } from 'svelte/elements';
+import { cn } from '#utils.js';
 
-	type $$Props = HTMLAttributes<HTMLTableSectionElement>;
+type $$Props = HTMLAttributes<HTMLTableSectionElement>;
 
-	let className: $$Props["class"] = undefined;
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export { className as class };
 </script>
 
 <tfoot class={cn("bg-primary font-medium text-primary-foreground", className)} {...$$restProps}>

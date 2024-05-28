@@ -1,42 +1,42 @@
 <script lang="ts">
-	import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
-	import { superForm } from 'sveltekit-superforms';
-	import SuperDebug from 'sveltekit-superforms';
-	import { dev } from '$app/environment';
-	import { FloatingTextInput, Form, TagsInput } from '$lib/components/form';
-	import { updateDeviceKeys as keys } from '$lib/models/schema';
-	import { Logger } from '@spectacular/utils';
+import { dev } from '$app/environment';
+import { FloatingTextInput, Form, TagsInput } from '$lib/components/form';
+import { updateDeviceKeys as keys } from '$lib/models/schema';
+import { Logger } from '@spectacular/utils';
+import { Breadcrumb, BreadcrumbItem, Heading, Helper } from 'flowbite-svelte';
+import { superForm } from 'sveltekit-superforms';
+import SuperDebug from 'sveltekit-superforms';
 
-	const log = new Logger('routes:devices:update');
-	export let data;
-	// Client API:
-	const superform = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		syncFlashMessage: false,
-		onError({ result }) {
-			// the onError event allows you to act on ActionResult errors.
-			// TODO:
-			// message.set(result.error.message)
-			log.error('superForm:', { result });
-		}
-	});
-	const {
-		form,
-		delayed,
-		enhance,
-		errors,
-		constraints,
-		message,
-		tainted,
-		posted,
-		allErrors,
-		reset,
-		submitting,
-		capture,
-		restore
-	} = superform;
-	export const snapshot = { capture, restore };
+const log = new Logger('routes:devices:update');
+export let data;
+// Client API:
+const superform = superForm(data.form, {
+  dataType: 'json',
+  taintedMessage: null,
+  syncFlashMessage: false,
+  onError({ result }) {
+    // the onError event allows you to act on ActionResult errors.
+    // TODO:
+    // message.set(result.error.message)
+    log.error('superForm:', { result });
+  },
+});
+const {
+  form,
+  delayed,
+  enhance,
+  errors,
+  constraints,
+  message,
+  tainted,
+  posted,
+  allErrors,
+  reset,
+  submitting,
+  capture,
+  restore,
+} = superform;
+export const snapshot = { capture, restore };
 </script>
 
 <svelte:head>

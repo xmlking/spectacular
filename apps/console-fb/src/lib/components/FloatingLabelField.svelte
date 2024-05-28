@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { FloatingLabelInput } from 'flowbite-svelte';
+import { FloatingLabelInput } from 'flowbite-svelte';
 
-	export let style: 'filled' | 'outlined' | 'standard' = 'outlined';
-	export let name: string;
-	export let value: string | number | Date | undefined = '';
-	export let label: string;
-	export let error = '';
+export let style: 'filled' | 'outlined' | 'standard' = 'outlined';
+export let name: string;
+export let value: string | number | Date | undefined = '';
+export let label: string;
+export let error = '';
 </script>
 
 <FloatingLabelInput

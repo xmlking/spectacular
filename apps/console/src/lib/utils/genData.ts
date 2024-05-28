@@ -19,7 +19,13 @@ export function getRandomInteger(min: number, max: number, includeMax = true) {
 	return Math.floor(Math.random() * (max - min + (includeMax ? 1 : 0)) + min);
 }
 
-export function createSeries(options: { count?: number; min: number; max: number; keys?: Array<string>; value?: 'number' | 'integer' }) {
+export function createSeries(options: {
+	count?: number;
+	min: number;
+	max: number;
+	keys?: Array<string>;
+	value?: 'number' | 'integer';
+}) {
 	const count = options.count ?? 10;
 	const min = options.min;
 	const max = options.max;
@@ -63,7 +69,13 @@ export function createDateSeries(options: {
 	});
 }
 
-export function createTimeSeries(options: { count?: number; min: number; max: number; keys: Array<string>; value: 'number' | 'integer' }) {
+export function createTimeSeries(options: {
+	count?: number;
+	min: number;
+	max: number;
+	keys: Array<string>;
+	value: 'number' | 'integer';
+}) {
 	const count = options.count ?? 10;
 	const min = options.min;
 	const max = options.max;

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { sidebarOpen } from '$lib/stores/sidebar.store';
+import { sidebarOpen } from '$lib/stores/sidebar.store';
 
-	const toggle = () => {
-		sidebarOpen.update((n) => (n = !n));
-	};
-	export let hamburgerClass =
-		'text-gray-500 hover:text-gray-700 cursor-pointer border-none focus:outline-none dark:text-white hidden sm:block';
+const toggle = () => {
+  sidebarOpen.update((n) => (n = !n));
+};
+export let hamburgerClass =
+  'text-gray-500 hover:text-gray-700 cursor-pointer border-none focus:outline-none dark:text-white hidden sm:block';
 </script>
 
 <button

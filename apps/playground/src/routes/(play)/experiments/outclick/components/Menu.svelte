@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { Menu } from 'lucide-svelte';
-	import { OutClick } from '@spectacular/skeleton/components';
-	import { beforeNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
+import { beforeNavigate } from '$app/navigation';
+import { page } from '$app/stores';
+import { OutClick } from '@spectacular/skeleton/components';
+import { Menu } from 'lucide-svelte';
 
-	const items = [
-		{ title: 'HOME', href: '/experiments/outclick' },
-		{ title: 'EXCLUDE', href: '/experiments/outclick/exclude' },
-		{ title: 'HALF CLICK', href: '/experiments/outclick/half-click' }
-	];
+const items = [
+  { title: 'HOME', href: '/experiments/outclick' },
+  { title: 'EXCLUDE', href: '/experiments/outclick/exclude' },
+  { title: 'HALF CLICK', href: '/experiments/outclick/half-click' },
+];
 
-	let isOpen = false;
-	let toggleBtn: HTMLButtonElement;
+let isOpen = false;
+let toggleBtn: HTMLButtonElement;
 
-	beforeNavigate(() => (isOpen = false));
+beforeNavigate(() => (isOpen = false));
 </script>
 
 <button

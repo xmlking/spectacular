@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { LogoAnim } from '@spectacular/skeleton/components/logos';
-	import { page } from '$app/stores';
+import { page } from '$app/stores';
+import { LogoAnim } from '@spectacular/skeleton/components/logos';
 </script>
 
 {#if $page}

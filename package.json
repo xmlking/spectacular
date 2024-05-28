@@ -1,81 +1,78 @@
 {
-	"name": "spectacular",
-	"version": "0.2.2",
-	"private": true,
-	"description": "SvelteKit monorepo template",
-	"keywords": [
-		"cli",
-		"components",
-		"ui",
-		"component",
-		"svelte",
-		"template",
-		"monorepo",
-		"turborepo",
-		"tailwind",
-		"tailwindcss",
-		"sveltekit"
-	],
-	"homepage": "https://chinthagunta.com/",
-	"bugs": {
-		"url": "https://github.com/xmlking/spectacular/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/xmlking/spectacular.git"
-	},
-	"license": "MIT",
-	"workspaces": [
-		"apps/*",
-		"packages/*"
-	],
-	"scripts": {
-		"//": "Include build, lint, test - all the things you need to run before publishing",
-		"build": "turbo run build",
-		"check": "turbo run check --parallel",
-		"ci:release": "pnpm run prerelease && changeset publish",
-		"ci:snapshot": "pnpm prerelease && changeset version --snapshot preview && pnpm install && changeset publish --tag preview",
-		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
-		"ci:version-status": "changeset status -v",
-		"clean": "turbo run clean && rm -rf node_modules",
-		"cs": "changeset",
-		"dev": "turbo run dev --parallel",
-		"format": "turbo run format --parallel",
-    "format:root": "biome format . ",
-		"lint": "turbo run lint --parallel",
-		"lint:cspell": "cspell lint -c .vscode/cspell.json **",
-		"lint:root": "biome check .",
-		"prepare": "./scripts/init.sh",
-		"prerelease": "pnpm clean && pnpm install && turbo run build lint test",
-		"preview": "turbo run preview",
-		"test": "turbo run test --parallel",
-		"test:unit:coverage": "turbo run test:unit:coverage"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.7.3",
-		"@changesets/changelog-github": "0.5.0",
-		"@changesets/cli": "2.27.2",
-		"@dotenv-run/cli": "1.3.5",
-		"@markuplint/astro-parser": "4.6.2",
-		"@markuplint/svelte-parser": "4.6.2",
-		"@spectacular/biome-config": "workspace:*",
-		"@spectacular/typescript-config": "workspace:*",
-		"concurrently": "8.2.2",
-		"cspell": "8.8.1",
-		"husky": "9.0.11",
-		"lint-staged": "15.2.2",
-		"markuplint": "4.8.1",
-		"turbo": "1.13.3",
-		"vitest": "1.6.0"
-	},
-	"packageManager": "pnpm@9.1.0",
-	"engines": {
-		"node": ">=20",
-		"pnpm": ">=8"
-	},
-	"pnpm": {
-		"overrides": {
-			"xstate": "4.38.3"
-		}
-	}
+  "name": "spectacular",
+  "version": "0.2.2",
+  "private": true,
+  "description": "SvelteKit monorepo template",
+  "keywords": [
+    "cli",
+    "components",
+    "ui",
+    "component",
+    "svelte",
+    "template",
+    "monorepo",
+    "turborepo",
+    "tailwind",
+    "tailwindcss",
+    "sveltekit"
+  ],
+  "homepage": "https://chinthagunta.com/",
+  "bugs": {
+    "url": "https://github.com/xmlking/spectacular/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xmlking/spectacular.git"
+  },
+  "license": "MIT",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "//": "Include build, lint, test - all the things you need to run before publishing",
+    "build": "turbo run build",
+    "check": "turbo run check --parallel",
+    "ci:release": "pnpm run prerelease && changeset publish",
+    "ci:snapshot": "pnpm prerelease && changeset version --snapshot preview && pnpm install && changeset publish --tag preview",
+    "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
+    "ci:version-status": "changeset status -v",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "cs": "changeset",
+    "dev": "turbo run dev --parallel",
+    "format": "turbo run format --parallel",
+    "format:root": "biome check --apply .",
+    "lint": "turbo run lint --parallel",
+    "lint:cspell": "cspell lint -c .vscode/cspell.json **",
+    "lint:root": "biome check .",
+    "prepare": "./scripts/init.sh",
+    "prerelease": "pnpm clean && pnpm install && turbo run build lint test",
+    "preview": "turbo run preview",
+    "test": "turbo run test --parallel",
+    "test:unit:coverage": "turbo run test:unit:coverage"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@changesets/changelog-github": "0.5.0",
+    "@changesets/cli": "2.27.2",
+    "@dotenv-run/cli": "1.3.5",
+    "@markuplint/astro-parser": "4.6.2",
+    "@markuplint/svelte-parser": "4.6.2",
+    "@spectacular/biome-config": "workspace:*",
+    "@spectacular/typescript-config": "workspace:*",
+    "concurrently": "8.2.2",
+    "cspell": "8.8.1",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
+    "markuplint": "4.8.1",
+    "turbo": "1.13.3",
+    "vitest": "1.6.0"
+  },
+  "packageManager": "pnpm@9.1.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=8"
+  },
+  "pnpm": {
+    "overrides": {
+      "xstate": "4.38.3"
+    }
+  }
 }

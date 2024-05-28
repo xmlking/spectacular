@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { DropdownMenu as DropdownMenuPrimitive } from "bits-ui";
-	import Circle from "lucide-svelte/icons/circle";
-	import { cn } from "#utils.js";
+import type { DropdownMenu as DropdownMenuPrimitive } from 'bits-ui';
+import Circle from 'lucide-svelte/icons/circle';
+import { cn } from '#utils.js';
 
-	type $$Props = DropdownMenuPrimitive.RadioItemProps;
-	type $$Events = DropdownMenuPrimitive.RadioItemEvents;
+type $$Props = DropdownMenuPrimitive.RadioItemProps;
+type $$Events = DropdownMenuPrimitive.RadioItemEvents;
 
-	let className: $$Props["class"] = undefined;
-	export let value: $$Props["value"];
-	export { className as class };
+let className: $$Props['class'] = undefined;
+export let value: $$Props['value'];
+export { className as class };
 </script>
 
 <DropdownMenuPrimitive.RadioItem

@@ -1,19 +1,19 @@
 <script lang="ts">
-	import { ToggleGroup as ToggleGroupPrimitive } from "bits-ui";
-	import { cn } from "#utils.js";
-	import { getToggleGroupCtx, type ToggleVariants } from "./index.js";
-	import { toggleVariants } from "#components/ui/toggle/index.js";
+import type { ToggleGroup as ToggleGroupPrimitive } from 'bits-ui';
+import { toggleVariants } from '#components/ui/toggle/index.js';
+import { cn } from '#utils.js';
+import { type ToggleVariants, getToggleGroupCtx } from './index.js';
 
-	type $$Props = ToggleGroupPrimitive.ItemProps & ToggleVariants;
+type $$Props = ToggleGroupPrimitive.ItemProps & ToggleVariants;
 
-	let className: string | undefined | null = undefined;
+let className: string | undefined | null = undefined;
 
-	export { className as class };
-	export let variant: $$Props["variant"] = "default";
-	export let size: $$Props["size"] = "default";
-	export let value: $$Props["value"];
+export { className as class };
+export let variant: $$Props['variant'] = 'default';
+export let size: $$Props['size'] = 'default';
+export let value: $$Props['value'];
 
-	const ctx = getToggleGroupCtx();
+const ctx = getToggleGroupCtx();
 </script>
 
 <ToggleGroupPrimitive.Item

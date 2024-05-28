@@ -4,22 +4,22 @@
  */
 // export class ErrorBase<T extends string> extends Error {
 export abstract class ErrorBase<T extends string, C extends Error = Error> extends Error {
-	name: T;
-	message: string;
-	// cause: unknown;
-	cause: C;
-	constructor(error: ErrorWithCause<T, C>) {
-		super();
-		this.name = error.name;
-		this.message = error.message;
-		this.cause = error.cause;
-	}
-	abstract toJSON(): App.Error;
+  name: T;
+  message: string;
+  // cause: unknown;
+  cause: C;
+  constructor(error: ErrorWithCause<T, C>) {
+    super();
+    this.name = error.name;
+    this.message = error.message;
+    this.cause = error.cause;
+  }
+  abstract toJSON(): App.Error;
 }
 
 interface ErrorWithCause<T, C> {
-	name: T;
-	message: string;
-	// cause: unknown;
-	cause: C;
+  name: T;
+  message: string;
+  // cause: unknown;
+  cause: C;
 }

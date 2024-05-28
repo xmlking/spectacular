@@ -1,5 +1,5 @@
 <script>
-	import TransitionableImage from './TransitionableImage.svelte';
+import TransitionableImage from './TransitionableImage.svelte';
 </script>
 
 <div class="container">

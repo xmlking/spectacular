@@ -1,5 +1,5 @@
 <script lang="ts">
-	/**
+/**
 		Generates an HTML y-axis.
 		@type {Boolean} [gridlines=true] - Extend lines from the ticks into the chart space
 		@type {Boolean} [tickMarks=false] - Show a vertical mark for each tick.
@@ -10,25 +10,25 @@
 		@type {Number} [yTick=0] - How far up and down to position the text marker.
 		@type {Number} [dyTick=0] - Any optional value passed to the `dy` attribute on the text marker and tick mark (if visible). This is ignored on the text marker if your scale is ordinal.
 	*/
-	import { getContext } from 'svelte';
-	const { padding, xRange, yScale } = getContext('LayerCake');
-	export let gridlines = true;
-	export let tickMarks = false;
-	export let formatTick = (d) => d;
-	export let ticks = 4;
-	export let xTick = 0;
-	export let yTick = 0;
-	export let dxTick = 0;
-	export let dyTick = -4;
-	export let textAnchor = 'start';
-	$: isBandwidth = typeof $yScale.bandwidth === 'function';
-	$: tickVals = Array.isArray(ticks)
-		? ticks
-		: isBandwidth
-			? $yScale.domain()
-			: typeof ticks === 'function'
-				? ticks($yScale.ticks())
-				: $yScale.ticks(ticks);
+import { getContext } from 'svelte';
+const { padding, xRange, yScale } = getContext('LayerCake');
+export let gridlines = true;
+export let tickMarks = false;
+export let formatTick = (d) => d;
+export let ticks = 4;
+export let xTick = 0;
+export let yTick = 0;
+export let dxTick = 0;
+export let dyTick = -4;
+export let textAnchor = 'start';
+$: isBandwidth = typeof $yScale.bandwidth === 'function';
+$: tickVals = Array.isArray(ticks)
+  ? ticks
+  : isBandwidth
+    ? $yScale.domain()
+    : typeof ticks === 'function'
+      ? ticks($yScale.ticks())
+      : $yScale.ticks(ticks);
 </script>
 
 <g class="axis y-axis" transform="translate({-$padding.left}, 0)">

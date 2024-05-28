@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	import { graphql } from '$houdini';
+import { graphql } from '$houdini';
+import { onDestroy, onMount } from 'svelte';
 
-	const schedules = graphql(`
+const schedules = graphql(`
 		subscription StreamPolicy {
 			policies(
 				order_by: [{ updatedAt: desc_nulls_last }]
@@ -16,24 +16,24 @@
 		}
 	`);
 
-	// const livePolicy = graphql(`
-	// 	query LivePolicy {
-	// 		policies(order_by: [{ updatedAt: desc_nulls_last }], limit: 50, offset: 0) @live {
-	// 			id
-	// 			displayName
-	// 		}
-	// 	}
-	// `);
+// const livePolicy = graphql(`
+// 	query LivePolicy {
+// 		policies(order_by: [{ updatedAt: desc_nulls_last }], limit: 50, offset: 0) @live {
+// 			id
+// 			displayName
+// 		}
+// 	}
+// `);
 
-	onMount(() => {
-		console.log('sub Mount');
-		schedules.listen();
-	});
-	onDestroy(() => {
-		console.log('sub Destroy');
-		schedules.unlisten();
-	});
-	$: console.log('$schedules.data on load:', $schedules.data);
+onMount(() => {
+  console.log('sub Mount');
+  schedules.listen();
+});
+onDestroy(() => {
+  console.log('sub Destroy');
+  schedules.unlisten();
+});
+$: console.log('$schedules.data on load:', $schedules.data);
 </script>
 
 {#if $schedules.fetching}

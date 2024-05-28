@@ -1,46 +1,46 @@
 <script lang="ts">
-	// TODO https://github.com/carincon93/sipro-spa/blob/main/resources/js/Shared/Tags.svelte
-	import { flip } from 'svelte/animate';
+// TODO https://github.com/carincon93/sipro-spa/blob/main/resources/js/Shared/Tags.svelte
+import { flip } from 'svelte/animate';
 
-	export let delimiter = ',';
-	export let tags = [] as string[];
-	export let colour = (tag: string) => {
-		if (tag.length <= 0) {
-			return 0;
-		}
-		let h = 0;
-		let i = 0;
-		while (i < tag.length) {
-			h = ((h << 5) - h + tag.charCodeAt(i++)) | 0;
-		}
-		return 'hsl(' + h / 360 + ', 100%, 80%)';
-	};
+export let delimiter = ',';
+export let tags = [] as string[];
+export let colour = (tag: string) => {
+  if (tag.length <= 0) {
+    return 0;
+  }
+  let h = 0;
+  let i = 0;
+  while (i < tag.length) {
+    h = ((h << 5) - h + tag.charCodeAt(i++)) | 0;
+  }
+  return 'hsl(' + h / 360 + ', 100%, 80%)';
+};
 
-	let current = '';
+let current = '';
 
-	function parseInput() {
-		const tagSet = new Set(tags);
-		current.split(delimiter).forEach((t) => {
-			const clean = t && t.trim();
-			clean && clean !== '' && tagSet.add(t);
-		});
-		current = '';
-		sync(tagSet);
-	}
+function parseInput() {
+  const tagSet = new Set(tags);
+  current.split(delimiter).forEach((t) => {
+    const clean = t && t.trim();
+    clean && clean !== '' && tagSet.add(t);
+  });
+  current = '';
+  sync(tagSet);
+}
 
-	function handleInput({ key, code }) {
-		(key === delimiter || code === 'Enter') && parseInput();
-	}
+function handleInput({ key, code }) {
+  (key === delimiter || code === 'Enter') && parseInput();
+}
 
-	function removeTag(tag: string) {
-		const tagSet = new Set(tags);
-		tagSet.delete(tag);
-		sync(tagSet);
-	}
+function removeTag(tag: string) {
+  const tagSet = new Set(tags);
+  tagSet.delete(tag);
+  sync(tagSet);
+}
 
-	function sync(tagSet: Set<string>) {
-		tags = [...tagSet];
-	}
+function sync(tagSet: Set<string>) {
+  tags = [...tagSet];
+}
 </script>
 
 <div class="tag-input">

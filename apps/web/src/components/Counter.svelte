@@ -1,14 +1,14 @@
 <script lang="ts">
-	// let count = $state(0);
-	let count = 0;
+// let count = $state(0);
+let count = 0;
 
-	function add() {
-		count += 1;
-	}
+function add() {
+  count += 1;
+}
 
-	function subtract() {
-		count -= 1;
-	}
+function subtract() {
+  count -= 1;
+}
 </script>
 
 <div class="counter">

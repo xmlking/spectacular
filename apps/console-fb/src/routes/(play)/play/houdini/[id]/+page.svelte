@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { PageData } from './$houdini';
-	export let data: PageData;
-	let { GetPolicy2 } = data;
-	$: ({ GetPolicy2 } = data);
+import type { PageData } from './$houdini';
+export let data: PageData;
+let { GetPolicy2 } = data;
+$: ({ GetPolicy2 } = data);
 </script>
 
 <h1>Demo infer route params</h1>

@@ -1,19 +1,19 @@
 <script>
-	import { fade } from 'svelte/transition';
-	import { page } from '$app/stores';
-	import TransitionableImage from '../TransitionableImage.svelte';
+import { page } from '$app/stores';
+import { fade } from 'svelte/transition';
+import TransitionableImage from '../TransitionableImage.svelte';
 
-	let { id } = $page.params;
+let { id } = $page.params;
 
-	const images = {
-		a: 'https://picsum.photos/id/400/1200/800',
-		b: 'https://picsum.photos/id/402/1200/800',
-		c: 'https://picsum.photos/id/403/1200/800',
-		d: 'https://picsum.photos/id/404/1200/800',
-		e: 'https://picsum.photos/id/405/1200/800'
-	};
+const images = {
+  a: 'https://picsum.photos/id/400/1200/800',
+  b: 'https://picsum.photos/id/402/1200/800',
+  c: 'https://picsum.photos/id/403/1200/800',
+  d: 'https://picsum.photos/id/404/1200/800',
+  e: 'https://picsum.photos/id/405/1200/800',
+};
 
-	let src = images[id];
+let src = images[id];
 </script>
 
 <div class="container">

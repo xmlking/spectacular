@@ -1,14 +1,14 @@
 <script>
-	import { LayerCake, Svg } from 'layercake';
-	import Area from '$lib/components/layercake/Area.svelte';
+import Area from '$lib/components/layercake/Area.svelte';
+import { LayerCake, Svg } from 'layercake';
 
-	import data from '$mocks/data/points';
+import data from '$mocks/data/points';
 
-	const xKey = 'myX';
-	const yKey = 'myY';
-	data.forEach((d) => {
-		d[yKey] = +d[yKey];
-	});
+const xKey = 'myX';
+const yKey = 'myY';
+data.forEach((d) => {
+  d[yKey] = +d[yKey];
+});
 </script>
 
 <div class="chart-container">

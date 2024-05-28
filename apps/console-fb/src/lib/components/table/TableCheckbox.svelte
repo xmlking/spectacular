@@ -1,6 +1,6 @@
 <script>
-	export let isSelected;
-	export let isSomeSubRowsSelected;
+export let isSelected;
+export let isSomeSubRowsSelected;
 </script>
 
 <label class="flex items-center">

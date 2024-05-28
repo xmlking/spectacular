@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { version } from '$app/environment';
-	console.log(`Client version: ${version}`);
+import { version } from '$app/environment';
+console.log(`Client version: ${version}`);
 </script>
 
 <div class="container mx-auto flex h-full items-center justify-center">
