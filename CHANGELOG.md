@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.3.1](https://github.com/xmlking/spectacular/compare/0dd43c62df4cb7faf468f26cf14f14f04ffaaf52..v0.3.1) - 2024-05-28
+#### Bug Fixes
+- biome chaning lets to const, reverted - ([23453ef](https://github.com/xmlking/spectacular/commit/23453ef339647b4dae59d057c0c41af58f7e3fc5)) - [@xmlking](https://github.com/xmlking)
+- biome chaning lets to const, reverted - ([0dd43c6](https://github.com/xmlking/spectacular/commit/0dd43c62df4cb7faf468f26cf14f14f04ffaaf52)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.3.0](https://github.com/xmlking/spectacular/compare/a9ef87d944e700ce23d344876c03f7a9f423002f..v0.3.0) - 2024-05-28
 #### Bug Fixes
 - markdown vscode settings - ([dceb78c](https://github.com/xmlking/spectacular/commit/dceb78c2f11cfd2c6b8cc871e331be6154c31d93)) - [@xmlking](https://github.com/xmlking)
