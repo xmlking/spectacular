@@ -1,7 +1,7 @@
 <script lang="ts">
+import { isLoadingForm, isLoadingPage } from '$lib/stores/loading';
 import { ProgressRadial } from '@skeletonlabs/skeleton';
 import { fade } from 'svelte/transition';
-import { isLoadingForm, isLoadingPage } from '$lib/stores/loading';
 
 // Only show spinner if page transition takes more than 150ms
 const wait = (delay: number) => new Promise((res) => setTimeout(res, delay));

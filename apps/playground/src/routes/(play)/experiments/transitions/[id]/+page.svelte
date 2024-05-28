@@ -1,6 +1,6 @@
 <script>
-import { fade } from 'svelte/transition';
 import { page } from '$app/stores';
+import { fade } from 'svelte/transition';
 import TransitionableImage from '../TransitionableImage.svelte';
 
 let { id } = $page.params;

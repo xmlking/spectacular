@@ -1,11 +1,11 @@
 <script lang="ts">
+import { browser } from '$app/environment';
+import type { Engine } from '@tsparticles/engine';
 // if you are going to use `loadFull`, install the "tsparticles" package.
 //import { loadFull } from 'tsparticles';
 // if you are going to use `loadSlim`, install the "tsparticles-slim" package.
 import { loadSlim } from '@tsparticles/slim';
 import { particlesInit } from '@tsparticles/svelte';
-import type { Engine } from '@tsparticles/engine';
-import { browser } from '$app/environment';
 
 export let count = 200;
 export let size = 2;

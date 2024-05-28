@@ -1,8 +1,8 @@
 <script lang="ts">
+import { page } from '$app/stores';
+import { menuNavLinks } from '$lib/links';
 import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 import { Icon } from '@spectacular/skeleton/components/icons';
-import { menuNavLinks } from '$lib/links';
-import { page } from '$app/stores';
 
 // Local
 let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;

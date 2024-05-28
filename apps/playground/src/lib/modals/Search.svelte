@@ -1,8 +1,8 @@
 <script lang="ts">
-import { getModalStore } from '@skeletonlabs/skeleton';
-import { File, Search } from 'lucide-svelte';
 import { menuNavLinks } from '$lib/links';
 import type { List } from '$lib/links';
+import { getModalStore } from '@skeletonlabs/skeleton';
+import { File, Search } from 'lucide-svelte';
 
 // Classes
 const cBase =

@@ -1,27 +1,27 @@
 <!-- Layout: (root) -->
 <script lang="ts">
-import { MetaTags } from 'svelte-meta-tags';
-import { Modal, AppShell, storePopup, initializeStores, prefersReducedMotionStore } from '@skeletonlabs/skeleton';
-import type { ComponentEvents } from 'svelte';
-import type { ModalComponent } from '@skeletonlabs/skeleton';
-import { setupViewTransition } from 'sveltekit-view-transition';
-import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
-import { inject } from '@vercel/analytics';
-import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
-import GotoTop from '$lib/components/layout/go-to-top.svelte';
-import { i18n } from '$lib/i18n';
-import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
-import Search from '$lib/modals/search.svelte';
-import { dev, browser } from '$app/environment';
+import { browser, dev } from '$app/environment';
 import { page } from '$app/stores';
-import Header from '$lib/components/layout/header.svelte';
-import Footer from '$lib/components/layout/footer.svelte';
-import Sidebar from '$lib/components/layout/sidebar.svelte';
 import Drawer from '$lib/components/layout/drawer.svelte';
 import FlashMessageToast from '$lib/components/layout/flash-message-toast.svelte';
+import Footer from '$lib/components/layout/footer.svelte';
+import GotoTop from '$lib/components/layout/go-to-top.svelte';
+import Header from '$lib/components/layout/header.svelte';
+import Sidebar from '$lib/components/layout/sidebar.svelte';
+import { i18n } from '$lib/i18n';
 import ModalExampleEmbed from '$lib/modals/examples/ModalExampleEmbed.svelte';
 import ModalExampleImage from '$lib/modals/examples/ModalExampleImage.svelte';
 import ModalExampleList from '$lib/modals/examples/ModalExampleList.svelte';
+import Search from '$lib/modals/search.svelte';
+import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
+import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
+import { AppShell, Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
+import type { ModalComponent } from '@skeletonlabs/skeleton';
+import { inject } from '@vercel/analytics';
+import type { ComponentEvents } from 'svelte';
+import { MetaTags } from 'svelte-meta-tags';
+import { setupViewTransition } from 'sveltekit-view-transition';
 // import HeadHrefLangs from '$lib/components/layout/head-href-langs.svelte';
 
 // Global Stylesheets

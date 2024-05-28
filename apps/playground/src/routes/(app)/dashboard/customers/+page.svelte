@@ -1,6 +1,6 @@
 <script lang="ts">
-import { DataHandler } from '@vincjo/datatables';
 import * as Table from '@spectacular/skeleton/components/table';
+import { DataHandler } from '@vincjo/datatables';
 //Import data
 // export let data: PageData;
 // $: ({ customers } = data);

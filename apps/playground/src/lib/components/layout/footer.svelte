@@ -1,7 +1,7 @@
 <script lang="ts">
-import { VERSION } from '@sveltejs/kit';
 import { LogoIcon } from '@spectacular/skeleton/components/logos';
-import { Twitter, Youtube, Github, Linkedin } from 'lucide-svelte';
+import { VERSION } from '@sveltejs/kit';
+import { Github, Linkedin, Twitter, Youtube } from 'lucide-svelte';
 
 const appVersion = __APP_VERSION__;
 const gitTag = __GIT_TAG__;

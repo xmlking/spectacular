@@ -1,9 +1,9 @@
 <script lang="ts">
-import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { Field, Control, Label, Description, FieldErrors, Fieldset, Legend } from 'formsnap';
-import { zodClient } from 'sveltekit-superforms/adapters';
-import { DebugShell } from '@spectacular/skeleton/components';
 import Preview from '$lib/components/preview.svelte';
+import { DebugShell } from '@spectacular/skeleton/components';
+import { Control, Description, Field, FieldErrors, Fieldset, Label, Legend } from 'formsnap';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { zodClient } from 'sveltekit-superforms/adapters';
 import { allergies, schema, themes } from './schema.js';
 
 export let data;

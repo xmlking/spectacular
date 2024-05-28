@@ -1,7 +1,7 @@
 <script lang="ts">
-import { PaneGroup, Pane, PaneResizer } from 'paneforge';
-import { GripVertical, GripHorizontal } from 'lucide-svelte';
 import Preview from '$lib/components/preview.svelte';
+import { GripHorizontal, GripVertical } from 'lucide-svelte';
+import { Pane, PaneGroup, PaneResizer } from 'paneforge';
 </script>
 
 <svelte:head>

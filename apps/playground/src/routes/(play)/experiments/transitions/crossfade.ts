@@ -1,6 +1,6 @@
+import { cubicOut } from 'svelte/easing';
 import { assign, is_function } from 'svelte/internal';
 import type { EasingFunction, TransitionConfig } from 'svelte/types/runtime/transition';
-import { cubicOut } from 'svelte/easing';
 
 export interface CrossfadeParams {
   delay?: number;

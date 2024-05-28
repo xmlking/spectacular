@@ -1,10 +1,10 @@
-import { sequence } from '@sveltejs/kit/hooks';
-import type { Handle, HandleServerError } from '@sveltejs/kit';
-import { Logger } from '@spectacular/utils';
-import { ZodError } from 'zod';
 import { dev } from '$app/environment';
-import { theme } from '$lib/server/middleware';
 import { i18n } from '$lib/i18n';
+import { theme } from '$lib/server/middleware';
+import { Logger } from '@spectacular/utils';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+import { ZodError } from 'zod';
 
 /**
  * Code in hooks.server.ts will run when the application starts up,

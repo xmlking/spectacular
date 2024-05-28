@@ -1,8 +1,8 @@
 <script lang="ts">
-import { Menu } from 'lucide-svelte';
-import { OutClick } from '@spectacular/skeleton/components';
 import { beforeNavigate } from '$app/navigation';
 import { page } from '$app/stores';
+import { OutClick } from '@spectacular/skeleton/components';
+import { Menu } from 'lucide-svelte';
 
 const items = [
   { title: 'HOME', href: '/experiments/outclick' },

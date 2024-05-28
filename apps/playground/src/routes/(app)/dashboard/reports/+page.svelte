@@ -1,27 +1,27 @@
 <script lang="ts">
-import { formatDate, PeriodType } from 'svelte-ux/utils/date';
-import { flatten } from 'svelte-ux/utils/array';
-import { scaleBand, scaleOrdinal, scaleTime, scaleSequential } from 'd3-scale';
-import { stack } from 'd3-shape';
+import Preview from '$lib/components/preview.svelte';
+import { temperature as temperatureData } from '$lib/utils/dateSeries';
+import { createDateSeries } from '$lib/utils/genData';
 import { extent, ticks } from 'd3-array';
+import { scaleBand, scaleOrdinal, scaleSequential, scaleTime } from 'd3-scale';
 import { interpolateTurbo } from 'd3-scale-chromatic';
+import { stack } from 'd3-shape';
 import { format } from 'date-fns';
 import {
-  Chart,
-  Svg,
+  AreaStack,
   Axis,
   Bars,
-  AreaStack,
+  Chart,
   Highlight,
-  Tooltip,
-  TooltipItem,
+  Legend,
   LinearGradient,
   Spline,
-  Legend,
+  Svg,
+  Tooltip,
+  TooltipItem,
 } from 'layerchart';
-import { createDateSeries } from '$lib/utils/genData';
-import { temperature as temperatureData } from '$lib/utils/dateSeries';
-import Preview from '$lib/components/preview.svelte';
+import { flatten } from 'svelte-ux/utils/array';
+import { PeriodType, formatDate } from 'svelte-ux/utils/date';
 
 const data = createDateSeries({
   count: 30,
