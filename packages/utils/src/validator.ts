@@ -1,4 +1,4 @@
-import { AnyZodObject, ZodError, z } from 'zod';
+import type { AnyZodObject, ZodError, z } from 'zod';
 import { fromZodError } from 'zod-validation-error';
 
 /**

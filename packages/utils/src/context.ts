@@ -3,7 +3,7 @@
  * Ref: https://gist.github.com/tlux/0d87ec94581866567dad2ce64fa7c527
  * Ref: https://github.com/KamenKolev/svelte-typed-context
  */
-import { getContext as svelteGetContext, setContext as svelteSetContext, hasContext as svelteHasContext } from 'svelte';
+import { getContext as svelteGetContext, hasContext as svelteHasContext, setContext as svelteSetContext } from 'svelte';
 
 declare const isChecked: unique symbol;
 
