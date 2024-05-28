@@ -1,9 +1,9 @@
-import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
-import node from '@astrojs/node';
 // import vercel from "@astrojs/vercel/serverless";
 import vercel from '@astrojs/vercel/static';
+import { defineConfig } from 'astro/config';
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
 /* https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables */
