@@ -1,4 +1,8 @@
 <script lang="ts">
+import { browser, dev } from '$app/environment';
+import { goto, invalidateAll } from '$app/navigation';
+import { DeletePolicyStore, cache } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getToastStore } from '@skeletonlabs/skeleton';
 // import { default as SelectFetch } from 'svelte-select';
 // import { TimeDistance } from 'svelte-time-distance';
@@ -8,10 +12,6 @@ import { Logger } from '@spectacular/utils';
 /* eslint-disable */ // FIXME: remove
 import { GraphQLError } from 'graphql';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { goto, invalidateAll } from '$app/navigation';
-import { browser, dev } from '$app/environment';
-import { DeletePolicyStore, cache } from '$houdini';
 
 const log = new Logger('policies:list:browser');
 export let data;

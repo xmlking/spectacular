@@ -1,9 +1,9 @@
-import type { NhostClient } from '@nhost/nhost-js';
-import { Logger } from '@spectacular/utils';
-import type { GraphQLError } from 'graphql';
 import { env as secrets } from '$env/dynamic/private';
 import { ListOrganizationsStore } from '$houdini';
 import type { ListOrganizations$result } from '$houdini';
+import type { NhostClient } from '@nhost/nhost-js';
+import { Logger } from '@spectacular/utils';
+import type { GraphQLError } from 'graphql';
 
 /**
  * prevent calling server-side only functions in client-side code, we keep them under `lib/server`

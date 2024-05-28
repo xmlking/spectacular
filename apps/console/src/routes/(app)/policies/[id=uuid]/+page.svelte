@@ -1,9 +1,9 @@
 <script lang="ts">
+import { dev } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 /* FIXME */
 /* eslint-disable no-undef,@typescript-eslint/no-unused-vars,no-unused-vars */
 import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { dev } from '$app/environment';
 
 const log = new Logger('routes:policies:update');
 export let data;

@@ -1,4 +1,11 @@
 <script lang="ts">
+import { browser } from '$app/environment';
+import { enhance } from '$app/forms';
+import * as m from '$i18n/messages';
+import LangSwitch from '$lib/components/layout/lang-switch.svelte';
+// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
+import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
+import { storeTheme } from '$lib/stores';
 import type { User } from '@nhost/nhost-js';
 import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 import { AppBar, LightSwitch, getDrawerStore, getModalStore, popup } from '@skeletonlabs/skeleton';
@@ -15,13 +22,6 @@ import {
   Scroll,
   Search,
 } from 'lucide-svelte';
-import { browser } from '$app/environment';
-import { enhance } from '$app/forms';
-import * as m from '$i18n/messages';
-import LangSwitch from '$lib/components/layout/lang-switch.svelte';
-// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
-import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
-import { storeTheme } from '$lib/stores';
 import Avatar from './avatar.svelte';
 
 const drawerStore = getDrawerStore();

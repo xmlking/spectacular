@@ -1,14 +1,14 @@
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { i18n } from '$lib/i18n';
+import { setNhostSessionInCookies } from '$lib/nhost';
+import { userSchema } from '$lib/schema/user';
+import { limiter } from '$lib/server/limiter/limiter';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
 import { Logger, sleep } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { limiter } from '$lib/server/limiter/limiter';
-import { userSchema } from '$lib/schema/user';
-import { setNhostSessionInCookies } from '$lib/nhost';
-import { i18n } from '$lib/i18n';
-import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 
 const pwSchema = userSchema.pick({
   email: true,

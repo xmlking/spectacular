@@ -1,7 +1,7 @@
+import { i18n } from '$lib/i18n.js';
 import { Logger, startsWith } from '@spectacular/utils';
 import { redirect } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
-import { i18n } from '$lib/i18n.js';
 /**
  * Protect the route
  * This should be the next middleware after auth middleware.

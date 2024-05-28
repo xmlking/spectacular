@@ -1,7 +1,7 @@
-import { Logger, startsWith } from '@spectacular/utils';
-import type { Handle } from '@sveltejs/kit';
 import { dev } from '$app/environment';
 import { limiter } from '$lib/server/limiter/limiter';
+import { Logger, startsWith } from '@spectacular/utils';
+import type { Handle } from '@sveltejs/kit';
 
 /**
  * Rate Limit some routes

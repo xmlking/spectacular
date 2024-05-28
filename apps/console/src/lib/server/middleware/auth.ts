@@ -1,8 +1,8 @@
+import { i18n } from '$lib/i18n';
+import { getNhost, removeNhostSessionInCookies, setNhostSessionInCookies } from '$lib/nhost';
 import { Logger } from '@spectacular/utils';
 import type { Handle } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
-import { getNhost, removeNhostSessionInCookies, setNhostSessionInCookies } from '$lib/nhost';
-import { i18n } from '$lib/i18n';
 export const log = new Logger('server:middleware:auth');
 /**
  * Auth middleware goal is to set `NhostClient` initialized from either session cookie or refreshToken and set it into locals.

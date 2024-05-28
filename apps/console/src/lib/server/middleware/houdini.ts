@@ -1,6 +1,6 @@
+import { setSession } from '$houdini';
 import { Logger } from '@spectacular/utils';
 import type { Handle } from '@sveltejs/kit';
-import { setSession } from '$houdini';
 
 const log = new Logger('server:middleware:houdini');
 export const houdini = (async ({ event, resolve }) => {

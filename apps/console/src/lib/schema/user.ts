@@ -1,5 +1,5 @@
-import { z } from 'zod';
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { z } from 'zod';
 
 export const userSchema = z.object({
   firstName: z

@@ -1,8 +1,8 @@
 import { createOpenAI } from '@ai-sdk/openai';
 import { StreamingTextResponse, streamText } from 'ai';
 
-import { Logger } from '@spectacular/utils';
 import { env } from '$env/dynamic/private';
+import { Logger } from '@spectacular/utils';
 // import { limiter } from '$lib/server/limiter/limiter'; // TODO
 
 const log = new Logger('experiments:ai:completion:server');

@@ -1,4 +1,8 @@
 <script lang="ts">
+import { page } from '$app/stores';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { isLoadingForm } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Icon } from '@spectacular/skeleton/components/icons';
@@ -6,10 +10,6 @@ import { Logger } from '@spectacular/utils';
 import { AlertTriangle, Github, Loader, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { isLoadingForm } from '$lib/stores/loading';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import * as m from '$i18n/messages';
-import { page } from '$app/stores';
 
 export let data;
 const log = new Logger('auth:signin');

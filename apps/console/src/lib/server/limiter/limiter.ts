@@ -1,5 +1,5 @@
-import { RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
 import { RATE_LIMIT_SECRET } from '$env/static/private';
+import { RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
 
 export const limiter = new RetryAfterRateLimiter({
   // A rate is defined as [number, unit]

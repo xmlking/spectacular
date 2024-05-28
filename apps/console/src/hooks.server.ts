@@ -1,11 +1,11 @@
+import { dev } from '$app/environment';
+import { i18n } from '$lib/i18n';
+import { auth, guard, houdini, theme } from '$lib/server/middleware';
 import { Logger } from '@spectacular/utils';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { GraphQLError } from 'graphql';
 import { ZodError } from 'zod';
-import { auth, guard, houdini, theme } from '$lib/server/middleware';
-import { i18n } from '$lib/i18n';
-import { dev } from '$app/environment';
 
 /**
  * Code in hooks.server.ts will run when the application starts up,

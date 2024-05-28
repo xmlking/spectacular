@@ -11,7 +11,7 @@ import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
 import GotoTop from '$lib/components/layout/go-to-top.svelte';
 import { i18n } from '$lib/i18n';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
-import Search from '$lib/modals/Search.svelte';
+import Search from '$lib/modals/search.svelte';
 import { dev, browser } from '$app/environment';
 import { page } from '$app/stores';
 import Header from '$lib/components/layout/header.svelte';

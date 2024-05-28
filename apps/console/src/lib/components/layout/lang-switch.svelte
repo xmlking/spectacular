@@ -3,11 +3,11 @@
 	Switch for locales. Use in conjunction with AvailableLanguageTagTabs
 -->
 <script lang="ts">
-import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import { availableLanguageTags, languageTag } from '$i18n/runtime';
 import { i18n } from '$lib/i18n';
+import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 
 let locl: string = languageTag();
 </script>

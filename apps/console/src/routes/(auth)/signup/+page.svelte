@@ -1,15 +1,15 @@
 <script lang="ts">
+import { page } from '$app/stores';
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { isLoadingForm } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Logger } from '@spectacular/utils';
 import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { isLoadingForm } from '$lib/stores/loading';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import * as m from '$i18n/messages';
-import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
-import { page } from '$app/stores';
 
 export let data;
 const log = new Logger('auth:signup');

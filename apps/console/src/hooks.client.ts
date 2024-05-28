@@ -1,6 +1,6 @@
+import { dev } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 import type { HandleClientError } from '@sveltejs/kit';
-import { dev } from '$app/environment';
 
 // Setup logger
 if (!dev) {
