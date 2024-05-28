@@ -2,6 +2,28 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.3.0](https://github.com/xmlking/spectacular/compare/a9ef87d944e700ce23d344876c03f7a9f423002f..v0.3.0) - 2024-05-28
+#### Bug Fixes
+- markdown vscode settings - ([dceb78c](https://github.com/xmlking/spectacular/commit/dceb78c2f11cfd2c6b8cc871e331be6154c31d93)) - [@xmlking](https://github.com/xmlking)
+- set trailingComma to its default i.e., all - ([9f02fa4](https://github.com/xmlking/spectacular/commit/9f02fa40fd87b39249ab41d5e4e71b0edaa300d5)) - [@xmlking](https://github.com/xmlking)
+#### Build system
+- deps updated - ([f271ca9](https://github.com/xmlking/spectacular/commit/f271ca93fe36c7f473d7a26d770ad382c28b42e5)) - [@xmlking](https://github.com/xmlking)
+- deps updated - ([a5e03e1](https://github.com/xmlking/spectacular/commit/a5e03e11353a13943f02148e8b8dbcc655be9e61)) - [@xmlking](https://github.com/xmlking)
+#### Features
+- **(console)** adding ai sample - ([9389090](https://github.com/xmlking/spectacular/commit/9389090424ec25d1ac54c74ecfcffeeaa0f9d986)) - [@xmlking](https://github.com/xmlking)
+#### Style
+- using space instead of tab for indent - ([0c687a2](https://github.com/xmlking/spectacular/commit/0c687a217f7d15d405287fced1561716a244630c)) - [@xmlking](https://github.com/xmlking)
+- using space instead of tab for indent - ([6c6acec](https://github.com/xmlking/spectacular/commit/6c6acec61929e4270bb4532079923505c71252f1)) - [@xmlking](https://github.com/xmlking)
+- using space instead of tab for indent - ([10a2f8c](https://github.com/xmlking/spectacular/commit/10a2f8c5472c4cd270132298efedc3e13410d147)) - [@xmlking](https://github.com/xmlking)
+- using space instead of tab for indent - ([6dae52b](https://github.com/xmlking/spectacular/commit/6dae52b103444e3038512f00c0e098e2b9d74529)) - [@xmlking](https://github.com/xmlking)
+- using space instead of tab for indent - ([bb21cef](https://github.com/xmlking/spectacular/commit/bb21cef8a2d4c8d8aeea07428d16c7c64c36b7f5)) - [@xmlking](https://github.com/xmlking)
+- using space instead of tab for indent - ([abadf6d](https://github.com/xmlking/spectacular/commit/abadf6dabe3de47f01c9ace66290f15ad42d76d4)) - [@xmlking](https://github.com/xmlking)
+- using space instead of tab for indent - ([efc8231](https://github.com/xmlking/spectacular/commit/efc8231c49ce5c420986a604fca926fec2638c08)) - [@xmlking](https://github.com/xmlking)
+- using space instead of tab for indent - ([ea2aa8d](https://github.com/xmlking/spectacular/commit/ea2aa8ddc2e08749fa6c6575d79c298eb17e906c)) - [@xmlking](https://github.com/xmlking)
+- using svelteIndentScriptAndStyle: false - ([a9ef87d](https://github.com/xmlking/spectacular/commit/a9ef87d944e700ce23d344876c03f7a9f423002f)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.2.3](https://github.com/xmlking/spectacular/compare/196e8f924c15c0858d5e2812f8ea37a6ecb6c459..v0.2.3) - 2024-05-24
 #### Bug Fixes
 - **(actions)** move README to workflows [skip ci] - ([0c503ac](https://github.com/xmlking/spectacular/commit/0c503acaeeba2a34205629deb9d63be5011e1ed5)) - [@xmlking](https://github.com/xmlking)
