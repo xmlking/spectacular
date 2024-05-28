@@ -1,59 +1,67 @@
 [
-	{
-		"op": "replace",
-		"path": "/auth/redirections/clientUrl",
-		"value": "https://spectacular-console.vercel.app"
-	},
+  {
+    "op": "replace",
+    "path": "/auth/redirections/clientUrl",
+    "value": "https://spectacular-console.vercel.app"
+  },
   {
     "op": "replace",
     "path": "/auth/method/webauthn/relyingParty/origins/0",
     "value": "https://spectacular-console.vercel.app"
   },
-	{
-		"op": "replace",
-		"path": "/auth/redirections/allowedUrls",
-		"value": ["https://console.traefik.me:5173", "https://console.traefik.me:5173/dashboard/profile",  "https://console.traefik.me", "https://console.traefik.me/dashboard/profile", "https://spectacular-console.vercel.app", "https://spectacular-console.vercel.app/dashboard/profile", "https://*.vercel.app"]
-	},
-	{
-		"op": "replace",
-		"path": "/global/environment/0/value",
-		"value": "Spectacular"
-	},
-	{
-		"op": "replace",
-		"path": "/global/environment/1/value",
-		"value": "Spectacular Console App"
-	},
-	{
-		"op": "remove",
-		"path": "/provider/smtp"
-	},
-	{
-		"op": "remove",
-		"path": "/postgres/settings/maxWalSenders"
-	},
-	{
-		"op": "remove",
-		"path": "/postgres/settings/maxReplicationSlots"
-	},
-	{
-		"op": "remove",
-		"path": "/ai"
-	},
-	{
-		"op": "remove",
-		"path": "/hasura/resources"
-	},
-	{
-		"op": "remove",
-		"path": "/auth/resources"
-	},
-		{
-		"op": "remove",
-		"path": "/postgres/resources"
-	},
-		{
-		"op": "remove",
-		"path": "/storage/resources"
-	}
+  {
+    "op": "replace",
+    "path": "/auth/redirections/allowedUrls",
+    "value": [
+      "https://console.traefik.me:5173",
+      "https://console.traefik.me:5173/dashboard/profile",
+      "https://console.traefik.me",
+      "https://console.traefik.me/dashboard/profile",
+      "https://spectacular-console.vercel.app",
+      "https://spectacular-console.vercel.app/dashboard/profile",
+      "https://*.vercel.app"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/global/environment/0/value",
+    "value": "Spectacular"
+  },
+  {
+    "op": "replace",
+    "path": "/global/environment/1/value",
+    "value": "Spectacular Console App"
+  },
+  {
+    "op": "remove",
+    "path": "/provider/smtp"
+  },
+  {
+    "op": "remove",
+    "path": "/postgres/settings/maxWalSenders"
+  },
+  {
+    "op": "remove",
+    "path": "/postgres/settings/maxReplicationSlots"
+  },
+  {
+    "op": "remove",
+    "path": "/ai"
+  },
+  {
+    "op": "remove",
+    "path": "/hasura/resources"
+  },
+  {
+    "op": "remove",
+    "path": "/auth/resources"
+  },
+  {
+    "op": "remove",
+    "path": "/postgres/resources"
+  },
+  {
+    "op": "remove",
+    "path": "/storage/resources"
+  }
 ]
