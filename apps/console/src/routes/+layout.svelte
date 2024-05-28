@@ -1,5 +1,16 @@
 <!-- Layout: (root) -->
 <script lang="ts">
+import { browser, dev } from '$app/environment';
+import { page } from '$app/stores';
+import Drawer from '$lib/components/layout/drawer.svelte';
+import FlashMessageToast from '$lib/components/layout/flash-message-toast.svelte';
+import Footer from '$lib/components/layout/footer.svelte';
+import GotoTop from '$lib/components/layout/go-to-top.svelte';
+import Header from '$lib/components/layout/header.svelte';
+import Sidebar from '$lib/components/layout/sidebar.svelte';
+import { i18n } from '$lib/i18n';
+import Search from '$lib/modals/search.svelte';
+import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
 import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
@@ -10,17 +21,6 @@ import { startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
 import type { ComponentEvents } from 'svelte';
 import { setupViewTransition } from 'sveltekit-view-transition';
-import { browser, dev } from '$app/environment';
-import { page } from '$app/stores';
-import Drawer from '$lib/components/layout/drawer.svelte';
-import FlashMessageToast from '$lib/components/layout/flash-message-toast.svelte';
-import Footer from '$lib/components/layout/footer.svelte';
-import GotoTop from '$lib/components/layout/go-to-top.svelte';
-import Header from '$lib/components/layout/header.svelte';
-import Sidebar from '$lib/components/layout/sidebar.svelte';
-import { i18n } from '$lib/i18n';
-import Search from '$lib/modals/Search.svelte';
-import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import '../app.pcss';
 
 export let data;
