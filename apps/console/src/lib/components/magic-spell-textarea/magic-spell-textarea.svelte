@@ -42,7 +42,10 @@ function handleChange(e: Event) {
 function handleSubmitWrap(e: SubmitEvent) {
   e.preventDefault();
   log.debug({ value });
-  handleSubmit(e);
+  // FIXME: this like is temp, workaround as `handleSubmit` not taking dynamic body
+  // REF: https://github.com/vercel/ai/issues/1728
+  complete($input, { body: { text: value } });
+  // handleSubmit(e);
   input.set('');
 }
 
