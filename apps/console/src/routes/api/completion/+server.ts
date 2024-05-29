@@ -30,10 +30,7 @@ export const POST = async (event) => {
   if (await limiter.isLimited(event)) error(429);
 
   const { request } = event;
-  const aaa = await request.json();
-  console.log(aaa)
-  const { text, prompt } = aaa;
-  // const { text, prompt } = await request.json();
+  const { text, prompt } = await request.json();
   log.debug({ text, prompt });
   if (!prompt || !text) return new Response('Prompt is required', { status: 400 });
 

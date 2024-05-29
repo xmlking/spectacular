@@ -41,14 +41,14 @@ function handleChange(e: Event) {
 
 function handleSubmitWrap(e: SubmitEvent) {
   e.preventDefault();
-  log.debug({value})
+  log.debug({ value });
   handleSubmit(e);
   input.set('');
 }
 
-onMount(()=> {
+onMount(() => {
   //  complete('some example prompt', {body: {text: 'eeee'}});
-})
+});
 </script>
 
 <form
