@@ -28,11 +28,11 @@ export const load = async (event) => {
   // fetch orgs and render errors if backend throw error.
   const { errors, data } = await getOrgs(nhost);
   if (errors) {
-    errors.forEach((error) => {
+    for (const error of errors) {
       log.error('list orgs api error', error);
       // NOTE: you can add multiple errors, send all along with a message
       setError(form, '', (error as GraphQLError).message);
-    });
+    }
     setMessage(form, { type: 'error', message: 'List organizations failed' }, { status: 500 });
     return { status: 500, form };
   }

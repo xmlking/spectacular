@@ -8,12 +8,10 @@ const aiSchema = z.object({
   commentOne: z
     .string({ required_error: 'First Comment is required' })
     .min(10, { message: 'First Comment must contain at least 10 character(s)' })
-    .max(256)
     .trim(),
   commentTwo: z
     .string({ required_error: 'Second Comment is required' })
-    .min(10, { message: 'Second Name Comment contain at least 10 character(s)' })
-    .max(256)
+    .min(10, { message: 'Second Comment contain at least 10 character(s)' })
     .trim(),
 });
 

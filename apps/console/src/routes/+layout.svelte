@@ -45,7 +45,7 @@ const modalComponentRegistry: Record<string, ModalComponent> = {
 const noSidebarPaths = ['/signin', '/signup', '/privacy', '/terms', '/blog', '/password-reset'];
 function matchNoSidebarPaths(pathname: string): boolean {
   const canonicalPath = i18n.route(pathname);
-  if (canonicalPath == '/' || startsWith(canonicalPath, noSidebarPaths)) {
+  if (canonicalPath === '/' || startsWith(canonicalPath, noSidebarPaths)) {
     return true;
   }
   return false;

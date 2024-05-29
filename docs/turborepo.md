@@ -31,14 +31,19 @@ This Turborepo has some additional tools already setup for you:
 
 - [TypeScript](https://www.typescriptlang.org/) for static type checking ✅
 - [Biome](https://biomejs.dev/) for code linting, formatting, and fixing 🌿
+- [DotEnv](https://dotenv.run/) for loading environment variables from `.env.[NODE_ENV]` files with _Monorepo_ support.
 - [Changesets](https://github.com/changesets/changesets) for managing versioning, changelogs, and publishing 📝
 
 ## Prerequisite
 
-1. Turbo CLI
+1. Turbo CLI, dotenv CLI and biome
 
 ```shell
 pnpm add -g turbo@latest
+pnpm add -g @dotenv-run/cli
+pnpm add -g @biomejs/biome
+# in repo root directory
+pnpm add -D @changesets/cli @changesets/changelog-github  -w
 ```
 
 2. VS Code monorepo plugin: [Monorepo Focus Workspace](https://marketplace.visualstudio.com/items?itemName=alberto-varela.monorepo-focus-workspace)
