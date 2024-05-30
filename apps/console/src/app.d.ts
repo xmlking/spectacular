@@ -38,6 +38,7 @@ declare global {
       logResult?: boolean | null;
       backendToken?: string | null;
       useRole?: string | null;
+      adminSecret?: string | null;
     }
   }
 

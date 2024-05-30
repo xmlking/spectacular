@@ -8,7 +8,7 @@ import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacula
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
 
-const url = env.PUBLIC_GRAPHQL_ENDPOINT!;
+const url = env.PUBLIC_GRAPHQL_ENDPOINT;
 
 const log = new Logger('houdini.client');
 
@@ -48,11 +48,13 @@ export default new HoudiniClient({
     const accessToken = session?.accessToken;
     const backendToken = metadata?.backendToken;
     const useRole = metadata?.useRole;
+    const adminSecret = metadata?.adminSecret;
 
     return {
       headers: {
         ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
         ...(useRole ? { 'x-hasura-role': useRole } : {}),
+        ...(adminSecret ? { 'X-Hasura-Admin-Secret': adminSecret } : {}),
         ...(backendToken ? { backendToken } : {}),
       },
     };

@@ -2,7 +2,7 @@ import { i18n } from '$lib/i18n';
 import { setNhostSessionInCookies } from '$lib/nhost';
 import { signUpSchema } from '$lib/schema/user';
 import { limiter } from '$lib/server/limiter/limiter';
-import { getOrgs } from '$lib/server/utils/getOrgs';
+import { getOrgsNH } from '$lib/server/utils/getOrgs';
 import { Logger, sleep } from '@spectacular/utils';
 import { error, fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
@@ -26,7 +26,7 @@ export const load = async (event) => {
   if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
   const form = await superValidate(zod(signUpSchema));
   // fetch orgs and render errors if backend throw error.
-  const { errors, data } = await getOrgs(nhost);
+  const { errors, data } = await getOrgsNH(nhost);
   if (errors) {
     for (const error of errors) {
       log.error('list orgs api error', error);

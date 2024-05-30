@@ -10,6 +10,15 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      ghSiteUrl:
+        description: GitHub Pages URL.
+        default: https://xmlking.github.io
+        required: false
+      ghBasePath:
+        description: GitHub Pages Base.
+        default: ''
+        required: false
 
 permissions:
   contents: read
@@ -23,12 +32,14 @@ concurrency:
 env:
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-  GH_SITE_URL: ${{ secrets.GH_SITE_URL || 'https://xmlking.github.io' }}
-  GH_BASE_PATH: ${{ secrets.GH_BASE_PATH || '/spectacular' }}
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GH_SITE_URL: ${{ secrets.GH_SITE_URL || 'https://xmlking.github.io' }}
+      GH_BASE_PATH: ${{ secrets.GH_BASE_PATH || '/spectacular' }}
     steps:
       - name: Checkout 🛫
         uses: actions/checkout@v4
@@ -53,6 +64,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages 💖
+      - name: 💖 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
