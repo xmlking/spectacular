@@ -15,7 +15,7 @@ const dead_links_redirect_to: Record<string, string> = {
 
 /**
  * Handle Dead Links
- * TODO: this is replacemnt for src/lib/server/middleware/links.ts handler.
+ * TODO: this is replacemnt for src/lib/server/middleware/redirections.ts handler.
  * use it in hooks.ts
  */
 export const dead_links: Reroute = ({ url }) => {
