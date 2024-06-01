@@ -45,6 +45,20 @@ SELECT *
 FROM devices
 WHERE id NOT IN (SELECT device_id FROM public.device_pool WHERE pool_id = poolid)
 $$;
+CREATE FUNCTION public.enforce_single_default_role() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+  -- Update all other rows to set is_default_role to false
+UPDATE public.user_org_roles
+SET is_default_role = false
+WHERE user_id = NEW.user_id
+  AND organization = NEW.organization
+  AND is_default_role = true
+  AND id <> NEW.id;
+RETURN NEW;
+END;
+$$;
 CREATE FUNCTION public.insert_user_org_roles_when_user_roles_inserted() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
@@ -250,6 +264,8 @@ CREATE TRIGGER set_public_pools_updated_at BEFORE UPDATE ON public.pools FOR EAC
 COMMENT ON TRIGGER set_public_pools_updated_at ON public.pools IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 CREATE TRIGGER set_public_rules_updated_at BEFORE UPDATE ON public.rules FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
 COMMENT ON TRIGGER set_public_rules_updated_at ON public.rules IS 'trigger to set value of column "updated_at" to current timestamp on row update';
+CREATE TRIGGER trg_enforce_single_default_role BEFORE INSERT OR UPDATE OF is_default_role ON public.user_org_roles FOR EACH ROW WHEN ((new.is_default_role = true)) EXECUTE FUNCTION public.enforce_single_default_role();
+COMMENT ON TRIGGER trg_enforce_single_default_role ON public.user_org_roles IS 'trigger to set value of column "is_default_role" to "false" for all other rows, on a row insert or update';
 ALTER TABLE ONLY public.device_pool
     ADD CONSTRAINT device_pool_device_id_fkey FOREIGN KEY (device_id) REFERENCES public.devices(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.device_pool
