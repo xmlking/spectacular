@@ -1,4 +1,3 @@
-
 /**
  * Hasura GraphQL Errors
  */
