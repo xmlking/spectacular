@@ -7,7 +7,7 @@ export function getObjectTypeName(value: unknown): string {
  * target: target fields striped or set to `null` (WIP)
  */
 export type CleanOpts = { empty?: 'strip' | 'null'; target?: string[] };
-// eslint-disable-next-line @typescript-eslint/ban-types
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
 export function cleanClone<T extends Object>(obj: T, opts: CleanOpts): T {
   // TODO: check 'structuredClone' available in globalThis
   const cloneObj = structuredClone(obj);
@@ -23,7 +23,7 @@ export function cleanClone<T extends Object>(obj: T, opts: CleanOpts): T {
 
 function stripEmptyProperties(obj) {
   for (const key in obj) {
-    // eslint-disable-next-line no-prototype-builtins
+    // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
     if (obj.hasOwnProperty(key)) {
       if (obj[key] === null || obj[key] === undefined || (typeof obj[key] === 'string' && obj[key].trim() === '')) {
         delete obj[key];
@@ -38,7 +38,7 @@ function stripEmptyProperties(obj) {
 }
 function nullifyEmptyProperties(obj) {
   for (const key in obj) {
-    // eslint-disable-next-line no-prototype-builtins
+    // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
     if (obj.hasOwnProperty(key)) {
       if (obj[key] === null || obj[key] === undefined || (typeof obj[key] === 'string' && obj[key].trim() === '')) {
         obj[key] = null;
