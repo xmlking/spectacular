@@ -11,9 +11,9 @@ export type CleanOpts = { empty?: 'strip' | 'null'; target?: string[] };
 export function cleanClone<T extends Object>(obj: T, opts: CleanOpts): T {
   // TODO: check 'structuredClone' available in globalThis
   const cloneObj = structuredClone(obj);
-  if (opts.empty == 'strip') {
+  if (opts.empty === 'strip') {
     stripEmptyProperties(cloneObj);
-  } else if (opts.empty == 'null') {
+  } else if (opts.empty === 'null') {
     nullifyEmptyProperties(cloneObj);
   } else {
     throw Error('Unsupported CleanOpts');
