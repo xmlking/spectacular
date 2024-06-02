@@ -27,9 +27,9 @@ NOTE: You can pass `--endpoint <hasura-endpoint> --admin-secret <HASURA*GRAPHQL_
 ```shell
 # Create a directory to store migrations (with endpoint and admin secret configured):
 # use `''` to escape if `admin-secret` has special characters
-hasura init hasura --project infra --endpoint  https://srguexguxglrkvawhywy.hasura.us-east-1.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura init hasura --project nhost --endpoint  https://srguexguxglrkvawhywy.hasura.us-east-1.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # from localhost
-hasura init hasura --project infra --endpoint https://hasura.traefik.me
+hasura init hasura --project nhost --endpoint https://hasura.traefik.me
 # move infra/hasura/config.yaml to project root and edit metadata_directory, migrations_directory, seeds_directory paths in it
 
 hasura version
@@ -145,7 +145,7 @@ Check the status
 
 ```shell
 cd nhost
-asura metadata diff --endpoint https://hasura.traefik.me --admin-secret <admin-secret>
+hasura metadata diff --endpoint https://hasura.traefik.me --admin-secret <admin-secret>
 hasura migrate status --database-name default --endpoint https://hasura.traefik.me --admin-secret <admin-secret>
 ```
 

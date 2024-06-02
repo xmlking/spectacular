@@ -1,0 +1,156 @@
+table:
+  name: groups
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    deleted_at:
+      custom_name: deletedAt
+    display_name:
+      custom_name: displayName
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    deleted_at: deletedAt
+    display_name: displayName
+    updated_at: updatedAt
+    updated_by: updatedBy
+  custom_root_fields: {}
+array_relationships:
+  - name: group_users
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          name: user_groups
+          schema: public
+insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        updated_by: x-hasura-user-id
+      columns:
+        - annotations
+        - description
+        - display_name
+        - organization
+        - tags
+    comment: ""
+  - role: supervisor
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        organization: x-hasura-org-id
+        updated_by: x-hasura-user-id
+      columns:
+        - annotations
+        - description
+        - display_name
+        - tags
+    comment: ""
+select_permissions:
+  - role: manager
+    permission:
+      columns:
+        - annotations
+        - created_at
+        - created_by
+        - description
+        - display_name
+        - id
+        - organization
+        - tags
+        - updated_at
+        - updated_by
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - annotations
+        - created_at
+        - created_by
+        - description
+        - display_name
+        - id
+        - organization
+        - tags
+        - updated_at
+        - updated_by
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _eq: x-hasura-default-org
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - annotations
+        - created_at
+        - created_by
+        - description
+        - display_name
+        - id
+        - organization
+        - tags
+        - updated_at
+        - updated_by
+      filter:
+        group_users:
+          user_id:
+            _eq: x-hasura-user-id
+    comment: ""
+update_permissions:
+  - role: manager
+    permission:
+      columns:
+        - annotations
+        - deleted_at
+        - description
+        - display_name
+        - tags
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _in: x-hasura-allowed-orgs
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - annotations
+        - deleted_at
+        - description
+        - display_name
+        - tags
+      filter:
+        _and:
+          - deleted_at:
+              _is_null: true
+          - organization:
+              _eq: x-hasura-default-org
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
