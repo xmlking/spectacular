@@ -21,7 +21,7 @@
     "./tailwind.config": "./tailwind.config.ts"
   },
   "scripts": {
-    "format": "biome check --apply .",
+    "format": "biome check --write .",
     "lint": "biome check .",
     "test": "vitest run",
     "test:unit:coverage": "vitest run --coverage",

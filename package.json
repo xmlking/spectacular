@@ -41,7 +41,7 @@
     "cs": "changeset",
     "dev": "turbo run dev --parallel",
     "format": "turbo run format --parallel",
-    "format:root": "biome check --apply .",
+    "format:root": "biome check --write .",
     "lint": "turbo run lint --parallel",
     "lint:cspell": "cspell lint -c .vscode/cspell.json **",
     "lint:root": "biome check .",

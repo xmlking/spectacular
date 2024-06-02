@@ -14,7 +14,7 @@ pnpm biome init --jsonc
 pnpm biome format --write .
 pnpm biome lint --apply .
 # You can apply both of them by leveraging the check command:
-pnpm biome check --apply .
+pnpm biome check --write .
 ```
 
 ## TODO

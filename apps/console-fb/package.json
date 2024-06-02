@@ -11,7 +11,7 @@
     "dev:debug": "DEBUG=* dotenv-run -f .env -f .secrets -v '.*' -u -- vite dev",
     "dev:prod": "NODE_ENV=prod dotenv-run -f .env -f .secrets -v -- vite dev",
     "dev:sw": "SW_DEV=true dotenv-run -f .env -f .secrets -v -- vite dev",
-    "format": "biome check --apply .",
+    "format": "biome check --write .",
     "generate": "concurrently pnpm:generate:*",
     "generate:pull-schema": "dotenv-run -f .env -f .secrets -v -- houdini pull-schema",
     "generate:svelte": "svelte-kit sync",

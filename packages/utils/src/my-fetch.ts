@@ -40,6 +40,7 @@ export async function myFetch<Type = any>(input: RequestInfo | URL, init?: Reque
   return (await res.json()) as Type;
 }
 
+// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 export function handleError(err: unkown) {
   // Safe to our choice of logging service
   console.log(err);
