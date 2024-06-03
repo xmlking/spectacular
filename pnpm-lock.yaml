@@ -214,8 +214,8 @@ importers:
         specifier: 0.10.0
         version: 0.10.0(svelte@4.2.17)
       svelte-ux:
-        specifier: 0.66.1
-        version: 0.66.1(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
+        specifier: 0.66.3
+        version: 0.66.3(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
       sveltekit-flash-message:
         specifier: 2.4.4
         version: 2.4.4(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))(svelte@4.2.17)
@@ -316,7 +316,7 @@ importers:
         version: 5.3.1(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))
       '@sveltejs/enhanced-img':
         specifier: 0.2.1
-        version: 0.2.1(rollup@2.79.1)(svelte@4.2.17)
+        version: 0.2.1(rollup@4.18.0)(svelte@4.2.17)
       '@sveltejs/kit':
         specifier: 2.5.10
         version: 2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0))
@@ -733,7 +733,7 @@ importers:
         version: 5.3.1(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))
       '@sveltejs/enhanced-img':
         specifier: 0.2.1
-        version: 0.2.1(rollup@4.18.0)(svelte@4.2.17)
+        version: 0.2.1(rollup@2.79.1)(svelte@4.2.17)
       '@sveltejs/kit':
         specifier: 2.5.10
         version: 2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0))
@@ -825,8 +825,8 @@ importers:
         specifier: 0.10.0
         version: 0.10.0(svelte@4.2.17)
       svelte-ux:
-        specifier: 0.66.1
-        version: 0.66.1(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
+        specifier: 0.66.3
+        version: 0.66.3(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
       sveltekit-flash-message:
         specifier: 2.4.4
         version: 2.4.4(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))(svelte@4.2.17)(vite@5.2.12(@types/node@20.13.0)(terser@5.31.0)))(svelte@4.2.17)
@@ -9374,8 +9374,8 @@ packages:
   svelte-time-distance@0.0.3:
     resolution: {integrity: sha512-1L4e+fxjecAWgzg+rnhpXmoYi7Yb7rdL78BWH5HTOVuB1+Wc4S4fcPZyf4evBG80q0iJEazm90kE6id3sEzKxg==}
 
-  svelte-ux@0.66.1:
-    resolution: {integrity: sha512-pBT9qB0umIefpQ7k/jfstxcuzaTYHwlkOfNQ0ZRgvVIP/idmlW9po0mFdc6F0N5yabWqnAH1EhwU+BY1n05ZCA==}
+  svelte-ux@0.66.3:
+    resolution: {integrity: sha512-2sC9tsDmvFz/mJfhWTUcB/DuAKAtffakNoSOYoyl0Y0yf8zTPDSRNadIXgti/SaKmQnrh5CSqrAzxatWJAvEhA==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -17547,7 +17547,7 @@ snapshots:
       posthog-js: 1.136.2
       shapefile: 0.6.6
       svelte: 4.2.17
-      svelte-ux: 0.66.1(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
+      svelte-ux: 0.66.3(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -20286,7 +20286,7 @@ snapshots:
     dependencies:
       date-fns: 2.30.0
 
-  svelte-ux@0.66.1(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17):
+  svelte-ux@0.66.3(@babel/core@7.24.6)(postcss-load-config@5.1.0(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.17):
     dependencies:
       '@floating-ui/dom': 1.6.5
       '@fortawesome/fontawesome-common-types': 6.5.2
