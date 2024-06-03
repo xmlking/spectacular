@@ -44,3 +44,14 @@ const formatter = ({ value, locale = 'en-US', options }: TFormatterProps) =>
  */
 export const dateFormat = ({ value, preset, options }: TDateFormatterProps) =>
   formatter({ value, ...(preset ? dateTemplates[preset] : options) });
+
+export function formatDateOrDateTime(isoString: string, locale = 'en-US'): string {
+  const hasTime = isoString.includes('T');
+
+  const date = new Date(isoString);
+
+  if (hasTime) {
+    return date.toLocaleString(locale);
+  }
+  return date.toLocaleDateString(locale);
+}

@@ -17,8 +17,8 @@ export type Group = z.infer<typeof groupSchema>;
 export const searchGroupSchema = z.object({
   limit: z.number().int().min(5).max(100).default(10),
   offset: z.number().int().min(0).default(0),
-  displayName: z.string().trim().optional(),
-  organization: z.string().trim().optional(),
+  displayName: z.string().trim().min(3).optional(),
+  organization: z.string().trim().min(3).optional(),
 });
 
 export type SearchGroupSchema = typeof searchGroupSchema;

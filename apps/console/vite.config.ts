@@ -3,7 +3,6 @@ import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import houdini from 'houdini/vite';
-import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { defineConfig } from 'vitest/config';
 
 // if (!existsSync('./../../infra/base/traefik/certs/traefik.me.crt')) {
@@ -25,7 +24,6 @@ export default defineConfig({
     houdini(),
     enhancedImages(),
     sveltekit(),
-    purgeCss(),
     paraglide({
       project: './project.inlang',
       outdir: './src/i18n',

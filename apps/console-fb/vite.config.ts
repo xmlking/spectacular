@@ -3,7 +3,6 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import houdini from 'houdini/vite';
-import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -20,7 +19,6 @@ export default defineConfig({
     houdini(),
     enhancedImages(),
     sveltekit(),
-    purgeCss(),
     SvelteKitPWA({
       mode: 'development',
       base: '/',

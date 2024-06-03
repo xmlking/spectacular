@@ -2,7 +2,6 @@ import * as child_process from 'node:child_process';
 import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { purgeCss } from 'vite-plugin-tailwind-purgecss';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -18,7 +17,6 @@ export default defineConfig({
   plugins: [
     enhancedImages(),
     sveltekit(),
-    purgeCss(),
     paraglide({
       project: './project.inlang',
       outdir: './src/i18n',
