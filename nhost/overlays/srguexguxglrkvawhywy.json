@@ -33,6 +33,11 @@
     "value": "Spectacular Console App"
   },
   {
+    "op": "replace",
+    "path": "/postgres/version",
+    "value": "14.11-20240515-1"
+  },
+  {
     "op": "remove",
     "path": "/provider/smtp"
   },
