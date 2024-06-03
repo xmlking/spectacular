@@ -1,4 +1,4 @@
-import { CachePolicy, ListPoliciesStore, order_by } from '$houdini';
+import { CachePolicy, SearchPoliciesStore, order_by } from '$houdini';
 import { policySearchSchema as schema } from '$lib/schema/policy';
 import { Logger } from '@spectacular/utils';
 import { error } from '@sveltejs/kit';
@@ -7,7 +7,7 @@ import { setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 const log = new Logger('policies.list.browser');
 
-const listPoliciesStore = new ListPoliciesStore();
+const searchPoliciesStore = new SearchPoliciesStore();
 export const load = async (event) => {
   const { url } = event;
   const form = await superValidate(url, zod(schema));
@@ -30,7 +30,7 @@ export const load = async (event) => {
     orderBy,
     where,
   };
-  const { errors, data } = await listPoliciesStore.fetch({
+  const { errors, data } = await searchPoliciesStore.fetch({
     event,
     blocking: true,
     policy: CachePolicy.NetworkOnly,

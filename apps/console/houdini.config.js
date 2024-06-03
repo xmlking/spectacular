@@ -83,6 +83,10 @@ const config = {
         return val;
       },
     },
+    citext: {
+      type: 'string',
+      ...defaultMarshall,
+    },
     // FIXME: https://github.com/hasura/graphql-engine/issues/348
     // hstore: {
     // 	type: 'Map',

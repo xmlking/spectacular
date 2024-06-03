@@ -1,0 +1,14 @@
+query SearchGroups($where: groups_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [groups_order_by!] = [{organization: desc_nulls_last}]) {
+  groups(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
+    id
+    displayName
+    description
+    tags
+    annotations
+    organization
+    createdBy
+    updatedBy
+    createdAt
+    updatedAt
+  }
+}
