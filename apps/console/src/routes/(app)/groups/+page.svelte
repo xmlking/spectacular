@@ -1,51 +1,51 @@
 <script lang="ts">
-	import { DataHandler } from '@vincjo/datatables';
-	import { superForm } from 'sveltekit-superforms/client';
-	import SuperDebug from 'sveltekit-superforms';
-  import type { PopupSettings } from '@skeletonlabs/skeleton';
-  import  { popup } from '@skeletonlabs/skeleton';
-  import { Logger } from '@spectacular/utils';
-	import { dev } from '$app/environment';
+import { dev } from '$app/environment';
+import { searchGroupKeys as searchKeys } from '$lib/schema/group.js';
+import type { PopupSettings } from '@skeletonlabs/skeleton';
+import { popup } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
-	import { searchGroupKeys as searchKeys } from '$lib/schema/group.js';
-  import { CircleAlert, Plus, Search, UsersRound } from 'lucide-svelte';
+import { Logger } from '@spectacular/utils';
+import { DataHandler } from '@vincjo/datatables';
+import { CircleAlert, Plus, Search, UsersRound } from 'lucide-svelte';
+import SuperDebug from 'sveltekit-superforms';
+import { superForm } from 'sveltekit-superforms/client';
 
-	const log = new Logger('groups:list:browser');
+const log = new Logger('groups:list:browser');
 
-	export let data;
+export let data;
 
-	$: ({ groups } = data);
+$: ({ groups } = data);
 
-	const {
-		allErrors,
-		form: formData,
-		delayed,
-		errors,
-		constraints,
-		capture,
-		restore,
-		message,
-		tainted,
-		posted,
-		submitting
-	} = superForm(data.form, {
-		dataType: 'json',
-		taintedMessage: null,
-		onError({ result }) {
-			log.error('Client-Side SuperForm error', { result });
-		}
-	});
+const {
+  allErrors,
+  form: formData,
+  delayed,
+  errors,
+  constraints,
+  capture,
+  restore,
+  message,
+  tainted,
+  posted,
+  submitting,
+} = superForm(data.form, {
+  dataType: 'json',
+  taintedMessage: null,
+  onError({ result }) {
+    log.error('Client-Side SuperForm error', { result });
+  },
+});
 
-	$: handler = new DataHandler(groups, { rowsPerPage: 10 });
-	$: rows = handler.getRows();
+$: handler = new DataHandler(groups, { rowsPerPage: 10 });
+$: rows = handler.getRows();
 
-	export const snapshot = { capture, restore };
+export const snapshot = { capture, restore };
 
-  //
-  const popupHover: PopupSettings = {
-	event: 'hover',
-	target: 'popupHover',
-	placement: 'top'
+//
+const popupHover: PopupSettings = {
+  event: 'hover',
+  target: 'popupHover',
+  placement: 'top',
 };
 </script>
 

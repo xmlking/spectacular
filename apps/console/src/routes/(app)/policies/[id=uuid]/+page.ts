@@ -31,7 +31,7 @@ export const load = async (event) => {
       log.error('list policies api error', error);
       // NOTE: you can add multiple errors, send all along with a message
       setError(form, '', (error as GraphQLError).message);
-    };
+    }
     setMessage(form, { type: 'error', message: 'Backend error 😎' });
     return { status: 500, form };
   }
