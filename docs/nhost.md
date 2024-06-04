@@ -44,7 +44,7 @@ nhost config validate
 nhost config show
 nhost config show --subdomain local
 # This command is mostly useful to verify configuration overlays.
-nhost config show --subdomain srguexguxglrkvawhywy
+nhost config show --subdomain zyjloswljirxqtsdlnnf
 # Get cloud configuration
 nhost config pull
 ```
