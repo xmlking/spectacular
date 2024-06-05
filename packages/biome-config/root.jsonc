@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -36,15 +36,15 @@
           "level": "error",
           "options": {
             "strictCase": false,
-            // "conventions": [
-            //   {
-            //     "selector": {
-            //       "kind": "const",
-            //       "scope": "global"
-            //     },
-            //     "formats": ["CONSTANT_CASE"]
-            //   }
-            // ]
+            "conventions": [
+              {
+                "selector": {
+                  "kind": "const",
+                  "scope": "global"
+                },
+                "formats": ["CONSTANT_CASE"]
+              }
+            ]
           }
         },
         "useFilenamingConvention": {

@@ -39,9 +39,9 @@ jobs:
       - name: 🦶 Setup Biome CLI
         uses: biomejs/setup-biome@v2
         with:
-          version: 1.7.3
+          version: 1.8.0
       - name: 🧹 Lint code
-        run: biome ci .
+        run: biome ci --reporter=github
 
   tests:
     name: 🏗️ Build and Test
