@@ -25,10 +25,7 @@
     "url": "https://github.com/xmlking/spectacular.git"
   },
   "license": "MIT",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
     "//": "Include build, lint, test - all the things you need to run before publishing",
     "build": "turbo run build",
@@ -65,10 +62,10 @@
     "husky": "9.0.11",
     "lint-staged": "15.2.5",
     "markuplint": "4.9.0",
-    "turbo": "1.13.3",
+    "turbo": "2.0.1",
     "vitest": "1.6.0"
   },
-  "packageManager": "pnpm@9.1.0",
+  "packageManager": "pnpm@9.1.4",
   "engines": {
     "node": ">=20",
     "pnpm": ">=8"

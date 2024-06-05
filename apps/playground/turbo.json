@@ -1,7 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "extends": ["//"],
-  "pipeline": {
+  "tasks": {
     "check:watch": {
       "persistent": true,
       "outputs": [".svelte-kit/**"]
@@ -15,7 +15,7 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "dotEnv": [".env", ".secrets"]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
     },
     "generate": {
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]

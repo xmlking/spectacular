@@ -1,8 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env", "**/.secrets"],
-  "globalDotEnv": [".env", ".secrets"],
-  "pipeline": {
+  "globalDependencies": ["**/.env", "**/.secrets", ".env", ".secrets"],
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".svelte-kit/**", ".vercel/**"]
@@ -10,8 +9,7 @@
     "lint": {},
     "format": {},
     "test": {
-      "dotEnv": ["**/.env", "**/.env.test"],
-      "inputs": ["src/**", "tests/**"]
+      "inputs": ["src/**", "tests/**", "**/.env", "**/.env.test"]
     },
     "test:unit": {},
     "test:unit:coverage": {

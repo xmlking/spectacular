@@ -1,7 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "extends": ["//"],
-  "pipeline": {
+  "tasks": {
     "check:watch": {
       "persistent": true,
       "outputs": [".svelte-kit/**"]
@@ -13,23 +13,22 @@
       "outputs": [".svelte-kit/**"]
     },
     "dev": {
-      // FIXME: https://github.com/HoudiniGraphql/houdini/issues/1246 REMOVE  dependency on `sync`
       "dependsOn": ["sync"],
       "cache": false,
       "persistent": true,
-      "dotEnv": [".env", ".secrets"]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
     },
     "dev:debug": {
       "dependsOn": ["sync"],
       "cache": false,
       "persistent": true,
-      "dotEnv": [".env", ".secrets"]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
     },
     "dev:prod": {
       "dependsOn": ["sync"],
       "cache": false,
       "persistent": true,
-      "dotEnv": [".env", ".env.prod", ".secrets", ".secrets.prod"]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.prod", ".secrets", ".secrets.prod"]
     },
     "generate": {
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]

@@ -143,7 +143,7 @@ turbo build --filter=playground... --graph
 migrate command which both upgrades your repo to the specified version (latest by default) of turbo, and runs any codemods required.
 
 ```shell
-pnpx  @turbo/codemod migrate
+pnpx @turbo/codemod migrate --force
 ```
 
 ### Docker Build

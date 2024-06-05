@@ -32,6 +32,21 @@
       },
       "style": {
         // "noParameterAssign": "off",
+        "useNamingConvention": {
+          "level": "error",
+          "options": {
+            "strictCase": false,
+            // "conventions": [
+            //   {
+            //     "selector": {
+            //       "kind": "const",
+            //       "scope": "global"
+            //     },
+            //     "formats": ["CONSTANT_CASE"]
+            //   }
+            // ]
+          }
+        },
         "useFilenamingConvention": {
           "level": "error",
           "options": {
