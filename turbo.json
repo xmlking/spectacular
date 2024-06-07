@@ -1,13 +1,17 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env", "**/.secrets", ".env", ".secrets"],
+  "globalDependencies": ["**/.env", "**/.secrets", "**/.env.*local", ".env", ".secrets"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".svelte-kit/**", ".vercel/**"]
     },
-    "lint": {},
-    "format": {},
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "format": {
+      "dependsOn": ["^format"]
+    },
     "test": {
       "inputs": ["src/**", "tests/**", "**/.env", "**/.env.test"]
     },

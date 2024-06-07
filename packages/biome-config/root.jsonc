@@ -36,13 +36,16 @@
           "level": "error",
           "options": {
             "strictCase": false,
+            "requireAscii": true,
+            "enumMemberCase": "PascalCase",
             "conventions": [
               {
                 "selector": {
-                  "kind": "const",
-                  "scope": "global"
+                  "kind": "classMember",
+                  "modifiers": ["private"]
                 },
-                "formats": ["CONSTANT_CASE"]
+                "match": "_(.+)",
+                "formats": ["camelCase"]
               }
             ]
           }

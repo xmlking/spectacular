@@ -19,4 +19,3 @@ export const isURL = (url: string) => {
     return false;
   }
 };
-
