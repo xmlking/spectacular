@@ -32,24 +32,24 @@
       },
       "style": {
         // "noParameterAssign": "off",
-        "useNamingConvention": {
-          "level": "error",
-          "options": {
-            "strictCase": false,
-            "requireAscii": true,
-            "enumMemberCase": "PascalCase",
-            "conventions": [
-              {
-                "selector": {
-                  "kind": "classMember",
-                  "modifiers": ["private"]
-                },
-                "match": "_(.+)",
-                "formats": ["camelCase"]
-              }
-            ]
-          }
-        },
+        // "useNamingConvention": {
+        //   "level": "error",
+        //   "options": {
+        //     "strictCase": false,
+        //     "requireAscii": true,
+        //     "enumMemberCase": "PascalCase",
+        //     "conventions": [
+        //       {
+        //         "selector": {
+        //           "kind": "classMember",
+        //           "modifiers": ["private"]
+        //         },
+        //         "match": "_(.+)",
+        //         "formats": ["camelCase"]
+        //       }
+        //     ]
+        //   }
+        // },
         "useFilenamingConvention": {
           "level": "error",
           "options": {
