@@ -19,7 +19,7 @@
     "lang:studio": "pnpm inlang open editor",
     "lang:translate": "pnpm inlang machine translate --project ./project.inlang -f",
     "lang:validate": "pnpm inlang validate --project ./project.inlang",
-    "lint": "biome check .",
+    "lint": "biome check",
     "preview": "ORIGIN=https://console.traefik.me:4173 dotenv-run -f .env -f .secrets -v -- vite preview",
     "sync": "dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
     "test": "pnpm run test:integration && pnpm run test:unit",

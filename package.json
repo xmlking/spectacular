@@ -44,7 +44,7 @@
     "format:root": "biome check --write --reporter=summary",
     "lint": "turbo run lint --parallel",
     "lint:cspell": "cspell lint -c .vscode/cspell.json **",
-    "lint:root": "biome check .",
+    "lint:root": "biome check",
     "prepare": "./scripts/init.sh",
     "prerelease": "pnpm clean && pnpm install && turbo run build lint test",
     "preview": "turbo run preview",

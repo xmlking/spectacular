@@ -856,6 +856,234 @@ input direction_stream_cursor_value_input {
   value: String
 }
 
+"""User groups defined per organization"""
+type groups {
+  annotations: hstore
+  createdAt: timestamptz!
+  createdBy: String!
+  description: String
+  displayName: String!
+
+  """An array relationship"""
+  group_users(
+    """distinct select on columns"""
+    distinct_on: [user_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_groups_bool_exp
+  ): [user_groups!]!
+  id: uuid!
+  organization: String!
+  tags: [String!]
+  updatedAt: timestamptz!
+  updatedBy: String!
+}
+
+"""
+Boolean expression to filter rows from the table "groups". All fields are combined with a logical 'AND'.
+"""
+input groups_bool_exp {
+  _and: [groups_bool_exp!]
+  _not: groups_bool_exp
+  _or: [groups_bool_exp!]
+  annotations: hstore_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  createdBy: String_comparison_exp
+  description: String_comparison_exp
+  displayName: String_comparison_exp
+  group_users: user_groups_bool_exp
+  id: uuid_comparison_exp
+  organization: String_comparison_exp
+  tags: String_array_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "groups"
+"""
+enum groups_constraint {
+  """
+  unique or primary key constraint on columns "organization", "display_name"
+  """
+  groups_display_name_organization_unique
+
+  """
+  unique or primary key constraint on columns "id"
+  """
+  groups_pkey
+}
+
+"""
+input type for inserting data into table "groups"
+"""
+input groups_insert_input {
+  annotations: hstore
+  description: String
+  displayName: String
+  group_users: user_groups_arr_rel_insert_input
+  organization: String
+  tags: [String!]
+}
+
+"""
+response of any mutation on the table "groups"
+"""
+type groups_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [groups!]!
+}
+
+"""
+input type for inserting object relation for remote table "groups"
+"""
+input groups_obj_rel_insert_input {
+  data: groups_insert_input!
+
+  """upsert condition"""
+  on_conflict: groups_on_conflict
+}
+
+"""
+on_conflict condition type for table "groups"
+"""
+input groups_on_conflict {
+  constraint: groups_constraint!
+  update_columns: [groups_update_column!]! = []
+  where: groups_bool_exp
+}
+
+"""Ordering options when selecting data from "groups"."""
+input groups_order_by {
+  annotations: order_by
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  displayName: order_by
+  group_users_aggregate: user_groups_aggregate_order_by
+  id: order_by
+  organization: order_by
+  tags: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+}
+
+"""primary key columns input for table: groups"""
+input groups_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "groups"
+"""
+enum groups_select_column {
+  """column name"""
+  annotations
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  createdBy
+
+  """column name"""
+  description
+
+  """column name"""
+  displayName
+
+  """column name"""
+  id
+
+  """column name"""
+  organization
+
+  """column name"""
+  tags
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  updatedBy
+}
+
+"""
+input type for updating data in table "groups"
+"""
+input groups_set_input {
+  annotations: hstore
+  deletedAt: timestamptz
+  description: String
+  displayName: String
+  tags: [String!]
+}
+
+"""
+Streaming cursor of the table "groups"
+"""
+input groups_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: groups_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input groups_stream_cursor_value_input {
+  annotations: hstore
+  createdAt: timestamptz
+  createdBy: String
+  description: String
+  displayName: String
+  id: uuid
+  organization: String
+  tags: [String!]
+  updatedAt: timestamptz
+  updatedBy: String
+}
+
+"""
+update columns of table "groups"
+"""
+enum groups_update_column {
+  """column name"""
+  annotations
+
+  """column name"""
+  deletedAt
+
+  """column name"""
+  description
+
+  """column name"""
+  displayName
+
+  """column name"""
+  tags
+}
+
+input groups_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: groups_set_input
+
+  """filter the rows which have to be updated"""
+  where: groups_bool_exp!
+}
+
 scalar hstore
 
 """
@@ -926,6 +1154,19 @@ type mutation_root {
   delete_device_pool_by_pk(id: uuid!): device_pool
 
   """
+  delete data from the table: "user_groups"
+  """
+  delete_user_groups(
+    """filter the rows which have to be deleted"""
+    where: user_groups_bool_exp!
+  ): user_groups_mutation_response
+
+  """
+  delete single row from the table: "user_groups"
+  """
+  delete_user_groups_by_pk(id: uuid!): user_groups
+
+  """
   delete data from the table: "user_org_roles"
   """
   delete_user_org_roles(
@@ -981,6 +1222,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: devices_on_conflict
   ): devices
+
+  """
+  insert data into the table: "groups"
+  """
+  insert_groups(
+    """the rows to be inserted"""
+    objects: [groups_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: groups_on_conflict
+  ): groups_mutation_response
+
+  """
+  insert a single row into the table: "groups"
+  """
+  insert_groups_one(
+    """the row to be inserted"""
+    object: groups_insert_input!
+
+    """upsert condition"""
+    on_conflict: groups_on_conflict
+  ): groups
 
   """
   insert data into the table: "policies"
@@ -1047,6 +1310,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: rules_on_conflict
   ): rules
+
+  """
+  insert data into the table: "user_groups"
+  """
+  insert_user_groups(
+    """the rows to be inserted"""
+    objects: [user_groups_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: user_groups_on_conflict
+  ): user_groups_mutation_response
+
+  """
+  insert a single row into the table: "user_groups"
+  """
+  insert_user_groups_one(
+    """the row to be inserted"""
+    object: user_groups_insert_input!
+
+    """upsert condition"""
+    on_conflict: user_groups_on_conflict
+  ): user_groups
 
   """
   insert data into the table: "user_org_roles"
@@ -1117,6 +1402,34 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [devices_updates!]!
   ): [devices_mutation_response]
+
+  """
+  update data of the table: "groups"
+  """
+  update_groups(
+    """sets the columns of the filtered rows to the given values"""
+    _set: groups_set_input
+
+    """filter the rows which have to be updated"""
+    where: groups_bool_exp!
+  ): groups_mutation_response
+
+  """
+  update single row of the table: "groups"
+  """
+  update_groups_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: groups_set_input
+    pk_columns: groups_pk_columns_input!
+  ): groups
+
+  """
+  update multiples rows of table: "groups"
+  """
+  update_groups_many(
+    """updates to execute, in order"""
+    updates: [groups_updates!]!
+  ): [groups_mutation_response]
 
   """
   update data of the table: "policies"
@@ -2136,6 +2449,29 @@ type query_root {
   direction_by_pk(value: String!): direction
 
   """
+  fetch data from the table: "groups"
+  """
+  groups(
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]!
+
+  """fetch data from the table: "groups" using primary key columns"""
+  groups_by_pk(id: uuid!): groups
+
+  """
   fetch data from the table: "organizations"
   """
   organizations(
@@ -2295,6 +2631,29 @@ type query_root {
 
   """fetch data from the table: "auth.users" using primary key columns"""
   user(id: uuid!): users
+
+  """
+  fetch data from the table: "user_groups"
+  """
+  user_groups(
+    """distinct select on columns"""
+    distinct_on: [user_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_groups_bool_exp
+  ): [user_groups!]!
+
+  """fetch data from the table: "user_groups" using primary key columns"""
+  user_groups_by_pk(id: uuid!): user_groups
 
   """
   fetch data from the table: "user_org_roles"
@@ -3004,6 +3363,43 @@ type subscription_root {
   ): [direction!]!
 
   """
+  fetch data from the table: "groups"
+  """
+  groups(
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]!
+
+  """fetch data from the table: "groups" using primary key columns"""
+  groups_by_pk(id: uuid!): groups
+
+  """
+  fetch data from the table in a streaming manner: "groups"
+  """
+  groups_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [groups_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]!
+
+  """
   fetch data from the table: "organizations"
   """
   organizations(
@@ -3249,6 +3645,43 @@ type subscription_root {
   user(id: uuid!): users
 
   """
+  fetch data from the table: "user_groups"
+  """
+  user_groups(
+    """distinct select on columns"""
+    distinct_on: [user_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_groups_bool_exp
+  ): [user_groups!]!
+
+  """fetch data from the table: "user_groups" using primary key columns"""
+  user_groups_by_pk(id: uuid!): user_groups
+
+  """
+  fetch data from the table in a streaming manner: "user_groups"
+  """
+  user_groups_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [user_groups_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: user_groups_bool_exp
+  ): [user_groups!]!
+
+  """
   fetch data from the table: "user_org_roles"
   """
   user_org_roles(
@@ -3320,6 +3753,23 @@ type subscription_root {
   ): [users!]!
 }
 
+scalar timestamp
+
+"""
+Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'.
+"""
+input timestamp_comparison_exp {
+  _eq: timestamp
+  _gt: timestamp
+  _gte: timestamp
+  _in: [timestamp!]
+  _is_null: Boolean
+  _lt: timestamp
+  _lte: timestamp
+  _neq: timestamp
+  _nin: [timestamp!]
+}
+
 scalar timestamptz
 
 """
@@ -3335,6 +3785,167 @@ input timestamptz_comparison_exp {
   _lte: timestamptz
   _neq: timestamptz
   _nin: [timestamptz!]
+}
+
+"""User to Group association table"""
+type user_groups {
+  createdAt: timestamp!
+
+  """An object relationship"""
+  group: groups!
+  groupId: uuid!
+  id: uuid!
+
+  """An object relationship"""
+  user: users!
+  userId: uuid!
+}
+
+"""
+order by aggregate values of table "user_groups"
+"""
+input user_groups_aggregate_order_by {
+  count: order_by
+  max: user_groups_max_order_by
+  min: user_groups_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "user_groups"
+"""
+input user_groups_arr_rel_insert_input {
+  data: [user_groups_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: user_groups_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "user_groups". All fields are combined with a logical 'AND'.
+"""
+input user_groups_bool_exp {
+  _and: [user_groups_bool_exp!]
+  _not: user_groups_bool_exp
+  _or: [user_groups_bool_exp!]
+  createdAt: timestamp_comparison_exp
+  group: groups_bool_exp
+  groupId: uuid_comparison_exp
+  id: uuid_comparison_exp
+  user: users_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "user_groups"
+"""
+enum user_groups_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  user_groups_pkey
+}
+
+"""
+input type for inserting data into table "user_groups"
+"""
+input user_groups_insert_input {
+  group: groups_obj_rel_insert_input
+  groupId: uuid
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "user_groups"
+"""
+input user_groups_max_order_by {
+  createdAt: order_by
+  groupId: order_by
+  id: order_by
+  userId: order_by
+}
+
+"""
+order by min() on columns of table "user_groups"
+"""
+input user_groups_min_order_by {
+  createdAt: order_by
+  groupId: order_by
+  id: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "user_groups"
+"""
+type user_groups_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [user_groups!]!
+}
+
+"""
+on_conflict condition type for table "user_groups"
+"""
+input user_groups_on_conflict {
+  constraint: user_groups_constraint!
+  update_columns: [user_groups_update_column!]! = []
+  where: user_groups_bool_exp
+}
+
+"""Ordering options when selecting data from "user_groups"."""
+input user_groups_order_by {
+  createdAt: order_by
+  group: groups_order_by
+  groupId: order_by
+  id: order_by
+  user: users_order_by
+  userId: order_by
+}
+
+"""
+select columns of table "user_groups"
+"""
+enum user_groups_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  groupId
+
+  """column name"""
+  id
+
+  """column name"""
+  userId
+}
+
+"""
+Streaming cursor of the table "user_groups"
+"""
+input user_groups_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: user_groups_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input user_groups_stream_cursor_value_input {
+  createdAt: timestamp
+  groupId: uuid
+  id: uuid
+  userId: uuid
+}
+
+"""
+placeholder for update columns of table "user_groups" (current role has no relevant permissions)
+"""
+enum user_groups_update_column {
+  """placeholder (do not use)"""
+  _PLACEHOLDER
 }
 
 """Roles of User for a given Org."""

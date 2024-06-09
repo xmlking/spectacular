@@ -107,6 +107,9 @@ make exec-auth
 ```shell
 turbo dev --filter=console
 
+# or use `--log-order=stream` to disable TUI
+turbo dev --filter=console --log-order=stream
+
 # or start the server and open the app in a new browser tab
 turbo dev --filter=console -- --open
 

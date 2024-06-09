@@ -16,8 +16,12 @@ import Search from '$lib/modals/search.svelte';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
-import { type AppShell, Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
+import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
 import type { ModalComponent } from '@skeletonlabs/skeleton';
+
+// biome-ignore lint/style/useImportType: <explanation>
+import { AppShell } from '@skeletonlabs/skeleton';
+import { startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
 import type { ComponentEvents } from 'svelte';
 import { MetaTags } from 'svelte-meta-tags';
