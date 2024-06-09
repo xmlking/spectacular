@@ -2,7 +2,7 @@
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
-import { User2 } from 'lucide-svelte';
+import { UserRound } from 'lucide-svelte';
 </script>
 
 <div class="mx-auto flex max-w-md flex-col justify-center px-6 py-12 lg:px-8 lg:py-32">
@@ -10,7 +10,7 @@ import { User2 } from 'lucide-svelte';
     <div>
       <div class="mb-4 flex flex-row items-center justify-center">
         <div>
-          <User2 size={42} />
+          <UserRound size={42} />
         </div>
       </div>
       <TabGroup justify="justify-center">

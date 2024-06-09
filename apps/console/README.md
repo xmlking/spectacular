@@ -95,15 +95,15 @@ crane export ghcr.io/xmlking/spectacular/console:v0.1.3 - | tar -tvf - | grep -v
 | Service   | URL                                               |
 | --------- | ------------------------------------------------- |
 | Postgres  | postgres://postgres:postgres@localhost:5432/local |
-| Traefik   | https://traefik.traefik.me/dashboard/             |
-| Hasura    | https://hasura.traefik.me                         |
-| GraphQL   | https://graphql.traefik.me                        |
-| Auth      | https://auth.traefik.me/healthz                   |
-| Storage   | https://storage.traefik.me/healthz                |
-| Minio     | https://minio.traefik.me                          |
-| Mailhog   | https://mailhog.traefik.me                        |
-| Dashboard | https://dashboard.traefik.me                      |
-| Tailcall  | https://gateway.traefik.me                        |
+| Traefik   | <https://traefik.traefik.me/dashboard/>           |
+| Hasura    | <https://hasura.traefik.me>                       |
+| GraphQL   | <https://graphql.traefik.me>                      |
+| Auth      | <https://auth.traefik.me/healthz>                 |
+| Storage   | <https://storage.traefik.me/healthz>              |
+| Minio     | <https://minio.traefik.me>                        |
+| Mailhog   | <https://mailhog.traefik.me>                      |
+| Dashboard | <https://dashboard.traefik.me>                    |
+| Tailcall  | <https://gateway.traefik.me>                      |
 
 #### (Or) Start backend services with nhost cli
 
@@ -123,13 +123,13 @@ nhost up --apply-seeds
 | Service   | URL                                               |
 | --------- | ------------------------------------------------- |
 | Postgres  | postgres://postgres:postgres@localhost:5432/local |
-| Hasura    | https://local.hasura.nhost.run                    |
-| GraphQL   | https://local.graphql.nhost.run                   |
-| Auth      | https://local.auth.nhost.run                      |
-| Storage   | https://local.storage.nhost.run                   |
-| Functions | https://local.functions.nhost.run/v1/echo         |
-| Dashboard | https://local.dashboard.nhost.run                 |
-| Mailhog   | https://local.mailhog.nhost.run                   |
+| Hasura    | <https://local.hasura.nhost.run>                  |
+| GraphQL   | <https://local.graphql.nhost.run>                 |
+| Auth      | <https://local.auth.nhost.run>                    |
+| Storage   | <https://local.storage.nhost.run>                 |
+| Functions | <https://local.functions.nhost.run/v1/echo>       |
+| Dashboard | <https://local.dashboard.nhost.run>               |
+| Mailhog   | <https://local.mailhog.nhost.run>                 |
 
 #### Apply seeds
 
@@ -147,6 +147,8 @@ hasura seed apply --database-name default --endpoint https://hasura.traefik.me -
 ```bash
 cd apps/console
 turbo dev
+# or use `--log-order=stream` to disable TUI
+turbo dev --log-order=stream
 # or run with `prod` profile and
 # overload envelopment variables from `.env.prod`
 NODE_ENV=prod turbo dev

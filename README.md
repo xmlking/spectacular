@@ -17,6 +17,7 @@
 - GraphQL: [Houdini](https://www.houdinigraphql.com/) & [Hasura](https://hasura.io/)
 - Authentication: [Auth.js](https://authjs.dev/)
 - PWA: [Vite PWA](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html)
+- Linter/Formatter: [Biome](https://biomejs.dev/)
 
 ## Features
 

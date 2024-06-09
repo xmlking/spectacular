@@ -26,7 +26,6 @@
   },
   ////////// scm //////////
   "scm.defaultViewMode": "tree",
-  "conventionalCommits.scopes": ["workspace", "actions", "lint", "deps", "docs", "policy", "provider"],
   ////////// Git //////////
   "git.autofetch": true,
   ////////// Editor //////////
@@ -281,6 +280,7 @@
   // Make sure we're using biomejs for all filetypes
   // Need this because we need to override the default json and svelte formatters that folks might have configured
   "editor.defaultFormatter": "biomejs.biome",
+  "biome.rename": true,
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
