@@ -892,8 +892,8 @@ importers:
         specifier: 0.23.4
         version: 0.23.4(astro@4.9.3(@types/node@20.14.2)(terser@5.31.0)(typescript@5.4.5))
       '@astrojs/svelte':
-        specifier: 5.4.0
-        version: 5.4.0(astro@4.9.3(@types/node@20.14.2)(terser@5.31.0)(typescript@5.4.5))(svelte@4.2.17)(typescript@5.4.5)(vite@5.2.12(@types/node@20.14.2)(terser@5.31.0))
+        specifier: 5.5.0
+        version: 5.5.0(astro@4.9.3(@types/node@20.14.2)(terser@5.31.0)(typescript@5.4.5))(svelte@4.2.17)(typescript@5.4.5)(vite@5.2.12(@types/node@20.14.2)(terser@5.31.0))
       '@astrojs/tailwind':
         specifier: 5.1.0
         version: 5.1.0(astro@4.9.3(@types/node@20.14.2)(terser@5.31.0)(typescript@5.4.5))(tailwindcss@3.4.3)
@@ -1314,8 +1314,8 @@ packages:
     peerDependencies:
       astro: ^4.8.6
 
-  '@astrojs/svelte@5.4.0':
-    resolution: {integrity: sha512-D9/CVJ+Fy3fu+FzJ7x+0GnRUhHsJKsU6tW/xQQ1QzrFMABuEoM5U4YKTYtxWkqB4B4jNb7gbA4p9ZtEhYZ3/+w==}
+  '@astrojs/svelte@5.5.0':
+    resolution: {integrity: sha512-ooNFv4gWcc+IQnjgnijI6qTzXOPn7MBacSBqFd3EEQ9GDd2lnu87lqKEO8M5bXnQfsqsChg3E1gOsJ862mbCRA==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
     peerDependencies:
       astro: ^4.0.0
@@ -9310,8 +9310,8 @@ packages:
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
-  svelte2tsx@0.6.27:
-    resolution: {integrity: sha512-E1uPW1o6VsbRz+nUk3fznZ2lSmCITAJoNu8AYefWSvIwE2pSB01i5sId4RMbWNzfcwCQl1DcgGShCPcldl4rvg==}
+  svelte2tsx@0.7.9:
+    resolution: {integrity: sha512-Rm+0LAwg9wT4H2IsR8EaM9EWErTzi9LmuZKxkH5b1ua94XjQmwHstBP4VabLgA9AE6XmwBg+xK7Cjzwfm6ustQ==}
     peerDependencies:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
@@ -10588,12 +10588,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/svelte@5.4.0(astro@4.9.3(@types/node@20.14.2)(terser@5.31.0)(typescript@5.4.5))(svelte@4.2.17)(typescript@5.4.5)(vite@5.2.12(@types/node@20.14.2)(terser@5.31.0))':
+  '@astrojs/svelte@5.5.0(astro@4.9.3(@types/node@20.14.2)(terser@5.31.0)(typescript@5.4.5))(svelte@4.2.17)(typescript@5.4.5)(vite@5.2.12(@types/node@20.14.2)(terser@5.31.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 3.1.1(svelte@4.2.17)(vite@5.2.12(@types/node@20.14.2)(terser@5.31.0))
       astro: 4.9.3(@types/node@20.14.2)(terser@5.31.0)(typescript@5.4.5)
       svelte: 4.2.17
-      svelte2tsx: 0.6.27(svelte@4.2.17)(typescript@5.4.5)
+      svelte2tsx: 0.7.9(svelte@4.2.17)(typescript@5.4.5)
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -20262,7 +20262,7 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte2tsx@0.6.27(svelte@4.2.17)(typescript@5.4.5):
+  svelte2tsx@0.7.9(svelte@4.2.17)(typescript@5.4.5):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
