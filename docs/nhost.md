@@ -33,6 +33,8 @@ nhost sw upgrade
 
 #### Config
 
+> `--subdomain` defaults to `$NHOST_SUBDOMAIN` envelopment variable, if not spplied on command line
+
 ```shell
 # nhost login
 nhost login
@@ -45,11 +47,20 @@ nhost config show
 nhost config show --subdomain local
 # This command is mostly useful to verify configuration overlays.
 nhost config show --subdomain zyjloswljirxqtsdlnnf
-# Get cloud configuration
+# (DANGER) 
+# Pull current versions of ./nhost/nhost.toml and ./secrets used in the cloud environment.
 nhost config pull
 ```
 
-Refer: [configuration-overlays](https://docs.nhost.io/guides/cli/configuration-overlays)
+Secrets management in cloud
+
+```shell
+nhost secrets list --subdomain zyjloswljirxqtsdlnnf
+# (DANGER)
+# nhost secrets create --subdomain zyjloswljirxqtsdlnnf NHOST_WEBHOOK_SECRET "'ZAdx)h=Sy-YbsUfo:9ntz;3#;2p%A+L"
+# nhost secrets update --subdomain zyjloswljirxqtsdlnnf NHOST_WEBHOOK_SECRET "'ZAdx)h=Sy-YbsUfo:9ntz;3#;2p%A+L"
+# nhost secrets delete --subdomain zyjloswljirxqtsdlnnf NHOST_WEBHOOK_SECRET
+```
 
 #### Run
 
@@ -79,3 +90,9 @@ nhost run env --config nhost/nginx-service.toml --overlay-name local > .env1
 # nhost up --run-service path/to/run-service.toml[:overlay_name]
 nhost up --run-service ./nhost/nginx-service.toml:local
 ```
+
+## Reference
+
+1. [configuration-overlays](https://docs.nhost.io/guides/cli/configuration-overlays)
+2. [nhost-cli commands](https://github.com/nhost/nhost.toml)
+3. [nhost-cli docs](https://github.com/nhost/nhost.toml/tree/main/docs)
