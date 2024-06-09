@@ -65,7 +65,7 @@ onMount(() => {
     on:change={handleChange}
   />
 
-  <div class="z-10 -mt-5">
+  <div class="z-10 -mt-5 w-1/2">
     <fieldset disabled={$isLoading} class="input-group input-group-divider grid-cols-[1fr_auto]">
       <input
       type="search"
