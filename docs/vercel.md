@@ -44,6 +44,14 @@ Follow [SvelteKit on Vercel](https://vercel.com/docs/frameworks/sveltekit)
 ```shell
 # You can link your entire repo to all you Vercel projects in one command.
 vc link --repo
+#
+vercel env ls
+vercel env ls --environment production
+# Pull all Development Environment Variables down from the cloud
+vercel env pull .env.development.local
+# (DANGER)
+vercel env add API_TOKEN --sensitive
+vercel env rm API_TOKEN
 ```
 
 ## Build
