@@ -1,4 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
-  "extends": ["@spectacular/biome-config/svelte"]
+  "extends": ["@spectacular/biome-config/svelte"],
+  "files": {
+    "ignore": ["src/lib/server/middleware/guard.ts"]
+  }
 }

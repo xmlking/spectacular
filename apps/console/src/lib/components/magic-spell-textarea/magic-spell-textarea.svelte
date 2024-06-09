@@ -1,11 +1,11 @@
 <script lang="ts">
 import { getToastStore } from '@skeletonlabs/skeleton';
+import { autosize } from '@spectacular/skeleton/actions';
 import { Logger } from '@spectacular/utils';
 import { useCompletion } from 'ai/svelte';
 import { AlertTriangle, Sparkles } from 'lucide-svelte';
 import type { HTMLTextareaAttributes } from 'svelte/elements';
 import { fade } from 'svelte/transition';
-import { autosize } from '@spectacular/skeleton/actions';
 
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { onMount } from 'svelte';

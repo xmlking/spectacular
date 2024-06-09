@@ -19,7 +19,7 @@ export const actions = {
     const { params, request, locals } = event;
     const id = uuidSchema.parse(params.id);
     const session = await locals.auth();
-    if (session?.user == undefined) {
+    if (session?.user === undefined) {
       redirect(307, `/signin?callbackUrl=/policies/${id}`);
     }
 
@@ -55,7 +55,7 @@ export const actions = {
       ...restRule,
       ...(throttleRate && { throttleRate: `${throttleRate}` }),
       // HINT: only allow changing `shared` property from `false` to `true`
-      ...(originalShared == false && shared == true && { shared }),
+      ...(originalShared === false && shared === true && { shared }),
     };
 
     const variables = {
@@ -89,7 +89,7 @@ export const actions = {
 
     const message = {
       message: `Policy for Subject: ${policyResult.subjectDisplayName} ${
-        ruleResult ? 'and Rule: ' + ruleResult?.displayName : ''
+        ruleResult ? `and Rule: ${ruleResult?.displayName}` : ''
       } updated`,
       dismissible: true,
       duration: 10000,

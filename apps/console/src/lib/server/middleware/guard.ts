@@ -1,7 +1,10 @@
+  // biome-ignore format: <explanation>
+import { building } from '$app/environment';
 import { i18n } from '$lib/i18n.js';
 import { Logger, startsWith } from '@spectacular/utils';
 import { redirect } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
+
 /**
  * Protect the route
  * This should be the next middleware after auth middleware.
@@ -24,7 +27,8 @@ const publicPaths = [
 export const guard = (async ({ event, resolve }) => {
   // skip auth logic on build to prevent infinite redirection in production mode
   // FIXME: https://github.com/nextauthjs/next-auth/discussions/6186
-  return await resolve(event);
+  // biome-ignore format: <explanation>
+  if (building) return await resolve(event);
 
   // TODO:
   // check if user present in houdini middleware
@@ -75,7 +79,7 @@ export const guard = (async ({ event, resolve }) => {
   log.debug({ roles, role, orgs, org });
 
   if (startsWith(pathname, managerPaths)) {
-    if (role != 'manager') {
+    if (role !== 'manager') {
       // if (!roles?.includes('manager')) {
       redirect(303, i18n.resolveRoute('/dashboard'));
     }

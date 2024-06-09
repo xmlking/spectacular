@@ -53,7 +53,18 @@
     }
   },
   "files": {
-    "ignore": [".env", ".env.*", "src/lib/models/types/**", "src/i18n", "schema.graphql", "coverage/"]
+    "ignore": [
+      ".env",
+      ".env.*",
+      "src/lib/models/types/**",
+      "packages/ui/src/components/ui",
+      "src/i18n",
+      "schema.graphql",
+      "coverage/",
+      "$houdini/",
+      ".turbo/",
+      ".svelte-kit/"
+    ]
   },
   "overrides": [
     {
@@ -69,6 +80,9 @@
       "include": ["*.svelte"],
       "linter": {
         "rules": {
+          "correctness": {
+            "noUndeclaredVariables": "off"
+          },
           "style": {
             "useConst": "off"
           }

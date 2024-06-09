@@ -127,12 +127,11 @@ export const actions = {
     if (error) {
       log.error(error);
       return setError(form, `Failed signin: ${error.message}`, { status: 409 }); // 424 ???
-    } else {
-      return message(form, {
-        type: 'success',
-        message: '😎 Click the link in the email to finish the sign in process',
-      });
     }
+    return message(form, {
+      type: 'success',
+      message: '😎 Click the link in the email to finish the sign in process',
+    });
   },
 
   google: async ({
