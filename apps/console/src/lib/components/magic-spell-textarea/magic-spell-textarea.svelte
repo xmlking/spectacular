@@ -1,11 +1,11 @@
 <script lang="ts">
 import { getToastStore } from '@skeletonlabs/skeleton';
-import { AutoResizeTextarea } from '@spectacular/skeleton/components/auto-resize-textarea';
 import { Logger } from '@spectacular/utils';
 import { useCompletion } from 'ai/svelte';
 import { AlertTriangle, Sparkles } from 'lucide-svelte';
 import type { HTMLTextareaAttributes } from 'svelte/elements';
 import { fade } from 'svelte/transition';
+import { autosize } from '@spectacular/skeleton/actions';
 
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { onMount } from 'svelte';
@@ -58,14 +58,13 @@ onMount(() => {
   class="flex flex-col items-center"
   on:submit={handleSubmitWrap}
 >
-  <AutoResizeTextarea
+  <textarea use:autosize={{ minRows: 4 }}
     {...$$props}
-    maxRows={100}
-    minRows={4}
     disabled={$isLoading}
     value={$isLoading && $completion.length > 0 ? $completion.trim() : value}
     on:change={handleChange}
   />
+
   <div class="z-10 -mt-5">
     <fieldset disabled={$isLoading} class="input-group input-group-divider grid-cols-[1fr_auto]">
       <input

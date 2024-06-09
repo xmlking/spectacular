@@ -13,6 +13,10 @@ const aiSchema = z.object({
     .string({ required_error: 'Second Comment is required' })
     .min(10, { message: 'Second Comment contain at least 10 character(s)' })
     .trim(),
+  commentThree: z
+    .string({ required_error: 'Third Comment is required' })
+    .min(10, { message: 'Third Comment contain at least 10 character(s)' })
+    .trim(),
 });
 
 const log = new Logger('server:ai:ms');
