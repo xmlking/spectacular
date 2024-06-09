@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join } from 'node:path';
 import { skeleton } from '@skeletonlabs/tw-plugin';
 import containerQueries from '@tailwindcss/container-queries';
 // import colors from 'tailwindcss/colors';

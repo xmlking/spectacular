@@ -6,8 +6,8 @@
     "astro": "astro",
     "build": "astro check && astro build",
     "dev": "astro dev",
-    "format": "biome check --write .",
-    "lint": "biome check .",
+    "format": "biome check --write",
+    "lint": "biome check",
     "preview": "astro preview",
     "start": "astro dev",
     "test:unit:coverage": "echo OK"

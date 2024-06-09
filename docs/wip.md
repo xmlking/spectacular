@@ -12,4 +12,8 @@ docker compose config | kompose convert -c -f - -o ./infra/helm --volumes hostPa
 docker compose config | kompose up -c -f - --volumes hostPath --profile all
 kubectl get deployment,svc,pods
 docker compose config | kompose down -c -f - --volumes hostPath --profile all
+
+## rename all files in a folder according to a specified naming convention
+# https://github.com/Gadiguibou/stdrename
+stdrename -kr .  
 ```

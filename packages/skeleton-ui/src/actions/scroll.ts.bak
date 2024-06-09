@@ -34,7 +34,6 @@ export const scrollTop: Action<HTMLDivElement, Writable<number>> = (node, value)
   return {
     update(newValue) {
       unsubscribe();
-      // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
       unsubscribe = (value = newValue).subscribe(listener);
     },
     destroy() {

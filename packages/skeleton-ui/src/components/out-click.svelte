@@ -15,6 +15,7 @@ export let excludeElements: HTMLElement | HTMLElement[] = [];
 export let excludeQuerySelectorAll = '';
 
 // Now the user can enter a single element or an array of elements. `excludeElements={element}` or `excludeElements={[element1, element2]}`
+let excludeElementsArray: HTMLElement | HTMLElement[];
 $: excludeElementsArray = excludeElements ? castArray(excludeElements) : [];
 
 // If the wrapper did contain the event target, allow the `outclick` event to dispatch
@@ -34,7 +35,7 @@ const didClickOnExcludedElement = (target: HTMLElement): boolean => {
 
   if (excludeElementsArray && excludeElementsArray.length > 0) {
     for (const element of excludeElementsArray) {
-      if (element && element.contains(target)) {
+      if (element?.contains(target)) {
         status = true;
         break;
       }
@@ -44,7 +45,7 @@ const didClickOnExcludedElement = (target: HTMLElement): boolean => {
   if (excludeQuerySelectorAll) {
     const elements = document.querySelectorAll(excludeQuerySelectorAll);
     for (const element of elements) {
-      if (element && element.contains(target)) {
+      if (element?.contains(target)) {
         status = true;
         break;
       }

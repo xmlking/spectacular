@@ -20,8 +20,8 @@
     "./tailwind.config": "./tailwind.config.ts"
   },
   "scripts": {
-    "format": "biome check --write .",
-    "lint": "biome check .",
+    "format": "biome check --write",
+    "lint": "biome check",
     "test": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
     "ui:add": "pnpx shadcn-svelte@latest add"

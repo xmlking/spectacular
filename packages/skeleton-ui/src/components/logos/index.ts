@@ -1,4 +1,4 @@
-export { default as LogoIcon } from './LogoIcon.svelte';
-export { default as LogoAnim } from './LogoAnim.svelte';
-export { default as LogoFull } from './LogoFull.svelte';
-export { default as LogoHero } from './LogoHero.svelte';
+export { default as LogoIcon } from './logo-icon.svelte';
+export { default as LogoAnim } from './logo-anim.svelte';
+export { default as LogoFull } from './logo-full.svelte';
+export { default as LogoHero } from './logo-hero.svelte';
