@@ -7,7 +7,7 @@ import svelte from '@astrojs/svelte';
 import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel/serverless';
 import expressiveCode from 'astro-expressive-code';
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 const SITE_URL = process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL : 'http://localhost:4321/';
 
@@ -47,4 +47,25 @@ export default defineConfig({
     : node({
         mode: 'standalone',
       }),
+  experimental: {
+    env: {
+      schema: {
+        API_PORT: envField.number({
+          context: 'server',
+          access: 'secret',
+          default: 7000,
+        }),
+        PUBLIC_SOME_SERVER_FEATURE_FLAG: envField.boolean({
+          context: 'server',
+          access: 'public',
+          default: false,
+        }),
+        PUBLIC_SOME_CLIENT_FEATURE_FLAG: envField.boolean({
+          context: 'client',
+          access: 'public',
+          default: false,
+        }),
+      },
+    },
+  },
 });
