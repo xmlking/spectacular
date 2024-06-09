@@ -24,9 +24,12 @@ const publicPaths = [
   '/terms',
 ];
 
+// skip auth logic on build to prevent infinite redirection in production mode
+// FIXME: https://github.com/nextauthjs/next-auth/discussions/6186
+// TODO: why this line getting removed by biome?
+// if (building) return await resolve(event);
+
 export const guard = (async ({ event, resolve }) => {
-  // skip auth logic on build to prevent infinite redirection in production mode
-  // FIXME: https://github.com/nextauthjs/next-auth/discussions/6186
   // biome-ignore format: <explanation>
   if (building) return await resolve(event);
 
