@@ -1,4 +1,3 @@
-  // biome-ignore format: <explanation>
 import { building } from '$app/environment';
 import { i18n } from '$lib/i18n.js';
 import { Logger, startsWith } from '@spectacular/utils';

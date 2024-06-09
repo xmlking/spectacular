@@ -14,7 +14,9 @@ export function getRandomNumber(min: number, max: number) {
  *   see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_integer_between_two_values_inclusive
  */
 export function getRandomInteger(min: number, max: number, includeMax = true) {
+  // biome-ignore lint/style/noParameterAssign: <explanation>
   min = Math.ceil(min);
+  // biome-ignore lint/style/noParameterAssign: <explanation>
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + (includeMax ? 1 : 0)) + min);
 }
