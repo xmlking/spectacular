@@ -59,6 +59,7 @@ export const snapshot = { capture, restore };
           <MagicSpellTextarea
             id="commentOne"
             name="commentOne"
+            style="min-height: 4lh"
             bind:value={$form.commentOne}
             data-invalid={$errors.commentOne}
             placeholder="It was a dark and stormy night..."
@@ -73,6 +74,7 @@ export const snapshot = { capture, restore };
           <MagicSpellTextarea
             id="commentTwo"
             name="commentTwo"
+            class="min-h-24"
             bind:value={$form.commentTwo}
             data-invalid={$errors.commentTwo}
             placeholder="It was a dark and stormy night..."

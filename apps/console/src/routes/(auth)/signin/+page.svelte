@@ -214,7 +214,7 @@ pwlDelayed.subscribe((v) => ($isLoadingForm = v));
 </form>
 
 <div class="mt-5 flex flex-row items-center justify-center">
-  <a href="/password-reset" class="font-semibold">{m.auth_labels_forgot_password()}</a>
+  <a href="/password-reset" class="anchor font-semibold">{m.auth_labels_forgot_password()}</a>
 </div>
 
 <!-- Divider -->

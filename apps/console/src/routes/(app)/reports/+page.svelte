@@ -82,7 +82,7 @@ const temperatureColor = scaleSequential(extent(temperatureData, (d) => d.value)
   </div>
 </Preview>
 
-<h2>With Tooltip and Highlight</h2>
+<h3 class="h3">With Tooltip and Highlight</h3>
 
 <Preview>
   <div class="h-[300px] rounded border p-4">
@@ -114,7 +114,7 @@ const temperatureColor = scaleSequential(extent(temperatureData, (d) => d.value)
     </Chart>
   </div>
 </Preview>
-<h2>Gradient encoding</h2>
+<h3 class="h3">Gradient encoding</h3>
 <Preview>
   <div class="h-[300px] rounded border p-4">
     <Chart data={temperatureData} x="date" xScale={scaleTime()} y="value" yNice padding={{ left: 16, bottom: 24 }}>

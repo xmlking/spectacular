@@ -1,26 +1,33 @@
+/**
+ * HINT: useing CSS if `field-sizing: content` is avaiable.
+ */
 import { tick } from 'svelte';
 import type { Action } from 'svelte/action';
-export const autosize: Action<HTMLTextAreaElement, { minRows: number }> = (node, options = { minRows: 3 }) => {
-  node.rows = options.minRows;
+export const autosize: Action<HTMLTextAreaElement> = (node) => {
+  const isCSSEnabled = CSS.supports('field-sizing', 'content');
 
   function triggerResize() {
     node.style.height = 'auto';
     node.style.height = `${node.scrollHeight}px`;
   }
 
-  // const observer = new ResizeObserver(triggerResize);
-  // observer.observe(node);
+  if (isCSSEnabled) {
+    node.style.setProperty('field-sizing', 'content');
+  } else {
+    // const observer = new ResizeObserver(triggerResize);
+    // observer.observe(node);
+    node.addEventListener('input', triggerResize);
+    tick().then(triggerResize);
+  }
 
-  node.addEventListener('input', triggerResize);
-
-  tick().then(triggerResize);
   return {
-    update(newOptions) {
-      node.rows = newOptions.minRows;
-    },
     destroy() {
-      // observer.disconnect();
-      node.removeEventListener('input', triggerResize);
+      if (isCSSEnabled) {
+        node.style.setProperty('field-sizing', 'initial');
+      } else {
+        // observer.disconnect();
+        node.removeEventListener('input', triggerResize);
+      }
     },
   };
 };

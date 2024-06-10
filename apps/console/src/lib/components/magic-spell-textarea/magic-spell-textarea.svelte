@@ -58,7 +58,7 @@ onMount(() => {
   class="flex flex-col items-center"
   on:submit={handleSubmitWrap}
 >
-  <textarea use:autosize={{ minRows: 4 }}
+  <textarea use:autosize
     {...$$props}
     disabled={$isLoading}
     value={$isLoading && $completion.length > 0 ? $completion.trim() : value}
