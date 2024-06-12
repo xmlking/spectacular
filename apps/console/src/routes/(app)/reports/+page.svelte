@@ -1,7 +1,7 @@
 <script lang="ts">
 import Preview from '$lib/components/preview.svelte';
-import { temperature as temperatureData } from '$lib/utils/dateSeries';
-import { createDateSeries } from '$lib/utils/genData';
+import { temperature as temperatureData } from '$lib/utils/date-series';
+import { createDateSeries } from '$lib/utils/gen-data';
 import { extent, ticks } from 'd3-array';
 import { scaleBand, scaleOrdinal, scaleSequential, scaleTime } from 'd3-scale';
 import { interpolateTurbo } from 'd3-scale-chromatic';

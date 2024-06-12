@@ -1,8 +1,8 @@
 import { i18n } from '$lib/i18n';
-import { setNhostSessionInCookies } from '$lib/nhost';
+import { setNhostSessionInCookies } from '$lib/server/utils/nhost';
 import { signUpSchema } from '$lib/schema/user';
 import { limiter } from '$lib/server/limiter/limiter';
-import { getOrgs } from '$lib/server/utils/getOrgs';
+import { getOrgs } from '$lib/server/utils/get-orgs';
 import { Logger, sleep } from '@spectacular/utils';
 import { error, fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';

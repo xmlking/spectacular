@@ -39,6 +39,15 @@ export const userSchema = z.object({
   organization: z.string().default(PUBLIC_DEFAULT_ORGANIZATION),
 });
 
+export const pwSchema = userSchema.pick({
+  email: true,
+  password: true,
+});
+
+export const pwlSchema = userSchema.pick({
+  email: true,
+});
+
 export const signUpSchema = userSchema
   .pick({
     firstName: true,

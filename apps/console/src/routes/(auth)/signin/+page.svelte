@@ -3,6 +3,7 @@ import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { isLoadingForm } from '$lib/stores/loading';
+import { pwSchema, pwlSchema } from '$lib/schema/user';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Icon } from '@spectacular/skeleton/components/icons';
@@ -10,6 +11,7 @@ import { Logger } from '@spectacular/utils';
 import { AlertTriangle, Github, Loader, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
+  import { zodClient } from 'sveltekit-superforms/adapters';
 
 export let data;
 const log = new Logger('auth:signin');
@@ -36,6 +38,7 @@ const {
   syncFlashMessage: false,
   delayMs: 100,
   timeoutMs: 4000,
+  validators: zodClient(pwSchema),
   onError({ result }) {
     // TODO:
     // message.set(result.error.message)
@@ -69,6 +72,7 @@ const {
   syncFlashMessage: false,
   delayMs: 100,
   timeoutMs: 4000,
+  validators: zodClient(pwlSchema),
   onError({ result }) {
     // TODO:
     // message.set(result.error.message)

@@ -1,5 +1,5 @@
 import { i18n } from '$lib/i18n';
-import { removeNhostSessionInCookies } from '$lib/nhost';
+import { removeNhostSessionInCookies } from '$lib/server/utils/nhost';
 import { Logger } from '@spectacular/utils';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import type { Actions } from './$types';

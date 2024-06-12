@@ -1,1 +1,1 @@
-export * from './genData';
+export * from './gen-data';
