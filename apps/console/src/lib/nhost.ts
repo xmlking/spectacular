@@ -1,59 +1,94 @@
-import { env } from '$env/dynamic/public';
+import { invalidate } from '$app/navigation';
+import { PUBLIC_NHOST_REGION, PUBLIC_NHOST_SUBDOMAIN } from '$env/static/public';
 import { NhostClient } from '@nhost/nhost-js';
-import type { NhostSession } from '@nhost/nhost-js';
-import type { Cookies } from '@sveltejs/kit';
-import { waitFor } from 'xstate/lib/waitFor';
-// import { env as secrets } from '$env/dynamic/private';
+import type { NhostClientConstructorParams, NhostSession, User } from '@nhost/nhost-js';
+import { Logger } from '@spectacular/utils';
+import Cookies from 'js-cookie';
+import { writable } from 'svelte/store';
+
+const log = new Logger('nhost.client-side');
 
 export const NHOST_SESSION_KEY = 'nhostSession';
 const isBrowser = typeof window !== 'undefined';
 
-export async function getNhost(cookies: Cookies) {
-  const nhost = new NhostClient({
-    subdomain: env.PUBLIC_NHOST_SUBDOMAIN || 'local',
-    region: env.PUBLIC_NHOST_REGION,
-    // Disable automations on server-side.
-    // Need cookie storage for auth trasfering to SSR.
-    autoSignIn: isBrowser,
-    autoRefreshToken: isBrowser,
-    clientStorageType: 'cookie',
-    // HINT: When set, it is sent as an `x-hasura-admin-secret` header for all GraphQL, Storage, and Serverless Functions requests.
-    // adminSecret: secrets.HASURA_GRAPHQL_ADMIN_SECRET,
-    start: false,
+// class SvelteKitNhostClient extends NhostClient {
+//   constructor(params: NhostClientConstructorParams) {
+//     super({
+//       ...params,
+//       autoSignIn: isBrowser && params.autoSignIn,
+//       autoRefreshToken: isBrowser && params.autoRefreshToken,
+//       clientStorageType: 'web',
+//       start: false,
+//     });
+
+//     this.auth.onAuthStateChanged(() => {
+//       setNhostSessionInCookie(this);
+//     });
+//     this.auth.onTokenChanged(setNhostSessionInCookie);
+//   }
+//   start() {
+//     //initialize
+//   }
+// }
+
+export const nhost = new NhostClient({
+  subdomain: PUBLIC_NHOST_SUBDOMAIN || 'local',
+  region: PUBLIC_NHOST_REGION,
+  autoSignIn: isBrowser,
+  autoRefreshToken: isBrowser,
+  clientStorageType: 'web',
+  start: false,
+});
+
+export const user = writable <User>();
+
+if (isBrowser) {
+  nhost.auth.onAuthStateChanged((event, session) => {
+    log.debug(`The auth state has changed. State is now ${event} with session: ${session}`);
+    setNhostSessionInCookie(session);
+    invalidate('nhost:auth');
+    // window.location.reload();
+  });
+  nhost.auth.onTokenChanged((session) => {
+    log.debug('The access and refresh token has changed');
+    setNhostSessionInCookie(session);
   });
 
-  const sessionCookieValue = cookies.get(NHOST_SESSION_KEY) || '';
+  init();
+}
 
-  const initialSession: NhostSession = JSON.parse(atob(sessionCookieValue) || 'null');
-
+export function init() {
+  log.debug('initializing nhost client...');
+  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY);
+  const initialSession = sessionCookieValue ? (JSON.parse(atob(sessionCookieValue)) as NhostSession) : undefined;
   nhost.auth.client.start({ initialSession });
+}
 
-  if (nhost.auth.client.interpreter) {
-    await waitFor(nhost.auth.client.interpreter, (state) => !state.hasTag('loading'));
+/**
+ * Set the Nhost session in a cookie
+ * @param {NhostSession} session - The session to set in the cookie
+ */
+function setNhostSessionInCookie(session: NhostSession | null) {
+  if (session === null) {
+    Cookies.remove(NHOST_SESSION_KEY);
+    return;
   }
 
-  return nhost;
+  const expires = new Date();
+  // Expire the cookie 60 seconds before the token expires
+  expires.setSeconds(expires.getSeconds() + session.accessTokenExpiresIn - 60);
+  Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
+    sameSite: 'strict',
+    expires,
+  });
+  if (session?.user) user.set(session.user);
 }
 
 /**
- * Use this function to set nhost session into cookie - from SignIn/SignUp/auth-miggleware
- * @param cookies
- * @param session
+ * Log out a user
+ * @returns {Promise<boolean>} - Whether the logout was successful
  */
-const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
-export function setNhostSessionInCookies(cookies: Cookies, session: NhostSession) {
-  // Set cookie expires based on the actual `refreshToken` expire time: 30 days. i.e., `AUTH_REFRESH_TOKEN_EXPIRES_IN`
-  // cookie is not removed when the browser is closed because if `expiers` is omitted, the cookie becomes a session cookie.
-  // Note: the `accessToken` is still refreshed on the client-side or server-side, every 15 minutes. i.e. `AUTH_ACCESS_TOKEN_EXPIRES_IN`
-  const expires = new Date(Date.now() + THIRTY_DAYS);
-  cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/', expires });
-}
-
-/**
- * delete nhost session cookie
- * @param cookies
- */
-export function removeNhostSessionInCookies(cookies: Cookies) {
-  cookies.delete(NHOST_SESSION_KEY, { path: '/' });
-  // cookies.set(NHOST_SESSION_KEY, '', { httpOnly: true, path: '/', maxAge: 0 });
+export async function logOut() {
+  const { error } = await nhost.auth.signOut();
+  if (error) log.error(error);
 }

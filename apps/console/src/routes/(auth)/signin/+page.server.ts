@@ -1,8 +1,8 @@
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 import { i18n } from '$lib/i18n';
-import { setNhostSessionInCookies } from '$lib/server/utils/nhost';
 import { pwSchema, pwlSchema } from '$lib/schema/user';
 import { limiter } from '$lib/server/limiter/limiter';
+import { setNhostSessionInCookies } from '$lib/server/utils/nhost';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
 import { Logger, sleep } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
@@ -58,7 +58,7 @@ export const actions = {
     }
 
     log.debug('in password', { lang, nhost });
-    await sleep(8000);
+    await sleep(5000);
 
     if (!form.valid) return fail(400, { form });
 
@@ -73,11 +73,11 @@ export const actions = {
     if (session) {
       setNhostSessionInCookies(cookies, session);
       const message: App.Superforms.Message = { type: 'success', message: 'Signin sucessfull 😎' } as const;
-      redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
+      redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event); // how to reload!
     }
 
     // This line should never reach.
-    return message(form, { type: 'success', message: 'Signin sucessfull 😎' });
+    return message(form, { type: 'success', message: 'Signin sucessfull-no 😎' });
   },
 
   passwordless: async (event) => {
@@ -134,7 +134,7 @@ export const actions = {
   }) => {
     // TODO check if already login? session is valid
     log.debug('in login with google');
-    await login(nhost, new URL(request.url).origin, lang, 'google');
+    await login(nhost, new URL(request.url).origin + i18n.resolveRoute('/dashboard'), lang, 'google');
   },
 
   github: async ({
@@ -145,7 +145,7 @@ export const actions = {
     },
   }) => {
     log.debug('in login with github');
-    await login(nhost, new URL(request.url).origin, lang, 'github');
+    await login(nhost, new URL(request.url).origin + i18n.resolveRoute('/dashboard'), lang, 'github');
   },
 
   azuread: async ({

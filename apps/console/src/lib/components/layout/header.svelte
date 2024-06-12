@@ -11,6 +11,7 @@ import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 import { AppBar, LightSwitch, getDrawerStore, getModalStore, popup } from '@skeletonlabs/skeleton';
 import { LogoIcon } from '@spectacular/skeleton/components/logos';
 import type { SubmitFunction } from '@sveltejs/kit';
+// import {user , nhost } from '$lib/nhost';
 import {
   BookText,
   ChevronDown,

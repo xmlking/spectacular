@@ -3,7 +3,10 @@
  */
 import { tick } from 'svelte';
 import type { Action } from 'svelte/action';
-export const autosize: Action<HTMLTextAreaElement> = (node) => {
+export const autosize: Action<HTMLTextAreaElement, { useJs: boolean } | undefined> = (
+  node,
+  options = { useJs: false },
+) => {
   const isCSSEnabled = CSS.supports('field-sizing', 'content');
 
   function triggerResize() {
@@ -11,7 +14,7 @@ export const autosize: Action<HTMLTextAreaElement> = (node) => {
     node.style.height = `${node.scrollHeight}px`;
   }
 
-  if (isCSSEnabled) {
+  if (!options.useJs && isCSSEnabled) {
     node.style.setProperty('field-sizing', 'content');
   } else {
     // const observer = new ResizeObserver(triggerResize);
@@ -22,7 +25,7 @@ export const autosize: Action<HTMLTextAreaElement> = (node) => {
 
   return {
     destroy() {
-      if (isCSSEnabled) {
+      if (!options.useJs && isCSSEnabled) {
         node.style.setProperty('field-sizing', 'initial');
       } else {
         // observer.disconnect();
