@@ -53,6 +53,7 @@ services:
   postgres:
     image: postgres:16
     # image: pgvector/pgvector:pg16
+    # image: timescale/timescaledb-ha:pg16
     hostname: postgres
     container_name: postgres
     restart: unless-stopped
@@ -366,7 +367,7 @@ services:
   # dashboard
   ###########################################################################
   dashboard:
-    image: nhost/dashboard:1.16.3
+    image: nhost/dashboard:1.17.0
     hostname: dashboard
     container_name: dashboard
     restart: unless-stopped
@@ -403,7 +404,7 @@ services:
   # configserver
   ###########################################################################
   configserver:
-    image: nhost/cli:v1.18.0
+    image: nhost/cli:v1.18.2
     hostname: configserver
     container_name: configserver
     restart: unless-stopped
