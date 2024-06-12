@@ -40,7 +40,7 @@ export const nhost = new NhostClient({
   start: false,
 });
 
-export const user = writable <User>();
+export const user = writable<User>();
 
 if (isBrowser) {
   nhost.auth.onAuthStateChanged((event, session) => {

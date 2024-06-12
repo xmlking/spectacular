@@ -10,6 +10,8 @@ import Header from '$lib/components/layout/header.svelte';
 import Sidebar from '$lib/components/layout/sidebar.svelte';
 import { i18n } from '$lib/i18n';
 import Search from '$lib/modals/search.svelte';
+// KEEPME: initialize nhost
+import { NHOST_SESSION_KEY, init, nhost, user } from '$lib/nhost';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
@@ -21,8 +23,6 @@ import { startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
 import type { ComponentEvents } from 'svelte';
 import { setupViewTransition } from 'sveltekit-view-transition';
-// KEEPME: initialize nhost
-import {user , nhost, init, NHOST_SESSION_KEY } from '$lib/nhost';
 import '../app.pcss';
 
 export let data;
