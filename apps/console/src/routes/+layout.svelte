@@ -11,7 +11,8 @@ import Sidebar from '$lib/components/layout/sidebar.svelte';
 import { i18n } from '$lib/i18n';
 import Search from '$lib/modals/search.svelte';
 // KEEPME: initialize nhost
-import { NHOST_SESSION_KEY, init, nhost, user } from '$lib/nhost';
+import { init, nhost, user } from '$lib/nhost';
+import { NHOST_SESSION_KEY } from '$lib/constants';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';

@@ -39,14 +39,22 @@ export const userSchema = z.object({
   organization: z.string().default(PUBLIC_DEFAULT_ORGANIZATION),
 });
 
-export const pwSchema = userSchema.pick({
-  email: true,
-  password: true,
-});
+export const pwSchema = userSchema
+  .pick({
+    email: true,
+    password: true,
+  })
+  .extend({
+    redirectTo: z.string().default('/dashboard'),
+  });
 
-export const pwlSchema = userSchema.pick({
-  email: true,
-});
+export const pwlSchema = userSchema
+  .pick({
+    email: true,
+  })
+  .extend({
+    redirectTo: z.string().default('/dashboard'),
+  });
 
 export const signUpSchema = userSchema
   .pick({
@@ -57,6 +65,9 @@ export const signUpSchema = userSchema
     confirmPassword: true,
     terms: true,
     organization: true,
+  })
+  .extend({
+    redirectTo: z.string().default('/dashboard'),
   })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
 

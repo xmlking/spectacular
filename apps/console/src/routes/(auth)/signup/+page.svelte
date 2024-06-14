@@ -37,6 +37,9 @@ const { form, delayed, timeout, enhance, errors, constraints, message, tainted, 
 
 export const snapshot = { capture, restore };
 
+
+// Reactivity
+$form.redirectTo = $page.url.searchParams.get('redirectTo')
 // $: termsValue = $form.terms as Writable<boolean>;
 // Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
 delayed.subscribe((v) => ($isLoadingForm = v));

@@ -34,6 +34,7 @@ export const actions = {
     const {
       request,
       cookies,
+      url,
       locals: {
         paraglide: { lang },
         nhost,
@@ -62,18 +63,27 @@ export const actions = {
 
     if (!form.valid) return fail(400, { form });
 
-    const { email, password } = form.data;
+    const { email, password, redirectTo } = form.data;
 
-    const { session, error } = await nhost.auth.signIn({ email, password });
+    let { session, error } = await nhost.auth.signIn({ email, password });
     if (error) {
       log.error(error);
       return setError(form, `Failed signin: ${error.message}`, { status: 409 }); // 424 ???
     }
 
+    if (session && session.accessTokenExpiresIn === 0) {
+      // FIXME: we have to call refreshSession() as accessTokenExpiresIn comming as zero.
+      ({ session, error } = await nhost.auth.refreshSession());
+      if (error) {
+        log.error(error);
+        return setError(form, `Failed signin: ${error.message}`, { status: 409 }); // 424 ???
+      }
+    }
+
     if (session) {
       setNhostSessionInCookies(cookies, session);
       const message: App.Superforms.Message = { type: 'success', message: 'Signin sucessfull 😎' } as const;
-      redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event); // how to reload!
+      redirectWithFlash(303, i18n.resolveRoute(redirectTo), message, event); // how to reload!
     }
 
     // This line should never reach.

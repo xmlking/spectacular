@@ -54,7 +54,7 @@ export const guard = (async ({ event, resolve }) => {
   const { isAuthenticated, isLoading } = nhost.auth.getAuthenticationStatus();
   log.debug({ isAuthenticated, isLoading, lang });
   if (!isAuthenticated) {
-    redirect(303, i18n.resolveRoute(`/signin?callbackUrl=${pathname}`));
+    redirect(303, i18n.resolveRoute(`/signin?redirectTo=${pathname}`));
   }
 
   const session = nhost.auth.getSession();
@@ -67,7 +67,7 @@ export const guard = (async ({ event, resolve }) => {
     log.debug('session expired at: ', tokenExpirationTime);
     // FIXME: redirect from middleware may cause recursion
     // event.cookies.delete(NHOST_SESSION_KEY, { path: '/' })
-    redirect(303, i18n.resolveRoute('/logout?callbackUrl=/blog'));
+    redirect(303, i18n.resolveRoute(`/signin?redirectTo=${pathname}`));
   }
 
   // Check authorizations

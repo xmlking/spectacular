@@ -85,8 +85,12 @@ const {
   },
 });
 
+// Reactivity
 delayed.subscribe((v) => ($isLoadingForm = v));
 pwlDelayed.subscribe((v) => ($isLoadingForm = v));
+
+$form.redirectTo = $page.url.searchParams.get('redirectTo')
+$pwlForm.redirectTo = $page.url.searchParams.get('redirectTo')
 </script>
 
 <svelte:head>

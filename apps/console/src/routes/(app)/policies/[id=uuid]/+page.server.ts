@@ -20,7 +20,7 @@ export const actions = {
     const id = uuidSchema.parse(params.id);
     const session = await locals.auth();
     if (session?.user === undefined) {
-      redirect(307, `/signin?callbackUrl=/policies/${id}`);
+      redirect(307, `/signin?redirectTo=/policies/${id}`);
     }
 
     const form = await superValidate(request, zod(schema));
