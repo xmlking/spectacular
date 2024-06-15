@@ -6,6 +6,11 @@
 Add additional Tailwind styles to this file, for example with @layer:
 https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 */
+@layer base {
+  @view-transition {
+    navigation: auto; /* enabled! */
+  }
+}
 
 @layer components {
   /* .display-none {
