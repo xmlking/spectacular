@@ -27,6 +27,13 @@ function shutdownGracefully() {
 }
 process.on('SIGINT', shutdownGracefully); // Ctrl+C
 process.on('SIGTERM', shutdownGracefully); // docker stop
+// reason: 'SIGINT' | 'SIGTERM' | 'IDLE'
+process.on('sveltekit:shutdown', async (reason) => {
+  log.info('Shutdown Gracefully ...', { reason });
+  // anything you need to clean up manually goes in  here
+  // await jobs.stop();
+  // await db.close();
+});
 
 // NOTE: Order is impotent! `auth` middleware sets `nhost` into `local` which is used by `guard` middleware
 export const handle: Handle = sequence(i18n.handle(), auth, guard, houdini, theme);

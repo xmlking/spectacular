@@ -113,7 +113,8 @@ Guidelines for configuring `turbo.json`
 
 ## Usage
 
-> You can use `--dry-run` flag with any **turbo** commands, to preview what tasks will execute without really running them.
+> You can use `--dry / --dry-run` flag with any **turbo** commands, to preview what tasks will execute without really running them.
+> Use `--log-order=stream` flag to opt-out from terminal UI.
 
 ### Run
 
@@ -121,6 +122,7 @@ Guidelines for configuring `turbo.json`
 turbo dev --filter=playground
 turbo dev --filter=web
 turbo dev --filter=docs
+turbo dev --filter=console --log-order=stream
 ```
 
 ### Test
@@ -132,10 +134,10 @@ turbo test --filter=helpers
 ### Build
 
 ```shell
-turbo build --filter=playground...
-turbo build --filter=playground... --summarize
-turbo build --filter=playground... --dry-run
-turbo build --filter=playground... --graph
+turbo build --filter=console...
+turbo build --filter=console... --summarize
+turbo build --filter=console... --dry-run
+turbo build --filter=console... --graph
 ```
 
 ### Maintenance
