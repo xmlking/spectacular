@@ -1,7 +1,7 @@
 ---
-import { Icon } from '@astrojs/starlight/components';
-import Container from '@components/container.astro';
-import Layout from '@layouts/layout.astro';
+import { Icon } from "@astrojs/starlight/components";
+import Container from "@components/container.astro";
+import Layout from "@layouts/layout.astro";
 ---
 
 <Layout title="404 Not Found">
@@ -12,6 +12,7 @@ import Layout from '@layouts/layout.astro';
         <p class="mt-4 text-lg text-slate-600">Page not found.</p>
         <a
           href="/"
+          data-astro-prefetch
           class="flex gap-3 rounded bg-neutral-200 px-4 py-2 text-black hover:bg-neutral-600"
         >
           Go Back to Home

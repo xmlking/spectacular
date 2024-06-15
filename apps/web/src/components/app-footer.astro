@@ -1,68 +1,125 @@
 ---
-import { Icon } from '@astrojs/starlight/components';
-import Container from './container.astro';
+import { Icon } from "@astrojs/starlight/components";
+import Container from "./container.astro";
 ---
 
 <footer class="py-20 md:py-40">
   <Container>
     <div class="m-auto md:w-10/12 lg:w-8/12 xl:w-6/12">
       <div class="flex flex-wrap items-center justify-between md:flex-nowrap">
-        <div class="flex w-full justify-center space-x-12 text-gray-600 dark:text-gray-300 sm:w-7/12 md:justify-start">
+        <div
+          class="flex w-full justify-center space-x-12 text-gray-600 dark:text-gray-300 sm:w-7/12 md:justify-start"
+        >
           <ul class="list-inside list-disc space-y-8">
-            <li><a href="/" class="transition hover:text-primary">Home</a></li>
+            <li>
+              <a
+                href="/"
+                data-astro-prefetch
+                class="transition hover:text-primary">Home</a
+              >
+            </li>
 
-            <li><a href="/about" class="transition hover:text-primary">About</a></li>
-            <li><a href="/pricing" class="transition hover:text-primary">Pricing</a></li>
-            <li><a href="/blog" class="transition hover:text-primary">Blog</a></li>
-            <li><a href="/contact" class="transition hover:text-primary">Contact</a></li>
-            <li><a href="#" class="transition hover:text-primary">Terms of Use</a></li>
+            <li>
+              <a
+                href="/about"
+                data-astro-prefetch="viewport"
+                class="transition hover:text-primary">About</a
+              >
+            </li>
+            <li>
+              <a
+                href="/pricing"
+                data-astro-prefetch
+                class="transition hover:text-primary">Pricing</a
+              >
+            </li>
+            <li>
+              <a
+                href="/blog"
+                data-astro-prefetch
+                class="transition hover:text-primary">Blog</a
+              >
+            </li>
+            <li>
+              <a
+                href="/contact"
+                data-astro-prefetch
+                class="transition hover:text-primary">Contact</a
+              >
+            </li>
+            <li>
+              <a href="#" class="transition hover:text-primary">Terms of Use</a>
+            </li>
           </ul>
 
           <ul role="list" class="space-y-8">
             <li>
-              <a href="#" class="flex items-center space-x-3 transition hover:text-primary">
+              <a
+                href="#"
+                class="flex items-center space-x-3 transition hover:text-primary"
+              >
                 <Icon size="1.2rem" name="github" />
                 <span>Github</span>
               </a>
             </li>
             <li>
-              <a href="#" class="flex items-center space-x-3 transition hover:text-primary">
+              <a
+                href="#"
+                class="flex items-center space-x-3 transition hover:text-primary"
+              >
                 <Icon size="1.2rem" name="twitter" />
                 <span>Twitter</span>
               </a>
             </li>
             <li>
-              <a href="#" class="flex items-center space-x-3 transition hover:text-primary">
+              <a
+                href="#"
+                class="flex items-center space-x-3 transition hover:text-primary"
+              >
                 <Icon size="1.2rem" name="youtube" />
                 <span>YouTube</span>
               </a>
             </li>
 
             <li>
-              <a href="#" class="flex items-center space-x-3 transition hover:text-primary">
+              <a
+                href="#"
+                class="flex items-center space-x-3 transition hover:text-primary"
+              >
                 <Icon size="1.2rem" name="facebook" />
                 <span>Facebook</span>
               </a>
             </li>
             <li>
-              <a href="#" class="flex items-center space-x-3 transition hover:text-primary">
+              <a
+                href="#"
+                class="flex items-center space-x-3 transition hover:text-primary"
+              >
                 <Icon size="1.2rem" name="patreon" />
                 <span>Medium</span>
               </a>
             </li>
             <li>
-              <a href="#" class="flex items-center space-x-3 transition hover:text-primary">
+              <a
+                href="#"
+                class="flex items-center space-x-3 transition hover:text-primary"
+              >
                 <Icon size="1.5rem" name="instagram" />
                 <span>Instagram</span>
               </a>
             </li>
           </ul>
         </div>
-        <div class="m-auto mt-16 w-10/12 space-y-6 text-center sm:mt-auto sm:w-5/12 sm:text-left">
-          <span class="block text-gray-500 dark:text-gray-400">We change the way UI components librairies are used</span
+        <div
+          class="m-auto mt-16 w-10/12 space-y-6 text-center sm:mt-auto sm:w-5/12 sm:text-left"
+        >
+          <span class="block text-gray-500 dark:text-gray-400"
+            >We change the way UI components librairies are used</span
           >
 
-          <span class="block text-gray-500 dark:text-gray-400">Tailus Blocks &copy; <span id="year"></span></span>
+          <span class="block text-gray-500 dark:text-gray-400"
+            >Tailus Blocks &copy; <span id="year"></span></span
+          >
 
           <span class="flex justify-between text-gray-600 dark:text-white">
             <a href="#" class="font-medium">Terms of Use</a>
@@ -70,7 +127,13 @@ import Container from './container.astro';
           </span>
 
           <span class="block text-gray-500 dark:text-gray-400"
-            >Need help? <a href="/contact" class="font-semibold text-gray-600 dark:text-white"> Contact Us</a></span
+            >Need help? <a
+              href="/contact"
+              data-astro-prefetch
+              class="font-semibold text-gray-600 dark:text-white"
+            >
+              Contact Us</a
+            ></span
           >
         </div>
       </div>

@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import Container from '@components/container.astro';
-import Layout from '@layouts/layout.astro';
+import { getCollection } from "astro:content";
+import Container from "@components/container.astro";
+import Layout from "@layouts/layout.astro";
 
 // Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('posts');
+  const blogEntries = await getCollection("posts");
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -56,6 +56,7 @@ const { Content } = await entry.render();
     <div class="mt-8 text-center">
       <a
         href="/blog"
+        data-astro-prefetch
         class="rounded-md bg-gray-100 px-5 py-3 transition hover:bg-gray-200"
         >← Back to Blog</a
       >

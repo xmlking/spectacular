@@ -47,12 +47,23 @@ export default defineConfig({
     : node({
         mode: 'standalone',
       }),
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
   experimental: {
+    clientPrerender: true,
     env: {
       schema: {
+        API_VERSION: envField.enum({
+          context: 'server',
+          access: 'secret',
+          values: ['v1', 'v2'],
+        }),
         API_PORT: envField.number({
           context: 'server',
           access: 'secret',
+          gt: 1024,
           default: 7000,
         }),
         PUBLIC_SOME_SERVER_FEATURE_FLAG: envField.boolean({

@@ -56,7 +56,9 @@ const { title } = Astro.props;
   <ModeWatcher />
   <body class="bg-white dark:bg-gray-900">
     <AppHeader />
-    <slot />
+    <main role="main">
+      <slot />
+    </main>
     <AppFooter />
     <style>
       html {
