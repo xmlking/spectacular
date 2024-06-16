@@ -70,14 +70,13 @@ export const actions = {
       );
     }
 
-    log.debug({ lang, nhost });
     await sleep(8000);
 
     if (!form.valid) return fail(400, { form });
 
     const { organization, firstName, lastName, email, password, redirectTo } = form.data;
 
-    let { session, error } = await nhost.auth.signUp({
+    const { session: sessionBad, error } = await nhost.auth.signUp({
       email,
       password,
       options: {
@@ -96,16 +95,7 @@ export const actions = {
       log.error(error);
       return setError(form, `Failed creating account: ${error.message}`, { status: 409 }); // 424 ???
     }
-
-    if (session && session.accessTokenExpiresIn === 0) {
-      // FIXME: we have to call refreshSession() as accessTokenExpiresIn comming as zero.
-      ({ session, error } = await nhost.auth.refreshSession());
-      if (error) {
-        log.error(error);
-        return setError(form, `Failed creating account: ${error.message}`, { status: 409 }); // 424 ???
-      }
-    }
-
+    const session = nhost.auth.getSession();
     if (session) {
       setNhostSessionInCookies(cookies, session);
       const message: App.Superforms.Message = { type: 'success', message: 'Signup sucessfull 😎' } as const;

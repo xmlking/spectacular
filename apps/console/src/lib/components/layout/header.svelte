@@ -228,7 +228,7 @@ const setTheme: SubmitFunction = ({ formData }) => {
           <Avatar initials={user.email} />
         {/if}
       {:else}
-        <a href="/signin" class="variant-filled-primary btn">{m.auth_labels_signin()}</a>
+        <a href="/signin?redirectTo=/dashboard" class="variant-filled-primary btn">{m.auth_labels_signin()}</a>
       {/if}
     </section>
   </svelte:fragment>

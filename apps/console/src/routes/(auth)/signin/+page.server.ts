@@ -22,7 +22,6 @@ export const load = async (event) => {
   await limiter.cookieLimiter?.preflight(event);
 
   const session = nhost.auth.getSession();
-  log.debug(session);
   if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
   const pwForm = await superValidate(zod(pwSchema));
   const pwlForm = await superValidate(zod(pwlSchema));
@@ -31,6 +30,7 @@ export const load = async (event) => {
 
 export const actions = {
   password: async (event) => {
+    log.debug('in login with password');
     const {
       request,
       cookies,
@@ -58,28 +58,18 @@ export const actions = {
       );
     }
 
-    log.debug('in password', { lang, nhost });
-    await sleep(5000);
+    await sleep(8000);
 
     if (!form.valid) return fail(400, { form });
 
     const { email, password, redirectTo } = form.data;
 
-    let { session, error } = await nhost.auth.signIn({ email, password });
+    const { session: sessionBad, error } = await nhost.auth.signIn({ email, password });
     if (error) {
       log.error(error);
       return setError(form, `Failed signin: ${error.message}`, { status: 409 }); // 424 ???
     }
-
-    if (session && session.accessTokenExpiresIn === 0) {
-      // FIXME: we have to call refreshSession() as accessTokenExpiresIn comming as zero.
-      ({ session, error } = await nhost.auth.refreshSession());
-      if (error) {
-        log.error(error);
-        return setError(form, `Failed signin: ${error.message}`, { status: 409 }); // 424 ???
-      }
-    }
-
+    const session = nhost.auth.getSession();
     if (session) {
       setNhostSessionInCookies(cookies, session);
       const message: App.Superforms.Message = { type: 'success', message: 'Signin sucessfull 😎' } as const;
@@ -91,6 +81,7 @@ export const actions = {
   },
 
   passwordless: async (event) => {
+    log.debug('in login with passwordless');
     const {
       request,
       locals: {
@@ -116,7 +107,6 @@ export const actions = {
       );
     }
 
-    log.debug('in passwordless', { lang, nhost });
     await sleep(8000);
 
     if (!form.valid) return fail(400, { form });

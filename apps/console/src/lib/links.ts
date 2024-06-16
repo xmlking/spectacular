@@ -67,8 +67,8 @@ export const menuNavLinks: MenuNavLinks = {
     {
       title: 'Auth',
       list: [
-        { href: '/signup', label: 'Signup', keywords: 'signup, users' },
-        { href: '/signin', label: 'Signin', keywords: 'signin, login, users' },
+        { href: '/signup?redirectTo=/dashboard', label: 'Signup', keywords: 'signup, users' },
+        { href: '/signin?redirectTo=/dashboard', label: 'Signin', keywords: 'signin, login, users' },
       ],
     },
     {

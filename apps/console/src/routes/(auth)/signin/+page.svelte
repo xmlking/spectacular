@@ -18,17 +18,17 @@ const log = new Logger('auth:signin');
 const toastStore = getToastStore();
 
 const {
-  form,
-  delayed,
-  timeout,
-  enhance,
-  errors,
-  constraints,
-  message,
-  tainted,
-  posted,
-  submitting,
-  formId,
+  form: pwForm,
+  delayed: pwDelayed,
+  timeout: pwTimeout,
+  enhance: pwEnhance,
+  errors: pwErrors,
+  constraints: pwConstraints,
+  message: pwMessage,
+  tainted: pwTainted,
+  posted: pwPosted,
+  submitting: pwSubmitting,
+  formId: pwFormId,
   capture,
   restore,
 } = superForm(data.pwForm, {
@@ -86,11 +86,11 @@ const {
 });
 
 // Reactivity
-delayed.subscribe((v) => ($isLoadingForm = v));
+pwDelayed.subscribe((v) => ($isLoadingForm = v));
 pwlDelayed.subscribe((v) => ($isLoadingForm = v));
 
-$form.redirectTo = $page.url.searchParams.get('redirectTo')
-$pwlForm.redirectTo = $page.url.searchParams.get('redirectTo')
+$pwForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwForm.redirectTo
+$pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redirectTo
 </script>
 
 <svelte:head>
@@ -99,20 +99,20 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo')
 </svelte:head>
 
 <!-- Form Level Errors / Messages -->
-{#if $message}
+{#if $pwMessage}
   <aside
     class="alert mt-6"
-    class:variant-filled-success={$message.type == 'success'}
-    class:variant-filled-error={$message.type == 'error'}
-    class:variant-filled-warning={$message.type == 'warning'}
+    class:variant-filled-success={$pwMessage.type == 'success'}
+    class:variant-filled-error={$pwMessage.type == 'error'}
+    class:variant-filled-warning={$pwMessage.type == 'warning'}
     transition:fade|local={{ duration: 200 }}
   >
     <!-- Icon -->
     <!-- <AlertTriangle /> -->
     <!-- Message -->
     <div class="alert-message">
-      {#if $message}
-        <p class="font-medium">{$message.message}</p>
+      {#if $pwMessage}
+        <p class="font-medium">{$pwMessage.message}</p>
       {/if}
     </div>
     <!-- Actions -->
@@ -121,11 +121,11 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo')
 		</div> -->
   </aside>
 {/if}
-{#if $errors._errors}
+{#if $pwErrors._errors}
   <aside class="alert mt-6" class:variant-filled-error={$page.status >= 400} transition:fade|local={{ duration: 200 }}>
     <div class="alert-message">
       <ul class="list">
-        {#each $errors._errors as error}
+        {#each $pwErrors._errors as error}
           <li>
             <span><AlertTriangle /></span>
             <span class="flex-auto">{error}</span>
@@ -168,8 +168,8 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo')
 {/if}
 
 <!-- Signin with email/password -->
-<form method="POST" action="/signin?/password" use:enhance>
-  <input type="hidden" name="__superform_id" bind:value={$formId} />
+<form method="POST" action="/signin?/password" use:pwEnhance>
+  <input type="hidden" name="__superform_id" bind:value={$pwFormId} />
   <div class="mt-6">
     <label class="label">
       <span class="sr-only">{m.auth_forms_email_label()}</span>
@@ -179,13 +179,13 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo')
         class="input"
         autocomplete="email"
         placeholder={m.auth_forms_email_placeholder()}
-        data-invalid={$errors.email}
-        bind:value={$form.email}
-        class:input-error={$errors.email}
-        {...$constraints.email}
+        data-invalid={$pwErrors.email}
+        bind:value={$pwForm.email}
+        class:input-error={$pwErrors.email}
+        {...$pwConstraints.email}
       />
-      {#if $errors.email}
-        <small>{$errors.email}</small>
+      {#if $pwErrors.email}
+        <small>{$pwErrors.email}</small>
       {/if}
     </label>
   </div>
@@ -198,21 +198,21 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo')
         type="password"
         class="input"
         placeholder={m.auth_forms_password_placeholder()}
-        data-invalid={$errors.password}
-        bind:value={$form.password}
-        class:input-error={$errors.password}
-        {...$constraints.password}
+        data-invalid={$pwErrors.password}
+        bind:value={$pwForm.password}
+        class:input-error={$pwErrors.password}
+        {...$pwConstraints.password}
       />
-      {#if $errors.password}
-        <small>{$errors.password}</small>
+      {#if $pwErrors.password}
+        <small>{$pwErrors.password}</small>
       {/if}
     </label>
   </div>
   <div class="mt-6">
     <button type="submit" class="variant-filled-primary btn w-full">
-      {#if $timeout}
+      {#if $pwTimeout}
         <MoreHorizontal class="animate-ping" />
-      {:else if $delayed}
+      {:else if $pwDelayed}
         <Loader class="animate-spin" />
       {:else}
         {m.auth_labels_signin()}
@@ -313,21 +313,21 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo')
     label="Password Miscellaneous"
     status={false}
     data={{
-      message: $message,
-      submitting: $submitting,
-      delayed: $delayed,
-      timeout: $timeout,
-      posted: $posted,
+      message: $pwMessage,
+      submitting: $pwSubmitting,
+      delayed: $pwDelayed,
+      timeout: $pwTimeout,
+      posted: $pwPosted,
     }}
   />
   <br />
-  <SuperDebug label="Password Form" data={$form} />
+  <SuperDebug label="Password Form" data={$pwForm} />
   <br />
-  <SuperDebug label="Tainted" status={false} data={$tainted} />
+  <SuperDebug label="Tainted" status={false} data={$pwTainted} />
   <br />
-  <SuperDebug label="Errors" status={false} data={$errors} />
+  <SuperDebug label="Errors" status={false} data={$pwErrors} />
   <br />
-  <SuperDebug label="Constraints" status={false} data={$constraints} />
+  <SuperDebug label="Constraints" status={false} data={$pwConstraints} />
   <!-- <br />
  	<SuperDebug label="$page data" status={false} data={$page} /> -->
   <br />
