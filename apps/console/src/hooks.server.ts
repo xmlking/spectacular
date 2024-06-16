@@ -1,7 +1,8 @@
+// import process from 'node:process';
 import { dev } from '$app/environment';
 import { i18n } from '$lib/i18n';
 import { auth, guard, houdini, theme } from '$lib/server/middleware';
-import { Logger } from '@spectacular/utils';
+import { Logger, sleep } from '@spectacular/utils';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { GraphQLError } from 'graphql';
@@ -19,18 +20,13 @@ if (!dev) {
 
 const log = new Logger('hooks:server');
 
-// for graceful termination
-function shutdownGracefully() {
-  // anything you need to clean up manually goes in  here
-  log.info('Shutdown Gracefully ...');
-  process.exit();
-}
-process.on('SIGINT', shutdownGracefully); // Ctrl+C
-process.on('SIGTERM', shutdownGracefully); // docker stop
-// reason: 'SIGINT' | 'SIGTERM' | 'IDLE'
-process.on('sveltekit:shutdown', async (reason) => {
-  log.info('Shutdown Gracefully ...', { reason });
-  // anything you need to clean up manually goes in  here
+/**
+ * Graceful termination
+ */
+process.on('sveltekit:shutdown', async (signal: NodeJS.Signals) => {
+  log.info(`Received signal: ${signal}. Gracefully shutting down...`);
+  // anything you need to clean up manually goes in here
+  // await sleep(5000);
   // await jobs.stop();
   // await db.close();
 });

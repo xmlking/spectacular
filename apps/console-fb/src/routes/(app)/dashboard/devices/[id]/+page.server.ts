@@ -18,7 +18,7 @@ export const actions = {
     const { params, request, locals } = event;
     const id = uuidSchema.parse(params.id);
     const session = await locals.auth();
-    if (session?.user == undefined) {
+    if (session?.user === undefined) {
       throw redirect(307, `/auth/signin?callbackUrl=/dashboard/devices/${id}`);
     }
 
@@ -31,13 +31,7 @@ export const actions = {
     log.debug('before cleanClone with null:', form.data);
     const dataCopy = cleanClone(form.data, { empty: 'null' });
     log.debug('after cleanClone with null:', dataCopy);
-
-    const payload: devices_set_input = {
-      // FIXME organization should not be changed.
-      ...(dataCopy.description && { description: dataCopy.description }),
-      ...(dataCopy.annotations && { annotations: dataCopy.annotations }),
-      ...(dataCopy.tags && { tags: dataCopy.tags }),
-    };
+		const payload: devices_set_input = dataCopy;
     const variables = { id, data: payload };
     log.debug('UPDATE action variables:', variables);
     const { errors, data } = await updateDeviceStore.mutate(variables, {

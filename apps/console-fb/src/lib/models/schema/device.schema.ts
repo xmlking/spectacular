@@ -22,9 +22,9 @@ export type Device = z.infer<typeof deviceSchema>;
 export const updateDeviceSchema = deviceSchema
   .omit({
     id: true,
-    // ip: true,
-    // displayName: true,
-    // version: true
+    ip: true,
+    displayName: true,
+    version: true,
   })
   .extend({
     // shared: z.literal(true)
