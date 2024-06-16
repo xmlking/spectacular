@@ -220,8 +220,8 @@ importers:
         specifier: 0.11.0
         version: 0.11.0(svelte@4.2.18)
       svelte-ux:
-        specifier: 0.66.7
-        version: 0.66.7(@babel/core@7.24.7)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)
+        specifier: 0.66.8
+        version: 0.66.8(@babel/core@7.24.7)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)
       sveltekit-flash-message:
         specifier: 2.4.4
         version: 2.4.4(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1)))(svelte@4.2.18)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1)))(svelte@4.2.18)
@@ -322,7 +322,7 @@ importers:
         version: 5.3.1(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1)))(svelte@4.2.18)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1)))
       '@sveltejs/enhanced-img':
         specifier: 0.2.1
-        version: 0.2.1(rollup@4.18.0)(svelte@4.2.18)
+        version: 0.2.1(rollup@2.79.1)(svelte@4.2.18)
       '@sveltejs/kit':
         specifier: 2.5.10
         version: 2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1)))(svelte@4.2.18)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1))
@@ -831,8 +831,8 @@ importers:
         specifier: 0.11.0
         version: 0.11.0(svelte@4.2.18)
       svelte-ux:
-        specifier: 0.66.7
-        version: 0.66.7(@babel/core@7.24.7)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)
+        specifier: 0.66.8
+        version: 0.66.8(@babel/core@7.24.7)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)
       sveltekit-flash-message:
         specifier: 2.4.4
         version: 2.4.4(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1)))(svelte@4.2.18)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1)))(svelte@4.2.18)
@@ -9327,8 +9327,8 @@ packages:
   svelte-time-distance@0.0.3:
     resolution: {integrity: sha512-1L4e+fxjecAWgzg+rnhpXmoYi7Yb7rdL78BWH5HTOVuB1+Wc4S4fcPZyf4evBG80q0iJEazm90kE6id3sEzKxg==}
 
-  svelte-ux@0.66.7:
-    resolution: {integrity: sha512-x4so3Aoj4wK7ZmhBYuq/Al2jq3dPWAvGvSSZy47Tux3YhF6vRB/aseDASqVKOl6gMSo9VuB79XzJOpFFl82O7w==}
+  svelte-ux@0.66.8:
+    resolution: {integrity: sha512-PaDLLSHnktN1uv/Viu8joHidvQ2UPh3AEB8JxeWgGH/GPwirYfa7jAferad+TMrv5Cvp9V124T559ySaLThxJg==}
     peerDependencies:
       svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
@@ -17505,7 +17505,7 @@ snapshots:
       posthog-js: 1.139.0
       shapefile: 0.6.6
       svelte: 4.2.18
-      svelte-ux: 0.66.7(@babel/core@7.24.7)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)
+      svelte-ux: 0.66.8(@babel/core@7.24.7)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -20280,7 +20280,7 @@ snapshots:
     dependencies:
       date-fns: 2.30.0
 
-  svelte-ux@0.66.7(@babel/core@7.24.7)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18):
+  svelte-ux@0.66.8(@babel/core@7.24.7)(postcss-load-config@4.0.2(postcss@8.4.38))(postcss@8.4.38)(svelte@4.2.18):
     dependencies:
       '@floating-ui/dom': 1.6.5
       '@fortawesome/fontawesome-common-types': 6.5.2
