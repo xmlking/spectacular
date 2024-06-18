@@ -1,5 +1,7 @@
+import { NHOST_SESSION_KEY } from '$lib/constants';
 import { i18n } from '$lib/i18n';
-import { getNhost, removeNhostSessionInCookies, setNhostSessionInCookies } from '$lib/server/utils/nhost';
+import { getServerNhost, setNhostSessionInCookies } from '$lib/server/utils/nhost';
+import type { NhostSession } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
 import type { Handle } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
@@ -15,27 +17,32 @@ export const log = new Logger('server:middleware:auth');
  * by default, user's default_role is used.
  */
 export const auth = (async ({ event, resolve }) => {
-  log.debug('auth: pathname:', event.url.pathname);
+  const { url, cookies } = event;
+  log.debug('auth: pathname:', url.pathname);
 
-  const nhost = await getNhost(event.cookies);
+  const sessionCookieValue = cookies.get(NHOST_SESSION_KEY);
+  const initialSession = sessionCookieValue ? (JSON.parse(atob(sessionCookieValue)) as NhostSession) : undefined;
+
+  const nhost = await getServerNhost(initialSession, cookies);
 
   const session = nhost.auth.getSession();
 
-  const refreshToken = event.url.searchParams.get('refreshToken') || undefined;
+  const refreshToken = url.searchParams.get('refreshToken') || undefined;
 
   const currentTime = Math.floor(Date.now() / 1000);
   const tokenExpirationTime = nhost.auth.getDecodedAccessToken()?.exp;
   const accessTokenExpired = session && tokenExpirationTime && currentTime > tokenExpirationTime;
 
   if (accessTokenExpired || refreshToken) {
+    log.debug('in accessTokenExpired || refreshToken');
     // FIXME: https://github.com/nhost/nhost/issues/2028
     const { session: newSession, error } = await nhost.auth.refreshSession(refreshToken);
     if (error) {
       // delete session cookie when the refreshToken has expired
-      removeNhostSessionInCookies(event.cookies);
+      event.cookies.delete(NHOST_SESSION_KEY, { path: '/' });
       // TODO: should we throw error and display error to user?
       log.error('auth error:', error);
-      redirect(303, i18n.resolveRoute('/signin'));
+      redirect(303, i18n.resolveRoute('/signin?redirectTo=/dashboard'));
     }
 
     if (newSession) {

@@ -17,7 +17,7 @@ export const load = loadFlash(
     // pass locale information from "server-context" to "shared server + client context"
     return {
       vercelEnv: VERCEL_ENV,
-      user: session?.user,
+      session,
     };
   },
 );

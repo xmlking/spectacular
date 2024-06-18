@@ -10,9 +10,7 @@ import Header from '$lib/components/layout/header.svelte';
 import Sidebar from '$lib/components/layout/sidebar.svelte';
 import { i18n } from '$lib/i18n';
 import Search from '$lib/modals/search.svelte';
-// KEEPME: initialize nhost
-import { init, nhost, user } from '$lib/nhost';
-import { NHOST_SESSION_KEY } from '$lib/constants';
+import {  nhost } from '$lib/stores/user';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
@@ -20,11 +18,13 @@ import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '
 import type { ModalComponent } from '@skeletonlabs/skeleton';
 // biome-ignore lint/style/useImportType: biome still don't understand svelte
 import { AppShell } from '@skeletonlabs/skeleton';
-import { startsWith } from '@spectacular/utils';
+import { Logger, startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
 import type { ComponentEvents } from 'svelte';
 import { setupViewTransition } from 'sveltekit-view-transition';
 import '../app.pcss';
+
+const log = new Logger('layout:root:browser');
 
 export let data;
 
@@ -45,7 +45,7 @@ const modalComponentRegistry: Record<string, ModalComponent> = {
   modalSearch: { ref: Search },
 };
 
-const noSidebarPaths = ['/signin', '/signup', '/privacy', '/terms', '/blog', '/password-reset'];
+const noSidebarPaths = ['/signin', '/signup',  '/password-reset', '/privacy', '/terms', '/docs', '/blog', '/about','/contact'];
 function matchNoSidebarPaths(pathname: string): boolean {
   const canonicalPath = i18n.route(pathname);
   if (canonicalPath === '/' || startsWith(canonicalPath, noSidebarPaths)) {
@@ -79,8 +79,20 @@ function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
 $: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
 $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 
-// nhost
-// if (browser) {
+// update nhost session
+// HINT: https://blog.flotes.app/posts/performant-reactivity
+$: ({ session } = data)
+$: if(browser) {
+  if (session) {
+    log.debug('trigger SESSION_UPDATE', { session });
+    nhost.auth.client.interpreter?.send('SESSION_UPDATE', { data: { session } });
+  } else {
+    log.debug('session empty, trigger SIGNOUT');
+    nhost.auth.client.interpreter?.send('SIGNOUT');
+  }
+}
+
+// if(browser) {
 //   cookieStore.onchange = (event: CookieChangeEvent) => {
 //      console.log("cookie changed", {event});
 //     if(event.deleted[0] && event.deleted[0].name === NHOST_SESSION_KEY) {
@@ -106,7 +118,7 @@ $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
   <AppShell {slotSidebarLeft} regionPage={allyPageSmoothScroll} slotFooter="bg-black p-4" on:scroll={scrollHandler}>
     <!-- Header -->
     <svelte:fragment slot="header">
-      <Header user={data?.user} />
+      <Header />
     </svelte:fragment>
 
     <!-- Sidebar (Left) -->
