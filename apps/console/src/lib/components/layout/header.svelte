@@ -6,12 +6,10 @@ import LangSwitch from '$lib/components/layout/lang-switch.svelte';
 // import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
 import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
 import { storeTheme } from '$lib/stores';
-import type { User } from '@nhost/nhost-js';
 import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 import { AppBar, LightSwitch, getDrawerStore, getModalStore, popup } from '@skeletonlabs/skeleton';
 import { LogoIcon } from '@spectacular/skeleton/components/logos';
 import type { SubmitFunction } from '@sveltejs/kit';
-// import {user , nhost } from '$lib/nhost';
 import {
   BookText,
   ChevronDown,
@@ -23,11 +21,10 @@ import {
   Scroll,
   Search,
 } from 'lucide-svelte';
+  import { isAuthenticated, user } from '$lib/stores/user';
 import Avatar from './avatar.svelte';
 
 const drawerStore = getDrawerStore();
-
-export let user: User | undefined;
 
 // Local
 let isOsMac = false;
@@ -221,11 +218,11 @@ const setTheme: SubmitFunction = ({ formData }) => {
 
     <!-- Login/Avatar -->
     <section class="flex items-center justify-between gap-4">
-      {#if user}
-        {#if user?.avatarUrl}
-          <Avatar src={user?.avatarUrl || undefined} />
+      {#if $isAuthenticated && $user}
+        {#if $user.avatarUrl}
+          <Avatar src={$user.avatarUrl || undefined} />
         {:else}
-          <Avatar initials={user.email} />
+          <Avatar initials={$user.email} />
         {/if}
       {:else}
         <a href="/signin?redirectTo=/dashboard" class="variant-filled-primary btn">{m.auth_labels_signin()}</a>

@@ -1,8 +1,6 @@
 <script lang="ts">
-import { nhost, user } from '$lib/nhost';
+import { user } from '$lib/stores/user';
 import { Debug } from '@spectacular/skeleton/components';
-
-console.log(nhost);
 </script>
 
 <svelte:head>

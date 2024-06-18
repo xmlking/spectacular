@@ -58,7 +58,7 @@ export const actions = {
       );
     }
 
-    await sleep(8000);
+    await sleep(2000);
 
     if (!form.valid) return fail(400, { form });
 

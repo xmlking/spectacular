@@ -1,7 +1,10 @@
 <!-- Layout: (dashboard) -->
 <script lang="ts">
+import { page } from '$app/stores';
 import { goto } from '$app/navigation';
+import { nhost, isAuthenticated } from '$lib/stores/user';
 import { onMount } from 'svelte';
+import WaitForAuth from '$lib/components/layout/wait-for-auth.svelte';
 
 export let data;
 
@@ -10,12 +13,12 @@ export let data;
  * Otherwise all authorized graphql queries will get errors.
  */
 onMount(async () => {
-  if (data.user == null) {
-    goto('/signin');
+  if (!(await nhost.auth.isAuthenticated())) {
+    goto(`/signin?redirectTo=${$page.url.pathname}`);
   }
 });
 </script>
 
-{#if data.user}
+<WaitForAuth>
   <slot />
-{/if}
+</WaitForAuth>

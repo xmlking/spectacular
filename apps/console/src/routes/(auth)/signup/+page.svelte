@@ -39,10 +39,11 @@ export const snapshot = { capture, restore };
 
 
 // Reactivity
-$form.redirectTo = $page.url.searchParams.get('redirectTo')
-// $: termsValue = $form.terms as Writable<boolean>;
 // Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
 delayed.subscribe((v) => ($isLoadingForm = v));
+
+$form.redirectTo = $page.url.searchParams.get('redirectTo') ?? $form.redirectTo
+// $: termsValue = $form.terms as Writable<boolean>;
 </script>
 
 <svelte:head>

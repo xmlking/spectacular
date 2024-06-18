@@ -19,8 +19,13 @@ const publicPaths = [
   '/fonts',
   '/signin',
   '/signup',
+  '/password-reset',
   '/privacy',
   '/terms',
+  '/docs',
+  '/blog',
+  '/about',
+  '/contact',
 ];
 
 // skip auth logic on build to prevent infinite redirection in production mode
