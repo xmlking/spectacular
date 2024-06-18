@@ -1,19 +1,19 @@
 ---
-import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
-import Container from "@components/container.astro";
-import SectionHead from "@components/section-head.astro";
-import Layout from "@layouts/layout.astro";
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Container from '@components/container.astro';
+import SectionHead from '@components/section-head.astro';
+import Layout from '@layouts/layout.astro';
 
 // Filter team entries with 'draft: false' & date before current date
-const publishedTeamMembers = await getCollection("team", ({ data }) => {
+const publishedTeamMembers = await getCollection('team', ({ data }) => {
   return !data.draft && data.publishedAt < new Date();
 });
 
-import { PUBLIC_SOME_CLIENT_FEATURE_FLAG } from "astro:env/client";
-import { PUBLIC_SOME_SERVER_FEATURE_FLAG, getSecret } from "astro:env/server";
+import { PUBLIC_SOME_CLIENT_FEATURE_FLAG } from 'astro:env/client';
+import { PUBLIC_SOME_SERVER_FEATURE_FLAG, getSecret } from 'astro:env/server';
 if (PUBLIC_SOME_SERVER_FEATURE_FLAG) {
-  const API_PORT = getSecret("API_PORT"); // number
+  const API_PORT = getSecret('API_PORT'); // number
   console.log({ API_PORT });
 }
 console.log({ PUBLIC_SOME_CLIENT_FEATURE_FLAG });

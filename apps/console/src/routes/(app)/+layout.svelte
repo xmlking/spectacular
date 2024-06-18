@@ -1,10 +1,10 @@
 <!-- Layout: (dashboard) -->
 <script lang="ts">
-import { page } from '$app/stores';
 import { goto } from '$app/navigation';
-import { nhost, isAuthenticated } from '$lib/stores/user';
-import { onMount } from 'svelte';
+import { page } from '$app/stores';
 import WaitForAuth from '$lib/components/layout/wait-for-auth.svelte';
+import { isAuthenticated, nhost } from '$lib/stores/user';
+import { onMount } from 'svelte';
 
 export let data;
 

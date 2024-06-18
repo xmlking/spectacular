@@ -1,5 +1,5 @@
 <script lang="ts">
-import { user, isAuthenticated } from '$lib/stores/user';
+import { isAuthenticated, user } from '$lib/stores/user';
 import { Debug } from '@spectacular/skeleton/components';
 </script>
 

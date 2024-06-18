@@ -89,8 +89,8 @@ const {
 pwDelayed.subscribe((v) => ($isLoadingForm = v));
 pwlDelayed.subscribe((v) => ($isLoadingForm = v));
 
-$pwForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwForm.redirectTo
-$pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redirectTo
+$pwForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwForm.redirectTo;
+$pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redirectTo;
 </script>
 
 <svelte:head>

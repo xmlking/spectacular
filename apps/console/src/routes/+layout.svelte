@@ -10,8 +10,8 @@ import Header from '$lib/components/layout/header.svelte';
 import Sidebar from '$lib/components/layout/sidebar.svelte';
 import { i18n } from '$lib/i18n';
 import Search from '$lib/modals/search.svelte';
-import {  nhost } from '$lib/stores/user';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
+import { nhost } from '$lib/stores/user';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
 import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
@@ -45,7 +45,17 @@ const modalComponentRegistry: Record<string, ModalComponent> = {
   modalSearch: { ref: Search },
 };
 
-const noSidebarPaths = ['/signin', '/signup',  '/password-reset', '/privacy', '/terms', '/docs', '/blog', '/about','/contact'];
+const noSidebarPaths = [
+  '/signin',
+  '/signup',
+  '/password-reset',
+  '/privacy',
+  '/terms',
+  '/docs',
+  '/blog',
+  '/about',
+  '/contact',
+];
 function matchNoSidebarPaths(pathname: string): boolean {
   const canonicalPath = i18n.route(pathname);
   if (canonicalPath === '/' || startsWith(canonicalPath, noSidebarPaths)) {
@@ -81,8 +91,8 @@ $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 
 // update nhost session
 // HINT: https://blog.flotes.app/posts/performant-reactivity
-$: ({ session } = data)
-$: if(browser) {
+$: ({ session } = data);
+$: if (browser) {
   if (session) {
     log.debug('trigger SESSION_UPDATE', { session });
     nhost.auth.client.interpreter?.send('SESSION_UPDATE', { data: { session } });

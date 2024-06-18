@@ -31,7 +31,7 @@ export const actions = {
     log.debug('before cleanClone with null:', form.data);
     const dataCopy = cleanClone(form.data, { empty: 'null' });
     log.debug('after cleanClone with null:', dataCopy);
-		const payload: devices_set_input = dataCopy;
+    const payload: devices_set_input = dataCopy;
     const variables = { id, data: payload };
     log.debug('UPDATE action variables:', variables);
     const { errors, data } = await updateDeviceStore.mutate(variables, {

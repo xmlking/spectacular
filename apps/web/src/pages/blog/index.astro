@@ -1,19 +1,17 @@
 ---
-import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
-import Container from "@components/container.astro";
-import SectionHead from "@components/section-head.astro";
-import Layout from "@layouts/layout.astro";
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Container from '@components/container.astro';
+import SectionHead from '@components/section-head.astro';
+import Layout from '@layouts/layout.astro';
 
 // Filter blog entries with 'draft: false' & date before current date
-const publishedBlogEntries = await getCollection("posts", ({ data }) => {
+const publishedBlogEntries = await getCollection('posts', ({ data }) => {
   return !data.draft && data.publishedAt < new Date();
 });
 
 // Sort content entries by publication date
-publishedBlogEntries.sort(
-  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
-);
+publishedBlogEntries.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 ---
 
 <Layout title="Blog">

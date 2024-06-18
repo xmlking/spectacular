@@ -10,7 +10,7 @@ import { createClient as createWSClient } from 'graphql-ws';
 
 const url = env.PUBLIC_GRAPHQL_ENDPOINT;
 
-const log = new Logger(browser? 'houdini.browser.client': 'houdini.server.client');
+const log = new Logger(browser ? 'houdini.browser.client' : 'houdini.server.client');
 
 // in order to verify that we send metadata, we need something that will log the metadata after
 const logMetadata: ClientPlugin = () => ({
@@ -40,10 +40,10 @@ export default new HoudiniClient({
   url,
   fetchParams({ session, metadata }) {
     if (metadata) {
-      log.debug('metadata...', {metadata});
+      log.debug('metadata...', { metadata });
     }
     if (session) {
-      log.debug('session...', {session});
+      log.debug('session...', { session });
     }
     const accessToken = session?.accessToken;
     const backendToken = metadata?.backendToken;
