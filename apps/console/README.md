@@ -6,16 +6,26 @@ Everything you need to build a Svelte project, powered by [`create-svelte`](http
 
 ### First Step
 
-download latest `traefik.me` certs for _svelte_ dev server.
+1. download latest `traefik.me` certs for _svelte_ dev server.
 
-> NOTE: they will expire every 60 days
+    > NOTE: they will expire every 60 days
 
-```shell
-curl traefik.me/fullchain.pem -o infra/base/traefik/certs/traefik.me.crt
-curl traefik.me/privkey.pem -o infra/base/traefik/certs/traefik.me.key
-# make sure docker has read access to those files:
-chmod ugo+r infra/base/traefik/.htpasswd
-```
+    ```shell
+    curl traefik.me/fullchain.pem -o infra/base/traefik/certs/traefik.me.crt
+    curl traefik.me/privkey.pem -o infra/base/traefik/certs/traefik.me.key
+    # make sure docker has read access to those files:
+    chmod ugo+r infra/base/traefik/.htpasswd
+    ```
+
+2. Generate TLS `certs` to enable **TLS** transport for **Mailpit** and **Hasura-auth**
+
+    ```shell
+    cd infra/base/mailpit
+    ./create-certs.sh mailpit
+    chmod -R ugo+r certs
+    # go back to project root
+    cd ../../..
+    ```
 
 ### Backend
 
@@ -105,32 +115,6 @@ crane export ghcr.io/xmlking/spectacular/console:v0.1.3 - | tar -tvf - | grep -v
 | Dashboard | <https://dashboard.traefik.me>                    |
 | Tailcall  | <https://gateway.traefik.me>                      |
 
-#### (Or) Start backend services with nhost cli
-
-```shell
-# start all
-nhost up
-# check logs for example: auth service
-nhost logs auth -f
-# shutdown all
-nhost down
-# (optional) shutdown and reset volume
-nhost down --volumes
-#  (optional) nhost first time when started, will load seeds but you can force with `--apply-seeds`
-nhost up --apply-seeds
-```
-
-| Service   | URL                                               |
-| --------- | ------------------------------------------------- |
-| Postgres  | postgres://postgres:postgres@localhost:5432/local |
-| Hasura    | <https://local.hasura.nhost.run>                  |
-| GraphQL   | <https://local.graphql.nhost.run>                 |
-| Auth      | <https://local.auth.nhost.run>                    |
-| Storage   | <https://local.storage.nhost.run>                 |
-| Functions | <https://local.functions.nhost.run/v1/echo>       |
-| Dashboard | <https://local.dashboard.nhost.run>               |
-| Mailhog   | <https://local.mailhog.nhost.run>                 |
-
 #### Apply seeds
 
 Optionally apply all seed files
@@ -151,7 +135,7 @@ turbo dev
 turbo dev --log-order=stream
 # or run with `prod` profile and
 # overload envelopment variables from `.env.prod`
-NODE_ENV=prod turbo dev
+turbo dev:prod --log-order=stream
 ```
 
 Default demo user's **username:** `sumo@demo.com` **password:** `sumodemo123`

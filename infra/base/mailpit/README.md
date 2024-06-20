@@ -1,6 +1,6 @@
 # mailpit
 
-SMTP Relay for Development time.
+**SMTP Relay** for *Development* time.
 
 ## Mailpit TLS Certs
 

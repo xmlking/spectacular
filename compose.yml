@@ -136,8 +136,8 @@ services:
   # mailpit - smtp relay and UI
   # NOTE: this mailpit use self-signed certs with SAN: mailpit,
   # located in ./infra/base/mailpit/certs
-  # you may have to add its CA cert to hasura-auth system trust store
-  # e.g. ./infra/components/cacerts/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
+  # you have to add its CA cert to `hasura-auth` system's trust store
+  # e.g. ./infra/base/mailpit/certs/ca.pem:/etc/ssl/certs/ca-certificates.crt
   ###########################################################################
   mailpit:
     image: axllent/mailpit:v1.18.4
@@ -153,8 +153,8 @@ services:
       MP_SMTP_TLS_CERT: /certs/tls.crt
       MP_SMTP_TLS_KEY: /certs/tls.key
       # only enable below 3 lines, if you also want to send email copy via relay
-      MP_SMTP_RELAY_HOST: smtp.gmail.com
-      MP_SMTP_RELAY_PORT: 25
+      MP_SMTP_RELAY_HOST: smtp-relay.gmail.com
+      MP_SMTP_RELAY_PORT: 587
       MP_SMTP_RELAY_MATCHING: "@chinthagunta\\.com$" # (or) MP_SMTP_RELAY_ALL: true
       # MP_SMTP_RELAY_ALL: true
     expose:
@@ -194,6 +194,7 @@ services:
     user: 1000:1000
     volumes:
       - ./nhost/emails:/app/email-templates
+      - ./infra/base/mailpit/certs/ca.pem:/etc/ssl/certs/ca-certificates.crt
     environment:
       AUTH_LOG_LEVEL: info
       AUTH_ACCESS_CONTROL_ALLOWED_EMAIL_DOMAINS: ${AUTH_ACCESS_CONTROL_ALLOWED_EMAIL_DOMAINS:-}

@@ -18,6 +18,11 @@ const rows = handler.getRows();
 // $: handler.setRows(customers);
 </script>
 
+<svelte:head>
+  <title>Datablocks | Customer</title>
+  <meta name="description" content="Customer Table" />
+</svelte:head>
+
 <div class="page-container">
   <div class="page-section">
     <header class="flex justify-between">

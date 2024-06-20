@@ -9,5 +9,9 @@ export let data;
   <meta name="description" content="Account Settings" />
 </svelte:head>
 
-<h2 class="h2">Settings</h2>
-<Debug {data} />
+<div class="page-container">
+  <div class="page-section">
+    <h2 class="h2">Settings</h2>
+    <Debug {data} />
+  </div>
+</div>
