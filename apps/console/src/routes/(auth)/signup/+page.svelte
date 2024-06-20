@@ -2,6 +2,7 @@
 import { page } from '$app/stores';
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 import * as m from '$i18n/messages';
+import { signUpSchema } from '$lib/schema/user';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { isLoadingForm } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
@@ -10,6 +11,7 @@ import { Logger } from '@spectacular/utils';
 import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
+  import { zodClient } from 'sveltekit-superforms/adapters';
 
 export let data;
 const log = new Logger('auth:signup');
@@ -23,6 +25,7 @@ const { form, delayed, timeout, enhance, errors, constraints, message, tainted, 
     syncFlashMessage: false,
     delayMs: 150,
     timeoutMs: 4000,
+    validators: zodClient(signUpSchema),
     onError({ result }) {
       // TODO:
       // message.set(result.error.message)
