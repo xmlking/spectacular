@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { env } from '$env/dynamic/public';
 import { PUBLIC_NHOST_REGION, PUBLIC_NHOST_SUBDOMAIN } from '$env/static/public';
 import { NHOST_SESSION_KEY } from '$lib/constants';
 import type { User } from '@nhost/nhost-js';
@@ -9,8 +10,12 @@ import { readable, writable } from 'svelte/store';
 const log = new Logger('user.store.client');
 
 export const nhost = new NhostClient({
-  subdomain: PUBLIC_NHOST_SUBDOMAIN || 'local',
-  region: PUBLIC_NHOST_REGION,
+  // subdomain: PUBLIC_NHOST_SUBDOMAIN || 'local',
+  // region: PUBLIC_NHOST_REGION,
+  authUrl: env.PUBLIC_NHOST_AUTH_URL,
+  graphqlUrl: env.PUBLIC_NHOST_GRAPHQL_URL,
+  storageUrl: env.PUBLIC_NHOST_STORAGE_URL,
+  functionsUrl: env.PUBLIC_NHOST_FUNCTIONS_URL,
 });
 
 export const user = writable<User | null>(null);

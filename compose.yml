@@ -133,23 +133,36 @@ services:
       traefik.http.routers.hasura.tls: 'true'
       traefik.http.services.hasura.loadbalancer.server.port: '8080'
   ###########################################################################
-  # mailpit - but named as mailhog
+  # mailpit - smtp relay and UI
+  # NOTE: this mailpit use self-signed certs with SAN: mailpit,
+  # located in ./infra/base/mailpit/certs
+  # you may have to add its CA cert to hasura-auth system trust store
+  # e.g. ./infra/components/cacerts/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
   ###########################################################################
-  mailhog:
-    image: axllent/mailpit:v1.18.3
-    hostname: mailhog
-    container_name: mailhog
+  mailpit:
+    image: axllent/mailpit:v1.18.4
+    hostname: mailpit
+    container_name: mailpit
     restart: unless-stopped
     environment:
-      MP_SMTP_AUTH: 'user:password'
-      # MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 'true'
       TZ: ${CONTAINER_TIMEZONE:-America/Los_Angeles}
+      # MP_SMTP_AUTH_ACCEPT_ANY: 1  # (or) use MP_SMTP_AUTH
+      MP_SMTP_AUTH: 'user:password'
+      # MP_SMTP_AUTH_ALLOW_INSECURE: 'true' # (or) below 3 lines
+      MP_SMTP_REQUIRE_TLS: 'true'
+      MP_SMTP_TLS_CERT: /certs/tls.crt
+      MP_SMTP_TLS_KEY: /certs/tls.key
+      # only enable below 3 lines, if you also want to send email copy via relay
+      MP_SMTP_RELAY_HOST: smtp.gmail.com
+      MP_SMTP_RELAY_PORT: 25
+      MP_SMTP_RELAY_MATCHING: "@chinthagunta\\.com$" # (or) MP_SMTP_RELAY_ALL: true
+      # MP_SMTP_RELAY_ALL: true
     expose:
       - 1025 # MP_SMTP_BIND_ADDR
       - 8025 # MP_UI_BIND_ADDR
     volumes:
-      - mailhog:/data
+      - mailpit:/data
+      - ./infra/base/mailpit/certs:/certs:ro
     healthcheck:
       test: ['CMD', 'wget', '--spider', '-S', 'http://localhost:8025/livez'] # for k8 /readyz
       interval: 60s
@@ -162,16 +175,16 @@ services:
         condition: service_healthy
     labels:
       traefik.enable: 'true'
-      traefik.http.routers.mailhog.entrypoints: websecure
-      traefik.http.routers.mailhog.rule: Host(`mailhog${BASE_HOSTNAME}`)
-      traefik.http.routers.mailhog.service: mailhog
-      traefik.http.routers.mailhog.tls: 'true'
-      traefik.http.services.mailhog.loadbalancer.server.port: '8025'
+      traefik.http.routers.mailpit.entrypoints: websecure
+      traefik.http.routers.mailpit.rule: Host(`mailpit${BASE_HOSTNAME}`)
+      traefik.http.routers.mailpit.service: mailpit
+      traefik.http.routers.mailpit.tls: 'true'
+      traefik.http.services.mailpit.loadbalancer.server.port: '8025'
   ###########################################################################
   # hasura auth
   # Environment Variables:
   # https://github.com/nhost/hasura-auth/blob/main/docs/environment-variables.md
-  # If SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
+  # When SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
     image: nhost/hasura-auth:0.32.0
@@ -224,11 +237,11 @@ services:
       AUTH_REQUIRE_ELEVATED_CLAIM: recommended # required
       AUTH_SERVER_URL: https://auth${BASE_HOSTNAME}/v1
       AUTH_SMTP_AUTH_METHOD: ${AUTH_SMTP_AUTH_METHOD:-PLAIN}
-      AUTH_SMTP_HOST: ${AUTH_SMTP_HOST:-mailhog}
+      AUTH_SMTP_HOST: ${AUTH_SMTP_HOST:-mailpit}
       AUTH_SMTP_PORT: ${AUTH_SMTP_PORT:-1025}
       AUTH_SMTP_USER: ${AUTH_SMTP_USER:-user}
       AUTH_SMTP_PASS: ${AUTH_SMTP_PASS:-password}
-      AUTH_SMTP_SECURE: ${AUTH_SMTP_SECURE:-false}
+      AUTH_SMTP_SECURE: ${AUTH_SMTP_SECURE:-true}
       AUTH_SMTP_SENDER: ${AUTH_SMTP_SENDER:-hasura-auth@example.com}
       AUTH_USER_DEFAULT_ALLOWED_ROLES: user,me
       AUTH_USER_DEFAULT_ROLE: user
@@ -259,7 +272,7 @@ services:
     depends_on:
       traefik:
         condition: service_healthy
-      # mailhog:
+      # mailpit:
       #   condition: service_healthy
       postgres:
         condition: service_healthy
@@ -532,5 +545,5 @@ services:
 volumes:
   certs: {}
   pg_data: {}
-  mailhog: {}
+  mailpit: {}
   minio: {}

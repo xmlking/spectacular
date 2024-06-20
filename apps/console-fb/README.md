@@ -25,7 +25,9 @@ PUBLIC_GRAPHQL_ENDPOINT=api.mycompany.com:443 turbo dev
 Generate `i18n` types, `schema.graphql` etc...
 
 ```shell
-turbo run generate --filter=playground
+turbo run generate --filter=console-fb
+# or from prod
+NODE_ENV=prod turbo run generate --filter=console-fb
 ```
 
 ## Maintenance

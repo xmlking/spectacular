@@ -14,6 +14,7 @@
     "format": "biome check --write",
     "generate": "concurrently pnpm:generate:*",
     "generate:pull-schema": "dotenv-run -f .env -f .secrets -v -- houdini pull-schema",
+    "generate:pull-schema:prod": "NODE_ENV=prod dotenv-run -f .env -f .secrets -v -- houdini pull-schema",
     "generate:svelte": "svelte-kit sync",
     "lang:lint": "pnpm inlang lint --project ./project.inlang",
     "lang:studio": "pnpm inlang open editor",

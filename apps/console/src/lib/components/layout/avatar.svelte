@@ -2,6 +2,9 @@
 // Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/Avatar.svelte
 import { Avatar, popup } from '@skeletonlabs/skeleton';
 import type { PopupSettings } from '@skeletonlabs/skeleton';
+import { Settings } from 'lucide-svelte';
+import { CircleUserRound } from 'lucide-svelte';
+import { LogOut } from 'lucide-svelte';
 
 const popupSettings: PopupSettings = {
   event: 'click',
@@ -31,13 +34,19 @@ export let src: string | undefined = undefined;
 <div class="card w-48 rounded-container-token" data-popup="avatarPopup">
   <div class="w-full">
     <a href="/settings" class="bg-primary-hover-token btn w-full rounded-container-token">
-      <iconify-icon class="w-5 justify-center" icon="lucide:settings" />
+<!--      <iconify-icon class="w-5 justify-center" icon="lucide:settings" />-->
+      <Settings class="w-5 justify-center" />
       <p class="flex-grow text-justify">Settings</p>
+    </a>
+    <hr />
+    <a href="/profile" class="bg-primary-hover-token btn w-full rounded-container-token">
+      <CircleUserRound class="w-5 justify-center" />
+      <p class="flex-grow text-justify">Profile</p>
     </a>
     <hr />
     <form method="POST" action="/signout">
       <button type="submit" class="bg-primary-hover-token btn w-full rounded-container-token">
-        <iconify-icon class="w-5 justify-center" icon="lucide:log-out" />
+        <LogOut class="w-5 justify-center" />
         <p class="flex-grow text-justify">Log out</p>
       </button>
     </form>
