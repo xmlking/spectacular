@@ -8,10 +8,11 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Icon } from '@spectacular/skeleton/components/icons';
 import { Logger } from '@spectacular/utils';
-import { AlertTriangle, Github, Loader, MoreHorizontal } from 'lucide-svelte';
+import { AlertTriangle, Github, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
+import { Fingerprint } from 'lucide-svelte';
 
 export let data;
 const log = new Logger('auth:signin');
@@ -254,14 +255,23 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redir
       {/if}
     </label>
   </div>
-  <div class="mt-6">
-    <button type="submit" class="variant-filled-primary btn w-full">
+  <div class="mt-6 flex justify-between">
+    <button type="submit" class="variant-filled-primary btn">
       {#if $pwlTimeout}
         <MoreHorizontal class="animate-ping" />
       {:else if $pwlDelayed}
         <Loader class="animate-spin" />
       {:else}
-        {m.auth_labels_signin_with_email()}
+        {m.auth_labels_signin_with_email()} <Mail class="pl-2" />
+      {/if}
+    </button>
+    <button type="submit" class="variant-filled-primary btn">
+      {#if $pwlTimeout}
+        <MoreHorizontal class="animate-ping" />
+      {:else if $pwlDelayed}
+        <Loader class="animate-spin" />
+      {:else}
+        {m.auth_labels_signin_with_webauthn()} <Fingerprint class="pl-2"/>
       {/if}
     </button>
   </div>
