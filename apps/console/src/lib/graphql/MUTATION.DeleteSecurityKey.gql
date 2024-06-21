@@ -1,0 +1,5 @@
+mutation RemoveSecurityKey($id: uuid!) {
+  deleteAuthUserSecurityKey(id: $id) {
+    id
+  }
+}

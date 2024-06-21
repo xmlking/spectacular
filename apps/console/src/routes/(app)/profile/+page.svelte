@@ -1,27 +1,25 @@
 <script lang="ts">
 import { Debug } from '@spectacular/skeleton/components';
-import { Settings } from 'lucide-svelte';
-import Cookies from 'js-cookie'
 import { nhost, user } from '$lib/stores/user';
-import { goto } from '$app/navigation';
-import { NHOST_SESSION_KEY } from '$lib/constants.js';
-  import type { AuthErrorPayload } from '@nhost/nhost-js';
+import type { AuthErrorPayload } from '@nhost/nhost-js';
 
+// https://github.com/nhost/nhost/blob/main/examples/react-apollo/src/profile/security-keys.tsx
 export let data
 
-  let email: string
-  let error: AuthErrorPayload | null
-  const handleSubmit = async () => {
+  let nickname: string
+  let error : AuthErrorPayload | null
 
-
-    const { session, error: signInError } = await nhost.auth.signUp({ email, securityKey: true })
-
-    if (session) {
-      Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' })
-      goto('/protected/todos')
-    } else {
-      error = signInError
+  async function  addSecurityKey() {
+    console.log({nickname})
+    const { key, error: addKeyError } = await nhost.auth.addSecurityKey(nickname)
+    // Something unexpected happened
+    if (error) {
+      console.log(error)
+      error = addKeyError
+      return
     }
+    // Successfully added a new security key
+    console.log(key?.id)
   }
 </script>
 
@@ -57,14 +55,13 @@ export let data
           ))}
         </tbody> -->
       </table>
-        <form class="space-y-4" on:submit|preventDefault={handleSubmit}>
+        <form class="space-y-4" on:submit|preventDefault={addSecurityKey}>
           <input
-            bind:value={email}
-            placeholder='email'
+            bind:value={nickname}
+            placeholder='Nickname for the device (optional)'
             class="block w-full p-3 border rounded-md border-slate-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           <button type="submit" class="btn variant-filled">Add a new device</button>
-
       </form>
     </div>
   </div>

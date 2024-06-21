@@ -28,6 +28,21 @@ input Boolean_comparison_exp {
   _nin: [Boolean!]
 }
 
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
 input ListUniversitiesInput {
   country: String
   name: String
@@ -250,6 +265,140 @@ input action_stream_cursor_input {
 input action_stream_cursor_value_input {
   description: String
   value: String
+}
+
+"""
+User webauthn security keys. Don't modify its structure as Hasura Auth relies on it to function properly.
+"""
+type authUserSecurityKeys {
+  id: uuid!
+  nickname: String
+
+  """An object relationship"""
+  user: users!
+}
+
+"""
+aggregated selection of "auth.user_security_keys"
+"""
+type authUserSecurityKeys_aggregate {
+  aggregate: authUserSecurityKeys_aggregate_fields
+  nodes: [authUserSecurityKeys!]!
+}
+
+input authUserSecurityKeys_aggregate_bool_exp {
+  count: authUserSecurityKeys_aggregate_bool_exp_count
+}
+
+input authUserSecurityKeys_aggregate_bool_exp_count {
+  arguments: [authUserSecurityKeys_select_column!]
+  distinct: Boolean
+  filter: authUserSecurityKeys_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "auth.user_security_keys"
+"""
+type authUserSecurityKeys_aggregate_fields {
+  count(columns: [authUserSecurityKeys_select_column!], distinct: Boolean): Int!
+  max: authUserSecurityKeys_max_fields
+  min: authUserSecurityKeys_min_fields
+}
+
+"""
+order by aggregate values of table "auth.user_security_keys"
+"""
+input authUserSecurityKeys_aggregate_order_by {
+  count: order_by
+  max: authUserSecurityKeys_max_order_by
+  min: authUserSecurityKeys_min_order_by
+}
+
+"""
+Boolean expression to filter rows from the table "auth.user_security_keys". All fields are combined with a logical 'AND'.
+"""
+input authUserSecurityKeys_bool_exp {
+  _and: [authUserSecurityKeys_bool_exp!]
+  _not: authUserSecurityKeys_bool_exp
+  _or: [authUserSecurityKeys_bool_exp!]
+  id: uuid_comparison_exp
+  nickname: String_comparison_exp
+  user: users_bool_exp
+}
+
+"""aggregate max on columns"""
+type authUserSecurityKeys_max_fields {
+  id: uuid
+  nickname: String
+}
+
+"""
+order by max() on columns of table "auth.user_security_keys"
+"""
+input authUserSecurityKeys_max_order_by {
+  id: order_by
+  nickname: order_by
+}
+
+"""aggregate min on columns"""
+type authUserSecurityKeys_min_fields {
+  id: uuid
+  nickname: String
+}
+
+"""
+order by min() on columns of table "auth.user_security_keys"
+"""
+input authUserSecurityKeys_min_order_by {
+  id: order_by
+  nickname: order_by
+}
+
+"""
+response of any mutation on the table "auth.user_security_keys"
+"""
+type authUserSecurityKeys_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [authUserSecurityKeys!]!
+}
+
+"""Ordering options when selecting data from "auth.user_security_keys"."""
+input authUserSecurityKeys_order_by {
+  id: order_by
+  nickname: order_by
+  user: users_order_by
+}
+
+"""
+select columns of table "auth.user_security_keys"
+"""
+enum authUserSecurityKeys_select_column {
+  """column name"""
+  id
+
+  """column name"""
+  nickname
+}
+
+"""
+Streaming cursor of the table "authUserSecurityKeys"
+"""
+input authUserSecurityKeys_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: authUserSecurityKeys_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input authUserSecurityKeys_stream_cursor_value_input {
+  id: uuid
+  nickname: String
 }
 
 scalar citext
@@ -1140,6 +1289,19 @@ input jsonb_comparison_exp {
 
 """mutation root"""
 type mutation_root {
+  """
+  delete single row from the table: "auth.user_security_keys"
+  """
+  deleteAuthUserSecurityKey(id: uuid!): authUserSecurityKeys
+
+  """
+  delete data from the table: "auth.user_security_keys"
+  """
+  deleteAuthUserSecurityKeys(
+    """filter the rows which have to be deleted"""
+    where: authUserSecurityKeys_bool_exp!
+  ): authUserSecurityKeys_mutation_response
+
   """
   delete data from the table: "device_pool"
   """
@@ -2335,6 +2497,51 @@ type query_root {
   action_by_pk(value: String!): action
 
   """
+  fetch data from the table: "auth.user_security_keys" using primary key columns
+  """
+  authUserSecurityKey(id: uuid!): authUserSecurityKeys
+
+  """
+  fetch data from the table: "auth.user_security_keys"
+  """
+  authUserSecurityKeys(
+    """distinct select on columns"""
+    distinct_on: [authUserSecurityKeys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserSecurityKeys_order_by!]
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): [authUserSecurityKeys!]!
+
+  """
+  fetch aggregated fields from the table: "auth.user_security_keys"
+  """
+  authUserSecurityKeysAggregate(
+    """distinct select on columns"""
+    distinct_on: [authUserSecurityKeys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserSecurityKeys_order_by!]
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): authUserSecurityKeys_aggregate!
+
+  """
   fetch data from the table: "device_pool"
   """
   device_pool(
@@ -3205,6 +3412,65 @@ type subscription_root {
     """filter the rows returned"""
     where: action_bool_exp
   ): [action!]!
+
+  """
+  fetch data from the table: "auth.user_security_keys" using primary key columns
+  """
+  authUserSecurityKey(id: uuid!): authUserSecurityKeys
+
+  """
+  fetch data from the table: "auth.user_security_keys"
+  """
+  authUserSecurityKeys(
+    """distinct select on columns"""
+    distinct_on: [authUserSecurityKeys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserSecurityKeys_order_by!]
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): [authUserSecurityKeys!]!
+
+  """
+  fetch aggregated fields from the table: "auth.user_security_keys"
+  """
+  authUserSecurityKeysAggregate(
+    """distinct select on columns"""
+    distinct_on: [authUserSecurityKeys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserSecurityKeys_order_by!]
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): authUserSecurityKeys_aggregate!
+
+  """
+  fetch data from the table in a streaming manner: "auth.user_security_keys"
+  """
+  authUserSecurityKeys_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [authUserSecurityKeys_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): [authUserSecurityKeys!]!
 
   """
   fetch data from the table: "device_pool"
@@ -4158,6 +4424,42 @@ type users {
   otpMethodLastUsed: String
   phoneNumber: String
   phoneNumberVerified: Boolean!
+
+  """An array relationship"""
+  securityKeys(
+    """distinct select on columns"""
+    distinct_on: [authUserSecurityKeys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserSecurityKeys_order_by!]
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): [authUserSecurityKeys!]!
+
+  """An aggregate relationship"""
+  securityKeys_aggregate(
+    """distinct select on columns"""
+    distinct_on: [authUserSecurityKeys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserSecurityKeys_order_by!]
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): authUserSecurityKeys_aggregate!
   ticket: String
   ticketExpiresAt: timestamptz!
   updatedAt: timestamptz!
@@ -4190,6 +4492,8 @@ input users_bool_exp {
   otpMethodLastUsed: String_comparison_exp
   phoneNumber: String_comparison_exp
   phoneNumberVerified: Boolean_comparison_exp
+  securityKeys: authUserSecurityKeys_bool_exp
+  securityKeys_aggregate: authUserSecurityKeys_aggregate_bool_exp
   ticket: String_comparison_exp
   ticketExpiresAt: timestamptz_comparison_exp
   updatedAt: timestamptz_comparison_exp
@@ -4228,6 +4532,7 @@ input users_order_by {
   otpMethodLastUsed: order_by
   phoneNumber: order_by
   phoneNumberVerified: order_by
+  securityKeys_aggregate: authUserSecurityKeys_aggregate_order_by
   ticket: order_by
   ticketExpiresAt: order_by
   updatedAt: order_by

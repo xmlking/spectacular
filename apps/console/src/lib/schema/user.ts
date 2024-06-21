@@ -71,9 +71,20 @@ export const signUpSchema = userSchema
   })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
 
-export const userUpdatePasswordSchema = userSchema
+export const changePasswordSchema = userSchema
   .pick({ password: true, confirmPassword: true })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
+
+export const changeEmailSchema = userSchema.pick({ email: true });
+
+export const webAuthnSchema = z.object({
+  nickname: z
+    .string({ required_error: 'Nickname is required' })
+    .min(2, { message: 'Nickname must contain at least 2 character(s)' })
+    .max(256)
+    .trim(),
+});
+
 
 /**
  * Refine functions
