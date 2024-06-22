@@ -36,7 +36,7 @@ Recommended roles:
 
 | Role       | Description                                                            | Allowed Activity                                                                   |
 | ---------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| anonymous  | A user who is not logged-in                                            | Only read from some restricted tables/views or **public** data                     |
+| public  | A user who is not logged-in                                            | Only read from some restricted tables/views or **public** data                     |
 | user       | A user who is logged in                                                | Allow access to personally created data and any **public** data                    |
 | me         | A user who is logged in                                                | Allow access to personally created data and any **private** data                   |
 | supervisor | A user that has access to other users' data with in their organization | Allow access to personally created data, their organization's data and public data |
@@ -60,7 +60,7 @@ Cascading permissions with inherited roles
 ```yaml
 - role_name: user
   role_set:
-    - anonymous # public
+    - public # anonymous
 - role_name: me
   role_set:
     - user
@@ -77,7 +77,7 @@ Cascading permissions with inherited roles
 
 By default, there is an `admin` role that can perform any operation on any table.
 For our case `admin` is only used for back channel management app.
-For customer facing apps we use `anonymous`, `user`, `me`, `supervisor`, `manager` roles.
+For customer facing apps we use `public`, `user`, `me`, `supervisor`, `manager` roles.
 
 ### Assign Allowed Roles
 
@@ -140,7 +140,7 @@ Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Adminis
 
 ### Actions
 
-1. **Anonymous** user should be able to self register account as long as their email domain is in the allowed email domains (`AUTH_ACCESS_CONTROL_ALLOWED_EMAIL_DOMAINS`) and not in blacklist(`AUTH_ACCESS_CONTROL_BLOCKED_EMAILS`) for a give `Organization`. Checks are handled by `hadura-auth` for home-org.
+1. **Anonymous** (`public` role) user should be able to self register account as long as their email domain is in the allowed email domains (`AUTH_ACCESS_CONTROL_ALLOWED_EMAIL_DOMAINS`) and not in blacklist(`AUTH_ACCESS_CONTROL_BLOCKED_EMAILS`) for a give `Organization`. Checks are handled by `hadura-auth` for home-org.
    1. This should result creating row in `auth.users` table with with `default_org=AUTH_USER_DEFAULT_ROLE` and multiple rows added in `auth.user_roles` matching to `AUTH_USER_DEFAULT_ALLOWED_ROLES` _automatically_.
    2. This should result creating multiple rows  _automatically_ in  `public.user_org_roles` table with one of the row having `is_default_role=true` that match to `auth.user.default_role` via _trigger_.
 2. **User** should be able switch the `default_org` and `default_role` for home/non-home `orgs` applied only during that user **session**.
