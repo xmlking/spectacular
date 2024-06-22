@@ -20,7 +20,7 @@ services:
   # traefik proxy
   ###########################################################################
   traefik:
-    image: traefik:v3.0.1
+    image: traefik:v3.0.3
     hostname: traefik
     container_name: traefik
     restart: unless-stopped
@@ -53,7 +53,7 @@ services:
   postgres:
     image: postgres:16
     # image: pgvector/pgvector:pg16
-    # image: timescale/timescaledb-ha:pg16
+    # image: timescale/timescaledb-ha:pg16 # no support for Mac ARM yet.
     hostname: postgres
     container_name: postgres
     restart: unless-stopped
@@ -85,7 +85,7 @@ services:
   # hasura service
   ###########################################################################
   graphql:
-    image: hasura/graphql-engine:v2.39.2-ce
+    image: hasura/graphql-engine:v2.40.1-ce
     hostname: graphql
     container_name: graphql
     restart: unless-stopped
@@ -140,7 +140,7 @@ services:
   # e.g. ./infra/base/mailpit/certs/ca.pem:/etc/ssl/certs/ca-certificates.crt
   ###########################################################################
   mailpit:
-    image: axllent/mailpit:v1.18.4
+    image: axllent/mailpit:v1.18.6
     hostname: mailpit
     container_name: mailpit
     restart: unless-stopped
@@ -290,7 +290,7 @@ services:
   # minio
   ###########################################################################
   minio:
-    image: bitnami/minio:2024.5.10
+    image: bitnami/minio:2024.6.13
     hostname: minio
     container_name: minio
     restart: unless-stopped
@@ -417,7 +417,7 @@ services:
   # configserver
   ###########################################################################
   configserver:
-    image: nhost/cli:v1.18.2
+    image: nhost/cli:v1.18.3
     hostname: configserver
     container_name: configserver
     restart: unless-stopped

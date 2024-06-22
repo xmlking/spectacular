@@ -37,6 +37,7 @@ select_permissions:
       columns:
         - id
         - nickname
+        - user_id
       filter:
         user_id:
           _eq: x-hasura-user-id
@@ -47,6 +48,7 @@ select_permissions:
       columns:
         - id
         - nickname
+        - user_id
       filter:
         user_id:
           _eq: x-hasura-user-id
@@ -57,27 +59,26 @@ select_permissions:
       columns:
         - id
         - nickname
+        - user_id
       filter:
         user_id:
           _eq: x-hasura-user-id
       allow_aggregations: true
-    comment: ""
 delete_permissions:
   - role: manager
     permission:
       filter:
         user_id:
-          _eq: x-hasura-user-id
+          _eq: x-hasura-auth-elevated
     comment: ""
   - role: supervisor
     permission:
       filter:
         user_id:
-          _eq: x-hasura-user-id
+          _eq: x-hasura-auth-elevated
     comment: ""
   - role: user
     permission:
       filter:
         user_id:
-          _eq: x-hasura-user-id
-    comment: ""
+          _eq: x-hasura-auth-elevated
