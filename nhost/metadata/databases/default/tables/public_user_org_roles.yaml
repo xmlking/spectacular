@@ -21,9 +21,8 @@ insert_permissions:
   - role: manager
     permission:
       check:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
+        organization:
+          _in: x-hasura-allowed-orgs
       set:
         created_by: x-hasura-user-id
       columns:
@@ -35,9 +34,8 @@ insert_permissions:
   - role: supervisor
     permission:
       check:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
+        organization:
+          _eq: x-hasura-default-org
       set:
         created_by: x-hasura-user-id
       columns:
@@ -58,9 +56,9 @@ select_permissions:
         - role
         - user_id
       filter:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
+        organization:
+          _in: x-hasura-allowed-orgs
+      allow_aggregations: true
     comment: ""
   - role: supervisor
     permission:
@@ -73,25 +71,23 @@ select_permissions:
         - role
         - user_id
       filter:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
+        organization:
+          _eq: x-hasura-default-org
+      allow_aggregations: true
     comment: ""
   - role: user
     permission:
       columns:
-        - created_at
-        - id
         - is_default_role
         - organization
         - role
+        - created_at
+        - created_by
+        - id
         - user_id
       filter:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
-          - user_id:
-              _eq: x-hasura-user-id
+        user_id:
+          _eq: x-hasura-user-id
     comment: ""
 update_permissions:
   - role: manager
@@ -99,9 +95,8 @@ update_permissions:
       columns:
         - is_default_role
       filter:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
+        organization:
+          _in: x-hasura-allowed-orgs
       check: null
     comment: ""
   - role: supervisor
@@ -109,23 +104,20 @@ update_permissions:
       columns:
         - is_default_role
       filter:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
+        organization:
+          _eq: x-hasura-default-org
       check: null
     comment: ""
 delete_permissions:
   - role: manager
     permission:
       filter:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
+        organization:
+          _in: x-hasura-allowed-orgs
     comment: ""
   - role: supervisor
     permission:
       filter:
-        _and:
-          - organization:
-              _in: x-hasura-allowed-orgs
+        organization:
+          _eq: x-hasura-default-org
     comment: ""

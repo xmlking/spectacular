@@ -32,28 +32,6 @@ object_relationships:
     using:
       foreign_key_constraint_on: user_id
 select_permissions:
-  - role: manager
-    permission:
-      columns:
-        - id
-        - nickname
-        - user_id
-      filter:
-        user_id:
-          _eq: x-hasura-user-id
-      allow_aggregations: true
-    comment: ""
-  - role: supervisor
-    permission:
-      columns:
-        - id
-        - nickname
-        - user_id
-      filter:
-        user_id:
-          _eq: x-hasura-user-id
-      allow_aggregations: true
-    comment: ""
   - role: user
     permission:
       columns:
@@ -63,20 +41,7 @@ select_permissions:
       filter:
         user_id:
           _eq: x-hasura-user-id
-      allow_aggregations: true
 delete_permissions:
-  - role: manager
-    permission:
-      filter:
-        user_id:
-          _eq: x-hasura-auth-elevated
-    comment: ""
-  - role: supervisor
-    permission:
-      filter:
-        user_id:
-          _eq: x-hasura-auth-elevated
-    comment: ""
   - role: user
     permission:
       filter:

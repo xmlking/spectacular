@@ -11,6 +11,16 @@ configuration:
     allowed_email_domains: allowedEmailDomains
     allowed_emails: allowedEmails
   custom_root_fields: {}
+insert_permissions:
+  - role: manager
+    permission:
+      check: {}
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - description
+        - organization
+    comment: ""
 select_permissions:
   - role: manager
     permission:
@@ -29,7 +39,7 @@ select_permissions:
         - organization
       filter:
         organization:
-          _in: x-hasura-allowed-orgs
+          _eq: x-hasura-default-org
   - role: user
     permission:
       columns:
@@ -38,3 +48,35 @@ select_permissions:
       filter:
         organization:
           _in: x-hasura-allowed-orgs
+update_permissions:
+  - role: manager
+    permission:
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - description
+        - organization
+      filter:
+        organization:
+          _in: x-hasura-allowed-orgs
+      check: null
+    comment: ""
+  - role: supervisor
+    permission:
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - description
+        - organization
+      filter:
+        organization:
+          _eq: x-hasura-default-org
+      check: null
+    comment: ""
+delete_permissions:
+  - role: manager
+    permission:
+      filter:
+        organization:
+          _in: x-hasura-allowed-orgs
+    comment: ""

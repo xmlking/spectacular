@@ -102,6 +102,11 @@ FROM public.organizations o
 WHERE ur.user_id = user_row.id
 ORDER BY o.organization
 $$;
+CREATE FUNCTION public.user_default_org(user_row auth.users) RETURNS text
+    LANGUAGE sql STABLE
+    AS $$
+ SELECT user_row.metadata->>'default_org'
+$$;
 CREATE FUNCTION public.users_not_in_group(group_id uuid) RETURNS SETOF auth.users
     LANGUAGE plpgsql
     AS $$

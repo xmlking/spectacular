@@ -42,14 +42,17 @@ select_permissions:
         - type
         - user_id
       filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+        _and:
+          - user_id:
+              _eq: x-hasura-user-id
+          - type:
+              _eq: pat
 delete_permissions:
   - role: user
     permission:
       filter:
         _and:
           - user_id:
-              _eq: X-Hasura-User-Id
+              _eq: x-hasura-user-id
           - type:
               _eq: pat

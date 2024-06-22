@@ -113,6 +113,13 @@ array_relationships:
         table:
           name: user_security_keys
           schema: auth
+  - name: userOrgRoles
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: user_org_roles
+          schema: public
   - name: userProviders
     using:
       foreign_key_constraint_on:
@@ -125,6 +132,11 @@ computed_fields:
     definition:
       function:
         name: user_allowed_orgs
+        schema: public
+  - name: defaultOrg
+    definition:
+      function:
+        name: user_default_org
         schema: public
 select_permissions:
   - role: manager
@@ -143,16 +155,14 @@ select_permissions:
         - last_seen
         - locale
         - metadata
-        - new_email
-        - otp_hash_expires_at
-        - otp_method_last_used
         - phone_number
         - phone_number_verified
-        - ticket
-        - ticket_expires_at
         - updated_at
-        - webauthn_current_challenge
-      filter: {}
+      computed_fields:
+        - defaultOrg
+      filter:
+        defaultOrg:
+          _in: x-hasura-allowed-orgs
     comment: ""
   - role: supervisor
     permission:
@@ -170,30 +180,68 @@ select_permissions:
         - last_seen
         - locale
         - metadata
-        - new_email
-        - otp_hash_expires_at
-        - otp_method_last_used
         - phone_number
         - phone_number_verified
-        - ticket
-        - ticket_expires_at
         - updated_at
-        - webauthn_current_challenge
-      filter: {}
+      computed_fields:
+        - defaultOrg
+      filter:
+        defaultOrg:
+          _eq: x-hasura-default-org
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - active_mfa_type
+        - avatar_url
+        - created_at
+        - default_role
+        - display_name
+        - email
+        - email_verified
+        - id
+        - is_anonymous
+        - locale
+        - metadata
+        - phone_number
+        - phone_number_verified
+      computed_fields:
+        - defaultOrg
+      filter:
+        id:
+          _eq: x-hasura-user-id
     comment: ""
 update_permissions:
   - role: manager
     permission:
       columns:
+        - avatar_url
+        - default_role
+        - disabled
         - display_name
-      filter: {}
+        - email
+        - locale
+        - metadata
+        - phone_number
+      filter:
+        defaultOrg:
+          _in: x-hasura-allowed-orgs
       check: null
     comment: ""
   - role: supervisor
     permission:
       columns:
+        - avatar_url
+        - default_role
+        - disabled
         - display_name
-      filter: {}
+        - email
+        - locale
+        - metadata
+        - phone_number
+      filter:
+        defaultOrg:
+          _eq: x-hasura-default-org
       check: null
     comment: ""
   - role: user
