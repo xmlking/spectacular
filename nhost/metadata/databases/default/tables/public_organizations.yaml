@@ -30,6 +30,13 @@ select_permissions:
         - description
         - organization
       filter: {}
+  - role: public
+    permission:
+      columns:
+        - description
+        - organization
+      filter: {}
+    comment: ""
   - role: supervisor
     permission:
       columns:

@@ -36,9 +36,9 @@ Recommended roles:
 
 | Role       | Description                                                            | Allowed Activity                                                                   |
 | ---------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| anonymous  | A user who is not logged-in                                            | Only read from some restricted tables/views or public data                         |
-| user       | A user who is logged in                                                | Allow access to personally created data and any public data                        |
-| me         | A user who is logged in                                                | Allow access to personally created data                                            |
+| anonymous  | A user who is not logged-in                                            | Only read from some restricted tables/views or **public** data                     |
+| user       | A user who is logged in                                                | Allow access to personally created data and any **public** data                    |
+| me         | A user who is logged in                                                | Allow access to personally created data and any **private** data                   |
 | supervisor | A user that has access to other users' data with in their organization | Allow access to personally created data, their organization's data and public data |
 | manager    | A user that has access to any users' data across all organizations     | Allow access to all users' data and public data                                    |
 
@@ -52,6 +52,26 @@ By default, users have two allowed roles:
 - me
 
 > If users have more elevated roles, UI can pass elevated role in http header e.g., `X-Hasura-Role: supervisor` to run specific operation with that role. If this header is not present, the operation will run with default role i.e., `user`.
+
+### Role Hierarchy
+
+Cascading permissions with inherited roles
+
+```yaml
+- role_name: user
+  role_set:
+    - anonymous # public
+- role_name: me
+  role_set:
+    - user
+    - private
+- role_name: supervisor
+  role_set:
+    - user
+- role_name: manager
+  role_set:
+    - supervisor
+```
 
 ### The Admin Role
 

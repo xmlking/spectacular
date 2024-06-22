@@ -164,6 +164,14 @@ select_permissions:
         defaultOrg:
           _in: x-hasura-allowed-orgs
     comment: ""
+  - role: private
+    permission:
+      columns:
+        - phone_number
+      filter:
+        id:
+          _eq: x-hasura-user-id
+    comment: ""
   - role: supervisor
     permission:
       columns:

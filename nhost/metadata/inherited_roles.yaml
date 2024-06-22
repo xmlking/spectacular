@@ -1,1 +1,13 @@
-[]
+- role_name: manager
+  role_set:
+    - supervisor
+- role_name: me
+  role_set:
+    - private
+    - user
+- role_name: supervisor
+  role_set:
+    - user
+- role_name: user
+  role_set:
+    - public

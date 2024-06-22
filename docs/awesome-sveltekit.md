@@ -146,6 +146,8 @@ Awesome **SvelteKit** Links
 - [Svelte Vietnam](https://github.com/sveltevietnam/sveltevietnam.dev/tree/main) - Use: monorepo, turbo, changesets, i18n, hooks
 - [my-skeleton-app](https://github.com/hansaskov/my-skeleton-app) - Use: Auth, Superforms, Flash Messages, Demo: [hjemmet.vercel.app](https://hjemmet.vercel.app/)
 - [**ciso-assistant-community**](https://github.com/intuitem/ciso-assistant-community)  - Use: `paraglide-js`, `skeleton`, `storybook`, `vincjo/datatables`, `sveltekit-flash-message`, `sveltekit-rate-limiter` and `superforms`
+- [ReShared](https://reshared.org/) is community things sharing webapp. OSS, implemented with **nhost**.
+  - [repo](https://github.com/altschuler/reshared/)
 
 ## Deployment
 
