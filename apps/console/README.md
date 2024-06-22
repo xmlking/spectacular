@@ -162,3 +162,4 @@ gcloud run deploy --allow-unauthenticated
 ## TODO
 
 - After user record created for first-time (i.e., after user login), have admins assign `organization` and `groups` via Web UI:
+- use [lcl.host](https://anchor.dev/docs/lcl-host/why-lcl)

@@ -1,17 +1,17 @@
 import { i18n } from '$lib/i18n';
 import { signUpSchema } from '$lib/schema/user';
 import { limiter } from '$lib/server/limiter/limiter';
-import { getOrgs } from '$lib/server/utils/get-orgs';
 import { setNhostSessionInCookies } from '$lib/server/utils/nhost';
 import { Logger, sleep } from '@spectacular/utils';
-import { error, fail } from '@sveltejs/kit';
-import type { GraphQLError } from 'graphql';
+import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
-import { message, setError, setMessage, superValidate } from 'sveltekit-superforms';
+import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('server:auth:signup');
 
+/*
+const searchOrganizationsStore = new SearchOrganizationsStore();
 export const load = async (event) => {
   const {
     locals: { nhost },
@@ -21,12 +21,17 @@ export const load = async (event) => {
   // before posting, request will be limited:
   await limiter.cookieLimiter?.preflight(event);
 
-  const session = nhost.auth.getSession();
-  // log.debug(session);
-  if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
+  const isAuthenticated = nhost.auth.isAuthenticated();
+  // log.debug({isAuthenticated});
+  if (isAuthenticated) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
   const form = await superValidate(zod(signUpSchema));
   // fetch orgs and render errors if backend throw error.
-  const { errors, data } = await getOrgs(event);
+  const { errors, data } = await searchOrganizationsStore.fetch({
+    event,
+    blocking: true,
+    metadata: { logResult: true, useRole: 'public' },
+    variables: {},
+  });
   if (errors) {
     for (const error of errors) {
       log.error('list orgs api error', error);
@@ -36,11 +41,12 @@ export const load = async (event) => {
     setMessage(form, { type: 'error', message: 'List organizations failed' }, { status: 500 });
     return { status: 500, form };
   }
-  const organizations = data.organizations.map((x) => x.organization);
+  const organizations = data?.organizations.map((x) => x.organization);
   if (!organizations) error(404, 'organizations not found');
 
   return { organizations, form };
 };
+*/
 
 export const actions = {
   default: async (event) => {

@@ -9,10 +9,10 @@ import { DebugShell } from '@spectacular/skeleton/components';
 import { Icon } from '@spectacular/skeleton/components/icons';
 import { Logger } from '@spectacular/utils';
 import { AlertTriangle, Github, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
+import { Fingerprint } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
-import { Fingerprint } from 'lucide-svelte';
 
 export let data;
 const log = new Logger('auth:signin');

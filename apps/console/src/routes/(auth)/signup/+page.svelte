@@ -2,8 +2,8 @@
 import { page } from '$app/stores';
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 import * as m from '$i18n/messages';
-import { signUpSchema } from '$lib/schema/user';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+import { signUpSchema } from '$lib/schema/user';
 import { isLoadingForm } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -11,11 +11,16 @@ import { Logger } from '@spectacular/utils';
 import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
-  import { zodClient } from 'sveltekit-superforms/adapters';
+import { zodClient } from 'sveltekit-superforms/adapters';
+import type { PageData } from './$houdini';
 
-export let data;
-const log = new Logger('auth:signup');
-const organizations = data.organizations ?? [PUBLIC_DEFAULT_ORGANIZATION];
+const log = new Logger('auth:signup:browser');
+
+export let data: PageData;
+
+$: ({ ListOrganizations } = data);
+$: organizations = $ListOrganizations.data?.organizations.map((x) => x.organization) ?? [PUBLIC_DEFAULT_ORGANIZATION];
+
 const toastStore = getToastStore();
 
 const { form, delayed, timeout, enhance, errors, constraints, message, tainted, posted, submitting, capture, restore } =
@@ -45,7 +50,6 @@ export const snapshot = { capture, restore };
 delayed.subscribe((v) => ($isLoadingForm = v));
 
 $form.redirectTo = $page.url.searchParams.get('redirectTo') ?? $form.redirectTo;
-// $: termsValue = $form.terms as Writable<boolean>;
 </script>
 
 <svelte:head>

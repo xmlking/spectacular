@@ -85,7 +85,6 @@ export const webAuthnSchema = z.object({
     .trim(),
 });
 
-
 /**
  * Refine functions
  */
