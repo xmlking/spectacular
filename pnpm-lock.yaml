@@ -322,7 +322,7 @@ importers:
         version: 5.3.2(@sveltejs/kit@2.5.16(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1)))(svelte@4.2.18)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1)))
       '@sveltejs/enhanced-img':
         specifier: 0.3.0
-        version: 0.3.0(rollup@4.18.0)(svelte@4.2.18)
+        version: 0.3.0(rollup@2.79.1)(svelte@4.2.18)
       '@sveltejs/kit':
         specifier: 2.5.16
         version: 2.5.16(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1)))(svelte@4.2.18)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1))
@@ -387,8 +387,8 @@ importers:
         specifier: 2.3.0
         version: 2.3.0
       flowbite-svelte:
-        specifier: 0.46.2
-        version: 0.46.2(svelte@4.2.18)
+        specifier: 0.46.4
+        version: 0.46.4(svelte@4.2.18)
       flowbite-svelte-blocks:
         specifier: 1.1.2
         version: 1.1.2(svelte@4.2.18)
@@ -6253,8 +6253,8 @@ packages:
       tailwind-merge: ^2.0.0
       tailwindcss: ^3.3.2
 
-  flowbite-svelte@0.46.2:
-    resolution: {integrity: sha512-nOPJ4xBq3T/s3yiow+YyabupWiPqj1TQ7Fv12gLYTHFsjwBOcelWPEFbe1G/yO8a6gm243QE9KG9m+ag/N7KyA==}
+  flowbite-svelte@0.46.4:
+    resolution: {integrity: sha512-67OYCGH1Jk4ttMqQqKFU3J3Wudajl2TNVzO8Yzqx3meIlT2yGrszIeWwhnSzS0+En2P7Sl60kmJvCHeHIjyEMA==}
     engines: {node: '>=18.0.0', pnpm: '>=8.0.0'}
     peerDependencies:
       svelte: ^3.55.1 || ^4.0.0
@@ -16463,7 +16463,7 @@ snapshots:
   flowbite-svelte-blocks@1.1.2(svelte@4.2.18):
     dependencies:
       flowbite: 2.3.0
-      flowbite-svelte: 0.46.2(svelte@4.2.18)
+      flowbite-svelte: 0.46.4(svelte@4.2.18)
       svelte: 4.2.18
       tailwind-merge: 2.3.0
 
@@ -16473,7 +16473,7 @@ snapshots:
       tailwind-merge: 2.3.0
       tailwindcss: 3.4.4
 
-  flowbite-svelte@0.46.2(svelte@4.2.18):
+  flowbite-svelte@0.46.4(svelte@4.2.18):
     dependencies:
       '@floating-ui/dom': 1.6.5
       apexcharts: 3.49.1
