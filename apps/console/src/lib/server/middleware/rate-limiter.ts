@@ -8,7 +8,7 @@ import type { Handle } from '@sveltejs/kit';
  * This should be the first middleware.
  */
 const log = new Logger('server:middleware:limiter');
-const rateLimitedPaths = ['/signin', '/signup', '/password-reset', '/downlaod'];
+const rateLimitedPaths = ['/signin', '/signup', '/reset', '/downlaod'];
 
 export const rateLimiter = (async ({ event, resolve }) => {
   const {

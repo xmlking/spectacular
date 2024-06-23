@@ -75,6 +75,8 @@ export const changePasswordSchema = userSchema
   .pick({ password: true, confirmPassword: true })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
 
+export const resetPasswordSchema = userSchema.pick({ email: true });
+
 export const changeEmailSchema = userSchema.pick({ email: true });
 
 export const webAuthnSchema = z.object({

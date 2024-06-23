@@ -19,7 +19,7 @@ const publicPaths = [
   '/fonts',
   '/signin',
   '/signup',
-  '/password-reset',
+  '/reset',
   '/privacy',
   '/terms',
   '/docs',

@@ -45,17 +45,7 @@ const modalComponentRegistry: Record<string, ModalComponent> = {
   modalSearch: { ref: Search },
 };
 
-const noSidebarPaths = [
-  '/signin',
-  '/signup',
-  '/password-reset',
-  '/privacy',
-  '/terms',
-  '/docs',
-  '/blog',
-  '/about',
-  '/contact',
-];
+const noSidebarPaths = ['/signin', '/signup', '/reset', '/privacy', '/terms', '/docs', '/blog', '/about', '/contact'];
 function matchNoSidebarPaths(pathname: string): boolean {
   const canonicalPath = i18n.route(pathname);
   if (canonicalPath === '/' || startsWith(canonicalPath, noSidebarPaths)) {
@@ -101,7 +91,7 @@ $: if (browser) {
     // nhost.auth.client.interpreter?.send('SIGNOUT');
     (async () => {
       const { error } = await nhost.auth.signOut();
-      if (error) log.error({ error })
+      if (error) log.error({ error });
     })();
   }
 }

@@ -8,14 +8,14 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Icon } from '@spectacular/skeleton/components/icons';
 import { Logger } from '@spectacular/utils';
-import { AlertTriangle, Github, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
-import { Fingerprint } from 'lucide-svelte';
+// import { SiGithub } from "@icons-pack/svelte-simple-icons";
+import { AlertTriangle, Fingerprint, Github, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
 
 export let data;
-const log = new Logger('auth:signin');
+const log = new Logger('auth:signin:browser');
 const toastStore = getToastStore();
 
 const {
@@ -223,7 +223,7 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redir
 </form>
 
 <div class="mt-5 flex flex-row items-center justify-center">
-  <a href="/password-reset" class="anchor font-semibold">{m.auth_labels_forgot_password()}</a>
+  <a href="/reset" class="anchor font-semibold">{m.auth_labels_forgot_password()}</a>
 </div>
 
 <!-- Divider -->

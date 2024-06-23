@@ -14,7 +14,7 @@ import { UserRound } from 'lucide-svelte';
         </div>
       </div>
       <TabGroup justify="justify-center">
-        <TabAnchor href="/signin" selected={$page.url.pathname === '/signin'}>
+        <TabAnchor href="/signin" selected={$page.url.pathname === '/signin' || $page.url.pathname === '/reset'}>
           <span>{m.auth_labels_signin()}</span>
         </TabAnchor>
         <TabAnchor href="/signup" selected={$page.url.pathname === '/signup'}>
