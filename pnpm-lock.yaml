@@ -322,7 +322,7 @@ importers:
         version: 5.3.2(@sveltejs/kit@2.5.16(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1)))(svelte@4.2.18)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1)))
       '@sveltejs/enhanced-img':
         specifier: 0.3.0
-        version: 0.3.0(rollup@4.18.0)(svelte@4.2.18)
+        version: 0.3.0(rollup@2.79.1)(svelte@4.2.18)
       '@sveltejs/kit':
         specifier: 2.5.16
         version: 2.5.16(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1)))(svelte@4.2.18)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1))
@@ -652,11 +652,11 @@ importers:
         specifier: 8.3.1
         version: 8.3.1(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))
       '@astrojs/starlight':
-        specifier: 0.24.2
-        version: 0.24.2(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))
+        specifier: 0.24.4
+        version: 0.24.4(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))
       '@astrojs/starlight-tailwind':
         specifier: 2.0.3
-        version: 2.0.3(@astrojs/starlight@0.24.2(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5)))(@astrojs/tailwind@5.1.0(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))(tailwindcss@3.4.4))(tailwindcss@3.4.4)
+        version: 2.0.3(@astrojs/starlight@0.24.4(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5)))(@astrojs/tailwind@5.1.0(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))(tailwindcss@3.4.4))(tailwindcss@3.4.4)
       '@astrojs/tailwind':
         specifier: 5.1.0
         version: 5.1.0(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))(tailwindcss@3.4.4)
@@ -895,8 +895,8 @@ importers:
         specifier: 3.1.6
         version: 3.1.6
       '@astrojs/starlight':
-        specifier: 0.24.2
-        version: 0.24.2(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))
+        specifier: 0.24.4
+        version: 0.24.4(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))
       '@astrojs/svelte':
         specifier: 5.6.0
         version: 5.6.0(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))(svelte@4.2.18)(typescript@5.4.5)(vite@5.3.1(@types/node@20.14.5)(terser@5.31.1))
@@ -1355,8 +1355,8 @@ packages:
       '@astrojs/tailwind': ^5.0.0
       tailwindcss: ^3.3.3
 
-  '@astrojs/starlight@0.24.2':
-    resolution: {integrity: sha512-hXFVBHcr2a4UwX5GDCNQEZsRXdgVlNzZ7txpI2jlMvtzbgfoLEGOHjaHpB5QTW/OCrRAMjcx9Zx0HxRliohaxQ==}
+  '@astrojs/starlight@0.24.4':
+    resolution: {integrity: sha512-rED8LPQwsXlgclfdHO+okUGcirof1prrxZLuKWp380xC/T7u2qQ5b1gnKqpM+92x+vhs8GYT7mHGKz9VctwdUg==}
     peerDependencies:
       astro: ^4.8.6
 
@@ -10639,13 +10639,13 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight-tailwind@2.0.3(@astrojs/starlight@0.24.2(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5)))(@astrojs/tailwind@5.1.0(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))(tailwindcss@3.4.4))(tailwindcss@3.4.4)':
+  '@astrojs/starlight-tailwind@2.0.3(@astrojs/starlight@0.24.4(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5)))(@astrojs/tailwind@5.1.0(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))(tailwindcss@3.4.4))(tailwindcss@3.4.4)':
     dependencies:
-      '@astrojs/starlight': 0.24.2(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))
+      '@astrojs/starlight': 0.24.4(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))
       '@astrojs/tailwind': 5.1.0(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))(tailwindcss@3.4.4)
       tailwindcss: 3.4.4
 
-  '@astrojs/starlight@0.24.2(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))':
+  '@astrojs/starlight@0.24.4(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))':
     dependencies:
       '@astrojs/mdx': 3.1.1(astro@4.10.3(@types/node@20.14.5)(terser@5.31.1)(typescript@5.4.5))
       '@astrojs/sitemap': 3.1.6
