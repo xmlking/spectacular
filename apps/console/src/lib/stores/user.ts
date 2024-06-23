@@ -5,7 +5,7 @@ import { NHOST_SESSION_KEY } from '$lib/constants';
 import type { User } from '@nhost/nhost-js';
 import { NhostClient } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
-import { readable, writable } from 'svelte/store';
+import { derived, readable, writable } from 'svelte/store';
 
 const log = new Logger('user.store.client');
 
@@ -42,4 +42,8 @@ export const accessToken = readable<string | null>(null, (set) => {
     log.debug('The access token refreshed:', { session });
     set(session?.accessToken ?? null);
   });
+});
+
+export const elevated = derived([accessToken, user], ([$at, $user]) => {
+  return $at && $user  ? nhost.auth.getHasuraClaim('x-hasura-auth-elevated') === $user.id : false;
 });
