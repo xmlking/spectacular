@@ -18,7 +18,7 @@ export const log = new Logger('server:middleware:auth');
  */
 export const auth = (async ({ event, resolve }) => {
   const { url, cookies } = event;
-  log.debug('auth: pathname:', url.pathname);
+  log.debug('pathname:', url.pathname);
 
   const sessionCookieValue = cookies.get(NHOST_SESSION_KEY);
   const initialSession = sessionCookieValue ? (JSON.parse(atob(sessionCookieValue)) as NhostSession) : undefined;
@@ -32,6 +32,7 @@ export const auth = (async ({ event, resolve }) => {
   const currentTime = Math.floor(Date.now() / 1000);
   const tokenExpirationTime = nhost.auth.getDecodedAccessToken()?.exp;
   const accessTokenExpired = session && tokenExpirationTime && currentTime > tokenExpirationTime;
+  log.debug({ accessTokenExpired, refreshToken });
 
   if (accessTokenExpired || refreshToken) {
     log.debug('in accessTokenExpired || refreshToken');

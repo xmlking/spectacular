@@ -10,44 +10,6 @@ import { zod } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('server:auth:signup');
 
-/*
-const searchOrganizationsStore = new SearchOrganizationsStore();
-export const load = async (event) => {
-  const {
-    locals: { nhost },
-  } = event;
-  // Preflight prevents direct posting.
-  // If preflight option is true and this function isn't called
-  // before posting, request will be limited:
-  await limiter.cookieLimiter?.preflight(event);
-
-  const isAuthenticated = nhost.auth.isAuthenticated();
-  // log.debug({isAuthenticated});
-  if (isAuthenticated) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
-  const form = await superValidate(zod(signUpSchema));
-  // fetch orgs and render errors if backend throw error.
-  const { errors, data } = await searchOrganizationsStore.fetch({
-    event,
-    blocking: true,
-    metadata: { logResult: true, useRole: 'public' },
-    variables: {},
-  });
-  if (errors) {
-    for (const error of errors) {
-      log.error('list orgs api error', error);
-      // NOTE: you can add multiple errors, send all along with a message
-      setError(form, '', (error as GraphQLError).message);
-    }
-    setMessage(form, { type: 'error', message: 'List organizations failed' }, { status: 500 });
-    return { status: 500, form };
-  }
-  const organizations = data?.organizations.map((x) => x.organization);
-  if (!organizations) error(404, 'organizations not found');
-
-  return { organizations, form };
-};
-*/
-
 export const actions = {
   default: async (event) => {
     const {

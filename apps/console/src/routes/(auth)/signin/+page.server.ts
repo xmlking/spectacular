@@ -12,6 +12,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('server:auth:signin');
 
+/*
 export const load = async (event) => {
   const {
     locals: { nhost },
@@ -27,6 +28,7 @@ export const load = async (event) => {
   const pwlForm = await superValidate(zod(pwlSchema));
   return { pwForm, pwlForm };
 };
+*/
 
 export const actions = {
   password: async (event) => {

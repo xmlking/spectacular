@@ -98,7 +98,11 @@ $: if (browser) {
     nhost.auth.client.interpreter?.send('SESSION_UPDATE', { data: { session } });
   } else {
     log.debug('session empty, trigger SIGNOUT');
-    nhost.auth.client.interpreter?.send('SIGNOUT');
+    // nhost.auth.client.interpreter?.send('SIGNOUT');
+    (async () => {
+      const { error } = await nhost.auth.signOut();
+      if (error) log.error({ error })
+    })();
   }
 }
 
