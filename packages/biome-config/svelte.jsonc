@@ -46,7 +46,7 @@
     }
   },
   "javascript": {
-    "globals": ["Astro", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"],
+    "globals": ["Astro", "App", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"],
     "formatter": {
       "quoteStyle": "single"
       // "semicolons": "asNeeded"
@@ -88,6 +88,16 @@
           },
           "style": {
             "useConst": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["src/routes/(legal)/+layout@.svelte"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
           }
         }
       }
