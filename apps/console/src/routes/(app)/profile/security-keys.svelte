@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { SecurityKey } from '$houdini';
+import { PendingValue, type SecurityKeyFields } from '$houdini';
 import { flip } from 'svelte/animate';
 import { quintOut } from 'svelte/easing';
 import { fade } from 'svelte/transition';
@@ -10,8 +10,12 @@ export const defaultDE = {
   easing: quintOut,
 };
 
-export let securityKeys: SecurityKey[];
+export let securityKeys: SecurityKeyFields[];
 </script>
+
+<section class="rounded-lg bg-slate-50">
+  <pre>{JSON.stringify(securityKeys, null, 2)}</pre>
+</section>
 
 <div class="divide-y divide-slate-200">
   {#each securityKeys as securityKey (securityKey.id)}

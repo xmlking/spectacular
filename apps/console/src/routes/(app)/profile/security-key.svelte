@@ -1,6 +1,6 @@
 <script lang="ts">
 import { RemoveSecurityKeyStore, fragment, graphql } from '$houdini';
-import type { SecurityKey } from '$houdini';
+import type { SecurityKeyFields, SecurityKeyFields$data } from '$houdini';
 import { Logger } from '@spectacular/utils';
 import { fade } from 'svelte/transition';
 
@@ -8,19 +8,19 @@ const log = new Logger('auth:profile:browser');
 
 let isDeleting = false;
 
-export let securityKey: SecurityKey;
+export let securityKey: SecurityKeyFields;
 
 $: data = fragment(
   securityKey,
   graphql`
-      fragment SecurityKey on authUserSecurityKeys {
-        nickname
+      fragment SecurityKeyFields on authUserSecurityKeys {
         id
+        nickname
       }
     `,
 );
 
-$: ({ id, nickname } = $data);
+$: ({ id, nickname } = $data || ({} as SecurityKeyFields$data));
 
 const deleteSecurityKey = new RemoveSecurityKeyStore();
 
@@ -43,13 +43,9 @@ const handleDelete = async () => {
  <div class="relative">
     <div class="flex items-center">
       <p class="font-bold">{nickname}</p>
-      <!-- <time class="ml-2 text-sm font-medium text-zinc-500" title={createdAt.toISO()}>
-        {createdAt.toFormat('MM/dd/yyyy')}
-      </time> -->
     </div>
 
     <div class="absolute bottom-0 right-0" transition:fade={{ duration: 75 }}>
       <button on:click={handleDelete} disabled={isDeleting}>Delete</button>
     </div>
-
   </div>

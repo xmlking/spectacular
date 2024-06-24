@@ -50,11 +50,15 @@ $: meta = {
 
 <div class="page-container">
 
-  <section class="rounded-lg bg-slate-50">aaa</section>
 
   {#if $GetUser.fetching}
     <span>loading...</span>
   {:else}
+
+    <section class="rounded-lg bg-slate-50">
+      <pre>{JSON.stringify($GetUser.data, null, 2)}</pre>
+    </section>
+
     <section>
       <span>done....</span>
       <div class="relative inline-block">

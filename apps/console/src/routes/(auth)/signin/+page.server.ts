@@ -12,23 +12,25 @@ import { zod } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('server:auth:signin');
 
-/*
 export const load = async (event) => {
   const {
     locals: { nhost },
   } = event;
-  // Preflight prevents direct posting.
-  // If preflight option is true and this function isn't called
-  // before posting, request will be limited:
+  /**
+   * Preflight prevents direct posting. If preflight option for the
+   * cookie limiter is true and this function isn't called before posting,
+   * request will be limited.
+   *
+   * Remember to await, so the cookie will be set before returning!
+   */
   await limiter.cookieLimiter?.preflight(event);
 
-  const session = nhost.auth.getSession();
-  if (session) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
-  const pwForm = await superValidate(zod(pwSchema));
-  const pwlForm = await superValidate(zod(pwlSchema));
-  return { pwForm, pwlForm };
+  const isAuthenticated = nhost.auth.isAuthenticated();
+  if (isAuthenticated) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
+  // const pwForm = await superValidate(zod(pwSchema));
+  // const pwlForm = await superValidate(zod(pwlSchema));
+  // return { pwForm, pwlForm };
 };
-*/
 
 export const actions = {
   password: async (event) => {

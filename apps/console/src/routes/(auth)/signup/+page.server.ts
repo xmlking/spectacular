@@ -3,12 +3,32 @@ import { signUpSchema } from '$lib/schema/user';
 import { limiter } from '$lib/server/limiter/limiter';
 import { setNhostSessionInCookies } from '$lib/server/utils/nhost';
 import { Logger, sleep } from '@spectacular/utils';
-import { fail } from '@sveltejs/kit';
+import { error, fail } from '@sveltejs/kit';
+import type { GraphQLError } from 'graphql';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
-import { message, setError, superValidate } from 'sveltekit-superforms';
+import { message, setError, setMessage, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('server:auth:signup');
+
+export const load = async (event) => {
+  const {
+    locals: { nhost },
+  } = event;
+  /**
+   * Preflight prevents direct posting. If preflight option for the
+   * cookie limiter is true and this function isn't called before posting,
+   * request will be limited.
+   *
+   * Remember to await, so the cookie will be set before returning!
+   */
+  await limiter.cookieLimiter?.preflight(event);
+
+  const isAuthenticated = nhost.auth.isAuthenticated();
+  if (isAuthenticated) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
+  // const form = await superValidate(zod(signUpSchema));
+  // return { form };
+};
 
 export const actions = {
   default: async (event) => {

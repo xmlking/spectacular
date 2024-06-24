@@ -50,6 +50,11 @@ export default new HoudiniClient({
     const useRole = metadata?.useRole;
     const adminSecret = metadata?.adminSecret;
 
+    // client side AT !!!
+    // if (browser) {
+    //   const accessToken = get(accessTojen); // from svelte store
+    // }
+
     return {
       headers: {
         ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),

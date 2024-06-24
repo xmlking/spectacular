@@ -11,22 +11,10 @@ export const defaultDE = {
 };
 
 export let rules: Rule[];
-
-export function hasId(obj) {
-  if (obj == null || typeof obj !== 'object') return false;
-  return !!('id' in obj);
-}
-
-export function toWithId(obj) {
-  if (hasId(obj)) return obj;
-  throw new Error('.id is required');
-}
-
-$: rulesWithId = rules.map(toWithId);
 </script>
 
 <div class="divide-y divide-slate-200">
-  {#each rulesWithId as rule (rule.id)}
+  {#each rules as rule (rule.id)}
     <div transition:fade={defaultDE} animate:flip={defaultDE}>
       <RuleItem {rule} />
     </div>

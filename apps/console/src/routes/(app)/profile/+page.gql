@@ -15,8 +15,12 @@ query GetUser($userId: uuid!) @cache(policy: CacheAndNetwork) {
       role
       isDefaultRole
     }
-    securityKeys(order_by: { nickname: asc })  @list(name: "SecurityKeys")  {
-      ...SecurityKey
+    sks: securityKeys {
+      id
+      nickname
+    }
+    securityKeys(order_by: { nickname: asc })  @list(name: "SecurityKeys") {
+      ...SecurityKeyFields
       # nickname
       # id
     }
