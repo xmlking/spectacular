@@ -32,6 +32,21 @@ async function addSecurityKey() {
   console.log(key?.id);
 }
 
+async function handleElevate() {
+  const email = $user?.email
+  if (email) {
+        const { elevated, isError } = await nhost.auth.elevateEmailSecurityKey(email)
+      if (elevated) {
+          // notify
+          console.log({elevated})
+      }
+      if (isError) {
+        console.log({isError})
+      }
+  }
+
+}
+
 // Reactivity
 $: meta = {
   title: 'Datablocks | Profile',
@@ -54,6 +69,12 @@ $: meta = {
   {#if $GetUser.fetching}
     <span>loading...</span>
   {:else}
+
+    <h3>Error:</h3>
+    <section class="rounded-lg bg-slate-50">
+      <pre>{JSON.stringify(error, null, 2)}</pre>
+    </section>
+
 
     <section class="rounded-lg bg-slate-50">
       <pre>{JSON.stringify($GetUser.data, null, 2)}</pre>
@@ -108,6 +129,11 @@ $: meta = {
           <button type="submit" class="btn variant-filled">Add a new device</button>
       </form>
     </div>
+  </section>
+
+  <section>
+    <!-- <span>Elevated permissions: {String(elevated)}</span> -->
+    <button type="button" class="btn variant-filled" on:click={handleElevate} >Elevate</button>
   </section>
 </div>
 

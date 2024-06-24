@@ -17,10 +17,11 @@ export let securityKeys: SecurityKeyFields[];
   <pre>{JSON.stringify(securityKeys, null, 2)}</pre>
 </section>
 
-<div class="divide-y divide-slate-200">
+<!-- fixme: opened issue-->
+<!-- <div class="divide-y divide-slate-200">
   {#each securityKeys as securityKey (securityKey.id)}
     <div transition:fade={defaultDE} animate:flip={defaultDE}>
       <SecurityKeyItem {securityKey} />
     </div>
   {/each}
-</div>
+</div> -->
