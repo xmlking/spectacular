@@ -45,5 +45,5 @@ export const accessToken = readable<string | null>(null, (set) => {
 });
 
 export const elevated = derived([accessToken, user], ([$at, $user]) => {
-  return $at && $user  ? nhost.auth.getHasuraClaim('x-hasura-auth-elevated') === $user.id : false;
+  return $at && $user ? nhost.auth.getHasuraClaim('x-hasura-auth-elevated') === $user.id : false;
 });

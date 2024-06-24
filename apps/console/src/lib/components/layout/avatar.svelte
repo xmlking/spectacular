@@ -7,7 +7,7 @@ import { LogOut } from 'lucide-svelte';
 
 export let initials: string | undefined = undefined;
 export let src: string | undefined = undefined;
-export let elevated: boolean = false;
+export let elevated = false;
 </script>
 
  <!-- trigger -->
