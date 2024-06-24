@@ -1,12 +1,26 @@
 <script lang="ts">
-import { user } from '$lib/stores/user';
-import { Debug } from '@spectacular/skeleton/components';
+import type { PageData } from './$houdini';
+import RulesCard from './rules.svelte';
+
+export let data: PageData;
+
+$: ({ Rules: RulesData } = data);
+$: rules = $RulesData.data?.rules ?? [];
 </script>
 
 <svelte:head>
-  <title>Datablocks | Settings</title>
-  <meta name="description" content="Account Settings" />
+  <title>Datablocks | Rules</title>
+  <meta name="description" content="Rules list" />
 </svelte:head>
 
-<h2 class="h2">Settings</h2>
-<Debug data={$user}/>
+<h2 class="h2">Rules</h2>
+
+  {#if $RulesData.fetching}
+    <span>loading...</span>
+  {:else}
+      <span>done....</span>
+      <RulesCard {rules}/>
+  {/if}
+
+
+

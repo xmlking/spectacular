@@ -21,6 +21,14 @@ const config = {
       'x-hasura-role': 'manager',
     },
   },
+  // features: {
+  //   runtimeScalars: {
+  //     UserId: {
+  //       type: 'uuid',
+  //       resolve: ({ session }) => session?.userId,
+  //     },
+  //   },
+  // },
   plugins: {
     // 'houdini-plugin-svelte-global-stores': {
     // 	generate: 'all'

@@ -1,47 +1,48 @@
 <script lang="ts">
-  import { fade } from 'svelte/transition';
-  import { RemoveSecurityKeyStore, fragment, graphql } from '$houdini';
-  import { Logger } from '@spectacular/utils';
- import type { SecurityKey } from '$houdini';
+import { RemoveSecurityKeyStore, fragment, graphql } from '$houdini';
+import type { SecurityKey } from '$houdini';
+import { Logger } from '@spectacular/utils';
+import { fade } from 'svelte/transition';
 
-  const log = new Logger('auth:profile:browser');
+const log = new Logger('auth:profile:browser');
 
-  let isDeleting = false;
+let isDeleting = false;
 
-  export let securityKey: SecurityKey;
+export let securityKey: SecurityKey;
 
- $: data = fragment(
-    securityKey,
-    graphql`
+$: data = fragment(
+  securityKey,
+  graphql`
       fragment SecurityKey on authUserSecurityKeys {
         nickname
         id
       }
     `,
-  );
+);
 
-  const deleteSecurityKey = new RemoveSecurityKeyStore();
+$: ({ id, nickname } = $data);
 
-  const handleDelete = async () => {
-    // before
-    isDeleting = true;
-    const { errors } = await deleteSecurityKey.mutate({ id: $data.id });
+const deleteSecurityKey = new RemoveSecurityKeyStore();
 
-    if (errors?.length) {
-      log.error({errors})
-      // window.location.reload();
-      return;
-    }
+const handleDelete = async () => {
+  // before
+  isDeleting = true;
+  const { errors } = await deleteSecurityKey.mutate({ id });
 
-    // after
-    // No need to reset as comments disappear.
-  };
+  if (errors?.length) {
+    log.error({ errors });
+    // window.location.reload();
+    return;
+  }
 
+  // after
+  // No need to reset as comments disappear.
+};
 </script>
 
  <div class="relative">
     <div class="flex items-center">
-      <p class="font-bold">{$data.nickname}</p>
+      <p class="font-bold">{nickname}</p>
       <!-- <time class="ml-2 text-sm font-medium text-zinc-500" title={createdAt.toISO()}>
         {createdAt.toFormat('MM/dd/yyyy')}
       </time> -->

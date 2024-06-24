@@ -1,18 +1,16 @@
 <script lang="ts">
-  import SecurityKeyItem from './security-key.svelte';
-  import { quintOut } from 'svelte/easing';
-  import { flip } from 'svelte/animate';
-  import { fade } from 'svelte/transition';
-  import type { SecurityKey } from '$houdini';
+import type { SecurityKey } from '$houdini';
+import { flip } from 'svelte/animate';
+import { quintOut } from 'svelte/easing';
+import { fade } from 'svelte/transition';
+import SecurityKeyItem from './security-key.svelte';
 
-
-  export const defaultDE = {
+export const defaultDE = {
   duration: 450,
   easing: quintOut,
 };
 
-
-  export let securityKeys: SecurityKey[];
+export let securityKeys: SecurityKey[];
 </script>
 
 <div class="divide-y divide-slate-200">

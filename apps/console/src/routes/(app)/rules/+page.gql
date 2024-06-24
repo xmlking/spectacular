@@ -1,0 +1,21 @@
+query Rules {
+  rules(order_by: { createdAt: asc }) @list(name: "Rules") {
+    action
+    annotations
+    appId
+    description
+    destination
+    destinationPort
+    direction
+    displayName
+    protocol
+    shared
+    source
+    sourcePort
+    throttleRate
+    updatedAt
+    updatedBy
+    weight
+    ...RuleCardFields
+  }
+}

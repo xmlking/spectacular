@@ -5,14 +5,14 @@ import { nhost, user } from '$lib/stores/user';
 import type { AuthErrorPayload } from '@nhost/nhost-js';
 import { Avatar } from '@skeletonlabs/skeleton';
 import { Debug } from '@spectacular/skeleton/components';
-import SecurityKeysCard from './security-keys.svelte';
 import type { PageData } from './$houdini';
+import SecurityKeysCard from './security-keys.svelte';
 
 // https://github.com/nhost/nhost/blob/main/examples/react-apollo/src/profile/security-keys.tsx
 export let data: PageData;
 
 $: ({ GetUser } = data);
-  $: securityKeys = $GetUser.data?.user?.securityKeys ?? [];
+$: securityKeys = $GetUser.data?.user?.securityKeys ?? [];
 
 // Variables
 let nickname: string;
