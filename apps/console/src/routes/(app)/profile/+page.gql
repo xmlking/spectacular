@@ -1,0 +1,34 @@
+query GetUser($userId: uuid!) @cache(policy: CacheAndNetwork) {
+  # get all gragments needed for profile page.
+  user(id: $userId) {
+    id
+    displayName
+    email
+    phoneNumber
+    defaultOrg
+    defaultRole
+    avatarUrl
+    locale
+    plan: metadata(path: ".plan")
+    userOrgRoles(order_by: {organization: asc}) {
+      organization
+      role
+      isDefaultRole
+    }
+    securityKeys(order_by: { nickname: asc })  @list(name: "SecurityKeys")  {
+      ...SecurityKey
+      # nickname
+      # id
+    }
+    personalAccessTokens: refreshTokens {
+      id
+      metadata(path: ".name")
+    }
+    userProviders {
+      id
+      providerId
+      providerUserId
+      updatedAt
+    }
+  }
+}

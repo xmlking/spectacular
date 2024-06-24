@@ -1,39 +1,79 @@
 <script lang="ts">
-import { Debug } from '@spectacular/skeleton/components';
+import { page } from '$app/stores';
+import { Meta } from '$lib/components';
 import { nhost, user } from '$lib/stores/user';
 import type { AuthErrorPayload } from '@nhost/nhost-js';
+import { Avatar } from '@skeletonlabs/skeleton';
+import { Debug } from '@spectacular/skeleton/components';
+import SecurityKeysCard from './security-keys.svelte';
+import type { PageData } from './$houdini';
 
 // https://github.com/nhost/nhost/blob/main/examples/react-apollo/src/profile/security-keys.tsx
-export let data
+export let data: PageData;
 
-  let nickname: string
-  let error : AuthErrorPayload | null
+$: ({ GetUser } = data);
+  $: securityKeys = $GetUser.data?.user?.securityKeys ?? [];
 
-  async function  addSecurityKey() {
-    console.log({nickname})
-    const { key, error: addKeyError } = await nhost.auth.addSecurityKey(nickname)
-    // Something unexpected happened
-    if (error) {
-      console.log(error)
-      error = addKeyError
-      return
-    }
-    // Successfully added a new security key
-    console.log(key?.id)
+// Variables
+let nickname: string;
+let error: AuthErrorPayload | null;
+
+// Functions
+async function addSecurityKey() {
+  console.log({ nickname });
+  const { key, error: addKeyError } = await nhost.auth.addSecurityKey(nickname);
+  // Something unexpected happened
+  if (error) {
+    console.log(error);
+    error = addKeyError;
+    return;
   }
+  // Successfully added a new security key
+  console.log(key?.id);
+}
+
+// Reactivity
+$: meta = {
+  title: 'Datablocks | Profile',
+  canonical: $page.url.toString(),
+};
 </script>
+
+<Meta {...meta} />
 
 <svelte:head>
   <title>Datablocks | Profile</title>
   <meta name="description" content="Account Profile" />
 </svelte:head>
 
+
+
 <div class="page-container">
+
+  <section class="rounded-lg bg-slate-50">aaa</section>
+
+  {#if $GetUser.fetching}
+    <span>loading...</span>
+  {:else}
+    <section>
+      <span>done....</span>
+      <div class="relative inline-block">
+        <span class="badge-icon variant-filled-warning absolute -top-0 -right-0 z-10">2</span>
+        <Avatar />
+      </div>
+        <!-- {$GetUser.data....} -->
+    </section>
+
+    <section class="rounded-lg bg-slate-50">
+      <SecurityKeysCard {securityKeys} />
+    </section>
+  {/if}
+
   <div class="page-section">
     <h2 class="h2">Profile</h2>
     <Debug data={$user} />
   </div>
-  <div class="page-section">
+  <section class="page-section">
     <h3 class="h3">WebAuthn</h3>
       <div class="card p-4">
       <title>Security keys</title>
@@ -64,6 +104,6 @@ export let data
           <button type="submit" class="btn variant-filled">Add a new device</button>
       </form>
     </div>
-  </div>
+  </section>
 </div>
 
