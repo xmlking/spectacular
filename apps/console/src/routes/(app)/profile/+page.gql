@@ -1,5 +1,5 @@
-query GetUser($userId: uuid!) @cache(policy: CacheAndNetwork) {
-  # get all gragments needed for profile page.
+query GetUser($userId: uuid!) @cache(policy: NetworkOnly) {
+  # get all fragments needed for profile page.
   user(id: $userId) {
     id
     displayName
@@ -15,14 +15,9 @@ query GetUser($userId: uuid!) @cache(policy: CacheAndNetwork) {
       role
       isDefaultRole
     }
-    sks: securityKeys {
-      id
+    securityKeys(order_by: { nickname: asc }) {
       nickname
-    }
-    securityKeys(order_by: { nickname: asc })  @list(name: "SecurityKeys") {
-      ...SecurityKeyFields
-      # nickname
-      # id
+      id
     }
     personalAccessTokens: refreshTokens {
       id
