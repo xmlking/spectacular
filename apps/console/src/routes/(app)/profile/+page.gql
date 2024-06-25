@@ -15,14 +15,9 @@ query GetUser($userId: uuid!) @cache(policy: CacheAndNetwork) {
       role
       isDefaultRole
     }
-    sks: securityKeys {
+    securityKeys {
       id
       nickname
-    }
-    securityKeys(order_by: { nickname: asc })  @list(name: "SecurityKeys") {
-      ...SecurityKeyFields
-      # nickname
-      # id
     }
     personalAccessTokens: refreshTokens {
       id
