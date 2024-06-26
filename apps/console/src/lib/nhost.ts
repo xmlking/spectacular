@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
+import { SearchSecurityKeysStore } from '$houdini';
 import { nhost, user } from '$lib/stores/user';
 import { Logger } from '@spectacular/utils';
-import { SearchSecurityKeysStore } from '$houdini';
 
 /**
  * NOTE: These methods are still not in use.
@@ -55,10 +55,9 @@ export async function isAuthenticated(): Promise<boolean> {
 const skQuery = new SearchSecurityKeysStore().artifact.raw;
 export async function hasSecurityKey(userId: string) {
   const { data, error } = await nhost.graphql.request(skQuery, { userId });
-  if(error) {
-    log.error({error})
-    return false
+  if (error) {
+    log.error({ error });
+    return false;
   }
-  return data?.authUserSecurityKeys.length > 0
+  return data?.authUserSecurityKeys.length > 0;
 }
-

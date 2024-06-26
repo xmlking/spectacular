@@ -1,9 +1,11 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { pwSchema, pwlSchema } from '$lib/schema/user';
 import { isLoadingForm } from '$lib/stores/loading';
+import { nhost } from '$lib/stores/user';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Icon } from '@spectacular/skeleton/components/icons';
@@ -86,6 +88,19 @@ const {
   },
 });
 
+async function waSignin() {
+  console.log($pwlForm.email);
+  if (!$pwErrors.email) {
+    const { session, error: signInError } = await nhost.auth.signIn({ email: $pwlForm.email, securityKey: true });
+    if (session) {
+      // TODO
+      // Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' })
+      goto('/dashboard');
+    } else {
+      console.log(signInError);
+    }
+  }
+}
 // Reactivity
 pwDelayed.subscribe((v) => ($isLoadingForm = v));
 pwlDelayed.subscribe((v) => ($isLoadingForm = v));
@@ -234,7 +249,7 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redir
 </div>
 
 <!-- Signin with email : Magic Link Passwordless Authentication -->
-<form method="POST" action="/signin?/passwordless" use:pwlEnhance>
+<form method="POST" use:pwlEnhance>
   <input type="hidden" name="__superform_id" bind:value={$pwlFormId} />
   <div class="mt-6">
     <label class="label">
@@ -256,7 +271,7 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redir
     </label>
   </div>
   <div class="mt-6 flex justify-between">
-    <button type="submit" class="variant-filled-primary btn">
+    <button type="submit" formaction="/signin?/passwordless" class="variant-filled-primary btn">
       {#if $pwlTimeout}
         <MoreHorizontal class="animate-ping" />
       {:else if $pwlDelayed}
@@ -265,14 +280,8 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redir
         {m.auth_labels_signin_with_email()} <Mail class="pl-2" />
       {/if}
     </button>
-    <button type="submit" class="variant-filled-primary btn">
-      {#if $pwlTimeout}
-        <MoreHorizontal class="animate-ping" />
-      {:else if $pwlDelayed}
-        <Loader class="animate-spin" />
-      {:else}
+    <button type="button" formaction="/signin?/webauthn" on:click|preventDefault={waSignin} class="variant-filled-primary btn">
         {m.auth_labels_signin_with_webauthn()} <Fingerprint class="pl-2"/>
-      {/if}
     </button>
   </div>
 </form>

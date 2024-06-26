@@ -25,9 +25,8 @@ let error: AuthErrorPayload | null;
 
 // Functions
 async function addSecurityKey() {
-  console.log({ nickname });
-  error = await elevate()
-   if (error) {
+  error = await elevate();
+  if (error) {
     console.log(error);
     return;
   }
@@ -43,10 +42,10 @@ async function addSecurityKey() {
 }
 
 async function handleElevate() {
-  error = await elevate()
+  error = await elevate();
   if (!error) {
-        // TODO notify
-      console.log('elevated successfully');
+    // TODO notify
+    console.log('elevated successfully');
   }
 }
 
