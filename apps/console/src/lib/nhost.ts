@@ -1,6 +1,8 @@
 import { goto } from '$app/navigation';
 import { nhost, user } from '$lib/stores/user';
 import { Logger } from '@spectacular/utils';
+import { SearchSecurityKeysStore } from '$houdini';
+
 /**
  * NOTE: These methods are still not in use.
  * TODO: Evaulate switching to auth managment to client,
@@ -21,7 +23,7 @@ export async function signUp(email: string, password: string, displayName: strin
     throw error;
   }
   if (session) {
-    user.set(nhost.auth.getUser());
+    // user.set(nhost.auth.getUser());
     goto('/dashboard');
   }
 }
@@ -33,7 +35,7 @@ export async function signIn(email: string, password: string): Promise<void> {
     throw error;
   }
   if (session) {
-    user.set(nhost.auth.getUser());
+    // user.set(nhost.auth.getUser());
     goto('/dashboard');
   }
 }
@@ -49,3 +51,14 @@ export async function signOut() {
 export async function isAuthenticated(): Promise<boolean> {
   return await nhost.auth.isAuthenticatedAsync();
 }
+
+const skQuery = new SearchSecurityKeysStore().artifact.raw;
+export async function hasSecurityKey(userId: string) {
+  const { data, error } = await nhost.graphql.request(skQuery, { userId });
+  if(error) {
+    log.error({error})
+    return false
+  }
+  return data?.authUserSecurityKeys.length > 0
+}
+

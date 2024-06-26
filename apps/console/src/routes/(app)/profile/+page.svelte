@@ -1,7 +1,7 @@
 <script lang="ts">
 import { page } from '$app/stores';
 import { Meta } from '$lib/components';
-import { nhost, user } from '$lib/stores/user';
+import { elevate, nhost, user } from '$lib/stores/user';
 import type { AuthErrorPayload } from '@nhost/nhost-js';
 import { Debug } from '@spectacular/skeleton/components';
 import type { PageData } from './$houdini';
@@ -26,6 +26,11 @@ let error: AuthErrorPayload | null;
 // Functions
 async function addSecurityKey() {
   console.log({ nickname });
+  error = await elevate()
+   if (error) {
+    console.log(error);
+    return;
+  }
   const { key, error: addKeyError } = await nhost.auth.addSecurityKey(nickname);
   // Something unexpected happened
   if (error) {
@@ -38,16 +43,10 @@ async function addSecurityKey() {
 }
 
 async function handleElevate() {
-  const email = $user?.email;
-  if (email) {
-    const { elevated, isError } = await nhost.auth.elevateEmailSecurityKey(email);
-    if (elevated) {
-      // notify
-      console.log({ elevated });
-    }
-    if (isError) {
-      console.log({ isError });
-    }
+  error = await elevate()
+  if (!error) {
+        // TODO notify
+      console.log('elevated successfully');
   }
 }
 
