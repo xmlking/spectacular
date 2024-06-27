@@ -15,6 +15,8 @@ import { AlertTriangle, Fingerprint, Github, Loader, Mail, MoreHorizontal } from
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
+import Cookies from 'js-cookie'
+  import { NHOST_SESSION_KEY } from '$lib/constants.js';
 
 export let data;
 const log = new Logger('auth:signin:browser');
@@ -93,9 +95,11 @@ async function waSignin() {
   if (!$pwErrors.email) {
     const { session, error: signInError } = await nhost.auth.signIn({ email: $pwlForm.email, securityKey: true });
     if (session) {
-      // TODO
-      // Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' })
-      goto('/dashboard');
+      Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
+      path: '/',
+      sameSite: 'strict'
+    })
+    goto('/dashboard');
     } else {
       console.log(signInError);
     }

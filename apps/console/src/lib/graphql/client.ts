@@ -4,6 +4,8 @@ import { env } from '$env/dynamic/public';
 import { HoudiniClient } from '$houdini';
 import type { ClientPlugin } from '$houdini';
 import { subscription } from '$houdini/plugins';
+import { accessToken as $accessToken } from '$lib/stores/user'
+import { get } from 'svelte/store';
 import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacular/utils';
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
@@ -45,15 +47,15 @@ export default new HoudiniClient({
     if (session) {
       log.debug('session...', { session });
     }
-    const accessToken = session?.accessToken;
+    let accessToken = session?.accessToken;
     const backendToken = metadata?.backendToken;
     const useRole = metadata?.useRole;
     const adminSecret = metadata?.adminSecret;
 
-    // client side AT !!!
-    // if (browser) {
-    //   const accessToken = get(accessTojen); // from svelte store
-    // }
+    // use client-side AT !!!
+    if (browser) {
+      accessToken = get($accessToken) ?? undefined;
+    }
 
     return {
       headers: {
