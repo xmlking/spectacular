@@ -18,7 +18,7 @@ export const nhost = new NhostClient({
   graphqlUrl: env.PUBLIC_NHOST_GRAPHQL_URL,
   storageUrl: env.PUBLIC_NHOST_STORAGE_URL,
   functionsUrl: env.PUBLIC_NHOST_FUNCTIONS_URL,
-  start: browser
+  start: browser,
 });
 
 /**

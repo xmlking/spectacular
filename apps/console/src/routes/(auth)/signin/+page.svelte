@@ -97,8 +97,8 @@ async function waSignin() {
       goto('/dashboard');
       handleMessage({ type: 'success', message: 'Signin sucessfull 😎' } as const, toastStore);
     } else {
-       log.error(signInError);
-       handleMessage({ type: 'error', message: `Signin failed: ${signInError?.message}` } as const, toastStore);
+      log.error(signInError);
+      handleMessage({ type: 'error', message: `Signin failed: ${signInError?.message}` } as const, toastStore);
     }
   }
 }
