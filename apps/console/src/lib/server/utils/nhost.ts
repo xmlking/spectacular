@@ -42,13 +42,14 @@ export async function getServerNhost(initialSession: NhostSession | undefined, c
  * @param {NhostSession} session - The session to set in the cookie
  */
 export function setNhostSessionInCookies(cookies: Cookies, session: NhostSession) {
-  const expires = new Date();
   // Expire the cookie 60 seconds before the token expires
-  expires.setSeconds(expires.getSeconds() + session.accessTokenExpiresIn - 60);
+  // const expires = new Date();
+  // expires.setSeconds(expires.getSeconds() + session.accessTokenExpiresIn - 60);
   cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
     path: '/',
     sameSite: 'strict',
-    httpOnly: true,
-    expires,
+    // make it as session cookie and let the browser refresh and update cookie
+    httpOnly: false,
+    // expires,
   });
 }

@@ -11,7 +11,6 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Icon } from '@spectacular/skeleton/components/icons';
 import { Logger } from '@spectacular/utils';
-import Cookies from 'js-cookie';
 // import { SiGithub } from "@icons-pack/svelte-simple-icons";
 import { AlertTriangle, Fingerprint, Github, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
@@ -95,13 +94,11 @@ async function waSignin() {
   if (!$pwErrors.email) {
     const { session, error: signInError } = await nhost.auth.signIn({ email: $pwlForm.email, securityKey: true });
     if (session) {
-      Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
-        path: '/',
-        sameSite: 'strict',
-      });
       goto('/dashboard');
+      handleMessage({ type: 'success', message: 'Signin sucessfull 😎' } as const, toastStore);
     } else {
-      console.log(signInError);
+       log.error(signInError);
+       handleMessage({ type: 'error', message: `Signin failed: ${signInError?.message}` } as const, toastStore);
     }
   }
 }
