@@ -95,7 +95,7 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=allow
       # HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=allow
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
       HASURA_GRAPHQL_LOG_LEVEL: warn
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup
@@ -250,7 +250,7 @@ services:
       AUTH_WEBAUTHN_ENABLED: 'true'
       AUTH_WEBAUTHN_RP_NAME: ${APP_DESCRIPTION}
       AUTH_WEBAUTHN_RP_ORIGINS: ${AUTH_CLIENT_URL:-https://console${BASE_HOSTNAME}:5173,https://console.traefik.me}
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       POSTGRES_MIGRATIONS_CONNECTION: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       HASURA_GRAPHQL_GRAPHQL_URL: http://graphql:8080/v1/graphql
@@ -341,7 +341,7 @@ services:
       DEBUG: 'true'
       # CLAMAV_SERVER: tcp://run-clamav:3310
       HASURA_ENDPOINT: http://graphql:8080/v1
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_METADATA: '1'
       POSTGRES_MIGRATIONS: '1'
       POSTGRES_MIGRATIONS_SOURCE: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=disable
@@ -387,7 +387,7 @@ services:
     profiles: [all]
     environment:
       NEXT_PUBLIC_ENV: dev
-      NEXT_PUBLIC_NHOST_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-hasura-admin-secret}
+      NEXT_PUBLIC_NHOST_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       NEXT_PUBLIC_NHOST_AUTH_URL: https://auth${BASE_HOSTNAME}/v1
       NEXT_PUBLIC_NHOST_CONFIGSERVER_URL: https://dashboard${BASE_HOSTNAME}/v1/configserver/graphql
       NEXT_PUBLIC_NHOST_FUNCTIONS_URL: https://functions${BASE_HOSTNAME}/v1

@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/server-alias: 'hasura.local.ii.coop, hasura.local.ii.nz, hasura.local.sharing.io'
 spec:
   rules:
-    - host: local.hasura.nhost.run
+    - host: hasura.traefik.me
       http:
         paths:
           - path: /
