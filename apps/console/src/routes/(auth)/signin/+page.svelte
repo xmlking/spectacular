@@ -3,6 +3,7 @@ import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+import { NHOST_SESSION_KEY } from '$lib/constants.js';
 import { pwSchema, pwlSchema } from '$lib/schema/user';
 import { isLoadingForm } from '$lib/stores/loading';
 import { nhost } from '$lib/stores/user';
@@ -10,13 +11,12 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Icon } from '@spectacular/skeleton/components/icons';
 import { Logger } from '@spectacular/utils';
+import Cookies from 'js-cookie';
 // import { SiGithub } from "@icons-pack/svelte-simple-icons";
 import { AlertTriangle, Fingerprint, Github, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
-import Cookies from 'js-cookie'
-  import { NHOST_SESSION_KEY } from '$lib/constants.js';
 
 export let data;
 const log = new Logger('auth:signin:browser');
@@ -96,10 +96,10 @@ async function waSignin() {
     const { session, error: signInError } = await nhost.auth.signIn({ email: $pwlForm.email, securityKey: true });
     if (session) {
       Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
-      path: '/',
-      sameSite: 'strict'
-    })
-    goto('/dashboard');
+        path: '/',
+        sameSite: 'strict',
+      });
+      goto('/dashboard');
     } else {
       console.log(signInError);
     }

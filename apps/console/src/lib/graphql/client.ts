@@ -4,11 +4,11 @@ import { env } from '$env/dynamic/public';
 import { HoudiniClient } from '$houdini';
 import type { ClientPlugin } from '$houdini';
 import { subscription } from '$houdini/plugins';
-import { accessToken as $accessToken } from '$lib/stores/user'
-import { get } from 'svelte/store';
+import { accessToken as $accessToken } from '$lib/stores/user';
 import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacular/utils';
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
+import { get } from 'svelte/store';
 
 const url = env.PUBLIC_GRAPHQL_ENDPOINT;
 
