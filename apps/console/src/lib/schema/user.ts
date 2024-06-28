@@ -81,11 +81,15 @@ export const changeEmailSchema = userSchema.pick({ email: true });
 
 export const webAuthnSchema = z.object({
   nickname: z
-    .string({ required_error: 'Nickname is required' })
-    .min(2, { message: 'Nickname must contain at least 2 character(s)' })
+    .string({ required_error: 'A security key nickname is required' })
+    .min(2, { message: 'The security key nickname must contain at least 2 character(s)' })
     .max(256)
     .trim(),
 });
+
+export type webAuthnSchema = typeof webAuthnSchema;
+export type WebAuthn = z.infer<typeof webAuthnSchema>;
+export const addWebAuthnKeys = webAuthnSchema.keyof().Enum;
 
 /**
  * Refine functions

@@ -24,9 +24,6 @@ export async function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
   if (!get(isAuthenticated)) redirect(302, i18n.resolveRoute('/signin?redirectTo=/profile'));
   const cpForm = await superValidate(zod(changePasswordSchema));
   const ceForm = await superValidate(zod(changeEmailSchema));
-  const waForm = await superValidate(zod(webAuthnSchema));
-  return { cpForm, ceForm, waForm };
+  const addSecurityKeyForm = await superValidate(zod(webAuthnSchema));
+  return { cpForm, ceForm, addSecurityKeyForm };
 }
-
-// export async function _houdini_afterLoad({ event, input, data }: AfterLoadEvent) {
-// }
