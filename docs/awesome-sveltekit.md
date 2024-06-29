@@ -149,6 +149,7 @@ Awesome **SvelteKit** Links
 - [**ciso-assistant-community**](https://github.com/intuitem/ciso-assistant-community)  - Use: `paraglide-js`, `skeleton`, `storybook`, `vincjo/datatables`, `sveltekit-flash-message`, `sveltekit-rate-limiter` and `superforms`
 - [ReShared](https://reshared.org/) is community things sharing webapp. OSS, implemented with **nhost**.
   - [repo](https://github.com/altschuler/reshared/)
+- [game-chronicle](https://github.com/ItsCentric/game-chronicle) - Use Superforms, shadcn-svelte, formsnap, tauri  for native app
 
 ## Deployment
 

@@ -7,6 +7,7 @@
     "defaultBranch": "main"
   },
   "formatter": {
+    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*"],
     "enabled": true,
     "formatWithErrors": true,
     "indentStyle": "space",
@@ -16,9 +17,11 @@
     "attributePosition": "auto"
   },
   "organizeImports": {
+    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*"],
     "enabled": true
   },
   "linter": {
+    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*"],
     "enabled": true,
     "rules": {
       "recommended": true,
@@ -46,7 +49,7 @@
     }
   },
   "javascript": {
-    "globals": ["Astro", "App", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"],
+    "globals": ["Bun", "Astro", "App", "$", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"],
     "formatter": {
       "quoteStyle": "single"
       // "semicolons": "asNeeded"
@@ -63,7 +66,10 @@
       "coverage/",
       "$houdini/",
       ".turbo/",
-      ".svelte-kit/"
+      "**/node_modules/*",
+      "**/dist/*",
+      "**/.svelte-kit/*",
+      "**/build/*"
     ]
   },
   "overrides": [
