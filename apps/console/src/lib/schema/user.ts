@@ -65,7 +65,7 @@ export const pwlSchema = userSchema
     redirectTo: z.string().default('/dashboard'),
   });
 
-  /**
+/**
  * Sign Up
  */
 export const signUpSchema = userSchema

@@ -1,18 +1,18 @@
 <script lang="ts">
-  import type { GetUser$result } from "$houdini";
-  import { flip } from "svelte/animate";
-  import { quintOut } from "svelte/easing";
-  import { fade } from "svelte/transition";
-  import SecurityKeyItem from "./security-key.svelte";
+import type { GetUser$result } from '$houdini';
+import { flip } from 'svelte/animate';
+import { quintOut } from 'svelte/easing';
+import { fade } from 'svelte/transition';
+import SecurityKeyItem from './security-key.svelte';
 
-  export const defaultDE = {
-    duration: 450,
-    easing: quintOut,
-  };
+export const defaultDE = {
+  duration: 450,
+  easing: quintOut,
+};
 
-  export let securityKeys: NonNullable<GetUser$result["user"]>["securityKeys"];
-  export let message: App.Superforms.Message | undefined;
-  export let errors: string[];
+export let securityKeys: NonNullable<GetUser$result['user']>['securityKeys'];
+export let message: App.Superforms.Message | undefined;
+export let errors: string[];
 </script>
 
 <div class="w-full text-token card p-4 space-y-4">

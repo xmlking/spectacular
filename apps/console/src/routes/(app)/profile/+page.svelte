@@ -1,43 +1,43 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-  import { Meta } from "$lib/components";
-  import { elevate, nhost, user } from "$lib/stores/user";
-  import type { AuthErrorPayload } from "@nhost/nhost-js";
-  import { Debug } from "@spectacular/skeleton/components";
-  import type { PageData } from "./$houdini";
+import { page } from '$app/stores';
+import { Meta } from '$lib/components';
+import { elevate, nhost, user } from '$lib/stores/user';
+import type { AuthErrorPayload } from '@nhost/nhost-js';
+import { Debug } from '@spectacular/skeleton/components';
+import type { PageData } from './$houdini';
 
-  import { Alerts } from "@spectacular/skeleton/components/form";
-  import ChangeEmailForm from "./components/change-email.svelte";
-  import ChangePasswordForm from "./components/change-password.svelte";
-  import ConnectSocials from "./components/connect-socials.svelte";
-  import ElevateComp from "./components/elevate.svelte";
-  import MultiFactorAuth from "./components/multi-factor-auth.svelte";
-  import PersonalAccessTokens from "./components/personal-access-tokens.svelte";
-  import SecurityKeyForm from "./components/security-key-form.svelte";
-  import SecurityKeys from "./components/security-keys.svelte";
-  import UserOrgRoles from "./components/user-org-roles.svelte";
+import { Alerts } from '@spectacular/skeleton/components/form';
+import ChangeEmailForm from './components/change-email.svelte';
+import ChangePasswordForm from './components/change-password.svelte';
+import ConnectSocials from './components/connect-socials.svelte';
+import ElevateComp from './components/elevate.svelte';
+import MultiFactorAuth from './components/multi-factor-auth.svelte';
+import PersonalAccessTokens from './components/personal-access-tokens.svelte';
+import SecurityKeyForm from './components/security-key-form.svelte';
+import SecurityKeys from './components/security-keys.svelte';
+import UserOrgRoles from './components/user-org-roles.svelte';
 
-  // https://github.com/nhost/nhost/blob/main/examples/react-apollo/src/profile/security-keys.tsx
-  export let data: PageData;
+// https://github.com/nhost/nhost/blob/main/examples/react-apollo/src/profile/security-keys.tsx
+export let data: PageData;
 
-  // Variables
-  let message: App.Superforms.Message | undefined;
-  let errors: string[] = [];
+// Variables
+let message: App.Superforms.Message | undefined;
+let errors: string[] = [];
 
-  // Functions
+// Functions
 
-  // Reactivity
-  $: ({ GetUser } = data);
-  $: userOrgRoles = $GetUser.data?.user?.userOrgRoles ?? [];
-  $: userProviders = $GetUser.data?.user?.userProviders ?? [];
-  $: personalAccessTokens = $GetUser.data?.user?.personalAccessTokens ?? [];
-  $: securityKeys = $GetUser.data?.user?.securityKeys ?? [];
-  $: email = $GetUser.data?.user?.email;
+// Reactivity
+$: ({ GetUser } = data);
+$: userOrgRoles = $GetUser.data?.user?.userOrgRoles ?? [];
+$: userProviders = $GetUser.data?.user?.userProviders ?? [];
+$: personalAccessTokens = $GetUser.data?.user?.personalAccessTokens ?? [];
+$: securityKeys = $GetUser.data?.user?.securityKeys ?? [];
+$: email = $GetUser.data?.user?.email;
 
-  $: meta = {
-    title: "Datablocks | Profile",
-    canonical: $page.url.toString(),
-  };
+$: meta = {
+  title: 'Datablocks | Profile',
+  canonical: $page.url.toString(),
+};
 </script>
 
 <Meta {...meta} />

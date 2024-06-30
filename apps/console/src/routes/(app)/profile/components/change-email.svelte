@@ -1,41 +1,41 @@
 <script lang="ts">
-  import { isLoadingForm } from "$lib/stores/loading";
-  import * as Form from "formsnap";
-  import SuperDebug, { defaults, superForm } from "sveltekit-superforms";
-  import { type ChangeEmail, changeEmailSchema } from "$lib/schema/user";
-  import { zod, zodClient } from "sveltekit-superforms/adapters";
-  import { Alerts } from "@spectacular/skeleton/components/form";
-  import { DebugShell } from "@spectacular/skeleton";
-  import { Button } from "@spectacular/skeleton/components/button";
+import { type ChangeEmail, changeEmailSchema } from '$lib/schema/user';
+import { isLoadingForm } from '$lib/stores/loading';
+import { DebugShell } from '@spectacular/skeleton';
+import { Button } from '@spectacular/skeleton/components/button';
+import { Alerts } from '@spectacular/skeleton/components/form';
+import * as Form from 'formsnap';
+import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
-  export let initialData: ChangeEmail;
+export let initialData: ChangeEmail;
 
-  const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
-    validators: zodClient(changeEmailSchema),
-    onUpdate({ form }) {
-      if (form.valid) {
-        // TODO: Call an external API with form.data, await the result and update form
-      }
-    },
-  });
+const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
+  validators: zodClient(changeEmailSchema),
+  onUpdate({ form }) {
+    if (form.valid) {
+      // TODO: Call an external API with form.data, await the result and update form
+    }
+  },
+});
 
-  const {
-    form: formData,
-    errors,
-    message,
-    submitting,
-    constraints,
-    delayed,
-    timeout,
-    tainted,
-    posted,
-    allErrors,
-    enhance,
-  } = form;
+const {
+  form: formData,
+  errors,
+  message,
+  submitting,
+  constraints,
+  delayed,
+  timeout,
+  tainted,
+  posted,
+  allErrors,
+  enhance,
+} = form;
 
-  // Reactivity
-  $: valid = $allErrors.length === 0;
-  delayed.subscribe((v) => ($isLoadingForm = v));
+// Reactivity
+$: valid = $allErrors.length === 0;
+delayed.subscribe((v) => ($isLoadingForm = v));
 </script>
 
 <!-- Form Level Errors / Messages -->

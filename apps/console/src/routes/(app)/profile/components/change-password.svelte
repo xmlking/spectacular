@@ -1,39 +1,39 @@
 <script lang="ts">
-  import { isLoadingForm } from "$lib/stores/loading";
-  import * as Form from "formsnap";
-  import SuperDebug, { defaults, superForm } from "sveltekit-superforms";
-  import { changePasswordSchema } from "$lib/schema/user";
-  import { zod, zodClient } from "sveltekit-superforms/adapters";
-  import { Alerts } from "@spectacular/skeleton/components/form";
-  import { DebugShell } from "@spectacular/skeleton";
+import { changePasswordSchema } from '$lib/schema/user';
+import { isLoadingForm } from '$lib/stores/loading';
+import { DebugShell } from '@spectacular/skeleton';
+import { Alerts } from '@spectacular/skeleton/components/form';
+import * as Form from 'formsnap';
+import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
-  const form = superForm(defaults(zod(changePasswordSchema)), {
-    SPA: true,
-    validators: zodClient(changePasswordSchema),
-    onUpdate({ form }) {
-      if (form.valid) {
-        // TODO: Call an external API with form.data, await the result and update form
-      }
-    },
-  });
+const form = superForm(defaults(zod(changePasswordSchema)), {
+  SPA: true,
+  validators: zodClient(changePasswordSchema),
+  onUpdate({ form }) {
+    if (form.valid) {
+      // TODO: Call an external API with form.data, await the result and update form
+    }
+  },
+});
 
-  const {
-    form: formData,
-    errors,
-    message,
-    submitting,
-    constraints,
-    delayed,
-    timeout,
-    tainted,
-    posted,
-    allErrors,
-    enhance,
-  } = form;
+const {
+  form: formData,
+  errors,
+  message,
+  submitting,
+  constraints,
+  delayed,
+  timeout,
+  tainted,
+  posted,
+  allErrors,
+  enhance,
+} = form;
 
-  // Reactivity
-  $: valid = $allErrors.length === 0;
-  delayed.subscribe((v) => ($isLoadingForm = v));
+// Reactivity
+$: valid = $allErrors.length === 0;
+delayed.subscribe((v) => ($isLoadingForm = v));
 </script>
 
 <!-- Form Level Errors / Messages -->

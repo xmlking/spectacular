@@ -49,7 +49,7 @@
     }
   },
   "javascript": {
-    "globals": ["Bun", "Astro", "App", "$", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"],
+    "globals": ["Bun", "Astro", "App", "App.Superforms.Message", "$", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"],
     "formatter": {
       "quoteStyle": "single"
       // "semicolons": "asNeeded"

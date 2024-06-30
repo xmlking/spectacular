@@ -1,87 +1,80 @@
 <script lang="ts">
-  import { handleMessage } from "$lib/components/layout/toast-manager";
-  import { elevate, nhost } from "$lib/stores/user";
-  import { isLoadingForm } from "$lib/stores/loading";
-  import * as Form from "formsnap";
-  import { page } from "$app/stores";
-  import * as m from "$i18n/messages";
-  import { Loader, LoaderCircle, MoreHorizontal } from "lucide-svelte";
-  import { webAuthnSchema } from "$lib/schema/user";
-  import { getToastStore } from "@skeletonlabs/skeleton";
-  import SuperDebug, {
-    superForm,
-    setMessage,
-    setError,
-    defaults,
-  } from "sveltekit-superforms";
-  import type { ErrorStatus } from "sveltekit-superforms";
-  import { zod } from "sveltekit-superforms/adapters";
-  import { DebugShell } from "@spectacular/skeleton";
-  import { Alerts } from "@spectacular/skeleton/components/form";
+import { page } from '$app/stores';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { webAuthnSchema } from '$lib/schema/user';
+import { isLoadingForm } from '$lib/stores/loading';
+import { elevate, nhost } from '$lib/stores/user';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { DebugShell } from '@spectacular/skeleton';
+import { Alerts } from '@spectacular/skeleton/components/form';
+import * as Form from 'formsnap';
+import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
+import SuperDebug, { superForm, setMessage, setError, defaults } from 'sveltekit-superforms';
+import type { ErrorStatus } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
 
-  // Variables
-  const toastStore = getToastStore();
+// Variables
+const toastStore = getToastStore();
 
-  const form = superForm(defaults(zod(webAuthnSchema)), {
-    SPA: true,
-    dataType: "json",
-    taintedMessage: null,
-    clearOnSubmit: "errors-and-message",
-    delayMs: 100,
-    timeoutMs: 4000,
-    resetForm: false,
-    validators: zod(webAuthnSchema),
-    async onUpdate({ form, cancel }) {
-      if (!form.valid) return;
-      // First, check if elevate is required
-      const error = await elevate();
-      if (error) {
-        setError(form, "", error.message, {
-          status: error.status as ErrorStatus,
-        });
-        return;
-      }
-      // Second, add the security key to database
-      const { key, error: addKeyError } = await nhost.auth.addSecurityKey(
-        form.data.nickname,
-      );
-      if (addKeyError) {
-        setError(form, "", addKeyError.message, {
-          status: addKeyError.status as ErrorStatus,
-        });
-        return;
-      }
-      // Finally notify user: successfully added a new security key
-      const message = {
-        message: `Added security key: ${key?.nickname}`,
-        hideDismiss: true,
-        timeout: 10000,
-        type: "success",
-      } as const;
-      setMessage(form, message);
-      handleMessage(message, toastStore);
-    },
-  });
+const form = superForm(defaults(zod(webAuthnSchema)), {
+  SPA: true,
+  dataType: 'json',
+  taintedMessage: null,
+  clearOnSubmit: 'errors-and-message',
+  delayMs: 100,
+  timeoutMs: 4000,
+  resetForm: false,
+  validators: zod(webAuthnSchema),
+  async onUpdate({ form, cancel }) {
+    if (!form.valid) return;
+    // First, check if elevate is required
+    const error = await elevate();
+    if (error) {
+      setError(form, '', error.message, {
+        status: error.status as ErrorStatus,
+      });
+      return;
+    }
+    // Second, add the security key to database
+    const { key, error: addKeyError } = await nhost.auth.addSecurityKey(form.data.nickname);
+    if (addKeyError) {
+      setError(form, '', addKeyError.message, {
+        status: addKeyError.status as ErrorStatus,
+      });
+      return;
+    }
+    // Finally notify user: successfully added a new security key
+    const message = {
+      message: `Added security key: ${key?.nickname}`,
+      hideDismiss: true,
+      timeout: 10000,
+      type: 'success',
+    } as const;
+    setMessage(form, message);
+    handleMessage(message, toastStore);
+  },
+});
 
-  const {
-    form: formData,
-    errors,
-    allErrors,
-    message,
-    constraints,
-    submitting,
-    delayed,
-    tainted,
-    timeout,
-    posted,
-    enhance,
-  } = form;
+const {
+  form: formData,
+  errors,
+  allErrors,
+  message,
+  constraints,
+  submitting,
+  delayed,
+  tainted,
+  timeout,
+  posted,
+  enhance,
+} = form;
 
-  // Functions
+// Functions
 
-  // Reactivity
-  $: valid = $allErrors.length === 0;
-  delayed.subscribe((v) => ($isLoadingForm = v));
+// Reactivity
+$: valid = $allErrors.length === 0;
+delayed.subscribe((v) => ($isLoadingForm = v));
 </script>
 
 <!-- Form Level Errors / Messages -->
