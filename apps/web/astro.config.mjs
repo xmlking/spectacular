@@ -59,6 +59,7 @@ export default defineConfig({
           context: 'server',
           access: 'secret',
           values: ['v1', 'v2'],
+          optional: true,
         }),
         API_PORT: envField.number({
           context: 'server',

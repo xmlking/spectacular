@@ -14,7 +14,7 @@ import { Logger } from '@spectacular/utils';
 // import { SiGithub } from "@icons-pack/svelte-simple-icons";
 import { AlertTriangle, Fingerprint, Github, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
-import SuperDebug, { superForm } from 'sveltekit-superforms';
+import SuperDebug, { setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
 
 export let data;
@@ -74,6 +74,7 @@ const {
   dataType: 'json',
   taintedMessage: null,
   syncFlashMessage: false,
+  clearOnSubmit: 'errors-and-message',
   delayMs: 100,
   timeoutMs: 4000,
   validators: zodClient(pwlSchema),
@@ -90,8 +91,9 @@ const {
 });
 
 async function waSignin() {
-  console.log($pwlForm.email);
-  if (!$pwErrors.email) {
+  if ($pwlErrors.email) {
+    handleMessage({ type: 'error', message: 'Invalid email' } as const, toastStore);
+  } else {
     const { session, error: signInError } = await nhost.auth.signIn({ email: $pwlForm.email, securityKey: true });
     if (session) {
       goto('/dashboard');

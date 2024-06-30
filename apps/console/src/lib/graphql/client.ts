@@ -76,7 +76,12 @@ export default new HoudiniClient({
       // if accessToken(AT) expires (15min), reloading the page will refresh AT and set new AT into cookie
       // e.g. goto with invalidateAll on current path
       if (errors.some(hasErrorMessage('JWTExpired'))) {
+        // if accessToken(AT) expires (15min), reloading the page will refresh AT and set new AT into cookie
+        // e.g. goto with invalidateAll on current path
         await invalidateAll();
+      } else if (errors.some(hasErrorMessage('missing session variable: "x-hasura-auth-elevated"'))) {
+        log.error('FIXME: did you miss adding `elevate()` check before this GQL action?');
+        error(403, `(${ctx.artifact.name}): ${errors.map((err) => err.message).join('. ')}.`);
       } else if (errors.some(hasErrorTypes(['PERMISSION_DENIED', 'UNAUTHENTICATED']))) {
         redirect(303, '/signin'); // TODO: ?redirectTo=/dashboard
       } else if (errors.some(isErrorType('NOT_FOUND'))) {

@@ -1,13 +1,12 @@
-import ErrorMessage from './error-message.svelte';
+
+import Button from "./form-button.svelte";
 import Alerts from './form-alerts.svelte';
-import Root from './form.svelte';
+
 
 export {
-  Root,
   Alerts,
-  ErrorMessage,
+  Button,
   //
-  Root as Form,
   Alerts as FormAlerts,
-  ErrorMessage as FormErrorMessage,
+  Button as FormButton,
 };

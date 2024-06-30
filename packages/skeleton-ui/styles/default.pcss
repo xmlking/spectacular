@@ -62,19 +62,22 @@ https://github.com/pevey/saluna/blob/0258967cdcae3bfdfb61f5fa991fcc4921b7290c/sr
     @apply space-y-4;
   }
 
-  /* apply skeleton FORM styles */
+  /* apply skeleton FORM styles automatically */
+  /*
   form {
-    input[type] {
-      &[data-fs-error='true'] {
-        @apply input-error;
-      }
-    }
-    input[type='email'] {
-      @apply input;
-      &[data-fs-error='true'] {
-        @apply input-error;
-      }
-    }
+    input[type='color'],
+    input[type='text'],
+    input[type='email'],
+    input[type='url'],
+    input[type='password'],
+    input[type='number'],
+    input[type='date'],
+    input[type='datetime-local'],
+    input[type='month'],
+    input[type='search'],
+    input[type='tel'],
+    input[type='time'],
+    input[type='week']
     input[type='file'] {
       @apply input;
     }
@@ -93,11 +96,32 @@ https://github.com/pevey/saluna/blob/0258967cdcae3bfdfb61f5fa991fcc4921b7290c/sr
     select {
       @apply select;
     }
+    input[type],
+    select,
+    textarea {
+      &[data-fs-error] {
+        @apply input-error;
+      }
+      &[data-fs-success] {
+        @apply input-success;
+      }
+      &[data-fs-warning] {
+        @apply input-warning;
+      }
+    }
+    label {
+      &[data-fs-error] {
+        @apply text-error-500;
+      }
+    }
   }
+*/
 }
 
-/* @layer utilities {
+/*
+@layer utilities {
 	.content-auto1 {
 		content-visibility: auto;
 	}
-} */
+}
+*/

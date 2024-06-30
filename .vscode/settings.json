@@ -151,6 +151,8 @@
   "tailwindCSS.includeLanguages": {
     "plaintext": "html"
   },
+  // for tailwind-variants
+  "tailwindCSS.experimental.classRegex": [["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]],
   ////////// TypeScript //////////
   // astro requires this
   "typescript.inlayHints.parameterNames.enabled": "all",

@@ -1,6 +1,9 @@
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 import { z } from 'zod';
 
+/**
+ * General User Schema
+ */
 export const userSchema = z.object({
   firstName: z
     .string({ required_error: 'First Name is required' })
@@ -39,6 +42,9 @@ export const userSchema = z.object({
   organization: z.string().default(PUBLIC_DEFAULT_ORGANIZATION),
 });
 
+/**
+ * Sign in with password
+ */
 export const pwSchema = userSchema
   .pick({
     email: true,
@@ -48,6 +54,9 @@ export const pwSchema = userSchema
     redirectTo: z.string().default('/dashboard'),
   });
 
+/**
+ * Sign in passwordless
+ */
 export const pwlSchema = userSchema
   .pick({
     email: true,
@@ -56,6 +65,9 @@ export const pwlSchema = userSchema
     redirectTo: z.string().default('/dashboard'),
   });
 
+  /**
+ * Sign Up
+ */
 export const signUpSchema = userSchema
   .pick({
     firstName: true,
@@ -70,19 +82,40 @@ export const signUpSchema = userSchema
     redirectTo: z.string().default('/dashboard'),
   })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
+export type SignUpSchema = typeof signUpSchema;
+export type SignUp = z.infer<typeof signUpSchema>;
+export const signUpKeys = signUpSchema.innerType().keyof().Enum;
 
+/**
+ * Change Password Form
+ */
 export const changePasswordSchema = userSchema
   .pick({ password: true, confirmPassword: true })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
+export type ChangePasswordSchema = typeof changePasswordSchema;
+export type ChangePassword = z.infer<typeof changePasswordSchema>;
+export const changePasswordKeys = changePasswordSchema.innerType().keyof().Enum;
 
+/**
+ * used in reset password in auth page
+ */
 export const resetPasswordSchema = userSchema.pick({ email: true });
 
+/**
+ * Change Email Form
+ */
 export const changeEmailSchema = userSchema.pick({ email: true });
+export type ChangeEmailSchema = typeof changeEmailSchema;
+export type ChangeEmail = z.infer<typeof changeEmailSchema>;
+export const changeEmailKeys = changeEmailSchema.keyof().Enum;
 
+/**
+ * Add Security Key for WebAuthN Form
+ */
 export const webAuthnSchema = z.object({
   nickname: z
-    .string({ required_error: 'Nickname is required' })
-    .min(2, { message: 'Nickname must contain at least 2 character(s)' })
+    .string({ required_error: 'Security Key nickname is required' })
+    .min(2, { message: 'Security Key nickname must contain at least 2 character(s)' })
     .max(256)
     .trim(),
 });
