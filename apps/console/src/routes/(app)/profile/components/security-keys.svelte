@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { GetUser$result } from '$houdini';
+import { Alerts } from '@spectacular/skeleton/components/form';
 import { flip } from 'svelte/animate';
 import { quintOut } from 'svelte/easing';
 import { fade } from 'svelte/transition';
@@ -11,10 +12,14 @@ export const defaultDE = {
 };
 
 export let securityKeys: NonNullable<GetUser$result['user']>['securityKeys'];
-export let message: App.Superforms.Message | undefined;
-export let errors: string[];
+
+// Variables
+let message: App.Superforms.Message | undefined;
+let errors: string[] = [];
 </script>
 
+<!-- Form Level Errors / Messages -->
+<Alerts errors={errors} message={message} />
 <div class="w-full text-token card p-4 space-y-4">
   <dl class="list-dl">
     {#each securityKeys as securityKey (securityKey.id)}

@@ -1,10 +1,13 @@
 <script lang="ts">
-import type { GetUser$result } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
 import { elevate } from '$lib/stores/user';
-import type { AuthErrorPayload } from '@nhost/nhost-js';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { Alerts } from '@spectacular/skeleton/components/form';
 
-export let message: App.Superforms.Message | undefined;
-export let errors: string[];
+// Variables
+let message: App.Superforms.Message | undefined;
+let errors: string[] = [];
+const toastStore = getToastStore();
 
 async function handleElevate() {
   const error = await elevate();
@@ -17,10 +20,13 @@ async function handleElevate() {
       timeout: 10000,
       type: 'success',
     };
+    handleMessage(message, toastStore);
   }
 }
 </script>
 
+<!-- Form Level Errors / Messages -->
+<Alerts errors={errors} message={message} />
 <div class="card p-4">
   <!-- <span>Elevated permissions: {String(elevated)}</span> -->
   <button type="button" class="btn variant-filled" on:click={handleElevate} >Elevate</button>

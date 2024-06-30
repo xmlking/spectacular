@@ -1,12 +1,7 @@
 <script lang="ts">
 import { page } from '$app/stores';
 import { Meta } from '$lib/components';
-import { elevate, nhost, user } from '$lib/stores/user';
-import type { AuthErrorPayload } from '@nhost/nhost-js';
-import { Debug } from '@spectacular/skeleton/components';
 import type { PageData } from './$houdini';
-
-import { Alerts } from '@spectacular/skeleton/components/form';
 import ChangeEmailForm from './components/change-email.svelte';
 import ChangePasswordForm from './components/change-password.svelte';
 import ConnectSocials from './components/connect-socials.svelte';
@@ -21,8 +16,6 @@ import UserOrgRoles from './components/user-org-roles.svelte';
 export let data: PageData;
 
 // Variables
-let message: App.Superforms.Message | undefined;
-let errors: string[] = [];
 
 // Functions
 
@@ -52,9 +45,6 @@ $: meta = {
     <p>Update your profile details</p>
   </section>
 
-  <!-- Form Level Errors / Messages -->
-  <Alerts {errors} {message} />
-
   {#if $GetUser.fetching}
     <div class="placeholder animate-pulse" />
   {:else}
@@ -69,19 +59,19 @@ $: meta = {
     <section class="space-y-4">
       <h2 class="h2">User Org Roles</h2>
       <p>Add or delete user org roles</p>
-      <UserOrgRoles bind:message bind:errors {userOrgRoles} />
+      <UserOrgRoles {userOrgRoles} />
     </section>
 
     <section class="space-y-4">
       <h2 class="h2">Auth Providers</h2>
       <p>Add or delete auth providers</p>
-      <ConnectSocials bind:message bind:errors {userProviders} />
+      <ConnectSocials {userProviders} />
     </section>
 
     <section class="space-y-4">
       <h2 class="h2">Personal Access Tokens</h2>
       <p>Add are delete your personal access tokens(PAT)</p>
-      <PersonalAccessTokens bind:message bind:errors {personalAccessTokens}
+      <PersonalAccessTokens {personalAccessTokens}
       ></PersonalAccessTokens>
     </section>
 
@@ -106,20 +96,21 @@ $: meta = {
       <p>
         Add are delete your security keys like TouchID, FaceID, YubiKeys etc
       </p>
-      <SecurityKeys bind:message bind:errors {securityKeys} />
-      <SecurityKeyForm bind:message bind:errors />
+      <SecurityKeyForm />
+      <SecurityKeys {securityKeys} />
+
     </section>
 
     <section class="space-y-4">
       <h2 class="h2">Multi-Factor Authentication (MFA)</h2>
       <p>Add MFA</p>
-      <MultiFactorAuth bind:message bind:errors />
+      <MultiFactorAuth />
     </section>
 
     <section class="space-y-4">
       <h2 class="h2">Elevate</h2>
       <p>Elevate user security level</p>
-      <ElevateComp bind:message bind:errors />
+      <ElevateComp />
     </section>
   {/if}
 </div>

@@ -24,7 +24,7 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
   clearOnSubmit: 'errors-and-message',
   delayMs: 100,
   timeoutMs: 4000,
-  resetForm: false,
+  resetForm: true,
   validators: zod(webAuthnSchema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
