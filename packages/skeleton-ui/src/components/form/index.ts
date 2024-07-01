@@ -1,10 +1,13 @@
 import Alerts from './form-alerts.svelte';
-import Button from './form-button.svelte';
+import ErrorMessage from './form-error.svelte';
+import SubmitButton from './form-submit-button.svelte';
 
 export {
   Alerts,
-  Button,
+  ErrorMessage,
+  SubmitButton,
   //
   Alerts as FormAlerts,
-  Button as FormButton,
+  ErrorMessage as FormError,
+  SubmitButton as FormSubmitButton,
 };

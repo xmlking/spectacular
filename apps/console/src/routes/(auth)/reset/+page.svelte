@@ -3,7 +3,7 @@ import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { resetPasswordSchema } from '$lib/schema/user';
-import { isLoadingForm } from '$lib/stores/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 // import { ConicGradient } from '@skeletonlabs/skeleton';
 // import type { ConicStop } from '@skeletonlabs/skeleton';
@@ -17,6 +17,7 @@ import { zodClient } from 'sveltekit-superforms/adapters';
 export let data;
 const log = new Logger('auth:reset:browser');
 const toastStore = getToastStore();
+const loadingState = getLoadingState();
 
 const { form, delayed, timeout, enhance, errors, constraints, message, tainted, posted, submitting, capture, restore } =
   superForm(data.form, {
@@ -41,7 +42,7 @@ const { form, delayed, timeout, enhance, errors, constraints, message, tainted, 
 export const snapshot = { capture, restore };
 
 // Reactivity
-delayed.subscribe((v) => ($isLoadingForm = v));
+$: loadingState.setFormLoading($delayed);
 
 // const conicStops: ConicStop[] = [
 //   { color: 'transparent', start: 0, end: 25 },

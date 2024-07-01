@@ -13,10 +13,11 @@ import { getFlash } from 'sveltekit-flash-message/client';
 import { Toast, getToastStore } from '@skeletonlabs/skeleton';
 import { page } from '$app/stores';
 import { afterNavigate, beforeNavigate } from '$app/navigation';
-import { isLoadingPage } from '$lib/stores/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { handleMessage } from './toast-manager';
 
 const toastStore = getToastStore();
+const loadingState = getLoadingState()
 
 const flash = getFlash(page, {
   clearOnNavigate: false,
@@ -29,7 +30,7 @@ beforeNavigate(({ from, to }) => {
     $flash = undefined;
   }
   if (to?.route.id) {
-    isLoadingPage.set(true);
+    loadingState.setPageLoading(true);
   }
 });
 
@@ -38,7 +39,7 @@ afterNavigate(({ type, from, to }) => {
   // Flash Messages
   isGotoNavigated = ['goto'].includes(type as string);
   // Loading Animation
-  isLoadingPage.set(false);
+    loadingState.setPageLoading(false);
   // Scroll to top
   const isNewPage = from?.url.pathname !== to?.url.pathname;
   const elemPage = document.querySelector('#page');

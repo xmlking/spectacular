@@ -126,63 +126,76 @@ const handleDelete = async (e: CustomEvent<any>) => {
   <meta name="description" content="policies" />
 </svelte:head>
 
-<form data-sveltekit-noscroll bind:this={searchForm}>
-  <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"> Policies </span>
-  <!--
-		<ButtonGroup class="w-1/3">
-			<Select
-				name="subjectType"
-				class="!w-fit !rounded-r-none"
-				items={subjectTypeOptions}
-				bind:value={$form.subjectType}
-				on:change={clearSubject}
-				placeholder="Select Type"
-				data-invalid={$errors.subjectType}
-				color={$errors.subjectType ? 'red' : 'base'}
-				aria-invalid={Boolean($errors.subjectType)}
-				aria-errormessage={Array($errors.subjectType).join('. ')}
-				aria-required="{$constraints.subjectType?.required},"
-				{...$constraints.subjectType}
-			/>
-			<SelectFetch
-				class="w-auto !rounded-l-none !bg-gray-50 !px-2 dark:!bg-gray-700"
-				itemId="displayName"
-				label="displayName"
-				bind:value={subject}
-				on:change={() => searchForm.requestSubmit()}
-				on:clear={clearSubject}
-				loadOptions={fetchSubjects}
-				--list-z-index="100"
-			>
-				<b slot="prepend" class="p-2">
-					{#if $form.subjectType == 'group'}
-						<UsersGroupOutline />
-					{:else if $form.subjectType == 'service_account'}
-						<UserCircleOutline />
-					{:else if $form.subjectType == 'device'}
-						<MobilePhoneOutline />
-					{:else if $form.subjectType == 'device_pool'}
-						<ComputerSpeakerOutline />
-					{:else}
-						<UserOutline />
-					{/if}
-				</b>
-				<svelte:fragment slot="input-hidden" let:value>
-					<input type="hidden" name="subjectId" value={value ? value.id : null} />
-					<input type="hidden" name="subjectDisplayName" value={value ? value.displayName : null} />
-				</svelte:fragment>
-			</SelectFetch>
-		</ButtonGroup>
- -->
+<div class="page-container">
 
-  <input name="limit" bind:value={$form.limit} type="hidden" />
-  <input name="offset" bind:value={$form.offset} type="hidden" />
-  <Form.ErrorMessage error={$errors?.subjectType?.[0]} />
-  <Form.ErrorMessage error={$errors?.subjectId?.[0]} />
-  <Form.ErrorMessage error={$errors?.limit?.[0]} />
-  <Form.ErrorMessage error={$errors?.offset?.[0]} />
-  <Form.FormAlerts message={$message} errors={$errors._errors} />
-</form>
+  <section class="space-y-4">
+    <h1 class="h1">Policies</h1>
+    <p>Create, update, search, delete policies</p>
+  </section>
+
+<section class="space-y-4">
+  <form data-sveltekit-noscroll bind:this={searchForm}>
+    <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"> Policies </span>
+    <!--
+      <ButtonGroup class="w-1/3">
+        <Select
+          name="subjectType"
+          class="!w-fit !rounded-r-none"
+          items={subjectTypeOptions}
+          bind:value={$form.subjectType}
+          on:change={clearSubject}
+          placeholder="Select Type"
+          data-invalid={$errors.subjectType}
+          color={$errors.subjectType ? 'red' : 'base'}
+          aria-invalid={Boolean($errors.subjectType)}
+          aria-errormessage={Array($errors.subjectType).join('. ')}
+          aria-required="{$constraints.subjectType?.required},"
+          {...$constraints.subjectType}
+        />
+        <SelectFetch
+          class="w-auto !rounded-l-none !bg-gray-50 !px-2 dark:!bg-gray-700"
+          itemId="displayName"
+          label="displayName"
+          bind:value={subject}
+          on:change={() => searchForm.requestSubmit()}
+          on:clear={clearSubject}
+          loadOptions={fetchSubjects}
+          --list-z-index="100"
+        >
+          <b slot="prepend" class="p-2">
+            {#if $form.subjectType == 'group'}
+              <UsersGroupOutline />
+            {:else if $form.subjectType == 'service_account'}
+              <UserCircleOutline />
+            {:else if $form.subjectType == 'device'}
+              <MobilePhoneOutline />
+            {:else if $form.subjectType == 'device_pool'}
+              <ComputerSpeakerOutline />
+            {:else}
+              <UserOutline />
+            {/if}
+          </b>
+          <svelte:fragment slot="input-hidden" let:value>
+            <input type="hidden" name="subjectId" value={value ? value.id : null} />
+            <input type="hidden" name="subjectDisplayName" value={value ? value.displayName : null} />
+          </svelte:fragment>
+        </SelectFetch>
+      </ButtonGroup>
+  -->
+
+    <input name="limit" bind:value={$form.limit} type="hidden" />
+    <input name="offset" bind:value={$form.offset} type="hidden" />
+    <Form.FormError error={$errors?.subjectType?.[0]} />
+    <Form.FormError error={$errors?.subjectId?.[0]} />
+    <Form.FormError error={$errors?.limit?.[0]} />
+    <Form.FormError error={$errors?.offset?.[0]} />
+    <Form.FormAlerts message={$message} errors={$errors._errors} />
+  </form>
+</section>
+
+<section class="card">
+  <SuperDebug label="policiy data" data={data.items} collapsible />
+</section>
 
 <DebugShell>
   <SuperDebug
@@ -201,6 +214,7 @@ const handleDelete = async (e: CustomEvent<any>) => {
   <!-- <br />
 	<SuperDebug label="$page data" status={false} data={$page} /> -->
 </DebugShell>
+</div>
 
 <style lang="postcss">
 :global(td.matches) {

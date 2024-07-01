@@ -5,7 +5,7 @@ import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { NHOST_SESSION_KEY } from '$lib/constants.js';
 import { pwSchema, pwlSchema } from '$lib/schema/user';
-import { isLoadingForm } from '$lib/stores/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { nhost } from '$lib/stores/user';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -20,6 +20,7 @@ import { zodClient } from 'sveltekit-superforms/adapters';
 export let data;
 const log = new Logger('auth:signin:browser');
 const toastStore = getToastStore();
+const loadingState = getLoadingState();
 
 const {
   form: pwForm,
@@ -105,8 +106,8 @@ async function waSignin() {
   }
 }
 // Reactivity
-pwDelayed.subscribe((v) => ($isLoadingForm = v));
-pwlDelayed.subscribe((v) => ($isLoadingForm = v));
+$: loadingState.setFormLoading($pwDelayed);
+$: loadingState.setFormLoading($pwlDelayed);
 
 $pwForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwForm.redirectTo;
 $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redirectTo;

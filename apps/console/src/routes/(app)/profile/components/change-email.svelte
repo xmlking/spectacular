@@ -1,19 +1,31 @@
 <script lang="ts">
 import { type ChangeEmail, changeEmailSchema } from '$lib/schema/user';
-import { isLoadingForm } from '$lib/stores/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { DebugShell } from '@spectacular/skeleton';
 import { Button } from '@spectacular/skeleton/components/button';
 import { Alerts } from '@spectacular/skeleton/components/form';
+import { sleep } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 export let initialData: ChangeEmail;
 
+const loadingState = getLoadingState();
+
 const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
+  SPA: true,
+  dataType: 'json',
+  taintedMessage: null,
+  clearOnSubmit: 'errors-and-message',
+  delayMs: 100,
+  timeoutMs: 4000,
+  resetForm: true,
+  invalidateAll: false,  // this is key for avoid calling the load function on server side
   validators: zodClient(changeEmailSchema),
-  onUpdate({ form }) {
+  async onUpdate({ form, cancel }) {
     if (form.valid) {
+      await sleep(8000);
       // TODO: Call an external API with form.data, await the result and update form
     }
   },
@@ -35,7 +47,9 @@ const {
 
 // Reactivity
 $: valid = $allErrors.length === 0;
-delayed.subscribe((v) => ($isLoadingForm = v));
+// loadingState.listen(delayed)
+// delayed.subscribe((v) => loadingState.setFormLoading(v));
+$: loadingState.setFormLoading($delayed);
 </script>
 
 <!-- Form Level Errors / Messages -->

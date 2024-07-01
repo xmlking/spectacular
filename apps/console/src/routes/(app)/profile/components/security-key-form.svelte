@@ -3,7 +3,7 @@ import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { webAuthnSchema } from '$lib/schema/user';
-import { isLoadingForm } from '$lib/stores/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { elevate, nhost } from '$lib/stores/user';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
@@ -16,6 +16,7 @@ import { zod } from 'sveltekit-superforms/adapters';
 
 // Variables
 const toastStore = getToastStore();
+const loadingState = getLoadingState();
 
 const form = superForm(defaults(zod(webAuthnSchema)), {
   SPA: true,
@@ -74,7 +75,7 @@ const {
 
 // Reactivity
 $: valid = $allErrors.length === 0;
-delayed.subscribe((v) => ($isLoadingForm = v));
+$: loadingState.setFormLoading($delayed);
 </script>
 
 <!-- Form Level Errors / Messages -->

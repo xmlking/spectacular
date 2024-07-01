@@ -4,7 +4,7 @@ import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { signUpSchema } from '$lib/schema/user';
-import { isLoadingForm } from '$lib/stores/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Logger } from '@spectacular/utils';
@@ -18,10 +18,9 @@ const log = new Logger('auth:signup:browser');
 
 export let data: PageData;
 
-$: ({ ListOrganizations } = data);
-$: organizations = $ListOrganizations.data?.organizations.map((x) => x.organization) ?? [PUBLIC_DEFAULT_ORGANIZATION];
-
+// Variables
 const toastStore = getToastStore();
+const loadingState = getLoadingState();
 
 const { form, delayed, timeout, enhance, errors, constraints, message, tainted, posted, submitting, capture, restore } =
   superForm(data.form, {
@@ -47,8 +46,11 @@ const { form, delayed, timeout, enhance, errors, constraints, message, tainted, 
 export const snapshot = { capture, restore };
 
 // Reactivity
+$: ({ ListOrganizations } = data);
+$: organizations = $ListOrganizations.data?.organizations.map((x) => x.organization) ?? [PUBLIC_DEFAULT_ORGANIZATION];
+
 // Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
-delayed.subscribe((v) => ($isLoadingForm = v));
+$: loadingState.setFormLoading($delayed);
 
 $form.redirectTo = $page.url.searchParams.get('redirectTo') ?? $form.redirectTo;
 </script>

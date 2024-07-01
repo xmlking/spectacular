@@ -11,6 +11,7 @@ import Sidebar from '$lib/components/layout/sidebar.svelte';
 import { i18n } from '$lib/i18n';
 import Search from '$lib/modals/search.svelte';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
+import { setLoadingState } from '$lib/stores/loading';
 import { nhost } from '$lib/stores/user';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
@@ -33,6 +34,8 @@ storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
 // initialize overlay components
 initializeStores();
+// initialize LoadingState
+setLoadingState();
 
 // Handle Vercel Production Mode
 storeVercelProductionMode.set(data.vercelEnv === 'production');

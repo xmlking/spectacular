@@ -1,13 +1,16 @@
 <script lang="ts">
-import { isLoadingForm, isLoadingPage } from '$lib/stores/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { ProgressBar } from '@skeletonlabs/skeleton';
 import { fade } from 'svelte/transition';
+
+// const { isLoading } = getLoadingState();
+const loadingState = getLoadingState(); // HINT: `loadingState` is also subscribable
 
 // Only show spinner if page transition takes more than 150ms
 const wait = (delay: number) => new Promise((res) => setTimeout(res, delay));
 </script>
 
-{#if $isLoadingForm || $isLoadingPage}
+{#if $loadingState }
   {#await wait(150) then}
     <div transition:fade|global>
       <div class="absolute inset-x-0 top-0 w-full">

@@ -1,2 +1,2 @@
 export { scroll, lang, storeTheme, storeVercelProductionMode } from './stores';
-export { isLoadingForm, isLoadingPage } from './loading';
+export { setLoadingState, getLoadingState } from './loading';

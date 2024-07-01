@@ -61,7 +61,8 @@ export const accessToken = readable<string | null>(null, (set) => {
     nhost.auth.onTokenChanged((session) => {
       log.debug('The access token refreshed:', { session });
       set(session?.accessToken ?? null);
-      // save session as cookie everytime token is refreshed or user signin via WebAuthN
+      // save session as cookie everytime token is refreshed or user signin via WebAuthN.
+      // Cookie will be removed when browser closed or user explicitly SIGNED_OUT.
       Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
         path: '/',
         sameSite: 'strict',

@@ -150,6 +150,7 @@ Awesome **SvelteKit** Links
 - [ReShared](https://reshared.org/) is community things sharing webapp. OSS, implemented with **nhost**.
   - [repo](https://github.com/altschuler/reshared/)
 - [game-chronicle](https://github.com/ItsCentric/game-chronicle) - Use Superforms, shadcn-svelte, formsnap, tauri  for native app
+- [climbing_noteboo](https://github.com/diericx/climbing_notebook) - Use skeleton, Superforms, sveltekit-flash-message
 
 ## Deployment
 

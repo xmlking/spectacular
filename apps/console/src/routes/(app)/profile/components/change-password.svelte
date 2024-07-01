@@ -1,17 +1,28 @@
 <script lang="ts">
 import { changePasswordSchema } from '$lib/schema/user';
-import { isLoadingForm } from '$lib/stores/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
+import { sleep } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
+// Variables
+const loadingState = getLoadingState();
 const form = superForm(defaults(zod(changePasswordSchema)), {
   SPA: true,
+  dataType: 'json',
+  taintedMessage: null,
+  clearOnSubmit: 'errors-and-message',
+  delayMs: 100,
+  timeoutMs: 4000,
+  resetForm: true,
+  invalidateAll: false, // this is key for avoid calling the load function on server side
   validators: zodClient(changePasswordSchema),
-  onUpdate({ form }) {
+  async onUpdate({ form }) {
     if (form.valid) {
+      await sleep(8000);
       // TODO: Call an external API with form.data, await the result and update form
     }
   },
@@ -33,7 +44,7 @@ const {
 
 // Reactivity
 $: valid = $allErrors.length === 0;
-delayed.subscribe((v) => ($isLoadingForm = v));
+$: loadingState.setFormLoading($delayed);
 </script>
 
 <!-- Form Level Errors / Messages -->
@@ -45,6 +56,7 @@ delayed.subscribe((v) => ($isLoadingForm = v));
     <section class="p-4 space-y-2">
       <Form.Field {form} name="password">
         <Form.Control let:attrs>
+          <!-- <Form.Label class="label data-[fs-error]:text-error-500">Password</Form.Label> -->
           <Form.Label class="label">Password</Form.Label>
           <input
             type="password"
@@ -60,9 +72,7 @@ delayed.subscribe((v) => ($isLoadingForm = v));
       </Form.Field>
       <Form.Field {form} name="confirmPassword">
         <Form.Control let:attrs>
-          <Form.Label class="label data-[fs-error]:text-error-500">
-            Confirm Password
-          </Form.Label>
+          <Form.Label>Confirm Password</Form.Label>
           <input
             type="password"
             class="input data-[fs-error]:input-error"

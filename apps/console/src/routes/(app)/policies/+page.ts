@@ -1,6 +1,6 @@
 import { CachePolicy, SearchPoliciesStore, order_by } from '$houdini';
 import { policySearchSchema as schema } from '$lib/schema/policy';
-import { Logger } from '@spectacular/utils';
+import { Logger, sleep } from '@spectacular/utils';
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { setError, setMessage, superValidate } from 'sveltekit-superforms';
@@ -13,6 +13,7 @@ export const load = async (event) => {
   const form = await superValidate(url, zod(schema));
 
   if (!form.valid) return { status: 400, form }; // return fail(400, { form }); // FIXME
+  await sleep(5000);
 
   const {
     data: { limit, offset, subjectType, subjectId },
