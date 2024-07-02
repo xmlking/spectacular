@@ -131,14 +131,23 @@ hasura seed apply --database-name default --endpoint https://hasura.traefik.me -
 ```bash
 cd apps/console
 turbo dev
-# or use `--log-order=stream` to disable TUI
-turbo dev --log-order=stream
 # or run with `prod` profile and
 # overload envelopment variables from `.env.prod`
-turbo dev:prod --log-order=stream
+turbo dev:prod
 ```
 
 Default demo user's **username:** `sumo@demo.com` **password:** `sumodemo123`
+
+## Generate
+
+Generate `i18n` types, `schema.graphql` etc...
+
+```shell
+turbo run generate --filter=console
+# or for prod, run:
+cd apps/console
+npm run generate:pull-schema:prod
+```
 
 ## Building
 

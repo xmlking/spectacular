@@ -5,5 +5,24 @@ export let userOrgRoles: NonNullable<GetUser$result['user']>['userOrgRoles'];
 </script>
 
 <div class="card p-4">
-  <pre>{JSON.stringify(userOrgRoles, null, 2)}</pre>
+<div class="table-container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Organization</th>
+				<th>Role</th>
+				<th>isDefaultRole</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#each userOrgRoles as role, i}
+				<tr>
+					<td>{role.organization}</td>
+					<td>{role.role}</td>
+					<td>{role.isDefaultRole}</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
+</div>
 </div>

@@ -30,7 +30,7 @@ export let errors: string[] | undefined;
   </aside>
 {/if}
 {#if errors && errors.length}
-  <aside class="alert mt-6" class:variant-filled-error={$page.status >= 400} transition:fade|local={{ duration: 200 }}>
+  <aside class="alert mt-6 variant-filled-warning" class:variant-filled-error={$page.status >= 400} transition:fade|local={{ duration: 200 }}>
     <div class="alert-message">
       <ul class="list">
         {#each errors as error}

@@ -1,16 +1,21 @@
 <script lang="ts">
+import { handleMessage } from '$lib/components/layout/toast-manager';
 import { type ChangeEmail, changeEmailSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
+import { nhost } from '$lib/stores/user';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
 import { Button } from '@spectacular/skeleton/components/button';
 import { Alerts } from '@spectacular/skeleton/components/form';
-import { sleep } from '@spectacular/utils';
+import { Logger, sleep } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, setError, setMessage, superForm, type ErrorStatus } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 export let initialData: ChangeEmail;
-
+// Variables
+const log = new Logger('profile:password:browser');
+const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
@@ -21,12 +26,28 @@ const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: true,
-  invalidateAll: false,  // this is key for avoid calling the load function on server side
+  invalidateAll: false, // this is key for avoid calling the load function on server side
   validators: zodClient(changeEmailSchema),
-  async onUpdate({ form, cancel }) {
+  async onUpdate({ form }) {
     if (form.valid) {
-      await sleep(8000);
-      // TODO: Call an external API with form.data, await the result and update form
+      await sleep(4500);
+      const newEmail = form.data.email;
+      const { error } = await nhost.auth.changeEmail({ newEmail });
+      if (error) {
+        log.error('Error occurred while changing the email:', error.error);
+        setError(form, '', error.error, {
+          status: error.status as ErrorStatus,
+        });
+        return;
+      }
+      const message = {
+        message: `Email changed to: ${newEmail}`,
+        hideDismiss: true,
+        timeout: 10000,
+        type: 'success',
+      } as const;
+      setMessage(form, message);
+      handleMessage(message, toastStore);
     }
   },
 });
@@ -47,8 +68,6 @@ const {
 
 // Reactivity
 $: valid = $allErrors.length === 0;
-// loadingState.listen(delayed)
-// delayed.subscribe((v) => loadingState.setFormLoading(v));
 $: loadingState.setFormLoading($delayed);
 </script>
 

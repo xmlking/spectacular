@@ -27,3 +27,6 @@ cd infra/base/mailpit
 # go back to project root
 cd ../../..
 ```
+
+> [!IMPORTANT]
+> Append newly created `infra/base/mailpit/certs/ca.pem` file content to `infra/components/cacerts/ca-certificates.crt`
