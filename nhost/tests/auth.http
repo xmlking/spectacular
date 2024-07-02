@@ -1,0 +1,61 @@
+###
+@graphqlEndpoint =  {{$dotenv PUBLIC_GRAPHQL_ENDPOINT}}
+@graphqlAdminToken = {{$dotenv HASURA_GRAPHQL_ADMIN_SECRET}}
+
+
+# set token without `''`
+@graphqlUserToken =
+###
+
+
+### List Security Keys
+# @name SearchSecurityKeys
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+# Authorization: Bearer {{graphqlUserToken}}
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles: user me manager
+x-hasura-default-role: user
+x-hasura-role: user
+x-hasura-allowed-orgs: {signals,example}
+x-hasura-default-org: signals
+x-hasura-user-email: sumo@demo.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+
+query SearchSecurityKeys($userId: uuid!) {
+  authUserSecurityKeys(where: { userId: { _eq: $userId } }) {
+    id
+    nickname
+  }
+}
+
+{
+      "userId": "076a79f9-ed08-4e28-a4c3-8d4e0aa269a3"
+}
+
+### x-hasura-auth-elevated: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+
+### List Orgs
+# @name GetOrgs
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+# Authorization: Bearer {{graphqlUserToken}}
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles: user me manager
+x-hasura-default-role: user
+x-hasura-role: manager
+x-hasura-allowed-orgs: {signals,example}
+x-hasura-default-org: signals
+x-hasura-user-email: sumo@demo.com
+x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+
+query GetOrganizations {
+  organizations {
+    allowedEmailDomains
+    allowedEmails
+    description
+    organization
+  }
+}
