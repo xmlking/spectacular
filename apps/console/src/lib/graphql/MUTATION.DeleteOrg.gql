@@ -1,0 +1,6 @@
+mutation DeleteOrg($organization: String!) {
+  delete_organizations_by_pk(organization: $organization) {
+    organization
+    description
+  }
+}
