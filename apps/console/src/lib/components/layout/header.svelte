@@ -6,7 +6,7 @@ import LangSwitch from '$lib/components/layout/lang-switch.svelte';
 // import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
 import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
 import { storeTheme } from '$lib/stores';
-import { elevated, isAuthenticated, user } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
 import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 import { AppBar, LightSwitch, getDrawerStore, getModalStore, popup } from '@skeletonlabs/skeleton';
 import { LogoIcon } from '@spectacular/skeleton/components/logos';
@@ -29,6 +29,7 @@ const drawerStore = getDrawerStore();
 // Local
 let isOsMac = false;
 const modalStore = getModalStore();
+const { elevated, isAuthenticated, user } = getNhostClient();
 
 // Set Search Keyboard Shortcut
 if (browser) {

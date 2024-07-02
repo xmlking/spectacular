@@ -17,7 +17,6 @@ export class LoadingState {
   constructor() {
     onDestroy(() => {
       this.#log.debug('onDestroy called');
-      // TODO Unsubscribe all listeners??
       this.reset();
     });
   }

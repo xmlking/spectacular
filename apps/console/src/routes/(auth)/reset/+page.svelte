@@ -1,53 +1,72 @@
 <script lang="ts">
-import { page } from '$app/stores';
-import * as m from '$i18n/messages';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { resetPasswordSchema } from '$lib/schema/user';
-import { getLoadingState } from '$lib/stores/loading';
-import { getToastStore } from '@skeletonlabs/skeleton';
-// import { ConicGradient } from '@skeletonlabs/skeleton';
-// import type { ConicStop } from '@skeletonlabs/skeleton';
-import { DebugShell } from '@spectacular/skeleton/components';
-import { Logger } from '@spectacular/utils';
-import { AlertTriangle, Loader, MoreHorizontal } from 'lucide-svelte';
-import { fade } from 'svelte/transition';
-import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { zodClient } from 'sveltekit-superforms/adapters';
+  import * as Form from "formsnap";
+  import * as m from "$i18n/messages";
+  import { handleMessage } from "$lib/components/layout/toast-manager";
+  import { resetPasswordSchema } from "$lib/schema/user";
+  import { getLoadingState } from "$lib/stores/loading";
+  import { getToastStore } from "@skeletonlabs/skeleton";
+  // import { ConicGradient } from '@skeletonlabs/skeleton';
+  // import type { ConicStop } from '@skeletonlabs/skeleton';
+  import { DebugShell } from "@spectacular/skeleton/components";
+  import { Alerts } from "@spectacular/skeleton/components/form";
+  import { Logger } from "@spectacular/utils";
+  import { Loader, MoreHorizontal } from "lucide-svelte";
+  import SuperDebug, { defaults, superForm } from "sveltekit-superforms";
+  import { zod, zodClient } from "sveltekit-superforms/adapters";
 
-export let data;
-const log = new Logger('auth:reset:browser');
-const toastStore = getToastStore();
-const loadingState = getLoadingState();
+  export let data;
+  const log = new Logger("auth:reset:browser");
+  // Variables
+  const loadingState = getLoadingState();
+  const toastStore = getToastStore();
 
-const { form, delayed, timeout, enhance, errors, constraints, message, tainted, posted, submitting, capture, restore } =
-  superForm(data.form, {
-    dataType: 'json',
+  const form = superForm(defaults(zod(resetPasswordSchema)), {
+    dataType: "json",
     taintedMessage: null,
+    clearOnSubmit: "errors-and-message",
     syncFlashMessage: false,
     delayMs: 100,
     timeoutMs: 4000,
     validators: zodClient(resetPasswordSchema),
-    onError({ result }) {
-      // TODO:
-      // message.set(result.error.message)
-      log.error('reset password error:', { result });
-    },
     onUpdated({ form }) {
       if (form.message) {
         handleMessage(form.message, toastStore);
       }
     },
+    onError({ result }) {
+      // TODO:
+      // setError(form, '', result.error.message);
+      log.error("reset password error:", { result });
+    },
   });
 
-export const snapshot = { capture, restore };
+  const {
+    form: formData,
+    errors,
+    message,
+    submitting,
+    constraints,
+    delayed,
+    timeout,
+    tainted,
+    posted,
+    allErrors,
+    capture,
+    restore,
+    enhance,
+  } = form;
 
-// Reactivity
-$: loadingState.setFormLoading($delayed);
+  export const snapshot = { capture, restore };
 
-// const conicStops: ConicStop[] = [
-//   { color: 'transparent', start: 0, end: 25 },
-//   { color: 'rgb(var(--color-primary-900))', start: 75, end: 100 }
-// ];
+  // Functions
+
+  // Reactivity
+  $: loadingState.setFormLoading($delayed);
+  $: valid = $allErrors.length === 0;
+  // const conicStops: ConicStop[] = [
+  //   { color: 'transparent', start: 0, end: 25 },
+  //   { color: 'rgb(var(--color-primary-900))', start: 75, end: 100 }
+  // ];
 </script>
 
 <svelte:head>
@@ -56,69 +75,38 @@ $: loadingState.setFormLoading($delayed);
 </svelte:head>
 
 <h3 class="h3 pt-5">{m.auth_messages_reset_password_healding()}</h3>
-<small class="text-gray-500">{m.auth_messages_reset_password_subheading()}</small>
+<small class="text-gray-500"
+  >{m.auth_messages_reset_password_subheading()}</small
+>
 
 <!-- Form Level Errors / Messages -->
-{#if $message}
-  <aside
-    class="alert mt-6"
-    class:variant-filled-success={$message.type == 'success'}
-    class:variant-filled-error={$message.type == 'error'}
-    class:variant-filled-warning={$message.type == 'warning'}
-    transition:fade|local={{ duration: 200 }}
-  >
-    <!-- Icon -->
-    <!-- <AlertTriangle /> -->
-    <!-- Message -->
-    <div class="alert-message">
-      {#if $message}
-        <p class="font-medium">{$message.message}</p>
-      {/if}
-    </div>
-    <!-- Actions -->
-    <!-- <div class="alert-actions">
-			<button class="btn-icon variant-filled"><X /></button>
-		</div> -->
-  </aside>
-{/if}
-{#if $errors._errors}
-  <aside class="alert mt-6" class:variant-filled-error={$page.status >= 400} transition:fade|local={{ duration: 200 }}>
-    <div class="alert-message">
-      <h3 class="h3">{m.auth_labels_reset_password_problem()}</h3>
-      <ul class="list">
-        {#each $errors._errors as error}
-          <li>
-            <span><AlertTriangle /></span>
-            <span class="flex-auto">{error}</span>
-          </li>
-        {/each}
-      </ul>
-    </div>
-  </aside>
-{/if}
-
+<Alerts errors={$errors._errors} message={$message} />
+<!-- Reset password Form -->
 <form method="POST" use:enhance>
   <div class="mt-6">
-    <label class="label">
-      <span class="sr-only">{m.auth_forms_email_label()}</span>
-      <input
-        name="email"
-        type="email"
-        class="input"
-        autocomplete="email"
-        placeholder={m.auth_forms_email_placeholder()}
-        data-invalid={$errors.email}
-        bind:value={$form.email}
-        class:input-error={$errors.email}
-        {...$constraints.email}
-      />
-      {#if $errors.email}
-        <small>{$errors.email}</small>
-      {/if}
-    </label>
+    <Form.Field {form} name="email">
+      <Form.Control let:attrs>
+        <Form.Label class="label sr-only"
+          >{m.auth_forms_email_label()}</Form.Label
+        >
+        <input
+          type="email"
+          autocomplete="email"
+          class="input mt-1 data-[fs-error]:input-error"
+          placeholder={m.auth_forms_email_placeholder()}
+          {...attrs}
+          bind:value={$formData.email}
+        />
+      </Form.Control>
+      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+    </Form.Field>
   </div>
   <div class="mt-6">
-    <button type="submit" class="variant-filled-primary btn w-full">
+    <button
+      type="submit"
+      class="variant-filled-primary btn w-full"
+      disabled={!$tainted || !valid || $submitting}
+    >
       {#if $timeout}
         <MoreHorizontal class="animate-ping" />
       {:else if $delayed}
@@ -131,6 +119,7 @@ $: loadingState.setFormLoading($delayed);
   </div>
 </form>
 
+<!-- Debug -->
 <DebugShell>
   <SuperDebug
     label="Miscellaneous"
@@ -144,7 +133,7 @@ $: loadingState.setFormLoading($delayed);
     }}
   />
   <br />
-  <SuperDebug label="Form" data={$form} />
+  <SuperDebug label="Form" data={$formData} />
   <br />
   <SuperDebug label="Tainted" status={false} data={$tainted} />
   <br />

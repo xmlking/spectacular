@@ -1,6 +1,6 @@
 import { goto } from '$app/navigation';
 import { SearchSecurityKeysStore } from '$houdini';
-import { nhost, user } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
 import { Logger } from '@spectacular/utils';
 
 /**
@@ -10,7 +10,9 @@ import { Logger } from '@spectacular/utils';
  */
 const log = new Logger('nhost.auth.brower');
 
+
 export async function signUp(email: string, password: string, displayName: string) {
+  const nhost = getNhostClient();
   const { session, error } = await nhost.auth.signUp({
     email,
     password,
@@ -23,24 +25,24 @@ export async function signUp(email: string, password: string, displayName: strin
     throw error;
   }
   if (session) {
-    // user.set(nhost.auth.getUser());
     goto('/dashboard');
   }
 }
 
 export async function signIn(email: string, password: string): Promise<void> {
+  const nhost = getNhostClient();
   const { session, error } = await nhost.auth.signIn({ email, password });
   if (error) {
     log.error(error);
     throw error;
   }
   if (session) {
-    // user.set(nhost.auth.getUser());
     goto('/dashboard');
   }
 }
 
 export async function signOut() {
+  const nhost = getNhostClient();
   const { error } = await nhost.auth.signOut();
   if (error) {
     log.error(error);
@@ -49,11 +51,13 @@ export async function signOut() {
 }
 
 export async function isAuthenticated(): Promise<boolean> {
+  const nhost = getNhostClient();
   return await nhost.auth.isAuthenticatedAsync();
 }
 
 const skQuery = new SearchSecurityKeysStore().artifact.raw;
 export async function hasSecurityKey(userId: string) {
+  const nhost = getNhostClient();
   const { data, error } = await nhost.graphql.request(skQuery, { userId });
   if (error) {
     log.error({ error });

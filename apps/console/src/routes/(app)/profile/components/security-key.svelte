@@ -2,7 +2,7 @@
 import { invalidateAll } from '$app/navigation';
 import { type GetUser$result, RemoveSecurityKeyStore, cache } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { elevate } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { Logger } from '@spectacular/utils';
 import { GraphQLError } from 'graphql';
@@ -17,6 +17,7 @@ export let message: App.Superforms.Message | undefined;
 export let errors: string[];
 
 const { id, nickname } = securityKey;
+const { elevate } = getNhostClient();
 /**
  * delete handler
  */

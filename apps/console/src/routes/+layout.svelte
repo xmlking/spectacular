@@ -12,7 +12,6 @@ import { i18n } from '$lib/i18n';
 import Search from '$lib/modals/search.svelte';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { setLoadingState } from '$lib/stores/loading';
-import { nhost } from '$lib/stores/user';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
 import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
@@ -21,9 +20,10 @@ import type { ModalComponent } from '@skeletonlabs/skeleton';
 import { AppShell } from '@skeletonlabs/skeleton';
 import { Logger, startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
-import type { ComponentEvents } from 'svelte';
+import { onMount, type ComponentEvents } from 'svelte';
 import { setupViewTransition } from 'sveltekit-view-transition';
 import '../app.pcss';
+import { getNhostClient, setNhostClient } from '$lib/stores/nhost';
 
 const log = new Logger('layout:root:browser');
 
@@ -36,6 +36,11 @@ storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 initializeStores();
 // initialize LoadingState
 setLoadingState();
+// initialize nhost client
+ // TODO: initialize different clients for server-side and client-side
+setNhostClient()
+
+
 
 // Handle Vercel Production Mode
 storeVercelProductionMode.set(data.vercelEnv === 'production');
@@ -77,12 +82,14 @@ function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
   });
 }
 
+
 // Reactive
 // Disable left sidebar on homepage
 $: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
 $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 
 // update nhost session
+const nhost = getNhostClient()
 // HINT: https://blog.flotes.app/posts/performant-reactivity
 $: ({ session } = data);
 $: if (browser) {

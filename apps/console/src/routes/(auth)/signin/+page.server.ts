@@ -27,9 +27,6 @@ export const load = async (event) => {
 
   const isAuthenticated = nhost.auth.isAuthenticated();
   if (isAuthenticated) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
-  // const pwForm = await superValidate(zod(pwSchema));
-  // const pwlForm = await superValidate(zod(pwlSchema));
-  // return { pwForm, pwlForm };
 };
 
 export const actions = {

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { elevate } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
 
@@ -8,6 +8,7 @@ import { Alerts } from '@spectacular/skeleton/components/form';
 let message: App.Superforms.Message | undefined;
 let errors: string[] = [];
 const toastStore = getToastStore();
+const { elevate } = getNhostClient();
 
 async function handleElevate() {
   const error = await elevate();
