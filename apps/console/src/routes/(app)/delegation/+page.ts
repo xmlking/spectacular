@@ -10,10 +10,10 @@ export async function load(event) {
   });
 
   if (errors) {
-   for (const error of errors) {
-    console.log('list subscriber api error', error);
-  }
-  return { status: 500 };
+    for (const error of errors) {
+      console.log('list subscriber api error', error);
+    }
+    return { status: 500 };
   }
   const UsersList = data?.users;
   if (!UsersList) error(404, 'Users not found');

@@ -1,4 +1,4 @@
-import { organizationsCreateSchema } from '$lib/schema/organizations';
+import { organizationsCreateSchema } from '$lib/schema/organization';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 

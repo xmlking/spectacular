@@ -1,24 +1,18 @@
 <script lang="ts">
-import BreadCrumb from '$lib/components/bread-crumb.svelte';
-import { Form } from '$lib/components/form';
-import { updateOrganizationsSchema as schema } from '$lib/schema/organizations';
+import { updateOrganizationsSchema as schema } from '$lib/schema/organization';
 import { InputChip } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Control, Field, FieldErrors, Label } from 'formsnap';
 import { superForm } from 'sveltekit-superforms';
 import SuperDebug from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
+
 export let data;
 // initializing a form based on superForm with zod schema
 const form = superForm(data.form, {
   dataType: 'json',
   validators: zodClient(schema),
 });
-const breadcrumbItems = [
-  { text: 'Home', link: '/dashboard' },
-  { text: 'Organizations', link: '/organizationses' },
-  { text: 'Update Organization', link: null },
-];
 
 const {
   form: formData,
@@ -48,12 +42,12 @@ function isValidEmailDomain(value: string): boolean {
 	<meta name="description" content=" Update Organization" />
 </svelte:head>
 <div class="page-container">
-<Form
+<form
 	{form}
 	submitButtonText="Update"
 	class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md "
 >
-<BreadCrumb {...{ items: breadcrumbItems }} />
+
 <div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
 		<div class="col-span-3">
 			<Field {form} name="Organization">
@@ -115,7 +109,7 @@ function isValidEmailDomain(value: string): boolean {
 			</Field>
 		</div>
 	</div>
-</Form>
+</form>
 <DebugShell>
 	<SuperDebug
 		label="Miscellaneous"

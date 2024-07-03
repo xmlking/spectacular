@@ -19,7 +19,6 @@ export const actions = {
 
     await nhost.auth.signOut();
     cookies.delete(NHOST_SESSION_KEY, { path: '/' });
-    // cookies.set(NHOST_SESSION_KEY, '', { httpOnly: true, path: '/', maxAge: 0 });
     const message: App.Superforms.Message = { type: 'success', message: 'Signout sucessfull 😎' } as const;
     redirectWithFlash(303, i18n.resolveRoute('/'), message, event);
     // redirectWithFlash(303, i18n.resolveRoute('/signin'), message, event);

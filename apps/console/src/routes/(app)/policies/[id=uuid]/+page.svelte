@@ -57,15 +57,8 @@ const disabled = $form?.originalShared;
   <meta name="description" content="Update Policy" />
 </svelte:head>
 
-<!-- <Breadcrumb aria-label="Default breadcrumb example" class="mb-6">
-	<BreadcrumbItem href="/dashboard" home>Home</BreadcrumbItem>
-	<BreadcrumbItem href="/policies">Policy</BreadcrumbItem>
-	<BreadcrumbItem>Update Policy</BreadcrumbItem>
-</Breadcrumb> -->
 
-<!-- <Heading tag="h4" class="pb-5">Update policy</Heading> -->
-
-<Form {superform} submitButtonText="Update" class="space-y-6">
+<form {superform} submitButtonText="Update" class="space-y-6">
   <input type="hidden" name="ruleId" bind:value={$form.ruleId} />
 
   <div class="mb-6 grid gap-6 md:grid-cols-3 lg:grid-cols-6">
@@ -174,7 +167,7 @@ const disabled = $form?.originalShared;
       <DateInput type="datetime-local" field={keys.validTo} label="Valid To" />
     </div>
   </div>
-</Form>
+</form>
 
 {#if dev}
   <br />

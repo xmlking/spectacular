@@ -1,5 +1,5 @@
 import { UpdateOrgsStore, type organizations_set_input } from '$houdini';
-import { updateOrganizationsSchema as schema } from '$lib/schema/organizations';
+import { updateOrganizationsSchema as schema } from '$lib/schema/organization';
 import { Logger, cleanClone } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';

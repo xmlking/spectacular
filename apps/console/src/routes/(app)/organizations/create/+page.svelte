@@ -1,7 +1,5 @@
 <script lang="ts">
-import { BreadCrumb } from '$lib/components';
-import { Form } from '$lib/components/form';
-import { organizationsCreateSchema as schema } from '$lib/schema/organizations';
+import { organizationsCreateSchema as schema } from '$lib/schema/organization';
 import { InputChip } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Control, Description, Field, FieldErrors, Fieldset, Label, Legend } from 'formsnap';
@@ -27,11 +25,7 @@ const {
   constraints,
   enhance,
 } = form;
-const breadcrumbItems = [
-  { text: 'Dashboard', link: '/dashboard' },
-  { text: 'Organizations', link: '/organizations' },
-  { text: 'Create Organization', link: null },
-];
+
 function isValidEmail(value: string): boolean {
   return value.includes('@') && value.includes('.');
 }
@@ -47,9 +41,8 @@ function isValidEmailDomain(value: string): boolean {
 	<meta name="description" content="Showcase formsnap" />
 </svelte:head>
 <div class="page-container">
-	<BreadCrumb {...{ items: breadcrumbItems }} />
 	<h1 class="pb-8 text-3xl font-semibold tracking-tight">Create Stream</h1>
-	<Form
+	<form
 		{form}
 		submitButtonText="Create"
 		class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md "
@@ -100,7 +93,7 @@ function isValidEmailDomain(value: string): boolean {
 				</Field>
 			</div>
 		</div>
-	</Form>
+	</form>
 	<DebugShell>
 		<SuperDebug
 			label="Miscellaneous"

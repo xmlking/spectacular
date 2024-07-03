@@ -40,7 +40,7 @@ export const actions = {
         } else {
           setError(form, '', (error as GraphQLError).message);
         }
-      };
+      }
       return setMessage(form, { type: 'error', message: 'Update user failed' });
     }
 

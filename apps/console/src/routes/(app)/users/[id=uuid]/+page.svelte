@@ -1,56 +1,51 @@
 <script lang="ts">
-  import { Form } from "$lib/components/form";
-  import { updateUserSchema as schema } from "$lib/schema/delegation";
-  import { Avatar } from "@skeletonlabs/skeleton";
-  import { Control, Field, FieldErrors, Label } from "formsnap";
-  import { writable } from "svelte/store";
-  import { superForm } from "sveltekit-superforms";
-  import { zodClient } from "sveltekit-superforms/adapters";
-  export let data;
-  const form = superForm(data.form, {
-    dataType: "json",
-    validators: zodClient(schema),
-  });
-  const {
-    form: formData,
-    message,
-    errors,
-    tainted,
-    isTainted,
-    submitting,
-    delayed,
-    timeout,
-    posted,
-    constraints,
-    enhance,
-  } = form;
-  const groupRolesByOrganization = () => {
-    const groupedRoles: { [key: string]: string[] } = {};
-    for (const { organization, role } of data.orgRoles) {
-      if (!groupedRoles[organization]) {
-        groupedRoles[organization] = [];
-      }
-      groupedRoles[organization].push(role);
+import { updateUserSchema as schema } from '$lib/schema/delegation';
+import { Avatar } from '@skeletonlabs/skeleton';
+import { Control, Field, FieldErrors, Label } from 'formsnap';
+import { writable } from 'svelte/store';
+import { superForm } from 'sveltekit-superforms';
+import { zodClient } from 'sveltekit-superforms/adapters';
+export let data;
+const form = superForm(data.form, {
+  dataType: 'json',
+  validators: zodClient(schema),
+});
+const {
+  form: formData,
+  message,
+  errors,
+  tainted,
+  isTainted,
+  submitting,
+  delayed,
+  timeout,
+  posted,
+  constraints,
+  enhance,
+} = form;
+const groupRolesByOrganization = () => {
+  const groupedRoles: { [key: string]: string[] } = {};
+  for (const { organization, role } of data.orgRoles) {
+    if (!groupedRoles[organization]) {
+      groupedRoles[organization] = [];
     }
-    return groupedRoles;
-  };
-  const myorgroles = writable([]);
-  $: {
-    myorgroles.set(
-      data.orgRoles
-        .filter((item) => item.organization === $formData.metadata.default_org)
-        .map((item) => item.role),
-    );
-    $formData.defaultRole = data.orgRoles.find(
-      (role) =>
-        role.isDefaultRole === true &&
-        role.organization === $formData.metadata.default_org,
-    ).role;
+    groupedRoles[organization].push(role);
   }
+  return groupedRoles;
+};
+const myorgroles = writable([]);
+$: {
+  myorgroles.set(
+    data.orgRoles.filter((item) => item.organization === $formData.metadata.default_org).map((item) => item.role),
+  );
+  $formData.defaultRole = data.orgRoles.find(
+    (role) => role.isDefaultRole === true && role.organization === $formData.metadata.default_org,
+  ).role;
+}
 </script>
 
 <div class="page-container">
-  <Form
+  <form
     {form}
     submitButtonText="Update"
     class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md "
@@ -138,5 +133,5 @@
         </Field>
       </div>
     </div>
-  </Form>
+  </form>
 </div>
