@@ -35,7 +35,7 @@ async function handleElevate() {
 <Alerts {errors} {message} />
 
 <div class="card">
-  <header class="card-header">{m.profile_hasura_jwt_label()}</header>
+  <header class="card-header">{m.profile_hasura_jwt_claims_label()}</header>
   <AppBar>
     <svelte:fragment slot="lead"><UserRound /></svelte:fragment>
    <h3 class="h3"><span class="gradient-heading">Elevation status: {$elevated}</span></h3>
@@ -44,7 +44,7 @@ async function handleElevate() {
         type="button"
         class="variant-filled-primary btn"
         on:click={() => nhost.auth.refreshSession()}
-        >{m.profile_nhost_refresh_session()}</button
+        >{m.profile_nhost_refresh_session_label()}</button
       >
       <button type="button" class="btn variant-filled" on:click={handleElevate}
         >Elevate</button
