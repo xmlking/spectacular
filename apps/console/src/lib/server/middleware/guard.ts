@@ -50,7 +50,7 @@ export const guard = (async ({ event, resolve }) => {
     },
   } = event;
 
-    // bypass guard for home-page ('/') or if path that starts with any of the `publicPaths`
+  // bypass guard for home-page ('/') or if path that starts with any of the `publicPaths`
   const canonicalPath = i18n.route(pathname);
   if (canonicalPath === '/' || startsWith(canonicalPath, publicPaths)) {
     // bypass guard for all unprotected routes.
