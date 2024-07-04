@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { GetUser$result } from '$houdini';
+import type { GetUser$result, SecurityKeyFields } from '$houdini';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { flip } from 'svelte/animate';
 import { quintOut } from 'svelte/easing';
@@ -11,7 +11,7 @@ export const defaultDE = {
   easing: quintOut,
 };
 
-export let securityKeys: NonNullable<GetUser$result['user']>['securityKeys'];
+export let securityKeys: SecurityKeyFields[]
 
 // Variables
 let message: App.Superforms.Message | undefined;

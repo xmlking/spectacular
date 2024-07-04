@@ -1,6 +1,6 @@
 query GetUser($userId: uuid!) @cache(policy: NetworkOnly) {
   # get all fragments needed for profile page.
-  user(id: $userId) {
+  user(id: $userId) @loading(cascade: true) {
     id
     displayName
     email
@@ -15,9 +15,9 @@ query GetUser($userId: uuid!) @cache(policy: NetworkOnly) {
       role
       isDefaultRole
     }
-    securityKeys(order_by: { nickname: asc }) {
-      nickname
-      id
+    securityKeys(order_by: { nickname: asc })  @list(name: "SecurityKeys") {
+      __typename
+      ...SecurityKeyFields
     }
     personalAccessTokens: refreshTokens {
       id
