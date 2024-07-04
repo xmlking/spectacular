@@ -99,7 +99,7 @@ async function updorg(Org: string, roless: string[], userId: string) {
     userId: userId,
     role: role,
   }));
-  if (Org == def_org) {
+  if (Org === def_org) {
     const { errors, data } = await updatehomerolesStore.mutate({
       userId: userId,
       defaultRole: defrole,

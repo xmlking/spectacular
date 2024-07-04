@@ -11,7 +11,7 @@ export const defaultDE = {
   easing: quintOut,
 };
 
-export let securityKeys: SecurityKeyFields[]
+export let securityKeys: SecurityKeyFields[];
 
 // Variables
 let message: App.Superforms.Message | undefined;
