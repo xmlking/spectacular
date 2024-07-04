@@ -1,4 +1,5 @@
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { showMagicLinkLogin, showSocialLogin } from '$lib/flags';
 import { i18n } from '$lib/i18n';
 import { pwSchema, pwlSchema } from '$lib/schema/user';
 import { limiter } from '$lib/server/limiter/limiter';
@@ -27,9 +28,9 @@ export const load = async (event) => {
 
   const isAuthenticated = nhost.auth.isAuthenticated();
   if (isAuthenticated) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
-  // const pwForm = await superValidate(zod(pwSchema));
-  // const pwlForm = await superValidate(zod(pwlSchema));
-  // return { pwForm, pwlForm };
+  const showMagicLink = await showMagicLinkLogin();
+  const showSocial = await showSocialLogin();
+  return { flags: { showMagicLink, showSocial } }; // TODO: use flags
 };
 
 export const actions = {

@@ -151,6 +151,7 @@ Awesome **SvelteKit** Links
   - [repo](https://github.com/altschuler/reshared/)
 - [game-chronicle](https://github.com/ItsCentric/game-chronicle) - Use Superforms, shadcn-svelte, formsnap, tauri  for native app
 - [climbing_noteboo](https://github.com/diericx/climbing_notebook) - Use skeleton, Superforms, sveltekit-flash-message
+- [Vercel Toolbar and Feature Flags SvelteKit Starter](https://github.com/vercel/examples/tree/main/toolbar/toolbar-feature-flags-sveltekit), [Demo](https://toolbar-feature-flags-sveltekit.vercel.app/)
 
 ## Deployment
 
@@ -262,3 +263,4 @@ Awesome **SvelteKit** Links
 - <https://github.com/janosh/awesome-sveltekit>
 - Learn something new with GraphQL, every week - [graphql.wtf](https://graphql.wtf/)
 - [VS code setup for Svelte](https://webjeda.com/blog/vscode-setup-svelte)
+- [component-party](https://component-party.dev/) website showcase how reactivity work in **React Framework** vs **Svelte Framework**

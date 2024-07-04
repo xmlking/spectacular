@@ -21,7 +21,8 @@ import type { ModalComponent } from '@skeletonlabs/skeleton';
 import { AppShell } from '@skeletonlabs/skeleton';
 import { Logger, startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
-import type { ComponentEvents } from 'svelte';
+import { mountVercelToolbar } from '@vercel/toolbar/vite';
+import { type ComponentEvents, onMount } from 'svelte';
 import { setupViewTransition } from 'sveltekit-view-transition';
 import '../app.pcss';
 
@@ -29,6 +30,7 @@ const log = new Logger('layout:root:browser');
 
 export let data;
 
+//*** initializations ***//
 // Floating UI for Popups
 storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
@@ -42,6 +44,8 @@ storeVercelProductionMode.set(data.vercelEnv === 'production');
 // Init Vercel Analytics
 // if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
 inject({ mode: dev ? 'development' : 'production' });
+// initialize Vercel Toolbar
+onMount(() => mountVercelToolbar());
 
 // Registered list of Components for Modals
 const modalComponentRegistry: Record<string, ModalComponent> = {

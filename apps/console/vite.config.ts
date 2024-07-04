@@ -2,6 +2,7 @@ import * as child_process from 'node:child_process';
 import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { vercelToolbar } from '@vercel/toolbar/plugins/vite';
 import houdini from 'houdini/vite';
 import { defineConfig } from 'vitest/config';
 
@@ -28,6 +29,7 @@ export default defineConfig({
       project: './project.inlang',
       outdir: './src/i18n',
     }),
+    vercelToolbar(),
   ],
   define: {
     // to burn-in release version in the footer.svelte

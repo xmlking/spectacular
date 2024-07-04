@@ -16,8 +16,9 @@ import { AlertTriangle, Fingerprint, Github, Loader, Mail, MoreHorizontal } from
 import { fade } from 'svelte/transition';
 import SuperDebug, { setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
+import type { PageData } from './$types.js';
 
-export let data;
+export let data: PageData;
 const log = new Logger('auth:signin:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -373,4 +374,5 @@ $pwlForm.redirectTo = $page.url.searchParams.get('redirectTo') ?? $pwlForm.redir
   <SuperDebug label="Passwordless Errors" status={false} data={$pwlErrors} />
   <br />
   <SuperDebug label="Passwordless Constraints" status={false} data={$pwlConstraints} />
+   <SuperDebug label="$page data" status={false} data={$page} />
 </DebugShell>

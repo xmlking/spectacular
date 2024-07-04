@@ -12,7 +12,6 @@ const log = new Logger('server:middleware:guard');
 // TODO define roles in apps/console/src/lib/links.ts
 const managerPaths = ['/admin'];
 const publicPaths = [
-  '/',
   '/favicon.ico',
   '/robots.txt',
   '/assets',
@@ -26,6 +25,7 @@ const publicPaths = [
   '/blog',
   '/about',
   '/contact',
+  '/.well-known/',
 ];
 
 // skip auth logic on build to prevent infinite redirection in production mode
@@ -49,8 +49,10 @@ export const guard = (async ({ event, resolve }) => {
       nhost,
     },
   } = event;
+
+    // bypass guard for home-page ('/') or if path that starts with any of the `publicPaths`
   const canonicalPath = i18n.route(pathname);
-  if (startsWith(canonicalPath, publicPaths)) {
+  if (canonicalPath === '/' || startsWith(canonicalPath, publicPaths)) {
     // bypass guard for all unprotected routes.
     return await resolve(event);
   }

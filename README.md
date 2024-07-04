@@ -7,17 +7,18 @@
 - Monorepo: [Turborepo](https://turbo.build/repo/docs/handbook)
 - JS Framework: [SvelteKit](https://kit.svelte.dev/)
 - CSS: [Tailwind CSS](https://tailwindcss.com/)
-- UI Components: tailwindcss based [Flowbite](https://flowbite-svelte.com/), [SkeletonUI](https://www.skeleton.dev/) and [DaisyUI](https://daisyui.com/)
+- UI Components: tailwindcss based [SkeletonUI](https://www.skeleton.dev/), [Shadcn](https://www.shadcn-svelte.com/) and [Flowbite](https://flowbite-svelte.com/)
 - Unit/Component testing: [vitest](https://vitest.dev/)
-- [Testing Library](https://testing-library.com/)
-- [Svelte Testing Library](https://github.com/testing-library/svelte-testing-library)
+  - [Testing Library](https://testing-library.com/)
+  - [Svelte Testing Library](https://github.com/testing-library/svelte-testing-library)
 - API Mocking: [Mock Service Worker](https://mswjs.io/)
 - Code Coverage [c8](https://c8.io/)
 - End-to-End Testing: [playwright](https://playwright.dev/)
 - GraphQL: [Houdini](https://www.houdinigraphql.com/) & [Hasura](https://hasura.io/)
-- Authentication: [Auth.js](https://authjs.dev/)
+- Authentication: [Auth.js](https://authjs.dev/),  [nhost-auth](https://nhost.io/product/auth)
 - PWA: [Vite PWA](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html)
 - Linter/Formatter: [Biome](https://biomejs.dev/)
+
 
 ## Features
 
@@ -56,7 +57,7 @@
 - [ ] Implement Changesets [(link)](https://github.com/changesets/changesets) with [turborepo](https://turbo.build/repo/docs/handbook/publishing-packages/versioning-and-publishing)
 - [ ] **TAURI:** Use [Tauri](https://tauri.app/) with [Skeleton](https://www.skeleton.dev/docs/tauri) for multi-platform.
 - [ ] Charts with [LayerChart](https://www.layerchart.com/)
-- [ ] **tRPC-SvelteKit** [End-to-end typesafe APIs](https://icflorescu.github.io/trpc-sveltekit) SvelteKit.
+- [ ] [Feature Flags](https://vercel.com/docs/workflow-collaboration/feature-flags/feature-flags-pattern) with [Vercel Feature Flags](https://vercel.com/docs/workflow-collaboration/feature-flags) and [Vercel Toolbar](https://vercel.com/docs/workflow-collaboration/vercel-toolbar)
 
 ## Setup
 
