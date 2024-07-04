@@ -1,4 +1,5 @@
 <script lang="ts">
+import { invalidate } from '$app/navigation';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { nhost } from '$lib/stores/user';
@@ -9,12 +10,18 @@ import { UserRound } from 'lucide-svelte';
 import SuperDebug from 'sveltekit-superforms';
 
 // Variables
-const claims = nhost.auth.getHasuraClaims();
+let claims = nhost.auth.getHasuraClaims();
 let message: App.Superforms.Message | undefined;
 const errors: string[] = [];
 const toastStore = getToastStore();
 
 // Functions
+async function handleRefresh() {
+  await nhost.auth.refreshSession();
+  // update new claims
+  claims = nhost.auth.getHasuraClaims();
+}
+
 async function handleElevate() {
   const error = await elevate();
   if (error) {
@@ -27,6 +34,8 @@ async function handleElevate() {
       type: 'success',
     };
     handleMessage(message, toastStore);
+    // update new claims
+    claims = nhost.auth.getHasuraClaims();
   }
 }
 </script>
@@ -43,7 +52,7 @@ async function handleElevate() {
       <button
         type="button"
         class="variant-filled-primary btn"
-        on:click={() => nhost.auth.refreshSession()}
+        on:click={handleRefresh}
         >{m.profile_nhost_refresh_session_label()}</button
       >
       <button type="button" class="btn variant-filled" on:click={handleElevate}
