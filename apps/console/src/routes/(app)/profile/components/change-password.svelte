@@ -2,7 +2,7 @@
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { changePasswordSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
-import { nhost } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -15,6 +15,7 @@ import { zod, zodClient } from 'sveltekit-superforms/adapters';
 const log = new Logger('profile:password:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
+const { nhost } = getNhostClient();
 
 const form = superForm(defaults(zod(changePasswordSchema)), {
   SPA: true,

@@ -3,13 +3,32 @@ import { resetPasswordSchema } from '$lib/schema/user';
 import { limiter } from '$lib/server/limiter/limiter';
 import { Logger, sleep } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
+import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('auth:reset:server');
 
+export const load = async (event) => {
+  const {
+    locals: { nhost },
+  } = event;
+  /**
+   * Preflight prevents direct posting. If preflight option for the
+   * cookie limiter is true and this function isn't called before posting,
+   * request will be limited.
+   *
+   * Remember to await, so the cookie will be set before returning!
+   */
+  await limiter.cookieLimiter?.preflight(event);
+
+  const isAuthenticated = nhost.auth.isAuthenticated();
+  if (isAuthenticated) redirectWithFlash(302, i18n.resolveRoute('/dashboard'));
+};
+
 export const actions = {
   default: async (event) => {
+    log.debug('in reset action');
     const {
       request,
       cookies,

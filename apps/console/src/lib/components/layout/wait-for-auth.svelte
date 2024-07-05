@@ -3,7 +3,9 @@
  * Ensure that Auth is initialized before rendering the app.
  * Otherwise all authorized graphql queries will get errors.
  */
-import { isAuthenticated } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
+
+const { isAuthenticated } = getNhostClient();
 </script>
 
 {#if $isAuthenticated}

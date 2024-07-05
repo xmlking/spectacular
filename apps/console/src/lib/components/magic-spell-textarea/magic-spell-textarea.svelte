@@ -60,6 +60,7 @@ onMount(() => {
 >
   <textarea use:autosize={{useJs: true}}
     {...$$props}
+    class="textarea"
     disabled={$isLoading}
     value={$isLoading && $completion.length > 0 ? $completion.trim() : value}
     on:change={handleChange}

@@ -3,7 +3,7 @@ import { invalidateAll } from '$app/navigation';
 import type { SecurityKeyFields } from '$houdini';
 import { PendingValue, RemoveSecurityKeyStore, cache, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { elevate } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { Logger } from '@spectacular/utils';
 import { GraphQLError } from 'graphql';
@@ -40,6 +40,7 @@ const handleDelete = async () => {
   isDeleting = true;
 
   // check if elevate is needed
+  const { elevate } = getNhostClient();
   const error = await elevate();
   if (error) {
     errors.push(error.message);

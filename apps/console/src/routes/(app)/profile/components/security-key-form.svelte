@@ -4,7 +4,7 @@ import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { webAuthnSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
-import { elevate, nhost } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -19,6 +19,8 @@ import { zod } from 'sveltekit-superforms/adapters';
 const log = new Logger('profile:keys:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
+const nhost = getNhostClient();
+const { elevate } = nhost;
 
 const form = superForm(defaults(zod(webAuthnSchema)), {
   SPA: true,

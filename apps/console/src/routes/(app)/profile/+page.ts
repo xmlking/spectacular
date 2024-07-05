@@ -1,14 +1,13 @@
 import { load_GetUser } from '$houdini';
-import { user } from '$lib/stores/user';
 import { Logger } from '@spectacular/utils';
 import { error } from '@sveltejs/kit';
-import { get } from 'svelte/store';
 import type { PageLoad, GetUserVariables as Variables } from './$houdini';
 
 const log = new Logger('user.profile.browser');
 
 // export const _GetUserVariables: Variables = async (event) => {
-//   const userId = get(user)?.id;
+// const { user } = nhost;
+// const userId = get(user)?.id;
 //   if (!userId) {
 //     log.error('not authenticated');
 //     throw error(400, 'not authenticated');
@@ -20,7 +19,8 @@ const log = new Logger('user.profile.browser');
  * TODO: is this going to be a blocking call?
  */
 export const load: PageLoad = async (event) => {
-  const userId = get(user)?.id;
+  const { session } = await event.parent();
+  const userId = session?.user.id;
   if (!userId) {
     log.error('not authenticated');
     throw error(400, 'not authenticated');

@@ -152,6 +152,7 @@ Awesome **SvelteKit** Links
 - [game-chronicle](https://github.com/ItsCentric/game-chronicle) - Use Superforms, shadcn-svelte, formsnap, tauri  for native app
 - [climbing_noteboo](https://github.com/diericx/climbing_notebook) - Use skeleton, Superforms, sveltekit-flash-message
 - [Vercel Toolbar and Feature Flags SvelteKit Starter](https://github.com/vercel/examples/tree/main/toolbar/toolbar-feature-flags-sveltekit), [Demo](https://toolbar-feature-flags-sveltekit.vercel.app/)
+- [JavaFlavors](https://github.com/Critteros/JavaFlavors/tree/main/web) - use `houdini` and `setClientSession()`, drizzle, superforms, shadcn-svelte
 
 ## Deployment
 

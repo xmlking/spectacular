@@ -1,6 +1,8 @@
 <script lang="ts">
-import { isAuthenticated, user } from '$lib/stores/user';
+import { getNhostClient } from '$lib/stores/nhost';
 import { Debug } from '@spectacular/skeleton/components';
+
+const { isAuthenticated, user } = getNhostClient();
 </script>
 
 <svelte:head>
