@@ -1,14 +1,11 @@
 import { browser } from '$app/environment';
 import { invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
-import { HoudiniClient } from '$houdini';
-import type { ClientPlugin } from '$houdini';
+import { type ClientPlugin, HoudiniClient, getClientSession } from '$houdini';
 import { subscription } from '$houdini/plugins';
-import { nhost } from '$lib/stores/nhost';
 import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacular/utils';
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
-import { get } from 'svelte/store';
 
 const url = env.PUBLIC_GRAPHQL_ENDPOINT;
 const log = new Logger(browser ? 'houdini.browser.client' : 'houdini.server.client');
@@ -46,15 +43,14 @@ export default new HoudiniClient({
     if (session) {
       log.debug('session...', { session });
     }
+    // use client-side AT if avaiable !!!
     let accessToken = session?.accessToken;
     const backendToken = metadata?.backendToken;
     const useRole = metadata?.useRole;
     const adminSecret = metadata?.adminSecret;
 
-    // use client-side AT !!!
-    if (browser) {
-      const { accessToken: $accessToken } = nhost;
-      accessToken = get($accessToken) ?? undefined;
+     if (browser && getClientSession()?.accessToken) {
+      accessToken = getClientSession().accessToken;
     }
 
     return {

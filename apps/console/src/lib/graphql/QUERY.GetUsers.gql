@@ -1,0 +1,12 @@
+query GetUsers @cache(policy: NetworkOnly){
+  users {
+    displayName
+    email
+    id
+    lastSeen
+    metadata
+    phoneNumber
+		defaultRole
+		avatarUrl
+  }
+}

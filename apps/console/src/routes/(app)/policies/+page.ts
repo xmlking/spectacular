@@ -13,7 +13,7 @@ export const load = async (event) => {
   const form = await superValidate(url, zod(schema));
 
   if (!form.valid) return { status: 400, form }; // return fail(400, { form }); // FIXME
-  await sleep(5000);
+  await sleep(1000);
 
   const {
     data: { limit, offset, subjectType, subjectId },

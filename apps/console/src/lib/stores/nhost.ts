@@ -1,6 +1,7 @@
 import { browser } from '$app/environment';
 import { env } from '$env/dynamic/public';
 import { PUBLIC_NHOST_REGION, PUBLIC_NHOST_SUBDOMAIN } from '$env/static/public';
+import { extractSession, setClientSession, getClientSession } from '$houdini';
 import { NHOST_SESSION_KEY } from '$lib/constants';
 import { hasSecurityKey } from '$lib/nhost';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
@@ -64,7 +65,10 @@ export class SvelteKitNhostClient extends NhostClient {
         set(this.auth.getAccessToken() ?? null);
         this.auth.onTokenChanged((session) => {
           this.#log.debug('The access token refreshed:', { session });
-          set(session?.accessToken ?? null);
+          const accessToken = session?.accessToken;
+          set(accessToken ?? null);
+          // set fresh accessToken into HoudiniClient's session (client-side only)
+          setClientSession({ accessToken });
           // save session as cookie everytime token is refreshed or user signin via WebAuthN.
           // Cookie will be removed when browser closed or user explicitly SIGNED_OUT.
           Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
@@ -126,11 +130,10 @@ const NHOST_CLIENT_KEY = Symbol('NHOST_CLIENT');
  * This custom `nhost` object will not have sensitive data on server-side,
  * as we carefully check if this code is running in the browser, then only set session data.
  */
-export let nhost: SvelteKitNhostClient;
+// export let nhost: SvelteKitNhostClient;
 
 export const setNhostClient = () => {
-  // const nhost = ...
-  nhost = new SvelteKitNhostClient({
+const nhost = new SvelteKitNhostClient({
     // subdomain: PUBLIC_NHOST_SUBDOMAIN || 'local',
     // region: PUBLIC_NHOST_REGION,
     authUrl: env.PUBLIC_NHOST_AUTH_URL,

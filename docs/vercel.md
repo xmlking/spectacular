@@ -2,7 +2,7 @@
 
 ![Vercel Monorepo](./images/monorepo.avif 'Title')
 
-<p style="text-align: center;">The architecture of a monorepo deployed to Vercel</p>
+The architecture of a monorepo deployed to Vercel
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ Follow [SvelteKit on Vercel](https://vercel.com/docs/frameworks/sveltekit)
 
 ```shell
 # You can link your entire repo to all you Vercel projects in one command.
-vc link --repo
+vercel link --repo
 #
 vercel env ls
 vercel env ls --environment production
@@ -54,6 +54,16 @@ vercel env add API_TOKEN --sensitive
 vercel env rm API_TOKEN
 ```
 
+### Link
+
+Using Monorepos with Vercel CLI
+> [!NOTE]
+> If you're working in a monorepo using the Git Integration, you can link multiple projects at once using `vc link --repo`
+
+```shell
+vercel link --repo --yes --token $VERCEL_TOKEN
+```
+
 ## Build
 
 **Incremental Static Regeneration (ISR)** is a modern web development strategy that allows developers to create and update static pages on-demand, after the initial build.
@@ -62,7 +72,7 @@ vercel env rm API_TOKEN
 
 ![Vercel Request Times](./images/vercel-request-times.avif 'Title')
 
-<p style="text-align: center;">The result of ISR, for the end-user, feels as fast as static-site generation, served on Vercel's Edge Network.</p>
+The result of ISR, for the end-user, feels as fast as static-site generation, served on Vercel's Edge Network.
 
 ## Deploy
 
@@ -94,3 +104,4 @@ Vercel provides a set of [System Environment Variables](https://vercel.com/docs/
 - Quick Tip: [Deploy only modified Vercel projects in a Turborepo monorepo](https://www.joostschuur.com/blog/quick-tip-deploy-only-modified-vercel-projects-in-a-turborepo-monorepo)
 - [Intelligent ignored builds using Turborepo](https://vercel.com/changelog/intelligent-ignored-builds-using-turborepo)
 - [New features for SvelteKit: Optimize your application with ease](https://vercel.com/blog/feature-complete-sveltekit)
+- [Deploying a Monorepo to Vercel with Github Actions p1](https://davetayls.me/blog/2023-06-12-deploying-a-monorepo-to-vercel-with-github-actions)

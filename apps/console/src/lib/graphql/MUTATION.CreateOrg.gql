@@ -1,0 +1,8 @@
+mutation CreateOrg($data: organizations_insert_input!) {
+  insert_organizations_one(object: $data) {
+    organization
+    description
+    allowedEmails
+    allowedEmailDomains
+  }
+}

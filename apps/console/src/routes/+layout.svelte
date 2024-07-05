@@ -47,8 +47,10 @@ storeVercelProductionMode.set(data.vercelEnv === 'production');
 // Init Vercel Analytics
 // if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
 inject({ mode: dev ? 'development' : 'production' });
-// initialize Vercel Toolbar
-onMount(() => mountVercelToolbar());
+// initialize Vercel Toolbar in dev
+if (dev) {
+  onMount(() => mountVercelToolbar());
+}
 
 // Registered list of Components for Modals
 const modalComponentRegistry: Record<string, ModalComponent> = {
