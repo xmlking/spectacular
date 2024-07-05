@@ -3,7 +3,7 @@ import { dev } from '$app/environment';
 import { FLAGS_SECRET } from '$env/static/private';
 import * as flags from '$lib/flags';
 import { i18n } from '$lib/i18n';
-import { auth, guard, houdini, theme } from '$lib/server/middleware';
+import { auth, guard, houdini, theme } from '$lib/server/hooks';
 import { Logger, sleep } from '@spectacular/utils';
 import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';

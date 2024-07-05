@@ -1,6 +1,6 @@
 <script lang="ts">
 import { invalidateAll } from '$app/navigation';
-import type { SecurityKeyFields } from '$houdini';
+import type { SecurityKeyFragment } from '$houdini';
 import { PendingValue, RemoveSecurityKeyStore, cache, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
@@ -16,19 +16,20 @@ const toastStore = getToastStore();
 export let message: App.Superforms.Message | undefined;
 export let errors: string[];
 
-export let securityKey: SecurityKeyFields;
-$: securityKeyFields = fragment(
+export let securityKey: SecurityKeyFragment;
+$: securityKeyFragment = fragment(
   securityKey,
   graphql`
-    fragment SecurityKeyFields on authUserSecurityKeys {
+    fragment SecurityKeyFragment on authUserSecurityKeys {
       id
       nickname
     }
   `,
 );
 
-$: ({ id, nickname } = $securityKeyFields);
-//  $: loading = $securityKeyFields.__typename === PendingValue;
+$: ({ id, nickname } = $securityKeyFragment);
+
+//  $: loading = $securityKeyFragment.__typename === PendingValue;
 
 /**
  * delete handler

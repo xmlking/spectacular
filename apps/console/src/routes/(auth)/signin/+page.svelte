@@ -13,7 +13,11 @@ export let data;
 </svelte:head>
 
 <PasswordSigninForm />
+{#if data.flags.showMagicLink}
 <Divider>Or</Divider>
 <PasswordlessSigninForm />
+{/if}
+{#if data.flags.showSocial}
 <Divider>Or continue with</Divider>
 <SocialSigninForm />
+{/if}

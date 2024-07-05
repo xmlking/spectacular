@@ -17,7 +17,7 @@ query GetUser($userId: uuid!) @cache(policy: NetworkOnly) {
     }
     securityKeys(order_by: { nickname: asc })  @list(name: "SecurityKeys") {
       __typename
-      ...SecurityKeyFields
+      ...SecurityKeyFragment
     }
     personalAccessTokens: refreshTokens {
       id
