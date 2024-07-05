@@ -18,7 +18,6 @@ const log = new Logger('auth:profile:skey:browser');
 const toastStore = getToastStore();
 const nhost = getNhostClient();
 
-
 export let securityKey: SecurityKeyFragment;
 $: securityKeyFragment = fragment(
   securityKey,

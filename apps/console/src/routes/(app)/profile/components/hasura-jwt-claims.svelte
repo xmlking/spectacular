@@ -2,11 +2,11 @@
 import { invalidate } from '$app/navigation';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+import { getNhostClient } from '$lib/stores/nhost';
 import { AppBar, getToastStore } from '@skeletonlabs/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { UserRound } from 'lucide-svelte';
 import SuperDebug from 'sveltekit-superforms';
-import { getNhostClient } from '$lib/stores/nhost';
 
 // Variables
 let message: App.Superforms.Message | undefined;
