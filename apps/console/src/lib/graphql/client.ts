@@ -49,7 +49,7 @@ export default new HoudiniClient({
     const useRole = metadata?.useRole;
     const adminSecret = metadata?.adminSecret;
 
-     if (browser && getClientSession()?.accessToken) {
+    if (browser && getClientSession()?.accessToken) {
       accessToken = getClientSession().accessToken;
     }
 

@@ -39,8 +39,8 @@ initializeStores();
 // initialize LoadingState
 setLoadingState();
 // initialize nhost client
- // TODO: initialize different clients for server-side and client-side
-const nhost = setNhostClient()
+// TODO: initialize different clients for server-side and client-side
+const nhost = setNhostClient();
 
 // Handle Vercel Production Mode
 storeVercelProductionMode.set(data.vercelEnv === 'production');

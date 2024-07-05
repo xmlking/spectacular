@@ -1,4 +1,6 @@
 <script lang="ts">
+import { page } from '$app/stores';
+import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { pwSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
@@ -7,11 +9,9 @@ import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import * as m from '$i18n/messages';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-  import { page } from '$app/stores';
 
 const log = new Logger('auth:signin:password:browser');
 // Variables

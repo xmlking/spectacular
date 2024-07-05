@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Icon } from '@spectacular/skeleton/components/icons';
-  import { Github } from 'lucide-svelte';
+import { Github } from 'lucide-svelte';
 </script>
 
 <!-- Signin with social -->

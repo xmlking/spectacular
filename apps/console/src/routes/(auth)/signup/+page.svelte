@@ -1,79 +1,76 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-  import { PUBLIC_DEFAULT_ORGANIZATION } from "$env/static/public";
-  import * as Form from "formsnap";
-  import * as m from "$i18n/messages";
-  import { handleMessage } from "$lib/components/layout/toast-manager";
-  import { signUpSchema } from "$lib/schema/user";
-  import { getLoadingState } from "$lib/stores/loading";
-  import { getToastStore } from "@skeletonlabs/skeleton";
-  import { DebugShell } from "@spectacular/skeleton/components";
-  import { Alerts } from "@spectacular/skeleton/components/form";
-  import { Logger } from "@spectacular/utils";
-  import {  Loader, MoreHorizontal } from "lucide-svelte";
-  import SuperDebug, { defaults, superForm } from "sveltekit-superforms";
-  import { zod, zodClient } from "sveltekit-superforms/adapters";
-  import type { PageData } from "./$houdini";
+import { page } from '$app/stores';
+import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { signUpSchema } from '$lib/schema/user';
+import { getLoadingState } from '$lib/stores/loading';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { DebugShell } from '@spectacular/skeleton/components';
+import { Alerts } from '@spectacular/skeleton/components/form';
+import { Logger } from '@spectacular/utils';
+import * as Form from 'formsnap';
+import { Loader, MoreHorizontal } from 'lucide-svelte';
+import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import type { PageData } from './$houdini';
 
-  const log = new Logger("auth:signup:browser");
+const log = new Logger('auth:signup:browser');
 
-  export let data: PageData;
+export let data: PageData;
 
-  // Variables
-  const loadingState = getLoadingState();
-  const toastStore = getToastStore();
+// Variables
+const loadingState = getLoadingState();
+const toastStore = getToastStore();
 
-  const form = superForm(defaults(zod(signUpSchema)), {
-    dataType: "json",
-    taintedMessage: null,
-    clearOnSubmit: "errors-and-message",
-    syncFlashMessage: false,
-    delayMs: 100,
-    timeoutMs: 4000,
-    validators: zodClient(signUpSchema),
-    onUpdated({ form }) {
-      if (form.message) {
-        handleMessage(form.message, toastStore);
-      }
-    },
-    onError({ result }) {
-      // TODO:
-      // setError(form, '', result.error.message);
-      log.error("signup error:", { result });
-    },
-  });
+const form = superForm(defaults(zod(signUpSchema)), {
+  dataType: 'json',
+  taintedMessage: null,
+  clearOnSubmit: 'errors-and-message',
+  syncFlashMessage: false,
+  delayMs: 100,
+  timeoutMs: 4000,
+  validators: zodClient(signUpSchema),
+  onUpdated({ form }) {
+    if (form.message) {
+      handleMessage(form.message, toastStore);
+    }
+  },
+  onError({ result }) {
+    // TODO:
+    // setError(form, '', result.error.message);
+    log.error('signup error:', { result });
+  },
+});
 
-  const {
-    form: formData,
-    errors,
-    message,
-    submitting,
-    constraints,
-    delayed,
-    timeout,
-    tainted,
-    posted,
-    allErrors,
-    capture,
-    restore,
-    enhance,
-  } = form;
+const {
+  form: formData,
+  errors,
+  message,
+  submitting,
+  constraints,
+  delayed,
+  timeout,
+  tainted,
+  posted,
+  allErrors,
+  capture,
+  restore,
+  enhance,
+} = form;
 
-  export const snapshot = { capture, restore };
+export const snapshot = { capture, restore };
 
-  // Functions
+// Functions
 
-  // Reactivity
-  $: ({ ListOrganizations } = data);
-  $: organizations = $ListOrganizations.data?.organizations.map(
-    (x) => x.organization,
-  ) ?? [PUBLIC_DEFAULT_ORGANIZATION];
+// Reactivity
+$: ({ ListOrganizations } = data);
+$: organizations = $ListOrganizations.data?.organizations.map((x) => x.organization) ?? [PUBLIC_DEFAULT_ORGANIZATION];
 
-  // Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
-  $: loadingState.setFormLoading($delayed);
-  $: valid = $allErrors.length === 0;
-  $formData.redirectTo =
-    $page.url.searchParams.get("redirectTo") ?? $formData.redirectTo;
+// Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
+$: loadingState.setFormLoading($delayed);
+$: valid = $allErrors.length === 0;
+$formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
 </script>
 
 <svelte:head>
