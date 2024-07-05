@@ -2,18 +2,19 @@
 import { invalidate } from '$app/navigation';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { nhost } from '$lib/stores/user';
-import { elevate, elevated } from '$lib/stores/user';
 import { AppBar, getToastStore } from '@skeletonlabs/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { UserRound } from 'lucide-svelte';
 import SuperDebug from 'sveltekit-superforms';
+import { getNhostClient } from '$lib/stores/nhost';
 
 // Variables
-let claims = nhost.auth.getHasuraClaims();
 let message: App.Superforms.Message | undefined;
 const errors: string[] = [];
 const toastStore = getToastStore();
+const nhost = getNhostClient();
+const { elevated } = nhost;
+let claims = nhost.auth.getHasuraClaims();
 
 // Functions
 async function handleRefresh() {
@@ -23,7 +24,7 @@ async function handleRefresh() {
 }
 
 async function handleElevate() {
-  const error = await elevate();
+  const error = await nhost.elevate();
   if (error) {
     errors.push(error.message);
   } else {

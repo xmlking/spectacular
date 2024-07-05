@@ -15,7 +15,7 @@ import { zod, zodClient } from 'sveltekit-superforms/adapters';
 const log = new Logger('profile:password:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
-const { nhost } = getNhostClient();
+const nhost = getNhostClient();
 
 const form = superForm(defaults(zod(changePasswordSchema)), {
   SPA: true,

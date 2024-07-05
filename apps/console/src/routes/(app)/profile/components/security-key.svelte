@@ -10,11 +10,14 @@ import { GraphQLError } from 'graphql';
 import { KeyRound, Trash } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 
-const log = new Logger('auth:profile:skey:browser');
-const toastStore = getToastStore();
-
 export let message: App.Superforms.Message | undefined;
 export let errors: string[];
+
+// Variables
+const log = new Logger('auth:profile:skey:browser');
+const toastStore = getToastStore();
+const nhost = getNhostClient();
+
 
 export let securityKey: SecurityKeyFragment;
 $: securityKeyFragment = fragment(
@@ -39,10 +42,8 @@ const deleteSecurityKey = new RemoveSecurityKeyStore();
 const handleDelete = async () => {
   // before
   isDeleting = true;
-
   // check if elevate is needed
-  const { elevate } = getNhostClient();
-  const error = await elevate();
+  const error = await nhost.elevate();
   if (error) {
     errors.push(error.message);
     handleMessage(

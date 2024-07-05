@@ -20,8 +20,6 @@ const log = new Logger('profile:keys:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const nhost = getNhostClient();
-const { elevate } = nhost;
-
 const form = superForm(defaults(zod(webAuthnSchema)), {
   SPA: true,
   dataType: 'json',
@@ -34,7 +32,7 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
     // First, check if elevate is required
-    const error = await elevate();
+    const error = await nhost.elevate();
     if (error) {
       log.error('Error elevating user', { error });
       setError(form, '', error.message, {

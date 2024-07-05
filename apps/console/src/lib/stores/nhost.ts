@@ -1,9 +1,8 @@
 import { browser } from '$app/environment';
 import { env } from '$env/dynamic/public';
 import { PUBLIC_NHOST_REGION, PUBLIC_NHOST_SUBDOMAIN } from '$env/static/public';
-import { extractSession, getClientSession, setClientSession } from '$houdini';
+import { SearchSecurityKeysStore, extractSession, getClientSession, setClientSession } from '$houdini';
 import { NHOST_SESSION_KEY } from '$lib/constants';
-import { hasSecurityKey } from '$lib/nhost';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
 import type { User } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
@@ -11,6 +10,7 @@ import Cookies from 'js-cookie';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { type Readable, type Writable, derived, get, readable, readonly, writable } from 'svelte/store';
 
+const skQuery = new SearchSecurityKeysStore().artifact.raw;
 export class SvelteKitNhostClient extends NhostClient {
   #log = new Logger('auth.store.client');
 
@@ -110,11 +110,21 @@ export class SvelteKitNhostClient extends NhostClient {
   async elevate() {
     const $elevated = get(this.elevated);
     const $user = get(this.#user);
-    if (!$elevated && $user?.id && (await hasSecurityKey($user.id))) {
+    if (!$elevated && $user?.id && (await this.hasSecurityKey())) {
       const { error } = await this.auth.elevateEmailSecurityKey($user?.email as string);
       if (error) return error;
     }
     return null;
+  }
+
+  async hasSecurityKey() {
+    const userId = get(this.#user)?.id;
+    const { data, error } = await this.graphql.request(skQuery, { userId });
+    if (error) {
+      this.#log.error({ error });
+      return false;
+    }
+    return data?.authUserSecurityKeys.length > 0;
   }
 }
 

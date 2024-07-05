@@ -17,7 +17,7 @@ export let initialData: ChangeEmail;
 const log = new Logger('profile:password:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
-const { nhost } = getNhostClient();
+const nhost = getNhostClient();
 
 const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
   SPA: true,
