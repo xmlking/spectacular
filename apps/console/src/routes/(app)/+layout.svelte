@@ -14,7 +14,7 @@ const nhost = getNhostClient()
  * Otherwise all authorized graphql queries will get errors.
  */
 onMount(async () => {
-  if (!(await nhost.auth.isAuthenticated())) {
+  if (!(nhost.auth.isAuthenticated())) {
     goto(`/signin?redirectTo=${$page.url.pathname}`);
   }
 });

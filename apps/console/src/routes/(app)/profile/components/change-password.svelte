@@ -1,15 +1,22 @@
 <script lang="ts">
+import { handleMessage } from '$lib/components/layout/toast-manager';
 import { changePasswordSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
-import { sleep } from '@spectacular/utils';
+import { Logger, sleep } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, setError, setMessage, superForm, type ErrorStatus } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 // Variables
+const log = new Logger('profile:password:browser');
+const toastStore = getToastStore();
 const loadingState = getLoadingState();
+const { nhost } = getNhostClient();
+
 const form = superForm(defaults(zod(changePasswordSchema)), {
   SPA: true,
   dataType: 'json',
@@ -22,8 +29,24 @@ const form = superForm(defaults(zod(changePasswordSchema)), {
   validators: zodClient(changePasswordSchema),
   async onUpdate({ form }) {
     if (form.valid) {
-      await sleep(8000);
-      // TODO: Call an external API with form.data, await the result and update form
+      await sleep(4500);
+      const newPassword = form.data.password;
+      const { error } = await nhost.auth.changePassword({ newPassword });
+      if (error) {
+        log.error('Error occurred while changing the password:', { error });
+        setError(form, '', error.message, {
+          status: error.status as ErrorStatus,
+        });
+        return;
+      }
+      const message = {
+        message: 'Password changed',
+        hideDismiss: true,
+        timeout: 10000,
+        type: 'success',
+      } as const;
+      setMessage(form, message);
+      handleMessage(message, toastStore);
     }
   },
 });

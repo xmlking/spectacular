@@ -13,7 +13,6 @@ import { get } from 'svelte/store';
 const url = env.PUBLIC_GRAPHQL_ENDPOINT;
 const log = new Logger(browser ? 'houdini.browser.client' : 'houdini.server.client');
 
-
 // in order to verify that we send metadata, we need something that will log the metadata after
 const logMetadata: ClientPlugin = () => ({
   end(ctx, { resolve, value }) {

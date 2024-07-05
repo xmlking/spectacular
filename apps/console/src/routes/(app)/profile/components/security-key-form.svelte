@@ -8,6 +8,7 @@ import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
+import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { superForm, setMessage, setError, defaults } from 'sveltekit-superforms';
@@ -15,6 +16,7 @@ import type { ErrorStatus } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
 // Variables
+const log = new Logger('profile:keys:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const nhost = getNhostClient();
@@ -34,6 +36,7 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
     // First, check if elevate is required
     const error = await elevate();
     if (error) {
+      log.error('Error elevating user', { error });
       setError(form, '', error.message, {
         status: error.status as ErrorStatus,
       });
@@ -42,6 +45,7 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
     // Second, add the security key to database
     const { key, error: addKeyError } = await nhost.auth.addSecurityKey(form.data.nickname);
     if (addKeyError) {
+      log.error('Error adding security key', { error: addKeyError });
       setError(form, '', addKeyError.message, {
         status: addKeyError.status as ErrorStatus,
       });

@@ -1,5 +1,4 @@
 <script lang="ts">
-import Preview from '$lib/components/preview.svelte';
 import { temperature as temperatureData } from '$lib/utils/date-series';
 import { createDateSeries } from '$lib/utils/gen-data';
 import { extent, ticks } from 'd3-array';
@@ -38,7 +37,7 @@ const stackData = stack().keys(keys)(data1);
 const temperatureColor = scaleSequential(extent(temperatureData, (d) => d.value) as [number, number], interpolateTurbo);
 </script>
 
-<Preview>
+<div class="card p-4">
   <div class="h-[300px] rounded border p-4">
     <Chart
       data={stackData}
@@ -60,9 +59,9 @@ const temperatureColor = scaleSequential(extent(temperatureData, (d) => d.value)
       </Svg>
     </Chart>
   </div>
-</Preview>
+</div>
 
-<Preview>
+<div class="card p-4">
   <div class="h-[300px] rounded border p-4">
     <Chart
       {data}
@@ -80,11 +79,11 @@ const temperatureColor = scaleSequential(extent(temperatureData, (d) => d.value)
       </Svg>
     </Chart>
   </div>
-</Preview>
+</div>
 
 <h3 class="h3">With Tooltip and Highlight</h3>
 
-<Preview>
+<div class="card p-4">
   <div class="h-[300px] rounded border p-4">
     <Chart
       data={stackData}
@@ -113,9 +112,9 @@ const temperatureColor = scaleSequential(extent(temperatureData, (d) => d.value)
       </Tooltip>
     </Chart>
   </div>
-</Preview>
+</div>
 <h3 class="h3">Gradient encoding</h3>
-<Preview>
+<div class="card p-4">
   <div class="h-[300px] rounded border p-4">
     <Chart data={temperatureData} x="date" xScale={scaleTime()} y="value" yNice padding={{ left: 16, bottom: 24 }}>
       <Svg>
@@ -128,4 +127,4 @@ const temperatureColor = scaleSequential(extent(temperatureData, (d) => d.value)
       <Legend scale={temperatureColor} title="Temperature (°F)" placement="top-right" width={240} class="-top-[14px]" />
     </Chart>
   </div>
-</Preview>
+</div>

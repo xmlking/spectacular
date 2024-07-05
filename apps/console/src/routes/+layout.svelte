@@ -20,15 +20,17 @@ import type { ModalComponent } from '@skeletonlabs/skeleton';
 import { AppShell } from '@skeletonlabs/skeleton';
 import { Logger, startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
-import { onMount, type ComponentEvents } from 'svelte';
+import { mountVercelToolbar } from '@vercel/toolbar/vite';
+import { type ComponentEvents, onMount } from 'svelte';
 import { setupViewTransition } from 'sveltekit-view-transition';
 import '../app.pcss';
-import { getNhostClient, setNhostClient } from '$lib/stores/nhost';
+import { setNhostClient } from '$lib/stores/nhost';
 
 const log = new Logger('layout:root:browser');
 
 export let data;
 
+//*** initializations ***//
 // Floating UI for Popups
 storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
@@ -38,15 +40,15 @@ initializeStores();
 setLoadingState();
 // initialize nhost client
  // TODO: initialize different clients for server-side and client-side
-setNhostClient()
-
-
+const nhost = setNhostClient()
 
 // Handle Vercel Production Mode
 storeVercelProductionMode.set(data.vercelEnv === 'production');
 // Init Vercel Analytics
 // if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
 inject({ mode: dev ? 'development' : 'production' });
+// initialize Vercel Toolbar
+onMount(() => mountVercelToolbar());
 
 // Registered list of Components for Modals
 const modalComponentRegistry: Record<string, ModalComponent> = {
@@ -82,14 +84,12 @@ function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
   });
 }
 
-
 // Reactive
 // Disable left sidebar on homepage
 $: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
 $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 
 // update nhost session
-const nhost = getNhostClient()
 // HINT: https://blog.flotes.app/posts/performant-reactivity
 $: ({ session } = data);
 $: if (browser) {

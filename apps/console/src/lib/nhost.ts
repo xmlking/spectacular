@@ -10,7 +10,6 @@ import { Logger } from '@spectacular/utils';
  */
 const log = new Logger('nhost.auth.brower');
 
-
 export async function signUp(email: string, password: string, displayName: string) {
   const nhost = getNhostClient();
   const { session, error } = await nhost.auth.signUp({

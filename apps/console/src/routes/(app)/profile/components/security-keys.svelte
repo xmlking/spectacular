@@ -11,7 +11,7 @@ export const defaultDE = {
   easing: quintOut,
 };
 
-export let securityKeys: NonNullable<GetUser$result['user']>['securityKeys'];
+export let securityKeys: SecurityKeyFields[];
 
 // Variables
 let message: App.Superforms.Message | undefined;
@@ -26,6 +26,8 @@ let errors: string[] = [];
       <div transition:fade={defaultDE} animate:flip={defaultDE}>
         <SecurityKeyItem bind:message bind:errors {securityKey} />
       </div>
+    {:else}
+      <div class="text-center text-gray-500">No security keys found.</div>
     {/each}
   </dl>
 </div>

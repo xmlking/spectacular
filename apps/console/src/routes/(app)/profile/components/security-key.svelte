@@ -1,6 +1,7 @@
 <script lang="ts">
 import { invalidateAll } from '$app/navigation';
-import { type GetUser$result, RemoveSecurityKeyStore, cache } from '$houdini';
+import type { SecurityKeyFields } from '$houdini';
+import { PendingValue, RemoveSecurityKeyStore, cache, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
@@ -12,12 +13,23 @@ import { fade } from 'svelte/transition';
 const log = new Logger('auth:profile:skey:browser');
 const toastStore = getToastStore();
 
-export let securityKey: NonNullable<GetUser$result['user']>['securityKeys'][0];
 export let message: App.Superforms.Message | undefined;
 export let errors: string[];
 
-const { id, nickname } = securityKey;
-const { elevate } = getNhostClient();
+export let securityKey: SecurityKeyFields;
+$: securityKeyFields = fragment(
+  securityKey,
+  graphql`
+    fragment SecurityKeyFields on authUserSecurityKeys {
+      id
+      nickname
+    }
+  `,
+);
+
+$: ({ id, nickname } = $securityKeyFields);
+//  $: loading = $securityKeyFields.__typename === PendingValue;
+
 /**
  * delete handler
  */
@@ -28,6 +40,7 @@ const handleDelete = async () => {
   isDeleting = true;
 
   // check if elevate is needed
+  const { elevate } = getNhostClient();
   const error = await elevate();
   if (error) {
     errors.push(error.message);
