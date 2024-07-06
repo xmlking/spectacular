@@ -43,8 +43,8 @@ Any static assets, like images, can be placed in the `public/` directory.
 ## 🧞 Commands
 
 ```shell
-turbo dev  --filter=web
-turbo dev  --filter=web --  --verbose
+turbo --filter=web dev
+turbo --filter=web dev --  --verbose
 ```
 
 All commands are run from the root of the project, from a terminal:

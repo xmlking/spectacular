@@ -1,3 +1,4 @@
+import { setTimeout } from 'node:timers/promises';
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 import { showMagicLinkLogin, showSocialLogin } from '$lib/flags';
 import { i18n } from '$lib/i18n';
@@ -6,7 +7,6 @@ import { limiter } from '$lib/server/limiter/limiter';
 import { setNhostSessionInCookies } from '$lib/server/utils/nhost';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
-import { setTimeout } from 'node:timers/promises';
 import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
@@ -113,7 +113,7 @@ export const actions = {
       );
     }
 
-    await sleep(8000);
+    await setTimeout(8000);
 
     if (!form.valid) return fail(400, { form });
 

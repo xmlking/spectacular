@@ -1,5 +1,6 @@
 <script lang="ts">
 import { page } from '$app/stores';
+import { cache } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { webAuthnSchema } from '$lib/schema/user';
@@ -14,7 +15,6 @@ import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { superForm, setMessage, setError, defaults } from 'sveltekit-superforms';
 import type { ErrorStatus } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { cache } from '$houdini';
 
 // Variables
 const log = new Logger('profile:keys:browser');
@@ -59,10 +59,10 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
     } as const;
     setMessage(form, message);
     handleMessage(message, toastStore);
-     // Since addSecurityKey() is not using houdini client,
-     // we have to manually invalidate cache.
+    // Since addSecurityKey() is not using houdini client,
+    // we have to manually invalidate cache.
     // Mark all type 'authUserSecurityKeys' stale
-    cache.markStale('authUserSecurityKeys')
+    cache.markStale('authUserSecurityKeys');
   },
 });
 

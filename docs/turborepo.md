@@ -119,16 +119,16 @@ Guidelines for configuring `turbo.json`
 ### Run
 
 ```shell
-turbo dev --filter=playground
-turbo dev --filter=web
-turbo dev --filter=docs
-turbo dev --filter=console --log-order=stream
+turbo --filter=playground dev
+turbo --filter=web dev
+turbo --filter=docs dev
+turbo --filter=console --log-order=stream dev
 ```
 
 ### Test
 
 ```shell
-turbo test --filter=helpers
+turbo --filter=helpers test
 ```
 
 ### Build

@@ -19,10 +19,10 @@ pnpm create svelte@latest apps/my-app
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```shell
-turbo dev --filter=playground
+turbo --filter=playground dev
 
 # or start the server and open the app in a new browser tab
-turbo dev --filter=playground -- --open
+turbo --filter=playground dev -- --open
 ```
 
 ## Generate
@@ -30,7 +30,7 @@ turbo dev --filter=playground -- --open
 Generate `i18n` types, `schema.graphql` etc...
 
 ```shell
-turbo run generate --filter=playground
+turbo --filter=playground run generate
 ```
 
 ## Building
@@ -38,10 +38,10 @@ turbo run generate --filter=playground
 To create a production version of your app:
 
 ```shell
-turbo build --filter=playground...
-turbo build --filter=playground... --summarize
-turbo build --filter=playground... --dry
-turbo build --filter=playground... --graph
+turbo  --filter=playground... build
+turbo  --filter=playground... --summarize build
+turbo  --filter=playground... --dry build
+turbo  --filter=playground... --graph build
 ```
 
 You can preview the production build with `turbo preview --filter=playground`.

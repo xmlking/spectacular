@@ -107,16 +107,16 @@ make exec-auth
 ### Start apps/console
 
 ```shell
-turbo dev --filter=console
+turbo --filter=console dev
 
 # or use `--log-order=stream` to disable TUI
-turbo dev --filter=console --log-order=stream
+turbo --filter=console --log-order=stream dev
 
 # or start the server and open the app in a new browser tab
-turbo dev --filter=console -- --open
+turbo --filter=console dev -- --open 
 
 # run in debug mode
-turbo dev:debug --filter=console
+turbo --filter=console dev:debug
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
@@ -179,9 +179,9 @@ To create a production version of your app:
 ```shell
 turbo build
 # run build
-turbo build  --filter=playground...
-turbo build  --filter=playground... --dry
-turbo build --filter=playground... --graph
+turbo --filter=playground... build
+turbo --filter=playground... --dry build
+turbo --filter=playground... --graph build
 ```
 
 Run from the local build directory:

@@ -7,13 +7,13 @@ Demo app build with `tailwind`, `flowbite`, `graphql`, `houdini`, `superforms`
 Once you've cloned the project and installed dependencies with `pnpm i`, start a development server:
 
 ```shell
-turbo dev --filter=./apps/console-fb
+turbo --filter=console-fb dev
 
 # or start the server and open the app in a new browser tab
-turbo dev --filter=./apps/console-fb -- --open
+turbo --filter=console-fb dev -- --open
 
 # run in debug mode
-turbo dev:debug --filter=./apps/console-fb
+turbo --filter=console-fb dev:debug
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
@@ -47,8 +47,8 @@ pnpm audit --fix
 Format and lint code
 
 ```shell
-turbo format --filter=console-fb
-turbo lint --filter=console-fb
+turbo --filter=console-fb format
+turbo --filter=console-fb lint
 ```
 
 ## Testing
@@ -56,16 +56,16 @@ turbo lint --filter=console-fb
 ### Unit/Component Tests
 
 ```shell
-turbo test --filter=console-fb
+turbo --filter=console-fb test
 
-turbo test:ui --filter=console-fb
+turbo --filter=console-fb test:ui
 #Then, you can visit the Vitest UI at http://localhost:51204/__vitest__/.
 
 # test coverage
-turbo test:coverage --filter=console-fb
+turbo  --filter=console-fb test:coverage
 
 # updating Snapshots
-pnpx vitest -u --filter=console-fb
+pnpx  -u --filter=console-fb vitest
 
 # test specific folder
 pnpx vitest apps/console-fb/src/lib/utils
@@ -76,7 +76,7 @@ pnpx vitest apps/console-fb/src/lib/utils
 ### E2E Tests
 
 ```shell
-turbo test:e2e --filter=console-fb
+turbo --filter=console-fb test:e2e
 ```
 
 ## Building
@@ -86,9 +86,9 @@ To create a production version of your app:
 ```shell
 turbo build
 # run build
-turbo build  --filter=console-fb...
-turbo build  --filter=console-fb... --dry
-turbo build --filter=console-fb... --graph
+turbo --filter=console-fb... build
+turbo --filter=console-fb... --dry build
+turbo --filter=console-fb... --graph build
 ```
 
 Run from the local build directory:
@@ -126,7 +126,7 @@ cog bump --auto
 To build and publish libs
 
 ```shell
-turbo build --filter=lib...
+turbo --filter=lib... build
 cd package
 pnpm publish
 ```
