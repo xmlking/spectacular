@@ -1,7 +1,7 @@
 <script lang="ts">
 import { invalidateAll } from '$app/navigation';
 import type { SecurityKeyFragment } from '$houdini';
-import { PendingValue, RemoveSecurityKeyStore, cache, fragment, graphql } from '$houdini';
+import { PendingValue, cache, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
@@ -19,7 +19,7 @@ const toastStore = getToastStore();
 const nhost = getNhostClient();
 
 export let securityKey: SecurityKeyFragment;
-$: securityKeyFragment = fragment(
+$: data = fragment(
   securityKey,
   graphql`
     fragment SecurityKeyFragment on authUserSecurityKeys {
@@ -29,7 +29,7 @@ $: securityKeyFragment = fragment(
   `,
 );
 
-$: ({ id, nickname } = $securityKeyFragment);
+$: ({ id, nickname } = $data);
 
 //  $: loading = $securityKeyFragment.__typename === PendingValue;
 
@@ -37,7 +37,14 @@ $: ({ id, nickname } = $securityKeyFragment);
  * delete handler
  */
 let isDeleting = false;
-const deleteSecurityKey = new RemoveSecurityKeyStore();
+const deleteSecurityKey = graphql(`
+  mutation RemoveSecurityKey($id: uuid!) {
+    deleteAuthUserSecurityKey(id: $id) {
+      ...Security_Keys_remove
+    }
+  }
+`);
+
 const handleDelete = async () => {
   // before
   isDeleting = true;
@@ -85,9 +92,6 @@ const handleDelete = async () => {
         type: 'success',
       };
       handleMessage(message, toastStore);
-
-      cache.markStale();
-      await invalidateAll();
     } else {
       errors.push(`Cannot  delete security key: ${nickname}. Data returned from mutation is falsey.`);
       handleMessage(

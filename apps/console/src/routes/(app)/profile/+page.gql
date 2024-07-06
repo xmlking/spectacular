@@ -1,4 +1,6 @@
-query GetUser($userId: uuid!) @cache(policy: NetworkOnly) {
+# CacheOrNetwork is default cache strategy.
+# We are leveraging Houdini's Optimistic updates for this usecase
+query GetUser($userId: uuid!) @cache(policy: CacheOrNetwork) {
   # get all fragments needed for profile page.
   user(id: $userId) @loading(cascade: true) {
     id
@@ -15,7 +17,7 @@ query GetUser($userId: uuid!) @cache(policy: NetworkOnly) {
       role
       isDefaultRole
     }
-    securityKeys(order_by: { nickname: asc })  @list(name: "SecurityKeys") {
+    securityKeys(order_by: { nickname: asc })  @list(name: "Security_Keys") {
       __typename
       ...SecurityKeyFragment
     }

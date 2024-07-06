@@ -150,6 +150,7 @@ Awesome **SvelteKit** Links
 - [ReShared](https://reshared.org/) is community things sharing webapp. OSS, implemented with **nhost**.
   - [repo](https://github.com/altschuler/reshared/)
 - [game-chronicle](https://github.com/ItsCentric/game-chronicle) - Use Superforms, shadcn-svelte, formsnap, tauri  for native app
+- [whispering](https://github.com/braden-w/whispering) - Svelte5, tauri, OpanAI, audio capture
 - [climbing_noteboo](https://github.com/diericx/climbing_notebook) - Use skeleton, Superforms, sveltekit-flash-message
 - [Vercel Toolbar and Feature Flags SvelteKit Starter](https://github.com/vercel/examples/tree/main/toolbar/toolbar-feature-flags-sveltekit), [Demo](https://toolbar-feature-flags-sveltekit.vercel.app/)
 - [JavaFlavors](https://github.com/Critteros/JavaFlavors/tree/main/web) - use `houdini` and `setClientSession()`, drizzle, superforms, shadcn-svelte

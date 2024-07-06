@@ -5,7 +5,8 @@ import { pwSchema, pwlSchema } from '$lib/schema/user';
 import { limiter } from '$lib/server/limiter/limiter';
 import { setNhostSessionInCookies } from '$lib/server/utils/nhost';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
-import { Logger, sleep } from '@spectacular/utils';
+import { Logger } from '@spectacular/utils';
+import { setTimeout } from 'node:timers/promises';
 import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
@@ -63,7 +64,7 @@ export const actions = {
       );
     }
 
-    await sleep(2000);
+    await setTimeout(2000);
 
     if (!form.valid) return fail(400, { form });
 

@@ -2,7 +2,7 @@ import { VERCEL_ENV } from '$env/static/private';
 import { Logger } from '@spectacular/utils';
 import { loadFlash } from 'sveltekit-flash-message/server';
 
-const log = new Logger('server:layout');
+const log = new Logger('root:layout:server');
 
 export const load = loadFlash(
   async ({

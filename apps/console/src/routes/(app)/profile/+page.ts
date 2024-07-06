@@ -25,6 +25,8 @@ export const load: PageLoad = async (event) => {
     log.error('not authenticated');
     throw error(400, 'not authenticated');
   }
+  // this load function will be rerun if manually invalidated elsewhere by calling `invalidate('app:profile')`.
+  // event.depends('app:profile');
   return {
     ...(await load_GetUser({
       event,
@@ -37,3 +39,4 @@ export const load: PageLoad = async (event) => {
     })),
   };
 };
+

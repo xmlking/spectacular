@@ -26,7 +26,7 @@ import { setupViewTransition } from 'sveltekit-view-transition';
 import '../app.pcss';
 import { setNhostClient } from '$lib/stores/nhost';
 
-const log = new Logger('layout:root:browser');
+const log = new Logger('root:layout:browser');
 
 export let data;
 

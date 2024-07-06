@@ -14,6 +14,7 @@ import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { superForm, setMessage, setError, defaults } from 'sveltekit-superforms';
 import type { ErrorStatus } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import { cache } from '$houdini';
 
 // Variables
 const log = new Logger('profile:keys:browser');
@@ -58,6 +59,10 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
     } as const;
     setMessage(form, message);
     handleMessage(message, toastStore);
+     // Since addSecurityKey() is not using houdini client,
+     // we have to manually invalidate cache.
+    // Mark all type 'authUserSecurityKeys' stale
+    cache.markStale('authUserSecurityKeys')
   },
 });
 
