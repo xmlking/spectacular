@@ -15,12 +15,12 @@ Inspired by [grafbase-houdini](https://github.com/grafbase/grafbase/tree/main/pa
   }
   ```
 
-1. Add Role directive to any GLQ. e.g., `@role(name: "user")`
+1. Add `@role` directive to your GraphQL Docs. e.g., `@role(name: "user")`
 
   ```gql
   query GetUser($userId: uuid!) @role(name: "user") {
     user(id: $userId) {
-      ...UserDetailsFragment @loading
+      ...UserDetailsFragment
       userOrgRoles(order_by: {organization: asc}) {
         organization
         role

@@ -4,18 +4,11 @@ import type { ClientPlugin } from 'houdini';
 
 const plugin: ClientPlugin = () => ({
   start(ctx, { next }) {
-    const {
-      artifact: { pluginData },
-      metadata,
-    } = ctx;
-    const role = pluginData?.['@spectacular/role-houdini']?.role;
-
-    if (role && !metadata?.useRole) {
-      console.log('setting role:', role);
-      if (metadata) metadata.useRole = role;
-      else ctx.metadata = { useRole: role };
+    const role = ctx.artifact.pluginData?.['@spectacular/role-houdini']?.role;
+    if (role && ctx.fetchParams?.headers) {
+      ctx.fetchParams.headers = { ...ctx.fetchParams.headers, 'x-hasura-role': role };
+      console.log(ctx.fetchParams.headers);
     }
-
     next(ctx);
   },
 });

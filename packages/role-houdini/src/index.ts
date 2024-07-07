@@ -7,11 +7,21 @@ export default plugin('role-houdini', async () => {
     // add the @role directive
     schema() {
       return `
-                directive @role(
-                  name: [String!]
-                ) on QUERY
+              directive @role(
+                name: String!
+              ) on QUERY
             `;
     },
+
+    /**
+     * Add the client plugin to the runtime
+     */
+    clientPlugins: {
+      '@spectacular/role-houdini/client': null,
+    },
+
+    /** Configure the default set of scalars supported by Hasura */
+    config: '@spectacular/role-houdini/config',
 
     /**
      * We want to perform special logic for the the @role directive so we're going to persist
