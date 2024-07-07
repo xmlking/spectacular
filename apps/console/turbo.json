@@ -61,7 +61,8 @@
       ]
     },
     "build:prod": {
-      "dependsOn": ["generate:prod", "^build"],
+      // "dependsOn": ["generate:prod", "^build"],
+      "dependsOn": ["^build"],
       "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
       "env": [
         "VERCEL",
