@@ -1140,8 +1140,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(svelte@4.2.18)
       svelte-sonner:
-        specifier: 0.3.24
-        version: 0.3.24(svelte@4.2.18)
+        specifier: 0.3.25
+        version: 0.3.25(svelte@4.2.18)
       sveltekit-superforms:
         specifier: 2.15.2
         version: 2.15.2(@sveltejs/kit@2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.2(@types/node@20.14.9)(terser@5.31.1)))(svelte@4.2.18)(vite@5.3.2(@types/node@20.14.9)(terser@5.31.1)))(svelte@4.2.18)
@@ -3378,9 +3378,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.0':
     resolution: {integrity: sha512-mka73qxNZ2OGTz0XkwKoO/Gj62WZPA/2F1kcTWEGS9Q4j+Bo7+6rKXCFQq428yYqg/p82THWY0si/cMY3/HpTA==}
@@ -9310,10 +9312,10 @@ packages:
   svelte-select@5.8.3:
     resolution: {integrity: sha512-nQsvflWmTCOZjssdrNptzfD1Ok45hHVMTL5IHay5DINk7dfu5Er+8KsVJnZMJdSircqtR0YlT4YkCFlxOUhVPA==}
 
-  svelte-sonner@0.3.24:
-    resolution: {integrity: sha512-txuL0JBUs0v6qGrr0PGCsbXmKHuthdrAkfISYi8umuveF7+gINb6EXl6VmKY9aHhyxCqvVgqd6yophQNrnor4w==}
+  svelte-sonner@0.3.25:
+    resolution: {integrity: sha512-jYAHqDc1fBAotI+9g9SW2Pc6sKJ8oVl7aXB/EhQsxiVADAZ9AX4w7dxDI1oyskD6pG8mhYIKXi+5WqFmCRqFyw==}
     peerDependencies:
-      svelte: '>=3 <5'
+      svelte: ^3.0.0 || ^4.0.0 || ^5.0.0-next.1
 
   svelte-subscribe@2.0.1:
     resolution: {integrity: sha512-eKXIjLxB4C7eQWPqKEdxcGfNXm2g/qJ67zmEZK/GigCZMfrTR3m7DPY93R6MX+5uoqM1FRYxl8LZ1oy4URWi2A==}
@@ -20145,7 +20147,7 @@ snapshots:
     dependencies:
       svelte-floating-ui: 1.5.8
 
-  svelte-sonner@0.3.24(svelte@4.2.18):
+  svelte-sonner@0.3.25(svelte@4.2.18):
     dependencies:
       svelte: 4.2.18
 
