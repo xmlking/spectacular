@@ -143,10 +143,9 @@ Default demo user's **username:** `sumo@demo.com` **password:** `sumodemo123`
 Generate `i18n` types, `schema.graphql` etc...
 
 ```shell
-turbo run generate --filter=console
+turbo --filter=console run generate 
 # or for prod, run:
-cd apps/console
-npm run generate:pull-schema:prod
+turbo --filter=console run generate:prod
 ```
 
 ## Building

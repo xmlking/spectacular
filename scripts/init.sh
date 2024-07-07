@@ -3,6 +3,8 @@
 # In repository root
 cd "$(dirname $0)/.."
 
+###------Root--------###
+
 FILE=.env
 if [[ -f "$FILE" || -n "$CI" ]]; then
     echo "'$FILE' exists."
@@ -17,19 +19,21 @@ else
 	cp -n .secrets.example .secrets && echo 'Generated: .secrets, FIXIT'
 fi
 
-FILE=apps/console-fb/.env
+FILE=.env.prod
 if [[ -f "$FILE" || -n "$CI" ]]; then
     echo "'$FILE' exists."
 else
-	cp -n apps/console-fb/.env.example apps/console-fb/.env && echo 'Generated: apps/console-fb/.env, FIXIT'
+	cp -n .env.prod.example .env.prod && echo 'Generated: .env.prod, FIXIT'
 fi
 
-FILE=apps/console-fb/.secrets
+FILE=.secrets.prod
 if [[ -f "$FILE" || -n "$CI" ]]; then
     echo "'$FILE' exists."
 else
-	cp -n apps/console-fb/.secrets.example apps/console-fb/.secrets && echo 'Generated: apps/console-fb/.secrets, FIXIT'
+	cp -n .secrets.prod.example .secrets.prod && echo 'Generated: .secrets.prod, FIXIT'
 fi
+
+###------Console--------###
 
 FILE=apps/console/.env
 if [[ -f "$FILE" || -n "$CI" ]]; then
