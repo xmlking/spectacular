@@ -1,5 +1,5 @@
 <script lang="ts">
-import { fragment, graphql, type UserDetailsFragment } from '$houdini';
+import { type UserDetailsFragment, fragment, graphql } from '$houdini';
 import { Accordion, AccordionItem, AppBar, Avatar, NoirLight, filter } from '@skeletonlabs/skeleton';
 import { UserRound } from 'lucide-svelte';
 

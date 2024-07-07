@@ -1,6 +1,9 @@
 <script lang="ts">
 import { page } from '$app/stores';
+import { PendingValue } from '$houdini';
 import { Meta } from '$lib/components';
+import { GraphQLErrors } from '@spectacular/skeleton/components';
+import type { PageData } from './$houdini';
 import ChangeEmailForm from './components/change-email.svelte';
 import ChangePasswordForm from './components/change-password.svelte';
 import ConnectSocials from './components/connect-socials.svelte';
@@ -9,11 +12,8 @@ import MultiFactorAuth from './components/multi-factor-auth.svelte';
 import PersonalAccessTokens from './components/personal-access-tokens.svelte';
 import SecurityKeyForm from './components/security-key-form.svelte';
 import SecurityKeys from './components/security-keys.svelte';
-import UserOrgRoles from './components/user-org-roles.svelte';
 import UserDetails from './components/user-details.svelte';
-import { PendingValue } from '$houdini';
-import type { PageData } from './$houdini';
-import { GraphQLErrors } from '@spectacular/skeleton/components';
+import UserOrgRoles from './components/user-org-roles.svelte';
 
 /**
  * Loading states example: https://houdini-intro.pages.dev/
@@ -26,18 +26,17 @@ export let data: PageData;
 // Functions
 
 // Reactivity
- let { GetUser } = data
+let { GetUser } = data;
 $: ({ GetUser } = data);
 // biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 $: userDetails = $GetUser.data!.user;
-$: console.log({data: userDetails})
+$: console.log({ data: userDetails });
 $: userOrgRoles = userDetails?.userOrgRoles ?? [];
 $: userProviders = userDetails?.userProviders ?? [];
 $: personalAccessTokens = userDetails?.personalAccessTokens ?? [];
 $: securityKeys = userDetails?.securityKeys ?? [];
 $: email = userDetails?.email;
-
 
 $: meta = {
   title: 'Datablocks | Profile',

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { PendingValue, type SecurityKeyFragment, isPending, cache, fragment, graphql } from '$houdini';
+import { PendingValue, type SecurityKeyFragment, cache, fragment, graphql, isPending } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';

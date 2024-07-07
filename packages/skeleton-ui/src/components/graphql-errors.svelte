@@ -2,7 +2,7 @@
 import { page } from '$app/stores';
 import { AlertTriangle } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
-export let errors: { message: string; }[] | undefined;
+export let errors: { message: string }[] | undefined;
 </script>
 
 <!-- Houdini GraphQL Errors -->
