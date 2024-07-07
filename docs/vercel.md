@@ -54,6 +54,15 @@ vercel env add API_TOKEN --sensitive
 vercel env rm API_TOKEN
 ```
 
+> [!NOTE]
+> We also need to `vercel link` in `apps/console` as `turborepo` is not detected by `vercel-toolbar` yet.  
+> this will generate files in `apps/console/.vercel`
+
+```shell
+cd apps/console
+vercel link
+```
+
 ### Link
 
 Using Monorepos with Vercel CLI

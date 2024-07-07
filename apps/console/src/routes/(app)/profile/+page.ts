@@ -16,7 +16,7 @@ export const _GetUserVariables: Variables = async (event) => {
 };
 
 /**
- * TODO: is this going to be a blocking call?
+ * if you need more customizations
  */
 // export const load: PageLoad = async (event) => {
 //   const { session } = await event.parent();
