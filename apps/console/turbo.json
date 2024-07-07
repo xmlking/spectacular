@@ -19,13 +19,13 @@
       "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
     },
     "dev:debug": {
-      "dependsOn": ["sync"],
+      "dependsOn": ["sync", "@spectacular/role-houdini#build"],
       "cache": false,
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
     },
     "dev:prod": {
-      "dependsOn": ["sync"],
+      "dependsOn": ["sync", "@spectacular/role-houdini#build"],
       "cache": false,
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env", ".env.prod", ".secrets", ".secrets.prod"]
@@ -34,6 +34,25 @@
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
     },
     "build": {
+      "dependsOn": ["generate", "^build"],
+      "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
+      "env": [
+        "VERCEL",
+        "VERCEL_URL",
+        "VERCEL_ENV",
+        "FLAGS_SECRET",
+        "BUILD_VERSION",
+        "BUILD_TIME",
+        "BUN_ENV",
+        "SW_DEV",
+        "GCP_BUILDPACKS",
+        "OPENAI_ORG_ID",
+        "OPENAI_PROJECT_ID",
+        "OPENAI_API_KEY",
+        "npm_package_version"
+      ]
+    },
+    "build:prod": {
       "dependsOn": ["generate", "^build"],
       "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
       "env": [

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "dotenv-run -f .env -f .secrets -v -- vite build",
+    "build:prod": "NODE_ENV=prod dotenv-run -f .env -f .secrets -v -- vite build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "dev": "dotenv-run -f .env -f .secrets -v -- vite dev",
