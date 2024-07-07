@@ -1,7 +1,5 @@
 <script lang="ts">
-import { invalidateAll } from '$app/navigation';
-import type { SecurityKeyFragment } from '$houdini';
-import { PendingValue, cache, fragment, graphql } from '$houdini';
+import { PendingValue, type SecurityKeyFragment, isPending, cache, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
@@ -21,12 +19,12 @@ const nhost = getNhostClient();
 export let securityKey: SecurityKeyFragment;
 $: data = fragment(
   securityKey,
-  graphql`
+  graphql(`
     fragment SecurityKeyFragment on authUserSecurityKeys {
       id
       nickname
     }
-  `,
+  `),
 );
 
 $: ({ id, nickname } = $data);
@@ -118,15 +116,19 @@ const handleDelete = async () => {
   }
 };
 </script>
+{#if $data ===  PendingValue}
+<!-- {#if isPending(nickname)} -->
+<div class="placeholder animate-pulse" />
+{/if}
+
 
 <span class="badge-icon variant-soft-secondary"><KeyRound /></span>
 <span class="flex-auto">
   <dt class="font-bold">{nickname}</dt>
   <dd class="text-sm opacity-50">key for {id}</dd>
 </span>
-<span>
+<span transition:fade={{ duration: 75 }}>
   <button
-    transition:fade={{ duration: 75 }}
     type="button"
     class="btn-icon btn-icon-sm variant-filled-error"
     on:click={handleDelete}
@@ -135,3 +137,5 @@ const handleDelete = async () => {
     <Trash />
   </button>
 </span>
+
+<!-- opacity-80 transition-opacity duration-50 hover:opacity-100 -->

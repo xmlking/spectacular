@@ -20,6 +20,24 @@ const logMetadata: ClientPlugin = () => ({
     resolve(ctx);
   },
 });
+
+const setRolePlugin: ClientPlugin = () => ({
+  start(ctx, { next }) {
+    const {
+      artifact: { pluginData },
+      metadata,
+    } = ctx;
+    const role = pluginData?.['@spectacular/role-houdini']?.role;
+
+    if (role && !metadata?.useRole) {
+      console.log('setting role:', role);
+      if (metadata) metadata.useRole = role;
+      else ctx.metadata = { useRole: role };
+    }
+    next(ctx);
+  },
+});
+
 const subClient: ClientPlugin = subscription(({ session }) =>
   createWSClient({
     url: url.replace('https://', 'wss://').replace('http://', 'ws://'),
@@ -87,5 +105,5 @@ export default new HoudiniClient({
       // error(500, `(${ctx.artifact.name}): ` + errors.map((err) => err.message).join('. ') + '.')
     },
   },
-  plugins: [subClient, ...(browser ? [logMetadata] : [])],
+  plugins: [setRolePlugin, subClient, ...(browser ? [logMetadata] : [])],
 });

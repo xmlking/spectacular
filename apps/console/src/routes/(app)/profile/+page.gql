@@ -1,17 +1,10 @@
 # CacheOrNetwork is default cache strategy.
 # We are leveraging Houdini's Optimistic updates for this usecase
-query GetUser($userId: uuid!) @cache(policy: CacheOrNetwork) {
+query GetUser($userId: uuid!) @role(name: "me") {
   # get all fragments needed for profile page.
   user(id: $userId) @loading(cascade: true) {
-    id
-    displayName
     email
-    phoneNumber
-    defaultOrg
-    defaultRole
-    avatarUrl
-    locale
-    plan: metadata(path: ".plan")
+    ...UserDetailsFragment
     userOrgRoles(order_by: {organization: asc}) {
       organization
       role
@@ -33,3 +26,4 @@ query GetUser($userId: uuid!) @cache(policy: CacheOrNetwork) {
     }
   }
 }
+

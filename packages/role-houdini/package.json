@@ -1,0 +1,43 @@
+{
+  "name": "@spectacular/role-houdini",
+  "description": "houdini rule codegen plugin",
+  "sideEffects": false,
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": ["dist/**"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "require": "./dist/client.js"
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "lint": "biome check",
+    "format": "biome check --write",
+    "build": "pnpm build:plugin && pnpm build:client",
+    "build:plugin": "tsup src/index.ts --format esm,cjs --dts",
+    "build:client": "tsup src/client.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --watch --dts"
+  },
+  "dependencies": {
+    "houdini": "1.2.48"
+  },
+  "devDependencies": {
+    "@spectacular/biome-config": "workspace:*",
+    "@spectacular/typescript-config": "workspace:*",
+    "graphql": "16.9.0",
+    "tsup": "8.1.0",
+    "typescript": "5.3.3"
+  }
+}

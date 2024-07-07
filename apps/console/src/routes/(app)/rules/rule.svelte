@@ -6,7 +6,7 @@ export let rule: RuleCardFields;
 
 $: data = fragment(
   rule,
-  graphql`
+  graphql(`
       fragment RuleCardFields on rules {
         id
         createdAt
@@ -14,7 +14,7 @@ $: data = fragment(
         organization
         tags
       }
-    `,
+    `),
 );
 
 $: ({ id, createdAt, updatedAt, organization, tags } = $data);

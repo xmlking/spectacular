@@ -36,6 +36,7 @@ const config = {
     'houdini-svelte': {
       client: './src/lib/graphql/client',
     },
+    '@spectacular/role-houdini': {},
   },
   scalars: {
     // ref: https://www.houdinigraphql.com/api/config#custom-scalars

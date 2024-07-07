@@ -1,7 +1,6 @@
 <script lang="ts">
 import { page } from '$app/stores';
 import { Meta } from '$lib/components';
-import type { PageData } from './$houdini';
 import ChangeEmailForm from './components/change-email.svelte';
 import ChangePasswordForm from './components/change-password.svelte';
 import ConnectSocials from './components/connect-socials.svelte';
@@ -10,10 +9,16 @@ import MultiFactorAuth from './components/multi-factor-auth.svelte';
 import PersonalAccessTokens from './components/personal-access-tokens.svelte';
 import SecurityKeyForm from './components/security-key-form.svelte';
 import SecurityKeys from './components/security-keys.svelte';
-import UserDetails from './components/user-details.svelte';
 import UserOrgRoles from './components/user-org-roles.svelte';
+import UserDetails from './components/user-details.svelte';
+import { PendingValue } from '$houdini';
+import type { PageData } from './$houdini';
+import { GraphQLErrors } from '@spectacular/skeleton/components';
 
-// https://github.com/nhost/nhost/blob/main/examples/react-apollo/src/profile/security-keys.tsx
+/**
+ * Loading states example: https://houdini-intro.pages.dev/
+ * Docs: https://houdinigraphql.com/guides/loading-states
+ */
 export let data: PageData;
 
 // Variables
@@ -21,13 +26,18 @@ export let data: PageData;
 // Functions
 
 // Reactivity
+ let { GetUser } = data
 $: ({ GetUser } = data);
-$: userDetails = $GetUser.data?.user;
-$: userOrgRoles = $GetUser.data?.user?.userOrgRoles ?? [];
-$: userProviders = $GetUser.data?.user?.userProviders ?? [];
-$: personalAccessTokens = $GetUser.data?.user?.personalAccessTokens ?? [];
-$: securityKeys = $GetUser.data?.user?.securityKeys ?? [];
-$: email = $GetUser.data?.user?.email;
+// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
+// biome-ignore lint/style/noNonNullAssertion: <explanation>
+$: userDetails = $GetUser.data!.user;
+$: console.log({data: userDetails})
+$: userOrgRoles = userDetails?.userOrgRoles ?? [];
+$: userProviders = userDetails?.userProviders ?? [];
+$: personalAccessTokens = userDetails?.personalAccessTokens ?? [];
+$: securityKeys = userDetails?.securityKeys ?? [];
+$: email = userDetails?.email;
+
 
 $: meta = {
   title: 'Datablocks | Profile',
@@ -47,16 +57,18 @@ $: meta = {
     <p>Update your profile details</p>
   </section>
 
-  {#if $GetUser.fetching}
-    <div class="placeholder animate-pulse" />
+  {#if $GetUser.errors}
+  <GraphQLErrors errors={$GetUser.errors} />
   {:else}
-    {#if userDetails}
+
+
+    <!-- {#if userDetails} -->
       <section class="space-y-4">
         <h2 class="h2">User Details</h2>
         <p>Update user details</p>
         <UserDetails {userDetails} />
       </section>
-    {/if}
+    <!-- {/if} -->
 
     <section class="space-y-4">
       <h2 class="h2">User Org Roles</h2>
@@ -76,7 +88,7 @@ $: meta = {
       <PersonalAccessTokens {personalAccessTokens}></PersonalAccessTokens>
     </section>
 
-    {#if email}
+    {#if email !== PendingValue}
       <section class="space-y-4">
         <h2 class="h2">Change Email</h2>
         <p>Change the password of the current user.</p>
@@ -115,5 +127,5 @@ $: meta = {
       </p>
       <HasuraJwtClaims />
     </section>
-  {/if}
+{/if}
 </div>

@@ -13,7 +13,7 @@
       "outputs": [".svelte-kit/**"]
     },
     "dev": {
-      "dependsOn": ["sync"],
+      "dependsOn": ["sync", "@spectacular/role-houdini#build"],
       "cache": false,
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
@@ -34,7 +34,7 @@
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
     },
     "build": {
-      "dependsOn": ["generate"],
+      "dependsOn": ["generate", "^build"],
       "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
       "env": [
         "VERCEL",

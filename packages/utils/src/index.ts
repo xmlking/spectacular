@@ -1,4 +1,4 @@
-export { getObjectTypeName, cleanClone, type CleanOpts } from './object.js';
+export { getObjectTypeName, cleanClone, hasId, toWithId, type CleanOpts } from './object.js';
 export { add, subtract } from './math.js';
 export * from './collections.js';
 export * from './currency.js';

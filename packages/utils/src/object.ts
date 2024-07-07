@@ -3,6 +3,30 @@ export function getObjectTypeName(value: unknown): string {
 }
 
 /**
+ * Checks if an object has an 'id' property
+ * @template  T
+ * @param {T} obj - Object to check for the presence of an 'id' property
+ * @returns {obj is T & { id: string }} - True if the object has an 'id' property, false otherwise
+ */
+export function hasId(obj: any) {
+  if (obj == null || typeof obj !== 'object') return false;
+  return !!('id' in obj);
+}
+
+/**
+ * Ensures that the object has an 'id' property
+ * Throws an error if the object doesn't have an 'id' property
+ * @template {object} T
+ * @param {T} obj - Object to ensure has an 'id' property
+ * @returns {T & { id: string }} - The same object with an 'id' property
+ * @throws {Error} - Throws an error if the object doesn't have an 'id' property
+ */
+export function toWithId(obj: any) {
+  if (hasId(obj)) return obj;
+  throw new Error('.id is required');
+}
+
+/**
  * empty: empty fields striped or set to `null`
  * target: target fields striped or set to `null` (WIP)
  */
