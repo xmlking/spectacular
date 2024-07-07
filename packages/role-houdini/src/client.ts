@@ -7,7 +7,6 @@ const plugin: ClientPlugin = () => ({
     const role = ctx.artifact.pluginData?.['@spectacular/role-houdini']?.role;
     if (role && ctx.fetchParams?.headers) {
       ctx.fetchParams.headers = { ...ctx.fetchParams.headers, 'x-hasura-role': role };
-      console.log(ctx.fetchParams.headers);
     }
     next(ctx);
   },
