@@ -116,11 +116,6 @@ const handleDelete = async () => {
   }
 };
 </script>
-{#if $data ===  PendingValue}
-<!-- {#if isPending(nickname)} -->
-<div class="placeholder animate-pulse" />
-{/if}
-
 
 <span class="badge-icon variant-soft-secondary"><KeyRound /></span>
 <span class="flex-auto">

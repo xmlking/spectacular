@@ -8,7 +8,7 @@ import type { Handle } from '@sveltejs/kit';
  */
 const log = new Logger('middleware:guard');
 const protectedPaths = ['/dashboard', '/account', '/api', '/downloads'];
-const adminPaths = ['/dashboard/admin'];
+const adminPaths = ['/organizations', '/users', '/groups', '/delegations'];
 const userPaths = ['/downloads'];
 export const guard = (async ({ event, resolve }) => {
   // skip auth logic on build to prevent infinite redirection in production mode

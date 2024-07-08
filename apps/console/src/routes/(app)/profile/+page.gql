@@ -5,24 +5,12 @@ query GetUser($userId: uuid!) @role(name: "me") {
   user(id: $userId) @loading(cascade: true) {
     email
     ...UserDetailsFragment
-    userOrgRoles(order_by: {organization: asc}) {
-      organization
-      role
-      isDefaultRole
-    }
-    securityKeys(order_by: { nickname: asc })  @list(name: "Security_Keys") {
+    ...UserOrgRolesFragment
+    ...PersonalAccessTokensFragment
+    ...AuthProvidersFragment
+    securityKeys(order_by: { nickname: asc })  @list(name: "Security_Keys") @loading {
       __typename
       ...SecurityKeyFragment
-    }
-    personalAccessTokens: refreshTokens {
-      id
-      metadata(path: ".name")
-    }
-    userProviders {
-      id
-      providerId
-      providerUserId
-      updatedAt
     }
   }
 }

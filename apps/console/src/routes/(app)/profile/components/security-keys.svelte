@@ -6,6 +6,7 @@ import { flip } from 'svelte/animate';
 import { quintOut } from 'svelte/easing';
 import { fade } from 'svelte/transition';
 import SecurityKeyItem from './security-key.svelte';
+
 export let securityKeys: SecurityKeyFragment[];
 
 // Variables

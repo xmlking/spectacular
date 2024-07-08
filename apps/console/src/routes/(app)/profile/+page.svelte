@@ -30,13 +30,12 @@ let { GetUser } = data;
 $: ({ GetUser } = data);
 // biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
-$: userDetails = $GetUser.data!.user;
-$: console.log({ data: userDetails });
-$: userOrgRoles = userDetails?.userOrgRoles ?? [];
-$: userProviders = userDetails?.userProviders ?? [];
-$: personalAccessTokens = userDetails?.personalAccessTokens ?? [];
-$: securityKeys = userDetails?.securityKeys ?? [];
-$: email = userDetails?.email;
+$: user = $GetUser.data!.user!;
+// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
+$: securityKeys = user.securityKeys ;
+// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
+// biome-ignore lint/style/noNonNullAssertion: <explanation>
+$: email = user.email!;
 
 $: meta = {
   title: 'Datablocks | Profile',
@@ -57,43 +56,43 @@ $: meta = {
   </section>
 
   {#if $GetUser.errors}
-  <GraphQLErrors errors={$GetUser.errors} />
+    <GraphQLErrors errors={$GetUser.errors} />
   {:else}
-
-
-    <!-- {#if userDetails} -->
-      <section class="space-y-4">
-        <h2 class="h2">User Details</h2>
-        <p>Update user details</p>
-        <UserDetails {userDetails} />
-      </section>
-    <!-- {/if} -->
+    <section class="space-y-4">
+      <h2 class="h2">User Details</h2>
+      <p>Update user details</p>
+      <UserDetails {user} />
+    </section>
 
     <section class="space-y-4">
       <h2 class="h2">User Org Roles</h2>
       <p>Orgs and roles you are granted</p>
-      <UserOrgRoles {userOrgRoles} />
+      <UserOrgRoles  {user} />
     </section>
 
     <section class="space-y-4">
       <h2 class="h2">Auth Providers</h2>
       <p>Add or delete auth providers</p>
-      <ConnectSocials {userProviders} />
+      <ConnectSocials  {user} />
     </section>
 
     <section class="space-y-4">
       <h2 class="h2">Personal Access Tokens</h2>
       <p>Add are delete your personal access tokens(PAT)</p>
-      <PersonalAccessTokens {personalAccessTokens}></PersonalAccessTokens>
+      <PersonalAccessTokens  {user} ></PersonalAccessTokens>
     </section>
 
-    {#if email !== PendingValue}
-      <section class="space-y-4">
-        <h2 class="h2">Change Email</h2>
-        <p>Change the password of the current user.</p>
-        <ChangeEmailForm initialData={{ email }} />
-      </section>
-    {/if}
+
+    <section class="space-y-4">
+      <h2 class="h2">Change Email</h2>
+      <p>Change the password of the current user.</p>
+      {#if email === PendingValue}
+      <div class="placeholder animate-pulse" />
+      {:else}
+      <ChangeEmailForm initialData={{ email }} />
+      {/if}
+    </section>
+
 
     <section class="space-y-4">
       <h2 class="h2">Change Password</h2>
@@ -109,7 +108,9 @@ $: meta = {
         Add are delete your security keys like TouchID, FaceID, YubiKeys etc
       </p>
       <SecurityKeyForm />
+       <!-- {#if securityKeys?.__typename !== 'SecurityKeys'} -->
       <SecurityKeys {securityKeys} />
+      <!-- {/if} -->
     </section>
 
     <section class="space-y-4">

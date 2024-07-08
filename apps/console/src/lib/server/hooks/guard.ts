@@ -1,8 +1,8 @@
 import { building } from '$app/environment';
 import { i18n } from '$lib/i18n.js';
 import { Logger, startsWith } from '@spectacular/utils';
-import { redirect } from '@sveltejs/kit';
 import type { Handle } from '@sveltejs/kit';
+import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 
 /**
  * Protect the route
@@ -10,7 +10,7 @@ import type { Handle } from '@sveltejs/kit';
  */
 const log = new Logger('server:middleware:guard');
 // TODO define roles in apps/console/src/lib/links.ts
-const managerPaths = ['/admin'];
+const managerPaths = ['/organizations', '/users', '/groups', '/delegation'];
 const publicPaths = [
   '/favicon.ico',
   '/robots.txt',
@@ -61,7 +61,8 @@ export const guard = (async ({ event, resolve }) => {
   const { isAuthenticated, isLoading } = nhost.auth.getAuthenticationStatus();
   log.debug({ isAuthenticated, isLoading, lang });
   if (!isAuthenticated) {
-    redirect(303, i18n.resolveRoute(`/signin?redirectTo=${pathname}`));
+    const message: App.Superforms.Message = { type: 'error', message: 'Not authenticated' } as const;
+    redirectWithFlash(303, i18n.resolveRoute(`/signin?redirectTo=${pathname}`), message, event);
   }
 
   const session = nhost.auth.getSession();
@@ -74,7 +75,8 @@ export const guard = (async ({ event, resolve }) => {
     log.debug('session expired at: ', tokenExpirationTime);
     // FIXME: redirect from middleware may cause recursion
     // event.cookies.delete(NHOST_SESSION_KEY, { path: '/' })
-    redirect(303, i18n.resolveRoute(`/signin?redirectTo=${pathname}`));
+    const message: App.Superforms.Message = { type: 'warning', message: 'Session expired' } as const;
+    redirectWithFlash(303, i18n.resolveRoute(`/signin?redirectTo=${pathname}`), message, event);
   }
 
   // Check authorizations
@@ -83,14 +85,15 @@ export const guard = (async ({ event, resolve }) => {
   // log.debug({ claims });
   const roles = nhost.auth.getHasuraClaim('allowed-roles');
   const role = nhost.auth.getHasuraClaim('default-role');
-  const orgs = nhost.auth.getHasuraClaim('orgs');
+  const orgs = nhost.auth.getHasuraClaim('allowed-orgs');
   const org = nhost.auth.getHasuraClaim('default-org');
   log.debug({ roles, role, orgs, org });
 
   if (startsWith(pathname, managerPaths)) {
     if (role !== 'manager') {
       // if (!roles?.includes('manager')) {
-      redirect(303, i18n.resolveRoute('/dashboard'));
+      const message: App.Superforms.Message = { type: 'warning', message: "You don't have access" } as const;
+      redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
     }
   }
 
