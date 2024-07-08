@@ -39,7 +39,7 @@ export default plugin('role-houdini', async () => {
       // consider the artifact `role` if the query contains the `role` directive
       const role = queryDefinition?.directives?.find((directive) => directive.name.value === 'role');
       const value = (role?.arguments?.[0].value as StringValueNode)?.value;
-      console.debug(`Document: ${document.name}, Role: ${value}`);
+      // console.debug(`Document: ${document.name}, Role: ${value}`);
       return { role: value };
     },
   };
