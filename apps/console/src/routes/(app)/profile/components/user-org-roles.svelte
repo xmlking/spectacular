@@ -1,13 +1,10 @@
 <script lang="ts">
-  import {
-    fragment,
-    graphql,
-    PendingValue,
-    type UserOrgRolesFragment,
-  } from "$houdini";
+import { PendingValue, type UserOrgRolesFragment, fragment, graphql } from '$houdini';
 
-  export let user: UserOrgRolesFragment;
-  $: data = fragment(user, graphql(`
+export let user: UserOrgRolesFragment;
+$: data = fragment(
+  user,
+  graphql(`
       fragment UserOrgRolesFragment on users {
         userOrgRoles(order_by: { organization: asc }) @list(name: "User_Org_Roles") @loading {
           organization
@@ -15,8 +12,9 @@
           isDefaultRole
         }
       }
-  `));
-  $: userOrgRoles = $data.userOrgRoles;
+  `),
+);
+$: userOrgRoles = $data.userOrgRoles;
 </script>
 
 <div class="card p-4">

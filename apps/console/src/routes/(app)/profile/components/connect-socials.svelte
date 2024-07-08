@@ -1,13 +1,10 @@
 <script lang="ts">
-  import {
-    fragment,
-    graphql,
-    PendingValue,
-    type AuthProvidersFragment,
-  } from "$houdini";
+import { type AuthProvidersFragment, PendingValue, fragment, graphql } from '$houdini';
 
-  export let user: AuthProvidersFragment;
-  $: data = fragment(user, graphql(`
+export let user: AuthProvidersFragment;
+$: data = fragment(
+  user,
+  graphql(`
       fragment AuthProvidersFragment on users {
         providers: userProviders(order_by: { providerId: asc }) @list(name: "Auth_Providers") @loading {
           id
@@ -16,8 +13,9 @@
           updatedAt
         }
       }
-  `));
-  $: providers = $data.providers;
+  `),
+);
+$: providers = $data.providers;
 </script>
 
 <div class="card p-4">

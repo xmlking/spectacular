@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { goto, invalidate, invalidateAll } from '$app/navigation';
+import { goto, invalidate, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
@@ -66,7 +66,7 @@ async function waSignin() {
   } else {
     const { session, error: signInError } = await nhost.auth.signIn({ email: $formData.email, securityKey: true });
     if (session) {
-      await invalidateAll()
+      await invalidateAll();
       await goto('/dashboard');
       handleMessage({ type: 'success', message: 'Signin sucessfull 😎' } as const, toastStore);
     } else {

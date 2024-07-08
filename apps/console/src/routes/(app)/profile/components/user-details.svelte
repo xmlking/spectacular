@@ -4,7 +4,9 @@ import { Accordion, AccordionItem, AppBar, Avatar, NoirLight, filter } from '@sk
 import { UserRound } from 'lucide-svelte';
 
 export let user: UserDetailsFragment;
-$: data = fragment(user, graphql(`
+$: data = fragment(
+  user,
+  graphql(`
     fragment UserDetailsFragment on users @loading {
       id
       displayName
@@ -16,7 +18,8 @@ $: data = fragment(user, graphql(`
       locale
       plan: metadata(path: ".plan")
     }
-  `));
+  `),
+);
 </script>
 
 <AppBar>

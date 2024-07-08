@@ -31,8 +31,7 @@ $: ({ GetUser } = data);
 // biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 $: user = $GetUser.data!.user!;
-// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
-$: securityKeys = user.securityKeys ;
+$: securityKeys = user.securityKeys;
 // biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 $: email = user.email!;

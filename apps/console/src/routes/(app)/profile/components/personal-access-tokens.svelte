@@ -1,21 +1,19 @@
 <script lang="ts">
-  import {
-    fragment,
-    graphql,
-    PendingValue,
-    type PersonalAccessTokensFragment,
-  } from "$houdini";
+import { PendingValue, type PersonalAccessTokensFragment, fragment, graphql } from '$houdini';
 
-  export let user: PersonalAccessTokensFragment;
-  $: data = fragment(user, graphql(`
+export let user: PersonalAccessTokensFragment;
+$: data = fragment(
+  user,
+  graphql(`
       fragment PersonalAccessTokensFragment on users {
         personalAccessTokens: refreshTokens(order_by: { id: asc }) @list(name: "Personal_Access_Tokens") @loading {
           id
           metadata(path: ".name")
         }
       }
-  `));
-  $: personalAccessTokens = $data.personalAccessTokens;
+  `),
+);
+$: personalAccessTokens = $data.personalAccessTokens;
 </script>
 
 <div class="card p-4">
