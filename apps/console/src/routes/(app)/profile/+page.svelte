@@ -2,6 +2,7 @@
 import { page } from '$app/stores';
 import { PendingValue } from '$houdini';
 import { Meta } from '$lib/components';
+import { allLoaded, loaded, loading } from '$lib/graphql/loading';
 import { GraphQLErrors } from '@spectacular/skeleton/components';
 import type { PageData } from './$houdini';
 import ChangeEmailForm from './components/change-email.svelte';
@@ -9,6 +10,7 @@ import ChangePasswordForm from './components/change-password.svelte';
 import ConnectSocials from './components/connect-socials.svelte';
 import HasuraJwtClaims from './components/hasura-jwt-claims.svelte';
 import MultiFactorAuth from './components/multi-factor-auth.svelte';
+import PersonalAccessTokenForm from './components/personal-access-token-form.svelte';
 import PersonalAccessTokens from './components/personal-access-tokens.svelte';
 import SecurityKeyForm from './components/security-key-form.svelte';
 import SecurityKeys from './components/security-keys.svelte';
@@ -28,13 +30,6 @@ export let data: PageData;
 // Reactivity
 let { GetUser } = data;
 $: ({ GetUser } = data);
-// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
-// biome-ignore lint/style/noNonNullAssertion: <explanation>
-$: user = $GetUser.data!.user!;
-$: securityKeys = user.securityKeys;
-// biome-ignore lint/correctness/noUndeclaredVariables: <explanation>
-// biome-ignore lint/style/noNonNullAssertion: <explanation>
-$: email = user.email!;
 
 $: meta = {
   title: 'Datablocks | Profile',
@@ -56,7 +51,10 @@ $: meta = {
 
   {#if $GetUser.errors}
     <GraphQLErrors errors={$GetUser.errors} />
-  {:else}
+  {:else if $GetUser.data?.user}
+    {@const user = $GetUser.data.user}
+    {@const { email, securityKeys } = user}
+
     <section class="space-y-4">
       <h2 class="h2">User Details</h2>
       <p>Update user details</p>
@@ -66,32 +64,31 @@ $: meta = {
     <section class="space-y-4">
       <h2 class="h2">User Org Roles</h2>
       <p>Orgs and roles you are granted</p>
-      <UserOrgRoles  {user} />
+      <UserOrgRoles {user} />
     </section>
 
     <section class="space-y-4">
       <h2 class="h2">Auth Providers</h2>
       <p>Add or delete auth providers</p>
-      <ConnectSocials  {user} />
+      <ConnectSocials {user} />
     </section>
 
     <section class="space-y-4">
       <h2 class="h2">Personal Access Tokens</h2>
       <p>Add are delete your personal access tokens(PAT)</p>
-      <PersonalAccessTokens  {user} ></PersonalAccessTokens>
+      <PersonalAccessTokenForm />
+      <PersonalAccessTokens {user}></PersonalAccessTokens>
     </section>
-
 
     <section class="space-y-4">
       <h2 class="h2">Change Email</h2>
       <p>Change the password of the current user.</p>
-      {#if email === PendingValue}
-      <div class="placeholder animate-pulse" />
+      {#if loaded(email)}
+        <ChangeEmailForm initialData={{ email: email || "" }} />
       {:else}
-      <ChangeEmailForm initialData={{ email }} />
+        <div class="placeholder animate-pulse" />
       {/if}
     </section>
-
 
     <section class="space-y-4">
       <h2 class="h2">Change Password</h2>
@@ -107,9 +104,9 @@ $: meta = {
         Add are delete your security keys like TouchID, FaceID, YubiKeys etc
       </p>
       <SecurityKeyForm />
-       <!-- {#if securityKeys?.__typename !== 'SecurityKeys'} -->
+      {#if allLoaded(securityKeys) && securityKeys.length > 0}
       <SecurityKeys {securityKeys} />
-      <!-- {/if} -->
+      {/if}
     </section>
 
     <section class="space-y-4">
@@ -126,5 +123,5 @@ $: meta = {
       </p>
       <HasuraJwtClaims />
     </section>
-{/if}
+  {/if}
 </div>

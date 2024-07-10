@@ -1,7 +1,7 @@
 <script lang="ts">
 import { invalidateAll } from '$app/navigation';
 import { DeleteOrgStore } from '$houdini';
-import { default as ChipButton } from '$lib/components/chip-button.svelte';
+import { ChipButton } from '$lib/components';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';

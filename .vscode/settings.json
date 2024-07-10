@@ -117,12 +117,17 @@
   "files.defaultLanguage": "go",
   "files.trimTrailingWhitespace": true,
   ////////// GoLang //////////
-  "go.testFlags": ["-v", "-count=1"],
+  "go.testFlags": [
+    "-v",
+    "-count=1"
+  ],
   "go.testTimeout": "5s",
   "go.useLanguageServer": true,
   "go.lintTool": "golangci-lint",
-  "go.lintFlags": ["--fast", "--config=.github/linters/.golangci.yml"],
-
+  "go.lintFlags": [
+    "--fast",
+    "--config=.github/linters/.golangci.yml"
+  ],
   ////////// Spell checker //////////
   // Map spelling errors to Hints so that they don't show up in the Problems pane.
   "cSpell.diagnosticLevel": "Hint",
@@ -133,9 +138,10 @@
     // "css-unused-selector": "ignore",
     // "a11y-label-has-associated-control": "ignore"
   },
-
   ////////// vitest //////////
-  "vitest.include": ["**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,svelte}"],
+  "vitest.include": [
+    "**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,svelte}"
+  ],
   "vitest.exclude": [
     "**/node_modules/**",
     "$houdini/**",
@@ -145,21 +151,28 @@
     "**/ignored.test.ts",
     "tests/**"
   ],
-
   ////////// tailwindCSS //////////
   "tailwindCSS.emmetCompletions": true,
   "tailwindCSS.includeLanguages": {
     "plaintext": "html"
   },
   // for tailwind-variants
-  "tailwindCSS.experimental.classRegex": [["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]],
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "([\"'`][^\"'`]*.*?[\"'`])",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
+  ],
   ////////// TypeScript //////////
   // astro requires this
   "typescript.inlayHints.parameterNames.enabled": "all",
   ////////// Proto //////////
   "clang-format.style": "google",
   "protoc": {
-    "options": ["--proto_path=${workspaceRoot}/proto", "--proto_path=${env.GOPATH}/src"]
+    "options": [
+      "--proto_path=${workspaceRoot}/proto",
+      "--proto_path=${env.GOPATH}/src"
+    ]
   },
   ////////// Skeleton UI //////////
   "tailwindCSS.classAttributes": [
@@ -275,7 +288,6 @@
     "width",
     "zIndex"
   ],
-
   // ##################################################
   // ###           Language customisations          ###
   // ##################################################

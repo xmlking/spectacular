@@ -24,3 +24,13 @@ export const showSocialLogin = flag<boolean>({
     return true;
   },
 });
+
+export const simulateLoadingState = flag<boolean>({
+  key: 'simulateLoadingState',
+  description: 'Enable simulating loading states for testing',
+  origin: 'https://example.com/#simulateLoadingState',
+  options: [{ value: true }, { value: false }],
+  decide(event) {
+    return false;
+  },
+});

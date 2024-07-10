@@ -85,7 +85,7 @@ services:
   # hasura service
   ###########################################################################
   graphql:
-    image: hasura/graphql-engine:v2.40.1-ce
+    image: hasura/graphql-engine:v2.40.2-ce
     hostname: graphql
     container_name: graphql
     restart: unless-stopped

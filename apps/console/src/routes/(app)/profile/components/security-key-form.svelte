@@ -1,6 +1,6 @@
 <script lang="ts">
 import { page } from '$app/stores';
-import { cache } from '$houdini';
+import { CachePolicy, GetUserStore, cache } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { webAuthnSchema } from '$lib/schema/user';
@@ -62,7 +62,12 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
     // Since addSecurityKey() is not using houdini client,
     // we have to manually invalidate cache.
     // Mark all type 'authUserSecurityKeys' stale
+    // this may not work for first time, since there is no cache to mark stale
     cache.markStale('authUserSecurityKeys');
+    // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
+    // const user = cache.get("users", { id: '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'});
+    // user.refetch();
+    await reload();
   },
 });
 
@@ -81,7 +86,22 @@ const {
 } = form;
 
 // Functions
-
+/**
+ * FIXME: Workaround for refresh page, after first time security token added
+ * https://github.com/HoudiniGraphql/houdini/issues/891
+ */
+async function reload() {
+  const getUserStore = new GetUserStore();
+  // const userId = '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'
+  const userId = $page.data.session.user.id;
+  console.log({ userId });
+  const { data, errors } = await getUserStore.fetch({
+    blocking: true,
+    policy: CachePolicy.NetworkOnly,
+    variables: { userId },
+  });
+  console.log({ data, errors });
+}
 // Reactivity
 $: valid = $allErrors.length === 0;
 $: loadingState.setFormLoading($delayed);
