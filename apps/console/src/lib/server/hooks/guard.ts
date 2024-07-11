@@ -1,5 +1,5 @@
 import { building } from '$app/environment';
-import { i18n } from '$lib/i18n.js';
+import { i18n } from '$lib/i18n';
 import { Logger, startsWith } from '@spectacular/utils';
 import type { Handle } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';

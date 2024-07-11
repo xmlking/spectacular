@@ -1,6 +1,6 @@
 <script lang="ts">
 import { dev } from '$app/environment';
-import { searchGroupKeys as searchKeys } from '$lib/schema/group.js';
+import { searchGroupKeys as searchKeys } from '$lib/schema/group';
 import type { PopupSettings } from '@skeletonlabs/skeleton';
 import { popup } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';

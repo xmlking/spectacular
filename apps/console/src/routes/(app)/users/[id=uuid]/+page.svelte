@@ -1,11 +1,17 @@
 <script lang="ts">
 import { updateUserSchema as schema } from '$lib/schema/delegation';
 import { Avatar } from '@skeletonlabs/skeleton';
+import { DebugShell } from '@spectacular/skeleton/components';
+import { Alerts } from '@spectacular/skeleton/components/form';
 import { Control, Field, FieldErrors, Label } from 'formsnap';
 import { writable } from 'svelte/store';
+import { fade } from 'svelte/transition';
 import { superForm } from 'sveltekit-superforms';
+import SuperDebug from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
+
 export let data;
+
 const form = superForm(data.form, {
   dataType: 'json',
   validators: zodClient(schema),
@@ -15,6 +21,7 @@ const {
   message,
   errors,
   tainted,
+  reset,
   isTainted,
   submitting,
   delayed,
@@ -46,16 +53,21 @@ $: {
 
 <div class="page-container">
   <form
-    {form}
-    submitButtonText="Update"
-    class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md "
+    method="POST"
+    class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md"
+    use:enhance
   >
     <h1 class="pb-4 text-3xl font-semibold tracking-tight text-center">
       User Details
     </h1>
+
     <div class="flex justify-center items-center">
       <Avatar src={data.user.avatarUrl} width="w-16" rounded="rounded-full" />
     </div>
+
+    <!-- Form Level Errors / Messages -->
+    <Alerts errors={$errors._errors} message={$message} />
+
     <div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
       <div class="col-span-3">
         <Field {form} name="displayName">
@@ -133,5 +145,60 @@ $: {
         </Field>
       </div>
     </div>
+
+    <!-- Form Action Buttons -->
+    <button
+      type="button"
+      class="variant-ghost-secondary btn"
+      on:click={() => history.back()}>Back</button
+    >
+    <button
+      type="button"
+      class="variant-ghost-warning btn"
+      disabled={!$tainted}
+      on:click={() => reset()}
+    >
+      Reset
+    </button>
+
+    <button
+      class="variant-ghost-success btn"
+      type="submit"
+      disabled={!$tainted || $submitting}
+    >
+      {#if $submitting}
+        <aside
+          class="alert rounded-sm"
+          transition:fade|local={{ duration: 400 }}
+        >
+          Saving..
+        </aside>
+      {:else}
+        Update
+      {/if}
+    </button>
   </form>
+
+  <DebugShell>
+    <SuperDebug
+      label="Miscellaneous"
+      status={false}
+      data={{
+        message: $message,
+        isTainted: isTainted,
+        submitting: $submitting,
+        delayed: $delayed,
+        timeout: $timeout,
+        posted: $posted,
+      }}
+    />
+    <br />
+    <SuperDebug label="Form" data={$formData} />
+    <br />
+    <SuperDebug label="Tainted" status={false} data={$tainted} />
+    <br />
+    <SuperDebug label="Errors" status={false} data={$errors} />
+    <br />
+    <SuperDebug label="Constraints" status={false} data={$constraints} />
+  </DebugShell>
 </div>

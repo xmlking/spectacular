@@ -137,3 +137,13 @@ function checkConfirmPassword(ctx: z.RefinementCtx, confirmPassword: string, pas
     });
   }
 }
+
+// create a new PAT token
+export const createPATSchema = z.object({
+  name: z
+    .string({ required_error: 'Name is required' })
+    .min(6, { message: 'Name must contain at least 6 character(s)' })
+    .max(256)
+    .trim(),
+  expiryDate: z.string().date(),
+});

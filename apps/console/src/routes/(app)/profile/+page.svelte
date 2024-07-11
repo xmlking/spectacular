@@ -53,7 +53,7 @@ $: meta = {
     <GraphQLErrors errors={$GetUser.errors} />
   {:else if $GetUser.data?.user}
     {@const user = $GetUser.data.user}
-    {@const { email, securityKeys } = user}
+    {@const { email } = user}
 
     <section class="space-y-4">
       <h2 class="h2">User Details</h2>
@@ -104,9 +104,7 @@ $: meta = {
         Add are delete your security keys like TouchID, FaceID, YubiKeys etc
       </p>
       <SecurityKeyForm />
-      {#if allLoaded(securityKeys) && securityKeys.length > 0}
-      <SecurityKeys {securityKeys} />
-      {/if}
+      <SecurityKeys {user} />
     </section>
 
     <section class="space-y-4">

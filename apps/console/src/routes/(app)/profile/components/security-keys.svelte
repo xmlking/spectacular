@@ -1,26 +1,42 @@
 <script lang="ts">
-import type { SecurityKeyFragment } from '$houdini';
+import { type SecurityKeysFragment, fragment, graphql } from '$houdini';
+import { loaded } from '$lib/graphql/loading';
 import { Alerts } from '@spectacular/skeleton/components/form';
-import { toWithId } from '@spectacular/utils';
 import { flip } from 'svelte/animate';
 import { quintOut } from 'svelte/easing';
 import { fade } from 'svelte/transition';
 import SecurityKeyItem from './security-key.svelte';
 
-export let securityKeys: SecurityKeyFragment[];
+export let user: SecurityKeysFragment;
+$: data = fragment(
+  user,
+  graphql(`
+      fragment SecurityKeysFragment on users {
+        securityKeys(order_by: { nickname: asc })
+          @list(name: "Security_Keys")
+          @loading {
+          ...SecurityKeyFragment @mask_disable
+        }
+      }
+    `),
+);
+
+$: ({ securityKeys } = $data);
 
 // Variables
 let message: App.Superforms.Message | undefined;
 let errors: string[] = [];
-// $: securityKeysWithId = securityKeys.map(toWithId);
 </script>
 
 <!-- Form Level Errors / Messages -->
-<Alerts errors={errors} message={message} />
+<Alerts {errors} {message} />
 <div class="w-full text-token card p-4 space-y-4">
   <dl class="list-dl">
-    {#each securityKeys as securityKey (securityKey.id)}
-      <div transition:fade={{ duration: 450, easing: quintOut }} animate:flip={{ duration: 450, easing: quintOut }}>
+    {#each securityKeys.filter(loaded) as securityKey (securityKey.id)}
+      <div
+        transition:fade={{ duration: 450, easing: quintOut }}
+        animate:flip={{ duration: 450, easing: quintOut }}
+      >
         <SecurityKeyItem bind:message bind:errors {securityKey} />
       </div>
     {:else}

@@ -20,11 +20,11 @@ export let securityKey: SecurityKeyFragment;
 $: data = fragment(
   securityKey,
   graphql(`
-    fragment SecurityKeyFragment on authUserSecurityKeys {
-      id
-      nickname
-    }
-  `),
+      fragment SecurityKeyFragment on authUserSecurityKeys {
+        id
+        nickname
+      }
+    `),
 );
 
 $: ({ id, nickname } = $data);
@@ -36,12 +36,12 @@ $: ({ id, nickname } = $data);
  */
 let isDeleting = false;
 const deleteSecurityKey = graphql(`
-  mutation RemoveSecurityKey($id: uuid!) {
-    deleteAuthUserSecurityKey(id: $id) {
-      ...Security_Keys_remove
+    mutation RemoveSecurityKey($id: uuid!) {
+      deleteAuthUserSecurityKey(id: $id) {
+        ...Security_Keys_remove @allLists
+      }
     }
-  }
-`);
+  `);
 
 const handleDelete = async () => {
   // before

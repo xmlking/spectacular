@@ -2,10 +2,13 @@
 import { organizationsCreateSchema as schema } from '$lib/schema/organization';
 import { InputChip } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
+import { Alerts } from '@spectacular/skeleton/components/form';
 import { Control, Description, Field, FieldErrors, Fieldset, Label, Legend } from 'formsnap';
+import { fade } from 'svelte/transition';
 import { superForm } from 'sveltekit-superforms';
 import SuperDebug from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
+
 export let data;
 
 const form = superForm(data.form, {
@@ -17,6 +20,7 @@ const {
   message,
   errors,
   tainted,
+  reset,
   isTainted,
   submitting,
   delayed,
@@ -41,12 +45,15 @@ function isValidEmailDomain(value: string): boolean {
 	<meta name="description" content="Showcase formsnap" />
 </svelte:head>
 <div class="page-container">
-	<h1 class="pb-8 text-3xl font-semibold tracking-tight">Create Stream</h1>
-	<form
-		{form}
-		submitButtonText="Create"
-		class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md "
-	>
+	<h1 class="pb-8 text-3xl font-semibold tracking-tight">Create Organization</h1>
+  <form
+    method="POST"
+    class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md"
+    use:enhance
+  >
+
+      <!-- Form Level Errors / Messages -->
+    <Alerts errors={$errors._errors} message={$message} />
 		<div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
 			<div class="col-span-3">
 				<Field {form} name="organization">
@@ -93,7 +100,39 @@ function isValidEmailDomain(value: string): boolean {
 				</Field>
 			</div>
 		</div>
-	</form>
+    <!-- Form Action Buttons -->
+    <button
+      type="button"
+      class="variant-ghost-secondary btn"
+      on:click={() => history.back()}>Back</button
+    >
+    <button
+      type="button"
+      class="variant-ghost-warning btn"
+      disabled={!$tainted}
+      on:click={() => reset()}
+    >
+      Reset
+    </button>
+
+    <button
+      class="variant-ghost-success btn"
+      type="submit"
+      disabled={!$tainted || $submitting}
+    >
+      {#if $submitting}
+        <aside
+          class="alert rounded-sm"
+          transition:fade|local={{ duration: 400 }}
+        >
+          Saving..
+        </aside>
+      {:else}
+        Create
+      {/if}
+    </button>
+  </form>
+
 	<DebugShell>
 		<SuperDebug
 			label="Miscellaneous"

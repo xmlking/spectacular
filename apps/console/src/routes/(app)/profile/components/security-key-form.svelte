@@ -63,7 +63,7 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
     // we have to manually invalidate cache.
     // Mark all type 'authUserSecurityKeys' stale
     // this may not work for first time, since there is no cache to mark stale
-    cache.markStale('authUserSecurityKeys');
+    // cache.markStale('authUserSecurityKeys');
     // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
     // const user = cache.get("users", { id: '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'});
     // user.refetch();
@@ -116,14 +116,14 @@ $: loadingState.setFormLoading($delayed);
     <form method="POST" use:enhance>
       <Form.Field {form} name="nickname">
         <Form.Control let:attrs>
-          <!-- <Form.Label class="label data-[fs-error]:text-error-500" >{m.profile_skey_forms_nickname_label()}</Form.Label> -->
+          <!-- <Form.Label class="label data-[fs-error]:text-error-500" >{m.profile_forms_nickname_label()}</Form.Label> -->
           <div class="input-group input-group-divider grid-cols-[1fr_auto]">
             <input
               type="text"
               class="input data-[fs-error]:input-error"
               {...attrs}
               bind:value={$formData.nickname}
-              placeholder={m.profile_skey_forms_nickname_placeholder()}
+              placeholder={m.profile_forms_nickname_placeholder()}
             />
             <button
               class="variant-filled-secondary"
@@ -140,7 +140,7 @@ $: loadingState.setFormLoading($delayed);
           </div>
         </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">
-          {m.profile_skey_forms_nickname_description()}
+          {m.profile_forms_nickname_description()}
         </Form.Description>
         <Form.FieldErrors class="data-[fs-error]:text-error-500" />
       </Form.Field>

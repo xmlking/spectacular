@@ -8,9 +8,7 @@ query GetUser($userId: uuid!) @role(name: "me") {
     ...UserOrgRolesFragment
     ...PersonalAccessTokensFragment
     ...AuthProvidersFragment
-    securityKeys(order_by: { nickname: asc })  @list(name: "Security_Keys") {
-      ...SecurityKeyFragment
-    }
+    ...SecurityKeysFragment
   }
 }
 
