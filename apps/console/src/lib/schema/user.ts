@@ -139,11 +139,18 @@ function checkConfirmPassword(ctx: z.RefinementCtx, confirmPassword: string, pas
 }
 
 // create a new PAT token
+const END_OF_YEAR = new Date(`${new Date().getFullYear()}-12-31T23:59:59`);
+const ONE_YEAR_FROM_NOW = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+console.log({ END_OF_YEAR, ONE_YEAR_FROM_NOW });
 export const createPATSchema = z.object({
   name: z
     .string({ required_error: 'Name is required' })
     .min(6, { message: 'Name must contain at least 6 character(s)' })
     .max(256)
     .trim(),
-  expiryDate: z.string().date(),
+  expiresAt: z
+    .coerce.date()
+    .min(new Date(), { message: 'Expires date should be in the future' })
+    .max(ONE_YEAR_FROM_NOW, { message: 'Lifetime max is one year' }),
+  // .default(END_OF_YEAR),
 });

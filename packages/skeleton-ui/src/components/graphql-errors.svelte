@@ -1,8 +1,13 @@
 <script lang="ts">
 import { page } from '$app/stores';
+import { Logger } from '@spectacular/utils';
+import type { GraphQLError } from 'graphql';
 import { AlertTriangle } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
-export let errors: { message: string }[] | undefined;
+
+const log = new Logger('graphql:error:client');
+export let errors: GraphQLError[] | undefined;
+log.error({ errors });
 </script>
 
 <!-- Houdini GraphQL Errors -->
@@ -13,7 +18,7 @@ export let errors: { message: string }[] | undefined;
         {#each errors as error}
           <li>
             <span><AlertTriangle /></span>
-            <span class="flex-auto">{error}</span>
+             <span class="uppercase font-bold">{error.extensions?.code}:</span><span class="flex-auto">{error.message}</span>
           </li>
         {/each}
       </ul>

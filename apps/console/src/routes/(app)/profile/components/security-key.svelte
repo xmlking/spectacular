@@ -5,7 +5,7 @@ import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { Logger } from '@spectacular/utils';
 import { GraphQLError } from 'graphql';
-import { KeyRound, Trash } from 'lucide-svelte';
+import { KeyRound, Trash2 } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 
 export let message: App.Superforms.Message | undefined;
@@ -31,6 +31,7 @@ $: ({ id, nickname } = $data);
 
 //  $: loading = $securityKeyFragment.__typename === PendingValue;
 
+// Functions
 /**
  * delete handler
  */
@@ -125,12 +126,11 @@ const handleDelete = async () => {
 <span transition:fade={{ duration: 75 }}>
   <button
     type="button"
-    class="btn-icon btn-icon-sm variant-filled-error"
+    class="btn-icon  variant-filled-error"
     on:click={handleDelete}
     disabled={isDeleting}
   >
-    <Trash />
+    <Trash2 />
   </button>
 </span>
-
 <!-- opacity-80 transition-opacity duration-50 hover:opacity-100 -->

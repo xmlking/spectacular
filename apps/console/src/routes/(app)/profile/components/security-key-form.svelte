@@ -1,110 +1,118 @@
 <script lang="ts">
-import { page } from '$app/stores';
-import { CachePolicy, GetUserStore, cache } from '$houdini';
-import * as m from '$i18n/messages';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { webAuthnSchema } from '$lib/schema/user';
-import { getLoadingState } from '$lib/stores/loading';
-import { getNhostClient } from '$lib/stores/nhost';
-import { getToastStore } from '@skeletonlabs/skeleton';
-import { DebugShell } from '@spectacular/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
-import { Logger } from '@spectacular/utils';
-import * as Form from 'formsnap';
-import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { superForm, setMessage, setError, defaults } from 'sveltekit-superforms';
-import type { ErrorStatus } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters';
+  import { page } from "$app/stores";
+  import { CachePolicy, GetUserStore, cache } from "$houdini";
+  import * as m from "$i18n/messages";
+  import { handleMessage } from "$lib/components/layout/toast-manager";
+  import { webAuthnSchema } from "$lib/schema/user";
+  import { getLoadingState } from "$lib/stores/loading";
+  import { getNhostClient } from "$lib/stores/nhost";
+  import { getToastStore } from "@skeletonlabs/skeleton";
+  import { DebugShell } from "@spectacular/skeleton";
+  import { Alerts } from "@spectacular/skeleton/components/form";
+  import { Logger } from "@spectacular/utils";
+  import * as Form from "formsnap";
+  import { Loader, LoaderCircle, MoreHorizontal } from "lucide-svelte";
+  import SuperDebug, {
+    type ErrorStatus,
+    defaults,
+    setError,
+    setMessage,
+    superForm,
+  } from "sveltekit-superforms";
+  import { zod } from "sveltekit-superforms/adapters";
 
-// Variables
-const log = new Logger('profile:keys:browser');
-const toastStore = getToastStore();
-const loadingState = getLoadingState();
-const nhost = getNhostClient();
-const form = superForm(defaults(zod(webAuthnSchema)), {
-  SPA: true,
-  dataType: 'json',
-  taintedMessage: null,
-  clearOnSubmit: 'errors-and-message',
-  delayMs: 100,
-  timeoutMs: 4000,
-  resetForm: true,
-  validators: zod(webAuthnSchema),
-  async onUpdate({ form, cancel }) {
-    if (!form.valid) return;
-    // First, check if elevate is required
-    const error = await nhost.elevate();
-    if (error) {
-      log.error('Error elevating user', { error });
-      setError(form, '', error.message, {
-        status: error.status as ErrorStatus,
-      });
-      return;
-    }
-    // Second, add the security key to database
-    const { key, error: addKeyError } = await nhost.auth.addSecurityKey(form.data.nickname);
-    if (addKeyError) {
-      log.error('Error adding security key', { error: addKeyError });
-      setError(form, '', addKeyError.message, {
-        status: addKeyError.status as ErrorStatus,
-      });
-      return;
-    }
-    // Finally notify user: successfully added a new security key
-    const message = {
-      message: `Added security key: ${key?.nickname}`,
-      hideDismiss: true,
-      timeout: 10000,
-      type: 'success',
-    } as const;
-    setMessage(form, message);
-    handleMessage(message, toastStore);
-    // Since addSecurityKey() is not using houdini client,
-    // we have to manually invalidate cache.
-    // Mark all type 'authUserSecurityKeys' stale
-    // this may not work for first time, since there is no cache to mark stale
-    // cache.markStale('authUserSecurityKeys');
-    // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
-    // const user = cache.get("users", { id: '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'});
-    // user.refetch();
-    await reload();
-  },
-});
-
-const {
-  form: formData,
-  errors,
-  allErrors,
-  message,
-  constraints,
-  submitting,
-  delayed,
-  tainted,
-  timeout,
-  posted,
-  enhance,
-} = form;
-
-// Functions
-/**
- * FIXME: Workaround for refresh page, after first time security token added
- * https://github.com/HoudiniGraphql/houdini/issues/891
- */
-async function reload() {
-  const getUserStore = new GetUserStore();
-  // const userId = '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'
-  const userId = $page.data.session.user.id;
-  console.log({ userId });
-  const { data, errors } = await getUserStore.fetch({
-    blocking: true,
-    policy: CachePolicy.NetworkOnly,
-    variables: { userId },
+  // Variables
+  const log = new Logger("profile:keys:form:browser");
+  const toastStore = getToastStore();
+  const loadingState = getLoadingState();
+  const nhost = getNhostClient();
+  const form = superForm(defaults(zod(webAuthnSchema)), {
+    SPA: true,
+    dataType: "json",
+    taintedMessage: null,
+    clearOnSubmit: "errors-and-message",
+    delayMs: 100,
+    timeoutMs: 4000,
+    resetForm: true,
+    invalidateAll: false,
+    validators: zod(webAuthnSchema),
+    async onUpdate({ form, cancel }) {
+      if (!form.valid) return;
+      // First, check if elevate is required
+      const error = await nhost.elevate();
+      if (error) {
+        log.error("Error elevating user", { error });
+        setError(form, "", error.message, {
+          status: error.status as ErrorStatus,
+        });
+        return;
+      }
+      // Second, add the security key to database
+      const { key, error: addKeyError } = await nhost.auth.addSecurityKey(
+        form.data.nickname,
+      );
+      if (addKeyError) {
+        log.error("Error adding security key", { error: addKeyError });
+        setError(form, "", addKeyError.message, {
+          status: addKeyError.status as ErrorStatus,
+        });
+        return;
+      }
+      // Finally notify user: successfully added a new security key
+      const message = {
+        message: `Added security key: ${key?.nickname}`,
+        hideDismiss: true,
+        timeout: 10000,
+        type: "success",
+      } as const;
+      setMessage(form, message);
+      handleMessage(message, toastStore);
+      // Since addSecurityKey() is not using houdini client,
+      // we have to manually invalidate cache.
+      // Mark all type 'authUserSecurityKeys' stale
+      // this may not work for first time, since there is no cache to mark stale
+      // cache.markStale('authUserSecurityKeys');
+      // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
+      // const user = cache.get("users", { id: '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'});
+      // user.refetch();
+      await reload();
+    },
   });
-  console.log({ data, errors });
-}
-// Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+
+  const {
+    form: formData,
+    errors,
+    allErrors,
+    message,
+    constraints,
+    submitting,
+    delayed,
+    tainted,
+    timeout,
+    posted,
+    enhance,
+  } = form;
+
+  // Functions
+  /**
+   * FIXME: Workaround for refresh page, after first time security token added
+   * https://github.com/HoudiniGraphql/houdini/issues/891
+   */
+  async function reload() {
+    const getUserStore = new GetUserStore();
+    // const userId = '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'
+    const userId = $page.data.session.user.id;
+    console.log({ userId });
+    const { data, errors } = await getUserStore.fetch({
+      blocking: true,
+      policy: CachePolicy.NetworkOnly,
+      variables: { userId },
+    });
+    console.log({ data, errors });
+  }
+  // Reactivity
+  $: valid = $allErrors.length === 0;
+  $: loadingState.setFormLoading($delayed);
 </script>
 
 <!-- Form Level Errors / Messages -->

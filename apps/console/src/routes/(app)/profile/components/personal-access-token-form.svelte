@@ -1,128 +1,208 @@
 <script lang="ts">
-import * as m from '$i18n/messages';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { createPATSchema } from '$lib/schema/user';
-import { getLoadingState } from '$lib/stores/loading';
-import { getNhostClient } from '$lib/stores/nhost';
-import { getToastStore } from '@skeletonlabs/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
-import { Logger, sleep } from '@spectacular/utils';
-import * as Form from 'formsnap';
-import { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+  import { page } from "$app/stores";
+  import { CachePolicy, GetUserStore, cache } from "$houdini";
+  import * as m from "$i18n/messages";
+  import { handleMessage } from "$lib/components/layout/toast-manager";
+  import { createPATSchema } from "$lib/schema/user";
+  import { getLoadingState } from "$lib/stores/loading";
+  import { getNhostClient } from "$lib/stores/nhost";
+  import { AppBar, getToastStore } from "@skeletonlabs/skeleton";
+  import { DebugShell } from "@spectacular/skeleton";
+  import { Alerts } from "@spectacular/skeleton/components/form";
+  import { Logger } from "@spectacular/utils";
+  import * as Form from "formsnap";
+  import { Loader, LoaderCircle, MoreHorizontal } from "lucide-svelte";
+  import { onMount } from "svelte";
+  import type { Writable } from "svelte/store";
+  import SuperDebug, {
+    type ErrorStatus,
+    dateProxy,
+    defaults,
+    setError,
+    setMessage,
+    superForm,
+  } from "sveltekit-superforms";
+  import { zod, zodClient } from "sveltekit-superforms/adapters";
 
-// Variables
-let showModal = false;
-
-const openModal = () => {
-  showModal = true;
-};
-
-const log = new Logger('profile:password:browser');
-const toastStore = getToastStore();
-const loadingState = getLoadingState();
-const nhost = getNhostClient();
-
-const form = superForm(defaults(zod(createPATSchema)), {
-  SPA: true,
-  dataType: 'json',
-  taintedMessage: null,
-  clearOnSubmit: 'errors-and-message',
-  delayMs: 100,
-  timeoutMs: 4000,
-  resetForm: true,
-  invalidateAll: false, // this is key for avoid calling the load function on server side
-  validators: zodClient(createPATSchema),
-  async onUpdate({ form }) {
-    if (!form.valid) {
-      console.log('Form is not valid');
-    }
-    if (form.valid) {
-      await sleep(4500);
-      let expiresAt = new Date(form.data.expiryDate);
-      const { error } = await nhost.auth.createPAT(expiresAt, { name: form.data.name });
+  // Variables
+  const log = new Logger("profile:pat:form:browser");
+  const toastStore = getToastStore();
+  const loadingState = getLoadingState();
+  const nhost = getNhostClient();
+  const form = superForm(defaults(zod(createPATSchema)), {
+    SPA: true,
+    dataType: "json",
+    taintedMessage: null,
+    clearOnSubmit: "errors-and-message",
+    delayMs: 100,
+    timeoutMs: 4000,
+    resetForm: true,
+    invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
+    validators: zodClient(createPATSchema),
+    async onUpdate({ form, cancel }) {
+      if (!form.valid) return;
+      // First, check if elevate is required
+      const error = await nhost.elevate();
       if (error) {
-        log.error('Error occurred while creating a PAT token:', { error });
-        setError(form, '', error.error, {
+        log.error("Error elevating user", { error });
+        setError(form, "", error.message, {
           status: error.status as ErrorStatus,
         });
         return;
       }
+      // Second, add the PAT to database
+      // const expiresAt = new Date(form.data.expiryDate);
+      const { expiresAt, name } = form.data;
+      const { data, error: addPATError } = await nhost.auth.createPAT(
+        expiresAt,
+        { name },
+      );
+      if (addPATError) {
+        log.error("Error occurred while creating a PAT token:", { error });
+        setError(form, "", addPATError.error, {
+          status: addPATError.status as ErrorStatus,
+        });
+        return;
+      }
+      if (!data) {
+        log.error("This shoud not happen", { data });
+        return;
+      }
+      const { id, personalAccessToken } = data;
+      // Finally notify user: successfully added a new security key
       const message = {
-        message: 'PAT Token created',
+        message: `Added PAT token: ${name}`,
         hideDismiss: true,
         timeout: 10000,
-        type: 'success',
+        type: "success",
       } as const;
       setMessage(form, message);
       handleMessage(message, toastStore);
-    }
-  },
-});
+      // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
+      await reload();
+    },
+  });
 
-const { form: formData, delayed, timeout, enhance, errors, message, allErrors, tainted, submitting } = form;
+  const {
+    form: formData,
+    errors,
+    allErrors,
+    message,
+    constraints,
+    submitting,
+    delayed,
+    tainted,
+    timeout,
+    posted,
+    enhance,
+  } = form;
 
-const today = new Date().toISOString().split('T')[0];
-
-// Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+  let proxyExpiresAt: Writable<string>
+  onMount(() => {
+    proxyExpiresAt = dateProxy(form, 'expiresAt', { format: 'date', empty: 'undefined' });
+  });
+  // Functions
+  /**
+   * FIXME: Workaround for refresh page, after first time security token added
+   * https://github.com/HoudiniGraphql/houdini/issues/891
+   */
+  async function reload() {
+    const getUserStore = new GetUserStore();
+    // const userId = '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'
+    const userId = $page.data.session.user.id;
+    console.log({ userId });
+    const { data, errors } = await getUserStore.fetch({
+      blocking: true,
+      policy: CachePolicy.NetworkOnly,
+      variables: { userId },
+    });
+    console.log({ data, errors });
+  }
+  // Reactivity
+  $: valid = $allErrors.length === 0;
+  $: loadingState.setFormLoading($delayed);
 </script>
 
 <!-- Form Level Errors / Messages -->
 <Alerts errors={$errors._errors} message={$message} />
-<!-- Form -->
-<!-- Creating new PAT token -->
-  <div class="card p-4">
 
-              {#if !showModal}
-              <button on:click={openModal} class="variant-filled-primary btn w-full">{m.profile_forms_create_pat_button()}</button>
-              {:else}
-      <form method="POST" use:enhance>
-  <div class="card">
-    <section class="p-4 space-y-2">
-      <Form.Field {form} name="name">
-        <Form.Control let:attrs>
-          <Form.Label class="label">Name</Form.Label>
-          <input
-            type="text"
-            class="input data-[fs-error]:input-error"
-            {...attrs}
-            bind:value={$formData.name}
-          />
-        </Form.Control>
-        <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">
-          Enter name for the PAT.
-        </Form.Description>
-        <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-      </Form.Field>
-      <Form.Field {form} name="expiryDate">
-        <Form.Control let:attrs>
-          <Form.Label>Expiry Date</Form.Label>
-          <input
-            type="date"
-            min={today}
-            class="input data-[fs-error]:input-error"
-            {...attrs}
-            bind:value={$formData.expiryDate}
-          />
-        </Form.Control>
-        <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500"
-          >Enter the desired expiry date</Form.Description
-        >
-        <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-      </Form.Field>
-    </section>
-    <footer class="card-footer flex justify-end">
+<!-- Creating new PAT token  Form -->
+<form method="POST" use:enhance>
+  <AppBar gridColumns="grid-cols-3" slotTrail="place-content-end">
+    <svelte:fragment slot="lead">
+      <div>
+        <Form.Field {form} name="name">
+          <Form.Control let:attrs>
+            <Form.Label class="label">Name</Form.Label>
+            <input
+              type="text"
+              class="input data-[fs-error]:input-error"
+              {...attrs}
+              bind:value={$formData.name}
+            />
+          </Form.Control>
+          <Form.Description
+            class="sr-only md:not-sr-only text-sm text-gray-500"
+          >
+            Enter name for the PAT
+          </Form.Description>
+          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+        </Form.Field>
+      </div>
+      <div>
+        <Form.Field {form} name="expiresAt">
+          <Form.Control let:attrs>
+            <Form.Label class="space-y-3">Expiry Date</Form.Label>
+            <input
+              type="date"
+              class="input data-[fs-error]:input-error"
+              {...attrs}
+              {...$constraints.expiresAt}
+              min={$constraints.expiresAt?.min?.toString().slice(0, 10)}
+              max={$constraints.expiresAt?.max?.toString().slice(0, 10)}
+              bind:value={$proxyExpiresAt}
+            />
+          </Form.Control>
+          <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500"
+            >Enter the desired expiry date</Form.Description
+          >
+          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+        </Form.Field>
+      </div>
+    </svelte:fragment>
+    <svelte:fragment slot="trail">
       <button
         type="submit"
         class="btn variant-filled-secondary"
         disabled={!$tainted || !valid || $submitting}
       >
-        Submit
+        {#if $timeout}
+          <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+        {:else if $delayed}
+          <Loader class="m-2 h-4 w-4 animate-spin" />
+        {:else}
+          {m.buttons_add()}
+        {/if}
       </button>
-    </footer>
-  </div>
+    </svelte:fragment>
+  </AppBar>
 </form>
-{/if}
-    </div>
+
+<!-- Debug -->
+<DebugShell>
+  <SuperDebug
+    data={{
+      message: $message,
+      submitting: $submitting,
+      delayed: $delayed,
+      timeout: $timeout,
+      posted: $posted,
+      formData: $formData,
+      errors: $errors,
+      constraints: $constraints,
+    }}
+    theme="vscode"
+    --sd-code-date="lightgreen"
+  />
+  <SuperDebug label="$page data" data={page} collapsible />
+</DebugShell>

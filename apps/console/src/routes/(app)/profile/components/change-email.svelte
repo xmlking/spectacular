@@ -27,7 +27,7 @@ const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: true,
-  invalidateAll: false, // this is key for avoid calling the load function on server side
+  invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
   validators: zodClient(changeEmailSchema),
   async onUpdate({ form }) {
     if (form.valid) {

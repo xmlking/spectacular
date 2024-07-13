@@ -25,7 +25,7 @@ const form = superForm(defaults(zod(changePasswordSchema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: true,
-  invalidateAll: false, // this is key for avoid calling the load function on server side
+  invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
   validators: zodClient(changePasswordSchema),
   async onUpdate({ form }) {
     if (form.valid) {

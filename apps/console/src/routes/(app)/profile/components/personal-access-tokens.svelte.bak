@@ -26,15 +26,23 @@ $: data = fragment(
       }
     `),
 );
-$: personalAccessTokens = $data.personalAccessTokens;
 
+$: ({ personalAccessTokens } = $data);
 //variables
 const toastStore = getToastStore();
 const handler = new DataHandler(personalAccessTokens, { rowsPerPage: 5 });
 const rows = handler.getRows();
 
-const DeletePAT = new DeletePATStore();
+// Functions
 // PAT delete function
+let isDeleting = false;
+const deletePersonalAccessToken = graphql(`
+    mutation DeletePersonalAccessToken($id: uuid!) {
+      deleteAuthRefreshToken(id: $id) {
+        ...Personal_Access_Tokens_remove @allLists
+      }
+    }
+  `);
 async function del(patId: string) {
   const { errors, data } = await DeletePAT.mutate({ patId });
   if (errors) {

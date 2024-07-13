@@ -75,7 +75,7 @@ $: meta = {
 
     <section class="space-y-4">
       <h2 class="h2">Personal Access Tokens</h2>
-      <p>Add are delete your personal access tokens(PAT)</p>
+      <p>Add are remove your Personal Access Tokens(PAT)</p>
       <PersonalAccessTokenForm />
       <PersonalAccessTokens {user}></PersonalAccessTokens>
     </section>

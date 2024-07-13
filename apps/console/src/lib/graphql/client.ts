@@ -63,6 +63,7 @@ export default new HoudiniClient({
       },
     };
   },
+  /*
   throwOnError: {
     // can be any combination of
     // query, mutation, subscription, and all
@@ -88,5 +89,6 @@ export default new HoudiniClient({
       // error(500, `(${ctx.artifact.name}): ` + errors.map((err) => err.message).join('. ') + '.')
     },
   },
+  */
   plugins: [subClient, ...(browser ? [logMetadata] : [])],
 });
