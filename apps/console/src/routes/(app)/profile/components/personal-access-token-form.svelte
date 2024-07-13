@@ -1,126 +1,124 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-  import { CachePolicy, GetUserStore, cache } from "$houdini";
-  import * as m from "$i18n/messages";
-  import { handleMessage } from "$lib/components/layout/toast-manager";
-  import { createPATSchema } from "$lib/schema/user";
-  import { getLoadingState } from "$lib/stores/loading";
-  import { getNhostClient } from "$lib/stores/nhost";
-  import { AppBar, getToastStore } from "@skeletonlabs/skeleton";
-  import { DebugShell } from "@spectacular/skeleton";
-  import { Alerts } from "@spectacular/skeleton/components/form";
-  import { Logger } from "@spectacular/utils";
-  import * as Form from "formsnap";
-  import { Loader, LoaderCircle, MoreHorizontal } from "lucide-svelte";
-  import { onMount } from "svelte";
-  import type { Writable } from "svelte/store";
-  import SuperDebug, {
-    type ErrorStatus,
-    dateProxy,
-    defaults,
-    setError,
-    setMessage,
-    superForm,
-  } from "sveltekit-superforms";
-  import { zod, zodClient } from "sveltekit-superforms/adapters";
+import { page } from '$app/stores';
+import { CachePolicy, GetUserStore, cache } from '$houdini';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { createPATSchema } from '$lib/schema/user';
+import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
+import { AppBar, getToastStore } from '@skeletonlabs/skeleton';
+import { DebugShell } from '@spectacular/skeleton';
+import { Alerts } from '@spectacular/skeleton/components/form';
+import { Logger } from '@spectacular/utils';
+import * as Form from 'formsnap';
+import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
+import { onMount } from 'svelte';
+import type { Writable } from 'svelte/store';
+import SuperDebug, {
+  type ErrorStatus,
+  dateProxy,
+  defaults,
+  setError,
+  setMessage,
+  superForm,
+} from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
-  // Variables
-  const log = new Logger("profile:pat:form:browser");
-  const toastStore = getToastStore();
-  const loadingState = getLoadingState();
-  const nhost = getNhostClient();
-  const form = superForm(defaults(zod(createPATSchema)), {
-    SPA: true,
-    dataType: "json",
-    taintedMessage: null,
-    clearOnSubmit: "errors-and-message",
-    delayMs: 100,
-    timeoutMs: 4000,
-    resetForm: true,
-    invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
-    validators: zodClient(createPATSchema),
-    async onUpdate({ form, cancel }) {
-      if (!form.valid) return;
-      // First, check if elevate is required
-      const error = await nhost.elevate();
-      if (error) {
-        log.error("Error elevating user", { error });
-        setError(form, "", error.message, {
-          status: error.status as ErrorStatus,
-        });
-        return;
-      }
-      // Second, add the PAT to database
-      // const expiresAt = new Date(form.data.expiryDate);
-      const { expiresAt, name } = form.data;
-      const { data, error: addPATError } = await nhost.auth.createPAT(
-        expiresAt,
-        { name },
-      );
-      if (addPATError) {
-        log.error("Error occurred while creating a PAT token:", { error });
-        setError(form, "", addPATError.error, {
-          status: addPATError.status as ErrorStatus,
-        });
-        return;
-      }
-      if (!data) {
-        log.error("This shoud not happen", { data });
-        return;
-      }
-      const { id, personalAccessToken } = data;
-      // Finally notify user: successfully added a new security key
-      const message = {
-        message: `Added PAT token: ${name}`,
-        hideDismiss: true,
-        timeout: 10000,
-        type: "success",
-      } as const;
-      setMessage(form, message);
-      handleMessage(message, toastStore);
-      // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
-      await reload();
-    },
+// Variables
+const log = new Logger('profile:pat:form:browser');
+const toastStore = getToastStore();
+const loadingState = getLoadingState();
+const nhost = getNhostClient();
+const form = superForm(defaults(zod(createPATSchema)), {
+  SPA: true,
+  dataType: 'json',
+  taintedMessage: null,
+  clearOnSubmit: 'errors-and-message',
+  delayMs: 100,
+  timeoutMs: 4000,
+  resetForm: true,
+  invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
+  validators: zodClient(createPATSchema),
+  async onUpdate({ form, cancel }) {
+    if (!form.valid) return;
+    // First, check if elevate is required
+    const error = await nhost.elevate();
+    if (error) {
+      log.error('Error elevating user', { error });
+      setError(form, '', error.message, {
+        status: error.status as ErrorStatus,
+      });
+      return;
+    }
+    // Second, add the PAT to database
+    // const expiresAt = new Date(form.data.expiryDate);
+    const { expiresAt, name } = form.data;
+    const { data, error: addPATError } = await nhost.auth.createPAT(expiresAt, { name });
+    if (addPATError) {
+      log.error('Error occurred while creating a PAT token:', { error });
+      setError(form, '', addPATError.error, {
+        status: addPATError.status as ErrorStatus,
+      });
+      return;
+    }
+    if (!data) {
+      log.error('This shoud not happen', { data });
+      return;
+    }
+    const { id, personalAccessToken } = data;
+    // Finally notify user: successfully added a new security key
+    const message = {
+      message: `Added PAT token: ${name}`,
+      hideDismiss: true,
+      timeout: 10000,
+      type: 'success',
+    } as const;
+    setMessage(form, message);
+    handleMessage(message, toastStore);
+    // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
+    // TODO: add { id, personalAccessToken }  to cache, instead of reload()
+    await reload();
+  },
+});
+
+const {
+  form: formData,
+  errors,
+  allErrors,
+  message,
+  constraints,
+  submitting,
+  delayed,
+  tainted,
+  timeout,
+  posted,
+  enhance,
+} = form;
+
+let proxyExpiresAt: Writable<string>;
+onMount(() => {
+  proxyExpiresAt = dateProxy(form, 'expiresAt', { format: 'date-local', empty: 'undefined' });
+});
+// Functions
+/**
+ * FIXME: Workaround for refresh page, after first time security token added
+ * https://github.com/HoudiniGraphql/houdini/issues/891
+ */
+async function reload() {
+  const getUserStore = new GetUserStore();
+  // const userId = '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'
+  const userId = $page.data.session.user.id;
+  console.log({ userId });
+  const { data, errors } = await getUserStore.fetch({
+    blocking: true,
+    policy: CachePolicy.NetworkOnly,
+    variables: { userId },
   });
-
-  const {
-    form: formData,
-    errors,
-    allErrors,
-    message,
-    constraints,
-    submitting,
-    delayed,
-    tainted,
-    timeout,
-    posted,
-    enhance,
-  } = form;
-
-  let proxyExpiresAt: Writable<string>
-  onMount(() => {
-    proxyExpiresAt = dateProxy(form, 'expiresAt', { format: 'date', empty: 'undefined' });
-  });
-  // Functions
-  /**
-   * FIXME: Workaround for refresh page, after first time security token added
-   * https://github.com/HoudiniGraphql/houdini/issues/891
-   */
-  async function reload() {
-    const getUserStore = new GetUserStore();
-    // const userId = '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'
-    const userId = $page.data.session.user.id;
-    console.log({ userId });
-    const { data, errors } = await getUserStore.fetch({
-      blocking: true,
-      policy: CachePolicy.NetworkOnly,
-      variables: { userId },
-    });
-    console.log({ data, errors });
-  }
-  // Reactivity
-  $: valid = $allErrors.length === 0;
-  $: loadingState.setFormLoading($delayed);
+  console.log({ data, errors });
+}
+// Reactivity
+$: valid = $allErrors.length === 0;
+$: loadingState.setFormLoading($delayed);
 </script>
 
 <!-- Form Level Errors / Messages -->
