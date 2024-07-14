@@ -15,7 +15,7 @@ $: data = fragment(
       }
   `),
 );
-$: providers = $data.providers;
+$: ({ providers } = $data);
 </script>
 
 <div class="card p-4">

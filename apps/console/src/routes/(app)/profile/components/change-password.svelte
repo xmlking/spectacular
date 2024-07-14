@@ -85,7 +85,10 @@ $: loadingState.setFormLoading($delayed);
 <!-- Change Password Form -->
 <form method="POST" use:enhance>
   <div class="card">
-    <header class="card-header">Change Password</header>
+    <header class="card-header">
+      <div class="text-xl">Change Password</div>
+      <!-- <div>Update your signin password</div> -->
+    </header>
     <section class="p-4 space-y-2">
       <Form.Field {form} name="password">
         <Form.Control let:attrs>

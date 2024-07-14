@@ -1,5 +1,8 @@
 # CacheOrNetwork is default cache strategy.
 # We are leveraging Houdini's Optimistic updates for this usecase
+# HINT: If you find yourself wanting @loading on every field in your document (fragment or query),
+# you can put it on the document definition to implicitly add it to every field.
+# ex: query GetUser($userId: uuid!) @loading @role(name: "me")
 query GetUser($userId: uuid!) @role(name: "me") {
   # get all fragments needed for profile page.
   user(id: $userId) @loading(cascade: true) {

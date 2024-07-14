@@ -4,7 +4,7 @@ import { PendingValue, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getNhostClient } from '$lib/stores/nhost';
-import { getToastStore } from '@skeletonlabs/skeleton';
+import { clipboard, getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import * as Table from '@spectacular/skeleton/components/table';
@@ -19,6 +19,7 @@ const toastStore = getToastStore();
 const nhost = getNhostClient();
 let message: App.Superforms.Message | undefined;
 const errors: string[] = [];
+let copied: boolean[] = [];
 
 export let user: PersonalAccessTokensFragment;
 $: data = fragment(
@@ -145,40 +146,54 @@ const handleDelete = async (id: string, name: string) => {
       <thead>
         <tr>
           <Table.Head {handler} orderBy="name">Name</Table.Head>
+          <Table.Head {handler} orderBy="id">Token</Table.Head>
           <Table.Head {handler} orderBy="createdAt">Created At</Table.Head>
           <Table.Head {handler} orderBy="expiresAt">Expires At</Table.Head>
           <Table.Head {handler}>Delete</Table.Head>
         </tr>
       </thead>
       <tbody>
-        {#each $rows as token}
+        {#each $rows as token, i (token.id)}
           {#if token.id === PendingValue}
             <tr class="animate-pulse">
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
+              <td><div class="placeholder" /></td>
             </tr>
           {:else}
-          <tr>
-            <td>{token.name}</td>
-            <td><DateTime time={token.createdAt}/></td>
-            <td><DateTime time={token.expiresAt}/></td>
-            <td>
-              <button
-              type="button"
-              class="btn-icon btn-icon-sm variant-filled-error"
-              on:click={() => {handleDelete(token.id, token.name) }}
-              disabled={isDeleting}
-              >
-                <Trash2 />
-              </button>
-            </td>
-          </tr>
+            <tr>
+              <td>{token.name}</td>
+              <td>{token.id}
+                <button
+                class="btn btn-sm variant-filled ml-2"
+                use:clipboard={token.id}
+                on:click={() => {
+                          copied[i] = true;
+                            setTimeout(() => {
+                              copied[i] = false;
+                            }, 1000);
+                          }}
+                >{copied[i] ? 'copied 👍' : 'copy'}</button>
+              </td>
+              <td><DateTime time={token.createdAt}/></td>
+              <td><DateTime time={token.expiresAt}/></td>
+              <td>
+                <button
+                type="button"
+                class="btn-icon btn-icon-sm variant-filled-error"
+                on:click={() => {handleDelete(token.id, token.name) }}
+                disabled={isDeleting}
+                >
+                  <Trash2 />
+                </button>
+              </td>
+            </tr>
           {/if}
         {:else}
           <tr>
-            <td colspan="4"
+            <td colspan="5"
               ><div class="text-center text-gray-500">
                 No personal access tokens found.
               </div></td

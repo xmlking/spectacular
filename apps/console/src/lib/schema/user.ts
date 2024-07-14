@@ -41,10 +41,11 @@ export const userSchema = z.object({
     .min(2, { message: 'Display Name must contain at least 2 character(s)' })
     .max(256)
     .trim(),
-  phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!'),
-  avatarUrl: z.string().url(),
+  phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!').nullable(),
+  avatarUrl: z.string().url().nullable(),
   defaultRole: z.nativeEnum(Roles, { required_error: 'You must have a role' }).default(Roles.User),
-  plan: z.enum(['free', 'pro', 'enterprise']),
+  plan: z.enum(['free', 'pro', 'enterprise']).default('free'),
+  locale: z.enum(['en', 'es', 'de']).default('en'),
   verified: z.boolean().default(false),
   token: z.string().optional(),
   receiveEmail: z.boolean().default(true),
@@ -67,6 +68,7 @@ export const updateUserDetailsSchema = userSchema.omit({
   receiveEmail: true,
   createdAt: true,
   updatedAt: true,
+  organization: true,
 });
 export type UpdateUserDetailsSchema = typeof updateUserDetailsSchema;
 export type updateUserDetails = z.infer<typeof updateUserDetailsSchema>;

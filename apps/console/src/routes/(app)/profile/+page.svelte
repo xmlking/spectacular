@@ -57,7 +57,7 @@ $: meta = {
 
     <section class="space-y-4">
       <h2 class="h2">User Details</h2>
-      <p>Update user details</p>
+      <p>Update your account information</p>
       <UserDetails {user} />
     </section>
 

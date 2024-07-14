@@ -45,7 +45,10 @@ async function handleElevate() {
 <Alerts {errors} {message} />
 
 <div class="card">
-  <header class="card-header">{m.profile_hasura_jwt_claims_label()}</header>
+  <header class="card-header">
+    <div class="text-xl">{m.profile_hasura_jwt_claims_label()}</div>
+    <!-- <div>Here you can see your session claims</div> -->
+  </header>
   <AppBar>
     <svelte:fragment slot="lead"><UserRound /></svelte:fragment>
    <h3 class="h3"><span class="gradient-heading">Elevation status: {$elevated}</span></h3>

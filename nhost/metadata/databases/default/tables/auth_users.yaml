@@ -254,7 +254,12 @@ update_permissions:
   - role: user
     permission:
       columns:
+        - avatar_url
+        - default_role
         - display_name
+        - locale
+        - metadata
+        - phone_number
       filter:
         id:
           _eq: x-hasura-user-id

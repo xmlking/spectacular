@@ -87,7 +87,10 @@ $: loadingState.setFormLoading($delayed);
 <Alerts errors={$errors._errors} message={$message} />
 <!-- Form -->
 <div class="card">
-  <header class="card-header">Change Email</header>
+  <header class="card-header">
+    <div class="text-xl">Change Email</div>
+    <!-- <div>To update your password, enter password and conformPassword and submit</div> -->
+  </header>
   <section class="p-4">
     <form method="POST" use:enhance>
       <Form.Field {form} name="email">
