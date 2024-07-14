@@ -9,6 +9,7 @@ import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
+import { Loader, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
@@ -81,7 +82,7 @@ $: loadingState.setFormLoading($delayed);
 
 <!-- Form Level Errors / Messages -->
 <Alerts errors={$errors._errors} message={$message} />
-<!-- Form -->
+<!-- Change Password Form -->
 <form method="POST" use:enhance>
   <div class="card">
     <header class="card-header">Change Password</header>
@@ -95,6 +96,7 @@ $: loadingState.setFormLoading($delayed);
             class="input data-[fs-error]:input-error"
             {...attrs}
             bind:value={$formData.password}
+            placeholder="{m.profile_forms_change_password_placeholder()}"
           />
         </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">
@@ -110,6 +112,7 @@ $: loadingState.setFormLoading($delayed);
             class="input data-[fs-error]:input-error"
             {...attrs}
             bind:value={$formData.confirmPassword}
+            placeholder="{m.profile_forms_change_password_confirm_placeholder()}"
           />
         </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500"
@@ -124,11 +127,18 @@ $: loadingState.setFormLoading($delayed);
         class="btn variant-filled-secondary"
         disabled={!$tainted || !valid || $submitting}
       >
-        Submit
+        {#if $timeout}
+          <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+        {:else if $delayed}
+          <Loader class="m-2 h-4 w-4 animate-spin" />
+        {:else}
+          {m.buttons_submit()}
+        {/if}
       </button>
     </footer>
   </div>
 </form>
+
 <!-- Debug -->
 <DebugShell>
   <SuperDebug
