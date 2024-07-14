@@ -340,7 +340,7 @@ importers:
         version: 5.4.1(@sveltejs/kit@2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.1)))(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.1)))
       '@sveltejs/enhanced-img':
         specifier: 0.3.0
-        version: 0.3.0(rollup@4.18.0)(svelte@4.2.18)
+        version: 0.3.0(rollup@2.79.1)(svelte@4.2.18)
       '@sveltejs/kit':
         specifier: 2.5.18
         version: 2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.1)))(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.1))
@@ -403,13 +403,13 @@ importers:
         version: 3.6.0
       flowbite:
         specifier: 2.4.1
-        version: 2.4.1(rollup@4.18.0)
+        version: 2.4.1(rollup@2.79.1)
       flowbite-svelte:
         specifier: 0.46.14
-        version: 0.46.14(rollup@4.18.0)(svelte@4.2.18)
+        version: 0.46.14(rollup@2.79.1)(svelte@4.2.18)
       flowbite-svelte-blocks:
         specifier: 1.1.3
-        version: 1.1.3(rollup@4.18.0)(svelte@4.2.18)
+        version: 1.1.3(rollup@2.79.1)(svelte@4.2.18)
       flowbite-svelte-icons:
         specifier: 1.6.1
         version: 1.6.1(svelte@4.2.18)(tailwind-merge@2.3.0)(tailwindcss@3.4.4)
@@ -586,8 +586,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.39)
       bits-ui:
-        specifier: 0.21.11
-        version: 0.21.11(svelte@4.2.18)
+        specifier: 0.21.12
+        version: 0.21.12(svelte@4.2.18)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -1068,8 +1068,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.39)
       bits-ui:
-        specifier: 0.21.11
-        version: 0.21.11(svelte@4.2.18)
+        specifier: 0.21.12
+        version: 0.21.12(svelte@4.2.18)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -1140,8 +1140,8 @@ importers:
         specifier: ^2.0.0
         version: 2.5.18(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.1)))(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.1))
       bits-ui:
-        specifier: 0.21.11
-        version: 0.21.11(svelte@4.2.18)
+        specifier: 0.21.12
+        version: 0.21.12(svelte@4.2.18)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -3540,9 +3540,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.1':
     resolution: {integrity: sha512-WSAsGiSQ1lRWMB4sj/gIykrlRvyXWNde+Lv+/4DYxIc5122FBnWl3X2dGJeBCUHOFKmQbgJL1XKrjVDfWyRrXg==}
@@ -4272,7 +4274,7 @@ packages:
     peerDependencies:
       '@sveltejs/vite-plugin-svelte': ^3.0.0
       svelte: ^4.0.0 || ^5.0.0-next.0
-      vite: 5.2.13
+      vite: ^5.0.3
 
   '@sveltejs/kit@2.5.7':
     resolution: {integrity: sha512-6uedTzrb7nQrw6HALxnPrPaXdIN2jJJTzTIl96Z3P5NiG+OAfpdPbrWrvkJ3GN4CfWqrmU4dJqwMMRMTD/C7ow==}
@@ -5238,8 +5240,8 @@ packages:
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
 
-  bits-ui@0.21.11:
-    resolution: {integrity: sha512-pFS/9z1qLaPZwb+9Tm0YS4iBp+ClsJBARMZWFOjv0lGCYpzAN7lx4eNk3SbSB5QMBUKwoVjr9Rai71ROq3RD1Q==}
+  bits-ui@0.21.12:
+    resolution: {integrity: sha512-Cf0iB+ZKwA0ZjkpixrhrZK9PC6pGPFleW/65Xc/z0lpGvWaFtdOhiYEntCHHxZ0VihP3aJaG0OBhUBIbmAePaA==}
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.118
 
@@ -15295,7 +15297,7 @@ snapshots:
     dependencies:
       file-uri-to-path: 1.0.0
 
-  bits-ui@0.21.11(svelte@4.2.18):
+  bits-ui@0.21.12(svelte@4.2.18):
     dependencies:
       '@internationalized/date': 3.5.4
       '@melt-ui/svelte': 0.76.2(svelte@4.2.18)
@@ -16718,17 +16720,17 @@ snapshots:
 
   flattie@1.1.1: {}
 
-  flowbite-datepicker@1.3.0(rollup@4.18.0):
+  flowbite-datepicker@1.3.0(rollup@2.79.1):
     dependencies:
-      '@rollup/plugin-node-resolve': 15.2.3(rollup@4.18.0)
-      flowbite: 2.4.1(rollup@4.18.0)
+      '@rollup/plugin-node-resolve': 15.2.3(rollup@2.79.1)
+      flowbite: 2.4.1(rollup@2.79.1)
     transitivePeerDependencies:
       - rollup
 
-  flowbite-svelte-blocks@1.1.3(rollup@4.18.0)(svelte@4.2.18):
+  flowbite-svelte-blocks@1.1.3(rollup@2.79.1)(svelte@4.2.18):
     dependencies:
-      flowbite: 2.4.1(rollup@4.18.0)
-      flowbite-svelte: 0.46.14(rollup@4.18.0)(svelte@4.2.18)
+      flowbite: 2.4.1(rollup@2.79.1)
+      flowbite-svelte: 0.46.14(rollup@2.79.1)(svelte@4.2.18)
       svelte: 4.2.18
       tailwind-merge: 2.3.0
     transitivePeerDependencies:
@@ -16740,11 +16742,11 @@ snapshots:
       tailwind-merge: 2.3.0
       tailwindcss: 3.4.4
 
-  flowbite-svelte@0.46.14(rollup@4.18.0)(svelte@4.2.18):
+  flowbite-svelte@0.46.14(rollup@2.79.1)(svelte@4.2.18):
     dependencies:
       '@floating-ui/dom': 1.6.7
       apexcharts: 3.50.0
-      flowbite: 2.4.1(rollup@4.18.0)
+      flowbite: 2.4.1(rollup@2.79.1)
       svelte: 4.2.18
       tailwind-merge: 2.3.0
     transitivePeerDependencies:
@@ -16757,10 +16759,10 @@ snapshots:
       lodash.merge: 4.6.2
       tailwindcss: 3.4.4
 
-  flowbite@2.4.1(rollup@4.18.0):
+  flowbite@2.4.1(rollup@2.79.1):
     dependencies:
       '@popperjs/core': 2.11.8
-      flowbite-datepicker: 1.3.0(rollup@4.18.0)
+      flowbite-datepicker: 1.3.0(rollup@2.79.1)
       mini-svg-data-uri: 1.4.4
     transitivePeerDependencies:
       - rollup
@@ -21144,7 +21146,7 @@ snapshots:
 
   vaul-svelte@0.3.2(svelte@4.2.18):
     dependencies:
-      bits-ui: 0.21.11(svelte@4.2.18)
+      bits-ui: 0.21.12(svelte@4.2.18)
       svelte: 4.2.18
 
   vfile-location@5.0.2:
