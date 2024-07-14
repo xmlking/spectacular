@@ -2,15 +2,14 @@
 import type { PersonalAccessTokensFragment } from '$houdini';
 import { PendingValue, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+  import { loaded } from '$lib/graphql/loading';
 import { getNhostClient } from '$lib/stores/nhost';
-import { popup } from '@skeletonlabs/skeleton';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger } from '@spectacular/utils';
 import { DataHandler } from '@vincjo/datatables';
-import { formatDistance } from 'date-fns';
 import { GraphQLError } from 'graphql';
 import { Trash2 } from 'lucide-svelte';
 
@@ -41,8 +40,9 @@ $: data = fragment(
 $: ({ personalAccessTokens } = $data);
 
 //variables
-// const handler = new DataHandler(personalAccessTokens, { rowsPerPage: 5 });
-// const rows = handler.getRows();
+const handler = new DataHandler(personalAccessTokens?.filter(loaded), { rowsPerPage: 5 });
+$: handler.setRows(personalAccessTokens)
+const rows = handler.getRows()
 
 // Functions
 /**
@@ -136,18 +136,22 @@ const handleDelete = async (id: string, name: string) => {
 <Alerts {errors} {message} />
 
 <div class="card p-4">
-  <div class="table-container">
+  <div class="page-container p-0">
+    <header class="flex justify-between">
+      <Table.Search {handler} />
+      <Table.RowsPerPage {handler} />
+    </header>
     <table class="table table-hover table-compact w-full table-auto">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Created At</th>
-          <th>Expires At</th>
-           <th>Delete</th>
+          <Table.Head {handler} orderBy="name">Name</Table.Head>
+          <Table.Head {handler} orderBy="createdAt">Created At</Table.Head>
+          <Table.Head {handler} orderBy="expiresAt">Expires At</Table.Head>
+          <Table.Head {handler}>Delete</Table.Head>
         </tr>
       </thead>
       <tbody>
-        {#each personalAccessTokens as token}
+        {#each $rows as token}
           {#if token.id === PendingValue}
             <tr class="animate-pulse">
               <td><div class="placeholder" /></td>
@@ -156,25 +160,25 @@ const handleDelete = async (id: string, name: string) => {
               <td><div class="placeholder" /></td>
             </tr>
           {:else}
-            <tr>
-              <td>{token.name}</td>
-              <td><DateTime time={token.createdAt}/></td>
-              <td><DateTime time={token.expiresAt}/></td>
-              <td>
-                <button
-                type="button"
-                class="btn-icon btn-icon-sm variant-filled-error"
-                on:click={() => {handleDelete(token.id, token.name) }}
-                disabled={isDeleting}
-                >
-                  <Trash2 />
-                </button>
+          <tr>
+            <td>{token.name}</td>
+            <td><DateTime time={token.createdAt}/></td>
+            <td><DateTime time={token.expiresAt}/></td>
+            <td>
+              <button
+              type="button"
+              class="btn-icon btn-icon-sm variant-filled-error"
+              on:click={() => {handleDelete(token.id, token.name) }}
+              disabled={isDeleting}
+              >
+                <Trash2 />
+              </button>
             </td>
-            </tr>
+          </tr>
           {/if}
         {:else}
           <tr>
-            <td colspan="3"
+            <td colspan="4"
               ><div class="text-center text-gray-500">
                 No personal access tokens found.
               </div></td
@@ -183,5 +187,9 @@ const handleDelete = async (id: string, name: string) => {
         {/each}
       </tbody>
     </table>
+    <footer class="flex justify-between">
+      <Table.RowCount {handler} />
+      <Table.Pagination {handler} />
+    </footer>
   </div>
 </div>

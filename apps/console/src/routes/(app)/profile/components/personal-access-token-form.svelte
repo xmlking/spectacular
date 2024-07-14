@@ -139,11 +139,7 @@ $: loadingState.setFormLoading($delayed);
               bind:value={$formData.name}
             />
           </Form.Control>
-          <Form.Description
-            class="sr-only md:not-sr-only text-sm text-gray-500"
-          >
-            Enter name for the PAT
-          </Form.Description>
+          <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter name for the PAT</Form.Description> -->
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
       </div>
@@ -161,9 +157,7 @@ $: loadingState.setFormLoading($delayed);
               bind:value={$proxyExpiresAt}
             />
           </Form.Control>
-          <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500"
-            >Enter the desired expiry date</Form.Description
-          >
+          <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the desired expiry date</Form.Description> -->
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
       </div>

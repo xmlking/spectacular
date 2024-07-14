@@ -3,6 +3,7 @@ import { Avatar } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler } from '@vincjo/datatables';
 import type { PageData } from './$houdini';
+  import { Pencil } from 'lucide-svelte';
 export let data: PageData;
 $: ({ UsersList } = data);
 const handler = new DataHandler(UsersList, { rowsPerPage: 10 });
@@ -32,22 +33,12 @@ $: handler.setRows(UsersList);
 						<td><Avatar src={row.avatarUrl} width="w-10" rounded="rounded-full" /></td>
 						<td>{row.displayName}</td>
 						<td>{row.email}</td>
-						<td>{row.metadata.default_org}</td>
+						<td>{row.metadata?.default_org}</td>
 						<td>{row.defaultRole}</td>
-						<td><button class="btn hover:variant-soft-primary"><a href="./users/{row.id}"><svg
-							xmlns="http://www.w3.org/2000/svg"
-							class={`${$$props.class ?? 'h-6 w-6'} `}
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-							/>
-						</svg></a></button>
+						<td>
+              <button class="btn-icon bg-initial hover:variant-soft-primary">
+                <a href="/users/{row.id}"><Pencil /></a>
+              </button>
 						</td>
 					</tr>
 				{/each}

@@ -32,7 +32,7 @@ const {
 } = form;
 const groupRolesByOrganization = () => {
   const groupedRoles: { [key: string]: string[] } = {};
-  for (const { organization, role } of data.orgRoles) {
+  for (const { organization, role } of data.orgRoles ?? []) {
     if (!groupedRoles[organization]) {
       groupedRoles[organization] = [];
     }
@@ -112,7 +112,7 @@ $: {
                 <option value={$formData.metadata.default_org} disabled hidden
                   >{$formData.metadata.default_org}</option
                 >
-                {#each data.user.allowedOrgs as org}
+                {#each data.user.allowedOrgs ?? [] as org}
                   <option value={org.organization}
                     ><button>{org.organization}</button></option
                   >
