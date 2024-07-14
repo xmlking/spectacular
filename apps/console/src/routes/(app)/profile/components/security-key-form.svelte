@@ -44,7 +44,7 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
     // Second, add the security key to database
     const { key, error: addKeyError } = await nhost.auth.addSecurityKey(form.data.nickname);
     if (addKeyError) {
-      log.error('Error adding security key', { error: addKeyError });
+      log.error('Error occurred while adding security key', { error: addKeyError });
       setError(form, '', addKeyError.message, {
         status: addKeyError.status as ErrorStatus,
       });
