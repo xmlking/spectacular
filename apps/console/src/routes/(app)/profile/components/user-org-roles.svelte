@@ -1,12 +1,15 @@
 <script lang="ts">
 import { PendingValue, type UserOrgRolesFragment, fragment, graphql } from '$houdini';
+import { loaded } from '$lib/graphql/loading';
+import * as Table from '@spectacular/skeleton/components/table';
+import { DataHandler } from '@vincjo/datatables';
 
 export let user: UserOrgRolesFragment;
 $: data = fragment(
   user,
   graphql(`
       fragment UserOrgRolesFragment on users {
-        userOrgRoles(order_by: { organization: asc }) @list(name: "User_Org_Roles") @loading {
+        userOrgRoles(order_by: { organization: asc }) @list(name: "User_Org_Roles") @loading(cascade: true) {
           organization
           role
           isDefaultRole
@@ -14,33 +17,41 @@ $: data = fragment(
       }
   `),
 );
-$: userOrgRoles = $data.userOrgRoles;
+$: ({ userOrgRoles } = $data);
+//variables
+const handler = new DataHandler(userOrgRoles?.filter(loaded), { rowsPerPage: 5 });
+$: handler.setRows(userOrgRoles);
+const rows = handler.getRows();
 </script>
 
 <div class="card p-4">
-  <div class="table-container">
-    <table class="table table-hover">
+  <div class="page-container p-0">
+    <header class="flex justify-between">
+      <Table.Search {handler} />
+      <Table.RowsPerPage {handler} />
+    </header>
+    <table class="table table-hover table-compact w-full table-auto">
       <thead>
         <tr>
-          <th>Organization</th>
-          <th>Role</th>
-          <th>isDefaultRole</th>
+          <Table.Head {handler} orderBy="organization">Organization</Table.Head>
+          <Table.Head {handler} orderBy="role">Role</Table.Head>
+          <Table.Head {handler} orderBy="isDefaultRole">isDefaultRole</Table.Head>
         </tr>
       </thead>
       <tbody>
-        {#each userOrgRoles as role, i}
-          {#if role === PendingValue}
+        {#each $rows as role}
+          {#if role.organization === PendingValue}
             <tr class="animate-pulse">
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
             </tr>
           {:else}
-            <tr>
-              <td>{role.organization}</td>
-              <td>{role.role}</td>
-              <td>{role.isDefaultRole}</td>
-            </tr>
+          <tr>
+            <td>{role.organization}</td>
+            <td>{role.role}</td>
+            <td>{role.isDefaultRole}</td>
+          </tr>
           {/if}
         {:else}
           <tr>
@@ -53,5 +64,9 @@ $: userOrgRoles = $data.userOrgRoles;
         {/each}
       </tbody>
     </table>
+    <footer class="flex justify-between">
+      <Table.RowCount {handler} />
+      <Table.Pagination {handler} />
+    </footer>
   </div>
 </div>
