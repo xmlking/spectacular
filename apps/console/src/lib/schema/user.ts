@@ -2,7 +2,8 @@ import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
 import { Roles } from '$lib/types';
 import { z } from 'zod';
 
-const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
+// const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
+const phoneRegex = /^\+[1-9]\d{1,14}$/;
 
 /**
  * General User Schema
@@ -41,7 +42,12 @@ export const userSchema = z.object({
     .min(2, { message: 'Display Name must contain at least 2 character(s)' })
     .max(256)
     .trim(),
-  phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!').nullable(),
+  phoneNumber: z
+    .string()
+    .regex(phoneRegex, 'Invalid Number!')
+    .min(10)
+    .max(15)
+    .nullable(),
   avatarUrl: z.string().url().nullable(),
   defaultRole: z.nativeEnum(Roles, { required_error: 'You must have a role' }).default(Roles.User),
   plan: z.enum(['free', 'pro', 'enterprise']).default('free'),

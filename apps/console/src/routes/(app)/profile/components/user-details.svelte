@@ -162,7 +162,10 @@ $: valid = $allErrors.length === 0;
 $: loadingState.setFormLoading($delayed);
 
 // copy initialData to superform as soon as data is loaded
-$: $formData = { displayName, email, phoneNumber, defaultRole, locale, plan, avatarUrl };
+// $: $formData = { displayName, email, phoneNumber, defaultRole, locale, plan, avatarUrl };
+$: if(id !== PendingValue) {
+  $formData = { displayName, email, phoneNumber, defaultRole, locale, plan, avatarUrl };
+}
 </script>
 
 <AppBar>

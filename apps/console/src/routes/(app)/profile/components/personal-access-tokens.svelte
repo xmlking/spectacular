@@ -153,7 +153,8 @@ const handleDelete = async (id: string, name: string) => {
         </tr>
       </thead>
       <tbody>
-        {#each $rows as token, i (token.id)}
+        <!-- {#each $rows as token, i (token.id)} -->
+        {#each $rows as token, i}
           {#if token.id === PendingValue}
             <tr class="animate-pulse">
               <td><div class="placeholder" /></td>
