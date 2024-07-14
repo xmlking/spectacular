@@ -50,7 +50,7 @@ const form = superForm(defaults(zod(webAuthnSchema)), {
       });
       return;
     }
-    // Finally notify user: successfully added a new security key
+    // Finally notify user
     const message = {
       message: `Added security key: ${key?.nickname}`,
       hideDismiss: true,

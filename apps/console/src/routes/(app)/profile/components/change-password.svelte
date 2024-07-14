@@ -1,4 +1,5 @@
 <script lang="ts">
+import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { changePasswordSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
@@ -6,17 +7,16 @@ import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
-import { Logger, sleep } from '@spectacular/utils';
+import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import SuperDebug, { defaults, setError, setMessage, superForm, type ErrorStatus } from 'sveltekit-superforms';
+import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 // Variables
-const log = new Logger('profile:password:browser');
+const log = new Logger('profile:change:password:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const nhost = getNhostClient();
-
 const form = superForm(defaults(zod(changePasswordSchema)), {
   SPA: true,
   dataType: 'json',
@@ -25,43 +25,52 @@ const form = superForm(defaults(zod(changePasswordSchema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: true,
-  invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
+  invalidateAll: false,
   validators: zodClient(changePasswordSchema),
-  async onUpdate({ form }) {
-    if (form.valid) {
-      await sleep(4500);
-      const newPassword = form.data.password;
-      const { error } = await nhost.auth.changePassword({ newPassword });
-      if (error) {
-        log.error('Error occurred while changing the password:', { error });
-        setError(form, '', error.message, {
-          status: error.status as ErrorStatus,
-        });
-        return;
-      }
-      const message = {
-        message: 'Password changed',
-        hideDismiss: true,
-        timeout: 10000,
-        type: 'success',
-      } as const;
-      setMessage(form, message);
-      handleMessage(message, toastStore);
+  async onUpdate({ form, cancel }) {
+    if (!form.valid) return;
+    // First, check if elevate is required
+    const error = await nhost.elevate();
+    if (error) {
+      log.error('Error elevating user', { error });
+      setError(form, '', error.message, {
+        status: error.status as ErrorStatus,
+      });
+      return;
     }
+    // Second, change password via nhost auth SDK
+    const newPassword = form.data.password;
+    const { error: cpError } = await nhost.auth.changePassword({ newPassword });
+    if (cpError) {
+      log.error('Error occurred while changing the password:', { error: cpError });
+      setError(form, '', cpError.message, {
+        status: cpError.status as ErrorStatus,
+      });
+      return;
+    }
+    // Finally notify user
+    const message = {
+      message: 'Password changed. Signout and signin to verify',
+      hideDismiss: true,
+      timeout: 10000,
+      type: 'success',
+    } as const;
+    setMessage(form, message);
+    handleMessage(message, toastStore);
   },
 });
 
 const {
   form: formData,
   errors,
-  message,
-  submitting,
-  constraints,
-  delayed,
-  timeout,
-  tainted,
-  posted,
   allErrors,
+  message,
+  constraints,
+  submitting,
+  delayed,
+  tainted,
+  timeout,
+  posted,
   enhance,
 } = form;
 
@@ -80,7 +89,7 @@ $: loadingState.setFormLoading($delayed);
       <Form.Field {form} name="password">
         <Form.Control let:attrs>
           <!-- <Form.Label class="label data-[fs-error]:text-error-500">Password</Form.Label> -->
-          <Form.Label class="label">Password</Form.Label>
+          <Form.Label class="label">{m.profile_forms_change_password_label()}</Form.Label>
           <input
             type="password"
             class="input data-[fs-error]:input-error"
@@ -89,13 +98,13 @@ $: loadingState.setFormLoading($delayed);
           />
         </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">
-          Enter the new password.
+          {m.profile_forms_change_password_description()}
         </Form.Description>
         <Form.FieldErrors class="data-[fs-error]:text-error-500" />
       </Form.Field>
       <Form.Field {form} name="confirmPassword">
         <Form.Control let:attrs>
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>{m.profile_forms_change_password_confirm_label()}</Form.Label>
           <input
             type="password"
             class="input data-[fs-error]:input-error"
@@ -104,7 +113,7 @@ $: loadingState.setFormLoading($delayed);
           />
         </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500"
-          >Re-enter the new password</Form.Description
+          >{m.profile_forms_change_password_confirm_description()}</Form.Description
         >
         <Form.FieldErrors class="data-[fs-error]:text-error-500" />
       </Form.Field>
