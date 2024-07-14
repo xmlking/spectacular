@@ -1,5 +1,8 @@
 import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { Roles } from '$lib/types';
 import { z } from 'zod';
+
+const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
 
 /**
  * General User Schema
@@ -33,7 +36,15 @@ export const userSchema = z.object({
   terms: z
     .literal<boolean>(true, { errorMap: () => ({ message: 'Please accept Terms of Service to continue' }) })
     .default(false),
-  role: z.enum(['USER', 'PREMIUM', 'ADMIN'], { required_error: 'You must have a role' }).default('USER'),
+  displayName: z
+    .string({ required_error: 'Display Name is required' })
+    .min(2, { message: 'Display Name must contain at least 2 character(s)' })
+    .max(256)
+    .trim(),
+  phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!'),
+  avatarUrl: z.string().url(),
+  defaultRole: z.nativeEnum(Roles, { required_error: 'You must have a role' }).default(Roles.User),
+  plan: z.enum(['free', 'pro', 'enterprise']),
   verified: z.boolean().default(false),
   token: z.string().optional(),
   receiveEmail: z.boolean().default(true),
@@ -41,6 +52,25 @@ export const userSchema = z.object({
   updatedAt: z.date().optional(),
   organization: z.string().default(PUBLIC_DEFAULT_ORGANIZATION),
 });
+
+/**
+ * Update User Details
+ */
+export const updateUserDetailsSchema = userSchema.omit({
+  firstName: true,
+  lastName: true,
+  password: true,
+  confirmPassword: true,
+  terms: true,
+  verified: true,
+  token: true,
+  receiveEmail: true,
+  createdAt: true,
+  updatedAt: true,
+});
+export type UpdateUserDetailsSchema = typeof updateUserDetailsSchema;
+export type updateUserDetails = z.infer<typeof updateUserDetailsSchema>;
+export const updateUserDetailsKeys = updateUserDetailsSchema.keyof().Enum;
 
 /**
  * Sign in with password
