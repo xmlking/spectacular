@@ -2,7 +2,7 @@
 import type { PersonalAccessTokensFragment } from '$houdini';
 import { PendingValue, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-  import { loaded } from '$lib/graphql/loading';
+import { loaded } from '$lib/graphql/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '@spectacular/skeleton/components';
@@ -41,8 +41,8 @@ $: ({ personalAccessTokens } = $data);
 
 //variables
 const handler = new DataHandler(personalAccessTokens?.filter(loaded), { rowsPerPage: 5 });
-$: handler.setRows(personalAccessTokens)
-const rows = handler.getRows()
+$: handler.setRows(personalAccessTokens);
+const rows = handler.getRows();
 
 // Functions
 /**

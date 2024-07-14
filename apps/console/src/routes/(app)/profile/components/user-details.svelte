@@ -1,25 +1,13 @@
 <script lang="ts">
-  import {
-    PendingValue,
-    type UserDetailsFragment,
-    fragment,
-    graphql,
-  } from "$houdini";
-  import {
-    Accordion,
-    AccordionItem,
-    AppBar,
-    Avatar,
-    NoirLight,
-    filter,
-  } from "@skeletonlabs/skeleton";
-  import { camelize } from "@spectacular/utils";
-  import { UserRound } from "lucide-svelte";
+import { PendingValue, type UserDetailsFragment, fragment, graphql } from '$houdini';
+import { Accordion, AccordionItem, AppBar, Avatar, NoirLight, filter } from '@skeletonlabs/skeleton';
+import { camelize } from '@spectacular/utils';
+import { UserRound } from 'lucide-svelte';
 
-  export let user: UserDetailsFragment;
-  $: data = fragment(
-    user,
-    graphql(`
+export let user: UserDetailsFragment;
+$: data = fragment(
+  user,
+  graphql(`
       fragment UserDetailsFragment on users @loading(cascade: true) {
         id
         displayName
@@ -32,7 +20,7 @@
         plan: metadata(path: ".plan")
       }
     `),
-  );
+);
 </script>
 
 <AppBar>

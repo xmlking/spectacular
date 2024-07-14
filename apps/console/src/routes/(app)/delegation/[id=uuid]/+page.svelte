@@ -1,194 +1,173 @@
 <script lang="ts">
-  import { invalidateAll } from "$app/navigation";
-  import {
-    AddOrganizationStore,
-    UpdatehomerolesStore,
-    UpdatenonhomerolesStore,
-  } from "$houdini";
-  import { handleMessage } from "$lib/components/layout/toast-manager";
-  import { getToastStore, popup } from "@skeletonlabs/skeleton";
-  import * as Table from "@spectacular/skeleton/components/table";
-  import { findAddedAndRemoved } from "@spectacular/utils";
-  import { DataHandler } from "@vincjo/datatables";
-  import { Pencil } from "lucide-svelte";
-  import { writable } from "svelte/store";
-  export let data;
+import { invalidateAll } from '$app/navigation';
+import { AddOrganizationStore, UpdatehomerolesStore, UpdatenonhomerolesStore } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
+import * as Table from '@spectacular/skeleton/components/table';
+import { findAddedAndRemoved } from '@spectacular/utils';
+import { DataHandler } from '@vincjo/datatables';
+import { Pencil } from 'lucide-svelte';
+import { writable } from 'svelte/store';
+export let data;
 
-  const groupRolesByOrganization = () => {
-    const groupedRoles: { [key: string]: string[] } = {};
-    for (const { organization, role } of data.orgRoles) {
-      if (!groupedRoles[organization]) {
-        groupedRoles[organization] = [];
-      }
-      groupedRoles[organization].push(role);
+const groupRolesByOrganization = () => {
+  const groupedRoles: { [key: string]: string[] } = {};
+  for (const { organization, role } of data.orgRoles) {
+    if (!groupedRoles[organization]) {
+      groupedRoles[organization] = [];
     }
-    return groupedRoles;
+    groupedRoles[organization].push(role);
+  }
+  return groupedRoles;
+};
+const handler = new DataHandler(Object.entries(groupRolesByOrganization()), {
+  rowsPerPage: 10,
+});
+const rows = handler.getRows();
+const inputChip = '';
+const def_org = data.user.metadata.default_org;
+const roles: string[] = data.orgRoles.map((rol) => rol.role);
+const organizations: string[] = data.organizations.map((org) => org.organization);
+const allowedOrgs = data.user.allowedOrgs.map((item) => item.organization);
+const filterOrgs = organizations.filter((role) => !allowedOrgs.includes(role));
+let disablebutton = filterOrgs.length === 0;
+let neworg = '';
+let newdefrole = '';
+let defrole = '';
+const newroles = writable([]);
+const updateroles = writable([]);
+const roleHierarchy = ['anonymous', 'me', 'user', 'supervisor', 'manager'];
+const toastStore = getToastStore();
+const Addorgroles = new AddOrganizationStore();
+const updatehomerolesStore = new UpdatehomerolesStore();
+const updatenonhomerolesStore = new UpdatenonhomerolesStore();
+async function addorg(Org: string, roless: string[], defrole: string, userId: string) {
+  const getHighestRole = (roless) => {
+    return roless.reduce((highestRole, currentRole) => {
+      return roleHierarchy.indexOf(currentRole) > roleHierarchy.indexOf(highestRole) ? currentRole : highestRole;
+    }, roless[0]);
   };
-  const handler = new DataHandler(Object.entries(groupRolesByOrganization()), {
-    rowsPerPage: 10,
-  });
-  const rows = handler.getRows();
-  const inputChip = "";
-  const def_org = data.user.metadata.default_org;
-  const roles: string[] = data.orgRoles.map((rol) => rol.role);
-  const organizations: string[] = data.organizations.map(
-    (org) => org.organization,
-  );
-  const allowedOrgs = data.user.allowedOrgs.map((item) => item.organization);
-  const filterOrgs = organizations.filter(
-    (role) => !allowedOrgs.includes(role),
-  );
-  let disablebutton = filterOrgs.length === 0;
-  let neworg = "";
-  let newdefrole = "";
-  let defrole = "";
-  const newroles = writable([]);
-  const updateroles = writable([]);
-  const roleHierarchy = ["anonymous", "me", "user", "supervisor", "manager"];
-  const toastStore = getToastStore();
-  const Addorgroles = new AddOrganizationStore();
-  const updatehomerolesStore = new UpdatehomerolesStore();
-  const updatenonhomerolesStore = new UpdatenonhomerolesStore();
-  async function addorg(
-    Org: string,
-    roless: string[],
-    defrole: string,
-    userId: string,
-  ) {
-    const getHighestRole = (roless) => {
-      return roless.reduce((highestRole, currentRole) => {
-        return roleHierarchy.indexOf(currentRole) >
-          roleHierarchy.indexOf(highestRole)
-          ? currentRole
-          : highestRole;
-      }, roless[0]);
-    };
-    let defaultRole = getHighestRole(roless);
-    if (defrole.length > 0) {
-      defaultRole = defrole;
-    }
-    const rolesAdd = roless.map((role) => ({
+  let defaultRole = getHighestRole(roless);
+  if (defrole.length > 0) {
+    defaultRole = defrole;
+  }
+  const rolesAdd = roless.map((role) => ({
+    userId: userId,
+    organization: Org,
+    role: role,
+    isDefaultRole: role === defaultRole,
+  }));
+  const { errors, data } = await Addorgroles.mutate({ roles: rolesAdd });
+  if (errors) {
+    console.log(errors.toString());
+  }
+  if (data?.insert_user_org_roles) {
+    handleMessage(
+      {
+        message: `<p class="text-xl">User: New <span class="text-red-500 font-bold"> ${Org}</span> Added with <span class="text-red-500 font-bold">${roless}</span> roles and <span class="text-red-500 font-bold">${defaultRole}</span> as default role </p>`,
+        type: 'success',
+      },
+      toastStore,
+    );
+  }
+  await invalidateAll();
+  window.location.reload();
+}
+async function updorg(Org: string, roless: string[], userId: string) {
+  const getHighestRole = (roless) => {
+    return roless.reduce((highestRole, currentRole) => {
+      return roleHierarchy.indexOf(currentRole) > roleHierarchy.indexOf(highestRole) ? currentRole : highestRole;
+    }, roless[0]);
+  };
+  const defaultRole = getHighestRole(roless);
+  if (!roless.includes(defrole) && roles.includes(defaultRole)) {
+    defrole = defaultRole;
+  }
+  let myorg: string[] = [];
+  if (data.orgRoles.length > 0) {
+    myorg = data.orgRoles.filter((item) => item.organization === Org).map((item) => item.role);
+  }
+  const result = findAddedAndRemoved(myorg, roless);
+  console.log(result.added);
+  const delroles: string[] = result.removed;
+  const addedroles: string[] = result.added;
+  const rolesAdd = addedroles.map((role) => ({
+    userId: userId,
+    organization: Org,
+    role: role,
+  }));
+  const defrolesAdd = addedroles.map((role) => ({
+    userId: userId,
+    role: role,
+  }));
+  if (Org === def_org) {
+    const { errors, data } = await updatehomerolesStore.mutate({
       userId: userId,
-      organization: Org,
-      role: role,
-      isDefaultRole: role === defaultRole,
-    }));
-    const { errors, data } = await Addorgroles.mutate({ roles: rolesAdd });
+      defaultRole: defrole,
+      delroles: delroles,
+      Authroles: defrolesAdd,
+    });
+    if (errors) {
+      console.log(errors.toString());
+    }
+    if (data?.insertAuthUserRoles) {
+      handleMessage(
+        {
+          message: `<p class="text-xl">User: <span class="text-red-500 font-bold">${Org}</span> Updated with <span class="text-red-500 font-bold">${roless}</span> roles</p>`,
+          type: 'success',
+        },
+        toastStore,
+      );
+    }
+  } else {
+    const { errors, data } = await updatenonhomerolesStore.mutate({
+      userId: userId,
+      Org: Org,
+      defrole: defrole,
+      delroles: delroles,
+      roles: rolesAdd,
+    });
     if (errors) {
       console.log(errors.toString());
     }
     if (data?.insert_user_org_roles) {
       handleMessage(
         {
-          message: `<p class="text-xl">User: New <span class="text-red-500 font-bold"> ${Org}</span> Added with <span class="text-red-500 font-bold">${roless}</span> roles and <span class="text-red-500 font-bold">${defaultRole}</span> as default role </p>`,
-          type: "success",
+          message: `<p class="text-xl">User: <span class="text-red-500 font-bold">${Org}</span> Updated with <span class="text-red-500 font-bold">${roless}</span> roles</p>`,
+          type: 'success',
         },
         toastStore,
       );
     }
-    await invalidateAll();
-    window.location.reload();
   }
-  async function updorg(Org: string, roless: string[], userId: string) {
-    const getHighestRole = (roless) => {
-      return roless.reduce((highestRole, currentRole) => {
-        return roleHierarchy.indexOf(currentRole) >
-          roleHierarchy.indexOf(highestRole)
-          ? currentRole
-          : highestRole;
-      }, roless[0]);
-    };
-    const defaultRole = getHighestRole(roless);
-    if (!roless.includes(defrole) && roles.includes(defaultRole)) {
-      defrole = defaultRole;
+  await invalidateAll();
+  window.location.reload();
+}
+function radiobutton(role: string) {
+  newdefrole = role;
+}
+function handleCheckboxChange(role: string, event: Event) {
+  const target = event.target as HTMLInputElement;
+  newroles.update((current) => {
+    if (target.checked) {
+      // Add role to selectedroles if it's not already there
+      return [...current, role];
     }
-    let myorg: string[] = [];
-    if (data.orgRoles.length > 0) {
-      myorg = data.orgRoles
-        .filter((item) => item.organization === Org)
-        .map((item) => item.role);
+    // Remove role from selectedroles if it's there
+    return current.filter((r) => r !== role);
+  });
+}
+function handleupdateRoles(role: string, event: Event) {
+  const target = event.target as HTMLInputElement;
+  updateroles.update((current) => {
+    if (target.checked) {
+      // Add role to selectedroles if it's not already there
+      return [...current, role];
     }
-    const result = findAddedAndRemoved(myorg, roless);
-    console.log(result.added);
-    const delroles: string[] = result.removed;
-    const addedroles: string[] = result.added;
-    const rolesAdd = addedroles.map((role) => ({
-      userId: userId,
-      organization: Org,
-      role: role,
-    }));
-    const defrolesAdd = addedroles.map((role) => ({
-      userId: userId,
-      role: role,
-    }));
-    if (Org === def_org) {
-      const { errors, data } = await updatehomerolesStore.mutate({
-        userId: userId,
-        defaultRole: defrole,
-        delroles: delroles,
-        Authroles: defrolesAdd,
-      });
-      if (errors) {
-        console.log(errors.toString());
-      }
-      if (data?.insertAuthUserRoles) {
-        handleMessage(
-          {
-            message: `<p class="text-xl">User: <span class="text-red-500 font-bold">${Org}</span> Updated with <span class="text-red-500 font-bold">${roless}</span> roles</p>`,
-            type: "success",
-          },
-          toastStore,
-        );
-      }
-    } else {
-      const { errors, data } = await updatenonhomerolesStore.mutate({
-        userId: userId,
-        Org: Org,
-        defrole: defrole,
-        delroles: delroles,
-        roles: rolesAdd,
-      });
-      if (errors) {
-        console.log(errors.toString());
-      }
-      if (data?.insert_user_org_roles) {
-        handleMessage(
-          {
-            message: `<p class="text-xl">User: <span class="text-red-500 font-bold">${Org}</span> Updated with <span class="text-red-500 font-bold">${roless}</span> roles</p>`,
-            type: "success",
-          },
-          toastStore,
-        );
-      }
-    }
-    await invalidateAll();
-    window.location.reload();
-  }
-  function radiobutton(role: string) {
-    newdefrole = role;
-  }
-  function handleCheckboxChange(role: string, event: Event) {
-    const target = event.target as HTMLInputElement;
-    newroles.update((current) => {
-      if (target.checked) {
-        // Add role to selectedroles if it's not already there
-        return [...current, role];
-      }
-      // Remove role from selectedroles if it's there
-      return current.filter((r) => r !== role);
-    });
-  }
-  function handleupdateRoles(role: string, event: Event) {
-    const target = event.target as HTMLInputElement;
-    updateroles.update((current) => {
-      if (target.checked) {
-        // Add role to selectedroles if it's not already there
-        return [...current, role];
-      }
-      // Remove role from selectedroles if it's there
-      return current.filter((r) => r !== role);
-    });
-  }
+    // Remove role from selectedroles if it's there
+    return current.filter((r) => r !== role);
+  });
+}
 </script>
 
 <div class="page-container">

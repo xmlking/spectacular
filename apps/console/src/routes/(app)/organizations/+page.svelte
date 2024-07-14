@@ -1,36 +1,36 @@
 <script lang="ts">
-  import { invalidateAll } from "$app/navigation";
-  import { DeleteOrgStore } from "$houdini";
-  import { handleMessage } from "$lib/components/layout/toast-manager";
-  import { getToastStore, popup } from "@skeletonlabs/skeleton";
-  import * as Table from "@spectacular/skeleton/components/table";
-  import { DataHandler } from "@vincjo/datatables";
-  import type { PageData } from "./$houdini";
-  import { Pencil, Trash2 } from "lucide-svelte";
-  export let data: PageData;
-  $: ({ OrganizationsList } = data);
-  //Datatable handler initialization
-  const handler = new DataHandler(OrganizationsList, { rowsPerPage: 10 });
-  const rows = handler.getRows();
-  const toastStore = getToastStore();
-  const deleteOrgStore = new DeleteOrgStore();
-  async function del(organization: string) {
-    const { errors, data } = await deleteOrgStore.mutate({ organization });
-    if (errors) {
-      console.log(errors.toString());
-    }
-    if (data?.delete_organizations_by_pk?.organization) {
-      handleMessage(
-        {
-          message: `<p class="text-xl">Organization: <span class="text-red-500 font-bold">${organization}</span> deleted</p>`,
-          type: "success",
-        },
-        toastStore,
-      );
-      await invalidateAll();
-    }
+import { invalidateAll } from '$app/navigation';
+import { DeleteOrgStore } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
+import * as Table from '@spectacular/skeleton/components/table';
+import { DataHandler } from '@vincjo/datatables';
+import { Pencil, Trash2 } from 'lucide-svelte';
+import type { PageData } from './$houdini';
+export let data: PageData;
+$: ({ OrganizationsList } = data);
+//Datatable handler initialization
+const handler = new DataHandler(OrganizationsList, { rowsPerPage: 10 });
+const rows = handler.getRows();
+const toastStore = getToastStore();
+const deleteOrgStore = new DeleteOrgStore();
+async function del(organization: string) {
+  const { errors, data } = await deleteOrgStore.mutate({ organization });
+  if (errors) {
+    console.log(errors.toString());
   }
-  $: handler.setRows(OrganizationsList);
+  if (data?.delete_organizations_by_pk?.organization) {
+    handleMessage(
+      {
+        message: `<p class="text-xl">Organization: <span class="text-red-500 font-bold">${organization}</span> deleted</p>`,
+        type: 'success',
+      },
+      toastStore,
+    );
+    await invalidateAll();
+  }
+}
+$: handler.setRows(OrganizationsList);
 </script>
 
 <div class="page-container">
