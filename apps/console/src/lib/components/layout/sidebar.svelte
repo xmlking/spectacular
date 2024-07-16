@@ -2,12 +2,14 @@
 import { page } from '$app/stores';
 import { i18n } from '$lib/i18n';
 import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
+  import { getNhostClient } from '$lib/stores/nhost';
 import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 import { Icon } from '@spectacular/skeleton/components/icons';
 
 // Local
 let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
 const drawerStore = getDrawerStore();
+const { user } = getNhostClient()
 
 function onClickAnchor(): void {
   currentRailCategory = undefined;
@@ -72,14 +74,16 @@ $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? '
       <!-- Nav List -->
       <nav class="list-nav">
         <ul>
-          {#each segment.list as { href, label, badge, preload }}
+          {#each segment.list as { href, label, badge, preload, roles }}
             <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            {#if !roles || ($user?.defaultRole && roles.some( r => r === $user.defaultRole)) }
             <li on:keypress on:click={drawerStore.close}>
               <a {href} class={listboxItemActive(href)} data-sveltekit-preload-data={preload || 'hover'}>
                 <span class="flex-auto">{@html label}</span>
                 {#if badge}<span class="variant-filled-secondary badge">{badge}</span>{/if}
               </a>
             </li>
+            {/if}
           {/each}
         </ul>
       </nav>

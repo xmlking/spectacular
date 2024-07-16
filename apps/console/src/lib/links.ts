@@ -74,10 +74,10 @@ export const menuNavLinks: MenuNavLinks = {
     {
       title: 'Administration',
       list: [
-        { href: '/organizations', label: 'Organizations', keywords: 'account, organization', roles: [Roles.Manager] },
-        { href: '/delegation', label: 'Delegations', keywords: 'account, delegation', roles: [Roles.Manager] },
-        { href: '/users', label: 'Users', keywords: 'account, user, admin', roles: [Roles.Manager] },
-        { href: '/groups', label: 'Groups', keywords: 'account, group, admin', roles: [Roles.Manager] },
+        { href: '/organizations', label: 'Organizations', keywords: 'account, organization', roles: [Roles.Manager, Roles.Supervisor] },
+        { href: '/delegation', label: 'Delegations', keywords: 'account, delegation', roles: [Roles.Manager, Roles.Supervisor] },
+        { href: '/users', label: 'Users', keywords: 'account, user, admin', roles: [Roles.Manager, Roles.Supervisor] },
+        { href: '/groups', label: 'Groups', keywords: 'account, group, admin', roles: [Roles.Manager, Roles.Supervisor] },
       ],
     },
   ],
