@@ -43,7 +43,7 @@ $: data = fragment(
     `),
 );
 
-$: ({ id, displayName, email, phoneNumber, defaultRole, avatarUrl, locale, plan } = $data);
+$: ({ id, displayName, email, phoneNumber, defaultOrg, defaultRole, avatarUrl, locale, plan } = $data);
 
 const updateUserDetails = graphql(`
     mutation UpdateUserDetails($id: uuid!,  $data: users_set_input!) {
@@ -90,7 +90,7 @@ const form = superForm(defaults(zod(updateUserDetailsSchema)), {
       displayName: form.data.displayName,
       phoneNumber: form.data.phoneNumber,
       locale: form.data.locale,
-      metadata: { plan: form.data.plan },
+      metadata: { plan: form.data.plan, default_org: defaultOrg },
       avatarUrl: form.data.avatarUrl,
     };
     const variables: UpdateUserDetails$input = { id, data: payload };
