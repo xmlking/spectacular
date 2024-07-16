@@ -115,7 +115,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_first_name_placeholder()}
           {...attrs}
-          bind:value={$formData.email}
+          bind:value={$formData.firstName}
         />
       </Form.Control>
       <Form.FieldErrors class="data-[fs-error]:text-error-500" />
@@ -168,7 +168,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_password_placeholder()}
           {...attrs}
-          bind:value={$formData.email}
+          bind:value={$formData.password}
         />
       </Form.Control>
       <Form.FieldErrors class="data-[fs-error]:text-error-500" />
@@ -185,7 +185,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_confirm_password_placeholder()}
           {...attrs}
-          bind:value={$formData.email}
+          bind:value={$formData.confirmPassword}
         />
       </Form.Control>
       <Form.FieldErrors class="data-[fs-error]:text-error-500" />
@@ -199,7 +199,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           type="checkbox"
           class="checkbox data-[fs-error]:input-error"
           {...attrs}
-          bind:value={$formData.terms}
+          bind:checked={$formData.terms}
         />
         <span class="ml-2">
           I accept the
@@ -208,9 +208,6 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           <a href="/privacy" class="text-primaryHover underline"
             >privacy policy</a
           >
-          {#if $errors.terms}
-            <small class="text-error-500">{$errors.terms}</small>
-          {/if}
         </span>
       </Form.Control>
       <Form.FieldErrors class="data-[fs-error]:text-error-500" />
