@@ -1,6 +1,6 @@
 # NOTE: keep adding any new profiles here:
 ALL_PROFILES := all,storage,donotstart
-export COMPOSE_ENV_FILES ?= .env,.secrets,.env.local,apps/console/.env,apps/console/.secrets
+export COMPOSE_ENV_FILES ?= .env,.secrets,apps/console/.env,apps/console/.secrets
 
 # Target for running the action
 TARGET = $(word 1,$(subst -, ,$*))

@@ -30,7 +30,7 @@ NOTE: You can pass `--endpoint <hasura-endpoint> --admin-secret <HASURA_GRAPHQL_
 hasura init hasura --project nhost --endpoint https://zyjloswljirxqtsdlnnf.hasura.eu-central-1.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 
 # from localhost
-hasura init hasura --project nhost --endpoint https://hasura.traefik.me
+hasura init hasura --project nhost --endpoint https://hasura.traefik.me --admin-secret hasura-admin-secret
 # move infra/hasura/config.yaml to project root and edit metadata_directory, migrations_directory, seeds_directory paths in it
 
 hasura version
@@ -157,7 +157,7 @@ hasura migrate status --database-name default --endpoint https://hasura.traefik.
 To export **Metadata** and **Migrations** from your local Hasura to `infra/hasura` directory, for sharing with the team:
 
 ```shell
-hasura metadata export --endpoint https://hasura.traefik.me
+hasura metadata export --endpoint https://hasura.traefik.me --admin-secret hasura-admin-secret
 ```
 
 ### Reset Hasura Migrations and Metadata
