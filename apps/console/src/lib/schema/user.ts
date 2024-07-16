@@ -42,12 +42,7 @@ export const userSchema = z.object({
     .min(2, { message: 'Display Name must contain at least 2 character(s)' })
     .max(256)
     .trim(),
-  phoneNumber: z
-    .string()
-    .regex(phoneRegex, 'Invalid Number!')
-    .min(10)
-    .max(15)
-    .nullable(),
+  phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!').min(10).max(15).nullable(),
   avatarUrl: z.string().url().nullable(),
   defaultRole: z.nativeEnum(Roles, { required_error: 'You must have a role' }).default(Roles.User),
   plan: z.enum(['free', 'pro', 'enterprise']).default('free'),

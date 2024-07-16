@@ -2,14 +2,14 @@
 import { page } from '$app/stores';
 import { i18n } from '$lib/i18n';
 import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
-  import { getNhostClient } from '$lib/stores/nhost';
+import { getNhostClient } from '$lib/stores/nhost';
 import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 import { Icon } from '@spectacular/skeleton/components/icons';
 
 // Local
 let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
 const drawerStore = getDrawerStore();
-const { user } = getNhostClient()
+const { user } = getNhostClient();
 
 function onClickAnchor(): void {
   currentRailCategory = undefined;
