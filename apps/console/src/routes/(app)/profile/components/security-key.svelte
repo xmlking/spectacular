@@ -87,6 +87,7 @@ const handleDelete = async () => {
       message = {
         message: `Deleted security key: ${nickname}`,
         hideDismiss: true,
+        autohide: false,
         timeout: 10000,
         type: 'success',
       };

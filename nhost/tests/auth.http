@@ -58,6 +58,23 @@ query GetOrganizations {
   }
 }
 
+### Create PAT
+# @name createPAT
+POST {{authEndpoint}}/pat
+Content-Type: application/json
+Authorization: Bearer {{graphqlUserToken}}
+
+{
+  "metadata": {
+    "name": "sumodemo"
+  },
+  "expiresAt": "2024-11-07T05:31:56Z"
+}
+
+###
+@createdPAT =  {{createPAT.response.body.$.personalAccessToken}}
+###
+
 ### List PAT tokens
 # @name getMyPATs
 POST  {{graphqlEndpoint}}
@@ -86,16 +103,12 @@ query GetMyPATs {
   }
 }
 
-###
-@samplePat =  {{getMyPATs.response.body.$.data.users.[0].refreshTokens.[0].id}}
-###
 
-### Signin PAT
-# https://docs.nhost.io/reference/javascript/auth/sign-in-pat
+### Signin With PAT
 # @name SigninPAT
 POST {{authEndpoint}}/signin/pat
 Content-Type: application/json
 
 {
-  "personalAccessToken": "{{samplePat}}"
+  "personalAccessToken": "{{createdPAT}}"
 }

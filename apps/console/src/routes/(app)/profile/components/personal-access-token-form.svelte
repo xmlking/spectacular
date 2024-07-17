@@ -65,10 +65,11 @@ const form = superForm(defaults(zod(createPATSchema)), {
       return;
     }
     const { id, personalAccessToken } = data;
+    log.debug({name, id, personalAccessToken})
     // Finally notify user: successfully added a new security key
     const message = {
-      message: `Added PAT token: ${name}`,
-      hideDismiss: true,
+      message: `Created '${name}' PAT token, Please save your PAT: ${personalAccessToken}`,
+      hideDismiss: false,
       timeout: 10000,
       type: 'success',
     } as const;
