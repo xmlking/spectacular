@@ -79,7 +79,6 @@ query GetMyPATs {
     refreshTokens(where: {type: {_eq: pat}}) {
       id
       type
-      refreshTokenHash
       metadata
       userId
       expiresAt
@@ -100,9 +99,3 @@ Content-Type: application/json
 {
   "personalAccessToken": "{{samplePat}}"
 }
-
-a6e8e778-c81b-4005-b0af-fb0d3f64d8f2
-refreshTokenHash
-\xc5d56ae662ade41ec06ef4bb855c7aec568eb385b29a7922891388629fba9837
-
-\x3e762075a680d386af5a0e3774cdb73f4acfd66f4cdb035fb87eaf345787c8a4
