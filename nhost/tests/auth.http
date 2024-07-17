@@ -1,7 +1,6 @@
 ###
 @graphqlEndpoint =  {{$dotenv PUBLIC_GRAPHQL_ENDPOINT}}
 @graphqlAdminToken = {{$dotenv HASURA_GRAPHQL_ADMIN_SECRET}}
-
 @authEndpoint = {{$dotenv NHOST_AUTH_URL}}
 
 # set token without `''`
@@ -19,8 +18,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me manager
 x-hasura-default-role: user
 x-hasura-role: user
-x-hasura-allowed-orgs: {signals,example}
-x-hasura-default-org: signals
+x-hasura-allowed-orgs: {chinthagunta,example}
+x-hasura-default-org: chinthagunta
 x-hasura-user-email: sumo@demo.com
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
@@ -35,8 +34,6 @@ query SearchSecurityKeys($userId: uuid!) {
       "userId": "076a79f9-ed08-4e28-a4c3-8d4e0aa269a3"
 }
 
-### x-hasura-auth-elevated: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
-
 ### List Orgs
 # @name GetOrgs
 POST  {{graphqlEndpoint}}
@@ -47,8 +44,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me manager
 x-hasura-default-role: user
 x-hasura-role: manager
-x-hasura-allowed-orgs: {signals,example}
-x-hasura-default-org: signals
+x-hasura-allowed-orgs: {chinthagunta,example}
+x-hasura-default-org: chinthagunta
 x-hasura-user-email: sumo@demo.com
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
@@ -62,7 +59,7 @@ query GetOrganizations {
 }
 
 ### List PAT tokens
-# @name GetMyPATs
+# @name getMyPATs
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
@@ -71,8 +68,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me manager
 x-hasura-default-role: user
 x-hasura-role: me
-x-hasura-allowed-orgs: {signals,example}
-x-hasura-default-org: signals
+x-hasura-allowed-orgs: {chinthagunta,example}
+x-hasura-default-org: chinthagunta
 x-hasura-user-email: sumo@demo.com
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
@@ -82,11 +79,17 @@ query GetMyPATs {
     refreshTokens(where: {type: {_eq: pat}}) {
       id
       type
+      refreshTokenHash
       metadata
+      userId
       expiresAt
     }
   }
 }
+
+###
+@samplePat =  {{getMyPATs.response.body.$.data.users.[0].refreshTokens.[0].id}}
+###
 
 ### Signin PAT
 # https://docs.nhost.io/reference/javascript/auth/sign-in-pat
@@ -95,5 +98,11 @@ POST {{authEndpoint}}/signin/pat
 Content-Type: application/json
 
 {
-  "personalAccessToken": "asdadas"
+  "personalAccessToken": "{{samplePat}}"
 }
+
+a6e8e778-c81b-4005-b0af-fb0d3f64d8f2
+refreshTokenHash
+\xc5d56ae662ade41ec06ef4bb855c7aec568eb385b29a7922891388629fba9837
+
+\x3e762075a680d386af5a0e3774cdb73f4acfd66f4cdb035fb87eaf345787c8a4
