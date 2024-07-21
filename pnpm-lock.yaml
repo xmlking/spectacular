@@ -916,8 +916,8 @@ importers:
         specifier: 0.25.1
         version: 0.25.1(astro@4.11.5(@types/node@20.14.10)(terser@5.31.2)(typescript@5.5.3))
       '@astrojs/svelte':
-        specifier: 5.6.0
-        version: 5.6.0(astro@4.11.5(@types/node@20.14.10)(terser@5.31.2)(typescript@5.5.3))(svelte@4.2.18)(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))
+        specifier: 5.7.0
+        version: 5.7.0(astro@4.11.5(@types/node@20.14.10)(terser@5.31.2)(typescript@5.5.3))(svelte@4.2.18)(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))
       '@astrojs/tailwind':
         specifier: 5.1.0
         version: 5.1.0(astro@4.11.5(@types/node@20.14.10)(terser@5.31.2)(typescript@5.5.3))(tailwindcss@3.4.4)
@@ -1430,12 +1430,12 @@ packages:
     peerDependencies:
       astro: ^4.8.6
 
-  '@astrojs/svelte@5.6.0':
-    resolution: {integrity: sha512-rdHBlqMQE6UOA1ySF1t3sdb6pf44yP8Dd0TqxGO0yR4HAgbtKtW8XToJ3mQ1PmuRmf5fisH9xzt3EEx7NAQuZg==}
+  '@astrojs/svelte@5.7.0':
+    resolution: {integrity: sha512-pC/xM5ejDzqIhfr8e6gbjBkIwyTQDLuOH778LfH0EiVlTq5H0WUHCnIcjFBvcaJv9ye8AR0TlGvQmZtkt9x3Eg==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
     peerDependencies:
       astro: ^4.0.0
-      svelte: ^4.0.0 || ^5.0.0-next.90
+      svelte: ^4.0.0 || ^5.0.0-next.190
       typescript: ^5.3.3
 
   '@astrojs/tailwind@5.1.0':
@@ -3421,9 +3421,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.2':
     resolution: {integrity: sha512-T9HCQO30Sq6L8tXQfdJI2CNMeNQxtMepJyoBYgK5QEN2LuIUqaoTfsZ2GryAqwFdAEj5FSM5Kdnf7f6shFqBHw==}
@@ -10651,7 +10653,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/svelte@5.6.0(astro@4.11.5(@types/node@20.14.10)(terser@5.31.2)(typescript@5.5.3))(svelte@4.2.18)(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))':
+  '@astrojs/svelte@5.7.0(astro@4.11.5(@types/node@20.14.10)(terser@5.31.2)(typescript@5.5.3))(svelte@4.2.18)(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 3.1.1(svelte@4.2.18)(vite@5.3.3(@types/node@20.14.10)(terser@5.31.2))
       astro: 4.11.5(@types/node@20.14.10)(terser@5.31.2)(typescript@5.5.3)
