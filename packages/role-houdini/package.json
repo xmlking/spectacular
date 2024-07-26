@@ -38,13 +38,13 @@
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts"
   },
   "dependencies": {
-    "houdini": "1.2.50"
+    "houdini": "1.2.51"
   },
   "devDependencies": {
     "@spectacular/biome-config": "workspace:*",
     "@spectacular/typescript-config": "workspace:*",
     "graphql": "16.9.0",
-    "tsup": "8.2.2",
+    "tsup": "8.2.3",
     "typescript": "5.5.4"
   }
 }
