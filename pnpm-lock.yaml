@@ -174,6 +174,9 @@ importers:
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.39)
+      chrome-ai:
+        specifier: 1.9.1
+        version: 1.9.1
       d3-array:
         specifier: 3.2.4
         version: 3.2.4
@@ -216,6 +219,9 @@ importers:
       lucide-svelte:
         specifier: 0.414.0
         version: 0.414.0(svelte@4.2.18)
+      ollama-ai-provider:
+        specifier: 0.10.0
+        version: 0.10.0(zod@3.23.8)
       paneforge:
         specifier: 0.0.5
         version: 0.0.5(svelte@4.2.18)
@@ -1276,6 +1282,15 @@ packages:
       zod:
         optional: true
 
+  '@ai-sdk/provider-utils@1.0.0':
+    resolution: {integrity: sha512-Akq7MmGQII8xAuoVjJns/n/2BTUrF6qaXIj/3nEuXk/hPSdETlLWRSrjrTmLpte1VIPE5ecNzTALST+6nz47UQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+
   '@ai-sdk/provider-utils@1.0.2':
     resolution: {integrity: sha512-57f6O4OFVNEpI8Z8o+K40tIB3YQiTw+VCql/qrAO9Utq7Ti1o6+X9tvm177DlZJL7ft0Rwzvgy48S9YhrEKgmA==}
     engines: {node: '>=18'}
@@ -1287,6 +1302,10 @@ packages:
 
   '@ai-sdk/provider@0.0.10':
     resolution: {integrity: sha512-NzkrtREQpHID1cTqY/C4CI30PVOaXWKYytDR2EcytmFgnP7Z6+CrGIA/YCnNhYAuUm6Nx+nGpRL/Hmyrv7NYzg==}
+    engines: {node: '>=18'}
+
+  '@ai-sdk/provider@0.0.11':
+    resolution: {integrity: sha512-VTipPQ92Moa5Ovg/nZIc8yNoIFfukZjUHZcQMduJbiUh3CLQyrBAKTEV9AwjPy8wgVxj3+GZjon0yyOJKhfp5g==}
     engines: {node: '>=18'}
 
   '@ai-sdk/provider@0.0.12':
@@ -3532,6 +3551,12 @@ packages:
   '@mdx-js/mdx@3.0.1':
     resolution: {integrity: sha512-eIQ4QTrOWyL3LWEe/bu6Taqzq2HQvHcyTMaOrI95P2/LmJE7AsfPfgJGuFLPVqBUE1BC1rik3VIhU+s9u72arA==}
 
+  '@mediapipe/tasks-genai@0.10.14':
+    resolution: {integrity: sha512-2XYVRJl/ylWLmBRzm7TVrl2yF8tKK2HCWypBno1KIVGPwY2i4mFlzt05itqBsTEwZbVYS/rZ15gLE9ypc6Nw3w==}
+
+  '@mediapipe/tasks-text@0.10.14':
+    resolution: {integrity: sha512-hQU/t9df83lU083sjbX69ImipPOqfvdMnc0pMk44L0QkRXKjSp9q1OYVhA5ePOe1bUmEUzaYSPPTwz+mNhFqhw==}
+
   '@melt-ui/svelte@0.76.2':
     resolution: {integrity: sha512-7SbOa11tXUS95T3fReL+dwDs5FyJtCEqrqG3inRziDws346SYLsxOQ6HmX+4BkIsQh1R8U3XNa+EMmdMt38lMA==}
     peerDependencies:
@@ -5204,6 +5229,9 @@ packages:
   chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
+
+  chrome-ai@1.9.1:
+    resolution: {integrity: sha512-SZ+wd6MJ7+6sltQg5QfthhjzStrjXrqFM4s6Ihvy9sryAx/SMmpmN0C0qRuXeQ2TGHdLJnLmMLMHiddlGsIFSQ==}
 
   chrono-node@2.7.6:
     resolution: {integrity: sha512-yugKSRLHc6B6kXxm/DwNc94zhaddAjCSO9IOGH3w7NIWNM+gUoLl/2/XLndiw4I+XhU4H2LOhC5Ab2JjS6JWsA==}
@@ -7816,6 +7844,15 @@ packages:
     resolution: {integrity: sha512-MG5qmrTL5y8KYwFgE1A4JWmgfQBaIETE/lOlfwNYx1QOtCQHGVxkRJmdUJltFc1HVn73d61TlMhMyNTOtMl+ng==}
     engines: {node: '>= 18'}
 
+  ollama-ai-provider@0.10.0:
+    resolution: {integrity: sha512-ppzofC1JtB8yQ2TRAGm6I9ppoRSpXZGQV4u5ez2JAQ5hwnkJKULgEg5Hc4rt84ErF3MpEIpG1ZSBV4njlL6LPQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+
   on-finished@2.4.1:
     resolution: {integrity: sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==}
     engines: {node: '>= 0.8'}
@@ -7941,6 +7978,9 @@ packages:
 
   parse5@7.1.2:
     resolution: {integrity: sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw==}
+
+  partial-json@0.1.7:
+    resolution: {integrity: sha512-Njv/59hHaokb/hRUjce3Hdv12wd60MtM9Z5Olmn+nehe0QDAsRtRbJPvJ0Z91TusF0SuZRIvnM+S4l6EIP8leA==}
 
   pascal-case@3.1.2:
     resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
@@ -10331,6 +10371,15 @@ snapshots:
     optionalDependencies:
       zod: 3.23.8
 
+  '@ai-sdk/provider-utils@1.0.0(zod@3.23.8)':
+    dependencies:
+      '@ai-sdk/provider': 0.0.11
+      eventsource-parser: 1.1.2
+      nanoid: 3.3.6
+      secure-json-parse: 2.7.0
+    optionalDependencies:
+      zod: 3.23.8
+
   '@ai-sdk/provider-utils@1.0.2(zod@3.23.8)':
     dependencies:
       '@ai-sdk/provider': 0.0.12
@@ -10341,6 +10390,10 @@ snapshots:
       zod: 3.23.8
 
   '@ai-sdk/provider@0.0.10':
+    dependencies:
+      json-schema: 0.4.0
+
+  '@ai-sdk/provider@0.0.11':
     dependencies:
       json-schema: 0.4.0
 
@@ -13021,6 +13074,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@mediapipe/tasks-genai@0.10.14': {}
+
+  '@mediapipe/tasks-text@0.10.14': {}
+
   '@melt-ui/svelte@0.76.2(svelte@4.2.18)':
     dependencies:
       '@floating-ui/core': 1.6.5
@@ -15060,6 +15117,15 @@ snapshots:
   chownr@1.1.4: {}
 
   chownr@2.0.0: {}
+
+  chrome-ai@1.9.1:
+    dependencies:
+      '@ai-sdk/provider': 0.0.12
+      '@mediapipe/tasks-genai': 0.10.14
+      '@mediapipe/tasks-text': 0.10.14
+      debug: 4.3.5
+    transitivePeerDependencies:
+      - supports-color
 
   chrono-node@2.7.6:
     dependencies:
@@ -18264,6 +18330,14 @@ snapshots:
       '@octokit/request-error': 5.1.0
       '@octokit/types': 12.4.0
 
+  ollama-ai-provider@0.10.0(zod@3.23.8):
+    dependencies:
+      '@ai-sdk/provider': 0.0.11
+      '@ai-sdk/provider-utils': 1.0.0(zod@3.23.8)
+      partial-json: 0.1.7
+    optionalDependencies:
+      zod: 3.23.8
+
   on-finished@2.4.1:
     dependencies:
       ee-first: 1.1.1
@@ -18408,6 +18482,8 @@ snapshots:
   parse5@7.1.2:
     dependencies:
       entities: 4.5.0
+
+  partial-json@0.1.7: {}
 
   pascal-case@3.1.2:
     dependencies:
