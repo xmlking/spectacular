@@ -102,6 +102,7 @@ services:
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: public # anonymous
       HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
       HASURA_GRAPHQL_CORS_DOMAIN: '*'
+      HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       # HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
       # HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
     healthcheck:

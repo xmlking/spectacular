@@ -93,6 +93,7 @@ Awesome **SvelteKit** Links
 ## Animation
 
 - [Svelte Star Wars Demo](https://github.com/geoffrich/star-wars-demo-svelte), [Demo](https://main--transcendent-begonia-7a3d6f.netlify.app/)
+- [Motion](https://motion.dev/) (preferred)
 
 ## State Management
 

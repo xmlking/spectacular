@@ -30,9 +30,8 @@ export function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
     if (err instanceof ZodError) {
       const { formErrors, fieldErrors } = err.flatten();
       return { formErrors, fieldErrors };
-    } else {
+    }
       log.error('search:_houdini_beforeLoad:', err);
       error(500, err as Error);
-    }
   }
 }
