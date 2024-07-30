@@ -55,7 +55,8 @@ export const policySearchSchema = z.object({
   subjectId: z.string().trim().uuid().optional(),
   subjectDisplayName: z.string().trim().optional(),
 });
-
+export type PolicySearchSchema = typeof policySearchSchema;
+export type PolicySearch = z.infer<typeof policySearchSchema>;
 /**
  * Create Policy Schema
  */

@@ -119,15 +119,14 @@ const handleDelete = async (id: string, name: string) => {
       );
     }
   } catch (err) {
-    log.error(err);
     if (err instanceof GraphQLError) {
       errors.push(err.message);
     } else {
+      log.error(err);
       throw err;
     }
   } finally {
     // after
-    // No need to reset as securityKey disappear.
     isDeleting = false;
   }
 };
