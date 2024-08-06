@@ -424,6 +424,15 @@ pnpm add -D @vite-pwa/sveltekit @vite-pwa/assets-generator vite-plugin-pwa workb
 
 add `pwa-assets.config.ts` to project root
 
+#### AI
+
+```shell
+# add vercel AI core
+pnpm add -D ai @ai-sdk/svelte --filter console
+# add optional providers
+pnpm add -D  @ai-sdk/openai @ai-sdk/azure chrome-ai ollama-ai-provider --filter console
+```
+
 #### Enable https (optional)
 
 **Step 1:** install `mkcert` and initialize RootCA
