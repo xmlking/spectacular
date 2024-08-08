@@ -94,6 +94,7 @@ Awesome **SvelteKit** Links
 
 - [Svelte Star Wars Demo](https://github.com/geoffrich/star-wars-demo-svelte), [Demo](https://main--transcendent-begonia-7a3d6f.netlify.app/)
 - [Motion](https://motion.dev/) (preferred)
+- [Svelte Magic UI](https://animation-svelte.vercel.app/magic)
 
 ## State Management
 
@@ -153,7 +154,7 @@ Awesome **SvelteKit** Links
 - [game-chronicle](https://github.com/ItsCentric/game-chronicle) - Use Superforms, shadcn-svelte, formsnap, tauri  for native app
 - [whispering](https://github.com/braden-w/whispering) - Svelte5, tauri, OpanAI, audio capture
 - [climbing_noteboo](https://github.com/diericx/climbing_notebook) - Use skeleton, Superforms, sveltekit-flash-message
-- [Vercel Toolbar and Feature Flags SvelteKit Starter](https://github.com/vercel/examples/tree/main/toolbar/toolbar-feature-flags-sveltekit), [Demo](https://toolbar-feature-flags-sveltekit.vercel.app/)
+- [Vercel Toolbar and Feature Flags SvelteKit Starter](https://github.com/vercel/examples/tree/main/toolbar/toolbar-feature-flags-sveltekit), [Demo](https://toolbar-feature-flags-sveltekit.vercel.app/), [Blog](https://vercel.com/blog/flags-as-code-in-next-js)
 - [JavaFlavors](https://github.com/Critteros/JavaFlavors/tree/main/web) - use `houdini` and `setClientSession()`, drizzle, superforms, shadcn-svelte
 
 ## Deployment

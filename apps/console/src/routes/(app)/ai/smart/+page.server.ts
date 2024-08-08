@@ -34,8 +34,8 @@ export const actions = {
 
     if (!form.valid) return fail(400, { form });
 
-    const { commentOne, commentTwo } = form.data;
-    log.debug({ commentOne, commentTwo });
-    return message(form, { type: 'success', message: 'AI sucessfull 😎' });
+    const { commentOne, commentTwo, commentThree } = form.data;
+    log.debug({ commentOne, commentTwo, commentThree });
+    return message(form, { type: 'success', message: 'AI form saved sucessfully 😎' });
   },
 };

@@ -1,8 +1,7 @@
 <script lang="ts">
 import { getToastStore } from '@skeletonlabs/skeleton';
-import { autosize } from '@spectacular/skeleton/actions';
 import { Logger } from '@spectacular/utils';
-import { useCompletion } from 'ai/svelte';
+import { useCompletion } from '@ai-sdk/svelte';
 import { AlertTriangle, Sparkles } from 'lucide-svelte';
 import type { HTMLTextareaAttributes } from 'svelte/elements';
 import { fade } from 'svelte/transition';
@@ -58,7 +57,7 @@ onMount(() => {
   class="flex flex-col items-center"
   on:submit={handleSubmitWrap}
 >
-  <textarea use:autosize={{useJs: true}}
+  <textarea
     {...$$props}
     class="textarea"
     disabled={$isLoading}
@@ -103,3 +102,11 @@ onMount(() => {
   </div>
   <!-- <button type="button" class="btn variant-filled" on:click={stop} disabled={!$isLoading}>Stop</button> -->
 </form>
+
+<style>
+	textarea {
+    line-height: 1.5;
+    field-sizing: content;
+    min-height: 3lh;
+	}
+</style>

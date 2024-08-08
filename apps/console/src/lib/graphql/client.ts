@@ -64,6 +64,8 @@ export default new HoudiniClient({
     };
   },
   /*
+  // NOTE: we are using `silently` mode
+  // Ref: https://houdinigraphql.com/api/client#error-handling
   throwOnError: {
     // can be any combination of
     // query, mutation, subscription, and all

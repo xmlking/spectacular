@@ -31,10 +31,11 @@ export const menuNavLinks: MenuNavLinks = {
     {
       title: 'AI',
       list: [
-        { href: '/magic-spell', label: 'Magic Spell', keywords: 'magic-spell, ai, completion' },
-        { href: '/assistants', label: 'Assistants', keywords: 'assistants, smart-forms, ai' },
-        { href: '/ragapps', label: 'RAG Apps', keywords: 'RAG, ai, completion' },
-        { href: '/chatbot', label: 'Chat Bot', keywords: 'chatbot, OpenAI' },
+        { href: '/ai/smart', label: 'Smart Components', keywords: 'Smart Components, ai, completion' },
+        { href: '/ai/datagen', label: 'Data Gen', keywords: 'datagen, ai, chrome' },
+        { href: '/ai/assistants', label: 'Assistants', keywords: 'assistants, smart-forms, ai' },
+        { href: '/ai/ragapps', label: 'RAG Apps', keywords: 'RAG, ai, completion' },
+        { href: '/ai/chatbot', label: 'Chat Bot', keywords: 'chatbot, OpenAI' },
       ],
     },
   ],

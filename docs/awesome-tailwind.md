@@ -24,6 +24,10 @@ Awesome **Tailwind CSS** Links
 
 - [Flowbite Admin Dashboard](https://github.com/themesberg/flowbite-admin-dashboard) and [Svelte version](https://github.com/themesberg/flowbite-svelte-admin-dashboard)
 
+## Tools
+
+- Generate Web UI blocks using AI [tailwind-genie](https://tailwindgenie.com/)
+
 ## Guides
 
 - [Best free tailwind CSS libraries for 2023](https://medium.com/frontendweb/top-19-best-free-tailwind-css-libraries-kits-for-2023-8dfb478d4d0f)
@@ -51,20 +55,20 @@ Awesome **Tailwind CSS** Links
 
   ```svelte
   <RadioGroup bind:value={plan}>
-  	<RadioGroupLabel>Plan</RadioGroupLabel>
-  	<RadioGroupOption value="startup" let:checked>
-  		<span class:checked>Startup</span>
-  	</RadioGroupOption>
-  	<RadioGroupOption value="business" let:checked>
-  		<span class:checked>Business</span>
-  	</RadioGroupOption>
+   <RadioGroupLabel>Plan</RadioGroupLabel>
+   <RadioGroupOption value="startup" let:checked>
+    <span class:checked>Startup</span>
+   </RadioGroupOption>
+   <RadioGroupOption value="business" let:checked>
+    <span class:checked>Business</span>
+   </RadioGroupOption>
   </RadioGroup>
 
   <style>
-  	/* Note that using global styles this way is bad practice in larger applications; see below for more */
-  	:global(.checked) {
-  		background-color: rgb(191 219 254);
-  	}
+   /* Note that using global styles this way is bad practice in larger applications; see below for more */
+   :global(.checked) {
+    background-color: rgb(191 219 254);
+   }
   </style>
   ```
 
@@ -72,22 +76,22 @@ Awesome **Tailwind CSS** Links
 
   ```svelte
   <div>
-  	<RadioGroup bind:value={plan}>
-  		<RadioGroupLabel>Plan</RadioGroupLabel>
-  		<RadioGroupOption value="startup" class={({ checked }) => (checked ? 'checked' : '')}>
-  			Startup
-  		</RadioGroupOption>
-  		<RadioGroupOption value="business" class={({ checked }) => (checked ? 'checked' : '')}>
-  			Business
-  		</RadioGroupOption>
-  	</RadioGroup>
+   <RadioGroup bind:value={plan}>
+    <RadioGroupLabel>Plan</RadioGroupLabel>
+    <RadioGroupOption value="startup" class={({ checked }) => (checked ? 'checked' : '')}>
+     Startup
+    </RadioGroupOption>
+    <RadioGroupOption value="business" class={({ checked }) => (checked ? 'checked' : '')}>
+     Business
+    </RadioGroupOption>
+   </RadioGroup>
   </div>
 
   <!-- This will only apply to .checked elements that descend from this component -->
   <style>
-  	* > :global(.checked) {
-  		background-color: rgb(191 219 254);
-  	}
+   * > :global(.checked) {
+    background-color: rgb(191 219 254);
+   }
   </style>
   ```
 
