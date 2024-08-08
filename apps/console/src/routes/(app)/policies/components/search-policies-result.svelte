@@ -193,7 +193,7 @@ $: loadingState.setFormLoading(isDeleting);
                 ></td
               >
               <td>{row.subjectDisplayName}</td>
-              <td><DateTime time={row.updatedAt} /></td>
+              <td><DateTime distance time={row.updatedAt} /></td>
               <td>{row.rule.sourcePort}</td>
               <td>{row.rule.destinationPort}</td>
               <td>{row.active}</td>

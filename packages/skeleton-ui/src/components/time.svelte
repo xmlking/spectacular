@@ -1,10 +1,13 @@
 <script lang="ts">
+// TODO: https://github.com/metonym/svelte-time
 import { format, formatDistance } from 'date-fns';
 import { enGB } from 'date-fns/locale';
 import { onDestroy } from 'svelte';
+
 export let time: Date;
 export const dateFormat = 'PPPP';
 export const distance = false;
+
 const title = format(time, 'dd. MMMM yyyy HH:mm:ss', { locale: enGB });
 let text: string;
 const distanceText = () =>
@@ -34,5 +37,5 @@ $: {
 </script>
 
 <time datetime={time.toTimeString()} {title}>
-	{text}
+  {text}
 </time>
