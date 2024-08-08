@@ -22,11 +22,11 @@ $: ({ SearchPolicies } = data);
 <div class="page-container">
   <section class="space-y-4">
     <h1 class="h1">Policies</h1>
-    <p>Create, update, search, delete policies</p>
+    <p>Search, create, update, delete policies</p>
   </section>
 
   <section class="space-y-4">
-    <SearchPoliciesForm formData={data.form}/>
+    <SearchPoliciesForm formInitData={data.form}/>
   </section>
 
 <section class="space-y-4">

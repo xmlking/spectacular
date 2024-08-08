@@ -51,7 +51,7 @@ export const policySearchSchema = z.object({
   limit: z.number().int().min(5).max(100).default(10),
   offset: z.number().int().min(0).default(0),
   // TODO use enum
-  subjectType: z.enum(['user', 'group', 'device', 'service_account', 'device_pool']).optional(),
+  subjectType: z.enum(['user', 'group', 'device', 'service_account', 'device_pool']).default('user').optional(),
   subjectId: z.string().trim().uuid().optional(),
   subjectDisplayName: z.string().trim().optional(),
 });

@@ -21,6 +21,11 @@ const config = {
       'x-hasura-role': 'manager',
     },
   },
+  // types: {
+  //   user: {
+  //     keys: ['id'],
+  //   },
+  // },
   // features: {
   //   runtimeScalars: {
   //     UserId: {

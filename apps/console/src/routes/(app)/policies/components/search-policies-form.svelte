@@ -1,134 +1,218 @@
 <script lang="ts">
-import { browser, dev } from '$app/environment';
-import { goto, invalidateAll } from '$app/navigation';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import type { PolicySearch } from '$lib/schema/policy';
-import { getToastStore } from '@skeletonlabs/skeleton';
-// import { default as SelectFetch } from 'svelte-select';
-// import { TimeDistance } from 'svelte-time-distance';
-import { DebugShell } from '@spectacular/skeleton/components';
-import { Alerts, ErrorMessage } from '@spectacular/skeleton/components/form';
-import { Logger } from '@spectacular/utils';
-import { Trash2 } from 'lucide-svelte';
-import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms';
+  import * as m from "$i18n/messages";
+  import * as Form from "formsnap";
+  import { goto } from "$app/navigation";
+  import type { PolicySearch } from "$lib/schema/policy";
+  import {
+    AppBar,
+    Autocomplete,
+    popup,
+    type AutocompleteOption,
+    type PopupSettings,
+  } from "@skeletonlabs/skeleton";
+  import { getLoadingState } from "$lib/stores/loading";
+  import { DebugShell, GraphQLErrors } from "@spectacular/skeleton/components";
+  import { Alerts, ErrorMessage } from "@spectacular/skeleton/components/form";
+  import { Logger } from "@spectacular/utils";
+  import {
+    LoaderIcon,
+    MoreHorizontalIcon,
+    SearchIcon,
+    ShieldCheckIcon,
+    ScaleIcon,
+  } from "lucide-svelte";
+  import SuperDebug, {
+    superForm,
+    type SuperValidated,
+  } from "sveltekit-superforms";
+  import { searchSubjects, type Subject } from "./search";
+  import type { GraphQLError } from "graphql";
+  import { debounce } from "@spectacular/utils";
 
-// Variables
-const log = new Logger('policies:search-form:browser');
+  const log = new Logger("policies:search-form:browser");
 
-export let formData: SuperValidated<PolicySearch>;
+  export let formInitData: SuperValidated<PolicySearch>;
 
-// Variables
-const toastStore = getToastStore();
+  // Variables
+  const loadingState = getLoadingState();
 
-// Search form
-const superform = superForm(formData, {
-  dataType: 'json',
-  taintedMessage: null,
-  syncFlashMessage: false,
-  onError({ result }) {
-    // the onError event allows you to act on ActionResult errors.
-    // TODO:
-    // message.set(result.error.message)
-    log.error('policy superForm error:', { result });
-  },
-});
-const { form, delayed, errors, constraints, message, tainted, posted, submitting } = superform;
+  // Search form
+  const form = superForm(formInitData, {
+    dataType: "json",
+    taintedMessage: null,
+    syncFlashMessage: false,
+    resetForm: true,
+    onError({ result }) {
+      // the onError event allows you to act on ActionResult errors.
+      // TODO:
+      // message.set(result.error.message)
+      log.error("policy superForm error:", { result });
+    },
+  });
+  const {
+    form: formData,
+    delayed,
+    allErrors,
+    errors,
+    constraints,
+    message,
+    tainted,
+    posted,
+    submitting,
+    timeout,
+  } = form;
 
-let searchForm: HTMLFormElement;
-let subject = $form.subjectId
-  ? {
-      id: $form.subjectId,
-      displayName: $form.subjectDisplayName,
-      secondaryId: '',
-    }
-  : null;
+  let searchForm: HTMLFormElement;
 
-// Functions
-async function fetchSubjects(filterText: string) {
-  if (!filterText.length) return Promise.resolve([]);
-  const response = await fetch(`/api/directory/search?subType=${$form.subjectType}&filter=&search=${filterText}`);
-  if (!response.ok) throw new Error(`An error has occurred: ${response.status}`);
-  const data = await response.json();
-  if (!data) throw new Error('no data');
-  return data.results;
-}
-async function clearSubject(event: Event) {
-  subject = null;
-  if (browser) {
-    await goto(`/policies?subjectType=${$form.subjectType}&limit=${$form.limit}&offset=${$form.offset}`);
+  const popupSettings: PopupSettings = {
+    event: "focus-click",
+    target: "popupAutocomplete",
+    placement: "bottom",
+  };
+
+  let gqlErrors: Partial<GraphQLError>[] | undefined;
+  let subjects: Subject[] | undefined;
+
+  // Functions
+  async function clearSubject() {
+    await goto(
+      `/policies?subjectType=${$formData.subjectType}&limit=${$formData.limit}&offset=${$formData.offset}`,
+    );
   }
-}
+
+  async function onSelection(event: CustomEvent<AutocompleteOption<Subject>>) {
+    $formData.subjectId = event.detail.value.id;
+    $formData.subjectDisplayName = event.detail.value.displayName;
+    await goto(
+      `/policies?subjectType=${$formData.subjectType}&subjectId=${$formData.subjectId}&subjectDisplayName=${$formData.subjectDisplayName}&limit=${$formData.limit}&offset=${$formData.offset}`,
+    );
+  }
+
+  // Reactivity
+  $: if (
+    $formData.subjectDisplayName &&
+    $formData.subjectDisplayName.length > 3
+  ) {
+    ({ data: subjects, errors: gqlErrors } = searchSubjects($formData));
+    // console.log({subjects, gqlErrors})
+    // searchSubjects($formData.subjectDisplayName).then( result => {
+    //   subjects = result.data
+    //   gqlErrors = result.errors
+    //   console.log({subjects, gqlErrors})
+    // })
+
+    // (async() => {
+    //   ({ data: subjects, errors: gqlErrors } =  await searchSubjects($formData.subjectDisplayName))
+    // })()
+  }
+  $: if ($formData.subjectDisplayName === "") {
+    clearSubject();
+  }
+  $: invalid = $allErrors.length > 0;
+  $: loadingState.setFormLoading($delayed);
 </script>
 
-  <!-- Form Level Errors / Messages -->
-  <Alerts errors={$errors._errors} message={$message} />
+<!-- Form Level Errors / Messages -->
+<Alerts errors={$errors._errors} message={$message} />
+<!-- GraphQL Errors  -->
+<GraphQLErrors errors={gqlErrors} />
+<!-- Form -->
+<form data-sveltekit-noscroll bind:this={searchForm}>
+  <AppBar
+    gridColumns="grid-cols-3"
+    slotLead="place-content-start !justify-start"
+    slotTrail="place-content-end"
+  >
+    <svelte:fragment slot="lead">
+      <ShieldCheckIcon />
+      <h3 class="h3 pl-2 hidden md:block">Policies</h3>
+    </svelte:fragment>
 
-  <form data-sveltekit-noscroll bind:this={searchForm}>
-    <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"> Policies </span>
-    <!--
-      <ButtonGroup class="w-1/3">
-        <Select
-          name="subjectType"
-          class="!w-fit !rounded-r-none"
-          items={subjectTypeOptions}
-          bind:value={$form.subjectType}
-          on:change={clearSubject}
-          placeholder="Select Type"
-          data-invalid={$errors.subjectType}
-          color={$errors.subjectType ? 'red' : 'base'}
-          aria-invalid={Boolean($errors.subjectType)}
-          aria-errormessage={Array($errors.subjectType).join('. ')}
-          aria-required="{$constraints.subjectType?.required},"
-          {...$constraints.subjectType}
-        />
-        <SelectFetch
-          class="w-auto !rounded-l-none !bg-gray-50 !px-2 dark:!bg-gray-700"
-          itemId="displayName"
-          label="displayName"
-          bind:value={subject}
-          on:change={() => searchForm.requestSubmit()}
-          on:clear={clearSubject}
-          loadOptions={fetchSubjects}
-          --list-z-index="100"
-        >
-          <b slot="prepend" class="p-2">
-            {#if $form.subjectType == 'group'}
-              <UsersGroupOutline />
-            {:else if $form.subjectType == 'service_account'}
-              <UserCircleOutline />
-            {:else if $form.subjectType == 'device'}
-              <MobilePhoneOutline />
-            {:else if $form.subjectType == 'device_pool'}
-              <ComputerSpeakerOutline />
-            {:else}
-              <UserOutline />
-            {/if}
-          </b>
-          <svelte:fragment slot="input-hidden" let:value>
-            <input type="hidden" name="subjectId" value={value ? value.id : null} />
-            <input type="hidden" name="subjectDisplayName" value={value ? value.displayName : null} />
-          </svelte:fragment>
-        </SelectFetch>
-      </ButtonGroup>
-  -->
+    <div
+      class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
+      class:input-error={invalid}
+      use:popup={popupSettings}
+    >
+      <div class="input-group-shim" class:input-error={invalid}>
+        <SearchIcon size={17} />
+      </div>
+      <Form.Field {form} name="subjectDisplayName">
+        <Form.Control let:attrs>
+          <input
+            type="search"
+            class="data-[fs-error]:input-error hidden md:block"
+            placeholder="Subject Display Name"
+            autocomplete="off"
+            {...attrs}
+            bind:value={$formData.subjectDisplayName}
+          />
+        </Form.Control>
+      </Form.Field>
+      <Form.Field {form} name="subjectType">
+        <Form.Control let:attrs>
+          <select
+            class="data-[fs-error]:input-error"
+            bind:value={$formData.subjectType}
+            on:change={clearSubject}
+            {...attrs}
+            {...$constraints.subjectType}
+          >
+            <option value="user">User</option>
+            <option value="group">Group</option>
+            <option value="service_account">Service</option>
+            <option value="device">Device</option>
+            <option value="device_pool">D Pool</option>
+          </select>
+        </Form.Control>
+      </Form.Field>
+    </div>
+    <div
+      class="card w-full max-w-sm max-h-48 p-4 overflow-y-auto z-10"
+      data-popup="popupAutocomplete"
+      tabindex="-1"
+    >
+      <Autocomplete
+        bind:input={$formData.subjectDisplayName}
+        options={subjects?.map((subject) => ({
+          label: subject.displayName,
+          value: subject,
+          keywords: "",
+        }))}
+        on:selection={onSelection}
+      />
+    </div>
 
-    <input name="limit" bind:value={$form.limit} type="hidden" />
-    <input name="offset" bind:value={$form.offset} type="hidden" />
-    <ErrorMessage error={$errors?.subjectType?.[0]} />
-    <ErrorMessage error={$errors?.subjectId?.[0]} />
-    <ErrorMessage error={$errors?.limit?.[0]} />
-    <ErrorMessage error={$errors?.offset?.[0]} />
-  </form>
+    <svelte:fragment slot="trail">
+      <a
+        href="/policies/create"
+        class="btn variant-filled"
+        data-sveltekit-preload-data="hover">Add Policy</a
+      >
+    </svelte:fragment>
+  </AppBar>
+  <input name="subjectId" bind:value={$formData.subjectId} type="hidden" />
+  <input name="limit" bind:value={$formData.limit} type="hidden" />
+  <input name="offset" bind:value={$formData.offset} type="hidden" />
+  <ErrorMessage error={$errors?.subjectType?.[0]} />
+  <ErrorMessage error={$errors?.subjectId?.[0]} />
+  <ErrorMessage error={$errors?.subjectDisplayName?.[0]} />
+  <ErrorMessage error={$errors?.limit?.[0]} />
+  <ErrorMessage error={$errors?.offset?.[0]} />
+</form>
 
-
-  <DebugShell label="form-data">
+<DebugShell label="form-data">
   <SuperDebug
     label="Miscellaneous"
     status={false}
-    data={{ message: $message, submitting: $submitting, delayed: $delayed, posted: $posted }}
+    data={{
+      message: $message,
+      submitting: $submitting,
+      delayed: $delayed,
+      posted: $posted,
+    }}
   />
   <br />
-  <SuperDebug label="Form" data={$form} />
+  <SuperDebug label="Form" data={$formData} />
   <br />
   <SuperDebug label="Tainted" status={false} data={$tainted} />
   <br />

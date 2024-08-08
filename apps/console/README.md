@@ -105,15 +105,15 @@ crane export ghcr.io/xmlking/spectacular/console:v0.1.3 - | tar -tvf - | grep -v
 | Service   | URL                                               |
 | --------- | ------------------------------------------------- |
 | Postgres  | postgres://postgres:postgres@localhost:5432/local |
-| Traefik   | <https://traefik.traefik.me/dashboard/>           |
-| Hasura    | <https://hasura.traefik.me>                       |
-| GraphQL   | <https://graphql.traefik.me>                      |
-| Auth      | <https://auth.traefik.me/healthz>                 |
-| Storage   | <https://storage.traefik.me/healthz>              |
-| Minio     | <https://minio.traefik.me>                        |
-| Mailpit   | <https://mailpit.traefik.me>                      |
-| Dashboard | <https://dashboard.traefik.me>                    |
-| Tailcall  | <https://gateway.traefik.me>                      |
+| Traefik   | <https://traefik.traefik.me/dashboard/>              |
+| Hasura    | <https://hasura.traefik.me/console/>               |
+| GraphQL   | <https://graphql.traefik.me>                       |
+| Auth      | <https://auth.traefik.me/healthz>                  |
+| Storage   | <https://storage.traefik.me/healthz>               |
+| Minio     | <https://minio.traefik.me>                         |
+| Mailpit   | <https://mailpit.traefik.me>                       |
+| Dashboard | <https://dashboard.traefik.me>                     |
+| Tailcall  | <https://gateway.traefik.me>                       |
 
 #### Apply seeds
 
@@ -165,6 +165,13 @@ You can preview the production build with `turbo preview`.
 
 ```shell
 gcloud run deploy --allow-unauthenticated
+```
+
+To reset deleted (soft) `policies` and `rules`
+
+```sql
+UPDATE public.rules SET deleted_at = null WHERE deleted_at is not null;
+UPDATE public.policies SET deleted_at = null WHERE deleted_at is not null;
 ```
 
 ## TODO

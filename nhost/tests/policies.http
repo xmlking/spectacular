@@ -144,7 +144,7 @@ query SearchAgentPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: 
 {
   "where": {
     "subjectType": { "_eq": "user" },
-    "subjectId": { "_eq": "6e9bf365-8c09-4dd9-b9b2-83f6ab315618" }
+    "subjectId": { "_eq": "076a79f9-ed08-4e28-a4c3-8d4e0aa269a3" }
   },
   "limit": 2,
   "orderBy": [{ "updatedAt": "desc_nulls_last" }]
@@ -211,7 +211,7 @@ query SearchPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int =
 {
   "where": {
     "subjectType": { "_eq": "user" },
-    "subjectId": { "_eq": "6e9bf365-8c09-4dd9-b9b2-83f6ab315618" }
+    "subjectId": { "_eq": "076a79f9-ed08-4e28-a4c3-8d4e0aa269a3" }
   },
   "limit": 2,
   "orderBy": [{ "updatedAt": "desc_nulls_last" }]
@@ -433,7 +433,7 @@ mutation CreatePolicy($data: policies_insert_input!) {
 		"active": true,
 		"validFrom":"{{$datetime rfc1123|iso8601 [offset option]}}",
 		"validTo":"2024-05-21 00:59:07.11014+00",
-		"subjectId":"6e9bf365-8c09-4dd9-b9b2-83f6ab315618",
+		"subjectId":"076a79f9-ed08-4e28-a4c3-8d4e0aa269a3",
 		"subjectType":"user",
 		"subjectDisplayName":"sumanth chinthagunta",
 		"subjectSecondaryId":"xmlking@gmail.com",
