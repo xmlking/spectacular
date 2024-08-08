@@ -29,6 +29,9 @@ For local dev _postgres_ database running in docker compose, these steps are not
 
 SSH to **db host**
 
+> [!TIP]
+> alternatively you can also connect directly to database via `psql postgres://postgres:postgres@localhost:5432/postgres -v openai_api_key=$OPENAI_API_KEY` without SSH to container.
+
 ```shell
 # if your database is running in docker
 docker compose exec postgres /bin/bash
@@ -44,6 +47,8 @@ postgresdb=# \c postgres
 postgresdb=# \l
 # list relations
 postgresdb-# \dt
+# list extensions
+postgresdb-# \dx
 # list users
 postgresdb-# \du
 # to change the postgres user's password:
@@ -114,6 +119,8 @@ CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
 COMMENT ON EXTENSION ltree IS 'data type for storing hierarchical data path';
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+-- CREATE EXTENSION IF NOT EXISTS vector CASCADE WITH SCHEMA public;
+-- CREATE EXTENSION IF NOT EXISTS ai CASCADE WITH SCHEMA public;
 
 SELECT * FROM pg_extension;
 SELECT extname, extowner::regrole FROM pg_catalog.pg_extension;
@@ -147,3 +154,7 @@ cat  /var/lib/pgsql/14/data/pg_hba.conf
 ```
 
 ## Reference
+
+- [Automatic Data Classification using OpenAI, PostgreSQL, pgai, and pgvector](https://github.com/quamernasim/automatic-data-classification-using-openai-postgreSQL-pgai-and-pgvector)
+- [Use pgai with OpenAI](https://github.com/timescale/pgai/blob/main/docs/openai.md) 
+- [Use pgai with Ollama](https://github.com/timescale/pgai/blob/main/docs/ollama.md)

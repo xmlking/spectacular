@@ -20,7 +20,7 @@ services:
   # traefik proxy
   ###########################################################################
   traefik:
-    image: traefik:v3.0.4
+    image: traefik:v3.1.1
     hostname: traefik
     container_name: traefik
     restart: unless-stopped
@@ -51,9 +51,9 @@ services:
   # postgres database
   ###########################################################################
   postgres:
-    image: postgres:16
+    # image: postgres:16
     # image: pgvector/pgvector:pg16
-    # image: timescale/timescaledb-ha:pg16 # no support for Mac ARM yet.
+    image: timescale/timescaledb-ha:pg16
     hostname: postgres
     container_name: postgres
     restart: unless-stopped
@@ -68,12 +68,13 @@ services:
     ports:
       - '5432:5432'
     environment:
+      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: postgres
     volumes:
-      - pg_data:/var/lib/postgresql/data
-      - ./infra/base/postgres/initdb.d:/docker-entrypoint-initdb.d:ro
+      # - pg_data:/var/lib/postgresql/data # for timescale/timescaledb:pg16 or postgres:16
+      - pg_data:/home/postgres/pgdata/data # for timescale/timescaledb-ha:pg16
+      - ./infra/base/postgres/initdb.d/100-create-schema.sql:/docker-entrypoint-initdb.d/100-create-schema.sql:ro
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB -q']
       interval: 60s
@@ -291,7 +292,7 @@ services:
   # minio
   ###########################################################################
   minio:
-    image: bitnami/minio:2024.7.13
+    image: bitnami/minio:2024.8.3
     hostname: minio
     container_name: minio
     restart: unless-stopped
@@ -381,7 +382,7 @@ services:
   # dashboard
   ###########################################################################
   dashboard:
-    image: nhost/dashboard:1.23.0
+    image: nhost/dashboard:1.24.1
     hostname: dashboard
     container_name: dashboard
     restart: unless-stopped
