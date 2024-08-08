@@ -91,6 +91,7 @@ jobs:
             ## only enabled in main branch:
             # type=raw,value=latest,enable={{is_default_branch}}
       - name: Build and push Docker image
+        id: push
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -107,8 +108,12 @@ jobs:
             BUILD_REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
             SCOPE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.title'] }}
 
-# TODO: https://github.blog/2024-05-02-introducing-artifact-attestations-now-in-public-beta/
-#      - name: Attest Build Provenance
-#        uses: actions/attest-build-provenance@897ed5eab6ed058a474202017ada7f40bfa52940 # v1.0.0
-#        with:
-#          subject-path: "bin/my-artifact.tar.gz"
+      # Ref: https://github.blog/security/supply-chain-security/configure-github-artifact-attestations-for-secure-cloud-native-delivery/
+      - name: Generate Artifact Attestation
+        id: attest
+        uses: actions/attest-build-provenance@v1.0.0
+        with:
+          subject-name: ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+          # subject-path: ${{ github.workspace }}/apps/${{ env.SCOPE }}/*
