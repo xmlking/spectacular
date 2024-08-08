@@ -1,4 +1,5 @@
 <script lang="ts">
+// NOTE: from https://swapy.tahazsh.com/
 import { onMount } from 'svelte';
 import { persisted } from 'svelte-persisted-store';
 import { createSwapy } from 'swapy';
@@ -25,7 +26,10 @@ let container: HTMLDivElement;
 
 onMount(() => {
   if (container) {
-    const swapy = createSwapy(container);
+    const swapy = createSwapy(container, {
+      animation: 'dynamic', // or spring or none
+    });
+
     // swapy.onSwap(({ data }) => {
     //   console.log({ data: data.object });
     //   slotItems.set(data.object);

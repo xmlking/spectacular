@@ -13,7 +13,7 @@ export interface Subject {
 }
 
 // TODO: throttle-debounce , prevent double calling, finish
-export function searchSubjects(filter: PolicySearch): GQLResult<Subject[]> {
+export async function searchSubjects(filter: PolicySearch): Promise<GQLResult<Subject[]>> {
   console.log(filter.subjectDisplayName?.length);
   return {
     data: [
