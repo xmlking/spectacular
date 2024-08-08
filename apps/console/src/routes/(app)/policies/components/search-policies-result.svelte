@@ -1,36 +1,36 @@
 <script lang="ts">
-  import type { MouseEventHandler } from "svelte/elements";
-  import { PendingValue, type SearchPolicies$result, graphql } from "$houdini";
-  import { handleMessage } from "$lib/components/layout/toast-manager";
-  import { loaded } from "$lib/graphql/loading";
-  import { getToastStore } from "@skeletonlabs/skeleton";
-  import { DateTime } from "@spectacular/skeleton/components";
-  import * as Table from "@spectacular/skeleton/components/table";
-  import { Logger, sleep } from "@spectacular/utils";
-  import { DataHandler, type Row, check } from "@vincjo/datatables";
-  import { getLoadingState } from "$lib/stores/loading";
-  import { Trash2 } from "lucide-svelte";
+import { PendingValue, type SearchPolicies$result, graphql } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { loaded } from '$lib/graphql/loading';
+import { getLoadingState } from '$lib/stores/loading';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { DateTime } from '@spectacular/skeleton/components';
+import * as Table from '@spectacular/skeleton/components/table';
+import { Logger, sleep } from '@spectacular/utils';
+import { DataHandler, type Row, check } from '@vincjo/datatables';
+import { Trash2 } from 'lucide-svelte';
+import type { MouseEventHandler } from 'svelte/elements';
 
-  const log = new Logger("policies:search-results:browser");
-  // Variables
-  export let data: SearchPolicies$result;
-  let { policies } = data;
-  $: ({ policies } = data);
+const log = new Logger('policies:search-results:browser');
+// Variables
+export let data: SearchPolicies$result;
+let { policies } = data;
+$: ({ policies } = data);
 
-  const toastStore = getToastStore();
-  const loadingState = getLoadingState();
+const toastStore = getToastStore();
+const loadingState = getLoadingState();
 
-  //Datatable handler initialization
-  const handler = new DataHandler(policies.filter(loaded), { rowsPerPage: 10 });
-  $: handler.setRows(policies);
-  const rows = handler.getRows();
+//Datatable handler initialization
+const handler = new DataHandler(policies.filter(loaded), { rowsPerPage: 10 });
+$: handler.setRows(policies);
+const rows = handler.getRows();
 
-  // Functions
-  /**
-   * Delete Polcy action
-   */
-  let isDeleting = false;
-  const deletePolicy = graphql(`
+// Functions
+/**
+ * Delete Polcy action
+ */
+let isDeleting = false;
+const deletePolicy = graphql(`
     mutation DeletePolicy(
       $policyId: uuid!
       $ruleId: uuid!
@@ -52,72 +52,70 @@
       }
     }
   `);
-  const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-    const { policyId, ruleId, displayName } = event.currentTarget.dataset;
-    if (!policyId || !ruleId || !displayName) {
-      log.error(
-        "Misconfiguration: did you mess adding `data-id/data-rule-id/data-display-name` attributes?",
-      );
-      return;
-    }
-    // before
-    isDeleting = true;
-    await sleep(1300);
-    const deletedAt = new Date();
-    const { data, errors: gqlErrors } = await deletePolicy.mutate({
-      policyId,
-      ruleId,
-      deletedAt,
-    });
-    if (gqlErrors) {
-      handleMessage(
-        {
-          message: `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `,
-          hideDismiss: false,
-          timeout: 10000,
-          type: "error",
-        },
-        toastStore,
-      );
-      return;
-    }
-    if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
-      handleMessage(
-        {
-          message: `Policy and associated rule: "${displayName}" deleted`,
-          hideDismiss: false,
-          timeout: 10000,
-          type: "success",
-        },
-        toastStore,
-      );
-    } else if (data?.update_policies_by_pk) {
-      handleMessage(
-        {
-          message: `Policy "${displayName}" deleted`,
-          hideDismiss: false,
-          timeout: 10000,
-          type: "success",
-        },
-        toastStore,
-      );
-    } else {
-      handleMessage(
-        {
-          message: `Policy not found for ID: ${policyId}`,
-          hideDismiss: false,
-          timeout: 50000,
-          type: "error",
-        },
-        toastStore,
-      );
-    }
-    // after
-    isDeleting = false;
-  };
+const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
+  const { policyId, ruleId, displayName } = event.currentTarget.dataset;
+  if (!policyId || !ruleId || !displayName) {
+    log.error('Misconfiguration: did you mess adding `data-id/data-rule-id/data-display-name` attributes?');
+    return;
+  }
+  // before
+  isDeleting = true;
+  await sleep(1300);
+  const deletedAt = new Date();
+  const { data, errors: gqlErrors } = await deletePolicy.mutate({
+    policyId,
+    ruleId,
+    deletedAt,
+  });
+  if (gqlErrors) {
+    handleMessage(
+      {
+        message: `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `,
+        hideDismiss: false,
+        timeout: 10000,
+        type: 'error',
+      },
+      toastStore,
+    );
+    return;
+  }
+  if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
+    handleMessage(
+      {
+        message: `Policy and associated rule: "${displayName}" deleted`,
+        hideDismiss: false,
+        timeout: 10000,
+        type: 'success',
+      },
+      toastStore,
+    );
+  } else if (data?.update_policies_by_pk) {
+    handleMessage(
+      {
+        message: `Policy "${displayName}" deleted`,
+        hideDismiss: false,
+        timeout: 10000,
+        type: 'success',
+      },
+      toastStore,
+    );
+  } else {
+    handleMessage(
+      {
+        message: `Policy not found for ID: ${policyId}`,
+        hideDismiss: false,
+        timeout: 50000,
+        type: 'error',
+      },
+      toastStore,
+    );
+  }
+  // after
+  isDeleting = false;
+};
 
-  // Reactivity
-  $: loadingState.setFormLoading(isDeleting);
+// Reactivity
+$: loadingState.setFormLoading(isDeleting);
 </script>
 
 <div class="card p-4">

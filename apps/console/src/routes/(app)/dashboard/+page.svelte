@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { persisted } from "svelte-persisted-store";
-  import { createSwapy } from "swapy";
+import { onMount } from 'svelte';
+import { persisted } from 'svelte-persisted-store';
+import { createSwapy } from 'swapy';
 
-  let container: HTMLDivElement;
+let container: HTMLDivElement;
 
-  /*
+/*
   const DEFAULT = {
     1: "a",
     3: "c",
@@ -23,15 +23,15 @@
   );
   */
 
-  onMount(() => {
-    if (container) {
-      const swapy = createSwapy(container);
-      // swapy.onSwap(({ data }) => {
-      //   console.log({ data: data.object });
-      //   slotItems.set(data.object);
-      // });
-    }
-  });
+onMount(() => {
+  if (container) {
+    const swapy = createSwapy(container);
+    // swapy.onSwap(({ data }) => {
+    //   console.log({ data: data.object });
+    //   slotItems.set(data.object);
+    // });
+  }
+});
 </script>
 
 <svelte:head>

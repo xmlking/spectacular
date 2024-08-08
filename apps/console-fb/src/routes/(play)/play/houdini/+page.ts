@@ -31,7 +31,7 @@ export function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
       const { formErrors, fieldErrors } = err.flatten();
       return { formErrors, fieldErrors };
     }
-      log.error('search:_houdini_beforeLoad:', err);
-      error(500, err as Error);
+    log.error('search:_houdini_beforeLoad:', err);
+    error(500, err as Error);
   }
 }

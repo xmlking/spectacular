@@ -1,9 +1,9 @@
+import { limiter } from '$lib/server/limiter/limiter';
+import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
+import { Logger } from '@spectacular/utils';
 import { error } from '@sveltejs/kit';
 import { streamText } from 'ai';
-import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
 import { ollama } from 'ollama-ai-provider';
-import { limiter } from '$lib/server/limiter/limiter';
-import { Logger } from '@spectacular/utils';
 
 const log = new Logger('experiments:ai:completion:server');
 
