@@ -34,6 +34,11 @@ onMount(() => {
     //   console.log({ data: data.object });
     //   slotItems.set(data.object);
     // });
+
+    // cleanup after onDestroy
+    return () => {
+      swapy.enable(false);
+    };
   }
 });
 </script>

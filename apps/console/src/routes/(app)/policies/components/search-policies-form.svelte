@@ -1,115 +1,89 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
-  import * as m from "$i18n/messages";
-  import type { PolicySearch } from "$lib/schema/policy";
-  import { getLoadingState } from "$lib/stores/loading";
-  import {
-    AppBar,
-    Autocomplete,
-    type AutocompleteOption,
-    type PopupSettings,
-    popup,
-  } from "@skeletonlabs/skeleton";
-  import { DebugShell, GraphQLErrors } from "@spectacular/skeleton/components";
-  import { Alerts, ErrorMessage } from "@spectacular/skeleton/components/form";
-  import { Logger } from "@spectacular/utils";
-  import { debounce } from "@spectacular/utils";
-  import * as Form from "formsnap";
-  import type { GraphQLError } from "graphql";
-  import {
-    LoaderIcon,
-    MoreHorizontalIcon,
-    ScaleIcon,
-    SearchIcon,
-    ShieldCheckIcon,
-  } from "lucide-svelte";
-  import type { FormEventHandler } from "svelte/elements";
-  import SuperDebug, {
-    superForm,
-    type SuperValidated,
-  } from "sveltekit-superforms";
-  import { type Subject, searchSubjects } from "./search";
+import { goto } from '$app/navigation';
+import * as m from '$i18n/messages';
+import type { PolicySearch } from '$lib/schema/policy';
+import { getLoadingState } from '$lib/stores/loading';
+import { AppBar, Autocomplete, type AutocompleteOption, type PopupSettings, popup } from '@skeletonlabs/skeleton';
+import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
+import { Alerts, ErrorMessage } from '@spectacular/skeleton/components/form';
+import { Logger } from '@spectacular/utils';
+// import { debounce } from "@spectacular/utils";
+import * as Form from 'formsnap';
+import type { GraphQLError } from 'graphql';
+import { LoaderIcon, MoreHorizontalIcon, ScaleIcon, SearchIcon, ShieldCheckIcon } from 'lucide-svelte';
+import type { FormEventHandler } from 'svelte/elements';
+import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms';
+import { type Subject, searchSubjects } from './search';
 
-  const log = new Logger("policies:search-form:browser");
+const log = new Logger('policies:search-form:browser');
 
-  export let formInitData: SuperValidated<PolicySearch>;
+export let formInitData: SuperValidated<PolicySearch>;
 
-  // Variables
-  const loadingState = getLoadingState();
+// Variables
+const loadingState = getLoadingState();
 
-  // Search form
-  const form = superForm(formInitData, {
-    dataType: "json",
-    taintedMessage: null,
-    syncFlashMessage: false,
-    resetForm: true,
-    onError({ result }) {
-      // the onError event allows you to act on ActionResult errors.
-      // TODO:
-      // message.set(result.error.message)
-      log.error("policy superForm error:", { result });
-    },
-  });
-  const {
-    form: formData,
-    delayed,
-    allErrors,
-    errors,
-    constraints,
-    message,
-    tainted,
-    posted,
-    submitting,
-    timeout,
-  } = form;
+// Search form
+const form = superForm(formInitData, {
+  dataType: 'json',
+  taintedMessage: null,
+  syncFlashMessage: false,
+  resetForm: true,
+  onError({ result }) {
+    // the onError event allows you to act on ActionResult errors.
+    // TODO:
+    // message.set(result.error.message)
+    log.error('policy superForm error:', { result });
+  },
+});
+const { form: formData, delayed, allErrors, errors, constraints, message, tainted, posted, submitting, timeout } = form;
 
-  let searchForm: HTMLFormElement;
+let searchForm: HTMLFormElement;
 
-  const popupSettings: PopupSettings = {
-    event: "focus-click",
-    target: "popupAutocomplete",
-    placement: "bottom",
-  };
+const popupSettings: PopupSettings = {
+  event: 'focus-click',
+  target: 'popupAutocomplete',
+  placement: 'bottom',
+};
 
-  let gqlErrors: Partial<GraphQLError>[] | undefined;
-  let subjects: Subject[] | undefined;
+let gqlErrors: Partial<GraphQLError>[] | null;
+let subjects: Subject[] | undefined;
 
-  // Functions
-  async function clearSubject() {
-    await goto(
-      `/policies?subjectType=${$formData.subjectType}&limit=${$formData.limit}&offset=${$formData.offset}`,
-    );
+// Functions
+async function clearSubject() {
+  await goto(`/policies?subjectType=${$formData.subjectType}&limit=${$formData.limit}&offset=${$formData.offset}`);
+}
+
+const onInput: FormEventHandler<HTMLInputElement> = async (event) => {
+  const value = event.currentTarget.value;
+  console.log(`onInput: ${value}`);
+  if (value.length > 3) {
+    ({ data: subjects, errors: gqlErrors } = await searchSubjects($formData.subjectType, value));
   }
+};
 
-  const onInput: FormEventHandler<HTMLInputElement> = async (event) => {
-    const value = event.currentTarget.value;
-    console.log(`onInput: ${value}`);
-    if (value.length > 3) {
-      ({ data: subjects, errors: gqlErrors } = await searchSubjects($formData));
-    }
-  };
+// const debouncedInput = debounce(onInput, 300)
 
-  const onChange: FormEventHandler<HTMLInputElement> = async (event) => {
-    const value = event.currentTarget.value;
-    console.log(`onChange: ${value}`);
-    if (value === "") {
-      await clearSubject();
-    }
-  };
+const onChange: FormEventHandler<HTMLInputElement> = async (event) => {
+  const value = event.currentTarget.value;
+  console.log(`onChange: ${value}`);
+  if (value === '') {
+    await clearSubject();
+  }
+};
 
-  const onSelect = async (event: CustomEvent<AutocompleteOption<Subject>>) => {
-    const value = event.detail.value;
-    console.log(`onSelect: ${value}`);
-    $formData.subjectId = value.id;
-    $formData.subjectDisplayName = value.displayName;
-    await goto(
-      `/policies?subjectType=${$formData.subjectType}&subjectId=${$formData.subjectId}&subjectDisplayName=${$formData.subjectDisplayName}&limit=${$formData.limit}&offset=${$formData.offset}`,
-    );
-  };
+const onSelect = async (event: CustomEvent<AutocompleteOption<Subject>>) => {
+  const value = event.detail.value;
+  console.log(`onSelect: ${value}`);
+  $formData.subjectId = value.id;
+  $formData.subjectDisplayName = value.displayName;
+  await goto(
+    `/policies?subjectType=${$formData.subjectType}&subjectId=${$formData.subjectId}&subjectDisplayName=${$formData.subjectDisplayName}&limit=${$formData.limit}&offset=${$formData.offset}`,
+  );
+};
 
-  // Reactivity
-  $: invalid = $allErrors.length > 0;
-  $: loadingState.setFormLoading($delayed);
+// Reactivity
+$: invalid = $allErrors.length > 0;
+$: loadingState.setFormLoading($delayed);
 </script>
 
 <!-- Form Level Errors / Messages -->

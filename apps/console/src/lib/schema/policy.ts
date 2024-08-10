@@ -1,3 +1,10 @@
+import {
+  action_enum,
+  direction_enum,
+  protocol_enum,
+  subject_type_enum,
+  type subject_type_enum$options,
+} from '$houdini';
 import { z } from 'zod';
 
 /**
@@ -14,7 +21,7 @@ export const policySchema = z.object({
   subjectDisplayName: z.string().trim().min(1),
   subjectId: z.string().trim().min(1),
   subjectSecondaryId: z.string().trim().min(1),
-  subjectType: z.enum(['user', 'group', 'device', 'service_account', 'device_pool']).default('user'),
+  subjectType: z.nativeEnum(subject_type_enum).default(subject_type_enum.user),
   active: z.boolean().optional().default(true),
   ruleId: z.string().trim().uuid(),
   rule: z.object({
@@ -29,11 +36,9 @@ export const policySchema = z.object({
     sourcePort: z.string().trim().nullish(),
     destination: z.string().ip().nullish(),
     destinationPort: z.string().trim().nullish(),
-    protocol: z.enum(['Any', 'IP', 'ICMP', 'IGMP', 'TCP', 'UDP', 'IPV6', 'ICMPV6', 'RM']).default('Any'),
-    action: z
-      .enum(['permit', 'block', 'callout_inspection', 'callout_terminating', 'callout_unknown'])
-      .default('block'),
-    direction: z.enum(['egress', 'ingress']).default('egress'),
+    protocol: z.nativeEnum(protocol_enum).default(protocol_enum.Any),
+    action: z.nativeEnum(action_enum).default(action_enum.block),
+    direction: z.nativeEnum(direction_enum).default(direction_enum.egress),
     appId: z.string().trim().nullish(),
     throttleRate: z.coerce.number().min(0).max(100).optional().default(80),
     weight: z.coerce.number().min(0).max(1000).optional().default(1000),
@@ -50,8 +55,7 @@ export type Policy = z.infer<typeof policySchema>;
 export const policySearchSchema = z.object({
   limit: z.number().int().min(5).max(100).default(10),
   offset: z.number().int().min(0).default(0),
-  // TODO use enum
-  subjectType: z.enum(['user', 'group', 'device', 'service_account', 'device_pool']).default('user').optional(),
+  subjectType: z.nativeEnum(subject_type_enum).default(subject_type_enum.user),
   subjectId: z.string().trim().uuid().optional(),
   subjectDisplayName: z.string().trim().optional(),
 });
