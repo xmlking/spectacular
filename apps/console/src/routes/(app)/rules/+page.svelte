@@ -10,8 +10,8 @@ const log = new Logger('rules:search:browser');
 export let data: PageData;
 
 // Reactivity
-let { SearchRules } = data;
-$: ({ SearchRules } = data);
+let { SearchRules, form } = data;
+$: ({ SearchRules, form } = data);
 </script>
 
 <svelte:head>
@@ -26,7 +26,7 @@ $: ({ SearchRules } = data);
   </section>
 
   <section class="space-y-4">
-    <SearchRulesForm formInitData={data.form}/>
+    <SearchRulesForm formInitData={form}/>
   </section>
 
   <section class="space-y-4">

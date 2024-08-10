@@ -1,5 +1,5 @@
-import type { RuleSearch, RuleSearchSchema } from '$lib/schema/rule';
 import type { GraphQLError } from 'graphql';
+import type { RuleSearch } from '$lib/schema/rule';
 
 interface GQLResult<T> {
   data: T | undefined;

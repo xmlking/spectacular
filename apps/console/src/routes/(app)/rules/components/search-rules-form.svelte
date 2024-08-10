@@ -1,97 +1,97 @@
 <script lang="ts">
-import { goto } from "$app/navigation";
-import type { RuleSearch } from "$lib/schema/rule";
-import { getLoadingState } from "$lib/stores/loading";
-import {
-  AppBar,
-  Autocomplete,
-  type AutocompleteOption,
-  type PopupSettings,
-  popup,
-} from "@skeletonlabs/skeleton";
-import { DebugShell, GraphQLErrors } from "@spectacular/skeleton/components";
-import { Alerts, ErrorMessage } from "@spectacular/skeleton/components/form";
-import { Logger } from "@spectacular/utils";
-import * as Form from "formsnap";
-import type { GraphQLError } from "graphql";
-import { SearchIcon } from "lucide-svelte";
-import type { FormEventHandler } from "svelte/elements";
-import SuperDebug, {
-  superForm,
-  type SuperValidated,
-} from "sveltekit-superforms";
-import { searchRules, type Rule } from "./search";
+  import { goto } from "$app/navigation";
+  import type { RuleSearch } from "$lib/schema/rule";
+  import { getLoadingState } from "$lib/stores/loading";
+  import {
+    AppBar,
+    Autocomplete,
+    type AutocompleteOption,
+    type PopupSettings,
+    popup,
+  } from "@skeletonlabs/skeleton";
+  import { DebugShell, GraphQLErrors } from "@spectacular/skeleton/components";
+  import { Alerts, ErrorMessage } from "@spectacular/skeleton/components/form";
+  import { Logger } from "@spectacular/utils";
+  import * as Form from "formsnap";
+  import type { GraphQLError } from "graphql";
+  import { SearchIcon } from "lucide-svelte";
+  import type { FormEventHandler } from "svelte/elements";
+  import SuperDebug, {
+    superForm,
+    type SuperValidated,
+  } from "sveltekit-superforms";
+  import { searchRules, type Rule } from "./search";
 
-const log = new Logger("rules:search-form:browser");
+  const log = new Logger("rules:search-form:browser");
 
-export let formInitData: SuperValidated<RuleSearch>;
+  export let formInitData: SuperValidated<RuleSearch>;
 
-// Variables
-const loadingState = getLoadingState();
+  // Variables
+  const loadingState = getLoadingState();
 
-// Search form
-const form = superForm(formInitData, {
-  dataType: "json",
-  taintedMessage: null,
-  syncFlashMessage: false,
-  resetForm: true,
-  onError({ result }) {
-    log.error("rule superForm error:", { result });
-  },
-});
-const {
-  form: formData,
-  delayed,
-  allErrors,
-  errors,
-  constraints,
-  message,
-  tainted,
-  posted,
-  submitting,
-  timeout,
-} = form;
+  // Search form
+  const form = superForm(formInitData, {
+    dataType: "json",
+    taintedMessage: null,
+    syncFlashMessage: false,
+    resetForm: true,
+    onError({ result }) {
+      log.error("rule superForm error:", { result });
+    },
+  });
+  const {
+    form: formData,
+    delayed,
+    allErrors,
+    errors,
+    constraints,
+    message,
+    tainted,
+    posted,
+    submitting,
+    timeout,
+  } = form;
 
-let searchForm: HTMLFormElement;
+  let searchForm: HTMLFormElement;
 
-const popupSettings: PopupSettings = {
-  event: "focus-click",
-  target: "popupAutocomplete",
-  placement: "bottom",
-};
+  const popupSettings: PopupSettings = {
+    event: "focus-click",
+    target: "popupAutocomplete",
+    placement: "bottom",
+  };
 
-let gqlErrors: Partial<GraphQLError>[] | undefined;
-let rules: Rule[] | undefined;
+  let gqlErrors: Partial<GraphQLError>[] | undefined;
+  let rules: Rule[] | undefined;
 
-// Functions
-const onInput: FormEventHandler<HTMLInputElement> = async (event) => {
-  const value = event.currentTarget.value;
-  console.log(`onInput: ${value}`);
-  if (value.length > 3) {
-    ({ data: rules, errors: gqlErrors } = await searchRules($formData));
-  }
-};
+  // Functions
+  const onInput: FormEventHandler<HTMLInputElement> = async (event) => {
+    const value = event.currentTarget.value;
+    console.log(`onInput: ${value}`);
+    if (value.length > 3) {
+      ({ data: rules, errors: gqlErrors } = await searchRules($formData));
+    }
+  };
 
-const onChange: FormEventHandler<HTMLInputElement> = async (event) => {
-  const value = event.currentTarget.value;
-  console.log(`onChange: ${value}`);
-  if (value === "") {
-    await goto(`/rules?limit=${$formData.limit}&offset=${$formData.offset}`);
-  }
-};
+  const onChange: FormEventHandler<HTMLInputElement> = async (event) => {
+    const value = event.currentTarget.value;
+    console.log(`onChange: ${value}`);
+    if (value === "") {
+      await goto(`/rules?limit=${$formData.limit}&offset=${$formData.offset}`);
+    }
+  };
 
-const onSelect = async (event: CustomEvent<AutocompleteOption<Rule>>) => {
-  const value = event.detail.value;
-  console.log(`onSelect: ${value}`);
-  $formData.displayName = value.displayName;
-  await goto(
-    `/rules?displayName=${$formData.displayName}&limit=${$formData.limit}&offset=${$formData.offset}`
-  );
-};
+  const onSelect = async (event: CustomEvent<AutocompleteOption<Rule>>) => {
+    const value = event.detail.value;
+    console.log(`onSelect: ${value}`);
+    $formData.displayName = value.displayName;
+    await goto(
+      `/rules?displayName=${$formData.displayName}&limit=${$formData.limit}&offset=${$formData.offset}`,
+    );
+  };
 
-// Reactivity
-$: invalid = $allErrors.length > 0;
-$: loadingState.setFormLoading($delayed);
+  // Reactivity
+  $: invalid = $allErrors.length > 0;
+  $: loadingState.setFormLoading($delayed);
 </script>
 
 <form data-sveltekit-noscroll bind:this={searchForm}>
@@ -146,11 +146,13 @@ $: loadingState.setFormLoading($delayed);
     </div>
 
     <svelte:fragment slot="trail">
-
+      <a
         href="/rules/create"
         class="btn variant-filled"
         data-sveltekit-preload-data="hover"
-        <a href="">Add Rule</a>
+      >
+        Add Rule
+      </a>
     </svelte:fragment>
   </AppBar>
   <input name="limit" bind:value={$formData.limit} type="hidden" />
