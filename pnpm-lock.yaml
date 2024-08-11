@@ -217,8 +217,8 @@ importers:
         specifier: 24.1.1
         version: 24.1.1
       layerchart:
-        specifier: 0.43.7
-        version: 0.43.7(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4)
+        specifier: 0.43.8
+        version: 0.43.8(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4)
       lucide-svelte:
         specifier: 0.426.0
         version: 0.426.0(svelte@4.2.18)
@@ -3380,9 +3380,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.2':
     resolution: {integrity: sha512-T9HCQO30Sq6L8tXQfdJI2CNMeNQxtMepJyoBYgK5QEN2LuIUqaoTfsZ2GryAqwFdAEj5FSM5Kdnf7f6shFqBHw==}
@@ -7273,11 +7275,6 @@ packages:
       svelte: 3 - 5 || >=5.0.0-next.120
       typescript: ^5.0.2
 
-  layerchart@0.43.7:
-    resolution: {integrity: sha512-YfVRWJtx+wgcfUn5uDmIscbHZ2LcEaxu0FU4dVeUnIufCRk+6KbIDbpkbe8yjPlHya2AFxULG3Usx1CuDdJB3Q==}
-    peerDependencies:
-      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
-
   layerchart@0.43.8:
     resolution: {integrity: sha512-LvfLyNJSBif1hrQF5J5hwdhGXxwqMjo+3KunZyQD8HXkNSU5PhDmoUE1ZcSPnDQ3rTMBAn1u8+516X6XUPsOFg==}
     peerDependencies:
@@ -9442,11 +9439,6 @@ packages:
 
   svelte-time-distance@0.0.3:
     resolution: {integrity: sha512-1L4e+fxjecAWgzg+rnhpXmoYi7Yb7rdL78BWH5HTOVuB1+Wc4S4fcPZyf4evBG80q0iJEazm90kE6id3sEzKxg==}
-
-  svelte-ux@0.72.4:
-    resolution: {integrity: sha512-P0wFF/vIdq7VMdAt/ajZpwU0p0Y9oNcZc1hJuPrdcv5F2o5VKqO3bbpUTdh3WIMeHPDjBI8FKfKHQK4t7TdTHg==}
-    peerDependencies:
-      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
 
   svelte-ux@0.74.3:
     resolution: {integrity: sha512-ztYbOCrr/pisyc6nznDk7wow9wJ90UHQGfToV2BTJcxJ7GfN4H1BiMvA7EwikeVJupcPJGUMMzTgQoaW15pdIA==}
@@ -17757,47 +17749,6 @@ snapshots:
       svelte: 4.2.18
       typescript: 5.5.4
 
-  layerchart@0.43.7(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4):
-    dependencies:
-      d3-array: 3.2.4
-      d3-color: 3.1.0
-      d3-delaunay: 6.0.4
-      d3-dsv: 3.0.1
-      d3-force: 3.0.0
-      d3-geo: 3.1.1
-      d3-geo-voronoi: 2.1.0
-      d3-hierarchy: 3.1.2
-      d3-interpolate: 3.0.1
-      d3-interpolate-path: 2.3.0
-      d3-path: 3.1.0
-      d3-quadtree: 3.0.1
-      d3-random: 3.0.1
-      d3-sankey: 0.12.3
-      d3-scale: 4.0.2
-      d3-scale-chromatic: 3.1.0
-      d3-shape: 3.2.0
-      d3-tile: 1.0.0
-      d3-time: 3.1.0
-      date-fns: 3.6.0
-      layercake: 8.3.4(svelte@4.2.18)(typescript@5.5.4)
-      lodash-es: 4.17.21
-      posthog-js: 1.155.0
-      shapefile: 0.6.6
-      svelte: 4.2.18
-      svelte-ux: 0.72.4(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)
-      topojson-client: 3.1.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - coffeescript
-      - less
-      - postcss
-      - postcss-load-config
-      - pug
-      - sass
-      - stylus
-      - sugarss
-      - typescript
-
   layerchart@0.43.8(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18)(typescript@5.5.4):
     dependencies:
       d3-array: 3.2.4
@@ -20508,36 +20459,6 @@ snapshots:
   svelte-time-distance@0.0.3:
     dependencies:
       date-fns: 2.30.0
-
-  svelte-ux@0.72.4(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18):
-    dependencies:
-      '@floating-ui/dom': 1.6.10
-      '@fortawesome/fontawesome-common-types': 6.6.0
-      '@mdi/js': 7.4.47
-      clsx: 2.1.1
-      culori: 4.0.1
-      d3-array: 3.2.4
-      d3-scale: 4.0.2
-      date-fns: 3.6.0
-      immer: 10.1.1
-      lodash-es: 4.17.21
-      prism-svelte: 0.5.0
-      prism-themes: 1.9.0
-      prismjs: 1.29.0
-      sveld: 0.20.0(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)
-      svelte: 4.2.18
-      tailwind-merge: 2.5.0
-      zod: 3.23.8
-    transitivePeerDependencies:
-      - '@babel/core'
-      - coffeescript
-      - less
-      - postcss
-      - postcss-load-config
-      - pug
-      - sass
-      - stylus
-      - sugarss
 
   svelte-ux@0.74.3(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.41))(postcss@8.4.41)(svelte@4.2.18):
     dependencies:
