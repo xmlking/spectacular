@@ -47,7 +47,7 @@ maxDepthQueries = 4
 version = 20
 
 [auth]
-version = '0.32.1'
+version = '0.33.0-beta2'
 
 [auth.resources]
 replicas = 1
@@ -187,7 +187,7 @@ enabled = true
 issuer = 'Spectacular'
 
 [postgres]
-version = '16.2-20240515-1'
+version = '16.2-20240718-1'
 
 [postgres.resources]
 replicas = 1
@@ -213,7 +213,7 @@ secure = false
 method = '{{ secrets.AUTH_SMTP_AUTH_METHOD }}'
 
 [storage]
-version = '0.6.0'
+version = '0.6.1'
 
 [storage.resources]
 replicas = 1

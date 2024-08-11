@@ -19,6 +19,8 @@ providers: # You can add more than one provider if needed
     exposedByDefault: false # Only expose explicitly enabled containers
     watch: true
     defaultRule: 'HostRegexp(`{{ index .Labels "com.docker.compose.service"}}.traefik.me`,`{{ index .Labels "com.docker.compose.service"}}-{dashed-ip:.*}.traefik.me`)'
+    # https://mail.google.com/mail/u/0/#inbox/FMfcgzGxSlQdprhMgZcPwZNxtnnjRvzh
+    # defaultRule: "HostRegexp(`{{ index .Labels \"com.docker.compose.service\"}}-.+.traefik.me`) || HostRegexp(`{{ index .Labels \"com.docker.compose.service\"}}.traefik.me`)"
   file:
     filename: /etc/traefik/dynamic.yml
     watch: true

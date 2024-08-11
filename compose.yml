@@ -20,7 +20,7 @@ services:
   # traefik proxy
   ###########################################################################
   traefik:
-    image: traefik:v3.1.1
+    image: traefik:v3.1.2
     hostname: traefik
     container_name: traefik
     restart: unless-stopped
@@ -86,7 +86,7 @@ services:
   # hasura service
   ###########################################################################
   graphql:
-    image: hasura/graphql-engine:v2.41.0-ce
+    image: hasura/graphql-engine:v2.42.0-ce
     hostname: graphql
     container_name: graphql
     restart: unless-stopped
@@ -189,7 +189,7 @@ services:
   # When SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.32.1
+    image: nhost/hasura-auth:0.33.0-beta2
     hostname: auth
     container_name: auth
     restart: unless-stopped
@@ -326,7 +326,7 @@ services:
   # storage
   ###########################################################################
   storage:
-    image: nhost/hasura-storage:0.6.0
+    image: nhost/hasura-storage:0.6.1
     hostname: storage
     container_name: storage
     restart: unless-stopped
@@ -419,7 +419,7 @@ services:
   # configserver
   ###########################################################################
   configserver:
-    image: nhost/cli:v1.20.0
+    image: nhost/cli:v1.21.0
     hostname: configserver
     container_name: configserver
     restart: unless-stopped
