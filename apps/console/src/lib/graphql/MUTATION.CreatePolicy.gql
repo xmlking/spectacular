@@ -1,4 +1,4 @@
-mutation CreatePolicy($data: policies_insert_input!) {
+mutation CreatePolicy1($data: policies_insert_input!) {
   insert_policies_one(object: $data) {
     id
     weight

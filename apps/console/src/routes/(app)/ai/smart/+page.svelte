@@ -58,8 +58,6 @@ export const snapshot = { capture, restore };
 $: loadingState.setFormLoading($delayed);
 </script>
 
-
-
 <div class="page-container">
   <div class="page-section">
     <header class="flex justify-between">

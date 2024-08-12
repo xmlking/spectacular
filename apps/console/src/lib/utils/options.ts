@@ -15,31 +15,10 @@ export const rows = [
 ];
 
 export const subjectTypeOptions = [
-  { value: '', name: 'All' },
   { value: 'user', name: 'User' },
   { value: 'group', name: 'Group' },
-  { value: 'service_account', name: 'Service' },
   { value: 'device', name: 'Device' },
   { value: 'device_pool', name: 'Device Pool' },
-];
-
-export const subjectTypeOptions2 = [
-  {
-    value: 'user',
-    label: 'User',
-  },
-  {
-    value: 'group',
-    label: 'Group',
-  },
-  {
-    value: 'device',
-    label: 'Device',
-  },
-  {
-    value: 'device_pool',
-    label: 'Device Pool',
-  },
 ];
 
 export const protocols = [

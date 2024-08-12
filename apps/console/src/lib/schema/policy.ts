@@ -28,7 +28,7 @@ export const policySchema = z.object({
     id: z.string().trim().uuid(),
     displayName: z.string().trim().min(4).max(256),
     description: z.string().trim().max(256).nullish(),
-    tags: z.string().trim().min(2).array().max(5).nullish(),
+    tags: z.string().trim().min(2).array().max(5).default([]),
     // annotations: z.preprocess(stringToJSON, z.record(z.string().trim().min(3), z.string().trim().min(3)).nullish()),
     // annotations: z.preprocess(stringToMap, z.map(z.string().trim().min(3), z.string().trim().min(3))).nullish(),
     annotations: z.string().trim().nullish(), // TODO: validate map string

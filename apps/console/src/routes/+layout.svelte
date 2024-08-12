@@ -25,10 +25,11 @@ import { type ComponentEvents, onMount } from 'svelte';
 import { setupViewTransition } from 'sveltekit-view-transition';
 import '../app.pcss';
 import { setNhostClient } from '$lib/stores/nhost';
+import type { LayoutData } from './$types';
 
 const log = new Logger('root:layout:browser');
 
-export let data;
+export let data: LayoutData;
 
 //*** initializations ***//
 // Floating UI for Popups

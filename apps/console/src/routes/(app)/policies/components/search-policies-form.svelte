@@ -13,7 +13,7 @@ import type { GraphQLError } from 'graphql';
 import { LoaderIcon, MoreHorizontalIcon, ScaleIcon, SearchIcon, ShieldCheckIcon } from 'lucide-svelte';
 import type { FormEventHandler } from 'svelte/elements';
 import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms';
-import { type Subject, searchSubjects } from './search';
+import { type Subject, searchSubjects } from '$lib/api/search-subjects';
 
 const log = new Logger('policies:search-form:browser');
 
