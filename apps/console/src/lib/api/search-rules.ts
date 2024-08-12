@@ -1,4 +1,4 @@
-import { CachePolicy, graphql, order_by, type SearchRules$result } from '$houdini';
+import { CachePolicy, type SearchRules$result, graphql, order_by } from '$houdini';
 import { Logger } from '@spectacular/utils';
 import type { GraphQLError } from 'graphql';
 

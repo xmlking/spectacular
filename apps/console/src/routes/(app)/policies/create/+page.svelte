@@ -1,55 +1,49 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
-  import { graphql, type policies_insert_input } from "$houdini";
-  import { handleMessage } from "$lib/components/layout/toast-manager";
-  import { i18n } from "$lib/i18n.js";
-  import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
-  import { createPolicySchema } from "$lib/schema/policy";
-  import { getLoadingState } from "$lib/stores/loading";
-  import { getToastStore } from "@skeletonlabs/skeleton";
-  import { DebugShell, GraphQLErrors } from "@spectacular/skeleton";
-  import { Alerts } from "@spectacular/skeleton/components/form";
-  import { cleanClone, Logger } from "@spectacular/utils";
-  import type { GraphQLError } from "graphql";
-  import { searchRulesFn } from "$lib/api/search-rules";
-  import Select from "svelte-select";
-  import SuperDebug, {
-  dateProxy,
-    defaults,
-    setError,
-    setMessage,
-    superForm,
-  } from "sveltekit-superforms";
-  import { zod, zodClient } from "sveltekit-superforms/adapters";
-  import {
+import { browser } from '$app/environment';
+import { goto } from '$app/navigation';
+import { graphql, type policies_insert_input } from '$houdini';
+import * as m from '$i18n/messages';
+import { searchRulesFn } from '$lib/api/search-rules';
+import { searchSubjects } from '$lib/api/search-subjects';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { i18n } from '$lib/i18n.js';
+import { createPolicySchema } from '$lib/schema/policy';
+import { createPolicyKeys as keys } from '$lib/schema/policy';
+import { getLoadingState } from '$lib/stores/loading';
+import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
+import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
+import { Alerts } from '@spectacular/skeleton/components/form';
+import { Logger, cleanClone } from '@spectacular/utils';
+import * as Form from 'formsnap';
+import type { GraphQLError } from 'graphql';
+import {
   Loader,
-    MonitorSmartphone,
-    MoreHorizontal,
-    Search,
-    Server,
-    User,
-    UserRound,
-    Users,
-    UsersRound,
-  } from "lucide-svelte";
-  import { browser } from "$app/environment";
-  import { searchSubjects } from "$lib/api/search-subjects";
-  import * as m from "$i18n/messages";
-  import * as Form from "formsnap";
-  import { createPolicyKeys as keys } from "$lib/schema/policy";
-  import { actionOptions, directionOptions, protocols, subjectTypeOptions } from "$lib/utils/options";
-  // import type { PageData } from './$types';
+  MonitorSmartphone,
+  MoreHorizontal,
+  Search,
+  Server,
+  User,
+  UserRound,
+  Users,
+  UsersRound,
+} from 'lucide-svelte';
+import Select from 'svelte-select';
+import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
+// import type { PageData } from './$types';
 
-  const log = new Logger("policies.create.browser");
+const log = new Logger('policies.create.browser');
 
-  // Variables
-  // export let data: PageData;
-  const toastStore = getToastStore();
-  const loadingState = getLoadingState();
-  let gqlErrors: Partial<GraphQLError>[] | null;
-  // let subjects: Subject[] | undefined;
+// Variables
+// export let data: PageData;
+const toastStore = getToastStore();
+const loadingState = getLoadingState();
+let gqlErrors: Partial<GraphQLError>[] | null;
+// let subjects: Subject[] | undefined;
 
-  const createPolicy = graphql(`
+const createPolicy = graphql(`
     mutation CreatePolicy($data: policies_insert_input!) {
       insert_policies_one(object: $data) {
         id
@@ -93,221 +87,187 @@
     }
   `);
 
-  const superform = superForm(defaults(zod(createPolicySchema)), {
-    SPA: true,
-    dataType: "json",
-    taintedMessage: null,
-    syncFlashMessage: false,
-    resetForm: true,
-    delayMs: 100,
-    timeoutMs: 4000,
-    validators: zodClient(createPolicySchema),
-    async onUpdate({ form, cancel }) {
-      if (!form.valid) return;
+const superform = superForm(defaults(zod(createPolicySchema)), {
+  SPA: true,
+  dataType: 'json',
+  taintedMessage: null,
+  syncFlashMessage: false,
+  resetForm: true,
+  delayMs: 100,
+  timeoutMs: 4000,
+  validators: zodClient(createPolicySchema),
+  async onUpdate({ form, cancel }) {
+    if (!form.valid) return;
 
-      // validate incoming data with business rules
-      if (form.data.ruleId && form.data.rule.shared === false) {
-        return setError(
-          form,
-          "ruleId",
-          "Only shared rules are allowed to pick from. Chose a shared rule",
-        );
-      }
+    // validate incoming data with business rules
+    if (form.data.ruleId && form.data.rule.shared === false) {
+      return setError(form, 'ruleId', 'Only shared rules are allowed to pick from. Chose a shared rule');
+    }
 
-      log.debug("before cleanClone with strip:", form.data);
-      const dataCopy = cleanClone(form.data, { empty: "strip" });
-      log.debug("after cleanClone with strip:", dataCopy);
-      const {
-        ruleId,
-        rule: { throttleRate, ...ruleRest },
-        ...restPolicy
-      } = dataCopy;
-      const payload: policies_insert_input = {
-        ...restPolicy,
-        ...(ruleId
-          ? { ruleId }
-          : {
-              rule: {
-                data: {
-                  ...ruleRest,
-                  ...(throttleRate && { throttleRate: `${throttleRate}` }),
-                },
+    log.debug('before cleanClone with strip:', form.data);
+    const dataCopy = cleanClone(form.data, { empty: 'strip' });
+    log.debug('after cleanClone with strip:', dataCopy);
+    const {
+      ruleId,
+      rule: { throttleRate, ...ruleRest },
+      ...restPolicy
+    } = dataCopy;
+    const payload: policies_insert_input = {
+      ...restPolicy,
+      ...(ruleId
+        ? { ruleId }
+        : {
+            rule: {
+              data: {
+                ...ruleRest,
+                ...(throttleRate && { throttleRate: `${throttleRate}` }),
               },
-            }),
-      };
+            },
+          }),
+    };
 
-      // if we are creating Policy with new Rule, overwrite Rule's weight with Policy's weight.
-      if (payload.rule?.data && payload.weight) {
-        payload.rule.data.weight = payload.weight;
-      }
-      log.debug("payload:", payload);
+    // if we are creating Policy with new Rule, overwrite Rule's weight with Policy's weight.
+    if (payload.rule?.data && payload.weight) {
+      payload.rule.data.weight = payload.weight;
+    }
+    log.debug('payload:', payload);
 
-      const { data, errors } = await createPolicy.mutate(
-        { data: payload },
-        { metadata: { logResult: true, useRole: "user" } },
-      );
-
-      if (errors) {
-        for (const error of errors) {
-          if (error.message.includes("Uniqueness violation")) {
-            setError(form, "rule.displayName", "Display Name already taken");
-          } else {
-            gqlErrors = errors;
-          }
-        }
-        log.error("create policy api call error:", errors);
-        return;
-      }
-
-      const result = data?.insert_policies_one;
-      if (!result) {
-        setMessage(
-          form,
-          { type: "error", message: "Create policy failed: responce empty" },
-          { status: 404 },
-        );
-        return;
-      }
-
-      // Finally notify user: successfully created new policy
-      const message: App.Superforms.Message = {
-        type: "success",
-        message: `Policy created with Rule: ${result.rule.displayName}`,
-      } as const;
-      setMessage(form, message);
-      handleMessage(message, toastStore);
-      await goto(i18n.resolveRoute("/dashboard/policies"), {
-        invalidateAll: false,
-      });
-    },
-    onError({ result }) {
-      log.error("superForm onError:", { result });
-    },
-  });
-
-  const {
-    form,
-    delayed,
-    enhance,
-    errors,
-    constraints,
-    message,
-    isTainted,
-    tainted,
-    posted,
-    allErrors,
-    reset,
-    submitting,
-    timeout,
-    capture,
-    restore,
-  } = superform;
-  export const snapshot = { capture, restore };
-
-  // subject settings
-  let subject = $form?.subjectId
-    ? {
-        id: $form.subjectId,
-        displayName: $form.subjectDisplayName,
-        secondaryId: $form.subjectSecondaryId,
-      }
-    : null;
-
-  async function fetchSubjects(filterText: string) {
-    const { data, errors } = await searchSubjects(
-      $form.subjectType,
-      filterText,
+    const { data, errors } = await createPolicy.mutate(
+      { data: payload },
+      { metadata: { logResult: true, useRole: 'user' } },
     );
-    if (errors) gqlErrors = errors;
-    return data;
-  }
 
-  async function onSubjectChange(changedSubject: CustomEvent) {
-    log.debug("onSubjectChange", changedSubject.detail);
-    if (browser) {
-      if (changedSubject?.detail) {
-        $form.subjectId = changedSubject.detail.id;
-        $form.subjectDisplayName = changedSubject.detail.displayName;
-        $form.subjectSecondaryId = changedSubject.detail.id;
-      } else {
-        $form.subjectId = "";
-        $form.subjectDisplayName = "";
-        $form.subjectSecondaryId = "";
+    if (errors) {
+      for (const error of errors) {
+        if (error.message.includes('Uniqueness violation')) {
+          setError(form, 'rule.displayName', 'Display Name already taken');
+        } else {
+          gqlErrors = errors;
+        }
       }
+      log.error('create policy api call error:', errors);
+      return;
+    }
+
+    const result = data?.insert_policies_one;
+    if (!result) {
+      setMessage(form, { type: 'error', message: 'Create policy failed: responce empty' }, { status: 404 });
+      return;
+    }
+
+    // Finally notify user: successfully created new policy
+    const message: App.Superforms.Message = {
+      type: 'success',
+      message: `Policy created with Rule: ${result.rule.displayName}`,
+    } as const;
+    setMessage(form, message);
+    handleMessage(message, toastStore);
+    await goto(i18n.resolveRoute('/dashboard/policies'), {
+      invalidateAll: false,
+    });
+  },
+  onError({ result }) {
+    log.error('superForm onError:', { result });
+  },
+});
+
+const {
+  form,
+  delayed,
+  enhance,
+  errors,
+  constraints,
+  message,
+  isTainted,
+  tainted,
+  posted,
+  allErrors,
+  reset,
+  submitting,
+  timeout,
+  capture,
+  restore,
+} = superform;
+export const snapshot = { capture, restore };
+
+// subject settings
+let subject = $form?.subjectId
+  ? {
+      id: $form.subjectId,
+      displayName: $form.subjectDisplayName,
+      secondaryId: $form.subjectSecondaryId,
+    }
+  : null;
+
+async function fetchSubjects(filterText: string) {
+  const { data, errors } = await searchSubjects($form.subjectType, filterText);
+  if (errors) gqlErrors = errors;
+  return data;
+}
+
+async function onSubjectChange(changedSubject: CustomEvent) {
+  log.debug('onSubjectChange', changedSubject.detail);
+  if (browser) {
+    if (changedSubject?.detail) {
+      $form.subjectId = changedSubject.detail.id;
+      $form.subjectDisplayName = changedSubject.detail.displayName;
+      $form.subjectSecondaryId = changedSubject.detail.id;
+    } else {
+      $form.subjectId = '';
+      $form.subjectDisplayName = '';
+      $form.subjectSecondaryId = '';
     }
   }
+}
 
-  function clearSubject(event: CustomEvent | Event) {
-    console.log('clearSubject')
-    // reset Selected ???
-    // log.debug('onSubjectTypeChange1',event.target?.value);
-    // log.debug('onSubjectTypeChange', event.detail);
-    if (browser) {
-      subject = null;
-      $form.subjectId = "";
-      $form.subjectDisplayName = "";
-      $form.subjectSecondaryId = "";
-    }
+function clearSubject(event: CustomEvent | Event) {
+  console.log('clearSubject');
+  // reset Selected ???
+  // log.debug('onSubjectTypeChange1',event.target?.value);
+  // log.debug('onSubjectTypeChange', event.detail);
+  if (browser) {
+    subject = null;
+    $form.subjectId = '';
+    $form.subjectDisplayName = '';
+    $form.subjectSecondaryId = '';
   }
+}
 
-  // rule settings
-  let rule = $form?.ruleId
-    ? {
-        id: $form.ruleId,
-        displayName: $form.rule.displayName,
-      }
-    : null;
-
-  async function onRuleChange(changedSubject: CustomEvent) {
-    log.debug("onRuleChange", changedSubject.detail);
-    if (browser) {
-      if (changedSubject?.detail) {
-        $form.ruleId = changedSubject.detail.id;
-        $form.rule.shared = changedSubject.detail.shared;
-        $form.rule.displayName = changedSubject.detail.displayName;
-        $form.rule.description = changedSubject.detail.description;
-        $form.rule.tags = changedSubject.detail.tags;
-        $form.rule.annotations = changedSubject.detail.annotations;
-        $form.rule.source = changedSubject.detail.source;
-        $form.rule.sourcePort = changedSubject.detail.sourcePort;
-        $form.rule.destination = changedSubject.detail.destination;
-        $form.rule.destinationPort = changedSubject.detail.destinationPort;
-        $form.rule.protocol = changedSubject.detail.protocol;
-        $form.rule.direction = changedSubject.detail.direction;
-        $form.rule.action = changedSubject.detail.action;
-        $form.rule.appId = changedSubject.detail.appId;
-        $form.rule.weight = changedSubject.detail.weight;
-        // HINT: we copy `rule.weight` to `policy.weight` initially and let users overwrite weightage afterwords.
-        $form.weight = changedSubject.detail.weight;
-      } else {
-        // Reset rule section of form
-        rule = null;
-        $form.ruleId = undefined;
-        $form.rule.shared = false;
-        $form.rule.displayName = "";
-        $form.rule.description = undefined;
-        $form.rule.tags = [];
-        $form.rule.annotations = undefined;
-        $form.rule.source = undefined;
-        $form.rule.sourcePort = undefined;
-        $form.rule.destination = undefined;
-        $form.rule.destinationPort = undefined;
-        $form.rule.protocol = "Any";
-        $form.rule.direction = "egress";
-        $form.rule.action = "block";
-        $form.rule.appId = undefined;
-        $form.rule.weight = 1000;
-      }
+// rule settings
+let rule = $form?.ruleId
+  ? {
+      id: $form.ruleId,
+      displayName: $form.rule.displayName,
     }
-  }
-  function clearRule(event: Event) {
-    log.debug("onRuleClear", event.target);
-    if (browser) {
+  : null;
+
+async function onRuleChange(changedSubject: CustomEvent) {
+  log.debug('onRuleChange', changedSubject.detail);
+  if (browser) {
+    if (changedSubject?.detail) {
+      $form.ruleId = changedSubject.detail.id;
+      $form.rule.shared = changedSubject.detail.shared;
+      $form.rule.displayName = changedSubject.detail.displayName;
+      $form.rule.description = changedSubject.detail.description;
+      $form.rule.tags = changedSubject.detail.tags;
+      $form.rule.annotations = changedSubject.detail.annotations;
+      $form.rule.source = changedSubject.detail.source;
+      $form.rule.sourcePort = changedSubject.detail.sourcePort;
+      $form.rule.destination = changedSubject.detail.destination;
+      $form.rule.destinationPort = changedSubject.detail.destinationPort;
+      $form.rule.protocol = changedSubject.detail.protocol;
+      $form.rule.direction = changedSubject.detail.direction;
+      $form.rule.action = changedSubject.detail.action;
+      $form.rule.appId = changedSubject.detail.appId;
+      $form.rule.weight = changedSubject.detail.weight;
+      // HINT: we copy `rule.weight` to `policy.weight` initially and let users overwrite weightage afterwords.
+      $form.weight = changedSubject.detail.weight;
+    } else {
       // Reset rule section of form
       rule = null;
       $form.ruleId = undefined;
       $form.rule.shared = false;
-      $form.rule.displayName = "";
+      $form.rule.displayName = '';
       $form.rule.description = undefined;
       $form.rule.tags = [];
       $form.rule.annotations = undefined;
@@ -315,27 +275,50 @@
       $form.rule.sourcePort = undefined;
       $form.rule.destination = undefined;
       $form.rule.destinationPort = undefined;
-      $form.rule.protocol = "Any";
-      $form.rule.direction = "egress";
-      $form.rule.action = "block";
+      $form.rule.protocol = 'Any';
+      $form.rule.direction = 'egress';
+      $form.rule.action = 'block';
       $form.rule.appId = undefined;
       $form.rule.weight = 1000;
     }
   }
-
-  async function fetchRule(filterText: string) {
-    const { data, errors } = await searchRulesFn(filterText);
-    if (errors) gqlErrors = errors;
-    return data;
+}
+function clearRule(event: Event) {
+  log.debug('onRuleClear', event.target);
+  if (browser) {
+    // Reset rule section of form
+    rule = null;
+    $form.ruleId = undefined;
+    $form.rule.shared = false;
+    $form.rule.displayName = '';
+    $form.rule.description = undefined;
+    $form.rule.tags = [];
+    $form.rule.annotations = undefined;
+    $form.rule.source = undefined;
+    $form.rule.sourcePort = undefined;
+    $form.rule.destination = undefined;
+    $form.rule.destinationPort = undefined;
+    $form.rule.protocol = 'Any';
+    $form.rule.direction = 'egress';
+    $form.rule.action = 'block';
+    $form.rule.appId = undefined;
+    $form.rule.weight = 1000;
   }
+}
 
-  // Reactivity
-  const validFrom = dateProxy(form, "validFrom", { format: "datetime-utc" });
-  const validTo = dateProxy(form, "validTo", { format: "datetime-utc" });
-  // $: disabled=$form.rule.shared
-  $: disabled = rule != null;
-  $: valid = $allErrors.length === 0;
-  $: loadingState.setFormLoading($delayed);
+async function fetchRule(filterText: string) {
+  const { data, errors } = await searchRulesFn(filterText);
+  if (errors) gqlErrors = errors;
+  return data;
+}
+
+// Reactivity
+const validFrom = dateProxy(form, 'validFrom', { format: 'datetime-utc' });
+const validTo = dateProxy(form, 'validTo', { format: 'datetime-utc' });
+// $: disabled=$form.rule.shared
+$: disabled = rule != null;
+$: valid = $allErrors.length === 0;
+$: loadingState.setFormLoading($delayed);
 </script>
 
 <svelte:head>

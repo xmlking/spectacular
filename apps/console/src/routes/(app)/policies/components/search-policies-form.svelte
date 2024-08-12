@@ -1,6 +1,7 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
 import * as m from '$i18n/messages';
+import { type Subject, searchSubjects } from '$lib/api/search-subjects';
 import type { PolicySearch } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';
 import { AppBar, Autocomplete, type AutocompleteOption, type PopupSettings, popup } from '@skeletonlabs/skeleton';
@@ -13,7 +14,6 @@ import type { GraphQLError } from 'graphql';
 import { LoaderIcon, MoreHorizontalIcon, ScaleIcon, SearchIcon, ShieldCheckIcon } from 'lucide-svelte';
 import type { FormEventHandler } from 'svelte/elements';
 import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms';
-import { type Subject, searchSubjects } from '$lib/api/search-subjects';
 
 const log = new Logger('policies:search-form:browser');
 

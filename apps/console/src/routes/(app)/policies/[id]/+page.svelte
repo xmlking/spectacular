@@ -1,14 +1,13 @@
 <script lang="ts">
-  import { DebugShell } from '@spectacular/skeleton';
-  import { Logger } from '@spectacular/utils';
-  import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { DebugShell } from '@spectacular/skeleton';
+import { Logger } from '@spectacular/utils';
+import SuperDebug, { superForm } from 'sveltekit-superforms';
 
+export let data;
 
-  export let data;
+const log = new Logger('routes:policies:create');
 
-  const log = new Logger('routes:policies:create');
-
-  const superform = superForm(data.form, {
+const superform = superForm(data.form, {
   dataType: 'json',
   syncFlashMessage: false,
   onError({ result }) {
@@ -35,7 +34,6 @@ const {
   restore,
 } = superform;
 export const snapshot = { capture, restore };
-
 </script>
 
 
