@@ -82,7 +82,7 @@ $: meta = {
 
     <section class="space-y-4">
       <h2 class="h2">Change Email</h2>
-      <p>Change the password of the current user.</p>
+      <p>Change the Email of the current user.</p>
       {#if loaded(email)}
         <ChangeEmailForm initialData={{ email: email || "" }} />
       {:else}

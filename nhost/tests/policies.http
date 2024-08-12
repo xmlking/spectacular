@@ -164,7 +164,6 @@ x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
 
-
 query SearchPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [policies_order_by!] = [{updatedAt: desc_nulls_last}]) {
   policies(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
     id
@@ -298,7 +297,6 @@ x-hasura-role: manager
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
-
 
 mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $ruleId: uuid!,$ruleData: rules_set_input!) {
   update_policies_by_pk(pk_columns: {id: $policyId}, _set: $policyData) {

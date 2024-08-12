@@ -16,7 +16,7 @@ import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 export let initialData: ChangeEmail;
 // Variables
-const log = new Logger('profile:password:browser');
+const log = new Logger('profile:email:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const nhost = getNhostClient();
