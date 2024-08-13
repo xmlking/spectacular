@@ -75,7 +75,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
         <input
           type="email"
           autocomplete="email"
-          class="input mt-1 data-[fs-error]:input-error"
+          class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_email_placeholder()}
           {...attrs}
           bind:value={$formData.email}
@@ -90,7 +90,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
         <Form.Label class="label sr-only">{m.auth_forms_password_label()}</Form.Label>
         <input
           type="password"
-          class="input mt-1 data-[fs-error]:input-error"
+          class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_password_placeholder()}
           {...attrs}
           bind:value={$formData.password}

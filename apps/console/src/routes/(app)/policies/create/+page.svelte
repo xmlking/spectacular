@@ -338,7 +338,7 @@ $: loadingState.setFormLoading($delayed);
     <!-- GraphQL Errors  -->
     <GraphQLErrors errors={gqlErrors} />
     <!-- Update User Details Form -->
-    <form class="card" method="POST" use:enhance>
+    <form class="card md:space-y-8" method="POST" use:enhance>
       <header class="card-header">
           <div class="text-xl">Create Policy</div>
           <!-- <div>Create new policy</div> -->

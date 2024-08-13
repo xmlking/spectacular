@@ -92,7 +92,7 @@ $: valid = $allErrors.length === 0;
         <input
           type="email"
           autocomplete="email"
-          class="input mt-1 data-[fs-error]:input-error"
+          class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_email_placeholder()}
           {...attrs}
           bind:value={$formData.email}
