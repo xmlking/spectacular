@@ -3,7 +3,7 @@ import { ruleSearchSchema } from '$lib/schema/rule';
 import { Logger } from '@spectacular/utils';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import type { BeforeLoadEvent, SearchRulesVariables as Variables } from './$houdini';
+import type { BeforeLoadEvent, SearchRulesPage, SearchRulesPageVariables as Variables } from './$houdini';
 
 const log = new Logger('rules:search-ts:browser');
 
@@ -14,7 +14,7 @@ export async function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
   return { form };
 }
 
-export const _SearchRulesVariables: Variables = async (event) => {
+export const _SearchRulesPageVariables: Variables = async (event) => {
   const { url } = event;
   log.debug('in _SearchRulesVariables', { url });
   const {

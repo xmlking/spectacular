@@ -123,6 +123,7 @@ $: loadingState.setFormLoading($delayed);
       />
     </div>
 
+
     <svelte:fragment slot="trail">
       <a
         href="/rules/create"

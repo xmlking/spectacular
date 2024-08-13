@@ -1,3 +1,4 @@
+import { searchRulesFn } from '$lib/api/search-rules';
 import type { RuleSearch } from '$lib/schema/rule';
 import type { GraphQLError } from 'graphql';
 
@@ -13,16 +14,5 @@ export interface Rule {
 }
 
 export async function searchRules(filter: RuleSearch): Promise<GQLResult<Rule[]>> {
-  // This is a mock implementation. Replace with actual GraphQL query when ready.
-  console.log('Searching rules with filter:', filter);
-  return {
-    data: [
-      {
-        id: '1',
-        displayName: 'Example Rule',
-        description: 'This is an example rule',
-      },
-    ],
-    errors: undefined,
-  };
+  return await searchRulesFn(filter.displayName || '');
 }
