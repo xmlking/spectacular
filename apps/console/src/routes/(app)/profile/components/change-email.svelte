@@ -6,7 +6,6 @@ import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
-import { Button } from '@spectacular/skeleton/components/button';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger, sleep } from '@spectacular/utils';
 import * as Form from 'formsnap';
