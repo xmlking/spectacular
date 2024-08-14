@@ -47,7 +47,9 @@
         "npm_package_version"
       ]
     },
-    "preview": {},
+    "preview": {
+      "persistent": true
+    },
     "test:unit:coverage": {
       "dependsOn": ["sync", "^test:unit:coverage"]
     },

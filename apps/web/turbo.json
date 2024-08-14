@@ -22,7 +22,9 @@
       ]
     },
     "astro": {},
-    "preview": {},
+    "preview": {
+      "persistent": true
+    },
     "test:integration": {
       "dependsOn": ["build"]
     }
