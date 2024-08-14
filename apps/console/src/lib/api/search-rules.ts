@@ -37,18 +37,16 @@ const searchRules = graphql(`
     }
   }
 `);
+const limit = 10;
+const orderBy = [{ updatedAt: order_by.desc_nulls_last }];
+export async function searchRulesFn(ruleNameTerm: string): Promise<GQLResult<Rule[]>> {
+  if ( ruleNameTerm.length < 4) return { data: [], errors: null };
 
-export async function searchRulesFn(filter: RuleSearch): Promise<GQLResult<Rule[]>> {
-  if (filter.displayName && filter.displayName.length < 4) return { data: [], errors: null };
-
-  const where = filter.displayName ? { displayName: { _ilike: `%${filter.displayName}%` } } : undefined;
-
-  const variables = {
-    where,
-    limit: filter.limit,
-    offset: filter.offset,
-    orderBy: [{ updatedAt: order_by.desc_nulls_last }],
+  const where = {
+    displayName: { _ilike: `%${ruleNameTerm}%` },
   };
+
+  const variables = { where, limit, orderBy };
 
   const { data, errors } = await searchRules.fetch({
     blocking: true,

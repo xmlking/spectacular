@@ -106,22 +106,10 @@ $: loadingState.setFormLoading($delayed);
           />
         </Form.Control>
       </Form.Field>
+      <button type="submit" class="variant-filled-secondary">Submit</button>
     </div>
-    <div
-      class="card w-full max-w-sm max-h-48 p-4 overflow-y-auto z-10"
-      data-popup="popupAutocomplete"
-      tabindex="-1"
-    >
-      <Autocomplete
-        bind:input={$formData.displayName}
-        options={rules?.map((rule) => ({
-          label: rule.displayName,
-          value: rule,
-          keywords: "",
-        }))}
-        on:selection={onSelect}
-      />
-    </div>
+
+
 
 
     <svelte:fragment slot="trail">
