@@ -74,8 +74,7 @@ ENV TURBO_TEAM=$TURBO_TEAM
 ARG TURBO_TOKEN
 ENV TURBO_TOKEN=$TURBO_TOKEN
 
-## TODO: set any extra ENV needed for build
-# ENV ENCRYPTION_SECRET=encryption_secret_placeholder123 NEXTAUTH_URL=http://localhost:3000 NEXT_PUBLIC_VIEWER_URL=http://localhost:3001
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm turbo run build --filter=${SCOPE}...
 
 ###################################################################

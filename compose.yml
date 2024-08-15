@@ -481,18 +481,18 @@ services:
   # webapp - console
   ###########################################################################
   webapp:
-    image: ghcr.io/xmlking/spectacular/console:v0.1.3
+    image: ghcr.io/xmlking/spectacular/console:0.4.1
     hostname: webapp
     container_name: webapp
     restart: unless-stopped
     profiles: [optional]
     environment:
       NODE_ENV: production
+      VERCEL_ENV: production
       CACHE_TTL: ${CACHE_TTL:-6000}
       PUBLIC_DEFAULT_ORGANIZATION: ${PUBLIC_DEFAULT_ORGANIZATION:-chinthagunta}
-      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-https://console.traefik.me}
-      PUBLIC_GRAPHQL_ENDPOINT: ${PUBLIC_GRAPHQL_ENDPOINT:-https://graphql${BASE_HOSTNAME}/v1/graphql}
-      # PUBLIC_GRAPHQL_ENDPOINT: ${PUBLIC_GRAPHQL_ENDPOINT:-https://hasura${BASE_HOSTNAME}/v1/graphql}
+      PUBLIC_BASE_URL: https://console{BASE_HOSTNAME}
+      PUBLIC_GRAPHQL_ENDPOINT: ${PUBLIC_GRAPHQL_ENDPOINT:-https://hasura${BASE_HOSTNAME}/v1/graphql}
       PUBLIC_TERMS_PRIVACY_COMPANY: 'Your Company'
       PUBLIC_TERMS_PRIVACY_EFFECTIVE_DATE: 'January 1, 2024'
       PUBLIC_TERMS_PRIVACY_WEBSITE: 'yourdomain.com'
@@ -500,15 +500,25 @@ services:
       PUBLIC_TERMS_PRIVACY_APP_NAME: ${APP_NAME}
       PUBLIC_TERMS_PRIVACY_APP_PRICING_AND_SUBSCRIPTIONS: '[Details about the pricing, subscription model, refund policy]'
       PUBLIC_TERMS_PRIVACY_COUNTRY: 'United States'
+      HASURA_GRAPHQL_ENDPOINT: https://hasura${BASE_HOSTNAME}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_GRAPHQL_JWT_SECRET_KEY: ${HASURA_GRAPHQL_JWT_SECRET_KEY}
       RATE_LIMIT_SECRET: ${RATE_LIMIT_SECRET}
       FEATURE_ENABLE_PASSWORD_LOGIN: ${FEATURE_ENABLE_PASSWORD_LOGIN}
       FEATURE_ENABLE_AZURE_LOGIN: ${FEATURE_ENABLE_AZURE_LOGIN}
       NHOST_HASURA_URL: https://hasura${BASE_HOSTNAME}/console
       NHOST_AUTH_URL: https://auth${BASE_HOSTNAME}/v1
-      NHOST_GRAPHQL_URL: https://graphql${BASE_HOSTNAME}/v1
+      NHOST_GRAPHQL_URL: https://hasura${BASE_HOSTNAME}/v1/graphql
       NHOST_STORAGE_URL: https://storage${BASE_HOSTNAME}/v1
       NHOST_FUNCTIONS_URL: https://functions${BASE_HOSTNAME}/v1
+      PUBLIC_NHOST_AUTH_URL: ${NHOST_AUTH_URL}
+      PUBLIC_NHOST_GRAPHQL_URL: ${NHOST_GRAPHQL_URL}
+      PUBLIC_NHOST_STORAGE_URL: ${NHOST_STORAGE_URL}
+      PUBLIC_NHOST_FUNCTIONS_URL: ${NHOST_FUNCTIONS_URL}
+      FLAGS_SECRET: ${FLAGS_SECRET}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_ORG_ID: ${OPENAI_ORG_ID}
+      OPENAI_PROJECT_ID: ${OPENAI_PROJECT_ID}
     expose:
       - 3000
     depends_on:
