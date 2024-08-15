@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.4.2](https://github.com/xmlking/spectacular/compare/b222ded81c6710f682307c733504279ff1812912..v0.4.2) - 2024-08-15
+#### Bug Fixes
+- updated deps - ([8473e12](https://github.com/xmlking/spectacular/commit/8473e121b25a54db290bfa777162cf101f81e117)) - [@xmlking](https://github.com/xmlking)
+- update webapp in compose.yaml - ([b222ded](https://github.com/xmlking/spectacular/commit/b222ded81c6710f682307c733504279ff1812912)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.4.1](https://github.com/xmlking/spectacular/compare/4fd953e9b399c235cfeb89e730d8b48fc785f3c8..v0.4.1) - 2024-08-15
 #### Bug Fixes
 - docker file - ([4fd953e](https://github.com/xmlking/spectacular/commit/4fd953e9b399c235cfeb89e730d8b48fc785f3c8)) - [@xmlking](https://github.com/xmlking)
