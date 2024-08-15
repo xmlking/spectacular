@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.4.1](https://github.com/xmlking/spectacular/compare/4fd953e9b399c235cfeb89e730d8b48fc785f3c8..v0.4.1) - 2024-08-15
+#### Bug Fixes
+- docker file - ([4fd953e](https://github.com/xmlking/spectacular/commit/4fd953e9b399c235cfeb89e730d8b48fc785f3c8)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.4.0](https://github.com/xmlking/spectacular/compare/db300c9eabd92a2428e7413bd5b15c2b00b852cf..v0.4.0) - 2024-08-14
 #### Bug Fixes
 - **(console)** remove dead code - ([59aa74f](https://github.com/xmlking/spectacular/commit/59aa74ff79155aaec5e7a9be534a3cac3342d518)) - [@xmlking](https://github.com/xmlking)
