@@ -3,7 +3,7 @@ ARG SCOPE=console
 # Stage 0: base image											                        #
 ###################################################################
 FROM node:22-slim AS base
-ENV GIT_SSL_NO_VERIFY 1
+ENV GIT_SSL_NO_VERIFY=1
 RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
 ARG SCOPE
@@ -54,8 +54,8 @@ COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
 ## https://playwright.dev/docs/browsers
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
-ENV COREPACK_ENABLE_STRICT 0
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+ENV COREPACK_ENABLE_STRICT=0
 
 ## FIXME: https://github.com/vercel/turbo/pull/7512
 # RUN pnpm install --frozen-lockfile
@@ -87,7 +87,7 @@ FROM cgr.dev/chainguard/node:latest AS runner
 # FROM base AS runner
 
 WORKDIR /app
-ENV NODE_ENV production
+ENV NODE_ENV=production
 ARG SCOPE
 
 ## copy tini
@@ -104,7 +104,7 @@ COPY --from=builder --chown=node:node /app/apps/${SCOPE}/build ./build
 
 ENV HOST=0.0.0.0
 EXPOSE 3000
-ENV PORT 3000
+ENV PORT=3000
 
 ## Metadata params
 ARG DOCKER_REGISTRY=ghcr.io
