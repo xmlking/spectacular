@@ -481,7 +481,7 @@ services:
   # webapp - console
   ###########################################################################
   webapp:
-    image: ghcr.io/xmlking/spectacular/console:0.4.1
+    image: ghcr.io/xmlking/spectacular/console:0.4.2
     hostname: webapp
     container_name: webapp
     restart: unless-stopped
