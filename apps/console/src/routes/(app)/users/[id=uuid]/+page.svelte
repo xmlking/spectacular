@@ -45,9 +45,6 @@ $: {
   myorgroles.set(
     data.orgRoles.filter((item) => item.organization === $formData.metadata.default_org).map((item) => item.role),
   );
-  $formData.defaultRole = data.orgRoles.find(
-    (role) => role.isDefaultRole === true && role.organization === $formData.metadata.default_org,
-  ).role;
 }
 </script>
 

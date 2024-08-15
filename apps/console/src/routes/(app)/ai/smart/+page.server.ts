@@ -17,6 +17,7 @@ const aiSchema = z.object({
     .string({ required_error: 'Third Comment is required' })
     .min(10, { message: 'Third Comment contain at least 10 character(s)' })
     .trim(),
+  startData: z.date().nullish(),
 });
 
 const log = new Logger('server:ai:ms');

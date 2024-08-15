@@ -1,6 +1,6 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { MagicSpellTextarea } from '$lib/components/smart/index.js';
+import { MagicSpellTextarea, SmartDatePicker } from '$lib/components/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -104,6 +104,18 @@ $: loadingState.setFormLoading($delayed);
               bind:value={$formData.commentThree}
               {...$constraints.commentThree}
               placeholder="It was a dark and stormy night..."
+            />
+          </Form.Control>
+          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+        </Form.Field>
+        <Form.Field {form} name="startData">
+          <Form.Control let:attrs>
+            <Form.Label class="label">Start Data</Form.Label>
+            <SmartDatePicker
+              class="textarea data-[fs-error]:input-error"
+              {...attrs}
+              bind:value={$formData.startData}
+              {...$constraints.startData}
             />
           </Form.Control>
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />

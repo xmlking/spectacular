@@ -7,6 +7,7 @@ import { createPATSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { AppBar, getToastStore } from '@skeletonlabs/skeleton';
+import { clipboard } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
@@ -25,6 +26,7 @@ import SuperDebug, {
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 // Variables
+let copied: boolean;
 const log = new Logger('profile:pat:form:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -72,6 +74,7 @@ const form = superForm(defaults(zod(createPATSchema)), {
       hideDismiss: false,
       timeout: 10000,
       type: 'success',
+      value: { personalAccessToken },
     } as const;
     setMessage(form, message);
     handleMessage(message, toastStore);
@@ -123,6 +126,15 @@ $: loadingState.setFormLoading($delayed);
 
 <!-- Form Level Errors / Messages -->
 <Alerts errors={$errors._errors} message={$message} />
+{#if $message?.type === 'success'}
+<button class="btn variant-filled-primary w-full" use:clipboard={$message?.value?.personalAccessToken} on:click={() => {
+                          copied = true;
+                            setTimeout(() => {
+                              copied = false;
+                            }, 1000);
+                          }}
+                >{copied ? 'copied 👍' : 'Copy your token here'}</button>
+{/if}
 <!-- Creating new PAT token  Form -->
 <form method="POST" use:enhance>
   <AppBar gridColumns="grid-cols-3" slotTrail="place-content-end">

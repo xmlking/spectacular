@@ -6,11 +6,10 @@ import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 
 const getUsersByIdStore = new GetUserByIdStore();
-export const load = async (event) => {
-  const {
-    params: { id },
-  } = event;
+export async function load({ params, url }) {
+  const id = url.searchParams.get('userId');
   const variables = { id }; // TODO: validate `id`
+  console.log(id);
   const { errors, data } = await getUsersByIdStore.fetch({
     event,
     blocking: true,
@@ -26,4 +25,4 @@ export const load = async (event) => {
   if (!user) error(404, 'User not found');
   const form = await superValidate(user, zod(schema));
   return { form, user, orgRoles, organizations, roles };
-};
+}

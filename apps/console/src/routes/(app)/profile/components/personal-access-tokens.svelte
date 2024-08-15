@@ -145,7 +145,6 @@ const handleDelete = async (id: string, name: string) => {
       <thead>
         <tr>
           <Table.Head {handler} orderBy="name">Name</Table.Head>
-          <Table.Head {handler} orderBy="id">Token</Table.Head>
           <Table.Head {handler} orderBy="createdAt">Created At</Table.Head>
           <Table.Head {handler} orderBy="expiresAt">Expires At</Table.Head>
           <Table.Head {handler}>Delete</Table.Head>
@@ -156,7 +155,6 @@ const handleDelete = async (id: string, name: string) => {
         {#each $rows as token, i}
           {#if token.id === PendingValue}
             <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>

@@ -15,7 +15,7 @@ export const policySchema = z.object({
   // validFrom: z.coerce.date(),
   // validFrom: z.string().datetime({ offset: true }).nullish().catch(null),
   // validTo: z.string().datetime({ offset: true }).nullish().catch(null),
-  validFrom: z.date().nullish(),
+  validFrom: z.date().min(new Date()).nullish(),
   validTo: z.date().nullish(),
   weight: z.coerce.number().min(0).max(1000).optional().default(1000),
   subjectDisplayName: z.string().trim().min(1),

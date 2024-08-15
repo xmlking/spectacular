@@ -2,7 +2,7 @@
 import { Avatar } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler } from '@vincjo/datatables';
-import { Pencil } from 'lucide-svelte';
+import { Pencil, UserRoundCog } from 'lucide-svelte';
 import type { PageData } from './$houdini';
 export let data: PageData;
 $: ({ UsersList } = data);
@@ -25,6 +25,7 @@ $: handler.setRows(UsersList);
 					<Table.Head {handler} orderBy="metadata">Organization</Table.Head>
 					<Table.Head {handler} orderBy="defaultRole">Role</Table.Head>
 					<Table.Head {handler} >Edit</Table.Head>
+          <Table.Head {handler} >Delegation</Table.Head>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,6 +41,11 @@ $: handler.setRows(UsersList);
                 <a href="/users/{row.id}"><Pencil /></a>
               </button>
 						</td>
+            <td>
+              <button class="btn-icon bg-initial hover:variant-soft-primary">
+                <a href="/users/delegation?userId={row.id}"><UserRoundCog /></a>
+              </button>
+            </td>
 					</tr>
 				{/each}
 			</tbody>

@@ -1,9 +1,13 @@
 <script lang="ts">
 import { type AuthProvidersFragment, PendingValue, fragment, graphql } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { Alerts } from '@spectacular/skeleton/components/form';
 import { Icon } from '@spectacular/skeleton/components/icons';
 import { Github } from 'lucide-svelte';
+import { onMount } from 'svelte';
 const nhost = getNhostClient();
 export let user: AuthProvidersFragment;
 $: data = fragment(
@@ -22,20 +26,48 @@ $: data = fragment(
 $: ({ providers } = $data);
 
 let Ids: string[] = [];
+let message: App.Superforms.Message | undefined;
+const errors: string[] = [];
+let error: string | null = null;
+let errorDescription: string | null = null;
+const toastStore = getToastStore();
 $: Ids = providers?.map((provider) => provider.providerId);
 $: isGithub = Ids?.includes('github');
 $: isAzure = Ids?.includes('azuread');
 $: isGoogle = Ids?.includes('google');
+onMount(() => {
+  const searchParams = new URLSearchParams(window.location.search);
+  error = searchParams.get('error');
+  errorDescription = searchParams.get('errorDescription');
+  if (errorDescription) {
+    errors.push(errorDescription);
+    handleMessage(
+      {
+        message: `Socail Connect Action failed with error ${errorDescription} `,
+        hideDismiss: false,
+        timeout: 10000,
+        type: 'error',
+      },
+      toastStore,
+    );
+  }
+});
 async function login(nhost: NhostClient, provider: Provider) {
-  const { providerUrl } = await nhost.auth.connectProvider({
+  const redirectTo = '/profile';
+  const error = await nhost.auth.connectProvider({
     provider,
+    options: {
+      redirectTo,
+    },
   });
 }
 function click(event: MouseEvent, provider: Provider) {
   login(nhost, provider);
 }
 </script>
-
+{#if errorDescription}
+  <Alerts {errors} {message} />
+{/if}
 <div class="card p-4 flex">
   {#if !isGithub}
       <button
