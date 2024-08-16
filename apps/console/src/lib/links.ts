@@ -81,12 +81,6 @@ export const menuNavLinks: MenuNavLinks = {
           keywords: 'account, organization',
           roles: [Roles.Manager, Roles.Supervisor],
         },
-        {
-          href: '/delegation',
-          label: 'Delegations',
-          keywords: 'account, delegation',
-          roles: [Roles.Manager, Roles.Supervisor],
-        },
         { href: '/users', label: 'Users', keywords: 'account, user, admin', roles: [Roles.Manager, Roles.Supervisor] },
         {
           href: '/groups',
