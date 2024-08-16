@@ -27,6 +27,7 @@ import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 // Variables
 let copied: boolean;
+let pat: string;
 const log = new Logger('profile:pat:form:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -62,22 +63,20 @@ const form = superForm(defaults(zod(createPATSchema)), {
       });
       return;
     }
-    if (!data) {
+    if (!data?.personalAccessToken) {
       log.error('This shoud not happen', { data });
       return;
     }
-    const { id, personalAccessToken } = data;
-    log.debug({ name, id, personalAccessToken });
     // Finally notify user: successfully added a new security key
     const message = {
-      message: `Created '${name}' PAT token, Please save your PAT: ${personalAccessToken}`,
+      message: `Created '${name}' PAT token, Please save your PAT: ${data.personalAccessToken}`,
       hideDismiss: false,
       timeout: 10000,
       type: 'success',
-      value: { personalAccessToken },
     } as const;
+    pat = data.personalAccessToken;
     setMessage(form, message);
-    handleMessage(message, toastStore);
+    // handleMessage(message, toastStore);
     // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
     // TODO: add { id, personalAccessToken }  to cache, instead of reload()
     await reload();
@@ -125,16 +124,21 @@ $: loadingState.setFormLoading($delayed);
 </script>
 
 <!-- Form Level Errors / Messages -->
-<Alerts errors={$errors._errors} message={$message} />
-{#if $message?.type === 'success'}
-<button class="btn variant-filled-primary w-full" use:clipboard={$message?.value?.personalAccessToken} on:click={() => {
-                          copied = true;
-                            setTimeout(() => {
-                              copied = false;
-                            }, 1000);
-                          }}
-                >{copied ? 'copied 👍' : 'Copy your token here'}</button>
-{/if}
+<Alerts errors={$errors._errors} message={$message}>
+    <button
+      slot="message"
+      class:hidden={$message?.type !== "success"}
+      class="btn variant-filled ml-2"
+      use:clipboard={pat}
+      on:click={() => {
+        copied = true;
+        setTimeout(() => {
+          copied = false;
+        }, 1000);
+      }}>{copied ? "Copied 👍" : "Copy"}</button
+    >
+</Alerts>
+
 <!-- Creating new PAT token  Form -->
 <form method="POST" use:enhance>
   <AppBar gridColumns="grid-cols-3" slotTrail="place-content-end">
@@ -195,6 +199,7 @@ $: loadingState.setFormLoading($delayed);
 <DebugShell>
   <SuperDebug
     data={{
+      pat,
       message: $message,
       submitting: $submitting,
       delayed: $delayed,

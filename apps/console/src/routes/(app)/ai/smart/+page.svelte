@@ -1,6 +1,6 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { MagicSpellTextarea, SmartDatePicker } from '$lib/components/smart';
+import { MagicSpellTextarea, SmartDate } from '$lib/components/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -111,7 +111,7 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name="startData">
           <Form.Control let:attrs>
             <Form.Label class="label">Start Data</Form.Label>
-            <SmartDatePicker
+            <SmartDate
               class="textarea data-[fs-error]:input-error"
               {...attrs}
               bind:value={$formData.startData}

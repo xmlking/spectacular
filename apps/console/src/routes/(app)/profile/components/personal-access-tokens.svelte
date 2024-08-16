@@ -4,7 +4,7 @@ import { PendingValue, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getNhostClient } from '$lib/stores/nhost';
-import { clipboard, getToastStore } from '@skeletonlabs/skeleton';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import * as Table from '@spectacular/skeleton/components/table';
@@ -12,6 +12,7 @@ import { Logger } from '@spectacular/utils';
 import { DataHandler } from '@vincjo/datatables';
 import { GraphQLError } from 'graphql';
 import { Trash2 } from 'lucide-svelte';
+import type { MouseEventHandler } from 'svelte/elements';
 
 // Variables
 const log = new Logger('profile:pat:browser');
@@ -19,7 +20,6 @@ const toastStore = getToastStore();
 const nhost = getNhostClient();
 let message: App.Superforms.Message | undefined;
 const errors: string[] = [];
-let copied: boolean[] = [];
 
 export let user: PersonalAccessTokensFragment;
 $: data = fragment(
@@ -58,7 +58,12 @@ const deletePersonalAccessToken = graphql(`
     }
   `);
 
-const handleDelete = async (id: string, name: string) => {
+const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
+  const { id, name } = event.currentTarget.dataset;
+  if (!id || !name) {
+    log.error('Misconfiguration: did you mess adding `data-id/data-name` attributes?');
+    return;
+  }
   // before
   isDeleting = true;
   // check if elevate is needed
@@ -163,25 +168,15 @@ const handleDelete = async (id: string, name: string) => {
           {:else}
             <tr>
               <td>{token.name}</td>
-              <td>{token.id}
-                <button
-                class="btn btn-sm variant-filled ml-2"
-                use:clipboard={token.id}
-                on:click={() => {
-                          copied[i] = true;
-                            setTimeout(() => {
-                              copied[i] = false;
-                            }, 1000);
-                          }}
-                >{copied[i] ? 'copied 👍' : 'copy'}</button>
-              </td>
-              <td><DateTime time={token.createdAt}/></td>
-              <td><DateTime time={token.expiresAt}/></td>
+              <td><DateTime distance time={token.createdAt}/></td>
+              <td><DateTime distance time={token.expiresAt}/></td>
               <td>
                 <button
                 type="button"
                 class="btn-icon btn-icon-sm variant-filled-error"
-                on:click={() => {handleDelete(token.id, token.name) }}
+                data-id={token.id}
+                data-name={token.name}
+                on:click|stopPropagation|capture={handleDelete}
                 disabled={isDeleting}
                 >
                   <Trash2 />

@@ -31,7 +31,7 @@ $: ({ SearchPolicies } = data);
 
 <section class="space-y-4">
   <DebugShell label="table-data">
-    <SuperDebug label="table-data" data={$SearchPolicies} collapsible={true}  display={true} />
+    <SuperDebug label="table-data" data={$SearchPolicies} />
   </DebugShell>
 
   {#if $SearchPolicies.errors}

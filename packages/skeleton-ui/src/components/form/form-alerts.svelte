@@ -18,10 +18,9 @@ export let errors: string[] | undefined;
     <!-- Icon -->
     <!-- <AlertTriangle /> -->
     <!-- Message -->
-    <div class="alert-message">
-      {#if message}
+    <div class="alert-message flex items-center">
         <p class="font-medium">{message.message}</p>
-      {/if}
+        <slot name="message" />
     </div>
     <!-- Actions -->
     <!-- <div class="alert-actions">
@@ -41,5 +40,6 @@ export let errors: string[] | undefined;
         {/each}
       </ul>
     </div>
+    <slot name="errors" />
   </aside>
 {/if}
