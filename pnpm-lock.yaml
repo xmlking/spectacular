@@ -60,8 +60,8 @@ importers:
   apps/console:
     optionalDependencies:
       '@playwright/test':
-        specifier: 1.46.0
-        version: 1.46.0
+        specifier: 1.46.1
+        version: 1.46.1
       '@vitest/ui':
         specifier: 2.0.5
         version: 2.0.5(vitest@2.0.5)
@@ -305,8 +305,8 @@ importers:
         version: 0.6.0
     optionalDependencies:
       '@playwright/test':
-        specifier: 1.46.0
-        version: 1.46.0
+        specifier: 1.46.1
+        version: 1.46.1
       '@vitest/ui':
         specifier: 2.0.5
         version: 2.0.5(vitest@2.0.5)
@@ -534,8 +534,8 @@ importers:
   apps/console-sc:
     optionalDependencies:
       '@playwright/test':
-        specifier: 1.46.0
-        version: 1.46.0
+        specifier: 1.46.1
+        version: 1.46.1
       '@vitest/ui':
         specifier: 2.0.5
         version: 2.0.5(vitest@2.0.5)
@@ -722,8 +722,8 @@ importers:
   apps/playground:
     optionalDependencies:
       '@playwright/test':
-        specifier: 1.46.0
-        version: 1.46.0
+        specifier: 1.46.1
+        version: 1.46.1
       '@vitest/ui':
         specifier: 2.0.5
         version: 2.0.5(vitest@2.0.5)
@@ -3383,9 +3383,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.2':
     resolution: {integrity: sha512-T9HCQO30Sq6L8tXQfdJI2CNMeNQxtMepJyoBYgK5QEN2LuIUqaoTfsZ2GryAqwFdAEj5FSM5Kdnf7f6shFqBHw==}
@@ -3770,8 +3772,8 @@ packages:
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
-  '@playwright/test@1.46.0':
-    resolution: {integrity: sha512-/QYft5VArOrGRP5pgkrfKksqsKA6CEFyGQ/gjNe6q0y4tZ1aaPfq4gIjudr1s3D+pXyrPRdsy4opKDrjBabE5w==}
+  '@playwright/test@1.46.1':
+    resolution: {integrity: sha512-Fq6SwLujA/DOIvNC2EL/SojJnkKf/rAwJ//APpJJHRyMi1PdKrY3Az+4XNQ51N4RTbItbIByQ0jgd1tayq1aeA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -8104,13 +8106,13 @@ packages:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
 
-  playwright-core@1.46.0:
-    resolution: {integrity: sha512-9Y/d5UIwuJk8t3+lhmMSAJyNP1BUC/DqP3cQJDQQL/oWqAiuPTLgy7Q5dzglmTLwcBRdetzgNM/gni7ckfTr6A==}
+  playwright-core@1.46.1:
+    resolution: {integrity: sha512-h9LqIQaAv+CYvWzsZ+h3RsrqCStkBHlgo6/TJlFst3cOTlLghBQlJwPOZKQJTKNaD3QIB7aAVQ+gfWbN3NXB7A==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.46.0:
-    resolution: {integrity: sha512-XYJ5WvfefWONh1uPAUAi0H2xXV5S3vrtcnXe6uAOgdGi3aSpqOSXX08IAjXW34xitfuOJsvXU5anXZxPSEQiJw==}
+  playwright@1.46.1:
+    resolution: {integrity: sha512-oPcr1yqoXLCkgKtD5eNUPLiN40rYEM39odNpIb6VE6S7/15gJmA1NzVv6zJYusV0e7tzvkU/utBFNa/Kpxmwng==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -13375,9 +13377,9 @@ snapshots:
 
   '@pkgr/core@0.1.1': {}
 
-  '@playwright/test@1.46.0':
+  '@playwright/test@1.46.1':
     dependencies:
-      playwright: 1.46.0
+      playwright: 1.46.1
     optional: true
 
   '@polka/url@1.0.0-next.25': {}
@@ -18614,12 +18616,12 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
-  playwright-core@1.46.0:
+  playwright-core@1.46.1:
     optional: true
 
-  playwright@1.46.0:
+  playwright@1.46.1:
     dependencies:
-      playwright-core: 1.46.0
+      playwright-core: 1.46.1
     optionalDependencies:
       fsevents: 2.3.2
     optional: true
