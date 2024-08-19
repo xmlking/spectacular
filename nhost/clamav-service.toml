@@ -3,9 +3,13 @@ name = 'clamav-service'
 [image]
 image = 'nhost/clamav:0.1.2'
 
+[[environment]]
+name="ENV"
+value="prod"
+
 [[ports]]
+type="http"
 port = 3310
-type = 'http'
 publish = true
 
 [resources]

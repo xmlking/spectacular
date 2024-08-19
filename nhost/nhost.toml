@@ -14,7 +14,7 @@ webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 
 [[hasura.jwtSecrets]]
 type = 'HS256'
-key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET_KEY }}'
+key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
 
 [hasura.settings]
 corsDomain = ['*']
@@ -47,7 +47,7 @@ maxDepthQueries = 4
 version = 20
 
 [auth]
-version = '0.33.0-beta2'
+version = '0.33.0-beta3'
 
 [auth.resources]
 replicas = 1

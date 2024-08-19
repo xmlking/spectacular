@@ -16,6 +16,15 @@ TODO
 
 ## Datagem
 
+## TODO
+
+- [Smart Datetime Picker](https://dub.co/blog/smart-datetime-picker) with [Chrono](https://git.new/chrono)
+- [midday-ai](https://github.com/midday-ai/midday) for smart filters idea.
+
 ## Ref
 
 - <https://github.com/appwrite/console/blob/main/src/lib/commandCenter/panels/ai.svelte>
+- <https://dev.to/ptvty/next-level-web-applications-with-on-device-generative-ai-a-look-at-google-chromes-built-in-gemini-nano-llm-4bng>
+- <https://medium.com/google-cloud/deep-dive-into-function-calling-in-gemini-b62e2618e3a7>
+- <https://github.com/marketplace/models>
+- <https://github.com/jeasonstudio/chrome-ai>
