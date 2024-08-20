@@ -103,7 +103,7 @@ nhost run config-deploy --config ./nhost/console-webapp.toml --service-id consol
 #### Tag and push image to nhost
 
 ```shell
-docker tag ghcr.io/threatmatic/cybernetics/dashboard:0.4.4 registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912:0.4.4
+docker tag ghcr.io/xmlking/spectacular/console:0.4.2 registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912:0.4.2
 docker push registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912:0.4.4
 ```
 
