@@ -1,0 +1,122 @@
+name="console"
+
+[image]
+image = "ghcr.io/xmlking/spectacular/console:0.4.2"
+# image="registry.eu-central-1.nhost.run/b719c4a4-6fb2-4feb-8220-c7f01ef5bfe8:0.1.1"
+
+[[environment]]
+NAME = "ORIGIN"
+VALUE = "http://localhost:3000"
+[[environment]]
+NAME = "NODE_ENV"
+VALUE = "production"
+[[environment]]
+NAME = "VERCEL_ENV"
+VALUE = "production"
+[[environment]]
+NAME = "CACHE_TTL"
+VALUE = '6000'
+[[environment]]
+name = 'PUBLIC_DEFAULT_ORGANIZATION'
+value = 'chinthagunta'
+[[environment]]
+name = 'PUBLIC_GRAPHQL_ENDPOINT'
+value = 'https://local.graphql.nhost.run/v1/graphql'
+[[environment]]
+name = 'PUBLIC_TERMS_PRIVACY_COMPANY'
+value = 'Your Company'
+[[environment]]
+name = 'PUBLIC_TERMS_PRIVACY_EFFECTIVE_DATE'
+value = 'January 1, 2024'
+[[environment]]
+name = 'PUBLIC_TERMS_PRIVACY_WEBSITE'
+value = 'yourdomain.com'
+[[environment]]
+name = 'PUBLIC_TERMS_PRIVACY_CONTACT_EMAIL'
+value = 'yourname@email.com'
+[[environment]]
+name = 'PUBLIC_TERMS_PRIVACY_APP_NAME'
+value =  'Spectacular'
+[[environment]]
+name = 'PUBLIC_TERMS_PRIVACY_APP_PRICING_AND_SUBSCRIPTIONS'
+value =  '[Details about the pricing, subscription model, refund policy]'
+[[environment]]
+name = 'PUBLIC_TERMS_PRIVACY_COUNTRY'
+value =  'United States'
+[[environment]]
+name = 'HASURA_GRAPHQL_ENDPOINT'
+value =  'https://local.graphql.nhost.run'
+[[environment]]
+name = 'HASURA_GRAPHQL_ADMIN_SECRET'
+value =   '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
+[[environment]]
+name = 'HASURA_GRAPHQL_JWT_SECRET_KEY'
+value =   '{{ secrets.HASURA_GRAPHQL_JWT_SECRET_KEY }}'
+[[environment]]
+name = 'RATE_LIMIT_SECRET'
+value =   '84568a0e3c25b3eaba088d0618d7d03fd6f64182c13ebd01f6671bbf59071284a9ef78a144ea2dd2cfe7ad37e3bf7bce8420d79078c7f3d85457e503aeef4c97'
+[[environment]]
+name = 'FEATURE_ENABLE_PASSWORD_LOGIN'
+value =   'true'
+[[environment]]
+name = 'PUBLIC_NHOST_SUBDOMAIN'
+value =   'local'
+[[environment]]
+name = 'PUBLIC_NHOST_REGION'
+value =   ''
+[[environment]]
+name = 'NHOST_HASURA_URL'
+value =   'https://local.hasura.nhost.run/console'
+[[environment]]
+name = 'NHOST_AUTH_URL'
+value =   'https://local.auth.nhost.run/v1'
+[[environment]]
+name = 'NHOST_GRAPHQL_URL'
+value =   'https://local.graphql.nhost.run/v1/graphql'
+[[environment]]
+name = 'NHOST_STORAGE_URL'
+value =   'https://local.storage.nhost.run/v1'
+[[environment]]
+name = 'NHOST_FUNCTIONS_URL'
+value =   'https://local.functions.nhost.run/v1'
+[[environment]]
+name = 'PUBLIC_NHOST_AUTH_URL'
+value =   'https://local.auth.nhost.run/v1'
+[[environment]]
+name = 'PUBLIC_NHOST_GRAPHQL_URL'
+value =   'https://local.graphql.nhost.run/v1/graphql'
+[[environment]]
+name = 'PUBLIC_NHOST_STORAGE_URL'
+value =   'https://local.storage.nhost.run/v1'
+[[environment]]
+name = 'PUBLIC_NHOST_FUNCTIONS_URL'
+value =   'https://local.functions.nhost.run/v1'
+[[environment]]
+name = 'FLAGS_SECRET'
+value =   '0S1qdVe4NgUNwPyi-usmtYzuoLck76d6hqgZBMkhYQo'
+[[environment]]
+name = 'OPENAI_API_KEY'
+value =   '{{ secrets.OPENAI_API_KEY }}'
+[[environment]]
+name = 'OPENAI_ORG_ID'
+value =   '{{ secrets.OPENAI_ORG_ID }}'
+[[environment]]
+name = 'OPENAI_PROJECT_ID'
+value =   '{{ secrets.OPENAI_PROJECT_ID }}'
+
+[[ports]]
+type="http"
+port = 3000
+publish = true
+
+[resources]
+replicas = 1
+
+[resources.compute]
+cpu = 62
+memory = 128
+
+# [[resources.storage]]
+# name="data"
+# path="/var/lib/data"
+# capacity=1

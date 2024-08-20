@@ -91,7 +91,7 @@ nhost run env --config nhost/nginx-service.toml --overlay-name local > .env1
 # run service locally
 # nhost up --run-service path/to/run-service.toml[:overlay_name]
 nhost up --run-service ./nhost/nginx-service.toml:local
-nhost up --run-service ./nhost/console-wevapp.toml:local
+nhost up --run-service ./nhost/console-webapp.toml:local
 ```
 
 ## Reference
