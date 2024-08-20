@@ -37,7 +37,12 @@ nhost sw upgrade
 
 ```shell
 # nhost login
+# you can also login with your regular email/password credentials 
 nhost login
+# if you prefered, you can also login with PAT token generated from [nhost](https://app.nhost.io/).
+nhost login --pat $PAT
+# Configuring docker to use Nhost’s registry
+nhost docker-credentials configure
 # Shows an example config file
 nhost config example
 # validate configuration
@@ -50,8 +55,7 @@ nhost config show --subdomain zyjloswljirxqtsdlnnf
 # (DANGER) 
 # Pull current versions of ./nhost/nhost.toml and ./secrets used in the cloud environment.
 nhost config pull
-# Configuring docker to use Nhost’s registry
-nhost docker-credentials configure
+
 ```
 
 Secrets management in cloud
@@ -92,6 +96,15 @@ nhost run env --config nhost/nginx-service.toml --overlay-name local > .env1
 # nhost up --run-service path/to/run-service.toml[:overlay_name]
 nhost up --run-service ./nhost/nginx-service.toml:local
 nhost up --run-service ./nhost/console-webapp.toml:local
+#  deploy to nhost
+nhost run config-deploy --config ./nhost/console-webapp.toml --service-id console
+```
+
+#### Tag and push image to nhost
+
+```shell
+docker tag ghcr.io/threatmatic/cybernetics/dashboard:0.4.4 registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912:0.4.4
+docker push registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912:0.4.4
 ```
 
 ## Reference

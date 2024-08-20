@@ -50,8 +50,8 @@ value =  'https://local.graphql.nhost.run'
 name = 'HASURA_GRAPHQL_ADMIN_SECRET'
 value =   '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
 [[environment]]
-name = 'HASURA_GRAPHQL_JWT_SECRET_KEY'
-value =   '{{ secrets.HASURA_GRAPHQL_JWT_SECRET_KEY }}'
+name = 'HASURA_GRAPHQL_JWT_SECRET'
+value =   '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
 [[environment]]
 name = 'RATE_LIMIT_SECRET'
 value =   '84568a0e3c25b3eaba088d0618d7d03fd6f64182c13ebd01f6671bbf59071284a9ef78a144ea2dd2cfe7ad37e3bf7bce8420d79078c7f3d85457e503aeef4c97'
