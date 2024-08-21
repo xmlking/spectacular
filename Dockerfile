@@ -45,10 +45,6 @@ COPY .gitignore .gitignore
 COPY scripts scripts
 COPY .env.example .env.example
 COPY .secrets.example .secrets.example
-COPY apps/console/.env.example apps/console/.env.example
-COPY apps/console/.secrets.example apps/console/.secrets.example
-COPY apps/console-fb/.env.example apps/console-fb/.env.example
-COPY apps/console-fb/.secrets.example apps/console-fb/.secrets.example
 
 COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
