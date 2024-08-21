@@ -23,6 +23,14 @@
     ]
   },
   {
+    "op": "add",
+    "path": "/global/environment/2",
+    "value": {
+      "name": "TEST_ENV",
+      "value": "mytest"
+    }
+  },
+  {
     "op": "replace",
     "path": "/global/environment/0/value",
     "value": "Spectacular"
@@ -34,23 +42,18 @@
   },
   {
     "op": "replace",
-    "path": "/postgres/version",
-    "value": "14.11-20240718-1"
-  },
-  {
-    "op": "replace",
     "path": "/hasura/settings/devMode",
-    "value": "false"
+    "value": false
   },
   {
     "op": "replace",
     "path": "/graphql/security/forbidAminSecret",
-    "value": "true"
+    "value": true
   },
   {
     "op": "replace",
     "path": "/auth/session/accessToken/expiresIn",
-    "value": "3600"
+    "value": 3600
   },
   {
     "op": "remove",
