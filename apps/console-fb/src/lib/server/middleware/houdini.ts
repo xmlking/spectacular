@@ -16,7 +16,7 @@ export const houdini = (async ({ event, resolve }) => {
   const roles = session?.roles;
 
   // FIXME: always return null with @auth/core/jwt's getToken
-  // const token = await getToken({ secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY, salt: cookieName, event.request });
+  // const token = await getToken({ secret: envPri.HASURA_GRAPHQL_JWT_SECRET, salt: cookieName, event.request });
   const token = await getSignedToken(cookies);
   log.debug('setting token and roles......', token, roles);
   if (token) setSession(event, { token, roles });

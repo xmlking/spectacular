@@ -20,7 +20,7 @@ spec:
             - name: HASURA_GRAPHQL_DATABASE_URL
               value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_SERVICE_NAME):5432/$(POSTGRES_DB)
             - name: HASURA_GRAPHQL_JWT_SECRET
-              value: '{ "type": "HS256", "key": "$(HASURA_GRAPHQL_JWT_SECRET_KEY)"}'
+              value: '{ "type": "HS256", "key": "$(HASURA_GRAPHQL_JWT_SECRET)"}'
           ports:
             - name: http
               containerPort: 8080

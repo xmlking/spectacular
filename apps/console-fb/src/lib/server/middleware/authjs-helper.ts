@@ -10,13 +10,13 @@ import { SignJWT } from 'jose';
 export const useSecureCookie = envPub.PUBLIC_BASE_URL?.startsWith('https://') ?? envPri.VERCEL;
 export const domain = new URL(envPub.PUBLIC_BASE_URL).hostname.replace(/^[^.]+\./g, '');
 export const cookieName = useSecureCookie ? '__Secure-authjs.session-token' : 'authjs.session-token';
-const secret = new TextEncoder().encode(envPri.HASURA_GRAPHQL_JWT_SECRET_KEY);
+const secret = new TextEncoder().encode(envPri.HASURA_GRAPHQL_JWT_SECRET);
 const alg = 'HS256';
 
 export async function getToken(cookies: Cookies, raw = false) {
   const token = cookies.get(cookieName);
   if (raw) return token;
-  return await decode({ salt: cookieName, secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY, token });
+  return await decode({ salt: cookieName, secret: envPri.HASURA_GRAPHQL_JWT_SECRET, token });
 }
 
 export async function getSignedToken(cookies: Cookies) {

@@ -126,6 +126,20 @@ Optionally apply all seed files
 hasura seed apply --database-name default --endpoint https://hasura.traefik.me --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 ```
 
+#### With nhost
+
+| Service   | URL                                                 |
+| --------- | --------------------------------------------------- |
+| Postgres  | <postgres://postgres:postgres@localhost:5432/local> |
+| Hasura    | <https://local.hasura.local.nhost.run/console/>     |
+| GraphQL   | <https://local.hasura.local.nhost.run/v1/version>   |
+| Auth      | <https://local.auth.local.nhost.run/v1/version>     |
+| Storage   | <https://local.storage.local.nhost.run/v1/version>  |
+| Mailhog   | <https://local.mailhog.local.nhost.run>             |
+| Dashboard | <https://local.dashboard.local.nhost.run>           |
+| Functions | <<https://local.functions.local.nhost.run>          |
+| WebApp    | <<https://local.webapp.local.nhost.run>             |
+
 ### Frontend
 
 ```bash

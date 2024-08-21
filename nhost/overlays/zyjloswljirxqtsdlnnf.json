@@ -38,6 +38,25 @@
     "value": "14.11-20240718-1"
   },
   {
+    "op": "replace",
+    "path": "/hasura/settings/devMode",
+    "value": "false"
+  },
+  {
+    "op": "replace",
+    "path": "/graphql/security/forbidAminSecret",
+    "value": "true"
+  },
+  {
+    "op": "replace",
+    "path": "/auth/session/accessToken/expiresIn",
+    "value": "3600"
+  },
+  {
+    "op": "remove",
+    "path": "/auth/user/emailDomains/allowed"
+  },
+  {
     "op": "remove",
     "path": "/provider/smtp"
   },

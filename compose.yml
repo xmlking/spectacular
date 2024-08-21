@@ -95,7 +95,7 @@ services:
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=allow
       # HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres?sslmode=allow
-      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET}"}'
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
       HASURA_GRAPHQL_LOG_LEVEL: warn
@@ -142,7 +142,7 @@ services:
   # e.g. ./infra/base/mailpit/certs/ca.pem:/etc/ssl/certs/ca-certificates.crt
   ###########################################################################
   mailpit:
-    image: axllent/mailpit:v1.19.0
+    image: axllent/mailpit:v1.20.2
     hostname: mailpit
     container_name: mailpit
     restart: unless-stopped
@@ -189,7 +189,7 @@ services:
   # When SMTP host bane == "mailhog" || name == "localhost" || name == "127.0.0.1" || name == "::1", non-tls is allowed
   ###########################################################################
   auth:
-    image: nhost/hasura-auth:0.33.0-beta2
+    image: nhost/hasura-auth:0.33.0-beta3
     hostname: auth
     container_name: auth
     restart: unless-stopped
@@ -256,7 +256,7 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       POSTGRES_MIGRATIONS_CONNECTION: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/postgres
       HASURA_GRAPHQL_GRAPHQL_URL: http://graphql:8080/v1/graphql
-      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET_KEY}"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "${HASURA_GRAPHQL_JWT_SECRET}"}'
     expose:
       - 4000
     healthcheck:
@@ -292,7 +292,7 @@ services:
   # minio
   ###########################################################################
   minio:
-    image: bitnami/minio:2024.8.3
+    image: bitnami/minio:2024.8.17
     hostname: minio
     container_name: minio
     restart: unless-stopped
@@ -382,7 +382,7 @@ services:
   # dashboard
   ###########################################################################
   dashboard:
-    image: nhost/dashboard:1.24.1
+    image: nhost/dashboard:1.25.0
     hostname: dashboard
     container_name: dashboard
     restart: unless-stopped
@@ -419,7 +419,7 @@ services:
   # configserver
   ###########################################################################
   configserver:
-    image: nhost/cli:v1.21.0
+    image: nhost/cli:v1.22.1
     hostname: configserver
     container_name: configserver
     restart: unless-stopped
@@ -502,7 +502,7 @@ services:
       PUBLIC_TERMS_PRIVACY_COUNTRY: 'United States'
       HASURA_GRAPHQL_ENDPOINT: https://hasura${BASE_HOSTNAME}
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
-      HASURA_GRAPHQL_JWT_SECRET_KEY: ${HASURA_GRAPHQL_JWT_SECRET_KEY}
+      HASURA_GRAPHQL_JWT_SECRET: ${HASURA_GRAPHQL_JWT_SECRET}
       RATE_LIMIT_SECRET: ${RATE_LIMIT_SECRET}
       FEATURE_ENABLE_PASSWORD_LOGIN: ${FEATURE_ENABLE_PASSWORD_LOGIN}
       FEATURE_ENABLE_AZURE_LOGIN: ${FEATURE_ENABLE_AZURE_LOGIN}

@@ -21,25 +21,27 @@ corsDomain = ['*']
 devMode = true
 enableAllowList = false
 enableConsole = true
-enableRemoteSchemaPermissions = false
+enableRemoteSchemaPermissions = true
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
-liveQueriesMultiplexedRefetchInterval = 3000
+liveQueriesMultiplexedRefetchInterval = 1000
+stringifyNumericTypes = false
 
 [hasura.logs]
 level = 'warn'
 
 [hasura.events]
-httpPoolSize = 100
+httpPoolSize = 10
 
 [hasura.resources]
 replicas = 1
 
 [hasura.resources.compute]
 cpu = 500
-memory = 1536
+memory = 1024
 
 [graphql]
 [graphql.security]
+forbidAminSecret = true
 maxDepthQueries = 4
 
 [functions]
@@ -54,7 +56,7 @@ replicas = 1
 
 [auth.resources.compute]
 cpu = 250
-memory = 256
+memory = 512
 
 [auth.elevatedPrivileges]
 mode = 'required'
@@ -83,8 +85,11 @@ rating = 'g'
 
 [auth.user.email]
 allowed = ['sumo@demo.com','manager@chinthagunta.com','supervisor@chinthagunta.com','user1@chinthagunta.com','user2@chinthagunta.com']
+blocked = ['bad@example.com']
+
 [auth.user.emailDomains]
-allowed = ['gmail.com']
+allowed = ['gmail.com', 'outlook.com']
+blocked = ['example.org']
 
 [auth.session]
 [auth.session.accessToken]
@@ -142,6 +147,7 @@ enabled = false
 [auth.method.oauth.github]
 enabled = true
 clientId = '{{ secrets.AUTH_PROVIDER_GITHUB_CLIENT_ID }}'
+scope = ['openid', 'email', 'profile']
 clientSecret = '{{ secrets.AUTH_PROVIDER_GITHUB_CLIENT_SECRET }}'
 
 [auth.method.oauth.gitlab]
@@ -150,6 +156,7 @@ enabled = false
 [auth.method.oauth.google]
 enabled = true
 clientId = '{{ secrets.AUTH_PROVIDER_GOOGLE_CLIENT_ID }}'
+scope = ['openid', 'email', 'profile']
 clientSecret = '{{ secrets.AUTH_PROVIDER_GOOGLE_CLIENT_SECRET }}'
 
 [auth.method.oauth.linkedin]
@@ -192,16 +199,20 @@ version = '16.2-20240718-1'
 
 [postgres.resources]
 replicas = 1
+enablePublicAccess = true
 
 [postgres.resources.compute]
 cpu = 1000
 memory = 2048
 
+[postgres.resources.storage]
+capacity = 20
+
 [postgres.settings]
 maxConnections = 100
 walLevel = 'logical'
-maxWalSenders = 1
-maxReplicationSlots = 1
+maxWalSenders = 10
+maxReplicationSlots = 10
 
 [provider]
 [provider.smtp]
@@ -213,6 +224,12 @@ port = 1025
 secure = false
 method = '{{ secrets.AUTH_SMTP_AUTH_METHOD }}'
 
+# [provider.sms]
+# provider = 'twilio'
+# accountSid = 'twilioAccountSid'
+# authToken = 'twilioAuthToken'
+# messagingServiceId = 'twilioMessagingServiceId'
+
 [storage]
 version = '0.6.1'
 
@@ -220,8 +237,11 @@ version = '0.6.1'
 replicas = 1
 
 [storage.resources.compute]
-cpu = 250
-memory = 256
+cpu = 500
+memory = 1024
+
+# [storage.antivirus]
+# server = 'tcp://run-clamav:3310'
 
 [ai]
 version = '0.5.2'
@@ -229,11 +249,11 @@ webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
 
 [ai.resources]
 [ai.resources.compute]
-cpu = 187
-memory = 384
+cpu = 256
+memory = 512
 
 [ai.openai]
-organization = 'my-org'
+organization = '{{ secrets.OPENAI_ORG_ID }}'
 apiKey = '{{ secrets.OPENAI_API_KEY }}'
 
 [ai.autoEmbeddings]
@@ -242,3 +262,4 @@ synchPeriodMinutes = 10
 [observability]
 [observability.grafana]
 adminPassword = '{{ secrets.GRAFANA_ADMIN_PASSWORD }}'
+

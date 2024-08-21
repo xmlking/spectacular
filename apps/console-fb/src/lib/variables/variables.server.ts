@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 const schema = z.object({
   // Add your private env variables here
-  HASURA_GRAPHQL_JWT_SECRET_KEY: z.string().regex(/^\S*$/, {
+  HASURA_GRAPHQL_JWT_SECRET: z.string().regex(/^\S*$/, {
     message: 'No spaces allowed',
   }),
   VERCEL: z.coerce.boolean(),

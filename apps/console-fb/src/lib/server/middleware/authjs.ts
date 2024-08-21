@@ -31,7 +31,7 @@ export const authHookConfig: SvelteKitAuthConfig = {
   useSecureCookies: true,
   trustHost: true,
   basePath: '/auth',
-  secret: envPri.HASURA_GRAPHQL_JWT_SECRET_KEY,
+  secret: envPri.HASURA_GRAPHQL_JWT_SECRET,
   redirectProxyUrl,
   // adapter: HasuraAdapter({
   // 	endpoint: envPri.PUBLIC_GRAPHQL_ENDPOINT,

@@ -7,6 +7,7 @@ Nhost is an open source Firebase alternative with GraphQL, built with the follow
 - Authentication: [Hasura Auth](https://github.com/nhost/hasura-auth/)
 - Storage: [Hasura Storage](https://github.com/nhost/hasura-storage)
 - Serverless Functions: Node.js (JavaScript and TypeScript)
+- Nhost Run: run any containerized workloads
 
 ![Nhost architecture](https://raw.githubusercontent.com/nhost/nhost/main/assets/nhost-diagram.png)
 
@@ -31,9 +32,17 @@ nhost sw upgrade
 
 ### Usage
 
+#### Environment Variables
+
+- **NHOST_SUBDOMAIN** : `subdomain` in nhost cloud
+- **NHOST_REGION** : `region` in nhost cloud. e.g, `us-west-2`
+- **NHOST_LOCAL_SUBDOMAIN** : `subdomain` in local-dev or self-host environment
+- **NHOST_PROJECT_NAME** : project name within nhost workspace
+
 #### Config
 
-> `--subdomain` defaults to `$NHOST_SUBDOMAIN` envelopment variable, if not spplied on command line
+> `--subdomain` defaults to `$NHOST_SUBDOMAIN` envelopment variable, if not spplied on command line.  
+> `--local-subdomain` defaults to `$NHOST_LOCAL_SUBDOMAIN` envelopment variable, if not spplied on command line.
 
 ```shell
 # nhost login
@@ -71,10 +80,16 @@ nhost secrets list --subdomain zyjloswljirxqtsdlnnf
 #### Run
 
 ```shell
+# start nhost services
 nhost up
+# or start with applying seed data
 nhost up --apply-seeds
-# You can also use the Nhost Dashboard:
-nhost up --ui nhost
+# or start nhost services bind with your device public IP. 
+nhost --local-subdomain 192-168-1-108 up # or
+NHOST_LOCAL_SUBDOMAIN=192-168-1-108 nhost up 
+# start nhost services and one or more `Run` containers
+nhost up --run-service ./nhost/console-webapp.toml:local
+# shutdown nhost services
 nhost down
 # danger: delete docker volumes. Use it to reset postgres/hasura
 nhost down --volumes

@@ -8,7 +8,7 @@ export const prerender = false;
 export async function GET({ request, fetch }) {
   const token = await getToken({
     req: request,
-    secret: dynPriEnv.HASURA_GRAPHQL_JWT_SECRET_KEY,
+    secret: dynPriEnv.HASURA_GRAPHQL_JWT_SECRET,
     salt: '',
     raw: true,
   });
