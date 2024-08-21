@@ -9,7 +9,7 @@ import GotoTop from '$lib/components/layout/go-to-top.svelte';
 import Header from '$lib/components/layout/header.svelte';
 import Sidebar from '$lib/components/layout/sidebar.svelte';
 import { i18n } from '$lib/i18n';
-import Search from '$lib/modals/search.svelte';
+import Search from '$lib/models/search.svelte';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { setLoadingState } from '$lib/stores/loading';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
