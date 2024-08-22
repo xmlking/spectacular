@@ -30,7 +30,7 @@ sudo nhost sw upgrade
 nhost sw upgrade
 ```
 
-### Usage
+### Configuration
 
 #### Environment Variables
 
@@ -38,8 +38,6 @@ nhost sw upgrade
 - **NHOST_REGION** : `region` in nhost cloud. e.g, `us-west-2`
 - **NHOST_LOCAL_SUBDOMAIN** : `subdomain` in local-dev or self-host environment
 - **NHOST_PROJECT_NAME** : project name within nhost workspace
-
-#### Config
 
 > `--subdomain` defaults to `$NHOST_SUBDOMAIN` envelopment variable, if not spplied on command line.  
 > `--local-subdomain` defaults to `$NHOST_LOCAL_SUBDOMAIN` envelopment variable, if not spplied on command line.
@@ -67,7 +65,7 @@ nhost config pull
 
 ```
 
-Secrets management in cloud
+#### Secrets Management
 
 ```shell
 nhost secrets list --subdomain zyjloswljirxqtsdlnnf
@@ -77,7 +75,9 @@ nhost secrets list --subdomain zyjloswljirxqtsdlnnf
 # nhost secrets delete --subdomain zyjloswljirxqtsdlnnf NHOST_WEBHOOK_SECRET
 ```
 
-#### Run
+### Start
+
+Starting and Stoping local nhost stack
 
 ```shell
 # start nhost services
@@ -95,10 +95,19 @@ nhost down
 nhost down --volumes
 ```
 
-#### nhost Run
+### nhost Run
 
 nhost `Run` allow running custom containers along with standared nhost stack.
 [Local development](https://docs.nhost.io/guides/run/local-development)
+
+Tag and push images to nhost registry:
+
+```shell
+# set the SERVICE_ID
+SERVICE_ID="2503b290-249c-42f5-b89e-fd9a98980e22"
+docker tag ghcr.io/xmlking/spectacular/console:0.4.2 registry.us-west-2.nhost.run/$SERVICE_ID:0.4.2
+docker push registry.us-west-2.nhost.run/$SERVICE_ID:0.4.4
+```
 
 ```shell
 # show config for given overlay
@@ -111,15 +120,29 @@ nhost run env --config nhost/nginx-service.toml --overlay-name local > .env1
 # nhost up --run-service path/to/run-service.toml[:overlay_name]
 nhost up --run-service ./nhost/nginx-service.toml:local
 nhost up --run-service ./nhost/console-webapp.toml:local
-#  deploy to nhost
-nhost run config-deploy --config ./nhost/console-webapp.toml --service-id console
 ```
 
-#### Tag and push image to nhost
+#### Deploy Run
+
+Deploy to nhost cloud
 
 ```shell
-docker tag ghcr.io/xmlking/spectacular/console:0.4.2 registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912:0.4.2
-docker push registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912:0.4.4
+# set the SERVICE_ID
+SERVICE_ID="2503b290-249c-42f5-b89e-fd9a98980e22"
+nhost run config-deploy --config ./nhost/console-webapp.toml --service-id $SERVICE_ID
+```
+
+### Seeds
+
+> [!NOTE]
+> With the CLI, it is easy to extract data from an existing environment and generate a “seed” that can be shared and used to pre-populate any development environment as it initializes.
+
+```shell
+nhost dev hasura seed create some-initial-data \
+    --endpoint https://local.hasura.local.nhost.run \
+    --admin-secret nhost-admin-secret \
+    --database-name default \
+    --from-table animals
 ```
 
 ## Reference
@@ -127,3 +150,5 @@ docker push registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912:0.
 1. [configuration-overlays](https://docs.nhost.io/guides/cli/configuration-overlays)
 2. [nhost-cli commands](https://github.com/nhost/nhost.toml)
 3. [nhost-cli docs](https://github.com/nhost/nhost.toml/tree/main/docs)
+4. [nhost GitHub Actions](https://github.com/nhost-actions)
+5. [CLI & CI Deployments](https://docs.nhost.io/guides/run/cli-deployments)

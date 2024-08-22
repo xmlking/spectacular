@@ -244,7 +244,7 @@ memory = 1024
 # server = 'tcp://run-clamav:3310'
 
 [ai]
-version = '0.5.2'
+version = '0.6.1'
 webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
 
 [ai.resources]
