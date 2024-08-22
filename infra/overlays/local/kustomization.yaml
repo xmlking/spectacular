@@ -22,7 +22,7 @@ configMapGenerator:
   - name: env-vars-common
     behavior: merge
     literals:
-      - PUBLIC_GRAPHQL_ENDPOINT=https://hasura.traefik.me/v1/graphql
+      - PUBLIC_NHOST_GRAPHQL_URL=https://hasura.traefik.me/v1/graphql
       - AUTH_CLIENT_URL=https://console.traefik.me:5173
       - PUBLIC_NHOST_SUBDOMAIN=local
       - PUBLIC_NHOST_REGION=

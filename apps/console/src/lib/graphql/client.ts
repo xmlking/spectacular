@@ -7,7 +7,7 @@ import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacula
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
 
-const url = env.PUBLIC_GRAPHQL_ENDPOINT;
+const url = env.PUBLIC_NHOST_GRAPHQL_URL;
 const log = new Logger(browser ? 'houdini.browser.client' : 'houdini.server.client');
 
 // in order to verify that we send metadata, we need something that will log the metadata after

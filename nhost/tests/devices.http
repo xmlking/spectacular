@@ -1,5 +1,5 @@
 ###
-@graphqlEndpoint =  {{$dotenv PUBLIC_GRAPHQL_ENDPOINT}}
+@graphqlEndpoint =  {{$dotenv NHOST_GRAPHQL_URL}}
 @graphqlAdminToken = {{$dotenv HASURA_GRAPHQL_ADMIN_SECRET}}
 # set token without `''`
 @graphqlUserToken =

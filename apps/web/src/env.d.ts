@@ -3,9 +3,9 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-  readonly SITE_URL: string;
-  readonly PUBLIC_GRAPHQL_ENDPOINT: string;
-  // more env variables...
+	readonly SITE_URL: string;
+	readonly PUBLIC_NHOST_GRAPHQL_URL: string;
+	// more env variables...
 }
 
 interface ImportMeta {
