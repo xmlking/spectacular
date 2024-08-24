@@ -45,8 +45,8 @@ COPY .gitignore .gitignore
 COPY scripts scripts
 COPY .env.example .env.example
 COPY .secrets.example .secrets.example
-COPY .env.prod.example .env.prod.example
-COPY .secrets.prod.example .secrets.prod.example
+COPY .env.production.example .env.production.example
+COPY .secrets.production.example .secrets.production.example
 
 COPY --from=pruner /app/out/json/ .
 COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml

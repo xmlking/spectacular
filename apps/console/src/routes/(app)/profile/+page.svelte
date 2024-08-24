@@ -68,8 +68,8 @@ $: meta = {
     </section>
 
     <section class="space-y-4">
-      <h2 class="h2">Auth Providers</h2>
-      <p>Add or delete auth providers</p>
+      <h2 class="h2">Authentication Providers</h2>
+      <p>Connect/Disconnect Authentication Providers</p>
       <ConnectSocials {user} />
     </section>
 

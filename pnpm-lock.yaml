@@ -159,6 +159,9 @@ importers:
       '@vercel/flags':
         specifier: 2.6.0
         version: 2.6.0(@sveltejs/kit@2.5.24(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@22.4.2)))(svelte@4.2.18)(vite@5.4.2(@types/node@22.4.2)))(react@18.3.1)
+      '@vercel/speed-insights':
+        specifier: 1.0.12
+        version: 1.0.12(@sveltejs/kit@2.5.24(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@22.4.2)))(svelte@4.2.18)(vite@5.4.2(@types/node@22.4.2)))(react@18.3.1)(svelte@4.2.18)(vue@3.4.38(typescript@5.5.4))
       '@vercel/toolbar':
         specifier: 0.1.15
         version: 0.1.15(react@18.3.1)(vite@5.4.2(@types/node@22.4.2))
@@ -2947,6 +2950,29 @@ packages:
     resolution: {integrity: sha512-oySTdDSzUAFDXpsSLk9Q943o+/Yu/+TCFxnehpFQEf/3khi2stMpTHPVNwFdvZq/Z4Ky93lE+MGHpXCRpMkSCA==}
     engines: {node: '>=16'}
     hasBin: true
+
+  '@vercel/speed-insights@1.0.12':
+    resolution: {integrity: sha512-ZGQ+a7bcfWJD2VYEp2R1LHvRAMyyaFBYytZXsfnbOMkeOvzGNVxUL7aVUvisIrTZjXTSsxG45DKX7yiw6nq2Jw==}
+    peerDependencies:
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19
+      svelte: ^4
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
 
   '@vercel/toolbar@0.1.15':
     resolution: {integrity: sha512-YDwRdYM6ij5CbkZm9NgoO1H7uXPuoM5nnzoHYMAZtF0sJylhQ7JIgwLniW71V6RNCKCrJGS1B23BvrQQl8WyrQ==}
@@ -10317,6 +10343,13 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  '@vercel/speed-insights@1.0.12(@sveltejs/kit@2.5.24(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@22.4.2)))(svelte@4.2.18)(vite@5.4.2(@types/node@22.4.2)))(react@18.3.1)(svelte@4.2.18)(vue@3.4.38(typescript@5.5.4))':
+    optionalDependencies:
+      '@sveltejs/kit': 2.5.24(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.4.2(@types/node@22.4.2)))(svelte@4.2.18)(vite@5.4.2(@types/node@22.4.2))
+      react: 18.3.1
+      svelte: 4.2.18
+      vue: 3.4.38(typescript@5.5.4)
 
   '@vercel/toolbar@0.1.15(react@18.3.1)(vite@5.4.2(@types/node@22.4.2))':
     dependencies:

@@ -19,16 +19,16 @@ else
 	cp -n .secrets.example .secrets && echo 'Generated: .secrets, FIXIT'
 fi
 
-FILE=.env.prod
+FILE=.env.production
 if [[ -f "$FILE" || -n "$CI" ]]; then
     echo "'$FILE' exists."
 else
-	cp -n .env.prod.example .env.prod && echo 'Generated: .env.prod, FIXIT'
+	cp -n .env.production.example .env.production && echo 'Generated: .env.production, FIXIT'
 fi
 
-FILE=.secrets.prod
+FILE=.secrets.production
 if [[ -f "$FILE" || -n "$CI" ]]; then
     echo "'$FILE' exists."
 else
-	cp -n .secrets.prod.example .secrets.prod && echo 'Generated: .secrets.prod, FIXIT'
+	cp -n .secrets.production.example .secrets.production && echo 'Generated: .secrets.production, FIXIT'
 fi

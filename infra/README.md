@@ -22,7 +22,7 @@ A feature-complete Hasura stack on Kubernetes.
 
 ### Features
 
-- **Multiple environments** - Deploy to multiple environments (dev, test, prod etc.) and/or clusters with different configurations.
+- **Multiple environments** - Deploy to multiple environments (development, test, production etc.) and/or clusters with different configurations.
 - **Configuration and templating** - allows to use templating in nearly all places, making it easy to have dynamic configuration.
 - **Diffs and Dry-Runs** - Diffs and dry-runs allow you to always know what will happen and what actually happened.
 - **GitOps** - Use a GitOps workflow (Argo CD, Flux CD) for easy rollbacks

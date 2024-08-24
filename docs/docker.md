@@ -70,10 +70,10 @@ docker inspect --format "{{.Architecture}}" $DOCKER_IMAGE:$VERSION
 
 # run
 docker run -it --rm --platform linux/amd64 -p 3000:3000 \
--e NODE_ENV=production -e ORIGIN=http://localhost:3000 --env-file ./.env $DOCKER_IMAGE:$VERSION
+-e NODE_ENV=production --env-file ./.env $DOCKER_IMAGE:$VERSION
 
 docker run -it --rm --platform linux/arm64/v8 -p 3000:3000 \
--e NODE_ENV=production -e ORIGIN=http://localhost:3000 --env-file ./.env $DOCKER_IMAGE:$VERSION
+-e NODE_ENV=production --env-file ./.env $DOCKER_IMAGE:$VERSION
 ## (or)
 docker compose up
 
@@ -115,12 +115,12 @@ make boot
 make up
 ```
 
-### Prod
+### Production
 
-To run hasura stack locally with prod config
+To run hasura stack locally with production config
 
 ```shell
-export COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets,.env.prod,.secrets.prod
+export COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets,.env.production,.secrets.production
 docker compose -f compose-nonprod.yml up traefik
 docker compose -f compose-nonprod.yml up graphql
 docker compose -f compose-nonprod.yml up auth

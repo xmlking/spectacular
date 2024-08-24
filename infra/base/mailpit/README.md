@@ -7,7 +7,7 @@
 Generate `certs` to enable **TLS** transport for **Mailpit**, so that **hasura-auth** can use it for sending email securely.
 
 > [!NOTE]  
-> we use `mailpit` for local development only. for prod env, we should use any 3rd party managed SMTP relays.
+> we use `mailpit` for local development only. for production env, we should use any 3rd party managed SMTP relays.
 
 ### Prerequisites
 

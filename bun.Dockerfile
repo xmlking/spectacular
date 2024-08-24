@@ -46,7 +46,7 @@ RUN bun run build --filter=${SCOPE}...
 RUN ls -la  /app/apps/web
 
 ###################################################################
-# Stage 2: Run the app (prod)                                     #
+# Stage 2: Run the app (production)                                     #
 ###################################################################
 FROM base AS runner
 USER bun:bun

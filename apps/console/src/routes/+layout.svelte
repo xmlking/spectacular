@@ -20,6 +20,7 @@ import type { ModalComponent } from '@skeletonlabs/skeleton';
 import { AppShell } from '@skeletonlabs/skeleton';
 import { Logger, startsWith } from '@spectacular/utils';
 import { inject } from '@vercel/analytics';
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 import { mountVercelToolbar } from '@vercel/toolbar/vite';
 import { type ComponentEvents, onMount } from 'svelte';
 import { setupViewTransition } from 'sveltekit-view-transition';
@@ -45,9 +46,11 @@ const nhost = setNhostClient();
 
 // Handle Vercel Production Mode
 storeVercelProductionMode.set(data.vercelEnv === 'production');
-// Init Vercel Analytics
+// inject Vercel Analytics
 // if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
 inject({ mode: dev ? 'development' : 'production' });
+// inject Vercel Speed Insights
+injectSpeedInsights();
 // initialize Vercel Toolbar in dev
 if (dev) {
   onMount(() => mountVercelToolbar());

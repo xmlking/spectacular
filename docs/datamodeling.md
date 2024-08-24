@@ -58,7 +58,7 @@ if s.Valid {
 - **tags** Optional text array used to associate arbitrary categories to an entity. e.g., `public`, `confidential` etc.
   - **Tags** is like **Categories**, but more **arbitrary**.
   - i.e. `tags text[]`
-- **annotations** Optional key/value pairs to associate arbitrary metadata to an entity. e.g., `env -> prod`, `size -> large`, `tire -> free` etc.
+- **annotations** Optional key/value pairs to associate arbitrary metadata to an entity. e.g., `env -> production`, `size -> large`, `tire -> free` etc.
   - i.e. `annotations public.hstore`
 
 The timestamps are useful for forensics if something goes wrong, they do not necessarily need to be used or exposed by our graphql APIs. There is no harm in exposing them though.
@@ -207,7 +207,7 @@ There are reasons to not use foreign keys at scale, but we are not at scale and 
 
 Foreign key constraints should not cascade deletes for a few reasons:
 
-1. We don't want to accidentally delete a lot of data (either from our application, or from a manual query in prod).
+1. We don't want to accidentally delete a lot of data (either from our application, or from a manual query in production).
 2. If we ever add new tables that depend on other tables via foreign key, it is not necessarily the case that cascading the delete is correct for the new table. Explicit application code is better here.
 3. If we ever get to the point of sharding the db, we will probably need to drop all foreign key constraints so it would be great if we did not make our code depend on cascading delete behavior.
 

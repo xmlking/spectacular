@@ -12,7 +12,7 @@
     "sync": {
       "outputs": [".svelte-kit/**"]
     },
-    "sync:prod": {
+    "sync:production": {
       "outputs": [".svelte-kit/**"]
     },
     "dev": {
@@ -27,18 +27,18 @@
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
     },
-    "dev:prod": {
-      "dependsOn": ["generate:prod"],
+    "dev:production": {
+      "dependsOn": ["generate:production"],
       "cache": false,
       "persistent": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.prod", ".secrets", ".secrets.prod"]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.production", ".secrets", ".secrets.production"]
     },
     "generate": {
       "dependsOn": ["sync", "@spectacular/role-houdini#build"],
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
     },
-    "generate:prod": {
-      "dependsOn": ["sync:prod", "@spectacular/role-houdini#build"],
+    "generate:production": {
+      "dependsOn": ["sync:production", "@spectacular/role-houdini#build"],
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
     },
     "build": {
@@ -60,8 +60,8 @@
         "npm_package_version"
       ]
     },
-    "build:prod": {
-      "dependsOn": ["generate:prod", "^build"],
+    "build:production": {
+      "dependsOn": ["generate:production", "^build"],
       "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
       "env": [
         "VERCEL",

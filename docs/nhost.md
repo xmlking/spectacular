@@ -58,7 +58,7 @@ nhost config validate
 nhost config show
 nhost config show --subdomain local
 # This command is mostly useful to verify configuration overlays.
-nhost config show --subdomain zyjloswljirxqtsdlnnf
+nhost config show --subdomain swzucovdccjouwebopwb
 # (DANGER) 
 # Pull current versions of ./nhost/nhost.toml and ./secrets used in the cloud environment.
 nhost config pull
@@ -68,11 +68,11 @@ nhost config pull
 #### Secrets Management
 
 ```shell
-nhost secrets list --subdomain zyjloswljirxqtsdlnnf
+nhost secrets list --subdomain swzucovdccjouwebopwb
 # (DANGER)
-# nhost secrets create --subdomain zyjloswljirxqtsdlnnf NHOST_WEBHOOK_SECRET "'ZAdx)h=Sy-YbsUfo:9ntz;3#;2p%A+L"
-# nhost secrets update --subdomain zyjloswljirxqtsdlnnf NHOST_WEBHOOK_SECRET "'ZAdx)h=Sy-YbsUfo:9ntz;3#;2p%A+L"
-# nhost secrets delete --subdomain zyjloswljirxqtsdlnnf NHOST_WEBHOOK_SECRET
+# nhost secrets create --subdomain swzucovdccjouwebopwb NHOST_WEBHOOK_SECRET "'ZAdx)h=Sy-YbsUfo:9ntz;3#;2p%A+L"
+# nhost secrets update --subdomain swzucovdccjouwebopwb NHOST_WEBHOOK_SECRET "'ZAdx)h=Sy-YbsUfo:9ntz;3#;2p%A+L"
+# nhost secrets delete --subdomain swzucovdccjouwebopwb NHOST_WEBHOOK_SECRET
 ```
 
 ### Start
