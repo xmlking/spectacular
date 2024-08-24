@@ -9,7 +9,7 @@ import vercel from '@astrojs/vercel/serverless';
 import expressiveCode from 'astro-expressive-code';
 import { defineConfig, envField } from 'astro/config';
 
-const SITE_URL = process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL : 'http://localhost:4321/';
+const SITE_URL = process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL : 'http://localhost:4321';
 
 // https://astro.build/config
 export default defineConfig({
