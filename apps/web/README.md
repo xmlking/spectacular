@@ -65,7 +65,7 @@ All commands are run from the root of the project, from a terminal:
 npx @astrojs/upgrade
 ```
 
-## 👀 Want to learn more?
+## 👀 Want to learn more? 11
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
