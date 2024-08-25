@@ -1,23 +1,22 @@
-
-
 <script lang="ts">
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
-import { streamObject } from 'ai';
+import { generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';
-import { SearchIcon } from 'lucide-svelte';
+import { LoaderIcon, SearchIcon, Sparkles } from 'lucide-svelte';
 import { onMount } from 'svelte';
 import { z } from 'zod';
 
 const model = chromeai('text', {
   // additional settings
-  temperature: 0.5,
-  topK: 5,
+  temperature: 0.8,
+  topK: 3,
 });
 
 let prompt = 'Generate a lasagna recipe.';
 let output = '';
 let error: string;
 let isEnabled = false;
+let isLoading = false;
 
 const schema = z.object({
   recipe: z.object({
@@ -33,26 +32,36 @@ const schema = z.object({
 });
 
 onMount(async () => {
-  isEnabled = !!('ai' in globalThis);
-  isEnabled = (await globalThis.ai?.canCreateTextSession()) === 'readily';
+  isEnabled = !!globalThis.ai?.assistant;
+  globalThis.ai?.assistant.capabilities().then((cap) => {
+    isEnabled = cap.available === 'readily';
+  });
   console.log({ isEnabled });
   if (!isEnabled) error = 'Your browser is not supported. Please update Chrome to version 127 or higher.';
 });
 
 const onGenerate = async () => {
+  console.log('in onGenerate');
   output = '';
-  const { partialObjectStream } = await streamObject({
-    model,
-    schema,
-    prompt,
-  });
+  try {
+    isLoading = true;
+    const { object } = await generateObject({
+      model,
+      schema,
+      prompt,
+    });
 
-  for await (const partialObject of partialObjectStream) {
-    output += JSON.stringify(partialObject, null, 2);
-    // { recipe: {...} }
+    output = JSON.stringify(object, null, 2);
+    isLoading = false;
+  } catch (err) {
+    console.log(err);
+    error = `${err}`;
+  } finally {
+    isLoading = false;
   }
 };
 </script>
+
 <div class="page-container">
   <div class="page-section">
     <header class="flex justify-between">
@@ -67,23 +76,37 @@ const onGenerate = async () => {
         <div class="input-group-shim">
           <SearchIcon size={17} />
         </div>
-        <input type="search" placeholder="Generate a XYZ recipe." bind:value={prompt} />
-        <button class="variant-filled-secondary" on:click={onGenerate}>Generate</button>
+        <input
+          type="search"
+          placeholder="Generate a XYZ recipe."
+          bind:value={prompt}
+        />
+        <button
+          type="submit"
+          class="variant-filled-secondary"
+          on:click={onGenerate}
+          aria-label="Submit"
+        >
+          {#if isLoading}
+            <LoaderIcon />
+          {:else}
+            <Sparkles />
+          {/if}
+        </button>
       </div>
     </label>
 
     <label class="label">
       <span>Output</span>
-      <textarea  class="textarea" value={output}/>
+      <textarea class="textarea" value={output} />
     </label>
   </div>
-
 </div>
 
 <style>
-	textarea {
+  textarea {
     line-height: 1.5;
     field-sizing: content;
     min-height: 3lh;
-	}
+  }
 </style>

@@ -1,71 +1,66 @@
 <script lang="ts">
-import { useCompletion } from '@ai-sdk/svelte';
-import { getToastStore } from '@skeletonlabs/skeleton';
+import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
-import { AlertTriangle, Sparkles } from 'lucide-svelte';
-import { fade } from 'svelte/transition';
-
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { onMount } from 'svelte';
+import { Sparkles } from 'lucide-svelte';
 import { default as LoaderIcon } from './loader-icon.svelte';
 
 const log = new Logger('experiments:ai:ms:browser');
-const toastStore = getToastStore();
 const api = '/api/date';
 
 export let value = '';
+let prompt = '';
+let isLoading = false;
+let error: string;
 
-/* eslint-disable @typescript-eslint/no-unused-vars,no-unused-vars */
-const { complete, completion, input, isLoading, handleSubmit, error, stop } = useCompletion({
-  api,
-  body: { text: value },
-  onFinish: (_prompt, completion) => {
-    value = completion.trim();
-  },
-  onError: (error) => handleMessage({ type: 'error', message: error.message }, toastStore),
-});
-
-// callbacks
-function handleChange(e: Event) {
-  // if (!$isLoading)
-  value = (e.target as HTMLSelectElement)?.value;
-}
-
-function handleSubmitWrap(e: SubmitEvent) {
-  e.preventDefault();
-  log.debug({ value });
-  // FIXME: this like is temp, workaround as `handleSubmit` not taking dynamic body
-  // REF: https://github.com/vercel/ai/issues/1728
-  complete($input, { body: { text: value } });
-  // handleSubmit(e);
-  input.set('');
-}
-
-onMount(() => {
-  //  complete('some example prompt', {body: {text: 'eeee'}});
-});
+// TODO: useObject is not yet supported for svelte https://sdk.vercel.ai/docs/ai-sdk-ui/overview
+const onSubmit = async (event: SubmitEvent) => {
+  console.log({ prompt });
+  try {
+    isLoading = true;
+    const rawResponse = await fetch(api, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ prompt }),
+    });
+    const content = await rawResponse.json();
+    console.log();
+    if (content.date) {
+      value = content.date.slice(0, 16);
+      //value =  new Date().toISOString().slice(0,16)
+      prompt = '';
+    }
+    isLoading = false;
+  } catch (err) {
+    log.error(err);
+    error = `${err}`;
+  } finally {
+    isLoading = false;
+  }
+};
 </script>
 
-<form class="flex flex-col items-center" on:submit={handleSubmitWrap}>
+<form class="flex flex-col items-center" on:submit|preventDefault={onSubmit}>
   <input
     type="datetime-local"
     {...$$props}
     class="input"
-    disabled={$isLoading}
-    value={$isLoading && $completion.length > 0 ? $completion.trim() : value}
-    on:change={handleChange}
+    disabled={isLoading}
+    {value}
   />
 
   <div class="z-10 -mt-5 w-1/2">
     <fieldset
-      disabled={$isLoading}
+      disabled={isLoading}
       class="input-group input-group-divider grid-cols-[1fr_auto]"
     >
       <input
         type="search"
         class="input"
         placeholder="paraphrase it..."
-        bind:value={$input}
+        bind:value={prompt}
         aria-label="Prompt"
         required
       />
@@ -74,7 +69,7 @@ onMount(() => {
         class="variant-filled-secondary"
         aria-label="Submit"
       >
-        {#if $isLoading}
+        {#if isLoading}
           <LoaderIcon />
         {:else}
           <Sparkles />
@@ -82,22 +77,5 @@ onMount(() => {
       </button>
     </fieldset>
     <!-- TODO: this block is redundant as we are poping toast messages via onError() -->
-    {#if $error}
-      <aside
-        class="alert mt-6 variant-filled-error"
-        transition:fade|local={{ duration: 200 }}
-      >
-        <!-- Icon -->
-        <AlertTriangle />
-        <!-- Message -->
-        <div class="alert-message">
-          {#if $error}
-            <p class="font-medium">{$error.message}</p>
-          {/if}
-        </div>
-        <!-- Actions -->
-      </aside>
-    {/if}
-  </div>
-  <!-- <button type="button" class="btn variant-filled" on:click={stop} disabled={!$isLoading}>Stop</button> -->
+    <ErrorMessage {error} />
 </form>

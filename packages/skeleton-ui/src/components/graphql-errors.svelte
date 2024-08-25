@@ -6,7 +6,7 @@ import { AlertTriangle } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 
 const log = new Logger('graphql:error:client');
-export let errors: Partial<GraphQLError>[] | undefined | null;
+export let errors: readonly Partial<GraphQLError>[] | undefined | null;
 log.error({ errors });
 </script>
 

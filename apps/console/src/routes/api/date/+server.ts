@@ -2,11 +2,11 @@ import { limiter } from '$lib/server/limiter/limiter';
 import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
 import { Logger } from '@spectacular/utils';
 import { error } from '@sveltejs/kit';
-import { type LanguageModel, streamObject, streamText } from 'ai';
+import { JSONParseError, type LanguageModel, TypeValidationError, generateObject, streamObject, streamText } from 'ai';
 import { ollama } from 'ollama-ai-provider';
 import { z } from 'zod';
 
-const log = new Logger('experiments:ai:completion:server');
+const log = new Logger('experiments:ai:date:server');
 
 // free https://platform.openai.com/docs/guides/rate-limits/free-tier-rate-limits
 const model = openai('gpt-4o-mini');
@@ -17,7 +17,7 @@ const model = openai('gpt-4o-mini');
 
 const system = 'You are a text to date converter. Do not include the prompt. Do not enclose the response in quotes.';
 const schema = z.object({
-  date: z.date().describe('local DateTime with timezone'),
+  date: z.coerce.date().describe('local DateTime with timezone'),
 });
 
 export const POST = async (event) => {
@@ -25,19 +25,31 @@ export const POST = async (event) => {
   if (await limiter.isLimited(event)) error(429);
 
   const { request } = event;
-  const { text, prompt } = await request.json();
-  log.debug({ text, prompt });
-  if (!prompt || !text) return new Response('Prompt is required', { status: 400 });
+  const { prompt } = await request.json();
+  log.debug({ prompt });
+  if (!prompt) return new Response('Prompt is required', { status: 400 });
 
-  const result = await streamObject({
-    model,
-    schema,
-    // system,
-    prompt: `The current date is: ${new Date()} \nGenerate Date from Text: ${text}`,
-    onFinish({ object }) {
-      // save object to database
-    },
-  });
+  try {
+    const result = await generateObject({
+      model,
+      // output: 'array',
+      schema,
+      system,
+      prompt: `The current date is: ${new Date()} \nGenerate Date from Text: ${prompt}`,
+    });
 
-  return result.toTextStreamResponse();
+    log.debug(result.object);
+    return result.toJsonResponse();
+  } catch (err) {
+    log.error('backend error', err);
+    if (TypeValidationError.isInstance(err)) {
+      error(500, `${err.value}`);
+      // return { type: 'validation-error', value: error.value };
+    } else if (JSONParseError.isInstance(err)) {
+      error(500, `${err.text}`);
+      // return { type: 'parse-error', text: error.text };
+    } else {
+      error(500, `${err}`);
+    }
+  }
 };

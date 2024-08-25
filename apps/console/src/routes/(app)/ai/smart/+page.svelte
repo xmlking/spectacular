@@ -110,7 +110,7 @@ $: loadingState.setFormLoading($delayed);
         </Form.Field>
         <Form.Field {form} name="startData">
           <Form.Control let:attrs>
-            <Form.Label class="label">Start Data</Form.Label>
+            <Form.Label class="label">Start Date</Form.Label>
             <SmartDate
               class="textarea data-[fs-error]:input-error"
               {...attrs}
