@@ -1,9 +1,10 @@
 <script lang="ts">
+import { isAIEnabled, isAIReady } from '$lib/stores/stores';
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';
 import { LoaderIcon, SearchIcon, Sparkles } from 'lucide-svelte';
-import { onMount } from 'svelte';
+import { onDestroy, onMount } from 'svelte';
 import { z } from 'zod';
 
 const model = chromeai('text', {
@@ -12,10 +13,10 @@ const model = chromeai('text', {
   topK: 3,
 });
 
+// biome-ignore lint/style/useConst: <explanation>
 let prompt = 'Generate a lasagna recipe.';
 let output = '';
 let error: string;
-let isEnabled = false;
 let isLoading = false;
 
 const schema = z.object({
@@ -32,17 +33,14 @@ const schema = z.object({
 });
 
 onMount(async () => {
-  isEnabled = !!globalThis.ai?.assistant;
-  globalThis.ai?.assistant.capabilities().then((cap) => {
-    isEnabled = cap.available === 'readily';
-  });
-  console.log({ isEnabled });
-  if (!isEnabled) error = 'Your browser is not supported. Please update Chrome to version 127 or higher.';
+  console.log({ isAIEnabled: $isAIEnabled, isAIReady: $isAIReady });
 });
+onDestroy(() => {});
 
 const onGenerate = async () => {
   console.log('in onGenerate');
   output = '';
+  error = '';
   try {
     isLoading = true;
     const { object } = await generateObject({
@@ -65,9 +63,14 @@ const onGenerate = async () => {
 <div class="page-container">
   <div class="page-section">
     <header class="flex justify-between">
-      <h1 class="h1">Smart Data Generate</h1>
+      <h1 class="h1">On-Device AI: Smart Data Generate</h1>
     </header>
 
+    {#if !$isAIEnabled}
+      <ErrorMessage
+        error="Your browser is not supported. Please update Chrome to version 130 or higher."
+      />
+    {/if}
     <ErrorMessage {error} />
 
     <label class="label">

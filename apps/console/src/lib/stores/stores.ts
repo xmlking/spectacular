@@ -1,8 +1,8 @@
 import { browser } from '$app/environment';
 import { page } from '$app/stores';
 import { persisted } from 'svelte-persisted-store';
-import { derived, writable } from 'svelte/store';
-import type { Writable } from 'svelte/store';
+import { derived, readable, writable } from 'svelte/store';
+import type { Readable, Writable } from 'svelte/store';
 
 // Svelte Writable Stores ---
 
@@ -25,3 +25,25 @@ export const lang = derived(page, ($page) => $page.data.lang);
  * current scrollLeft and scrollTop values
  */
 export const scroll = writable<{ x: number; y: number }>({ x: 0, y: 0 });
+
+/**
+ *  AI State
+ */
+
+export const isAIEnabled: Readable<boolean> = readable(false, (set) => {
+  if (browser) {
+    set(!!globalThis.ai?.assistant);
+  }
+});
+
+export const isAIReady = derived(
+  isAIEnabled,
+  ($isAIEnabled, set) => {
+    if (browser && $isAIEnabled) {
+      globalThis.ai?.assistant.capabilities().then((cap) => {
+        set(cap.available === 'readily');
+      });
+    }
+  },
+  false,
+);

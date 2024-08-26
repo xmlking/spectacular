@@ -2,6 +2,7 @@
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { MagicSpellTextarea, SmartDate } from '$lib/components/smart';
 import { getLoadingState } from '$lib/stores/loading';
+import { isAIEnabled, isAIReady } from '$lib/stores/stores';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -110,7 +111,7 @@ $: loadingState.setFormLoading($delayed);
         </Form.Field>
         <Form.Field {form} name="startData">
           <Form.Control let:attrs>
-            <Form.Label class="label">Start Date</Form.Label>
+            <Form.Label class="label">Start Date: <small>Using On-Device AI: <span class="text-pink-600">{$isAIReady}</span></small></Form.Label>
             <SmartDate
               class="textarea data-[fs-error]:input-error"
               {...attrs}
