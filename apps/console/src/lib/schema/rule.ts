@@ -21,6 +21,7 @@ export const ruleSchema = z.object({
   throttleRate: z.coerce.number().min(0).max(100).optional().default(80),
   weight: z.coerce.number().min(0).max(1000).optional().default(1000),
   shared: z.boolean().optional().default(false),
+  active: z.boolean().optional().default(true),
 });
 
 export type RuleSchema = typeof ruleSchema;

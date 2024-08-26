@@ -1,0 +1,1 @@
+CREATE TABLE "public"."test_rule" ("a" uuid NOT NULL, "b" timestamptz NOT NULL, "c" boolean NOT NULL, "d" integer NOT NULL, PRIMARY KEY ("a") );COMMENT ON TABLE "public"."test_rule" IS E'created by nithin, just for testing';

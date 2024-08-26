@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Footer from './../../../../lib/components/layout/footer.svelte';
-
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 import { graphql, type policies_insert_input } from '$houdini';
@@ -37,79 +35,41 @@ import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 
 
-const log = new Logger('rules.create.browser');
 
-// Variables
-// export let data: PageData;
-const toastStore = getToastStore();
-const loadingState = getLoadingState();
-let gqlErrors: Partial<GraphQLError>[] | null;
-// let subjects: Subject[] | undefined;
-
-const createRule = graphql(`
-  mutation CreateRule($data: rules_insert_input!) {
-    insert_rules_one(object: $data) {
-      id
-      displayName
-      description
-      tags
-      annotations
-      source
-      sourcePort
-      destination
-      destinationPort
-      protocol
-      action
-      direction
-      appId
-      throttleRate
-      weight
-      shared
-      createdBy
-      createdAt
-      updatedAt
-      updatedBy
-      organization
-    }
-  }
-`);
-
-
-
-
-const superform = superForm(defaults(zod(createRuleSchema)), {
+const form = superForm(defaults(zod(createRuleSchema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
-  syncFlashMessage: false,
-  resetForm: true,
+  clearOnSubmit: 'errors-and-message',
   delayMs: 100,
   timeoutMs: 4000,
+  resetForm: true,
+  invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
   validators: zodClient(createRuleSchema),
-  async onUpdate({ form, cancel }) {
-    if (!form.valid) return;
-  }
 
+  async onUpdate({ form, cancel }) {
+    console.log({form:form})
+  }
 });
 
-
-  const {
-  form,
-  delayed,
-  enhance,
+const {
+  form: formData,
   errors,
-  constraints,
-  message,
-  isTainted,
-  tainted,
-  posted,
   allErrors,
-  reset,
+  message,
+  constraints,
   submitting,
+  delayed,
+  tainted,
   timeout,
-  capture,
-  restore,
-} = superform;
+  posted,
+  enhance,
+} = form;
+
+
+
+
+$: valid = $allErrors.length === 0;
 
 </script>
 
@@ -128,7 +88,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
     <!-- Form Level Errors / Messages -->
     <Alerts errors={$errors._errors} message={$message} />
     <!-- GraphQL Errors  -->
-    <GraphQLErrors errors={gqlErrors} />
+    <!-- <GraphQLErrors errors={gqlErrors} /> -->
     <!-- Update User Details Form -->
 
     <form class="card md:space-y-8" method="POST" use:enhance>
@@ -139,7 +99,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
 
       <section class="p-4 grid gap-6 md:grid-cols-3 lg:grid-cols-6">
         <div class="col-span-2">
-          <Form.Field form={superform} name='rule.displayName'>
+          <Form.Field form={form} name='displayName'>
             <Form.Control let:attrs>
               <Form.Label class="label">Display Name</Form.Label>
               <input
@@ -148,6 +108,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
                 {...attrs}
 
                 placeholder="Display Name"
+                bind:value={$formData.displayName}
 
               />
             </Form.Control>
@@ -157,14 +118,15 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
         </div>
 
         <div class="col-span-4">
-          <Form.Field form={superform} name='rule.description'>
+          <Form.Field form={form} name='description'>
             <Form.Control let:attrs>
               <Form.Label class="label">Description</Form.Label>
               <input
                 type="text"
                 class="input data-[fs-error]:input-error"
                 {...attrs}
-                placeholder="Display Name"
+                placeholder="Description"
+                bind:value={$formData.description}
               />
             </Form.Control>
             <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the description</Form.Description>
@@ -172,31 +134,31 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.tags'>
+          <Form.Field form={form} name='tags'>
             <Form.Control let:attrs>
               <Form.Label class="label">Tags</Form.Label>
               <!-- <input
                 type="text"
                 class="input data-[fs-error]:input-error"
                 {...attrs}
-                {disabled}
                 placeholder="Enter tags..."
-                bind:value={$form.rule.tags}
+                bind:value={$formData.tags}
               /> -->
-              <InputChip {...attrs}   placeholder="Enter tags..." class="input data-[fs-error]:input-error"  />
+              <InputChip {...attrs}   placeholder="Enter tags..." class="input data-[fs-error]:input-error" bind:value={$formData.tags} />
             </Form.Control>
             <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the tags</Form.Description>
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.annotations'>
+          <Form.Field form={form} name='annotations'>
             <Form.Control let:attrs>
               <Form.Label class="label">Annotations</Form.Label>
               <input
                 type="text"
                 class="input data-[fs-error]:input-error"
                 {...attrs}
+                bind:value={$formData.annotations}
                 placeholder="Enter Annotations..."
               />
             </Form.Control>
@@ -205,7 +167,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.source'>
+          <Form.Field form={form} name='source'>
             <Form.Control let:attrs>
               <Form.Label class="label">Source</Form.Label>
               <input
@@ -213,6 +175,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 placeholder="Enter Source..."
+                bind:value={$formData.source}
               />
             </Form.Control>
             <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the source</Form.Description>
@@ -220,7 +183,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.sourcePort'>
+          <Form.Field form={form} name='sourcePort'>
             <Form.Control let:attrs>
               <Form.Label class="label">Source port</Form.Label>
               <input
@@ -228,6 +191,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 placeholder="Enter Source port..."
+                bind:value={$formData.sourcePort}
               />
             </Form.Control>
             <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the source port</Form.Description>
@@ -235,7 +199,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.destination'>
+          <Form.Field form={form} name='destination'>
             <Form.Control let:attrs>
               <Form.Label class="label">Destination</Form.Label>
               <input
@@ -243,6 +207,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 placeholder="Enter Destination..."
+                bind:value={$formData.destination}
               />
             </Form.Control>
             <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the destination</Form.Description>
@@ -250,7 +215,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.destinationPort'>
+          <Form.Field form={form} name='destinationPort'>
             <Form.Control let:attrs>
               <Form.Label class="label">Destination port</Form.Label>
               <input
@@ -258,6 +223,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 placeholder="Enter Destination port..."
+                bind:value={$formData.destinationPort}
 
               />
             </Form.Control>
@@ -266,13 +232,13 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div>
-          <Form.Field form={superform} name='rule.protocol'>
+          <Form.Field form={form} name='protocol'>
             <Form.Control let:attrs>
               <Form.Label class="label">Protocols</Form.Label>
               <select
                 class="input data-[fs-error]:input-error"
                 {...attrs}
-
+                bind:value={$formData.protocol}
               >
                {#each protocols as protocol}
                 <option value={protocol.value}>{protocol.name}</option>
@@ -284,12 +250,18 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div>
-          <Form.Fieldset form={superform} name='rule.action'>
+          <Form.Fieldset form={form} name='action'>
             <Form.Legend>Action</Form.Legend>
             <RadioGroup active="variant-filled-secondary" >
             {#each actionOptions as action}
             <Form.Control let:attrs>
-
+              <RadioItem
+                {...attrs}
+                bind:group={$formData.action}
+                value={action.value}
+              >
+                 <Form.Label class="label">{action.label}</Form.Label>
+            </RadioItem>
             </Form.Control>
             {/each}
             </RadioGroup>
@@ -298,12 +270,18 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Fieldset>
         </div>
         <div>
-          <Form.Fieldset form={superform} name='rule.direction'>
+          <Form.Fieldset form={form} name='direction'>
             <Form.Legend>Direction</Form.Legend>
             <RadioGroup active="variant-filled-secondary" >
             {#each directionOptions as direction}
             <Form.Control let:attrs>
-
+              <RadioItem
+                {...attrs}
+                bind:group={$formData.direction}
+                value={direction.value}
+              >
+                 <Form.Label class="label">{direction.label}</Form.Label>
+            </RadioItem>
             </Form.Control>
             {/each}
             </RadioGroup>
@@ -312,13 +290,13 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Fieldset>
         </div>
         <div class="col-start-5 flex justify-end">
-          <Form.Field form={superform} name='rule.shared'>
+          <Form.Field form={form} name='shared'>
             <Form.Control let:attrs>
               <SlideToggle
                 active="variant-filled-secondary"
                 size="md"
                 {...attrs}
-
+                bind:checked={$formData.shared}
               >
               <Form.Label class="inline-block w-[100px] text-left"> Shared</Form.Label>
 						</SlideToggle>
@@ -328,14 +306,14 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div class="col-end-7">
-          <Form.Field form={superform} name={keys.weight}>
+          <Form.Field form={form} name={keys.weight}>
             <Form.Control let:attrs>
               <Form.Label class="label">Weight</Form.Label>
               <input
                 type="number"
                 class="input data-[fs-error]:input-error"
                 {...attrs}
-
+                bind:value={$formData.weight}
               />
             </Form.Control>
             <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter Weight</Form.Description>
@@ -344,7 +322,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
         </div>
 
         <div class="col-span-4">
-          <Form.Field form={superform} name='rule.appId'>
+          <Form.Field form={form} name='appId'>
             <Form.Control let:attrs>
               <Form.Label class="label">App id</Form.Label>
               <input
@@ -352,6 +330,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 placeholder="Display Name"
+                bind:value={$formData.appId}
               />
             </Form.Control>
             <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">If no app is selected, throttle rate applied system wide.</Form.Description>
@@ -359,10 +338,11 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div class="col-span-2">
-          <Form.Field form={superform} name='rule.throttleRate'>
+          <Form.Field form={form} name='throttleRate'>
             <Form.Control let:attrs>
               <RangeSlider
                  {...attrs}
+                 bind:value={$formData.throttleRate}
                  min={0}
                  max={100}
                  step={1}
@@ -370,7 +350,7 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
               >
                 <div class="flex justify-between items-center">
                   <Form.Label class="label">Bandwidth limit</Form.Label>
-                  <div class="text-xs"> </div>
+                  <div class="text-xs">{$formData.throttleRate} /100</div>
                 </div>
             </RangeSlider>
             </Form.Control>
@@ -379,35 +359,37 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
           </Form.Field>
         </div>
         <div class="flex justify-start">
-          <Form.Field form={superform} name='active'>
+          <Form.Field form={form} name='active'>
             <Form.Control let:attrs>
               <SlideToggle
                 active="variant-filled-secondary"
                 size="md"
                 {...attrs}
+                bind:checked={$formData.active}
               >
-              <Form.Label class="inline-block w-[100px] text-left">Active </Form.Label>
+              <Form.Label class="inline-block w-[100px] text-left">Active {$formData.active ? 'On' : 'Off'} </Form.Label>
 						</SlideToggle>
             </Form.Control>
             <!-- <Form.Description>Temporarily disable policy</Form.Description> -->
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
-        <div class="col-start-5">
-
-        </div>
-        <div class="col-end-auto">
-
-        </div>
-
       </section>
 
-
-
-
-
       <footer class="card-footer flex justify-end">
-
+        <button
+          type="submit"
+          class="btn variant-filled-secondary"
+          disabled={!$tainted || !valid || $submitting}
+        >
+          {#if $timeout}
+            <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+          {:else if $delayed}
+            <Loader class="m-2 h-4 w-4 animate-spin" />
+          {:else}
+            {m.buttons_create()}
+          {/if}
+        </button>
       </footer>
     </form>
   </section>
@@ -416,5 +398,22 @@ const superform = superForm(defaults(zod(createRuleSchema)), {
 
   </section>
 
+<DebugShell label="form-data">
+  <SuperDebug
+    data={{
+      message: $message,
+      submitting: $submitting,
+      delayed: $delayed,
+      timeout: $timeout,
+      posted: $posted,
+      formData: $formData,
+      errors: $errors,
+      constraints: $constraints,
+      tainted:$tainted
+    }}
+    theme="vscode"
+    --sd-code-date="lightgreen"
+  />
+</DebugShell>
 
 </div>
