@@ -42,6 +42,7 @@ WORKDIR /app
 COPY .gitignore .gitignore
 
 ## prepare: `scripts/init.sh` will copy `.env`, `.secrets` needed during build
+# TODO: remove scripts and .env* copy
 COPY scripts scripts
 COPY .env.example .env.example
 COPY .secrets.example .secrets.example

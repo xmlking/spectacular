@@ -1,17 +1,12 @@
 import { CachePolicy, type SearchRules$result, graphql, order_by } from '$houdini';
+import type { PartialGraphQLErrors, Subject } from '$lib/types';
 import { Logger } from '@spectacular/utils';
-import type { GraphQLError } from 'graphql';
+import { type Result, err, ok } from 'neverthrow';
 
-interface GQLResult<T> {
-  data: T | undefined;
-  errors: Partial<GraphQLError>[] | null;
-}
-
-export interface Subject {
-  id: string;
-  displayName: string;
-  secondaryId?: string;
-}
+/**
+ * HINT: Using `neverthrow` lib's `Result` to annotate a functions
+ * https://x.com/mattpocockuk/status/1825552717571629306
+ */
 
 const log = new Logger('api:rules:search');
 
@@ -49,8 +44,10 @@ const limit = 10;
 const orderBy = [{ updatedAt: order_by.desc_nulls_last }];
 
 // TODO: throttle-debounce , prevent double calling, finish
-export async function searchRulesFn(displayNameTerm: string) {
-  if (displayNameTerm.length < 4) return { data: [], errors: null };
+export async function searchRulesFn(
+  displayNameTerm: string,
+): Promise<Result<SearchRules$result['rules'], PartialGraphQLErrors>> {
+  if (displayNameTerm.length < 4) return ok([]);
 
   const where = {
     displayName: { _ilike: `%${displayNameTerm}%` },
@@ -64,5 +61,5 @@ export async function searchRulesFn(displayNameTerm: string) {
     metadata: { logResult: true },
     variables,
   });
-  return { data: data?.rules, errors };
+  return data?.rules ? ok(data.rules) : err(errors);
 }

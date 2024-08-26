@@ -4,13 +4,13 @@ import * as m from '$i18n/messages';
 import { type Subject, searchSubjects } from '$lib/api/search-subjects';
 import type { PolicySearch } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';
+import type { PartialGraphQLErrors } from '$lib/types';
 import { AppBar, Autocomplete, type AutocompleteOption, type PopupSettings, popup } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
 import { Alerts, ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 // import { debounce } from "@spectacular/utils";
 import * as Form from 'formsnap';
-import type { GraphQLError } from 'graphql';
 import { LoaderIcon, MoreHorizontalIcon, ScaleIcon, SearchIcon, ShieldCheckIcon } from 'lucide-svelte';
 import type { FormEventHandler } from 'svelte/elements';
 import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms';
@@ -45,8 +45,8 @@ const popupSettings: PopupSettings = {
   placement: 'bottom',
 };
 
-let gqlErrors: Partial<GraphQLError>[] | null;
-let subjects: Subject[] | undefined;
+let gqlErrors: PartialGraphQLErrors;
+let subjects: Subject[];
 
 // Functions
 async function clearSubject() {
@@ -57,7 +57,15 @@ const onInput: FormEventHandler<HTMLInputElement> = async (event) => {
   const value = event.currentTarget.value;
   console.log(`onInput: ${value}`);
   if (value.length > 3) {
-    ({ data: subjects, errors: gqlErrors } = await searchSubjects($formData.subjectType, value));
+    // ({ data: subjects, errors: gqlErrors } = await searchSubjects($formData.subjectType, value));
+    const result = await searchSubjects($formData.subjectType, value);
+    result
+      .map((data) => {
+        subjects = data;
+      })
+      .mapErr((err) => {
+        gqlErrors = err;
+      });
   }
 };
 

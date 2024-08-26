@@ -225,6 +225,9 @@ importers:
       lucide-svelte:
         specifier: 0.435.0
         version: 0.435.0(svelte@4.2.19)
+      neverthrow:
+        specifier: 7.0.1
+        version: 7.0.1
       ollama-ai-provider:
         specifier: 0.12.1
         version: 0.12.1(zod@3.23.8)
@@ -5628,6 +5631,10 @@ packages:
   neotraverse@0.6.18:
     resolution: {integrity: sha512-Z4SmBUweYa09+o6pG+eASabEpP6QkQ70yHj351pQoEXIs8uHbaU2DWVmzBANKgflPa47A50PtB2+NgRpQvr7vA==}
     engines: {node: '>= 10'}
+
+  neverthrow@7.0.1:
+    resolution: {integrity: sha512-NY1sD1wZn6dwwzV9/5KZ4wRIpH4xC7ARy3fGmnEi2Pi8CHDTWlp+WSF+if8cudrwuCWGrk2y2BE/dnGh070iuA==}
+    engines: {node: '>=18'}
 
   next-tick@1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
@@ -13806,6 +13813,8 @@ snapshots:
   negotiator@0.6.3: {}
 
   neotraverse@0.6.18: {}
+
+  neverthrow@7.0.1: {}
 
   next-tick@1.1.0: {}
 

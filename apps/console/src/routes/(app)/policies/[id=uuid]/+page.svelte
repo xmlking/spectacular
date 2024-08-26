@@ -26,7 +26,6 @@ const {
   message,
   isTainted,
   tainted,
-  posted,
   allErrors,
   reset,
   submitting,
@@ -44,8 +43,7 @@ export const snapshot = { capture, restore };
     data={{
       message: $message,
       submitting: $submitting,
-      delayed: $delayed,
-      posted: $posted,
+      delayed: $delayed
     }}
   />
   <br />

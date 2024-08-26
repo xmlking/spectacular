@@ -1,18 +1,12 @@
 import { CachePolicy, graphql, order_by, subject_type_enum, type subject_type_enum$options } from '$houdini';
-import type { PolicySearch, PolicySearchSchema } from '$lib/schema/policy';
+import type { PartialGraphQLErrors, Subject } from '$lib/types';
 import { Logger } from '@spectacular/utils';
-import type { GraphQLError } from 'graphql';
+import { type Result, err, ok } from 'neverthrow';
 
-interface GQLResult<T> {
-  data: T | undefined;
-  errors: Partial<GraphQLError>[] | null;
-}
-
-export interface Subject {
-  id: string;
-  displayName: string;
-  secondaryId?: string;
-}
+/**
+ * HINT: Using `neverthrow` lib's `Result` to annotate a functions
+ * https://x.com/mattpocockuk/status/1825552717571629306
+ */
 
 const log = new Logger('api:subjects:search');
 
@@ -79,8 +73,8 @@ const orderBy = [{ updatedAt: order_by.desc_nulls_last }];
 export async function searchSubjects(
   subjectType: subject_type_enum$options,
   subjectNameTerm: string,
-): Promise<GQLResult<Subject[]>> {
-  if (subjectNameTerm.length < 4) return { data: [], errors: null };
+): Promise<Result<Subject[], PartialGraphQLErrors>> {
+  if (subjectNameTerm.length < 4) return ok([]);
 
   const where = {
     displayName: { _ilike: `%${subjectNameTerm}%` },
@@ -97,7 +91,7 @@ export async function searchSubjects(
         metadata: { logResult: true },
         variables,
       });
-      return { data: data?.users, errors };
+      return data?.users ? ok(data.users) : err(errors);
     }
     case subject_type_enum.group: {
       const { data, errors } = await searchGroups.fetch({
@@ -106,7 +100,7 @@ export async function searchSubjects(
         metadata: { logResult: true },
         variables,
       });
-      return { data: data?.groups, errors };
+      return data?.groups ? ok(data.groups) : err(errors);
     }
     case subject_type_enum.device: {
       const { data, errors } = await searchDevices.fetch({
@@ -115,7 +109,7 @@ export async function searchSubjects(
         metadata: { logResult: true },
         variables,
       });
-      return { data: data?.devices, errors };
+      return data?.devices ? ok(data.devices) : err(errors);
     }
     case subject_type_enum.device_pool: {
       const { data, errors } = await searchPools.fetch({
@@ -124,9 +118,9 @@ export async function searchSubjects(
         metadata: { logResult: true },
         variables,
       });
-      return { data: data?.pools, errors };
+      return data?.pools ? ok(data.pools) : err(errors);
     }
     default:
-      throw new Error(`Unknown Subject Type: ${subjectType}`, { cause: Error(`${subjectType}`) });
+      return err([new Error(`Unknown Subject Type: ${subjectType}`, { cause: Error(`${subjectType}`) })]);
   }
 }

@@ -10,6 +10,7 @@ import { i18n } from '$lib/i18n.js';
 import { createPolicySchema } from '$lib/schema/policy';
 import { createPolicyKeys as keys } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';
+import type { PartialGraphQLErrors } from '$lib/types';
 import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
 import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
 import { getToastStore } from '@skeletonlabs/skeleton';
@@ -40,7 +41,7 @@ const log = new Logger('policies.create.browser');
 // export let data: PageData;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
-let gqlErrors: Partial<GraphQLError>[] | null;
+let gqlErrors: PartialGraphQLErrors;
 // let subjects: Subject[] | undefined;
 
 const createPolicy = graphql(`
@@ -180,7 +181,6 @@ const {
   message,
   isTainted,
   tainted,
-  posted,
   allErrors,
   reset,
   submitting,
@@ -200,9 +200,12 @@ let subject = $form?.subjectId
   : null;
 
 async function fetchSubjects(filterText: string) {
-  const { data, errors } = await searchSubjects($form.subjectType, filterText);
-  if (errors) gqlErrors = errors;
-  return data;
+  const result = await searchSubjects($form.subjectType, filterText);
+  if (result.isErr()) {
+    gqlErrors = result.error;
+    return [];
+  }
+  return result.value;
 }
 
 async function onSubjectChange(changedSubject: CustomEvent) {
@@ -307,9 +310,12 @@ function clearRule(event: Event) {
 }
 
 async function fetchRule(filterText: string) {
-  const { data, errors } = await searchRulesFn(filterText);
-  if (errors) gqlErrors = errors;
-  return data;
+  const result = await searchRulesFn(filterText);
+  if (result.isErr()) {
+    gqlErrors = result.error;
+    return [];
+  }
+  return result.value;
 }
 
 // Reactivity
@@ -340,25 +346,25 @@ $: loadingState.setFormLoading($delayed);
     <!-- Update User Details Form -->
     <form class="card md:space-y-8" method="POST" use:enhance>
       <header class="card-header">
-          <div class="text-xl">Create Policy</div>
-          <!-- <div>Create new policy</div> -->
+        <div class="text-xl">Create Policy</div>
+        <!-- <div>Create new policy</div> -->
       </header>
       <section class="p-4 grid gap-6 md:grid-cols-3 lg:grid-cols-6">
         <div class="col-span-2">
           <Form.Fieldset form={superform} name={keys.subjectType}>
-            <RadioGroup active="variant-filled-secondary" >
-            {#each subjectTypeOptions as sType}
-            <Form.Control let:attrs>
-              <RadioItem
-                {...attrs}
-                bind:group={$form.subjectType}
-                value={sType.value}
-                on:change={clearSubject}
-              >
-                 <Form.Label class="label">{sType.name}</Form.Label>
-            </RadioItem>
-            </Form.Control>
-            {/each}
+            <RadioGroup active="variant-filled-secondary">
+              {#each subjectTypeOptions as sType}
+                <Form.Control let:attrs>
+                  <RadioItem
+                    {...attrs}
+                    bind:group={$form.subjectType}
+                    value={sType.value}
+                    on:change={clearSubject}
+                  >
+                    <Form.Label class="label">{sType.name}</Form.Label>
+                  </RadioItem>
+                </Form.Control>
+              {/each}
             </RadioGroup>
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Fieldset>
@@ -426,7 +432,7 @@ $: loadingState.setFormLoading($delayed);
           </Select>
         </div>
         <div class="col-span-2">
-          <Form.Field form={superform} name='rule.displayName'>
+          <Form.Field form={superform} name="rule.displayName">
             <Form.Control let:attrs>
               <Form.Label class="label">Display Name</Form.Label>
               <input
@@ -438,12 +444,15 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.displayName}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the displayName</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the displayName</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-4">
-          <Form.Field form={superform} name='rule.description'>
+          <Form.Field form={superform} name="rule.description">
             <Form.Control let:attrs>
               <Form.Label class="label">Description</Form.Label>
               <input
@@ -455,12 +464,15 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.description}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the description</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the description</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.tags'>
+          <Form.Field form={superform} name="rule.tags">
             <Form.Control let:attrs>
               <Form.Label class="label">Tags</Form.Label>
               <!-- <input
@@ -471,14 +483,23 @@ $: loadingState.setFormLoading($delayed);
                 placeholder="Enter tags..."
                 bind:value={$form.rule.tags}
               /> -->
-              <InputChip {...attrs}  {disabled}  placeholder="Enter tags..." class="input data-[fs-error]:input-error" bind:value={$form.rule.tags} />
+              <InputChip
+                {...attrs}
+                {disabled}
+                placeholder="Enter tags..."
+                class="input data-[fs-error]:input-error"
+                bind:value={$form.rule.tags}
+              />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the tags</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the tags</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.annotations'>
+          <Form.Field form={superform} name="rule.annotations">
             <Form.Control let:attrs>
               <Form.Label class="label">Annotations</Form.Label>
               <input
@@ -490,12 +511,15 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.annotations}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Format: key1=>value1 (or) "key2" => "value2 with space"</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Format: key1=>value1 (or) "key2" => "value2 with space"</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.source'>
+          <Form.Field form={superform} name="rule.source">
             <Form.Control let:attrs>
               <Form.Label class="label">Source</Form.Label>
               <input
@@ -507,12 +531,15 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.source}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the source</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the source</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.sourcePort'>
+          <Form.Field form={superform} name="rule.sourcePort">
             <Form.Control let:attrs>
               <Form.Label class="label">Source port</Form.Label>
               <input
@@ -524,12 +551,15 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.sourcePort}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the source port</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the source port</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.destination'>
+          <Form.Field form={superform} name="rule.destination">
             <Form.Control let:attrs>
               <Form.Label class="label">Destination</Form.Label>
               <input
@@ -541,12 +571,15 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.destination}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the destination</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the destination</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name='rule.destinationPort'>
+          <Form.Field form={superform} name="rule.destinationPort">
             <Form.Control let:attrs>
               <Form.Label class="label">Destination port</Form.Label>
               <input
@@ -558,12 +591,15 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.destinationPort}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the destination port</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the destination port</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div>
-          <Form.Field form={superform} name='rule.protocol'>
+          <Form.Field form={superform} name="rule.protocol">
             <Form.Control let:attrs>
               <Form.Label class="label">Protocols</Form.Label>
               <select
@@ -572,59 +608,68 @@ $: loadingState.setFormLoading($delayed);
                 {disabled}
                 bind:value={$form.rule.protocol}
               >
-               {#each protocols as protocol}
-                <option value={protocol.value}>{protocol.name}</option>
-              {/each}
-            </select>
+                {#each protocols as protocol}
+                  <option value={protocol.value}>{protocol.name}</option>
+                {/each}
+              </select>
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter Protocols</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter Protocols</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div>
-          <Form.Fieldset form={superform} name='rule.action'>
+          <Form.Fieldset form={superform} name="rule.action">
             <Form.Legend>Action</Form.Legend>
-            <RadioGroup active="variant-filled-secondary" >
-            {#each actionOptions as action}
-            <Form.Control let:attrs>
-              <RadioItem
-                {...attrs}
-                {disabled}
-                bind:group={$form.rule.action}
-                value={action.value}
-              >
-                 <Form.Label class="label">{action.label}</Form.Label>
-            </RadioItem>
-            </Form.Control>
-            {/each}
+            <RadioGroup active="variant-filled-secondary">
+              {#each actionOptions as action}
+                <Form.Control let:attrs>
+                  <RadioItem
+                    {...attrs}
+                    {disabled}
+                    bind:group={$form.rule.action}
+                    value={action.value}
+                  >
+                    <Form.Label class="label">{action.label}</Form.Label>
+                  </RadioItem>
+                </Form.Control>
+              {/each}
             </RadioGroup>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Select action</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Select action</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Fieldset>
         </div>
         <div>
-          <Form.Fieldset form={superform} name='rule.direction'>
+          <Form.Fieldset form={superform} name="rule.direction">
             <Form.Legend>Direction</Form.Legend>
-            <RadioGroup active="variant-filled-secondary" >
-            {#each directionOptions as direction}
-            <Form.Control let:attrs>
-              <RadioItem
-                {...attrs}
-                {disabled}
-                bind:group={$form.rule.direction}
-                value={direction.value}
-              >
-                 <Form.Label class="label">{direction.label}</Form.Label>
-            </RadioItem>
-            </Form.Control>
-            {/each}
+            <RadioGroup active="variant-filled-secondary">
+              {#each directionOptions as direction}
+                <Form.Control let:attrs>
+                  <RadioItem
+                    {...attrs}
+                    {disabled}
+                    bind:group={$form.rule.direction}
+                    value={direction.value}
+                  >
+                    <Form.Label class="label">{direction.label}</Form.Label>
+                  </RadioItem>
+                </Form.Control>
+              {/each}
             </RadioGroup>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Select direction</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Select direction</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Fieldset>
         </div>
         <div class="col-start-5 flex justify-end">
-          <Form.Field form={superform} name='rule.shared'>
+          <Form.Field form={superform} name="rule.shared">
             <Form.Control let:attrs>
               <SlideToggle
                 active="variant-filled-secondary"
@@ -633,8 +678,10 @@ $: loadingState.setFormLoading($delayed);
                 {disabled}
                 bind:checked={$form.rule.shared}
               >
-              <Form.Label class="inline-block w-[100px] text-left"> {$form.rule.shared ? '' : 'Not'} Shared</Form.Label>
-						</SlideToggle>
+                <Form.Label class="inline-block w-[100px] text-left">
+                  {$form.rule.shared ? "" : "Not"} Shared</Form.Label
+                >
+              </SlideToggle>
             </Form.Control>
             <!-- <Form.Description>Temporarily disable policy</Form.Description> -->
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
@@ -652,13 +699,16 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.weight}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter Weight</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter Weight</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
 
         <div class="col-span-4">
-          <Form.Field form={superform} name='rule.appId'>
+          <Form.Field form={superform} name="rule.appId">
             <Form.Control let:attrs>
               <Form.Label class="label">App id</Form.Label>
               <input
@@ -670,34 +720,40 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$form.rule.appId}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">If no app is selected, throttle rate applied system wide.</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >If no app is selected, throttle rate applied system wide.</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-2">
-          <Form.Field form={superform} name='rule.throttleRate'>
+          <Form.Field form={superform} name="rule.throttleRate">
             <Form.Control let:attrs>
               <RangeSlider
-                 {...attrs}
-                 {disabled}
-                 bind:value={$form.rule.throttleRate}
-                 min={0}
-                 max={100}
-                 step={1}
-                 ticked
+                {...attrs}
+                {disabled}
+                bind:value={$form.rule.throttleRate}
+                min={0}
+                max={100}
+                step={1}
+                ticked
               >
                 <div class="flex justify-between items-center">
                   <Form.Label class="label">Bandwidth limit</Form.Label>
                   <div class="text-xs">{$form.rule.throttleRate} /100</div>
                 </div>
-            </RangeSlider>
+              </RangeSlider>
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Set Bandwidth limit</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Set Bandwidth limit</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="flex justify-start">
-          <Form.Field form={superform} name='active'>
+          <Form.Field form={superform} name="active">
             <Form.Control let:attrs>
               <SlideToggle
                 active="variant-filled-secondary"
@@ -705,8 +761,10 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 bind:checked={$form.active}
               >
-              <Form.Label class="inline-block w-[100px] text-left">Active {$form.active ? 'On' : 'Off'}</Form.Label>
-						</SlideToggle>
+                <Form.Label class="inline-block w-[100px] text-left"
+                  >Active {$form.active ? "On" : "Off"}</Form.Label
+                >
+              </SlideToggle>
             </Form.Control>
             <!-- <Form.Description>Temporarily disable policy</Form.Description> -->
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
@@ -723,7 +781,10 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$validFrom}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the validFrom date</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the validFrom date</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
@@ -738,7 +799,10 @@ $: loadingState.setFormLoading($delayed);
                 bind:value={$validTo}
               />
             </Form.Control>
-            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the validTo date</Form.Description>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the validTo date</Form.Description
+            >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
@@ -771,7 +835,6 @@ $: loadingState.setFormLoading($delayed);
           message: $message,
           submitting: $submitting,
           delayed: $delayed,
-          posted: $posted,
         }}
       />
       <br />

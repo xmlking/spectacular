@@ -1,3 +1,5 @@
+import type { GraphQLError } from 'graphql';
+
 export type Project = {
   id: string;
   name: string;
@@ -6,6 +8,27 @@ export type Project = {
   by?: string;
   href?: string;
 };
+
+/**
+ * Policy
+ */
+
+export interface Subject {
+  id: string;
+  displayName: string;
+  secondaryId?: string;
+}
+
+/**
+ * GraphQL API Types
+ */
+
+export type PartialGraphQLErrors = readonly Partial<GraphQLError>[] | null;
+
+interface GQLResult<T> {
+  data?: T | null;
+  errors?: PartialGraphQLErrors;
+}
 
 /**
  * Side Nav Links
