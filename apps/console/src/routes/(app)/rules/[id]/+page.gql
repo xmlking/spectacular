@@ -1,0 +1,21 @@
+query GetRule($id: uuid!) {
+  rules_by_pk(id: $id) {
+    id
+    displayName
+    description
+    tags
+    annotations
+    source
+    sourcePort
+    destination
+    destinationPort
+    protocol
+    action
+    direction
+    appId
+    throttleRate
+    weight
+    shared
+    updatedAt
+  }
+}

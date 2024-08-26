@@ -1,0 +1,15 @@
+# query MyQuery {
+#   rules {
+#     id
+#     displayName
+#   }
+# }
+
+query MyQuery {
+  test_rule {
+    a
+    b
+    c
+    d
+  }
+}

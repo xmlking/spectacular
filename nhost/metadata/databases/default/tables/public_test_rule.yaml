@@ -1,0 +1,13 @@
+table:
+  name: test_rule
+  schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - c
+        - d
+        - b
+        - a
+      filter: {}
+    comment: ""

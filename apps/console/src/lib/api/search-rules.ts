@@ -1,56 +1,49 @@
+// $lib/api/search-rules.ts
 import { CachePolicy, type SearchRules$result, graphql, order_by } from '$houdini';
-import type { PartialGraphQLErrors, Subject } from '$lib/types';
+import type { Rule, RuleSearch } from '$lib/schema/rule';
 import { Logger } from '@spectacular/utils';
-import { type Result, err, ok } from 'neverthrow';
+import type { GraphQLError } from 'graphql';
 
-/**
- * HINT: Using `neverthrow` lib's `Result` to annotate a functions
- * https://x.com/mattpocockuk/status/1825552717571629306
- */
+interface GQLResult<T> {
+  data: T | undefined;
+  errors: Partial<GraphQLError>[] | null;
+}
 
 const log = new Logger('api:rules:search');
 
 const searchRules = graphql(`
-        query SearchRules(
-          $where: rules_bool_exp
-          $limit: Int = 50
-          $offset: Int = 0
-          $orderBy: [rules_order_by!] = [{ updatedAt: desc_nulls_last }]
-        ) @cache(policy: NetworkOnly) {
-          rules(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
-            id
-            displayName
-            description
-            tags
-            annotations
-            shared
-            source
-            sourcePort
-            destination
-            destinationPort
-            protocol
-            direction
-            action
-            appId
-            throttleRate
-            weight
-            updatedBy
-            updatedAt
-          }
-        }
-    `);
-
+  query SearchRules(
+    $where: rules_bool_exp
+    $limit: Int = 50
+    $offset: Int = 0
+    $orderBy: [rules_order_by!] = [{ updatedAt: desc_nulls_last }]
+  ) @cache(policy: NetworkOnly) {
+    rules(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
+      id
+      displayName
+      description
+      source
+      sourcePort
+      destination
+      destinationPort
+      protocol
+      action
+      direction
+      appId
+      throttleRate
+      weight
+      shared
+      updatedAt
+    }
+  }
+`);
 const limit = 10;
 const orderBy = [{ updatedAt: order_by.desc_nulls_last }];
-
-// TODO: throttle-debounce , prevent double calling, finish
-export async function searchRulesFn(
-  displayNameTerm: string,
-): Promise<Result<SearchRules$result['rules'], PartialGraphQLErrors>> {
-  if (displayNameTerm.length < 4) return ok([]);
+export async function searchRulesFn(ruleNameTerm: string): Promise<GQLResult<Rule[]>> {
+  if ( ruleNameTerm.length < 4) return { data: [], errors: null };
 
   const where = {
-    displayName: { _ilike: `%${displayNameTerm}%` },
+    displayName: { _ilike: `%${ruleNameTerm}%` },
   };
 
   const variables = { where, limit, orderBy };
@@ -61,5 +54,6 @@ export async function searchRulesFn(
     metadata: { logResult: true },
     variables,
   });
-  return data?.rules ? ok(data.rules) : err(errors);
+
+  return { data: data?.rules as Rule[], errors };
 }
