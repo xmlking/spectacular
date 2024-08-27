@@ -13,7 +13,7 @@ Nhost is an open source Firebase alternative with GraphQL, built with the follow
 
 ## Nhost CLI
 
-[nhost](https://docs.nhost.io/cli) cli is used to `setup/config/run`` local nhost **BFF**
+[nhost](https://docs.nhost.io/cli) cli is used to `setup/config/run` local nhost **BFF**
 
 ### Prerequisites
 
@@ -21,11 +21,18 @@ Nhost is an open source Firebase alternative with GraphQL, built with the follow
 
 ### Installation
 
+> [!NOTE]
+> You can check latest available `nhost cli` version at: [nhost releases](https://github.com/nhost/cli/)  
+> If you follow nhost installation docs, default installation location is `/usr/local/bin`  
+> We overwrite installation with  `export INSTALL_PATH=$HOME/bin` setting
+
 ```shell
-# Install the CLI with:
-sudo curl -L https://raw.githubusercontent.com/nhost/cli/main/get.sh | bash
+# Install the CLI in ~/bin diretory:
+mkdir -p $HOME/bin
+export INSTALL_PATH=$HOME/bin
+curl -L https://raw.githubusercontent.com/nhost/cli/main/get.sh | bash
 # update
-sudo nhost sw upgrade
+nhost sw upgrade
 # (or) if you install user's directory i.e., ~/bin/nhost
 nhost sw upgrade
 ```

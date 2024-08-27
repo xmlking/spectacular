@@ -21,8 +21,9 @@ export const load = async (event) => {
   const user = data?.user;
   const orgRoles = data?.user_org_roles;
   const organizations = data?.organizations;
+  const roles = data?.authUserRoles;
   console.log('user:', user);
   if (!user) error(404, 'User not found');
   const form = await superValidate(user, zod(schema));
-  return { form, user, orgRoles, organizations };
+  return { form, user, orgRoles, organizations, roles };
 };

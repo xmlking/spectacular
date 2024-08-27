@@ -6,16 +6,19 @@
   },
   {
     "op": "replace",
-    "path": "/auth/redirections/allowedUrls",
-    "value": [
-      "https://console.traefik.me:5173",
-      "https://console.traefik.me:5173/dashboard/profile",
-      "https://console.traefik.me:3000",
-      "https://console.traefik.me:3000/dashboard/profile",
-      "https://console.traefik.me",
-      "https://console.traefik.me/dashboard/profile",
-      "https://*.vercel.app"
-    ]
+				"path": "/auth/redirections/allowedUrls",
+				"value": [
+					"https://console.traefik.me:5173",
+					"https://console.traefik.me:5173/profile",
+					"https://console.traefik.me:5173/dashboard/profile",
+					"https://console.traefik.me:3000",
+					"https://console.traefik.me:3000/profile",
+					"https://console.traefik.me:3000/dashboard/profile",
+					"https://console.traefik.me",
+					"https://console.traefik.me/profile",
+					"https://console.traefik.me/dashboard/profile",
+					"https://*.vercel.app"
+				]
   },
   {
     "op": "replace",
@@ -31,5 +34,9 @@
     "op": "replace",
     "path": "/postgres/settings/maxConnections",
     "value": 99
+  },
+  {
+    "op": "remove",
+    "path": "/ai"
   }
 ]
