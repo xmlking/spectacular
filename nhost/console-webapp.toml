@@ -2,7 +2,7 @@ name="console"
 
 [image]
 image = "ghcr.io/xmlking/spectacular/console:0.4.2"
-# image="registry.eu-central-1.nhost.run/b719c4a4-6fb2-4feb-8220-c7f01ef5bfe8:0.1.1"
+pullCredentials = '{{ secrets.CONTAINER_REGISTRY_CREDENTIALS }}'
 
 [[environment]]
 NAME = "ORIGIN"
