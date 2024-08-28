@@ -6,7 +6,7 @@ import { vercelToolbar } from '@vercel/toolbar/plugins/vite';
 import houdini from 'houdini/vite';
 import { defineConfig } from 'vitest/config';
 
-// if (!existsSync('./../../infra/base/traefik/certs/traefik.me.crt')) {
+// if (!existsSync('config/certs/traefik.me.crt')) {
 // 	console.log('Missing HTTPS key/cert. You may need to run:  npm run cert');
 // }
 // TODO Lightning CSS  and tailwind v4 https://twitter.com/devongovett/status/1701097560155549756
@@ -16,8 +16,8 @@ export default defineConfig({
     host: 'console.traefik.me',
     // host: 'console-192-168-XX-XX.traefik.me',
     https: {
-      cert: './../../infra/base/traefik/certs/traefik.me.crt',
-      key: './../../infra/base/traefik/certs/traefik.me.key',
+      cert: 'config/certs/traefik.me.crt',
+      key: 'config/certs/traefik.me.key',
     },
     proxy: {},
   },

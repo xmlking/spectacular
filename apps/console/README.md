@@ -11,8 +11,8 @@ Everything you need to build a Svelte project, powered by [`create-svelte`](http
     > NOTE: they will expire every 60 days
 
     ```shell
-    curl traefik.me/fullchain.pem -o infra/base/traefik/certs/traefik.me.crt
-    curl traefik.me/privkey.pem -o infra/base/traefik/certs/traefik.me.key
+    curl traefik.me/fullchain.pem -o apps/console/config/certs/traefik.me.crt
+    curl traefik.me/privkey.pem -o apps/console/config/certs/traefik.me.key
     ```
 
 ### Backend

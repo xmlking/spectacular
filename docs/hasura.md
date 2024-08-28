@@ -31,7 +31,7 @@ hasura init hasura --project nhost --endpoint https://swzucovdccjouwebopwb.hasur
 
 # from localhost
 hasura init hasura --project nhost --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-# move infra/hasura/config.yaml to project root and edit metadata_directory, migrations_directory, seeds_directory paths in it
+# move nhost/config.yaml to project root and edit metadata_directory, migrations_directory, seeds_directory paths in it
 
 hasura version
 
@@ -124,7 +124,7 @@ docker compose down -v
 
 ### Apply Migrations and Metadata on another instance of the Hasura Server
 
-To apply all the **Metadata** and **Migrations** present in the `infra/hasura` directory to a new, "fresh" database (i.e., after `docker compose down -v`):
+To apply all the **Metadata** and **Migrations** present in the `nhost` directory to a new, "fresh" database (i.e., after `docker compose down -v`):
 
 > In this case, I am applying metadata, migrations and seed data to local fresh hasura/postgres database started with `docker compose up hasura`
 
@@ -154,7 +154,7 @@ hasura migrate status --database-name default --endpoint https://local.hasura.lo
 
 ### Export Metadata
 
-To export **Metadata** and **Migrations** from your local Hasura to `infra/hasura` directory, for sharing with the team:
+To export **Metadata** and **Migrations** from your local Hasura to `nhost/hasura` directory, for sharing with the team:
 
 ```shell
 hasura metadata export --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret

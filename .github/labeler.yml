@@ -4,37 +4,41 @@ web:
 docs:
   - apps/docs/**/*
   - change-notes/**/*docs*
-offline:
-  - apps/offline/**/*
-  - change-notes/**/*offline*
-playground:
-  - apps/playground/**/*
-  - change-notes/**/*playground*
+console:
+  - apps/console/**/*
+  - change-notes/**/*console*
 ui:
   - packages/ui/**/*
   - change-notes/**/*ui*
 assets:
   - packages/assets/**/*
   - change-notes/**/*assets*
-tailwind-config:
-  - packages/tailwind-config/**/*
-  - change-notes/**/*tailwind-config*
-tsconfig:
-  - packages/tsconfig/**/*
-  - change-notes/**/*tsconfig*
+biome-config:
+  - packages/biome-config/**/*
+  - change-notes/**/*biome-config*
+role-houdini:
+  - packages/role-houdini/**/*
+  - change-notes/**/*role-houdini*
+skeleton-ui:
+  - packages/skeleton-ui/**/*
+  - change-notes/**/*skeleton-ui*
+typescript-config:
+  - packages/typescript-config/**/*
+  - change-notes/**/*typescript-config*
 documentation:
   - '**/*.md'
   - docs/**/*
 hasura:
-  - infra/hasura/**/*
+  - nhost/**/*
   - change-notes/**/*hasura*
 test:
   - /**/tests/**/*
   - change-notes/**/*tests*
 env:
   - '**/.env'
-  - '**/.env.local'
-  - '**/.env.test'
+  - '**/.env.production'
+  - '**/.secrets'
+  - '**/.secrets.production'
 workspace:
   - .github/**/*
   - config.yaml

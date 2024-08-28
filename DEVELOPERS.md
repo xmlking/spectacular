@@ -30,7 +30,6 @@ The repository is organized as a monorepo, with the following structure (only re
 
 ```
 assets/            # Assets used in the README
-infra/             # Hasura and K8S *Infrastructure as Code (IaC)* files for the monorepo
 docs/              # Developer Documentation
 apps/
 	web/           # Dashboard WebApp
