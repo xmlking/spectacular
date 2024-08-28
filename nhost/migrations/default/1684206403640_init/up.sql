@@ -235,8 +235,8 @@ CREATE TABLE public.user_org_roles (
     created_by uuid NOT NULL,
     user_id uuid NOT NULL,
     role text NOT NULL,
-    is_default_role boolean DEFAULT false NOT NULL,
-    organization text NOT NULL
+    organization text NOT NULL,
+    is_default_role boolean DEFAULT false NOT NULL
 );
 COMMENT ON TABLE public.user_org_roles IS 'Roles of User for a given Org.';
 ALTER TABLE ONLY public.action

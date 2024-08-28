@@ -50,6 +50,12 @@ onMount(() => {
       },
       toastStore,
     );
+    // Remove the error parameters
+    searchParams.delete('error');
+    searchParams.delete('errorDescription');
+    // update URL without parameters
+    const url = `${window.location.pathname}?${searchParams.toString()}`;
+    window.history.replaceState({}, '', url);
   }
 });
 async function login(nhost: NhostClient, provider: Provider) {
