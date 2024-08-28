@@ -1,0 +1,149 @@
+<script lang="ts">
+import { goto } from '$app/navigation';
+import type { DeviceSearch } from '$lib/schema/device';
+import { getLoadingState } from '$lib/stores/loading';
+import { AppBar, Autocomplete, type AutocompleteOption, type PopupSettings, popup } from '@skeletonlabs/skeleton';
+import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
+import { ErrorMessage } from '@spectacular/skeleton/components/form';
+import { Logger } from '@spectacular/utils';
+import * as Form from 'formsnap';
+import type { GraphQLError } from 'graphql';
+import { SearchIcon } from 'lucide-svelte';
+import type { FormEventHandler } from 'svelte/elements';
+import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms';
+import { searchDevices, type Device } from './search';
+
+const log = new Logger('devices:search-form:browser');
+
+export let formInitData: SuperValidated<DeviceSearch>;
+
+// Variables
+const loadingState = getLoadingState();
+
+// Search form
+const form = superForm(formInitData, {
+  dataType: 'json',
+  taintedMessage: null,
+  syncFlashMessage: false,
+  resetForm: true,
+  onError({ result }) {
+    log.error('rule superForm error:', { result });
+  },
+});
+const { form: formData, delayed, allErrors, errors, constraints, message, tainted, posted, submitting, timeout } = form;
+
+let searchForm: HTMLFormElement;
+
+const popupSettings: PopupSettings = {
+  event: 'focus-click',
+  target: 'popupAutocomplete',
+  placement: 'bottom',
+};
+
+let gqlErrors: Partial<GraphQLError>[] | undefined;
+let devices: Device[] | undefined;
+
+// Functions
+const onInput: FormEventHandler<HTMLInputElement> = async (event) => {
+  const value = event.currentTarget.value;
+  console.log(`onInput: ${value}`);
+  if (value.length > 3) {
+    ({ data: devices, errors: gqlErrors } = await searchDevices($formData));
+  }
+};
+
+const onChange: FormEventHandler<HTMLInputElement> = async (event) => {
+  const value = event.currentTarget.value;
+  console.log(`onChange: ${value}`);
+  if (value === '') {
+    await goto(`/devices?limit=${$formData.limit}&offset=${$formData.offset}`);
+  }
+};
+
+const onSelect = async (event: CustomEvent<AutocompleteOption<Device>>) => {
+  const value = event.detail.value;
+  console.log(`onSelect: ${value}`);
+  $formData.displayName = value.displayName;
+  await goto(`/devices?displayName=${$formData.displayName}&limit=${$formData.limit}&offset=${$formData.offset}`);
+};
+
+// Reactivity
+$: invalid = $allErrors.length > 0;
+$: loadingState.setFormLoading($delayed);
+</script>
+
+
+<form data-sveltekit-noscroll bind:this={searchForm}>
+  <AppBar
+    gridColumns="grid-cols-3"
+    slotLead="place-content-start !justify-start"
+    slotTrail="place-content-end"
+  >
+    <svelte:fragment slot="lead">
+      <h3 class="h3 pl-2 hidden md:block">Devices</h3>
+    </svelte:fragment>
+
+    <div
+      class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
+      class:input-error={invalid}
+      use:popup={popupSettings}
+    >
+      <div class="input-group-shim" class:input-error={invalid}>
+        <SearchIcon size={17} />
+      </div>
+      <Form.Field {form} name="displayName">
+        <Form.Control let:attrs>
+          <input
+            type="search"
+            class="data-[fs-error]:input-error hidden md:block"
+            placeholder="Device Display Name"
+            autocomplete="off"
+            spellcheck="false"
+            autocorrect="off"
+            on:change={onChange}
+            on:input={onInput}
+            {...attrs}
+            bind:value={$formData.displayName}
+          />
+        </Form.Control>
+      </Form.Field>
+      <button type="submit" class="variant-filled-secondary">Submit</button>
+    </div>
+
+    <svelte:fragment slot="trail">
+      <a
+        href="/devices/create"
+        class="btn variant-filled"
+        data-sveltekit-preload-data="hover"
+      >
+        Add Device
+      </a>
+    </svelte:fragment>
+  </AppBar>
+  <input name="limit" bind:value={$formData.limit} type="hidden" />
+  <input name="offset" bind:value={$formData.offset} type="hidden" />
+  <ErrorMessage error={$errors?.displayName?.[0]} />
+  <ErrorMessage error={$errors?.limit?.[0]} />
+  <ErrorMessage error={$errors?.offset?.[0]} />
+</form>
+
+<DebugShell label="form-data">
+  <SuperDebug
+    label="Miscellaneous"
+    status={false}
+    data={{
+      message: $message,
+      submitting: $submitting,
+      delayed: $delayed,
+      posted: $posted,
+    }}
+  />
+  <br />
+  <SuperDebug label="Form" data={$formData} />
+  <br />
+  <SuperDebug label="Tainted" status={false} data={$tainted} />
+  <br />
+  <SuperDebug label="Errors" status={false} data={$errors} />
+  <br />
+  <SuperDebug label="Constraints" status={false} data={$constraints} />
+</DebugShell>

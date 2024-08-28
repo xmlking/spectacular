@@ -1,0 +1,19 @@
+query SearchDevicesPage(
+  $where: devices_bool_exp
+  $limit: Int = 50
+  $offset: Int = 0
+  $orderBy: [devices_order_by!] = [{ updatedAt: desc_nulls_last }]
+) @loading(cascade: true) {
+  devices(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) @list(name: "Search_Devices") {
+    ... on devices {
+      id
+      displayName
+      description
+      ip
+      tags
+      annotations
+      version
+      updatedAt
+    }
+  }
+}

@@ -7,7 +7,7 @@ Awesome **Tailwind CSS** Links
 - [Flowbite](https://flowbite.com/) [Svelte UI Components](https://flowbite-svelte.com/), [Getting Started with Flowbite-Svelte](https://medium.com/mkdir-awesome/getting-started-with-flowbite-svelte-37b086ce9db5)
 - [DaisyUI](https://daisyui.com/)
 - [headlessUI](https://github.com/CaptainCodeman/svelte-headlessui) **fully accessible, unstyled** UI components.
-- [Preline]([preline](https://preline.co/index.html)
+- [Preline]([preline](https://preline.co/index.html))
 - [Skeleton](https://www.skeleton.dev/) - Build fast and reactive web interfaces using Svelte + Tailwind CSS.
 
 ## UI Blocks
