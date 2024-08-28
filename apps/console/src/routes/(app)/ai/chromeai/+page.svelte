@@ -1,10 +1,11 @@
 <script lang="ts">
 import { isAIEnabled, isAIReady } from '$lib/stores/stores';
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
-import { generateObject } from 'ai';
+import { JSONParseError, TypeValidationError, generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';
 import { LoaderIcon, SearchIcon, Sparkles } from 'lucide-svelte';
 import { onDestroy, onMount } from 'svelte';
+import { message } from 'sveltekit-superforms';
 import { z } from 'zod';
 
 const model = chromeai('text', {
@@ -52,8 +53,16 @@ const onGenerate = async () => {
     output = JSON.stringify(object, null, 2);
     isLoading = false;
   } catch (err) {
-    console.log(err);
-    error = `${err}`;
+    console.error(err);
+    if (TypeValidationError.isInstance(err)) {
+      // error = `${err.value}`;
+      output = JSON.stringify(err.value, null, 2);
+    } else if (JSONParseError.isInstance(err)) {
+      // error = `${err.text}`;
+      output = JSON.stringify(err.text, null, 2);
+    } else {
+      error = `${err}`;
+    }
   } finally {
     isLoading = false;
   }
