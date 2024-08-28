@@ -158,10 +158,23 @@ turbo prune --scope=playground --docker
 ## Guides
 
 ```shell
+# List all tasks in the repository
+turbo run
+# List tasks in a specific package
+turbo run --filter=console
+# Using Automatic Package Scoping
+cd packages/ui && turbo run
+# List all packages in the repository
+turbo ls
+# List dependencies and tasks for the `web` package
+turbo ls console
+## List affected packages
+turbo ls --affected
 turbo build
 turbo dev
 turbo dev  --filter=playground
 turbo lint
+turbo run lint test --affected
 turbo run generate
 turbo run generate  --dry-run
 pnpx turbo login
