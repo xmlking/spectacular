@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { onMount } from 'svelte';
 import { tweened } from 'svelte/motion';
 import { fly, scale, slide } from 'svelte/transition';

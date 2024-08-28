@@ -1,3 +1,8 @@
+<!--
+  @component
+
+  some markdown here
+-->
 <script lang="ts">
 // Source: https://babakfp.ir/docs/svelte-outclick
 import { createEventDispatcher } from 'svelte';

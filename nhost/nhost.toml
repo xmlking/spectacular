@@ -49,7 +49,7 @@ maxDepthQueries = 4
 version = 20
 
 [auth]
-version = '0.33.0-beta3'
+version = '0.33.0'
 
 [auth.resources]
 replicas = 1
@@ -84,7 +84,7 @@ default = 'mp'
 rating = 'g'
 
 [auth.user.email]
-allowed = ['sumo@demo.com','manager@chinthagunta.com','supervisor@chinthagunta.com','user1@chinthagunta.com','user2@chinthagunta.com']
+allowed = ['sumo@demo.com', 'manager@chinthagunta.com', 'supervisor@chinthagunta.com', 'user1@chinthagunta.com', 'user2@chinthagunta.com']
 blocked = ['bad@example.com']
 
 [auth.user.emailDomains]
@@ -262,4 +262,3 @@ synchPeriodMinutes = 10
 [observability]
 [observability.grafana]
 adminPassword = '{{ secrets.GRAFANA_ADMIN_PASSWORD }}'
-

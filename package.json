@@ -28,8 +28,8 @@
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {
     "//": "Include build, lint, test - all the things you need to run before publishing",
-    "build": "turbo run build",
-    "check": "turbo run check --parallel",
+    "build": "turbo run build --affected",
+    "check": "turbo run check --parallel --affected",
     "ci:release": "pnpm run prerelease && changeset publish",
     "ci:snapshot": "pnpm prerelease && changeset version --snapshot preview && pnpm install && changeset publish --tag preview",
     "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
@@ -37,16 +37,16 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "cs": "changeset",
     "dev": "turbo run dev --parallel",
-    "format": "turbo run format --parallel",
+    "format": "turbo run format --parallel --affected",
     "format:root": "biome check --write --reporter=summary",
-    "lint": "turbo run lint --parallel",
+    "lint": "turbo run lint --parallel --affected",
     "lint:cspell": "cspell lint -c .vscode/cspell.json **",
     "lint:root": "biome check",
     "prepare": "./scripts/init.sh",
-    "prerelease": "pnpm clean && pnpm install && turbo run build lint test",
+    "prerelease": "pnpm clean && pnpm install && turbo run build lint test --affected",
     "preview": "turbo run preview",
-    "test": "turbo run test --parallel",
-    "test:unit:coverage": "turbo run test:unit:coverage"
+    "test": "turbo run test --parallel --affected",
+    "test:unit:coverage": "turbo run test:unit:coverage --affected"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
@@ -62,7 +62,7 @@
     "husky": "9.1.5",
     "lint-staged": "15.2.9",
     "markuplint": "4.9.2",
-    "turbo": "2.0.14",
+    "turbo": "2.1.0",
     "vitest": "2.0.5"
   },
   "packageManager": "pnpm@9.8.0",
