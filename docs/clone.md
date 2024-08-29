@@ -22,7 +22,17 @@ upstream        DISABLE (push)
 
 When you push, do so on `origin` with `git push origin`.
 
-When you want to pull changes from `upstream` you can just fetch the remote and rebase on top of your work.
+When you want to pull changes from `upstream` you can just fetch the remote and **merge** on top of your work.
+
+```shell
+git fetch upstream
+git merge upstream/main --no-ff
+# then, fix any merge confects 
+git merge --continue
+git push
+```
+
+**(OR)** When you want to pull changes from `upstream` you can just fetch the remote and **rebase** on top of your work.
 
 ```shell
 git fetch upstream
