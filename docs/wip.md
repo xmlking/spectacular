@@ -2,8 +2,8 @@
 
 ```shell
 # clean exclude TODO & .env (remove `-n` , it used to try dry-run)
-git clean -dfx -e TODO  -e .env.local  -e .env -e .env.production -e .env.test -e .secrets -e .secrets.production -e .vercel -e apps/console/.vercel \
--e apps/playground/.env.test -e infra/base/traefik/certs -e infra/base/mailpit/certs -e infra/helm -e compose.nhost.yml -e .idea -n
+git clean -dfx -e .env -e .env.production  -e .secrets -e .secrets.production \
+-e .vercel -e apps/console/.vercel -e apps/console/config/certs -e TODO -e .idea -n
 # update deps
 pnpm up --latest -r
 # convert docker-compose file to helm
