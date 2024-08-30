@@ -242,6 +242,11 @@ version = '0.6.1'
 version = '0.6.1'
 webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
 
+[ai.resources]
+[ai.resources.compute]
+cpu = 256
+memory = 512
+
 [ai.openai]
 organization = '{{ secrets.OPENAI_ORG_ID }}'
 apiKey = '{{ secrets.OPENAI_API_KEY }}'

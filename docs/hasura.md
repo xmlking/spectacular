@@ -134,14 +134,14 @@ hasura metadata apply --endpoint https://local.hasura.local.nhost.run  --admin-s
 # apply metadata, DB migrations and seed data
 hasura deploy --endpoint https://local.hasura.local.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Apply all seed file:
-hasura seed apply --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # (Or) Apply only a particular files:
-hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 002_users.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 011_devices.sql --database-name default  --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 012_rules.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 013_pools.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 014_policies.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 002_users.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 011_devices.sql --database-name default  --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 012_rules.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 013_pools.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 014_policies.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 ```
 
 Check the status
