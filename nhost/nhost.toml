@@ -21,7 +21,7 @@ corsDomain = ['*']
 devMode = true
 enableAllowList = false
 enableConsole = true
-enableRemoteSchemaPermissions = true
+enableRemoteSchemaPermissions = false
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
 liveQueriesMultiplexedRefetchInterval = 1000
 stringifyNumericTypes = false
@@ -30,18 +30,11 @@ stringifyNumericTypes = false
 level = 'warn'
 
 [hasura.events]
-httpPoolSize = 10
-
-[hasura.resources]
-replicas = 1
-
-[hasura.resources.compute]
-cpu = 500
-memory = 1024
+httpPoolSize = 100
 
 [graphql]
 [graphql.security]
-forbidAminSecret = true
+forbidAminSecret = false
 maxDepthQueries = 4
 
 [functions]
@@ -50,13 +43,6 @@ version = 20
 
 [auth]
 version = '0.33.0'
-
-[auth.resources]
-replicas = 1
-
-[auth.resources.compute]
-cpu = 250
-memory = 512
 
 [auth.elevatedPrivileges]
 mode = 'required'
@@ -194,19 +180,35 @@ timeout = 60000
 enabled = true
 issuer = 'Spectacular'
 
+[auth.misc]
+concealErrors = false
+
+[auth.rateLimit]
+[auth.rateLimit.emails]
+limit = 10
+interval = '1h'
+
+[auth.rateLimit.sms]
+limit = 10
+interval = '1h'
+
+[auth.rateLimit.bruteForce]
+limit = 10
+interval = '5m'
+
+[auth.rateLimit.signups]
+limit = 10
+interval = '5m'
+
+[auth.rateLimit.global]
+limit = 100
+interval = '1m'
+
 [postgres]
 version = '16.2-20240718-1'
 
 [postgres.resources]
-replicas = 1
 enablePublicAccess = true
-
-[postgres.resources.compute]
-cpu = 1000
-memory = 2048
-
-[postgres.resources.storage]
-capacity = 20
 
 [postgres.settings]
 maxConnections = 100
@@ -233,24 +235,12 @@ method = '{{ secrets.AUTH_SMTP_AUTH_METHOD }}'
 [storage]
 version = '0.6.1'
 
-[storage.resources]
-replicas = 1
-
-[storage.resources.compute]
-cpu = 500
-memory = 1024
-
 # [storage.antivirus]
 # server = 'tcp://run-clamav:3310'
 
 [ai]
 version = '0.6.1'
 webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
-
-[ai.resources]
-[ai.resources.compute]
-cpu = 256
-memory = 512
 
 [ai.openai]
 organization = '{{ secrets.OPENAI_ORG_ID }}'

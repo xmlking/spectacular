@@ -4,21 +4,68 @@ name="console"
 image = "ghcr.io/xmlking/spectacular/console:0.4.2"
 pullCredentials = '{{ secrets.CONTAINER_REGISTRY_CREDENTIALS }}'
 
-[[environment]]
-NAME = "ORIGIN"
-VALUE = "http://localhost:3000"
+# runtime
 [[environment]]
 NAME = "NODE_ENV"
 VALUE = "production"
 [[environment]]
 NAME = "VERCEL_ENV"
 VALUE = "production"
+# deployment environment
 [[environment]]
-NAME = "CACHE_TTL"
-VALUE = '6000'
+name = 'NHOST_SUBDOMAIN'
+value =   'swzucovdccjouwebopwb'
+[[environment]]
+name = 'PUBLIC_NHOST_REGION'
+value =   'us-west-2'
+[[environment]]
+name = 'PUBLIC_NHOST_SUBDOMAIN'
+value =   'swzucovdccjouwebopwb'
+[[environment]]
+name = 'PUBLIC_NHOST_REGION'
+value =   'us-west-2'
+# hasura, storage, auth
+[[environment]]
+name = 'NHOST_HASURA_URL'
+value =   'https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run/console'
+[[environment]]
+name = 'NHOST_AUTH_URL'
+value =   'https://swzucovdccjouwebopwb.auth.us-west-2.nhost.run/v1'
+[[environment]]
+name = 'NHOST_GRAPHQL_URL'
+value =   'https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run/v1/graphql'
+[[environment]]
+name = 'NHOST_STORAGE_URL'
+value =   'https://swzucovdccjouwebopwb.storage.us-west-2.nhost.run/v1'
+[[environment]]
+name = 'NHOST_FUNCTIONS_URL'
+value =   'https://swzucovdccjouwebopwb.functions.us-west-2.nhost.run/v1'
+[[environment]]
+name = 'PUBLIC_NHOST_AUTH_URL'
+value =   'https://swzucovdccjouwebopwb.auth.us-west-2.nhost.run/v1'
+[[environment]]
+name = 'PUBLIC_NHOST_GRAPHQL_URL'
+value =   'https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run/v1/graphql'
+[[environment]]
+name = 'PUBLIC_NHOST_STORAGE_URL'
+value =   'https://swzucovdccjouwebopwb.storage.us-west-2.nhost.run/v1'
+[[environment]]
+name = 'PUBLIC_NHOST_FUNCTIONS_URL'
+value =   'https://swzucovdccjouwebopwb.functions.us-west-2.nhost.run/v1'
+[[environment]]
+name = 'HASURA_GRAPHQL_ENDPOINT'
+value =  'https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run'
+# app
+[[environment]]
+name = 'APP_NAME'
+value =  'Spectacular'
+[[environment]]
+name = 'APP_DESCRIPTION'
+value =  'Spectacular Console App'
 [[environment]]
 name = 'PUBLIC_DEFAULT_ORGANIZATION'
-value = 'chinthagunta'
+value =  'chinthagunta'
+# terms
 [[environment]]
 name = 'PUBLIC_TERMS_PRIVACY_COMPANY'
 value = 'Your Company'
@@ -40,66 +87,32 @@ value =  '[Details about the pricing, subscription model, refund policy]'
 [[environment]]
 name = 'PUBLIC_TERMS_PRIVACY_COUNTRY'
 value =  'United States'
+# flags
 [[environment]]
-name = 'HASURA_GRAPHQL_ENDPOINT'
-value =  'https://local.graphql.nhost.run'
+name = 'FEATURE_SHOW_MAGIC_LINK_LOGIN'
+value =  'true'
 [[environment]]
-name = 'HASURA_GRAPHQL_ADMIN_SECRET'
-value =   '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
+name = 'FEATURE_SHOW_SOCIAL_LOGIN'
+value =  'true'
 [[environment]]
-name = 'HASURA_GRAPHQL_JWT_SECRET'
-value =   '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
+name = 'FEATURE_SIMULATE_LOADING_STATE'
+value =  'false'
+# secrets
 [[environment]]
 name = 'RATE_LIMIT_SECRET'
-value =   '84568a0e3c25b3eaba088d0618d7d03fd6f64182c13ebd01f6671bbf59071284a9ef78a144ea2dd2cfe7ad37e3bf7bce8420d79078c7f3d85457e503aeef4c97'
-[[environment]]
-name = 'FEATURE_ENABLE_PASSWORD_LOGIN'
-value =   'true'
-[[environment]]
-name = 'PUBLIC_NHOST_SUBDOMAIN'
-value =   'local'
-[[environment]]
-name = 'PUBLIC_NHOST_REGION'
-value =   ''
-[[environment]]
-name = 'NHOST_HASURA_URL'
-value =   'https://local.hasura.nhost.run/console'
-[[environment]]
-name = 'NHOST_AUTH_URL'
-value =   'https://local.auth.nhost.run/v1'
-[[environment]]
-name = 'NHOST_GRAPHQL_URL'
-value =   'https://local.graphql.nhost.run/v1/graphql'
-[[environment]]
-name = 'NHOST_STORAGE_URL'
-value =   'https://local.storage.nhost.run/v1'
-[[environment]]
-name = 'NHOST_FUNCTIONS_URL'
-value =   'https://local.functions.nhost.run/v1'
-[[environment]]
-name = 'PUBLIC_NHOST_AUTH_URL'
-value =   'https://local.auth.nhost.run/v1'
-[[environment]]
-name = 'PUBLIC_NHOST_GRAPHQL_URL'
-value =   'https://local.graphql.nhost.run/v1/graphql'
-[[environment]]
-name = 'PUBLIC_NHOST_STORAGE_URL'
-value =   'https://local.storage.nhost.run/v1'
-[[environment]]
-name = 'PUBLIC_NHOST_FUNCTIONS_URL'
-value =   'https://local.functions.nhost.run/v1'
+value =  '{{ secrets.RATE_LIMIT_SECRET }}'
 [[environment]]
 name = 'FLAGS_SECRET'
-value =   '0S1qdVe4NgUNwPyi-usmtYzuoLck76d6hqgZBMkhYQo'
-[[environment]]
-name = 'OPENAI_API_KEY'
-value =   '{{ secrets.OPENAI_API_KEY }}'
+value =  '{{ secrets.FLAGS_SECRET }}'
 [[environment]]
 name = 'OPENAI_ORG_ID'
-value =   '{{ secrets.OPENAI_ORG_ID }}'
+value =  '{{ secrets.OPENAI_ORG_ID }}'
 [[environment]]
 name = 'OPENAI_PROJECT_ID'
-value =   '{{ secrets.OPENAI_PROJECT_ID }}'
+value =  '{{ secrets.OPENAI_PROJECT_ID }}'
+[[environment]]
+name = 'OPENAI_API_KEY'
+value =  '{{ secrets.OPENAI_API_KEY }}'
 
 [[ports]]
 type="http"

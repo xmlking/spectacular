@@ -163,6 +163,13 @@ Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Adminis
 3. To assign `manager` role to an user, set `default_role` as `manager` in `auth.users` and add `manager` role for that user in `auth.user_roles` table.
    > Admin users will have exactly one `manager` role defined as `default_role` in their `default_org` in `auth.users` table.
 
+## FAQ
+
+**How to implement `on-behalf-of` feature in webApps using Hasura?**
+
+In some cases it is necessary to act **on behalf of** a user. While the **Auth** service doesn’t allow that it is not difficult to implement such functionality as a serverless function.  
+You can find an example of a function that can generate a valid access token for your application with customized values here: [Custom JWTs](https://docs.nhost.io/guides/auth/custom-jwts)
+
 ## Reference
 
 - [Authentication and authorization in multi-tenancy B2B scenarios](https://zitadel.com/docs/guides/solution-scenarios/b2b)
