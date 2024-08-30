@@ -92,9 +92,9 @@ Awesome **SvelteKit** Links
 
 ## Animation
 
+- [Svelte Animations for Marketing](https://github.com/SikandarJODD/svelte-animations), [Demo](https://animation-svelte.vercel.app/)
 - [Svelte Star Wars Demo](https://github.com/geoffrich/star-wars-demo-svelte), [Demo](https://main--transcendent-begonia-7a3d6f.netlify.app/)
 - [Motion](https://motion.dev/) (preferred)
-- [Svelte Magic UI](https://animation-svelte.vercel.app/magic)
 
 ## State Management
 

@@ -135,7 +135,8 @@ Deploy to nhost cloud
 
 ```shell
 # set the SERVICE_ID
-SERVICE_ID="2503b290-249c-42f5-b89e-fd9a98980e22"
+SERVICE_ID="f27908df-3586-4d02-bb44-a762412d3912"
+# registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912
 nhost run config-deploy --config ./nhost/console-webapp.toml --service-id $SERVICE_ID
 ```
 
