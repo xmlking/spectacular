@@ -24,7 +24,7 @@ $: ({ SearchDevicesPage, form } = data);
   </section>
 
   <section class="space-y-4">
-    <SearchDevicesForm {form}/>
+    <SearchDevicesForm formInitData={form}/>
   </section>
 
   <section class="space-y-4">
