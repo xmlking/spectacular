@@ -29,7 +29,7 @@ WORKDIR /app
 RUN pnpm add -g turbo
 COPY . .
 RUN mv .git dotgit
-RUN turbo prune --scope=${SCOPE} --docker
+RUN turbo prune --scope=@spectacular/${SCOPE} --docker
 
 ###################################################################
 # Stage 2: Install dependencies                                   #
@@ -74,7 +74,7 @@ ARG TURBO_TOKEN
 ENV TURBO_TOKEN=$TURBO_TOKEN
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN pnpm turbo run build --filter=./apps/${SCOPE}...
+RUN pnpm turbo run build --filter=@spectacular/${SCOPE}...
 
 ###################################################################
 # Stage 4: Run the app (prod)                                     #

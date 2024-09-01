@@ -120,7 +120,7 @@ make up
 To run hasura stack locally with production config
 
 ```shell
-export COMPOSE_ENV_FILES=.env,.secrets,apps/console/.env,apps/console/.secrets,.env.production,.secrets.production
+export COMPOSE_ENV_FILES=.env,.secrets,.env.production,.secrets.production
 docker compose -f compose-nonprod.yml up traefik
 docker compose -f compose-nonprod.yml up graphql
 docker compose -f compose-nonprod.yml up auth
