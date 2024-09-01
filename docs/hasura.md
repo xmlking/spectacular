@@ -91,7 +91,7 @@ hasura migrate apply --up 1  --database-name default --endpoint https://local.ha
 hasura migrate apply --version 1686378049757 --type down --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura migrate apply --version 1686378049757 --type up --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Rollback all migrations:
-hasura migrate apply --down all -endpoint https://local.hasura.local.nhost.run --admin-secrethasura-admin-secret
+hasura migrate apply --down all --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Check status of migrations
 hasura migrate status --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Usage to delete all migration versions
@@ -148,8 +148,8 @@ Check the status
 
 ```shell
 cd nhost
-hasura metadata diff --endpoint https://local.hasura.local.nhost.run --admin-secret <admin-secret>
-hasura migrate status --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret <admin-secret>
+hasura metadata diff --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura migrate status --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 ```
 
 ### Export Metadata
