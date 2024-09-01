@@ -25,7 +25,10 @@
     "url": "https://github.com/xmlking/spectacular.git"
   },
   "license": "MIT",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "//": "Include build, lint, test - all the things you need to run before publishing",
     "build": "turbo run build --affected",
@@ -45,7 +48,7 @@
     "lint": "manypkg check && biome lint",
     "lint:cspell": "cspell lint -c .vscode/cspell.json **",
     "lint:workspaces": "turbo run lint --parallel --affected",
-    "manypkg": "manypkg check",
+    "manypkg": "manypkg fix",
     "postinstall": "manypkg check",
     "prepare": "./scripts/init.sh",
     "prerelease": "pnpm clean && pnpm install && turbo run build lint test --affected",
@@ -82,6 +85,8 @@
   },
   "manypkg": {
     "defaultBranch": "main",
-    "ignoredRules": ["ROOT_HAS_DEV_DEPENDENCIES"]
+    "ignoredRules": [
+      "ROOT_HAS_DEV_DEPENDENCIES"
+    ]
   }
 }
