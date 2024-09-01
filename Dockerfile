@@ -74,7 +74,7 @@ ARG TURBO_TOKEN
 ENV TURBO_TOKEN=$TURBO_TOKEN
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN pnpm turbo run build --filter=${SCOPE}...
+RUN pnpm turbo run build --filter=./apps/${SCOPE}...
 
 ###################################################################
 # Stage 4: Run the app (prod)                                     #

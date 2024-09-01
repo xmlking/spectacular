@@ -42,7 +42,7 @@ ENV TURBO_TOKEN=$TURBO_TOKEN
 
 # TODO: set any extra ENV needed for build
 ENV BUN_ENV=true
-RUN bun run build --filter=${SCOPE}...
+RUN bun run build --filter=./apps/${SCOPE}...
 RUN ls -la  /app/apps/web
 
 ###################################################################

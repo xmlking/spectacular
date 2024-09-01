@@ -17,7 +17,8 @@
     },
     "dev": {
       "dependsOn": ["generate"],
-      "cache": false,
+      "outputLogs": "new-only",
+      "cache": false, // No outputs will be cached
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
     },
@@ -43,6 +44,9 @@
     },
     "build": {
       "dependsOn": ["generate", "^build"],
+      // Consider all default inputs except the package's README
+      "inputs": ["$TURBO_DEFAULT$", "!README.md"],
+      // File outputs will be cached
       "outputs": [
         "build/**",
         "dist/**",
@@ -85,10 +89,12 @@
         "OPENAI_ORG_ID",
         "OPENAI_PROJECT_ID",
         "OPENAI_API_KEY",
+        "PUBLIC_*",
         "npm_package_version"
       ]
     },
     "preview": {
+      "cache": false,
       "persistent": true
     },
     "test:unit:coverage": {

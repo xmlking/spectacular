@@ -52,6 +52,7 @@ export default defineConfig({
     defaultStrategy: 'hover',
   },
   experimental: {
+    serverIslands: true,
     clientPrerender: true,
     env: {
       schema: {

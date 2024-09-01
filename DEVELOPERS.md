@@ -65,7 +65,7 @@ Although package references are correctly updated on the fly for TypeScript, exa
 Running packages in development mode from the root folder is as simple as:
 
 ```sh
-$ turbo dev --filter=web -- --open
+$ turbo dev --filter=@spectacular/web -- --open
 ```
 
 Our packages are linked together using [PNPM's workspace](https://pnpm.io/workspaces) feature. Next.js and Vite automatically detect changes in the dependencies and rebuild everything, so the changes will be reflected in the examples and the dashboard.
@@ -76,7 +76,7 @@ The easier way to contribute to our documentation is to go to the `apps/docs` fo
 
 ```sh
 # not necessary if you've already done this step somewhere in the repository
-$ turbo dev --filter=docs
+$ turbo dev --filter=@spectacular/docs
 ```
 
 ## Run Test Suites
@@ -86,7 +86,7 @@ $ turbo dev --filter=docs
 You can run the unit tests with the following command from the repository root:
 
 ```sh
-$ turbo test:unit  --filter=web...
+$ turbo test:unit  --filter=@spectacular/web...
 ```
 
 ### E2E Tests
@@ -96,7 +96,7 @@ Each package that defines end-to-end tests embeds their own Spectacular configur
 You can run the e2e tests with the following command from the repository root:
 
 ```sh
-$ turbo test:integration  --filter=web...
+$ turbo test:integration  --filter=@spectacular/web...
 ```
 
 ## Changesets

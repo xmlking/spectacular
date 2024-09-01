@@ -428,9 +428,9 @@ add `pwa-assets.config.ts` to project root
 
 ```shell
 # add vercel AI core
-pnpm add -D ai @ai-sdk/svelte --filter console
+pnpm add -D ai @ai-sdk/svelte --filter @spectacular/console
 # add optional providers
-pnpm add -D  @ai-sdk/openai @ai-sdk/azure chrome-ai ollama-ai-provider --filter console
+pnpm add -D  @ai-sdk/openai @ai-sdk/azure chrome-ai ollama-ai-provider --filter @spectacular/console
 ```
 
 #### Enable https (optional)

@@ -52,10 +52,10 @@ The following URLs will be available
 ### Frontend
 
 ```bash
-turbo --filter=console dev
+turbo --filter=@spectacular/console dev
 # or run with `production` profile and
 # overload envelopment variables from `.env.production` and `.secrets.production`
-turbo --filter=console dev:production
+turbo --filter=@spectacular/console dev:production
 ```
 
 Default demo user's **username:** `sumo@demo.com` **password:** `sumodemo123`
@@ -65,9 +65,9 @@ Default demo user's **username:** `sumo@demo.com` **password:** `sumodemo123`
 Generate `i18n` types, `schema.graphql` etc...
 
 ```shell
-turbo --filter=console run generate 
+turbo --filter=@spectacular/console run generate 
 # or for production, run:
-turbo --filter=console run generate:production
+turbo --filter=@spectacular/console run generate:production
 ```
 
 ## Building

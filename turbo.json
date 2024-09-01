@@ -37,20 +37,7 @@
       "cache": false,
       "persistent": true
     },
-    "dev": {
-      "outputLogs": "new-only",
-      "cache": false, // No outputs will be cached
-      "persistent": true
-    },
-    "build": {
-      "inputs": ["$TURBO_DEFAULT$", "!README.md"], // Consider all default inputs except the package's README
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "build/**", ".vercel/output/**"] // File outputs will be cached
-    },
-    "preview": {
-      "cache": false,
-      "persistent": true
-    },
+    "build": {},
     "clean": {
       "cache": false
     }

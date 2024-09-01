@@ -31,19 +31,7 @@ pnpm astro add starlight
 
 #### Add linting tools
 
-Add [eslint-plugin-astro](https://github.com/withastro/prettier-plugin-astro)
-
-```shell
-pnpm add -D prettier prettier-plugin-astro -w
-# use
-prettier --write . --plugin=prettier-plugin-astro
-```
-
-Add [eslint-plugin-astro](https://ota-meshi.github.io/eslint-plugin-astro/user-guide/)
-
-```shell
-pnpm add -D eslint-plugin-astro --filter "eslint-config-custom"
-```
+TODO: add astro biome linting tools
 
 ## Start
 

@@ -19,7 +19,6 @@
 - PWA: [Vite PWA](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html)
 - Linter/Formatter: [Biome](https://biomejs.dev/)
 
-
 ## Features
 
 - [x] Responsive Design: [Container queries](https://www.smashingmagazine.com/2021/05/complete-guide-css-container-queries/)
@@ -107,16 +106,16 @@ make exec-auth
 ### Start apps/console
 
 ```shell
-turbo --filter=console dev
+turbo --filter=@spectacular/console dev
 
 # or use `--log-order=stream` to disable TUI
-turbo --filter=console --log-order=stream dev
+turbo --filter=@spectacular/console --log-order=stream dev
 
 # or start the server and open the app in a new browser tab
-turbo --filter=console dev -- --open 
+turbo --filter=@spectacular/console dev -- --open 
 
 # run in debug mode
-turbo --filter=console dev:debug
+turbo --filter=@spectacular/console dev:debug
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
@@ -140,7 +139,7 @@ Format and lint code
 
 ```shell
 turbo format
-turbo format --filter=!'console-fb'
+turbo format --filter=!'@spectacular/console'
 turbo lint
 ```
 
@@ -179,9 +178,9 @@ To create a production version of your app:
 ```shell
 turbo build
 # run build
-turbo --filter=playground... build
-turbo --filter=playground... --dry build
-turbo --filter=playground... --graph build
+turbo --filter=@spectacular/console... build
+turbo --filter=@spectacular/console... --dry build
+turbo --filter=@spectacular/console... --graph build
 ```
 
 Run from the local build directory:
@@ -198,7 +197,7 @@ ORIGIN=https://my.site \
 node build
 ```
 
-You can preview the production build with `turbo preview --filter=playground...`.
+You can preview the production build with `turbo preview --filter=@spectacular/console...`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
 > environment.
