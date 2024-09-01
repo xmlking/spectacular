@@ -1,328 +1,323 @@
 {
-	"explorer.sortOrder": "type",
-	"explorer.autoRevealExclude": {
-		"**/node_modules": true,
-		".svelte-kit": true,
-		"$houdini": true,
-		"build": true,
-		"coverage": true
-	},
-	"explorer.fileNesting.enabled": true,
-	"explorer.fileNesting.expand": false,
-	"explorer.fileNesting.patterns": {
-		"+layout.svelte": "+layout.ts,+layout.js,+layout.server.ts,+layout.server.js,+layout.gql",
-		"+page.svelte": "+page.ts,+page.js,+page.server.ts,+page.server.js,+page.gql",
-		"*.svelte": "${capture}.stories.ts",
-		"biome.jsonc": "biome.json*,.markuplintrc.cjs,.markdownlintignore,.lintstagedrc.cjs,.editorconfig,.textlintignore",
-		".env": ".env*,.secrets*",
-		".gitignore": ".gitattributes,.vercelignore",
-		"README.md": "DEVELOPERS.md,CHANGELOG.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,LICENSE",
-		"Dockerfile": "*.Dockerfile,Dockerfile.*,compose*.yml,.dockerignore",
-		"vitest.config.ts": "vitest.*",
-		"package.json": "pnpm-lock.yaml,pnpm-workspace.yaml",
-		"tailwind.config.*": "postcss.config*",
-		"flake.nix": "flake.lock",
-		"turbo.json": "vercel.json"
-	},
-	////////// scm //////////
-	"scm.defaultViewMode": "tree",
-	////////// Git //////////
-	"git.autofetch": true,
-	////////// Editor //////////
-	"editor.autoIndent": "full",
-	"editor.lineHeight": 2,
-	"editor.codeActionsOnSave": {
-		"quickfix.biome": "explicit",
-		"source.organizeImports.biome": "explicit"
-	},
-	"editor.cursorBlinking": "solid",
-	"editor.cursorSmoothCaretAnimation": "on",
-	"editor.cursorStyle": "line",
-	// "editor.fontSize": 16, // or "window.zoomLevel": 1,
-	"editor.fontFamily": " SourceCodePro-Regular, FiraCode-Retina, Menlo",
-	"editor.fontLigatures": true,
-	"editor.formatOnPaste": true,
-	"editor.formatOnType": false,
-	"editor.formatOnSave": true,
-	// "editor.letterSpacing": 0.5,
-	// "editor.lineHeight": 25,
-	"editor.minimap.enabled": false,
-	"editor.renderWhitespace": "none",
-	"editor.tabCompletion": "on",
-	"editor.tabSize": 2,
-	"editor.wordWrap": "off",
-	"editor.linkedEditing": true,
-	// To make tailwindcss-intellisense work in .svelte files
-	"editor.quickSuggestions": {
-		"comments": false,
-		"strings": true
-	},
-	////////// Search //////////
-	"search.followSymlinks": false,
-	"search.exclude": {
-		"**/.git": true,
-		"**/node_modules": true,
-		"pnpm-lock.yaml": true,
-		"**/.turbo": true,
-		".nhost": true,
-		"**/.svelte-kit": true,
-		"**/$houdini": true,
-		"**/vercel": true,
-		"_": true,
-		"**/coverage": true,
-		"**/build": true,
-		"**/dist": true
-	},
-	////////// Terminal //////////
-	"terminal.integrated.fontFamily": "MesloLGM Nerd Font Mono, Monospace",
-	// "terminal.integrated.fontSize": 16, // or "window.zoomLevel": 1,
-	////////// Workbench //////////
-	"workbench.editor.limit.enabled": true,
-	"workbench.editor.limit.value": 8,
-	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.iconTheme": "material-icon-theme",
-	"workbench.editor.labelFormat": "short",
-	////////// File settings //////////
-	"files.autoSave": "afterDelay",
-	"files.autoSaveDelay": 1000,
-	"files.exclude": {
-		"**/.git": true,
-		"**/.DS_Store": true,
-		".idea": true,
-		"**/.svelte-kit": true,
-		"**/$houdini": true,
-		"**/.turbo": true,
-		"**/.astro": true,
-		"**/.vercel": true,
-		"**/node_modules": true,
-		"**/*.js": {
-			"when": "$(basename).ts"
-		},
-		"**/*.js.map": {
-			"when": "$(basename)"
-		}
-	},
-	"files.associations": {
-		".env.*": "properties",
-		".secrets*": "properties",
-		"*.svx": "markdown",
-		"Makefile*": "makefile",
-		"biome.json": "jsonc",
-		"base.json": "jsonc",
-		"strict.json": "jsonc",
-		"turbo.json": "jsonc",
-		"*.css": "tailwindcss"
-	},
-	// "files.hotExit": "onExit",
-	"files.defaultLanguage": "go",
-	"files.trimTrailingWhitespace": true,
-	////////// Spell checker //////////
-	// Map spelling errors to Hints so that they don't show up in the Problems pane.
-	"cSpell.diagnosticLevel": "Hint",
-	////////// svelte //////////
-	"svelte.enable-ts-plugin": true,
-	"svelte.plugin.svelte.defaultScriptLanguage": "ts",
-	"svelte.plugin.svelte.compilerWarnings": {
-		// "css-unused-selector": "ignore",
-		// "a11y-label-has-associated-control": "ignore"
-	},
-	////////// vitest //////////
-	"vitest.include": ["**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,svelte}"],
-	"vitest.exclude": [
-		"**/node_modules/**",
-		"$houdini/**",
-		"**/dist/**",
-		"**/cypress/**",
-		"**/.{idea,git,cache,output,temp}/**",
-		"**/ignored.test.ts",
-		"tests/**"
-	],
-	////////// tailwindCSS //////////
-	"tailwindCSS.emmetCompletions": true,
-	"tailwindCSS.includeLanguages": {
-		"plaintext": "html"
-	},
-	// for tailwind-variants
-	"tailwindCSS.experimental.classRegex": [
-		["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
-	],
-	////////// TypeScript //////////
-	// astro requires this
-	"typescript.inlayHints.parameterNames.enabled": "all",
-	////////// Proto //////////
-	"clang-format.style": "google",
-	"protoc": {
-		"options": [
-			"--proto_path=${workspaceRoot}/proto",
-			"--proto_path=${env.GOPATH}/src"
-		]
-	},
-	////////// Skeleton UI //////////
-	"tailwindCSS.classAttributes": [
-		"class",
-		"accent",
-		"active",
-		"aspectRatio",
-		"background",
-		"badge",
-		"bgBackdrop",
-		"bgDark",
-		"bgDrawer",
-		"bgLight",
-		"blur",
-		"border",
-		"button",
-		"buttonAction",
-		"buttonBack",
-		"buttonClasses",
-		"buttonComplete",
-		"buttonDismiss",
-		"buttonNeutral",
-		"buttonNext",
-		"buttonPositive",
-		"buttonTextCancel",
-		"buttonTextConfirm",
-		"buttonTextFirst",
-		"buttonTextLast",
-		"buttonTextNext",
-		"buttonTextPrevious",
-		"buttonTextSubmit",
-		"caretClosed",
-		"caretOpen",
-		"chips",
-		"color",
-		"controlSeparator",
-		"controlVariant",
-		"cursor",
-		"display",
-		"element",
-		"fill",
-		"fillDark",
-		"fillLight",
-		"flex",
-		"gap",
-		"gridColumns",
-		"height",
-		"hover",
-		"inactive",
-		"indent",
-		"justify",
-		"meter",
-		"padding",
-		"position",
-		"regionAnchor",
-		"regionBackdrop",
-		"regionBody",
-		"regionCaption",
-		"regionCaret",
-		"regionCell",
-		"regionChildren",
-		"regionChipList",
-		"regionChipWrapper",
-		"regionCone",
-		"regionContent",
-		"regionControl",
-		"regionDefault",
-		"regionDrawer",
-		"regionFoot",
-		"regionFootCell",
-		"regionFooter",
-		"regionHead",
-		"regionHeadCell",
-		"regionHeader",
-		"regionIcon",
-		"regionInput",
-		"regionInterface",
-		"regionInterfaceText",
-		"regionLabel",
-		"regionLead",
-		"regionLegend",
-		"regionList",
-		"regionListItem",
-		"regionNavigation",
-		"regionPage",
-		"regionPanel",
-		"regionRowHeadline",
-		"regionRowMain",
-		"regionSummary",
-		"regionSymbol",
-		"regionTab",
-		"regionTrail",
-		"ring",
-		"rounded",
-		"select",
-		"shadow",
-		"slotDefault",
-		"slotFooter",
-		"slotHeader",
-		"slotLead",
-		"slotMessage",
-		"slotMeta",
-		"slotPageContent",
-		"slotPageFooter",
-		"slotPageHeader",
-		"slotSidebarLeft",
-		"slotSidebarRight",
-		"slotTrail",
-		"spacing",
-		"text",
-		"track",
-		"transition",
-		"width",
-		"zIndex"
-	],
-	// ##################################################
-	// ###           Language customisations          ###
-	// ##################################################
-	// Make sure we're using biomejs for all filetypes
-	// Need this because we need to override the default json and svelte formatters that folks might have configured
-	"editor.defaultFormatter": "biomejs.biome",
-	"biome.rename": true,
-	"[javascript]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[jsonc]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[html]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[svelte]": {
-		"editor.defaultFormatter": "svelte.svelte-vscode",
-		"editor.codeActionsOnSave": {
-    // FIXME: biome and svelte conflict
-    "quickfix.biome": "never",
-    "source.organizeImports.biome": "never"
-  }
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[astro]": {
-		"editor.defaultFormatter": "astro-build.astro-vscode"
-	},
-	"[json]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[markdown]": {
-		"editor.defaultFormatter": "yzhang.markdown-all-in-one",
-		// Trailing whitespace has special meaning
-		"files.trimTrailingWhitespace": false,
-		"editor.codeActionsOnSave": {
-			"source.fixAll.markdownlint": "explicit"
-		}
-	},
-	"[dockerfile]": {
-		"editor.defaultFormatter": "ms-azuretools.vscode-docker"
-	},
-	"[toml]": {
-		"editor.defaultFormatter": "tamasfe.even-better-toml"
-	},
-	"[yaml]": {
-		"editor.defaultFormatter": "redhat.vscode-yaml"
-	},
-	"redhat.telemetry.enabled": false
+  "explorer.sortOrder": "type",
+  "explorer.autoRevealExclude": {
+    "**/node_modules": true,
+    ".svelte-kit": true,
+    "$houdini": true,
+    "build": true,
+    "coverage": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "+layout.svelte": "+layout.ts,+layout.js,+layout.server.ts,+layout.server.js,+layout.gql",
+    "+page.svelte": "+page.ts,+page.js,+page.server.ts,+page.server.js,+page.gql",
+    "*.svelte": "${capture}.stories.ts",
+    "biome.jsonc": "biome.json*,.markuplintrc.cjs,.markdownlintignore,.lintstagedrc.cjs,.editorconfig,.textlintignore",
+    ".env": ".env*,.secrets*",
+    ".gitignore": ".gitattributes,.vercelignore",
+    "README.md": "DEVELOPERS.md,CHANGELOG.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,LICENSE",
+    "Dockerfile": "*.Dockerfile,Dockerfile.*,compose*.yml,.dockerignore",
+    "vitest.config.ts": "vitest.*",
+    "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml",
+    "tailwind.config.*": "postcss.config*",
+    "flake.nix": "flake.lock",
+    "turbo.json": "vercel.json"
+  },
+  ////////// scm //////////
+  "scm.defaultViewMode": "tree",
+  ////////// Git //////////
+  "git.autofetch": true,
+  ////////// Editor //////////
+  "editor.autoIndent": "full",
+  "editor.lineHeight": 2,
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorStyle": "line",
+  // "editor.fontSize": 16, // or "window.zoomLevel": 1,
+  "editor.fontFamily": " SourceCodePro-Regular, FiraCode-Retina, Menlo",
+  "editor.fontLigatures": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  // "editor.letterSpacing": 0.5,
+  // "editor.lineHeight": 25,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "none",
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "off",
+  "editor.linkedEditing": true,
+  // To make tailwindcss-intellisense work in .svelte files
+  "editor.quickSuggestions": {
+    "comments": false,
+    "strings": true
+  },
+  ////////// Search //////////
+  "search.followSymlinks": false,
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "pnpm-lock.yaml": true,
+    "**/.turbo": true,
+    ".nhost": true,
+    "**/.svelte-kit": true,
+    "**/$houdini": true,
+    "**/vercel": true,
+    "_": true,
+    "**/coverage": true,
+    "**/build": true,
+    "**/dist": true
+  },
+  ////////// Terminal //////////
+  "terminal.integrated.fontFamily": "MesloLGM Nerd Font Mono, Monospace",
+  // "terminal.integrated.fontSize": 16, // or "window.zoomLevel": 1,
+  ////////// Workbench //////////
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 8,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.editor.labelFormat": "short",
+  ////////// File settings //////////
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    ".idea": true,
+    "**/.svelte-kit": true,
+    "**/$houdini": true,
+    "**/.turbo": true,
+    "**/.astro": true,
+    "**/.vercel": true,
+    "**/node_modules": true,
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.js.map": {
+      "when": "$(basename)"
+    }
+  },
+  "files.associations": {
+    ".env.*": "properties",
+    ".secrets*": "properties",
+    "*.svx": "markdown",
+    "Makefile*": "makefile",
+    "biome.json": "jsonc",
+    "base.json": "jsonc",
+    "strict.json": "jsonc",
+    "turbo.json": "jsonc",
+    "*.css": "tailwindcss"
+  },
+  // "files.hotExit": "onExit",
+  "files.defaultLanguage": "go",
+  "files.trimTrailingWhitespace": true,
+  ////////// Spell checker //////////
+  // Map spelling errors to Hints so that they don't show up in the Problems pane.
+  "cSpell.diagnosticLevel": "Hint",
+  ////////// svelte //////////
+  "svelte.enable-ts-plugin": true,
+  "svelte.plugin.svelte.defaultScriptLanguage": "ts",
+  "svelte.plugin.svelte.compilerWarnings": {
+    // "css-unused-selector": "ignore",
+    // "a11y-label-has-associated-control": "ignore"
+  },
+  ////////// vitest //////////
+  "vitest.include": ["**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,svelte}"],
+  "vitest.exclude": [
+    "**/node_modules/**",
+    "$houdini/**",
+    "**/dist/**",
+    "**/cypress/**",
+    "**/.{idea,git,cache,output,temp}/**",
+    "**/ignored.test.ts",
+    "tests/**"
+  ],
+  ////////// tailwindCSS //////////
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+  },
+  // for tailwind-variants
+  "tailwindCSS.experimental.classRegex": [["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]],
+  ////////// TypeScript //////////
+  // astro requires this
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  ////////// Proto //////////
+  "clang-format.style": "google",
+  "protoc": {
+    "options": ["--proto_path=${workspaceRoot}/proto", "--proto_path=${env.GOPATH}/src"]
+  },
+  ////////// Skeleton UI //////////
+  "tailwindCSS.classAttributes": [
+    "class",
+    "accent",
+    "active",
+    "aspectRatio",
+    "background",
+    "badge",
+    "bgBackdrop",
+    "bgDark",
+    "bgDrawer",
+    "bgLight",
+    "blur",
+    "border",
+    "button",
+    "buttonAction",
+    "buttonBack",
+    "buttonClasses",
+    "buttonComplete",
+    "buttonDismiss",
+    "buttonNeutral",
+    "buttonNext",
+    "buttonPositive",
+    "buttonTextCancel",
+    "buttonTextConfirm",
+    "buttonTextFirst",
+    "buttonTextLast",
+    "buttonTextNext",
+    "buttonTextPrevious",
+    "buttonTextSubmit",
+    "caretClosed",
+    "caretOpen",
+    "chips",
+    "color",
+    "controlSeparator",
+    "controlVariant",
+    "cursor",
+    "display",
+    "element",
+    "fill",
+    "fillDark",
+    "fillLight",
+    "flex",
+    "gap",
+    "gridColumns",
+    "height",
+    "hover",
+    "inactive",
+    "indent",
+    "justify",
+    "meter",
+    "padding",
+    "position",
+    "regionAnchor",
+    "regionBackdrop",
+    "regionBody",
+    "regionCaption",
+    "regionCaret",
+    "regionCell",
+    "regionChildren",
+    "regionChipList",
+    "regionChipWrapper",
+    "regionCone",
+    "regionContent",
+    "regionControl",
+    "regionDefault",
+    "regionDrawer",
+    "regionFoot",
+    "regionFootCell",
+    "regionFooter",
+    "regionHead",
+    "regionHeadCell",
+    "regionHeader",
+    "regionIcon",
+    "regionInput",
+    "regionInterface",
+    "regionInterfaceText",
+    "regionLabel",
+    "regionLead",
+    "regionLegend",
+    "regionList",
+    "regionListItem",
+    "regionNavigation",
+    "regionPage",
+    "regionPanel",
+    "regionRowHeadline",
+    "regionRowMain",
+    "regionSummary",
+    "regionSymbol",
+    "regionTab",
+    "regionTrail",
+    "ring",
+    "rounded",
+    "select",
+    "shadow",
+    "slotDefault",
+    "slotFooter",
+    "slotHeader",
+    "slotLead",
+    "slotMessage",
+    "slotMeta",
+    "slotPageContent",
+    "slotPageFooter",
+    "slotPageHeader",
+    "slotSidebarLeft",
+    "slotSidebarRight",
+    "slotTrail",
+    "spacing",
+    "text",
+    "track",
+    "transition",
+    "width",
+    "zIndex"
+  ],
+  // ##################################################
+  // ###           Language customisations          ###
+  // ##################################################
+  // Make sure we're using biomejs for all filetypes
+  // Need this because we need to override the default json and svelte formatters that folks might have configured
+  "editor.defaultFormatter": "biomejs.biome",
+  "biome.rename": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode",
+    "editor.codeActionsOnSave": {
+      // FIXME: biome and svelte conflict
+      "quickfix.biome": "never",
+      "source.organizeImports.biome": "never"
+    }
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    // Trailing whitespace has special meaning
+    "files.trimTrailingWhitespace": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": "explicit"
+    }
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "redhat.telemetry.enabled": false
 }

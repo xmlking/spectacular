@@ -7,7 +7,7 @@
     "defaultBranch": "main"
   },
   "formatter": {
-    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*"],
+    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*", "nhost/emails/*"],
     "enabled": true,
     "formatWithErrors": true,
     "indentStyle": "space",
@@ -17,7 +17,7 @@
     "attributePosition": "auto"
   },
   "organizeImports": {
-    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*"],
+    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*", "nhost/emails/*"],
     "enabled": true
   },
   "linter": {

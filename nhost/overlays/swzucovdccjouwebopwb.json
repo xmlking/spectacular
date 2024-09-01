@@ -11,19 +11,19 @@
   },
   {
     "op": "replace",
-				"path": "/auth/redirections/allowedUrls",
-				"value": [
-					"https://console.traefik.me:5173",
-					"https://console.traefik.me:5173/profile",
-					"https://console.traefik.me:5173/dashboard/profile",
-					"https://console.traefik.me",
-					"https://console.traefik.me/profile",
-					"https://console.traefik.me/dashboard/profile",
-					"https://spectacular-console.vercel.app",
-					"https://spectacular-console.vercel.app/profile",
-					"https://spectacular-console.vercel.app/dashboard/profile",
-					"https://*.vercel.app"
-				]
+    "path": "/auth/redirections/allowedUrls",
+    "value": [
+      "https://console.traefik.me:5173",
+      "https://console.traefik.me:5173/profile",
+      "https://console.traefik.me:5173/dashboard/profile",
+      "https://console.traefik.me",
+      "https://console.traefik.me/profile",
+      "https://console.traefik.me/dashboard/profile",
+      "https://spectacular-console.vercel.app",
+      "https://spectacular-console.vercel.app/profile",
+      "https://spectacular-console.vercel.app/dashboard/profile",
+      "https://*.vercel.app"
+    ]
   },
   {
     "op": "add",
