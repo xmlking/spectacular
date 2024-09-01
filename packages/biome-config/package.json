@@ -12,8 +12,12 @@
     "access": "public"
   },
   "scripts": {
-    "format": "biome check --write",
-    "lint": "biome check"
+    "clean": "git clean -xdf -n",
+    "format": "biome format --write",
+    "lint": "biome lint"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3"
   },
   "peerDependencies": {
     "@biomejs/biome": "^1.8.0"

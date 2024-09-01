@@ -20,8 +20,9 @@
     "./tailwind.config": "./tailwind.config.ts"
   },
   "scripts": {
-    "format": "biome check --write",
-    "lint": "biome check",
+    "clean": "git clean -xdf -n",
+    "format": "biome format --write",
+    "lint": "biome lint",
     "test": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
     "ui:add": "pnpx shadcn-svelte@latest add"
@@ -55,6 +56,8 @@
     "cssnano": "7.0.5",
     "postcss-import": "16.1.0",
     "postcss-load-config": "6.0.1",
+    "svelte": "4.2.19",
+    "@sveltejs/kit": "2.5.25",
     "tailwindcss": "3.4.10",
     "typescript": "5.5.4",
     "vitest": "2.0.5"

@@ -26,9 +26,9 @@
     }
   },
   "scripts": {
-    "clean": "rm -rf dist",
-    "lint": "biome check",
-    "format": "biome check --write",
+    "clean": "git clean -xdf -n",
+    "lint": "biome lint",
+    "format": "biome format --write",
     "build": "pnpm build:plugin && pnpm build:client && pnpm build:config",
     "build:plugin": "tsup src/index.ts --format esm,cjs --dts",
     "build:client": "tsup src/client.ts --format esm,cjs --dts",

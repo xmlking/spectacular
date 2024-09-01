@@ -11,8 +11,9 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "format": "biome check --write",
-    "lint": "biome check",
+    "clean": "git clean -xdf -n",
+    "format": "biome format --write",
+    "lint": "biome lint",
     "test": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
     "test:watch": "vitest"
@@ -23,9 +24,5 @@
     "@vitest/coverage-v8": "2.0.5",
     "zod": "3.23.8",
     "zod-validation-error": "3.3.1"
-  },
-  "peerDependencies": {
-    "@sveltejs/kit": "^2.0.0",
-    "svelte": "^4.0.0"
   }
 }

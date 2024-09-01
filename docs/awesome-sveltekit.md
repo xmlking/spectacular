@@ -268,3 +268,4 @@ Awesome **SvelteKit** Links
 - Learn something new with GraphQL, every week - [graphql.wtf](https://graphql.wtf/)
 - [VS code setup for Svelte](https://webjeda.com/blog/vscode-setup-svelte)
 - [component-party](https://component-party.dev/) website showcase how reactivity work in **React Framework** vs **Svelte Framework**
+- [best nextjs template](https://v1.run/) with Turborepo, Biome, Shadcn, React Email

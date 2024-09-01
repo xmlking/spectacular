@@ -43,7 +43,15 @@
     },
     "build": {
       "dependsOn": ["generate", "^build"],
-      "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
+      "outputs": [
+        "build/**",
+        "dist/**",
+        ".vercel/output/**",
+        ".svelte-kit/**",
+        "$houdini/**",
+        "schema.graphql",
+        "src/i18n"
+      ],
       "env": [
         "VERCEL",
         "VERCEL_URL",
@@ -57,6 +65,7 @@
         "OPENAI_ORG_ID",
         "OPENAI_PROJECT_ID",
         "OPENAI_API_KEY",
+        "PUBLIC_*",
         "npm_package_version"
       ]
     },

@@ -290,9 +290,10 @@
 	"[svelte]": {
 		"editor.defaultFormatter": "svelte.svelte-vscode",
 		"editor.codeActionsOnSave": {
-			// FIXME: biome and svelte conflect
-			"source.organizeImports.biome": "never"
-		}
+    // FIXME: biome and svelte conflict
+    "quickfix.biome": "never",
+    "source.organizeImports.biome": "never"
+  }
 	},
 	"[typescript]": {
 		"editor.defaultFormatter": "biomejs.biome"

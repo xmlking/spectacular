@@ -33,6 +33,9 @@ This Turborepo has some additional tools already setup for you:
 - [Biome](https://biomejs.dev/) for code linting, formatting, and fixing 🌿
 - [DotEnv](https://dotenv.run/) for loading environment variables from `.env.[NODE_ENV]` files with _Monorepo_ support.
 - [Changesets](https://github.com/changesets/changesets) for managing versioning, changelogs, and publishing 📝
+- [Manypkg](https://github.com/Thinkmill/manypkg) is a linter for `package.json` files in Yarn, Bolt or pnpm monorepos.
+  - `manypkg check` runs all of the [checks](https://github.com/Thinkmill/manypkg?tab=readme-ov-file#checks) against your monorepo, logs any errors and exits with a code.
+  - `manypkg fix` runs all of the [checks](https://github.com/Thinkmill/manypkg?tab=readme-ov-file#checks) against your monorepo and fixes any of problems that can be fixed.
 
 ## Prerequisite
 

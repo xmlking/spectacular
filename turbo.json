@@ -1,26 +1,53 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "stream",
-  "globalDependencies": ["**/.env", "**/.secrets", "**/.env.*local", ".env", ".secrets"],
+  "globalEnv": [],
+  "globalPassThroughEnv": [
+    "NODE_ENV",
+    "CI",
+    "GITHUB_TOKEN",
+    "NODE_ENV",
+    "VERCEL",
+    "VERCEL_ENV",
+    "VERCEL_URL",
+    "VERCEL_TOKEN",
+    "VERCEL_ORG_ID",
+    "VERCEL_PROJECT_ID",
+    "VERCEL_GIT_COMMIT_REF",
+    "npm_lifecycle_event"
+  ],
+  "globalDependencies": [".env", ".secrets", "pnpm-lock.yaml"],
   "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".svelte-kit/**", ".vercel/**"]
-    },
     "lint": {
       "dependsOn": ["^lint"]
     },
     "format": {
-      "dependsOn": ["^format"]
+      "dependsOn": ["^format"],
+      "outputLogs": "new-only"
     },
     "test": {
-      "inputs": ["src/**", "tests/**", "**/.env", "**/.env.test"]
+      "cache": false,
+      "inputs": ["src/**", "tests/**", ".env.test"]
     },
     "test:unit": {},
     "test:unit:coverage": {
       "outputs": ["coverage/**"]
     },
     "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev": {
+      "outputLogs": "new-only",
+      "cache": false, // No outputs will be cached
+      "persistent": true
+    },
+    "build": {
+      "inputs": ["$TURBO_DEFAULT$", "!README.md"], // Consider all default inputs except the package's README
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", "build/**", ".vercel/output/**"] // File outputs will be cached
+    },
+    "preview": {
       "cache": false,
       "persistent": true
     },

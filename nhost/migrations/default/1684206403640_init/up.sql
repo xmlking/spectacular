@@ -35,9 +35,13 @@ CREATE TABLE public.devices (
     updated_by text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    deleted_at timestamp with time zone,
+    deleted_at timestamp with time zone
     ip text NOT NULL,
-    version text
+    version text,
+    alternate_dns boolean DEFAULT false,
+    proxy_ip boolean DEFAULT false,
+    public_ip text,
+    schannel_ip text,
 );
 COMMENT ON TABLE public.devices IS 'Devices Metadata';
 CREATE FUNCTION public.devices_not_in_pool(poolid uuid) RETURNS SETOF public.devices

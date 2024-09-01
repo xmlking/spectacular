@@ -5,9 +5,10 @@
   "scripts": {
     "astro": "astro",
     "build": "astro check && astro build",
+    "clean": "git clean -xdf -n",
     "dev": "astro dev",
-    "format": "biome check --write",
-    "lint": "biome check",
+    "format": "biome format --write",
+    "lint": "biome lint",
     "preview": "astro preview",
     "start": "astro dev",
     "test:unit:coverage": "echo OK"

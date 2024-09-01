@@ -25,8 +25,9 @@
     "./tailwind.config": "./tailwind.config.ts"
   },
   "scripts": {
-    "format": "biome check --write",
-    "lint": "biome check",
+    "clean": "git clean -xdf -n",
+    "format": "biome format --write",
+    "lint": "biome lint",
     "test": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
     "test:watch": "vitest"
@@ -58,6 +59,8 @@
     "postcss": "8.4.41",
     "postcss-import": "16.1.0",
     "postcss-load-config": "6.0.1",
+    "svelte": "4.2.19",
+    "@sveltejs/kit": "2.5.25",
     "sveltekit-superforms": "2.17.0",
     "tailwind-merge": "2.5.2",
     "tailwind-variants": "0.2.1",
