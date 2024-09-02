@@ -182,14 +182,14 @@ CREATE TABLE public.pools (
     proxy_ip boolean DEFAULT false
 );
 COMMENT ON TABLE public.pools IS 'Device pools';
---- TODO change to associated_pools dissociated_pools with device
-CREATE FUNCTION public.dissociated_pools(device_id uuid) RETURNS SETOF public.pools
+CREATE FUNCTION public.device_dissociated_pools(device_row public.devices) RETURNS SETOF public.pools
     LANGUAGE sql STABLE
     AS $$
 SELECT *
 FROM pools
-WHERE id NOT IN (SELECT pool_id FROM public.device_pools WHERE device_id = device_id)
+WHERE id NOT IN (SELECT pool_id FROM public.device_pools WHERE device_id = device_row.id)
 $$;
+COMMENT ON FUNCTION public.device_dissociated_pools(device_row public.devices) IS 'Used as Computed Field on Devices Table';
 CREATE TABLE public.protocol (
     value text NOT NULL,
     description text NOT NULL
