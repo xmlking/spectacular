@@ -224,7 +224,7 @@ importers:
         version: 25.0.0
       layerchart:
         specifier: 0.44.0
-        version: 0.44.0(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4)
+        version: 0.44.0(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4)
       lucide-svelte:
         specifier: 0.438.0
         version: 0.438.0(svelte@4.2.19)
@@ -248,7 +248,7 @@ importers:
         version: 0.5.2
       svelte-check:
         specifier: 3.8.6
-        version: 3.8.6(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19)
+        version: 3.8.6(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19)
       svelte-meta-tags:
         specifier: 3.1.4
         version: 3.1.4(svelte@4.2.19)(typescript@5.5.4)
@@ -260,7 +260,7 @@ importers:
         version: 5.8.3
       svelte-ux:
         specifier: 0.74.6
-        version: 0.74.6(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19)
+        version: 0.74.6(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19)
       sveltekit-flash-message:
         specifier: 2.4.4
         version: 2.4.4(@sveltejs/kit@2.5.25(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.2(@types/node@22.5.2)))(svelte@4.2.19)(vite@5.4.2(@types/node@22.5.2)))(svelte@4.2.19)
@@ -301,8 +301,8 @@ importers:
         specifier: 2.0.5
         version: 2.0.5(@types/node@22.5.2)(@vitest/ui@2.0.5)(jsdom@25.0.0)
       xstate:
-        specifier: 5.18.0
-        version: 5.18.0
+        specifier: 4.38.3
+        version: 4.38.3
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -6288,10 +6288,6 @@ packages:
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
-  postcss@8.4.41:
-    resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
-    engines: {node: ^10 || ^12 || >=14}
-
   postcss@8.4.43:
     resolution: {integrity: sha512-gJAQVYbh5R3gYm33FijzCZj7CHyQ3hWMgJMprLUlIYqCwTeZhBQ19wp0e9mA25BUbEvY5+EXuuaAjqQsrBxQBQ==}
     engines: {node: ^10 || ^12 || >=14}
@@ -7803,9 +7799,6 @@ packages:
 
   xstate@4.38.3:
     resolution: {integrity: sha512-SH7nAaaPQx57dx6qvfcIgqKRXIh4L0A1iYEqim4s1u7c9VoCgzZc+63FY90AKU4ZzOC2cfJzTnpO4zK7fCUzzw==}
-
-  xstate@5.18.0:
-    resolution: {integrity: sha512-MKlq/jhyFBYm6Z9+P0k9nhMrHYTTg1ZGmhMw8tVe67oDq9nIlEf2/u/bY5kvUvqu4LTCiVl67hnfd92RMLRyVg==}
 
   xxhash-wasm@1.0.2:
     resolution: {integrity: sha512-ibF0Or+FivM9lNrg+HGJfVX8WJqgo+kCLDc4vx6xMeTce7Aj+DLttKbxxRR/gNLSAelRc1omAPlJ77N/Jem07A==}
@@ -10748,7 +10741,7 @@ snapshots:
       '@vue/shared': 3.4.38
       estree-walker: 2.0.2
       magic-string: 0.30.11
-      postcss: 8.4.41
+      postcss: 8.4.43
       source-map-js: 1.2.0
 
   '@vue/compiler-ssr@3.4.38':
@@ -13208,7 +13201,7 @@ snapshots:
       svelte: 4.2.19
       typescript: 5.5.4
 
-  layerchart@0.44.0(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4):
+  layerchart@0.44.0(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4):
     dependencies:
       d3-array: 3.2.4
       d3-color: 3.1.0
@@ -13235,7 +13228,7 @@ snapshots:
       posthog-js: 1.160.0
       shapefile: 0.6.6
       svelte: 4.2.19
-      svelte-ux: 0.74.6(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19)
+      svelte-ux: 0.74.6(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19)
       topojson-client: 3.1.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -14543,12 +14536,6 @@ snapshots:
 
   postcss-value-parser@4.2.0: {}
 
-  postcss@8.4.41:
-    dependencies:
-      nanoid: 3.3.7
-      picocolors: 1.0.1
-      source-map-js: 1.2.0
-
   postcss@8.4.43:
     dependencies:
       nanoid: 3.3.7
@@ -15273,7 +15260,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  sveld@0.20.0(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43):
+  sveld@0.20.0(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43):
     dependencies:
       '@rollup/plugin-node-resolve': 13.3.0(rollup@2.79.1)
       acorn: 8.12.1
@@ -15283,7 +15270,7 @@ snapshots:
       rollup: 2.79.1
       rollup-plugin-svelte: 7.2.2(rollup@2.79.1)(svelte@4.2.19)
       svelte: 4.2.19
-      svelte-preprocess: 5.1.4(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4)
+      svelte-preprocess: 5.1.4(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4)
       typescript: 5.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -15300,14 +15287,14 @@ snapshots:
     dependencies:
       tiny-glob: 0.2.9
 
-  svelte-check@3.8.6(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19):
+  svelte-check@3.8.6(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 3.6.0
       picocolors: 1.0.1
       sade: 1.8.1
       svelte: 4.2.19
-      svelte-preprocess: 5.1.4(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4)
+      svelte-preprocess: 5.1.4(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4)
       typescript: 5.5.4
     transitivePeerDependencies:
       - '@babel/core'
@@ -15348,7 +15335,7 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-preprocess@5.1.4(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4):
+  svelte-preprocess@5.1.4(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19)(typescript@5.5.4):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
@@ -15359,7 +15346,7 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.25.2
       postcss: 8.4.43
-      postcss-load-config: 6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0)
+      postcss-load-config: 4.0.2(postcss@8.4.43)
       typescript: 5.5.4
 
   svelte-radix@1.1.1(svelte@4.2.19):
@@ -15374,7 +15361,7 @@ snapshots:
     dependencies:
       svelte: 4.2.19
 
-  svelte-ux@0.74.6(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)(svelte@4.2.19):
+  svelte-ux@0.74.6(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)(svelte@4.2.19):
     dependencies:
       '@floating-ui/dom': 1.6.10
       '@fortawesome/fontawesome-common-types': 6.6.0
@@ -15389,7 +15376,7 @@ snapshots:
       prism-svelte: 0.5.0
       prism-themes: 1.9.0
       prismjs: 1.29.0
-      sveld: 0.20.0(@babel/core@7.25.2)(postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.43)(yaml@2.5.0))(postcss@8.4.43)
+      sveld: 0.20.0(@babel/core@7.25.2)(postcss-load-config@4.0.2(postcss@8.4.43))(postcss@8.4.43)
       svelte: 4.2.19
       tailwind-merge: 2.5.2
       zod: 3.23.8
@@ -16206,8 +16193,6 @@ snapshots:
   xmlchars@2.2.0: {}
 
   xstate@4.38.3: {}
-
-  xstate@5.18.0: {}
 
   xxhash-wasm@1.0.2: {}
 
