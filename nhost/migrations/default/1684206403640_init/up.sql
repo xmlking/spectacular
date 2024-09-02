@@ -43,6 +43,31 @@ CREATE TABLE public.devices (
     proxy_ip boolean DEFAULT false
 );
 COMMENT ON TABLE public.devices IS 'Devices Metadata';
+CREATE TABLE public.pools (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    display_name text NOT NULL,
+    description text,
+    tags text[],
+    annotations public.hstore,
+    organization text NOT NULL,
+    created_by text NOT NULL,
+    updated_by text NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    deleted_at timestamp with time zone,
+    version text,
+    alternate_dns boolean DEFAULT false,
+    proxy_ip boolean DEFAULT false
+);
+COMMENT ON TABLE public.pools IS 'Device pools';
+CREATE FUNCTION public.device_dissociated_pools(device_row public.devices) RETURNS SETOF public.pools
+    LANGUAGE sql STABLE
+    AS $$
+SELECT *
+FROM pools
+WHERE id NOT IN (SELECT pool_id FROM public.device_pools WHERE device_id = device_row.id)
+$$;
+COMMENT ON FUNCTION public.device_dissociated_pools(device_row public.devices) IS 'Used as Computed Field on Devices Table';
 CREATE FUNCTION public.enforce_single_default_role() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
@@ -165,31 +190,6 @@ CREATE TABLE public.policies (
     rule_id uuid NOT NULL
 );
 COMMENT ON TABLE public.policies IS 'Joint table associating subjects polymorphically with rules';
-CREATE TABLE public.pools (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    display_name text NOT NULL,
-    description text,
-    tags text[],
-    annotations public.hstore,
-    organization text NOT NULL,
-    created_by text NOT NULL,
-    updated_by text NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    deleted_at timestamp with time zone,
-    version text,
-    alternate_dns boolean DEFAULT false,
-    proxy_ip boolean DEFAULT false
-);
-COMMENT ON TABLE public.pools IS 'Device pools';
-CREATE FUNCTION public.device_dissociated_pools(device_row public.devices) RETURNS SETOF public.pools
-    LANGUAGE sql STABLE
-    AS $$
-SELECT *
-FROM pools
-WHERE id NOT IN (SELECT pool_id FROM public.device_pools WHERE device_id = device_row.id)
-$$;
-COMMENT ON FUNCTION public.device_dissociated_pools(device_row public.devices) IS 'Used as Computed Field on Devices Table';
 CREATE TABLE public.protocol (
     value text NOT NULL,
     description text NOT NULL
