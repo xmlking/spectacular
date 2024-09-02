@@ -94,8 +94,11 @@ hasura migrate apply --version 1686378049757 --type up --database-name default -
 hasura migrate apply --down all --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Check status of migrations
 hasura migrate status --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-# Usage to delete all migration versions
+# Example to delete all migration versions
 hasura migrate delete --all --database-name default --server --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+# Example to delete specific migration version
+hasura migrate delete --version 1725260357999 --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret --server
+
 # Apply all migrations
 hasura migrate apply --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Export Hasura GraphQL Engine metadata from the database
