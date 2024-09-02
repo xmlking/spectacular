@@ -24,12 +24,12 @@ configuration:
     updated_by: updatedBy
   custom_root_fields: {}
 array_relationships:
-  - name: pool_devices
+  - name: devices
     using:
       foreign_key_constraint_on:
         column: pool_id
         table:
-          name: device_pool
+          name: device_pools
           schema: public
 insert_permissions:
   - role: manager

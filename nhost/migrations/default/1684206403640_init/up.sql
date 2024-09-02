@@ -43,14 +43,6 @@ CREATE TABLE public.devices (
     proxy_ip boolean DEFAULT false
 );
 COMMENT ON TABLE public.devices IS 'Devices Metadata';
---- TODO associated_pools not_associated_pools
-CREATE FUNCTION public.devices_not_in_pool(poolid uuid) RETURNS SETOF public.devices
-    LANGUAGE sql STABLE
-    AS $$
-SELECT *
-FROM devices
-WHERE id NOT IN (SELECT device_id FROM public.device_pools WHERE pool_id = poolid)
-$$;
 CREATE FUNCTION public.enforce_single_default_role() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
@@ -129,16 +121,12 @@ CREATE TABLE public.action (
     description text NOT NULL
 );
 COMMENT ON TABLE public.action IS 'action enum';
-CREATE TABLE public.device_pool (
+CREATE TABLE public.device_pools (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_by text NOT NULL,
-    updated_by text NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
     pool_id uuid NOT NULL,
     device_id uuid NOT NULL
 );
-COMMENT ON TABLE public.device_pool IS 'device to pool bridge table ';
+COMMENT ON TABLE public.device_pools IS 'device to pool bridge table';
 CREATE TABLE public.direction (
     value text NOT NULL,
     description text NOT NULL
@@ -188,9 +176,20 @@ CREATE TABLE public.pools (
     updated_by text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    deleted_at timestamp with time zone
+    deleted_at timestamp with time zone,
+    version text,
+    alternate_dns boolean DEFAULT false,
+    proxy_ip boolean DEFAULT false
 );
 COMMENT ON TABLE public.pools IS 'Device pools';
+--- TODO change to associated_pools dissociated_pools with device
+CREATE FUNCTION public.dissociated_pools(device_id uuid) RETURNS SETOF public.pools
+    LANGUAGE sql STABLE
+    AS $$
+SELECT *
+FROM pools
+WHERE id NOT IN (SELECT pool_id FROM public.device_pools WHERE device_id = device_id)
+$$;
 CREATE TABLE public.protocol (
     value text NOT NULL,
     description text NOT NULL
@@ -245,10 +244,10 @@ CREATE TABLE public.user_org_roles (
 COMMENT ON TABLE public.user_org_roles IS 'Roles of User for a given Org.';
 ALTER TABLE ONLY public.action
     ADD CONSTRAINT action_pkey PRIMARY KEY (value);
-ALTER TABLE ONLY public.device_pool
-    ADD CONSTRAINT device_pool_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.device_pool
-    ADD CONSTRAINT device_pool_pool_id_device_id_key UNIQUE (pool_id, device_id);
+ALTER TABLE ONLY public.device_pools
+    ADD CONSTRAINT device_pools_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.device_pools
+    ADD CONSTRAINT device_pools_pool_id_device_id_key UNIQUE (pool_id, device_id);
 ALTER TABLE ONLY public.devices
     ADD CONSTRAINT devices_display_name_organization_key UNIQUE (display_name, organization);
 ALTER TABLE ONLY public.devices
@@ -307,8 +306,6 @@ CREATE RULE rules_soft_deletion_rule AS
 COMMENT ON RULE rules_soft_deletion_rule ON public.rules IS 'Make soft instead of hard deletion';
 CREATE TRIGGER delete_public_user_org_roles_when_auth_user_roles_deleted AFTER DELETE ON auth.user_roles FOR EACH ROW EXECUTE FUNCTION public.delete_user_org_roles_when_user_roles_deleted();
 CREATE TRIGGER insert_public_user_org_roles_when_auth_user_roles_inserted AFTER INSERT ON auth.user_roles FOR EACH ROW EXECUTE FUNCTION public.insert_user_org_roles_when_user_roles_inserted();
-CREATE TRIGGER set_public_device_pool_updated_at BEFORE UPDATE ON public.device_pool FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
-COMMENT ON TRIGGER set_public_device_pool_updated_at ON public.device_pool IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 CREATE TRIGGER set_public_devices_updated_at BEFORE UPDATE ON public.devices FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
 COMMENT ON TRIGGER set_public_devices_updated_at ON public.devices IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 CREATE TRIGGER set_public_groups_updated_at BEFORE UPDATE ON public.groups FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
@@ -321,10 +318,10 @@ CREATE TRIGGER set_public_rules_updated_at BEFORE UPDATE ON public.rules FOR EAC
 COMMENT ON TRIGGER set_public_rules_updated_at ON public.rules IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 CREATE TRIGGER trg_enforce_single_default_role BEFORE INSERT OR UPDATE OF is_default_role ON public.user_org_roles FOR EACH ROW WHEN ((new.is_default_role = true)) EXECUTE FUNCTION public.enforce_single_default_role();
 COMMENT ON TRIGGER trg_enforce_single_default_role ON public.user_org_roles IS 'trigger to set value of column "is_default_role" to "false" for all other rows, on a row insert or update';
-ALTER TABLE ONLY public.device_pool
-    ADD CONSTRAINT device_pool_device_id_fkey FOREIGN KEY (device_id) REFERENCES public.devices(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
-ALTER TABLE ONLY public.device_pool
-    ADD CONSTRAINT device_pool_pool_id_fkey FOREIGN KEY (pool_id) REFERENCES public.pools(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.device_pools
+    ADD CONSTRAINT device_pools_device_id_fkey FOREIGN KEY (device_id) REFERENCES public.devices(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.device_pools
+    ADD CONSTRAINT device_pools_pool_id_fkey FOREIGN KEY (pool_id) REFERENCES public.pools(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.devices
     ADD CONSTRAINT devices_organization_fkey FOREIGN KEY (organization) REFERENCES public.organizations(organization) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.groups

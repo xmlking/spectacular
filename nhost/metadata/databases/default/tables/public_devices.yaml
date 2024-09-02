@@ -36,12 +36,12 @@ configuration:
     updated_by: updatedBy
   custom_root_fields: {}
 array_relationships:
-  - name: device_pools
+  - name: associatedPools
     using:
       foreign_key_constraint_on:
         column: device_id
         table:
-          name: device_pool
+          name: device_pools
           schema: public
 select_permissions:
   - role: manager
