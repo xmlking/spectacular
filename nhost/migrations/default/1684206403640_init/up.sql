@@ -35,21 +35,21 @@ CREATE TABLE public.devices (
     updated_by text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    deleted_at timestamp with time zone
+    deleted_at timestamp with time zone,
     ip text NOT NULL,
+    public_ip text,
     version text,
     alternate_dns boolean DEFAULT false,
-    proxy_ip boolean DEFAULT false,
-    public_ip text,
-    schannel_ip text,
+    proxy_ip boolean DEFAULT false
 );
 COMMENT ON TABLE public.devices IS 'Devices Metadata';
+--- TODO associated_pools not_associated_pools
 CREATE FUNCTION public.devices_not_in_pool(poolid uuid) RETURNS SETOF public.devices
     LANGUAGE sql STABLE
     AS $$
 SELECT *
 FROM devices
-WHERE id NOT IN (SELECT device_id FROM public.device_pool WHERE pool_id = poolid)
+WHERE id NOT IN (SELECT device_id FROM public.device_pools WHERE pool_id = poolid)
 $$;
 CREATE FUNCTION public.enforce_single_default_role() RETURNS trigger
     LANGUAGE plpgsql
@@ -230,7 +230,7 @@ CREATE TABLE public.user_groups (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     group_id uuid NOT NULL,
-    created_at timestamp without time zone DEFAULT now() NOT NULL
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 COMMENT ON TABLE public.user_groups IS 'User to Group association table';
 CREATE TABLE public.user_org_roles (
