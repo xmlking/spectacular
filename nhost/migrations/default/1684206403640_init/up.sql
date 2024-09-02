@@ -60,6 +60,14 @@ CREATE TABLE public.pools (
     proxy_ip boolean DEFAULT false
 );
 COMMENT ON TABLE public.pools IS 'Device pools';
+CREATE FUNCTION public.device_associated_pools(device_row public.devices) RETURNS SETOF public.pools
+    LANGUAGE sql STABLE
+    AS $$
+SELECT *
+FROM pools
+WHERE id IN (SELECT pool_id FROM public.device_pools WHERE device_id = device_row.id)
+$$;
+COMMENT ON FUNCTION public.device_associated_pools(device_row public.devices) IS 'Used as Computed Field on Devices Table';
 CREATE FUNCTION public.device_dissociated_pools(device_row public.devices) RETURNS SETOF public.pools
     LANGUAGE sql STABLE
     AS $$

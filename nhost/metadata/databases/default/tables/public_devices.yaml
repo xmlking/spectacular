@@ -35,15 +35,12 @@ configuration:
     updated_at: updatedAt
     updated_by: updatedBy
   custom_root_fields: {}
-array_relationships:
-  - name: associatedPools
-    using:
-      foreign_key_constraint_on:
-        column: device_id
-        table:
-          name: device_pools
-          schema: public
 computed_fields:
+  - name: associatedPools
+    definition:
+      function:
+        name: device_associated_pools
+        schema: public
   - name: dissociatedPools
     definition:
       function:
