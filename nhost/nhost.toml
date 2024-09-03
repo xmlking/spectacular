@@ -224,7 +224,7 @@ sender = '{{ secrets.AUTH_SMTP_SENDER }}'
 host = '{{ secrets.AUTH_SMTP_HOST }}'
 port = 1025
 secure = false
-method = '{{ secrets.AUTH_SMTP_AUTH_METHOD }}'
+method = 'PLAIN'
 
 # [provider.sms]
 # provider = 'twilio'

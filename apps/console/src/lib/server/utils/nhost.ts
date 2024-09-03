@@ -45,6 +45,7 @@ export function setNhostSessionInCookies(cookies: Cookies, session: NhostSession
   // Expire the cookie 60 seconds before the token expires
   // const expires = new Date();
   // expires.setSeconds(expires.getSeconds() + session.accessTokenExpiresIn - 60);
+  // FIXME: *** btoa don't support unicode and throw error: DOMException [InvalidCharacterError]: Invalid character ***
   cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
     path: '/',
     sameSite: 'strict',

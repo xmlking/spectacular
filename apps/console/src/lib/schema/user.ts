@@ -4,6 +4,9 @@ import { z } from 'zod';
 
 // const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
 const phoneRegex = /^\+[1-9]\d{1,14}$/;
+// Regular expression to match ASCII characters
+// const asciiRegex = /^[\x01-\x7F]*$/; // all ascii
+const asciiRegex = /^[\x20-\x7E]*$/; // printable ascii
 
 /**
  * General User Schema
@@ -11,11 +14,13 @@ const phoneRegex = /^\+[1-9]\d{1,14}$/;
 export const userSchema = z.object({
   firstName: z
     .string({ required_error: 'First Name is required' })
+    .regex(asciiRegex, 'Only ASCII characters are allowed')
     .min(2, { message: 'First Name must contain at least 2 character(s)' })
     .max(256)
     .trim(),
   lastName: z
     .string({ required_error: 'Last Name is required' })
+    .regex(asciiRegex, 'Only ASCII characters are allowed')
     .min(2, { message: 'Last Name must contain at least 2 character(s)' })
     .max(256)
     .trim(),

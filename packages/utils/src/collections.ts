@@ -23,6 +23,26 @@ export function findAddedAndRemoved<T>(originalSet: T[], modifiedSet: T[]) {
   return { added, removed };
 }
 
+export function hasIntersection<T>(big: T[], small: T[]) {
+  const bigSet = new Set(big);
+  return small.some((item) => bigSet.has(item));
+}
+
+export function isSubset<T>(big: T[], small: T[]) {
+  const bigSet = new Set(big);
+  return small.every((item) => bigSet.has(item));
+}
+
+export function toArray<T>(value: T | T[] | null): T[] {
+  if (value === null) {
+    return [];
+  }
+  if (Array.isArray(value)) {
+    return value;
+  }
+  return [value];
+}
+
 if (import.meta.vitest) {
   // RUN: turbo run test --filter=./packages/utils
   // in-source testing
@@ -59,5 +79,23 @@ if (import.meta.vitest) {
     };
 
     expect(groupBy(ungrouped, 'branch')).toStrictEqual(grouped);
+  });
+
+  it('Test hasIntersection', async () => {
+    const bigArr = ['anonymous', 'me', 'user', 'supervisor', 'manager'];
+    const smallArr = ['something', 'supervisor', 'manager'];
+
+    const result = hasIntersection(bigArr, smallArr);
+
+    expect(result).toStrictEqual(true);
+  });
+
+  it('Test isSubset', async () => {
+    const bigArr = ['anonymous', 'me', 'user', 'supervisor', 'manager'];
+    const smallArr = ['supervisor', 'manager'];
+
+    const result = isSubset(bigArr, smallArr);
+
+    expect(result).toStrictEqual(true);
   });
 }
