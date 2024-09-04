@@ -19,11 +19,16 @@ Everything you need to build a Svelte project, powered by [`create-svelte`](http
 
 Start backend services with [nhost cli](../../docs/nhost.md)
 
+> [!NOTE]
+> To set custom CA certs for all _nhost_ containers, set: `export NHOST_CA_CERTIFICATES=./nhost/ca-certificates.crt`
+
 ```sh
 # start nhost services
 nhost up
 # or start with applying seed data
 nhost up --apply-seeds
+# or with company's custom CA certs
+nhost up --apply-seeds --ca-certificates ./nhost/ca-certificates.crt
 # or start nhost services bind with your device public IP. 
 nhost --local-subdomain 192-168-1-108 up # or
 NHOST_LOCAL_SUBDOMAIN=192-168-1-108 nhost up 

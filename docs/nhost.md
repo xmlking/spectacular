@@ -24,12 +24,9 @@ Nhost is an open source Firebase alternative with GraphQL, built with the follow
 > [!NOTE]
 > You can check latest available `nhost cli` version at: [nhost releases](https://github.com/nhost/cli/)  
 > If you follow nhost installation docs, default installation location is `/usr/local/bin`  
-> We overwrite installation with  `export INSTALL_PATH=$HOME/bin` setting
 
 ```shell
-# Install the CLI in ~/bin diretory:
-mkdir -p $HOME/bin
-export INSTALL_PATH=$HOME/bin
+# Install the CLI in `/usr/local/bin` diretory:
 curl -L https://raw.githubusercontent.com/nhost/cli/main/get.sh | bash
 # update
 nhost sw upgrade
@@ -86,11 +83,17 @@ nhost secrets list --subdomain swzucovdccjouwebopwb
 
 Starting and Stoping local nhost stack
 
+> [!NOTE]
+> To set custom CA certs for all _nhost_ containers, set: `export NHOST_CA_CERTIFICATES=./nhost/ca-certificates.crt`
+
+
 ```shell
 # start nhost services
 nhost up
 # or start with applying seed data
 nhost up --apply-seeds
+# or with company's custom CA certs
+nhost up --apply-seeds --ca-certificates ./nhost/ca-certificates.crt
 # or start nhost services bind with your device public IP. 
 nhost --local-subdomain 192-168-1-108 up # or
 NHOST_LOCAL_SUBDOMAIN=192-168-1-108 nhost up 
