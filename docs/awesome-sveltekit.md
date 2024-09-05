@@ -84,6 +84,7 @@ Awesome **SvelteKit** Links
 - Backend
 
   - [Remult](https://remult.dev/) - Fullstack Type-safe CRUD & Realtime. setup with [SvelteKit](https://remult.dev/tutorials/sveltekit/)
+  - [GUN.js](https://gun.js.org/) - It is a really cool `Decentralized Graph Database`, that allow `peer-to-peer` streaming of data. Build Decentralized Chat Apps: [Code](https://github.com/TetrisIQ/sveltekit-gunjs), [Demo](https://sveltekit-gunjs-latest.onrender.com/), [Blog](https://dev.to/envoy_/building-a-decentralized-chat-app-using-gunjs-and-svelte-29h6), Other [Code](https://github.com/Envoy-VC/gun-chat)
 
 - General
   - [Svelte Hover Draw SVG](https://github.com/davipon/svelte-hover-draw-svg)

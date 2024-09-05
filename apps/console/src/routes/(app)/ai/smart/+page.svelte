@@ -2,20 +2,27 @@
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { MagicSpellTextarea, SmartDate } from '$lib/components/smart';
 import { getLoadingState } from '$lib/stores/loading';
-import { isAIEnabled, isAIReady } from '$lib/stores/stores';
+import { getChromeAI } from '$lib/stores/chrome-ai';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { onMount } from 'svelte';
 
-const log = new Logger('ai:ms:browser');
+const log = new Logger('ai:smart:browser');
 export let data;
 
 // Variables
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
+const chromeAI = getChromeAI();
+const { isAISupported, isAssistantReady } = chromeAI;
+
+onMount(async () => {
+  log.debug({ isAISupported: $isAISupported, isAssistantReady: $isAssistantReady });
+});
 
 // Search form
 const form = superForm(data.form, {
@@ -111,7 +118,7 @@ $: loadingState.setFormLoading($delayed);
         </Form.Field>
         <Form.Field {form} name="startData">
           <Form.Control let:attrs>
-            <Form.Label class="label">Start Date: <small>Using On-Device AI: <span class="text-pink-600">{$isAIReady}</span></small></Form.Label>
+            <Form.Label class="label">Start Date: <small>Using On-Device AI: <span class="text-pink-600">{$isAssistantReady}</span></small></Form.Label>
             <SmartDate
               class="textarea data-[fs-error]:input-error"
               {...attrs}

@@ -1,5 +1,6 @@
 <script lang="ts">
 // NOTE: from https://swapy.tahazsh.com/
+// TODO: Drag-and-Drop Dashboard https://github.com/olliethedev/dnd-dashboard
 import { onMount } from 'svelte';
 import { persisted } from 'svelte-persisted-store';
 import { createSwapy } from 'swapy';

@@ -1,12 +1,18 @@
 <script lang="ts">
-import { isAIEnabled, isAIReady } from '$lib/stores/stores';
-import { ErrorMessage } from '@spectacular/skeleton/components/form';
+import { getChromeAI } from '$lib/stores/chrome-ai';
+import { ErrorMessage, Alerts } from '@spectacular/skeleton/components/form';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';
 import { LoaderIcon, SearchIcon, Sparkles } from 'lucide-svelte';
 import { onDestroy, onMount } from 'svelte';
-import { message } from 'sveltekit-superforms';
+import { AssistantStats } from '$lib/components/smart';
 import { z } from 'zod';
+import { Logger } from '@spectacular/utils';
+
+const log = new Logger('ai:generate:browser');
+let message: App.Superforms.Message;
+const chromeAI = getChromeAI();
+const { isAISupported, isAssistantReady, errors } = chromeAI;
 
 const model = chromeai('text', {
   // additional settings
@@ -33,10 +39,14 @@ const schema = z.object({
   }),
 });
 
-onMount(async () => {
-  console.log({ isAIEnabled: $isAIEnabled, isAIReady: $isAIReady });
+onMount(() => {
+  log.error('onMount...');
+  log.debug({ isAISupported: $isAISupported, isAssistantReady: $isAssistantReady });
 });
-onDestroy(() => {});
+
+onDestroy(() => {
+  log.debug('onDestroy...');
+});
 
 const onGenerate = async () => {
   console.log('in onGenerate');
@@ -74,12 +84,8 @@ const onGenerate = async () => {
     <header class="flex justify-between">
       <h1 class="h1">On-Device AI: Smart Data Generate</h1>
     </header>
-
-    {#if !$isAIEnabled}
-      <ErrorMessage
-        error="Your browser is not supported. Please update Chrome to version 130 or higher."
-      />
-    {/if}
+    <Alerts errors={$errors} {message} />
+    <AssistantStats />
     <ErrorMessage {error} />
 
     <label class="label">
