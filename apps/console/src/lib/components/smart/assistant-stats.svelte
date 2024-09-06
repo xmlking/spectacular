@@ -19,11 +19,11 @@ const { isAISupported, isAssistantReady, assistant, isLoading } = chromeAI;
       </thead>
       <tbody>
         <tr>
-          <td>{assistant.temperature}</td>
-          <td>{assistant.topK}</td>
-          <td>{assistant.tokensSoFar}</td>
-          <td>{assistant.tokensLeft}</td>
-          <td>{assistant.maxTokens}</td>
+          <td>{assistant?.temperature}</td>
+          <td>{assistant?.topK}</td>
+          <td>{assistant?.tokensSoFar}</td>
+          <td>{assistant?.tokensLeft}</td>
+          <td>{assistant?.maxTokens}</td>
         </tr>
       </tbody>
     </table>

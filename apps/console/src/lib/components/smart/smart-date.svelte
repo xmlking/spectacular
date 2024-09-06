@@ -19,7 +19,6 @@ let error: string;
 
 // TODO: useObject is not yet supported for svelte https://sdk.vercel.ai/docs/ai-sdk-ui/overview
 const useRemoteModel = async (event: SubmitEvent) => {
-  console.log({ prompt });
   try {
     isLoading = true;
     const rawResponse = await fetch(api, {

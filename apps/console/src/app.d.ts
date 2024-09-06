@@ -1,5 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
+/// <reference path="./ai.d.ts" />
 
 type NhostClient = import('@nhost/nhost-js').NhostClient;
 type ToastSettings = import('@skeletonlabs/skeleton').ToastSettings;

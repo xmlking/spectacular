@@ -5,113 +5,6 @@ import { derived, get, readable, readonly, writable } from 'svelte/store';
 import type { Readable, Writable } from 'svelte/store';
 
 /**
- *  Chrome AI Interfaces
- */
-
-export enum ChromeAICapabilityAvailability {
-  /**
-   * the device or browser does not support prompting a language model at all
-   */
-  NO = 'no',
-  /**
-   * the device or browser supports prompting a language model, but it needs to be downloaded before it can be used
-   */
-  AFTER_DOWNLOAD = 'after-download',
-  /**
-   * the device or browser supports prompting a language model and it’s ready to be used without any downloading steps
-   */
-  READILY = 'readily',
-}
-
-export interface ChromeAIAssistantCapabilities {
-  available: ChromeAICapabilityAvailability;
-  defaultTemperature: number;
-  defaultTopK: number;
-  maxTopK: number;
-}
-
-export interface ChromeAIAssistantCreateOptions extends Record<string, any> {
-  temperature?: number;
-  topK?: number;
-}
-
-export interface ChromeAIAssistant {
-  maxTokens: number;
-  temperature: number;
-  tokensLeft: number;
-  tokensSoFar: number;
-  topK: number;
-  destroy: () => Promise<void>;
-  prompt: (prompt: string) => Promise<string>;
-  promptStreaming: (prompt: string) => ReadableStream<string>;
-}
-
-export interface ChromeAIAssistantFactory {
-  capabilities: () => Promise<ChromeAIAssistantCapabilities>;
-  create: (options?: ChromeAIAssistantCreateOptions) => Promise<ChromeAIAssistant>;
-}
-
-export interface ChromePromptAPI extends Record<string, any> {
-  assistant: ChromeAIAssistantFactory;
-}
-
-// ----
-
-interface ChromeAISummarizer {
-  // sharedContext: string;
-  destroy: () => Promise<void>;
-  summarize: (input: string) => Promise<string>;
-  summarizeStreaming: (prompt: string) => ReadableStream<string>;
-}
-interface ChromeAISummarizerCapabilities {
-  available: ChromeAICapabilityAvailability;
-}
-interface ChromeAIWriter {
-  sharedContext: string;
-  write: (input: string) => Promise<string>;
-}
-interface ChromeAIRewriter {
-  length: string; // "as-is"
-  sharedContext: string;
-  tone: string; // "as-is"
-  rewrite: (input: string) => Promise<string>;
-}
-interface ChromeAITranslationDetector {
-  detect: (input: string) => Promise<ChromeAITranslationResult[]>;
-}
-interface ChromeAITranslationResult {
-  confidence: number;
-  detectedLanguage: string;
-}
-
-// ----
-
-declare global {
-  interface Window {
-    ai: {
-      assistant: {
-        create: () => Promise<ChromeAIAssistant>;
-        capabilities: () => Promise<ChromeAIAssistantCapabilities>;
-      };
-      summarizer: {
-        create: () => Promise<ChromeAISummarizer>;
-        capabilities: () => Promise<ChromeAISummarizerCapabilities>;
-      };
-      writer: {
-        create: () => Promise<ChromeAIWriter>;
-      };
-      rewriter: {
-        create: () => Promise<ChromeAIRewriter>;
-      };
-    };
-    translation: {
-      canDetect: () => Promise<boolean>;
-      createDetector: () => Promise<ChromeAITranslationDetector>;
-    };
-  }
-}
-
-/**
  *  Chrome AI Util Functions
  */
 
@@ -120,16 +13,11 @@ function getChromeVersion() {
   return raw ? Number.parseInt(raw[2], 10) : 0;
 }
 
-async function getAssistantCapabilities(): Promise<ChromeAIAssistantCapabilities> {
-  const state: ChromeAIAssistantCapabilities = window.ai.assistant
-    ? await window.ai.assistant.capabilities()
-    : {
-        available: (await window.ai.canCreateTextSession()) as ChromeAICapabilityAvailability,
-        defaultTopK: 3,
-        maxTopK: 128,
-        defaultTemperature: 0.8,
-      };
-  return state;
+async function getAssistantAvailability(): Promise<AICapabilityAvailability> {
+  const available: AICapabilityAvailability = window.ai.assistant
+    ? (await window.ai.assistant.capabilities()).available
+    : ((await window.ai.canCreateTextSession()) as AICapabilityAvailability);
+  return available;
 }
 
 function getAssistantApi() {
@@ -148,7 +36,7 @@ export class ChromeAI {
   #log = new Logger('chromeai.store.client');
   readonly #errors = writable<Array<string>>([]);
   readonly isLoading = writable<boolean>(false);
-  readonly #options: ChromeAIAssistantCreateOptions;
+  readonly #options: AIAssistantCreateOptions;
 
   readonly isAISupported: Readable<boolean> = readable(false, (set, update) => {
     if (browser) {
@@ -178,26 +66,69 @@ export class ChromeAI {
     this.isAISupported,
     ($isAISupported, set) => {
       if (browser && $isAISupported) {
-        getAssistantCapabilities().then((cap) => {
-          set(cap.available === ChromeAICapabilityAvailability.READILY);
+        getAssistantAvailability().then((availability) => {
+          set(availability === 'readily');
         });
       }
     },
     false,
   );
 
-  // readonly isSummarizeReady =
-  // readonly isWriterReady =
-  // readonly isRewriterReady =
-  // readonly isDetectorReady =
+  readonly isSummarizeReady = derived(
+    this.isAISupported,
+    ($isAISupported, set) => {
+      if (browser && $isAISupported) {
+        window.ai.summarizer?.capabilities().then((cap) => {
+          set(cap.available === 'readily');
+        });
+      }
+    },
+    false,
+  );
 
-  readonly #assistant: ChromeAIAssistant;
-  #summarizer: ChromeAISummarizer;
-  #writer: ChromeAIWriter;
-  #rewriter: ChromeAIRewriter;
-  #detector: ChromeAITranslationDetector;
+  readonly isWriterReady = derived(
+    this.isAISupported,
+    ($isAISupported, set) => {
+      if (browser && $isAISupported) {
+        window.ai.summarizer?.capabilities().then((cap) => {
+          set(cap.available === 'readily');
+        });
+      }
+    },
+    false,
+  );
 
-  constructor(options: ChromeAIAssistantCreateOptions) {
+  readonly isRewriterReady = derived(
+    this.isAISupported,
+    ($isAISupported, set) => {
+      if (browser && $isAISupported) {
+        window.ai.summarizer?.capabilities().then((cap) => {
+          set(cap.available === 'readily');
+        });
+      }
+    },
+    false,
+  );
+
+  readonly islanguageDetectorReady = derived(
+    this.isAISupported,
+    ($isAISupported, set) => {
+      if (browser && $isAISupported) {
+        window.translation?.canDetect().then((availability) => {
+          set(availability === 'readily');
+        });
+      }
+    },
+    false,
+  );
+
+  #assistant: AIAssistant;
+  #summarizer: AISummarizer;
+  #writer: AIWriter;
+  #rewriter: AIRewriter;
+  // #detector: LanguageDetector;
+
+  constructor(options: AIAssistantCreateOptions) {
     this.#options = options;
 
     onDestroy(async () => {
@@ -208,9 +139,9 @@ export class ChromeAI {
 
   async init() {
     if (get(this.isAISupported) === false) return;
-    const cap = await getAssistantCapabilities();
+    const availability = await getAssistantAvailability();
 
-    if (cap.available !== ChromeAICapabilityAvailability.READILY) {
+    if (availability !== 'readily') {
       this.#log.error('Built-in assistant model not ready');
       this.#errors.update((errors) => {
         errors.push('Built-in assistant model not ready');
@@ -220,12 +151,33 @@ export class ChromeAI {
     }
 
     this.#assistant = await getAssistantApi().create({
-      temperature: cap.defaultTemperature,
-      topK: cap.defaultTopK,
+      // temperature: cap.defaultTemperature,
+      // topK: cap.defaultTopK,
+      ...this.#options,
+    });
+    // https://github.com/tomayac/writer-rewriter-api-playground/tree/main
+    this.#writer = await window.ai.writer.create({
+      // tone: '',
+      // length: '',
+      // format: '',
+      // sharedContext: '',
+      ...this.#options,
+    });
+    this.#rewriter = await window.ai.rewriter.create({
+      // tone: '',
+      // length: '',
+      // format: '',
+      // sharedContext: '',
+      ...this.#options,
+    });
+    this.#summarizer = await window.ai.summarizer.create({
+      // tone: '',
+      // length: '',
+      // format: '',
+      // sharedContext: '',
       ...this.#options,
     });
   }
-
   get errors() {
     return readonly(this.#errors);
   }
@@ -233,16 +185,29 @@ export class ChromeAI {
   get assistant() {
     return this.#assistant;
   }
+  get summarizer() {
+    return this.#summarizer;
+  }
+  get writer() {
+    return this.#writer;
+  }
+  get rewriter() {
+    return this.#rewriter;
+  }
 
   async reset() {
-    await this.#assistant?.destroy();
+    await Promise.all([
+      await this.#assistant?.destroy(),
+      await this.#writer?.destroy(),
+      await this.#rewriter?.destroy(),
+    ]);
   }
 }
 
 const CHROME_AI_KEY = Symbol('CHROME_AI');
 
 export const setChromeAI = () => {
-  const chromeAI = new ChromeAI({});
+  const chromeAI = new ChromeAI({ temperature: 0.8, topK: 3 });
   chromeAI.init();
   return setContext(CHROME_AI_KEY, chromeAI);
 };
