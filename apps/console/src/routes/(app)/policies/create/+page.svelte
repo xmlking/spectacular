@@ -349,7 +349,7 @@ $: loadingState.setFormLoading($delayed);
         <div class="text-xl">Create Policy</div>
         <!-- <div>Create new policy</div> -->
       </header>
-      <section class="p-4 grid gap-6 md:grid-cols-3 lg:grid-cols-6">
+      <section class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6">
         <div class="col-span-2 leading-3">
           <Form.Fieldset form={superform} name={keys.subjectType}>
             <RadioGroup active="variant-filled-secondary">
@@ -644,7 +644,7 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
-        <div class="content-center leading-3">
+        <div class="leading-3">
           <Form.Field form={superform} name="rule.protocol">
             <Form.Control let:attrs>
               <Form.Label class="label">Protocols</Form.Label>
@@ -666,7 +666,7 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
-        <div class="content-center leading-3">
+        <div class="leading-3">
           <Form.Fieldset form={superform} name="rule.action">
             <Form.Legend>Action</Form.Legend>
             <RadioGroup active="variant-filled-secondary">
@@ -690,7 +690,7 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Fieldset>
         </div>
-        <div class="content-center leading-3">
+        <div class="leading-3">
           <Form.Fieldset form={superform} name="rule.direction">
             <Form.Legend>Direction</Form.Legend>
             <RadioGroup active="variant-filled-secondary">
@@ -714,7 +714,7 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Fieldset>
         </div>
-        <div class="col-start-5  justify-end content-center">
+        <div class="col-start-5 justify-end content-center">
           <Form.Field form={superform} name="rule.shared">
             <Form.Control let:attrs>
               <SlideToggle
@@ -798,7 +798,7 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
-        <div class="flex justify-start">
+        <div class="justify-start content-center">
           <Form.Field form={superform} name="active">
             <Form.Control let:attrs>
               <SlideToggle
