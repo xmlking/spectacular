@@ -6,7 +6,7 @@ import * as m from '$i18n/messages';
 import { searchRulesFn } from '$lib/api/search-rules';
 import { searchSubjects } from '$lib/api/search-subjects';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { i18n } from '$lib/i18n.js';
+import { i18n } from '$lib/i18n';
 import { createPolicySchema } from '$lib/schema/policy';
 import { createPolicyKeys as keys } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';

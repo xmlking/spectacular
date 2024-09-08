@@ -32,9 +32,9 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager
-x-hasura-default-role: manager
-x-hasura-role: manager
+x-hasura-allowed-roles: user me supervisor
+x-hasura-default-role: supervisor
+x-hasura-role: supervisor
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
@@ -76,9 +76,9 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager
-x-hasura-default-role: manager
-x-hasura-role: manager
+x-hasura-allowed-roles: user me supervisor
+x-hasura-default-role: supervisor
+x-hasura-role: supervisor
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
@@ -125,9 +125,9 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager
-x-hasura-default-role: manager
-x-hasura-role: manager
+x-hasura-allowed-roles: user me supervisor
+x-hasura-default-role: supervisor
+x-hasura-role: supervisor
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
@@ -170,9 +170,9 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager
-x-hasura-default-role: manager
-x-hasura-role: manager
+x-hasura-allowed-roles: user me supervisor
+x-hasura-default-role: supervisor
+x-hasura-role: supervisor
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
@@ -235,9 +235,9 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager
-x-hasura-default-role: manager
-x-hasura-role: manager
+x-hasura-allowed-roles: user me supervisor
+x-hasura-default-role: supervisor
+x-hasura-role: supervisor
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
@@ -284,9 +284,9 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager
-x-hasura-default-role: manager
-x-hasura-role: manager
+x-hasura-allowed-roles: user me supervisor
+x-hasura-default-role: supervisor
+x-hasura-role: supervisor
 x-hasura-allowed-orgs: {chinthagunta}
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3

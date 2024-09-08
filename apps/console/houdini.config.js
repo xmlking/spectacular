@@ -145,6 +145,14 @@ const config = {
         return date?.toISOString();
       },
     },
+    bigint: {
+      type: 'number',
+      ...defaultMarshall,
+    },
+    bytea: {
+      type: 'binary',
+      ...defaultMarshall,
+    },
   },
 };
 
