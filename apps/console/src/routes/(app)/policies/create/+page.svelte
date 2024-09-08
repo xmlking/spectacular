@@ -400,9 +400,9 @@ $: loadingState.setFormLoading($delayed);
 
             --item-color="var(--body-text-color)"
             --item-border="var(--comfy-dropdown-border-color)"
-            --item-is-active-color="var(--pd-dropdown-item-text)"
-            --item-hover-color="var(--pd-dropdown-item-hover-text)"
-            --item-active-background="var(--pd-input-field-hover-stroke)"
+            --item-is-active-color="rgba(var(--theme-font-color-dark))"
+            --item-hover-color="rgba(var(--theme-font-color-dark))"
+            --item-active-background="rgb(var(--color-surface-400) /2)"
             --item-is-active-bg="var(--pd-input-field-hover-stroke)"
             --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
           >
@@ -459,9 +459,9 @@ $: loadingState.setFormLoading($delayed);
 
             --item-color="var(--body-text-color)"
             --item-border="var(--comfy-dropdown-border-color)"
-            --item-is-active-color="var(--pd-dropdown-item-text)"
-            --item-hover-color="var(--pd-dropdown-item-hover-text)"
-            --item-active-background="var(--pd-input-field-hover-stroke)"
+            --item-is-active-color="rgba(var(--theme-font-color-dark))"
+            --item-hover-color="rgba(var(--theme-font-color-dark))"
+            --item-active-background="rgb(var(--color-surface-400) /2)"
             --item-is-active-bg="var(--pd-input-field-hover-stroke)"
             --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
           >
