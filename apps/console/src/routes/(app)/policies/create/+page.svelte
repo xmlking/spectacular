@@ -379,9 +379,32 @@ $: loadingState.setFormLoading($delayed);
             on:change={onSubjectChange}
             on:clear={clearSubject}
             loadOptions={fetchSubjects}
+            --tw-border-opacity="1"
+            --tw-bg-opacity="1"
+            --background="rgb(var(--color-surface-200))"
+            --border-radius="var(--theme-rounded-base)"
+            --border="var(--theme-border-base) solid rgb(var(--color-surface-400))"
+            --border-hover="var(--theme-border-base) solid rgb(var(--color-surface-500))"
+            --border-focused="var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))"
+            --error-background="rgb(var(--color-error-200) / var(--tw-bg-opacity))"
+            --error-border="rgb(var(--color-error-500) / var(--tw-bg-opacity))"
+
+            --disabled-color="rgb(var(--color-surface-400) / 2)"
+            --disabled-border-color="rgb(var(--color-surface-400) / 2)"
+            --disabled-background="rgb(var(--color-surface-200) / 2)"
+
+            --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
+            --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
+            --list-empty-padding="10px"
             --list-z-index="100"
-            --border-radius="8px"
-            --border-focused="1px solid blue"
+
+            --item-color="var(--body-text-color)"
+            --item-border="var(--comfy-dropdown-border-color)"
+            --item-is-active-color="var(--pd-dropdown-item-text)"
+            --item-hover-color="var(--pd-dropdown-item-hover-text)"
+            --item-active-background="var(--pd-input-field-hover-stroke)"
+            --item-is-active-bg="var(--pd-input-field-hover-stroke)"
+            --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
           >
             <b slot="prepend">
               {#if $form.subjectType == "group"}
@@ -415,9 +438,32 @@ $: loadingState.setFormLoading($delayed);
             on:change={onRuleChange}
             on:clear={clearRule}
             loadOptions={fetchRule}
+            --tw-border-opacity="1"
+            --tw-bg-opacity="1"
+            --background="rgb(var(--color-surface-200))"
+            --border-radius="var(--theme-rounded-base)"
+            --border="var(--theme-border-base) solid rgb(var(--color-surface-400))"
+            --border-hover="var(--theme-border-base) solid rgb(var(--color-surface-500))"
+            --border-focused="var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))"
+            --error-background="rgb(var(--color-error-200) / var(--tw-bg-opacity))"
+            --error-border="rgb(var(--color-error-500) / var(--tw-bg-opacity))"
+
+            --disabled-color="rgb(var(--color-surface-400) / 2)"
+            --disabled-border-color="rgb(var(--color-surface-400) / 2)"
+            --disabled-background="rgb(var(--color-surface-200) / 2)"
+
+            --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
+            --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
+            --list-empty-padding="10px"
             --list-z-index="100"
-            --border-radius="8px"
-            --border-focused="1px solid blue"
+
+            --item-color="var(--body-text-color)"
+            --item-border="var(--comfy-dropdown-border-color)"
+            --item-is-active-color="var(--pd-dropdown-item-text)"
+            --item-hover-color="var(--pd-dropdown-item-hover-text)"
+            --item-active-background="var(--pd-input-field-hover-stroke)"
+            --item-is-active-bg="var(--pd-input-field-hover-stroke)"
+            --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
           >
             <b slot="prepend">
               <Search />
@@ -850,3 +896,48 @@ $: loadingState.setFormLoading($delayed);
     </DebugShell>
   </section>
 </div>
+
+<style lang="postcss">
+	/*
+			CSS variables can be used to control theming.
+			https://github.com/rob-balfre/svelte-select/blob/master/docs/theming_variables.md
+	*/
+	.select1 {
+		--border-radius: var(--theme-rounded-container);
+		--border-color: rgb(var(--color-secondary-500));
+		--border-focused: 1px solid rgb(var(--color-secondary-500));
+		--border-hover: 1px solid rgb(var(--color-secondary-500));
+		--multi-item-active-outline: 1px solid rgb(var(--color-secondary-500));
+		--multi-item-outline: 1px solid rgb(var(--color-secondary-500));
+		--clear-select-focus-outline: 1px solid rgb(var(--color-secondary-500));
+		--height: 3rem;
+		--multi-select-input-margin: 0px;
+
+    --tw-border-opacity: 1
+    --tw-bg-opacity: 1
+    --background: rgb(var(--color-surface-200))
+    --border-radius: var(--theme-rounded-base)
+    --border: var(--theme-border-base) solid rgb(var(--color-surface-400))
+    --border-hover: var(--theme-border-base) solid rgb(var(--color-surface-500))
+    --border-focused: var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))
+    --error-background: rgb(var(--color-error-200) / var(--tw-bg-opacity))
+    --error-border: rgb(var(--color-error-500) / var(--tw-bg-opacity))
+
+    --disabled-color: rgb(var(--color-surface-400) / 2)
+    --disabled-border-color: rgb(var(--color-surface-400) / 2)
+    --disabled-background: rgb(var(--color-surface-200) / 2)
+
+    --list-background: rgb(var(--color-surface-200) / var(--tw-bg-opacity))
+    --list-border: var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))
+    --list-empty-padding: 10px
+    --list-z-index: 100
+
+    --item-color: var(--body-text-color)
+    --item-border: var(--comfy-dropdown-border-color)
+    --item-is-active-color: var(--pd-dropdown-item-text)
+    --item-hover-color: var(--pd-dropdown-item-hover-text)
+    --item-active-background: var(--pd-input-field-hover-stroke)
+    --item-is-active-bg: var(--pd-input-field-hover-stroke)
+    --item-hover-bg: rgba(var(--color-secondary-500) / 1)
+	}
+</style>

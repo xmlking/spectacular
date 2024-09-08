@@ -172,7 +172,7 @@ onMount(() => {
   </div>
 </div>
 
-<style>
+<style lang="postcss">
   .second-hand {
     position: absolute;
     z-index: 7;

@@ -15,5 +15,5 @@ import { UsersRound } from 'lucide-svelte';
   </div>
 </div>
 
-<style>
+<style lang="postcss">
 </style>

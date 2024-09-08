@@ -121,7 +121,7 @@ const onGenerate = async () => {
   </div>
 </div>
 
-<style>
+<style lang="postcss">
   textarea {
     line-height: 1.5;
     field-sizing: content;

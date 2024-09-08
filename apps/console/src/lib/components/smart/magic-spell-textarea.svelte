@@ -103,7 +103,7 @@ onMount(() => {
   <!-- <button type="button" class="btn variant-filled" on:click={stop} disabled={!$isLoading}>Stop</button> -->
 </form>
 
-<style>
+<style lang="postcss">
 	textarea {
     line-height: 1.5;
     field-sizing: content;
