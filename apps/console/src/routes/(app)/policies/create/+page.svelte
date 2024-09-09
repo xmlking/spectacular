@@ -395,13 +395,14 @@ $: loadingState.setFormLoading($delayed);
 
             --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
             --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
+            --list-border-radius="var(--theme-rounded-container)"
             --list-empty-padding="10px"
             --list-z-index="100"
 
             --item-color="var(--body-text-color)"
             --item-border="var(--comfy-dropdown-border-color)"
             --item-is-active-color="rgba(var(--theme-font-color-dark))"
-            --item-hover-color="rgba(var(--theme-font-color-dark))"
+            --item-hover-color="rgba(var(--on-secondary))"
             --item-active-background="rgb(var(--color-surface-400) /2)"
             --item-is-active-bg="var(--pd-input-field-hover-stroke)"
             --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
@@ -454,13 +455,14 @@ $: loadingState.setFormLoading($delayed);
 
             --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
             --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
+            --list-border-radius="var(--theme-rounded-container)"
             --list-empty-padding="10px"
             --list-z-index="100"
 
             --item-color="var(--body-text-color)"
             --item-border="var(--comfy-dropdown-border-color)"
             --item-is-active-color="rgba(var(--theme-font-color-dark))"
-            --item-hover-color="rgba(var(--theme-font-color-dark))"
+            --item-hover-color="rgba(var(--on-secondary))"
             --item-active-background="rgb(var(--color-surface-400) /2)"
             --item-is-active-bg="var(--pd-input-field-hover-stroke)"
             --item-hover-bg="rgba(var(--color-secondary-500) / 1)"

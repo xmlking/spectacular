@@ -287,6 +287,7 @@ CREATE UNIQUE INDEX policies_subject_id_subject_type_rule_id_organization_unique
 CREATE UNIQUE INDEX pools_display_name_organization_unique ON public.pools USING btree (display_name, organization) WHERE (deleted_at IS NULL);
 CREATE UNIQUE INDEX rules_display_name_organization_unique ON public.rules USING btree (display_name, organization) WHERE (deleted_at IS NULL);
 CREATE UNIQUE INDEX user_org_roles_user_id_organization_default_role_unique ON public.user_org_roles USING btree (user_id, organization) WHERE (is_default_role = true);
+CREATE UNIQUE INDEX refresh_tokens_metadata_name_unique ON auth.refresh_tokens USING btree (((metadata ->> 'name'::text))) WHERE (metadata IS NOT NULL);
 CREATE RULE devices_soft_deletion_rule AS
     ON DELETE TO public.devices
    WHERE (current_setting('rules.soft_deletion'::text) = 'on'::text) DO INSTEAD  UPDATE public.devices SET deleted_at = now()
