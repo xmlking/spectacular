@@ -114,6 +114,9 @@ importers:
       '@spectacular/utils':
         specifier: workspace:*
         version: link:../../packages/utils
+      '@svelte-plugins/datepicker':
+        specifier: 1.0.9
+        version: 1.0.9
       '@sveltejs/adapter-auto':
         specifier: 3.2.4
         version: 3.2.4(@sveltejs/kit@2.5.26(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.3(@types/node@22.5.4)))(svelte@4.2.19)(vite@5.4.3(@types/node@22.5.4)))
@@ -2594,6 +2597,9 @@ packages:
 
   '@sodaru/yup-to-json-schema@2.0.1':
     resolution: {integrity: sha512-lWb0Wiz8KZ9ip/dY1eUqt7fhTPmL24p6Hmv5Fd9pzlzAdw/YNcWZr+tiCT4oZ4Zyxzi9+1X4zv82o7jYvcFxYA==}
+
+  '@svelte-plugins/datepicker@1.0.9':
+    resolution: {integrity: sha512-HagVB8jLUwNFbwfAcJBNURN1QMQ+qAQQjLJPH97GMqI6auo7jIxOMiSIEWpx7SxTDewHJAlH1izQy3cwBVV8oQ==}
 
   '@svelte-put/shortcut@3.1.1':
     resolution: {integrity: sha512-2L5EYTZXiaKvbEelVkg5znxqvfZGZai3m97+cAiUBhLZwXnGtviTDpHxOoZBsqz41szlfRMcamW/8o0+fbW3ZQ==}
@@ -10110,6 +10116,8 @@ snapshots:
 
   '@sodaru/yup-to-json-schema@2.0.1':
     optional: true
+
+  '@svelte-plugins/datepicker@1.0.9': {}
 
   '@svelte-put/shortcut@3.1.1(svelte@4.2.19)':
     dependencies:
