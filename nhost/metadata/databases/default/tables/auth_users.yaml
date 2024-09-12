@@ -209,9 +209,11 @@ select_permissions:
         - email_verified
         - id
         - is_anonymous
+        - last_seen
         - locale
         - metadata
         - phone_number_verified
+        - updated_at
       computed_fields:
         - defaultOrg
       filter:

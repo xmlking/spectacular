@@ -1,9 +1,13 @@
 type Query {
-  ListUniversities(arg1: ListUniversitiesInput!): [ListUniversitiesOutput]
+  ListUniversities(
+    arg1: ListUniversitiesInput!
+  ): [ListUniversitiesOutput]
 }
 
 type Query {
-  SearchRestrooms(arg1: SearchRestroomsInput!): [SearchRestroomsOutput]
+  SearchRestrooms(
+    arg1: SearchRestroomsInput!
+  ): [SearchRestroomsOutput]
 }
 
 input ListUniversitiesInput {
@@ -48,3 +52,4 @@ type SearchRestroomsOutput {
   updated_at: String
   upvote: Int
 }
+
