@@ -10,7 +10,7 @@ query GetUserById($id: uuid!) {
     avatarUrl
     metadata
   }
-  user_org_roles(where: {userId: {_eq: $id}}) {
+  user_org_roles(where: { userId: { _eq: $id } }) {
     organization
     role
     isDefaultRole

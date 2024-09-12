@@ -9,7 +9,7 @@ import { defineConfig } from 'astro/config';
 /* https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables */
 const VERCEL_SITE_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined;
 const site = VERCEL_SITE_URL ?? process.env.GH_SITE_URL ?? 'http://localhost:4321';
-const base = process.env.GITHUB_ACTIONS ? process.env.GH_BASE_PATH ?? '/spectacular' : undefined;
+const base = process.env.GITHUB_ACTIONS ? (process.env.GH_BASE_PATH ?? '/spectacular') : undefined;
 
 console.log('which runtime?', { site, base });
 // https://astro.build/config

@@ -14,4 +14,3 @@ query GetUser($userId: uuid!) @role(name: "me") {
     ...SecurityKeysFragment
   }
 }
-

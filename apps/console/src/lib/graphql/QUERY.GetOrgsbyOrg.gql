@@ -1,4 +1,4 @@
-query GetOrgsbyOrg($organization: String!){
+query GetOrgsbyOrg($organization: String!) {
   organizations_by_pk(organization: $organization) {
     allowedEmailDomains
     allowedEmails

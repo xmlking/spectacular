@@ -19,7 +19,7 @@
     "README.md": "DEVELOPERS.md,CHANGELOG.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,LICENSE",
     "Dockerfile": "*.Dockerfile,Dockerfile.*,compose*.yml,.dockerignore",
     "vitest.config.ts": "vitest.*",
-    "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml",
+    "package.json": ".npmrc,pnpm-lock.yaml,pnpm-workspace.yaml,pnpm-lock.bak.yaml,bun.lockb",
     "tailwind.config.*": "postcss.config*",
     "flake.nix": "flake.lock",
     "turbo.json": "vercel.json"
