@@ -1,5 +1,6 @@
 # Chat
 
+Decentralized Chat App using GUN.js and Svelte
 use GUN.js
 
 Web Speach API <https://www.google.com/intl/en/chrome/demos/speech.html>
