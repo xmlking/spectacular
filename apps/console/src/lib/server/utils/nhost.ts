@@ -17,8 +17,12 @@ const isBrowser = typeof window !== 'undefined';
  */
 export async function getServerNhost(initialSession: NhostSession | undefined, cookies: Cookies) {
   const nhost = new NhostClient({
-    subdomain: env.PUBLIC_NHOST_SUBDOMAIN || 'local',
-    region: env.PUBLIC_NHOST_REGION,
+    // subdomain: env.PUBLIC_NHOST_SUBDOMAIN ?? 'local',
+    // region: env.PUBLIC_NHOST_REGION,
+    authUrl: env.PUBLIC_NHOST_AUTH_URL,
+    graphqlUrl: env.PUBLIC_NHOST_GRAPHQL_URL,
+    storageUrl: env.PUBLIC_NHOST_STORAGE_URL,
+    functionsUrl: env.PUBLIC_NHOST_FUNCTIONS_URL,
     autoSignIn: false,
     autoRefreshToken: false,
     clientStorageType: 'cookie',

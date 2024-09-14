@@ -1,6 +1,5 @@
 import { browser } from '$app/environment';
 import { env } from '$env/dynamic/public';
-import { PUBLIC_NHOST_REGION, PUBLIC_NHOST_SUBDOMAIN } from '$env/static/public';
 import { SearchSecurityKeysStore, extractSession, getClientSession, setClientSession } from '$houdini';
 import { NHOST_SESSION_KEY } from '$lib/constants';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
@@ -144,8 +143,8 @@ const NHOST_CLIENT_KEY = Symbol('NHOST_CLIENT');
 
 export const setNhostClient = () => {
   const nhost = new SvelteKitNhostClient({
-    // subdomain: PUBLIC_NHOST_SUBDOMAIN || 'local',
-    // region: PUBLIC_NHOST_REGION,
+    // subdomain: env.PUBLIC_NHOST_SUBDOMAIN || 'local',
+    // region: env.PUBLIC_NHOST_REGION,
     authUrl: env.PUBLIC_NHOST_AUTH_URL,
     graphqlUrl: env.PUBLIC_NHOST_GRAPHQL_URL,
     storageUrl: env.PUBLIC_NHOST_STORAGE_URL,

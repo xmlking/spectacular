@@ -1,6 +1,6 @@
 // import process from 'node:process';
 import { dev } from '$app/environment';
-import { FLAGS_SECRET } from '$env/static/private';
+import { env as secrets } from '$env/dynamic/private';
 import * as flags from '$lib/flags';
 import { i18n } from '$lib/i18n';
 import { auth, guard, houdini, theme } from '$lib/server/hooks';
@@ -34,7 +34,7 @@ process.on('sveltekit:shutdown', async (signal: NodeJS.Signals) => {
   // await db.close();
 });
 
-export const flagHandle = createHandle({ secret: FLAGS_SECRET, flags });
+export const flagHandle = createHandle({ secret: secrets.FLAGS_SECRET ?? 'FLAGS_SECRET', flags });
 // NOTE: Order is impotent! `auth` middleware sets `nhost` into `local` which is used by `guard` middleware
 export const handle: Handle = sequence(i18n.handle(), auth, guard, houdini, theme, flagHandle);
 

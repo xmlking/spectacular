@@ -1,4 +1,4 @@
-import { VERCEL_ENV } from '$env/static/private';
+import { env as secrets } from '$env/dynamic/private';
 import { Logger } from '@spectacular/utils';
 import { loadFlash } from 'sveltekit-flash-message/server';
 
@@ -16,7 +16,7 @@ export const load = loadFlash(
 
     // pass locale information from "server-context" to "shared server + client context"
     return {
-      vercelEnv: VERCEL_ENV,
+      vercelEnv: secrets.VERCEL_ENV ?? 'development',
       session,
     };
   },

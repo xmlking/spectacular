@@ -1,4 +1,5 @@
-import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { env } from '$env/dynamic/public';
+import { DEFAULT_ORGANIZATION } from '$lib/constants';
 import { Roles } from '$lib/types';
 import { z } from 'zod';
 
@@ -57,7 +58,7 @@ export const userSchema = z.object({
   receiveEmail: z.boolean().default(true),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
-  organization: z.string().default(PUBLIC_DEFAULT_ORGANIZATION),
+  organization: z.string().default(env.PUBLIC_DEFAULT_ORGANIZATION ?? DEFAULT_ORGANIZATION),
 });
 
 /**

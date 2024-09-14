@@ -1,5 +1,5 @@
 import { setTimeout } from 'node:timers/promises';
-import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import { showMagicLinkLogin, showSocialLogin } from '$lib/flags';
 import { i18n } from '$lib/i18n';
 import { pwSchema, pwlSchema } from '$lib/schema/user';
@@ -11,6 +11,7 @@ import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
+import { DEFAULT_ORGANIZATION } from '$lib/constants';
 
 const log = new Logger('server:auth:signin');
 
@@ -177,7 +178,7 @@ async function login(nhost: NhostClient, redirectTo: string, lang: string, provi
       locale: lang,
       metadata: {
         plan: 'free',
-        default_org: PUBLIC_DEFAULT_ORGANIZATION,
+        default_org: env.PUBLIC_DEFAULT_ORGANIZATION ?? DEFAULT_ORGANIZATION,
       },
     },
   });

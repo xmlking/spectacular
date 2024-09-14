@@ -3,11 +3,12 @@ import { invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
 import { type ClientPlugin, HoudiniClient, getClientSession } from '$houdini';
 import { subscription } from '$houdini/plugins';
+import { GRAPHQL_URL } from '$lib/constants';
 import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacular/utils';
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
 
-const url = env.PUBLIC_NHOST_GRAPHQL_URL;
+const url = env.PUBLIC_NHOST_GRAPHQL_URL ?? GRAPHQL_URL;
 const log = new Logger(browser ? 'houdini.browser.client' : 'houdini.server.client');
 
 // in order to verify that we send metadata, we need something that will log the metadata after

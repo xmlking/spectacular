@@ -1,6 +1,6 @@
 <script lang="ts">
 import { page } from '$app/stores';
-import { PUBLIC_DEFAULT_ORGANIZATION } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { signUpSchema } from '$lib/schema/user';
@@ -65,7 +65,9 @@ export const snapshot = { capture, restore };
 
 // Reactivity
 $: ({ ListOrganizations } = data);
-$: organizations = $ListOrganizations.data?.organizations.map((x) => x.organization) ?? [PUBLIC_DEFAULT_ORGANIZATION];
+$: organizations = $ListOrganizations.data?.organizations.map((x) => x.organization) ?? [
+  env.PUBLIC_DEFAULT_ORGANIZATION,
+];
 
 // Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
 $: loadingState.setFormLoading($delayed);

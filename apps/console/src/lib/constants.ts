@@ -31,3 +31,9 @@ export const MAX_RETRIES = 3;
  * @constant
  */
 export const TIMEOUT = 5000;
+
+/**
+ * Defaults
+ */
+export const DEFAULT_ORGANIZATION = 'spectacular';
+export const GRAPHQL_URL = 'https://local.hasura.local.nhost.run';
