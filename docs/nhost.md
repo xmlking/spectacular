@@ -86,7 +86,6 @@ Starting and Stoping local nhost stack
 > [!NOTE]
 > To set custom CA certs for all _nhost_ containers, set: `export NHOST_CA_CERTIFICATES=./nhost/ca-certificates.crt`
 
-
 ```shell
 # start nhost services
 nhost up
@@ -98,7 +97,7 @@ nhost up --apply-seeds --ca-certificates ./nhost/ca-certificates.crt
 nhost --local-subdomain 192-168-1-108 up # or
 NHOST_LOCAL_SUBDOMAIN=192-168-1-108 nhost up 
 # start nhost services and one or more `Run` containers
-nhost up --run-service ./nhost/console-webapp.toml:local
+nhost up --run-service run-console-local.toml
 # shutdown nhost services
 nhost down
 # danger: delete docker volumes. Use it to reset postgres/hasura
@@ -115,21 +114,20 @@ Tag and push images to nhost registry:
 ```shell
 # set the SERVICE_ID
 SERVICE_ID="2503b290-249c-42f5-b89e-fd9a98980e22"
-docker tag ghcr.io/xmlking/spectacular/console:0.4.2 registry.us-west-2.nhost.run/$SERVICE_ID:0.4.2
-docker push registry.us-west-2.nhost.run/$SERVICE_ID:0.4.4
+docker tag ghcr.io/xmlking/spectacular/console:0.4.2 registry.us-west-2.nhost.run/$SERVICE_ID:0.4.3
+docker push registry.us-west-2.nhost.run/$SERVICE_ID:0.4.3
 ```
 
 ```shell
 # show config for given overlay
-nhost run config-show --config nhost/nginx-service.toml --overlay-name local
+nhost run config-show --config run-console.toml --overlay-name console-local
 # validate config for given overlay
-nhost run config-validate --config nhost/nginx-service.toml --overlay-name local
+nhost run config-validate --config run-console.toml --overlay-name console-local
 # generate service specific .env for given overlay
-nhost run env --config nhost/nginx-service.toml --overlay-name local > .env1
-# run service locally
-# nhost up --run-service path/to/run-service.toml[:overlay_name]
-nhost up --run-service ./nhost/nginx-service.toml:local
-nhost up --run-service ./nhost/console-webapp.toml:local
+nhost run env --config run-console.toml --overlay-name console-local > .env1
+# run service locally with overlay config
+# nhost up --run-service path/to/run-console.toml[:overlay_name]
+nhost up --run-service run-console.toml:console-local
 ```
 
 #### Deploy Run
@@ -140,7 +138,7 @@ Deploy to nhost cloud
 # set the SERVICE_ID
 SERVICE_ID="f27908df-3586-4d02-bb44-a762412d3912"
 # registry.us-west-2.nhost.run/f27908df-3586-4d02-bb44-a762412d3912
-nhost run config-deploy --config ./nhost/console-webapp.toml --service-id $SERVICE_ID
+nhost run config-deploy --config run-console.toml --service-id $SERVICE_ID
 ```
 
 ### Seeds

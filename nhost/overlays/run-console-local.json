@@ -1,0 +1,20 @@
+[
+  {
+    "value": {
+      "name": "ORIGIN",
+      "value": "http://localhost:3000"
+    },
+    "op": "add",
+    "path": "/environment/-"
+  },
+  {
+    "value": "development",
+    "op": "replace",
+    "path": "/environment/0/value"
+  },
+  {
+    "value": "development",
+    "op": "replace",
+    "path": "/environment/1/value"
+  }
+]
