@@ -7,16 +7,16 @@ pullCredentials = '{{ secrets.CONTAINER_REGISTRY_CREDENTIALS }}'
 # runtime
 [[environment]]
 NAME = 'NODE_ENV'
-VALUE = 'development'
+VALUE = 'production'
 
 [[environment]]
 NAME = 'VERCEL_ENV'
-VALUE = 'development'
+VALUE = 'production'
 
 # deployment environment
 [[environment]]
 name = 'NHOST_SUBDOMAIN'
-value = 'local'
+value = '192-168-60-32'
 
 [[environment]]
 name = 'PUBLIC_NHOST_REGION'
@@ -24,7 +24,7 @@ value = 'local'
 
 [[environment]]
 name = 'PUBLIC_NHOST_SUBDOMAIN'
-value = 'local'
+value = '192-168-60-32'
 
 [[environment]]
 name = 'PUBLIC_NHOST_REGION'
@@ -33,43 +33,43 @@ value = 'local'
 # hasura, storage, auth
 [[environment]]
 name = 'NHOST_HASURA_URL'
-value = 'https://local.hasura.local.nhost.run/console'
+value = 'https://192-168-60-32.hasura.local.nhost.run/console'
 
 [[environment]]
 name = 'NHOST_AUTH_URL'
-value = 'https://local.auth.local.nhost.run/v1'
+value = 'https://192-168-60-32.auth.local.nhost.run/v1'
 
 [[environment]]
 name = 'NHOST_GRAPHQL_URL'
-value = 'https://local.hasura.local.nhost.run/v1/graphql'
+value = 'https://192-168-60-32.hasura.local.nhost.run/v1/graphql'
 
 [[environment]]
 name = 'NHOST_STORAGE_URL'
-value = 'https://local.storage.local.nhost.run/v1'
+value = 'https://192-168-60-32.storage.local.nhost.run/v1'
 
 [[environment]]
 name = 'NHOST_FUNCTIONS_URL'
-value = 'https://local.functions.local.nhost.run/v1'
+value = 'https://192-168-60-32.functions.local.nhost.run/v1'
 
 [[environment]]
 name = 'PUBLIC_NHOST_AUTH_URL'
-value = 'https://local.auth.local.nhost.run/v1'
+value = 'https://192-168-60-32.auth.local.nhost.run/v1'
 
 [[environment]]
 name = 'PUBLIC_NHOST_GRAPHQL_URL'
-value = 'https://local.hasura.local.nhost.run/v1/graphql'
+value = 'https://192-168-60-32.hasura.local.nhost.run/v1/graphql'
 
 [[environment]]
 name = 'PUBLIC_NHOST_STORAGE_URL'
-value = 'https://local.storage.local.nhost.run/v1'
+value = 'https://192-168-60-32.storage.local.nhost.run/v1'
 
 [[environment]]
 name = 'PUBLIC_NHOST_FUNCTIONS_URL'
-value = 'https://local.functions.local.nhost.run/v1'
+value = 'https://192-168-60-32.functions.local.nhost.run/v1'
 
 [[environment]]
 name = 'HASURA_GRAPHQL_ENDPOINT'
-value = 'https://local.hasura.local.nhost.run'
+value = 'https://192-168-60-32.hasura.local.nhost.run'
 
 # app
 [[environment]]

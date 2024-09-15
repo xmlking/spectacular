@@ -29,11 +29,6 @@ nhost up
 nhost up --apply-seeds
 # or with company's custom CA certs
 nhost up --apply-seeds --ca-certificates ./nhost/ca-certificates.crt
-# or start nhost services bind with your device public IP. 
-nhost --local-subdomain 192-168-1-108 up # or
-NHOST_LOCAL_SUBDOMAIN=192-168-1-108 nhost up 
-# start nhost services and one or more `Run` containers
-nhost up --run-service ./nhost/console-webapp.toml:local
 # shutdown nhost services
 nhost down
 # danger: delete docker volumes. Use it to reset postgres/hasura
@@ -53,6 +48,20 @@ The following URLs will be available
 | Dashboard | <https://local.dashboard.local.nhost.run>           |
 | Functions | <<https://local.functions.local.nhost.run>          |
 | WebApp    | <<https://local.webapp.local.nhost.run>             |
+
+#### Advanced setup
+
+to start services with your public **IP** on laptop:
+
+1. Update `NHOST_LOCAL_SUBDOMAIN` to match your **IP**
+2. Update `run-console-ip.toml` file to match your **IP**
+3. Then run following steps
+
+```shell
+nhost down --volumes
+NHOST_LOCAL_SUBDOMAIN=192-168-60-32 nhost up --apply-seeds
+NHOST_LOCAL_SUBDOMAIN=192-168-60-32 nhost up --run-service run-console-ip.toml
+```
 
 ### Frontend
 
