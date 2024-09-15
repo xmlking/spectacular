@@ -1,10 +1,10 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
 import * as m from '$i18n/messages';
-import { type Subject, searchSubjects } from '$lib/api/search-subjects';
+import { searchSubjects } from '$lib/api/search-subjects';
 import type { PolicySearch } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';
-import type { PartialGraphQLErrors } from '$lib/types';
+import type { PartialGraphQLErrors, Subject } from '$lib/types';
 import { AppBar, Autocomplete, type AutocompleteOption, type PopupSettings, popup } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
 import { Alerts, ErrorMessage } from '@spectacular/skeleton/components/form';
@@ -14,6 +14,7 @@ import * as Form from 'formsnap';
 import { LoaderIcon, MoreHorizontalIcon, ScaleIcon, SearchIcon, ShieldCheckIcon } from 'lucide-svelte';
 import type { FormEventHandler } from 'svelte/elements';
 import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms';
+import { ssp, queryParameters } from 'sveltekit-search-params';
 
 const log = new Logger('policies:search-form:browser');
 
@@ -21,6 +22,19 @@ export let formInitData: SuperValidated<PolicySearch>;
 
 // Variables
 const loadingState = getLoadingState();
+const queryParams = queryParameters(
+  {
+    subjectType: true,
+    subjectId: true,
+    subjectDisplayName: true,
+    limit: ssp.number(), // .number(10),
+    offset: ssp.number(),
+  },
+  {
+    debounceHistory: 300, //a new history entry will be created after 300ms of this store not changing
+  },
+);
+$: console.log($queryParams);
 
 // Search form
 const form = superForm(formInitData, {
@@ -50,7 +64,12 @@ let subjects: Subject[];
 
 // Functions
 async function clearSubject() {
-  await goto(`/policies?subjectType=${$formData.subjectType}&limit=${$formData.limit}&offset=${$formData.offset}`);
+  $queryParams.subjectType = $formData.subjectType;
+  $queryParams.subjectId = null;
+  $queryParams.subjectDisplayName = null;
+  $queryParams.limit = $formData.limit;
+  $queryParams.offset = $formData.offset;
+  // await goto(`/policies?subjectType=${$formData.subjectType}&limit=${$formData.limit}&offset=${$formData.offset}`);
 }
 
 const onInput: FormEventHandler<HTMLInputElement> = async (event) => {
@@ -73,7 +92,6 @@ const onInput: FormEventHandler<HTMLInputElement> = async (event) => {
 
 const onChange: FormEventHandler<HTMLInputElement> = async (event) => {
   const value = event.currentTarget.value;
-  console.log(`onChange: ${value}`);
   if (value === '') {
     await clearSubject();
   }
@@ -84,9 +102,15 @@ const onSelect = async (event: CustomEvent<AutocompleteOption<Subject>>) => {
   console.log(`onSelect: ${value}`);
   $formData.subjectId = value.id;
   $formData.subjectDisplayName = value.displayName;
-  await goto(
-    `/policies?subjectType=${$formData.subjectType}&subjectId=${$formData.subjectId}&subjectDisplayName=${$formData.subjectDisplayName}&limit=${$formData.limit}&offset=${$formData.offset}`,
-  );
+
+  $queryParams.subjectType = $formData.subjectType;
+  $queryParams.subjectId = $formData.subjectId;
+  $queryParams.subjectDisplayName = $formData.subjectDisplayName;
+  $queryParams.limit = $formData.limit;
+  $queryParams.offset = $formData.offset;
+  // await goto(
+  //   `/policies?subjectType=${$formData.subjectType}&subjectId=${$formData.subjectId}&subjectDisplayName=${$formData.subjectDisplayName}&limit=${$formData.limit}&offset=${$formData.offset}`,
+  // );
 };
 
 // Reactivity
