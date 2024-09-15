@@ -114,8 +114,8 @@ Tag and push images to nhost registry:
 ```shell
 # set the SERVICE_ID
 SERVICE_ID="2503b290-249c-42f5-b89e-fd9a98980e22"
-docker tag ghcr.io/xmlking/spectacular/console:0.4.2 registry.us-west-2.nhost.run/$SERVICE_ID:0.4.3
-docker push registry.us-west-2.nhost.run/$SERVICE_ID:0.4.3
+docker tag ghcr.io/xmlking/spectacular/console:0.5.0 registry.us-west-2.nhost.run/$SERVICE_ID:0.5.0
+docker push registry.us-west-2.nhost.run/$SERVICE_ID:0.5.0
 ```
 
 ```shell
