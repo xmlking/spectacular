@@ -1,6 +1,6 @@
 {
   "name": "spectacular",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "private": true,
   "description": "SvelteKit monorepo template",
   "keywords": [
@@ -25,7 +25,10 @@
     "url": "https://github.com/xmlking/spectacular.git"
   },
   "license": "MIT",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "//": "For tasks that you run frequently, you can write your turbo commands directly into your root package.json.",
     "build": "turbo run build --affected",
@@ -80,6 +83,8 @@
   },
   "manypkg": {
     "defaultBranch": "main",
-    "ignoredRules": ["ROOT_HAS_DEV_DEPENDENCIES"]
+    "ignoredRules": [
+      "ROOT_HAS_DEV_DEPENDENCIES"
+    ]
   }
 }
