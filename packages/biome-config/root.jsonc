@@ -60,6 +60,13 @@
             "filenameCases": ["kebab-case", "export"]
           }
         }
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "error",
+          "options": { "functions": ["twMerge"] }
+        }
       }
     }
   },
