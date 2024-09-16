@@ -79,8 +79,7 @@ RUN pnpm turbo run build --filter=@spectacular/${SCOPE}...
 ###################################################################
 # Stage 4: Run the app (prod)                                     #
 ###################################################################
-# FROM gcr.io/distroless/nodejs:22 as final
-# FROM gcr.io/distroless/nodejs:22-debug as final
+# FROM cgr.dev/chainguard/node:latest-dev AS runner
 FROM cgr.dev/chainguard/node:latest AS runner
 # FROM base AS runner
 
@@ -92,9 +91,9 @@ ARG SCOPE
 COPY --from=builder --chown=node:node /usr/bin/tini /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "-s", "--", "/usr/bin/node"]
 
-## copy runtime needed config files???
+## copy runtime needed config files for `dashboard` app ONLY
+# COPY --from=builder --chown=node:node /app/apps/${SCOPE}/config ./config
 COPY --from=builder --chown=node:node /app/apps/${SCOPE}/package.json .
-# COPY --from=builder --chown=node:node /app/config ./config
 
 ## Automatically leverage output traces to reduce image size
 ## https://nextjs.org/docs/advanced-features/output-file-tracing

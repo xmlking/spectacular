@@ -50,9 +50,10 @@ Awesome **SvelteKit** Links
 
 - Charts
 
+  - [Unovis](https://unovis.dev/) is a modular data visualization framework for React, Angular, Svelte, Vue and vanilla TypeScript or JavaScript. Explore [Gallery](https://unovis.dev/gallery)
+  - [LayerChart](https://www.layerchart.com/) which uses [Layer Cake](https://layercake.graphics/) - supports SSR, responsive graphics, full customizable layers for your graph.
   - [apexcharts](https://github.com/galkatz373/svelte-apexcharts) with [flowbite](https://flowbite-svelte.com/docs/plugins/charts)
   - [pancake](https://pancake-charts.surge.sh/)
-  - [LayerChart](https://www.layerchart.com/) which uses [Layer Cake](https://layercake.graphics/) - supports SSR, responsive graphics, full customizable layers for your graph.
 
 - Maps
 
