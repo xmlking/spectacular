@@ -12,7 +12,7 @@ import { Logger } from '@spectacular/utils';
 const log = new Logger('ai:generate:browser');
 let message: App.Superforms.Message;
 const chromeAI = getChromeAI();
-const { isAISupported, isAssistantReady, errors } = chromeAI;
+const { isAISupported, assistantAvailability, errors } = chromeAI;
 
 const model = chromeai('text', {
   // additional settings
@@ -41,7 +41,7 @@ const schema = z.object({
 
 onMount(() => {
   log.error('onMount...');
-  log.debug({ isAISupported: $isAISupported, isAssistantReady: $isAssistantReady });
+  log.debug({ isAISupported, assistantAvailability: $assistantAvailability });
 });
 
 onDestroy(() => {

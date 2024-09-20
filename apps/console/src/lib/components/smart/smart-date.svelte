@@ -10,7 +10,7 @@ import { default as LoaderIcon } from './loader-icon.svelte';
 
 const log = new Logger('experiments:ai:ms:browser');
 const api = '/api/date';
-const { isAISupported, isAssistantReady } = getChromeAI();
+const { isAISupported, assistantAvailability } = getChromeAI();
 
 export let value = '';
 let prompt = '';
@@ -87,7 +87,7 @@ const onSubmit = useLocalLocal;
 <form
   class="flex flex-col items-center"
   on:submit|preventDefault={(event) => {
-    $isAssistantReady ? useLocalLocal(event) : useRemoteModel(event);
+    $assistantAvailability === 'readily' ? useLocalLocal(event) : useRemoteModel(event);
   }}
 >
   <input

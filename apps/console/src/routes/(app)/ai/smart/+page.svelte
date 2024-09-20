@@ -18,10 +18,10 @@ export let data;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const chromeAI = getChromeAI();
-const { isAISupported, isAssistantReady } = chromeAI;
+const { isAISupported, assistantAvailability } = chromeAI;
 
 onMount(async () => {
-  log.debug({ isAISupported: $isAISupported, isAssistantReady: $isAssistantReady });
+  log.debug({ isAISupported, assistantAvailability: $assistantAvailability });
 });
 
 // Search form
@@ -118,7 +118,7 @@ $: loadingState.setFormLoading($delayed);
         </Form.Field>
         <Form.Field {form} name="startData">
           <Form.Control let:attrs>
-            <Form.Label class="label">Start Date: <small>Using On-Device AI: <span class="text-pink-600">{$isAssistantReady}</span></small></Form.Label>
+            <Form.Label class="label">Start Date: <small>Using On-Device AI: <span class="text-pink-600">{$assistantAvailability}</span></small></Form.Label>
             <SmartDate
               class="textarea data-[fs-error]:input-error"
               {...attrs}

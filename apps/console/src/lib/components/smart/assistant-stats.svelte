@@ -1,10 +1,10 @@
 <script lang="ts">
 import { getChromeAI } from '$lib/stores/chrome-ai';
 const chromeAI = getChromeAI();
-const { isAISupported, isAssistantReady, assistant, isLoading } = chromeAI;
+const { isAISupported, assistantAvailability, assistant, isLoading } = chromeAI;
 </script>
 
-{#if $isAISupported && $isAssistantReady}
+{#if isAISupported && $assistantAvailability === 'readily'}
   <div class="my-12">
     <div class="h2">Session stats</div>
     <table class="table table-hover">

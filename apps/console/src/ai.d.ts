@@ -1,6 +1,6 @@
 /**
  * Types from
- * https://github.com/swissspidy/ai-experiments/blob/main/packages/editor/src/%40types/ai.d.ts
+ * https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/dom-chromium-ai/index.d.ts
  */
 
 interface WindowOrWorkerGlobalScope {
