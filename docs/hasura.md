@@ -54,22 +54,22 @@ hasura seed apply --database-name default --endpoint https://local.hasura.local.
 # (Or) Apply only a particular files:
 hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed apply --file 002_users.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 011_devices.sql --database-name default  --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 011_devices.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed apply --file 012_rules.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed apply --file 013_pools.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed apply --file 014_policies.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 
 # To apply all the Migrations present in the `migrations/` directory and the Metadata present in the `metadata/` directory on a new, "fresh",
 # instance of the Hasura Server at http://another-server-instance.hasura.app:
-hasura deploy --endpoint  https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura deploy --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # To apply only apply metadata
-hasura metadata apply --endpoint  https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura metadata apply --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # NOTE:
 # if you get error: "permission denied to create extension \"hstore\"", Run `create extension hstore;` in hasura console
-# if you get error: "must be owner of extension hstore",  Run `alter role nhost_hasura with superuser;` in hasura console
+# if you get error: "must be owner of extension hstore", Run `alter role nhost_hasura with superuser;` in hasura console
 # if you get error: "x509: certificate signed by unknown authority", add `--insecure-skip-tls-verify` flag to above command
 
-#  Check the status of Migrations
+# Check the status of Migrations
 hasura migrate status --database-name default
 # Apply the Metadata and Migrations:
 hasura migrate apply --database-name default
@@ -79,13 +79,13 @@ hasura metadata apply
 hasura metadata reload
 # Take pg_dump of schema and hasura metadata from server while specifying the schemas to include
 hasura migrate create init --from-server --database-name default --schema public --project nhost --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura migrate create init --from-server --database-name default --schema auth --project nhost --endpoint https://local.hasura.local.nhost.run  --admin-secret hasura-admin-secret
-hasura migrate create init --from-server --database-name default --schema storage --project nhost --endpoint https://local.hasura.local.nhost.run  --admin-secret hasura-admin-secret
+hasura migrate create init --from-server --database-name default --schema auth --project nhost --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura migrate create init --from-server --database-name default --schema storage --project nhost --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 ## rollback/rollup last migrate
 # Apply last 1 down migrations:
 hasura migrate apply --down 1 --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Apply last 1 up migrations:
-hasura migrate apply --up 1  --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura migrate apply --up 1 --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Apply only a particular `down` version
 # this will reset tables in `public` schema and apply type data into `type` tables
 hasura migrate apply --version 1686378049757 --type down --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
@@ -98,7 +98,10 @@ hasura migrate status --database-name default --endpoint https://local.hasura.lo
 hasura migrate delete --all --database-name default --server --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Example to delete specific migration version
 hasura migrate delete --version 1725260357999 --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret --server
-
+# Marking Migrations as applied
+hasura migrate apply --skip-execution --version 1684206403640 --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura migrate apply --skip-execution --version 1686378049757 --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura migrate apply --skip-execution --version 1725835313697 --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Apply all migrations
 hasura migrate apply --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # Export Hasura GraphQL Engine metadata from the database
@@ -133,15 +136,15 @@ To apply all the **Metadata** and **Migrations** present in the `nhost` director
 
 ```shell
 # only apply metadata
-hasura metadata apply --endpoint https://local.hasura.local.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura metadata apply --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # apply metadata, DB migrations and seed data
-hasura deploy --endpoint https://local.hasura.local.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura deploy --endpoint https://local.hasura.local.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Apply all seed file:
 hasura seed apply --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # (Or) Apply only a particular files:
 hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed apply --file 002_users.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 011_devices.sql --database-name default  --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 011_devices.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed apply --file 012_rules.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed apply --file 013_pools.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed apply --file 014_policies.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
@@ -167,13 +170,19 @@ hasura metadata export --endpoint https://local.hasura.local.nhost.run --admin-s
 
 > useful when you reset your cloud **Postgres** and **Hasura** metadata
 
+#### Step 0: Reset metadata
+
+```shell
+hasura metadata clear --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+```
+
 #### Step 1: Reset the migration history on the server
 
 ```shell
 # reset migrations on server only
-hasura migrate delete --all --server --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura migrate delete --all --server --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # Verify the status of the Migrations
-hasura migrate status --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura migrate status --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 ```
 
 #### Step 2: recreate public schema
@@ -205,16 +214,16 @@ ALTER DEFAULT PRIVILEGES FOR ROLE nhost_auth_admin IN SCHEMA auth GRANT ALL ON T
 
 ```shell
 # apply metadata, DB migrations
-hasura deploy  --with-seeds --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura deploy --with-seeds --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # (optionally) Apply all seed file:
-hasura seed apply --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # (Or) Apply only a particular files:
-hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 002_users.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 011_devices.sql --database-name default  --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 012_rules.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 013_pools.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 014_policies.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run  --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 002_users.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 011_devices.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 012_rules.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 013_pools.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 014_policies.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 ```
 
 ## Configuration
@@ -226,7 +235,7 @@ hasura seed apply --file 014_policies.sql --database-name default --endpoint htt
 ![Allow List](./images/allow-list.png)
 
 - **In development instances:** During development or in dev instances, disable the Allow List (default setting) to enable complete access to the GraphQL schema.
-  Add/remove operations in the [Allow List](https://hasura.io/docs/latest/security/allow-list/) and then export the Metadata for version-control (so you can apply it to other instances).
+ Add/remove operations in the [Allow List](https://hasura.io/docs/latest/security/allow-list/) and then export the Metadata for version-control (so you can apply it to other instances).
 - **In CI/CD instances:** Enable the Allow List for testing.
 - **In production instances:** Enabling the Allow List is highly recommended when running the GraphQL Engine in production. i.e., `HASURA_GRAPHQL_ENABLE_ALLOWLIST: 'true'`
 
