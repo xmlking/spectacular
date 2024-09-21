@@ -11,7 +11,13 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "types": ["vitest/globals", "vitest/importMeta", "@testing-library/jest-dom", "vite-plugin-pwa/client", "@types/dom-chromium-ai"],
+    "types": [
+      "vitest/globals",
+      "vitest/importMeta",
+      "@testing-library/jest-dom",
+      "vite-plugin-pwa/client",
+      "@types/dom-chromium-ai"
+    ],
     "rootDirs": [".", "./.svelte-kit/types", "./$houdini/types"]
   }
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias

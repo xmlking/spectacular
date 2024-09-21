@@ -83,7 +83,7 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.editor.labelFormat": "short",
   ////////// File settings //////////
-  "files.autoSave": "afterDelay",
+  "files.autoSave": "onFocusChange",
   "files.autoSaveDelay": 1000,
   "files.exclude": {
     "**/.git": true,
@@ -287,7 +287,8 @@
     "editor.codeActionsOnSave": {
       // FIXME: biome and svelte conflict
       "quickfix.biome": "never",
-      "source.organizeImports.biome": "never"
+      "source.organizeImports.biome": "never",
+      "source.fixAll.biome": "never"
     }
   },
   "[typescript]": {
