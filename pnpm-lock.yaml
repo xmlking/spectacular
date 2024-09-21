@@ -153,6 +153,9 @@ importers:
       '@types/d3-scale':
         specifier: 4.0.8
         version: 4.0.8
+      '@types/dom-chromium-ai':
+        specifier: 0.0.0
+        version: 0.0.0
       '@types/js-cookie':
         specifier: 3.0.6
         version: 3.0.6
@@ -2875,6 +2878,9 @@ packages:
 
   '@types/diff-match-patch@1.0.36':
     resolution: {integrity: sha512-xFdR6tkm0MWvBfO8xXCSsinYxHcqkQUlcHeSpMC2ukzOb6lwQAfDmW+Qt0AvlGd8HpsS28qKsB+oPeJn9I39jg==}
+
+  '@types/dom-chromium-ai@0.0.0':
+    resolution: {integrity: sha512-hDYiRUtSWuDqXgjpltqX3n60FRsj6PNivRL2w5QAYOiNstdcjkKq9YYC6VP7nbtVO2F+55wf/TCBXAK8L3HBjA==}
 
   '@types/estree-jsx@1.0.5':
     resolution: {integrity: sha512-52CcUVNFyfb1A2ALocQw/Dd1BQFNmSdkuC3BkZ6iqhdMfQz7JWOFRuJFloOzjk+6WijU56m9oKXFAXc7o3Towg==}
@@ -10522,6 +10528,8 @@ snapshots:
       '@types/ms': 0.7.34
 
   '@types/diff-match-patch@1.0.36': {}
+
+  '@types/dom-chromium-ai@0.0.0': {}
 
   '@types/estree-jsx@1.0.5':
     dependencies:
