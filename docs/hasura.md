@@ -41,7 +41,7 @@ hasura console
 # Create a new seed by exporting data from tables already present in the database:
 # use `--insecure-skip-tls-verify` if needed
 hasura seed create organizations --database-name default --from-table organizations --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed create users --database-name default --from-table users --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create users --database-name default --from-table auth.users --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create devices --database-name default --from-table devices --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create rules --database-name default --from-table rules --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create pools --database-name default --from-table pools --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
