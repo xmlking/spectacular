@@ -9,7 +9,7 @@ let assistant: AIAssistant | undefined;
 onMount(async () => {
   assistant = await chromeAI.createAssistant();
 });
-onDestroy(async () => {
+onDestroy(() => {
   assistant?.destroy();
 });
 </script>
