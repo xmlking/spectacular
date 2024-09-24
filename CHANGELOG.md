@@ -2,6 +2,28 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.5.1](https://github.com/xmlking/spectacular/compare/1c8d95318bff4225b2cc735f3ca2c1b83140648d..v0.5.1) - 2024-09-24
+#### Bug Fixes
+- **(biome)** add useSortedClasses rule for biome - ([1c8d953](https://github.com/xmlking/spectacular/commit/1c8d95318bff4225b2cc735f3ca2c1b83140648d)) - [@xmlking](https://github.com/xmlking)
+- **(console)** switch from layerchart to unovis - ([32b8d29](https://github.com/xmlking/spectacular/commit/32b8d29cf7794466d63ac0e8fe7253457f6eef4d)) - [@xmlking](https://github.com/xmlking)
+- **(console)** deps updated - ([100c46a](https://github.com/xmlking/spectacular/commit/100c46a3f38fca75d3acc0f6ff3ae68de0171f45)) - [@xmlking](https://github.com/xmlking)
+- **(console)** refactor chrome-ai lib - ([77806d2](https://github.com/xmlking/spectacular/commit/77806d22848817cd3a7bbe0338debf8e2da2be7d)) - [@xmlking](https://github.com/xmlking)
+- **(console)** changed vscode autoSave settings to onFocusChange [skip ci] - ([d9f361b](https://github.com/xmlking/spectacular/commit/d9f361b4c4899fdeaa12447fc436207cc11387eb)) - [@xmlking](https://github.com/xmlking)
+- **(console)** using dom-chromium-ai types for chrome-ai - ([cd82e99](https://github.com/xmlking/spectacular/commit/cd82e991cb2bd9875ea516a28aae00a0915cf48a)) - [@xmlking](https://github.com/xmlking)
+- **(console)** update chrome ai API - ([ebceb94](https://github.com/xmlking/spectacular/commit/ebceb9462ad3aea0347865caddddea6551d10ec5)) - [@xmlking](https://github.com/xmlking)
+- **(console)** use private URLs when creating nhost client on server side - ([f272971](https://github.com/xmlking/spectacular/commit/f272971e354cfa9cefd2488d4b0519af4433dc8b)) - [@xmlking](https://github.com/xmlking)
+- **(console)** using sveltekit-search-params - ([bbc1de7](https://github.com/xmlking/spectacular/commit/bbc1de733d672725c26536a523b4e1c156c50215)) - [@xmlking](https://github.com/xmlking)
+- **(docs)** updated awesome docs with Unovis [skip ci] - ([e426673](https://github.com/xmlking/spectacular/commit/e42667324d901f4dc2a9ac7daccc3d5bff7884f0)) - [@xmlking](https://github.com/xmlking)
+- **(nhost)** nhsot run docs [skip ci] - ([bff5447](https://github.com/xmlking/spectacular/commit/bff54478114c9466c17e118d87becb9146f387b5)) - [@xmlking](https://github.com/xmlking)
+- added turbo-run-clean command - ([b8df726](https://github.com/xmlking/spectacular/commit/b8df72679506ab374f795ae3ab995178f092a47d)) - [@xmlking](https://github.com/xmlking)
+#### Build system
+- deps updated [skip ci] - ([49c3b05](https://github.com/xmlking/spectacular/commit/49c3b0542abe3b109bf0f00aaabf5f24f4710a02)) - [@xmlking](https://github.com/xmlking)
+#### Documentation
+- hasura docs [skip ci] - ([4d73580](https://github.com/xmlking/spectacular/commit/4d73580abe1ea751ef514fc30c8323ea98217c48)) - [@xmlking](https://github.com/xmlking)
+- remove whitespace [skip ci] - ([07c219d](https://github.com/xmlking/spectacular/commit/07c219dd04d440640978ccde5a7fea39cecdecd3)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.5.0](https://github.com/xmlking/spectacular/compare/359a0a4898c95f08c9bb4e5e5136600ead974e7a..v0.5.0) - 2024-09-15
 #### Bug Fixes
 - **(console)** add permissions for user to query their own data - ([e425e17](https://github.com/xmlking/spectacular/commit/e425e17534a761fe6ce83344442755277188be2e)) - [@xmlking](https://github.com/xmlking)
