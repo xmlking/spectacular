@@ -20,7 +20,7 @@
     "./tailwind.config": "./tailwind.config.ts"
   },
   "scripts": {
-    "clean": "git clean -xdf -n",
+    "clean": "git clean -xdf",
     "format": "biome format --write",
     "lint": "biome lint",
     "test": "vitest run",

@@ -37,7 +37,7 @@
     "ci:snapshot": "pnpm prerelease && changeset version --snapshot preview && pnpm install && changeset publish --tag preview",
     "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
     "ci:version-status": "changeset status -v",
-    "clean": "git clean -xdf .DS_Store .nhost .turbo node_modules -n",
+    "clean": "git clean -xdf .DS_Store .nhost .turbo node_modules",
     "cs": "changeset",
     "dev:web": "turbo run dev --filter=@spectacular/web",
     "dev:docs": "turbo run dev --filter=@spectacular/docs",
