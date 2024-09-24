@@ -1,8 +1,7 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { MagicSpellTextarea, SmartDate } from '$lib/components/smart';
+import { MagicSpellTextarea, SmartDate, getChromeAI } from '$lib/components/smart';
 import { getLoadingState } from '$lib/stores/loading';
-import { getChromeAI } from '$lib/stores/chrome-ai';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -18,10 +17,10 @@ export let data;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const chromeAI = getChromeAI();
-const { isAISupported, assistantAvailability } = chromeAI;
+const { isAISupported, assistantCapabilities } = chromeAI;
 
 onMount(async () => {
-  log.debug({ isAISupported, assistantAvailability: $assistantAvailability });
+  log.debug({ isAISupported, assistantCapabilities: $assistantCapabilities });
 });
 
 // Search form
@@ -118,7 +117,7 @@ $: loadingState.setFormLoading($delayed);
         </Form.Field>
         <Form.Field {form} name="startData">
           <Form.Control let:attrs>
-            <Form.Label class="label">Start Date: <small>Using On-Device AI: <span class="text-pink-600">{$assistantAvailability}</span></small></Form.Label>
+            <Form.Label class="label">Start Date: <small>Using On-Device AI: <span class="text-pink-600">{$assistantCapabilities?.available}</span></small></Form.Label>
             <SmartDate
               class="textarea data-[fs-error]:input-error"
               {...attrs}

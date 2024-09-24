@@ -1,10 +1,20 @@
 <script lang="ts">
-import { getChromeAI } from '$lib/stores/chrome-ai';
+import { getChromeAI } from '$lib/components/smart/chrome-ai';
+import { onMount, onDestroy } from 'svelte';
 const chromeAI = getChromeAI();
-const { isAISupported, assistantAvailability, assistant, isLoading } = chromeAI;
+console.log({ chromeAI });
+const { isAISupported, assistantCapabilities, isLoading } = chromeAI;
+
+let assistant: AIAssistant | undefined;
+onMount(async () => {
+  assistant = await chromeAI.createAssistant();
+});
+onDestroy(async () => {
+  assistant?.destroy();
+});
 </script>
 
-{#if isAISupported && $assistantAvailability === 'readily'}
+{#if isAISupported && $assistantCapabilities?.available === 'readily'}
   <div class="my-12">
     <div class="h2">Session stats</div>
     <table class="table table-hover">

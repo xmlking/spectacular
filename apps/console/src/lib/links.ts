@@ -33,6 +33,7 @@ export const menuNavLinks: MenuNavLinks = {
       list: [
         { href: '/ai/smart', label: 'Smart Components', keywords: 'Smart Components, ai, completion' },
         { href: '/ai/chromeai', label: 'Chrome AI', keywords: 'datagen, ai, chrome' },
+        { href: '/ai/speech', label: 'Speech', keywords: 'Lang, Speech' },
         { href: '/ai/assistants', label: 'Assistants', keywords: 'assistants, smart-forms, ai' },
         { href: '/ai/ragapps', label: 'RAG Apps', keywords: 'RAG, ai, completion' },
         { href: '/ai/chat', label: 'Chat', keywords: 'chat, OpenAI' },

@@ -1,4 +1,35 @@
-const langs = [
+export type AIStyles = 'balanced' | 'creative' | 'precise';
+export const TEMP_STYLES: Record<AIStyles, { temperature: number; topK: number }> = {
+  balanced: {
+    temperature: 0.5,
+    topK: 3,
+  },
+  creative: {
+    temperature: 0.8,
+    topK: 5,
+  },
+  precise: {
+    temperature: 0.2,
+    topK: 2,
+  },
+};
+
+export const ASSISTANT_SYSTEM_PROMPT = {
+  content: 'You are a helpful AI assistant.',
+  role: 'system',
+};
+export const WRITER_SYSTEM_PROMPT = {
+  content: `You are a text editor. You will be given a prompt and a text to edit, which may be empty or incomplete.
+  Edit the text to match the prompt, and only respond with the full edited version of the text - do not include any other information, context, or explanation.
+  If you add on to the text, respond with the full version, not just the new portion. Do not include the prompt or otherwise preface your response.
+  Do not enclose the response in quotes.`,
+  role: 'system',
+};
+
+/**
+ * language
+ */
+export const langs = [
   ['Afrikaans', ['af-ZA']],
   ['አማርኛ', ['am-ET']],
   ['Azərbaycanca', ['az-AZ']],

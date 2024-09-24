@@ -12,7 +12,7 @@ import { default as LoaderIcon } from './loader-icon.svelte';
 
 const log = new Logger('experiments:ai:ms:browser');
 const toastStore = getToastStore();
-const api = '/api/completion';
+const api = '/api/completions';
 
 /* FIXME */
 /* eslint-disable @typescript-eslint/no-unused-vars,no-unused-vars */

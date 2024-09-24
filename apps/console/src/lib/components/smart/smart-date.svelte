@@ -1,5 +1,5 @@
 <script lang="ts">
-import { getChromeAI } from '$lib/stores/chrome-ai';
+import { getChromeAI } from '$lib/components/smart';
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
@@ -10,7 +10,7 @@ import { default as LoaderIcon } from './loader-icon.svelte';
 
 const log = new Logger('experiments:ai:ms:browser');
 const api = '/api/date';
-const { isAISupported, assistantAvailability } = getChromeAI();
+const { isAISupported, assistantCapabilities } = getChromeAI();
 
 export let value = '';
 let prompt = '';
@@ -87,7 +87,7 @@ const onSubmit = useLocalLocal;
 <form
   class="flex flex-col items-center"
   on:submit|preventDefault={(event) => {
-    $assistantAvailability === 'readily' ? useLocalLocal(event) : useRemoteModel(event);
+    $assistantCapabilities.available === 'readily' ? useLocalLocal(event) : useRemoteModel(event);
   }}
 >
   <input

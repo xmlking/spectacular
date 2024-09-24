@@ -5,6 +5,14 @@ import { error } from '@sveltejs/kit';
 import { streamText } from 'ai';
 import { ollama } from 'ollama-ai-provider';
 
+/**
+ * Use this "Completions API" for text generation.
+ * Draft documents
+ * Write computer code
+ * Answer questions about a knowledge base
+ * Translate languages
+ * Analyze texts
+ */
 const log = new Logger('experiments:ai:completion:server');
 
 // free https://platform.openai.com/docs/guides/rate-limits/free-tier-rate-limits

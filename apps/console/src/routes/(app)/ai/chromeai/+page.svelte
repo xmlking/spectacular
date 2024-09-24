@@ -1,18 +1,17 @@
 <script lang="ts">
-import { getChromeAI } from '$lib/stores/chrome-ai';
+import { getChromeAI, AssistantStats } from '$lib/components/smart';
 import { ErrorMessage, Alerts } from '@spectacular/skeleton/components/form';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';
 import { LoaderIcon, SearchIcon, Sparkles } from 'lucide-svelte';
 import { onDestroy, onMount } from 'svelte';
-import { AssistantStats } from '$lib/components/smart';
 import { z } from 'zod';
 import { Logger } from '@spectacular/utils';
 
 const log = new Logger('ai:generate:browser');
 let message: App.Superforms.Message;
 const chromeAI = getChromeAI();
-const { isAISupported, assistantAvailability, errors } = chromeAI;
+const { isAISupported, assistantCapabilities, errors } = chromeAI;
 
 const model = chromeai('text', {
   // additional settings
@@ -41,7 +40,7 @@ const schema = z.object({
 
 onMount(() => {
   log.error('onMount...');
-  log.debug({ isAISupported, assistantAvailability: $assistantAvailability });
+  log.debug({ isAISupported, assistantCapabilities: $assistantCapabilities });
 });
 
 onDestroy(() => {
