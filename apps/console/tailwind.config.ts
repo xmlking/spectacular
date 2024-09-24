@@ -4,7 +4,7 @@ import colors from 'tailwindcss/colors';
 
 export default {
   presets: [baseConfig],
-  content: [...baseConfig.content, './node_modules/layerchart/**/*.{svelte,js}'],
+  content: [...baseConfig.content],
   theme: {
     extend: {
       colors: {
