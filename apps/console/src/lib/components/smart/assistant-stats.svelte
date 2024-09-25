@@ -2,7 +2,6 @@
 import { getChromeAI } from '$lib/components/smart/chrome-ai';
 import { onMount, onDestroy } from 'svelte';
 const chromeAI = getChromeAI();
-console.log({ chromeAI });
 const { isAISupported, assistantCapabilities, isLoading } = chromeAI;
 
 let assistant: AIAssistant | undefined;

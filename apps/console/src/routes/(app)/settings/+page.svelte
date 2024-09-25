@@ -1,17 +1,22 @@
 <script lang="ts">
-import { Debug } from '@spectacular/skeleton/components';
-
-export let data;
+import Settings from '$lib/components/smart/settings.svelte';
 </script>
 
 <svelte:head>
   <title>Datablocks | Settings</title>
-  <meta name="description" content="Account Settings" />
+  <meta name="description" content="User Settings" />
 </svelte:head>
 
 <div class="page-container">
+  <section class="space-y-4">
+    <h1 class="h1">Setting</h1>
+    <p>Here you can change user settings</p>
+  </section>
+
   <div class="page-section">
-    <h2 class="h2">Settings</h2>
-    <Debug {data} />
+    <h3 class="h2">AI Settings</h3>
+    <p>Update AI model settings</p>
+    <Settings />
   </div>
 </div>
+
