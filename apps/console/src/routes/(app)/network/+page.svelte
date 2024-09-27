@@ -1,5 +1,5 @@
 <script lang="ts">
-  import NetworkGraph from "./components/network.svelte";
+import NetworkGraph from './components/network.svelte';
 </script>
 
 <svelte:head>

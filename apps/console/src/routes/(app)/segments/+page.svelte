@@ -1,5 +1,5 @@
 <script lang="ts">
-  import LayeredGraphLayout from "./components/layered-graph-layout.svelte";
+import LayeredGraphLayout from './components/layered-graph-layout.svelte';
 </script>
 
 <svelte:head>

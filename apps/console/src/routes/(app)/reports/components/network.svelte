@@ -1,63 +1,50 @@
 <script lang="ts">
-  import { VisSingleContainer, VisGraph } from "@unovis/svelte";
-  import { Graph, GraphLayoutType } from "@unovis/ts";
+import { VisSingleContainer, VisGraph } from '@unovis/svelte';
+import { Graph, GraphLayoutType } from '@unovis/ts';
 
-  import {
-    nodes,
-    links,
-    sites,
-    StatusMap,
-    type NodeDatum,
-    type LinkDatum,
-  } from "./network.data";
+import { nodes, links, sites, StatusMap, type NodeDatum, type LinkDatum } from './network.data';
 
-  const mainSite = nodes[0].site;
+const mainSite = nodes[0].site;
 
-  // Reactive statements
-  let expanded = [mainSite];
-  $: panels = expanded.map((site) => sites[site].panel);
-  $: data = {
-    nodes: nodes.flatMap<NodeDatum>((n) =>
-      expanded.includes(n.site) ? n.children : n,
-    ),
-    links: links.map((l) => ({
-      ...l,
-      source: expanded.includes(l.sourceGroup)
-        ? l.source
-        : sites[l.sourceGroup].groupNodeId,
-      target: expanded.includes(l.targetGroup)
-        ? l.target
-        : sites[l.targetGroup].groupNodeId,
-    })),
-  };
+// Reactive statements
+let expanded = [mainSite];
+$: panels = expanded.map((site) => sites[site].panel);
+$: data = {
+  nodes: nodes.flatMap<NodeDatum>((n) => (expanded.includes(n.site) ? n.children : n)),
+  links: links.map((l) => ({
+    ...l,
+    source: expanded.includes(l.sourceGroup) ? l.source : sites[l.sourceGroup].groupNodeId,
+    target: expanded.includes(l.targetGroup) ? l.target : sites[l.targetGroup].groupNodeId,
+  })),
+};
 
-  // Graph config
-  const graphConfig = {
-    events: {
-      [Graph.selectors.node]: {
-        click: (d: NodeDatum) => {
-          expanded = d.site === mainSite ? [mainSite] : [mainSite, d.site];
-        },
+// Graph config
+const graphConfig = {
+  events: {
+    [Graph.selectors.node]: {
+      click: (d: NodeDatum) => {
+        expanded = d.site === mainSite ? [mainSite] : [mainSite, d.site];
       },
     },
-    nodeGaugeValue: (n: NodeDatum) => n.score,
-    nodeGaugeFill: (n: NodeDatum) => StatusMap[n.status]?.color,
-    nodeIconSize: 20,
-    nodeShape: (n: NodeDatum) => n.shape,
-    nodeSideLabels: (n: NodeDatum) => [
-      {
-        radius: 16,
-        fontSize: 12,
-        ...(n.children ? { text: n.children.length } : StatusMap[n.status]),
-      },
-    ],
-    nodeSize: (n: NodeDatum) => (n.children ? 75 : 50),
-    nodeSubLabel: (n: NodeDatum) => n.score && `${n.score}/100`,
-    nodeStrokeWidth: 3,
-    linkFlow: (l: LinkDatum) => l.showTraffic,
-    linkStroke: (l: LinkDatum) => StatusMap[l.status]?.color || null,
-    linkBandWidth: (l: LinkDatum) => (l.showTraffic ? 12 : 6),
-  };
+  },
+  nodeGaugeValue: (n: NodeDatum) => n.score,
+  nodeGaugeFill: (n: NodeDatum) => StatusMap[n.status]?.color,
+  nodeIconSize: 20,
+  nodeShape: (n: NodeDatum) => n.shape,
+  nodeSideLabels: (n: NodeDatum) => [
+    {
+      radius: 16,
+      fontSize: 12,
+      ...(n.children ? { text: n.children.length } : StatusMap[n.status]),
+    },
+  ],
+  nodeSize: (n: NodeDatum) => (n.children ? 75 : 50),
+  nodeSubLabel: (n: NodeDatum) => n.score && `${n.score}/100`,
+  nodeStrokeWidth: 3,
+  linkFlow: (l: LinkDatum) => l.showTraffic,
+  linkStroke: (l: LinkDatum) => StatusMap[l.status]?.color || null,
+  linkBandWidth: (l: LinkDatum) => (l.showTraffic ? 12 : 6),
+};
 </script>
 
 <div class="chart">
