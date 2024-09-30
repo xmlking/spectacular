@@ -47,6 +47,7 @@ vercel link --repo
 #
 vercel env ls
 vercel env ls --environment production
+vercel env ls --scope chinthagunta
 # Pull all Development Environment Variables down from the cloud
 vercel env pull .env.development.local
 # (DANGER)
@@ -60,7 +61,7 @@ vercel env rm API_TOKEN
 
 ```shell
 cd apps/console
-vercel link
+vercel link --scope chinthagunta
 ```
 
 ### Link
@@ -70,7 +71,7 @@ Using Monorepos with Vercel CLI
 > If you're working in a monorepo using the Git Integration, you can link multiple projects at once using `vc link --repo`
 
 ```shell
-vercel link --repo --yes --token $VERCEL_TOKEN
+vercel link --repo --yes --scope chinthagunta --token $VERCEL_TOKEN
 ```
 
 ## Build
