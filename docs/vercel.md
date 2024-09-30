@@ -42,26 +42,20 @@ Follow [SvelteKit on Vercel](https://vercel.com/docs/frameworks/sveltekit)
 ## CLI
 
 ```shell
-# You can link your entire repo to all you Vercel projects in one command.
-vercel link --repo
+#
+vercel whoami
+vercel teams list
+# to switch vercel teams (when user has multiple teams)
+vercel teams switch spectacular
 #
 vercel env ls
 vercel env ls --environment production
-vercel env ls --scope chinthagunta
+vercel env ls --scope spectacular
 # Pull all Development Environment Variables down from the cloud
 vercel env pull .env.development.local
 # (DANGER)
 vercel env add API_TOKEN --sensitive
 vercel env rm API_TOKEN
-```
-
-> [!NOTE]
-> We also need to `vercel link` in `apps/console` as `turborepo` is not detected by `vercel-toolbar` yet.  
-> this will generate files in `apps/console/.vercel`
-
-```shell
-cd apps/console
-vercel link --scope chinthagunta
 ```
 
 ### Link
@@ -71,7 +65,25 @@ Using Monorepos with Vercel CLI
 > If you're working in a monorepo using the Git Integration, you can link multiple projects at once using `vc link --repo`
 
 ```shell
-vercel link --repo --yes --scope chinthagunta --token $VERCEL_TOKEN
+vercel link --repo --yes --scope spectacular --token $VERCEL_TOKEN
+```
+
+> [!NOTE]
+> We also need to `vercel link` in `apps/console` as `turborepo` is not detected by `vercel-toolbar` yet.  
+> this will generate files in `apps/console/.vercel`
+
+```shell
+cd apps/console
+vercel link
+```
+
+## Dev
+
+Test Vercel deployment environment locally and test your Vercel Project before deploying using the vercel dev CLI command.
+
+```shell
+vercel dev
+vercel dev apps/docs
 ```
 
 ## Build
@@ -95,6 +107,14 @@ this guide will walk you through the steps to automate deployments via tags inst
 
 ```shell
 vercel deploy --prod
+```
+
+### Logs
+
+see logs in prod
+
+```shell
+vercel logs spectacular-console.vercel.app
 ```
 
 ## Environment Variables
