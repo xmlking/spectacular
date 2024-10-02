@@ -1,5 +1,5 @@
 <script lang="ts">
-import Settings from '$lib/components/smart/settings.svelte';
+import AISettings from '$lib/components/smart/settings.svelte';
 </script>
 
 <svelte:head>
@@ -16,7 +16,7 @@ import Settings from '$lib/components/smart/settings.svelte';
   <div class="page-section">
     <h3 class="h2">AI Settings</h3>
     <p>Update AI model settings</p>
-    <Settings />
+    <AISettings />
   </div>
 </div>
 
