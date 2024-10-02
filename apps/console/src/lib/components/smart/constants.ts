@@ -133,3 +133,17 @@ export const langs = [
   ['हिन्दी', ['hi-IN']],
   ['ภาษาไทย', ['th-TH']],
 ];
+
+// const aaa = langs.flatMap(([l, ...lo]) => lo).sort((a, b) => (a[0] < b[0] ? -1 : 1));
+// console.log(aaa);
+
+// <select>
+//   <optgroup label="Options 1">
+//     <option>Option 1.1</option>
+//     <option>Option 1.2</option>
+//   </optgroup>
+//   <optgroup label="Options 2">
+//     <option>Option 2.1</option>
+//     <option>Option 2.2</option>
+//   </optgroup>
+// </select>
