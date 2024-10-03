@@ -1,38 +1,38 @@
 <script lang="ts">
-import { DebugShell } from '@spectacular/skeleton/components';
-import { getChromeAI } from '$lib/components/smart/chrome-ai';
-import SuperDebug from 'sveltekit-superforms';
-import {
-  aiProvider,
-  assistantStyle,
-  assistantOptions,
-  summarizerOptions,
-  writerOptions,
-  rewriterOptions,
-  preferedLang,
-} from '$lib/components/smart/settings';
-import { Provider } from '$lib/components/smart/settings';
-import { onMount } from 'svelte';
-// import { langs } from './constants';
-const chromeAI = getChromeAI();
-const { isAISupported, assistantCapabilities, isLoading } = chromeAI;
+  import { DebugShell } from "@spectacular/skeleton/components";
+  import { getChromeAI } from "$lib/components/smart/chrome-ai";
+  import SuperDebug from "sveltekit-superforms";
+  import {
+    aiProvider,
+    assistantStyle,
+    assistantOptions,
+    summarizerOptions,
+    writerOptions,
+    rewriterOptions,
+    preferedLang,
+  } from "$lib/components/smart/settings";
+  import { Provider } from "$lib/components/smart/settings";
+  import { onMount } from "svelte";
+  // import { langs } from './constants';
+  const chromeAI = getChromeAI();
+  const { isAISupported, assistantCapabilities, isLoading } = chromeAI;
 
-let voices: { label: string; value: string; isDefault: boolean }[] = [];
-onMount(() => {
-  speechSynthesis.onvoiceschanged = () => {
-    voices =
-      window.speechSynthesis?.getVoices().map((v) => ({
-        label: v.name,
-        value: v.lang,
-        isDefault: v.default,
-      })) ?? [];
-    console.log(voices);
-  };
-});
+  let voices: { label: string; value: string; isDefault: boolean }[] = [];
+  onMount(() => {
+    speechSynthesis.onvoiceschanged = () => {
+      voices =
+        window.speechSynthesis?.getVoices().map((v) => ({
+          label: v.name,
+          value: v.lang,
+          isDefault: v.default,
+        })) ?? [];
+      console.log(voices);
+    };
+  });
 </script>
 
 {#if isAISupported && $assistantCapabilities.available === "readily"}
-  <form class="p-6 bg-card rounded-lg shadow-lg">
+  <form class="card p-6 shadow-lg">
     <fieldset class="border border-surface-400 rounded-md p-4 mb-6">
       <legend class="text-sm font-semibold px-2">Assistants Options</legend>
       <div class="grid gap-4 md:grid-cols-2">
@@ -183,22 +183,26 @@ onMount(() => {
 
 <!-- Debug -->
 <DebugShell label="AI Settings Form">
-<SuperDebug label="aiProvider" data={$aiProvider} />
-<br />
-<SuperDebug label="assistantStyle" status={false} data={$assistantStyle} />
-<br />
-<SuperDebug label="assistantOptions" status={false} data={$assistantOptions} />
-<br />
-<SuperDebug label="writerOptions" status={false} data={$writerOptions} />
-<br />
-<SuperDebug label="rewriterOptions" status={false} data={$rewriterOptions} />
-<br />
-<SuperDebug
-  label="summarizerOptions"
-  status={false}
-  data={$summarizerOptions}
-/>
-<br />
-<SuperDebug label="preferedLang" status={false} data={$preferedLang} />
-<br />
+  <SuperDebug label="aiProvider" data={$aiProvider} />
+  <br />
+  <SuperDebug label="assistantStyle" status={false} data={$assistantStyle} />
+  <br />
+  <SuperDebug
+    label="assistantOptions"
+    status={false}
+    data={$assistantOptions}
+  />
+  <br />
+  <SuperDebug label="writerOptions" status={false} data={$writerOptions} />
+  <br />
+  <SuperDebug label="rewriterOptions" status={false} data={$rewriterOptions} />
+  <br />
+  <SuperDebug
+    label="summarizerOptions"
+    status={false}
+    data={$summarizerOptions}
+  />
+  <br />
+  <SuperDebug label="preferedLang" status={false} data={$preferedLang} />
+  <br />
 </DebugShell>

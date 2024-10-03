@@ -17,7 +17,9 @@ const aiSchema = z.object({
     .string({ required_error: 'Third Comment is required' })
     .min(10, { message: 'Third Comment contain at least 10 character(s)' })
     .trim(),
-  startData: z.date().nullish(),
+  startDate: z.date().nullish(),
+  endDate: z.date().nullish(),
+  specialization: z.string().nullish(),
 });
 
 const log = new Logger('server:ai:ms');
@@ -35,8 +37,8 @@ export const actions = {
 
     if (!form.valid) return fail(400, { form });
 
-    const { commentOne, commentTwo, commentThree } = form.data;
-    log.debug({ commentOne, commentTwo, commentThree });
+    const { commentOne, commentTwo, commentThree, startData1, startData2, comboSelect } = form.data;
+    log.debug({ commentOne, commentTwo, commentThree, startData1, startData2, comboSelect });
     return message(form, { type: 'success', message: 'AI form saved sucessfully 😎' });
   },
 };

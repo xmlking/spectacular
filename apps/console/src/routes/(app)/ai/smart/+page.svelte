@@ -1,6 +1,6 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { MagicSpellTextarea, SmartDate, getChromeAI } from '$lib/components/smart';
+import { MagicSpellTextarea, SmartDate, SmartDatePicker, ComboBox, getChromeAI } from '$lib/components/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -52,7 +52,6 @@ const {
   constraints,
   message,
   tainted,
-  posted,
   submitting,
   formId,
   capture,
@@ -68,67 +67,129 @@ $: loadingState.setFormLoading($delayed);
 <div class="page-container">
   <div class="page-section">
     <header class="flex justify-between">
-      <h1 class="h1">Smart Components</h1>
+      <h1 class="h1">Smart Components Demo</h1>
     </header>
 
-    <!-- Form Level Errors / Messages -->
-    <Alerts errors={$errors._errors} message={$message} />
     <!-- Form -->
-    <form method="POST" use:enhance>
-      <div class="flex flex-col space-y-4">
-        <Form.Field {form} name="commentOne">
-          <Form.Control let:attrs>
-            <Form.Label class="label">Comment One</Form.Label>
-            <MagicSpellTextarea
-              class="textarea data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.commentOne}
-              {...$constraints.commentOne}
-              placeholder="It was a dark and stormy night..."
-            />
-          </Form.Control>
-          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-        </Form.Field>
-        <Form.Field {form} name="commentTwo">
-          <Form.Control let:attrs>
-            <Form.Label class="label">Comment Two</Form.Label>
-            <MagicSpellTextarea
-              class="textarea data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.commentTwo}
-              {...$constraints.commentTwo}
-              placeholder="It was a dark and stormy night..."
-            />
-          </Form.Control>
-          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-        </Form.Field>
-        <Form.Field {form} name="commentThree">
-          <Form.Control let:attrs>
-            <Form.Label class="label">Comment Three</Form.Label>
-            <MagicSpellTextarea
-              class="textarea data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.commentThree}
-              {...$constraints.commentThree}
-              placeholder="It was a dark and stormy night..."
-            />
-          </Form.Control>
-          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-        </Form.Field>
-        <Form.Field {form} name="startData">
-          <Form.Control let:attrs>
-            <Form.Label class="label">Start Date: <small>Using On-Device AI: <span class="text-pink-600">{$assistantCapabilities?.available}</span></small></Form.Label>
-            <SmartDate
-              class="textarea data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.startData}
-              {...$constraints.startData}
-            />
-          </Form.Control>
-          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-        </Form.Field>
-        <button type="submit" class="variant-filled-primary btn w-full">submit</button>
-      </div>
+    <form method="POST" use:enhance class="card shadow-lg">
+      <header class="card-header">
+        <!-- Form Level Errors / Messages -->
+        <Alerts errors={$errors._errors} message={$message} />
+      </header>
+      <section class="p-6 space-y-4">
+        <div>
+          <Form.Field {form} name="commentOne">
+            <Form.Control let:attrs>
+              <Form.Label class="label">Comment One</Form.Label>
+              <MagicSpellTextarea
+                class="textarea data-[fs-error]:input-error"
+                {...attrs}
+                bind:value={$formData.commentOne}
+                {...$constraints.commentOne}
+                placeholder="It was a dark and stormy night..."
+              />
+            </Form.Control>
+            <Form.Description class="sr-only"
+              >Put Comment One description here</Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div>
+          <Form.Field {form} name="commentTwo">
+            <Form.Control let:attrs>
+              <Form.Label class="label">Comment Two</Form.Label>
+              <MagicSpellTextarea
+                class="textarea data-[fs-error]:input-error"
+                {...attrs}
+                bind:value={$formData.commentTwo}
+                {...$constraints.commentTwo}
+                placeholder="It was a dark and stormy night..."
+              />
+            </Form.Control>
+            <Form.Description class="sr-only"
+              >Put Comment Two description here</Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div>
+          <Form.Field {form} name="commentThree">
+            <Form.Control let:attrs>
+              <Form.Label class="label">Comment Three</Form.Label>
+              <MagicSpellTextarea
+                class="textarea data-[fs-error]:input-error"
+                {...attrs}
+                bind:value={$formData.commentThree}
+                {...$constraints.commentThree}
+                placeholder="It was a dark and stormy night..."
+              />
+            </Form.Control>
+            <Form.Description class="sr-only"
+              >Put Comment Three description here</Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div class="grid gap-6 md:grid-cols-3">
+          <div>
+            <Form.Field {form} name="startDate">
+              <Form.Control let:attrs>
+                <Form.Label class="label">Start Date</Form.Label>
+                <SmartDate
+                  class="textarea data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$formData.startDate}
+                  {...$constraints.startDate}
+                />
+              </Form.Control>
+              <Form.Description class="sr-only"
+                >Start Date Desc</Form.Description
+              >
+              <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+            </Form.Field>
+          </div>
+          <div>
+            <Form.Field {form} name="endDate">
+              <Form.Control let:attrs>
+                <Form.Label class="label">End Date</Form.Label>
+                <SmartDatePicker
+                  class="textarea data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:startDate={$formData.endDate}
+                  {...$constraints.endDate}
+                />
+              </Form.Control>
+              <Form.Description class="sr-only">End Date Desc</Form.Description>
+              <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+            </Form.Field>
+          </div>
+          <div>
+            <Form.Field {form} name="specialization">
+              <Form.Control let:attrs>
+                <Form.Label class="label">Provider Specialization</Form.Label>
+                <ComboBox
+                  bind:selected={$formData.specialization}
+                  {...$constraints.commentThree}
+                />
+              </Form.Control>
+              <Form.Description class="sr-only"
+                >Provider Specialization Desc</Form.Description
+              >
+              <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+            </Form.Field>
+          </div>
+        </div>
+      </section>
+      <hr class="opacity-50" />
+      <footer class="p-4 card-footer flex justify-end items-center space-x-4">
+        <p class="text-xs">
+          On-Device AI: <span class="text-error-500 uppercase"
+            >{$assistantCapabilities?.available}</span
+          >
+        </p>
+        <button type="submit" class="variant-filled-primary btn">submit</button>
+      </footer>
     </form>
     <!-- Debug -->
     <DebugShell label="AI Form">
@@ -140,7 +201,6 @@ $: loadingState.setFormLoading($delayed);
           submitting: $submitting,
           delayed: $delayed,
           timeout: $timeout,
-          posted: $posted,
           formId: $formId,
         }}
       />
@@ -156,5 +216,3 @@ $: loadingState.setFormLoading($delayed);
     </DebugShell>
   </div>
 </div>
-
-
