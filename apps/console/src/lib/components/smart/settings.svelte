@@ -1,34 +1,34 @@
 <script lang="ts">
-  import { DebugShell } from "@spectacular/skeleton/components";
-  import { getChromeAI } from "$lib/components/smart/chrome-ai";
-  import SuperDebug from "sveltekit-superforms";
-  import {
-    aiProvider,
-    assistantStyle,
-    assistantOptions,
-    summarizerOptions,
-    writerOptions,
-    rewriterOptions,
-    preferedLang,
-  } from "$lib/components/smart/settings";
-  import { Provider } from "$lib/components/smart/settings";
-  import { onMount } from "svelte";
-  // import { langs } from './constants';
-  const chromeAI = getChromeAI();
-  const { isAISupported, assistantCapabilities, isLoading } = chromeAI;
+import { DebugShell } from '@spectacular/skeleton/components';
+import { getChromeAI } from '$lib/components/smart/chrome-ai';
+import SuperDebug from 'sveltekit-superforms';
+import {
+  aiProvider,
+  assistantStyle,
+  assistantOptions,
+  summarizerOptions,
+  writerOptions,
+  rewriterOptions,
+  preferedLang,
+} from '$lib/components/smart/settings';
+import { Provider } from '$lib/components/smart/settings';
+import { onMount } from 'svelte';
+// import { langs } from './constants';
+const chromeAI = getChromeAI();
+const { isAISupported, assistantCapabilities, isLoading } = chromeAI;
 
-  let voices: { label: string; value: string; isDefault: boolean }[] = [];
-  onMount(() => {
-    speechSynthesis.onvoiceschanged = () => {
-      voices =
-        window.speechSynthesis?.getVoices().map((v) => ({
-          label: v.name,
-          value: v.lang,
-          isDefault: v.default,
-        })) ?? [];
-      console.log(voices);
-    };
-  });
+let voices: { label: string; value: string; isDefault: boolean }[] = [];
+onMount(() => {
+  speechSynthesis.onvoiceschanged = () => {
+    voices =
+      window.speechSynthesis?.getVoices().map((v) => ({
+        label: v.name,
+        value: v.lang,
+        isDefault: v.default,
+      })) ?? [];
+    console.log(voices);
+  };
+});
 </script>
 
 {#if isAISupported && $assistantCapabilities.available === "readily"}

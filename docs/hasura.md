@@ -210,7 +210,11 @@ GRANT USAGE ON SCHEMA auth TO nhost_hasura;
 ALTER DEFAULT PRIVILEGES FOR ROLE nhost_auth_admin IN SCHEMA auth GRANT ALL ON TABLES TO nhost_hasura;
 ```
 
-#### Step 3: reinitialize metadata and migrations
+#### Step 3
+
+Start `hasura-auth` and `hasura-storage` services so that associated database tables are created in `auth` and `storage` DB scheam.
+
+#### Step 4: reinitialize metadata and migrations for public schema
 
 ```shell
 # apply metadata, DB migrations
