@@ -15,30 +15,6 @@ const api = '/api/combobox';
 const { isAISupported, assistantCapabilities } = getChromeAI();
 let isLoading = false;
 let error: string;
-const items = [
-  'Anesthesiology',
-  'Cardiology',
-  'Dermatology',
-  'Emergency Medicine',
-  'Endocrinology',
-  'Family Medicine',
-  'Gastroenterology',
-  'General Surgery',
-  'Geriatrics',
-  'Hematology',
-  'Infectious Disease',
-  'Internal Medicine',
-  'Nephrology',
-  'Neurology',
-  'Obstetrics & Gynecology',
-  'Oncology',
-  'Ophthalmology',
-  'Orthopedics',
-  'Pediatrics',
-  'Psychiatry',
-  'Pulmonology',
-  'Urology',
-];
 const options = writable([]);
 
 let value = '';
@@ -57,8 +33,8 @@ const useRemoteModel = async (event: Event) => {
     });
     const content = await rawResponse.json();
     if (content[0]?.options) {
+      console.log({ result: content[0]?.options });
       return content[0]?.options;
-      //value =  new Date().toISOString().slice(0,16)
     }
     isLoading = false;
   } catch (err) {
