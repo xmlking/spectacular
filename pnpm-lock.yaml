@@ -149,7 +149,7 @@ importers:
         version: 6.5.0
       '@testing-library/svelte':
         specifier: 5.2.3
-        version: 5.2.3(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))(vitest@2.1.2)
+        version: 5.2.3(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       '@types/d3-scale':
         specifier: 4.0.8
         version: 4.0.8
@@ -185,7 +185,7 @@ importers:
         version: 1.14.10(svelte@4.2.19)
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       '@xyflow/svelte':
         specifier: 0.1.20
         version: 0.1.20(svelte@4.2.19)
@@ -400,7 +400,7 @@ importers:
         version: 0.5.15(tailwindcss@3.4.13)
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       astro:
         specifier: 4.15.11
         version: 4.15.11(@types/node@22.7.4)(rollup@4.24.0)(typescript@5.6.2)
@@ -515,7 +515,7 @@ importers:
         version: 1.14.10(svelte@4.2.19)
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -656,7 +656,7 @@ importers:
         version: 22.7.4
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       cssnano:
         specifier: 7.0.6
         version: 7.0.6(postcss@8.4.47)
@@ -689,7 +689,7 @@ importers:
         version: link:../typescript-config
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -2212,9 +2212,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.2':
     resolution: {integrity: sha512-T9HCQO30Sq6L8tXQfdJI2CNMeNQxtMepJyoBYgK5QEN2LuIUqaoTfsZ2GryAqwFdAEj5FSM5Kdnf7f6shFqBHw==}
@@ -10818,7 +10820,7 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/svelte@5.2.3(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))(vitest@2.1.2)':
+  '@testing-library/svelte@5.2.3(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))':
     dependencies:
       '@testing-library/dom': 10.4.0
       svelte: 4.2.19
@@ -11362,7 +11364,7 @@ snapshots:
       validator: 13.12.0
     optional: true
 
-  '@vitest/coverage-v8@2.1.2(vitest@2.1.2)':
+  '@vitest/coverage-v8@2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
