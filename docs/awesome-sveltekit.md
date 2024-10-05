@@ -97,6 +97,7 @@ Awesome **SvelteKit** Links
 - [Svelte Animations for Marketing](https://github.com/SikandarJODD/svelte-animations), [Demo](https://animation-svelte.vercel.app/)
 - [Svelte Star Wars Demo](https://github.com/geoffrich/star-wars-demo-svelte), [Demo](https://main--transcendent-begonia-7a3d6f.netlify.app/)
 - [Motion](https://motion.dev/) (preferred)
+- [lottiefiles](https://lottiefiles.github.io/lottie-docs/) Lottie is a **vector** animation format, used to build marketing pages. See [Examples](https://lottiefiles.com/use-cases/website)
 
 ## State Management
 
