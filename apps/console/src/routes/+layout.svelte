@@ -45,7 +45,7 @@ setLoadingState();
 // TODO: initialize different clients for server-side and client-side
 const nhost = setNhostClient();
 // initialize ChromeAI
-setChromeAI();
+// setChromeAI();
 
 // Handle Vercel Production Mode
 storeVercelProductionMode.set(data.vercelEnv === 'production');
