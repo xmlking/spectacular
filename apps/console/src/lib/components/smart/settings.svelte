@@ -26,12 +26,12 @@ onMount(() => {
         value: v.lang,
         isDefault: v.default,
       })) ?? [];
-    console.log(voices);
+    // console.log(voices);
   };
 });
 </script>
 
-{#if isAISupported && $assistantCapabilities.available === "readily"}
+{#if isAISupported && $assistantCapabilities?.available === "readily"}
   <form class="card p-6 shadow-lg">
     <fieldset class="border border-surface-400 rounded-md p-4 mb-6">
       <legend class="text-sm font-semibold px-2">Assistants Options</legend>

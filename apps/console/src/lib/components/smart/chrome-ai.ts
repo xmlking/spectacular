@@ -95,25 +95,27 @@ export class ChromeAI {
   });
 
   constructor() {
-    const version = getChromeVersion();
-    this.#log.debug({ chromeVersion: version, isAISupported: 'ai' in globalThis });
-    if (version < 129) {
-      this.#errors.update((errors) => {
-        errors.push('Your browser is not supported. Please update to 129 version or greater');
-        return errors;
-      });
-      return;
+    if (browser) {
+      const version = getChromeVersion();
+      this.#log.debug({ chromeVersion: version, isAISupported: 'ai' in globalThis });
+      if (version < 129) {
+        this.#errors.update((errors) => {
+          errors.push('Your browser is not supported. Please update to 129 version or greater');
+          return errors;
+        });
+        return;
+      }
+      if (!('ai' in globalThis)) {
+        this.#errors.update((errors) => {
+          errors.push(
+            'Prompt API is not available, check your configuration in chrome://flags/#prompt-api-for-gemini-nano',
+          );
+          return errors;
+        });
+        return;
+      }
+      this.#isAISupported = true;
     }
-    if (!('ai' in globalThis)) {
-      this.#errors.update((errors) => {
-        errors.push(
-          'Prompt API is not available, check your configuration in chrome://flags/#prompt-api-for-gemini-nano',
-        );
-        return errors;
-      });
-      return;
-    }
-    this.#isAISupported = true;
 
     const assistantOptionsSub = assistantOptions.subscribe((options) => {
       this.#assistantOptions = options;
@@ -135,10 +137,6 @@ export class ChromeAI {
       writerOptionsSub();
       rewriterOptionsSub();
     });
-  }
-
-  async init() {
-    console.log({ assistantCapabilities: get(this.assistantCapabilities) });
   }
 
   get errors() {
@@ -281,9 +279,6 @@ const CHROME_AI_KEY = Symbol('CHROME_AI');
 
 export const setChromeAI = () => {
   const chromeAI = new ChromeAI();
-  if (browser) {
-    chromeAI.init();
-  }
   return setContext(CHROME_AI_KEY, chromeAI);
 };
 
