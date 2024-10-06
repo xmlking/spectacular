@@ -2,16 +2,10 @@ import { browser } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { derived, get, readable, readonly, writable } from 'svelte/store';
-import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings';
 
 /**
  *  Chrome AI Util Functions
  */
-
-function getChromeVersion() {
-  const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
-  return raw ? Number.parseInt(raw[2], 10) : 0;
-}
 
 /**
  *  Chrome AI Stores
@@ -22,13 +16,13 @@ export class ChromeAI {
   readonly #errors = writable<Array<string>>([]);
   readonly isLoading = writable<boolean>(false);
 
-  #isAISupported = 'ai' in globalThis;
+  #isAISupported = browser && 'ai' in window;
   get isAISupported() {
     return this.#isAISupported;
   }
 
   readonly assistantCapabilities = readable<AIAssistantCapabilities>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported) {
       window.ai.assistant.capabilities().then((cap) => {
         set(cap);
       });
@@ -36,7 +30,7 @@ export class ChromeAI {
   });
 
   readonly summarizerCapabilities = readable<AISummarizerCapabilities>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported) {
       window.ai.summarizer?.capabilities().then((cap) => {
         set(cap);
       });
@@ -44,7 +38,7 @@ export class ChromeAI {
   });
 
   readonly writerCapabilities = readable<AIWriterCapabilities>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported) {
       // TODO
       // window.ai.writer?.capabilities().then((cap) => {
       //    set(cap);
@@ -62,7 +56,7 @@ export class ChromeAI {
   });
 
   readonly rewriterCapabilities = readable<AIRewriterCapabilities>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported) {
       // window.ai.rewriter?.capabilities().then((cap) => {
       //   set(cap);
       // });
@@ -85,30 +79,6 @@ export class ChromeAI {
       });
     }
   });
-
-  constructor() {
-    if (browser) {
-      const version = getChromeVersion();
-      this.#log.debug({ chromeVersion: version, isAISupported: 'ai' in globalThis });
-      if (version < 129) {
-        this.#errors.update((errors) => {
-          errors.push('Your browser is not supported. Please update to 129 version or greater');
-          return errors;
-        });
-        return;
-      }
-      if (!('ai' in globalThis)) {
-        this.#errors.update((errors) => {
-          errors.push(
-            'Prompt API is not available, check your configuration in chrome://flags/#prompt-api-for-gemini-nano',
-          );
-          return errors;
-        });
-        return;
-      }
-      this.#isAISupported = true;
-    }
-  }
 
   get errors() {
     return readonly(this.#errors);
