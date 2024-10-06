@@ -22,13 +22,13 @@ export class ChromeAI {
   readonly #errors = writable<Array<string>>([]);
   readonly isLoading = writable<boolean>(false);
 
-  // #detector: LanguageDetector;
+  #detector: LanguageDetector;
 
-  // #assistantOptions: { topK: number; temperature: number };
-  // #summarizerOptions: { type?: AISummarizerType; format?: AISummarizerFormat; length?: AISummarizerLength };
-  // #writerOptions: { tone?: AIWriterTone; format?: AIWriterFormat; length?: AIWriterLength };
-  // #rewriterOptions: { tone?: AIRewriterTone; format?: AIRewriterFormat; length?: AIRewriterLength };
-  // #preferedLang: string;
+  #assistantOptions: { topK: number; temperature: number };
+  #summarizerOptions: { type?: AISummarizerType; format?: AISummarizerFormat; length?: AISummarizerLength };
+  #writerOptions: { tone?: AIWriterTone; format?: AIWriterFormat; length?: AIWriterLength };
+  #rewriterOptions: { tone?: AIRewriterTone; format?: AIRewriterFormat; length?: AIRewriterLength };
+  #preferedLang: string;
 
   #isAISupported = browser && 'ai' in window;
   get isAISupported() {
