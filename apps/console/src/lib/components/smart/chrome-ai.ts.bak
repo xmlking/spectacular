@@ -30,13 +30,13 @@ export class ChromeAI {
   #rewriterOptions: { tone?: AIRewriterTone; format?: AIRewriterFormat; length?: AIRewriterLength };
   #preferedLang: string;
 
-  #isAISupported = 'ai' in globalThis;
+  #isAISupported = browser && 'ai' in window;
   get isAISupported() {
     return this.#isAISupported;
   }
 
   readonly assistantCapabilities = readable<AIAssistantCapabilities>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported && window.ai.assistant) {
       window.ai.assistant.capabilities().then((cap) => {
         set(cap);
       });
@@ -44,7 +44,7 @@ export class ChromeAI {
   });
 
   readonly summarizerCapabilities = readable<AISummarizerCapabilities>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported && window.ai.summarizer) {
       window.ai.summarizer?.capabilities().then((cap) => {
         set(cap);
       });
@@ -52,37 +52,33 @@ export class ChromeAI {
   });
 
   readonly writerCapabilities = readable<AIWriterCapabilities>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported && window.ai.writer) {
       // TODO
       // window.ai.writer?.capabilities().then((cap) => {
       //    set(cap);
       // });
-      if (window.ai.writer) {
-        set({
-          available: 'readily',
-          supportsTone: (tone: AIWriterTone) => 'readily',
-          supportsFormat: (format: AIWriterFormat) => 'readily',
-          supportsLength: (length: AIWriterLength) => 'readily',
-          supportsInputLanguage: (languageTag: Intl.UnicodeBCP47LocaleIdentifier) => 'readily',
-        });
-      }
+      set({
+        available: 'readily',
+        supportsTone: (tone: AIWriterTone) => 'readily',
+        supportsFormat: (format: AIWriterFormat) => 'readily',
+        supportsLength: (length: AIWriterLength) => 'readily',
+        supportsInputLanguage: (languageTag: Intl.UnicodeBCP47LocaleIdentifier) => 'readily',
+      });
     }
   });
 
   readonly rewriterCapabilities = readable<AIRewriterCapabilities>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported && window.ai.rewriter) {
       // window.ai.rewriter?.capabilities().then((cap) => {
       //   set(cap);
       // });
-      if (window.ai.rewriter) {
-        set({
-          available: 'readily',
-          supportsTone: (tone: AIRewriterTone) => 'readily',
-          supportsFormat: (format: AIRewriterFormat) => 'readily',
-          supportsLength: (length: AIRewriterLength) => 'readily',
-          supportsInputLanguage: (languageTag: Intl.UnicodeBCP47LocaleIdentifier) => 'readily',
-        });
-      }
+      set({
+        available: 'readily',
+        supportsTone: (tone: AIRewriterTone) => 'readily',
+        supportsFormat: (format: AIRewriterFormat) => 'readily',
+        supportsLength: (length: AIRewriterLength) => 'readily',
+        supportsInputLanguage: (languageTag: Intl.UnicodeBCP47LocaleIdentifier) => 'readily',
+      });
     }
   });
 
@@ -147,7 +143,7 @@ export class ChromeAI {
   async createAssistant(
     options?: AIAssistantCreateOptionsWithSystemPrompt | AIAssistantCreateOptionsWithoutSystemPrompt,
   ): Promise<AIAssistant | undefined> {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported && window.ai.assistant) {
       const availability = (await window.ai.assistant?.capabilities())?.available;
       switch (availability) {
         case 'readily':
@@ -178,7 +174,7 @@ export class ChromeAI {
   }
 
   async createSummarizer(options?: AISummarizerCreateOptions): Promise<AISummarizer | undefined> {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported && window.ai.summarizer) {
       const availability = (await window.ai.summarizer?.capabilities())?.available;
       switch (availability) {
         case 'readily':
@@ -210,7 +206,7 @@ export class ChromeAI {
 
   // https://github.com/tomayac/writer-rewriter-api-playground/tree/main
   async createWriter(options?: AIWriterCreateOptions): Promise<AIWriter | undefined> {
-    if (browser && this.#isAISupported && window.ai.writer) {
+    if (this.#isAISupported && window.ai.writer) {
       return await window.ai.writer.create({ ...this.#writerOptions, ...options });
       // biome-ignore lint/style/noUselessElse: <explanation>
     } else {
@@ -223,7 +219,7 @@ export class ChromeAI {
   }
 
   async createRewriter(options?: AIRewriterCreateOptions): Promise<AIRewriter | undefined> {
-    if (browser && this.#isAISupported && window.ai.rewriter) {
+    if (this.#isAISupported && window.ai.rewriter) {
       return await window.ai.rewriter.create({ ...this.#rewriterOptions, ...options });
       // biome-ignore lint/style/noUselessElse: <explanation>
     } else {
@@ -238,7 +234,7 @@ export class ChromeAI {
   // https://github.com/tomayac/translation-language-detection-api-playground/blob/main/script.js
   async createDetector() {
     if (this.#detector) return this.#detector;
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported && window.translation) {
       const availability = await window.translation?.canDetect();
       switch (availability) {
         case 'readily':
@@ -277,7 +273,7 @@ export class ChromeAI {
   // https: //github.com/GoogleChromeLabs/web-ai-demos/blob/main/product-reviews/src/lib/HybridTranslator.js
   // https://docs.google.com/document/d/1bzpeKk4k26KfjtR-_d9OuXLMpJdRMiLZAOVNMuFIejk/edit
   async createTranslator(options: TranslationLanguageOptions) {
-    if (browser && this.#isAISupported) {
+    if (this.#isAISupported && window.translation) {
       const availability = await window.translation.canTranslate(options);
       switch (availability) {
         case 'readily':
