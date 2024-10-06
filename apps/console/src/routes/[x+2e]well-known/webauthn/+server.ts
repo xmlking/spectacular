@@ -22,6 +22,7 @@ export async function GET({ setHeaders }) {
     origins: [
       'https://console.traefik.me:5173',
       'https://console.traefik.me:3000',
+      'https://console.traefik.me:4173',
       'https://console.traefik.me',
       'https://spectacular-console.vercel.app',
       'https://spectacular-console-git-main-spectacular.vercel.app',

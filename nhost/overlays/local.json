@@ -14,6 +14,9 @@
       "https://console.traefik.me:3000",
       "https://console.traefik.me:3000/profile",
       "https://console.traefik.me:3000/dashboard/profile",
+      "https://console.traefik.me:4173",
+      "https://console.traefik.me:4173/profile",
+      "https://console.traefik.me:4173/dashboard/profile",
       "https://console.traefik.me",
       "https://console.traefik.me/profile",
       "https://console.traefik.me/dashboard/profile"
@@ -27,6 +30,11 @@
   {
     "op": "add",
     "path": "/auth/method/webauthn/relyingParty/origins/2",
+    "value": "https://console.traefik.me:4173"
+  },
+  {
+    "op": "add",
+    "path": "/auth/method/webauthn/relyingParty/origins/3",
     "value": "https://console.traefik.me"
   },
   {

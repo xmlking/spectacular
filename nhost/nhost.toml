@@ -49,7 +49,7 @@ mode = 'required'
 
 [auth.redirections]
 clientUrl = 'https://console.traefik.me:5173'
-allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:5173/dashboard/profile', 'https://console.traefik.me:3000', 'https://console.traefik.me:3000/dashboard/profile', 'https://console.traefik.me', 'https://console.traefik.me/dashboard/profile', 'https://*.vercel.app']
+allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:5173/profile', 'https://console.traefik.me:4173', 'https://console.traefik.me:4173/profile', 'https://console.traefik.me:3000', 'https://console.traefik.me:3000/profile', 'https://console.traefik.me', 'https://console.traefik.me/profile', 'https://*.vercel.app']
 
 [auth.signUp]
 enabled = true
