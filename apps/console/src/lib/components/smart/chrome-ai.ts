@@ -42,7 +42,7 @@ export class ChromeAI {
       });
     }
   });
-  /*
+
   readonly summarizerCapabilities = readable<AISummarizerCapabilities>(undefined, (set) => {
     if (this.#isAISupported && window.ai.summarizer) {
       window.ai.summarizer?.capabilities().then((cap) => {
@@ -89,7 +89,7 @@ export class ChromeAI {
       });
     }
   });
-
+  /*
 
   constructor() {
     if (browser) {
