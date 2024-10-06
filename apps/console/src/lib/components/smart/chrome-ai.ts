@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { derived, get, readable, readonly, writable } from 'svelte/store';
-// import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings';
+import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings';
 
 /**
  *  Chrome AI Util Functions
@@ -112,25 +112,25 @@ export class ChromeAI {
       }
       this.#isAISupported = true;
 
-      // const assistantOptionsSub = assistantOptions.subscribe((options) => {
-      //   this.#assistantOptions = options;
-      // });
-      // const summarizerOptionsSub = summarizerOptions.subscribe((options) => {
-      //   this.#summarizerOptions = options;
-      // });
-      // const writerOptionsSub = writerOptions.subscribe((options) => {
-      //   this.#writerOptions = options;
-      // });
-      // const rewriterOptionsSub = rewriterOptions.subscribe((options) => {
-      //   this.#rewriterOptions = options;
-      // });
+      const assistantOptionsSub = assistantOptions.subscribe((options) => {
+        this.#assistantOptions = options;
+      });
+      const summarizerOptionsSub = summarizerOptions.subscribe((options) => {
+        this.#summarizerOptions = options;
+      });
+      const writerOptionsSub = writerOptions.subscribe((options) => {
+        this.#writerOptions = options;
+      });
+      const rewriterOptionsSub = rewriterOptions.subscribe((options) => {
+        this.#rewriterOptions = options;
+      });
 
       onDestroy(async () => {
         this.#log.debug('onDestroy called');
-        // assistantOptionsSub();
-        // summarizerOptionsSub();
-        // writerOptionsSub();
-        // rewriterOptionsSub();
+        assistantOptionsSub();
+        summarizerOptionsSub();
+        writerOptionsSub();
+        rewriterOptionsSub();
       });
     }
   }

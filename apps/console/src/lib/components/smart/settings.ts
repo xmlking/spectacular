@@ -43,11 +43,12 @@ export const rewriterOptions: Writable<{
   length?: AIRewriterLength;
 }> = writable({ tone: 'as-is', format: 'as-is', length: 'as-is' });
 
-export const preferedLang: Writable<string> = writable(navigator.language);
+const lang = browser ? navigator.language : 'en-US';
+export const preferedLang: Writable<string> = writable(lang);
 
 export function languageTagToHumanReadable(
   languageTag: Intl.UnicodeBCP47LocaleIdentifier,
-  targetLanguage: string = navigator.language,
+  targetLanguage: string = lang,
 ) {
   const displayNames = new Intl.DisplayNames([targetLanguage], { type: 'language' });
   return displayNames.of(languageTag);
