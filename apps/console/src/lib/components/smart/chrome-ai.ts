@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { derived, get, readable, readonly, writable } from 'svelte/store';
-import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings';
+// import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings';
 
 /**
  *  Chrome AI Util Functions
@@ -234,7 +234,7 @@ export class ChromeAI {
   // https://github.com/tomayac/translation-language-detection-api-playground/blob/main/script.js
   async createDetector() {
     if (this.#detector) return this.#detector;
-    if (this.#isAISupported && window.translation) {
+    if (this.#isAISupported && 'translation' in window) {
       const availability = await window.translation?.canDetect();
       switch (availability) {
         case 'readily':
@@ -273,7 +273,7 @@ export class ChromeAI {
   // https: //github.com/GoogleChromeLabs/web-ai-demos/blob/main/product-reviews/src/lib/HybridTranslator.js
   // https://docs.google.com/document/d/1bzpeKk4k26KfjtR-_d9OuXLMpJdRMiLZAOVNMuFIejk/edit
   async createTranslator(options: TranslationLanguageOptions) {
-    if (this.#isAISupported && window.translation) {
+    if (this.#isAISupported && 'translation' in window) {
       const availability = await window.translation.canTranslate(options);
       switch (availability) {
         case 'readily':
