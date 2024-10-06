@@ -1,5 +1,5 @@
 <script lang="ts">
-import AISettings from '$lib/components/smart/settings.svelte';
+import { AISettings } from '@spectacular/smart';
 </script>
 
 <svelte:head>

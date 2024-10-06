@@ -251,6 +251,10 @@ Awesome **SvelteKit** Links
 
   add `sideEffects` to `package.json`
 
+- One technique for re-using a SvelteKit app is making it an npm package:
+
+  <https://x.com/joshnuss/status/1553580203540094977>
+
 ## Blogs
 
 - [https://joyofcode.xyz/](https://joyofcode.xyz/)

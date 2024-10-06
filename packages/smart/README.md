@@ -1,5 +1,7 @@
 # Smart Components
 
+Hybrid AI Apps
+
 AI assistend web components usage examples.
 
 All Components leveraing `Chrome built-in model (Gemini Nano)`, build with [Vercel AI](https://vercel.com/ai) and [chrome-ai](https://github.com/jeasonstudio/chrome-ai) provider

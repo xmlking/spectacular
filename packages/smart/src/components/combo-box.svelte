@@ -1,9 +1,7 @@
 <script lang="ts">
-import { getChromeAI } from '$lib/components/smart/chrome-ai';
+import { getChromeAI } from './chrome-ai.js';
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
-import { JSONParseError, TypeValidationError, generateObject } from 'ai';
-import { chromeai } from 'chrome-ai';
 import Select from 'svelte-select';
 import { writable } from 'svelte/store';
 import type { HTMLTextareaAttributes } from 'svelte/elements';

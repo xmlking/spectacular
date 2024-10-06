@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { type Writable, derived, writable } from 'svelte/store';
-import { type AIStyles, TEMP_STYLES } from './constants';
+import { type AIStyles, TEMP_STYLES } from './constants.js';
 
 export enum Provider {
   Local = 'local',

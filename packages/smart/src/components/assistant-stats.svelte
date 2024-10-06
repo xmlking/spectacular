@@ -1,5 +1,5 @@
 <script lang="ts">
-import { getChromeAI } from '$lib/components/smart/chrome-ai';
+import { getChromeAI } from './chrome-ai.js';
 import { onMount, onDestroy } from 'svelte';
 const chromeAI = getChromeAI();
 const { isAISupported, assistantCapabilities, isLoading } = chromeAI;

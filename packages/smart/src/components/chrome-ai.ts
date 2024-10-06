@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { derived, get, readable, readonly, writable } from 'svelte/store';
-import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings';
+import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings.js';
 
 /**
  *  Chrome AI Util Functions

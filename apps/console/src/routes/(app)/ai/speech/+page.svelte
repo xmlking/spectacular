@@ -1,5 +1,5 @@
 <script lang="ts">
-import { langs } from '$lib/components/smart/constants';
+import { langs } from '@spectacular/smart';
 import { onMount } from 'svelte';
 
 // TODO https://github.com/herebefrogs/dictafone.app/tree/main/src/routes

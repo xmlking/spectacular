@@ -1,6 +1,6 @@
 <script lang="ts">
 import { DebugShell } from '@spectacular/skeleton/components';
-import { getChromeAI } from '$lib/components/smart/chrome-ai';
+import { getChromeAI } from './chrome-ai.js';
 import SuperDebug from 'sveltekit-superforms';
 import {
   aiProvider,
@@ -10,8 +10,8 @@ import {
   writerOptions,
   rewriterOptions,
   preferedLang,
-} from '$lib/components/smart/settings';
-import { Provider } from '$lib/components/smart/settings';
+} from './settings.js';
+import { Provider } from './settings.js';
 import { onMount } from 'svelte';
 // import { langs } from './constants';
 const chromeAI = getChromeAI();

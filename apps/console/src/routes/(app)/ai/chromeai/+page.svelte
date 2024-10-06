@@ -1,5 +1,5 @@
 <script lang="ts">
-import { getChromeAI, AssistantStats } from '$lib/components/smart';
+import { getChromeAI, AssistantStats } from '@spectacular/smart';
 import { ErrorMessage, Alerts } from '@spectacular/skeleton/components/form';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';

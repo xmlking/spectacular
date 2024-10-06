@@ -108,6 +108,9 @@ importers:
       '@spectacular/skeleton':
         specifier: workspace:*
         version: link:../../packages/skeleton-ui
+      '@spectacular/smart':
+        specifier: workspace:*
+        version: link:../../packages/smart
       '@spectacular/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -552,6 +555,96 @@ importers:
       svelte:
         specifier: 4.2.19
         version: 4.2.19
+      sveltekit-superforms:
+        specifier: 2.19.1
+        version: 2.19.1(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(@types/json-schema@7.0.15)(svelte@4.2.19)
+      tailwind-merge:
+        specifier: 2.5.3
+        version: 2.5.3
+      tailwind-variants:
+        specifier: 0.2.1
+        version: 0.2.1(tailwindcss@3.4.13)
+      tailwindcss:
+        specifier: 3.4.13
+        version: 3.4.13
+      tslib:
+        specifier: 2.7.0
+        version: 2.7.0
+      typescript:
+        specifier: 5.6.2
+        version: 5.6.2
+      vite:
+        specifier: 5.4.8
+        version: 5.4.8(@types/node@22.7.4)
+      vitest:
+        specifier: 2.1.2
+        version: 2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1)
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
+
+  packages/smart:
+    devDependencies:
+      '@ai-sdk/svelte':
+        specifier: 0.0.51
+        version: 0.0.51(svelte@4.2.19)(zod@3.23.8)
+      '@floating-ui/dom':
+        specifier: 1.6.11
+        version: 1.6.11
+      '@skeletonlabs/skeleton':
+        specifier: 2.10.2
+        version: 2.10.2(svelte@4.2.19)
+      '@spectacular/biome-config':
+        specifier: workspace:*
+        version: link:../biome-config
+      '@spectacular/skeleton':
+        specifier: workspace:*
+        version: link:../skeleton-ui
+      '@spectacular/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@spectacular/utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@svelte-plugins/datepicker':
+        specifier: 1.0.9
+        version: 1.0.9
+      '@sveltejs/kit':
+        specifier: 2.6.2
+        version: 2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))
+      '@tsconfig/svelte':
+        specifier: 5.0.4
+        version: 5.0.4
+      '@types/dom-chromium-ai':
+        specifier: 0.0.1
+        version: 0.0.1
+      '@types/node':
+        specifier: 22.7.4
+        version: 22.7.4
+      '@vitest/coverage-v8':
+        specifier: 2.1.2
+        version: 2.1.2(vitest@2.1.2)
+      ai:
+        specifier: 3.4.9
+        version: 3.4.9(react@18.3.1)(solid-js@1.9.1)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.11(typescript@5.6.2))(zod@3.23.8)
+      chrome-ai:
+        specifier: 1.11.1
+        version: 1.11.1
+      date-fns:
+        specifier: 4.1.0
+        version: 4.1.0
+      lucide-svelte:
+        specifier: 0.447.0
+        version: 0.447.0(svelte@4.2.19)
+      svelte:
+        specifier: 4.2.19
+        version: 4.2.19
+      svelte-check:
+        specifier: 4.0.4
+        version: 4.0.4(picomatch@4.0.2)(svelte@4.2.19)(typescript@5.6.2)
+      svelte-select:
+        specifier: 5.8.3
+        version: 5.8.3
       sveltekit-superforms:
         specifier: 2.19.1
         version: 2.19.1(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(@types/json-schema@7.0.15)(svelte@4.2.19)
@@ -11143,7 +11236,7 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 22.7.4
 
   '@types/semver@6.2.7': {}
 

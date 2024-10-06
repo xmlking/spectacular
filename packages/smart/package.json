@@ -1,0 +1,64 @@
+{
+  "name": "@spectacular/smart",
+  "description": "Smart UI components for svelte",
+  "sideEffects": false,
+  "type": "module",
+  "imports": {
+    "#utils": "./src/utils/index.js",
+    "#*": "./src/*"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/components/index.ts",
+      "svelte": "./src/components/index.ts",
+      "default": "./src/components/index.ts"
+    },
+    "./actions": "./src/actions/index.ts",
+    "./actions/*": "./src/actions/*.ts",
+    "./components": "./src/components/index.ts",
+    "./components/*": "./src/components/*/index.ts"
+  },
+  "scripts": {
+    "clean": "git clean -xdf",
+    "format": "biome format --write",
+    "lint": "biome lint",
+    "test": "vitest run",
+    "test:unit:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@ai-sdk/svelte": "0.0.51",
+    "@floating-ui/dom": "1.6.11",
+    "@skeletonlabs/skeleton": "2.10.2",
+    "@spectacular/biome-config": "workspace:*",
+    "@spectacular/skeleton": "workspace:*",
+    "@spectacular/typescript-config": "workspace:*",
+    "@spectacular/utils": "workspace:*",
+    "@svelte-plugins/datepicker": "1.0.9",
+    "@sveltejs/kit": "2.6.2",
+    "@tsconfig/svelte": "5.0.4",
+    "@types/dom-chromium-ai": "0.0.1",
+    "@types/node": "22.7.4",
+    "@vitest/coverage-v8": "2.1.2",
+    "ai": "3.4.9",
+    "chrome-ai": "1.11.1",
+    "date-fns": "4.1.0",
+    "lucide-svelte": "0.447.0",
+    "svelte": "4.2.19",
+    "svelte-check": "4.0.4",
+    "svelte-select": "5.8.3",
+    "sveltekit-superforms": "2.19.1",
+    "tailwind-merge": "2.5.3",
+    "tailwind-variants": "0.2.1",
+    "tailwindcss": "3.4.13",
+    "tslib": "2.7.0",
+    "typescript": "5.6.2",
+    "vite": "5.4.8",
+    "vitest": "2.1.2",
+    "zod": "3.23.8"
+  },
+  "peerDependencies": {
+    "@sveltejs/kit": "^2.0.0",
+    "svelte": "^4.0.0"
+  }
+}

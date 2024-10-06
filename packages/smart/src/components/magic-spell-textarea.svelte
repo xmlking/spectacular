@@ -5,8 +5,6 @@ import { Logger } from '@spectacular/utils';
 import { AlertTriangle, Sparkles } from 'lucide-svelte';
 import type { HTMLTextareaAttributes } from 'svelte/elements';
 import { fade } from 'svelte/transition';
-
-import { handleMessage } from '$lib/components/layout/toast-manager';
 import { onMount } from 'svelte';
 import { default as LoaderIcon } from './loader-icon.svelte';
 
@@ -29,7 +27,7 @@ const { complete, completion, input, isLoading, handleSubmit, error, stop } = us
   onFinish: (_prompt, completion) => {
     value = completion.trim();
   },
-  onError: (error) => handleMessage({ type: 'error', message: error.message }, toastStore),
+  onError: (error) => console.error(error)
 });
 
 // callbacks
