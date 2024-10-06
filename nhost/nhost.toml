@@ -171,7 +171,6 @@ enabled = true
 
 [auth.method.webauthn.relyingParty]
 name = 'Spectacular Console App'
-id = 'traefik.me'
 origins = ['https://console.traefik.me:5173']
 
 [auth.method.webauthn.attestation]
