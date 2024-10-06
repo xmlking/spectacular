@@ -34,7 +34,7 @@ export class ChromeAI {
   get isAISupported() {
     return this.#isAISupported;
   }
-
+  /*
   readonly assistantCapabilities = readable<AIAssistantCapabilities>(undefined, (set) => {
     if (this.#isAISupported && window.ai.assistant) {
       window.ai.assistant.capabilities().then((cap) => {
@@ -90,7 +90,7 @@ export class ChromeAI {
     }
   });
 
-  /*
+
   constructor() {
     if (browser) {
       const version = getChromeVersion();
