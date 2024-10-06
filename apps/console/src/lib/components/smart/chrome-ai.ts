@@ -8,10 +8,10 @@ import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } f
  *  Chrome AI Util Functions
  */
 
-function getChromeVersion() {
-  const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
-  return raw ? Number.parseInt(raw[2], 10) : 0;
-}
+// function getChromeVersion() {
+//   const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
+//   return raw ? Number.parseInt(raw[2], 10) : 0;
+// }
 
 /**
  *  Chrome AI Stores
@@ -22,7 +22,7 @@ export class ChromeAI {
   readonly #errors = writable<Array<string>>([]);
   readonly isLoading = writable<boolean>(false);
 
-  #detector: LanguageDetector;
+  // #detector: LanguageDetector;
 
   #assistantOptions: { topK: number; temperature: number };
   #summarizerOptions: { type?: AISummarizerType; format?: AISummarizerFormat; length?: AISummarizerLength };
