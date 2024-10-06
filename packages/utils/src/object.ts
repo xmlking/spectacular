@@ -33,7 +33,7 @@ export function toWithId(obj: any) {
 export type CleanOpts = { empty?: 'strip' | 'null'; target?: string[] };
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
 export function cleanClone<T extends Object>(obj: T, opts: CleanOpts): T {
-  // TODO: check 'structuredClone' available in globalThis
+  // TODO: check 'structuredClone' available in window
   const cloneObj = structuredClone(obj);
   if (opts.empty === 'strip') {
     stripEmptyProperties(cloneObj);

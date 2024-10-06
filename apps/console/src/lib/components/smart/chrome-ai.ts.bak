@@ -93,7 +93,7 @@ export class ChromeAI {
   constructor() {
     if (browser) {
       const version = getChromeVersion();
-      this.#log.debug({ chromeVersion: version, isAISupported: 'ai' in globalThis });
+      this.#log.debug({ chromeVersion: version, isAISupported: 'ai' in window });
       if (version < 129) {
         this.#errors.update((errors) => {
           errors.push('Your browser is not supported. Please update to 129 version or greater');
@@ -101,7 +101,7 @@ export class ChromeAI {
         });
         return;
       }
-      if (!('ai' in globalThis)) {
+      if (!('ai' in window)) {
         this.#errors.update((errors) => {
           errors.push(
             'Prompt API is not available, check your configuration in chrome://flags/#prompt-api-for-gemini-nano',
