@@ -90,6 +90,7 @@ export class ChromeAI {
     }
   });
 
+  /*
   constructor() {
     if (browser) {
       const version = getChromeVersion();
@@ -134,7 +135,7 @@ export class ChromeAI {
       });
     }
   }
-
+*/
   get errors() {
     return readonly(this.#errors);
   }
