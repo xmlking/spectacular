@@ -250,7 +250,12 @@ export class ChromeAI {
             errors.push('Built-in languageDetector model is downloading');
             return errors;
           });
-          return;
+          this.#detector = await window.translation.createDetector();
+          this.#detector.addEventListener('downloadprogress', (e) => {
+            this.#log.info('downloadprogress', e.loaded, e.total);
+          });
+          await this.#detector.ready;
+          return this.#detector;
         case 'no':
           this.#log.error('Built-in languageDetector model not available');
           this.#errors.update((errors) => {
@@ -278,8 +283,14 @@ export class ChromeAI {
 const CHROME_AI_KEY = Symbol('CHROME_AI');
 
 export const setChromeAI = () => {
-  const chromeAI = new ChromeAI();
-  return setContext(CHROME_AI_KEY, chromeAI);
+  try {
+    const chromeAI = new ChromeAI();
+    console.log({ chromeAI });
+    return setContext(CHROME_AI_KEY, chromeAI);
+    // TODO remove try catch
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getChromeAI = () => {

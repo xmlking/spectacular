@@ -169,7 +169,7 @@ onMount(() => {
         <label class="label">
           <span>Prefered Language</span>
           <select class="select" bind:value={$preferedLang}>
-            {#each voices as { value, label, isDefault } (value)}
+            {#each voices as { value, label, isDefault } (label)}
               <option {value} selected={isDefault}>{label}</option>
             {/each}
           </select>

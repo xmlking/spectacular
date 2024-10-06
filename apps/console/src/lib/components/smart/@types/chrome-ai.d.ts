@@ -15,9 +15,8 @@ interface Translation {
   createDetector(): Promise<LanguageDetector>;
 }
 
-interface LanguageDetector extends EventTarget {
+interface LanguageDetector extends AICreateMonitor {
   ready: Promise<undefined>;
-  ondownloadprogress?(evt: Event): void;
   detect(input: string): Promise<LanguageDetectionResult[]>;
 }
 
