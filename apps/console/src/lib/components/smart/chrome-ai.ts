@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { derived, get, readable, readonly, writable } from 'svelte/store';
-import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings';
+// import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings';
 
 /**
  *  Chrome AI Util Functions
@@ -24,11 +24,11 @@ export class ChromeAI {
 
   // #detector: LanguageDetector;
 
-  #assistantOptions: { topK: number; temperature: number };
-  #summarizerOptions: { type?: AISummarizerType; format?: AISummarizerFormat; length?: AISummarizerLength };
-  #writerOptions: { tone?: AIWriterTone; format?: AIWriterFormat; length?: AIWriterLength };
-  #rewriterOptions: { tone?: AIRewriterTone; format?: AIRewriterFormat; length?: AIRewriterLength };
-  #preferedLang: string;
+  // #assistantOptions: { topK: number; temperature: number };
+  // #summarizerOptions: { type?: AISummarizerType; format?: AISummarizerFormat; length?: AISummarizerLength };
+  // #writerOptions: { tone?: AIWriterTone; format?: AIWriterFormat; length?: AIWriterLength };
+  // #rewriterOptions: { tone?: AIRewriterTone; format?: AIRewriterFormat; length?: AIRewriterLength };
+  // #preferedLang: string;
 
   #isAISupported = browser && 'ai' in window;
   get isAISupported() {
