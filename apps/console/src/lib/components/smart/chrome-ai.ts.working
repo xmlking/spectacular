@@ -8,10 +8,10 @@ import { derived, get, readable, readonly, writable } from 'svelte/store';
  *  Chrome AI Util Functions
  */
 
-// function getChromeVersion() {
-//   const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
-//   return raw ? Number.parseInt(raw[2], 10) : 0;
-// }
+function getChromeVersion() {
+  const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
+  return raw ? Number.parseInt(raw[2], 10) : 0;
+}
 
 /**
  *  Chrome AI Stores

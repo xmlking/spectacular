@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import { type Writable, derived, writable } from 'svelte/store';
 import { type AIStyles, TEMP_STYLES } from './constants';
 
@@ -6,7 +7,7 @@ export enum Provider {
   Remote = 'remote',
 }
 
-export const aiProvider: Writable<Provider> = writable('ai' in globalThis ? Provider.Local : Provider.Remote);
+export const aiProvider: Writable<Provider> = writable(browser && 'ai' in window ? Provider.Local : Provider.Remote);
 
 export const assistantStyle: Writable<AIStyles> = writable('balanced');
 export const assistantOptions = derived<Writable<AIStyles>, { topK: number; temperature: number }>(
