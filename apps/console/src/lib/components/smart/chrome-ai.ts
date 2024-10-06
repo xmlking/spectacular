@@ -87,7 +87,7 @@ export class ChromeAI {
   });
 
   readonly languageDetectorAvailability = readable<AICapabilityAvailability>(undefined, (set) => {
-    if (browser && this.#isAISupported) {
+    if (browser && 'translation' in window && 'canDetect' in window.translation) {
       window.translation?.canDetect().then((availability) => {
         set(availability);
       });
@@ -115,28 +115,28 @@ export class ChromeAI {
         return;
       }
       this.#isAISupported = true;
+
+      const assistantOptionsSub = assistantOptions.subscribe((options) => {
+        this.#assistantOptions = options;
+      });
+      const summarizerOptionsSub = summarizerOptions.subscribe((options) => {
+        this.#summarizerOptions = options;
+      });
+      const writerOptionsSub = writerOptions.subscribe((options) => {
+        this.#writerOptions = options;
+      });
+      const rewriterOptionsSub = rewriterOptions.subscribe((options) => {
+        this.#rewriterOptions = options;
+      });
+
+      onDestroy(async () => {
+        this.#log.debug('onDestroy called');
+        assistantOptionsSub();
+        summarizerOptionsSub();
+        writerOptionsSub();
+        rewriterOptionsSub();
+      });
     }
-
-    const assistantOptionsSub = assistantOptions.subscribe((options) => {
-      this.#assistantOptions = options;
-    });
-    const summarizerOptionsSub = summarizerOptions.subscribe((options) => {
-      this.#summarizerOptions = options;
-    });
-    const writerOptionsSub = writerOptions.subscribe((options) => {
-      this.#writerOptions = options;
-    });
-    const rewriterOptionsSub = rewriterOptions.subscribe((options) => {
-      this.#rewriterOptions = options;
-    });
-
-    onDestroy(async () => {
-      this.#log.debug('onDestroy called');
-      assistantOptionsSub();
-      summarizerOptionsSub();
-      writerOptionsSub();
-      rewriterOptionsSub();
-    });
   }
 
   get errors() {
