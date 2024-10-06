@@ -1,3 +1,5 @@
+import { env as secrets } from '$env/dynamic/private';
+
 // TODO: enaable after setting - prerender: { crawl: true }
 // export const prerender = true;
 
@@ -8,7 +10,8 @@ export const config = {
     expiration: 3600,
     // Random token that can be provided to bypass the cached version of the page with a __prerender_bypass=<token> cookie.
     // Allows rendering content at request time for this route.
-    bypassToken: 'REPLACE_ME_WITH_SECRET_VALUE',
+    //  The `bypassToken` argument for `Prerender` must be 32 characters or more.
+    bypassToken: secrets.FLAGS_SECRET,
   },
 };
 
