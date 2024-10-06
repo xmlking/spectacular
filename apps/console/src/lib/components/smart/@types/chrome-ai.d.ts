@@ -13,6 +13,8 @@ interface WindowOrWorkerGlobalScope {
 interface Translation {
   canDetect(): Promise<AICapabilityAvailability>;
   createDetector(): Promise<LanguageDetector>;
+  canTranslate(options: TranslationLanguageOptions): Promise<AICapabilityAvailability>;
+  createTranslator(options: TranslationLanguageOptions): Promise<LanguageTranslator>;
 }
 
 interface LanguageDetector extends AICreateMonitor {
@@ -23,4 +25,14 @@ interface LanguageDetector extends AICreateMonitor {
 interface LanguageDetectionResult {
   confidence: number;
   LanguageDetectionResult: string;
+}
+
+interface TranslationLanguageOptions {
+  sourceLanguage: string;
+  targetLanguage: string;
+}
+
+interface LanguageTranslator extends AICreateMonitor {
+  ready: Promise<undefined>;
+  translate(input: string): Promise<string>;
 }

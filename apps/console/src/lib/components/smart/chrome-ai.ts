@@ -275,22 +275,50 @@ export class ChromeAI {
   }
 
   // https: //github.com/GoogleChromeLabs/web-ai-demos/blob/main/product-reviews/src/lib/HybridTranslator.js
-  async createTranslator() {
-    throw new Error('un implemented');
+  // https://docs.google.com/document/d/1bzpeKk4k26KfjtR-_d9OuXLMpJdRMiLZAOVNMuFIejk/edit
+  async createTranslator(options: TranslationLanguageOptions) {
+    if (browser && this.#isAISupported) {
+      const availability = await window.translation.canTranslate(options);
+      switch (availability) {
+        case 'readily':
+          return await window.translation.createTranslator(options);
+        case 'after-download': {
+          this.#log.error('Built-in languageTranslator model is downloading');
+          this.#errors.update((errors) => {
+            errors.push('Built-in languageTranslator model is downloading');
+            return errors;
+          });
+          const translator = await window.translation.createTranslator(options);
+          translator.addEventListener('downloadprogress', (e) => {
+            this.#log.info('downloadprogress', e.loaded, e.total);
+          });
+          await translator.ready;
+          return translator;
+        }
+        case 'no':
+          this.#log.error('Built-in languageTranslator model not available');
+          this.#errors.update((errors) => {
+            errors.push('Built-in languageTranslator model not available');
+            return errors;
+          });
+          return;
+        default:
+          this.#log.error('Built-in languageTranslator model not available');
+          this.#errors.update((errors) => {
+            errors.push('Built-in languageTranslator model not available');
+            return errors;
+          });
+          return;
+      }
+    }
   }
 }
 
 const CHROME_AI_KEY = Symbol('CHROME_AI');
 
 export const setChromeAI = () => {
-  try {
-    const chromeAI = new ChromeAI();
-    console.log({ chromeAI });
-    return setContext(CHROME_AI_KEY, chromeAI);
-    // TODO remove try catch
-  } catch (err) {
-    console.log(err);
-  }
+  console.log('in setChromeAI <-- remove');
+  return setContext(CHROME_AI_KEY, new ChromeAI());
 };
 
 export const getChromeAI = () => {
