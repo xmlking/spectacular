@@ -20,6 +20,25 @@
     ]
   },
   {
+    "op": "remove",
+    "path": "/auth/method/webauthn/relyingParty/id"
+  },
+  {
+    "value": "https://console.traefik.me:5173",
+    "op": "replace",
+    "path": "/auth/method/webauthn/relyingParty/origins/0"
+  },
+  {
+    "op": "add",
+    "path": "/auth/method/webauthn/relyingParty/origins/1",
+    "value": "https://console.traefik.me:3000"
+  },
+  {
+    "op": "add",
+    "path": "/auth/method/webauthn/relyingParty/origins/2",
+    "value": "https://console.traefik.me"
+  },
+  {
     "op": "replace",
     "path": "/global/environment/0/value",
     "value": "Spectacular"

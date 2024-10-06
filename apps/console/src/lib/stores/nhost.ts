@@ -27,7 +27,7 @@ export class SvelteKitNhostClient extends NhostClient {
    * Readable: updates when `accessToken` changed.
    * e.g., when `nhost.auth.elevateEmailSecurityKey(emmail)` is called or `accessToken` refeshed.
    */
-  readonly elevated: Readable<boolean | null>;
+  readonly elevated: Readable<boolean>;
 
   constructor(params: NhostClientConstructorParams) {
     super({

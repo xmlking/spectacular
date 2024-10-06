@@ -8,12 +8,16 @@ import { LogOut } from 'lucide-svelte';
 export let initials: string | undefined = undefined;
 export let src: string | undefined = undefined;
 export let elevated = false;
+export let online = true;
 </script>
 
  <!-- trigger -->
 <button class="relative inline-block" use:popup={{event: 'click',target: 'avatarPopup'}}>
   {#if elevated}
     <span class="badge-icon variant-filled-success absolute w-3 h-3 -top-0 -right-0 z-10"></span>
+  {/if}
+  {#if !online}
+    <span class="badge-icon variant-filled-error absolute w-3 h-3 -top-0 -left-0 z-10"></span>
   {/if}
   <Avatar
     {initials}

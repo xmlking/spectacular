@@ -6,6 +6,7 @@ import LangSwitch from '$lib/components/layout/lang-switch.svelte';
 // import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
 import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
 import { storeTheme } from '$lib/stores';
+import { online } from '$lib/stores/window';
 import { getNhostClient } from '$lib/stores/nhost';
 import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 import { AppBar, LightSwitch, getDrawerStore, getModalStore, popup } from '@skeletonlabs/skeleton';
@@ -221,9 +222,9 @@ const setTheme: SubmitFunction = ({ formData }) => {
     <section class="flex items-center justify-between gap-4">
       {#if $isAuthenticated && $user}
         {#if $user.avatarUrl}
-          <Avatar src={$user.avatarUrl || undefined} elevated={$elevated} />
+          <Avatar src={$user.avatarUrl || undefined} elevated={$elevated} online={$online} />
         {:else}
-          <Avatar initials={$user.email} elevated={$elevated} />
+          <Avatar initials={$user.email} elevated={$elevated} online={$online} />
         {/if}
       {:else}
         <a href="/signin?redirectTo=/dashboard" class="variant-filled-primary btn">{m.auth_labels_signin()}</a>

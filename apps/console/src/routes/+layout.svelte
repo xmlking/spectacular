@@ -12,6 +12,7 @@ import { i18n } from '$lib/i18n';
 import Search from '$lib/modals/search.svelte';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { setLoadingState } from '$lib/stores/loading';
+import { online, orientation, size } from '$lib/stores/window';
 import { setChromeAI } from '@spectacular/smart';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
@@ -129,6 +130,13 @@ $: if (browser) {
 //   };
 // }
 </script>
+
+<!-- window info -->
+<svelte:window
+  bind:online={$online}
+  on:resize={() => {  $size = { height: window.innerHeight , width: window.innerWidth } }}
+  on:orientationchange={() => {$orientation = screen.orientation.type}}
+/>
 
 <!-- Overlays -->
 <Modal components={modalComponentRegistry} />

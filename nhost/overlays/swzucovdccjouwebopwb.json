@@ -5,9 +5,14 @@
     "value": "https://spectacular-console.vercel.app"
   },
   {
-    "op": "replace",
+    "op": "add",
     "path": "/auth/method/webauthn/relyingParty/origins/1",
     "value": "https://spectacular-console.vercel.app"
+  },
+  {
+    "op": "add",
+    "path": "/auth/method/webauthn/relyingParty/origins/2",
+    "value": "https://spectacular-console-git-main-spectacular.vercel.app"
   },
   {
     "op": "replace",
