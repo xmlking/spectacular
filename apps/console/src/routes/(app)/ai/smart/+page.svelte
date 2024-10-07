@@ -1,6 +1,13 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { MagicSpellTextarea, SmartDate, SmartDatePicker, ComboBox, getChromeAI } from '@spectacular/smart';
+import {
+  MagicSpellTextarea,
+  SmartDate,
+  SmartDatePicker,
+  ComboBox,
+  getChromeAI,
+  SmartTextarea,
+} from '@spectacular/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -117,12 +124,20 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="commentThree">
             <Form.Control let:attrs>
               <Form.Label class="label">Comment Three</Form.Label>
-              <MagicSpellTextarea
+              <!-- <MagicSpellTextarea
                 class="textarea data-[fs-error]:input-error"
                 {...attrs}
                 bind:value={$formData.commentThree}
                 {...$constraints.commentThree}
                 placeholder="It was a dark and stormy night..."
+              /> -->
+              <SmartTextarea
+                class="textarea data-[fs-error]:input-error"
+                {...attrs}
+                bind:value={$formData.commentThree}
+                {...$constraints.commentThree}
+                placeholder="It was a dark and stormy night..."
+                sharedContext="writing assistant"
               />
             </Form.Control>
             <Form.Description class="sr-only"

@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { type Writable, derived, writable } from 'svelte/store';
+import { type Writable, derived, readable, writable } from 'svelte/store';
 import { type AIStyles, TEMP_STYLES } from './constants.js';
 
 export enum Provider {
@@ -52,4 +52,37 @@ export function languageTagToHumanReadable(
 ) {
   const displayNames = new Intl.DisplayNames([targetLanguage], { type: 'language' });
   return displayNames.of(languageTag);
+}
+
+export function createStreamStore(stream: ReadableStream<string>) {
+  return readable('', (set) => {
+    // Create a reader from the stream
+    const reader = stream.getReader();
+
+    // Function to read from the stream
+    const read = async () => {
+      try {
+        // for await (const value of stream) {
+        //   set(value);
+        // }
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          // Update the store with the new value
+          set(value);
+        }
+      } catch (error) {
+        console.error('Error reading from stream:', error);
+        set(''); // Clear the store on error
+      } finally {
+        reader.releaseLock();
+      }
+    };
+
+    // Start reading the stream
+    read();
+
+    return () => reader.cancel();
+  });
 }

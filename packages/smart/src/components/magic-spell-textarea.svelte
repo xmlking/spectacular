@@ -27,7 +27,7 @@ const { complete, completion, input, isLoading, handleSubmit, error, stop } = us
   onFinish: (_prompt, completion) => {
     value = completion.trim();
   },
-  onError: (error) => console.error(error)
+  onError: (error) => console.error(error),
 });
 
 // callbacks
