@@ -277,7 +277,7 @@ ALTER TABLE ONLY public.rules
 ALTER TABLE ONLY public.subject_type
     ADD CONSTRAINT subject_type_pkey PRIMARY KEY (value);
 ALTER TABLE ONLY public.user_groups
-    ADD CONSTRAINT user_groups_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT user_groups_pkey PRIMARY KEY (user_id, group_id);
 ALTER TABLE ONLY public.user_org_roles
     ADD CONSTRAINT user_org_roles_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.user_org_roles
