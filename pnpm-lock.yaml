@@ -127,8 +127,8 @@ importers:
         specifier: 5.2.5
         version: 5.2.5(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))
       '@sveltejs/adapter-vercel':
-        specifier: 5.4.4
-        version: 5.4.4(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))
+        specifier: 5.4.5
+        version: 5.4.5(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))
       '@sveltejs/enhanced-img':
         specifier: 0.3.8
         version: 0.3.8(rollup@4.24.0)(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))
@@ -152,7 +152,7 @@ importers:
         version: 6.5.0
       '@testing-library/svelte':
         specifier: 5.2.3
-        version: 5.2.3(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))(vitest@2.1.2)
+        version: 5.2.3(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       '@types/d3-scale':
         specifier: 4.0.8
         version: 4.0.8
@@ -188,7 +188,7 @@ importers:
         version: 1.14.10(svelte@4.2.19)
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       '@xyflow/svelte':
         specifier: 0.1.20
         version: 0.1.20(svelte@4.2.19)
@@ -403,7 +403,7 @@ importers:
         version: 0.5.15(tailwindcss@3.4.13)
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       astro:
         specifier: 4.15.11
         version: 4.15.11(@types/node@22.7.4)(rollup@4.24.0)(typescript@5.6.2)
@@ -518,7 +518,7 @@ importers:
         version: 1.14.10(svelte@4.2.19)
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -623,7 +623,7 @@ importers:
         version: 22.7.4
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       ai:
         specifier: 3.4.9
         version: 3.4.9(react@18.3.1)(solid-js@1.9.1)(sswr@2.1.0(svelte@4.2.19))(svelte@4.2.19)(vue@3.5.11(typescript@5.6.2))(zod@3.23.8)
@@ -749,7 +749,7 @@ importers:
         version: 22.7.4
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       cssnano:
         specifier: 7.0.6
         version: 7.0.6(postcss@8.4.47)
@@ -782,7 +782,7 @@ importers:
         version: link:../typescript-config
       '@vitest/coverage-v8':
         specifier: 2.1.2
-        version: 2.1.2(vitest@2.1.2)
+        version: 2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -2305,9 +2305,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.2':
     resolution: {integrity: sha512-T9HCQO30Sq6L8tXQfdJI2CNMeNQxtMepJyoBYgK5QEN2LuIUqaoTfsZ2GryAqwFdAEj5FSM5Kdnf7f6shFqBHw==}
@@ -2910,8 +2912,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.4.0
 
-  '@sveltejs/adapter-vercel@5.4.4':
-    resolution: {integrity: sha512-KORoxxqB2H5DrxpCHc9Yfijcgvmoaaz6G6eKHEg9fRlTsujJkxN26C0x4YlcgxqDU4dLIi1wfSLHpuZD0E4Irg==}
+  '@sveltejs/adapter-vercel@5.4.5':
+    resolution: {integrity: sha512-SROpUbjSZ1Xni4xuS22dunXFLjYzvTZwppqixIQFzTrf9oWcZEm2OfO+VgnrOT67LOcWQefJp7VSrpmjV691yQ==}
     peerDependencies:
       '@sveltejs/kit': ^2.4.0
 
@@ -10754,7 +10756,7 @@ snapshots:
       '@sveltejs/kit': 2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))
       rollup: 4.24.0
 
-  '@sveltejs/adapter-vercel@5.4.4(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))':
+  '@sveltejs/adapter-vercel@5.4.5(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))':
     dependencies:
       '@sveltejs/kit': 2.6.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))
       '@vercel/nft': 0.27.4
@@ -10907,7 +10909,7 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/svelte@5.2.3(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))(vitest@2.1.2)':
+  '@testing-library/svelte@5.2.3(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.4))(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))':
     dependencies:
       '@testing-library/dom': 10.4.0
       svelte: 4.2.19
@@ -11451,7 +11453,7 @@ snapshots:
       validator: 13.12.0
     optional: true
 
-  '@vitest/coverage-v8@2.1.2(vitest@2.1.2)':
+  '@vitest/coverage-v8@2.1.2(vitest@2.1.2(@types/node@22.7.4)(@vitest/ui@2.1.2)(jsdom@25.0.1))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
