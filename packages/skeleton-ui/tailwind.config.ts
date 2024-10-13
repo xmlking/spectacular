@@ -13,9 +13,9 @@ export default {
   darkMode: 'class',
   content: [
     './src/**/*.{html,js,svelte,ts,md,svx}',
-    './node_modules/@skeletonlabs/skeleton/**/*.{html,js,svelte,ts}',
     join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}'),
-    '../../packages/skeleton-ui/components/**/*.{svelte,ts}',
+    join(require.resolve('@spectacular/skeleton'), '../**/*.{html,js,svelte,ts}'),
+    join(require.resolve('@spectacular/smart'), '../**/*.{html,js,svelte,ts}'),
   ],
   theme: {
     extend: {

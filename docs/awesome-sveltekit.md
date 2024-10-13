@@ -13,6 +13,8 @@ Awesome **SvelteKit** Links
   - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
   - [Melt UI](https://www.melt-ui.com/) strives to be the de-facto headless UI library for Svelte.
   - [svelte-headlessui](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit
+  - [VisualSearch.js](https://documentcloud.github.io/visualsearch/), [magic-search](https://eucalyptus.github.io/magic-search/) for facet search.
+    - TODO: use this to add/edit `annotations` Input.
 
 - Tables
 
@@ -60,11 +62,12 @@ Awesome **SvelteKit** Links
   - [Svelte MapBox](https://github.com/beyonk-group/svelte-mapbox) Maps and Geocoding (Autocomplete) MapBox components in Vanilla JS (or Svelte)
 
 - Toast
-
+  - [Svelte Sonner](https://svelte-sonner.vercel.app/)
   - [svelte-french-toast](https://svelte-french-toast.com/)
 
 - Icons
 
+  - [Lucide Svelte](https://lucide.dev/guide/packages/lucide-svelte) is the Svelte implementation of [Lucide](https://lucide.dev/) Icons.
   - [flowbite-svelte-icons](https://github.com/themesberg/flowbite-svelte-icons) 480+ SVG [Flowbite icons](https://flowbite.com/icons/) components for Svelte. list of icon [names](https://flowbite-svelte-icons.vercel.app/icons)
   - [heroicons](https://heroicons.com/) Icons via [svelte-heros-v2](https://github.com/shinokada/svelte-heros-v2) Icon Components. list of icon [names](https://svelte-heros-v2.vercel.app/outline)
 
@@ -94,10 +97,11 @@ Awesome **SvelteKit** Links
 
 ## Animation
 
-- [Svelte Animations for Marketing](https://github.com/SikandarJODD/svelte-animations), [Demo](https://animation-svelte.vercel.app/)
+- [Svelte Animations for Landing Pages](https://github.com/SikandarJODD/svelte-animations) that includes [Magic UI](https://magicui.design/), [Luxe](https://www.luxeui.com/), [Indie](https://ui.indie-starter.dev/) and [Aceternity UI](https://ui.aceternity.com/) components. All in one [demo](https://animation-svelte.vercel.app/) page. [Svelte Aceternity UI](https://animation-svelte.vercel.app/a/components/bento-grid)
 - [Svelte Star Wars Demo](https://github.com/geoffrich/star-wars-demo-svelte), [Demo](https://main--transcendent-begonia-7a3d6f.netlify.app/)
 - [Motion](https://motion.dev/) (preferred)
 - [lottiefiles](https://lottiefiles.github.io/lottie-docs/) Lottie is a **vector** animation format, used to build marketing pages. See [Examples](https://lottiefiles.com/use-cases/website)
+- [Magic UI](https://magicui.design/) - **React**, **Typescript**, **Tailwind CSS**, and **Framer Motion**. Perfect companion for **shadcn/ui**.
 
 ## State Management
 
@@ -159,6 +163,7 @@ Awesome **SvelteKit** Links
 - [climbing_noteboo](https://github.com/diericx/climbing_notebook) - Use skeleton, Superforms, sveltekit-flash-message
 - [Vercel Toolbar and Feature Flags SvelteKit Starter](https://github.com/vercel/examples/tree/main/toolbar/toolbar-feature-flags-sveltekit), [Demo](https://toolbar-feature-flags-sveltekit.vercel.app/), [Blog](https://vercel.com/blog/flags-as-code-in-next-js)
 - [JavaFlavors](https://github.com/Critteros/JavaFlavors/tree/main/web) - use `houdini` and `setClientSession()`, drizzle, superforms, shadcn-svelte
+- [Turborepo Svelte starter](https://github.com/kevingdc/turborepo-sveltekit-shadcn/tree/main)
 
 ## Deployment
 
