@@ -120,10 +120,14 @@ export type SummarizerOptions = {
   //   loading = false;
   // }
 
-  async function handleSubmit() {
-    // Reset state
+  function clearPreviousResults() {
     error = "";
     completion = "";
+  }
+
+  async function handleSubmit() {
+    // Reset state
+    clearPreviousResults()
     // Validate
     if (value.trim() === "") {
       error = "Type your intent and try again...";
@@ -364,6 +368,7 @@ export type SummarizerOptions = {
         {value}
         label={value}
         title={ent.name}
+        on:change={clearPreviousResults}
       >
         <svelte:component this={ent.icon} />
       </RadioItem>

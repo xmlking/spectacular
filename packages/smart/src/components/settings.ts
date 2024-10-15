@@ -86,3 +86,8 @@ export function createStreamStore(stream: ReadableStream<string>) {
     return () => reader.cancel();
   });
 }
+
+/**
+ * TODO: build like vercel `useCompletion`
+ */
+export function useChromeAi() {}
