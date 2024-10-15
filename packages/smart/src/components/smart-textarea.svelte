@@ -64,7 +64,6 @@ export type SummarizerOptions = {
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   import { getFormField } from "formsnap";
   import Result from "./result.svelte";
-  import { writer } from "repl";
 
   const log = new Logger("smart:textarea:browser");
 
