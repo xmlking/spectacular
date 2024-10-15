@@ -15,7 +15,9 @@ import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
+import { zodClient } from 'sveltekit-superforms/adapters';
 import { onMount } from 'svelte';
+import { aiSchema } from './schema.js';
 
 const log = new Logger('ai:smart:browser');
 export let data;
@@ -38,6 +40,7 @@ const form = superForm(data.form, {
   syncFlashMessage: false,
   delayMs: 100,
   timeoutMs: 4000,
+  validators: zodClient(aiSchema),
   onError({ result }) {
     // TODO:
     // message.set(result.error.message)
@@ -136,8 +139,9 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 bind:value={$formData.commentThree}
                 {...$constraints.commentThree}
-                placeholder="It was a dark and stormy night..."
-                sharedContext="writing assistant"
+                stream={true}
+                placeholder="Write an email to my bank asking them to raise my credit limit from $1,000 to $10,000."
+                context="I'm a long-standing customer."
               />
             </Form.Control>
             <Form.Description class="sr-only"

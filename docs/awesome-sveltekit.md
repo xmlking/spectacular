@@ -252,6 +252,40 @@ Awesome **SvelteKit** Links
   });
   ```
 
+- Creating TypeScript `union` type form array of objects
+  
+```svelte
+<script lang="ts">
+  export const toolTypeOptions = [
+    { value: "writer", name: "Writer", icon: PenTool, placeholder: "Generating content...", header: "" },
+    { value: "rewriter", name: "Rewriter", icon: SpellCheck2, placeholder: "Rewriting content...", header: "Rewritten Content:" },
+    { value: "summarizer", name: "Summarizer", icon: Replace, placeholder: "Summarizing content...", header: "Summary:" },
+    { value: "translator", name: "Translator", icon: Translate, placeholder: "Translating content...", header: "Translation:" },
+  ] as const; // <-- NOTE: `as const`
+
+  export type ToolType = (typeof toolTypeOptions)[number]["value"];
+
+  // Reactivity
+  // Placeholder text based on selected `tool`
+  let placeholder: string;
+  // Reactive block to update placeholder whenever `tool` changes
+    $: placeholder = (() => {
+    switch (tool) {
+      case "writer":
+        return "Generating content...";
+      case "rewriter":
+        return "Rewriting content...";
+      case "summarizer":
+        return "Summarizing content...";
+      case "translator":
+        return "Translating content...";
+      default:
+        return "Generating content...";
+    }
+  })();
+</script>
+```
+
 - Best practices for Createing [Svelte Component Library](https://blog.robino.dev/posts/svelte-component-library)
 
   add `sideEffects` to `package.json`

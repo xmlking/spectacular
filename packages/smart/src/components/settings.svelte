@@ -130,7 +130,7 @@ onMount(() => {
           <label class="label">
             <span>Type</span>
             <select class="select" bind:value={$summarizerOptions.type}>
-              <option value="tl;dr">As Is</option>
+              <option value="tl;dr">TL;DR</option>
               <option value="key-points">Bullet Points</option>
               <option value="teaser">Teaser</option>
               <option value="headline">Headline</option>

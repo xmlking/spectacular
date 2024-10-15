@@ -248,7 +248,7 @@ importers:
         version: 0.5.2
       svelte-check:
         specifier: 4.0.5
-        version: 4.0.5(picomatch@4.0.2)(svelte@4.2.19)(typescript@5.6.3)
+        version: 4.0.5(picomatch@2.3.1)(svelte@4.2.19)(typescript@5.6.3)
       svelte-meta-tags:
         specifier: 3.1.4
         version: 3.1.4(svelte@4.2.19)(typescript@5.6.3)
@@ -633,6 +633,9 @@ importers:
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
+      formsnap:
+        specifier: 1.0.1
+        version: 1.0.1(svelte@4.2.19)(sveltekit-superforms@2.19.1(@sveltejs/kit@2.7.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.5)))(svelte@4.2.19)(vite@5.4.8(@types/node@22.7.5)))(@types/json-schema@7.0.15)(svelte@4.2.19))
       lucide-svelte:
         specifier: 0.452.0
         version: 0.452.0(svelte@4.2.19)
@@ -16159,6 +16162,18 @@ snapshots:
   svelte-adapter-bun@0.5.2:
     dependencies:
       tiny-glob: 0.2.9
+
+  svelte-check@4.0.5(picomatch@2.3.1)(svelte@4.2.19)(typescript@5.6.3):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      chokidar: 4.0.1
+      fdir: 6.4.0(picomatch@2.3.1)
+      picocolors: 1.1.0
+      sade: 1.8.1
+      svelte: 4.2.19
+      typescript: 5.6.3
+    transitivePeerDependencies:
+      - picomatch
 
   svelte-check@4.0.5(picomatch@4.0.2)(svelte@4.2.19)(typescript@5.6.3):
     dependencies:

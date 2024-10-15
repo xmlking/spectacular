@@ -49,6 +49,8 @@ function handleSubmitWrap(e: SubmitEvent) {
 onMount(() => {
   //  complete('some example prompt', {body: {text: 'eeee'}});
 });
+
+// Reactivity
 </script>
 
 <form

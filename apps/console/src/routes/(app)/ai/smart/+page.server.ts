@@ -3,24 +3,7 @@ import { fail } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
-
-const aiSchema = z.object({
-  commentOne: z
-    .string({ required_error: 'First Comment is required' })
-    .min(10, { message: 'First Comment must contain at least 10 character(s)' })
-    .trim(),
-  commentTwo: z
-    .string({ required_error: 'Second Comment is required' })
-    .min(10, { message: 'Second Comment contain at least 10 character(s)' })
-    .trim(),
-  commentThree: z
-    .string({ required_error: 'Third Comment is required' })
-    .min(10, { message: 'Third Comment contain at least 10 character(s)' })
-    .trim(),
-  startDate: z.date().nullish(),
-  endDate: z.date().nullish(),
-  specialization: z.string().nullish(),
-});
+import { aiSchema } from './schema';
 
 const log = new Logger('server:ai:ms');
 
