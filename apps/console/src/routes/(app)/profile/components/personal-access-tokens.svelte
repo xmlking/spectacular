@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, stopPropagation } from 'svelte/legacy';
+
 import type { PersonalAccessTokensFragment } from '$houdini';
 import { PendingValue, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
@@ -18,11 +20,15 @@ import type { MouseEventHandler } from 'svelte/elements';
 const log = new Logger('profile:pat:browser');
 const toastStore = getToastStore();
 const nhost = getNhostClient();
-let message: App.Superforms.Message | undefined;
+let message: App.Superforms.Message | undefined = $state();
 const errors: string[] = [];
 
-export let user: PersonalAccessTokensFragment;
-$: data = fragment(
+  interface Props {
+    user: PersonalAccessTokensFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment PersonalAccessTokensFragment on users {
@@ -36,20 +42,22 @@ $: data = fragment(
         }
       }
     `),
-);
+));
 
-$: ({ personalAccessTokens } = $data);
+let { personalAccessTokens } = $derived($data);
 
 //variables
 const handler = new DataHandler(personalAccessTokens?.filter(loaded), { rowsPerPage: 5 });
-$: handler.setRows(personalAccessTokens);
+run(() => {
+    handler.setRows(personalAccessTokens);
+  });
 const rows = handler.getRows();
 
 // Functions
 /**
  * PAT delete handler
  */
-let isDeleting = false;
+let isDeleting = $state(false);
 const deletePersonalAccessToken = graphql(`
     mutation DeletePersonalAccessToken($id: uuid!) {
       deleteAuthRefreshToken(id: $id) {
@@ -160,10 +168,10 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
         {#each $rows as token, i}
           {#if token.id === PendingValue}
             <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
             </tr>
           {:else}
             <tr>
@@ -176,7 +184,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
                 class="btn-icon btn-icon-sm variant-filled-error"
                 data-id={token.id}
                 data-name={token.name}
-                on:click|stopPropagation|capture={handleDelete}
+                onclickcapture={stopPropagation(handleDelete)}
                 disabled={isDeleting}
                 >
                   <Trash2 />

@@ -1,3 +1,4 @@
+<!-- @migration-task Error while migrating Svelte code: Event attribute must be a JavaScript expression, not a string -->
 <script lang="ts">
 import { langs } from '@spectacular/smart';
 import { onMount } from 'svelte';
@@ -205,10 +206,10 @@ import { onMount } from 'svelte';
   </div>
 
   <div id="div_start">
-    <select id="select_language" onchange="updateCountry()"></select>
+    <select id="select_language"  onchange={() => eval("updateCountry()")}></select>
     &nbsp;&nbsp; <select id="select_dialect"></select>
 
-    &nbsp;&nbsp;<button id="start_button" onclick="startButton(event)">
+    &nbsp;&nbsp;<button id="start_button" onclick={() => eval("startButton(event)")}>
       <img
         alt="Start"
         id="start_img"
@@ -218,7 +219,7 @@ import { onMount } from 'svelte';
 
     &nbsp;&nbsp;<button
       id="record_button"
-      onclick="stopButton(event)"
+      onclick={() => eval("startButton(event)")}
       style="display:none"
     >
       <img

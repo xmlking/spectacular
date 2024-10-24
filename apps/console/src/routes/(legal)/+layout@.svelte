@@ -1,5 +1,10 @@
 <script lang="ts">
 import { UsersRound } from 'lucide-svelte';
+  interface Props {
+    children?: import('svelte').Snippet;
+  }
+
+  let { children }: Props = $props();
 </script>
 
 <div class="mx-auto flex max-w-2xl flex-col justify-center px-6 py-12 lg:px-8">
@@ -10,7 +15,7 @@ import { UsersRound } from 'lucide-svelte';
           <UsersRound size={42} />
         </div>
       </div>
-      <slot />
+      {@render children?.()}
     </div>
   </div>
 </div>

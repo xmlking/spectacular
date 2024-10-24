@@ -2,7 +2,7 @@
 import { typewriter } from '@spectacular/skeleton/transitions';
 
 // biome-ignore lint/style/useConst: <explanation>
-let visible = false;
+let visible = $state(false);
 </script>
 
 <div class="relative flex min-h-dvh w-full flex-col items-center justify-cente text-black">

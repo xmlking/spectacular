@@ -3,6 +3,11 @@ import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 import { UserRound } from 'lucide-svelte';
+  interface Props {
+    children?: import('svelte').Snippet;
+  }
+
+  let { children }: Props = $props();
 </script>
 
 <div class="mx-auto flex max-w-md flex-col justify-center px-6 py-12 lg:px-8 lg:py-32">
@@ -21,7 +26,7 @@ import { UserRound } from 'lucide-svelte';
           <span>{m.auth_labels_signup()}</span>
         </TabAnchor>
       </TabGroup>
-      <slot />
+      {@render children?.()}
     </div>
   </div>
 </div>

@@ -10,7 +10,11 @@ export const defaultDE = {
   easing: quintOut,
 };
 
-export let rules: Rule[];
+  interface Props {
+    rules: Rule[];
+  }
+
+  let { rules }: Props = $props();
 </script>
 
 <div class="divide-y divide-slate-200">

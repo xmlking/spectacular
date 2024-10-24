@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, stopPropagation } from 'svelte/legacy';
+
 import { PendingValue, type SearchPolicies$result, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
@@ -12,24 +14,33 @@ import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 
 const log = new Logger('policies:search-results:browser');
-// Variables
-export let data: SearchPolicies$result;
-let { policies } = data;
-$: ({ policies } = data);
+
+  interface Props {
+    // Variables
+    data: SearchPolicies$result;
+  }
+
+  let { data }: Props = $props();
+let { policies } = $state(data);
+run(() => {
+    ({ policies } = data);
+  });
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 //Datatable handler initialization
 const handler = new DataHandler(policies.filter(loaded), { rowsPerPage: 10 });
-$: handler.setRows(policies);
+run(() => {
+    handler.setRows(policies);
+  });
 const rows = handler.getRows();
 
 // Functions
 /**
  * Delete Polcy action
  */
-let isDeleting = false;
+let isDeleting = $state(false);
 const deletePolicy = graphql(`
     mutation DeletePolicy(
       $policyId: uuid!
@@ -115,7 +126,9 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
 };
 
 // Reactivity
-$: loadingState.setFormLoading(isDeleting);
+run(() => {
+    loadingState.setFormLoading(isDeleting);
+  });
 </script>
 
 <div class="card p-4">
@@ -175,13 +188,13 @@ $: loadingState.setFormLoading(isDeleting);
         {#each $rows as row}
           {#if row.id === PendingValue}
             <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
             </tr>
           {:else}
             <tr>
@@ -205,7 +218,7 @@ $: loadingState.setFormLoading(isDeleting);
                   data-policy-id={row.id}
                   data-rule-id={row.rule.id}
                   data-display-name={row.rule.displayName}
-                  on:click|stopPropagation|capture={handleDelete}
+                  onclickcapture={stopPropagation(handleDelete)}
                   disabled={isDeleting}
                 >
                   <Trash2 />

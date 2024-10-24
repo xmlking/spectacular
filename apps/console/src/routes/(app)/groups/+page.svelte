@@ -13,9 +13,9 @@ import { superForm } from 'sveltekit-superforms/client';
 
 const log = new Logger('groups:list:browser');
 
-export let data;
+  let { data } = $props();
 
-$: ({ groups } = data);
+let { groups } = $derived(data);
 
 const {
   allErrors,
@@ -38,8 +38,8 @@ const {
   },
 });
 
-$: handler = new DataHandler(groups, { rowsPerPage: 10 });
-$: rows = handler.getRows();
+let handler = $derived(new DataHandler(groups, { rowsPerPage: 10 }));
+let rows = $derived(handler.getRows());
 
 export const snapshot = { capture, restore };
 

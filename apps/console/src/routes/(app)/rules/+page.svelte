@@ -2,10 +2,14 @@
 import type { PageData } from './$houdini';
 import RulesCard from './rules.svelte';
 
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
 
-$: ({ Rules: RulesData } = data);
-$: rules = $RulesData.data?.rules ?? [];
+  let { data }: Props = $props();
+
+let { Rules: RulesData } = $derived(data);
+let rules = $derived($RulesData.data?.rules ?? []);
 </script>
 
 <svelte:head>

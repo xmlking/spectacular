@@ -1,14 +1,22 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 import { Avatar } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler } from '@vincjo/datatables';
 import { Pencil, UserRoundCog } from 'lucide-svelte';
 import type { PageData } from './$houdini';
-export let data: PageData;
-$: ({ UsersList } = data);
+	interface Props {
+		data: PageData;
+	}
+
+	let { data }: Props = $props();
+let { UsersList } = $derived(data);
 const handler = new DataHandler(UsersList, { rowsPerPage: 10 });
 const rows = handler.getRows();
-$: handler.setRows(UsersList);
+run(() => {
+		handler.setRows(UsersList);
+	});
 </script>
 <div class="page-container">
 	<div class="page-section">

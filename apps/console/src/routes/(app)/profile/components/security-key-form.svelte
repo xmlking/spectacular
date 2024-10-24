@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { page } from '$app/stores';
 import { CachePolicy, GetUserStore, cache } from '$houdini';
 import * as m from '$i18n/messages';
@@ -103,8 +105,10 @@ async function reload() {
   console.log({ data, errors });
 }
 // Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+let valid = $derived($allErrors.length === 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <!-- Form Level Errors / Messages -->
@@ -118,30 +122,32 @@ $: loadingState.setFormLoading($delayed);
   <section class="p-4">
     <form method="POST" use:enhance>
       <Form.Field {form} name="nickname">
-        <Form.Control let:attrs>
-          <!-- <Form.Label class="label data-[fs-error]:text-error-500" >{m.profile_forms_nickname_label()}</Form.Label> -->
-          <div class="input-group input-group-divider grid-cols-[1fr_auto]">
-            <input
-              type="text"
-              class="input data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.nickname}
-              placeholder={m.profile_forms_nickname_placeholder()}
-            />
-            <button
-              class="variant-filled-secondary"
-              disabled={!$tainted || !valid || $submitting}
-            >
-              {#if $timeout}
-                <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
-              {:else if $delayed}
-                <Loader class="m-2 h-4 w-4 animate-spin" />
-              {:else}
-                {m.buttons_add()}
-              {/if}
-            </button>
-          </div>
-        </Form.Control>
+        <Form.Control >
+          {#snippet children({ attrs })}
+                    <!-- <Form.Label class="label data-[fs-error]:text-error-500" >{m.profile_forms_nickname_label()}</Form.Label> -->
+            <div class="input-group input-group-divider grid-cols-[1fr_auto]">
+              <input
+                type="text"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                bind:value={$formData.nickname}
+                placeholder={m.profile_forms_nickname_placeholder()}
+              />
+              <button
+                class="variant-filled-secondary"
+                disabled={!$tainted || !valid || $submitting}
+              >
+                {#if $timeout}
+                  <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+                {:else if $delayed}
+                  <Loader class="m-2 h-4 w-4 animate-spin" />
+                {:else}
+                  {m.buttons_add()}
+                {/if}
+              </button>
+            </div>
+                            {/snippet}
+                </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">
           {m.profile_forms_nickname_description()}
         </Form.Description>

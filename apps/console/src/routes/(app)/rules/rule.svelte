@@ -2,9 +2,13 @@
 import { fragment, graphql } from '$houdini';
 import type { RuleCardFields } from '$houdini';
 
-export let rule: RuleCardFields;
+  interface Props {
+    rule: RuleCardFields;
+  }
 
-$: data = fragment(
+  let { rule }: Props = $props();
+
+let data = $derived(fragment(
   rule,
   graphql(`
       fragment RuleCardFields on rules {
@@ -15,9 +19,9 @@ $: data = fragment(
         tags
       }
     `),
-);
+));
 
-$: ({ id, createdAt, updatedAt, organization, tags } = $data);
+let { id, createdAt, updatedAt, organization, tags } = $derived($data);
 </script>
 
 <div

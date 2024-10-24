@@ -4,7 +4,7 @@ import DocsSidebar from './sidebar.svelte';
 
 const drawerStore = getDrawerStore();
 
-$: classesDrawer = $drawerStore.id === 'doc-sidenav' ? 'lg:hidden' : '';
+let classesDrawer = $derived($drawerStore.id === 'doc-sidenav' ? 'lg:hidden' : '');
 </script>
 
 <Drawer class={classesDrawer}>

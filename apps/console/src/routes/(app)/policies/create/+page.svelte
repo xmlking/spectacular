@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 import { graphql, type policies_insert_input } from '$houdini';
@@ -41,7 +43,7 @@ const log = new Logger('policies.create.browser');
 // export let data: PageData;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
-let gqlErrors: PartialGraphQLErrors;
+let gqlErrors: PartialGraphQLErrors = $state();
 // let subjects: Subject[] | undefined;
 
 const createPolicy = graphql(`
@@ -191,13 +193,13 @@ const {
 export const snapshot = { capture, restore };
 
 // subject settings
-let subject = $form?.subjectId
+let subject = $state($form?.subjectId
   ? {
       id: $form.subjectId,
       displayName: $form.subjectDisplayName,
       secondaryId: $form.subjectSecondaryId,
     }
-  : null;
+  : null);
 
 async function fetchSubjects(filterText: string) {
   const result = await searchSubjects($form.subjectType, filterText);
@@ -237,12 +239,12 @@ function clearSubject(event: CustomEvent | Event) {
 }
 
 // rule settings
-let rule = $form?.ruleId
+let rule = $state($form?.ruleId
   ? {
       id: $form.ruleId,
       displayName: $form.rule.displayName,
     }
-  : null;
+  : null);
 
 async function onRuleChange(changedSubject: CustomEvent) {
   log.debug('onRuleChange', changedSubject.detail);
@@ -322,9 +324,11 @@ async function fetchRule(filterText: string) {
 const validFrom = dateProxy(form, 'validFrom', { format: 'datetime-utc' });
 const validTo = dateProxy(form, 'validTo', { format: 'datetime-utc' });
 // $: disabled=$form.rule.shared
-$: disabled = rule != null;
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+let disabled = $derived(rule != null);
+let valid = $derived($allErrors.length === 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <svelte:head>
@@ -354,16 +358,18 @@ $: loadingState.setFormLoading($delayed);
           <Form.Fieldset form={superform} name={keys.subjectType}>
             <RadioGroup active="variant-filled-secondary">
               {#each subjectTypeOptions as sType}
-                <Form.Control let:attrs>
-                  <RadioItem
-                    {...attrs}
-                    bind:group={$form.subjectType}
-                    value={sType.value}
-                    on:change={clearSubject}
-                  >
-                    <Form.Label class="label">{sType.name}</Form.Label>
-                  </RadioItem>
-                </Form.Control>
+                <Form.Control >
+                  {#snippet children({ attrs })}
+                                    <RadioItem
+                      {...attrs}
+                      bind:group={$form.subjectType}
+                      value={sType.value}
+                      on:change={clearSubject}
+                    >
+                      <Form.Label class="label">{sType.name}</Form.Label>
+                    </RadioItem>
+                                                    {/snippet}
+                                </Form.Control>
               {/each}
             </RadioGroup>
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
@@ -407,20 +413,23 @@ $: loadingState.setFormLoading($delayed);
             --item-is-active-bg="var(--pd-input-field-hover-stroke)"
             --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
           >
-            <b slot="prepend">
-              {#if $form.subjectType == "group"}
-                <UsersRound />
-              {:else if $form.subjectType == "service_account"}
-                <User />
-              {:else if $form.subjectType == "device"}
-                <MonitorSmartphone />
-              {:else if $form.subjectType == "device_pool"}
-                <Server />
-              {:else}
-                <UserRound />
-              {/if}
-            </b>
-            <svelte:fragment slot="input-hidden" let:value>
+            {#snippet prepend()}
+                        <b >
+                {#if $form.subjectType == "group"}
+                  <UsersRound />
+                {:else if $form.subjectType == "service_account"}
+                  <User />
+                {:else if $form.subjectType == "device"}
+                  <MonitorSmartphone />
+                {:else if $form.subjectType == "device_pool"}
+                  <Server />
+                {:else}
+                  <UserRound />
+                {/if}
+              </b>
+                      {/snippet}
+            <!-- @migration-task: migrate this slot by hand, `input-hidden` is an invalid identifier -->
+  <svelte:fragment slot="input-hidden" let:value>
               <input
                 type="hidden"
                 name="subjectDisplayName"
@@ -467,10 +476,13 @@ $: loadingState.setFormLoading($delayed);
             --item-is-active-bg="var(--pd-input-field-hover-stroke)"
             --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
           >
-            <b slot="prepend">
-              <Search />
-            </b>
-            <svelte:fragment slot="input-hidden" let:value>
+            {#snippet prepend()}
+                        <b >
+                <Search />
+              </b>
+                      {/snippet}
+            <!-- @migration-task: migrate this slot by hand, `input-hidden` is an invalid identifier -->
+  <svelte:fragment slot="input-hidden" let:value>
               <input
                 type="hidden"
                 name="ruleDisplayName"
@@ -481,17 +493,19 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-2">
           <Form.Field form={superform} name="rule.displayName">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Display Name</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Display Name"
-                bind:value={$form.rule.displayName}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Display Name</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Display Name"
+                  bind:value={$form.rule.displayName}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the displayName</Form.Description
@@ -501,17 +515,19 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-4">
           <Form.Field form={superform} name="rule.description">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Description</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Display Name"
-                bind:value={$form.rule.description}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Description</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Display Name"
+                  bind:value={$form.rule.description}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the description</Form.Description
@@ -521,24 +537,26 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-3">
           <Form.Field form={superform} name="rule.tags">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Tags</Form.Label>
-              <!-- <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter tags..."
-                bind:value={$form.rule.tags}
-              /> -->
-              <InputChip
-                {...attrs}
-                {disabled}
-                placeholder="Enter tags..."
-                class="input data-[fs-error]:input-error"
-                bind:value={$form.rule.tags}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Tags</Form.Label>
+                <!-- <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Enter tags..."
+                  bind:value={$form.rule.tags}
+                /> -->
+                <InputChip
+                  {...attrs}
+                  {disabled}
+                  placeholder="Enter tags..."
+                  class="input data-[fs-error]:input-error"
+                  bind:value={$form.rule.tags}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the tags</Form.Description
@@ -548,17 +566,19 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-3">
           <Form.Field form={superform} name="rule.annotations">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Annotations</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter Annotations..."
-                bind:value={$form.rule.annotations}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Annotations</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Enter Annotations..."
+                  bind:value={$form.rule.annotations}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Format: key1=>value1 (or) "key2" => "value2 with space"</Form.Description
@@ -568,17 +588,19 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-3">
           <Form.Field form={superform} name="rule.source">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Source</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter Source..."
-                bind:value={$form.rule.source}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Source</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Enter Source..."
+                  bind:value={$form.rule.source}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the source</Form.Description
@@ -588,17 +610,19 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-3">
           <Form.Field form={superform} name="rule.sourcePort">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Source port</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter Source port..."
-                bind:value={$form.rule.sourcePort}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Source port</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Enter Source port..."
+                  bind:value={$form.rule.sourcePort}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the source port</Form.Description
@@ -608,17 +632,19 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-3">
           <Form.Field form={superform} name="rule.destination">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Destination</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter Destination..."
-                bind:value={$form.rule.destination}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Destination</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Enter Destination..."
+                  bind:value={$form.rule.destination}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the destination</Form.Description
@@ -628,17 +654,19 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-3">
           <Form.Field form={superform} name="rule.destinationPort">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Destination port</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter Destination port..."
-                bind:value={$form.rule.destinationPort}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Destination port</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Enter Destination port..."
+                  bind:value={$form.rule.destinationPort}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the destination port</Form.Description
@@ -648,19 +676,21 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="leading-3">
           <Form.Field form={superform} name="rule.protocol">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Protocols</Form.Label>
-              <select
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                bind:value={$form.rule.protocol}
-              >
-                {#each protocols as protocol}
-                  <option value={protocol.value}>{protocol.name}</option>
-                {/each}
-              </select>
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Protocols</Form.Label>
+                <select
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  bind:value={$form.rule.protocol}
+                >
+                  {#each protocols as protocol}
+                    <option value={protocol.value}>{protocol.name}</option>
+                  {/each}
+                </select>
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter Protocols</Form.Description
@@ -673,16 +703,18 @@ $: loadingState.setFormLoading($delayed);
             <Form.Legend>Action</Form.Legend>
             <RadioGroup active="variant-filled-secondary">
               {#each actionOptions as action}
-                <Form.Control let:attrs>
-                  <RadioItem
-                    {...attrs}
-                    {disabled}
-                    bind:group={$form.rule.action}
-                    value={action.value}
-                  >
-                    <Form.Label class="label">{action.label}</Form.Label>
-                  </RadioItem>
-                </Form.Control>
+                <Form.Control >
+                  {#snippet children({ attrs })}
+                                    <RadioItem
+                      {...attrs}
+                      {disabled}
+                      bind:group={$form.rule.action}
+                      value={action.value}
+                    >
+                      <Form.Label class="label">{action.label}</Form.Label>
+                    </RadioItem>
+                                                    {/snippet}
+                                </Form.Control>
               {/each}
             </RadioGroup>
             <Form.Description
@@ -697,16 +729,18 @@ $: loadingState.setFormLoading($delayed);
             <Form.Legend>Direction</Form.Legend>
             <RadioGroup active="variant-filled-secondary">
               {#each directionOptions as direction}
-                <Form.Control let:attrs>
-                  <RadioItem
-                    {...attrs}
-                    {disabled}
-                    bind:group={$form.rule.direction}
-                    value={direction.value}
-                  >
-                    <Form.Label class="label">{direction.label}</Form.Label>
-                  </RadioItem>
-                </Form.Control>
+                <Form.Control >
+                  {#snippet children({ attrs })}
+                                    <RadioItem
+                      {...attrs}
+                      {disabled}
+                      bind:group={$form.rule.direction}
+                      value={direction.value}
+                    >
+                      <Form.Label class="label">{direction.label}</Form.Label>
+                    </RadioItem>
+                                                    {/snippet}
+                                </Form.Control>
               {/each}
             </RadioGroup>
             <Form.Description
@@ -718,35 +752,39 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-start-5 justify-end content-center">
           <Form.Field form={superform} name="rule.shared">
-            <Form.Control let:attrs>
-              <SlideToggle
-                active="variant-filled-secondary"
-                size="md"
-                {...attrs}
-                {disabled}
-                bind:checked={$form.rule.shared}
-              >
-                <Form.Label class="inline-block w-[100px] text-left">
-                  {$form.rule.shared ? "" : "Not"} Shared</Form.Label
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <SlideToggle
+                  active="variant-filled-secondary"
+                  size="md"
+                  {...attrs}
+                  {disabled}
+                  bind:checked={$form.rule.shared}
                 >
-              </SlideToggle>
-            </Form.Control>
+                  <Form.Label class="inline-block w-[100px] text-left">
+                    {$form.rule.shared ? "" : "Not"} Shared</Form.Label
+                  >
+                </SlideToggle>
+                                        {/snippet}
+                        </Form.Control>
             <!-- <Form.Description>Temporarily disable policy</Form.Description> -->
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-end-7">
           <Form.Field form={superform} name={keys.weight}>
-            <Form.Control let:attrs>
-              <Form.Label class="label">Weight</Form.Label>
-              <input
-                type="number"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                bind:value={$form.rule.weight}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Weight</Form.Label>
+                <input
+                  type="number"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  bind:value={$form.rule.weight}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter Weight</Form.Description
@@ -757,17 +795,19 @@ $: loadingState.setFormLoading($delayed);
 
         <div class="col-span-4">
           <Form.Field form={superform} name="rule.appId">
-            <Form.Control let:attrs>
-              <Form.Label class="label">App id</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Display Name"
-                bind:value={$form.rule.appId}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">App id</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {disabled}
+                  placeholder="Display Name"
+                  bind:value={$form.rule.appId}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >If no app is selected, throttle rate applied system wide.</Form.Description
@@ -777,22 +817,24 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-2">
           <Form.Field form={superform} name="rule.throttleRate">
-            <Form.Control let:attrs>
-              <RangeSlider
-                {...attrs}
-                {disabled}
-                bind:value={$form.rule.throttleRate}
-                min={0}
-                max={100}
-                step={1}
-                ticked
-              >
-                <div class="flex justify-between items-center">
-                  <Form.Label class="label">Bandwidth limit</Form.Label>
-                  <div class="text-xs">{$form.rule.throttleRate} /100</div>
-                </div>
-              </RangeSlider>
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <RangeSlider
+                  {...attrs}
+                  {disabled}
+                  bind:value={$form.rule.throttleRate}
+                  min={0}
+                  max={100}
+                  step={1}
+                  ticked
+                >
+                  <div class="flex justify-between items-center">
+                    <Form.Label class="label">Bandwidth limit</Form.Label>
+                    <div class="text-xs">{$form.rule.throttleRate} /100</div>
+                  </div>
+                </RangeSlider>
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Set Bandwidth limit</Form.Description
@@ -802,33 +844,37 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="justify-start content-center">
           <Form.Field form={superform} name="active">
-            <Form.Control let:attrs>
-              <SlideToggle
-                active="variant-filled-secondary"
-                size="md"
-                {...attrs}
-                bind:checked={$form.active}
-              >
-                <Form.Label class="inline-block w-[100px] text-left"
-                  >Active {$form.active ? "On" : "Off"}</Form.Label
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <SlideToggle
+                  active="variant-filled-secondary"
+                  size="md"
+                  {...attrs}
+                  bind:checked={$form.active}
                 >
-              </SlideToggle>
-            </Form.Control>
+                  <Form.Label class="inline-block w-[100px] text-left"
+                    >Active {$form.active ? "On" : "Off"}</Form.Label
+                  >
+                </SlideToggle>
+                                        {/snippet}
+                        </Form.Control>
             <!-- <Form.Description>Temporarily disable policy</Form.Description> -->
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-start-5">
           <Form.Field form={superform} name={keys.validFrom}>
-            <Form.Control let:attrs>
-              <Form.Label class="label">Valid From</Form.Label>
-              <input
-                type="datetime-local"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                bind:value={$validFrom}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Valid From</Form.Label>
+                <input
+                  type="datetime-local"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$validFrom}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the validFrom date</Form.Description
@@ -838,15 +884,17 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-end-auto">
           <Form.Field form={superform} name={keys.validTo}>
-            <Form.Control let:attrs>
-              <Form.Label class="label">Valid To</Form.Label>
-              <input
-                type="datetime-local"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                bind:value={$validTo}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Valid To</Form.Label>
+                <input
+                  type="datetime-local"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$validTo}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the validTo date</Form.Description

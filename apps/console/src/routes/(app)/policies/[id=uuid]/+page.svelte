@@ -3,7 +3,7 @@ import { DebugShell } from '@spectacular/skeleton';
 import { Logger } from '@spectacular/utils';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
 
-export let data;
+  let { data } = $props();
 
 const log = new Logger('routes:policies:create');
 

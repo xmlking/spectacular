@@ -9,7 +9,7 @@ import { superForm } from 'sveltekit-superforms';
 import SuperDebug from 'sveltekit-superforms';
 import { zodClient } from 'sveltekit-superforms/adapters';
 
-export let data;
+	let { data } = $props();
 // initializing a form based on superForm with zod schema
 const form = superForm(data.form, {
   dataType: 'json',
@@ -58,61 +58,69 @@ function isValidEmailDomain(value: string): boolean {
 <div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
 		<div class="col-span-3">
 			<Field {form} name="Organization">
-				<Control let:attrs>
-					<div class="grid gap-2">
-						<Label class="label">Organization</Label>
-						<input
-							class="input"
-							{...attrs}
-							bind:value={$formData.organization}
-              disabled
-						/>
-					</div>
-				</Control>
+				<Control >
+					{#snippet children({ attrs })}
+												<div class="grid gap-2">
+							<Label class="label">Organization</Label>
+							<input
+								class="input"
+								{...attrs}
+								bind:value={$formData.organization}
+	              disabled
+							/>
+						</div>
+																{/snippet}
+										</Control>
 				<FieldErrors />
 			</Field>
 		</div>
 		<div class="col-span-3">
 			<Field {form} name="description">
-				<Control let:attrs>
-					<div class="grid gap-2">
-						<Label class="label">Description</Label>
-						<input
-							class="input"
-							{...attrs}
-							bind:value={$formData.description}
-						/>
-					</div>
-				</Control>
+				<Control >
+					{#snippet children({ attrs })}
+												<div class="grid gap-2">
+							<Label class="label">Description</Label>
+							<input
+								class="input"
+								{...attrs}
+								bind:value={$formData.description}
+							/>
+						</div>
+																{/snippet}
+										</Control>
 				<FieldErrors />
 			</Field>
 		</div>
 		<div class="col-span-3">
 			<Field {form} name="allowedEmails">
-				<Control let:attrs>
-					<div class="grid gap-2">
-							<Label class="label">Allowed Emails</Label>
-							<InputChip
-								{...attrs}
-								bind:value={$formData.allowedEmails}
-                validation={isValidEmail}
-							/>
-					</div>
-				</Control>
+				<Control >
+					{#snippet children({ attrs })}
+												<div class="grid gap-2">
+								<Label class="label">Allowed Emails</Label>
+								<InputChip
+									{...attrs}
+									bind:value={$formData.allowedEmails}
+	                validation={isValidEmail}
+								/>
+						</div>
+																{/snippet}
+										</Control>
 			</Field>
 		</div>
     <div class="col-span-3">
 			<Field {form} name="allowedEmailDomains">
-				<Control let:attrs>
-					<div class="grid gap-2">
-							<Label class="label">Allowed Email Domains</Label>
-							<InputChip
-								{...attrs}
-								bind:value={$formData.allowedEmailDomains}
-                validation={isValidEmailDomain}
-							/>
-					</div>
-				</Control>
+				<Control >
+					{#snippet children({ attrs })}
+												<div class="grid gap-2">
+								<Label class="label">Allowed Email Domains</Label>
+								<InputChip
+									{...attrs}
+									bind:value={$formData.allowedEmailDomains}
+	                validation={isValidEmailDomain}
+								/>
+						</div>
+																{/snippet}
+										</Control>
 			</Field>
 		</div>
 	</div>
@@ -120,13 +128,13 @@ function isValidEmailDomain(value: string): boolean {
     <button
       type="button"
       class="variant-ghost-secondary btn"
-      on:click={() => history.back()}>Back</button
+      onclick={() => history.back()}>Back</button
     >
     <button
       type="button"
       class="variant-ghost-warning btn"
       disabled={!$tainted}
-      on:click={() => reset()}
+      onclick={() => reset()}
     >
       Reset
     </button>

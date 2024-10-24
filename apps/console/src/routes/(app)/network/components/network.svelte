@@ -7,16 +7,16 @@ import { nodes, links, sites, StatusMap, type NodeDatum, type LinkDatum } from '
 const mainSite = nodes[0].site;
 
 // Reactive statements
-let expanded = [mainSite];
-$: panels = expanded.map((site) => sites[site].panel);
-$: data = {
+let expanded = $state([mainSite]);
+let panels = $derived(expanded.map((site) => sites[site].panel));
+let data = $derived({
   nodes: nodes.flatMap<NodeDatum>((n) => (expanded.includes(n.site) ? n.children : n)),
   links: links.map((l) => ({
     ...l,
     source: expanded.includes(l.sourceGroup) ? l.source : sites[l.sourceGroup].groupNodeId,
     target: expanded.includes(l.targetGroup) ? l.target : sites[l.targetGroup].groupNodeId,
   })),
-};
+});
 
 // Graph config
 const graphConfig = {

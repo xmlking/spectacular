@@ -14,18 +14,18 @@ const cResultAnchor = '!rounded-none justify-between hover:variant-soft focus:!v
 const cFooter = 'hidden md:flex items-center gap-2 bg-surface-300-600-token p-4 text-xs font-bold';
 
 // Local
-let searchTerm = '';
+let searchTerm = $state('');
 const resultsCopy = [
   ...menuNavLinks['/policies'],
   ...menuNavLinks['/flows'],
   ...menuNavLinks['/reports'],
   ...menuNavLinks['/account'],
 ] as const;
-let results = resultsCopy;
+let results = $state(resultsCopy);
 const modalStore = getModalStore();
 
 // Elements
-let elemDocSearch: HTMLElement;
+let elemDocSearch: HTMLElement = $state();
 
 function filterList(list: List) {
   return list.filter((rowObj) => {
@@ -59,8 +59,8 @@ function onKeyDown(event: KeyboardEvent): void {
       bind:value={searchTerm}
       type="search"
       placeholder="Search..."
-      on:input={onInput}
-      on:keydown={onKeyDown}
+      oninput={onInput}
+      onkeydown={onKeyDown}
     />
   </header>
   <!-- Results -->
@@ -74,7 +74,7 @@ function onKeyDown(event: KeyboardEvent): void {
               <a
                 class={cResultAnchor}
                 href={link.href}
-                on:click={() => {
+                onclick={() => {
                   modalStore.close();
                 }}
               >

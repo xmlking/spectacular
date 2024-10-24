@@ -1,12 +1,18 @@
 <script lang="ts">
+  interface Props {
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let { ...props }: Props = $props();
 // Classes
 const cBase = 'page-container';
 
 // Reactive
-$: classesBase = `${cBase} ${$$props.class ?? ''}`;
+let classesBase = $derived(`${cBase} ${props.class ?? ''}`);
 </script>
 
 <div class={classesBase}>
   <!-- Content -->
-  <slot />
+  {@render props.children?.()}
 </div>

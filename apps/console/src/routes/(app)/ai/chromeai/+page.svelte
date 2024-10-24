@@ -20,10 +20,10 @@ const model = chromeai('text', {
 });
 
 // biome-ignore lint/style/useConst: <explanation>
-let prompt = 'Generate a lasagna recipe.';
-let output = '';
-let error: string;
-let isLoading = false;
+let prompt = $state('Generate a lasagna recipe.');
+let output = $state('');
+let error: string = $state();
+let isLoading = $state(false);
 
 const schema = z.object({
   recipe: z.object({
@@ -101,7 +101,7 @@ const onGenerate = async () => {
         <button
           type="submit"
           class="variant-filled-secondary"
-          on:click={onGenerate}
+          onclick={onGenerate}
           aria-label="Submit"
         >
           {#if isLoading}
@@ -115,7 +115,7 @@ const onGenerate = async () => {
 
     <label class="label">
       <span>Output</span>
-      <textarea class="textarea" value={output} />
+      <textarea class="textarea" value={output}></textarea>
     </label>
   </div>
 </div>

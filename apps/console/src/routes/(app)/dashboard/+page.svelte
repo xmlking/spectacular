@@ -5,7 +5,7 @@ import { onMount } from 'svelte';
 import { persisted } from 'svelte-persisted-store';
 import { createSwapy } from 'swapy';
 
-let container: HTMLDivElement;
+let container: HTMLDivElement = $state();
 
 /*
   const DEFAULT = {

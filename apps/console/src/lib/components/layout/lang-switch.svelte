@@ -9,7 +9,7 @@ import { availableLanguageTags, languageTag } from '$i18n/runtime';
 import { i18n } from '$lib/i18n';
 import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 
-let locl: string = languageTag();
+let locl: string = $state(languageTag());
 </script>
 
 <!-- TODO: make it pretty-->

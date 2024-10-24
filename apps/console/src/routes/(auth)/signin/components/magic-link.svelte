@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { goto, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
@@ -77,8 +79,10 @@ async function waSignin() {
 }
 
 // Reactivity
-$: loadingState.setFormLoading($delayed);
-$: valid = $allErrors.length === 0;
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
+let valid = $derived($allErrors.length === 0);
 $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
 </script>
 
@@ -88,17 +92,19 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
 <form method="POST" use:enhance>
   <div class="mt-6">
     <Form.Field {form} name="email">
-      <Form.Control let:attrs>
-        <Form.Label class="label sr-only">{m.auth_forms_email_label()}</Form.Label>
-        <input
-          type="email"
-          autocomplete="email"
-          class="input data-[fs-error]:input-error"
-          placeholder={m.auth_forms_email_placeholder()}
-          {...attrs}
-          bind:value={$formData.email}
-        />
-      </Form.Control>
+      <Form.Control >
+        {#snippet children({ attrs })}
+                <Form.Label class="label sr-only">{m.auth_forms_email_label()}</Form.Label>
+          <input
+            type="email"
+            autocomplete="email"
+            class="input data-[fs-error]:input-error"
+            placeholder={m.auth_forms_email_placeholder()}
+            {...attrs}
+            bind:value={$formData.email}
+          />
+                      {/snippet}
+            </Form.Control>
       <Form.FieldErrors class="data-[fs-error]:text-error-500" />
     </Form.Field>
   </div>

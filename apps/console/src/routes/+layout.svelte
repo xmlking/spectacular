@@ -1,5 +1,7 @@
 <!-- Layout: (root) -->
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { browser, dev } from '$app/environment';
 import { page } from '$app/stores';
 import Drawer from '$lib/components/layout/drawer.svelte';
@@ -32,7 +34,12 @@ import type { LayoutData } from './$types';
 
 const log = new Logger('root:layout:browser');
 
-export let data: LayoutData;
+  interface Props {
+    data: LayoutData;
+    children?: import('svelte').Snippet;
+  }
+
+  let { data, children }: Props = $props();
 
 //*** initializations ***//
 // Floating UI for Popups
@@ -96,25 +103,27 @@ function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
 
 // Reactive
 // Disable left sidebar on homepage
-$: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
-$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
+let slotSidebarLeft = $derived(matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto');
+let allyPageSmoothScroll = $derived(!$prefersReducedMotionStore ? 'scroll-smooth' : '');
 
 // update nhost session
 // HINT: https://blog.flotes.app/posts/performant-reactivity
-$: ({ session } = data);
-$: if (browser) {
-  if (session) {
-    log.debug('trigger SESSION_UPDATE', { session });
-    nhost.auth.client.interpreter?.send('SESSION_UPDATE', { data: { session } });
-  } else {
-    log.debug('session empty, trigger SIGNOUT');
-    // nhost.auth.client.interpreter?.send('SIGNOUT');
-    (async () => {
-      const { error } = await nhost.auth.signOut();
-      if (error) log.error({ error });
-    })();
+let { session } = $derived(data);
+run(() => {
+    if (browser) {
+    if (session) {
+      log.debug('trigger SESSION_UPDATE', { session });
+      nhost.auth.client.interpreter?.send('SESSION_UPDATE', { data: { session } });
+    } else {
+      log.debug('session empty, trigger SIGNOUT');
+      // nhost.auth.client.interpreter?.send('SIGNOUT');
+      (async () => {
+        const { error } = await nhost.auth.signOut();
+        if (error) log.error({ error });
+      })();
+    }
   }
-}
+  });
 
 // if(browser) {
 //   cookieStore.onchange = (event: CookieChangeEvent) => {
@@ -134,8 +143,8 @@ $: if (browser) {
 <!-- window info -->
 <svelte:window
   bind:online={$online}
-  on:resize={() => {  $size = { height: window.innerHeight , width: window.innerWidth } }}
-  on:orientationchange={() => {$orientation = screen.orientation.type}}
+  onresize={() => {  $size = { height: window.innerHeight , width: window.innerWidth } }}
+  onorientationchange={() => {$orientation = screen.orientation.type}}
 />
 
 <!-- Overlays -->
@@ -148,14 +157,18 @@ $: if (browser) {
   <!-- App Shell -->
   <AppShell {slotSidebarLeft} regionPage={allyPageSmoothScroll} slotFooter="bg-black p-4" on:scroll={scrollHandler}>
     <!-- Header -->
-    <svelte:fragment slot="header">
-      <Header />
-    </svelte:fragment>
+    {#snippet header()}
+      
+        <Header />
+      
+      {/snippet}
 
     <!-- Sidebar (Left) -->
-    <svelte:fragment slot="sidebarLeft">
-      <Sidebar class="hidden w-[360px] overflow-hidden lg:grid" />
-    </svelte:fragment>
+    {#snippet sidebarLeft()}
+      
+        <Sidebar class="hidden w-[360px] overflow-hidden lg:grid" />
+      
+      {/snippet}
 
     <!-- Page Content -->
     <!--
@@ -164,12 +177,14 @@ $: if (browser) {
 			https://github.com/opral/monorepo/tree/paraglide-js-adapter-sveltekit/inlang/source-code/paraglide/paraglide-js-adapter-sveltekit
 
 		-->
-    <slot />
+    {@render children?.()}
 
     <!-- Page Footer -->
-    <svelte:fragment slot="pageFooter">
-      <Footer />
-    </svelte:fragment>
+    {#snippet pageFooter()}
+      
+        <Footer />
+      
+      {/snippet}
   </AppShell>
 </ParaglideJS>
 <!-- Change showAtPixel to 0 to show the button right after scroll -->

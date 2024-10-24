@@ -6,12 +6,14 @@ import { ArrowUp } from 'lucide-svelte';
 import type { HTMLButtonAttributes } from 'svelte/elements';
 import { derived } from 'svelte/store';
 
-interface $$Props extends HTMLButtonAttributes {
-  showAtPixel: number;
-}
+
 const className: $$Props['class'] = undefined;
 export { className as class };
-export let showAtPixel: $$Props['showAtPixel'] = 2000;
+  interface Props {
+    showAtPixel: number;
+  }
+
+  let { showAtPixel = 2000 }: Props = $props();
 
 const elemPage = browser ? document.querySelector('#page') : null;
 
@@ -31,7 +33,7 @@ const showGotoTop = derived(scroll, ($scroll) => {
 {#if $showGotoTop}
   <button
     type="button"
-    on:click={gotoTop}
+    onclick={gotoTop}
     title="Go To Top"
     class={cn(
       'fixed bottom-10 right-10 z-50 text-white',

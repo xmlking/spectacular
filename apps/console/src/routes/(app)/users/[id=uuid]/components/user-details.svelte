@@ -1,3 +1,4 @@
+<!-- @migration-task Error while migrating Svelte code: `<button>` is invalid inside `<option>` -->
 <script lang="ts">
 import { updateUserSchema as schema } from '$lib/schema/delegation';
 import { Avatar } from '@skeletonlabs/skeleton';

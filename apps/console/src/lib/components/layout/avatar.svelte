@@ -5,10 +5,19 @@ import { Settings } from 'lucide-svelte';
 import { CircleUserRound } from 'lucide-svelte';
 import { LogOut } from 'lucide-svelte';
 
-export let initials: string | undefined = undefined;
-export let src: string | undefined = undefined;
-export let elevated = false;
-export let online = true;
+  interface Props {
+    initials?: string | undefined;
+    src?: string | undefined;
+    elevated?: boolean;
+    online?: boolean;
+  }
+
+  let {
+    initials = undefined,
+    src = undefined,
+    elevated = false,
+    online = true
+  }: Props = $props();
 </script>
 
  <!-- trigger -->

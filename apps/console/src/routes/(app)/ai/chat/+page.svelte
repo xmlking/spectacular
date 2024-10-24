@@ -20,7 +20,7 @@ interface MessageFeed {
   color: string;
 }
 
-let elemChat: HTMLElement;
+let elemChat: HTMLElement = $state();
 
 // Navigation List
 const people: Person[] = [
@@ -31,10 +31,10 @@ const people: Person[] = [
   { id: 4, avatar: 24, name: 'Lara' },
   { id: 5, avatar: 9, name: 'Melissa' },
 ];
-let currentPersonId: number = people[0].id;
+let currentPersonId: number = $state(people[0].id);
 
 // Messages
-let messageFeed: MessageFeed[] = [
+let messageFeed: MessageFeed[] = $state([
   {
     id: 0,
     host: true,
@@ -71,8 +71,8 @@ let messageFeed: MessageFeed[] = [
     message: 'hi',
     color: 'variant-soft-primary',
   },
-];
-let currentMessage = '';
+]);
+let currentMessage = $state('');
 
 // For some reason, eslint thinks ScrollBehavior is undefined...
 // eslint-disable-next-line no-undef
@@ -141,7 +141,7 @@ onMount(() => {
               class="btn w-full flex items-center space-x-4 {person.id === currentPersonId
                 ? 'variant-filled-primary'
                 : 'bg-surface-hover-token'}"
-              on:click={() => (currentPersonId = person.id)}
+              onclick={() => (currentPersonId = person.id)}
             >
               <Avatar src="https://i.pravatar.cc/?img={person.avatar}" width="w-8" />
               <span class="flex-1 text-start">
@@ -195,9 +195,9 @@ onMount(() => {
             id="prompt"
             placeholder="Write a message..."
             rows="1"
-            on:keydown={onPromptKeydown}
+            onkeydown={onPromptKeydown}
           ></textarea>
-          <button class={currentMessage ? 'variant-filled-primary' : 'input-group-shim'} on:click={addMessage}>
+          <button class={currentMessage ? 'variant-filled-primary' : 'input-group-shim'} onclick={addMessage}>
             <Send />
           </button>
         </div>

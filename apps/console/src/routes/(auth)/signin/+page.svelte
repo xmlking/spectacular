@@ -4,7 +4,7 @@ import PasswordSigninForm from './components/password.svelte';
 import PasswordlessSigninForm from './components/passwordless.svelte';
 import SocialSigninForm from './components/social.svelte';
 
-export let data;
+  let { data } = $props();
 </script>
 
 <svelte:head>

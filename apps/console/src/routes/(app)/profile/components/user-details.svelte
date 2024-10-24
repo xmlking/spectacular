@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { page } from '$app/stores';
 import {
   CachePolicy,
@@ -25,8 +27,12 @@ import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';
 import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
-export let user: UserDetailsFragment;
-$: data = fragment(
+  interface Props {
+    user: UserDetailsFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment UserDetailsFragment on users @loading(cascade: true) {
@@ -41,9 +47,9 @@ $: data = fragment(
         plan: metadata(path: "plan")
       }
     `),
-);
+));
 
-$: ({ id, displayName, email, phoneNumber, defaultOrg, defaultRole, avatarUrl, locale, plan } = $data);
+let { id, displayName, email, phoneNumber, defaultOrg, defaultRole, avatarUrl, locale, plan } = $derived($data);
 
 const updateUserDetails = graphql(`
     mutation UpdateUserDetails($id: uuid!,  $data: users_set_input!) {
@@ -158,36 +164,44 @@ async function reload() {
   console.log({ data, errors });
 }
 // Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+let valid = $derived($allErrors.length === 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 
 // copy initialData to superform as soon as data is loaded
 // $: $formData = { displayName, email, phoneNumber, defaultRole, locale, plan, avatarUrl };
-$: if (id !== PendingValue) {
-  $formData = { displayName, email, phoneNumber, defaultRole, locale, plan, avatarUrl };
-}
+run(() => {
+    if (id !== PendingValue) {
+    $formData = { displayName, email, phoneNumber, defaultRole, locale, plan, avatarUrl };
+  }
+  });
 </script>
 
 <AppBar>
-  <svelte:fragment slot="lead"><UserRound /></svelte:fragment>
+  {#snippet lead()}
+    <UserRound />
+  {/snippet}
   {#if $data.displayName === PendingValue}
-    <div class="placeholder animate-pulse" />
+    <div class="placeholder animate-pulse"></div>
   {:else}
     <h2 class="h2" data-toc-ignore>{$data.displayName}</h2>
   {/if}
-  <svelte:fragment slot="trail">
-    {#if $data.avatarUrl === PendingValue && $data.displayName === PendingValue}
-      <div class="placeholder-circle w-16 animate-pulse" />
-    {:else}
-      <Avatar
-        src={$data.avatarUrl || undefined}
-        initials={$data.displayName}
-        width="w-11"
-        action={filter}
-        actionParams="#NoirLight"
-      />
-    {/if}
-  </svelte:fragment>
+  {#snippet trail()}
+  
+      {#if $data.avatarUrl === PendingValue && $data.displayName === PendingValue}
+        <div class="placeholder-circle w-16 animate-pulse"></div>
+      {:else}
+        <Avatar
+          src={$data.avatarUrl || undefined}
+          initials={$data.displayName}
+          width="w-11"
+          action={filter}
+          actionParams="#NoirLight"
+        />
+      {/if}
+    
+  {/snippet}
 </AppBar>
 
 <!-- Form Level Errors / Messages -->
@@ -202,50 +216,56 @@ $: if (id !== PendingValue) {
     <div class="space-y-4">
       <div class="grid gap-2">
         <Form.Field {form} name={keys.displayName}>
-          <Form.Control let:attrs>
-            <Form.Label class="label">Display Name</Form.Label>
-            <input
-              type="text"
-              class="input data-[fs-error]:input-error"
-              {...attrs}
-              placeholder="John Doe"
-              bind:value={$formData.displayName}
-            />
-          </Form.Control>
+          <Form.Control >
+            {#snippet children({ attrs })}
+                        <Form.Label class="label">Display Name</Form.Label>
+              <input
+                type="text"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="John Doe"
+                bind:value={$formData.displayName}
+              />
+                                  {/snippet}
+                    </Form.Control>
           <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter name for the PAT</Form.Description> -->
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
       </div>
       <div class="grid gap-2">
         <Form.Field {form} name={keys.email}>
-          <Form.Control let:attrs>
-            <Form.Label class="label">Email</Form.Label>
-            <input
-              type="email"
-              class="input data-[fs-error]:input-error"
-              {...attrs} disabled
-              placeholder="name@orgamization.com"
-              bind:value={$formData.email}
-            />
-          </Form.Control>
+          <Form.Control >
+            {#snippet children({ attrs })}
+                        <Form.Label class="label">Email</Form.Label>
+              <input
+                type="email"
+                class="input data-[fs-error]:input-error"
+                {...attrs} disabled
+                placeholder="name@orgamization.com"
+                bind:value={$formData.email}
+              />
+                                  {/snippet}
+                    </Form.Control>
           <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter Primary Email</Form.Description> -->
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
       </div>
       <div class="grid gap-2">
         <Form.Field {form} name={keys.locale}>
-          <Form.Control let:attrs>
-              <Form.Label>Locale</Form.Label>
-              <select
-              class="select data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.locale}>
-                  <option value="en">English (US)</option>
-                  <option value="es">Español (España)</option>
-                  <!-- <option value="fr">Français (France)</option> -->
-                  <option value="de">Deutsch (Deutschland)</option>
-              </select>
-          </Form.Control>
+          <Form.Control >
+              {#snippet children({ attrs })}
+                        <Form.Label>Locale</Form.Label>
+                <select
+                class="select data-[fs-error]:input-error"
+                {...attrs}
+                bind:value={$formData.locale}>
+                    <option value="en">English (US)</option>
+                    <option value="es">Español (España)</option>
+                    <!-- <option value="fr">Français (France)</option> -->
+                    <option value="de">Deutsch (Deutschland)</option>
+                </select>
+                                  {/snippet}
+                    </Form.Control>
           <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User prefered Locale</Form.Description> -->
           <Form.FieldErrors />
         </Form.Field>
@@ -254,49 +274,55 @@ $: if (id !== PendingValue) {
     <div class="space-y-4">
       <div class="grid gap-2">
         <Form.Field {form} name={keys.phoneNumber}>
-          <Form.Control let:attrs>
-            <Form.Label class="label">Phone Number</Form.Label>
-            <input
-              type="tel"
-              class="input data-[fs-error]:input-error"
-              {...attrs}
-              placeholder="+1 (555) 555-5555"
-              bind:value={$formData.phoneNumber}
-            />
-          </Form.Control>
+          <Form.Control >
+            {#snippet children({ attrs })}
+                        <Form.Label class="label">Phone Number</Form.Label>
+              <input
+                type="tel"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="+1 (555) 555-5555"
+                bind:value={$formData.phoneNumber}
+              />
+                                  {/snippet}
+                    </Form.Control>
           <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter your prefered contact phone number</Form.Description> -->
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
       </div>
       <div class="grid gap-2">
         <Form.Field {form} name={keys.defaultRole}>
-          <Form.Control let:attrs>
-            <Form.Label class="label">Default Role</Form.Label>
-            <input
-              type="text"
-              class="input data-[fs-error]:input-error"
-              {...attrs} disabled
-              placeholder="User"
-              bind:value={$formData.defaultRole}
-            />
-          </Form.Control>
+          <Form.Control >
+            {#snippet children({ attrs })}
+                        <Form.Label class="label">Default Role</Form.Label>
+              <input
+                type="text"
+                class="input data-[fs-error]:input-error"
+                {...attrs} disabled
+                placeholder="User"
+                bind:value={$formData.defaultRole}
+              />
+                                  {/snippet}
+                    </Form.Control>
           <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User's Default Role</Form.Description> -->
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
       </div>
       <div class="grid gap-2">
         <Form.Field {form} name={keys.plan}>
-          <Form.Control let:attrs>
-              <Form.Label>Plan</Form.Label>
-              <select
-              class="select data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.plan}>
-                <option value="free">Free</option>
-                <option value="pro">Pro</option>
-                <option value="enterprise">Enterprise</option>
-              </select>
-          </Form.Control>
+          <Form.Control >
+              {#snippet children({ attrs })}
+                        <Form.Label>Plan</Form.Label>
+                <select
+                class="select data-[fs-error]:input-error"
+                {...attrs}
+                bind:value={$formData.plan}>
+                  <option value="free">Free</option>
+                  <option value="pro">Pro</option>
+                  <option value="enterprise">Enterprise</option>
+                </select>
+                                  {/snippet}
+                    </Form.Control>
           <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User's subscription plan</Form.Description> -->
           <Form.FieldErrors />
         </Form.Field>
@@ -305,16 +331,18 @@ $: if (id !== PendingValue) {
     <div class="col-span-2 space-y-4">
       <div class="grid gap-2">
         <Form.Field {form} name={keys.avatarUrl}>
-          <Form.Control let:attrs>
-            <Form.Label class="label">Avatar URL</Form.Label>
-            <input
-              type="url"
-              class="input data-[fs-error]:input-error"
-              {...attrs}
-              placeholder="https://example.com/avatar.jpg"
-              bind:value={$formData.avatarUrl}
-            />
-          </Form.Control>
+          <Form.Control >
+            {#snippet children({ attrs })}
+                        <Form.Label class="label">Avatar URL</Form.Label>
+              <input
+                type="url"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="https://example.com/avatar.jpg"
+                bind:value={$formData.avatarUrl}
+              />
+                                  {/snippet}
+                    </Form.Control>
           <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500"User's Avatar URL</Form.Description> -->
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>

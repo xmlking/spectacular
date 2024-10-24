@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
 import { Logger } from '@spectacular/utils';
 import SuperDebug from 'sveltekit-superforms';
@@ -7,11 +9,17 @@ import SearchPoliciesForm from './components/search-policies-form.svelte';
 import SearchPoliciesResult from './components/search-policies-result.svelte';
 
 const log = new Logger('policies:search:browser');
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { SearchPolicies } = data;
-$: ({ SearchPolicies } = data);
+let { SearchPolicies } = $state(data);
+run(() => {
+    ({ SearchPolicies } = data);
+  });
 </script>
 
 <svelte:head>

@@ -1,11 +1,17 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { PendingValue, type UserOrgRolesFragment, fragment, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler } from '@vincjo/datatables';
 
-export let user: UserOrgRolesFragment;
-$: data = fragment(
+  interface Props {
+    user: UserOrgRolesFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment UserOrgRolesFragment on users {
@@ -16,12 +22,14 @@ $: data = fragment(
         }
       }
   `),
-);
-$: ({ userOrgRoles } = $data);
+));
+let { userOrgRoles } = $derived($data);
 
 //variables
 const handler = new DataHandler(userOrgRoles?.filter(loaded), { rowsPerPage: 5 });
-$: handler.setRows(userOrgRoles);
+run(() => {
+    handler.setRows(userOrgRoles);
+  });
 const rows = handler.getRows();
 </script>
 
@@ -43,9 +51,9 @@ const rows = handler.getRows();
         {#each $rows as role}
           {#if role.organization === PendingValue}
             <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
+              <td><div class="placeholder"></div></td>
             </tr>
           {:else}
           <tr>

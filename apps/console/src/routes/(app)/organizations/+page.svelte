@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { invalidateAll } from '$app/navigation';
 import { DeleteOrgStore } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
@@ -7,8 +9,12 @@ import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler } from '@vincjo/datatables';
 import { Pencil, Trash2 } from 'lucide-svelte';
 import type { PageData } from './$houdini';
-export let data: PageData;
-$: ({ OrganizationsList } = data);
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
+let { OrganizationsList } = $derived(data);
 //Datatable handler initialization
 const handler = new DataHandler(OrganizationsList, { rowsPerPage: 10 });
 const rows = handler.getRows();
@@ -30,7 +36,9 @@ async function del(organization: string) {
     await invalidateAll();
   }
 }
-$: handler.setRows(OrganizationsList);
+run(() => {
+    handler.setRows(OrganizationsList);
+  });
 </script>
 
 <div class="page-container">
@@ -111,7 +119,7 @@ $: handler.setRows(OrganizationsList);
           <button
             type="button"
             class="variant-filled-error btn"
-            on:click={() => {
+            onclick={() => {
               del(row.organization);
             }}>Delete</button
           >

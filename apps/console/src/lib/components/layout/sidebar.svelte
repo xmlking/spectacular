@@ -1,13 +1,21 @@
 <script lang="ts">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
 import { page } from '$app/stores';
 import { i18n } from '$lib/i18n';
 import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
 import { getNhostClient } from '$lib/stores/nhost';
 import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 import { Icon } from '@spectacular/skeleton/components/icons';
+  interface Props {
+    [key: string]: any
+  }
+
+  let { ...props }: Props = $props();
 
 // Local
-let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
+let currentRailCategory: keyof typeof menuNavLinks | undefined = $state(undefined);
 const drawerStore = getDrawerStore();
 const { user } = getNhostClient();
 
@@ -27,42 +35,54 @@ page.subscribe((page) => {
 });
 
 // Reactive
-$: submenu = menuNavLinks[currentRailCategory ?? '/policies'];
-$: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '');
+let submenu = $derived(menuNavLinks[currentRailCategory ?? '/policies']);
+let listboxItemActive = $derived((href: string) => ($page.url.pathname?.includes(href) ? 'bg-primary-active-token' : ''));
 </script>
 
 <div
-  class="bg-surface-50-900-token grid h-full grid-cols-[auto_1fr] border-r border-surface-500/30 {$$props.class ?? ''}"
+  class="bg-surface-50-900-token grid h-full grid-cols-[auto_1fr] border-r border-surface-500/30 {props.class ?? ''}"
 >
   <!-- App Rail -->
   <AppRail background="bg-transparent" border="border-r border-surface-500/30">
     <!-- Mobile Only -->
     <!-- prettier-ignore -->
     <AppRailAnchor href="/" class="lg:hidden" on:click={() => { onClickAnchor() }}>
-			<svelte:fragment slot="lead"><Icon name="home" width="w-6" height="h-6" /></svelte:fragment>
+			{#snippet lead()}
+            <Icon name="home" width="w-6" height="h-6" />
+          {/snippet}
 			<span>Home</span>
 		</AppRailAnchor>
     <!-- prettier-ignore -->
     <AppRailAnchor href="/blog" class="lg:hidden" on:click={() => { onClickAnchor() }}>
-			<svelte:fragment slot="lead"><Icon name="bullhorn" width="w-6" height="h-6" /></svelte:fragment>
+			{#snippet lead()}
+            <Icon name="bullhorn" width="w-6" height="h-6" />
+          {/snippet}
 			<span>Blog</span>
 		</AppRailAnchor>
     <!-- --- / --- -->
     <AppRailTile bind:group={currentRailCategory} name="policies" value={'/policies'}>
-      <svelte:fragment slot="lead"><Icon name="book" width="w-6" height="h-6" /></svelte:fragment>
+      {#snippet lead()}
+            <Icon name="book" width="w-6" height="h-6" />
+          {/snippet}
       <span>Policies</span>
     </AppRailTile>
     <hr class="opacity-30" />
     <AppRailTile bind:group={currentRailCategory} name="flows" value={'/flows'}>
-      <svelte:fragment slot="lead"><Icon name="tailwind" width="w-6" height="h-6" /></svelte:fragment>
+      {#snippet lead()}
+            <Icon name="tailwind" width="w-6" height="h-6" />
+          {/snippet}
       <span>Flows</span>
     </AppRailTile>
     <AppRailTile bind:group={currentRailCategory} name="reports" value={'/reports'}>
-      <svelte:fragment slot="lead"><Icon name="svelte" width="w-6" height="h-6" /></svelte:fragment>
+      {#snippet lead()}
+            <Icon name="svelte" width="w-6" height="h-6" />
+          {/snippet}
       <span>Reports</span>
     </AppRailTile>
     <AppRailTile bind:group={currentRailCategory} name="account" value={'/account'}>
-      <svelte:fragment slot="lead"><Icon name="screwdriverWrench" width="w-6" height="h-6" /></svelte:fragment>
+      {#snippet lead()}
+            <Icon name="screwdriverWrench" width="w-6" height="h-6" />
+          {/snippet}
       <span>Account</span>
     </AppRailTile>
   </AppRail>
@@ -75,9 +95,9 @@ $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? '
       <nav class="list-nav">
         <ul>
           {#each segment.list as { href, label, badge, preload, roles }}
-            <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+            <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
             {#if !roles || ($user?.defaultRole && roles.some( r => r === $user.defaultRole)) }
-            <li on:keypress on:click={drawerStore.close}>
+            <li onkeypress={bubble('keypress')} onclick={drawerStore.close}>
               <a {href} class={listboxItemActive(href)} data-sveltekit-preload-data={preload || 'hover'}>
                 <span class="flex-auto">{@html label}</span>
                 {#if badge}<span class="variant-filled-secondary badge">{badge}</span>{/if}

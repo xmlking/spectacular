@@ -6,7 +6,7 @@ import WaitForAuth from '$lib/components/layout/wait-for-auth.svelte';
 import { getNhostClient } from '$lib/stores/nhost';
 import { onMount } from 'svelte';
 
-export let data;
+  let { data, children } = $props();
 const nhost = getNhostClient();
 
 /**
@@ -21,5 +21,5 @@ onMount(async () => {
 </script>
 
 <WaitForAuth>
-  <slot />
+  {@render children?.()}
 </WaitForAuth>

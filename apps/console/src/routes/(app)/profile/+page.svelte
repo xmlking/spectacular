@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { page } from '$app/stores';
 import { PendingValue } from '$houdini';
 import { Meta } from '$lib/components';
@@ -17,24 +19,31 @@ import SecurityKeys from './components/security-keys.svelte';
 import UserDetails from './components/user-details.svelte';
 import UserOrgRoles from './components/user-org-roles.svelte';
 
-/**
+
+  interface Props {
+    /**
  * Loading states example: https://houdini-intro.pages.dev/
  * Docs: https://houdinigraphql.com/guides/loading-states
  */
-export let data: PageData;
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Variables
 
 // Functions
 
 // Reactivity
-let { GetUser } = data;
-$: ({ GetUser } = data);
+let { GetUser } = $state(data);
+run(() => {
+    ({ GetUser } = data);
+  });
 
-$: meta = {
+let meta = $derived({
   title: 'Datablocks | Profile',
   canonical: $page.url.toString(),
-};
+});
 </script>
 
 <Meta {...meta} />
@@ -86,7 +95,7 @@ $: meta = {
       {#if loaded(email)}
         <ChangeEmailForm initialData={{ email: email || "" }} />
       {:else}
-        <div class="placeholder animate-pulse" />
+        <div class="placeholder animate-pulse"></div>
       {/if}
     </section>
 

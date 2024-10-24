@@ -8,16 +8,20 @@ import { GraphQLError } from 'graphql';
 import { KeyRound, Trash2 } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 
-export let message: App.Superforms.Message | undefined;
-export let errors: string[];
 
 // Variables
 const log = new Logger('auth:profile:skey:browser');
 const toastStore = getToastStore();
 const nhost = getNhostClient();
 
-export let securityKey: SecurityKeyFragment;
-$: data = fragment(
+  interface Props {
+    message: App.Superforms.Message | undefined;
+    errors: string[];
+    securityKey: SecurityKeyFragment;
+  }
+
+  let { message = $bindable(), errors, securityKey }: Props = $props();
+let data = $derived(fragment(
   securityKey,
   graphql(`
       fragment SecurityKeyFragment on authUserSecurityKeys {
@@ -25,9 +29,9 @@ $: data = fragment(
         nickname
       }
     `),
-);
+));
 
-$: ({ id, nickname } = $data);
+let { id, nickname } = $derived($data);
 
 //  $: loading = $securityKeyFragment.__typename === PendingValue;
 
@@ -35,7 +39,7 @@ $: ({ id, nickname } = $data);
 /**
  * delete handler
  */
-let isDeleting = false;
+let isDeleting = $state(false);
 const deleteSecurityKey = graphql(`
     mutation RemoveSecurityKey($id: uuid!) {
       deleteAuthUserSecurityKey(id: $id) {
@@ -128,7 +132,7 @@ const handleDelete = async () => {
   <button
     type="button"
     class="btn-icon  variant-filled-error"
-    on:click={handleDelete}
+    onclick={handleDelete}
     disabled={isDeleting}
   >
     <Trash2 />

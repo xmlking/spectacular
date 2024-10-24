@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { goto } from '$app/navigation';
 import * as m from '$i18n/messages';
 import { searchSubjects } from '$lib/api/search-subjects';
@@ -18,7 +20,11 @@ import { ssp, queryParameters } from 'sveltekit-search-params';
 
 const log = new Logger('policies:search-form:browser');
 
-export let formInitData: SuperValidated<PolicySearch>;
+  interface Props {
+    formInitData: SuperValidated<PolicySearch>;
+  }
+
+  let { formInitData }: Props = $props();
 
 // Variables
 const loadingState = getLoadingState();
@@ -34,7 +40,9 @@ const queryParams = queryParameters(
     debounceHistory: 300, //a new history entry will be created after 300ms of this store not changing
   },
 );
-$: console.log($queryParams);
+run(() => {
+    console.log($queryParams);
+  });
 
 // Search form
 const form = superForm(formInitData, {
@@ -51,7 +59,7 @@ const form = superForm(formInitData, {
 });
 const { form: formData, delayed, allErrors, errors, constraints, message, tainted, posted, submitting, timeout } = form;
 
-let searchForm: HTMLFormElement;
+let searchForm: HTMLFormElement = $state();
 
 const popupSettings: PopupSettings = {
   event: 'focus-click',
@@ -59,8 +67,8 @@ const popupSettings: PopupSettings = {
   placement: 'bottom',
 };
 
-let gqlErrors: PartialGraphQLErrors;
-let subjects: Subject[];
+let gqlErrors: PartialGraphQLErrors = $state();
+let subjects: Subject[] = $state();
 
 // Functions
 async function clearSubject() {
@@ -114,8 +122,10 @@ const onSelect = async (event: CustomEvent<AutocompleteOption<Subject>>) => {
 };
 
 // Reactivity
-$: invalid = $allErrors.length > 0;
-$: loadingState.setFormLoading($delayed);
+let invalid = $derived($allErrors.length > 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <!-- Form Level Errors / Messages -->
@@ -129,10 +139,12 @@ $: loadingState.setFormLoading($delayed);
     slotLead="place-content-start !justify-start"
     slotTrail="place-content-end"
   >
-    <svelte:fragment slot="lead">
-      <ShieldCheckIcon />
-      <h3 class="h3 pl-2 hidden md:block">Policies</h3>
-    </svelte:fragment>
+    {#snippet lead()}
+      
+        <ShieldCheckIcon />
+        <h3 class="h3 pl-2 hidden md:block">Policies</h3>
+      
+      {/snippet}
 
     <div
       class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
@@ -143,37 +155,41 @@ $: loadingState.setFormLoading($delayed);
         <SearchIcon size={17} />
       </div>
       <Form.Field {form} name="subjectDisplayName">
-        <Form.Control let:attrs>
-          <input
-            type="search"
-            class="data-[fs-error]:input-error hidden md:block"
-            placeholder="Subject Display Name"
-            autocomplete="off"
-            spellcheck="false"
-            autocorrect="off"
-            on:change={onChange}
-            on:input={onInput}
-            {...attrs}
-            bind:value={$formData.subjectDisplayName}
-          />
-        </Form.Control>
+        <Form.Control >
+          {#snippet children({ attrs })}
+                    <input
+              type="search"
+              class="data-[fs-error]:input-error hidden md:block"
+              placeholder="Subject Display Name"
+              autocomplete="off"
+              spellcheck="false"
+              autocorrect="off"
+              onchange={onChange}
+              oninput={onInput}
+              {...attrs}
+              bind:value={$formData.subjectDisplayName}
+            />
+                            {/snippet}
+                </Form.Control>
       </Form.Field>
       <Form.Field {form} name="subjectType">
-        <Form.Control let:attrs>
-          <select
-            class="data-[fs-error]:input-error"
-            bind:value={$formData.subjectType}
-            on:change={clearSubject}
-            {...attrs}
-            {...$constraints.subjectType}
-          >
-            <option value="user">User</option>
-            <option value="group">Group</option>
-            <option value="service_account">Service</option>
-            <option value="device">Device</option>
-            <option value="device_pool">D Pool</option>
-          </select>
-        </Form.Control>
+        <Form.Control >
+          {#snippet children({ attrs })}
+                    <select
+              class="data-[fs-error]:input-error"
+              bind:value={$formData.subjectType}
+              onchange={clearSubject}
+              {...attrs}
+              {...$constraints.subjectType}
+            >
+              <option value="user">User</option>
+              <option value="group">Group</option>
+              <option value="service_account">Service</option>
+              <option value="device">Device</option>
+              <option value="device_pool">D Pool</option>
+            </select>
+                            {/snippet}
+                </Form.Control>
       </Form.Field>
     </div>
     <div
@@ -192,13 +208,15 @@ $: loadingState.setFormLoading($delayed);
       />
     </div>
 
-    <svelte:fragment slot="trail">
-      <a
-        href="/policies/create"
-        class="btn variant-filled"
-        data-sveltekit-preload-data="hover">Add Policy</a
-      >
-    </svelte:fragment>
+    {#snippet trail()}
+      
+        <a
+          href="/policies/create"
+          class="btn variant-filled"
+          data-sveltekit-preload-data="hover">Add Policy</a
+        >
+      
+      {/snippet}
   </AppBar>
   <input name="subjectId" bind:value={$formData.subjectId} type="hidden" />
   <input name="limit" bind:value={$formData.limit} type="hidden" />

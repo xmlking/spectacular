@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import {
   MagicSpellTextarea,
@@ -20,7 +22,7 @@ import { onMount } from 'svelte';
 // import { aiSchema } from './schema.js';
 
 const log = new Logger('ai:smart:browser');
-export let data;
+  let { data } = $props();
 
 // Variables
 const toastStore = getToastStore();
@@ -71,7 +73,9 @@ const {
 export const snapshot = { capture, restore };
 
 // Reactivity
-$: loadingState.setFormLoading($delayed);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <div class="page-container">
@@ -89,16 +93,18 @@ $: loadingState.setFormLoading($delayed);
       <section class="p-6 space-y-4">
         <div>
           <Form.Field {form} name="commentOne">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Comment One</Form.Label>
-              <MagicSpellTextarea
-                class="textarea data-[fs-error]:input-error"
-                {...attrs}
-                bind:value={$formData.commentOne}
-                {...$constraints.commentOne}
-                placeholder="It was a dark and stormy night..."
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Comment One</Form.Label>
+                <MagicSpellTextarea
+                  class="textarea data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$formData.commentOne}
+                  {...$constraints.commentOne}
+                  placeholder="It was a dark and stormy night..."
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description class="sr-only"
               >Put Comment One description here</Form.Description
             >
@@ -107,16 +113,18 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div>
           <Form.Field {form} name="commentTwo">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Comment Two</Form.Label>
-              <MagicSpellTextarea
-                class="textarea data-[fs-error]:input-error"
-                {...attrs}
-                bind:value={$formData.commentTwo}
-                {...$constraints.commentTwo}
-                placeholder="It was a dark and stormy night..."
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Comment Two</Form.Label>
+                <MagicSpellTextarea
+                  class="textarea data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$formData.commentTwo}
+                  {...$constraints.commentTwo}
+                  placeholder="It was a dark and stormy night..."
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description class="sr-only"
               >Put Comment Two description here</Form.Description
             >
@@ -125,25 +133,27 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div>
           <Form.Field {form} name="commentThree">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Comment Three</Form.Label>
-              <!-- <MagicSpellTextarea
-                class="textarea data-[fs-error]:input-error"
-                {...attrs}
-                bind:value={$formData.commentThree}
-                {...$constraints.commentThree}
-                placeholder="It was a dark and stormy night..."
-              /> -->
-              <SmartTextarea
-                class="textarea data-[fs-error]:input-error"
-                {...attrs}
-                bind:value={$formData.commentThree}
-                {...$constraints.commentThree}
-                stream={true}
-                placeholder="Write an email to my bank asking them to raise my credit limit from $1,000 to $10,000."
-                context="I'm a long-standing customer."
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Comment Three</Form.Label>
+                <!-- <MagicSpellTextarea
+                  class="textarea data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$formData.commentThree}
+                  {...$constraints.commentThree}
+                  placeholder="It was a dark and stormy night..."
+                /> -->
+                <SmartTextarea
+                  class="textarea data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$formData.commentThree}
+                  {...$constraints.commentThree}
+                  stream={true}
+                  placeholder="Write an email to my bank asking them to raise my credit limit from $1,000 to $10,000."
+                  context="I'm a long-standing customer."
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description class="sr-only"
               >Put Comment Three description here</Form.Description
             >
@@ -153,15 +163,17 @@ $: loadingState.setFormLoading($delayed);
         <div class="grid gap-6 md:grid-cols-3">
           <div>
             <Form.Field {form} name="startDate">
-              <Form.Control let:attrs>
-                <Form.Label class="label">Start Date</Form.Label>
-                <SmartDate
-                  class="textarea data-[fs-error]:input-error"
-                  {...attrs}
-                  bind:value={$formData.startDate}
-                  {...$constraints.startDate}
-                />
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <Form.Label class="label">Start Date</Form.Label>
+                  <SmartDate
+                    class="textarea data-[fs-error]:input-error"
+                    {...attrs}
+                    bind:value={$formData.startDate}
+                    {...$constraints.startDate}
+                  />
+                                              {/snippet}
+                            </Form.Control>
               <Form.Description class="sr-only"
                 >Start Date Desc</Form.Description
               >
@@ -170,28 +182,32 @@ $: loadingState.setFormLoading($delayed);
           </div>
           <div>
             <Form.Field {form} name="endDate">
-              <Form.Control let:attrs>
-                <Form.Label class="label">End Date</Form.Label>
-                <SmartDatePicker
-                  class="textarea data-[fs-error]:input-error"
-                  {...attrs}
-                  bind:startDate={$formData.endDate}
-                  {...$constraints.endDate}
-                />
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <Form.Label class="label">End Date</Form.Label>
+                  <SmartDatePicker
+                    class="textarea data-[fs-error]:input-error"
+                    {...attrs}
+                    bind:startDate={$formData.endDate}
+                    {...$constraints.endDate}
+                  />
+                                              {/snippet}
+                            </Form.Control>
               <Form.Description class="sr-only">End Date Desc</Form.Description>
               <Form.FieldErrors class="data-[fs-error]:text-error-500" />
             </Form.Field>
           </div>
           <div>
             <Form.Field {form} name="specialization">
-              <Form.Control let:attrs>
-                <Form.Label class="label">Provider Specialization</Form.Label>
-                <ComboBox
-                  bind:selected={$formData.specialization}
-                  {...$constraints.commentThree}
-                />
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <Form.Label class="label">Provider Specialization</Form.Label>
+                  <ComboBox
+                    bind:selected={$formData.specialization}
+                    {...$constraints.commentThree}
+                  />
+                                              {/snippet}
+                            </Form.Control>
               <Form.Description class="sr-only"
                 >Provider Specialization Desc</Form.Description
               >
