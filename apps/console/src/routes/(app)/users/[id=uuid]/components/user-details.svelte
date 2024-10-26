@@ -109,9 +109,7 @@ $: {
                   >{$formData.metadata.default_org}</option
                 >
                 {#each [...data.user.allowedOrgs].reverse() as org}
-                  <option value={org.organization}
-                    ><button>{org.organization}</button></option
-                  >
+                  <option value={org.organization}>{org.organization}</option>
                 {/each}
               </select>
               <FieldErrors class="data-fs-[error=true]:bg-red-200" />
@@ -132,7 +130,7 @@ $: {
                   >{$formData.defaultRole}</option
                 >
                 {#each $myorgroles as role}
-                  <option value={role}><button>{role}</button></option>
+                  <option value={role}>{role}</option>
                 {/each}
               </select>
               <FieldErrors class="data-fs-[error=true]:bg-red-200" />
@@ -199,4 +197,4 @@ $: {
   </DebugShell>
 </div>
 
- 
+

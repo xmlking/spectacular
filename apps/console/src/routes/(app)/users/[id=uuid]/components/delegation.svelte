@@ -271,7 +271,7 @@ function handleupdateRoles(role: string, event: Event) {
               <select bind:value={defrole} class="select">
                 <option value={defrole} disabled hidden>{defrole}</option>
                 {#each $updateroles as org}
-                  <option value={org}><button>{org}</button></option>
+                  <option value={org}>{org}</option>
                 {/each}
               </select>
             </label>
@@ -327,7 +327,7 @@ function handleupdateRoles(role: string, event: Event) {
       <span>Organization</span>
       <select bind:value={neworg} class="select">
         {#each filterOrgs as org}
-          <option class="option" value={org}><button>{org}</button></option>
+          <option class="option" value={org}>{org}</option>
         {/each}
       </select>
     </label>

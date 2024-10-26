@@ -8,6 +8,7 @@ Show how this repo is setup via step-by-step guild
 
 Install following CLI tools globally
 
+- [svelte CLI](https://github.com/sveltejs/cli)
 - [tsx](https://github.com/esbuild-kit/tsx) to run _TypeScript_ & _ESM_ files from command-line. This is **NOT** React's [TSX/JSX](https://www.typescriptlang.org/docs/handbook/jsx.html)
 - [hasura-cli](https://hasura.io/docs/latest/hasura-cli/install-hasura-cli/) as GitOps tool for Hasura
 - [dotenv](https://dotenv.run/)
@@ -15,7 +16,7 @@ Install following CLI tools globally
 - [vercel](https://vercel.com/docs/cli)
 
 ```shell
-pnpm add -g tsx
+pnpm add -g sv
 pnpm add -g turbo
 pnpm add -g @dotenv-run/cli
 pnpm add -g vercel
@@ -32,8 +33,11 @@ Install Chrome Plugins
 
 ```shell
 # bun create svelte@latest spectacular && cd $_ && code .
-pnpm create svelte@latest spectacular && cd $_ && code .
-# select `yes` for TypeScript, ESLint, Prettier, Playwright and Vitest
+# pnpm create svelte@latest spectacular && cd $_ && code .
+pnpx sv create --no-install --template minimal spectacular
+# select `yes` for TypeScript, vitest, playwright, tailwindcss and paraglide
+# select all tailwindcss plugins
+# paraglide: Which languages would you like to support?  en,es,de
 ```
 
 Next steps:

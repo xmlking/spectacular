@@ -90,7 +90,7 @@ export const pwSchema = userSchema
     password: true,
   })
   .extend({
-    redirectTo: z.string().default('/dashboard'),
+    redirectTo: z.string().default('/'),
   });
 
 /**
@@ -101,7 +101,7 @@ export const pwlSchema = userSchema
     email: true,
   })
   .extend({
-    redirectTo: z.string().default('/dashboard'),
+    redirectTo: z.string().default('/'),
   });
 
 /**
@@ -118,7 +118,7 @@ export const signUpSchema = userSchema
     organization: true,
   })
   .extend({
-    redirectTo: z.string().default('/dashboard'),
+    redirectTo: z.string().default('/'),
   })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
 export type SignUpSchema = typeof signUpSchema;
