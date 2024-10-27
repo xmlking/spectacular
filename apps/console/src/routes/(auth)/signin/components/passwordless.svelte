@@ -67,7 +67,7 @@ async function waSignin() {
     const { session, error: signInError } = await nhost.auth.signIn({ email: $formData.email, securityKey: true });
     if (session) {
       await invalidateAll();
-      await goto('/dashboard');
+      await goto('/profile');
       handleMessage({ type: 'success', message: 'Signin sucessfull 😎' } as const, toastStore);
     } else {
       log.error(signInError);
