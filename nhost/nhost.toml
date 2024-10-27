@@ -55,6 +55,10 @@ allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:51
 enabled = true
 disableNewUsers = false
 
+# TODO: https://docs.nhost.io/guides/auth/bot-protection
+# [auth.signUp.turnstile]
+# secretKey = 'turnstileSecretKey'
+
 [auth.user]
 [auth.user.roles]
 default = 'user'

@@ -1,5 +1,6 @@
 import { setTimeout } from 'node:timers/promises';
 import { env } from '$env/dynamic/public';
+import { DEFAULT_ORGANIZATION } from '$lib/constants';
 import { showMagicLinkLogin, showSocialLogin } from '$lib/flags';
 import { i18n } from '$lib/i18n';
 import { pwSchema, pwlSchema } from '$lib/schema/user';
@@ -11,7 +12,6 @@ import { fail } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import { DEFAULT_ORGANIZATION } from '$lib/constants';
 
 const log = new Logger('server:auth:signin');
 
@@ -113,8 +113,6 @@ export const actions = {
         { status: 429 },
       );
     }
-
-    await setTimeout(8000);
 
     if (!form.valid) return fail(400, { form });
 

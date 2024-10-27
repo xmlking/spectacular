@@ -4,7 +4,7 @@
 @authEndpoint = {{$dotenv NHOST_AUTH_URL}}
 
 # set token without `''`
-@graphqlUserToken =
+@accessToken =
 ###
 
 
@@ -13,7 +13,7 @@
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-# Authorization: Bearer {{graphqlUserToken}}
+# Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me manager
 x-hasura-default-role: user
@@ -39,7 +39,7 @@ query SearchSecurityKeys($userId: uuid!) {
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-# Authorization: Bearer {{graphqlUserToken}}
+# Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me manager
 x-hasura-default-role: user
@@ -58,11 +58,34 @@ query GetOrganizations {
   }
 }
 
+### Create User
+# @name createUser
+POST {{authEndpoint}}/signup/email-password
+Content-Type: application/json
+
+{
+  "email": "john.smith@gmail.com",
+  "password": "Str0ngPassw#ord-94|%",
+  "options": {
+    "displayName": "John Smith",
+    "locale": "en",
+    "metadata": {
+      "plan": "free",
+      "default_org": "chinthagunta"
+    },
+    "redirectTo": "https://console.traefik.me:5173/dashboard"
+  }
+}
+
+###
+@accessToken = {{createUser.response.body.$.session.accessToken}}
+###
+
 ### Create PAT
 # @name createPAT
 POST {{authEndpoint}}/pat
 Content-Type: application/json
-Authorization: Bearer {{graphqlUserToken}}
+Authorization: Bearer {{accessToken}}
 
 {
   "metadata": {
@@ -80,7 +103,7 @@ Authorization: Bearer {{graphqlUserToken}}
 POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
-# Authorization: Bearer {{graphqlUserToken}}
+# Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me manager
 x-hasura-default-role: user

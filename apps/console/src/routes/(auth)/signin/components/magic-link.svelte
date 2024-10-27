@@ -60,11 +60,11 @@ const {
 export const snapshot = { capture, restore };
 
 // Functions
-async function waSignin() {
+async function mlSignin() {
   if ($errors.email) {
     handleMessage({ type: 'error', message: 'Invalid email' } as const, toastStore);
   } else {
-    const { session, error: signInError } = await nhost.auth.signIn({ email: $formData.email, securityKey: true });
+    const { session, error: signInError } = await nhost.auth.signIn({ email: $formData.email });
     if (session) {
       await invalidateAll();
       await goto('/dashboard');
