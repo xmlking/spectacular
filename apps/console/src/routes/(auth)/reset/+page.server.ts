@@ -55,14 +55,16 @@ export const actions = {
       );
     }
 
-    await sleep(8000);
+    await sleep(2000);
+
+    const origin = new URL(event.url).origin;
 
     if (!form.valid) return fail(400, { form });
     const { email } = form.data;
     const { error } = await nhost.auth.resetPassword({
       email,
       options: {
-        redirectTo: '/profile',
+        redirectTo: `${origin}/profile`,
       },
     });
     if (error) {
