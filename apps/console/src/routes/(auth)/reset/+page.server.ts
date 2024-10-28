@@ -40,22 +40,20 @@ export const actions = {
 
     const form = await superValidate(request, zod(resetPasswordSchema));
 
-    const status = await limiter.check(event);
-    if (status.limited) {
+    const { limited, retryAfter } = await limiter.check(event);
+    if (limited) {
       event.setHeaders({
-        'Retry-After': status.retryAfter.toString(),
+        'Retry-After': retryAfter.toString(),
       });
       return message(
         form,
         {
           type: 'error',
-          message: `Rate limit has been reached. Please retry after ${status.retryAfter} seconds`,
+          message: `Rate limit has been reached. Please retry after ${retryAfter} seconds`,
         },
         { status: 429 },
       );
     }
-
-    await sleep(2000);
 
     const origin = new URL(event.url).origin;
 
