@@ -351,11 +351,10 @@ importers:
         version: link:../../packages/biome-config
 
   apps/smart:
-    dependencies:
+    devDependencies:
       '@inlang/paraglide-sveltekit':
         specifier: 0.11.5
         version: 0.11.5(@sveltejs/kit@2.7.4(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.1.9)(vite@5.4.10(@types/node@22.8.6)))(svelte@5.1.9)(vite@5.4.10(@types/node@22.8.6)))(babel-plugin-macros@3.1.0)(webpack-sources@3.2.3)
-    devDependencies:
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
