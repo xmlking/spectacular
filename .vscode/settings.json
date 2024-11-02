@@ -266,13 +266,47 @@
     "width",
     "zIndex"
   ],
+
+  // ##################################################
+  // ### Biome                                      ###
+  // ### Docs: https://deploy-preview-974--biomejs.netlify.app/reference/vscode/
+  // ##################################################
+  "biome.enabled": false,
+  "biome.experimental.rename": true,
+  "biome.projects": [
+		{
+			"path": "apps/console"
+		},
+		{
+			"path": "apps/docs"
+		},
+		{
+			"path": "apps/web"
+		},
+    {
+			"path": "packages/role-houdini",
+			"configFile": "biome.jsonc"
+		},
+		{
+			"path": "packages/skeleton-ui"
+		},
+		{
+			"path": "packages/smart",
+      "biome.enabled": false,
+		},
+    {
+			"path": "packages/ui"
+		},
+    {
+			"path": "packages/utils"
+		}
+  ],
   // ##################################################
   // ###           Language customisations          ###
   // ##################################################
   // Make sure we're using biomejs for all filetypes
   // Need this because we need to override the default json and svelte formatters that folks might have configured
   "editor.defaultFormatter": "biomejs.biome",
-  "biome.rename": true,
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -292,7 +326,7 @@
     }
   },
   "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
