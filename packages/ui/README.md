@@ -10,7 +10,16 @@ Run this command and select `shadcn` components you want to add/update
 
 ```shell
 cd packages/ui
-pnpm run ui:add --all
+# first time only run `pnpm run sync` this will create `.svelte-kit` folder
+pnpm run sync
+# then run add/update commands
+pnpm run ui:add button # this is command is equal to `pnpm dlx shadcn-svelte@next add button`
+# or 
+pnpm run ui:add --all  # equal to `pnpm dlx shadcn-svelte@next add --all`
+# FIXME : https://github.com/huntabyte/shadcn-svelte/issues/1368
+pnpm run ui:update button
+# or 
+pnpm run ui:update --all # equal to `pnpm dlx shadcn-svelte@next update --all`
 ```
 
 ## TODO
