@@ -15,6 +15,9 @@ const config = {
     alias: {
       $i18n: 'src/i18n',
     },
+    version: {
+      name: process.env.npm_package_version,
+    },
 	},
 
 };

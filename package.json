@@ -48,7 +48,7 @@
     "lint": "manypkg check && biome lint",
     "lint:cspell": "cspell lint -c .vscode/cspell.json **",
     "lint:workspaces": "turbo run lint --parallel --affected",
-    "postinstall": "manypkg check",
+    "postinstall-FIXME": "manypkg check",
     "prepare": "./scripts/init.sh",
     "prerelease": "pnpm clean && pnpm install && turbo run build lint test --affected",
     "test": "turbo run test --parallel --affected",

@@ -101,7 +101,7 @@
     "test:unit:coverage": {
       "dependsOn": ["sync", "^test:unit:coverage"]
     },
-    "test:integration": {
+    "test:e2e": {
       "dependsOn": ["build"]
     },
     "lang:lint": {},
