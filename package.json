@@ -25,7 +25,10 @@
     "url": "https://github.com/xmlking/spectacular.git"
   },
   "license": "MIT",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "//": "For tasks that you run frequently, you can write your turbo commands directly into your root package.json.",
     "build": "turbo run build --affected",
@@ -61,7 +64,7 @@
     "@markuplint/svelte-parser": "4.7.2",
     "@spectacular/biome-config": "workspace:*",
     "@spectacular/typescript-config": "workspace:*",
-    "cspell": "8.15.6",
+    "cspell": "8.15.7",
     "husky": "9.1.6",
     "lint-staged": "15.2.10",
     "markuplint": "4.11.2",
@@ -80,6 +83,8 @@
   },
   "manypkg": {
     "defaultBranch": "main",
-    "ignoredRules": ["ROOT_HAS_DEV_DEPENDENCIES"]
+    "ignoredRules": [
+      "ROOT_HAS_DEV_DEPENDENCIES"
+    ]
   }
 }
