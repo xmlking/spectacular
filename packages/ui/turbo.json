@@ -1,25 +1,17 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "extends": [
-    "//"
-  ],
+  "extends": ["//"],
   "tasks": {
     "ui:add": {
       "persistent": true,
-      "dependsOn": [
-        "sync"
-      ]
+      "dependsOn": ["sync"]
     },
     "ui:update": {
       "persistent": true,
-      "dependsOn": [
-        "sync"
-      ]
+      "dependsOn": ["sync"]
     },
     "sync": {
-      "outputs": [
-        ".svelte-kit"
-      ]
+      "outputs": [".svelte-kit"]
     }
   }
 }
