@@ -10,5 +10,5 @@ export const i18n = createI18n(runtime, {
     en: 'ltr',
     es: 'ltr',
     de: 'ltr',
-  }
+  },
 });

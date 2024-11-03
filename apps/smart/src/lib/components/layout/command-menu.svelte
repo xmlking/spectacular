@@ -1,34 +1,34 @@
 <script lang="ts">
-	import Circle from "svelte-radix/Circle.svelte";
-	import File from "svelte-radix/File.svelte";
-	import Laptop from "svelte-radix/Laptop.svelte";
-	import Moon from "svelte-radix/Moon.svelte";
-	import Sun from "svelte-radix/Sun.svelte";
-	import type { ComponentProps } from "svelte";
-	import { resetMode, setMode } from "mode-watcher";
-	import * as Command from "@spectacular/ui/components/command";
-	import { Button } from "@spectacular/ui/components/button";
-	import { cn } from "$lib/utils.js";
-	import { docsConfig } from "$lib/config/docs.js";
+import Circle from 'svelte-radix/Circle.svelte';
+import File from 'svelte-radix/File.svelte';
+import Laptop from 'svelte-radix/Laptop.svelte';
+import Moon from 'svelte-radix/Moon.svelte';
+import Sun from 'svelte-radix/Sun.svelte';
+import type { ComponentProps } from 'svelte';
+import { resetMode, setMode } from 'mode-watcher';
+import * as Command from '@spectacular/ui/components/command';
+import { Button } from '@spectacular/ui/components/button';
+import { cn } from '$lib/utils.js';
+import { docsConfig } from '$lib/config/docs.js';
 
-	let restProps: ComponentProps<typeof Button> = $props();
+let restProps: ComponentProps<typeof Button> = $props();
 
-	let open = $state(false);
+let open = $state(false);
 
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-			e.preventDefault();
-			open = true;
-		}
-	}
+function handleKeydown(e: KeyboardEvent) {
+  if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+    e.preventDefault();
+    open = true;
+  }
+}
 
-	function runCommand(cmd: () => void) {
-		open = false;
-		cmd();
-	}
+function runCommand(cmd: () => void) {
+  open = false;
+  cmd();
+}
 
-	const mainNav = docsConfig.mainNav.filter((item) => !item.external);
-	const sidebarNav = docsConfig.sidebarNav;
+const mainNav = docsConfig.mainNav.filter((item) => !item.external);
+const sidebarNav = docsConfig.sidebarNav;
 </script>
 
 <svelte:document onkeydown={handleKeydown} />

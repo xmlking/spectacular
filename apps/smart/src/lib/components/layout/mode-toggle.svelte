@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Moon from "svelte-radix/Moon.svelte";
-	import Sun from "svelte-radix/Sun.svelte";
-	import { resetMode, setMode } from "mode-watcher";
-	import * as DropdownMenu from "@spectacular/ui/components/dropdown-menu";
-  import { buttonVariants } from "@spectacular/ui/components/button";
-	import { cn } from "$lib/utils.js";
+import Moon from 'svelte-radix/Moon.svelte';
+import Sun from 'svelte-radix/Sun.svelte';
+import { resetMode, setMode } from 'mode-watcher';
+import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
+import { buttonVariants } from '@spectacular/ui/components/button';
+import { cn } from '$lib/utils.js';
 </script>
 
 <DropdownMenu.Root>

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { SVGAttributes } from "svelte/elements";
+import type { SVGAttributes } from 'svelte/elements';
 
-	let restProps: SVGAttributes<SVGElement> = $props();
+let restProps: SVGAttributes<SVGElement> = $props();
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="100pt" height="100pt" version="1.1" viewBox="0 0 100 100"  {...restProps}>

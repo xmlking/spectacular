@@ -1,18 +1,18 @@
-import type { Component } from "svelte";
+import type { Component } from 'svelte';
 
 export type NavItem = {
-	title: string;
-	href?: string;
-	disabled?: boolean;
-	external?: boolean;
-	icon?: Component;
-	label?: string;
+  title: string;
+  href?: string;
+  disabled?: boolean;
+  external?: boolean;
+  icon?: Component;
+  label?: string;
 };
 
 export type SidebarNavItem = NavItem & {
-	items: SidebarNavItem[];
+  items: SidebarNavItem[];
 };
 
 export type NavItemWithChildren = NavItem & {
-	items: NavItemWithChildren[];
+  items: NavItemWithChildren[];
 };

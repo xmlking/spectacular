@@ -1,8 +1,8 @@
 <script lang="ts">
-  import AppSidebar from "$lib/components/layout/app-sidebar.svelte";
-  import * as Breadcrumb from "@spectacular/ui/components/breadcrumb";
-  import { Separator } from "@spectacular/ui/components/separator";
-  import * as Sidebar from "@spectacular/ui/components/sidebar";
+import AppSidebar from '$lib/components/layout/app-sidebar.svelte';
+import * as Breadcrumb from '@spectacular/ui/components/breadcrumb';
+import { Separator } from '@spectacular/ui/components/separator';
+import * as Sidebar from '@spectacular/ui/components/sidebar';
 </script>
 
 <svelte:head>

@@ -6,18 +6,18 @@ export function languageTagToHumanReadable(
   return displayNames.of(languageTag);
 }
 
- /**
-  * in-source testing
-  * RUN: turbo run test --filter=@spectacular/smart
-  */
+/**
+ * in-source testing
+ * RUN: turbo run test --filter=@spectacular/smart
+ */
 if (import.meta.vitest) {
-  const { it, expect } = import .meta.vitest;
+  const { it, expect } = import.meta.vitest;
 
   it('test languageTagToHumanReadable', async () => {
-    expect(languageTagToHumanReadable("ja", "en")).toEqual("Japanese");
-    expect(languageTagToHumanReadable("zh", "en")).toEqual("Chinese");
-    expect(languageTagToHumanReadable("zh-Hant", "en")).toEqual("Traditional Chinese");
-    expect(languageTagToHumanReadable("zh-TW", "en")).toEqual("Chinese (Taiwan)");
-    expect(languageTagToHumanReadable("en", "ja")).toEqual("英語");
-  })
+    expect(languageTagToHumanReadable('ja', 'en')).toEqual('Japanese');
+    expect(languageTagToHumanReadable('zh', 'en')).toEqual('Chinese');
+    expect(languageTagToHumanReadable('zh-Hant', 'en')).toEqual('Traditional Chinese');
+    expect(languageTagToHumanReadable('zh-TW', 'en')).toEqual('Chinese (Taiwan)');
+    expect(languageTagToHumanReadable('en', 'ja')).toEqual('英語');
+  });
 }

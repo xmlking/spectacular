@@ -1,16 +1,16 @@
 <script lang="ts">
-	import * as DropdownMenu from "@spectacular/ui/components/dropdown-menu";
-	import * as Sidebar from "@spectacular/ui/components/sidebar";
-	import { useSidebar } from "@spectacular/ui/components/sidebar";
-	import ChevronsUpDown from "lucide-svelte/icons/chevrons-up-down";
-	import Plus from "lucide-svelte/icons/plus";
+import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
+import * as Sidebar from '@spectacular/ui/components/sidebar';
+import { useSidebar } from '@spectacular/ui/components/sidebar';
+import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
+import Plus from 'lucide-svelte/icons/plus';
 
-	// This should be `Component` after lucide-svelte updates types
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	let { teams }: { teams: { name: string; logo: any; plan: string }[] } = $props();
-	const sidebar = useSidebar();
+// This should be `Component` after lucide-svelte updates types
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let { teams }: { teams: { name: string; logo: any; plan: string }[] } = $props();
+const sidebar = useSidebar();
 
-	let activeTeam = $state(teams[0]);
+let activeTeam = $state(teams[0]);
 </script>
 
 <Sidebar.Menu>
