@@ -1,8 +1,12 @@
+import { fontFamily } from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
-// eslint-disable-next-line import/named
-import { fontFamily } from 'tailwindcss/defaultTheme.js';
+import aspectRatio from '@tailwindcss/aspect-ratio';
+import containerQueries from '@tailwindcss/container-queries';
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
-export default {
+const config: Config = {
   darkMode: ['class'],
   content: ['./src/**/*.{html,js,svelte,ts}', '../../packages/ui/src/components/**/*.{svelte,ts}'],
   safelist: ['dark'],
@@ -49,8 +53,19 @@ export default {
           DEFAULT: 'hsl(var(--card) / <alpha-value>)',
           foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
         },
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar-background))',
+          foreground: 'hsl(var(--sidebar-foreground))',
+          primary: 'hsl(var(--sidebar-primary))',
+          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+          accent: 'hsl(var(--sidebar-accent))',
+          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+          border: 'hsl(var(--sidebar-border))',
+          ring: 'hsl(var(--sidebar-ring))',
+        },
       },
       borderRadius: {
+        xl: 'calc(var(--radius) + 4px)',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
@@ -58,6 +73,28 @@ export default {
       fontFamily: {
         sans: [...fontFamily.sans],
       },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+        'caret-blink': {
+          '0%,70%,100%': { opacity: '1' },
+          '20%,50%': { opacity: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'caret-blink': 'caret-blink 1.25s ease-out infinite',
+      },
     },
   },
-} satisfies Config;
+  plugins: [typography, forms, containerQueries, aspectRatio, tailwindcssAnimate],
+};
+
+export default config;

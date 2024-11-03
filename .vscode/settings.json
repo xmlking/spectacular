@@ -269,37 +269,36 @@
 
   // ##################################################
   // ### Biome                                      ###
-  // ### Docs: https://deploy-preview-974--biomejs.netlify.app/reference/vscode/
   // ##################################################
   "biome.enabled": false,
   "biome.experimental.rename": true,
   "biome.projects": [
-		{
-			"path": "apps/console"
-		},
-		{
-			"path": "apps/docs"
-		},
-		{
-			"path": "apps/web"
-		},
     {
-			"path": "packages/role-houdini",
-			"configFile": "biome.jsonc"
-		},
-		{
-			"path": "packages/skeleton-ui"
-		},
-		{
-			"path": "packages/smart",
-      "biome.enabled": false,
-		},
+      "path": "apps/console"
+    },
     {
-			"path": "packages/ui"
-		},
+      "path": "apps/docs"
+    },
     {
-			"path": "packages/utils"
-		}
+      "path": "apps/web"
+    },
+    {
+      "path": "packages/role-houdini",
+      "configFile": "biome.jsonc"
+    },
+    {
+      "path": "packages/skeleton-ui"
+    },
+    {
+      "path": "packages/smart",
+      "biome.enabled": false
+    },
+    {
+      "path": "packages/ui"
+    },
+    {
+      "path": "packages/utils"
+    }
   ],
   // ##################################################
   // ###           Language customisations          ###

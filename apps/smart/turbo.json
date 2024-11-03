@@ -1,0 +1,112 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "check:watch": {
+      "persistent": true,
+      "outputs": [".svelte-kit/**"]
+    },
+    "check": {
+      "outputs": [".svelte-kit/**"]
+    },
+    "sync": {
+      "outputs": [".svelte-kit/**"]
+    },
+    "sync:production": {
+      "outputs": [".svelte-kit/**"]
+    },
+    "dev": {
+      "dependsOn": ["generate"],
+      "outputLogs": "new-only",
+      "cache": false, // No outputs will be cached
+      "persistent": true,
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
+    },
+    "dev:debug": {
+      "dependsOn": ["generate"],
+      "cache": false,
+      "persistent": true,
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
+    },
+    "dev:production": {
+      "dependsOn": ["generate:production"],
+      "cache": false,
+      "persistent": true,
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.production", ".secrets", ".secrets.production"]
+    },
+    "generate": {
+      "dependsOn": ["sync", "@spectacular/role-houdini#build"],
+      "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
+    },
+    "generate:production": {
+      "dependsOn": ["sync:production", "@spectacular/role-houdini#build"],
+      "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
+    },
+    "build": {
+      "dependsOn": ["generate", "^build"],
+      // Consider all default inputs except the package's README
+      "inputs": ["$TURBO_DEFAULT$", "!README.md"],
+      // File outputs will be cached
+      "outputs": [
+        "build/**",
+        "dist/**",
+        ".vercel/output/**",
+        ".svelte-kit/**",
+        "$houdini/**",
+        "schema.graphql",
+        "src/i18n"
+      ],
+      "env": [
+        "VERCEL",
+        "VERCEL_URL",
+        "VERCEL_ENV",
+        "FLAGS_SECRET",
+        "RATE_LIMIT_SECRET",
+        "BUILD_VERSION",
+        "BUILD_TIME",
+        "BUN_ENV",
+        "SW_DEV",
+        "GCP_BUILDPACKS",
+        "OPENAI_ORG_ID",
+        "OPENAI_PROJECT_ID",
+        "OPENAI_API_KEY",
+        "PUBLIC_*",
+        "npm_package_version"
+      ]
+    },
+    "build:production": {
+      "dependsOn": ["generate:production", "^build"],
+      "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
+      "env": [
+        "VERCEL",
+        "VERCEL_URL",
+        "VERCEL_ENV",
+        "FLAGS_SECRET",
+        "BUILD_VERSION",
+        "BUILD_TIME",
+        "BUN_ENV",
+        "SW_DEV",
+        "GCP_BUILDPACKS",
+        "OPENAI_ORG_ID",
+        "OPENAI_PROJECT_ID",
+        "OPENAI_API_KEY",
+        "PUBLIC_*",
+        "npm_package_version"
+      ]
+    },
+    "preview": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:unit:coverage": {
+      "dependsOn": ["sync", "^test:unit:coverage"]
+    },
+    "test:e2e": {
+      "dependsOn": ["build"]
+    },
+    "lang:lint": {},
+    "lang:validate": {},
+    "lang:translate": {},
+    "lang:studio": {}
+  }
+}
