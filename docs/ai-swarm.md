@@ -44,6 +44,10 @@ Chat UI Features
 
 Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI components and Vercel [AI-Swarm SDK](https://github.com/vercel/ai/tree/main/packages/swarm) for backend
 
+## TODO
+
+- [Natural Language PostgreSQL](https://github.com/vercel-labs/natural-language-postgres), [Demo](https://natural-language-postgres.vercel.app/)
+
 ## References
 
 - <https://x.com/blazity/status/1852380275981893952>

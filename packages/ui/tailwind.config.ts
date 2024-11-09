@@ -1,6 +1,6 @@
 import { fontFamily } from 'tailwindcss/defaultTheme.js';
 import type { Config } from 'tailwindcss';
-import aspectRatio from '@tailwindcss/aspect-ratio';
+// import aspectRatio from '@tailwindcss/aspect-ratio';// HINT: this will win TW native aspect-ratio. never add it.
 import containerQueries from '@tailwindcss/container-queries';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
@@ -94,7 +94,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [typography, forms, containerQueries, aspectRatio, tailwindcssAnimate],
+  plugins: [typography, forms, containerQueries, tailwindcssAnimate],
 };
 
 export default config;

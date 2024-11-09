@@ -30,9 +30,9 @@ $effect(() => {
 	<AppSidebar />
 	<Sidebar.Inset>
 		<AppHeader />
-		<main class="flex flex-1 flex-col gap-4 p-4 pt-0">
+		<div class="flex flex-1 flex-col gap-4 p-4 pt-0">
 			{@render children?.()}
-		</main>
+		</div>
 		<AppFooter />
 	</Sidebar.Inset>
 </Sidebar.Provider>
