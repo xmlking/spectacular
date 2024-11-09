@@ -844,8 +844,8 @@ importers:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
       bits-ui:
-        specifier: 1.0.0-next.39
-        version: 1.0.0-next.39(svelte@5.1.9)
+        specifier: 1.0.0-next.46
+        version: 1.0.0-next.46(svelte@5.1.9)
       cssnano:
         specifier: 7.0.6
         version: 7.0.6(postcss@8.4.47)
@@ -889,8 +889,8 @@ importers:
         specifier: 5.6.3
         version: 5.6.3
       vaul-svelte:
-        specifier: 1.0.0-next.1
-        version: 1.0.0-next.1(svelte@5.1.9)
+        specifier: 1.0.0-next.2
+        version: 1.0.0-next.2(svelte@5.1.9)
       vite:
         specifier: 5.4.10
         version: 5.4.10(@types/node@22.8.7)
@@ -3738,6 +3738,12 @@ packages:
 
   bits-ui@1.0.0-next.39:
     resolution: {integrity: sha512-pG05LtgSuUAFETQX6NjIwgk79PQd77QxrxbFrf1N/p8TRZFZ3LdT9bVLVRbdwouU+v/urkCsGwM1bd9Oyyretg==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
+    peerDependencies:
+      svelte: ^5.0.0-next.1
+
+  bits-ui@1.0.0-next.46:
+    resolution: {integrity: sha512-ATEyY4z3amOA5C3E7GsiV5H5kPpaNldrclDfDI0iUY6NfNJwNEv44crYlLNEyU8rBkSOGpQfonpwMp/mhtYoDQ==}
     engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
       svelte: ^5.0.0-next.1
@@ -7778,6 +7784,12 @@ packages:
 
   vaul-svelte@1.0.0-next.1:
     resolution: {integrity: sha512-HdKT5ha0FG1ZpJTtl9LjkwHhhdDlgoAr86lPQbiS1PfrjmrXwWG/hXXk/RMJWDJfAcy1lI9wdo+jt2l6hJ6asA==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
+    peerDependencies:
+      svelte: ^5.0.0
+
+  vaul-svelte@1.0.0-next.2:
+    resolution: {integrity: sha512-/SjvMvStOMwTnGsQAn+yP0bbQUufb3ZXu8MdnLeQCB33wCZ1ilCPa92DHx1EDhIlVTbiOitwhWp/zaHw/U3OqA==}
     engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
       svelte: ^5.0.0
@@ -11866,6 +11878,16 @@ snapshots:
       svelte-toolbelt: 0.4.6(svelte@5.1.9)
 
   bits-ui@1.0.0-next.39(svelte@5.1.9):
+    dependencies:
+      '@floating-ui/core': 1.6.8
+      '@floating-ui/dom': 1.6.12
+      '@internationalized/date': 3.5.6
+      esm-env: 1.1.4
+      runed: 0.15.3(svelte@5.1.9)
+      svelte: 5.1.9
+      svelte-toolbelt: 0.4.6(svelte@5.1.9)
+
+  bits-ui@1.0.0-next.46(svelte@5.1.9):
     dependencies:
       '@floating-ui/core': 1.6.8
       '@floating-ui/dom': 1.6.12
@@ -16675,6 +16697,12 @@ snapshots:
   vaul-svelte@1.0.0-next.1(svelte@5.1.9):
     dependencies:
       bits-ui: 1.0.0-next.28(svelte@5.1.9)
+      svelte: 5.1.9
+      svelte-toolbelt: 0.4.6(svelte@5.1.9)
+
+  vaul-svelte@1.0.0-next.2(svelte@5.1.9):
+    dependencies:
+      bits-ui: 1.0.0-next.46(svelte@5.1.9)
       svelte: 5.1.9
       svelte-toolbelt: 0.4.6(svelte@5.1.9)
 
