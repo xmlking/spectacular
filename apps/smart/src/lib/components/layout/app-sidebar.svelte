@@ -9,6 +9,8 @@ import GalleryVerticalEnd from 'lucide-svelte/icons/gallery-vertical-end';
 import Map from 'lucide-svelte/icons/map';
 import Settings2 from 'lucide-svelte/icons/settings-2';
 import SquareTerminal from 'lucide-svelte/icons/square-terminal';
+import Sparkles from 'lucide-svelte/icons/sparkles';
+import FlaskRound from 'lucide-svelte/icons/flask-round';
 
 // This is sample data.
 const data = {
@@ -52,6 +54,44 @@ const data = {
         {
           title: 'Settings',
           url: '#',
+        },
+      ],
+    },
+    {
+      title: 'Smart',
+      url: '#',
+      icon: Sparkles,
+      items: [
+        {
+          title: 'Debounce',
+          url: '/examples/debounce',
+        },
+        {
+          title: 'Hover',
+          url: '/examples/hover',
+        },
+        {
+          title: 'ClickOutside',
+          url: '/examples/click-outside',
+        },
+      ],
+    },
+    {
+      title: 'Examples',
+      url: '#',
+      icon: FlaskRound,
+      items: [
+        {
+          title: 'Debounce',
+          url: '/examples/debounce',
+        },
+        {
+          title: 'Hover',
+          url: '/examples/hover',
+        },
+        {
+          title: 'ClickOutside',
+          url: '/examples/click-outside',
         },
       ],
     },

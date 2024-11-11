@@ -306,7 +306,7 @@ Snippets, along with render tags, help create reusable chunks of markup inside y
 <table>
 	<thead>
 		<tr>
-			{@render children()}
+			{@render children?.()}
 		</tr>
 	</thead>
 	<!-- table body -->
@@ -436,7 +436,7 @@ In Svelte 5, event handlers are treated as properties, simplifying their use and
 </script>
 
 <button {onclick}>
-	{@render children()}
+	{@render children?.()}
 </button>
 ```
 
@@ -448,7 +448,7 @@ In Svelte 5, event handlers are treated as properties, simplifying their use and
 </script>
 
 <button {...props}>
-	{@render children()}
+	{@render children?.()}
 </button>
 ```
 

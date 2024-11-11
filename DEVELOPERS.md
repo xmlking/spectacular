@@ -32,10 +32,10 @@ The repository is organized as a monorepo, with the following structure (only re
 assets/            # Assets used in the README
 docs/              # Developer Documentation
 apps/
-	web/           # Dashboard WebApp
-	docs/          # Documentation website
-	playground/    # App to explore new experemental features
-	offline/        # local-first/offline-first demo app
+ web/              # Dashboard WebApp
+ docs/             # Documentation website
+ smart/            # AI experemental features
+ offline/           # local-first/offline-first demo app
 patches/           # pnpm patched dependencies
 packages/          # Core packages
 integrations/      # These are packages that rely on the core packages
@@ -54,8 +54,8 @@ git clone https://github.com/xmlking/spectacular.git
 Then, install the dependencies with `pnpm`:
 
 ```sh
-$ cd spectacular
-$ pnpm install
+cd spectacular
+pnpm install
 ```
 
 ### Development
@@ -65,7 +65,7 @@ Although package references are correctly updated on the fly for TypeScript, exa
 Running packages in development mode from the root folder is as simple as:
 
 ```sh
-$ turbo dev --filter=@spectacular/web -- --open
+turbo dev --filter=@spectacular/web -- --open
 ```
 
 Our packages are linked together using [PNPM's workspace](https://pnpm.io/workspaces) feature. Next.js and Vite automatically detect changes in the dependencies and rebuild everything, so the changes will be reflected in the examples and the dashboard.
@@ -86,7 +86,7 @@ $ turbo dev --filter=@spectacular/docs
 You can run the unit tests with the following command from the repository root:
 
 ```sh
-$ turbo test:unit  --filter=@spectacular/web...
+turbo test:unit  --filter=@spectacular/web...
 ```
 
 ### E2E Tests
@@ -96,7 +96,7 @@ Each package that defines end-to-end tests embeds their own Spectacular configur
 You can run the e2e tests with the following command from the repository root:
 
 ```sh
-$ turbo test:integration  --filter=@spectacular/web...
+turbo test:integration  --filter=@spectacular/web...
 ```
 
 ## Changesets
@@ -107,7 +107,7 @@ We use [changesets](https://github.com/changesets/changesets) to support our ver
 To create a changeset, run the following command from the repository root:
 
 ```sh
-$ pnpm changeset
+pnpm changeset
 ```
 
 This command will guide you through the process of creating a changeset. It will create a file in the `.changeset` directory.

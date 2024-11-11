@@ -68,6 +68,7 @@ Awesome **SvelteKit** Links
 - Icons
 
   - [Lucide Svelte](https://lucide.dev/guide/packages/lucide-svelte) is the Svelte implementation of [Lucide](https://lucide.dev/) Icons.
+  - [Moving Icons](https://www.movingicons.dev/)- collection of smooth, animated icons, built with [lucide](https://lucide.dev/)
   - [flowbite-svelte-icons](https://github.com/themesberg/flowbite-svelte-icons) 480+ SVG [Flowbite icons](https://flowbite.com/icons/) components for Svelte. list of icon [names](https://flowbite-svelte-icons.vercel.app/icons)
   - [heroicons](https://heroicons.com/) Icons via [svelte-heros-v2](https://github.com/shinokada/svelte-heros-v2) Icon Components. list of icon [names](https://svelte-heros-v2.vercel.app/outline)
 
@@ -84,6 +85,7 @@ Awesome **SvelteKit** Links
 - CMS
 
   - [editable-website](https://github.com/michael/editable-website) A SvelteKit template for building CMS-free editable websites. Try [DEMO](https://editable.website)
+  - [Svedit](https://svedit.vercel.app/) : Svedit (think Svelte Edit) - A rich content editor for Svelte 5
 
 - Backend
 
@@ -93,6 +95,7 @@ Awesome **SvelteKit** Links
 - General
   - [Svelte Hover Draw SVG](https://github.com/davipon/svelte-hover-draw-svg)
   - [Draggable Sections](https://github.com/TIKramer/svelte-section-list)
+  - [SvelteDnD](https://github.com/thisuxhq/SvelteDnD) - A lightweight, flexible drag and drop library for Svelte 5 applications.
   - [svelte-splitpanes](https://github.com/orefalo/svelte-splitpanes), [docs](https://orefalo.github.io/svelte-splitpanes/)
 
 ## Animation
@@ -194,7 +197,7 @@ Awesome **SvelteKit** Links
 - _Building Efficient, Resilient Web Apps With SvelteKit:_ [Blog](https://geoffrich.net/posts/thatconf-2023/), [Deck](https://thatconf-slides-2023.vercel.app/), [Repo](https://github.com/geoffrich/sveltunes)
 -
 
-## FQA
+## FAQ
 
 - External Links
 
@@ -215,6 +218,10 @@ Awesome **SvelteKit** Links
 - How to fix `Cross-site POST form submissions are forbidden` aks CSRF
 
   Add ORIGIN Env Variable i.e., `ORIGIN=http://localhost:3000 node build/index.js`
+
+- How to Document Svelte **components**, **actions** and **functions**?
+
+  - Follow Video and guide from: [Document Svelte Projects with HTML and JSDoc Comments](https://blog.robino.dev/posts/doc-comments-svelte)
 
 - How to make SvelteKit WebApp as PWA
 

@@ -9,12 +9,17 @@ import AppHeader from '$lib/components/layout/app-header.svelte';
 import AppSidebar from '$lib/components/layout/app-sidebar.svelte';
 import AppFooter from '$lib/components/layout/app-footer.svelte';
 import * as Sidebar from '@spectacular/ui/components/sidebar';
+import type { Snippet } from 'svelte';
 
 import { updateTheme } from '$lib/utils.js';
 import { config } from '$lib/stores/index.js';
 import '../app.pcss';
 
-let { children } = $props();
+  type Props = {
+    children?: Snippet;
+  };
+
+let { children }: Props = $props();
 
 $effect(() => {
   updateTheme($config.theme, $page.url.pathname);
