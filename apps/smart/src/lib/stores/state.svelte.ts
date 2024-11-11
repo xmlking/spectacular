@@ -11,21 +11,18 @@ export const rune = <T>(initialValue?: T) => {
     },
     set value(v: T) {
       _state = v;
-    }
+    },
   };
 };
 
 // writable store context
-export const useWritable = <T>(name: string, initialValue?: T) =>
-  useSharedStore(name, writable, initialValue);
+export const useWritable = <T>(name: string, initialValue?: T) => useSharedStore(name, writable, initialValue);
 
 // readable store context
-export const useReadable = <T>(name: string, initialValue?: T) =>
-  useSharedStore(name, readable, initialValue);
+export const useReadable = <T>(name: string, initialValue?: T) => useSharedStore(name, readable, initialValue);
 
 // Shared rune context
-export const useState = <T>(name: string, initialValue?: T) =>
-  useSharedStore(name, rune, initialValue);
+export const useState = <T>(name: string, initialValue?: T) => useSharedStore(name, rune, initialValue);
 
 /*
 // in stores.ts

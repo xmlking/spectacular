@@ -7,9 +7,7 @@ export const useSharedStore = <T, A>(name: string, fn: (value?: A) => T, initial
     return getContext<T>(name);
   }
   if (initialValue === undefined) {
-    throw new Error(
-      `Readable store "${name}" is not found, or is being created without initialValue.`
-    );
+    throw new Error(`Readable store "${name}" is not found, or is being created without initialValue.`);
   }
   const _value = fn(initialValue);
   return setContext(name, _value);

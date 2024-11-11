@@ -1,15 +1,14 @@
 <svelte:options runes={true} />
 <script lang="ts">
-  import { clickOutside } from "$lib/actions";
-  let counter = $state(0);
-  let second: HTMLElement
-  let third: HTMLElement
-  let include = [third]
+import { clickOutside } from '$lib/actions';
+let counter = $state(0);
+let second: HTMLElement;
+let third: HTMLElement;
+let include = [third];
 
-  function onClickOutside() {
-    counter++
-  }
-
+function onClickOutside() {
+  counter++;
+}
 </script>
 
 <h1 class="h1"> Svelte Action: click ourside demo</h1>

@@ -15,9 +15,9 @@ import { updateTheme } from '$lib/utils.js';
 import { config } from '$lib/stores/index.js';
 import '../app.pcss';
 
-  type Props = {
-    children?: Snippet;
-  };
+type Props = {
+  children?: Snippet;
+};
 
 let { children }: Props = $props();
 

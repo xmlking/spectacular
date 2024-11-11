@@ -1,4 +1,3 @@
-
 // Cookie Names
 export const NHOST_SESSION_KEY = 'nhostSession';
 
@@ -29,4 +28,3 @@ export const MAX_RETRIES = 3;
  * @constant
  */
 export const TIMEOUT = 5000;
-

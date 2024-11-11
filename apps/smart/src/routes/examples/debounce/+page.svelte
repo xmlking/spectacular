@@ -1,8 +1,7 @@
 <svelte:options runes={true} />
 <script lang="ts">
-  import { debounce } from "$lib/actions";
-  let debouncedValue = $state('');
-
+import { debounce } from '$lib/actions';
+let debouncedValue = $state('');
 </script>
 
 <h1> Svelte Action: debounced input demo</h1>

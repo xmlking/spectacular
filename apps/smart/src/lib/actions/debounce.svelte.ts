@@ -1,16 +1,16 @@
 import { on } from 'svelte/events';
-import type { Action } from "svelte/action";
+import type { Action } from 'svelte/action';
 
 type Options = {
-    delay?: number;
-    eventTypeToDebounce?: string;
+  delay?: number;
+  eventTypeToDebounce?: string;
 };
 
 type Attributes = {
-  'on:debounced'?: (event: InputEvent & { currentTarget: HTMLInputElement }) => void
-}
+  'on:debounced'?: (event: InputEvent & { currentTarget: HTMLInputElement }) => void;
+};
 
-type DebounceAction = Action<HTMLInputElement, Options | undefined, Attributes>
+type DebounceAction = Action<HTMLInputElement, Options | undefined, Attributes>;
 
 /**
  * Svelte action that debounces an event.
@@ -34,26 +34,24 @@ type DebounceAction = Action<HTMLInputElement, Options | undefined, Attributes>
  * <p>Debounced value: {debouncedValue}</p>
  * ```
  */
-export const debounce: DebounceAction = (node, _options = {} ) => {
-  const options = { delay: 300, eventTypeToDebounce: 'input', ..._options }
+export const debounce: DebounceAction = (node, _options = {}) => {
+  const options = { delay: 300, eventTypeToDebounce: 'input', ..._options };
 
   let timeoutId: ReturnType<typeof setTimeout>;
 
   const handleDebounce = (event: Event) => {
     timeoutId && clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
-        node.dispatchEvent(new CustomEvent("debounced", event));
+      node.dispatchEvent(new CustomEvent('debounced', event));
     }, options.delay);
   };
 
   $effect(() => {
-    const listener = on(node,options.eventTypeToDebounce, handleDebounce);
+    const listener = on(node, options.eventTypeToDebounce, handleDebounce);
 
     return () => {
       clearTimeout(timeoutId);
       listener();
     };
   });
-
-
 };

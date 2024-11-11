@@ -15,19 +15,31 @@ import type { Action } from 'svelte/action';
  *```
  */
 // https://github.com/nikolai-cc/svu/blob/main/src/lib/action/clipboard.ts
-const smart_past: Action<HTMLFormElement, null, { onpast: (e: CustomEvent) => void; onerror: (e: ErrorEvent) => void; }> = (node) => {
+const smart_past: Action<
+  HTMLFormElement,
+  null,
+  { onpast: (e: CustomEvent) => void; onerror: (e: ErrorEvent) => void }
+> = (node) => {
   // the node has been mounted in the DOM
 
   $effect(() => {
     // setup goes here
-    node.dispatchEvent(new CustomEvent('onpast', {detail: {a: 1, b:2}, composed: false, bubbles: true}));
+    node.dispatchEvent(new CustomEvent('onpast', { detail: { a: 1, b: 2 }, composed: false, bubbles: true }));
 
-    node.dispatchEvent(new ErrorEvent('error', { message : 'A monkey is throwing bananas at me!', error : new Error('AAAHHHH'), lineno : 402, composed: false, bubbles: true}));
+    node.dispatchEvent(
+      new ErrorEvent('error', {
+        message: 'A monkey is throwing bananas at me!',
+        error: new Error('AAAHHHH'),
+        lineno: 402,
+        composed: false,
+        bubbles: true,
+      }),
+    );
 
     return () => {
       // teardown goes here
     };
   });
-}
+};
 
 // for (const el of formElement.querySelectorAll<HTMLInputElement>('input,select,textarea,button')) { }
