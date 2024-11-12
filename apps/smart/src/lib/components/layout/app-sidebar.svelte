@@ -93,6 +93,10 @@ const data = {
           title: 'ClickOutside',
           url: '/examples/click-outside',
         },
+        {
+          title: 'Data Table',
+          url: '/examples/data-table',
+        },
       ],
     },
     {
