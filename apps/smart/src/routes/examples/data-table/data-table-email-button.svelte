@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { ComponentProps } from "svelte";
-	import CaretSort from "svelte-radix/CaretSort.svelte";
-	import { Button } from "@spectacular/ui/components/button";
+import type { ComponentProps } from 'svelte';
+import CaretSort from 'svelte-radix/CaretSort.svelte';
+import { Button } from '@spectacular/ui/components/button';
 
-	let { variant = "ghost", ...restProps }: ComponentProps<typeof Button> = $props();
+let { variant = 'ghost', ...restProps }: ComponentProps<typeof Button> = $props();
 </script>
 
 <Button {variant} {...restProps}>

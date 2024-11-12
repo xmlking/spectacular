@@ -53,6 +53,7 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
 - <https://x.com/blazity/status/1852380275981893952>
 - <https://shadcn-chatbot-kit.vercel.app/>
 - <https://github.com/Blazity/shadcn-chatbot-kit>
+- [AiBrow](https://aibrow.ai/)
 - Vercel Swarm
   - SDK news <https://x.com/lgrammel/status/1852647732185285106?s=46>
   - API <https://github.com/vercel/ai/tree/main/packages/swarm>
