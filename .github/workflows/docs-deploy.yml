@@ -52,7 +52,7 @@ jobs:
         with:
           enablement: true
       - name: 🏗️ Build
-        run: turbo build --filter=@spectacular/docs
+        run: turbo run docs#build
       - name: ☁️ Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:

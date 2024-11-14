@@ -66,10 +66,10 @@ NHOST_LOCAL_SUBDOMAIN=192-168-60-32 nhost up --run-service run-console-ip.toml
 ### Frontend
 
 ```bash
-turbo --filter=@spectacular/console dev
+turbo run console#dev
 # or run with `production` profile and
 # overload envelopment variables from `.env.production` and `.secrets.production`
-turbo --filter=@spectacular/console dev:production
+turbo run console#dev:production
 ```
 
 Default demo user's **username:** `sumo@demo.com` **password:** `sumodemo123`
@@ -79,9 +79,9 @@ Default demo user's **username:** `sumo@demo.com` **password:** `sumodemo123`
 Generate `i18n` types, `schema.graphql` etc...
 
 ```shell
-turbo --filter=@spectacular/console run generate 
+turbo run console#generate
 # or for production, run:
-turbo --filter=@spectacular/console run generate:production
+turbo run console#generate:production
 ```
 
 ## Building

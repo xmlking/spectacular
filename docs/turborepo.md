@@ -122,9 +122,9 @@ Guidelines for configuring `turbo.json`
 ### Run
 
 ```shell
-turbo --filter=@spectacular/web dev
-turbo --filter=@spectacular/docs dev
-turbo --filter=@spectacular/console --log-order=stream dev
+turbo run web#dev
+turbo run docs#dev
+turbo --filter=console --log-order=stream dev
 ```
 
 ### Test
@@ -136,10 +136,10 @@ turbo --filter=@spectacular/utils test
 ### Build
 
 ```shell
-turbo build --filter=@spectacular/console...
-turbo build --filter=@spectacular/console... --summarize
-turbo build --filter=@spectacular/console... --dry-run
-turbo build --filter=@spectacular/console... --graph
+turbo build --filter=console...
+turbo build --filter=console... --summarize
+turbo build --filter=console... --dry-run
+turbo build --filter=console... --graph
 ```
 
 ### Maintenance
@@ -163,23 +163,23 @@ turbo prune --scope=playground --docker
 # List all tasks in the repository
 turbo run
 # List tasks in a specific package
-turbo run --filter=@spectacular/console
+turbo run --filter=console
 # Using Automatic Package Scoping
 cd packages/ui && turbo run
 # List all packages in the repository
 turbo ls
 # List dependencies and tasks for the `web` package
-turbo ls @spectacular/console
+turbo ls console
 ## List affected packages
 turbo ls --affected
 turbo build
 turbo dev
-turbo dev  --filter=@spectacular/console
+turbo dev  --filter=console
 turbo lint
 turbo run lint test --affected
 turbo run generate
 turbo run generate  --dry-run
 pnpx turbo login
 
-turbo prune --scope=@spectacular/console --docker
+turbo prune --scope=console --docker
 ```

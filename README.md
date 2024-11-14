@@ -106,16 +106,16 @@ make exec-auth
 ### Start apps/console
 
 ```shell
-turbo --filter=@spectacular/console dev
+turbo run console#dev
 
 # or use `--log-order=stream` to disable TUI
-turbo --filter=@spectacular/console --log-order=stream dev
+turbo --filter=console --log-order=stream dev
 
 # or start the server and open the app in a new browser tab
-turbo --filter=@spectacular/console dev -- --open 
+turbo run console#dev  -- --open 
 
 # run in debug mode
-turbo --filter=@spectacular/console dev:debug
+turbo run console#dev:debug
 
 # run with a custom inline config
 # inline environment variables has higher precedence than ones loaded from .env and .env.local files
@@ -139,7 +139,7 @@ Format and lint code
 
 ```shell
 turbo format
-turbo format --filter=!'@spectacular/console'
+turbo format --filter=!'@console'
 turbo lint
 ```
 
@@ -178,9 +178,10 @@ To create a production version of your app:
 ```shell
 turbo build
 # run build
-turbo --filter=@spectacular/console... build
-turbo --filter=@spectacular/console... --dry build
-turbo --filter=@spectacular/console... --graph build
+turbo run console#dev:build
+turbo --filter=console... build
+turbo --filter=console... --dry build
+turbo --filter=console... --graph build
 ```
 
 Run from the local build directory:
@@ -197,7 +198,7 @@ ORIGIN=https://my.site \
 node build
 ```
 
-You can preview the production build with `turbo preview --filter=@spectacular/console...`.
+You can preview the production build with `turbo run console#preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
 > environment.
