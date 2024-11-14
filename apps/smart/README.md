@@ -19,10 +19,12 @@ npx sv create my-app
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```shell
-turbo run --filter=@spectacular/smart-app dev
+turbo run @spectacular/smart-app#dev
+# turbo run --filter=@spectacular/smart-app dev
 
 # or start the server and open the app in a new browser tab
-turbo run --filter=@spectacular/smart-app dev -- --open
+turbo run @spectacular/smart-app#dev -- --open
+# turbo run --filter=@spectacular/smart-app dev -- --open
 ```
 
 to add shadcn block:
