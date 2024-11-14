@@ -72,3 +72,4 @@ Based on discussions with web developers, we've been made aware so far of the fo
 * <https://medium.com/google-cloud/deep-dive-into-function-calling-in-gemini-b62e2618e3a7>
 * <https://github.com/marketplace/models>
 * <https://github.com/jeasonstudio/chrome-ai>
+* <https://github.com/WICG/translation-api/tree/main>

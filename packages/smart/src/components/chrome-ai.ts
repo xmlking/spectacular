@@ -36,8 +36,8 @@ export class ChromeAI {
   }
 
   readonly assistantCapabilities = readable<AIAssistantCapabilities>(undefined, (set) => {
-    if (this.#isAISupported && window.ai.assistant) {
-      window.ai.assistant.capabilities().then((cap) => {
+    if (this.#isAISupported && window.ai.languageModel) {
+      window.ai.languageModel.capabilities().then((cap) => {
         set(cap);
       });
     }
@@ -143,11 +143,11 @@ export class ChromeAI {
   async createAssistant(
     options?: AIAssistantCreateOptionsWithSystemPrompt | AIAssistantCreateOptionsWithoutSystemPrompt,
   ): Promise<AIAssistant | undefined> {
-    if (this.#isAISupported && window.ai.assistant) {
-      const availability = (await window.ai.assistant?.capabilities())?.available;
+    if (this.#isAISupported && window.ai.languageModel) {
+      const availability = (await window.ai.languageModel?.capabilities())?.available;
       switch (availability) {
         case 'readily':
-          return await window.ai.assistant.create({ ...this.#assistantOptions, ...options });
+          return await window.ai.languageModel.create({ ...this.#assistantOptions, ...options });
         case 'after-download':
           this.#log.error('Built-in assistant model is downloading');
           this.#errors.update((errors) => {

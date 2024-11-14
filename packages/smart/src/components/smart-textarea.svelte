@@ -163,7 +163,7 @@ export type SummarizerOptions = {
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim()
       });
-      writer = await window.ai.writer.create({
+      writer = await window.aibrow.writer.create({
         ...writerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -207,7 +207,7 @@ export type SummarizerOptions = {
         prompt: value.trim()
          }),
       });
-      rewriter = await window.ai.rewriter.create({
+      rewriter = await window.aibrow.rewriter.create({
         ...rewriterOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -250,7 +250,7 @@ export type SummarizerOptions = {
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim()
       });
-      summarizer = await window.ai.summarizer.create({
+      summarizer = await window.aibrow.summarizer.create({
         ...summarizerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -291,7 +291,7 @@ export type SummarizerOptions = {
         tool: 'translator',
         prompt
       });
-      translator = await window.ai.assistant.create();
+      translator = await window.aibrow.languageModel.create();
       if (stream) {
         const readableStream = translator.promptStreaming(prompt);
         // for await (const value of readableStream) {

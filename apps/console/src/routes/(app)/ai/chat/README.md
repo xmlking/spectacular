@@ -49,8 +49,8 @@ window.ai.summarizer.capabilities
 <https://github.com/debugtheworldbot/chromegemini/blob/main/src/lib/utils.ts>
 export const getAiApi = () => {
   return {
-    create: window.ai.assistant
-      ? window.ai.assistant.create.bind(window.ai.assistant)
+    create: window.ai.languageModel
+      ? window.ai.languageModel.create.bind(window.ai.languageModel)
       : window.ai.createTextSession.bind(window.ai),
   };
 };
@@ -99,7 +99,7 @@ const SYSTEM_PROMPT: ChatCompletionMessageParam = {
 Translate the summary to Japanese
 
 ```js
- const sessionTranslator = await window.ai.assistant.create({
+ const sessionTranslator = await window.ai.languageModel.create({
     systemPrompt: "You are helpful assistant to translate the summary",
     topK: 10,
     temperature: 0,
@@ -121,7 +121,7 @@ Translate the summary to Japanese
 ```
 
 ```js
-    const session = await window.ai.assistant.create( {
+    const session = await window.ai.languageModel.create( {
      initialPrompts: [
       {
        role: 'system',
@@ -178,7 +178,7 @@ ${ postContent }`
 
 ```js
 async giveTitle(text: string): Promise<string> {
-  const session = await window.ai.assistant.create();
+  const session = await window.ai.languageModel.create();
   try {
    const result = await session.prompt(
     `Given the following summary, generate a title for the article: 
