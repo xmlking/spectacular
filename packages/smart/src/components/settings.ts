@@ -9,11 +9,11 @@ export enum Provider {
 
 export const aiProvider: Writable<Provider> = writable(browser && 'ai' in window ? Provider.Local : Provider.Remote);
 
-export const assistantStyle: Writable<AIStyles> = writable('balanced');
-export const assistantOptions = derived<Writable<AIStyles>, { topK: number; temperature: number }>(
-  assistantStyle,
-  ($assistantStyle) => {
-    switch ($assistantStyle) {
+export const languageModelStyle: Writable<AIStyles> = writable('balanced');
+export const languageModelOptions = derived<Writable<AIStyles>, { topK: number; temperature: number }>(
+  languageModelStyle,
+  ($languageModelStyle) => {
+    switch ($languageModelStyle) {
       case 'balanced':
         return TEMP_STYLES.balanced;
       case 'creative':

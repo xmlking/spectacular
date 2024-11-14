@@ -2,7 +2,7 @@ import { browser } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { derived, get, readable, readonly, writable } from 'svelte/store';
-import { assistantOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings.js';
+import { languageModelOptions, rewriterOptions, summarizerOptions, writerOptions } from './settings.js';
 
 /**
  *  Chrome AI Util Functions
@@ -24,7 +24,7 @@ export class ChromeAI {
 
   #detector: LanguageDetector;
 
-  #assistantOptions: { topK: number; temperature: number };
+  #languageModelOptions: { topK: number; temperature: number };
   #summarizerOptions: { type?: AISummarizerType; format?: AISummarizerFormat; length?: AISummarizerLength };
   #writerOptions: { tone?: AIWriterTone; format?: AIWriterFormat; length?: AIWriterLength };
   #rewriterOptions: { tone?: AIRewriterTone; format?: AIRewriterFormat; length?: AIRewriterLength };
@@ -35,7 +35,7 @@ export class ChromeAI {
     return this.#isAISupported;
   }
 
-  readonly assistantCapabilities = readable<AIAssistantCapabilities>(undefined, (set) => {
+  readonly anguageModelCapabilities = readable<AILanguageModelCapabilities>(undefined, (set) => {
     if (this.#isAISupported && window.ai.languageModel) {
       window.ai.languageModel.capabilities().then((cap) => {
         set(cap);
@@ -112,8 +112,8 @@ export class ChromeAI {
       }
       this.#isAISupported = true;
 
-      const assistantOptionsSub = assistantOptions.subscribe((options) => {
-        this.#assistantOptions = options;
+      const languageModelOptionsSub = languageModelOptions.subscribe((options) => {
+        this.#languageModelOptions = options;
       });
       const summarizerOptionsSub = summarizerOptions.subscribe((options) => {
         this.#summarizerOptions = options;
@@ -127,7 +127,7 @@ export class ChromeAI {
 
       onDestroy(async () => {
         this.#log.debug('onDestroy called');
-        assistantOptionsSub();
+        languageModelOptionsSub();
         summarizerOptionsSub();
         writerOptionsSub();
         rewriterOptionsSub();
@@ -139,33 +139,33 @@ export class ChromeAI {
     return readonly(this.#errors);
   }
 
-  // https://github.com/explainers-by-googlers/prompt-api  #assistant: AIAssistant;
-  async createAssistant(
-    options?: AIAssistantCreateOptionsWithSystemPrompt | AIAssistantCreateOptionsWithoutSystemPrompt,
-  ): Promise<AIAssistant | undefined> {
+  // https://github.com/explainers-by-googlers/prompt-api  #languageModel: AILanguageModel;
+  async createLanguageModel(
+    options?: AILanguageModelCreateOptionsWithSystemPrompt | AILanguageModelCreateOptionsWithoutSystemPrompt,
+  ): Promise<AILanguageModel | undefined> {
     if (this.#isAISupported && window.ai.languageModel) {
       const availability = (await window.ai.languageModel?.capabilities())?.available;
       switch (availability) {
         case 'readily':
-          return await window.ai.languageModel.create({ ...this.#assistantOptions, ...options });
+          return await window.ai.languageModel.create({ ...this.#languageModelOptions, ...options });
         case 'after-download':
-          this.#log.error('Built-in assistant model is downloading');
+          this.#log.error('Built-in languageModel model is downloading');
           this.#errors.update((errors) => {
-            errors.push('Built-in assistant model is downloading');
+            errors.push('Built-in languageModel model is downloading');
             return errors;
           });
           return;
         case 'no':
-          this.#log.error('Built-in assistant model not available');
+          this.#log.error('Built-in languageModel model not available');
           this.#errors.update((errors) => {
-            errors.push('Built-in assistant model not available');
+            errors.push('Built-in languageModel model not available');
             return errors;
           });
           return;
         default:
-          this.#log.error('Built-in assistant model not available');
+          this.#log.error('Built-in languageModel model not available');
           this.#errors.update((errors) => {
-            errors.push('Built-in assistant model not available');
+            errors.push('Built-in languageModel model not available');
             return errors;
           });
           return;

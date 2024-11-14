@@ -4,8 +4,8 @@ import { getChromeAI } from './chrome-ai.js';
 import SuperDebug from 'sveltekit-superforms';
 import {
   aiProvider,
-  assistantStyle,
-  assistantOptions,
+  languageModelStyle,
+  languageModelOptions,
   summarizerOptions,
   writerOptions,
   rewriterOptions,
@@ -34,7 +34,7 @@ onMount(() => {
 {#if isAISupported && $assistantCapabilities?.available === "readily"}
   <form class="card p-6 shadow-lg">
     <fieldset class="border border-surface-400 rounded-md p-4 mb-6">
-      <legend class="text-sm font-semibold px-2">Assistants Options</legend>
+      <legend class="text-sm font-semibold px-2">LanguageModel Options</legend>
       <div class="grid gap-4 md:grid-cols-2">
         <div>
           <label>
@@ -47,8 +47,8 @@ onMount(() => {
         </div>
         <div>
           <label>
-            <span>Assistant Style</span>
-            <select class="select" bind:value={$assistantStyle}>
+            <span>LanguageModel Style</span>
+            <select class="select" bind:value={$languageModelStyle}>
               <option value="balanced">Balanced</option>
               <option value="creative">Creative</option>
               <option value="precise">Precise</option>
@@ -185,12 +185,12 @@ onMount(() => {
 <DebugShell label="AI Settings Form">
   <SuperDebug label="aiProvider" data={$aiProvider} />
   <br />
-  <SuperDebug label="assistantStyle" status={false} data={$assistantStyle} />
+  <SuperDebug label="languageModelStyle" status={false} data={$languageModelStyle} />
   <br />
   <SuperDebug
-    label="assistantOptions"
+    label="languageModelOptions"
     status={false}
-    data={$assistantOptions}
+    data={$languageModelOptions}
   />
   <br />
   <SuperDebug label="writerOptions" status={false} data={$writerOptions} />

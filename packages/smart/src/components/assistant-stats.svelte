@@ -4,9 +4,9 @@ import { onMount, onDestroy } from 'svelte';
 const chromeAI = getChromeAI();
 const { isAISupported, assistantCapabilities, isLoading } = chromeAI;
 
-let assistant: AIAssistant | undefined;
+let assistant: AILanguageModel | undefined;
 onMount(async () => {
-  assistant = await chromeAI.createAssistant();
+  assistant = await chromeAI.createLanguageModel();
 });
 onDestroy(() => {
   assistant?.destroy();
