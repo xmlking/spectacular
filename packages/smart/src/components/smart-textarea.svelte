@@ -127,7 +127,7 @@ export type SummarizerOptions = {
 
   async function handleSubmit() {
     // Reset state
-    clearPreviousResults()
+    clearPreviousResults();
     // Validate
     if (value.trim() === "") {
       error = "Type your intent and try again...";
@@ -158,12 +158,12 @@ export type SummarizerOptions = {
     try {
       loading = true;
       console.log({
-        tool: 'writer',
+        tool: "writer",
         ...writerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
-        prompt: value.trim()
+        prompt: value.trim(),
       });
-      writer = await window.aibrow.writer.create({
+      writer = await (window.aibrow || window.ai).writer.create({
         ...writerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -201,18 +201,21 @@ export type SummarizerOptions = {
       loading = true;
       // sharedContext = "Avoid any toxic language and be as constructive as possible."
       console.log({
-        tool: 'rewriter',
+        tool: "rewriter",
         ...rewriterOptions,
-        ...(sharedContext?.trim() && { sharedContext: sharedContext.trim(),
-        prompt: value.trim()
-         }),
+        ...(sharedContext?.trim() && {
+          sharedContext: sharedContext.trim(),
+          prompt: value.trim(),
+        }),
       });
-      rewriter = await window.aibrow.rewriter.create({
+      rewriter = await (window.aibrow || window.ai).rewriter.create({
         ...rewriterOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
       if (stream) {
-        const readableStream = rewriter.rewriteStreaming(value.trim(), {context});
+        const readableStream = rewriter.rewriteStreaming(value.trim(), {
+          context,
+        });
         // for await (const value of readableStream) {
         //   completion = value;
         // }
@@ -223,7 +226,7 @@ export type SummarizerOptions = {
           completion = value;
         }
       } else {
-        completion = await rewriter.rewrite(value.trim(), {context});
+        completion = await rewriter.rewrite(value.trim(), { context });
       }
     } catch (err) {
       console.error(err);
@@ -245,12 +248,12 @@ export type SummarizerOptions = {
       loading = true;
       // sharedContext = 'A technical blog post';
       console.log({
-        tool: 'summarizer',
+        tool: "summarizer",
         ...summarizerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
-        prompt: value.trim()
+        prompt: value.trim(),
       });
-      summarizer = await window.aibrow.summarizer.create({
+      summarizer = await window.ai.summarizer.create({
         ...summarizerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -285,13 +288,63 @@ export type SummarizerOptions = {
   async function translate() {
     let translator;
     try {
+      if (!('translation' in self) || !('createTranslator' in self.translation)) {
+        errors?.update((items) => {
+          items.push("translation not supported");
+          return items;
+        });
+        return
+      }
+
+      const detector = await self.translation.createDetector();
+      const { detectedLanguage, confidence } = (await detector.detect(value.trim()))[0];
+      translationOps.sourceLanguage = detectedLanguage
+
+      translator = await window.translation.createTranslator({
+        sourceLanguage: translationOps.sourceLanguage,
+        targetLanguage: translationOps.targetLanguage,
+        })
+
+      completion = await translator.translate(value.trim());
+      // if (stream) {
+      //   const readableStream = translator.translateStreaming(value.trim());
+      //   // for await (const value of readableStream) {
+      //   //   completion = value;
+      //   // }
+      //   const reader = readableStream.getReader();
+      //   while (true) {
+      //     const { done, value } = await reader.read();
+      //     if (done) break;
+      //     completion = value;
+      //   }
+      // } else {
+      //   completion = await translator.translate(value.trim());
+      // }
+    } catch (err) {
+      console.error(err);
+      if (err instanceof Error) {
+        error = err.message;
+        errors?.update((items) => {
+          items.push(error);
+          return items;
+        });
+      }
+    } finally {
+      // translator?.destroy();
+      loading = false;
+    }
+  }
+
+  async function translate1() {
+    let translator;
+    try {
       loading = true;
       const prompt = `Translate the following text to ${translationOps.targetLanguage}:\n\n"${value.trim()}"`;
       console.log({
-        tool: 'translator',
-        prompt
+        tool: "translator",
+        prompt,
       });
-      translator = await window.aibrow.languageModel.create();
+      translator = await window.ai.languageModel.create();
       if (stream) {
         const readableStream = translator.promptStreaming(prompt);
         // for await (const value of readableStream) {
@@ -402,12 +455,18 @@ export type SummarizerOptions = {
         </select>
       {:else if tool === "rewriter"}
         <!-- either Tone Or Length -->
-        <select bind:value={rewriterOptions.tone} on:change={() => rewriterOptions.length='as-is'}>
+        <select
+          bind:value={rewriterOptions.tone}
+          on:change={() => (rewriterOptions.length = "as-is")}
+        >
           <option value="as-is">As Is</option>
           <option value="more-casual">More Casual</option>
           <option value="more-formal">More Formal</option>
         </select>
-        <select bind:value={rewriterOptions.length} on:change={() => rewriterOptions.tone='as-is'}>>
+        <select
+          bind:value={rewriterOptions.length}
+          on:change={() => (rewriterOptions.tone = "as-is")}
+          >>
           <option value="as-is">As Is</option>
           <option value="shorter">Shorter</option>
           <option value="longer">Longer</option>
@@ -436,26 +495,20 @@ export type SummarizerOptions = {
         <!-- translator -->
       {:else}
         <select bind:value={translationOps.sourceLanguage}>
-          <option value="en-US">English</option>
-          <option value="es-ES">Español</option>
-          <option value="de-DE">Deutsch</option>
-          <option value="fr-FR">Français</option>
-          <option value="te-IN">తెలుగు</option>
-          <option value="ta-IN">தமிழ்</option>
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="te">తెలుగు</option>
+          <option value="ta">தமிழ்</option>
         </select>
         <select bind:value={translationOps.targetLanguage}>
-          <!-- <option value="en-US">English</option>
-          <option value="es-ES">Español</option>
-          <option value="de-DE">Deutsch</option>
-          <option value="fr-FR">Français</option>
-          <option value="te-IN">తెలుగు</option>
-          <option value="ta-IN">தமிழ்</option> -->
-          <option value="English">English</option>
-          <option value="Español">Español</option>
-          <option value="Deutsch">Deutsch</option>
-          <option value="Français">Français</option>
-          <option value="తెలుగు">తెలుగు</option>
-          <option value="தமிழ்">தமிழ்</option>
+          <option value="es">English</option>
+          <option value="es">Español</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="te">తెలుగు</option>
+          <option value="ta">தமிழ்</option>
         </select>
       {/if}
     </div>
