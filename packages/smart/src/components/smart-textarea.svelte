@@ -503,7 +503,7 @@ export type SummarizerOptions = {
           <option value="ta">தமிழ்</option>
         </select>
         <select bind:value={translationOps.targetLanguage}>
-          <option value="es">English</option>
+          <option value="en">English</option>
           <option value="es">Español</option>
           <option value="de">Deutsch</option>
           <option value="fr">Français</option>
