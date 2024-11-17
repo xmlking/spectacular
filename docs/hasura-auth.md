@@ -132,13 +132,14 @@ await nhost.graphql.request(
 
 ## Organizations
 
-Generally a user belongs to and is managed by one _organization_, however the user can receive authorizations from multiple other _organizations_ (delegated authorizations).
-Anyways, a user should be able to use the same identity(JWT) to switch between _organizations_.
+Generally a user belongs to and is managed by one _organization_, however the user can receive invitation to join multiple _organizations_ by respective `org:owner`s.  
+Anyways, a user should be able to use the same identity(JWT) to switch between _organizations_ with-in the _Application_.
 
 An user who has the membership of an organization is referred to as an organization member (i.e. member) within that organization's context.
+
 ![Auth Flow](./images/org-members.webp)
 
-Some users may be belongs to more then one _organization_. this is called **multi-tenancy**. such users may have different roles in different _Organizations_
+Some users may be belongs to more then one _organization_. this is called **multi-tenancy**. such users may have different _Roles_ in different _Organizations_
 
 Let’s take an example to understand how everything connects:
 
