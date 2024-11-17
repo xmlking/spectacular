@@ -21,6 +21,10 @@ Optionally, additional higher roles can be added to user's _allowed roles_ by ad
 We create Service Account (with role: device) when a new device is provisioned and generate PAT token.  
 **PAT** token (secret) issued during `SignUp` step is used as `API_KEY` to access backend services. _PATs_ have longer lifetime.
 
+### Teams
+
+Users (Human Accounts) are _optionally_ organized into `Teams` to support application specific usecases. example: Finance, HR, Marketing etc
+
 ## Authorization (AuthZ)
 
 ## Roles
@@ -30,17 +34,22 @@ roles in the Hasura GraphQL Engine and then create permissions for each of them.
 
 Recommended roles:
 
-- **Users**: users who are using the application as a starting point for their work.
-- **Supervisors**: users who are mainly using the application to manage users and their access of their _organization_.
-- **Administrators**: this users are able to grant additional organizations or departments and elect supervisors.
+- **org:member**: users who are using the application as a starting point for their work.
+- **org:admin**:  users who are mainly using the application to manage users and their access of their _organization_.
+- **org:owner**:  user who can remove an _organization_, can transfer ownershop of  _organization_.
+- **sys:admin**:  users who can do cross-organization activities that other _roles_ cannot do.
 
-| Role       | Description                                                            | Allowed Activity                                                                   |
-| ---------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| public  | A user who is not logged-in                                            | Only read from some restricted tables/views or **public** data                     |
-| user       | A user who is logged in                                                | Allow access to personally created data and any **public** data                    |
-| me         | A user who is logged in                                                | Allow access to personally created data and any **private** data                   |
-| supervisor | A user that has access to other users' data with in their organization | Allow access to personally created data, their organization's data and public data |
-| manager    | A user that has access to any users' data across all organizations     | Allow access to all users' data and public data                                    |
+| Role        | Role Type | Inherited / Composed | Description                                                                                         | Allowed Activity                                                                   |
+| ----------- | --------- | -------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| public      | implicit  |                      | Anonymous user who is not logged-in                                                                 | Only read from some restricted tables/views or **public** data                     |
+| private     | implicit  |                      | User who is logged in                                                                               | Only read from some restricted tables/views or **public** data                     |
+| me          | composed  | org:member, private  | `org:member` + `private`                                                                            | Allow access to personally created data and any **private** data                   |
+| org:member  | inherited | public               | User who are using the application as a starting point for their work                               | Allow access to personally created data and any **public** data                    |
+| org:admin   | inherited | org:member           | User who are mainly using the application to manage users and their access of their _organization_. | Allow access to personally created data, their organization's data and public data |
+| org:owner   | inherited | org:admin            | User who can remove an _organization_, can transfer ownershop of  _organization_                    | Allow access to personally created data, their organization's data and public data |
+| sys:admin   | inherited | org:owner            | User who can do cross-organization activities that other _roles_ cannot do.                         | Allow access to all users' data and public data                                    |
+| sys:metrics | base      |                      |                                                                                                     |                                                                                    |
+| sys:sre     | base      |                      |                                                                                                     |                                                                                    |
 
 See [this section](https://hasura.io/docs/latest/auth/authorization/permissions/) on how to configure permissions.
 
@@ -48,49 +57,49 @@ See [this section](https://hasura.io/docs/latest/auth/authorization/permissions/
 
 By default, users have two allowed roles:
 
-- user (default)
+- org:member (default)
 - me
 
-> If users have more elevated roles, UI can pass elevated role in http header e.g., `X-Hasura-Role: supervisor` to run specific operation with that role. If this header is not present, the operation will run with default role i.e., `user`.
+> If users have more elevated roles, UI can pass elevated role in http header e.g., `X-Hasura-Role: org:owner` to run specific operation with that role. If this header is not present, the operation will run with default role i.e., `org:member`.
 
 ### Role Hierarchy
 
 Cascading permissions with inherited roles
 
 ```yaml
-- role_name: user
+- role_name: org:member
   role_set:
     - public # anonymous
 - role_name: me
   role_set:
-    - user
+    - org:member
     - private
-- role_name: supervisor
+- role_name: org:admin
   role_set:
-    - user
-- role_name: manager
+    - org:member
+- role_name: org:owner
   role_set:
-    - supervisor
+    - org:admin
 ```
 
 ### The Admin Role
 
 By default, there is an `admin` role that can perform any operation on any table.
 For our case `admin` is only used for back channel management app.
-For customer facing apps we use `public`, `user`, `me`, `supervisor`, `manager` roles.
+For customer facing apps we use `org:member`, `me`, `org:admin`, `org:owner` roles.
 
 ### Assign Allowed Roles
 
 It’s possible to give users a subset of allowed roles during SignUp.
 
-**Example:** Save `supervisor` role (in addition to standard `user`, `me` roles) to the user’s allowed roles during SignUp:
+**Example:** Save `org:admin` role (in addition to standard `org:member`, `me` roles) to the user’s allowed roles during SignUp:
 
 ```js
 await nhost.auth.signUp({
   email: 'joe@example.com',
   password: 'secret-password'
   options: {
-    allowedRoles: ['user','me','supervisor']
+    allowedRoles: ['org:member','me','org:admin']
   }
 })
 ```
@@ -119,14 +128,12 @@ await nhost.graphql.request(
 
 ### Permissions
 
-| Role       | Action | Permissions                                                                                                                             |
-| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| user       | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
-| manage     | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}}]}                                           |
-| supervisor | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                            |
-| user       | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
-| manage     | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_in":"x-hasura-allowed-orgs"}}]}                                           |
-| supervisor | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                            |
+| Role       | Action | Permissions                                                                                                                           |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| org:member | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
+| org:admin  | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| org:member | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
+| org:admin  | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
 
 > `delete` action is desable for most cases, as we do `soft-delete`
 
