@@ -5,6 +5,8 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 import { aiSchema } from './schema';
 
+export const ssr = false;
+
 const log = new Logger('server:ai:ms');
 
 export const load = async () => {

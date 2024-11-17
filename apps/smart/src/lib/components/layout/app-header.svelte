@@ -2,7 +2,7 @@
 import * as Breadcrumb from '@spectacular/ui/components/breadcrumb';
 import { Separator } from '@spectacular/ui/components/separator';
 import * as Sidebar from '@spectacular/ui/components/sidebar';
-import * as Icon from '$lib/components/icons/index.js';
+import * as Icon from '@spectacular/ui/components/icons';
 import { siteConfig } from '$lib/config/site.js';
 import { buttonVariants } from '@spectacular/ui/components/button';
 import ModeToggle from '$lib/components/layout/mode-toggle.svelte';

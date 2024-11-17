@@ -56,6 +56,8 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
 - <https://shadcn-chatbot-kit.vercel.app/>
 - <https://github.com/Blazity/shadcn-chatbot-kit>
 - [AiBrow](https://aibrow.ai/) - Use *in-browser* and *on-device* AI to enable powerful and private genAI features in your Web Applications.
+  - aibrow All [Demos](https://aibrow.ai/demo.html)
+  - Chrome Built-in AI [Playground](https://ai.zaps.dev/)
 - Vercel Swarm
   - SDK news <https://x.com/lgrammel/status/1852647732185285106?s=46>
   - API <https://github.com/vercel/ai/tree/main/packages/swarm>
