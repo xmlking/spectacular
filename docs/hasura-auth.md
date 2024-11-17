@@ -132,13 +132,61 @@ await nhost.graphql.request(
 
 ## Organizations
 
-Generally a user belongs to and is managed by one organization, however the user can receive authorizations from multiple other organizations (delegated authorizations).
-Anyways, a user should be able to use the same identity to switch between organizations.
+Generally a user belongs to and is managed by one _organization_, however the user can receive authorizations from multiple other _organizations_ (delegated authorizations).
+Anyways, a user should be able to use the same identity(JWT) to switch between _organizations_.
 
-When use `SignUp`, the system will assgin **default** `Organization` in metadata field in `Users` table. Same way allowed `Roles` also be assigned during `SignUp`.  
-Custom UI dashboard can be used to assign/unassign `Orgs` to `Users` by `Administrators` after user account is created. This data is stored in `public.user_org` table.
+An user who has the membership of an organization is referred to as an organization member (i.e. member) within that organization's context.
+![Auth Flow](./images/org-members.webp)
+
+Some users may be belongs to more then one _organization_. this is called **multi-tenancy**. such users may have different roles in different _Organizations_
+
+Let’s take an example to understand how everything connects:
+
+**John, Sarah** are in different organizations with different roles in the context of different organizations.
+
+![Auth Flow](./images/multi-tenancy.webp)
+
+From this diagram, here are some info you need to know:
+
+1. **John** is affiliated with two organizations, using the email `john@email.com` as his unique identifier. He holds the position of `admin` in `Organization A` and is a `guest` in `Organization B`.
+2. **Sarah** is associated with a single organization and uses the email `sarah@email.com` as her unique identifier. She is the `admin` of `Organization B`.
+3. The roles of `Admin`, `Member`, and `Guest` are designated within organizations and these roles are consistent across various organizations.
+4. Additional roles can be created within the `sys:admin`'s` UI. These newly created roles will be applied and shared across all organizations.
 
 ### Actions
+
+1. **Organizations** are created by `sys:admin` ahead-of-time, and a pre-registered `user` is assign as `org:owner` of that _organization_ by `sys:admin`
+   1. `sys:admin` should be able to create new **organizations** ahead with Org: `display_name`,  `description` `allowed_email_domains`  `allowed_emails`,  `blocked_email_domains` `blocked_emails` `plan` etc via Web UI.
+2. When user `SignUp`, they may not belongs to any _organization_, unless their email is already invited to join an _organization_ by its `org:admin`. If user don't have an Org, they can only manage their `profile` page in the UI app.
+3. `org:owner` and `org:admin` of an _organization_ can invite any pre-registered or un-registered users to join their _organization_ by inviting via Web UI.
+   1. Users are invited with one of the roles: `org:member` or  `org:admin`  or  `org:billing` etc. NOT `org:owner`
+   2. An organization can have only one owner, and ownership can be transferred.
+4. `sys:admin` can have a Custom UI to assign/unassign _Organizations_ to _Users_ in bulk. This data is stored in `public.user_org_roles` table.
+
+### Org Permissions
+
+| Action                                                        | Billing | Member | Admin | Manager | Owner |
+| ------------------------------------------------------------- | ------- | ------ | ----- | ------- | ----- |
+| Can see and edit billing information and subscription details | ✓       |        |       |         | ✓     |
+| Can see and edit legal and compliance details                 | ✓       |        |       |         | ✓     |
+| Can view and act on issues (such as assigning and resolving)  |         | ✓      | ✓     | ✓       | ✓     |
+| Can join and leave existing teams                             |         | ✓      | ✓     | ✓       | ✓     |
+| Can add repositories (through GitHub integrations)            |         | ✓      | ✓     | ✓       | ✓     |
+| Can create and remove teams from the organization             |         |        | ✓     | ✓       | ✓     |
+| Can change project settings                                   |         | ✓*     | ✓     | ✓       | ✓     |
+| Can create and remove projects for the organization           |         | ✓**    | ✓     | ✓       | ✓     |
+| Can edit Global Integrations                                  |         |        | ✓     | ✓       | ✓     |
+| Can remove repositories                                       |         |        | ✓     | ✓       | ✓     |
+| Can add, remove, and change Org Members                       |         |        |       | ✓       | ✓     |
+| Can change organization settings, including open membership   |         |        |       | ✓       | ✓     |
+| Can assign Team Admin role                                    |         |        |       | ✓       | ✓     |
+| Can add, remove, and edit Team Contributors                   |         |        |       | ✓       | ✓     |
+| Can add projects for teams                                    |         |        |       | ✓       | ✓     |
+| Can remove projects from teams                                |         |        |       | ✓       | ✓     |
+| Can transfer projects to another organization                 |         |        |       |         | ✓     |
+| Can remove an organization                                    |         |        |       |         | ✓     |
+
+### Actions (old)
 
 1. **Anonymous** (`public` role) user should be able to self register account as long as their email domain is in the allowed email domains (`AUTH_ACCESS_CONTROL_ALLOWED_EMAIL_DOMAINS`) and not in blacklist(`AUTH_ACCESS_CONTROL_BLOCKED_EMAILS`) for a give `Organization`. Checks are handled by `hadura-auth` for home-org.
    1. This should result creating row in `auth.users` table with with `default_org=AUTH_USER_DEFAULT_ROLE` and multiple rows added in `auth.user_roles` matching to `AUTH_USER_DEFAULT_ALLOWED_ROLES` _automatically_.
@@ -175,3 +223,4 @@ You can find an example of a function that can generate a valid access token for
 - [Authentication and authorization in multi-tenancy B2B scenarios](https://zitadel.com/docs/guides/solution-scenarios/b2b)
 - [user management in nhost](https://docs.nhost.io/guides/auth/users)
 - [Hasura Authentication Using JWTs](https://hasura.io/docs/latest/auth/authentication/jwt/)
+- [logto: Understand how organizations work](https://docs.logto.io/docs/recipes/organizations/understand-how-it-works/)
