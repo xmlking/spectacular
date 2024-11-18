@@ -5,8 +5,6 @@ import { zod } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 import { aiSchema } from './schema';
 
-export const ssr = false;
-
 const log = new Logger('server:ai:ms');
 
 export const load = async () => {
@@ -22,8 +20,8 @@ export const actions = {
 
     if (!form.valid) return fail(400, { form });
 
-    const { commentOne, commentTwo, commentThree, startDate, endDate, specialization } = form.data;
-    log.debug({ commentOne, commentTwo, commentThree, startDate, endDate, specialization });
+    const { writing1 } = form.data;
+    log.debug({ writing1 });
     return message(form, { type: 'success', message: 'AI form saved sucessfully 😎' });
   },
 };

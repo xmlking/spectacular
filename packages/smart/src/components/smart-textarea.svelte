@@ -49,7 +49,6 @@ export type SummarizerOptions = {
 
 <script lang="ts">
   import type { HTMLTextareaAttributes } from "svelte/elements";
-  import { getChromeAI } from "./chrome-ai.js";
   import { Logger } from "@spectacular/utils";
   import { Sparkles, SearchIcon } from "lucide-svelte";
   import { default as LoaderIcon } from "./loader-icon.svelte";
@@ -91,7 +90,6 @@ export type SummarizerOptions = {
 
   // Variables
   const { errors } = getFormField();
-  const chromeAI = getChromeAI();
   let loading = false;
   let sharedContext = context;
   let completion: string;

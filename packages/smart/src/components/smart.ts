@@ -2,7 +2,7 @@
  *  Chrome AI Util Functions
  */
 
-function getChromeVersion() {
+export function getChromeVersion() {
   const raw = navigator.userAgent.match(/Chrom(e|ium)\/([0-9]+)\./);
   return raw ? Number.parseInt(raw[2], 10) : 0;
 }
@@ -10,7 +10,7 @@ function getChromeVersion() {
 /**
  * Detection & installation from aiBrow extension
  */
-async function checkAibrowInstalled() {
+export async function checkAibrowInstalled() {
   const capabilities = await window.aibrow.capabilities();
   if (!capabilities.extension) {
     // The extension is not installed
@@ -34,7 +34,7 @@ async function checkAibrowInstalled() {
 /**
  * polyfill window.ai... at start
  */
-async function init() {
+export async function init() {
   // check if AiBrow is polyfilling the window.AI API
   const isPolyfilled = window.ai && window.ai.aibrow === true;
   if (isPolyfilled) {

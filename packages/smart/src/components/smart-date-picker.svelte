@@ -1,5 +1,4 @@
 <script lang="ts">
-import { getChromeAI } from './chrome-ai.js';
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
@@ -13,7 +12,6 @@ interface $$Props extends HTMLTextareaAttributes {
 }
 const log = new Logger('experiments:ai:ms:browser');
 const api = '/api/date';
-const { isAISupported, assistantCapabilities } = getChromeAI();
 let isLoading = false;
 let error: string;
 let startDate = new Date();
@@ -116,7 +114,7 @@ const useLocalLocal = async (event: SubmitEvent) => {
   class="flex flex-col items-center"
   method="POST"
   on:submit|preventDefault={(event) => {
-    $assistantCapabilities.available === "readily"
+    window.ai?.assistant
       ? useLocalLocal(event)
       : useRemoteModel(event);
   }}

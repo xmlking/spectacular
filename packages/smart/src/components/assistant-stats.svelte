@@ -1,19 +1,17 @@
 <script lang="ts">
-import { getChromeAI } from './chrome-ai.js';
 import { onMount, onDestroy } from 'svelte';
-const chromeAI = getChromeAI();
-const { isAISupported, assistantCapabilities, isLoading } = chromeAI;
+import {languageModelOptions} from "#components/settings.js";
 
 let assistant: AILanguageModel | undefined;
 onMount(async () => {
-  assistant = await chromeAI.createLanguageModel();
+  assistant = await window.ai?.languageModel.create($languageModelOptions)
 });
 onDestroy(() => {
   assistant?.destroy();
 });
 </script>
 
-{#if isAISupported && $assistantCapabilities?.available === 'readily'}
+{#if window.ai?.languageModel }
   <div class="my-12">
     <div class="h2">Session stats</div>
     <table class="table table-hover">

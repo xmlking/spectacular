@@ -1,5 +1,4 @@
 <script lang="ts">
-import { getChromeAI } from './chrome-ai.js';
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import Select from 'svelte-select';
@@ -10,7 +9,6 @@ interface $$Props extends HTMLTextareaAttributes {
 }
 const log = new Logger('experiments:ai:ms:browser');
 const api = '/api/combobox';
-const { isAISupported, assistantCapabilities } = getChromeAI();
 let isLoading = false;
 let error: string;
 const options = writable([]);
@@ -31,7 +29,7 @@ const useRemoteModel = async (event: Event) => {
     });
     const content = await rawResponse.json();
     if (content[0]?.options) {
-      console.log({ result: content[0]?.options });
+      // console.log({ result: content[0]?.options });
       return content[0]?.options;
     }
     isLoading = false;

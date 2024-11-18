@@ -29,7 +29,8 @@ export const WRITER_SYSTEM_PROMPT = {
 /**
  * language
  */
-export const langs = [
+type LanguageEntry = [string, ...Array<string[]>];
+export const langs: LanguageEntry[] = [
   ['Afrikaans', ['af-ZA']],
   ['አማርኛ', ['am-ET']],
   ['Azərbaycanca', ['az-AZ']],

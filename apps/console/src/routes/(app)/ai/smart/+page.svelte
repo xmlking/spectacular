@@ -5,8 +5,6 @@ import {
   SmartDate,
   SmartDatePicker,
   ComboBox,
-  getChromeAI,
-  SmartTextarea,
 } from '@spectacular/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
@@ -25,12 +23,7 @@ export let data;
 // Variables
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
-const chromeAI = getChromeAI();
-const { isAISupported, assistantCapabilities } = chromeAI;
 
-onMount(async () => {
-  log.debug({ isAISupported, assistantCapabilities: $assistantCapabilities });
-});
 
 // Search form
 const form = superForm(data.form, {
@@ -127,21 +120,12 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="commentThree">
             <Form.Control let:attrs>
               <Form.Label class="label">Comment Three</Form.Label>
-              <!-- <MagicSpellTextarea
+              <MagicSpellTextarea
                 class="textarea data-[fs-error]:input-error"
                 {...attrs}
                 bind:value={$formData.commentThree}
                 {...$constraints.commentThree}
                 placeholder="It was a dark and stormy night..."
-              /> -->
-              <SmartTextarea
-                class="textarea data-[fs-error]:input-error"
-                {...attrs}
-                bind:value={$formData.commentThree}
-                {...$constraints.commentThree}
-                stream={true}
-                placeholder="Write an email to my bank asking them to raise my credit limit from $1,000 to $10,000."
-                context="I'm a long-standing customer."
               />
             </Form.Control>
             <Form.Description class="sr-only"
@@ -189,7 +173,7 @@ $: loadingState.setFormLoading($delayed);
                 <Form.Label class="label">Provider Specialization</Form.Label>
                 <ComboBox
                   bind:selected={$formData.specialization}
-                  {...$constraints.commentThree}
+                  {...$constraints.specialization}
                 />
               </Form.Control>
               <Form.Description class="sr-only"
@@ -204,7 +188,7 @@ $: loadingState.setFormLoading($delayed);
       <footer class="p-4 card-footer flex justify-end items-center space-x-4">
         <p class="text-xs">
           On-Device AI: <span class="text-error-500 uppercase"
-            >{$assistantCapabilities?.available}</span
+            >{window.ai?.languageModel !== undefined}</span
           >
         </p>
         <button type="submit" class="variant-filled-primary btn">submit</button>
