@@ -12,3 +12,4 @@ export * from './errors.js';
 export * from './cookies.js';
 export * from './constants.js';
 export * from './throttle.js';
+export * from './fn.js';

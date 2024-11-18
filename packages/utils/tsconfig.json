@@ -2,7 +2,8 @@
   "extends": "@spectacular/typescript-config/base.json",
   "compilerOptions": {
     "rootDir": "src",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "lib": ["esnext", "DOM", "DOM.Iterable"]
   },
   "include": ["src"]
 }

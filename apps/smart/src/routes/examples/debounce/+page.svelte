@@ -1,6 +1,6 @@
 <svelte:options runes={true} />
 <script lang="ts">
-import { debounce } from '$lib/actions';
+import { debounce } from '@spectacular/ui/actions';
 let debouncedValue = $state('');
 </script>
 
