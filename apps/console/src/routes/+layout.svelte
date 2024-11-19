@@ -1,160 +1,136 @@
 <!-- Layout: (root) -->
 <script lang="ts">
-  import { browser, dev } from "$app/environment";
-  import { page } from "$app/stores";
-  import Drawer from "$lib/components/layout/drawer.svelte";
-  import FlashMessageToast from "$lib/components/layout/flash-message-toast.svelte";
-  import Footer from "$lib/components/layout/footer.svelte";
-  import GotoTop from "$lib/components/layout/go-to-top.svelte";
-  import Header from "$lib/components/layout/header.svelte";
-  import Sidebar from "$lib/components/layout/sidebar.svelte";
-  import { i18n } from "$lib/i18n";
-  import Search from "$lib/modals/search.svelte";
-  import { scroll, storeTheme, storeVercelProductionMode } from "$lib/stores";
-  import { setLoadingState } from "$lib/stores/loading";
-  import { online, orientation, size } from "$lib/stores/window";
-  import { init as initAI } from "@spectacular/smart";
-  import {
-    arrow,
-    autoUpdate,
-    computePosition,
-    flip,
-    offset,
-    shift,
-  } from "@floating-ui/dom";
-  import { ParaglideJS } from "@inlang/paraglide-js-adapter-sveltekit";
-  import {
-    Modal,
-    initializeStores,
-    prefersReducedMotionStore,
-    storePopup,
-  } from "@skeletonlabs/skeleton";
-  import type { ModalComponent } from "@skeletonlabs/skeleton";
-  // biome-ignore lint/style/useImportType: biome still don't understand svelte
-  import { AppShell } from "@skeletonlabs/skeleton";
-  import { Logger, startsWith } from "@spectacular/utils";
-  import { inject } from "@vercel/analytics";
-  import { injectSpeedInsights } from "@vercel/speed-insights/sveltekit";
-  import { mountVercelToolbar } from "@vercel/toolbar/vite";
-  import { type ComponentEvents, onMount } from "svelte";
-  import { setupViewTransition } from "sveltekit-view-transition";
-  import "../app.pcss";
-  import { setNhostClient } from "$lib/stores/nhost";
-  import type { LayoutData } from "./$types";
+import { browser, dev } from '$app/environment';
+import { page } from '$app/stores';
+import Drawer from '$lib/components/layout/drawer.svelte';
+import FlashMessageToast from '$lib/components/layout/flash-message-toast.svelte';
+import Footer from '$lib/components/layout/footer.svelte';
+import GotoTop from '$lib/components/layout/go-to-top.svelte';
+import Header from '$lib/components/layout/header.svelte';
+import Sidebar from '$lib/components/layout/sidebar.svelte';
+import { i18n } from '$lib/i18n';
+import Search from '$lib/modals/search.svelte';
+import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
+import { setLoadingState } from '$lib/stores/loading';
+import { online, orientation, size } from '$lib/stores/window';
+import { init as initAI } from '@spectacular/smart';
+import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
+import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
+import type { ModalComponent } from '@skeletonlabs/skeleton';
+// biome-ignore lint/style/useImportType: biome still don't understand svelte
+import { AppShell } from '@skeletonlabs/skeleton';
+import { Logger, startsWith } from '@spectacular/utils';
+import { inject } from '@vercel/analytics';
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+import { mountVercelToolbar } from '@vercel/toolbar/vite';
+import { type ComponentEvents, onMount } from 'svelte';
+import { setupViewTransition } from 'sveltekit-view-transition';
+import '../app.pcss';
+import { setNhostClient } from '$lib/stores/nhost';
+import type { LayoutData } from './$types';
 
-  const log = new Logger("root:layout:browser");
+const log = new Logger('root:layout:browser');
 
-  export let data: LayoutData;
+export let data: LayoutData;
 
-  //*** initializations ***//
-  // Floating UI for Popups
-  storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+//*** initializations ***//
+// Floating UI for Popups
+storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
-  // initialize overlay components
-  initializeStores();
-  // initialize LoadingState
-  setLoadingState();
-  // initialize nhost client
-  // TODO: initialize different clients for server-side and client-side
-  const nhost = setNhostClient();
-  // initialize ChromeAI
-  onMount(async () =>  await initAI());
+// initialize overlay components
+initializeStores();
+// initialize LoadingState
+setLoadingState();
+// initialize nhost client
+// TODO: initialize different clients for server-side and client-side
+const nhost = setNhostClient();
+// initialize ChromeAI
+onMount(async () => await initAI());
 
-  // Handle Vercel Production Mode
-  storeVercelProductionMode.set(data.vercelEnv === "production");
-  // inject Vercel Analytics
-  // if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
-  inject({ mode: dev ? "development" : "production" });
-  // inject Vercel Speed Insights
-  injectSpeedInsights();
-  // initialize Vercel Toolbar in dev
-  if (dev) {
-    onMount(() => mountVercelToolbar());
+// Handle Vercel Production Mode
+storeVercelProductionMode.set(data.vercelEnv === 'production');
+// inject Vercel Analytics
+// if ($storeVercelProductionMode) import('@vercel/analytics').then((mod) => mod.inject());
+inject({ mode: dev ? 'development' : 'production' });
+// inject Vercel Speed Insights
+injectSpeedInsights();
+// initialize Vercel Toolbar in dev
+if (dev) {
+  onMount(() => mountVercelToolbar());
+}
+
+// Registered list of Components for Modals
+const modalComponentRegistry: Record<string, ModalComponent> = {
+  modalSearch: { ref: Search },
+};
+
+const noSidebarPaths = ['/signin', '/signup', '/reset', '/privacy', '/terms', '/docs', '/blog', '/about', '/contact'];
+function matchNoSidebarPaths(pathname: string): boolean {
+  const canonicalPath = i18n.route(pathname);
+  if (canonicalPath === '/' || startsWith(canonicalPath, noSidebarPaths)) {
+    return true;
   }
+  return false;
+}
 
-  // Registered list of Components for Modals
-  const modalComponentRegistry: Record<string, ModalComponent> = {
-    modalSearch: { ref: Search },
-  };
+// Set body `data-theme` based on current theme status
+storeTheme.subscribe(setBodyThemeAttribute);
+function setBodyThemeAttribute(): void {
+  if (!browser) return;
+  document.body.setAttribute('data-theme', $storeTheme);
+}
 
-  const noSidebarPaths = [
-    "/signin",
-    "/signup",
-    "/reset",
-    "/privacy",
-    "/terms",
-    "/docs",
-    "/blog",
-    "/about",
-    "/contact",
-  ];
-  function matchNoSidebarPaths(pathname: string): boolean {
-    const canonicalPath = i18n.route(pathname);
-    if (canonicalPath === "/" || startsWith(canonicalPath, noSidebarPaths)) {
-      return true;
-    }
-    return false;
-  }
+// View Transitions
+setupViewTransition();
 
-  // Set body `data-theme` based on current theme status
-  storeTheme.subscribe(setBodyThemeAttribute);
-  function setBodyThemeAttribute(): void {
-    if (!browser) return;
-    document.body.setAttribute("data-theme", $storeTheme);
-  }
+/**
+ * bind current scrollX scrollY value to store
+ */
+function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
+  scroll.set({
+    x: event.currentTarget.scrollLeft,
+    y: event.currentTarget.scrollTop,
+  });
+}
 
-  // View Transitions
-  setupViewTransition();
+// Reactive
+// Disable left sidebar on homepage
+$: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
+$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 
-  /**
-   * bind current scrollX scrollY value to store
-   */
-  function scrollHandler(event: ComponentEvents<AppShell>["scroll"]) {
-    scroll.set({
-      x: event.currentTarget.scrollLeft,
-      y: event.currentTarget.scrollTop,
+// update nhost session
+// HINT: https://blog.flotes.app/posts/performant-reactivity
+$: ({ session } = data);
+$: if (browser) {
+  if (session) {
+    log.debug('trigger SESSION_UPDATE', { session });
+    nhost.auth.client.interpreter?.send('SESSION_UPDATE', {
+      data: { session },
     });
+  } else {
+    log.debug('session empty, trigger SIGNOUT');
+    // nhost.auth.client.interpreter?.send('SIGNOUT');
+    (async () => {
+      const { error } = await nhost.auth.signOut();
+      if (error) log.error({ error });
+    })();
   }
+}
 
-  // Reactive
-  // Disable left sidebar on homepage
-  $: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname)
-    ? "w-0"
-    : "bg-surface-50-900-token lg:w-auto";
-  $: allyPageSmoothScroll = !$prefersReducedMotionStore ? "scroll-smooth" : "";
-
-  // update nhost session
-  // HINT: https://blog.flotes.app/posts/performant-reactivity
-  $: ({ session } = data);
-  $: if (browser) {
-    if (session) {
-      log.debug("trigger SESSION_UPDATE", { session });
-      nhost.auth.client.interpreter?.send("SESSION_UPDATE", {
-        data: { session },
-      });
-    } else {
-      log.debug("session empty, trigger SIGNOUT");
-      // nhost.auth.client.interpreter?.send('SIGNOUT');
-      (async () => {
-        const { error } = await nhost.auth.signOut();
-        if (error) log.error({ error });
-      })();
-    }
-  }
-
-  // if(browser) {
-  //   cookieStore.onchange = (event: CookieChangeEvent) => {
-  //      console.log("cookie changed", {event});
-  //     if(event.deleted[0] && event.deleted[0].name === NHOST_SESSION_KEY) {
-  //        console.log("cookie deleted", {deleted: event.deleted[0].name});
-  //        init();
-  //     }
-  //     if(event.changed[0] && event.changed[0].name === NHOST_SESSION_KEY) {
-  //        console.log("cookie changed", {changed: event.changed[0].name});
-  //        init();
-  //     }
-  //   };
-  // }
+// if(browser) {
+//   cookieStore.onchange = (event: CookieChangeEvent) => {
+//      console.log("cookie changed", {event});
+//     if(event.deleted[0] && event.deleted[0].name === NHOST_SESSION_KEY) {
+//        console.log("cookie deleted", {deleted: event.deleted[0].name});
+//        init();
+//     }
+//     if(event.changed[0] && event.changed[0].name === NHOST_SESSION_KEY) {
+//        console.log("cookie changed", {changed: event.changed[0].name});
+//        init();
+//     }
+//   };
+// }
 </script>
 
 <!-- window info -->

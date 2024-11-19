@@ -7,7 +7,7 @@ import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import SuperDebug, {  defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { writingSchema } from './schema.js';
 
@@ -39,20 +39,8 @@ const superform = superForm(defaults(zod(writingSchema)), {
   },
 });
 
-const {
-  form,
-  delayed,
-  timeout,
-  enhance,
-  errors,
-  constraints,
-  message,
-  tainted,
-  submitting,
-  formId,
-  capture,
-  restore,
-} = superform;
+const { form, delayed, timeout, enhance, errors, constraints, message, tainted, submitting, formId, capture, restore } =
+  superform;
 
 export const snapshot = { capture, restore };
 

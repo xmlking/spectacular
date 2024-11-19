@@ -7,7 +7,6 @@ import { writingSchema } from './schema';
 
 const log = new Logger('ai:writing:server');
 
-
 export const actions = {
   default: async ({ request }) => {
     const form = await superValidate(request, zod(writingSchema));

@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-  import { browser } from '$app/environment';
+import { browser } from '$app/environment';
 import { PenTool, SpellCheck2, Replace, Crop } from 'lucide-svelte';
 import Translate from './translate-icon.svelte';
 // import Summary from "./summary-icon.svelte";

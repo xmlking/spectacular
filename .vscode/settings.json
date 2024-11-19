@@ -308,7 +308,7 @@
   // ##################################################
   // Make sure we're using biomejs for all filetypes
   // Need this because we need to override the default json and svelte formatters that folks might have configured
-  "editor.defaultFormatter": "biomejs.biome",
+  // "editor.defaultFormatter": "biomejs.biome",
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -327,12 +327,12 @@
       "source.fixAll.biome": "never"
     }
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
+  // "[typescript]": {
+  //   "editor.defaultFormatter": "biomejs.biome"
+  // },
+  // "[typescriptreact]": {
+  //   "editor.defaultFormatter": "biomejs.biome"
+  // },
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },

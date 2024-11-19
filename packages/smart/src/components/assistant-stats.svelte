@@ -1,10 +1,10 @@
 <script lang="ts">
 import { onMount, onDestroy } from 'svelte';
-import {languageModelOptions} from "#components/settings.js";
+import { languageModelOptions } from '#components/settings.js';
 
 let assistant: AILanguageModel | undefined;
 onMount(async () => {
-  assistant = await window.ai?.languageModel.create($languageModelOptions)
+  assistant = await window.ai?.languageModel.create($languageModelOptions);
 });
 onDestroy(() => {
   assistant?.destroy();

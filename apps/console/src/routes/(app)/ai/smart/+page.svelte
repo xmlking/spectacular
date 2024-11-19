@@ -1,11 +1,6 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import {
-  MagicSpellTextarea,
-  SmartDate,
-  SmartDatePicker,
-  ComboBox,
-} from '@spectacular/smart';
+import { MagicSpellTextarea, SmartDate, SmartDatePicker, ComboBox } from '@spectacular/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -23,7 +18,6 @@ export let data;
 // Variables
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
-
 
 // Search form
 const form = superForm(data.form, {
