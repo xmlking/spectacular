@@ -31,9 +31,9 @@
     "test:unit:ui": "dotenv-run -f .env -f .secrets -v -- vitest --ui"
   },
   "devDependencies": {
-    "@ai-sdk/azure": "0.0.52",
-    "@ai-sdk/openai": "0.0.72",
-    "@ai-sdk/svelte": "0.0.57",
+    "@ai-sdk/azure": "1.0.0",
+    "@ai-sdk/openai": "1.0.0",
+    "@ai-sdk/svelte": "1.0.0",
     "@floating-ui/dom": "1.6.12",
     "@fontsource-variable/inter": "5.1.0",
     "@inlang/cli": "2.18.1",
@@ -59,7 +59,7 @@
     "@tailwindcss/forms": "0.5.9",
     "@tailwindcss/typography": "0.5.15",
     "@testing-library/jest-dom": "6.6.3",
-    "@testing-library/svelte": "5.2.4",
+    "@testing-library/svelte": "5.2.5",
     "@types/d3-scale": "4.0.8",
     "@types/dom-chromium-ai": "0.0.2",
     "@types/js-cookie": "3.0.6",
@@ -73,7 +73,7 @@
     "@vincjo/datatables": "1.14.10",
     "@vitest/coverage-v8": "2.1.5",
     "@xyflow/svelte": "0.1.24",
-    "ai": "3.4.33",
+    "ai": "4.0.0",
     "autoprefixer": "10.4.20",
     "chrome-ai": "1.11.1",
     "date-fns": "4.1.0",
@@ -113,7 +113,7 @@
     "zod": "3.23.8"
   },
   "optionalDependencies": {
-    "@playwright/test": "1.48.2",
+    "@playwright/test": "1.49.0",
     "@vitest/ui": "2.1.5"
   }
 }

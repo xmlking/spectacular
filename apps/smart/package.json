@@ -26,9 +26,9 @@
     "test:e2e": "dotenv-run -f .env -f .secrets -v -- playwright test"
   },
   "devDependencies": {
-    "@aibrow/dom-types": "1.2.0",
+    "@aibrow/dom-types": "1.2.1",
     "@inlang/paraglide-sveltekit": "0.11.5",
-    "@playwright/test": "1.48.2",
+    "@playwright/test": "1.49.0",
     "@spectacular/biome-config": "workspace:*",
     "@spectacular/typescript-config": "workspace:*",
     "@spectacular/ui": "workspace:*",
@@ -48,8 +48,8 @@
     "clsx": "2.1.1",
     "formsnap": "2.0.0-next.1",
     "lucide-svelte": "0.460.1",
-    "mode-watcher": "0.4.1",
-    "svelte": "5.2.2",
+    "mode-watcher": "0.5.0",
+    "svelte": "5.2.3",
     "svelte-check": "4.0.9",
     "svelte-persisted-store": "0.12.0",
     "svelte-radix": "2.0.1",
