@@ -54,7 +54,7 @@ const useRemoteModel = async (event: SubmitEvent) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ startDate }),
+      body: JSON.stringify({ prompt: formattedDate }),
     });
     const content = await rawResponse.json();
     if (content?.date) {

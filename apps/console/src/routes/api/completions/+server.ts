@@ -29,14 +29,14 @@ const system = `You are a text editor. You will be given a prompt and a text to 
 
 export const POST = async (event) => {
   // ratelimit
-  if (await limiter.isLimited(event)) error(429);
+  // if (await limiter.isLimited(event)) error(429);
 
   const { request } = event;
   const { text, prompt } = await request.json();
   log.debug({ text, prompt });
   if (!prompt || !text) return new Response('Prompt is required', { status: 400 });
 
-  const result = await streamText({ model, system, prompt: `Prompt: ${prompt}\nText: ${text}` });
+  const result = streamText({ model, system, prompt: `Prompt: ${prompt}\nText: ${text}` });
 
   return result.toDataStreamResponse();
 };

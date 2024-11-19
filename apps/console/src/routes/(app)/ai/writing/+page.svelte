@@ -7,27 +7,26 @@ import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { onMount } from 'svelte';
-// import { zodClient } from 'sveltekit-superforms/adapters';
-// import { aiSchema } from './schema.js';
+import SuperDebug, {  defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { writingSchema } from './schema.js';
 
-const log = new Logger('ai:smart:browser');
-export let data;
+const log = new Logger('ai:writing:browser');
 
 // Variables
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
-// Search form
-const form = superForm(data.form, {
-  id: 'ai-form',
+// form
+const superform = superForm(defaults(zod(writingSchema)), {
+  id: 'writing-form',
   dataType: 'json',
   taintedMessage: null,
   syncFlashMessage: false,
+  resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  // validators: zodClient(aiSchema),
+  validators: zodClient(writingSchema),
   onError({ result }) {
     // TODO:
     // message.set(result.error.message)
@@ -41,7 +40,7 @@ const form = superForm(data.form, {
 });
 
 const {
-  form: formData,
+  form,
   delayed,
   timeout,
   enhance,
@@ -53,7 +52,7 @@ const {
   formId,
   capture,
   restore,
-} = form;
+} = superform;
 
 export const snapshot = { capture, restore };
 
@@ -75,14 +74,14 @@ $: loadingState.setFormLoading($delayed);
       </header>
       <section class="p-6 space-y-4">
         <div>
-          <Form.Field {form} name="writing1">
+          <Form.Field form={superform} name="content">
             <Form.Control let:attrs>
               <Form.Label class="label">Writing Tools</Form.Label>
               <SmartTextarea
                 class="textarea data-[fs-error]:input-error"
                 {...attrs}
-                bind:value={$formData.writing1}
-                {...$constraints.writing1}
+                bind:value={$form.content}
+                {...$constraints.content}
                 stream={true}
                 placeholder="Write an email to my bank asking them to raise my credit limit from $1,000 to $10,000."
                 context="I'm a long-standing customer."
@@ -119,7 +118,7 @@ $: loadingState.setFormLoading($delayed);
         }}
       />
       <br />
-      <SuperDebug label="Form" data={$formData} />
+      <SuperDebug label="Form" data={$form} />
       <br />
       <SuperDebug label="Tainted" status={false} data={$tainted} />
       <br />

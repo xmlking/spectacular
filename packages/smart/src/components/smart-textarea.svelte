@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+  import { browser } from '$app/environment';
 import { PenTool, SpellCheck2, Replace, Crop } from 'lucide-svelte';
 import Translate from './translate-icon.svelte';
 // import Summary from "./summary-icon.svelte";
@@ -53,13 +54,6 @@ export type SummarizerOptions = {
   import { Sparkles, SearchIcon } from "lucide-svelte";
   import { default as LoaderIcon } from "./loader-icon.svelte";
   import type { Provider } from "./settings.js";
-  import {
-    aiProvider,
-    writerOptions as writerOps,
-    rewriterOptions as rewriterOps,
-    summarizerOptions as summarizerOps,
-    preferedLang,
-  } from "./settings.js";
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   import { getFormField } from "formsnap";
   import Result from "./result.svelte";
@@ -80,11 +74,10 @@ export type SummarizerOptions = {
   }
 
   export let value = "";
-  export let provider = $aiProvider;
   export let tool: ToolType = "writer";
-  export let writerOptions: WriterOptions = { ...$writerOps };
-  export let rewriterOptions: RewriterOptions = { ...$rewriterOps };
-  export let summarizerOptions: SummarizerOptions = { ...$summarizerOps };
+  export let writerOptions: WriterOptions = { tone: 'neutral', format: 'plain-text', length: 'short' };
+  export let rewriterOptions: RewriterOptions = { tone: 'as-is', format: 'as-is', length: 'as-is' };
+  export let summarizerOptions: SummarizerOptions = { type: 'tl;dr', format: 'plain-text', length: 'short' };
   export let context = "";
   export let stream = false;
 
@@ -96,8 +89,8 @@ export type SummarizerOptions = {
   let error: string;
   let translationOps: TranslationLanguageOptions = {
     // TODO: auto detect sourceLanguage
-    sourceLanguage: $preferedLang,
-    targetLanguage: $preferedLang,
+    sourceLanguage:  browser ? navigator.language : 'en-US',
+    targetLanguage:  browser ? navigator.language : 'en-US',
   };
   const controller = new AbortController();
 

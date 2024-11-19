@@ -22,7 +22,7 @@ const schema = z.object({
 
 export const POST = async (event) => {
   // ratelimit
-  if (await limiter.isLimited(event)) error(429);
+  // if (await limiter.isLimited(event)) error(429);
 
   const { request } = event;
   const { prompt } = await request.json();
