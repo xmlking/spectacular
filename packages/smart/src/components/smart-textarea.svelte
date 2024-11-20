@@ -29,31 +29,29 @@ const toolOptions = {
   },
 } as const;
 
-export type ToolType = keyof typeof toolOptions;
-export type WriterOptions = {
-  tone?: AIWriterTone;
-  format?: AIWriterFormat;
-  length?: AIWriterLength;
-};
-export type RewriterOptions = {
-  tone?: AIRewriterTone;
-  format?: AIRewriterFormat;
-  length?: AIRewriterLength;
-};
-export type SummarizerOptions = {
-  type?: AISummarizerType;
-  format?: AISummarizerFormat;
-  length?: AISummarizerLength;
-};
+  export type ToolType = keyof typeof toolOptions;
+  export type WriterOptions = {
+    tone?: AIWriterTone;
+    format?: AIWriterFormat;
+    length?: AIWriterLength;
+  };
+  export type RewriterOptions = {
+    tone?: AIRewriterTone;
+    format?: AIRewriterFormat;
+    length?: AIRewriterLength;
+  };
+  export type SummarizerOptions = {
+    type?: AISummarizerType;
+    format?: AISummarizerFormat;
+    length?: AISummarizerLength;
+  };
 </script>
 
 <script lang="ts">
-  import { browser } from '$app/environment';
   import type { HTMLTextareaAttributes } from "svelte/elements";
   import { Logger } from "@spectacular/utils";
   import { Sparkles, SearchIcon } from "lucide-svelte";
   import { default as LoaderIcon } from "./loader-icon.svelte";
-  import type { Provider } from "./settings.js";
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   import { getFormField } from "formsnap";
   import Result from "./result.svelte";
@@ -62,7 +60,6 @@ export type SummarizerOptions = {
 
   interface $$Props extends HTMLTextareaAttributes {
     value?: string;
-    provider?: Provider;
     tone?: AIWriterTone;
     format?: AIWriterFormat;
     length?: AIWriterLength;
@@ -89,8 +86,8 @@ export type SummarizerOptions = {
   let error: string;
   let translationOps: TranslationLanguageOptions = {
     // TODO: auto detect sourceLanguage
-    sourceLanguage:  browser ? navigator.language : 'en-US',
-    targetLanguage:  browser ? navigator.language : 'en-US',
+    sourceLanguage: "en",
+    targetLanguage: "en",
   };
   const controller = new AbortController();
 
@@ -294,7 +291,7 @@ export type SummarizerOptions = {
       translator = await window.translation.createTranslator({
         sourceLanguage: translationOps.sourceLanguage,
         targetLanguage: translationOps.targetLanguage,
-        })
+      });
 
       completion = await translator.translate(value.trim());
       // if (stream) {
