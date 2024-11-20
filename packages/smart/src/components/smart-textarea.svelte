@@ -29,22 +29,22 @@ const toolOptions = {
   },
 } as const;
 
-  export type ToolType = keyof typeof toolOptions;
-  export type WriterOptions = {
-    tone?: AIWriterTone;
-    format?: AIWriterFormat;
-    length?: AIWriterLength;
-  };
-  export type RewriterOptions = {
-    tone?: AIRewriterTone;
-    format?: AIRewriterFormat;
-    length?: AIRewriterLength;
-  };
-  export type SummarizerOptions = {
-    type?: AISummarizerType;
-    format?: AISummarizerFormat;
-    length?: AISummarizerLength;
-  };
+export type ToolType = keyof typeof toolOptions;
+export type WriterOptions = {
+  tone?: AIWriterTone;
+  format?: AIWriterFormat;
+  length?: AIWriterLength;
+};
+export type RewriterOptions = {
+  tone?: AIRewriterTone;
+  format?: AIRewriterFormat;
+  length?: AIRewriterLength;
+};
+export type SummarizerOptions = {
+  type?: AISummarizerType;
+  format?: AISummarizerFormat;
+  length?: AISummarizerLength;
+};
 </script>
 
 <script lang="ts">
