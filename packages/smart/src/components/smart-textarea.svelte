@@ -1,51 +1,50 @@
 <script lang="ts" context="module">
-import { browser } from '$app/environment';
-import { PenTool, SpellCheck2, Replace, Crop } from 'lucide-svelte';
-import Translate from './translate-icon.svelte';
-// import Summary from "./summary-icon.svelte";
-const toolOptions = {
-  writer: {
-    name: 'Writer',
-    icon: PenTool,
-    placeholder: 'Generating content...',
-    header: '',
-  },
-  rewriter: {
-    name: 'Rewriter',
-    icon: SpellCheck2,
-    placeholder: 'Rewriting content...',
-    header: 'Rewritten Content:',
-  },
-  summarizer: {
-    name: 'Summarizer',
-    icon: Crop, // Replace
-    placeholder: 'Summarizing content...',
-    header: 'Summary:',
-  },
-  translator: {
-    name: 'Translator',
-    icon: Translate,
-    placeholder: 'Translating content...',
-    header: 'Translation:',
-  },
-} as const;
+  import { PenTool, SpellCheck2, Replace, Crop } from "lucide-svelte";
+  import Translate from "./translate-icon.svelte";
+  // import Summary from "./summary-icon.svelte";
+  const toolOptions = {
+    writer: {
+      name: "Writer",
+      icon: PenTool,
+      placeholder: "Generating content...",
+      header: "",
+    },
+    rewriter: {
+      name: "Rewriter",
+      icon: SpellCheck2,
+      placeholder: "Rewriting content...",
+      header: "Rewritten Content:",
+    },
+    summarizer: {
+      name: "Summarizer",
+      icon: Crop, // Replace
+      placeholder: "Summarizing content...",
+      header: "Summary:",
+    },
+    translator: {
+      name: "Translator",
+      icon: Translate,
+      placeholder: "Translating content...",
+      header: "Translation:",
+    },
+  } as const;
 
-export type ToolType = keyof typeof toolOptions;
-export type WriterOptions = {
-  tone?: AIWriterTone;
-  format?: AIWriterFormat;
-  length?: AIWriterLength;
-};
-export type RewriterOptions = {
-  tone?: AIRewriterTone;
-  format?: AIRewriterFormat;
-  length?: AIRewriterLength;
-};
-export type SummarizerOptions = {
-  type?: AISummarizerType;
-  format?: AISummarizerFormat;
-  length?: AISummarizerLength;
-};
+  export type ToolType = keyof typeof toolOptions;
+  export type WriterOptions = {
+    tone?: AIWriterTone;
+    format?: AIWriterFormat;
+    length?: AIWriterLength;
+  };
+  export type RewriterOptions = {
+    tone?: AIRewriterTone;
+    format?: AIRewriterFormat;
+    length?: AIRewriterLength;
+  };
+  export type SummarizerOptions = {
+    type?: AISummarizerType;
+    format?: AISummarizerFormat;
+    length?: AISummarizerLength;
+  };
 </script>
 
 <script lang="ts">
@@ -53,7 +52,6 @@ export type SummarizerOptions = {
   import { Logger } from "@spectacular/utils";
   import { Sparkles, SearchIcon } from "lucide-svelte";
   import { default as LoaderIcon } from "./loader-icon.svelte";
-  import type { Provider } from "./settings.js";
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   import { getFormField } from "formsnap";
   import Result from "./result.svelte";
@@ -62,7 +60,6 @@ export type SummarizerOptions = {
 
   interface $$Props extends HTMLTextareaAttributes {
     value?: string;
-    provider?: Provider;
     tone?: AIWriterTone;
     format?: AIWriterFormat;
     length?: AIWriterLength;
@@ -75,9 +72,21 @@ export type SummarizerOptions = {
 
   export let value = "";
   export let tool: ToolType = "writer";
-  export let writerOptions: WriterOptions = { tone: 'neutral', format: 'plain-text', length: 'short' };
-  export let rewriterOptions: RewriterOptions = { tone: 'as-is', format: 'as-is', length: 'as-is' };
-  export let summarizerOptions: SummarizerOptions = { type: 'tl;dr', format: 'plain-text', length: 'short' };
+  export let writerOptions: WriterOptions = {
+    tone: "neutral",
+    format: "plain-text",
+    length: "short",
+  };
+  export let rewriterOptions: RewriterOptions = {
+    tone: "as-is",
+    format: "as-is",
+    length: "as-is",
+  };
+  export let summarizerOptions: SummarizerOptions = {
+    type: "tl;dr",
+    format: "plain-text",
+    length: "short",
+  };
   export let context = "";
   export let stream = false;
 
@@ -89,8 +98,8 @@ export type SummarizerOptions = {
   let error: string;
   let translationOps: TranslationLanguageOptions = {
     // TODO: auto detect sourceLanguage
-    sourceLanguage:  browser ? navigator.language : 'en-US',
-    targetLanguage:  browser ? navigator.language : 'en-US',
+    sourceLanguage: "en",
+    targetLanguage: "en",
   };
   const controller = new AbortController();
 
@@ -279,22 +288,27 @@ export type SummarizerOptions = {
   async function translate() {
     let translator;
     try {
-      if (!('translation' in self) || !('createTranslator' in self.translation)) {
+      if (
+        !("translation" in self) ||
+        !("createTranslator" in self.translation)
+      ) {
         errors?.update((items) => {
           items.push("translation not supported");
           return items;
         });
-        return
+        return;
       }
 
       const detector = await self.translation.createDetector();
-      const { detectedLanguage, confidence } = (await detector.detect(value.trim()))[0];
-      translationOps.sourceLanguage = detectedLanguage
+      const { detectedLanguage, confidence } = (
+        await detector.detect(value.trim())
+      )[0];
+      translationOps.sourceLanguage = detectedLanguage;
 
       translator = await window.translation.createTranslator({
         sourceLanguage: translationOps.sourceLanguage,
         targetLanguage: translationOps.targetLanguage,
-        })
+      });
 
       completion = await translator.translate(value.trim());
       // if (stream) {
