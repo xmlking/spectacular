@@ -13,7 +13,6 @@ import Search from '$lib/modals/search.svelte';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { setLoadingState } from '$lib/stores/loading';
 import { online, orientation, size } from '$lib/stores/window';
-import { init as initAI } from '@spectacular/smart';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
 import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
@@ -45,8 +44,6 @@ setLoadingState();
 // initialize nhost client
 // TODO: initialize different clients for server-side and client-side
 const nhost = setNhostClient();
-// initialize ChromeAI
-onMount(async () => await initAI());
 
 // Handle Vercel Production Mode
 storeVercelProductionMode.set(data.vercelEnv === 'production');

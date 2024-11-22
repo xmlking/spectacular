@@ -41,7 +41,7 @@ afterNavigate(({ type, from, to }) => {
   // Loading Animation
     loadingState.setPageLoading(false);
   // Scroll to top
-  const isNewPage = from?.url.pathname !== to?.url.pathname;
+  const isNewPage = from?.url?.pathname !== to?.url.pathname;
   const elemPage = document.querySelector('#page');
   if (isNewPage && elemPage !== null) {
     elemPage.scrollTop = 0;

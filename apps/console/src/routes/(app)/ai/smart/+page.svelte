@@ -1,6 +1,6 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { MagicSpellTextarea, SmartDate, SmartDatePicker, ComboBox } from '@spectacular/smart';
+import { MagicSpellTextarea, SmartDate, SmartDatePicker, ComboBox, Support } from '@spectacular/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -66,6 +66,8 @@ $: loadingState.setFormLoading($delayed);
     <header class="flex justify-between">
       <h1 class="h1">Smart Components Demo</h1>
     </header>
+
+    <Support />
 
     <!-- Form -->
     <form method="POST" use:enhance class="card shadow-lg">
@@ -180,11 +182,6 @@ $: loadingState.setFormLoading($delayed);
       </section>
       <hr class="opacity-50" />
       <footer class="p-4 card-footer flex justify-end items-center space-x-4">
-        <p class="text-xs">
-          On-Device AI: <span class="text-error-500 uppercase"
-            >{window.ai?.languageModel !== undefined}</span
-          >
-        </p>
         <button type="submit" class="variant-filled-primary btn">submit</button>
       </footer>
     </form>

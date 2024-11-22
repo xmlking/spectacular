@@ -1,5 +1,6 @@
+import type { ai as AI } from '@aibrow/dom-types';
 /**
- *  Chrome AI Util Functions
+ *  Browser AI Util Functions
  */
 
 export function getChromeVersion() {
@@ -11,14 +12,15 @@ export function getChromeVersion() {
  * Detection & installation from aiBrow extension
  */
 export async function checkAibrowInstalled() {
-  const capabilities = await window.aibrow.capabilities();
-  if (!capabilities.extension) {
+  if (!window.aibrow) {
     // The extension is not installed
     console.log(
       'Install the extension from https://chromewebstore.google.com/detail/aibrow/bbkbjiehfkggfkbampigbbakecijicdm',
     );
     return false;
   }
+
+  const capabilities = await window.aibrow.capabilities();
   if (!capabilities.helper) {
     // The helper binary is not installed. We can fetch the direct link to the latest
     // version for the current platform
@@ -31,32 +33,62 @@ export async function checkAibrowInstalled() {
   return true;
 }
 
-/**
- * polyfill window.ai... at start
- */
-export async function init() {
-  // check if AiBrow is polyfilling the window.AI API
-  const isPolyfilled = window.ai && window.ai.aibrow === true;
-  if (isPolyfilled) {
-    console.log('AiBrow is polyfilling the window.AI API');
-    console.log('%cAiBrow is polyfilling the window.AI API\nAll Good', 'color: green');
-    return;
+export function getBrowserAI() {
+  // Always get the browsers AI, regardless of the user's preference in AiBrow
+  const ai: typeof AI = window.ai && window.ai.aibrow === true ? window.ai.browserAI : window.ai;
+  if (!window.ai) {
+    // Eventually this check wont be needed as all browsers support window.ai
+    // throw new Error('Your browser doesn\'t support window.ai')
+    console.log("%cYour browser doesn't support window.ai", 'color: magenta');
+    return undefined;
   }
-  const aibrowInstalled = await checkAibrowInstalled();
-  // polyfilling missing AI features on window.AI
-  if (aibrowInstalled && !isPolyfilled) {
-    console.log('%cPolyfilling missing AI features on window.AI', 'color: magenta');
-    window.ai.writer = window.aibrow.writer;
-    window.ai.rewriter = window.aibrow.rewriter;
-    window.ai.assistant = window.aibrow.languageModel;
-    window.ai.translator = window.aibrow.translator;
-    return;
-  }
-  // if neither aibrow installed nor chrome.ai installed but some AI features are avaible due to `Chrome Origin Trials`
-  if ('translation' in self && 'createTranslator' in self.translation) {
-    console.log('%cPolyfilling ai.translator.create', 'color: blue');
-    window.ai.translator.create = window.translation.createTranslator;
-  }
+  return ai;
+}
 
-  console.log('%cNo local AI models available', 'color: red');
+export function getAiBrow(): typeof AI | undefined {
+  if (!window.aibrow) {
+    // Send user to the download page
+    // throw new Error('AiBrow is not installed')
+    return undefined;
+  }
+  return window.aibrow;
+}
+
+// const browserAI = getBrowserAI()
+// const aibrowAI = getAiBrow()
+
+// Both can be then used interchangeably as needed
+// await browserAI.summarizer.create()
+// await aibrowAI.summarizer.create()
+
+// Or you can fallback as needed
+// const writer = browserAI.writer || aibrowAI.writer || throw new Error('Writer is not supported')
+// await writer.create()
+
+export function isPolyfilledAI() {
+  return window.ai && window.ai.aibrow === true;
+}
+
+export function isPolyfilledTranslation() {
+  return window.translation?.aibrow === true;
+}
+
+/**
+ * print ai status to console
+ */
+export async function printAIStats() {
+  const browserAI = getBrowserAI();
+  const aibrowAI = await checkAibrowInstalled();
+
+  if (browserAI) {
+    console.log('%cBrowser AI Installed', 'color: green');
+  }
+  if (aibrowAI) {
+    console.log('%cAiBrow Installed', 'color: green');
+  } else {
+    console.log('%cAiBrow Not Installed', 'color: magenta');
+  }
+  if (!browserAI && !aibrowAI) {
+    console.log("%cYour browser doesn't have any lcoal Models", 'color: red');
+  }
 }

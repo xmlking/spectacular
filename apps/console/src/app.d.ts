@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
-
+import type AI from '@aibrow/dom-types';
 type NhostClient = import('@nhost/nhost-js').NhostClient;
 type ToastSettings = import('@skeletonlabs/skeleton').ToastSettings;
 type AvailableLanguageTag = import('$i18n/runtime').AvailableLanguageTag;
@@ -48,6 +48,10 @@ declare global {
   declare const __GIT_TAG__: string;
   // Date of last commit
   declare const __GIT_DATE__: string;
+
+  interface Window {
+    readonly aibrow: typeof AI;
+  }
 }
 
 export type {};

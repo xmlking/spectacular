@@ -10,3 +10,4 @@ export { default as SmartDatePicker } from './smart-date-picker.svelte';
 export { default as ComboBox } from './combo-box.svelte';
 export { default as AISettings } from './settings.svelte';
 export { default as SmartPaste } from './smart-paste.svelte';
+export { default as Support } from './support.svelte';

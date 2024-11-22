@@ -12,7 +12,7 @@ declare global {
     // interface Platform {}
   }
 
-  interface WindowOrWorkerGlobalScope {
+  interface Window {
     readonly aibrow: typeof AI;
   }
   declare module '*.png?enhanced';

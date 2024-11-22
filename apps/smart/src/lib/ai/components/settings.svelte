@@ -178,7 +178,7 @@ onMount(() => {
     </fieldset>
   </form>
 {:else}
-  <p class="text-accent-400">Chrome AI NOT available</p>
+  <p class="text-accent-400">Browser AI NOT available</p>
 {/if}
 
 <!-- Debug -->
