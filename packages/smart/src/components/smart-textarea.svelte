@@ -30,21 +30,6 @@ const toolOptions = {
 } as const;
 
 export type ToolType = keyof typeof toolOptions;
-export type WriterOptions = {
-  tone?: AIWriterTone;
-  format?: AIWriterFormat;
-  length?: AIWriterLength;
-};
-export type RewriterOptions = {
-  tone?: AIRewriterTone;
-  format?: AIRewriterFormat;
-  length?: AIRewriterLength;
-};
-export type SummarizerOptions = {
-  type?: AISummarizerType;
-  format?: AISummarizerFormat;
-  length?: AISummarizerLength;
-};
 </script>
 
 <script lang="ts">
@@ -55,26 +40,37 @@ export type SummarizerOptions = {
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   import { getFormField } from "formsnap";
   import Result from "./result.svelte";
+  import { languageTagToHumanReadable } from "./smart.js";
 
   const log = new Logger("smart:textarea:browser");
 
   interface $$Props extends HTMLTextareaAttributes {
     value?: string;
-    tone?: AIWriterTone;
-    format?: AIWriterFormat;
-    length?: AIWriterLength;
-    writerOptions?: WriterOptions;
-    rewriterOptions?: RewriterOptions;
-    summarizerOptions?: SummarizerOptions;
+    tool?: ToolType;
+    writerOptions?: AIWriterCreateOptions;
+    rewriterOptions?: AIRewriterCreateOptions;
+    summarizerOptions?: AISummarizerCreateOptions;
     context?: string;
     stream?: boolean;
   }
 
   export let value = "";
   export let tool: ToolType = "writer";
-  export let writerOptions: WriterOptions = { tone: 'neutral', format: 'plain-text', length: 'short' };
-  export let rewriterOptions: RewriterOptions = { tone: 'as-is', format: 'as-is', length: 'as-is' };
-  export let summarizerOptions: SummarizerOptions = { type: 'tl;dr', format: 'plain-text', length: 'short' };
+  export let writerOptions: AIWriterCreateOptions = {
+    tone: "neutral",
+    format: "plain-text",
+    length: "medium",
+  };
+  export let rewriterOptions: AIRewriterCreateOptions = {
+    tone: "as-is",
+    format: "as-is",
+    length: "as-is",
+  };
+  export let summarizerOptions: AISummarizerCreateOptions = {
+    type: "tl;dr",
+    format: "plain-text",
+    length: "medium",
+  };
   export let context = "";
   export let stream = false;
 
@@ -84,29 +80,12 @@ export type SummarizerOptions = {
   let sharedContext = context;
   let completion: string;
   let error: string;
-  let translationOps: TranslationLanguageOptions = {
-    // TODO: auto detect sourceLanguage
+  let translationOps: AITranslatorCreateOptions = {
     sourceLanguage: "en",
     targetLanguage: "en",
   };
   const controller = new AbortController();
-
-  // Functions
-  // async function write1() {
-  //   const writer = await chromeAI.createWriter({
-  //     tone,
-  //     format,
-  //     length,
-  //     sharedContext,
-  //   });
-  //   console.log({ writer });
-  //   if (writer === undefined) return;
-  //   loading = true;
-  //   // controller.abort()
-  //   const stream = writer.writeStreaming(value, { signal: controller.signal });
-  //   completion1 = createStreamStore(stream);
-  //   loading = false;
-  // }
+  let detectedLanguage: LanguageDetectionResult | null;
 
   function clearPreviousResults() {
     error = "";
@@ -151,7 +130,7 @@ export type SummarizerOptions = {
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim(),
       });
-      writer = await (window.aibrow || window.ai).writer.create({
+      writer = await window.ai.writer.create({
         ...writerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -196,7 +175,7 @@ export type SummarizerOptions = {
           prompt: value.trim(),
         }),
       });
-      rewriter = await (window.aibrow || window.ai).rewriter.create({
+      rewriter = await window.ai.rewriter.create({
         ...rewriterOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -273,41 +252,23 @@ export type SummarizerOptions = {
       loading = false;
     }
   }
-  async function translate() {
-    let translator;
+
+  async function detectLanguage() {
+    let detector;
     try {
-      if (!('translation' in self) || !('createTranslator' in self.translation)) {
-        errors?.update((items) => {
-          items.push("translation not supported");
-          return items;
-        });
-        return
+      loading = true;
+      detector = await window.ai.languageDetector.create();
+      const results = await detector.detect(value.trim());
+      if (Array.isArray(results) && results.length > 0) {
+        detectedLanguage = results[0];
+        if (detectedLanguage.detectedLanguage) {
+          translationOps.sourceLanguage = detectedLanguage.detectedLanguage;
+          // log.debug(
+          console.log(
+            `The language is: ${results[0].detectedLanguage} with a confidence of: ${results[0].confidence}`,
+          );
+        }
       }
-
-      const detector = await self.translation.createDetector();
-      const { detectedLanguage, confidence } = (await detector.detect(value.trim()))[0];
-      translationOps.sourceLanguage = detectedLanguage
-
-      translator = await window.translation.createTranslator({
-        sourceLanguage: translationOps.sourceLanguage,
-        targetLanguage: translationOps.targetLanguage,
-      });
-
-      completion = await translator.translate(value.trim());
-      // if (stream) {
-      //   const readableStream = translator.translateStreaming(value.trim());
-      //   // for await (const value of readableStream) {
-      //   //   completion = value;
-      //   // }
-      //   const reader = readableStream.getReader();
-      //   while (true) {
-      //     const { done, value } = await reader.read();
-      //     if (done) break;
-      //     completion = value;
-      //   }
-      // } else {
-      //   completion = await translator.translate(value.trim());
-      // }
     } catch (err) {
       console.error(err);
       if (err instanceof Error) {
@@ -318,23 +279,34 @@ export type SummarizerOptions = {
         });
       }
     } finally {
-      // translator?.destroy();
+      detector?.destroy();
       loading = false;
     }
   }
 
-  async function translate1() {
+  async function translate() {
     let translator;
+    let streamSupported = true;
     try {
-      loading = true;
-      const prompt = `Translate the following text to ${translationOps.targetLanguage}:\n\n"${value.trim()}"`;
-      console.log({
-        tool: "translator",
-        prompt,
-      });
-      translator = await window.ai.languageModel.create();
-      if (stream) {
-        const readableStream = translator.promptStreaming(prompt);
+      if (window.ai.translator) {
+        translator = await window.ai.translator.create(translationOps);
+      } else if (
+        "translation" in self &&
+        "createTranslator" in self.translation
+      ) {
+        translator = await window.translation.createTranslator(translationOps);
+        streamSupported = false;
+      } else {
+        errors?.update((items) => {
+          items.push("translation not supported");
+          return items;
+        });
+        return;
+      }
+      if (stream && streamSupported) {
+        const readableStream = (translator as AITranslator).translateStreaming(
+          value.trim(),
+        );
         // for await (const value of readableStream) {
         //   completion = value;
         // }
@@ -345,7 +317,7 @@ export type SummarizerOptions = {
           completion = value;
         }
       } else {
-        completion = await translator.prompt(prompt);
+        completion = await translator.translate(value.trim());
       }
     } catch (err) {
       console.error(err);
@@ -357,10 +329,13 @@ export type SummarizerOptions = {
         });
       }
     } finally {
-      translator?.destroy();
+      if (streamSupported) {
+        (translator as AITranslator)?.destroy();
+      }
       loading = false;
     }
   }
+
   // Reactivity
   // $: console.log (`---${completion}---`)
   // Placeholder text based on selected tool
@@ -372,19 +347,25 @@ export type SummarizerOptions = {
 </script>
 
 <div class="relative">
-  <!-- <textarea
-    {...$$restProps}
-    class="textarea pr-10"
-    disabled={loading}
-    value={completion?.length > 0 ? completion.trim() : value}
-    on:change={(e) => (value = e.target?.value)}
-  /> -->
   <textarea
     {...$$restProps}
     class="textarea pr-10"
     disabled={loading}
     bind:value
+    on:change={detectLanguage}
   />
+
+  {#if value && detectedLanguage && detectedLanguage.detectedLanguage}
+    <p
+      class="hidden lg:block text-xs text-muted-foreground absolute right-14 bottom-2"
+    >
+      The language is <strong
+        >{languageTagToHumanReadable(detectedLanguage.detectedLanguage)}</strong
+      >
+      with a confidence of {(detectedLanguage.confidence * 100).toFixed(1)}%
+    </p>
+  {/if}
+
   <button
     class="btn-icon btn-icon-sm bg-initial absolute right-2 bottom-2 p-1 h-auto"
     type="button"
@@ -442,19 +423,12 @@ export type SummarizerOptions = {
           <option value="long">Longer</option>
         </select>
       {:else if tool === "rewriter"}
-        <!-- either Tone Or Length -->
-        <select
-          bind:value={rewriterOptions.tone}
-          on:change={() => (rewriterOptions.length = "as-is")}
-        >
+        <select bind:value={rewriterOptions.tone}>
           <option value="as-is">As Is</option>
           <option value="more-casual">More Casual</option>
           <option value="more-formal">More Formal</option>
         </select>
-        <select
-          bind:value={rewriterOptions.length}
-          on:change={() => (rewriterOptions.tone = "as-is")}
-          >>
+        <select bind:value={rewriterOptions.length}>
           <option value="as-is">As Is</option>
           <option value="shorter">Shorter</option>
           <option value="longer">Longer</option>

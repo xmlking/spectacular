@@ -34,7 +34,7 @@ onMount(async () => {
       size={20}
       class={aibrowInstalled ? "text-green-500" : "text-red-500"}
     />
-    Aibrow Installed
+    AiBrow Installed
   </span>
   <span class="flex items-center gap-2">
     <Sparkles

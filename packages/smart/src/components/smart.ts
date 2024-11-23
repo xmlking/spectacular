@@ -1,4 +1,7 @@
-import type { ai as AI } from '@aibrow/dom-types';
+import type { ai } from '@aibrow/dom-types';
+import { readable } from 'svelte/store';
+
+type AI = typeof ai;
 /**
  *  Browser AI Util Functions
  */
@@ -35,7 +38,7 @@ export async function checkAibrowInstalled() {
 
 export function getBrowserAI() {
   // Always get the browsers AI, regardless of the user's preference in AiBrow
-  const ai: typeof AI = window.ai && window.ai.aibrow === true ? window.ai.browserAI : window.ai;
+  const ai: AI = window.ai && window.ai.aibrow === true ? window.ai.browserAI : window.ai;
   if (!window.ai) {
     // Eventually this check wont be needed as all browsers support window.ai
     // throw new Error('Your browser doesn\'t support window.ai')
@@ -45,7 +48,7 @@ export function getBrowserAI() {
   return ai;
 }
 
-export function getAiBrow(): typeof AI | undefined {
+export function getAiBrow(): AI | undefined {
   if (!window.aibrow) {
     // Send user to the download page
     // throw new Error('AiBrow is not installed')
@@ -91,4 +94,61 @@ export async function printAIStats() {
   if (!browserAI && !aibrowAI) {
     console.log("%cYour browser doesn't have any lcoal Models", 'color: red');
   }
+}
+
+export function createStreamStore(stream: ReadableStream<string>) {
+  return readable('', (set) => {
+    // Create a reader from the stream
+    const reader = stream.getReader();
+
+    // Function to read from the stream
+    const read = async () => {
+      try {
+        // for await (const value of stream) {
+        //   set(value);
+        // }
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          // Update the store with the new value
+          set(value);
+        }
+      } catch (error) {
+        console.error('Error reading from stream:', error);
+        set(''); // Clear the store on error
+      } finally {
+        reader.releaseLock();
+      }
+    };
+
+    // Start reading the stream
+    read();
+
+    return () => reader.cancel();
+  });
+}
+
+export function languageTagToHumanReadable(
+  languageTag: Intl.UnicodeBCP47LocaleIdentifier,
+  targetLanguage: string = 'en-US',
+) {
+  const displayNames = new Intl.DisplayNames([targetLanguage], { type: 'language' });
+  return displayNames.of(languageTag);
+}
+
+/**
+ * in-source testing
+ * RUN: turbo run @spectacular/smart#test
+ */
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest;
+
+  it('test languageTagToHumanReadable', async () => {
+    expect(languageTagToHumanReadable('ja', 'en')).toEqual('Japanese');
+    expect(languageTagToHumanReadable('zh', 'en')).toEqual('Chinese');
+    expect(languageTagToHumanReadable('zh-Hant', 'en')).toEqual('Traditional Chinese');
+    expect(languageTagToHumanReadable('zh-TW', 'en')).toEqual('Chinese (Taiwan)');
+    expect(languageTagToHumanReadable('en', 'ja')).toEqual('英語');
+  });
 }
