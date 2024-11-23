@@ -1,3 +1,26 @@
+<!--
+@component SmartTextarea - allow users write/rewrite/summarize with On-Device AI
+  @prop {string} value - The field value, this is the seed for Writer.
+  @prop {ToolType} tool - Which writing tool? - Writer, Rewriter, Summarizer, Translator
+  @prop {AIWriterCreateOptions} writerOptions - Writer Create Options
+  @prop {AIRewriterCreateOptions} rewriterOptions - Rewriter Create Options
+  @prop {AISummarizerCreateOptions} summarizerOptions - Summarizer Create Options
+  @prop {string} context - AI Writer/Rewriter Context
+  @prop {boolean} stream - streaming output enabled?
+  @slot default - The map container with image, vector, and text annotations
+
+  Usage:
+  ```svelte
+    <SmartTextarea
+      class="textarea data-[fs-error]:input-error"
+      {...attrs}
+      bind:value={$form.content}
+      {...$constraints.content}
+      stream={true}
+      context="I'm a long-standing customer."
+    />
+  ```
+-->
 <script lang="ts" context="module">
 import { PenTool, SpellCheck2, Replace, Crop } from 'lucide-svelte';
 import Translate from './translate-icon.svelte';

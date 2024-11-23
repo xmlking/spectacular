@@ -1,52 +1,144 @@
+<!--
+@component ComboBox - allow users to use natural language to filter given list of items using On-Device AI
+  @prop {string} value - 	Selected value(s)
+  @prop {string[]} items - Array of items available to display / filter
+  @prop {number} debounceWait - milliseconds debounce wait
+  @prop {string} name - Name attribute of hidden input, helpful for form actions
+  @slot prepend - prepend
+  @slot clear-icon - clear-icon
+
+  Usage:
+  ```svelte
+    <ComboBox
+      items={['item1', 'item2'...]}
+      debounceWait={300}
+      bind:value={$formData.specialization}
+      {...$constraints.specialization}
+    />
+  ```
+-->
 <script lang="ts">
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import Select from 'svelte-select';
 import { writable } from 'svelte/store';
-import type { HTMLTextareaAttributes } from 'svelte/elements';
-interface $$Props extends HTMLTextareaAttributes {
-  selected?: any;
+import type { HTMLSelectAttributes } from 'svelte/elements';
+interface $$Props extends HTMLSelectAttributes {
+  value: string;
+  items: Readonly<string[]>;
+  debounceWait?: number;
+  name?: string | null;
 }
+export let value = '';
+export let items: Readonly<string[]>;
+export let debounceWait = 300;
+export let name: string | null = null;
+
 const log = new Logger('experiments:ai:ms:browser');
 const api = '/api/combobox';
-let isLoading = false;
+let loading = false;
 let error: string;
 const options = writable([]);
 
-let value = '';
-export let selected = '';
-// TODO: useObject is not yet supported for svelte https://sdk.vercel.ai/docs/ai-sdk-ui/overview
-const useRemoteModel = async (event: Event) => {
+let filterText = '';
+
+async function handleOptions(filterText: string) {
+  if (filterText.length === 0) return [...items];
+  if (window.aibrow) {
+    return useLocalModel(filterText);
+  } else {
+    await useRemoteModel(filterText);
+  }
+}
+
+// Define the type of object we want returned
+
+const grammar = {
+  title: 'provider specialization',
+  type: 'object',
+  properties: {
+    specialization: {
+      enum: [
+        'Anesthesiology',
+        'Cardiology',
+        'Dermatology',
+        'Emergency Medicine',
+        'Endocrinology',
+        'Family Medicine',
+        'Gastroenterology',
+        'General Surgery',
+        'Geriatrics',
+        'Hematology',
+        'Infectious Disease',
+        'Internal Medicine',
+        'Nephrology',
+        'Neurology',
+        'Obstetrics & Gynecology',
+        'Oncology',
+        'Ophthalmology',
+        'Orthopedics',
+        'Pediatrics',
+        'Psychiatry',
+        'Pulmonology',
+        'Urology',
+      ],
+    },
+  },
+};
+
+const useLocalModel = async (filterText: string) => {
   try {
-    isLoading = true;
+    loading = true;
+    const session = await window.aibrow.coreModel.create({ grammar });
+    const prompt = `Extract data from the following text: ${filterText}`;
+    const output = await session.prompt(prompt);
+    console.log(output);
+    loading = false;
+    return [JSON.parse(output).specialization];
+  } catch (err) {
+    console.log(err);
+    error = `${err}`;
+  } finally {
+    loading = false;
+  }
+};
+
+// TODO: useObject is not yet supported for svelte https://sdk.vercel.ai/docs/ai-sdk-ui/overview
+const useRemoteModel = async (filterText: string) => {
+  try {
+    loading = true;
     const rawResponse = await fetch(api, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ value }),
+      body: JSON.stringify({ filterText }),
     });
     const content = await rawResponse.json();
     if (content[0]?.options) {
       // console.log({ result: content[0]?.options });
       return content[0]?.options;
     }
-    isLoading = false;
+    loading = false;
   } catch (err) {
     console.log(err);
     error = `${err}`;
   } finally {
-    isLoading = false;
+    loading = false;
   }
 };
 </script>
 
 <form class="flex flex-col items-center">
   <Select
-    bind:filterText={value}
-    bind:justValue={selected}
-    loadOptions={useRemoteModel}
+    bind:filterText
+    bind:justValue={value}
+    bind:loading
+    {name}
+    {debounceWait}
+    loadOptions={handleOptions}
+    placeholder="start typing..."
     --tw-border-opacity="1"
     --tw-bg-opacity="1"
     --background="rgb(var(--color-surface-200))"
@@ -71,6 +163,7 @@ const useRemoteModel = async (event: Event) => {
     --item-active-background="rgb(var(--color-surface-400) /2)"
     --item-is-active-bg="var(--pd-input-field-hover-stroke)"
     --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
+    {...$$restProps}
   />
 
   <ErrorMessage {error} />

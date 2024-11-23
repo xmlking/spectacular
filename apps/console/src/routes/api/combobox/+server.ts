@@ -1,3 +1,4 @@
+import { SPECIALIZATIONS } from '$lib/constants';
 import { limiter } from '$lib/server/limiter/limiter';
 import { azure } from '@ai-sdk/azure';
 import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
@@ -19,41 +20,15 @@ const model = openai('gpt-4o');
 const system =
   'You are a suggestion generator. Provide all possible suggestions for a given category value. Do not include the prompt. Do not enclose the response in quotes.';
 const schema = z.object({
-  options: z
-    .enum([
-      'Anesthesiology',
-      'Cardiology',
-      'Dermatology',
-      'Emergency Medicine',
-      'Endocrinology',
-      'Family Medicine',
-      'Gastroenterology',
-      'General Surgery',
-      'Geriatrics',
-      'Hematology',
-      'Infectious Disease',
-      'Internal Medicine',
-      'Nephrology',
-      'Neurology',
-      'Obstetrics & Gynecology',
-      'Oncology',
-      'Ophthalmology',
-      'Orthopedics',
-      'Pediatrics',
-      'Psychiatry',
-      'Pulmonology',
-      'Urology',
-    ])
-    .array()
-    .nullish(),
+  options: z.enum(SPECIALIZATIONS).array().nullish(),
 });
 export const POST = async (event) => {
   // ratelimit
   // if (await limiter.isLimited(event)) error(429);
 
   const { request } = event;
-  const { value } = await request.json();
-  log.debug({ value });
+  const { filterText } = await request.json();
+  log.debug({ filterText });
 
   try {
     const result = await generateObject({
@@ -61,7 +36,7 @@ export const POST = async (event) => {
       output: 'array',
       schema,
       system,
-      prompt: ` \nGenerate possible Suggestions from Text: ${value}`,
+      prompt: ` \nGenerate possible Suggestions from Text: ${filterText}`,
     });
 
     log.debug(result.object);

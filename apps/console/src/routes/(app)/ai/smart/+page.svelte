@@ -9,6 +9,7 @@ import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { superForm } from 'sveltekit-superforms';
 import { onMount } from 'svelte';
+import { SPECIALIZATIONS } from '$lib/constants.js';
 // import { zodClient } from 'sveltekit-superforms/adapters';
 // import { aiSchema } from './schema.js';
 
@@ -168,7 +169,9 @@ $: loadingState.setFormLoading($delayed);
               <Form.Control let:attrs>
                 <Form.Label class="label">Provider Specialization</Form.Label>
                 <ComboBox
-                  bind:selected={$formData.specialization}
+                  items={SPECIALIZATIONS}
+                  debounceWait={300}
+                  bind:value={$formData.specialization}
                   {...$constraints.specialization}
                 />
               </Form.Control>

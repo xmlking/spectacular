@@ -1,3 +1,4 @@
+import { SPECIALIZATIONS } from '$lib/constants';
 import { z } from 'zod';
 
 export const aiSchema = z.object({
@@ -15,5 +16,5 @@ export const aiSchema = z.object({
     .trim(),
   startDate: z.date().nullish(),
   endDate: z.date().nullish(),
-  specialization: z.string().nullish(),
+  specialization: z.enum(SPECIALIZATIONS),
 });

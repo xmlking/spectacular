@@ -33,6 +33,33 @@ export const MAX_RETRIES = 3;
 export const TIMEOUT = 5000;
 
 /**
+ * Doctor Specializations
+ */
+export const SPECIALIZATIONS = [
+  'Anesthesiology',
+  'Cardiology',
+  'Dermatology',
+  'Emergency Medicine',
+  'Endocrinology',
+  'Family Medicine',
+  'Gastroenterology',
+  'General Surgery',
+  'Geriatrics',
+  'Hematology',
+  'Infectious Disease',
+  'Internal Medicine',
+  'Nephrology',
+  'Neurology',
+  'Obstetrics & Gynecology',
+  'Oncology',
+  'Ophthalmology',
+  'Orthopedics',
+  'Pediatrics',
+  'Psychiatry',
+  'Pulmonology',
+  'Urology',
+] as const;
+/**
  * Defaults
  */
 export const DEFAULT_ORGANIZATION = 'spectacular';
