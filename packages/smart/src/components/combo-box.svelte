@@ -47,7 +47,9 @@ async function handleOptions(filterText: string) {
   if (window.aibrow) {
     return useLocalModel(filterText);
   } else {
-    await useRemoteModel(filterText);
+    let res = await useRemoteModel(filterText);
+    log.debug({ res });
+    return res;
   }
 }
 
