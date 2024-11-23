@@ -38,7 +38,7 @@ export type ToolType = keyof typeof toolOptions;
   import { Sparkles, SearchIcon } from "lucide-svelte";
   import { default as LoaderIcon } from "./loader-icon.svelte";
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
-  import { getFormField } from "formsnap";
+  // import { getFormField } from "formsnap";
   import Result from "./result.svelte";
   import { languageTagToHumanReadable } from "./smart.js";
 
@@ -75,7 +75,7 @@ export type ToolType = keyof typeof toolOptions;
   export let stream = false;
 
   // Variables
-  const { errors } = getFormField();
+  // const { errors } = getFormField();
   let loading = false;
   let sharedContext = context;
   let completion: string;
@@ -98,10 +98,10 @@ export type ToolType = keyof typeof toolOptions;
     // Validate
     if (value.trim() === "") {
       error = "Type your intent and try again...";
-      errors?.update((items) => {
-        items.push(error);
-        return items;
-      });
+      // errors?.update((items) => {
+      //   items.push(error);
+      //   return items;
+      // });
       return;
     }
 
@@ -152,10 +152,10 @@ export type ToolType = keyof typeof toolOptions;
       console.error(err);
       if (err instanceof Error) {
         error = err.message;
-        errors?.update((items) => {
-          items.push(error);
-          return items;
-        });
+        // errors?.update((items) => {
+        //   items.push(error);
+        //   return items;
+        // });
       }
     } finally {
       writer?.destroy();
@@ -199,10 +199,10 @@ export type ToolType = keyof typeof toolOptions;
       console.error(err);
       if (err instanceof Error) {
         error = err.message;
-        errors?.update((items) => {
-          items.push(error);
-          return items;
-        });
+        // errors?.update((items) => {
+        //   items.push(error);
+        //   return items;
+        // });
       }
     } finally {
       rewriter?.destroy();
@@ -242,10 +242,10 @@ export type ToolType = keyof typeof toolOptions;
       console.error(err);
       if (err instanceof Error) {
         error = err.message;
-        errors?.update((items) => {
-          items.push(error);
-          return items;
-        });
+        // errors?.update((items) => {
+        //   items.push(error);
+        //   return items;
+        // });
       }
     } finally {
       summarizer?.destroy();
@@ -273,10 +273,10 @@ export type ToolType = keyof typeof toolOptions;
       console.error(err);
       if (err instanceof Error) {
         error = err.message;
-        errors?.update((items) => {
-          items.push(error);
-          return items;
-        });
+        // errors?.update((items) => {
+        //   items.push(error);
+        //   return items;
+        // });
       }
     } finally {
       detector?.destroy();
@@ -297,10 +297,10 @@ export type ToolType = keyof typeof toolOptions;
         translator = await window.translation.createTranslator(translationOps);
         streamSupported = false;
       } else {
-        errors?.update((items) => {
-          items.push("translation not supported");
-          return items;
-        });
+        // errors?.update((items) => {
+        //   items.push("translation not supported");
+        //   return items;
+        // });
         return;
       }
       if (stream && streamSupported) {
@@ -323,10 +323,10 @@ export type ToolType = keyof typeof toolOptions;
       console.error(err);
       if (err instanceof Error) {
         error = err.message;
-        errors?.update((items) => {
-          items.push(error);
-          return items;
-        });
+        // errors?.update((items) => {
+        //   items.push(error);
+        //   return items;
+        // });
       }
     } finally {
       if (streamSupported) {
