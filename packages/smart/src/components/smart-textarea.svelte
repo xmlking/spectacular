@@ -263,8 +263,7 @@ export type ToolType = keyof typeof toolOptions;
         detectedLanguage = results[0];
         if (detectedLanguage.detectedLanguage) {
           translationOps.sourceLanguage = detectedLanguage.detectedLanguage;
-          // log.debug(
-          console.log(
+          log.debug(
             `The language is: ${results[0].detectedLanguage} with a confidence of: ${results[0].confidence}`,
           );
         }
@@ -297,6 +296,7 @@ export type ToolType = keyof typeof toolOptions;
         translator = await window.translation.createTranslator(translationOps);
         streamSupported = false;
       } else {
+        error = "translation not supported";
         // errors?.update((items) => {
         //   items.push("translation not supported");
         //   return items;
@@ -423,12 +423,18 @@ export type ToolType = keyof typeof toolOptions;
           <option value="long">Longer</option>
         </select>
       {:else if tool === "rewriter"}
-        <select bind:value={rewriterOptions.tone}>
+        <select
+          bind:value={rewriterOptions.tone}
+          on:change={() => (rewriterOptions.length = "as-is")}
+        >
           <option value="as-is">As Is</option>
           <option value="more-casual">More Casual</option>
           <option value="more-formal">More Formal</option>
         </select>
-        <select bind:value={rewriterOptions.length}>
+        <select
+          bind:value={rewriterOptions.length}
+          on:change={() => (rewriterOptions.tone = "as-is")}
+        >
           <option value="as-is">As Is</option>
           <option value="shorter">Shorter</option>
           <option value="longer">Longer</option>
