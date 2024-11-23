@@ -1,6 +1,6 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { MagicSpellTextarea, SmartDate, SmartDatePicker, ComboBox, Support } from '@spectacular/smart';
+import * as Smart from '@spectacular/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -68,7 +68,7 @@ $: loadingState.setFormLoading($delayed);
       <h1 class="h1">Smart Components Demo</h1>
     </header>
 
-    <Support />
+    <Smart.Support />
 
     <!-- Form -->
     <form method="POST" use:enhance class="card shadow-lg">
@@ -81,7 +81,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="commentOne">
             <Form.Control let:attrs>
               <Form.Label class="label">Comment One</Form.Label>
-              <MagicSpellTextarea
+              <Smart.MagicSpellTextarea
                 class="textarea data-[fs-error]:input-error"
                 {...attrs}
                 bind:value={$formData.commentOne}
@@ -99,7 +99,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="commentTwo">
             <Form.Control let:attrs>
               <Form.Label class="label">Comment Two</Form.Label>
-              <MagicSpellTextarea
+              <Smart.MagicSpellTextarea
                 class="textarea data-[fs-error]:input-error"
                 {...attrs}
                 bind:value={$formData.commentTwo}
@@ -117,7 +117,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="commentThree">
             <Form.Control let:attrs>
               <Form.Label class="label">Comment Three</Form.Label>
-              <MagicSpellTextarea
+              <Smart.MagicSpellTextarea
                 class="textarea data-[fs-error]:input-error"
                 {...attrs}
                 bind:value={$formData.commentThree}
@@ -136,7 +136,7 @@ $: loadingState.setFormLoading($delayed);
             <Form.Field {form} name="startDate">
               <Form.Control let:attrs>
                 <Form.Label class="label">Start Date</Form.Label>
-                <SmartDate
+                <Smart.Date
                   class="textarea data-[fs-error]:input-error"
                   {...attrs}
                   bind:value={$formData.startDate}
@@ -153,7 +153,7 @@ $: loadingState.setFormLoading($delayed);
             <Form.Field {form} name="endDate">
               <Form.Control let:attrs>
                 <Form.Label class="label">End Date</Form.Label>
-                <SmartDatePicker
+                <Smart.DatePicker
                   class="textarea data-[fs-error]:input-error"
                   {...attrs}
                   bind:startDate={$formData.endDate}
@@ -168,7 +168,7 @@ $: loadingState.setFormLoading($delayed);
             <Form.Field {form} name="specialization">
               <Form.Control let:attrs>
                 <Form.Label class="label">Provider Specialization</Form.Label>
-                <ComboBox
+                <Smart.ComboBox
                   items={SPECIALIZATIONS}
                   debounceWait={300}
                   bind:value={$formData.specialization}

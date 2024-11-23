@@ -1,5 +1,5 @@
 <script lang="ts">
-import { AISettings } from '@spectacular/smart';
+import * as Smart from '@spectacular/smart';
 </script>
 
 <svelte:head>
@@ -16,7 +16,7 @@ import { AISettings } from '@spectacular/smart';
   <div class="page-section">
     <h3 class="h2">AI Settings</h3>
     <p>Update AI model settings</p>
-    <AISettings />
+    <Smart.Settings />
   </div>
 </div>
 

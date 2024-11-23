@@ -1,13 +1,38 @@
-// Reexport your components here
 export * from './constants.js';
 export * from './settings.js';
 export * from './smart.js';
-export { default as MagicSpellTextarea } from './magic-spell-textarea.svelte';
-export { default as SmartTextarea } from './smart-textarea.svelte';
-export { default as SmartDate } from './smart-date.svelte';
-export { default as AssistantStats } from './assistant-stats.svelte';
-export { default as SmartDatePicker } from './smart-date-picker.svelte';
-export { default as ComboBox } from './combo-box.svelte';
-export { default as AISettings } from './settings.svelte';
-export { default as SmartPaste } from './smart-paste.svelte';
-export { default as Support } from './support.svelte';
+
+import Stats from './stats.svelte';
+import Settings from './settings.svelte';
+import Support from './support.svelte';
+import MagicSpellTextarea from './magic-spell-textarea.svelte';
+import Textarea from './textarea.svelte';
+import DatePicker from './date-picker.svelte';
+import Date from './date.svelte';
+import ComboBox from './combo-box.svelte';
+import Paste from './paste.svelte';
+import Sentiment from './sentiment.svelte';
+
+export {
+  Stats,
+  Settings,
+  Support,
+  MagicSpellTextarea,
+  Textarea,
+  DatePicker,
+  Date,
+  ComboBox,
+  Paste,
+  Sentiment,
+  //
+  Stats as SmartStats,
+  Settings as SmartSettings,
+  Support as SmartSupport,
+  MagicSpellTextarea as SmartMagicSpellTextarea,
+  Textarea as SmartTextarea,
+  DatePicker as SmartDatePicker,
+  Date as SmartDate,
+  ComboBox as SmartComboBox,
+  Paste as SmartPaste,
+  Sentiment as SmartSentiment
+};

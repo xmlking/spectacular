@@ -132,7 +132,6 @@ const useRemoteModel = async (filterText: string) => {
 };
 </script>
 
-<form class="flex flex-col items-center">
   <Select
     bind:filterText
     bind:justValue={value}
@@ -169,4 +168,4 @@ const useRemoteModel = async (filterText: string) => {
   />
 
   <ErrorMessage {error} />
-</form>
+

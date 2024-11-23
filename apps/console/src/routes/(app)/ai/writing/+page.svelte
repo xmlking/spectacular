@@ -1,7 +1,7 @@
 <script lang="ts">
 import { Support } from '@spectacular/smart';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { SmartTextarea } from '@spectacular/smart';
+import * as Smart from '@spectacular/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -67,7 +67,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field form={superform} name="content">
             <Form.Control let:attrs>
               <Form.Label class="label">Writing Tools</Form.Label>
-              <SmartTextarea
+              <Smart.Textarea
                 class="textarea data-[fs-error]:input-error"
                 {...attrs}
                 bind:value={$form.content}

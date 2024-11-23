@@ -279,6 +279,7 @@ export type ToolType = keyof typeof toolOptions;
   async function detectLanguage() {
     let detector;
     try {
+      if (!value.trim()) return;
       loading = true;
       detector = await window.ai.languageDetector.create();
       const results = await detector.detect(value.trim());
