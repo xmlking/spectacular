@@ -34,5 +34,5 @@ export {
   Date as SmartDate,
   ComboBox as SmartComboBox,
   Paste as SmartPaste,
-  Sentiment as SmartSentiment
+  Sentiment as SmartSentiment,
 };

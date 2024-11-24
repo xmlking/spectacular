@@ -28,14 +28,15 @@ interface $$Props extends HTMLSelectAttributes {
   items: Readonly<string[]>;
   debounceWait?: number;
   name?: string | null;
+  api?: Readonly<string>;
 }
 export let value = '';
 export let items: Readonly<string[]>;
 export let debounceWait = 300;
 export let name: string | null = null;
+export let api: string = '/api/combobox';
 
-const log = new Logger('experiments:ai:ms:browser');
-const api = '/api/combobox';
+const log = new Logger('smart:textarea:browser');
 let loading = false;
 let error: string;
 const options = writable([]);
@@ -54,53 +55,34 @@ async function handleOptions(filterText: string) {
 }
 
 // Define the type of object we want returned
-
 const grammar = {
   title: 'provider specialization',
   type: 'object',
   properties: {
-    specialization: {
-      enum: [
-        'Anesthesiology',
-        'Cardiology',
-        'Dermatology',
-        'Emergency Medicine',
-        'Endocrinology',
-        'Family Medicine',
-        'Gastroenterology',
-        'General Surgery',
-        'Geriatrics',
-        'Hematology',
-        'Infectious Disease',
-        'Internal Medicine',
-        'Nephrology',
-        'Neurology',
-        'Obstetrics & Gynecology',
-        'Oncology',
-        'Ophthalmology',
-        'Orthopedics',
-        'Pediatrics',
-        'Psychiatry',
-        'Pulmonology',
-        'Urology',
-      ],
+    specializations: {
+      type: 'array',
+      items: {
+        type: 'string',
+        enum: items,
+      },
     },
   },
 };
 
 const useLocalModel = async (filterText: string) => {
+  let session;
   try {
     loading = true;
-    const session = await window.aibrow.coreModel.create({ grammar });
+    session = await window.aibrow.coreModel.create({ grammar });
     const prompt = `Extract data from the following text: ${filterText}`;
     const output = await session.prompt(prompt);
-    console.log(output);
-    loading = false;
-    return [JSON.parse(output).specialization];
+    log.debug({ output });
+    return JSON.parse(output).specializations;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     error = `${err}`;
   } finally {
+    session?.destroy();
     loading = false;
   }
 };
@@ -132,40 +114,39 @@ const useRemoteModel = async (filterText: string) => {
 };
 </script>
 
-  <Select
-    bind:filterText
-    bind:justValue={value}
-    bind:loading
-    {name}
-    {debounceWait}
-    loadOptions={handleOptions}
-    placeholder="start typing..."
-    --tw-border-opacity="1"
-    --tw-bg-opacity="1"
-    --background="rgb(var(--color-surface-200))"
-    --border-radius="var(--theme-rounded-base)"
-    --border="var(--theme-border-base) solid rgb(var(--color-surface-400))"
-    --border-hover="var(--theme-border-base) solid rgb(var(--color-surface-500))"
-    --border-focused="var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))"
-    --error-background="rgb(var(--color-error-200) / var(--tw-bg-opacity))"
-    --error-border="rgb(var(--color-error-500) / var(--tw-bg-opacity))"
-    --disabled-color="rgb(var(--color-surface-400) / 2)"
-    --disabled-border-color="rgb(var(--color-surface-400) / 2)"
-    --disabled-background="rgb(var(--color-surface-200) / 2)"
-    --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
-    --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
-    --list-border-radius="var(--theme-rounded-container)"
-    --list-empty-padding="10px"
-    --list-z-index="100"
-    --item-color="var(--body-text-color)"
-    --item-border="var(--comfy-dropdown-border-color)"
-    --item-is-active-color="rgba(var(--theme-font-color-dark))"
-    --item-hover-color="rgba(var(--on-secondary))"
-    --item-active-background="rgb(var(--color-surface-400) /2)"
-    --item-is-active-bg="var(--pd-input-field-hover-stroke)"
-    --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
-    {...$$restProps}
-  />
+<Select
+  bind:filterText
+  bind:justValue={value}
+  bind:loading
+  {name}
+  {debounceWait}
+  loadOptions={handleOptions}
+  placeholder="start typing..."
+  --tw-border-opacity="1"
+  --tw-bg-opacity="1"
+  --background="rgb(var(--color-surface-200))"
+  --border-radius="var(--theme-rounded-base)"
+  --border="var(--theme-border-base) solid rgb(var(--color-surface-400))"
+  --border-hover="var(--theme-border-base) solid rgb(var(--color-surface-500))"
+  --border-focused="var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))"
+  --error-background="rgb(var(--color-error-200) / var(--tw-bg-opacity))"
+  --error-border="rgb(var(--color-error-500) / var(--tw-bg-opacity))"
+  --disabled-color="rgb(var(--color-surface-400) / 2)"
+  --disabled-border-color="rgb(var(--color-surface-400) / 2)"
+  --disabled-background="rgb(var(--color-surface-200) / 2)"
+  --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
+  --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
+  --list-border-radius="var(--theme-rounded-container)"
+  --list-empty-padding="10px"
+  --list-z-index="100"
+  --item-color="var(--body-text-color)"
+  --item-border="var(--comfy-dropdown-border-color)"
+  --item-is-active-color="rgba(var(--theme-font-color-dark))"
+  --item-hover-color="rgba(var(--on-secondary))"
+  --item-active-background="rgb(var(--color-surface-400) /2)"
+  --item-is-active-bg="var(--pd-input-field-hover-stroke)"
+  --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
+  {...$$restProps}
+/>
 
-  <ErrorMessage {error} />
-
+<ErrorMessage {error} />
