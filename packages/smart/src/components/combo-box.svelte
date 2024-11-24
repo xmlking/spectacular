@@ -30,19 +30,22 @@ interface $$Props extends HTMLSelectAttributes {
   name?: string | null;
   api?: Readonly<string>;
 }
+
+// Props
 export let value = '';
 export let items: Readonly<string[]>;
 export let debounceWait = 300;
 export let name: string | null = null;
 export let api: string = '/api/combobox';
 
+// Variables
 const log = new Logger('smart:textarea:browser');
 let loading = false;
 let error: string;
-const options = writable([]);
-
+// const options = writable([]);
 let filterText = '';
 
+// Functions
 async function handleOptions(filterText: string) {
   if (filterText.length === 0) return [...items];
   if (window.aibrow) {

@@ -19,7 +19,7 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 // form
-const superform = superForm(defaults(zod(writingSchema)), {
+const form = superForm(defaults(zod(writingSchema)), {
   id: 'writing-form',
   dataType: 'json',
   taintedMessage: null,
@@ -40,8 +40,20 @@ const superform = superForm(defaults(zod(writingSchema)), {
   },
 });
 
-const { form, delayed, timeout, enhance, errors, constraints, message, tainted, submitting, formId, capture, restore } =
-  superform;
+const {
+  form: formData,
+  delayed,
+  timeout,
+  enhance,
+  errors,
+  constraints,
+  message,
+  tainted,
+  submitting,
+  formId,
+  capture,
+  restore,
+} = form;
 
 export const snapshot = { capture, restore };
 
@@ -64,13 +76,13 @@ $: loadingState.setFormLoading($delayed);
       </header>
       <section class="p-6 space-y-4">
         <div>
-          <Form.Field form={superform} name="content">
+          <Form.Field {form} name="content">
             <Form.Control let:attrs>
               <Form.Label class="label">Writing Tools</Form.Label>
               <Smart.Textarea
                 class="textarea data-[fs-error]:input-error"
                 {...attrs}
-                bind:value={$form.content}
+                bind:value={$formData.content}
                 {...$constraints.content}
                 stream={true}
                 placeholder="Write an email to my bank asking them to raise my credit limit from $1,000 to $10,000."
@@ -103,7 +115,7 @@ $: loadingState.setFormLoading($delayed);
         }}
       />
       <br />
-      <SuperDebug label="Form" data={$form} />
+      <SuperDebug label="Form" data={$formData} />
       <br />
       <SuperDebug label="Tainted" status={false} data={$tainted} />
       <br />

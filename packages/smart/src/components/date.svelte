@@ -1,3 +1,21 @@
+<!--
+@component SmartDate - Interpret the given natural language string as a specific date and time using On-Device AI
+  @prop {string} value - 	Selected value(s)
+  @prop {string[]} items - Array of items available to display / filter
+  @prop {number} debounceWait - milliseconds debounce wait
+  @prop {string} name - Name attribute of hidden input, helpful for form actions
+  @slot prepend - prepend
+  @slot clear-icon - clear-icon
+
+  Usage:
+  ```svelte
+    <SmartDate
+      bind:value={$formData.specialization}
+      {...$constraints.specialization}
+      api={'/api/date'}
+    />
+  ```
+-->
 <script lang="ts">
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
@@ -5,20 +23,31 @@ import { JSONParseError, TypeValidationError, generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';
 import { Sparkles } from 'lucide-svelte';
 import { z } from 'zod';
+import type { HTMLInputAttributes } from 'svelte/elements';
 import { default as LoaderIcon } from './loader-icon.svelte';
 
-const log = new Logger('experiments:ai:ms:browser');
-const api = '/api/date';
+interface $$Props extends HTMLInputAttributes {
+  value?: string | null;
+  name?: string | null;
+  api?: Readonly<string>;
+}
 
-export let value: any = '';
+// Props
+export let value: string | null = null;
+export let name: string | null = null;
+export let api: string = '/api/date';
+
+// Variables
+const log = new Logger('ai:date:browser');
 let prompt = '';
-let isLoading = false;
+let loading = false;
 let error: string;
+const controller = new AbortController();
 
-// TODO: useObject is not yet supported for svelte https://sdk.vercel.ai/docs/ai-sdk-ui/overview
+// Functions
 const useRemoteModel = async (event: SubmitEvent) => {
   try {
-    isLoading = true;
+    loading = true;
     const rawResponse = await fetch(api, {
       method: 'POST',
       headers: {
@@ -28,79 +57,75 @@ const useRemoteModel = async (event: SubmitEvent) => {
       body: JSON.stringify({ prompt }),
     });
     const content = await rawResponse.json();
-    console.log();
     if (content.date) {
       value = content.date.slice(0, 16);
       //value =  new Date().toISOString().slice(0,16)
       prompt = '';
     }
-    isLoading = false;
+    loading = false;
   } catch (err) {
     log.error(err);
     error = `${err}`;
   } finally {
-    isLoading = false;
+    loading = false;
   }
+};
+
+const grammar = {
+  type: 'object',
+  properties: {
+    predicted_date: {
+      type: 'string',
+      format: 'date-time',
+    },
+  },
+  required: ['predicted_date'],
+  additionalProperties: false,
 };
 
 const useLocalLocal = async (event: SubmitEvent) => {
+  let session;
   try {
-    isLoading = true;
-    const {
-      object: { date },
-      rawResponse,
-    } = await generateObject({
-      model: chromeai('text'),
-      system: 'You are a javascript data object generator',
-      prompt: `The current date is: ${new Date()} \nGenerate date in format: 'YYYY-MM-DD HH:mm' from text: date of ${prompt}`,
-      schema: z.object({
-        // date: z.string().date().transform(value => new Date(value)),
-        date: z.coerce.date().describe('local DateTime with timezone'),
-      }),
-    });
-    log.debug({ date });
+    loading = true;
 
-    if (date) {
-      value = date.toISOString().slice(0, 16);
-      prompt = '';
-      error = '';
-    }
-    isLoading = false;
+    session = await window.aibrow.coreModel.create({ grammar, model: undefined });
+    const resp = await session.prompt(
+      `The current ISO datetime is: ${new Date().toISOString()}. Extract the data from the following: ${prompt}`,
+    );
+    log.debug(resp);
+
+    const predicted_date = JSON.parse(resp)?.predicted_date;
+    value = predicted_date.slice(0, 16);
+    prompt = '';
+    loading = false;
   } catch (err) {
     log.error(err);
-    if (TypeValidationError.isInstance(err)) {
-      error = `${err.value}`;
-    } else if (JSONParseError.isInstance(err)) {
-      error = `${err.text}`;
-    } else {
-      error = `${err}`;
-    }
+    error = `${err}`;
   } finally {
-    isLoading = false;
+    session?.destroy();
+    loading = false;
   }
 };
-const onSubmit = useLocalLocal;
 </script>
 
 <form
   class="flex flex-col items-center"
   on:submit|preventDefault={(event) => {
-      window.ai?.assistant
-      ? useLocalLocal(event)
-      : useRemoteModel(event);
+    window.aibrow?.coreModel ? useLocalLocal(event) : useRemoteModel(event);
   }}
 >
   <input
     type="datetime-local"
     {...$$props}
+    {name}
     class="input"
-    disabled={isLoading}
-    {value}
+    disabled={loading}
+    bind:value
   />
 
   <div class="z-10 -translate-y-1/4 w-1/2">
     <fieldset
-      disabled={isLoading}
+      disabled={loading}
       class="input-group input-group-divider grid-cols-[1fr_auto]"
     >
       <input
@@ -116,7 +141,7 @@ const onSubmit = useLocalLocal;
         class="variant-filled-secondary"
         aria-label="Submit"
       >
-        {#if isLoading}
+        {#if loading}
           <LoaderIcon />
         {:else}
           <Sparkles />

@@ -7,7 +7,6 @@ import Settings from './settings.svelte';
 import Support from './support.svelte';
 import MagicSpellTextarea from './magic-spell-textarea.svelte';
 import Textarea from './textarea.svelte';
-import DatePicker from './date-picker.svelte';
 import Date from './date.svelte';
 import ComboBox from './combo-box.svelte';
 import Paste from './paste.svelte';
@@ -19,7 +18,6 @@ export {
   Support,
   MagicSpellTextarea,
   Textarea,
-  DatePicker,
   Date,
   ComboBox,
   Paste,
@@ -30,7 +28,6 @@ export {
   Support as SmartSupport,
   MagicSpellTextarea as SmartMagicSpellTextarea,
   Textarea as SmartTextarea,
-  DatePicker as SmartDatePicker,
   Date as SmartDate,
   ComboBox as SmartComboBox,
   Paste as SmartPaste,

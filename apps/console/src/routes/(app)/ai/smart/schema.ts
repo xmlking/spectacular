@@ -14,7 +14,7 @@ export const aiSchema = z.object({
     .string({ required_error: 'Third Comment is required' })
     .min(10, { message: 'Third Comment contain at least 10 character(s)' })
     .trim(),
-  startDate: z.date().nullish(),
+  startDate: z.date().min(new Date()).nullish(),
   endDate: z.date().nullish(),
   specialization: z.enum(SPECIALIZATIONS),
 });

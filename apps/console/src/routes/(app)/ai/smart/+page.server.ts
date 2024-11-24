@@ -7,12 +7,7 @@ import { aiSchema } from './schema';
 
 export const ssr = false;
 
-const log = new Logger('server:ai:ms');
-
-export const load = async () => {
-  const form = await superValidate(zod(aiSchema));
-  return { form };
-};
+const log = new Logger('smart:date:server');
 
 export const actions = {
   default: async ({ request }) => {
