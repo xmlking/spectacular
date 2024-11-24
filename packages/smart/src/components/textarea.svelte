@@ -400,6 +400,7 @@ export type ToolType = keyof typeof toolOptions;
   <button
     class="btn-icon btn-icon-sm bg-initial absolute right-2 bottom-2 p-1 h-auto"
     type="button"
+    title="Use AI"
     on:click|stopPropagation|capture={handleSubmit}
   >
     {#if loading}

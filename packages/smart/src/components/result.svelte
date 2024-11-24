@@ -31,6 +31,7 @@ const dispatch = createEventDispatcher();
       <footer class="card-footer flex justify-between items-center space-x-4">
         <button
           type="button"
+          title="Copy to Clipboard"
           class="btn-icon btn-icon-sm bg-initial"
           use:clipboard={completion}
           on:click={() => {
@@ -48,6 +49,7 @@ const dispatch = createEventDispatcher();
         </button>
         <button
           type="button"
+          title="Accept and Replace Above"
           class="btn-icon btn-icon-sm bg-initial"
           on:click={() => {
              dispatch('accepted');
