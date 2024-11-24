@@ -109,12 +109,14 @@ export type ToolType = keyof typeof toolOptions;
   };
   const controller = new AbortController();
   let detectedLanguage: LanguageDetectionResult | null;
+  let inputEl: HTMLTextAreaElement;
 
   function clearPreviousResults() {
     error = "";
     completion = "";
   }
 
+  // Functions
   async function handleSubmit() {
     // Reset state
     clearPreviousResults();
@@ -143,6 +145,12 @@ export type ToolType = keyof typeof toolOptions;
         return;
     }
   }
+  function dispatchChangeEvent() {
+    const event = new Event("change", { bubbles: true });
+    inputEl.dispatchEvent(event);
+  }
+
+  // Tools
   async function write() {
     let writer;
     try {
@@ -275,7 +283,6 @@ export type ToolType = keyof typeof toolOptions;
       loading = false;
     }
   }
-
   async function detectLanguage() {
     let detector;
     try {
@@ -306,7 +313,6 @@ export type ToolType = keyof typeof toolOptions;
       loading = false;
     }
   }
-
   async function translate() {
     let translator;
     let streamSupported = true;
@@ -372,6 +378,7 @@ export type ToolType = keyof typeof toolOptions;
 
 <div class="relative">
   <textarea
+    bind:this={inputEl}
     {...$$restProps}
     class="textarea pr-10"
     disabled={loading}
@@ -506,7 +513,7 @@ export type ToolType = keyof typeof toolOptions;
     </div>
   </fieldset>
 </div>
-<Result {loading} {header} {placeholder} {completion} {error} />
+<Result {loading} {header} {placeholder} {completion} {error} on:accepted={() => {value = completion; completion = ''; dispatchChangeEvent()}}  />
 
 <style lang="postcss">
   textarea {

@@ -1,6 +1,7 @@
 <script lang="ts">
 import { clipboard } from '@skeletonlabs/skeleton';
-import { Copy, ThumbsUp } from 'lucide-svelte';
+import { Copy, ThumbsUp, ArrowUpFromLine } from 'lucide-svelte';
+import { createEventDispatcher } from 'svelte';
 
 // Props
 export let loading: boolean;
@@ -11,6 +12,7 @@ export let error: string;
 
 // Variables
 let copied: boolean;
+const dispatch = createEventDispatcher();
 </script>
 
 <div class="card variant-soft mt-4">
@@ -26,7 +28,7 @@ let copied: boolean;
     {/if}
     {#if completion}
       <section class="p-4 md:p-8 whitespace-pre-line">{completion}</section>
-      <footer class="card-footer">
+      <footer class="card-footer flex justify-between items-center space-x-4">
         <button
           type="button"
           class="btn-icon btn-icon-sm bg-initial"
@@ -43,6 +45,15 @@ let copied: boolean;
           {:else}
             <Copy />
           {/if}
+        </button>
+        <button
+          type="button"
+          class="btn-icon btn-icon-sm bg-initial"
+          on:click={() => {
+             dispatch('accepted');
+          }}
+        >
+          <ArrowUpFromLine />
         </button>
       </footer>
     {:else}
