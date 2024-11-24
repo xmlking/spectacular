@@ -499,16 +499,28 @@ export type ToolType = keyof typeof toolOptions;
           <option value="es">Español</option>
           <option value="de">Deutsch</option>
           <option value="fr">Français</option>
-          <option value="te">తెలుగు</option>
-          <option value="ta">தமிழ்</option>
+          <option value="pt">Portuguese</option>
+          <option value="ja">Japanese</option>
+          <option value="zh">Mandarin Chinese</option>
+          <option value="zh-Hant">Taiwanese Mandarin</option>
+          <option value="vi">Vietnamese</option>
+          <option value="tr">Turkish</option>
+          <option value="hi">Hindi</option>
+          <option value="bn">Bengali</option>
         </select>
         <select bind:value={translationOps.targetLanguage}>
           <option value="en">English</option>
           <option value="es">Español</option>
           <option value="de">Deutsch</option>
           <option value="fr">Français</option>
-          <option value="te">తెలుగు</option>
-          <option value="ta">தமிழ்</option>
+          <option value="pt">Portuguese</option>
+          <option value="ja">Japanese</option>
+          <option value="zh">Mandarin Chinese</option>
+          <option value="zh-Hant">Taiwanese Mandarin</option>
+          <option value="vi">Vietnamese</option>
+          <option value="tr">Turkish</option>
+          <option value="hi">Hindi</option>
+          <option value="bn">Bengali</option>
         </select>
       {/if}
     </div>
