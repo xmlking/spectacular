@@ -51,6 +51,7 @@ const {
   tainted,
   submitting,
   formId,
+  isTainted,
   capture,
   restore,
 } = form;
@@ -72,7 +73,7 @@ $: loadingState.setFormLoading($delayed);
     <Smart.Support />
 
     <!-- Form -->
-    <form method="POST" use:enhance class="card shadow-lg">
+    <form method="POST" class="card shadow-lg" use:enhance>
       <header class="card-header">
         <!-- Form Level Errors / Messages -->
         <Alerts errors={$errors._errors} message={$message} />
@@ -215,6 +216,7 @@ $: loadingState.setFormLoading($delayed);
         status={false}
         data={{
           message: $message,
+          isTainted: isTainted,
           submitting: $submitting,
           delayed: $delayed,
           timeout: $timeout,

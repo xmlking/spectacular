@@ -736,6 +736,9 @@ importers:
       '@types/dom-chromium-ai':
         specifier: 0.0.3
         version: 0.0.3
+      '@types/json-schema':
+        specifier: 7.0.15
+        version: 7.0.15
       '@types/node':
         specifier: 22.9.3
         version: 22.9.3
@@ -11052,8 +11055,7 @@ snapshots:
 
   '@types/js-cookie@3.0.6': {}
 
-  '@types/json-schema@7.0.15':
-    optional: true
+  '@types/json-schema@7.0.15': {}
 
   '@types/jsonwebtoken@9.0.7':
     dependencies:

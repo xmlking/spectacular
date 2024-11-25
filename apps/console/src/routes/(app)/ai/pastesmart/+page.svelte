@@ -1,6 +1,7 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { SmartPaste } from '@spectacular/smart';
+import { SmartPaste, SmartSupport } from '@spectacular/smart';
+import { smartPast } from '@spectacular/smart/actions';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
@@ -8,8 +9,9 @@ import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { fade } from 'svelte/transition';
-import SuperDebug, { superForm } from 'sveltekit-superforms';
-import { onMount } from 'svelte';
+import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { spSchema } from './schema.js';
 
 const log = new Logger('ai:smart:browser');
 export let data;
@@ -18,13 +20,15 @@ export let data;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
-const form = superForm(data.form, {
-  id: 'ai-form',
+// Search form
+const form = superForm(defaults(zod(spSchema)), {
+  id: 'smart-past-form',
   dataType: 'json',
   taintedMessage: null,
   syncFlashMessage: false,
   delayMs: 100,
   timeoutMs: 4000,
+  validators: zodClient(spSchema),
   onError({ result }) {
     // TODO:
     // message.set(result.error.message)
@@ -48,6 +52,7 @@ const {
   delayed,
   timeout,
   constraints,
+  formId,
   enhance,
   capture,
   restore,
@@ -67,6 +72,40 @@ function handlePasted(event: CustomEvent) {
   $formData.country = content.country;
 }
 
+const schema = {
+  title: 'provider specialization',
+  type: 'object',
+  properties: {
+    specializations: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+  },
+};
+
+const schema2 = {
+  $id: 'https://example.com/person.schema.json',
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
+  title: 'Person',
+  type: 'object',
+  properties: {
+    firstName: {
+      type: 'string',
+      description: "The person's first name.",
+    },
+    lastName: {
+      type: 'string',
+      description: "The person's last name.",
+    },
+    age: {
+      description: 'Age in years which must be equal to or greater than zero.',
+      type: 'integer',
+      minimum: 0,
+    },
+  },
+};
 // Functions
 const handlePaste = async (event: ClipboardEvent) => {
   event.preventDefault();
@@ -80,15 +119,25 @@ const handlePaste = async (event: ClipboardEvent) => {
 $: loadingState.setFormLoading($delayed);
 </script>
 
-<svelte:window on:paste={handlePaste} />
+<!-- <svelte:window on:paste={handlePaste} /> -->
 
 <div class="page-container">
   <div class="page-section">
     <header class="flex justify-between">
       <h1 class="h1">Smart Paste Demo</h1>
     </header>
+
+    <SmartSupport />
+
     <!-- Form -->
-    <form method="POST" use:enhance class="card shadow-lg">
+    <form
+      method="POST"
+      class="card shadow-lg"
+      use:enhance
+      use:smartPast={{api: '/api/smartpast', schema}}
+      on:smartPast={(e) => console.log(e)}
+      on:error={(e) => console.log(e)}
+    >
       <header class="card-header">
         <!-- Form Level Errors / Messages -->
         <Alerts errors={$errors._errors} message={$message} />
@@ -275,7 +324,8 @@ $: loadingState.setFormLoading($delayed);
           isTainted: isTainted,
           submitting: $submitting,
           delayed: $delayed,
-          timeout: $timeout
+          timeout: $timeout,
+          formId: $formId,
         }}
       />
       <br />
@@ -286,6 +336,7 @@ $: loadingState.setFormLoading($delayed);
       <SuperDebug label="Errors" status={false} data={$errors} />
       <br />
       <SuperDebug label="Constraints" status={false} data={$constraints} />
+      <br />
     </DebugShell>
   </div>
 </div>
