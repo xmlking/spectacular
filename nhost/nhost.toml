@@ -8,7 +8,7 @@ name = 'APP_DESCRIPTION'
 value = 'Spectacular Console App'
 
 [hasura]
-version = 'v2.38.0-ce'
+version = 'v2.44.0-ce'
 adminSecret = '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
 webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 
@@ -42,7 +42,7 @@ maxDepthQueries = 4
 version = 20
 
 [auth]
-version = '0.35.0'
+version = '0.36.0'
 
 [auth.elevatedPrivileges]
 mode = 'required'
@@ -209,7 +209,7 @@ limit = 100
 interval = '1m'
 
 [postgres]
-version = '16.4-20240930-1'
+version = '16.4-202401126-1'
 
 [postgres.resources]
 enablePublicAccess = true

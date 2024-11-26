@@ -1700,7 +1700,7 @@ unique or primary key constraints on table "groups"
 """
 enum groups_constraint {
   """
-  unique or primary key constraint on columns "organization", "display_name"
+  unique or primary key constraint on columns "display_name", "organization"
   """
   groups_display_name_organization_unique
 
@@ -2029,7 +2029,7 @@ type mutation_root {
   """
   delete single row from the table: "user_groups"
   """
-  delete_user_groups_by_pk(id: uuid!): user_groups
+  delete_user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
 
   """
   delete data from the table: "user_org_roles"
@@ -2795,7 +2795,7 @@ enum policies_constraint {
   policies_pkey
 
   """
-  unique or primary key constraint on columns "rule_id", "subject_id", "subject_type", "organization"
+  unique or primary key constraint on columns "subject_id", "organization", "rule_id", "subject_type"
   """
   policies_subject_id_subject_type_rule_id_organization_unique
 }
@@ -3093,7 +3093,7 @@ unique or primary key constraints on table "pools"
 """
 enum pools_constraint {
   """
-  unique or primary key constraint on columns "organization", "display_name"
+  unique or primary key constraint on columns "display_name", "organization"
   """
   pools_display_name_organization_unique
 
@@ -3985,7 +3985,7 @@ type query_root {
   ): [user_groups!]!
 
   """fetch data from the table: "user_groups" using primary key columns"""
-  user_groups_by_pk(id: uuid!): user_groups
+  user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
 
   """
   fetch data from the table: "user_org_roles"
@@ -4111,7 +4111,7 @@ unique or primary key constraints on table "rules"
 """
 enum rules_constraint {
   """
-  unique or primary key constraint on columns "organization", "display_name"
+  unique or primary key constraint on columns "display_name", "organization"
   """
   rules_display_name_organization_unique
 
@@ -5263,7 +5263,7 @@ type subscription_root {
   ): [user_groups!]!
 
   """fetch data from the table: "user_groups" using primary key columns"""
-  user_groups_by_pk(id: uuid!): user_groups
+  user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
 
   """
   fetch data from the table in a streaming manner: "user_groups"
@@ -5441,7 +5441,7 @@ unique or primary key constraints on table "user_groups"
 """
 enum user_groups_constraint {
   """
-  unique or primary key constraint on columns "id"
+  unique or primary key constraint on columns "user_id", "group_id"
   """
   user_groups_pkey
 }
