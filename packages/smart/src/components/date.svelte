@@ -88,7 +88,7 @@ const useLocalLocal = async (event: SubmitEvent) => {
   try {
     loading = true;
 
-    session = await window.aibrow.coreModel.create({ grammar, model: undefined });
+    session = await self.aibrow.coreModel.create({ grammar, model: undefined });
     const resp = await session.prompt(
       `The current ISO datetime is: ${new Date().toISOString()}. Extract the data from the following: ${prompt}`,
     );
@@ -111,7 +111,7 @@ const useLocalLocal = async (event: SubmitEvent) => {
 <form
   class="flex flex-col items-center"
   on:submit|preventDefault={(event) => {
-    window.aibrow?.coreModel ? useLocalLocal(event) : useRemoteModel(event);
+    self.aibrow?.coreModel ? useLocalLocal(event) : useRemoteModel(event);
   }}
 >
   <input

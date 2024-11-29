@@ -49,7 +49,7 @@ declare global {
   // Date of last commit
   declare const __GIT_DATE__: string;
 
-  interface Window {
+  interface WindowOrWorkerGlobalScope {
     readonly aibrow: typeof AI;
   }
 }

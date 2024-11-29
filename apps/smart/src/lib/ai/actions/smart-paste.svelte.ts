@@ -72,7 +72,7 @@ export const smartPaste: SmartPasteAction<Item> = (node, options) => {
     return {};
   }
   const useLocalLocal = async <T>(content: string) => {
-    const session = await window.aibrow.coreModel.create({ grammar: jsonSchema });
+    const session = await self.aibrow.coreModel.create({ grammar: jsonSchema });
     const prompt = `Extract the data from the following: ${content}`;
     const output = await session.prompt(prompt);
     session?.destroy();
@@ -102,8 +102,7 @@ export const smartPaste: SmartPasteAction<Item> = (node, options) => {
       loading?.set(true);
       const content = clipboardData.getData('text');
       event.preventDefault();
-      const detail =
-        useLocal && window.aibrow?.coreModel ? await useLocalLocal(content) : await useRemoteModel(content);
+      const detail = useLocal && self.aibrow?.coreModel ? await useLocalLocal(content) : await useRemoteModel(content);
       // Dispatch a custom event upon successful paste
       node.dispatchEvent(new CustomEvent('smartPaste', { detail }));
     } catch (error) {

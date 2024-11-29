@@ -4,14 +4,14 @@ import { languageModelOptions } from '#components/settings.js';
 
 let assistant: AILanguageModel | undefined;
 onMount(async () => {
-  assistant = await window.ai?.languageModel.create($languageModelOptions);
+  assistant = await self.ai?.languageModel.create($languageModelOptions);
 });
 onDestroy(() => {
   assistant?.destroy();
 });
 </script>
 
-{#if window.ai?.languageModel }
+{#if self.ai?.languageModel }
   <div class="my-12">
     <div class="h2">Session stats</div>
     <table class="table table-hover">

@@ -48,7 +48,7 @@ let filterText = '';
 // Functions
 async function handleOptions(filterText: string) {
   if (filterText.length === 0) return [...items];
-  if (window.aibrow) {
+  if (self.aibrow) {
     return useLocalModel(filterText);
   } else {
     let res = await useRemoteModel(filterText);
@@ -76,7 +76,7 @@ const useLocalModel = async (filterText: string) => {
   let session;
   try {
     loading = true;
-    session = await window.aibrow.coreModel.create({ grammar });
+    session = await self.aibrow.coreModel.create({ grammar });
     const prompt = `Extract data from the following text: ${filterText}`;
     const output = await session.prompt(prompt);
     log.debug({ output });

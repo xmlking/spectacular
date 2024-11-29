@@ -43,15 +43,15 @@ example  phonetic
 
 Libs
 <https://github.com/jeffwhelpley/offlineai/tree/main>
-window.ai.summarizer.capabilities
+self.ai.summarizer.capabilities
 <https://github.com/words/double-metaphone>
 
 <https://github.com/debugtheworldbot/chromegemini/blob/main/src/lib/utils.ts>
 export const getAiApi = () => {
   return {
-    create: window.ai.languageModel
-      ? window.ai.languageModel.create.bind(window.ai.languageModel)
-      : window.ai.createTextSession.bind(window.ai),
+    create: self.ai.languageModel
+      ? self.ai.languageModel.create.bind(self.ai.languageModel)
+      : self.ai.createTextSession.bind(self.ai),
   };
 };
 
@@ -99,7 +99,7 @@ const SYSTEM_PROMPT: ChatCompletionMessageParam = {
 Translate the summary to Japanese
 
 ```js
- const sessionTranslator = await window.ai.languageModel.create({
+ const sessionTranslator = await self.ai.languageModel.create({
     systemPrompt: "You are helpful assistant to translate the summary",
     topK: 10,
     temperature: 0,
@@ -121,7 +121,7 @@ Translate the summary to Japanese
 ```
 
 ```js
-    const session = await window.ai.languageModel.create( {
+    const session = await self.ai.languageModel.create( {
      initialPrompts: [
       {
        role: 'system',
@@ -178,7 +178,7 @@ ${ postContent }`
 
 ```js
 async giveTitle(text: string): Promise<string> {
-  const session = await window.ai.languageModel.create();
+  const session = await self.ai.languageModel.create();
   try {
    const result = await session.prompt(
     `Given the following summary, generate a title for the article: 

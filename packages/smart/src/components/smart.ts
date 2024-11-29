@@ -15,7 +15,7 @@ export function getChromeVersion() {
  * Detection & installation from aiBrow extension
  */
 export async function checkAibrowInstalled() {
-  if (!window.aibrow) {
+  if (!self.aibrow) {
     // The extension is not installed
     console.log(
       'Install the extension from https://chromewebstore.google.com/detail/aibrow/bbkbjiehfkggfkbampigbbakecijicdm',
@@ -23,11 +23,11 @@ export async function checkAibrowInstalled() {
     return false;
   }
 
-  const capabilities = await window.aibrow.capabilities();
+  const capabilities = await self.aibrow.capabilities();
   if (!capabilities.helper) {
     // The helper binary is not installed. We can fetch the direct link to the latest
     // version for the current platform
-    const helperUrl = await window.aibrow.getHelperDownloadUrl();
+    const helperUrl = await self.aibrow.getHelperDownloadUrl();
     console.log(`Install the helper from ${helperUrl}`);
     return false;
   }
@@ -38,23 +38,23 @@ export async function checkAibrowInstalled() {
 
 export function getBrowserAI() {
   // Always get the browsers AI, regardless of the user's preference in AiBrow
-  const ai: AI = window.ai && window.ai.aibrow === true ? window.ai.browserAI : window.ai;
-  if (!window.ai) {
-    // Eventually this check wont be needed as all browsers support window.ai
-    // throw new Error('Your browser doesn\'t support window.ai')
-    console.log("%cYour browser doesn't support window.ai", 'color: magenta');
+  const ai: AI = self.ai && self.ai.aibrow === true ? self.ai.browserAI : self.ai;
+  if (!self.ai) {
+    // Eventually this check wont be needed as all browsers support self.ai
+    // throw new Error('Your browser doesn\'t support self.ai')
+    console.log("%cYour browser doesn't support self.ai", 'color: magenta');
     return undefined;
   }
   return ai;
 }
 
 export function getAiBrow(): AI | undefined {
-  if (!window.aibrow) {
+  if (!self.aibrow) {
     // Send user to the download page
     // throw new Error('AiBrow is not installed')
     return undefined;
   }
-  return window.aibrow;
+  return self.aibrow;
 }
 
 // const browserAI = getBrowserAI()
@@ -69,7 +69,7 @@ export function getAiBrow(): AI | undefined {
 // await writer.create()
 
 export function isPolyfilledAI() {
-  return window.ai && window.ai.aibrow === true;
+  return self.ai && self.ai.aibrow === true;
 }
 
 export function isPolyfilledTranslation() {

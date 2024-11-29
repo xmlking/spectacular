@@ -161,7 +161,7 @@ export type ToolType = keyof typeof toolOptions;
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim(),
       });
-      writer = await window.ai.writer.create({
+      writer = await self.ai.writer.create({
         ...writerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -206,7 +206,7 @@ export type ToolType = keyof typeof toolOptions;
           prompt: value.trim(),
         }),
       });
-      rewriter = await window.ai.rewriter.create({
+      rewriter = await self.ai.rewriter.create({
         ...rewriterOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -251,7 +251,7 @@ export type ToolType = keyof typeof toolOptions;
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim(),
       });
-      summarizer = await window.ai.summarizer.create({
+      summarizer = await self.ai.summarizer.create({
         ...summarizerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -288,7 +288,7 @@ export type ToolType = keyof typeof toolOptions;
     try {
       if (!value.trim()) return;
       loading = true;
-      detector = await window.ai.languageDetector.create();
+      detector = await self.ai.languageDetector.create();
       const results = await detector.detect(value.trim());
       if (Array.isArray(results) && results.length > 0) {
         detectedLanguage = results[0];
@@ -317,8 +317,8 @@ export type ToolType = keyof typeof toolOptions;
     let translator;
     let streamSupported = isPolyfilledTranslation();
     try {
-      if (window.ai.translator) {
-        translator = await window.ai.translator.create(translationOps);
+      if (self.ai.translator) {
+        translator = await self.ai.translator.create(translationOps);
       } else if (
         "translation" in self &&
         "createTranslator" in self.translation
