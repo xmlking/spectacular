@@ -156,7 +156,7 @@ importers:
         version: 6.6.3
       '@testing-library/svelte':
         specifier: 5.2.6
-        version: 5.2.6(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1)(lightningcss@1.28.1))(vitest@2.1.6)
+        version: 5.2.6(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1)(lightningcss@1.28.1))(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))
       '@types/d3-scale':
         specifier: 4.0.8
         version: 4.0.8
@@ -192,7 +192,7 @@ importers:
         version: 1.14.10(svelte@4.2.19)
       '@vitest/coverage-v8':
         specifier: 2.1.6
-        version: 2.1.6(vitest@2.1.6)
+        version: 2.1.6(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))
       '@xyflow/svelte':
         specifier: 0.1.24
         version: 0.1.24(svelte@4.2.19)
@@ -411,8 +411,8 @@ importers:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
       bits-ui:
-        specifier: 1.0.0-next.51
-        version: 1.0.0-next.51(svelte@5.2.10)
+        specifier: 1.0.0-next.64
+        version: 1.0.0-next.64(svelte@5.2.10)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -524,7 +524,7 @@ importers:
         version: 0.5.15(tailwindcss@3.4.15)
       '@vitest/coverage-v8':
         specifier: 2.1.6
-        version: 2.1.6(vitest@2.1.6)
+        version: 2.1.6(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))
       astro:
         specifier: 4.16.16
         version: 4.16.16(@types/node@22.10.1)(lightningcss@1.28.1)(rollup@4.27.4)(typescript@5.7.2)
@@ -639,13 +639,13 @@ importers:
         version: 1.14.10(svelte@4.2.19)
       '@vitest/coverage-v8':
         specifier: 2.1.6
-        version: 2.1.6(vitest@2.1.6)
+        version: 2.1.6(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
       bits-ui:
-        specifier: 0.21.16
-        version: 0.21.16(svelte@4.2.19)
+        specifier: 1.0.0-next.64
+        version: 1.0.0-next.64(svelte@4.2.19)
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -747,7 +747,7 @@ importers:
         version: 22.10.1
       '@vitest/coverage-v8':
         specifier: 2.1.6
-        version: 2.1.6(vitest@2.1.6)
+        version: 2.1.6(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))
       ai:
         specifier: 4.0.9
         version: 4.0.9(react@18.3.1)(zod@3.23.8)
@@ -870,13 +870,13 @@ importers:
         version: 22.10.1
       '@vitest/coverage-v8':
         specifier: 2.1.6
-        version: 2.1.6(vitest@2.1.6)
+        version: 2.1.6(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
       bits-ui:
-        specifier: 1.0.0-next.51
-        version: 1.0.0-next.51(svelte@5.2.10)
+        specifier: 1.0.0-next.64
+        version: 1.0.0-next.64(svelte@5.2.10)
       cssnano:
         specifier: 7.0.6
         version: 7.0.6(postcss@8.4.49)
@@ -942,7 +942,7 @@ importers:
         version: link:../typescript-config
       '@vitest/coverage-v8':
         specifier: 2.1.6
-        version: 2.1.6(vitest@2.1.6)
+        version: 2.1.6(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -2163,9 +2163,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.3':
     resolution: {integrity: sha512-WVNraTylfZty0kt5EQNh8yx0WUJbtYEmc8YoNRRSUWB0rqeCh8a9xIQnmzZxBMf7IL7es+Ppiqx15py7mukJRw==}
@@ -2389,11 +2391,6 @@ packages:
 
   '@mediapipe/tasks-text@0.10.14':
     resolution: {integrity: sha512-hQU/t9df83lU083sjbX69ImipPOqfvdMnc0pMk44L0QkRXKjSp9q1OYVhA5ePOe1bUmEUzaYSPPTwz+mNhFqhw==}
-
-  '@melt-ui/svelte@0.76.2':
-    resolution: {integrity: sha512-7SbOa11tXUS95T3fReL+dwDs5FyJtCEqrqG3inRziDws346SYLsxOQ6HmX+4BkIsQh1R8U3XNa+EMmdMt38lMA==}
-    peerDependencies:
-      svelte: '>=3 <5'
 
   '@nhost/graphql-js@0.3.0':
     resolution: {integrity: sha512-CVYq6wx0VbaYdpUBmfNO/6mZatHB5+YBCqFjWyxhpN1nzHCHEO6rgdL7j0qk31OFE6XAX0z7AQZSXg1Pn63GUw==}
@@ -3762,13 +3759,8 @@ packages:
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
 
-  bits-ui@0.21.16:
-    resolution: {integrity: sha512-XFZ7/bK7j/K+5iktxX/ZpmoFHjYjpPzP5EOO/4bWiaFg5TG1iMcfjDhlBTQnJxD6BoVoHuqeZPHZvaTgF4Iv3Q==}
-    peerDependencies:
-      svelte: ^4.0.0 || ^5.0.0-next.118
-
-  bits-ui@1.0.0-next.51:
-    resolution: {integrity: sha512-6YlLpb5NtKawm/mtDGXQHtD0gp7Yvd8STvWVLfVpSQaqEV7Pb+TeMhp5Lv83NbU9H3gRFjfNToB7hGxBhM2tng==}
+  bits-ui@1.0.0-next.64:
+    resolution: {integrity: sha512-r1JThjUSKwTkaB1onwIs7ZQoqygSsWhjBaUElCS8m8CCbY1RxmTz0HnbN+Xp2oJgJ4YQgIfiXTG3170l80FEgg==}
     engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
       svelte: ^5.0.0-next.1
@@ -4890,9 +4882,6 @@ packages:
   flattie@1.1.1:
     resolution: {integrity: sha512-9UbaD6XdAL97+k/n+N7JwX46K/M6Zc6KcFYskrYL8wbBV/Uyk0CTAMY0VT+qiK5PM7AIc9aTWYtq65U7T+aCNQ==}
     engines: {node: '>=8'}
-
-  focus-trap@7.6.2:
-    resolution: {integrity: sha512-9FhUxK1hVju2+AiQIDJ5Dd//9R2n2RAfJ0qfhF4IHGHgcoEUTMpbTeG/zbEuwaiYXfuAH6XE0/aCyxDdRM+W5w==}
 
   follow-redirects@1.15.9:
     resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
@@ -7461,9 +7450,6 @@ packages:
   synckit@0.9.2:
     resolution: {integrity: sha512-vrozgXDQwYO72vHjUb/HnFbQx1exDjoKzqx23aXEg2a9VIg2TSFZ8FmeZpTjUCFMYw7mpX4BE2SFu8wI7asYsw==}
     engines: {node: ^14.18.0 || >=16.0.0}
-
-  tabbable@6.2.0:
-    resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
   tailwind-merge@2.5.5:
     resolution: {integrity: sha512-0LXunzzAZzo0tEPxV3I297ffKZPlKDrjj7NXphC8V5ak9yHC5zRmxnOe2m/Rd/7ivsOMJe3JZ2JVocoDdQTRBA==}
@@ -10191,16 +10177,6 @@ snapshots:
 
   '@mediapipe/tasks-text@0.10.14': {}
 
-  '@melt-ui/svelte@0.76.2(svelte@4.2.19)':
-    dependencies:
-      '@floating-ui/core': 1.6.8
-      '@floating-ui/dom': 1.6.12
-      '@internationalized/date': 3.6.0
-      dequal: 2.0.3
-      focus-trap: 7.6.2
-      nanoid: 5.0.9
-      svelte: 4.2.19
-
   '@nhost/graphql-js@0.3.0(graphql@16.9.0)':
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.9.0)
@@ -10950,7 +10926,7 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/svelte@5.2.6(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1)(lightningcss@1.28.1))(vitest@2.1.6)':
+  '@testing-library/svelte@5.2.6(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1)(lightningcss@1.28.1))(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))':
     dependencies:
       '@testing-library/dom': 10.4.0
       svelte: 4.2.19
@@ -11503,7 +11479,7 @@ snapshots:
       validator: 13.12.0
     optional: true
 
-  '@vitest/coverage-v8@2.1.6(vitest@2.1.6)':
+  '@vitest/coverage-v8@2.1.6(vitest@2.1.6(@types/node@22.10.1)(@vitest/ui@2.1.6)(jiti@2.4.0)(jsdom@25.0.1)(lightningcss@1.28.1)(yaml@2.6.1))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -12041,14 +12017,17 @@ snapshots:
     dependencies:
       file-uri-to-path: 1.0.0
 
-  bits-ui@0.21.16(svelte@4.2.19):
+  bits-ui@1.0.0-next.64(svelte@4.2.19):
     dependencies:
+      '@floating-ui/core': 1.6.8
+      '@floating-ui/dom': 1.6.12
       '@internationalized/date': 3.6.0
-      '@melt-ui/svelte': 0.76.2(svelte@4.2.19)
-      nanoid: 5.0.9
+      esm-env: 1.2.1
+      runed: 0.15.4(svelte@4.2.19)
       svelte: 4.2.19
+      svelte-toolbelt: 0.4.6(svelte@4.2.19)
 
-  bits-ui@1.0.0-next.51(svelte@5.2.10):
+  bits-ui@1.0.0-next.64(svelte@5.2.10):
     dependencies:
       '@floating-ui/core': 1.6.8
       '@floating-ui/dom': 1.6.12
@@ -13278,10 +13257,6 @@ snapshots:
   flatted@3.3.2: {}
 
   flattie@1.1.1: {}
-
-  focus-trap@7.6.2:
-    dependencies:
-      tabbable: 6.2.0
 
   follow-redirects@1.15.9: {}
 
@@ -15912,6 +15887,11 @@ snapshots:
     dependencies:
       queue-microtask: 1.2.3
 
+  runed@0.15.4(svelte@4.2.19):
+    dependencies:
+      esm-env: 1.2.1
+      svelte: 4.2.19
+
   runed@0.15.4(svelte@5.2.10):
     dependencies:
       esm-env: 1.2.1
@@ -16288,6 +16268,12 @@ snapshots:
     dependencies:
       svelte: 5.2.10
 
+  svelte-toolbelt@0.4.6(svelte@4.2.19):
+    dependencies:
+      clsx: 2.1.1
+      style-to-object: 1.0.8
+      svelte: 4.2.19
+
   svelte-toolbelt@0.4.6(svelte@5.2.10):
     dependencies:
       clsx: 2.1.1
@@ -16487,8 +16473,6 @@ snapshots:
     dependencies:
       '@pkgr/core': 0.1.1
       tslib: 2.8.1
-
-  tabbable@6.2.0: {}
 
   tailwind-merge@2.5.5: {}
 
@@ -16853,7 +16837,7 @@ snapshots:
 
   vaul-svelte@1.0.0-next.2(svelte@5.2.10):
     dependencies:
-      bits-ui: 1.0.0-next.51(svelte@5.2.10)
+      bits-ui: 1.0.0-next.64(svelte@5.2.10)
       svelte: 5.2.10
       svelte-toolbelt: 0.4.6(svelte@5.2.10)
 
