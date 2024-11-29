@@ -1,17 +1,20 @@
 <script lang="ts">
+import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { SmartPaste, SmartSupport } from '@spectacular/smart';
-import { smartPast } from '@spectacular/smart/actions';
+import { SmartSupport } from '@spectacular/smart';
+import { smartPaste } from '@spectacular/smart/actions';
 import { getLoadingState } from '$lib/stores/loading';
-import { getToastStore } from '@skeletonlabs/skeleton';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { Alerts, ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import { fade } from 'svelte/transition';
-import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, superForm, setError } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { spSchema } from './schema.js';
+import { personSchema, type Person } from './schema.js';
+import Sample from './sample.svelte';
+import { writable } from 'svelte/store';
+import { Loader, MoreHorizontal, Sparkles } from 'lucide-svelte';
 
 const log = new Logger('ai:smart:browser');
 export let data;
@@ -19,20 +22,26 @@ export let data;
 // Variables
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
+let loading = writable(false);
+let smartError = writable<string>();
+const jsonSchema = zod(personSchema).jsonSchema;
+let useLocal = false;
 
 // Search form
-const form = superForm(defaults(zod(spSchema)), {
+// const form = superForm(defaults(schemasafe(personSchema)), {
+const form = superForm(defaults(zod(personSchema)), {
   id: 'smart-past-form',
   dataType: 'json',
   taintedMessage: null,
   syncFlashMessage: false,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(spSchema),
+  validators: zodClient(personSchema),
+  // validators: schemasafe(personSchema),
   onError({ result }) {
     // TODO:
     // message.set(result.error.message)
-    log.error('ai error:', { result });
+    log.error('form submit error:', { result });
   },
   onUpdated({ form }) {
     if (form.message) {
@@ -59,67 +68,31 @@ const {
 } = form;
 
 export const snapshot = { capture, restore };
-function handlePasted(event: CustomEvent) {
-  const content = event.detail;
-  $formData.firstName = content.firstName;
-  $formData.lastName = content.lastName;
-  $formData.phoneNumber = content.phoneNumber;
-  $formData.line1 = content.line1;
-  $formData.line2 = content.line2;
-  $formData.city = content.city;
-  $formData.state = content.state;
-  $formData.zip = content.zip;
-  $formData.country = content.country;
+
+// Functions
+function handlePaste(event: CustomEvent<Person>) {
+  const { detail } = event;
+  $formData.firstName = detail.firstName;
+  $formData.lastName = detail.lastName;
+  $formData.phoneNumber = detail.phoneNumber;
+  $formData.email = detail.email;
+  $formData.line1 = detail.line1;
+  $formData.line2 = detail.line2;
+  $formData.city = detail.city;
+  $formData.state = detail.state;
+  $formData.zip = detail.zip;
+  $formData.country = detail.country;
 }
 
-const schema = {
-  title: 'provider specialization',
-  type: 'object',
-  properties: {
-    specializations: {
-      type: 'array',
-      items: {
-        type: 'string',
-      },
-    },
-  },
-};
-
-const schema2 = {
-  $id: 'https://example.com/person.schema.json',
-  $schema: 'https://json-schema.org/draft/2020-12/schema',
-  title: 'Person',
-  type: 'object',
-  properties: {
-    firstName: {
-      type: 'string',
-      description: "The person's first name.",
-    },
-    lastName: {
-      type: 'string',
-      description: "The person's last name.",
-    },
-    age: {
-      description: 'Age in years which must be equal to or greater than zero.',
-      type: 'integer',
-      minimum: 0,
-    },
-  },
-};
-// Functions
-const handlePaste = async (event: ClipboardEvent) => {
-  event.preventDefault();
-  const clipboard = event.clipboardData;
-  if (!clipboard) return;
-  const data = clipboard.getData('text/plain').trim();
-  console.log('Clipboard Data:', data);
-};
+function handleError(event: CustomEvent<Error>) {
+  log.error(event.detail.message);
+  $smartError = event.detail.message;
+}
 
 // Reactivity
 $: loadingState.setFormLoading($delayed);
+$: loadingState.setFormLoading($loading);
 </script>
-
-<!-- <svelte:window on:paste={handlePaste} /> -->
 
 <div class="page-container">
   <div class="page-section">
@@ -134,13 +107,14 @@ $: loadingState.setFormLoading($delayed);
       method="POST"
       class="card shadow-lg"
       use:enhance
-      use:smartPast={{api: '/api/smartpast', schema}}
-      on:smartPast={(e) => console.log(e)}
-      on:error={(e) => console.log(e)}
+      on:smartPaste={handlePaste}
+      on:smartError={handleError}
+      use:smartPaste={{api: '/api/smartpaste', loading, jsonSchema, useLocal }}
     >
       <header class="card-header">
         <!-- Form Level Errors / Messages -->
         <Alerts errors={$errors._errors} message={$message} />
+        <ErrorMessage error={$smartError} />
       </header>
       <section class="p-6 space-y-4">
         <div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
@@ -154,7 +128,7 @@ $: loadingState.setFormLoading($delayed);
                     class="input"
                     bind:value={$formData.firstName}
                   />
-                  <Form.FieldErrors class="data-fs-[error=true]:bg-red-200" />
+                  <Form.FieldErrors class="data-[fs-error]:text-error-500" />
                 </div>
               </Form.Control>
             </Form.Field>
@@ -183,6 +157,21 @@ $: loadingState.setFormLoading($delayed);
                     class="input"
                     {...attrs}
                     bind:value={$formData.phoneNumber}
+                  />
+                </div>
+              </Form.Control>
+              <Form.FieldErrors />
+            </Form.Field>
+          </div>
+          <div class="col-span-3">
+            <Form.Field {form} name="email">
+              <Form.Control let:attrs>
+                <div class="grid gap-2">
+                  <Form.Label>Email</Form.Label>
+                  <input
+                    class="input"
+                    {...attrs}
+                    bind:value={$formData.email}
                   />
                 </div>
               </Form.Control>
@@ -272,7 +261,21 @@ $: loadingState.setFormLoading($delayed);
             </Form.Field>
           </div>
         </div>
+      </section>
+      <hr class="opacity-50" />
+      <footer class="p-4 card-footer flex justify-between items-center space-x-4">
+        <div class="flex items-center space-x-2">
+          <Sparkles class="inline-block" />
+          <span>
+            <strong>Smart Fill</strong>
+            <span class="text-sm text-gray-500">
+              Press <kbd class="kbd">⌘ + C</kbd> to copy any text, then <kbd class="kbd">⌘ + V</kbd> anywhere in the form.
+            </span>
+          </span>
+          <SlideToggle name="slide" bind:checked={useLocal} size="sm" disabled={!("aibrow" in window)}>Use Local</SlideToggle>
+        </div>
         <!-- Form Action Buttons -->
+         <section>
         <button
           type="button"
           class="variant-ghost-secondary btn"
@@ -286,34 +289,49 @@ $: loadingState.setFormLoading($delayed);
         >
           Reset
         </button>
-
         <button
-          class="variant-ghost-success btn"
           type="submit"
+          class="variant-ghost-success btn"
           disabled={!$tainted || $submitting}
         >
-          {#if $submitting}
-            <aside
-              class="alert rounded-sm"
-              transition:fade|local={{ duration: 400 }}
-            >
-              Saving..
-            </aside>
+          {#if $timeout}
+            <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+          {:else if $delayed}
+            <Loader class="m-2 h-4 w-4 animate-spin" />
           {:else}
-            Create
+            {m.buttons_create()}
           {/if}
-        </button>
-      </section>
-      <hr class="opacity-50" />
-      <footer class="p-4 card-footer flex justify-end items-center space-x-4">
-        <p class="text-xs">
-          On-Device AI: <span class="text-error-500 uppercase"
-            >{window.ai?.languageModel !== undefined}</span
-          >
-        </p>
-        <SmartPaste on:pasted={handlePasted} />
+      </button>
+
+        </section>
       </footer>
     </form>
+    <!-- samples -->
+    <Sample header="sample text to copy" content="my name is Simon	Villarreal, my phone number is (904) 333-3212, email: simon.villarreal@youtube.com my address is : 334 Four Winds, Riverside, CA 92501, USA" />
+    <Sample header="sample text to copy" content="Dear Sir/Madam,
+
+I hope this message finds you well. My name is Alan Davies, and I am reaching out to introduce my web development services that can help elevate your business's online presence.
+
+In today's digital age, a robust and user-friendly website is crucial for any business looking to stand out and succeed. I specialize in creating custom, responsive, and aesthetically pleasing websites tailored to meet your specific business needs and goals. Whether you're looking to revamp your existing website or build a new one from scratch, I am here to help.
+
+What I Offer:
+* Custom Web Design: Tailored layouts that reflect your brand image
+* Responsive Design: Ensures your website looks great on all devices
+* E-commerce Solutions: Seamless online shopping experiences
+* SEO Optimization: Enhance your visibility on search engines
+* Ongoing Support & Maintenance: Reliable, ongoing services to keep your website running smoothly.
+* I would love the opportunity to discuss how I can contribute to your business's success by creating or improving your online presence.
+
+Please feel free to contact me at alan@mydemocorp.io or (555) 555-1234 to arrange a convenient time for a consultation.
+
+Thank you for considering my services. I look forward to the possibility of working together to achieve your online goals.
+
+Warm regards,
+
+Alan,
+
+MyDemoCorp
+132 My Street, Kingston, New York 12401" />
     <!-- Debug -->
     <DebugShell label="AI Form">
       <SuperDebug

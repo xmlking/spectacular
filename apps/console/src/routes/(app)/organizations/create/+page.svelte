@@ -61,7 +61,7 @@ function isValidEmailDomain(value: string): boolean {
 						<div class="grid gap-2">
 							<Label class="label">Organization</Label>
 							<input {...attrs} class="input" bind:value={$formData.organization} />
-							<FieldErrors class="data-fs-[error=true]:bg-red-200" />
+							<FieldErrors class="data-[fs-error]:text-error-500" />
 						</div>
 					</Control>
 				</Field>

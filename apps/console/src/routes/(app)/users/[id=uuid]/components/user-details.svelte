@@ -75,7 +75,7 @@ $: {
                 class="input"
                 bind:value={$formData.displayName}
               />
-              <FieldErrors class="data-fs-[error=true]:bg-red-200" />
+              <FieldErrors class="data-[fs-error]:text-error-500" />
             </div>
           </Control>
         </Field>
@@ -91,7 +91,7 @@ $: {
                 bind:value={$formData.email}
                 disabled
               />
-              <FieldErrors class="data-fs-[error=true]:bg-red-200" />
+              <FieldErrors class="data-[fs-error]:text-error-500" />
             </div>
           </Control>
         </Field>
@@ -112,7 +112,7 @@ $: {
                   <option value={org.organization}>{org.organization}</option>
                 {/each}
               </select>
-              <FieldErrors class="data-fs-[error=true]:bg-red-200" />
+              <FieldErrors class="data-[fs-error]:text-error-500" />
             </div>
           </Control>
         </Field>
@@ -133,7 +133,7 @@ $: {
                   <option value={role}>{role}</option>
                 {/each}
               </select>
-              <FieldErrors class="data-fs-[error=true]:bg-red-200" />
+              <FieldErrors class="data-[fs-error]:text-error-500" />
             </div>
           </Control>
         </Field>

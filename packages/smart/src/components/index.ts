@@ -9,7 +9,6 @@ import MagicSpellTextarea from './magic-spell-textarea.svelte';
 import Textarea from './textarea.svelte';
 import Date from './date.svelte';
 import ComboBox from './combo-box.svelte';
-import Paste from './paste.svelte';
 import Sentiment from './sentiment.svelte';
 
 export {
@@ -20,7 +19,6 @@ export {
   Textarea,
   Date,
   ComboBox,
-  Paste,
   Sentiment,
   //
   Stats as SmartStats,
@@ -30,6 +28,5 @@ export {
   Textarea as SmartTextarea,
   Date as SmartDate,
   ComboBox as SmartComboBox,
-  Paste as SmartPaste,
   Sentiment as SmartSentiment,
 };

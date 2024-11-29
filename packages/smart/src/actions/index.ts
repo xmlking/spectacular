@@ -1,1 +1,1 @@
-export * from './smart-past.js';
+export * from './smart-paste.js';

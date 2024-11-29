@@ -440,6 +440,9 @@ importers:
       svelte-sonner:
         specifier: 0.3.28
         version: 0.3.28(svelte@5.2.7)
+      sveltekit-superforms:
+        specifier: 2.20.1
+        version: 2.20.1(@sveltejs/kit@2.8.2(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.3)(lightningcss@1.28.1)))(svelte@5.2.7)(vite@5.4.11(@types/node@22.9.3)(lightningcss@1.28.1)))(@types/json-schema@7.0.15)(svelte@5.2.7)(typescript@5.7.2)
       tailwind-merge:
         specifier: 2.5.4
         version: 2.5.4
@@ -464,6 +467,9 @@ importers:
       vitest:
         specifier: 2.1.5
         version: 2.1.5(@types/node@22.9.3)(@vitest/ui@2.1.5)(jsdom@25.0.1)(lightningcss@1.28.1)
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
 
   apps/web:
     dependencies:
@@ -736,9 +742,6 @@ importers:
       '@types/dom-chromium-ai':
         specifier: 0.0.3
         version: 0.0.3
-      '@types/json-schema':
-        specifier: 7.0.15
-        version: 7.0.15
       '@types/node':
         specifier: 22.9.3
         version: 22.9.3
@@ -11055,7 +11058,8 @@ snapshots:
 
   '@types/js-cookie@3.0.6': {}
 
-  '@types/json-schema@7.0.15': {}
+  '@types/json-schema@7.0.15':
+    optional: true
 
   '@types/jsonwebtoken@9.0.7':
     dependencies:

@@ -63,7 +63,7 @@ export type ToolType = keyof typeof toolOptions;
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   // import { getFormField } from "formsnap";
   import Result from "./result.svelte";
-  import { languageTagToHumanReadable } from "./smart.js";
+  import { isPolyfilledTranslation, languageTagToHumanReadable } from "./smart.js";
 
   const log = new Logger("smart:textarea:browser");
 
@@ -315,7 +315,7 @@ export type ToolType = keyof typeof toolOptions;
   }
   async function translate() {
     let translator;
-    let streamSupported = true;
+    let streamSupported = isPolyfilledTranslation();
     try {
       if (window.ai.translator) {
         translator = await window.ai.translator.create(translationOps);
@@ -324,7 +324,6 @@ export type ToolType = keyof typeof toolOptions;
         "createTranslator" in self.translation
       ) {
         translator = await window.translation.createTranslator(translationOps);
-        streamSupported = false;
       } else {
         error = "translation not supported";
         // errors?.update((items) => {

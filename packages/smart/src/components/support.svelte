@@ -80,7 +80,7 @@ onMount(async () => {
     </ol>
     <p>To use it, open Developer Tools and create a session with:</p>
     <pre class="pre"><code
-        >const session = await window.aibrow.languageModel.create();</code
+        >const session = await window.ai.languageModel.create();</code
       ></pre>
   </div>
 </details>

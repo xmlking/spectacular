@@ -42,7 +42,7 @@ maxDepthQueries = 4
 version = 20
 
 [auth]
-version = '0.36.0'
+version = '0.36.1'
 
 [auth.elevatedPrivileges]
 mode = 'required'
@@ -114,6 +114,9 @@ passwordMinLength = 9
 
 [auth.method.smsPasswordless]
 enabled = false
+
+[auth.method.otp.email]
+enabled = true
 
 [auth.method.oauth]
 [auth.method.oauth.apple]
