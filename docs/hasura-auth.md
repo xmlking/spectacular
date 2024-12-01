@@ -38,6 +38,7 @@ Recommended roles:
 - **org:admin**:  users who are mainly using the application to manage users and their access of their _organization_.
 - **org:owner**:  user who can remove an _organization_, can transfer ownershop of  _organization_.
 - **sys:admin**:  users who can do cross-organization activities that other _roles_ cannot do.
+- **an:admin**:  users who are can access application analytics/reporting screens.
 
 | Role        | Role Type | Inherited / Composed | Description                                                                                         | Allowed Activity                                                                   |
 | ----------- | --------- | -------------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |

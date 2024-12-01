@@ -23,6 +23,7 @@ enableAllowList = false
 enableConsole = true
 enableRemoteSchemaPermissions = false
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
+inferFunctionPermissions = true
 liveQueriesMultiplexedRefetchInterval = 1000
 stringifyNumericTypes = false
 
@@ -43,6 +44,7 @@ version = 20
 
 [auth]
 version = '0.36.1'
+# version = '0.36.1-sumo'
 
 [auth.elevatedPrivileges]
 mode = 'required'
@@ -107,6 +109,10 @@ enabled = false
 [auth.method.emailPasswordless]
 enabled = true
 
+[auth.method.otp]
+[auth.method.otp.email]
+enabled = true
+
 [auth.method.emailPassword]
 hibpEnabled = false
 emailVerificationRequired = false
@@ -114,9 +120,6 @@ passwordMinLength = 9
 
 [auth.method.smsPasswordless]
 enabled = false
-
-[auth.method.otp.email]
-enabled = true
 
 [auth.method.oauth]
 [auth.method.oauth.apple]
@@ -184,8 +187,7 @@ origins = ['https://console.traefik.me:5173']
 timeout = 60000
 
 [auth.totp]
-enabled = true
-issuer = 'Spectacular'
+enabled = false
 
 [auth.misc]
 concealErrors = false
