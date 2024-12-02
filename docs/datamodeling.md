@@ -67,17 +67,17 @@ Example
 
 ```sql
 CREATE TABLE "widgets" (
-	"id" uuid DEFAULT gen_random_uuid() NOT NULL,
-	"created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
-	"updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
-	"deleted_at" TIMESTAMP WITH TIME ZONE,
-	"created_by" character varying NOT NULL,
-	"updated_by" character varying NOT NULL,
-	"display_name" character varying NOT NULL,
-	"organization" character varying NOT NULL,
-	"description" character varying,
-	"tags" text[],
-	"annotations" public.hstore
+ "id" uuid DEFAULT gen_random_uuid() NOT NULL,
+ "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+ "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+ "deleted_at" TIMESTAMP WITH TIME ZONE,
+ "created_by" character varying NOT NULL,
+ "updated_by" character varying NOT NULL,
+ "display_name" character varying NOT NULL,
+ "organization" character varying NOT NULL,
+ "description" character varying,
+ "tags" text[],
+ "annotations" public.hstore
 );
 ALTER TABLE ONLY public.widgets
     ADD CONSTRAINT widgets_organization_fkey FOREIGN KEY (organization) REFERENCES public.organization(value);
@@ -248,3 +248,4 @@ Whatever you end up doing, ensure that the affected code paths are tested approp
 - [Soft deletion with PostgreSQL: but with logic on the database!](https://evilmartians.com/chronicles/soft-deletion-with-postgresql-but-with-logic-on-the-database)
 - [Soft Deleting and Unique Constraint](https://halimsamy.com/sql-soft-deleting-and-unique-constraint)
 - [Soft Deleting and Unique Constraint with Partially Index](https://blog.staynoob.cn/post/2019/05/when-soft-delete-meets-unique-index/)
+- [Easy, alternative soft deletion](https://brandur.org/fragments/deleted-record-insert)
