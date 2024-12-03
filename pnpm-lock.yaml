@@ -156,7 +156,7 @@ importers:
         version: 6.6.3
       '@testing-library/svelte':
         specifier: 5.2.6
-        version: 5.2.6(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1))(vitest@2.1.8)
+        version: 5.2.6(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1))(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))
       '@types/d3-scale':
         specifier: 4.0.8
         version: 4.0.8
@@ -188,11 +188,11 @@ importers:
         specifier: 0.1.27
         version: 0.1.27(react@18.3.1)(vite@5.4.11(@types/node@22.10.1))
       '@vincjo/datatables':
-        specifier: 1.14.10
-        version: 1.14.10(svelte@4.2.19)
+        specifier: 2.1.0
+        version: 2.1.0(svelte@4.2.19)
       '@vitest/coverage-v8':
         specifier: 2.1.8
-        version: 2.1.8(vitest@2.1.8)
+        version: 2.1.8(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))
       '@xyflow/svelte':
         specifier: 0.1.24
         version: 0.1.24(svelte@4.2.19)
@@ -533,7 +533,7 @@ importers:
         version: 0.5.15(tailwindcss@3.4.15)
       '@vitest/coverage-v8':
         specifier: 2.1.8
-        version: 2.1.8(vitest@2.1.8)
+        version: 2.1.8(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))
       astro:
         specifier: 4.16.16
         version: 4.16.16(@types/node@22.10.1)(rollup@4.28.0)(typescript@5.7.2)
@@ -644,11 +644,11 @@ importers:
         specifier: 22.10.1
         version: 22.10.1
       '@vincjo/datatables':
-        specifier: 1.14.10
-        version: 1.14.10(svelte@4.2.19)
+        specifier: 2.1.0
+        version: 2.1.0(svelte@4.2.19)
       '@vitest/coverage-v8':
         specifier: 2.1.8
-        version: 2.1.8(vitest@2.1.8)
+        version: 2.1.8(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -756,7 +756,7 @@ importers:
         version: 22.10.1
       '@vitest/coverage-v8':
         specifier: 2.1.8
-        version: 2.1.8(vitest@2.1.8)
+        version: 2.1.8(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))
       ai:
         specifier: 4.0.10
         version: 4.0.10(react@18.3.1)(zod@3.23.8)
@@ -882,7 +882,7 @@ importers:
         version: 22.10.1
       '@vitest/coverage-v8':
         specifier: 2.1.8
-        version: 2.1.8(vitest@2.1.8)
+        version: 2.1.8(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -954,7 +954,7 @@ importers:
         version: link:../typescript-config
       '@vitest/coverage-v8':
         specifier: 2.1.8
-        version: 2.1.8(vitest@2.1.8)
+        version: 2.1.8(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))
       zod:
         specifier: 3.23.8
         version: 3.23.8
@@ -2178,9 +2178,11 @@ packages:
 
   '@inlang/paraglide-js-adapter-unplugin@1.4.29':
     resolution: {integrity: sha512-CDhQ69M9Ej8wfY/8P2rdNzwq6ux69A4nlFJqPcWffEX21xMaWGlt8JNspjMjc158KpAYyBGB8bFgTZ5K6o1fwg==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js-adapter-vite@1.2.40':
     resolution: {integrity: sha512-2+mAYI4hDMTr7AAei5CNzjqpjzOvsnlGrVvHrohtYs+Jn+tayokDaO7iL5o9k9SYrlXBZ7tUshAw88UQ1+f82Q==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@inlang/paraglide-js@1.11.3':
     resolution: {integrity: sha512-WVNraTylfZty0kt5EQNh8yx0WUJbtYEmc8YoNRRSUWB0rqeCh8a9xIQnmzZxBMf7IL7es+Ppiqx15py7mukJRw==}
@@ -3421,10 +3423,10 @@ packages:
       vite:
         optional: true
 
-  '@vincjo/datatables@1.14.10':
-    resolution: {integrity: sha512-gtojSC/LKDHbh2ZGZeaAQ+lLltcmcSDDLkecgb9WpG7lHmd4b/1HUTtFWAJt43TnaK8SrciGugh9VRRZN53bpw==}
+  '@vincjo/datatables@2.1.0':
+    resolution: {integrity: sha512-CU0hWE2BgxLAzdr5RviaQ4t5ok9VZdiFS/hEPotTZrySvwWFY10DfpFC88xRiHWsutnnQ6KJUXaiwJoCTeBkhQ==}
     peerDependencies:
-      svelte: ^3.56.0 || ^4.0.0 || ^5.0.0-next.120
+      svelte: ^5.0.0
 
   '@vinejs/compiler@2.5.1':
     resolution: {integrity: sha512-efiO/SCQSMCqz6LDZTI4R3Ceq1ik3K2IqefEbbch+ko4dZncaYmQWJpX/fXVwgmO78jTZuerzD4I2WphPJUCwg==}
@@ -10879,7 +10881,7 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/svelte@5.2.6(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1))(vitest@2.1.8)':
+  '@testing-library/svelte@5.2.6(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1))(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))':
     dependencies:
       '@testing-library/dom': 10.4.0
       svelte: 4.2.19
@@ -11410,7 +11412,7 @@ snapshots:
       react: 18.3.1
       vite: 5.4.11(@types/node@22.10.1)
 
-  '@vincjo/datatables@1.14.10(svelte@4.2.19)':
+  '@vincjo/datatables@2.1.0(svelte@4.2.19)':
     dependencies:
       svelte: 4.2.19
 
@@ -11429,7 +11431,7 @@ snapshots:
       validator: 13.12.0
     optional: true
 
-  '@vitest/coverage-v8@2.1.8(vitest@2.1.8)':
+  '@vitest/coverage-v8@2.1.8(vitest@2.1.8(@types/node@22.10.1)(@vitest/ui@2.1.8)(jsdom@25.0.1))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
