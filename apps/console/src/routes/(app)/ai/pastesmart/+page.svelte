@@ -11,7 +11,7 @@ import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { defaults, superForm, setError } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { personSchema, type Person } from './schema.js';
+import { personSchema, personJsonSchema as jsonSchema, type Person } from './schema.js';
 import Sample from './sample.svelte';
 import { writable } from 'svelte/store';
 import { Loader, MoreHorizontal, Sparkles } from 'lucide-svelte';
@@ -24,7 +24,7 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let loading = writable(false);
 let smartError = writable<string>();
-const jsonSchema = zod(personSchema).jsonSchema;
+// const jsonSchema = zod(personSchema).jsonSchema; // HINT: openai-zod-to-json-schema is better
 let useLocal = false;
 
 // Search form

@@ -67,6 +67,10 @@ const data = {
           url: '/examples/debounce',
         },
         {
+          title: 'Debounce Runed',
+          url: '/examples/debounce-runed',
+        },
+        {
           title: 'Hover',
           url: '/examples/hover',
         },
@@ -84,6 +88,10 @@ const data = {
         {
           title: 'Debounce',
           url: '/examples/debounce',
+        },
+        {
+          title: 'Debounce Runed',
+          url: '/examples/debounce-runed',
         },
         {
           title: 'Hover',

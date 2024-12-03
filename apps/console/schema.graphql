@@ -2029,7 +2029,7 @@ type mutation_root {
   """
   delete single row from the table: "user_groups"
   """
-  delete_user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
+  delete_user_groups_by_pk(id: uuid!): user_groups
 
   """
   delete data from the table: "user_org_roles"
@@ -3985,7 +3985,7 @@ type query_root {
   ): [user_groups!]!
 
   """fetch data from the table: "user_groups" using primary key columns"""
-  user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
+  user_groups_by_pk(id: uuid!): user_groups
 
   """
   fetch data from the table: "user_org_roles"
@@ -5263,7 +5263,7 @@ type subscription_root {
   ): [user_groups!]!
 
   """fetch data from the table: "user_groups" using primary key columns"""
-  user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
+  user_groups_by_pk(id: uuid!): user_groups
 
   """
   fetch data from the table in a streaming manner: "user_groups"
@@ -5441,7 +5441,7 @@ unique or primary key constraints on table "user_groups"
 """
 enum user_groups_constraint {
   """
-  unique or primary key constraint on columns "user_id", "group_id"
+  unique or primary key constraint on columns "id"
   """
   user_groups_pkey
 }

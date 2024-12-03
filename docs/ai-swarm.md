@@ -62,3 +62,6 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
   - SDK news <https://x.com/lgrammel/status/1852647732185285106?s=46>
   - API <https://github.com/vercel/ai/tree/main/packages/swarm>
   - Video <https://youtu.be/Rs8B8fQsl28>
+- Libs
+  - Gradual JSON Parser for Generative Pretrained Transformers [gjp-4-gpt](https://github.com/JacksonKearl/gjp-4-gpt)
+  - zod-to-json-schema [openai-zod-to-json-schema](https://github.com/transitive-bullshit/openai-zod-to-json-schema)

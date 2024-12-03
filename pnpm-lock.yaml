@@ -238,6 +238,9 @@ importers:
       ollama-ai-provider:
         specifier: 1.0.0
         version: 1.0.0(zod@3.23.8)
+      openai-zod-to-json-schema:
+        specifier: 1.0.3
+        version: 1.0.3(zod@3.23.8)
       paneforge:
         specifier: 0.0.6
         version: 0.0.6(svelte@4.2.19)
@@ -425,6 +428,12 @@ importers:
       mode-watcher:
         specifier: 0.5.0
         version: 0.5.0(svelte@5.2.10)
+      openai-zod-to-json-schema:
+        specifier: ^1.0.3
+        version: 1.0.3(zod@3.23.8)
+      runed:
+        specifier: 0.16.1
+        version: 0.16.1(svelte@5.2.10)
       svelte:
         specifier: 5.2.10
         version: 5.2.10
@@ -760,6 +769,9 @@ importers:
       formsnap:
         specifier: 1.0.1
         version: 1.0.1(svelte@4.2.19)(sveltekit-superforms@2.20.1(@sveltejs/kit@2.8.5(@sveltejs/vite-plugin-svelte@5.0.1(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1)(lightningcss@1.28.1)))(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.1)(lightningcss@1.28.1)))(@types/json-schema@7.0.15)(svelte@4.2.19)(typescript@5.7.2))
+      gjp-4-gpt:
+        specifier: 0.0.8
+        version: 0.0.8
       lucide-svelte:
         specifier: 0.462.0
         version: 0.462.0(svelte@4.2.19)
@@ -5020,6 +5032,9 @@ packages:
   github-slugger@2.0.0:
     resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
 
+  gjp-4-gpt@0.0.8:
+    resolution: {integrity: sha512-p6OsKWEJGyIb9TuM5DkHfG0QiDeskZM4pr2yGzZcZ0xRuDcLCizIZZc8BRMuQxnIMD3+NN4Ehr/2E9nlttEaxA==}
+
   gl-matrix@3.4.3:
     resolution: {integrity: sha512-wcCp8vu8FT22BnvKVPjXa/ICBWRq/zjFfdofZy1WSpQZpphblv12/bOQLBC1rMM7SGOFS9ltVmKOHil5+Ml7gA==}
 
@@ -6314,6 +6329,12 @@ packages:
   oniguruma-to-es@0.7.0:
     resolution: {integrity: sha512-HRaRh09cE0gRS3+wi2zxekB+I5L8C/gN60S+vb11eADHUaB/q4u8wGGOX3GvwvitG8ixaeycZfeoyruKQzUgNg==}
 
+  openai-zod-to-json-schema@1.0.3:
+    resolution: {integrity: sha512-CFU+KtOmX1dk2nPCZcGYgbrI3YLJJgMSehx1mLbH1A2fsRmZevHzMau6vFIhtkCpHWkGQ3ossA4a0OzVHlGrkw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.23.8
+
   ora@8.1.1:
     resolution: {integrity: sha512-YWielGi1XzG1UTvOaCFaNgEnuhZVMSHYkW/FQ7UX8O26PtlpdM84c0f7wLPlkvx2RfiQmnzd61d/MGxmpQeJPw==}
     engines: {node: '>=18'}
@@ -7043,6 +7064,11 @@ packages:
 
   runed@0.15.4:
     resolution: {integrity: sha512-kmbpstUd7v2FdlBM+MT78IyuOVd38tq/e7MHvVb0fnVCsPSPMD/m2Xh+wUhzg9qCJgxRjBbIKu68DlH/x5VXJA==}
+    peerDependencies:
+      svelte: ^5.0.0-next.1
+
+  runed@0.16.1:
+    resolution: {integrity: sha512-k9ylt7sfEQiqOo2FmuilkLSk92pDzMSeVHFb8aPJGFPQPG9ErUxhfcHQwnmUhT03F8oQeO6bKB/TDoPKhdXbTA==}
     peerDependencies:
       svelte: ^5.0.0-next.1
 
@@ -13394,6 +13420,8 @@ snapshots:
 
   github-slugger@2.0.0: {}
 
+  gjp-4-gpt@0.0.8: {}
+
   gl-matrix@3.4.3: {}
 
   glob-parent@5.1.2:
@@ -15124,6 +15152,10 @@ snapshots:
       regex: 5.0.2
       regex-recursion: 4.3.0
 
+  openai-zod-to-json-schema@1.0.3(zod@3.23.8):
+    dependencies:
+      zod: 3.23.8
+
   ora@8.1.1:
     dependencies:
       chalk: 5.3.0
@@ -15913,6 +15945,11 @@ snapshots:
       queue-microtask: 1.2.3
 
   runed@0.15.4(svelte@5.2.10):
+    dependencies:
+      esm-env: 1.2.1
+      svelte: 5.2.10
+
+  runed@0.16.1(svelte@5.2.10):
     dependencies:
       esm-env: 1.2.1
       svelte: 5.2.10
