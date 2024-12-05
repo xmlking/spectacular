@@ -1,4 +1,5 @@
 <script lang="ts">
+// https://developer.chrome.com/docs/ai/product-reviews-on-device
 // TODO
 let review = 'This is a great product. I love it!';
 

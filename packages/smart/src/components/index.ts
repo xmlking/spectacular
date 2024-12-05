@@ -10,6 +10,7 @@ import Textarea from './textarea.svelte';
 import Date from './date.svelte';
 import ComboBox from './combo-box.svelte';
 import Sentiment from './sentiment.svelte';
+import Chat from './chat.svelte';
 
 export {
   Stats,
@@ -20,6 +21,7 @@ export {
   Date,
   ComboBox,
   Sentiment,
+  Chat,
   //
   Stats as SmartStats,
   Settings as SmartSettings,
@@ -29,4 +31,5 @@ export {
   Date as SmartDate,
   ComboBox as SmartComboBox,
   Sentiment as SmartSentiment,
+  Chat as SmartChat,
 };

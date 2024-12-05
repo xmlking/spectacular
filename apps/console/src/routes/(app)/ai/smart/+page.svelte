@@ -235,3 +235,6 @@ $: loadingState.setFormLoading($delayed);
     </DebugShell>
   </div>
 </div>
+
+<!--Smart-Chat-->
+<Smart.Chat />
