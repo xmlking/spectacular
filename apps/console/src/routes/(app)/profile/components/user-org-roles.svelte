@@ -9,19 +9,26 @@ $: data = fragment(
   user,
   graphql(`
       fragment UserOrgRolesFragment on users {
-        userOrgRoles(order_by: { organization: asc }) @list(name: "User_Org_Roles") @loading(cascade: true) {
-          organization
+        allowedOrgs(order_by: { orgId: asc }) @list(name: "User_Org_Roles") @loading(cascade: true) {
+          orgId
+          organization {
+            displayName
+            description
+          }
           role
-          isDefaultRole
+
+          isCurrentOrg
         }
       }
-  `),
+    `),
 );
-$: ({ userOrgRoles } = $data);
+$: ({ allowedOrgs } = $data);
 
 //variables
-const handler = new DataHandler(userOrgRoles?.filter(loaded), { rowsPerPage: 5 });
-$: handler.setRows(userOrgRoles);
+const handler = new DataHandler(allowedOrgs?.filter(loaded), {
+  rowsPerPage: 5,
+});
+$: handler.setRows(allowedOrgs);
 const rows = handler.getRows();
 </script>
 
@@ -35,24 +42,29 @@ const rows = handler.getRows();
       <thead>
         <tr>
           <Table.Head {handler} orderBy="organization">Organization</Table.Head>
+          <Table.Head {handler} orderBy="role">Description</Table.Head>
           <Table.Head {handler} orderBy="role">Role</Table.Head>
-          <Table.Head {handler} orderBy="isDefaultRole">isDefaultRole</Table.Head>
+          <Table.Head {handler} orderBy="isCurrentOrg"
+            >isCurrentOrg</Table.Head
+          >
         </tr>
       </thead>
       <tbody>
         {#each $rows as role}
-          {#if role.organization === PendingValue}
+          {#if role.orgId === PendingValue}
             <tr class="animate-pulse">
+              <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
             </tr>
           {:else}
-          <tr>
-            <td>{role.organization}</td>
-            <td>{role.role}</td>
-            <td>{role.isDefaultRole}</td>
-          </tr>
+            <tr>
+              <td>{role.organization.displayName}</td>
+              <td>{role.organization.description}</td>
+              <td>{role.role}</td>
+              <td>{role.isCurrentOrg}</td>
+            </tr>
           {/if}
         {:else}
           <tr>

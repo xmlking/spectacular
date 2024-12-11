@@ -7,8 +7,8 @@ configuration:
       custom_name: createdAt
     created_by:
       custom_name: createdBy
-    deleted_at:
-      custom_name: deletedAt
+    org_id:
+      custom_name: orgId
     rule_id:
       custom_name: ruleId
     subject_display_name:
@@ -30,7 +30,7 @@ configuration:
   custom_column_names:
     created_at: createdAt
     created_by: createdBy
-    deleted_at: deletedAt
+    org_id: orgId
     rule_id: ruleId
     subject_display_name: subjectDisplayName
     subject_id: subjectId
@@ -42,34 +42,20 @@ configuration:
     valid_to: validTo
   custom_root_fields: {}
 object_relationships:
+  - name: organization
+    using:
+      foreign_key_constraint_on: org_id
   - name: rule
     using:
       foreign_key_constraint_on: rule_id
 insert_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       check: {}
       set:
-        created_by: x-hasura-user-id
-        updated_by: x-hasura-user-id
-      columns:
-        - active
-        - organization
-        - rule_id
-        - subject_display_name
-        - subject_id
-        - subject_secondary_id
-        - subject_type
-        - valid_from
-        - valid_to
-        - weight
-  - role: supervisor
-    permission:
-      check: {}
-      set:
-        created_by: x-hasura-user-id
-        organization: x-hasura-default-org
-        updated_by: x-hasura-user-id
+        created_by: x-hasura-User-Id
+        org_id: x-hasura-Org-Id
+        updated_by: x-hasura-User-Id
       columns:
         - active
         - rule_id
@@ -81,150 +67,49 @@ insert_permissions:
         - valid_to
         - weight
     comment: ""
-  - role: user
-    permission:
-      check: {}
-      set:
-        created_by: x-hasura-user-id
-        organization: x-hasura-default-org
-        updated_by: x-hasura-user-id
-      columns:
-        - active
-        - rule_id
-        - subject_display_name
-        - subject_id
-        - subject_secondary_id
-        - subject_type
-        - valid_from
-        - valid_to
-        - weight
 select_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
-        - id
         - active
-        - valid_from
-        - valid_to
         - weight
-        - subject_id
-        - subject_secondary_id
         - subject_display_name
-        - subject_type
-        - rule_id
-        - created_at
-        - created_by
-        - updated_at
-        - updated_by
-        - organization
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-  - role: supervisor
-    permission:
-      columns:
-        - active
-        - created_at
-        - created_by
-        - id
-        - organization
-        - rule_id
-        - subject_display_name
-        - subject_id
         - subject_secondary_id
         - subject_type
-        - updated_at
-        - updated_by
-        - valid_from
-        - valid_to
-        - weight
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _eq: x-hasura-default-org
-  - role: user
-    permission:
-      columns:
-        - id
-        - active
-        - valid_from
-        - valid_to
-        - weight
-        - subject_id
-        - subject_secondary_id
-        - subject_display_name
-        - subject_type
-        - rule_id
         - created_at
-        - created_by
         - updated_at
+        - valid_from
+        - valid_to
+        - created_by
+        - id
+        - org_id
+        - rule_id
+        - subject_id
         - updated_by
-        - organization
       filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-          - created_by:
-              _eq: x-hasura-user-id
-update_permissions:
-  - role: manager
-    permission:
-      columns:
-        - active
-        - deleted_at
-        - valid_from
-        - valid_to
-        - weight
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-      check: null
-      set:
-        updated_by: x-hasura-user-id
-  - role: supervisor
-    permission:
-      columns:
-        - active
-        - deleted_at
-        - valid_from
-        - valid_to
-        - weight
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _eq: x-hasura-default-org
-      check: null
-      set:
-        updated_by: x-hasura-user-id
+        org_id:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true
     comment: ""
-  - role: user
+update_permissions:
+  - role: org:admin
     permission:
       columns:
         - active
-        - deleted_at
         - valid_from
         - valid_to
         - weight
       filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-          - created_by:
-              _eq: x-hasura-user-id
+        org_id:
+          _eq: X-Hasura-Org-Id
       check: null
       set:
-        updated_by: x-hasura-user-id
+        updated_by: x-hasura-User-Id
+    comment: ""
+delete_permissions:
+  - role: org:admin
+    permission:
+      filter:
+        org_id:
+          _eq: X-Hasura-Org-Id
+    comment: ""

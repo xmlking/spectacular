@@ -38,8 +38,10 @@ export enum Roles {
   Me = 'me',
   Anonymous = 'anonymous',
   User = 'user',
-  Supervisor = 'supervisor',
-  Manager = 'manager',
+  Owner = 'org:owner',
+  Admin = 'org:admin',
+  Billing = 'org:billing',
+  Member = 'org:member',
 }
 
 export type Link = {

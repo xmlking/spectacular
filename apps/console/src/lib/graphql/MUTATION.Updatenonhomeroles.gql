@@ -1,31 +1,31 @@
 mutation Updatenonhomeroles(
   $userId: uuid!
-  $Org: String
+  $orgId: uuid!
   $defrole: String
   $delroles: [String!]!
   $roles: [user_org_roles_insert_input!]!
 ) {
-  delete_user_org_roles(where: { userId: { _eq: $userId }, organization: { _eq: $Org }, role: { _in: $delroles } }) {
+  delete_user_org_roles(where: { userId: { _eq: $userId }, orgId: { _eq: $orgId }, role: { _in: $delroles } }) {
     affected_rows
   }
 
   insert_user_org_roles(objects: $roles) {
     returning {
-      id
-      organization
+      userId
+      orgId
     }
   }
 
   update_user_org_roles(
-    where: { userId: { _eq: $userId }, organization: { _eq: $Org }, role: { _eq: $defrole } }
-    _set: { isDefaultRole: true }
+    where: { userId: { _eq: $userId }, orgId: { _eq: $orgId }, role: { _eq: $defrole } }
+    _set: { isCurrentOrg: true }
   ) {
     affected_rows
   }
 
   forother: update_user_org_roles(
-    where: { userId: { _eq: $userId }, organization: { _eq: $Org }, role: { _neq: $defrole } }
-    _set: { isDefaultRole: false }
+    where: { userId: { _eq: $userId }, orgId: { _eq: $orgId }, role: { _neq: $defrole } }
+    _set: { isCurrentOrg: false }
   ) {
     affected_rows
   }

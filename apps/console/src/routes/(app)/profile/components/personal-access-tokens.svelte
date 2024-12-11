@@ -86,7 +86,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
     const { data, errors: gqlErrors } = await deletePersonalAccessToken.mutate(
       { id },
       {
-        metadata: { logResult: true, useRole: 'me' },
+        metadata: { logResult: true, useRole: 'user' },
       },
     );
     if (gqlErrors) {

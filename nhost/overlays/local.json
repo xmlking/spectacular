@@ -23,6 +23,11 @@
     ]
   },
   {
+    "op": "replace",
+    "path": "/auth/version",
+    "value": "0.36.1-sumo"
+  },
+  {
     "op": "add",
     "path": "/auth/method/webauthn/relyingParty/origins/1",
     "value": "https://console.traefik.me:3000"
@@ -36,16 +41,6 @@
     "op": "add",
     "path": "/auth/method/webauthn/relyingParty/origins/3",
     "value": "https://console.traefik.me"
-  },
-  {
-    "op": "replace",
-    "path": "/global/environment/0/value",
-    "value": "Spectacular"
-  },
-  {
-    "op": "replace",
-    "path": "/global/environment/1/value",
-    "value": "Spectacular Console App"
   },
   {
     "op": "replace",

@@ -2,7 +2,7 @@ query GetUserById($id: uuid!) {
   user(id: $id) {
     id
     allowedOrgs {
-      organization
+      orgId
     }
     defaultRole
     displayName
@@ -11,12 +11,9 @@ query GetUserById($id: uuid!) {
     metadata
   }
   user_org_roles(where: { userId: { _eq: $id } }) {
-    organization
+    orgId
     role
-    isDefaultRole
-  }
-  organizations {
-    organization
+    isCurrentOrg
   }
   authUserRoles {
     role

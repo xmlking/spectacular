@@ -11,7 +11,7 @@ $: data = fragment(
         id
         createdAt
         updatedAt
-        organization
+        orgId
         tags
       }
     `),

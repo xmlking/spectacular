@@ -11,12 +11,12 @@ POST {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query IntrospectionQuery {
 	__schema {
@@ -38,12 +38,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query ListPolicies(
   $limit: Int = 50
@@ -106,12 +106,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query SearchAgentPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [policies_order_by!] = [{updatedAt: desc_nulls_last}]) {
   policies(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
@@ -157,12 +157,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query SearchPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [policies_order_by!] = [{updatedAt: desc_nulls_last}]) {
   policies(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) {
@@ -226,12 +226,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query GetPolicy($id: uuid!) {
   policies_by_pk(id: $id) {
@@ -291,12 +291,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $ruleId: uuid!,$ruleData: rules_set_input!) {
   update_policies_by_pk(pk_columns: {id: $policyId}, _set: $policyData) {
@@ -376,12 +376,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation CreatePolicy($data: policies_insert_input!) {
   insert_policies_one(object: $data) {
@@ -469,12 +469,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation DeletePolicyFail($id:uuid!) {
   delete_policies_by_pk(id:  $id) {
@@ -493,12 +493,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor
-x-hasura-default-role: supervisor
-x-hasura-role: supervisor
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!) {
   update_policies_by_pk(pk_columns: {id: $policyId}, _set: {deletedAt: $deletedAt}) {

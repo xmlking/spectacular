@@ -17,8 +17,8 @@ actions:
         version: 2
     permissions:
       - role: user
-      - role: supervisor
-      - role: manager
+      - role: org:admin
+      - role: org:owner
     comment: Universities API
   - name: SearchRestrooms
     definition:
@@ -40,8 +40,8 @@ actions:
         version: 2
     permissions:
       - role: user
-      - role: supervisor
-      - role: manager
+      - role: org:admin
+      - role: org:owner
     comment: Restrooms API
 custom_types:
   enums: []

@@ -13,13 +13,13 @@ mutation CreatePolicy1($data: policies_insert_input!) {
     createdAt
     updatedAt
     updatedBy
-    organization
+    orgId
     rule {
       id
       displayName
       description
       tags
-      annotations
+      metadata
       shared
       source
       sourcePort
@@ -35,7 +35,7 @@ mutation CreatePolicy1($data: policies_insert_input!) {
       createdAt
       updatedAt
       updatedBy
-      organization
+      orgId
     }
   }
 }

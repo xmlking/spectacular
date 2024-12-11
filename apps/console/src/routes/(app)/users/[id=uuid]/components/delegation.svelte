@@ -1,6 +1,6 @@
 <script lang="ts">
 import { invalidateAll } from '$app/navigation';
-import { AddOrganizationStore, UpdatehomerolesStore, UpdatenonhomerolesStore } from '$houdini';
+import { AddOrganizationStore, UpdatenonhomerolesStore } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
@@ -37,10 +37,10 @@ let newdefrole = '';
 let defrole = '';
 const newroles = writable([]);
 const updateroles = writable([]);
-const roleHierarchy = ['anonymous', 'me', 'user', 'supervisor', 'manager'];
+const roleHierarchy = ['public', 'me', 'user', 'org:member', 'org:admin', 'org:owner'];
 const toastStore = getToastStore();
 const Addorgroles = new AddOrganizationStore();
-const updatehomerolesStore = new UpdatehomerolesStore();
+// const updatehomerolesStore = new UpdatehomerolesStore();
 const updatenonhomerolesStore = new UpdatenonhomerolesStore();
 async function addorg(Org: string, roless: string[], defrole: string, userId: string) {
   const getHighestRole = (roless: string[]) => {
@@ -104,24 +104,24 @@ async function updorg(Org: string, roless: string[], userId: string) {
     role: role,
   }));
   if (Org === def_org) {
-    const { errors, data } = await updatehomerolesStore.mutate({
-      userId: userId,
-      defaultRole: defrole,
-      delroles: delroles,
-      Authroles: defrolesAdd,
-    });
-    if (errors) {
-      console.log(errors.toString());
-    }
-    if (data?.insertAuthUserRoles) {
-      handleMessage(
-        {
-          message: `<p class="text-xl">User: <span class="text-red-500 font-bold">${Org}</span> Updated with <span class="text-red-500 font-bold">${roless}</span> roles</p>`,
-          type: 'success',
-        },
-        toastStore,
-      );
-    }
+    // const { errors, data } = await updatehomerolesStore.mutate({
+    //   userId: userId,
+    //   defaultRole: defrole,
+    //   delroles: delroles,
+    //   Authroles: defrolesAdd,
+    // });
+    // if (errors) {
+    //   console.log(errors.toString());
+    // }
+    // if (data?.insertAuthUserRoles) {
+    //   handleMessage(
+    //     {
+    //       message: `<p class="text-xl">User: <span class="text-red-500 font-bold">${Org}</span> Updated with <span class="text-red-500 font-bold">${roless}</span> roles</p>`,
+    //       type: 'success',
+    //     },
+    //     toastStore,
+    //   );
+    // }
   } else {
     const { errors, data } = await updatenonhomerolesStore.mutate({
       userId: userId,

@@ -1,6 +1,7 @@
 mutation CreateOrg($data: organizations_insert_input!) {
   insert_organizations_one(object: $data) {
-    organization
+    id
+    displayName
     description
     allowedEmails
     allowedEmailDomains

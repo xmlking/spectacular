@@ -34,16 +34,16 @@ $: data = fragment(
         displayName
         email
         phoneNumber
-        defaultOrg
+        currentOrgId
         defaultRole
         avatarUrl
         locale
-        plan: metadata(path: "plan")
+        note: metadata(path: "note")
       }
     `),
 );
 
-$: ({ id, displayName, email, phoneNumber, defaultOrg, defaultRole, avatarUrl, locale, plan } = $data);
+$: ({ id, displayName, email, phoneNumber, currentOrgId, defaultRole, avatarUrl, locale, note } = $data);
 
 const updateUserDetails = graphql(`
     mutation UpdateUserDetails($id: uuid!,  $data: users_set_input!) {
@@ -51,7 +51,7 @@ const updateUserDetails = graphql(`
       displayName
       phoneNumber
       locale
-      plan: metadata(path: "plan")
+      note: metadata(path: "note")
       avatarUrl
       }
     }
@@ -90,7 +90,7 @@ const form = superForm(defaults(zod(updateUserDetailsSchema)), {
       displayName: form.data.displayName,
       phoneNumber: form.data.phoneNumber,
       locale: form.data.locale,
-      metadata: { plan: form.data.plan, default_org: defaultOrg },
+      metadata: { note: form.data.note },
       avatarUrl: form.data.avatarUrl,
     };
     const variables: UpdateUserDetails$input = { id, data: payload };
@@ -162,9 +162,9 @@ $: valid = $allErrors.length === 0;
 $: loadingState.setFormLoading($delayed);
 
 // copy initialData to superform as soon as data is loaded
-// $: $formData = { displayName, email, phoneNumber, defaultRole, locale, plan, avatarUrl };
+// $: $formData = { displayName, email, phoneNumber, defaultRole, locale, note, avatarUrl };
 $: if (id !== PendingValue) {
-  $formData = { displayName, email, phoneNumber, defaultRole, locale, plan, avatarUrl };
+  $formData = { displayName, email, phoneNumber, defaultRole, locale, note, avatarUrl };
 }
 </script>
 
@@ -285,20 +285,19 @@ $: if (id !== PendingValue) {
         </Form.Field>
       </div>
       <div class="grid gap-2">
-        <Form.Field {form} name={keys.plan}>
+        <Form.Field {form} name={keys.note}>
           <Form.Control let:attrs>
-              <Form.Label>Plan</Form.Label>
-              <select
-              class="select data-[fs-error]:input-error"
+            <Form.Label class="label">Notes</Form.Label>
+            <input
+              type="text"
+              class="input data-[fs-error]:input-error"
               {...attrs}
-              bind:value={$formData.plan}>
-                <option value="free">Free</option>
-                <option value="pro">Pro</option>
-                <option value="enterprise">Enterprise</option>
-              </select>
+              placeholder="User Notes..."
+              bind:value={$formData.note}
+            />
           </Form.Control>
-          <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User's subscription plan</Form.Description> -->
-          <Form.FieldErrors />
+          <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User's Notes</Form.Description> -->
+          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
       </div>
     </div>

@@ -1,7 +1,7 @@
 query Rules {
   rules(order_by: { createdAt: asc }) @list(name: "Rules") {
     action
-    annotations
+    metadata
     appId
     description
     destination

@@ -34,29 +34,20 @@ object_relationships:
   - name: user
     using:
       foreign_key_constraint_on: user_id
-insert_permissions:
-  - role: manager
-    permission:
-      check:
-        user:
-          defaultOrg:
-            _in: x-hasura-allowed-orgs
-      columns:
-        - role
-        - user_id
-    comment: ""
-  - role: supervisor
-    permission:
-      check:
-        user:
-          defaultOrg:
-            _eq: x-hasura-default-org
-      columns:
-        - role
-        - user_id
-    comment: ""
 select_permissions:
-  - role: manager
+  - role: me
+    permission:
+      columns:
+        - role
+        - created_at
+        - id
+        - user_id
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
+    comment: ""
+  - role: org:admin
     permission:
       columns:
         - role
@@ -65,46 +56,15 @@ select_permissions:
         - user_id
       filter:
         user:
-          defaultOrg:
-            _in: x-hasura-allowed-orgs
+          currentOrgId:
+            _eq: X-Hasura-Org-Id
       allow_aggregations: true
-    comment: ""
-  - role: supervisor
-    permission:
-      columns:
-        - role
-        - created_at
-        - id
-        - user_id
-      filter:
-        user:
-          defaultOrg:
-            _eq: x-hasura-default-org
-      allow_aggregations: true
-    comment: ""
-  - role: user
-    permission:
-      columns:
-        - role
-        - created_at
-        - id
-        - user_id
-      filter:
-        user_id:
-          _eq: x-hasura-user-id
     comment: ""
 delete_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       filter:
         user:
-          defaultOrg:
-            _in: x-hasura-allowed-orgs
-    comment: ""
-  - role: supervisor
-    permission:
-      filter:
-        user:
-          defaultOrg:
-            _eq: x-hasura-default-org
+          currentOrgId:
+            _eq: X-Hasura-Org-Id
     comment: ""

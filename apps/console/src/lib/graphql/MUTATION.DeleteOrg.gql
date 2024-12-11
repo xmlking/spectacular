@@ -1,6 +1,6 @@
-mutation DeleteOrg($organization: String!) {
-  delete_organizations_by_pk(organization: $organization) {
-    organization
+mutation DeleteOrg($id: uuid!) {
+  delete_organizations_by_pk(id: $id) {
+    displayName
     description
   }
 }

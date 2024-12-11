@@ -92,6 +92,15 @@ object_relationships:
     using:
       foreign_key_constraint_on: default_role
 array_relationships:
+  - name: allowedOrgs
+    using:
+      manual_configuration:
+        column_mapping:
+          id: user_id
+        insertion_order: null
+        remote_table:
+          name: user_org_roles
+          schema: public
   - name: refreshTokens
     using:
       foreign_key_constraint_on:
@@ -113,13 +122,6 @@ array_relationships:
         table:
           name: user_security_keys
           schema: auth
-  - name: userOrgRoles
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table:
-          name: user_org_roles
-          schema: public
   - name: userProviders
     using:
       foreign_key_constraint_on:
@@ -128,18 +130,47 @@ array_relationships:
           name: user_providers
           schema: auth
 computed_fields:
-  - name: allowedOrgs
+  - name: associatedGroups
     definition:
       function:
-        name: user_allowed_orgs
+        name: user_associated_groups
         schema: public
-  - name: defaultOrg
+  - name: currentOrgId
     definition:
       function:
-        name: user_default_org
+        name: user_current_org
+        schema: public
+  - name: dissociatedGroups
+    definition:
+      function:
+        name: user_dissociated_groups
         schema: public
 select_permissions:
-  - role: manager
+  - role: me
+    permission:
+      columns:
+        - active_mfa_type
+        - avatar_url
+        - created_at
+        - default_role
+        - display_name
+        - email
+        - email_verified
+        - id
+        - is_anonymous
+        - last_seen
+        - locale
+        - metadata
+        - phone_number
+        - phone_number_verified
+        - updated_at
+      computed_fields:
+        - currentOrgId
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    comment: ""
+  - role: org:admin
     permission:
       columns:
         - active_mfa_type
@@ -159,10 +190,11 @@ select_permissions:
         - phone_number_verified
         - updated_at
       computed_fields:
-        - defaultOrg
+        - currentOrgId
       filter:
-        defaultOrg:
-          _in: x-hasura-allowed-orgs
+        currentOrgId:
+          _eq: X-Hasura-Org-Id
+      allow_aggregations: true
     comment: ""
   - role: private
     permission:
@@ -170,100 +202,35 @@ select_permissions:
         - phone_number
       filter:
         id:
-          _eq: x-hasura-user-id
-    comment: ""
-  - role: supervisor
-    permission:
-      columns:
-        - active_mfa_type
-        - avatar_url
-        - created_at
-        - default_role
-        - disabled
-        - display_name
-        - email
-        - email_verified
-        - id
-        - is_anonymous
-        - last_seen
-        - locale
-        - metadata
-        - phone_number
-        - phone_number_verified
-        - updated_at
-      computed_fields:
-        - defaultOrg
-      filter:
-        defaultOrg:
-          _eq: x-hasura-default-org
-    comment: ""
-  - role: user
-    permission:
-      columns:
-        - active_mfa_type
-        - avatar_url
-        - created_at
-        - default_role
-        - display_name
-        - email
-        - email_verified
-        - id
-        - is_anonymous
-        - last_seen
-        - locale
-        - metadata
-        - phone_number_verified
-        - updated_at
-      computed_fields:
-        - defaultOrg
-      filter:
-        id:
-          _eq: x-hasura-user-id
+          _eq: X-Hasura-User-Id
     comment: ""
 update_permissions:
-  - role: manager
+  - role: me
     permission:
       columns:
         - avatar_url
-        - default_role
-        - disabled
         - display_name
         - email
-        - locale
-        - metadata
-        - phone_number
-      filter:
-        defaultOrg:
-          _in: x-hasura-allowed-orgs
-      check: null
-    comment: ""
-  - role: supervisor
-    permission:
-      columns:
-        - avatar_url
-        - default_role
-        - disabled
-        - display_name
-        - email
-        - locale
-        - metadata
-        - phone_number
-      filter:
-        defaultOrg:
-          _eq: x-hasura-default-org
-      check: null
-    comment: ""
-  - role: user
-    permission:
-      columns:
-        - avatar_url
-        - default_role
-        - display_name
         - locale
         - metadata
         - phone_number
       filter:
         id:
-          _eq: x-hasura-user-id
+          _eq: X-Hasura-User-Id
+      check: {}
+    comment: ""
+  - role: org:admin
+    permission:
+      columns:
+        - avatar_url
+        - default_role
+        - disabled
+        - display_name
+        - email
+        - locale
+        - metadata
+      filter:
+        currentOrgId:
+          _eq: X-Hasura-Org-Id
       check: null
     comment: ""

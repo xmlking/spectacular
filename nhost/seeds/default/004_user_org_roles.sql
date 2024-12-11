@@ -1,0 +1,2 @@
+SET check_function_bodies = false;
+INSERT INTO public.user_org_roles (created_by, updated_by, created_at, updated_at, user_id, org_id, role) VALUES ( 'bacd19f4-0cc4-43d1-9e7a-4e5098ed8d83','bacd19f4-0cc4-43d1-9e7a-4e5098ed8d83', '2024-12-02 03:28:40.616639+00', '2024-12-02 03:28:40.616639+00','572ad1c0-f97b-4e16-b1f6-8b5ca90f931f', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b', 'org:member');

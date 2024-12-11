@@ -1,12 +1,3 @@
-[global]
-[[global.environment]]
-name = 'APP_NAME'
-value = 'Spectacular'
-
-[[global.environment]]
-name = 'APP_DESCRIPTION'
-value = 'Spectacular Console App'
-
 [hasura]
 version = 'v2.44.0-ce'
 adminSecret = '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
@@ -15,6 +6,11 @@ webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 [[hasura.jwtSecrets]]
 type = 'HS256'
 key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
+
+# [[hasura.jwtSecrets.claims_map]]
+# claim = "x-hasura-allowed-roles"
+# path = "$.https://hasura.io/jwt/claims.tenant-roles"
+# default = ["user", "editor"]
 
 [hasura.settings]
 corsDomain = ['*']
@@ -26,6 +22,7 @@ enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
 inferFunctionPermissions = true
 liveQueriesMultiplexedRefetchInterval = 1000
 stringifyNumericTypes = false
+unauthorizedRole = 'public'
 
 [hasura.logs]
 level = 'warn'
@@ -44,7 +41,6 @@ version = 20
 
 [auth]
 version = '0.36.1'
-# version = '0.36.1-sumo'
 
 [auth.elevatedPrivileges]
 mode = 'required'
@@ -76,24 +72,20 @@ default = 'mp'
 rating = 'g'
 
 [auth.user.email]
-allowed = ['sumo@demo.com', 'manager@chinthagunta.com', 'supervisor@chinthagunta.com', 'user1@chinthagunta.com', 'user2@chinthagunta.com']
-blocked = ['bad@example.com']
 
 [auth.user.emailDomains]
-allowed = ['gmail.com', 'outlook.com']
-blocked = ['example.org']
 
 [auth.session]
 [auth.session.accessToken]
 expiresIn = 900
 
 [[auth.session.accessToken.customClaims]]
-key = 'allowed-orgs'
-value = 'allowedOrgs[].organization'
+key = 'Org-Id'
+value = 'currentOrgId'
 
 [[auth.session.accessToken.customClaims]]
-key = 'default-org'
-value = 'metadata.default_org'
+key = 'Org-Ids'
+value = 'allowedOrgs.orgId[]'
 
 [[auth.session.accessToken.customClaims]]
 key = 'user-email'
@@ -126,8 +118,8 @@ enabled = false
 enabled = false
 
 [auth.method.oauth.azuread]
-tenant = '{{ secrets.AUTH_PROVIDER_AZUREAD_TENANT }}'
 enabled = true
+tenant = '{{ secrets.AUTH_PROVIDER_AZUREAD_TENANT }}'
 clientId = '{{ secrets.AUTH_PROVIDER_AZUREAD_CLIENT_ID }}'
 clientSecret = '{{ secrets.AUTH_PROVIDER_AZUREAD_CLIENT_SECRET }}'
 

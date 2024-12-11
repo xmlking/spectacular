@@ -3,6 +3,6 @@ query GetOrganizations @cache(policy: NetworkOnly) {
     allowedEmailDomains
     allowedEmails
     description
-    organization
+    id
   }
 }

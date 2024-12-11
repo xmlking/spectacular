@@ -7,117 +7,129 @@ configuration:
       custom_name: createdAt
     created_by:
       custom_name: createdBy
-    is_default_role:
-      custom_name: isDefaultRole
+    is_current_org:
+      custom_name: isCurrentOrg
+    org_id:
+      custom_name: orgId
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
     user_id:
       custom_name: userId
   custom_column_names:
     created_at: createdAt
     created_by: createdBy
-    is_default_role: isDefaultRole
+    is_current_org: isCurrentOrg
+    org_id: orgId
+    updated_at: updatedAt
+    updated_by: updatedBy
     user_id: userId
   custom_root_fields: {}
+object_relationships:
+  - name: organization
+    using:
+      foreign_key_constraint_on: org_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
 insert_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       check:
-        organization:
-          _in: x-hasura-allowed-orgs
+        org_id:
+          _eq: X-Hasura-Org-Id
       set:
-        created_by: x-hasura-user-id
+        created_by: x-hasura-User-Id
+        updated_by: x-hasura-User-Id
       columns:
-        - is_default_role
-        - organization
-        - role
-        - user_id
-    comment: ""
-  - role: supervisor
-    permission:
-      check:
-        organization:
-          _eq: x-hasura-default-org
-      set:
-        created_by: x-hasura-user-id
-      columns:
-        - is_default_role
-        - organization
+        - is_current_org
+        - org_id
         - role
         - user_id
     comment: ""
 select_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
-        - created_at
-        - created_by
-        - id
-        - is_default_role
-        - organization
+        - is_current_org
         - role
+        - created_at
+        - updated_at
+        - created_by
+        - org_id
+        - updated_by
         - user_id
       filter:
-        organization:
-          _in: x-hasura-allowed-orgs
-      allow_aggregations: true
-    comment: ""
-  - role: supervisor
-    permission:
-      columns:
-        - created_at
-        - created_by
-        - id
-        - is_default_role
-        - organization
-        - role
-        - user_id
-      filter:
-        organization:
-          _eq: x-hasura-default-org
+        org_id:
+          _eq: X-Hasura-Org-Id
       allow_aggregations: true
     comment: ""
   - role: user
     permission:
       columns:
-        - is_default_role
-        - organization
+        - is_current_org
         - role
         - created_at
+        - updated_at
         - created_by
-        - id
+        - org_id
+        - updated_by
         - user_id
       filter:
         user_id:
-          _eq: x-hasura-user-id
+          _eq: X-Hasura-User-Id
+      allow_aggregations: true
     comment: ""
 update_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
-        - is_default_role
+        - role
       filter:
-        organization:
-          _in: x-hasura-allowed-orgs
+        _and:
+          - user_id:
+              _neq: X-Hasura-User-Id
+          - role:
+              _neq: org:owner
+          - org_id:
+              _eq: X-Hasura-Org-Id
       check: null
+      set:
+        updated_by: x-hasura-User-Id
     comment: ""
-  - role: supervisor
+  - role: org:member
     permission:
       columns:
-        - is_default_role
+        - is_current_org
       filter:
-        organization:
-          _eq: x-hasura-default-org
+        user_id:
+          _eq: X-Hasura-User-Id
       check: null
+      set:
+        updated_by: x-hasura-User-Id
+    comment: ""
+  - role: org:owner
+    permission:
+      columns:
+        - is_current_org
+        - role
+      filter:
+        org_id:
+          _eq: X-Hasura-Org-Id
+      check: null
+      set:
+        updated_by: x-hasura-User-Id
     comment: ""
 delete_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       filter:
-        organization:
-          _in: x-hasura-allowed-orgs
-    comment: ""
-  - role: supervisor
-    permission:
-      filter:
-        organization:
-          _eq: x-hasura-default-org
+        _and:
+          - user_id:
+              _neq: X-Hasura-User-Id
+          - role:
+              _neq: org:owner
+          - org_id:
+              _eq: X-Hasura-Org-Id
     comment: ""

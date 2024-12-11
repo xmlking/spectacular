@@ -17,8 +17,13 @@ const config = {
     // HINT: we need to generate scheam for highest role level that app support.
     headers: {
       'X-Hasura-Admin-Secret': (env) => env.HASURA_GRAPHQL_ADMIN_SECRET,
-      'x-hasura-allowed-roles': 'user me supervisor manager',
-      'x-hasura-role': 'manager',
+      'x-hasura-allowed-roles': 'user me sys:admin',
+      'x-hasura-role': 'sys:admin',
+    },
+  },
+  types: {
+    user_org_roles: {
+      keys: ['userId', 'orgId'],
     },
   },
   // types: {

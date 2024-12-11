@@ -82,8 +82,8 @@ if (import.meta.vitest) {
   });
 
   it('Test hasIntersection', async () => {
-    const bigArr = ['anonymous', 'me', 'user', 'supervisor', 'manager'];
-    const smallArr = ['something', 'supervisor', 'manager'];
+    const bigArr = ['anonymous', 'me', 'user', 'org:admin', 'org:owner'];
+    const smallArr = ['something', 'org:admin', 'org:owner'];
 
     const result = hasIntersection(bigArr, smallArr);
 
@@ -91,8 +91,8 @@ if (import.meta.vitest) {
   });
 
   it('Test isSubset', async () => {
-    const bigArr = ['anonymous', 'me', 'user', 'supervisor', 'manager'];
-    const smallArr = ['supervisor', 'manager'];
+    const bigArr = ['anonymous', 'me', 'user', 'org:admin', 'org:owner'];
+    const smallArr = ['org:admin', 'org:owner'];
 
     const result = isSubset(bigArr, smallArr);
 

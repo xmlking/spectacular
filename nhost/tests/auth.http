@@ -15,13 +15,12 @@ X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 # Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me manager
+x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: user
 x-hasura-role: user
-x-hasura-allowed-orgs: {chinthagunta,example}
-x-hasura-default-org: chinthagunta
-x-hasura-user-email: sumo@demo.com
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query SearchSecurityKeys($userId: uuid!) {
   authUserSecurityKeys(where: { userId: { _eq: $userId } }) {
@@ -41,13 +40,12 @@ X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 # Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me manager
-x-hasura-default-role: user
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta,example}
-x-hasura-default-org: chinthagunta
-x-hasura-user-email: sumo@demo.com
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query GetOrganizations {
   organizations {
@@ -105,13 +103,12 @@ X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 # Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me manager
+x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: user
 x-hasura-role: me
-x-hasura-allowed-orgs: {chinthagunta,example}
-x-hasura-default-org: chinthagunta
-x-hasura-user-email: sumo@demo.com
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query GetMyPATs {
   users {

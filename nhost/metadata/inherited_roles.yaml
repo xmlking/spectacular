@@ -1,13 +1,23 @@
-- role_name: manager
-  role_set:
-    - supervisor
 - role_name: me
   role_set:
     - user
     - private
-- role_name: supervisor
+- role_name: org:admin
+  role_set:
+    - org:member
+- role_name: org:billing
+  role_set:
+    - org:member
+- role_name: org:member
   role_set:
     - user
+- role_name: org:owner
+  role_set:
+    - org:admin
+    - org:billing
+- role_name: sys:admin
+  role_set:
+    - org:owner
 - role_name: user
   role_set:
     - public

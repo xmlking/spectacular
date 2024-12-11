@@ -60,13 +60,13 @@ const createPolicy = graphql(`
         createdAt
         updatedAt
         updatedBy
-        organization
+        orgId
         rule {
           id
           displayName
           description
           tags
-          annotations
+          metadata
           shared
           source
           sourcePort
@@ -82,7 +82,7 @@ const createPolicy = graphql(`
           createdAt
           updatedAt
           updatedBy
-          organization
+          orgId
         }
       }
     }
@@ -133,10 +133,7 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
     }
     log.debug('payload:', payload);
 
-    const { data, errors } = await createPolicy.mutate(
-      { data: payload },
-      { metadata: { logResult: true, useRole: 'user' } },
-    );
+    const { data, errors } = await createPolicy.mutate({ data: payload }, { metadata: { logResult: true } });
 
     if (errors) {
       for (const error of errors) {
@@ -163,7 +160,7 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
     } as const;
     setMessage(form, message);
     handleMessage(message, toastStore);
-    await goto(i18n.resolveRoute('/dashboard/policies'), {
+    await goto(i18n.resolveRoute('/policies'), {
       invalidateAll: false,
     });
   },
@@ -253,7 +250,7 @@ async function onRuleChange(changedSubject: CustomEvent) {
       $form.rule.displayName = changedSubject.detail.displayName;
       $form.rule.description = changedSubject.detail.description;
       $form.rule.tags = changedSubject.detail.tags;
-      $form.rule.annotations = changedSubject.detail.annotations;
+      $form.rule.metadata = changedSubject.detail.metadata;
       $form.rule.source = changedSubject.detail.source;
       $form.rule.sourcePort = changedSubject.detail.sourcePort;
       $form.rule.destination = changedSubject.detail.destination;
@@ -273,7 +270,7 @@ async function onRuleChange(changedSubject: CustomEvent) {
       $form.rule.displayName = '';
       $form.rule.description = undefined;
       $form.rule.tags = [];
-      $form.rule.annotations = undefined;
+      $form.rule.metadata = undefined;
       $form.rule.source = undefined;
       $form.rule.sourcePort = undefined;
       $form.rule.destination = undefined;
@@ -296,7 +293,7 @@ function clearRule(event: Event) {
     $form.rule.displayName = '';
     $form.rule.description = undefined;
     $form.rule.tags = [];
-    $form.rule.annotations = undefined;
+    $form.rule.metadata = undefined;
     $form.rule.source = undefined;
     $form.rule.sourcePort = undefined;
     $form.rule.destination = undefined;
@@ -547,16 +544,16 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.annotations">
+          <Form.Field form={superform} name="rule.metadata">
             <Form.Control let:attrs>
-              <Form.Label class="label">Annotations</Form.Label>
+              <Form.Label class="label">Metadata</Form.Label>
               <input
                 type="text"
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 {disabled}
-                placeholder="Enter Annotations..."
-                bind:value={$form.rule.annotations}
+                placeholder="Enter Metadata..."
+                bind:value={$form.rule.metadata}
               />
             </Form.Control>
             <Form.Description

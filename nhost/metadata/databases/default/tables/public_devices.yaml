@@ -9,12 +9,10 @@ configuration:
       custom_name: createdAt
     created_by:
       custom_name: createdBy
-    deleted_at:
-      custom_name: deletedAt
     display_name:
       custom_name: displayName
-    organization:
-      custom_name: organization
+    org_id:
+      custom_name: orgId
     proxy_ip:
       custom_name: proxyIp
     public_ip:
@@ -27,9 +25,8 @@ configuration:
     alternate_dns: alternateDns
     created_at: createdAt
     created_by: createdBy
-    deleted_at: deletedAt
     display_name: displayName
-    organization: organization
+    org_id: orgId
     proxy_ip: proxyIp
     public_ip: publicIp
     updated_at: updatedAt
@@ -47,131 +44,49 @@ computed_fields:
         name: device_dissociated_pools
         schema: public
 select_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
+        - tags
         - alternate_dns
-        - annotations
-        - created_at
-        - created_by
+        - proxy_ip
+        - metadata
         - description
         - display_name
-        - id
         - ip
-        - organization
-        - proxy_ip
         - public_ip
-        - tags
-        - updated_at
-        - updated_by
         - version
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-      allow_aggregations: true
-  - role: supervisor
-    permission:
-      columns:
-        - alternate_dns
-        - annotations
         - created_at
-        - created_by
-        - description
-        - display_name
-        - id
-        - ip
-        - organization
-        - proxy_ip
-        - public_ip
-        - tags
         - updated_at
-        - updated_by
-        - version
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _eq: x-hasura-default-org
-      allow_aggregations: true
-  - role: user
-    permission:
-      columns:
-        - alternate_dns
-        - annotations
-        - created_at
         - created_by
-        - description
-        - display_name
         - id
-        - ip
-        - organization
-        - proxy_ip
-        - public_ip
-        - tags
-        - updated_at
+        - org_id
         - updated_by
-        - version
       filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-          - created_by:
-              _eq: x-hasura-user-id
+        org_id:
+          _eq: X-Hasura-Org-Id
       allow_aggregations: true
+    comment: ""
 update_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
-        - annotations
-        - deleted_at
+        - alternate_dns
         - description
+        - metadata
+        - proxy_ip
         - tags
       filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
+        org_id:
+          _eq: X-Hasura-Org-Id
       check: null
       set:
-        updated_by: x-hasura-user-id
-  - role: supervisor
+        updated_by: x-hasura-User-Id
+    comment: ""
+delete_permissions:
+  - role: org:admin
     permission:
-      columns:
-        - annotations
-        - deleted_at
-        - description
-        - tags
       filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _eq: x-hasura-default-org
-      check: {}
-      set:
-        updated_by: x-hasura-user-id
-  - role: user
-    permission:
-      columns:
-        - annotations
-        - description
-        - tags
-      filter: {}
-      check:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-          - created_by:
-              _eq: x-hasura-user-id
-      set:
-        updated_by: x-hasura-user-id
+        org_id:
+          _eq: X-Hasura-Org-Id
     comment: ""

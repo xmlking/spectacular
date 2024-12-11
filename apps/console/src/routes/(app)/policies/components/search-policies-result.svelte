@@ -31,24 +31,9 @@ const rows = handler.getRows();
  */
 let isDeleting = false;
 const deletePolicy = graphql(`
-    mutation DeletePolicy(
-      $policyId: uuid!
-      $ruleId: uuid!
-      $deletedAt: timestamptz!
-    ) {
-      update_policies_by_pk(
-        pk_columns: { id: $policyId }
-        _set: { deletedAt: $deletedAt }
-      ) {
-        id
+    mutation DeletePolicy($policyId: uuid! ) {
+       delete_policies_by_pk(id: $policyId) {
         ...Search_Policies_remove
-      }
-      update_rules(
-        where: { shared: { _eq: false }, id: { _eq: $ruleId } }
-        _set: { deletedAt: $deletedAt }
-      ) {
-        affected_rows
-        # ...Search_Rules_remove
       }
     }
   `);
@@ -64,8 +49,6 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   const deletedAt = new Date();
   const { data, errors: gqlErrors } = await deletePolicy.mutate({
     policyId,
-    ruleId,
-    deletedAt,
   });
   if (gqlErrors) {
     handleMessage(

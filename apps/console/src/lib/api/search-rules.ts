@@ -22,7 +22,7 @@ const searchRules = graphql(`
             displayName
             description
             tags
-            annotations
+            metadata
             shared
             source
             sourcePort

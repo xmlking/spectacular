@@ -1,0 +1,94 @@
+###
+@graphqlEndpoint =  {{$dotenv NHOST_GRAPHQL_URL}}
+@graphqlAdminToken = {{$dotenv HASURA_GRAPHQL_ADMIN_SECRET}}
+# set token without `''`
+@graphqlUserToken =
+###
+
+### list all organizations
+# @name listOrganizations
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
+
+query listOrgs($limit: Int = 50, $offset: Int = 0, $orderBy: [organizations_order_by!] = [{displayName: desc_nulls_last}]) {
+  organizations(limit: $limit, offset: $offset, order_by: $orderBy) {
+    id
+    displayName
+    description
+    allowedEmailDomains
+    allowedEmails
+    autoEnroll
+    blockedEmailDomains
+    blockedEmails
+    createdBy
+    metadata
+    owner {
+      displayName
+    }
+  }
+}
+
+
+{
+  "limit": 2,
+  "orderBy": [{ "displayName": "desc_nulls_last" }]
+}
+
+### list all organizations for sys:admin users
+# @name listOrgsSysAdmin
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles: user me sys:admin
+x-hasura-default-role: sys:admin
+x-hasura-role: sys:admin
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
+
+query ListOrganizations($limit: Int = 50, $offset: Int = 0, $orderBy: [organizations_order_by!] = [{displayName: desc_nulls_last}]) {
+  organizations(limit: $limit, offset: $offset, order_by: $orderBy) {
+    id
+    displayName
+    description
+    allowedEmailDomains
+    allowedEmails
+    autoEnroll
+    blockedEmailDomains
+    blockedEmails
+    createdBy
+    metadata
+    owner {
+      displayName
+    }
+  }
+}
+
+
+{
+  "limit": 2,
+  "orderBy": [{ "displayName": "desc_nulls_last" }]
+}
+
+### list organizations for anonymous users
+# @name listOrgsPublic
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+x-hasura-role: public
+
+query ListOrganizations($limit: Int = 50, $offset: Int = 0, $orderBy: [organizations_order_by!] = [{displayName: desc_nulls_last}]) {
+  organizations(limit: $limit, offset: $offset, order_by: $orderBy) {
+    displayName
+    description
+  }
+}

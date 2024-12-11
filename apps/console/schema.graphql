@@ -159,27 +159,10 @@ input String_comparison_exp {
   _similar: String
 }
 
-"""action enum"""
+"""policy action enum"""
 type action {
   description: String!
   value: String!
-}
-
-"""
-aggregated selection of "action"
-"""
-type action_aggregate {
-  aggregate: action_aggregate_fields
-  nodes: [action!]!
-}
-
-"""
-aggregate fields of "action"
-"""
-type action_aggregate_fields {
-  count(columns: [action_select_column!], distinct: Boolean): Int!
-  max: action_max_fields
-  min: action_min_fields
 }
 
 """
@@ -219,18 +202,6 @@ input action_enum_comparison_exp {
   _is_null: Boolean
   _neq: action_enum
   _nin: [action_enum!]
-}
-
-"""aggregate max on columns"""
-type action_max_fields {
-  description: String
-  value: String
-}
-
-"""aggregate min on columns"""
-type action_min_fields {
-  description: String
-  value: String
 }
 
 """Ordering options when selecting data from "action"."""
@@ -305,6 +276,34 @@ type authRefreshTokens {
 }
 
 """
+aggregated selection of "auth.refresh_tokens"
+"""
+type authRefreshTokens_aggregate {
+  aggregate: authRefreshTokens_aggregate_fields
+  nodes: [authRefreshTokens!]!
+}
+
+input authRefreshTokens_aggregate_bool_exp {
+  count: authRefreshTokens_aggregate_bool_exp_count
+}
+
+input authRefreshTokens_aggregate_bool_exp_count {
+  arguments: [authRefreshTokens_select_column!]
+  distinct: Boolean
+  filter: authRefreshTokens_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "auth.refresh_tokens"
+"""
+type authRefreshTokens_aggregate_fields {
+  count(columns: [authRefreshTokens_select_column!], distinct: Boolean): Int!
+  max: authRefreshTokens_max_fields
+  min: authRefreshTokens_min_fields
+}
+
+"""
 order by aggregate values of table "auth.refresh_tokens"
 """
 input authRefreshTokens_aggregate_order_by {
@@ -329,6 +328,14 @@ input authRefreshTokens_bool_exp {
   userId: uuid_comparison_exp
 }
 
+"""aggregate max on columns"""
+type authRefreshTokens_max_fields {
+  createdAt: timestamptz
+  expiresAt: timestamptz
+  id: uuid
+  userId: uuid
+}
+
 """
 order by max() on columns of table "auth.refresh_tokens"
 """
@@ -337,6 +344,14 @@ input authRefreshTokens_max_order_by {
   expiresAt: order_by
   id: order_by
   userId: order_by
+}
+
+"""aggregate min on columns"""
+type authRefreshTokens_min_fields {
+  createdAt: timestamptz
+  expiresAt: timestamptz
+  id: uuid
+  userId: uuid
 }
 
 """
@@ -431,6 +446,34 @@ type authUserProviders {
 }
 
 """
+aggregated selection of "auth.user_providers"
+"""
+type authUserProviders_aggregate {
+  aggregate: authUserProviders_aggregate_fields
+  nodes: [authUserProviders!]!
+}
+
+input authUserProviders_aggregate_bool_exp {
+  count: authUserProviders_aggregate_bool_exp_count
+}
+
+input authUserProviders_aggregate_bool_exp_count {
+  arguments: [authUserProviders_select_column!]
+  distinct: Boolean
+  filter: authUserProviders_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "auth.user_providers"
+"""
+type authUserProviders_aggregate_fields {
+  count(columns: [authUserProviders_select_column!], distinct: Boolean): Int!
+  max: authUserProviders_max_fields
+  min: authUserProviders_min_fields
+}
+
+"""
 order by aggregate values of table "auth.user_providers"
 """
 input authUserProviders_aggregate_order_by {
@@ -455,6 +498,16 @@ input authUserProviders_bool_exp {
   userId: uuid_comparison_exp
 }
 
+"""aggregate max on columns"""
+type authUserProviders_max_fields {
+  createdAt: timestamptz
+  id: uuid
+  providerId: String
+  providerUserId: String
+  updatedAt: timestamptz
+  userId: uuid
+}
+
 """
 order by max() on columns of table "auth.user_providers"
 """
@@ -465,6 +518,16 @@ input authUserProviders_max_order_by {
   providerUserId: order_by
   updatedAt: order_by
   userId: order_by
+}
+
+"""aggregate min on columns"""
+type authUserProviders_min_fields {
+  createdAt: timestamptz
+  id: uuid
+  providerId: String
+  providerUserId: String
+  updatedAt: timestamptz
+  userId: uuid
 }
 
 """
@@ -609,29 +672,6 @@ input authUserRoles_bool_exp {
   userId: uuid_comparison_exp
 }
 
-"""
-unique or primary key constraints on table "auth.user_roles"
-"""
-enum authUserRoles_constraint {
-  """
-  unique or primary key constraint on columns "id"
-  """
-  user_roles_pkey
-
-  """
-  unique or primary key constraint on columns "user_id", "role"
-  """
-  user_roles_user_id_role_key
-}
-
-"""
-input type for inserting data into table "auth.user_roles"
-"""
-input authUserRoles_insert_input {
-  role: String
-  userId: uuid
-}
-
 """aggregate max on columns"""
 type authUserRoles_max_fields {
   createdAt: timestamptz
@@ -677,15 +717,6 @@ type authUserRoles_mutation_response {
 
   """data from the rows affected by the mutation"""
   returning: [authUserRoles!]!
-}
-
-"""
-on_conflict condition type for table "auth.user_roles"
-"""
-input authUserRoles_on_conflict {
-  constraint: authUserRoles_constraint!
-  update_columns: [authUserRoles_update_column!]! = []
-  where: authUserRoles_bool_exp
 }
 
 """Ordering options when selecting data from "auth.user_roles"."""
@@ -734,14 +765,6 @@ input authUserRoles_stream_cursor_value_input {
 }
 
 """
-placeholder for update columns of table "auth.user_roles" (current role has no relevant permissions)
-"""
-enum authUserRoles_update_column {
-  """placeholder (do not use)"""
-  _PLACEHOLDER
-}
-
-"""
 User webauthn security keys. Don't modify its structure as Hasura Auth relies on it to function properly.
 """
 type authUserSecurityKeys {
@@ -751,6 +774,34 @@ type authUserSecurityKeys {
   """An object relationship"""
   user: users!
   userId: uuid!
+}
+
+"""
+aggregated selection of "auth.user_security_keys"
+"""
+type authUserSecurityKeys_aggregate {
+  aggregate: authUserSecurityKeys_aggregate_fields
+  nodes: [authUserSecurityKeys!]!
+}
+
+input authUserSecurityKeys_aggregate_bool_exp {
+  count: authUserSecurityKeys_aggregate_bool_exp_count
+}
+
+input authUserSecurityKeys_aggregate_bool_exp_count {
+  arguments: [authUserSecurityKeys_select_column!]
+  distinct: Boolean
+  filter: authUserSecurityKeys_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "auth.user_security_keys"
+"""
+type authUserSecurityKeys_aggregate_fields {
+  count(columns: [authUserSecurityKeys_select_column!], distinct: Boolean): Int!
+  max: authUserSecurityKeys_max_fields
+  min: authUserSecurityKeys_min_fields
 }
 
 """
@@ -775,6 +826,13 @@ input authUserSecurityKeys_bool_exp {
   userId: uuid_comparison_exp
 }
 
+"""aggregate max on columns"""
+type authUserSecurityKeys_max_fields {
+  id: uuid
+  nickname: String
+  userId: uuid
+}
+
 """
 order by max() on columns of table "auth.user_security_keys"
 """
@@ -782,6 +840,13 @@ input authUserSecurityKeys_max_order_by {
   id: order_by
   nickname: order_by
   userId: order_by
+}
+
+"""aggregate min on columns"""
+type authUserSecurityKeys_min_fields {
+  id: uuid
+  nickname: String
+  userId: uuid
 }
 
 """
@@ -908,12 +973,19 @@ enum cursor_ordering {
   DESC
 }
 
-"""device to pool bridge table"""
+input device_associated_pools_args {
+  device_row: devices_scalar
+}
+
+input device_dissociated_pools_args {
+  device_row: devices_scalar
+}
+
+"""Device to Pool association table"""
 type device_pools {
   """An object relationship"""
   device: devices!
   deviceId: uuid!
-  id: uuid!
 
   """An object relationship"""
   pool: pools!
@@ -928,17 +1000,6 @@ type device_pools_aggregate {
   nodes: [device_pools!]!
 }
 
-input device_pools_aggregate_bool_exp {
-  count: device_pools_aggregate_bool_exp_count
-}
-
-input device_pools_aggregate_bool_exp_count {
-  arguments: [device_pools_select_column!]
-  distinct: Boolean
-  filter: device_pools_bool_exp
-  predicate: Int_comparison_exp!
-}
-
 """
 aggregate fields of "device_pools"
 """
@@ -946,25 +1007,6 @@ type device_pools_aggregate_fields {
   count(columns: [device_pools_select_column!], distinct: Boolean): Int!
   max: device_pools_max_fields
   min: device_pools_min_fields
-}
-
-"""
-order by aggregate values of table "device_pools"
-"""
-input device_pools_aggregate_order_by {
-  count: order_by
-  max: device_pools_max_order_by
-  min: device_pools_min_order_by
-}
-
-"""
-input type for inserting array relation for remote table "device_pools"
-"""
-input device_pools_arr_rel_insert_input {
-  data: [device_pools_insert_input!]!
-
-  """upsert condition"""
-  on_conflict: device_pools_on_conflict
 }
 
 """
@@ -976,7 +1018,6 @@ input device_pools_bool_exp {
   _or: [device_pools_bool_exp!]
   device: devices_bool_exp
   deviceId: uuid_comparison_exp
-  id: uuid_comparison_exp
   pool: pools_bool_exp
   poolId: uuid_comparison_exp
 }
@@ -986,14 +1027,9 @@ unique or primary key constraints on table "device_pools"
 """
 enum device_pools_constraint {
   """
-  unique or primary key constraint on columns "id"
-  """
-  device_pools_pkey
-
-  """
   unique or primary key constraint on columns "pool_id", "device_id"
   """
-  device_pools_pool_id_device_id_key
+  device_pools_pkey
 }
 
 """
@@ -1008,33 +1044,13 @@ input device_pools_insert_input {
 """aggregate max on columns"""
 type device_pools_max_fields {
   deviceId: uuid
-  id: uuid
   poolId: uuid
-}
-
-"""
-order by max() on columns of table "device_pools"
-"""
-input device_pools_max_order_by {
-  deviceId: order_by
-  id: order_by
-  poolId: order_by
 }
 
 """aggregate min on columns"""
 type device_pools_min_fields {
   deviceId: uuid
-  id: uuid
   poolId: uuid
-}
-
-"""
-order by min() on columns of table "device_pools"
-"""
-input device_pools_min_order_by {
-  deviceId: order_by
-  id: order_by
-  poolId: order_by
 }
 
 """
@@ -1061,7 +1077,6 @@ input device_pools_on_conflict {
 input device_pools_order_by {
   device: devices_order_by
   deviceId: order_by
-  id: order_by
   pool: pools_order_by
   poolId: order_by
 }
@@ -1072,9 +1087,6 @@ select columns of table "device_pools"
 enum device_pools_select_column {
   """column name"""
   deviceId
-
-  """column name"""
-  id
 
   """column name"""
   poolId
@@ -1094,7 +1106,6 @@ input device_pools_stream_cursor_input {
 """Initial value of the column from where the streaming should start"""
 input device_pools_stream_cursor_value_input {
   deviceId: uuid
-  id: uuid
   poolId: uuid
 }
 
@@ -1106,10 +1117,9 @@ enum device_pools_update_column {
   _PLACEHOLDER
 }
 
-"""Devices Metadata"""
+"""Table containing devices data"""
 type devices {
   alternateDns: Boolean
-  annotations: hstore
 
   """Used as Computed Field on Devices Table"""
   associatedPools(
@@ -1129,7 +1139,7 @@ type devices {
     where: pools_bool_exp
   ): [pools!]
   createdAt: timestamptz!
-  createdBy: String!
+  createdBy: uuid!
   description: String
   displayName: String!
 
@@ -1152,12 +1162,16 @@ type devices {
   ): [pools!]
   id: uuid!
   ip: String!
-  organization: String!
+  metadata(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  orgId: uuid!
   proxyIp: Boolean
   publicIp: String
   tags: [String!]
   updatedAt: timestamptz!
-  updatedBy: String!
+  updatedBy: uuid!
   version: String
 }
 
@@ -1178,6 +1192,11 @@ type devices_aggregate_fields {
   min: devices_min_fields
 }
 
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input devices_append_input {
+  metadata: jsonb
+}
+
 """
 Boolean expression to filter rows from the table "devices". All fields are combined with a logical 'AND'.
 """
@@ -1186,53 +1205,74 @@ input devices_bool_exp {
   _not: devices_bool_exp
   _or: [devices_bool_exp!]
   alternateDns: Boolean_comparison_exp
-  annotations: hstore_comparison_exp
   associatedPools: pools_bool_exp
   createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
+  createdBy: uuid_comparison_exp
   description: String_comparison_exp
   displayName: String_comparison_exp
   dissociatedPools: pools_bool_exp
   id: uuid_comparison_exp
   ip: String_comparison_exp
-  organization: String_comparison_exp
+  metadata: jsonb_comparison_exp
+  orgId: uuid_comparison_exp
   proxyIp: Boolean_comparison_exp
   publicIp: String_comparison_exp
   tags: String_array_comparison_exp
   updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
+  updatedBy: uuid_comparison_exp
   version: String_comparison_exp
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input devices_delete_at_path_input {
+  metadata: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input devices_delete_elem_input {
+  metadata: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input devices_delete_key_input {
+  metadata: String
 }
 
 """aggregate max on columns"""
 type devices_max_fields {
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   description: String
   displayName: String
   id: uuid
   ip: String
-  organization: String
+  orgId: uuid
   publicIp: String
   tags: [String!]
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
   version: String
 }
 
 """aggregate min on columns"""
 type devices_min_fields {
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   description: String
   displayName: String
   id: uuid
   ip: String
-  organization: String
+  orgId: uuid
   publicIp: String
   tags: [String!]
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
   version: String
 }
 
@@ -1250,7 +1290,6 @@ type devices_mutation_response {
 """Ordering options when selecting data from "devices"."""
 input devices_order_by {
   alternateDns: order_by
-  annotations: order_by
   associatedPools_aggregate: pools_aggregate_order_by
   createdAt: order_by
   createdBy: order_by
@@ -1259,7 +1298,8 @@ input devices_order_by {
   dissociatedPools_aggregate: pools_aggregate_order_by
   id: order_by
   ip: order_by
-  organization: order_by
+  metadata: order_by
+  orgId: order_by
   proxyIp: order_by
   publicIp: order_by
   tags: order_by
@@ -1273,15 +1313,19 @@ input devices_pk_columns_input {
   id: uuid!
 }
 
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input devices_prepend_input {
+  metadata: jsonb
+}
+
+scalar devices_scalar
+
 """
 select columns of table "devices"
 """
 enum devices_select_column {
   """column name"""
   alternateDns
-
-  """column name"""
-  annotations
 
   """column name"""
   createdAt
@@ -1302,7 +1346,10 @@ enum devices_select_column {
   ip
 
   """column name"""
-  organization
+  metadata
+
+  """column name"""
+  orgId
 
   """column name"""
   proxyIp
@@ -1327,9 +1374,10 @@ enum devices_select_column {
 input type for updating data in table "devices"
 """
 input devices_set_input {
-  annotations: hstore
-  deletedAt: timestamptz
+  alternateDns: Boolean
   description: String
+  metadata: jsonb
+  proxyIp: Boolean
   tags: [String!]
 }
 
@@ -1347,23 +1395,44 @@ input devices_stream_cursor_input {
 """Initial value of the column from where the streaming should start"""
 input devices_stream_cursor_value_input {
   alternateDns: Boolean
-  annotations: hstore
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   description: String
   displayName: String
   id: uuid
   ip: String
-  organization: String
+  metadata: jsonb
+  orgId: uuid
   proxyIp: Boolean
   publicIp: String
   tags: [String!]
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
   version: String
 }
 
 input devices_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: devices_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: devices_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: devices_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: devices_delete_key_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: devices_prepend_input
+
   """sets the columns of the filtered rows to the given values"""
   _set: devices_set_input
 
@@ -1371,27 +1440,10 @@ input devices_updates {
   where: devices_bool_exp!
 }
 
-"""direction enum"""
+"""policy direction enum"""
 type direction {
   description: String!
   value: String!
-}
-
-"""
-aggregated selection of "direction"
-"""
-type direction_aggregate {
-  aggregate: direction_aggregate_fields
-  nodes: [direction!]!
-}
-
-"""
-aggregate fields of "direction"
-"""
-type direction_aggregate_fields {
-  count(columns: [direction_select_column!], distinct: Boolean): Int!
-  max: direction_max_fields
-  min: direction_min_fields
 }
 
 """
@@ -1422,18 +1474,6 @@ input direction_enum_comparison_exp {
   _is_null: Boolean
   _neq: direction_enum
   _nin: [direction_enum!]
-}
-
-"""aggregate max on columns"""
-type direction_max_fields {
-  description: String
-  value: String
-}
-
-"""aggregate min on columns"""
-type direction_min_fields {
-  description: String
-  value: String
 }
 
 """Ordering options when selecting data from "direction"."""
@@ -1470,209 +1510,76 @@ input direction_stream_cursor_value_input {
   value: String
 }
 
-"""
-columns and relationships of "storage.files"
-"""
-type files {
-  bucketId: String!
+"""Table containing user groups that belongs to an organization"""
+type groups {
   createdAt: timestamptz!
-  etag: String
+  createdBy: uuid!
+  description: String
+  displayName: String!
   id: uuid!
-  isUploaded: Boolean
   metadata(
     """JSON select path"""
     path: String
   ): jsonb
-  mimeType: String
-  name: String
-  size: Int
-  updatedAt: timestamptz!
-  uploadedByUserId: uuid
-}
+  orgId: uuid!
 
-"""
-Boolean expression to filter rows from the table "storage.files". All fields are combined with a logical 'AND'.
-"""
-input files_bool_exp {
-  _and: [files_bool_exp!]
-  _not: files_bool_exp
-  _or: [files_bool_exp!]
-  bucketId: String_comparison_exp
-  createdAt: timestamptz_comparison_exp
-  etag: String_comparison_exp
-  id: uuid_comparison_exp
-  isUploaded: Boolean_comparison_exp
-  metadata: jsonb_comparison_exp
-  mimeType: String_comparison_exp
-  name: String_comparison_exp
-  size: Int_comparison_exp
-  updatedAt: timestamptz_comparison_exp
-  uploadedByUserId: uuid_comparison_exp
-}
-
-"""
-unique or primary key constraints on table "storage.files"
-"""
-enum files_constraint {
-  """
-  unique or primary key constraint on columns "id"
-  """
-  files_pkey
-}
-
-"""
-input type for inserting data into table "storage.files"
-"""
-input files_insert_input {
-  bucketId: String
-  createdAt: timestamptz
-  etag: String
-  id: uuid
-  isUploaded: Boolean
-  metadata: jsonb
-  mimeType: String
-  name: String
-  size: Int
-  updatedAt: timestamptz
-}
-
-"""
-response of any mutation on the table "storage.files"
-"""
-type files_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
-
-  """data from the rows affected by the mutation"""
-  returning: [files!]!
-}
-
-"""
-on_conflict condition type for table "storage.files"
-"""
-input files_on_conflict {
-  constraint: files_constraint!
-  update_columns: [files_update_column!]! = []
-  where: files_bool_exp
-}
-
-"""Ordering options when selecting data from "storage.files"."""
-input files_order_by {
-  bucketId: order_by
-  createdAt: order_by
-  etag: order_by
-  id: order_by
-  isUploaded: order_by
-  metadata: order_by
-  mimeType: order_by
-  name: order_by
-  size: order_by
-  updatedAt: order_by
-  uploadedByUserId: order_by
-}
-
-"""
-select columns of table "storage.files"
-"""
-enum files_select_column {
-  """column name"""
-  bucketId
-
-  """column name"""
-  createdAt
-
-  """column name"""
-  etag
-
-  """column name"""
-  id
-
-  """column name"""
-  isUploaded
-
-  """column name"""
-  metadata
-
-  """column name"""
-  mimeType
-
-  """column name"""
-  name
-
-  """column name"""
-  size
-
-  """column name"""
-  updatedAt
-
-  """column name"""
-  uploadedByUserId
-}
-
-"""
-Streaming cursor of the table "files"
-"""
-input files_stream_cursor_input {
-  """Stream column input with initial value"""
-  initial_value: files_stream_cursor_value_input!
-
-  """cursor ordering"""
-  ordering: cursor_ordering
-}
-
-"""Initial value of the column from where the streaming should start"""
-input files_stream_cursor_value_input {
-  bucketId: String
-  createdAt: timestamptz
-  etag: String
-  id: uuid
-  isUploaded: Boolean
-  metadata: jsonb
-  mimeType: String
-  name: String
-  size: Int
-  updatedAt: timestamptz
-  uploadedByUserId: uuid
-}
-
-"""
-placeholder for update columns of table "storage.files" (current role has no relevant permissions)
-"""
-enum files_update_column {
-  """placeholder (do not use)"""
-  _PLACEHOLDER
-}
-
-"""User groups defined per organization"""
-type groups {
-  annotations: hstore
-  createdAt: timestamptz!
-  createdBy: String!
-  description: String
-  displayName: String!
-
-  """An array relationship"""
-  group_users(
-    """distinct select on columns"""
-    distinct_on: [user_groups_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [user_groups_order_by!]
-
-    """filter the rows returned"""
-    where: user_groups_bool_exp
-  ): [user_groups!]!
-  id: uuid!
-  organization: String!
+  """An object relationship"""
+  organization: organizations!
   tags: [String!]
   updatedAt: timestamptz!
-  updatedBy: String!
+  updatedBy: uuid!
+}
+
+"""
+aggregated selection of "groups"
+"""
+type groups_aggregate {
+  aggregate: groups_aggregate_fields
+  nodes: [groups!]!
+}
+
+input groups_aggregate_bool_exp {
+  count: groups_aggregate_bool_exp_count
+}
+
+input groups_aggregate_bool_exp_count {
+  arguments: [groups_select_column!]
+  distinct: Boolean
+  filter: groups_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "groups"
+"""
+type groups_aggregate_fields {
+  count(columns: [groups_select_column!], distinct: Boolean): Int!
+  max: groups_max_fields
+  min: groups_min_fields
+}
+
+"""
+order by aggregate values of table "groups"
+"""
+input groups_aggregate_order_by {
+  count: order_by
+  max: groups_max_order_by
+  min: groups_min_order_by
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input groups_append_input {
+  metadata: jsonb
+}
+
+"""
+input type for inserting array relation for remote table "groups"
+"""
+input groups_arr_rel_insert_input {
+  data: [groups_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: groups_on_conflict
 }
 
 """
@@ -1682,17 +1589,17 @@ input groups_bool_exp {
   _and: [groups_bool_exp!]
   _not: groups_bool_exp
   _or: [groups_bool_exp!]
-  annotations: hstore_comparison_exp
   createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
+  createdBy: uuid_comparison_exp
   description: String_comparison_exp
   displayName: String_comparison_exp
-  group_users: user_groups_bool_exp
   id: uuid_comparison_exp
-  organization: String_comparison_exp
+  metadata: jsonb_comparison_exp
+  orgId: uuid_comparison_exp
+  organization: organizations_bool_exp
   tags: String_array_comparison_exp
   updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
+  updatedBy: uuid_comparison_exp
 }
 
 """
@@ -1700,9 +1607,9 @@ unique or primary key constraints on table "groups"
 """
 enum groups_constraint {
   """
-  unique or primary key constraint on columns "display_name", "organization"
+  unique or primary key constraint on columns "display_name", "org_id"
   """
-  groups_display_name_organization_unique
+  groups_org_id_display_name_key
 
   """
   unique or primary key constraint on columns "id"
@@ -1711,15 +1618,91 @@ enum groups_constraint {
 }
 
 """
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input groups_delete_at_path_input {
+  metadata: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input groups_delete_elem_input {
+  metadata: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input groups_delete_key_input {
+  metadata: String
+}
+
+"""
 input type for inserting data into table "groups"
 """
 input groups_insert_input {
-  annotations: hstore
   description: String
   displayName: String
-  group_users: user_groups_arr_rel_insert_input
-  organization: String
+  metadata: jsonb
+  organization: organizations_obj_rel_insert_input
   tags: [String!]
+}
+
+"""aggregate max on columns"""
+type groups_max_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  displayName: String
+  id: uuid
+  orgId: uuid
+  tags: [String!]
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""
+order by max() on columns of table "groups"
+"""
+input groups_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  displayName: order_by
+  id: order_by
+  orgId: order_by
+  tags: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+}
+
+"""aggregate min on columns"""
+type groups_min_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  displayName: String
+  id: uuid
+  orgId: uuid
+  tags: [String!]
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""
+order by min() on columns of table "groups"
+"""
+input groups_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  displayName: order_by
+  id: order_by
+  orgId: order_by
+  tags: order_by
+  updatedAt: order_by
+  updatedBy: order_by
 }
 
 """
@@ -1754,14 +1737,14 @@ input groups_on_conflict {
 
 """Ordering options when selecting data from "groups"."""
 input groups_order_by {
-  annotations: order_by
   createdAt: order_by
   createdBy: order_by
   description: order_by
   displayName: order_by
-  group_users_aggregate: user_groups_aggregate_order_by
   id: order_by
-  organization: order_by
+  metadata: order_by
+  orgId: order_by
+  organization: organizations_order_by
   tags: order_by
   updatedAt: order_by
   updatedBy: order_by
@@ -1772,13 +1755,15 @@ input groups_pk_columns_input {
   id: uuid!
 }
 
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input groups_prepend_input {
+  metadata: jsonb
+}
+
 """
 select columns of table "groups"
 """
 enum groups_select_column {
-  """column name"""
-  annotations
-
   """column name"""
   createdAt
 
@@ -1795,7 +1780,10 @@ enum groups_select_column {
   id
 
   """column name"""
-  organization
+  metadata
+
+  """column name"""
+  orgId
 
   """column name"""
   tags
@@ -1811,10 +1799,9 @@ enum groups_select_column {
 input type for updating data in table "groups"
 """
 input groups_set_input {
-  annotations: hstore
-  deletedAt: timestamptz
   description: String
   displayName: String
+  metadata: jsonb
   tags: [String!]
 }
 
@@ -1831,16 +1818,16 @@ input groups_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input groups_stream_cursor_value_input {
-  annotations: hstore
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   description: String
   displayName: String
   id: uuid
-  organization: String
+  metadata: jsonb
+  orgId: uuid
   tags: [String!]
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
 }
 
 """
@@ -1848,44 +1835,45 @@ update columns of table "groups"
 """
 enum groups_update_column {
   """column name"""
-  annotations
-
-  """column name"""
-  deletedAt
-
-  """column name"""
   description
 
   """column name"""
   displayName
 
   """column name"""
+  metadata
+
+  """column name"""
   tags
 }
 
 input groups_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: groups_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: groups_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: groups_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: groups_delete_key_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: groups_prepend_input
+
   """sets the columns of the filtered rows to the given values"""
   _set: groups_set_input
 
   """filter the rows which have to be updated"""
   where: groups_bool_exp!
-}
-
-scalar hstore
-
-"""
-Boolean expression to compare columns of type "hstore". All fields are combined with logical 'AND'.
-"""
-input hstore_comparison_exp {
-  _eq: hstore
-  _gt: hstore
-  _gte: hstore
-  _in: [hstore!]
-  _is_null: Boolean
-  _lt: hstore
-  _lte: hstore
-  _neq: hstore
-  _nin: [hstore!]
 }
 
 scalar jsonb
@@ -1980,19 +1968,6 @@ type mutation_root {
   ): authUserSecurityKeys_mutation_response
 
   """
-  delete single row from the table: "storage.files"
-  """
-  deleteFile(id: uuid!): files
-
-  """
-  delete data from the table: "storage.files"
-  """
-  deleteFiles(
-    """filter the rows which have to be deleted"""
-    where: files_bool_exp!
-  ): files_mutation_response
-
-  """
   delete data from the table: "device_pools"
   """
   delete_device_pools(
@@ -2003,7 +1978,33 @@ type mutation_root {
   """
   delete single row from the table: "device_pools"
   """
-  delete_device_pools_by_pk(id: uuid!): device_pools
+  delete_device_pools_by_pk(deviceId: uuid!, poolId: uuid!): device_pools
+
+  """
+  delete data from the table: "devices"
+  """
+  delete_devices(
+    """filter the rows which have to be deleted"""
+    where: devices_bool_exp!
+  ): devices_mutation_response
+
+  """
+  delete single row from the table: "devices"
+  """
+  delete_devices_by_pk(id: uuid!): devices
+
+  """
+  delete data from the table: "groups"
+  """
+  delete_groups(
+    """filter the rows which have to be deleted"""
+    where: groups_bool_exp!
+  ): groups_mutation_response
+
+  """
+  delete single row from the table: "groups"
+  """
+  delete_groups_by_pk(id: uuid!): groups
 
   """
   delete data from the table: "organizations"
@@ -2016,7 +2017,46 @@ type mutation_root {
   """
   delete single row from the table: "organizations"
   """
-  delete_organizations_by_pk(organization: String!): organizations
+  delete_organizations_by_pk(id: uuid!): organizations
+
+  """
+  delete data from the table: "policies"
+  """
+  delete_policies(
+    """filter the rows which have to be deleted"""
+    where: policies_bool_exp!
+  ): policies_mutation_response
+
+  """
+  delete single row from the table: "policies"
+  """
+  delete_policies_by_pk(id: uuid!): policies
+
+  """
+  delete data from the table: "pools"
+  """
+  delete_pools(
+    """filter the rows which have to be deleted"""
+    where: pools_bool_exp!
+  ): pools_mutation_response
+
+  """
+  delete single row from the table: "pools"
+  """
+  delete_pools_by_pk(id: uuid!): pools
+
+  """
+  delete data from the table: "rules"
+  """
+  delete_rules(
+    """filter the rows which have to be deleted"""
+    where: rules_bool_exp!
+  ): rules_mutation_response
+
+  """
+  delete single row from the table: "rules"
+  """
+  delete_rules_by_pk(id: uuid!): rules
 
   """
   delete data from the table: "user_groups"
@@ -2029,7 +2069,7 @@ type mutation_root {
   """
   delete single row from the table: "user_groups"
   """
-  delete_user_groups_by_pk(id: uuid!): user_groups
+  delete_user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
 
   """
   delete data from the table: "user_org_roles"
@@ -2042,51 +2082,7 @@ type mutation_root {
   """
   delete single row from the table: "user_org_roles"
   """
-  delete_user_org_roles_by_pk(id: uuid!): user_org_roles
-
-  """
-  insert a single row into the table: "auth.user_roles"
-  """
-  insertAuthUserRole(
-    """the row to be inserted"""
-    object: authUserRoles_insert_input!
-
-    """upsert condition"""
-    on_conflict: authUserRoles_on_conflict
-  ): authUserRoles
-
-  """
-  insert data into the table: "auth.user_roles"
-  """
-  insertAuthUserRoles(
-    """the rows to be inserted"""
-    objects: [authUserRoles_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: authUserRoles_on_conflict
-  ): authUserRoles_mutation_response
-
-  """
-  insert a single row into the table: "storage.files"
-  """
-  insertFile(
-    """the row to be inserted"""
-    object: files_insert_input!
-
-    """upsert condition"""
-    on_conflict: files_on_conflict
-  ): files
-
-  """
-  insert data into the table: "storage.files"
-  """
-  insertFiles(
-    """the rows to be inserted"""
-    objects: [files_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: files_on_conflict
-  ): files_mutation_response
+  delete_user_org_roles_by_pk(orgId: uuid!, userId: uuid!): user_org_roles
 
   """
   insert data into the table: "device_pools"
@@ -2330,6 +2326,27 @@ type mutation_root {
   update data of the table: "devices"
   """
   update_devices(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: devices_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: devices_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: devices_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: devices_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: devices_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: devices_set_input
 
@@ -2341,6 +2358,27 @@ type mutation_root {
   update single row of the table: "devices"
   """
   update_devices_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: devices_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: devices_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: devices_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: devices_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: devices_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: devices_set_input
     pk_columns: devices_pk_columns_input!
@@ -2358,6 +2396,27 @@ type mutation_root {
   update data of the table: "groups"
   """
   update_groups(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: groups_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: groups_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: groups_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: groups_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: groups_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: groups_set_input
 
@@ -2369,6 +2428,27 @@ type mutation_root {
   update single row of the table: "groups"
   """
   update_groups_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: groups_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: groups_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: groups_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: groups_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: groups_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: groups_set_input
     pk_columns: groups_pk_columns_input!
@@ -2386,6 +2466,27 @@ type mutation_root {
   update data of the table: "organizations"
   """
   update_organizations(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: organizations_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: organizations_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: organizations_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: organizations_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: organizations_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: organizations_set_input
 
@@ -2397,6 +2498,27 @@ type mutation_root {
   update single row of the table: "organizations"
   """
   update_organizations_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: organizations_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: organizations_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: organizations_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: organizations_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: organizations_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: organizations_set_input
     pk_columns: organizations_pk_columns_input!
@@ -2448,6 +2570,27 @@ type mutation_root {
   update data of the table: "pools"
   """
   update_pools(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: pools_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: pools_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: pools_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: pools_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: pools_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: pools_set_input
 
@@ -2459,6 +2602,27 @@ type mutation_root {
   update single row of the table: "pools"
   """
   update_pools_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: pools_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: pools_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: pools_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: pools_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: pools_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: pools_set_input
     pk_columns: pools_pk_columns_input!
@@ -2476,8 +2640,29 @@ type mutation_root {
   update data of the table: "rules"
   """
   update_rules(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: rules_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: rules_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: rules_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: rules_delete_key_input
+
     """increments the numeric columns with given value of the filtered values"""
     _inc: rules_inc_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: rules_prepend_input
 
     """sets the columns of the filtered rows to the given values"""
     _set: rules_set_input
@@ -2490,8 +2675,29 @@ type mutation_root {
   update single row of the table: "rules"
   """
   update_rules_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: rules_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: rules_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: rules_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: rules_delete_key_input
+
     """increments the numeric columns with given value of the filtered values"""
     _inc: rules_inc_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: rules_prepend_input
 
     """sets the columns of the filtered rows to the given values"""
     _set: rules_set_input
@@ -2564,21 +2770,161 @@ enum order_by {
   desc_nulls_last
 }
 
-"""organizations in multitenant env"""
+"""
+Table containing organizations owned by users. Auto-enroll members based on email domain
+"""
 type organizations {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
-  description: String!
-  organization: String!
+  autoEnroll: Boolean!
+  blockedEmailDomains: [String!]
+  blockedEmails: [String!]
+  createdAt: timestamptz!
+  createdBy: uuid!
+  description: String
+  displayName: String!
+
+  """An array relationship"""
+  groups(
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]!
+
+  """An aggregate relationship"""
+  groups_aggregate(
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): groups_aggregate!
+  id: uuid!
+  metadata(
+    """JSON select path"""
+    path: String
+  ): jsonb
+
+  """An object relationship"""
+  owner: users!
+  ownerId: uuid!
+
+  """An array relationship"""
+  subscriptions(
+    """distinct select on columns"""
+    distinct_on: [subscriptions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [subscriptions_order_by!]
+
+    """filter the rows returned"""
+    where: subscriptions_bool_exp
+  ): [subscriptions!]!
+
+  """An aggregate relationship"""
+  subscriptions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [subscriptions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [subscriptions_order_by!]
+
+    """filter the rows returned"""
+    where: subscriptions_bool_exp
+  ): subscriptions_aggregate!
+  tags: [String!]
+  updatedAt: timestamptz!
+  updatedBy: uuid!
+
+  """An array relationship"""
+  users(
+    """distinct select on columns"""
+    distinct_on: [user_org_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_org_roles_order_by!]
+
+    """filter the rows returned"""
+    where: user_org_roles_bool_exp
+  ): [user_org_roles!]!
+
+  """An aggregate relationship"""
+  users_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_org_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_org_roles_order_by!]
+
+    """filter the rows returned"""
+    where: user_org_roles_bool_exp
+  ): user_org_roles_aggregate!
 }
 
 """
-order by aggregate values of table "organizations"
+aggregated selection of "organizations"
 """
-input organizations_aggregate_order_by {
-  count: order_by
-  max: organizations_max_order_by
-  min: organizations_min_order_by
+type organizations_aggregate {
+  aggregate: organizations_aggregate_fields
+  nodes: [organizations!]!
+}
+
+"""
+aggregate fields of "organizations"
+"""
+type organizations_aggregate_fields {
+  count(columns: [organizations_select_column!], distinct: Boolean): Int!
+  max: organizations_max_fields
+  min: organizations_min_fields
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input organizations_append_input {
+  metadata: jsonb
 }
 
 """
@@ -2590,8 +2936,26 @@ input organizations_bool_exp {
   _or: [organizations_bool_exp!]
   allowedEmailDomains: String_array_comparison_exp
   allowedEmails: String_array_comparison_exp
+  autoEnroll: Boolean_comparison_exp
+  blockedEmailDomains: String_array_comparison_exp
+  blockedEmails: String_array_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  createdBy: uuid_comparison_exp
   description: String_comparison_exp
-  organization: String_comparison_exp
+  displayName: String_comparison_exp
+  groups: groups_bool_exp
+  groups_aggregate: groups_aggregate_bool_exp
+  id: uuid_comparison_exp
+  metadata: jsonb_comparison_exp
+  owner: users_bool_exp
+  ownerId: uuid_comparison_exp
+  subscriptions: subscriptions_bool_exp
+  subscriptions_aggregate: subscriptions_aggregate_bool_exp
+  tags: String_array_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: uuid_comparison_exp
+  users: user_org_roles_bool_exp
+  users_aggregate: user_org_roles_aggregate_bool_exp
 }
 
 """
@@ -2599,9 +2963,30 @@ unique or primary key constraints on table "organizations"
 """
 enum organizations_constraint {
   """
-  unique or primary key constraint on columns "organization"
+  unique or primary key constraint on columns "id"
   """
-  organization_pkey
+  organizations_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input organizations_delete_at_path_input {
+  metadata: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input organizations_delete_elem_input {
+  metadata: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input organizations_delete_key_input {
+  metadata: String
 }
 
 """
@@ -2610,28 +2995,49 @@ input type for inserting data into table "organizations"
 input organizations_insert_input {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
+  autoEnroll: Boolean
+  blockedEmailDomains: [String!]
+  blockedEmails: [String!]
   description: String
-  organization: String
+  displayName: String
+  groups: groups_arr_rel_insert_input
+  metadata: jsonb
+  tags: [String!]
+  users: user_org_roles_arr_rel_insert_input
 }
 
-"""
-order by max() on columns of table "organizations"
-"""
-input organizations_max_order_by {
-  allowedEmailDomains: order_by
-  allowedEmails: order_by
-  description: order_by
-  organization: order_by
+"""aggregate max on columns"""
+type organizations_max_fields {
+  allowedEmailDomains: [String!]
+  allowedEmails: [String!]
+  blockedEmailDomains: [String!]
+  blockedEmails: [String!]
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  displayName: String
+  id: uuid
+  ownerId: uuid
+  tags: [String!]
+  updatedAt: timestamptz
+  updatedBy: uuid
 }
 
-"""
-order by min() on columns of table "organizations"
-"""
-input organizations_min_order_by {
-  allowedEmailDomains: order_by
-  allowedEmails: order_by
-  description: order_by
-  organization: order_by
+"""aggregate min on columns"""
+type organizations_min_fields {
+  allowedEmailDomains: [String!]
+  allowedEmails: [String!]
+  blockedEmailDomains: [String!]
+  blockedEmails: [String!]
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  displayName: String
+  id: uuid
+  ownerId: uuid
+  tags: [String!]
+  updatedAt: timestamptz
+  updatedBy: uuid
 }
 
 """
@@ -2643,6 +3049,16 @@ type organizations_mutation_response {
 
   """data from the rows affected by the mutation"""
   returning: [organizations!]!
+}
+
+"""
+input type for inserting object relation for remote table "organizations"
+"""
+input organizations_obj_rel_insert_input {
+  data: organizations_insert_input!
+
+  """upsert condition"""
+  on_conflict: organizations_on_conflict
 }
 
 """
@@ -2658,13 +3074,33 @@ input organizations_on_conflict {
 input organizations_order_by {
   allowedEmailDomains: order_by
   allowedEmails: order_by
+  autoEnroll: order_by
+  blockedEmailDomains: order_by
+  blockedEmails: order_by
+  createdAt: order_by
+  createdBy: order_by
   description: order_by
-  organization: order_by
+  displayName: order_by
+  groups_aggregate: groups_aggregate_order_by
+  id: order_by
+  metadata: order_by
+  owner: users_order_by
+  ownerId: order_by
+  subscriptions_aggregate: subscriptions_aggregate_order_by
+  tags: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  users_aggregate: user_org_roles_aggregate_order_by
 }
 
 """primary key columns input for table: organizations"""
 input organizations_pk_columns_input {
-  organization: String!
+  id: uuid!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input organizations_prepend_input {
+  metadata: jsonb
 }
 
 """
@@ -2678,10 +3114,43 @@ enum organizations_select_column {
   allowedEmails
 
   """column name"""
+  autoEnroll
+
+  """column name"""
+  blockedEmailDomains
+
+  """column name"""
+  blockedEmails
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  createdBy
+
+  """column name"""
   description
 
   """column name"""
-  organization
+  displayName
+
+  """column name"""
+  id
+
+  """column name"""
+  metadata
+
+  """column name"""
+  ownerId
+
+  """column name"""
+  tags
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  updatedBy
 }
 
 """
@@ -2690,8 +3159,14 @@ input type for updating data in table "organizations"
 input organizations_set_input {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
+  autoEnroll: Boolean
+  blockedEmailDomains: [String!]
+  blockedEmails: [String!]
   description: String
-  organization: String
+  displayName: String
+  metadata: jsonb
+  ownerId: uuid
+  tags: [String!]
 }
 
 """
@@ -2709,8 +3184,19 @@ input organizations_stream_cursor_input {
 input organizations_stream_cursor_value_input {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
+  autoEnroll: Boolean
+  blockedEmailDomains: [String!]
+  blockedEmails: [String!]
+  createdAt: timestamptz
+  createdBy: uuid
   description: String
-  organization: String
+  displayName: String
+  id: uuid
+  metadata: jsonb
+  ownerId: uuid
+  tags: [String!]
+  updatedAt: timestamptz
+  updatedBy: uuid
 }
 
 """
@@ -2724,13 +3210,52 @@ enum organizations_update_column {
   allowedEmails
 
   """column name"""
+  autoEnroll
+
+  """column name"""
+  blockedEmailDomains
+
+  """column name"""
+  blockedEmails
+
+  """column name"""
   description
 
   """column name"""
-  organization
+  displayName
+
+  """column name"""
+  metadata
+
+  """column name"""
+  ownerId
+
+  """column name"""
+  tags
 }
 
 input organizations_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: organizations_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: organizations_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: organizations_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: organizations_delete_key_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: organizations_prepend_input
+
   """sets the columns of the filtered rows to the given values"""
   _set: organizations_set_input
 
@@ -2738,13 +3263,89 @@ input organizations_updates {
   where: organizations_bool_exp!
 }
 
+"""plan enum"""
+type plan {
+  description: String!
+  value: String!
+}
+
+"""
+Boolean expression to filter rows from the table "plan". All fields are combined with a logical 'AND'.
+"""
+input plan_bool_exp {
+  _and: [plan_bool_exp!]
+  _not: plan_bool_exp
+  _or: [plan_bool_exp!]
+  description: String_comparison_exp
+  value: String_comparison_exp
+}
+
+enum plan_enum {
+  """Enterprise"""
+  enterprise
+
+  """Pro"""
+  pro
+
+  """Starter"""
+  starter
+}
+
+"""
+Boolean expression to compare columns of type "plan_enum". All fields are combined with logical 'AND'.
+"""
+input plan_enum_comparison_exp {
+  _eq: plan_enum
+  _in: [plan_enum!]
+  _is_null: Boolean
+  _neq: plan_enum
+  _nin: [plan_enum!]
+}
+
+"""Ordering options when selecting data from "plan"."""
+input plan_order_by {
+  description: order_by
+  value: order_by
+}
+
+"""
+select columns of table "plan"
+"""
+enum plan_select_column {
+  """column name"""
+  description
+
+  """column name"""
+  value
+}
+
+"""
+Streaming cursor of the table "plan"
+"""
+input plan_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: plan_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input plan_stream_cursor_value_input {
+  description: String
+  value: String
+}
+
 """Joint table associating subjects polymorphically with rules"""
 type policies {
   active: Boolean!
   createdAt: timestamptz!
-  createdBy: String!
+  createdBy: uuid!
   id: uuid!
-  organization: String!
+  orgId: uuid!
+
+  """An object relationship"""
+  organization: organizations!
 
   """An object relationship"""
   rule: rules!
@@ -2754,10 +3355,40 @@ type policies {
   subjectSecondaryId: String!
   subjectType: subject_type_enum!
   updatedAt: timestamptz!
-  updatedBy: String!
+  updatedBy: uuid!
   validFrom: timestamptz!
   validTo: timestamptz
   weight: smallint!
+}
+
+"""
+aggregated selection of "policies"
+"""
+type policies_aggregate {
+  aggregate: policies_aggregate_fields
+  nodes: [policies!]!
+}
+
+"""
+aggregate fields of "policies"
+"""
+type policies_aggregate_fields {
+  avg: policies_avg_fields
+  count(columns: [policies_select_column!], distinct: Boolean): Int!
+  max: policies_max_fields
+  min: policies_min_fields
+  stddev: policies_stddev_fields
+  stddev_pop: policies_stddev_pop_fields
+  stddev_samp: policies_stddev_samp_fields
+  sum: policies_sum_fields
+  var_pop: policies_var_pop_fields
+  var_samp: policies_var_samp_fields
+  variance: policies_variance_fields
+}
+
+"""aggregate avg on columns"""
+type policies_avg_fields {
+  weight: Float
 }
 
 """
@@ -2769,9 +3400,10 @@ input policies_bool_exp {
   _or: [policies_bool_exp!]
   active: Boolean_comparison_exp
   createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
+  createdBy: uuid_comparison_exp
   id: uuid_comparison_exp
-  organization: String_comparison_exp
+  orgId: uuid_comparison_exp
+  organization: organizations_bool_exp
   rule: rules_bool_exp
   ruleId: uuid_comparison_exp
   subjectDisplayName: String_comparison_exp
@@ -2779,7 +3411,7 @@ input policies_bool_exp {
   subjectSecondaryId: String_comparison_exp
   subjectType: subject_type_enum_comparison_exp
   updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
+  updatedBy: uuid_comparison_exp
   validFrom: timestamptz_comparison_exp
   validTo: timestamptz_comparison_exp
   weight: smallint_comparison_exp
@@ -2790,14 +3422,14 @@ unique or primary key constraints on table "policies"
 """
 enum policies_constraint {
   """
+  unique or primary key constraint on columns "subject_id", "rule_id", "subject_type", "org_id"
+  """
+  policies_org_id_rule_id_subject_id_subject_type_key
+
+  """
   unique or primary key constraint on columns "id"
   """
   policies_pkey
-
-  """
-  unique or primary key constraint on columns "subject_id", "organization", "rule_id", "subject_type"
-  """
-  policies_subject_id_subject_type_rule_id_organization_unique
 }
 
 """
@@ -2812,13 +3444,47 @@ input type for inserting data into table "policies"
 """
 input policies_insert_input {
   active: Boolean
-  organization: String
+  organization: organizations_obj_rel_insert_input
   rule: rules_obj_rel_insert_input
   ruleId: uuid
   subjectDisplayName: String
   subjectId: uuid
   subjectSecondaryId: String
   subjectType: subject_type_enum
+  validFrom: timestamptz
+  validTo: timestamptz
+  weight: smallint
+}
+
+"""aggregate max on columns"""
+type policies_max_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  id: uuid
+  orgId: uuid
+  ruleId: uuid
+  subjectDisplayName: String
+  subjectId: uuid
+  subjectSecondaryId: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+  validFrom: timestamptz
+  validTo: timestamptz
+  weight: smallint
+}
+
+"""aggregate min on columns"""
+type policies_min_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  id: uuid
+  orgId: uuid
+  ruleId: uuid
+  subjectDisplayName: String
+  subjectId: uuid
+  subjectSecondaryId: String
+  updatedAt: timestamptz
+  updatedBy: uuid
   validFrom: timestamptz
   validTo: timestamptz
   weight: smallint
@@ -2850,7 +3516,8 @@ input policies_order_by {
   createdAt: order_by
   createdBy: order_by
   id: order_by
-  organization: order_by
+  orgId: order_by
+  organization: organizations_order_by
   rule: rules_order_by
   ruleId: order_by
   subjectDisplayName: order_by
@@ -2886,7 +3553,7 @@ enum policies_select_column {
   id
 
   """column name"""
-  organization
+  orgId
 
   """column name"""
   ruleId
@@ -2924,10 +3591,24 @@ input type for updating data in table "policies"
 """
 input policies_set_input {
   active: Boolean
-  deletedAt: timestamptz
   validFrom: timestamptz
   validTo: timestamptz
   weight: smallint
+}
+
+"""aggregate stddev on columns"""
+type policies_stddev_fields {
+  weight: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type policies_stddev_pop_fields {
+  weight: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type policies_stddev_samp_fields {
+  weight: Float
 }
 
 """
@@ -2945,18 +3626,23 @@ input policies_stream_cursor_input {
 input policies_stream_cursor_value_input {
   active: Boolean
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   id: uuid
-  organization: String
+  orgId: uuid
   ruleId: uuid
   subjectDisplayName: String
   subjectId: uuid
   subjectSecondaryId: String
   subjectType: subject_type_enum
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
   validFrom: timestamptz
   validTo: timestamptz
+  weight: smallint
+}
+
+"""aggregate sum on columns"""
+type policies_sum_fields {
   weight: smallint
 }
 
@@ -2966,9 +3652,6 @@ update columns of table "policies"
 enum policies_update_column {
   """column name"""
   active
-
-  """column name"""
-  deletedAt
 
   """column name"""
   validFrom
@@ -2991,59 +3674,41 @@ input policies_updates {
   where: policies_bool_exp!
 }
 
-"""Device pools"""
-type pools {
-  annotations: hstore
-  createdAt: timestamptz!
-  createdBy: String!
-  description: String
-
-  """An array relationship"""
-  devices(
-    """distinct select on columns"""
-    distinct_on: [device_pools_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [device_pools_order_by!]
-
-    """filter the rows returned"""
-    where: device_pools_bool_exp
-  ): [device_pools!]!
-
-  """An aggregate relationship"""
-  devices_aggregate(
-    """distinct select on columns"""
-    distinct_on: [device_pools_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [device_pools_order_by!]
-
-    """filter the rows returned"""
-    where: device_pools_bool_exp
-  ): device_pools_aggregate!
-  displayName: String!
-  id: uuid!
-  organization: String!
-  tags: [String!]
-  updatedAt: timestamptz!
-  updatedBy: String!
+"""aggregate var_pop on columns"""
+type policies_var_pop_fields {
+  weight: Float
 }
 
-"""
-aggregated selection of "pools"
-"""
+"""aggregate var_samp on columns"""
+type policies_var_samp_fields {
+  weight: Float
+}
+
+"""aggregate variance on columns"""
+type policies_variance_fields {
+  weight: Float
+}
+
+"""Table containing device pools data"""
+type pools {
+  alternateDns: Boolean
+  createdAt: timestamptz!
+  createdBy: uuid!
+  description: String
+  displayName: String!
+  id: uuid!
+  metadata(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  orgId: uuid!
+  proxyIp: Boolean
+  tags: [String!]
+  updatedAt: timestamptz!
+  updatedBy: uuid!
+  version: String
+}
+
 type pools_aggregate {
   aggregate: pools_aggregate_fields
   nodes: [pools!]!
@@ -3067,6 +3732,11 @@ input pools_aggregate_order_by {
   min: pools_min_order_by
 }
 
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input pools_append_input {
+  metadata: jsonb
+}
+
 """
 Boolean expression to filter rows from the table "pools". All fields are combined with a logical 'AND'.
 """
@@ -3074,18 +3744,19 @@ input pools_bool_exp {
   _and: [pools_bool_exp!]
   _not: pools_bool_exp
   _or: [pools_bool_exp!]
-  annotations: hstore_comparison_exp
+  alternateDns: Boolean_comparison_exp
   createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
+  createdBy: uuid_comparison_exp
   description: String_comparison_exp
-  devices: device_pools_bool_exp
-  devices_aggregate: device_pools_aggregate_bool_exp
   displayName: String_comparison_exp
   id: uuid_comparison_exp
-  organization: String_comparison_exp
+  metadata: jsonb_comparison_exp
+  orgId: uuid_comparison_exp
+  proxyIp: Boolean_comparison_exp
   tags: String_array_comparison_exp
   updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
+  updatedBy: uuid_comparison_exp
+  version: String_comparison_exp
 }
 
 """
@@ -3093,9 +3764,9 @@ unique or primary key constraints on table "pools"
 """
 enum pools_constraint {
   """
-  unique or primary key constraint on columns "display_name", "organization"
+  unique or primary key constraint on columns "display_name", "org_id"
   """
-  pools_display_name_organization_unique
+  pools_org_id_display_name_key
 
   """
   unique or primary key constraint on columns "id"
@@ -3104,28 +3775,51 @@ enum pools_constraint {
 }
 
 """
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input pools_delete_at_path_input {
+  metadata: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input pools_delete_elem_input {
+  metadata: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input pools_delete_key_input {
+  metadata: String
+}
+
+"""
 input type for inserting data into table "pools"
 """
 input pools_insert_input {
-  annotations: hstore
+  alternateDns: Boolean
   description: String
-  devices: device_pools_arr_rel_insert_input
   displayName: String
-  organization: String
+  metadata: jsonb
+  proxyIp: Boolean
   tags: [String!]
+  version: String
 }
 
 """aggregate max on columns"""
 type pools_max_fields {
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   description: String
   displayName: String
   id: uuid
-  organization: String
+  orgId: uuid
   tags: [String!]
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
+  version: String
 }
 
 """
@@ -3137,23 +3831,25 @@ input pools_max_order_by {
   description: order_by
   displayName: order_by
   id: order_by
-  organization: order_by
+  orgId: order_by
   tags: order_by
   updatedAt: order_by
   updatedBy: order_by
+  version: order_by
 }
 
 """aggregate min on columns"""
 type pools_min_fields {
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   description: String
   displayName: String
   id: uuid
-  organization: String
+  orgId: uuid
   tags: [String!]
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
+  version: String
 }
 
 """
@@ -3165,10 +3861,11 @@ input pools_min_order_by {
   description: order_by
   displayName: order_by
   id: order_by
-  organization: order_by
+  orgId: order_by
   tags: order_by
   updatedAt: order_by
   updatedBy: order_by
+  version: order_by
 }
 
 """
@@ -3203,17 +3900,19 @@ input pools_on_conflict {
 
 """Ordering options when selecting data from "pools"."""
 input pools_order_by {
-  annotations: order_by
+  alternateDns: order_by
   createdAt: order_by
   createdBy: order_by
   description: order_by
-  devices_aggregate: device_pools_aggregate_order_by
   displayName: order_by
   id: order_by
-  organization: order_by
+  metadata: order_by
+  orgId: order_by
+  proxyIp: order_by
   tags: order_by
   updatedAt: order_by
   updatedBy: order_by
+  version: order_by
 }
 
 """primary key columns input for table: pools"""
@@ -3221,12 +3920,17 @@ input pools_pk_columns_input {
   id: uuid!
 }
 
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input pools_prepend_input {
+  metadata: jsonb
+}
+
 """
 select columns of table "pools"
 """
 enum pools_select_column {
   """column name"""
-  annotations
+  alternateDns
 
   """column name"""
   createdAt
@@ -3244,7 +3948,13 @@ enum pools_select_column {
   id
 
   """column name"""
-  organization
+  metadata
+
+  """column name"""
+  orgId
+
+  """column name"""
+  proxyIp
 
   """column name"""
   tags
@@ -3254,17 +3964,22 @@ enum pools_select_column {
 
   """column name"""
   updatedBy
+
+  """column name"""
+  version
 }
 
 """
 input type for updating data in table "pools"
 """
 input pools_set_input {
-  annotations: hstore
-  deletedAt: timestamptz
+  alternateDns: Boolean
   description: String
   displayName: String
+  metadata: jsonb
+  proxyIp: Boolean
   tags: [String!]
+  version: String
 }
 
 """
@@ -3280,16 +3995,19 @@ input pools_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input pools_stream_cursor_value_input {
-  annotations: hstore
+  alternateDns: Boolean
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   description: String
   displayName: String
   id: uuid
-  organization: String
+  metadata: jsonb
+  orgId: uuid
+  proxyIp: Boolean
   tags: [String!]
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
+  version: String
 }
 
 """
@@ -3297,10 +4015,7 @@ update columns of table "pools"
 """
 enum pools_update_column {
   """column name"""
-  annotations
-
-  """column name"""
-  deletedAt
+  alternateDns
 
   """column name"""
   description
@@ -3309,10 +4024,40 @@ enum pools_update_column {
   displayName
 
   """column name"""
+  metadata
+
+  """column name"""
+  proxyIp
+
+  """column name"""
   tags
+
+  """column name"""
+  version
 }
 
 input pools_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: pools_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: pools_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: pools_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: pools_delete_key_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: pools_prepend_input
+
   """sets the columns of the filtered rows to the given values"""
   _set: pools_set_input
 
@@ -3320,27 +4065,10 @@ input pools_updates {
   where: pools_bool_exp!
 }
 
-"""network protocol enum"""
+"""policy network protocol enum"""
 type protocol {
   description: String!
   value: String!
-}
-
-"""
-aggregated selection of "protocol"
-"""
-type protocol_aggregate {
-  aggregate: protocol_aggregate_fields
-  nodes: [protocol!]!
-}
-
-"""
-aggregate fields of "protocol"
-"""
-type protocol_aggregate_fields {
-  count(columns: [protocol_select_column!], distinct: Boolean): Int!
-  max: protocol_max_fields
-  min: protocol_min_fields
 }
 
 """
@@ -3392,18 +4120,6 @@ input protocol_enum_comparison_exp {
   _is_null: Boolean
   _neq: protocol_enum
   _nin: [protocol_enum!]
-}
-
-"""aggregate max on columns"""
-type protocol_max_fields {
-  description: String
-  value: String
-}
-
-"""aggregate min on columns"""
-type protocol_min_fields {
-  description: String
-  value: String
 }
 
 """Ordering options when selecting data from "protocol"."""
@@ -3467,26 +4183,6 @@ type query_root {
     where: action_bool_exp
   ): [action!]!
 
-  """
-  fetch aggregated fields from the table: "action"
-  """
-  action_aggregate(
-    """distinct select on columns"""
-    distinct_on: [action_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [action_order_by!]
-
-    """filter the rows returned"""
-    where: action_bool_exp
-  ): action_aggregate!
-
   """fetch data from the table: "action" using primary key columns"""
   action_by_pk(value: String!): action
 
@@ -3516,6 +4212,26 @@ type query_root {
   ): [authRefreshTokens!]!
 
   """
+  fetch aggregated fields from the table: "auth.refresh_tokens"
+  """
+  authRefreshTokensAggregate(
+    """distinct select on columns"""
+    distinct_on: [authRefreshTokens_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authRefreshTokens_order_by!]
+
+    """filter the rows returned"""
+    where: authRefreshTokens_bool_exp
+  ): authRefreshTokens_aggregate!
+
+  """
   fetch data from the table: "auth.user_providers" using primary key columns
   """
   authUserProvider(id: uuid!): authUserProviders
@@ -3539,6 +4255,26 @@ type query_root {
     """filter the rows returned"""
     where: authUserProviders_bool_exp
   ): [authUserProviders!]!
+
+  """
+  fetch aggregated fields from the table: "auth.user_providers"
+  """
+  authUserProvidersAggregate(
+    """distinct select on columns"""
+    distinct_on: [authUserProviders_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserProviders_order_by!]
+
+    """filter the rows returned"""
+    where: authUserProviders_bool_exp
+  ): authUserProviders_aggregate!
 
   """fetch data from the table: "auth.user_roles" using primary key columns"""
   authUserRole(id: uuid!): authUserRoles
@@ -3609,6 +4345,126 @@ type query_root {
   ): [authUserSecurityKeys!]!
 
   """
+  fetch aggregated fields from the table: "auth.user_security_keys"
+  """
+  authUserSecurityKeysAggregate(
+    """distinct select on columns"""
+    distinct_on: [authUserSecurityKeys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserSecurityKeys_order_by!]
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): authUserSecurityKeys_aggregate!
+
+  """
+  execute function "device_associated_pools" which returns "pools"
+  """
+  device_associated_pools(
+    """
+    input parameters for function "device_associated_pools"
+    """
+    args: device_associated_pools_args!
+
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): [pools!]!
+
+  """
+  execute function "device_associated_pools" and query aggregates on result of table type "pools"
+  """
+  device_associated_pools_aggregate(
+    """
+    input parameters for function "device_associated_pools_aggregate"
+    """
+    args: device_associated_pools_args!
+
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): pools_aggregate!
+
+  """
+  execute function "device_dissociated_pools" which returns "pools"
+  """
+  device_dissociated_pools(
+    """
+    input parameters for function "device_dissociated_pools"
+    """
+    args: device_dissociated_pools_args!
+
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): [pools!]!
+
+  """
+  execute function "device_dissociated_pools" and query aggregates on result of table type "pools"
+  """
+  device_dissociated_pools_aggregate(
+    """
+    input parameters for function "device_dissociated_pools_aggregate"
+    """
+    args: device_dissociated_pools_args!
+
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): pools_aggregate!
+
+  """
   fetch data from the table: "device_pools"
   """
   device_pools(
@@ -3649,7 +4505,7 @@ type query_root {
   ): device_pools_aggregate!
 
   """fetch data from the table: "device_pools" using primary key columns"""
-  device_pools_by_pk(id: uuid!): device_pools
+  device_pools_by_pk(deviceId: uuid!, poolId: uuid!): device_pools
 
   """
   fetch data from the table: "devices"
@@ -3714,55 +4570,10 @@ type query_root {
     where: direction_bool_exp
   ): [direction!]!
 
-  """
-  fetch aggregated fields from the table: "direction"
-  """
-  direction_aggregate(
-    """distinct select on columns"""
-    distinct_on: [direction_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [direction_order_by!]
-
-    """filter the rows returned"""
-    where: direction_bool_exp
-  ): direction_aggregate!
-
   """fetch data from the table: "direction" using primary key columns"""
   direction_by_pk(value: String!): direction
 
-  """fetch data from the table: "storage.files" using primary key columns"""
-  file(id: uuid!): files
-
-  """
-  fetch data from the table: "storage.files"
-  """
-  files(
-    """distinct select on columns"""
-    distinct_on: [files_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [files_order_by!]
-
-    """filter the rows returned"""
-    where: files_bool_exp
-  ): [files!]!
-
-  """
-  fetch data from the table: "groups"
-  """
+  """An array relationship"""
   groups(
     """distinct select on columns"""
     distinct_on: [groups_select_column!]
@@ -3779,6 +4590,24 @@ type query_root {
     """filter the rows returned"""
     where: groups_bool_exp
   ): [groups!]!
+
+  """An aggregate relationship"""
+  groups_aggregate(
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): groups_aggregate!
 
   """fetch data from the table: "groups" using primary key columns"""
   groups_by_pk(id: uuid!): groups
@@ -3803,8 +4632,51 @@ type query_root {
     where: organizations_bool_exp
   ): [organizations!]!
 
+  """
+  fetch aggregated fields from the table: "organizations"
+  """
+  organizations_aggregate(
+    """distinct select on columns"""
+    distinct_on: [organizations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [organizations_order_by!]
+
+    """filter the rows returned"""
+    where: organizations_bool_exp
+  ): organizations_aggregate!
+
   """fetch data from the table: "organizations" using primary key columns"""
-  organizations_by_pk(organization: String!): organizations
+  organizations_by_pk(id: uuid!): organizations
+
+  """
+  fetch data from the table: "plan"
+  """
+  plan(
+    """distinct select on columns"""
+    distinct_on: [plan_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [plan_order_by!]
+
+    """filter the rows returned"""
+    where: plan_bool_exp
+  ): [plan!]!
+
+  """fetch data from the table: "plan" using primary key columns"""
+  plan_by_pk(value: String!): plan
 
   """
   fetch data from the table: "policies"
@@ -3825,6 +4697,26 @@ type query_root {
     """filter the rows returned"""
     where: policies_bool_exp
   ): [policies!]!
+
+  """
+  fetch aggregated fields from the table: "policies"
+  """
+  policies_aggregate(
+    """distinct select on columns"""
+    distinct_on: [policies_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [policies_order_by!]
+
+    """filter the rows returned"""
+    where: policies_bool_exp
+  ): policies_aggregate!
 
   """fetch data from the table: "policies" using primary key columns"""
   policies_by_pk(id: uuid!): policies
@@ -3892,26 +4784,6 @@ type query_root {
     where: protocol_bool_exp
   ): [protocol!]!
 
-  """
-  fetch aggregated fields from the table: "protocol"
-  """
-  protocol_aggregate(
-    """distinct select on columns"""
-    distinct_on: [protocol_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [protocol_order_by!]
-
-    """filter the rows returned"""
-    where: protocol_bool_exp
-  ): protocol_aggregate!
-
   """fetch data from the table: "protocol" using primary key columns"""
   protocol_by_pk(value: String!): protocol
 
@@ -3935,8 +4807,51 @@ type query_root {
     where: rules_bool_exp
   ): [rules!]!
 
+  """
+  fetch aggregated fields from the table: "rules"
+  """
+  rules_aggregate(
+    """distinct select on columns"""
+    distinct_on: [rules_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rules_order_by!]
+
+    """filter the rows returned"""
+    where: rules_bool_exp
+  ): rules_aggregate!
+
   """fetch data from the table: "rules" using primary key columns"""
   rules_by_pk(id: uuid!): rules
+
+  """
+  fetch data from the table: "status"
+  """
+  status(
+    """distinct select on columns"""
+    distinct_on: [status_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [status_order_by!]
+
+    """filter the rows returned"""
+    where: status_bool_exp
+  ): [status!]!
+
+  """fetch data from the table: "status" using primary key columns"""
+  status_by_pk(value: String!): status
 
   """
   fetch data from the table: "subject_type"
@@ -3961,8 +4876,147 @@ type query_root {
   """fetch data from the table: "subject_type" using primary key columns"""
   subject_type_by_pk(value: String!): subject_type
 
+  """An array relationship"""
+  subscriptions(
+    """distinct select on columns"""
+    distinct_on: [subscriptions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [subscriptions_order_by!]
+
+    """filter the rows returned"""
+    where: subscriptions_bool_exp
+  ): [subscriptions!]!
+
+  """An aggregate relationship"""
+  subscriptions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [subscriptions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [subscriptions_order_by!]
+
+    """filter the rows returned"""
+    where: subscriptions_bool_exp
+  ): subscriptions_aggregate!
+
+  """fetch data from the table: "subscriptions" using primary key columns"""
+  subscriptions_by_pk(id: uuid!): subscriptions
+
   """fetch data from the table: "auth.users" using primary key columns"""
   user(id: uuid!): users
+
+  """
+  execute function "user_associated_groups" which returns "groups"
+  """
+  user_associated_groups(
+    """
+    input parameters for function "user_associated_groups"
+    """
+    args: user_associated_groups_args!
+
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]!
+
+  """
+  execute function "user_associated_groups" and query aggregates on result of table type "groups"
+  """
+  user_associated_groups_aggregate(
+    """
+    input parameters for function "user_associated_groups_aggregate"
+    """
+    args: user_associated_groups_args!
+
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): groups_aggregate!
+
+  """
+  execute function "user_dissociated_groups" which returns "groups"
+  """
+  user_dissociated_groups(
+    """
+    input parameters for function "user_dissociated_groups"
+    """
+    args: user_dissociated_groups_args!
+
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]!
+
+  """
+  execute function "user_dissociated_groups" and query aggregates on result of table type "groups"
+  """
+  user_dissociated_groups_aggregate(
+    """
+    input parameters for function "user_dissociated_groups_aggregate"
+    """
+    args: user_dissociated_groups_args!
+
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): groups_aggregate!
 
   """
   fetch data from the table: "user_groups"
@@ -3984,8 +5038,28 @@ type query_root {
     where: user_groups_bool_exp
   ): [user_groups!]!
 
+  """
+  fetch aggregated fields from the table: "user_groups"
+  """
+  user_groups_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_groups_bool_exp
+  ): user_groups_aggregate!
+
   """fetch data from the table: "user_groups" using primary key columns"""
-  user_groups_by_pk(id: uuid!): user_groups
+  user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
 
   """
   fetch data from the table: "user_org_roles"
@@ -4028,7 +5102,7 @@ type query_root {
   ): user_org_roles_aggregate!
 
   """fetch data from the table: "user_org_roles" using primary key columns"""
-  user_org_roles_by_pk(id: uuid!): user_org_roles
+  user_org_roles_by_pk(orgId: uuid!, userId: uuid!): user_org_roles
 
   """
   fetch data from the table: "auth.users"
@@ -4049,22 +5123,45 @@ type query_root {
     """filter the rows returned"""
     where: users_bool_exp
   ): [users!]!
+
+  """
+  fetch aggregated fields from the table: "auth.users"
+  """
+  usersAggregate(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): users_aggregate!
 }
 
-"""5-tuple firewalls rules"""
+"""Table containing shared or single-use 5-tuple firewalls rules"""
 type rules {
   action: action_enum!
-  annotations: hstore
   appId: String
   createdAt: timestamptz!
-  createdBy: String!
+  createdBy: uuid!
   description: String
   destination: String
   destinationPort: String
   direction: direction_enum!
   displayName: String!
   id: uuid!
-  organization: String!
+  metadata(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  orgId: uuid!
   protocol: protocol_enum!
   shared: Boolean!
   source: String
@@ -4072,8 +5169,43 @@ type rules {
   tags: [String!]
   throttleRate: String
   updatedAt: timestamptz!
-  updatedBy: String!
+  updatedBy: uuid!
   weight: smallint!
+}
+
+"""
+aggregated selection of "rules"
+"""
+type rules_aggregate {
+  aggregate: rules_aggregate_fields
+  nodes: [rules!]!
+}
+
+"""
+aggregate fields of "rules"
+"""
+type rules_aggregate_fields {
+  avg: rules_avg_fields
+  count(columns: [rules_select_column!], distinct: Boolean): Int!
+  max: rules_max_fields
+  min: rules_min_fields
+  stddev: rules_stddev_fields
+  stddev_pop: rules_stddev_pop_fields
+  stddev_samp: rules_stddev_samp_fields
+  sum: rules_sum_fields
+  var_pop: rules_var_pop_fields
+  var_samp: rules_var_samp_fields
+  variance: rules_variance_fields
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input rules_append_input {
+  metadata: jsonb
+}
+
+"""aggregate avg on columns"""
+type rules_avg_fields {
+  weight: Float
 }
 
 """
@@ -4084,17 +5216,17 @@ input rules_bool_exp {
   _not: rules_bool_exp
   _or: [rules_bool_exp!]
   action: action_enum_comparison_exp
-  annotations: hstore_comparison_exp
   appId: String_comparison_exp
   createdAt: timestamptz_comparison_exp
-  createdBy: String_comparison_exp
+  createdBy: uuid_comparison_exp
   description: String_comparison_exp
   destination: String_comparison_exp
   destinationPort: String_comparison_exp
   direction: direction_enum_comparison_exp
   displayName: String_comparison_exp
   id: uuid_comparison_exp
-  organization: String_comparison_exp
+  metadata: jsonb_comparison_exp
+  orgId: uuid_comparison_exp
   protocol: protocol_enum_comparison_exp
   shared: Boolean_comparison_exp
   source: String_comparison_exp
@@ -4102,7 +5234,7 @@ input rules_bool_exp {
   tags: String_array_comparison_exp
   throttleRate: String_comparison_exp
   updatedAt: timestamptz_comparison_exp
-  updatedBy: String_comparison_exp
+  updatedBy: uuid_comparison_exp
   weight: smallint_comparison_exp
 }
 
@@ -4111,14 +5243,35 @@ unique or primary key constraints on table "rules"
 """
 enum rules_constraint {
   """
-  unique or primary key constraint on columns "display_name", "organization"
+  unique or primary key constraint on columns "display_name", "org_id"
   """
-  rules_display_name_organization_unique
+  rules_org_id_display_name_key
 
   """
   unique or primary key constraint on columns "id"
   """
   rules_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input rules_delete_at_path_input {
+  metadata: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input rules_delete_elem_input {
+  metadata: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input rules_delete_key_input {
+  metadata: String
 }
 
 """
@@ -4133,20 +5286,59 @@ input type for inserting data into table "rules"
 """
 input rules_insert_input {
   action: action_enum
-  annotations: hstore
   appId: String
   description: String
   destination: String
   destinationPort: String
   direction: direction_enum
   displayName: String
-  organization: String
+  metadata: jsonb
   protocol: protocol_enum
   shared: Boolean
   source: String
   sourcePort: String
   tags: [String!]
   throttleRate: String
+  weight: smallint
+}
+
+"""aggregate max on columns"""
+type rules_max_fields {
+  appId: String
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  destination: String
+  destinationPort: String
+  displayName: String
+  id: uuid
+  orgId: uuid
+  source: String
+  sourcePort: String
+  tags: [String!]
+  throttleRate: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+  weight: smallint
+}
+
+"""aggregate min on columns"""
+type rules_min_fields {
+  appId: String
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  destination: String
+  destinationPort: String
+  displayName: String
+  id: uuid
+  orgId: uuid
+  source: String
+  sourcePort: String
+  tags: [String!]
+  throttleRate: String
+  updatedAt: timestamptz
+  updatedBy: uuid
   weight: smallint
 }
 
@@ -4183,7 +5375,6 @@ input rules_on_conflict {
 """Ordering options when selecting data from "rules"."""
 input rules_order_by {
   action: order_by
-  annotations: order_by
   appId: order_by
   createdAt: order_by
   createdBy: order_by
@@ -4193,7 +5384,8 @@ input rules_order_by {
   direction: order_by
   displayName: order_by
   id: order_by
-  organization: order_by
+  metadata: order_by
+  orgId: order_by
   protocol: order_by
   shared: order_by
   source: order_by
@@ -4210,15 +5402,17 @@ input rules_pk_columns_input {
   id: uuid!
 }
 
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input rules_prepend_input {
+  metadata: jsonb
+}
+
 """
 select columns of table "rules"
 """
 enum rules_select_column {
   """column name"""
   action
-
-  """column name"""
-  annotations
 
   """column name"""
   appId
@@ -4248,7 +5442,10 @@ enum rules_select_column {
   id
 
   """column name"""
-  organization
+  metadata
+
+  """column name"""
+  orgId
 
   """column name"""
   protocol
@@ -4283,15 +5480,13 @@ input type for updating data in table "rules"
 """
 input rules_set_input {
   action: action_enum
-  annotations: hstore
   appId: String
-  deletedAt: timestamptz
   description: String
   destination: String
   destinationPort: String
   direction: direction_enum
   displayName: String
-  organization: String
+  metadata: jsonb
   protocol: protocol_enum
   shared: Boolean
   source: String
@@ -4299,6 +5494,21 @@ input rules_set_input {
   tags: [String!]
   throttleRate: String
   weight: smallint
+}
+
+"""aggregate stddev on columns"""
+type rules_stddev_fields {
+  weight: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type rules_stddev_pop_fields {
+  weight: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type rules_stddev_samp_fields {
+  weight: Float
 }
 
 """
@@ -4315,17 +5525,17 @@ input rules_stream_cursor_input {
 """Initial value of the column from where the streaming should start"""
 input rules_stream_cursor_value_input {
   action: action_enum
-  annotations: hstore
   appId: String
   createdAt: timestamptz
-  createdBy: String
+  createdBy: uuid
   description: String
   destination: String
   destinationPort: String
   direction: direction_enum
   displayName: String
   id: uuid
-  organization: String
+  metadata: jsonb
+  orgId: uuid
   protocol: protocol_enum
   shared: Boolean
   source: String
@@ -4333,7 +5543,12 @@ input rules_stream_cursor_value_input {
   tags: [String!]
   throttleRate: String
   updatedAt: timestamptz
-  updatedBy: String
+  updatedBy: uuid
+  weight: smallint
+}
+
+"""aggregate sum on columns"""
+type rules_sum_fields {
   weight: smallint
 }
 
@@ -4345,13 +5560,7 @@ enum rules_update_column {
   action
 
   """column name"""
-  annotations
-
-  """column name"""
   appId
-
-  """column name"""
-  deletedAt
 
   """column name"""
   description
@@ -4369,7 +5578,7 @@ enum rules_update_column {
   displayName
 
   """column name"""
-  organization
+  metadata
 
   """column name"""
   protocol
@@ -4394,14 +5603,50 @@ enum rules_update_column {
 }
 
 input rules_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: rules_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: rules_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: rules_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: rules_delete_key_input
+
   """increments the numeric columns with given value of the filtered values"""
   _inc: rules_inc_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: rules_prepend_input
 
   """sets the columns of the filtered rows to the given values"""
   _set: rules_set_input
 
   """filter the rows which have to be updated"""
   where: rules_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type rules_var_pop_fields {
+  weight: Float
+}
+
+"""aggregate var_samp on columns"""
+type rules_var_samp_fields {
+  weight: Float
+}
+
+"""aggregate variance on columns"""
+type rules_variance_fields {
+  weight: Float
 }
 
 scalar smallint
@@ -4421,7 +5666,80 @@ input smallint_comparison_exp {
   _nin: [smallint!]
 }
 
-"""subject enum"""
+"""status enum"""
+type status {
+  description: String!
+  value: String!
+}
+
+"""
+Boolean expression to filter rows from the table "status". All fields are combined with a logical 'AND'.
+"""
+input status_bool_exp {
+  _and: [status_bool_exp!]
+  _not: status_bool_exp
+  _or: [status_bool_exp!]
+  description: String_comparison_exp
+  value: String_comparison_exp
+}
+
+enum status_enum {
+  """Active"""
+  active
+
+  """Closed"""
+  closed
+
+  """Disabled"""
+  disabled
+}
+
+"""
+Boolean expression to compare columns of type "status_enum". All fields are combined with logical 'AND'.
+"""
+input status_enum_comparison_exp {
+  _eq: status_enum
+  _in: [status_enum!]
+  _is_null: Boolean
+  _neq: status_enum
+  _nin: [status_enum!]
+}
+
+"""Ordering options when selecting data from "status"."""
+input status_order_by {
+  description: order_by
+  value: order_by
+}
+
+"""
+select columns of table "status"
+"""
+enum status_select_column {
+  """column name"""
+  description
+
+  """column name"""
+  value
+}
+
+"""
+Streaming cursor of the table "status"
+"""
+input status_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: status_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input status_stream_cursor_value_input {
+  description: String
+  value: String
+}
+
+"""policy subject type enum"""
 type subject_type {
   description: String!
   value: String!
@@ -4521,26 +5839,6 @@ type subscription_root {
     where: action_bool_exp
   ): [action!]!
 
-  """
-  fetch aggregated fields from the table: "action"
-  """
-  action_aggregate(
-    """distinct select on columns"""
-    distinct_on: [action_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [action_order_by!]
-
-    """filter the rows returned"""
-    where: action_bool_exp
-  ): action_aggregate!
-
   """fetch data from the table: "action" using primary key columns"""
   action_by_pk(value: String!): action
 
@@ -4584,6 +5882,26 @@ type subscription_root {
   ): [authRefreshTokens!]!
 
   """
+  fetch aggregated fields from the table: "auth.refresh_tokens"
+  """
+  authRefreshTokensAggregate(
+    """distinct select on columns"""
+    distinct_on: [authRefreshTokens_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authRefreshTokens_order_by!]
+
+    """filter the rows returned"""
+    where: authRefreshTokens_bool_exp
+  ): authRefreshTokens_aggregate!
+
+  """
   fetch data from the table in a streaming manner: "auth.refresh_tokens"
   """
   authRefreshTokens_stream(
@@ -4621,6 +5939,26 @@ type subscription_root {
     """filter the rows returned"""
     where: authUserProviders_bool_exp
   ): [authUserProviders!]!
+
+  """
+  fetch aggregated fields from the table: "auth.user_providers"
+  """
+  authUserProvidersAggregate(
+    """distinct select on columns"""
+    distinct_on: [authUserProviders_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserProviders_order_by!]
+
+    """filter the rows returned"""
+    where: authUserProviders_bool_exp
+  ): authUserProviders_aggregate!
 
   """
   fetch data from the table in a streaming manner: "auth.user_providers"
@@ -4719,6 +6057,26 @@ type subscription_root {
   ): [authUserSecurityKeys!]!
 
   """
+  fetch aggregated fields from the table: "auth.user_security_keys"
+  """
+  authUserSecurityKeysAggregate(
+    """distinct select on columns"""
+    distinct_on: [authUserSecurityKeys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserSecurityKeys_order_by!]
+
+    """filter the rows returned"""
+    where: authUserSecurityKeys_bool_exp
+  ): authUserSecurityKeys_aggregate!
+
+  """
   fetch data from the table in a streaming manner: "auth.user_security_keys"
   """
   authUserSecurityKeys_stream(
@@ -4731,6 +6089,106 @@ type subscription_root {
     """filter the rows returned"""
     where: authUserSecurityKeys_bool_exp
   ): [authUserSecurityKeys!]!
+
+  """
+  execute function "device_associated_pools" which returns "pools"
+  """
+  device_associated_pools(
+    """
+    input parameters for function "device_associated_pools"
+    """
+    args: device_associated_pools_args!
+
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): [pools!]!
+
+  """
+  execute function "device_associated_pools" and query aggregates on result of table type "pools"
+  """
+  device_associated_pools_aggregate(
+    """
+    input parameters for function "device_associated_pools_aggregate"
+    """
+    args: device_associated_pools_args!
+
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): pools_aggregate!
+
+  """
+  execute function "device_dissociated_pools" which returns "pools"
+  """
+  device_dissociated_pools(
+    """
+    input parameters for function "device_dissociated_pools"
+    """
+    args: device_dissociated_pools_args!
+
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): [pools!]!
+
+  """
+  execute function "device_dissociated_pools" and query aggregates on result of table type "pools"
+  """
+  device_dissociated_pools_aggregate(
+    """
+    input parameters for function "device_dissociated_pools_aggregate"
+    """
+    args: device_dissociated_pools_args!
+
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): pools_aggregate!
 
   """
   fetch data from the table: "device_pools"
@@ -4773,7 +6231,7 @@ type subscription_root {
   ): device_pools_aggregate!
 
   """fetch data from the table: "device_pools" using primary key columns"""
-  device_pools_by_pk(id: uuid!): device_pools
+  device_pools_by_pk(deviceId: uuid!, poolId: uuid!): device_pools
 
   """
   fetch data from the table in a streaming manner: "device_pools"
@@ -4866,26 +6324,6 @@ type subscription_root {
     where: direction_bool_exp
   ): [direction!]!
 
-  """
-  fetch aggregated fields from the table: "direction"
-  """
-  direction_aggregate(
-    """distinct select on columns"""
-    distinct_on: [direction_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [direction_order_by!]
-
-    """filter the rows returned"""
-    where: direction_bool_exp
-  ): direction_aggregate!
-
   """fetch data from the table: "direction" using primary key columns"""
   direction_by_pk(value: String!): direction
 
@@ -4903,46 +6341,7 @@ type subscription_root {
     where: direction_bool_exp
   ): [direction!]!
 
-  """fetch data from the table: "storage.files" using primary key columns"""
-  file(id: uuid!): files
-
-  """
-  fetch data from the table: "storage.files"
-  """
-  files(
-    """distinct select on columns"""
-    distinct_on: [files_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [files_order_by!]
-
-    """filter the rows returned"""
-    where: files_bool_exp
-  ): [files!]!
-
-  """
-  fetch data from the table in a streaming manner: "storage.files"
-  """
-  files_stream(
-    """maximum number of rows returned in a single batch"""
-    batch_size: Int!
-
-    """cursor to stream the results returned by the query"""
-    cursor: [files_stream_cursor_input]!
-
-    """filter the rows returned"""
-    where: files_bool_exp
-  ): [files!]!
-
-  """
-  fetch data from the table: "groups"
-  """
+  """An array relationship"""
   groups(
     """distinct select on columns"""
     distinct_on: [groups_select_column!]
@@ -4959,6 +6358,24 @@ type subscription_root {
     """filter the rows returned"""
     where: groups_bool_exp
   ): [groups!]!
+
+  """An aggregate relationship"""
+  groups_aggregate(
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): groups_aggregate!
 
   """fetch data from the table: "groups" using primary key columns"""
   groups_by_pk(id: uuid!): groups
@@ -4997,8 +6414,28 @@ type subscription_root {
     where: organizations_bool_exp
   ): [organizations!]!
 
+  """
+  fetch aggregated fields from the table: "organizations"
+  """
+  organizations_aggregate(
+    """distinct select on columns"""
+    distinct_on: [organizations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [organizations_order_by!]
+
+    """filter the rows returned"""
+    where: organizations_bool_exp
+  ): organizations_aggregate!
+
   """fetch data from the table: "organizations" using primary key columns"""
-  organizations_by_pk(organization: String!): organizations
+  organizations_by_pk(id: uuid!): organizations
 
   """
   fetch data from the table in a streaming manner: "organizations"
@@ -5013,6 +6450,43 @@ type subscription_root {
     """filter the rows returned"""
     where: organizations_bool_exp
   ): [organizations!]!
+
+  """
+  fetch data from the table: "plan"
+  """
+  plan(
+    """distinct select on columns"""
+    distinct_on: [plan_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [plan_order_by!]
+
+    """filter the rows returned"""
+    where: plan_bool_exp
+  ): [plan!]!
+
+  """fetch data from the table: "plan" using primary key columns"""
+  plan_by_pk(value: String!): plan
+
+  """
+  fetch data from the table in a streaming manner: "plan"
+  """
+  plan_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [plan_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: plan_bool_exp
+  ): [plan!]!
 
   """
   fetch data from the table: "policies"
@@ -5033,6 +6507,26 @@ type subscription_root {
     """filter the rows returned"""
     where: policies_bool_exp
   ): [policies!]!
+
+  """
+  fetch aggregated fields from the table: "policies"
+  """
+  policies_aggregate(
+    """distinct select on columns"""
+    distinct_on: [policies_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [policies_order_by!]
+
+    """filter the rows returned"""
+    where: policies_bool_exp
+  ): policies_aggregate!
 
   """fetch data from the table: "policies" using primary key columns"""
   policies_by_pk(id: uuid!): policies
@@ -5128,26 +6622,6 @@ type subscription_root {
     where: protocol_bool_exp
   ): [protocol!]!
 
-  """
-  fetch aggregated fields from the table: "protocol"
-  """
-  protocol_aggregate(
-    """distinct select on columns"""
-    distinct_on: [protocol_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [protocol_order_by!]
-
-    """filter the rows returned"""
-    where: protocol_bool_exp
-  ): protocol_aggregate!
-
   """fetch data from the table: "protocol" using primary key columns"""
   protocol_by_pk(value: String!): protocol
 
@@ -5185,6 +6659,26 @@ type subscription_root {
     where: rules_bool_exp
   ): [rules!]!
 
+  """
+  fetch aggregated fields from the table: "rules"
+  """
+  rules_aggregate(
+    """distinct select on columns"""
+    distinct_on: [rules_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rules_order_by!]
+
+    """filter the rows returned"""
+    where: rules_bool_exp
+  ): rules_aggregate!
+
   """fetch data from the table: "rules" using primary key columns"""
   rules_by_pk(id: uuid!): rules
 
@@ -5201,6 +6695,43 @@ type subscription_root {
     """filter the rows returned"""
     where: rules_bool_exp
   ): [rules!]!
+
+  """
+  fetch data from the table: "status"
+  """
+  status(
+    """distinct select on columns"""
+    distinct_on: [status_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [status_order_by!]
+
+    """filter the rows returned"""
+    where: status_bool_exp
+  ): [status!]!
+
+  """fetch data from the table: "status" using primary key columns"""
+  status_by_pk(value: String!): status
+
+  """
+  fetch data from the table in a streaming manner: "status"
+  """
+  status_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [status_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: status_bool_exp
+  ): [status!]!
 
   """
   fetch data from the table: "subject_type"
@@ -5239,8 +6770,161 @@ type subscription_root {
     where: subject_type_bool_exp
   ): [subject_type!]!
 
+  """An array relationship"""
+  subscriptions(
+    """distinct select on columns"""
+    distinct_on: [subscriptions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [subscriptions_order_by!]
+
+    """filter the rows returned"""
+    where: subscriptions_bool_exp
+  ): [subscriptions!]!
+
+  """An aggregate relationship"""
+  subscriptions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [subscriptions_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [subscriptions_order_by!]
+
+    """filter the rows returned"""
+    where: subscriptions_bool_exp
+  ): subscriptions_aggregate!
+
+  """fetch data from the table: "subscriptions" using primary key columns"""
+  subscriptions_by_pk(id: uuid!): subscriptions
+
+  """
+  fetch data from the table in a streaming manner: "subscriptions"
+  """
+  subscriptions_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [subscriptions_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: subscriptions_bool_exp
+  ): [subscriptions!]!
+
   """fetch data from the table: "auth.users" using primary key columns"""
   user(id: uuid!): users
+
+  """
+  execute function "user_associated_groups" which returns "groups"
+  """
+  user_associated_groups(
+    """
+    input parameters for function "user_associated_groups"
+    """
+    args: user_associated_groups_args!
+
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]!
+
+  """
+  execute function "user_associated_groups" and query aggregates on result of table type "groups"
+  """
+  user_associated_groups_aggregate(
+    """
+    input parameters for function "user_associated_groups_aggregate"
+    """
+    args: user_associated_groups_args!
+
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): groups_aggregate!
+
+  """
+  execute function "user_dissociated_groups" which returns "groups"
+  """
+  user_dissociated_groups(
+    """
+    input parameters for function "user_dissociated_groups"
+    """
+    args: user_dissociated_groups_args!
+
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]!
+
+  """
+  execute function "user_dissociated_groups" and query aggregates on result of table type "groups"
+  """
+  user_dissociated_groups_aggregate(
+    """
+    input parameters for function "user_dissociated_groups_aggregate"
+    """
+    args: user_dissociated_groups_args!
+
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): groups_aggregate!
 
   """
   fetch data from the table: "user_groups"
@@ -5262,8 +6946,28 @@ type subscription_root {
     where: user_groups_bool_exp
   ): [user_groups!]!
 
+  """
+  fetch aggregated fields from the table: "user_groups"
+  """
+  user_groups_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_groups_bool_exp
+  ): user_groups_aggregate!
+
   """fetch data from the table: "user_groups" using primary key columns"""
-  user_groups_by_pk(id: uuid!): user_groups
+  user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
 
   """
   fetch data from the table in a streaming manner: "user_groups"
@@ -5320,7 +7024,7 @@ type subscription_root {
   ): user_org_roles_aggregate!
 
   """fetch data from the table: "user_org_roles" using primary key columns"""
-  user_org_roles_by_pk(id: uuid!): user_org_roles
+  user_org_roles_by_pk(orgId: uuid!, userId: uuid!): user_org_roles
 
   """
   fetch data from the table in a streaming manner: "user_org_roles"
@@ -5357,6 +7061,26 @@ type subscription_root {
   ): [users!]!
 
   """
+  fetch aggregated fields from the table: "auth.users"
+  """
+  usersAggregate(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): users_aggregate!
+
+  """
   fetch data from the table in a streaming manner: "auth.users"
   """
   users_stream(
@@ -5369,6 +7093,352 @@ type subscription_root {
     """filter the rows returned"""
     where: users_bool_exp
   ): [users!]!
+}
+
+"""Table containing subscriptions for an organization"""
+type subscriptions {
+  createdAt: timestamptz!
+  createdBy: uuid!
+  credits: Int!
+  id: uuid!
+  orgId: uuid!
+
+  """An object relationship"""
+  organization: organizations!
+  plan: plan_enum!
+  status: status_enum!
+  stripeCheckoutSessionId: String
+  stripeCustomerId: String
+  stripeSubscriptionId: String
+  updatedAt: timestamptz!
+  updatedBy: uuid!
+  validUntil: timestamptz!
+}
+
+"""
+aggregated selection of "subscriptions"
+"""
+type subscriptions_aggregate {
+  aggregate: subscriptions_aggregate_fields
+  nodes: [subscriptions!]!
+}
+
+input subscriptions_aggregate_bool_exp {
+  count: subscriptions_aggregate_bool_exp_count
+}
+
+input subscriptions_aggregate_bool_exp_count {
+  arguments: [subscriptions_select_column!]
+  distinct: Boolean
+  filter: subscriptions_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "subscriptions"
+"""
+type subscriptions_aggregate_fields {
+  avg: subscriptions_avg_fields
+  count(columns: [subscriptions_select_column!], distinct: Boolean): Int!
+  max: subscriptions_max_fields
+  min: subscriptions_min_fields
+  stddev: subscriptions_stddev_fields
+  stddev_pop: subscriptions_stddev_pop_fields
+  stddev_samp: subscriptions_stddev_samp_fields
+  sum: subscriptions_sum_fields
+  var_pop: subscriptions_var_pop_fields
+  var_samp: subscriptions_var_samp_fields
+  variance: subscriptions_variance_fields
+}
+
+"""
+order by aggregate values of table "subscriptions"
+"""
+input subscriptions_aggregate_order_by {
+  avg: subscriptions_avg_order_by
+  count: order_by
+  max: subscriptions_max_order_by
+  min: subscriptions_min_order_by
+  stddev: subscriptions_stddev_order_by
+  stddev_pop: subscriptions_stddev_pop_order_by
+  stddev_samp: subscriptions_stddev_samp_order_by
+  sum: subscriptions_sum_order_by
+  var_pop: subscriptions_var_pop_order_by
+  var_samp: subscriptions_var_samp_order_by
+  variance: subscriptions_variance_order_by
+}
+
+"""aggregate avg on columns"""
+type subscriptions_avg_fields {
+  credits: Float
+}
+
+"""
+order by avg() on columns of table "subscriptions"
+"""
+input subscriptions_avg_order_by {
+  credits: order_by
+}
+
+"""
+Boolean expression to filter rows from the table "subscriptions". All fields are combined with a logical 'AND'.
+"""
+input subscriptions_bool_exp {
+  _and: [subscriptions_bool_exp!]
+  _not: subscriptions_bool_exp
+  _or: [subscriptions_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  createdBy: uuid_comparison_exp
+  credits: Int_comparison_exp
+  id: uuid_comparison_exp
+  orgId: uuid_comparison_exp
+  organization: organizations_bool_exp
+  plan: plan_enum_comparison_exp
+  status: status_enum_comparison_exp
+  stripeCheckoutSessionId: String_comparison_exp
+  stripeCustomerId: String_comparison_exp
+  stripeSubscriptionId: String_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: uuid_comparison_exp
+  validUntil: timestamptz_comparison_exp
+}
+
+"""aggregate max on columns"""
+type subscriptions_max_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  credits: Int
+  id: uuid
+  orgId: uuid
+  stripeCheckoutSessionId: String
+  stripeCustomerId: String
+  stripeSubscriptionId: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+  validUntil: timestamptz
+}
+
+"""
+order by max() on columns of table "subscriptions"
+"""
+input subscriptions_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  credits: order_by
+  id: order_by
+  orgId: order_by
+  stripeCheckoutSessionId: order_by
+  stripeCustomerId: order_by
+  stripeSubscriptionId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  validUntil: order_by
+}
+
+"""aggregate min on columns"""
+type subscriptions_min_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  credits: Int
+  id: uuid
+  orgId: uuid
+  stripeCheckoutSessionId: String
+  stripeCustomerId: String
+  stripeSubscriptionId: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+  validUntil: timestamptz
+}
+
+"""
+order by min() on columns of table "subscriptions"
+"""
+input subscriptions_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  credits: order_by
+  id: order_by
+  orgId: order_by
+  stripeCheckoutSessionId: order_by
+  stripeCustomerId: order_by
+  stripeSubscriptionId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  validUntil: order_by
+}
+
+"""Ordering options when selecting data from "subscriptions"."""
+input subscriptions_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  credits: order_by
+  id: order_by
+  orgId: order_by
+  organization: organizations_order_by
+  plan: order_by
+  status: order_by
+  stripeCheckoutSessionId: order_by
+  stripeCustomerId: order_by
+  stripeSubscriptionId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  validUntil: order_by
+}
+
+"""
+select columns of table "subscriptions"
+"""
+enum subscriptions_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  createdBy
+
+  """column name"""
+  credits
+
+  """column name"""
+  id
+
+  """column name"""
+  orgId
+
+  """column name"""
+  plan
+
+  """column name"""
+  status
+
+  """column name"""
+  stripeCheckoutSessionId
+
+  """column name"""
+  stripeCustomerId
+
+  """column name"""
+  stripeSubscriptionId
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  updatedBy
+
+  """column name"""
+  validUntil
+}
+
+"""aggregate stddev on columns"""
+type subscriptions_stddev_fields {
+  credits: Float
+}
+
+"""
+order by stddev() on columns of table "subscriptions"
+"""
+input subscriptions_stddev_order_by {
+  credits: order_by
+}
+
+"""aggregate stddev_pop on columns"""
+type subscriptions_stddev_pop_fields {
+  credits: Float
+}
+
+"""
+order by stddev_pop() on columns of table "subscriptions"
+"""
+input subscriptions_stddev_pop_order_by {
+  credits: order_by
+}
+
+"""aggregate stddev_samp on columns"""
+type subscriptions_stddev_samp_fields {
+  credits: Float
+}
+
+"""
+order by stddev_samp() on columns of table "subscriptions"
+"""
+input subscriptions_stddev_samp_order_by {
+  credits: order_by
+}
+
+"""
+Streaming cursor of the table "subscriptions"
+"""
+input subscriptions_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: subscriptions_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input subscriptions_stream_cursor_value_input {
+  createdAt: timestamptz
+  createdBy: uuid
+  credits: Int
+  id: uuid
+  orgId: uuid
+  plan: plan_enum
+  status: status_enum
+  stripeCheckoutSessionId: String
+  stripeCustomerId: String
+  stripeSubscriptionId: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+  validUntil: timestamptz
+}
+
+"""aggregate sum on columns"""
+type subscriptions_sum_fields {
+  credits: Int
+}
+
+"""
+order by sum() on columns of table "subscriptions"
+"""
+input subscriptions_sum_order_by {
+  credits: order_by
+}
+
+"""aggregate var_pop on columns"""
+type subscriptions_var_pop_fields {
+  credits: Float
+}
+
+"""
+order by var_pop() on columns of table "subscriptions"
+"""
+input subscriptions_var_pop_order_by {
+  credits: order_by
+}
+
+"""aggregate var_samp on columns"""
+type subscriptions_var_samp_fields {
+  credits: Float
+}
+
+"""
+order by var_samp() on columns of table "subscriptions"
+"""
+input subscriptions_var_samp_order_by {
+  credits: order_by
+}
+
+"""aggregate variance on columns"""
+type subscriptions_variance_fields {
+  credits: Float
+}
+
+"""
+order by variance() on columns of table "subscriptions"
+"""
+input subscriptions_variance_order_by {
+  credits: order_by
 }
 
 scalar timestamptz
@@ -5388,14 +7458,19 @@ input timestamptz_comparison_exp {
   _nin: [timestamptz!]
 }
 
+input user_associated_groups_args {
+  user_row: users_scalar
+}
+
+input user_dissociated_groups_args {
+  user_row: users_scalar
+}
+
 """User to Group association table"""
 type user_groups {
-  createdAt: timestamptz!
-
   """An object relationship"""
   group: groups!
   groupId: uuid!
-  id: uuid!
 
   """An object relationship"""
   user: users!
@@ -5403,22 +7478,20 @@ type user_groups {
 }
 
 """
-order by aggregate values of table "user_groups"
+aggregated selection of "user_groups"
 """
-input user_groups_aggregate_order_by {
-  count: order_by
-  max: user_groups_max_order_by
-  min: user_groups_min_order_by
+type user_groups_aggregate {
+  aggregate: user_groups_aggregate_fields
+  nodes: [user_groups!]!
 }
 
 """
-input type for inserting array relation for remote table "user_groups"
+aggregate fields of "user_groups"
 """
-input user_groups_arr_rel_insert_input {
-  data: [user_groups_insert_input!]!
-
-  """upsert condition"""
-  on_conflict: user_groups_on_conflict
+type user_groups_aggregate_fields {
+  count(columns: [user_groups_select_column!], distinct: Boolean): Int!
+  max: user_groups_max_fields
+  min: user_groups_min_fields
 }
 
 """
@@ -5428,10 +7501,8 @@ input user_groups_bool_exp {
   _and: [user_groups_bool_exp!]
   _not: user_groups_bool_exp
   _or: [user_groups_bool_exp!]
-  createdAt: timestamptz_comparison_exp
   group: groups_bool_exp
   groupId: uuid_comparison_exp
-  id: uuid_comparison_exp
   user: users_bool_exp
   userId: uuid_comparison_exp
 }
@@ -5441,7 +7512,7 @@ unique or primary key constraints on table "user_groups"
 """
 enum user_groups_constraint {
   """
-  unique or primary key constraint on columns "id"
+  unique or primary key constraint on columns "user_id", "group_id"
   """
   user_groups_pkey
 }
@@ -5455,24 +7526,16 @@ input user_groups_insert_input {
   userId: uuid
 }
 
-"""
-order by max() on columns of table "user_groups"
-"""
-input user_groups_max_order_by {
-  createdAt: order_by
-  groupId: order_by
-  id: order_by
-  userId: order_by
+"""aggregate max on columns"""
+type user_groups_max_fields {
+  groupId: uuid
+  userId: uuid
 }
 
-"""
-order by min() on columns of table "user_groups"
-"""
-input user_groups_min_order_by {
-  createdAt: order_by
-  groupId: order_by
-  id: order_by
-  userId: order_by
+"""aggregate min on columns"""
+type user_groups_min_fields {
+  groupId: uuid
+  userId: uuid
 }
 
 """
@@ -5497,10 +7560,8 @@ input user_groups_on_conflict {
 
 """Ordering options when selecting data from "user_groups"."""
 input user_groups_order_by {
-  createdAt: order_by
   group: groups_order_by
   groupId: order_by
-  id: order_by
   user: users_order_by
   userId: order_by
 }
@@ -5510,13 +7571,7 @@ select columns of table "user_groups"
 """
 enum user_groups_select_column {
   """column name"""
-  createdAt
-
-  """column name"""
   groupId
-
-  """column name"""
-  id
 
   """column name"""
   userId
@@ -5535,9 +7590,7 @@ input user_groups_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input user_groups_stream_cursor_value_input {
-  createdAt: timestamptz
   groupId: uuid
-  id: uuid
   userId: uuid
 }
 
@@ -5549,14 +7602,21 @@ enum user_groups_update_column {
   _PLACEHOLDER
 }
 
-"""Roles of User for a given Org."""
+"""Table containing user's org and default_role"""
 type user_org_roles {
   createdAt: timestamptz!
   createdBy: uuid!
-  id: uuid!
-  isDefaultRole: Boolean!
-  organization: String!
+  isCurrentOrg: Boolean!
+  orgId: uuid!
+
+  """An object relationship"""
+  organization: organizations!
   role: String!
+  updatedAt: timestamptz!
+  updatedBy: uuid!
+
+  """An object relationship"""
+  user: users!
   userId: uuid!
 }
 
@@ -5614,6 +7674,16 @@ input user_org_roles_aggregate_order_by {
 }
 
 """
+input type for inserting array relation for remote table "user_org_roles"
+"""
+input user_org_roles_arr_rel_insert_input {
+  data: [user_org_roles_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: user_org_roles_on_conflict
+}
+
+"""
 Boolean expression to filter rows from the table "user_org_roles". All fields are combined with a logical 'AND'.
 """
 input user_org_roles_bool_exp {
@@ -5622,10 +7692,13 @@ input user_org_roles_bool_exp {
   _or: [user_org_roles_bool_exp!]
   createdAt: timestamptz_comparison_exp
   createdBy: uuid_comparison_exp
-  id: uuid_comparison_exp
-  isDefaultRole: Boolean_comparison_exp
-  organization: String_comparison_exp
+  isCurrentOrg: Boolean_comparison_exp
+  orgId: uuid_comparison_exp
+  organization: organizations_bool_exp
   role: String_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: uuid_comparison_exp
+  user: users_bool_exp
   userId: uuid_comparison_exp
 }
 
@@ -5634,27 +7707,23 @@ unique or primary key constraints on table "user_org_roles"
 """
 enum user_org_roles_constraint {
   """
-  unique or primary key constraint on columns "id"
+  unique or primary key constraint on columns "user_id", "org_id"
   """
   user_org_roles_pkey
 
   """
-  unique or primary key constraint on columns "user_id", "organization"
+  unique or primary key constraint on columns "user_id"
   """
-  user_org_roles_user_id_organization_default_role_unique
-
-  """
-  unique or primary key constraint on columns "user_id", "organization", "role"
-  """
-  user_org_roles_user_id_role_organization_key
+  user_org_roles_unique_current_org
 }
 
 """
 input type for inserting data into table "user_org_roles"
 """
 input user_org_roles_insert_input {
-  isDefaultRole: Boolean
-  organization: String
+  isCurrentOrg: Boolean
+  orgId: uuid
+  organization: organizations_obj_rel_insert_input
   role: String
   userId: uuid
 }
@@ -5663,9 +7732,10 @@ input user_org_roles_insert_input {
 type user_org_roles_max_fields {
   createdAt: timestamptz
   createdBy: uuid
-  id: uuid
-  organization: String
+  orgId: uuid
   role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
   userId: uuid
 }
 
@@ -5675,9 +7745,10 @@ order by max() on columns of table "user_org_roles"
 input user_org_roles_max_order_by {
   createdAt: order_by
   createdBy: order_by
-  id: order_by
-  organization: order_by
+  orgId: order_by
   role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
   userId: order_by
 }
 
@@ -5685,9 +7756,10 @@ input user_org_roles_max_order_by {
 type user_org_roles_min_fields {
   createdAt: timestamptz
   createdBy: uuid
-  id: uuid
-  organization: String
+  orgId: uuid
   role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
   userId: uuid
 }
 
@@ -5697,9 +7769,10 @@ order by min() on columns of table "user_org_roles"
 input user_org_roles_min_order_by {
   createdAt: order_by
   createdBy: order_by
-  id: order_by
-  organization: order_by
+  orgId: order_by
   role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
   userId: order_by
 }
 
@@ -5727,16 +7800,20 @@ input user_org_roles_on_conflict {
 input user_org_roles_order_by {
   createdAt: order_by
   createdBy: order_by
-  id: order_by
-  isDefaultRole: order_by
-  organization: order_by
+  isCurrentOrg: order_by
+  orgId: order_by
+  organization: organizations_order_by
   role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  user: users_order_by
   userId: order_by
 }
 
 """primary key columns input for table: user_org_roles"""
 input user_org_roles_pk_columns_input {
-  id: uuid!
+  orgId: uuid!
+  userId: uuid!
 }
 
 """
@@ -5750,16 +7827,19 @@ enum user_org_roles_select_column {
   createdBy
 
   """column name"""
-  id
+  isCurrentOrg
 
   """column name"""
-  isDefaultRole
-
-  """column name"""
-  organization
+  orgId
 
   """column name"""
   role
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  updatedBy
 
   """column name"""
   userId
@@ -5770,7 +7850,7 @@ select "user_org_roles_aggregate_bool_exp_bool_and_arguments_columns" columns of
 """
 enum user_org_roles_select_column_user_org_roles_aggregate_bool_exp_bool_and_arguments_columns {
   """column name"""
-  isDefaultRole
+  isCurrentOrg
 }
 
 """
@@ -5778,14 +7858,15 @@ select "user_org_roles_aggregate_bool_exp_bool_or_arguments_columns" columns of 
 """
 enum user_org_roles_select_column_user_org_roles_aggregate_bool_exp_bool_or_arguments_columns {
   """column name"""
-  isDefaultRole
+  isCurrentOrg
 }
 
 """
 input type for updating data in table "user_org_roles"
 """
 input user_org_roles_set_input {
-  isDefaultRole: Boolean
+  isCurrentOrg: Boolean
+  role: String
 }
 
 """
@@ -5803,10 +7884,11 @@ input user_org_roles_stream_cursor_input {
 input user_org_roles_stream_cursor_value_input {
   createdAt: timestamptz
   createdBy: uuid
-  id: uuid
-  isDefaultRole: Boolean
-  organization: String
+  isCurrentOrg: Boolean
+  orgId: uuid
   role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
   userId: uuid
 }
 
@@ -5815,7 +7897,10 @@ update columns of table "user_org_roles"
 """
 enum user_org_roles_update_column {
   """column name"""
-  isDefaultRole
+  isCurrentOrg
+
+  """column name"""
+  role
 }
 
 input user_org_roles_updates {
@@ -5832,12 +7917,10 @@ User account information. Don't modify its structure as Hasura Auth relies on it
 type users {
   activeMfaType: String
 
-  """
-  A computed field, executes function "user_allowed_orgs"
-  """
+  """An array relationship"""
   allowedOrgs(
     """distinct select on columns"""
-    distinct_on: [organizations_select_column!]
+    distinct_on: [user_org_roles_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -5846,21 +7929,73 @@ type users {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [organizations_order_by!]
+    order_by: [user_org_roles_order_by!]
 
     """filter the rows returned"""
-    where: organizations_bool_exp
-  ): [organizations!]
+    where: user_org_roles_bool_exp
+  ): [user_org_roles!]!
+
+  """An aggregate relationship"""
+  allowedOrgs_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_org_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_org_roles_order_by!]
+
+    """filter the rows returned"""
+    where: user_org_roles_bool_exp
+  ): user_org_roles_aggregate!
+
+  """Used as Computed Field on Users Table"""
+  associatedGroups(
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]
   avatarUrl: String!
   createdAt: timestamptz!
 
-  """
-  A computed field, executes function "user_default_org"
-  """
-  defaultOrg: String
+  """Function Used as Computed Field on Users Table"""
+  currentOrgId: uuid
   defaultRole: String!
   disabled: Boolean!
   displayName: String!
+
+  """Used as Computed Field on Users Table"""
+  dissociatedGroups(
+    """distinct select on columns"""
+    distinct_on: [groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [groups_order_by!]
+
+    """filter the rows returned"""
+    where: groups_bool_exp
+  ): [groups!]
   email: citext
   emailVerified: Boolean!
   id: uuid!
@@ -5891,6 +8026,24 @@ type users {
     """filter the rows returned"""
     where: authRefreshTokens_bool_exp
   ): [authRefreshTokens!]!
+
+  """An aggregate relationship"""
+  refreshTokens_aggregate(
+    """distinct select on columns"""
+    distinct_on: [authRefreshTokens_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authRefreshTokens_order_by!]
+
+    """filter the rows returned"""
+    where: authRefreshTokens_bool_exp
+  ): authRefreshTokens_aggregate!
 
   """An array relationship"""
   roles(
@@ -5945,30 +8098,11 @@ type users {
     """filter the rows returned"""
     where: authUserSecurityKeys_bool_exp
   ): [authUserSecurityKeys!]!
-  updatedAt: timestamptz!
-
-  """An array relationship"""
-  userOrgRoles(
-    """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
-
-    """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): [user_org_roles!]!
 
   """An aggregate relationship"""
-  userOrgRoles_aggregate(
+  securityKeys_aggregate(
     """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
+    distinct_on: [authUserSecurityKeys_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -5977,11 +8111,12 @@ type users {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
+    order_by: [authUserSecurityKeys_order_by!]
 
     """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): user_org_roles_aggregate!
+    where: authUserSecurityKeys_bool_exp
+  ): authUserSecurityKeys_aggregate!
+  updatedAt: timestamptz!
 
   """An array relationship"""
   userProviders(
@@ -6000,6 +8135,41 @@ type users {
     """filter the rows returned"""
     where: authUserProviders_bool_exp
   ): [authUserProviders!]!
+
+  """An aggregate relationship"""
+  userProviders_aggregate(
+    """distinct select on columns"""
+    distinct_on: [authUserProviders_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [authUserProviders_order_by!]
+
+    """filter the rows returned"""
+    where: authUserProviders_bool_exp
+  ): authUserProviders_aggregate!
+}
+
+"""
+aggregated selection of "auth.users"
+"""
+type users_aggregate {
+  aggregate: users_aggregate_fields
+  nodes: [users!]!
+}
+
+"""
+aggregate fields of "auth.users"
+"""
+type users_aggregate_fields {
+  count(columns: [users_select_column!], distinct: Boolean): Int!
+  max: users_max_fields
+  min: users_min_fields
 }
 
 """append existing jsonb value of filtered columns with new jsonb value"""
@@ -6015,13 +8185,16 @@ input users_bool_exp {
   _not: users_bool_exp
   _or: [users_bool_exp!]
   activeMfaType: String_comparison_exp
-  allowedOrgs: organizations_bool_exp
+  allowedOrgs: user_org_roles_bool_exp
+  allowedOrgs_aggregate: user_org_roles_aggregate_bool_exp
+  associatedGroups: groups_bool_exp
   avatarUrl: String_comparison_exp
   createdAt: timestamptz_comparison_exp
-  defaultOrg: String_comparison_exp
+  currentOrgId: uuid_comparison_exp
   defaultRole: String_comparison_exp
   disabled: Boolean_comparison_exp
   displayName: String_comparison_exp
+  dissociatedGroups: groups_bool_exp
   email: citext_comparison_exp
   emailVerified: Boolean_comparison_exp
   id: uuid_comparison_exp
@@ -6032,13 +8205,14 @@ input users_bool_exp {
   phoneNumber: String_comparison_exp
   phoneNumberVerified: Boolean_comparison_exp
   refreshTokens: authRefreshTokens_bool_exp
+  refreshTokens_aggregate: authRefreshTokens_aggregate_bool_exp
   roles: authUserRoles_bool_exp
   roles_aggregate: authUserRoles_aggregate_bool_exp
   securityKeys: authUserSecurityKeys_bool_exp
+  securityKeys_aggregate: authUserSecurityKeys_aggregate_bool_exp
   updatedAt: timestamptz_comparison_exp
-  userOrgRoles: user_org_roles_bool_exp
-  userOrgRoles_aggregate: user_org_roles_aggregate_bool_exp
   userProviders: authUserProviders_bool_exp
+  userProviders_aggregate: authUserProviders_aggregate_bool_exp
 }
 
 """
@@ -6062,6 +8236,42 @@ input users_delete_key_input {
   metadata: String
 }
 
+"""aggregate max on columns"""
+type users_max_fields {
+  activeMfaType: String
+  avatarUrl: String
+  createdAt: timestamptz
+
+  """Function Used as Computed Field on Users Table"""
+  currentOrgId: uuid
+  defaultRole: String
+  displayName: String
+  email: citext
+  id: uuid
+  lastSeen: timestamptz
+  locale: String
+  phoneNumber: String
+  updatedAt: timestamptz
+}
+
+"""aggregate min on columns"""
+type users_min_fields {
+  activeMfaType: String
+  avatarUrl: String
+  createdAt: timestamptz
+
+  """Function Used as Computed Field on Users Table"""
+  currentOrgId: uuid
+  defaultRole: String
+  displayName: String
+  email: citext
+  id: uuid
+  lastSeen: timestamptz
+  locale: String
+  phoneNumber: String
+  updatedAt: timestamptz
+}
+
 """
 response of any mutation on the table "auth.users"
 """
@@ -6076,13 +8286,15 @@ type users_mutation_response {
 """Ordering options when selecting data from "auth.users"."""
 input users_order_by {
   activeMfaType: order_by
-  allowedOrgs_aggregate: organizations_aggregate_order_by
+  allowedOrgs_aggregate: user_org_roles_aggregate_order_by
+  associatedGroups_aggregate: groups_aggregate_order_by
   avatarUrl: order_by
   createdAt: order_by
-  defaultOrg: order_by
+  currentOrgId: order_by
   defaultRole: order_by
   disabled: order_by
   displayName: order_by
+  dissociatedGroups_aggregate: groups_aggregate_order_by
   email: order_by
   emailVerified: order_by
   id: order_by
@@ -6096,7 +8308,6 @@ input users_order_by {
   roles_aggregate: authUserRoles_aggregate_order_by
   securityKeys_aggregate: authUserSecurityKeys_aggregate_order_by
   updatedAt: order_by
-  userOrgRoles_aggregate: user_org_roles_aggregate_order_by
   userProviders_aggregate: authUserProviders_aggregate_order_by
 }
 
@@ -6109,6 +8320,8 @@ input users_pk_columns_input {
 input users_prepend_input {
   metadata: jsonb
 }
+
+scalar users_scalar
 
 """
 select columns of table "auth.users"
@@ -6174,7 +8387,6 @@ input users_set_input {
   email: citext
   locale: String
   metadata: jsonb
-  phoneNumber: String
 }
 
 """

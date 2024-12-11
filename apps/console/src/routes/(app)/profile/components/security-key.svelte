@@ -67,7 +67,7 @@ const handleDelete = async () => {
     const { data, errors: gqlErrors } = await deleteSecurityKey.mutate(
       { id },
       {
-        metadata: { logResult: true, useRole: 'me' },
+        metadata: { logResult: true, useRole: 'user' },
       },
     );
     if (gqlErrors) {

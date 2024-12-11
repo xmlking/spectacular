@@ -51,14 +51,13 @@ export const userSchema = z.object({
   phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!').min(10).max(15).nullable(),
   avatarUrl: z.string().url().nullable(),
   defaultRole: z.nativeEnum(Roles, { required_error: 'You must have a role' }).default(Roles.User),
-  plan: z.enum(['free', 'pro', 'enterprise']).default('free'),
+  note: z.string().optional(),
   locale: z.enum(['en', 'es', 'de']).default('en'),
   verified: z.boolean().default(false),
   token: z.string().optional(),
   receiveEmail: z.boolean().default(true),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
-  organization: z.string().default(env.PUBLIC_DEFAULT_ORGANIZATION ?? DEFAULT_ORGANIZATION),
 });
 
 /**
@@ -75,7 +74,6 @@ export const updateUserDetailsSchema = userSchema.omit({
   receiveEmail: true,
   createdAt: true,
   updatedAt: true,
-  organization: true,
 });
 export type UpdateUserDetailsSchema = typeof updateUserDetailsSchema;
 export type updateUserDetails = z.infer<typeof updateUserDetailsSchema>;
