@@ -105,6 +105,12 @@ await nhost.auth.signUp({
 })
 ```
 
+Current user's `allowed-roles` and `default-role` once they switch to an `Org` in multi-tenancy setup :
+
+> allowed roles = user roles (auth.user_roles) + org role (public.user_org_roles)
+
+> default role =  org role (public.user_org_roles)  =  user default role (auth.user)
+
 ### Set Role for GraphQL Requests
 
 When no role is specified, the user’s default role will be used:
@@ -131,10 +137,14 @@ await nhost.graphql.request(
 
 | Role       | Action | Permissions                                                                                                                           |
 | ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| org:member | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
+| user       | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
 | org:admin  | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
-| org:member | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
+| org:owner  | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| sys:admin  | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| user       | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
 | org:admin  | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| org:owner  | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| sys:admin  | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
 
 > `delete` action is desable for most cases, as we do `soft-delete`
 
@@ -233,3 +243,4 @@ You can find an example of a function that can generate a valid access token for
 - [user management in nhost](https://docs.nhost.io/guides/auth/users)
 - [Hasura Authentication Using JWTs](https://hasura.io/docs/latest/auth/authentication/jwt/)
 - [logto: Understand how organizations work](https://docs.logto.io/docs/recipes/organizations/understand-how-it-works/)
+- [FedCA](https://developer.mozilla.org/en-US/docs/Web/API/Credential_Management_API/Credential_types)

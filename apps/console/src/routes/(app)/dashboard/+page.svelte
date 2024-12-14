@@ -1,11 +1,12 @@
 <script lang="ts">
 // NOTE: from https://swapy.tahazsh.com/
 // TODO: Drag-and-Drop Dashboard https://github.com/olliethedev/dnd-dashboard
-import { onMount } from 'svelte';
+import { onDestroy, onMount } from 'svelte';
 import { persisted } from 'svelte-persisted-store';
-import { createSwapy } from 'swapy';
+import { createSwapy, type Swapy } from 'swapy';
 
 let container: HTMLDivElement;
+let swapy: Swapy;
 
 /*
   const DEFAULT = {
@@ -27,7 +28,7 @@ let container: HTMLDivElement;
 
 onMount(() => {
   if (container) {
-    const swapy = createSwapy(container, {
+    swapy = createSwapy(container, {
       animation: 'dynamic', // or spring or none
     });
 
@@ -35,12 +36,11 @@ onMount(() => {
     //   console.log({ data: data.object });
     //   slotItems.set(data.object);
     // });
-
-    // cleanup after onDestroy
-    return () => {
-      swapy.enable(false);
-    };
   }
+});
+onDestroy(() => {
+  // Destroy the swapy instance on component destroy
+  swapy?.destroy();
 });
 </script>
 

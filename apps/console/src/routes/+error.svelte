@@ -2,7 +2,7 @@
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { i18n } from '$lib/i18n';
-import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
+import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 import { LogoAnim } from '@spectacular/skeleton/components/logos';
 
 const details = $page.error?.details;

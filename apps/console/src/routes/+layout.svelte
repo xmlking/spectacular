@@ -14,7 +14,7 @@ import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { setLoadingState } from '$lib/stores/loading';
 import { online, orientation, size } from '$lib/stores/window';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
+import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
 import type { ModalComponent } from '@skeletonlabs/skeleton';
 // biome-ignore lint/style/useImportType: biome still don't understand svelte

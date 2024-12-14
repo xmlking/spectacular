@@ -10,6 +10,7 @@ export default defineConfig({
     paraglide({
       project: './project.inlang',
       outdir: './src/i18n',
+      experimentalUseVirtualModules: true,
     }),
   ],
   test: {

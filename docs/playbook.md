@@ -413,8 +413,8 @@ pnpm add -D svelte-select
 We switched to inlang's [Paraglide JS](https://inlang.com/m/dxnzrydw/library-inlang-paraglideJsAdapterSvelteKit) for i18n
 
 ```shell
-npx @inlang/paraglide-js init
-npm i -D @inlang/paraglide-js-adapter-sveltekit
+npx @inlang/paraglide-sveltekit init
+npm install
 ```
 
 #### Progressive Web Apps (PWA)

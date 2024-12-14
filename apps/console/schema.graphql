@@ -1510,6 +1510,179 @@ input direction_stream_cursor_value_input {
   value: String
 }
 
+"""
+columns and relationships of "storage.files"
+"""
+type files {
+  bucketId: String!
+  createdAt: timestamptz!
+  etag: String
+  id: uuid!
+  isUploaded: Boolean
+  metadata(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  mimeType: String
+  name: String
+  size: Int
+  updatedAt: timestamptz!
+  uploadedByUserId: uuid
+}
+
+"""
+Boolean expression to filter rows from the table "storage.files". All fields are combined with a logical 'AND'.
+"""
+input files_bool_exp {
+  _and: [files_bool_exp!]
+  _not: files_bool_exp
+  _or: [files_bool_exp!]
+  bucketId: String_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  etag: String_comparison_exp
+  id: uuid_comparison_exp
+  isUploaded: Boolean_comparison_exp
+  metadata: jsonb_comparison_exp
+  mimeType: String_comparison_exp
+  name: String_comparison_exp
+  size: Int_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  uploadedByUserId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "storage.files"
+"""
+enum files_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  files_pkey
+}
+
+"""
+input type for inserting data into table "storage.files"
+"""
+input files_insert_input {
+  bucketId: String
+  createdAt: timestamptz
+  etag: String
+  id: uuid
+  isUploaded: Boolean
+  metadata: jsonb
+  mimeType: String
+  name: String
+  size: Int
+  updatedAt: timestamptz
+}
+
+"""
+response of any mutation on the table "storage.files"
+"""
+type files_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [files!]!
+}
+
+"""
+on_conflict condition type for table "storage.files"
+"""
+input files_on_conflict {
+  constraint: files_constraint!
+  update_columns: [files_update_column!]! = []
+  where: files_bool_exp
+}
+
+"""Ordering options when selecting data from "storage.files"."""
+input files_order_by {
+  bucketId: order_by
+  createdAt: order_by
+  etag: order_by
+  id: order_by
+  isUploaded: order_by
+  metadata: order_by
+  mimeType: order_by
+  name: order_by
+  size: order_by
+  updatedAt: order_by
+  uploadedByUserId: order_by
+}
+
+"""
+select columns of table "storage.files"
+"""
+enum files_select_column {
+  """column name"""
+  bucketId
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  etag
+
+  """column name"""
+  id
+
+  """column name"""
+  isUploaded
+
+  """column name"""
+  metadata
+
+  """column name"""
+  mimeType
+
+  """column name"""
+  name
+
+  """column name"""
+  size
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  uploadedByUserId
+}
+
+"""
+Streaming cursor of the table "files"
+"""
+input files_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: files_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input files_stream_cursor_value_input {
+  bucketId: String
+  createdAt: timestamptz
+  etag: String
+  id: uuid
+  isUploaded: Boolean
+  metadata: jsonb
+  mimeType: String
+  name: String
+  size: Int
+  updatedAt: timestamptz
+  uploadedByUserId: uuid
+}
+
+"""
+placeholder for update columns of table "storage.files" (current role has no relevant permissions)
+"""
+enum files_update_column {
+  """placeholder (do not use)"""
+  _PLACEHOLDER
+}
+
 """Table containing user groups that belongs to an organization"""
 type groups {
   createdAt: timestamptz!
@@ -1968,6 +2141,19 @@ type mutation_root {
   ): authUserSecurityKeys_mutation_response
 
   """
+  delete single row from the table: "storage.files"
+  """
+  deleteFile(id: uuid!): files
+
+  """
+  delete data from the table: "storage.files"
+  """
+  deleteFiles(
+    """filter the rows which have to be deleted"""
+    where: files_bool_exp!
+  ): files_mutation_response
+
+  """
   delete data from the table: "device_pools"
   """
   delete_device_pools(
@@ -2083,6 +2269,28 @@ type mutation_root {
   delete single row from the table: "user_org_roles"
   """
   delete_user_org_roles_by_pk(orgId: uuid!, userId: uuid!): user_org_roles
+
+  """
+  insert a single row into the table: "storage.files"
+  """
+  insertFile(
+    """the row to be inserted"""
+    object: files_insert_input!
+
+    """upsert condition"""
+    on_conflict: files_on_conflict
+  ): files
+
+  """
+  insert data into the table: "storage.files"
+  """
+  insertFiles(
+    """the rows to be inserted"""
+    objects: [files_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: files_on_conflict
+  ): files_mutation_response
 
   """
   insert data into the table: "device_pools"
@@ -4573,6 +4781,29 @@ type query_root {
   """fetch data from the table: "direction" using primary key columns"""
   direction_by_pk(value: String!): direction
 
+  """fetch data from the table: "storage.files" using primary key columns"""
+  file(id: uuid!): files
+
+  """
+  fetch data from the table: "storage.files"
+  """
+  files(
+    """distinct select on columns"""
+    distinct_on: [files_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [files_order_by!]
+
+    """filter the rows returned"""
+    where: files_bool_exp
+  ): [files!]!
+
   """An array relationship"""
   groups(
     """distinct select on columns"""
@@ -6340,6 +6571,43 @@ type subscription_root {
     """filter the rows returned"""
     where: direction_bool_exp
   ): [direction!]!
+
+  """fetch data from the table: "storage.files" using primary key columns"""
+  file(id: uuid!): files
+
+  """
+  fetch data from the table: "storage.files"
+  """
+  files(
+    """distinct select on columns"""
+    distinct_on: [files_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [files_order_by!]
+
+    """filter the rows returned"""
+    where: files_bool_exp
+  ): [files!]!
+
+  """
+  fetch data from the table in a streaming manner: "storage.files"
+  """
+  files_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [files_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: files_bool_exp
+  ): [files!]!
 
   """An array relationship"""
   groups(

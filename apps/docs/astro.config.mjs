@@ -141,7 +141,6 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
-  output: process.env.CI ? 'static' : 'hybrid',
   // HINT: To set build output, same way like sveltekit for Dockerfile
   build: {
     server: './build',
