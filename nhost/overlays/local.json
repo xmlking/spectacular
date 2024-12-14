@@ -28,6 +28,11 @@
     "value": "0.36.1-sumo"
   },
   {
+    "op": "replace",
+    "path": "/auth/rateLimit/signups/limit",
+    "value": 100
+  },
+  {
     "op": "add",
     "path": "/auth/method/webauthn/relyingParty/origins/1",
     "value": "https://console.traefik.me:3000"

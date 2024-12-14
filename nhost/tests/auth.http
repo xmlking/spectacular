@@ -62,15 +62,11 @@ POST {{authEndpoint}}/signup/email-password
 Content-Type: application/json
 
 {
-  "email": "john.smith@gmail.com",
+  "email": "john.smith@chinthagunta.com",
   "password": "Str0ngPassw#ord-94|%",
   "options": {
     "displayName": "John Smith",
     "locale": "en",
-    "metadata": {
-      "plan": "free",
-      "default_org": "chinthagunta"
-    },
     "redirectTo": "https://console.traefik.me:5173/dashboard"
   }
 }
@@ -78,6 +74,43 @@ Content-Type: application/json
 ###
 @accessToken = {{createUser.response.body.$.session.accessToken}}
 ###
+
+### Create User2
+# @name createUser2
+POST {{authEndpoint}}/signup/email-password
+Content-Type: application/json
+
+{
+  "email": "david.bowie@species.com",
+  "password": "Str0ngPassw#ord-94|%",
+  "options": {
+    "displayName": "David Bowie",
+    "locale": "en",
+    "redirectTo": "https://console.traefik.me:5173/dashboard"
+  }
+}
+
+
+
+### SignIn1
+# @name signIn
+POST {{authEndpoint}}/signin/email-password
+Content-Type: application/json
+
+{
+  "email": "john.smith@chinthagunta.com",
+  "password": "Str0ngPassw#ord-94|%"
+}
+
+### SignIn2
+# @name signIn
+POST {{authEndpoint}}/signin/email-password
+Content-Type: application/json
+
+{
+  "email": "david.bowie@species.com",
+  "password": "Str0ngPassw#ord-94|%"
+}
 
 ### Create PAT
 # @name createPAT

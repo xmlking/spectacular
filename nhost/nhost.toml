@@ -30,6 +30,10 @@ level = 'warn'
 [hasura.events]
 httpPoolSize = 100
 
+[hasura.rateLimit]
+limit = 100
+interval = '1m'
+
 [graphql]
 [graphql.security]
 forbidAminSecret = false
@@ -38,6 +42,10 @@ maxDepthQueries = 4
 [functions]
 [functions.node]
 version = 20
+
+[functions.rateLimit]
+limit = 100
+interval = '15m'
 
 [auth]
 version = '0.36.1'
@@ -118,8 +126,8 @@ enabled = false
 enabled = false
 
 [auth.method.oauth.azuread]
-enabled = true
 tenant = '{{ secrets.AUTH_PROVIDER_AZUREAD_TENANT }}'
+enabled = true
 clientId = '{{ secrets.AUTH_PROVIDER_AZUREAD_CLIENT_ID }}'
 clientSecret = '{{ secrets.AUTH_PROVIDER_AZUREAD_CLIENT_SECRET }}'
 
@@ -235,6 +243,10 @@ method = 'PLAIN'
 
 [storage]
 version = '0.6.1'
+
+[storage.rateLimit]
+limit = 100
+interval = '15m'
 
 # [storage.antivirus]
 # server = 'tcp://run-clamav:3310'
