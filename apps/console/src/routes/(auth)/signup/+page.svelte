@@ -1,6 +1,5 @@
 <script lang="ts">
 import { page } from '$app/stores';
-import { env } from '$env/dynamic/public';
 import * as m from '$i18n/messages';
 import { goto } from '$app/navigation';
 import { handleMessage } from '$lib/components/layout/toast-manager';
@@ -10,7 +9,6 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
-import { availableLanguageTags, languageTag } from '$i18n/runtime';
 import { getNhostClient } from '$lib/stores/nhost';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
@@ -39,11 +37,12 @@ const form = superForm(defaults(zod(signUpSchema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
-  clearOnSubmit: 'errors-and-message',
   syncFlashMessage: false,
+  resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
   validators: zodClient(signUpSchema),
+  clearOnSubmit: 'errors-and-message',
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
 
@@ -65,7 +64,7 @@ const form = superForm(defaults(zod(signUpSchema)), {
 
     if (session) {
       loadingState.setFormLoading(false); // workaround
-      const message = {
+      const message: App.Superforms.Message = {
         message: 'Account Created',
         hideDismiss: true,
         timeout: 10000,
@@ -73,9 +72,16 @@ const form = superForm(defaults(zod(signUpSchema)), {
       } as const;
       setMessage(form, message);
       handleMessage(message, toastStore);
-      // await goto(i18n.resolveRoute(redirectTo))
-      await goto(i18n.resolveRoute(redirectTo), { invalidateAll: true }); // workaround
+      // await goto(i18n.resolveRoute(redirectTo), {
+      //   invalidateAll: false,
+      // });
+      await goto(i18n.resolveRoute(redirectTo), {
+        invalidateAll: true, // workaround for profile page
+      });
     }
+  },
+  onError({ result }) {
+    log.error('superForm onError:', { result });
   },
 });
 
@@ -99,8 +105,8 @@ export const snapshot = { capture, restore };
 // Functions
 
 // Reactivity
-$: loadingState.setFormLoading($delayed);
 $: valid = $allErrors.length === 0;
+$: loadingState.setFormLoading($delayed);
 $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
 </script>
 
