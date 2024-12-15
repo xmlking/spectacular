@@ -1,6 +1,0 @@
-query ListOrganizations @cache(policy: CacheOrNetwork) {
-  organizations(order_by: [{ displayName: desc_nulls_last }]) {
-    displayName
-    description
-  }
-}

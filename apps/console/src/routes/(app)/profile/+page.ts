@@ -1,11 +1,14 @@
 import { load_GetUser } from '$houdini';
 import { Logger } from '@spectacular/utils';
 import { error } from '@sveltejs/kit';
+// import { getNhostClient } from '$lib/stores/nhost';
 import type { PageLoad, GetUserVariables as Variables } from './$houdini';
 
 const log = new Logger('user.profile.browser');
 
 export const _GetUserVariables: Variables = async (event) => {
+  // const user = nhost.auth.getUser()
+  // const userId = user?.id;
   const { session } = await event.parent();
   const userId = session?.user.id;
   if (!userId) {

@@ -35,13 +35,14 @@ interface GQLResult<T> {
  */
 
 export enum Roles {
-  Me = 'me',
   Anonymous = 'anonymous',
   User = 'user',
-  Owner = 'org:owner',
-  Admin = 'org:admin',
-  Billing = 'org:billing',
+  Me = 'me',
   Member = 'org:member',
+  Billing = 'org:billing',
+  Admin = 'org:admin',
+  Owner = 'org:owner',
+  SysAdmin = 'sys:admin',
 }
 
 export type Link = {

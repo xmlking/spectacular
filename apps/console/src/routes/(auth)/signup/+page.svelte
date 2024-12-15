@@ -2,28 +2,41 @@
 import { page } from '$app/stores';
 import { env } from '$env/dynamic/public';
 import * as m from '$i18n/messages';
+import { goto } from '$app/navigation';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { signUpSchema } from '$lib/schema/user';
+import { signUpSchema, updateUserDetailsKeys as keys } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
+import { availableLanguageTags, languageTag } from '$i18n/runtime';
+import { getNhostClient } from '$lib/stores/nhost';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import type { PageData } from './$houdini';
+import { i18n } from '$lib/i18n';
+import { onMount } from 'svelte';
 
 const log = new Logger('auth:signup:browser');
-
-export let data: PageData;
 
 // Variables
 const loadingState = getLoadingState();
 const toastStore = getToastStore();
+const nhost = getNhostClient();
+
+onMount(async () => {
+  const isAuthenticated = nhost.auth.isAuthenticated();
+  const redirectTo = $formData.redirectTo;
+  log.debug({ isAuthenticated, redirectTo });
+  if (isAuthenticated) {
+    await goto(i18n.resolveRoute(redirectTo));
+  }
+});
 
 const form = superForm(defaults(zod(signUpSchema)), {
+  SPA: true,
   dataType: 'json',
   taintedMessage: null,
   clearOnSubmit: 'errors-and-message',
@@ -31,15 +44,38 @@ const form = superForm(defaults(zod(signUpSchema)), {
   delayMs: 100,
   timeoutMs: 4000,
   validators: zodClient(signUpSchema),
-  onUpdated({ form }) {
-    if (form.message) {
-      handleMessage(form.message, toastStore);
+  async onUpdate({ form, cancel }) {
+    if (!form.valid) return;
+
+    const { firstName, lastName, email, password, locale, redirectTo } = form.data;
+    const { session, error } = await nhost.auth.signUp({
+      email,
+      password,
+      options: {
+        displayName: `${firstName} ${lastName}`,
+        locale,
+      },
+    });
+    if (error) {
+      log.error(error);
+      setError(form, '', error.message);
+      setMessage(form, { type: 'error', message: 'Account creation failed' });
+      return;
     }
-  },
-  onError({ result }) {
-    // TODO:
-    // setError(form, '', result.error.message);
-    log.error('signup error:', { result });
+
+    if (session) {
+      loadingState.setFormLoading(false); // workaround
+      const message = {
+        message: 'Account Created',
+        hideDismiss: true,
+        timeout: 10000,
+        type: 'success',
+      } as const;
+      setMessage(form, message);
+      handleMessage(message, toastStore);
+      // await goto(i18n.resolveRoute(redirectTo))
+      await goto(i18n.resolveRoute(redirectTo), { invalidateAll: true }); // workaround
+    }
   },
 });
 
@@ -52,7 +88,6 @@ const {
   delayed,
   timeout,
   tainted,
-  posted,
   allErrors,
   capture,
   restore,
@@ -64,12 +99,6 @@ export const snapshot = { capture, restore };
 // Functions
 
 // Reactivity
-$: ({ ListOrganizations } = data);
-$: organizations = $ListOrganizations.data?.organizations.map((x) => x.organization) ?? [
-  env.PUBLIC_DEFAULT_ORGANIZATION,
-];
-
-// Used in apps/console/src/lib/components/layout/page-load-spinner.svelte
 $: loadingState.setFormLoading($delayed);
 $: valid = $allErrors.length === 0;
 $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
@@ -84,27 +113,6 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
 <Alerts errors={$errors._errors} message={$message} />
 <!-- Signup Form -->
 <form method="POST" use:enhance>
-  <div class="mt-6">
-    <Form.Field {form} name="organization">
-      <Form.Control let:attrs>
-        <Form.Label class="label sr-only"
-          >{m.auth_forms_first_organization_label()}</Form.Label
-        >
-        <select
-          class="select data-[fs-error]:input-error"
-          placeholder={m.auth_forms_first_organization_placeholder()}
-          {...attrs}
-          bind:value={$formData.organization}
-        >
-          <option value="">Select Organization</option>
-          {#each organizations as org}
-            <option value={org}>{org}</option>
-          {/each}
-        </select>
-      </Form.Control>
-      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-    </Form.Field>
-  </div>
   <div class="mt-6">
     <Form.Field {form} name="firstName">
       <Form.Control let:attrs>
@@ -194,6 +202,24 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
     </Form.Field>
   </div>
   <div class="mt-6">
+    <Form.Field {form} name={keys.locale}>
+      <Form.Control let:attrs>
+        <Form.Label  class="label sr-only">Locale</Form.Label>
+        <select
+          class="select data-[fs-error]:input-error"
+          {...attrs}
+          bind:value={$formData.locale}>
+          <option value="en">English (US)</option>
+          <option value="es">Español (España)</option>
+          <!-- <option value="fr">Français (France)</option> -->
+          <option value="de">Deutsch (Deutschland)</option>
+        </select>
+      </Form.Control>
+      <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User preferred Locale</Form.Description> -->
+      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+    </Form.Field>
+  </div>
+  <div class="mt-6">
     <Form.Field {form} name="terms">
       <Form.Control let:attrs>
         <Form.Label class="label sr-only"></Form.Label>
@@ -240,8 +266,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
       message: $message,
       submitting: $submitting,
       delayed: $delayed,
-      timeout: $timeout,
-      posted: $posted,
+      timeout: $timeout
     }}
   />
   <br />

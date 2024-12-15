@@ -107,16 +107,16 @@ export const pwlSchema = userSchema
  */
 export const signUpSchema = userSchema
   .pick({
+    locale: true,
     firstName: true,
     lastName: true,
     email: true,
     password: true,
     confirmPassword: true,
     terms: true,
-    organization: true,
   })
   .extend({
-    redirectTo: z.string().default('/'),
+    redirectTo: z.string().default('/dashboard'),
   })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
 export type SignUpSchema = typeof signUpSchema;

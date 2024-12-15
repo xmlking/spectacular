@@ -9,6 +9,7 @@ export const i18n = createI18n(runtime, {
   exclude: ['/base/not-translated'],
   textDirection: {
     en: 'ltr',
+    es: 'ltr',
     de: 'ltr',
   },
 });
