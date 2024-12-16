@@ -1,11 +1,18 @@
 import { dev } from '$app/environment';
 import { Logger } from '@spectacular/utils';
-import type { HandleClientError } from '@sveltejs/kit';
+import type { HandleClientError, ClientInit } from '@sveltejs/kit';
 
-// Setup logger
-if (!dev) {
-  Logger.enableProductionMode();
-}
+/**
+ * Code in `init` method in `hooks.client.ts` will run one-time in browser, when the application starts up,
+ * making them useful for initializing database clients, logger, Sentry and so on.
+ */
+export const init: ClientInit = async () => {
+  console.log('in hooks.client.ts init:');
+  // Setup logger
+  if (!dev) {
+    Logger.enableProductionMode();
+  }
+};
 
 const log = new Logger('hooks:client');
 
