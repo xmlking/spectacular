@@ -15,7 +15,6 @@ import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { i18n } from '$lib/i18n';
 import { onMount } from 'svelte';
-import { fail } from '@sveltejs/kit';
 import { ROUTE_DASHBOARD, ROUTE_PROFILE } from '$lib/constants';
 
 const log = new Logger('auth:reset:browser');

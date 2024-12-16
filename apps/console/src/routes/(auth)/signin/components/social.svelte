@@ -1,16 +1,27 @@
 <script lang="ts">
 import { Icon } from '@spectacular/skeleton/components/icons';
 import { Github } from 'lucide-svelte';
+import { getNhostClient } from '$lib/stores/nhost';
+import { Logger } from '@spectacular/utils';
+import { ROUTE_DASHBOARD } from '$lib/constants';
+
+const log = new Logger('auth:signin:social:browser');
+
+// Variables
+const nhost = getNhostClient();
+const origin = new URL(window.location.href).origin;
+const redirectTo = `${origin}${ROUTE_DASHBOARD}`;
+const locale = 'en';
 </script>
 
 <!-- Signin with social -->
 <form method="POST">
   <div class="flex flex-row justify-evenly">
-    <button type="submit" formaction="/signin?/google" class="variant-filled-warning btn-icon"
+    <button type="button"  on:click={() => { nhost.auth.signIn({ provider: 'apple', options: {redirectTo, locale} }) }} class="variant-filled-warning btn-icon"
       ><Icon name="google" /></button
     >
-    <button type="submit" formaction="/signin?/github" class="variant-filled-secondary btn-icon"><Github /></button>
-    <button type="submit" formaction="/signin?/azuread" class="variant-filled-error btn-icon"
+    <button type="button" on:click={() => { nhost.auth.signIn({ provider: 'github', options: {redirectTo, locale} }) }}  class="variant-filled-secondary btn-icon"><Github /></button>
+    <button type="button" on:click={() => { nhost.auth.signIn({ provider: 'azuread', options: {redirectTo, locale} }) }} class="variant-filled-error btn-icon"
       ><Icon name="microsoft" /></button
     >
   </div>

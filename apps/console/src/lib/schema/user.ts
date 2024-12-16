@@ -1,5 +1,4 @@
-import { env } from '$env/dynamic/public';
-import { DEFAULT_ORGANIZATION } from '$lib/constants';
+import { ROUTE_DASHBOARD } from '$lib/constants';
 import { Roles } from '$lib/types';
 import { z } from 'zod';
 
@@ -88,7 +87,7 @@ export const pwSchema = userSchema
     password: true,
   })
   .extend({
-    redirectTo: z.string().default('/'),
+    redirectTo: z.string().default(ROUTE_DASHBOARD),
   });
 
 /**
@@ -99,7 +98,7 @@ export const pwlSchema = userSchema
     email: true,
   })
   .extend({
-    redirectTo: z.string().default('/'),
+    redirectTo: z.string().default(ROUTE_DASHBOARD),
   });
 
 /**
@@ -116,7 +115,7 @@ export const signUpSchema = userSchema
     terms: true,
   })
   .extend({
-    redirectTo: z.string().default('/dashboard'),
+    redirectTo: z.string().default(ROUTE_DASHBOARD),
   })
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
 export type SignUpSchema = typeof signUpSchema;
