@@ -105,9 +105,8 @@ onDestroy(() => {
       <div data-swapy-slot="3">
         <div
           data-swapy-item="c"
-          class="p-4 rounded-lg bg-orange-300 dark:bg-orange-800 dark:text-orange-400"
+          class="p-4 rounded-lg bg-lime-300 dark:bg-lime-800 dark:text-lime-400 cursor-move"
         >
-          <div class="handle cursor-move" data-swapy-handle></div>
           <div>03</div>
         </div>
       </div>
@@ -149,11 +148,14 @@ onDestroy(() => {
 
 <style lang="postcss">
   .handle {
+    cursor: grab;
+    width: 24px;
+    height: 24px;
+    background-image: url(data:image/svg+xml,%3csvg%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%20id='fi_3793594'%3e%3ccircle%20cx='8'%20cy='4'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='8'%20cy='12'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='8'%20cy='20'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='16'%20cy='4'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='16'%20cy='12'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='16'%20cy='20'%20r='2'%3e%3c/circle%3e%3c/svg%3e);
+    opacity: .5;
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 20px;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    top: 14px;
+    left: 10px;
   }
 </style>
+
