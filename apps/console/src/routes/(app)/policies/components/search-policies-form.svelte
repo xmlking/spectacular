@@ -121,7 +121,9 @@ $: loadingState.setFormLoading($delayed);
 <!-- Form Level Errors / Messages -->
 <Alerts errors={$errors._errors} message={$message} />
 <!-- GraphQL Errors  -->
-<GraphQLErrors errors={gqlErrors} />
+{#if gqlErrors}
+  <GraphQLErrors errors={gqlErrors} />
+{/if}
 <!-- Form -->
 <form data-sveltekit-noscroll bind:this={searchForm}>
   <AppBar

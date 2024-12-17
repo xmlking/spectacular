@@ -36,6 +36,7 @@ const subClient: ClientPlugin = subscription(({ session }) =>
 );
 
 // Export the Houdini client
+// Ref: https://github.com/hanshoi/sveltekit-nhost-houdini-example/blob/master/src/client.ts
 export default new HoudiniClient({
   url,
   fetchParams({ session, metadata }) {

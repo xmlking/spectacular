@@ -339,7 +339,9 @@ $: loadingState.setFormLoading($delayed);
     <!-- Form Level Errors / Messages -->
     <Alerts errors={$errors._errors} message={$message} />
     <!-- GraphQL Errors  -->
-    <GraphQLErrors errors={gqlErrors} />
+    {#if gqlErrors}
+      <GraphQLErrors errors={gqlErrors} />
+    {/if}
     <!-- Update User Details Form -->
     <form class="card md:space-y-8" method="POST" use:enhance>
       <header class="card-header">
