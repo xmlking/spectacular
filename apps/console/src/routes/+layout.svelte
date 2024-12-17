@@ -96,25 +96,6 @@ function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
 $: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
 $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 
-// update nhost session
-// HINT: https://blog.flotes.app/posts/performant-reactivity
-$: ({ session } = data);
-$: if (browser) {
-  if (session) {
-    log.debug('trigger SESSION_UPDATE', { session });
-    nhost.auth.client.interpreter?.send('SESSION_UPDATE', {
-      data: { session },
-    });
-  } else {
-    log.debug('session empty, trigger SIGNOUT');
-    // nhost.auth.client.interpreter?.send('SIGNOUT');
-    (async () => {
-      const { error } = await nhost.auth.signOut();
-      if (error) log.error({ error });
-    })();
-  }
-}
-
 // if(browser) {
 //   cookieStore.onchange = (event: CookieChangeEvent) => {
 //      console.log("cookie changed", {event});

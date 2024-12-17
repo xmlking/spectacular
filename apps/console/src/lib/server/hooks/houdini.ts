@@ -11,12 +11,9 @@ export const houdini = (async ({ event, resolve }) => {
 
   const { locals } = event;
   const accessToken = locals.nhost.auth.getAccessToken();
-  const session = locals.nhost.auth.getSession();
-
   log.debug('setting accessToken:', accessToken);
-  if (session && accessToken)
-    // FIXME: remove session check after https://github.com/nhost/nhost/issues/2028
-    setSession(event, { accessToken });
+  if (accessToken) setSession(event, { accessToken });
+
   const response = await resolve(event);
   return response;
 }) satisfies Handle;

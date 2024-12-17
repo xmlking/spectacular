@@ -11,11 +11,11 @@ const log = new Logger('nhost.server.client');
 
 const isBrowser = typeof window !== 'undefined';
 /**
- * Creates an Nhost client that runs on the server-side.
+ * Creates nHost client that runs on the server-side.
  * @param initialSession
  * @returns
  */
-export async function getServerNhost(initialSession: NhostSession | undefined, cookies: Cookies) {
+export async function getServerNhost(initialSession: NhostSession | undefined) {
   const nhost = new NhostClient({
     // subdomain: env.NHOST_SUBDOMAIN ?? 'local',
     // region: env.NHOST_REGION,
@@ -38,23 +38,4 @@ export async function getServerNhost(initialSession: NhostSession | undefined, c
   }
 
   return nhost;
-}
-
-/**
- * Use this function to set nhost session into cookie - from SignIn/SignUp/auth-miggleware
- * @param {Cookies} cookies - svelte cookies
- * @param {NhostSession} session - The session to set in the cookie
- */
-export function setNhostSessionInCookies(cookies: Cookies, session: NhostSession) {
-  // Expire the cookie 60 seconds before the token expires
-  // const expires = new Date();
-  // expires.setSeconds(expires.getSeconds() + session.accessTokenExpiresIn - 60);
-  // FIXME: *** btoa don't support unicode and throw error: DOMException [InvalidCharacterError]: Invalid character ***
-  cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
-    path: '/',
-    sameSite: 'strict',
-    // make it as session cookie and let the browser refresh and update cookie
-    httpOnly: false,
-    // expires,
-  });
 }

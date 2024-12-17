@@ -1,6 +1,6 @@
 import { NHOST_SESSION_KEY } from '$lib/constants';
 import { i18n } from '$lib/i18n';
-import { getServerNhost, setNhostSessionInCookies } from '$lib/server/utils/nhost';
+import { getServerNhost } from '$lib/server/utils/nhost';
 import type { NhostSession } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
 import type { Handle } from '@sveltejs/kit';
@@ -23,38 +23,15 @@ export const auth = (async ({ event, resolve }) => {
   const sessionCookieValue = cookies.get(NHOST_SESSION_KEY);
   const initialSession = sessionCookieValue ? (JSON.parse(atob(sessionCookieValue)) as NhostSession) : undefined;
 
-  const nhost = await getServerNhost(initialSession, cookies);
+  const nhost = await getServerNhost(initialSession);
 
-  const session = nhost.auth.getSession();
-
-  const refreshToken = url.searchParams.get('refreshToken') || undefined;
-
+  // check if session is still valid
   const currentTime = Math.floor(Date.now() / 1000);
   const tokenExpirationTime = nhost.auth.getDecodedAccessToken()?.exp;
-  const accessTokenExpired = session && tokenExpirationTime && currentTime > tokenExpirationTime;
-  log.debug({ accessTokenExpired, refreshToken });
-
-  if (accessTokenExpired || refreshToken) {
-    log.debug('in accessTokenExpired || refreshToken');
-    // FIXME: https://github.com/nhost/nhost/issues/2028
-    const { session: newSession, error } = await nhost.auth.refreshSession(refreshToken);
-    if (error) {
-      // delete session cookie when the refreshToken has expired
-      event.cookies.delete(NHOST_SESSION_KEY, { path: '/' });
-      // TODO: should we throw error and display error to user?
-      log.error('auth error:', error);
-      redirect(303, i18n.resolveRoute('/signin?redirectTo=/dashboard'));
-    }
-
-    if (newSession) {
-      setNhostSessionInCookies(event.cookies, newSession);
-    }
-
-    if (refreshToken) {
-      event.url.searchParams.delete('refreshToken');
-      // TODO: comment this block to proceed to next handler
-      redirect(303, event.url.pathname);
-    }
+  const accessTokenExpired = tokenExpirationTime && currentTime > tokenExpirationTime;
+  if (accessTokenExpired) {
+    log.debug('session expired:', { accessTokenExpired });
+    redirect(303, i18n.resolveRoute(`/signin?redirectTo=${event.url.pathname}`));
   }
 
   // HINT: set `nhost` into `locals` after `NhostSession` is initialized from

@@ -1,14 +1,34 @@
 <script lang="ts">
 // Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/Avatar.svelte
-import { Avatar, popup } from '@skeletonlabs/skeleton';
+import { Avatar, getToastStore, popup } from '@skeletonlabs/skeleton';
 import { Settings } from 'lucide-svelte';
 import { CircleUserRound } from 'lucide-svelte';
 import { LogOut } from 'lucide-svelte';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { goto } from '$app/navigation';
+import { i18n } from '$lib/i18n';
+import { ROUTE_SIGNIN } from '$lib/constants';
+import { getNhostClient } from '$lib/stores/nhost';
+import { NHOST_SESSION_KEY } from '$lib/constants';
+import Cookies from 'js-cookie';
 
 export let initials: string | undefined = undefined;
 export let src: string | undefined = undefined;
 export let elevated = false;
 export let online = true;
+
+const nhost = getNhostClient();
+const toastStore = getToastStore();
+
+async function signOut() {
+  await nhost.auth.signOut();
+  Cookies.remove(NHOST_SESSION_KEY, { path: '/' });
+  const message: App.Superforms.Message = { type: 'success', message: 'Signout sucessfull 😎' } as const;
+  handleMessage(message, toastStore);
+  await goto(i18n.resolveRoute(ROUTE_SIGNIN), {
+    invalidateAll: true,
+  });
+}
 </script>
 
  <!-- trigger -->
@@ -46,12 +66,10 @@ export let online = true;
       </li>
       <hr class="!my-4" />
       <li>
-        <form method="POST" action="/signout">
-          <button type="submit" class="bg-primary-hover-token btn w-full rounded-container-token">
-            <LogOut class="w-5 justify-center" />
-            <p class="flex-grow text-justify">Sign out</p>
-          </button>
-        </form>
+        <button type="button" on:click={signOut} class="bg-primary-hover-token btn w-full rounded-container-token">
+          <LogOut class="w-5 justify-center" />
+          <p class="flex-grow text-justify">Sign out</p>
+        </button>
       </li>
     </ul>
   </nav>
