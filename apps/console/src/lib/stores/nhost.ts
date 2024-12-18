@@ -79,6 +79,8 @@ export class SvelteKitNhostClient extends NhostClient {
           // Cookie will be removed when browser closed or user explicitly SIGNED_OUT.
           Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
             path: '/',
+            // Not setting `expires` explicitly means, cookie expires when browser is closed.
+            // expires: session?.accessTokenExpiresIn,
             sameSite: 'strict',
             secure: true,
           });
