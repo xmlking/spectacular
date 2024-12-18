@@ -5,7 +5,7 @@ import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
 import { findAddedAndRemoved } from '@spectacular/utils';
-import { DataHandler } from '@vincjo/datatables';
+import { DataHandler } from '@vincjo/datatables/legacy';
 import { Pencil } from 'lucide-svelte';
 import { writable } from 'svelte/store';
 export let data: any;

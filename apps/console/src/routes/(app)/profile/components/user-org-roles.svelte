@@ -2,7 +2,7 @@
 import { PendingValue, type UserOrgRolesFragment, fragment, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
-import { DataHandler } from '@vincjo/datatables';
+import { DataHandler } from '@vincjo/datatables/legacy';
 
 export let user: UserOrgRolesFragment;
 $: data = fragment(

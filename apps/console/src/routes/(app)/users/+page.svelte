@@ -1,7 +1,7 @@
 <script lang="ts">
 import { Avatar } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
-import { DataHandler } from '@vincjo/datatables';
+import { DataHandler } from '@vincjo/datatables/legacy';
 import { Pencil, UserRoundCog } from 'lucide-svelte';
 import type { PageData } from './$houdini';
 export let data: PageData;

@@ -4,7 +4,7 @@ import { DeleteOrgStore } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
-import { DataHandler } from '@vincjo/datatables';
+import { DataHandler } from '@vincjo/datatables/legacy';
 import { Pencil, Trash2 } from 'lucide-svelte';
 import type { PageData } from './$houdini';
 export let data: PageData;

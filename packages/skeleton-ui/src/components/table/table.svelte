@@ -1,10 +1,10 @@
 <script lang="ts" context="module">
-import type { Row } from '@vincjo/datatables';
+import type { Row } from '@vincjo/datatables/legacy';
 type T = Row;
 </script>
 
 <script lang="ts" generics="T extends Row">
-import type { DataHandler } from '@vincjo/datatables';
+import type { DataHandler } from '@vincjo/datatables/legacy';
 import type { HTMLTableAttributes } from 'svelte/elements';
 import Search from './table-search.svelte';
 import RowCount from './table-row-count.svelte';

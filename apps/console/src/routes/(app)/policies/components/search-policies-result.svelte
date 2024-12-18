@@ -7,7 +7,7 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '@spectacular/skeleton/components';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger, sleep } from '@spectacular/utils';
-import { DataHandler, type Row, check } from '@vincjo/datatables';
+import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 

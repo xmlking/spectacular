@@ -9,7 +9,7 @@ import { DateTime } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger } from '@spectacular/utils';
-import { DataHandler } from '@vincjo/datatables';
+import { DataHandler } from '@vincjo/datatables/legacy';
 import { GraphQLError } from 'graphql';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
