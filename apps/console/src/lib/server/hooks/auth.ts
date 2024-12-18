@@ -30,7 +30,9 @@ export const auth = (async ({ event, resolve }) => {
   const tokenExpirationTime = nhost.auth.getDecodedAccessToken()?.exp;
   const accessTokenExpired = tokenExpirationTime && currentTime > tokenExpirationTime;
   if (accessTokenExpired) {
-    log.debug('session expired:', { accessTokenExpired });
+    log.debug('session expired:', { accessTokenExpired, path: event.url.pathname });
+    // HINT: delete session cookie when accessTokenExpired and redirect to signin page.
+    event.cookies.delete(NHOST_SESSION_KEY, { path: '/' });
     redirect(303, i18n.resolveRoute(`/signin?redirectTo=${event.url.pathname}`));
   }
 

@@ -9,6 +9,9 @@ import Cookies from 'js-cookie';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { type Readable, type Writable, derived, get, readable, readonly, writable } from 'svelte/store';
 
+// WORKAROUND: remove next line
+export let at: string | undefined;
+
 // TODO: change to Svelte 5 Class: https://x.com/ankurpsinghal/status/1856719524059283897
 const skQuery = new SearchSecurityKeysStore().artifact.raw;
 export class SvelteKitNhostClient extends NhostClient {
@@ -69,6 +72,9 @@ export class SvelteKitNhostClient extends NhostClient {
           set(accessToken ?? null);
           // set fresh accessToken into HoudiniClient's session (client-side only)
           setClientSession({ accessToken });
+          // FIXME: after setClientSession() AT changes back to stale server-side AT in few sec
+          // WORKAROUND: remove next line
+          at = accessToken;
           // save session as cookie everytime token is refreshed or user signin via WebAuthN.
           // Cookie will be removed when browser closed or user explicitly SIGNED_OUT.
           Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
