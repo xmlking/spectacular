@@ -8,16 +8,13 @@ export const load = loadFlash(
   async ({
     locals: {
       paraglide: { lang, textDirection },
-      nhost,
     },
   }) => {
     log.debug(lang, textDirection);
-    const session = nhost.auth.getSession();
 
     // pass locale information from "server-context" to "shared server + client context"
     return {
       vercelEnv: secrets.VERCEL_ENV ?? 'development',
-      session,
     };
   },
 );

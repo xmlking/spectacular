@@ -171,6 +171,7 @@ Awesome **SvelteKit** Links
 - [climbing_noteboo](https://github.com/diericx/climbing_notebook) - Use skeleton, Superforms, sveltekit-flash-message
 - [Vercel Toolbar and Feature Flags SvelteKit Starter](https://github.com/vercel/examples/tree/main/toolbar/toolbar-feature-flags-sveltekit), [Demo](https://toolbar-feature-flags-sveltekit.vercel.app/), [Blog](https://vercel.com/blog/flags-as-code-in-next-js)
 - [JavaFlavors](https://github.com/Critteros/JavaFlavors/tree/main/web) - use `houdini` and `setClientSession()`, drizzle, superforms, shadcn-svelte
+- [Churros](https://github.com/inp-net/churros) - use `houdini` Fragments, `@loading` and `kustomization` for deployment. [Demo](https://git.inpt.fr/churros/churros)
 - [Turborepo Svelte starter](https://github.com/kevingdc/turborepo-sveltekit-shadcn/tree/main)
 - [JustShip](https://www.justship.today/) - Skip the boring parts, Ship **svelte 5** apps in days not weeks. Components: Stripe, Auth, tailwind
 - [next-forge](https://www.next-forge.com/) - Production-grade `Turborepo` template for` Next.js` apps. Components:
