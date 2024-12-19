@@ -1,6 +1,7 @@
 import { dev } from '$app/environment';
 import { Logger } from '@spectacular/utils';
 import type { HandleClientError, ClientInit } from '@sveltejs/kit';
+import { NHOST_SESSION_KEY } from '$lib/constants';
 
 /**
  * Code in `init` method in `hooks.client.ts` will run one-time in browser, when the application starts up,
@@ -11,6 +12,19 @@ export const init: ClientInit = async () => {
   // Setup logger
   if (!dev) {
     Logger.enableProductionMode();
+  }
+
+  // for debug cookies in development mode.
+  if (dev) {
+    cookieStore.onchange = (event: CookieChangeEvent) => {
+      // console.log("cookie changed", {event});
+      if (event.deleted[0] && event.deleted[0].name === NHOST_SESSION_KEY) {
+        console.log('cookie deleted', { deleted: event.deleted[0].value });
+      }
+      if (event.changed[0] && event.changed[0].name === NHOST_SESSION_KEY) {
+        console.log('cookie changed', { changed: event.changed[0].value });
+      }
+    };
   }
 };
 

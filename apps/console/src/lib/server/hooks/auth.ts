@@ -25,6 +25,37 @@ export const auth = (async ({ event, resolve }) => {
 
   const nhost = await getServerNhost(initialSession);
 
+  // check if refreshToken in URL
+  const refreshToken = url.searchParams.get('refreshToken') || undefined;
+  if (refreshToken) {
+    log.debug({ refreshToken });
+    const { session: newSession, error } = await nhost.auth.refreshSession(refreshToken);
+    if (error) {
+      // delete session cookie when the refreshToken has expired
+      event.cookies.delete(NHOST_SESSION_KEY, { path: '/' });
+      // TODO: should we throw error and display error to user?
+      log.error('auth error:', error);
+      redirect(303, i18n.resolveRoute(`/signin?redirectTo=${event.url.pathname}`));
+    }
+
+    if (newSession) {
+      // Expire the cookie 60 seconds before the token expires
+      // const expires = new Date();
+      // expires.setSeconds(expires.getSeconds() + session.accessTokenExpiresIn - 60);
+      // FIXME: *** btoa don't support unicode and throw error: DOMException [InvalidCharacterError]: Invalid character ***
+      cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(newSession)), {
+        path: '/',
+        sameSite: 'strict',
+        // make it as session cookie and let the browser refresh and update cookie
+        httpOnly: false,
+        // expires,
+      });
+    }
+    event.url.searchParams.delete('refreshToken');
+    // TODO: comment this block to proceed to next handler
+    redirect(303, event.url.pathname);
+  }
+
   // check if session is still valid
   const currentTime = Math.floor(Date.now() / 1000);
   const tokenExpirationTime = nhost.auth.getDecodedAccessToken()?.exp;
