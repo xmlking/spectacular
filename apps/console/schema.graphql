@@ -1183,6 +1183,33 @@ type devices_aggregate {
   nodes: [devices!]!
 }
 
+input devices_aggregate_bool_exp {
+  bool_and: devices_aggregate_bool_exp_bool_and
+  bool_or: devices_aggregate_bool_exp_bool_or
+  count: devices_aggregate_bool_exp_count
+}
+
+input devices_aggregate_bool_exp_bool_and {
+  arguments: devices_select_column_devices_aggregate_bool_exp_bool_and_arguments_columns!
+  distinct: Boolean
+  filter: devices_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input devices_aggregate_bool_exp_bool_or {
+  arguments: devices_select_column_devices_aggregate_bool_exp_bool_or_arguments_columns!
+  distinct: Boolean
+  filter: devices_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input devices_aggregate_bool_exp_count {
+  arguments: [devices_select_column!]
+  distinct: Boolean
+  filter: devices_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "devices"
 """
@@ -1190,6 +1217,15 @@ type devices_aggregate_fields {
   count(columns: [devices_select_column!], distinct: Boolean): Int!
   max: devices_max_fields
   min: devices_min_fields
+}
+
+"""
+order by aggregate values of table "devices"
+"""
+input devices_aggregate_order_by {
+  count: order_by
+  max: devices_max_order_by
+  min: devices_min_order_by
 }
 
 """append existing jsonb value of filtered columns with new jsonb value"""
@@ -1260,6 +1296,24 @@ type devices_max_fields {
   version: String
 }
 
+"""
+order by max() on columns of table "devices"
+"""
+input devices_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  displayName: order_by
+  id: order_by
+  ip: order_by
+  orgId: order_by
+  publicIp: order_by
+  tags: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  version: order_by
+}
+
 """aggregate min on columns"""
 type devices_min_fields {
   createdAt: timestamptz
@@ -1274,6 +1328,24 @@ type devices_min_fields {
   updatedAt: timestamptz
   updatedBy: uuid
   version: String
+}
+
+"""
+order by min() on columns of table "devices"
+"""
+input devices_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  displayName: order_by
+  id: order_by
+  ip: order_by
+  orgId: order_by
+  publicIp: order_by
+  tags: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  version: order_by
 }
 
 """
@@ -1368,6 +1440,28 @@ enum devices_select_column {
 
   """column name"""
   version
+}
+
+"""
+select "devices_aggregate_bool_exp_bool_and_arguments_columns" columns of table "devices"
+"""
+enum devices_select_column_devices_aggregate_bool_exp_bool_and_arguments_columns {
+  """column name"""
+  alternateDns
+
+  """column name"""
+  proxyIp
+}
+
+"""
+select "devices_aggregate_bool_exp_bool_or_arguments_columns" columns of table "devices"
+"""
+enum devices_select_column_devices_aggregate_bool_exp_bool_or_arguments_columns {
+  """column name"""
+  alternateDns
+
+  """column name"""
+  proxyIp
 }
 
 """
@@ -2193,6 +2287,19 @@ type mutation_root {
   delete_groups_by_pk(id: uuid!): groups
 
   """
+  delete data from the table: "org_settings"
+  """
+  delete_org_settings(
+    """filter the rows which have to be deleted"""
+    where: org_settings_bool_exp!
+  ): org_settings_mutation_response
+
+  """
+  delete single row from the table: "org_settings"
+  """
+  delete_org_settings_by_pk(key: String!, org_id: uuid!): org_settings
+
+  """
   delete data from the table: "organizations"
   """
   delete_organizations(
@@ -2243,6 +2350,19 @@ type mutation_root {
   delete single row from the table: "rules"
   """
   delete_rules_by_pk(id: uuid!): rules
+
+  """
+  delete data from the table: "setting_keys"
+  """
+  delete_setting_keys(
+    """filter the rows which have to be deleted"""
+    where: setting_keys_bool_exp!
+  ): setting_keys_mutation_response
+
+  """
+  delete single row from the table: "setting_keys"
+  """
+  delete_setting_keys_by_pk(key: String!): setting_keys
 
   """
   delete data from the table: "user_groups"
@@ -2337,6 +2457,28 @@ type mutation_root {
   ): groups
 
   """
+  insert data into the table: "org_settings"
+  """
+  insert_org_settings(
+    """the rows to be inserted"""
+    objects: [org_settings_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: org_settings_on_conflict
+  ): org_settings_mutation_response
+
+  """
+  insert a single row into the table: "org_settings"
+  """
+  insert_org_settings_one(
+    """the row to be inserted"""
+    object: org_settings_insert_input!
+
+    """upsert condition"""
+    on_conflict: org_settings_on_conflict
+  ): org_settings
+
+  """
   insert data into the table: "organizations"
   """
   insert_organizations(
@@ -2423,6 +2565,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: rules_on_conflict
   ): rules
+
+  """
+  insert data into the table: "setting_keys"
+  """
+  insert_setting_keys(
+    """the rows to be inserted"""
+    objects: [setting_keys_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: setting_keys_on_conflict
+  ): setting_keys_mutation_response
+
+  """
+  insert a single row into the table: "setting_keys"
+  """
+  insert_setting_keys_one(
+    """the row to be inserted"""
+    object: setting_keys_insert_input!
+
+    """upsert condition"""
+    on_conflict: setting_keys_on_conflict
+  ): setting_keys
 
   """
   insert data into the table: "user_groups"
@@ -2669,6 +2833,76 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [groups_updates!]!
   ): [groups_mutation_response]
+
+  """
+  update data of the table: "org_settings"
+  """
+  update_org_settings(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: org_settings_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: org_settings_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: org_settings_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: org_settings_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: org_settings_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: org_settings_set_input
+
+    """filter the rows which have to be updated"""
+    where: org_settings_bool_exp!
+  ): org_settings_mutation_response
+
+  """
+  update single row of the table: "org_settings"
+  """
+  update_org_settings_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: org_settings_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: org_settings_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: org_settings_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: org_settings_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: org_settings_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: org_settings_set_input
+    pk_columns: org_settings_pk_columns_input!
+  ): org_settings
+
+  """
+  update multiples rows of table: "org_settings"
+  """
+  update_org_settings_many(
+    """updates to execute, in order"""
+    updates: [org_settings_updates!]!
+  ): [org_settings_mutation_response]
 
   """
   update data of the table: "organizations"
@@ -2921,6 +3155,104 @@ type mutation_root {
   ): [rules_mutation_response]
 
   """
+  update data of the table: "setting_keys"
+  """
+  update_setting_keys(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: setting_keys_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: setting_keys_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: setting_keys_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: setting_keys_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: setting_keys_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: setting_keys_set_input
+
+    """filter the rows which have to be updated"""
+    where: setting_keys_bool_exp!
+  ): setting_keys_mutation_response
+
+  """
+  update single row of the table: "setting_keys"
+  """
+  update_setting_keys_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: setting_keys_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: setting_keys_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: setting_keys_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: setting_keys_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: setting_keys_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: setting_keys_set_input
+    pk_columns: setting_keys_pk_columns_input!
+  ): setting_keys
+
+  """
+  update multiples rows of table: "setting_keys"
+  """
+  update_setting_keys_many(
+    """updates to execute, in order"""
+    updates: [setting_keys_updates!]!
+  ): [setting_keys_mutation_response]
+
+  """
+  update data of the table: "subscriptions"
+  """
+  update_subscriptions(
+    """sets the columns of the filtered rows to the given values"""
+    _set: subscriptions_set_input
+
+    """filter the rows which have to be updated"""
+    where: subscriptions_bool_exp!
+  ): subscriptions_mutation_response
+
+  """
+  update single row of the table: "subscriptions"
+  """
+  update_subscriptions_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: subscriptions_set_input
+    pk_columns: subscriptions_pk_columns_input!
+  ): subscriptions
+
+  """
+  update multiples rows of table: "subscriptions"
+  """
+  update_subscriptions_many(
+    """updates to execute, in order"""
+    updates: [subscriptions_updates!]!
+  ): [subscriptions_mutation_response]
+
+  """
   update data of the table: "user_org_roles"
   """
   update_user_org_roles(
@@ -2978,6 +3310,309 @@ enum order_by {
   desc_nulls_last
 }
 
+"""Table containing organization's settings and feature flags"""
+type org_settings {
+  created_at: timestamptz!
+  created_by: uuid!
+  key: String!
+  org_id: uuid!
+  updated_at: timestamptz!
+  updated_by: uuid!
+  value(
+    """JSON select path"""
+    path: String
+  ): jsonb
+}
+
+"""
+aggregated selection of "org_settings"
+"""
+type org_settings_aggregate {
+  aggregate: org_settings_aggregate_fields
+  nodes: [org_settings!]!
+}
+
+input org_settings_aggregate_bool_exp {
+  count: org_settings_aggregate_bool_exp_count
+}
+
+input org_settings_aggregate_bool_exp_count {
+  arguments: [org_settings_select_column!]
+  distinct: Boolean
+  filter: org_settings_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "org_settings"
+"""
+type org_settings_aggregate_fields {
+  count(columns: [org_settings_select_column!], distinct: Boolean): Int!
+  max: org_settings_max_fields
+  min: org_settings_min_fields
+}
+
+"""
+order by aggregate values of table "org_settings"
+"""
+input org_settings_aggregate_order_by {
+  count: order_by
+  max: org_settings_max_order_by
+  min: org_settings_min_order_by
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input org_settings_append_input {
+  value: jsonb
+}
+
+"""
+input type for inserting array relation for remote table "org_settings"
+"""
+input org_settings_arr_rel_insert_input {
+  data: [org_settings_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: org_settings_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "org_settings". All fields are combined with a logical 'AND'.
+"""
+input org_settings_bool_exp {
+  _and: [org_settings_bool_exp!]
+  _not: org_settings_bool_exp
+  _or: [org_settings_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  created_by: uuid_comparison_exp
+  key: String_comparison_exp
+  org_id: uuid_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  updated_by: uuid_comparison_exp
+  value: jsonb_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "org_settings"
+"""
+enum org_settings_constraint {
+  """
+  unique or primary key constraint on columns "key", "org_id"
+  """
+  org_settings_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input org_settings_delete_at_path_input {
+  value: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input org_settings_delete_elem_input {
+  value: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input org_settings_delete_key_input {
+  value: String
+}
+
+"""
+input type for inserting data into table "org_settings"
+"""
+input org_settings_insert_input {
+  key: String
+  value: jsonb
+}
+
+"""aggregate max on columns"""
+type org_settings_max_fields {
+  created_at: timestamptz
+  created_by: uuid
+  key: String
+  org_id: uuid
+  updated_at: timestamptz
+  updated_by: uuid
+}
+
+"""
+order by max() on columns of table "org_settings"
+"""
+input org_settings_max_order_by {
+  created_at: order_by
+  created_by: order_by
+  key: order_by
+  org_id: order_by
+  updated_at: order_by
+  updated_by: order_by
+}
+
+"""aggregate min on columns"""
+type org_settings_min_fields {
+  created_at: timestamptz
+  created_by: uuid
+  key: String
+  org_id: uuid
+  updated_at: timestamptz
+  updated_by: uuid
+}
+
+"""
+order by min() on columns of table "org_settings"
+"""
+input org_settings_min_order_by {
+  created_at: order_by
+  created_by: order_by
+  key: order_by
+  org_id: order_by
+  updated_at: order_by
+  updated_by: order_by
+}
+
+"""
+response of any mutation on the table "org_settings"
+"""
+type org_settings_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [org_settings!]!
+}
+
+"""
+on_conflict condition type for table "org_settings"
+"""
+input org_settings_on_conflict {
+  constraint: org_settings_constraint!
+  update_columns: [org_settings_update_column!]! = []
+  where: org_settings_bool_exp
+}
+
+"""Ordering options when selecting data from "org_settings"."""
+input org_settings_order_by {
+  created_at: order_by
+  created_by: order_by
+  key: order_by
+  org_id: order_by
+  updated_at: order_by
+  updated_by: order_by
+  value: order_by
+}
+
+"""primary key columns input for table: org_settings"""
+input org_settings_pk_columns_input {
+  key: String!
+  org_id: uuid!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input org_settings_prepend_input {
+  value: jsonb
+}
+
+"""
+select columns of table "org_settings"
+"""
+enum org_settings_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  created_by
+
+  """column name"""
+  key
+
+  """column name"""
+  org_id
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  updated_by
+
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "org_settings"
+"""
+input org_settings_set_input {
+  value: jsonb
+}
+
+"""
+Streaming cursor of the table "org_settings"
+"""
+input org_settings_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: org_settings_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input org_settings_stream_cursor_value_input {
+  created_at: timestamptz
+  created_by: uuid
+  key: String
+  org_id: uuid
+  updated_at: timestamptz
+  updated_by: uuid
+  value: jsonb
+}
+
+"""
+update columns of table "org_settings"
+"""
+enum org_settings_update_column {
+  """column name"""
+  value
+}
+
+input org_settings_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: org_settings_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: org_settings_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: org_settings_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: org_settings_delete_key_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: org_settings_prepend_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: org_settings_set_input
+
+  """filter the rows which have to be updated"""
+  where: org_settings_bool_exp!
+}
+
+input org_settings_with_defaults_args {
+  org_row: organizations_scalar
+}
+
 """
 Table containing organizations owned by users. Auto-enroll members based on email domain
 """
@@ -2990,6 +3625,42 @@ type organizations {
   createdAt: timestamptz!
   createdBy: uuid!
   description: String
+
+  """An array relationship"""
+  devices(
+    """distinct select on columns"""
+    distinct_on: [devices_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [devices_order_by!]
+
+    """filter the rows returned"""
+    where: devices_bool_exp
+  ): [devices!]!
+
+  """An aggregate relationship"""
+  devices_aggregate(
+    """distinct select on columns"""
+    distinct_on: [devices_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [devices_order_by!]
+
+    """filter the rows returned"""
+    where: devices_bool_exp
+  ): devices_aggregate!
   displayName: String!
 
   """An array relationship"""
@@ -3036,6 +3707,168 @@ type organizations {
   """An object relationship"""
   owner: users!
   ownerId: uuid!
+
+  """An array relationship"""
+  policies(
+    """distinct select on columns"""
+    distinct_on: [policies_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [policies_order_by!]
+
+    """filter the rows returned"""
+    where: policies_bool_exp
+  ): [policies!]!
+
+  """An aggregate relationship"""
+  policies_aggregate(
+    """distinct select on columns"""
+    distinct_on: [policies_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [policies_order_by!]
+
+    """filter the rows returned"""
+    where: policies_bool_exp
+  ): policies_aggregate!
+
+  """An array relationship"""
+  pools(
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): [pools!]!
+
+  """An aggregate relationship"""
+  pools_aggregate(
+    """distinct select on columns"""
+    distinct_on: [pools_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [pools_order_by!]
+
+    """filter the rows returned"""
+    where: pools_bool_exp
+  ): pools_aggregate!
+
+  """An array relationship"""
+  rules(
+    """distinct select on columns"""
+    distinct_on: [rules_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rules_order_by!]
+
+    """filter the rows returned"""
+    where: rules_bool_exp
+  ): [rules!]!
+
+  """An aggregate relationship"""
+  rules_aggregate(
+    """distinct select on columns"""
+    distinct_on: [rules_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rules_order_by!]
+
+    """filter the rows returned"""
+    where: rules_bool_exp
+  ): rules_aggregate!
+
+  """An array relationship"""
+  settings(
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): [org_settings!]!
+
+  """Used as Computed Field on Organizations Table"""
+  settingsWithDefaults(
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): [org_settings!]
+
+  """An aggregate relationship"""
+  settings_aggregate(
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): org_settings_aggregate!
 
   """An array relationship"""
   subscriptions(
@@ -3150,6 +3983,8 @@ input organizations_bool_exp {
   createdAt: timestamptz_comparison_exp
   createdBy: uuid_comparison_exp
   description: String_comparison_exp
+  devices: devices_bool_exp
+  devices_aggregate: devices_aggregate_bool_exp
   displayName: String_comparison_exp
   groups: groups_bool_exp
   groups_aggregate: groups_aggregate_bool_exp
@@ -3157,6 +3992,15 @@ input organizations_bool_exp {
   metadata: jsonb_comparison_exp
   owner: users_bool_exp
   ownerId: uuid_comparison_exp
+  policies: policies_bool_exp
+  policies_aggregate: policies_aggregate_bool_exp
+  pools: pools_bool_exp
+  pools_aggregate: pools_aggregate_bool_exp
+  rules: rules_bool_exp
+  rules_aggregate: rules_aggregate_bool_exp
+  settings: org_settings_bool_exp
+  settingsWithDefaults: org_settings_bool_exp
+  settings_aggregate: org_settings_aggregate_bool_exp
   subscriptions: subscriptions_bool_exp
   subscriptions_aggregate: subscriptions_aggregate_bool_exp
   tags: String_array_comparison_exp
@@ -3210,6 +4054,10 @@ input organizations_insert_input {
   displayName: String
   groups: groups_arr_rel_insert_input
   metadata: jsonb
+  policies: policies_arr_rel_insert_input
+  pools: pools_arr_rel_insert_input
+  rules: rules_arr_rel_insert_input
+  settings: org_settings_arr_rel_insert_input
   tags: [String!]
   users: user_org_roles_arr_rel_insert_input
 }
@@ -3288,12 +4136,18 @@ input organizations_order_by {
   createdAt: order_by
   createdBy: order_by
   description: order_by
+  devices_aggregate: devices_aggregate_order_by
   displayName: order_by
   groups_aggregate: groups_aggregate_order_by
   id: order_by
   metadata: order_by
   owner: users_order_by
   ownerId: order_by
+  policies_aggregate: policies_aggregate_order_by
+  pools_aggregate: pools_aggregate_order_by
+  rules_aggregate: rules_aggregate_order_by
+  settingsWithDefaults_aggregate: org_settings_aggregate_order_by
+  settings_aggregate: org_settings_aggregate_order_by
   subscriptions_aggregate: subscriptions_aggregate_order_by
   tags: order_by
   updatedAt: order_by
@@ -3310,6 +4164,8 @@ input organizations_pk_columns_input {
 input organizations_prepend_input {
   metadata: jsonb
 }
+
+scalar organizations_scalar
 
 """
 select columns of table "organizations"
@@ -3577,6 +4433,33 @@ type policies_aggregate {
   nodes: [policies!]!
 }
 
+input policies_aggregate_bool_exp {
+  bool_and: policies_aggregate_bool_exp_bool_and
+  bool_or: policies_aggregate_bool_exp_bool_or
+  count: policies_aggregate_bool_exp_count
+}
+
+input policies_aggregate_bool_exp_bool_and {
+  arguments: policies_select_column_policies_aggregate_bool_exp_bool_and_arguments_columns!
+  distinct: Boolean
+  filter: policies_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input policies_aggregate_bool_exp_bool_or {
+  arguments: policies_select_column_policies_aggregate_bool_exp_bool_or_arguments_columns!
+  distinct: Boolean
+  filter: policies_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input policies_aggregate_bool_exp_count {
+  arguments: [policies_select_column!]
+  distinct: Boolean
+  filter: policies_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "policies"
 """
@@ -3594,9 +4477,43 @@ type policies_aggregate_fields {
   variance: policies_variance_fields
 }
 
+"""
+order by aggregate values of table "policies"
+"""
+input policies_aggregate_order_by {
+  avg: policies_avg_order_by
+  count: order_by
+  max: policies_max_order_by
+  min: policies_min_order_by
+  stddev: policies_stddev_order_by
+  stddev_pop: policies_stddev_pop_order_by
+  stddev_samp: policies_stddev_samp_order_by
+  sum: policies_sum_order_by
+  var_pop: policies_var_pop_order_by
+  var_samp: policies_var_samp_order_by
+  variance: policies_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "policies"
+"""
+input policies_arr_rel_insert_input {
+  data: [policies_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: policies_on_conflict
+}
+
 """aggregate avg on columns"""
 type policies_avg_fields {
   weight: Float
+}
+
+"""
+order by avg() on columns of table "policies"
+"""
+input policies_avg_order_by {
+  weight: order_by
 }
 
 """
@@ -3681,6 +4598,25 @@ type policies_max_fields {
   weight: smallint
 }
 
+"""
+order by max() on columns of table "policies"
+"""
+input policies_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  id: order_by
+  orgId: order_by
+  ruleId: order_by
+  subjectDisplayName: order_by
+  subjectId: order_by
+  subjectSecondaryId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  validFrom: order_by
+  validTo: order_by
+  weight: order_by
+}
+
 """aggregate min on columns"""
 type policies_min_fields {
   createdAt: timestamptz
@@ -3696,6 +4632,25 @@ type policies_min_fields {
   validFrom: timestamptz
   validTo: timestamptz
   weight: smallint
+}
+
+"""
+order by min() on columns of table "policies"
+"""
+input policies_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  id: order_by
+  orgId: order_by
+  ruleId: order_by
+  subjectDisplayName: order_by
+  subjectId: order_by
+  subjectSecondaryId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  validFrom: order_by
+  validTo: order_by
+  weight: order_by
 }
 
 """
@@ -3795,6 +4750,22 @@ enum policies_select_column {
 }
 
 """
+select "policies_aggregate_bool_exp_bool_and_arguments_columns" columns of table "policies"
+"""
+enum policies_select_column_policies_aggregate_bool_exp_bool_and_arguments_columns {
+  """column name"""
+  active
+}
+
+"""
+select "policies_aggregate_bool_exp_bool_or_arguments_columns" columns of table "policies"
+"""
+enum policies_select_column_policies_aggregate_bool_exp_bool_or_arguments_columns {
+  """column name"""
+  active
+}
+
+"""
 input type for updating data in table "policies"
 """
 input policies_set_input {
@@ -3809,14 +4780,35 @@ type policies_stddev_fields {
   weight: Float
 }
 
+"""
+order by stddev() on columns of table "policies"
+"""
+input policies_stddev_order_by {
+  weight: order_by
+}
+
 """aggregate stddev_pop on columns"""
 type policies_stddev_pop_fields {
   weight: Float
 }
 
+"""
+order by stddev_pop() on columns of table "policies"
+"""
+input policies_stddev_pop_order_by {
+  weight: order_by
+}
+
 """aggregate stddev_samp on columns"""
 type policies_stddev_samp_fields {
   weight: Float
+}
+
+"""
+order by stddev_samp() on columns of table "policies"
+"""
+input policies_stddev_samp_order_by {
+  weight: order_by
 }
 
 """
@@ -3855,6 +4847,13 @@ type policies_sum_fields {
 }
 
 """
+order by sum() on columns of table "policies"
+"""
+input policies_sum_order_by {
+  weight: order_by
+}
+
+"""
 update columns of table "policies"
 """
 enum policies_update_column {
@@ -3887,14 +4886,35 @@ type policies_var_pop_fields {
   weight: Float
 }
 
+"""
+order by var_pop() on columns of table "policies"
+"""
+input policies_var_pop_order_by {
+  weight: order_by
+}
+
 """aggregate var_samp on columns"""
 type policies_var_samp_fields {
   weight: Float
 }
 
+"""
+order by var_samp() on columns of table "policies"
+"""
+input policies_var_samp_order_by {
+  weight: order_by
+}
+
 """aggregate variance on columns"""
 type policies_variance_fields {
   weight: Float
+}
+
+"""
+order by variance() on columns of table "policies"
+"""
+input policies_variance_order_by {
+  weight: order_by
 }
 
 """Table containing device pools data"""
@@ -3917,9 +4937,39 @@ type pools {
   version: String
 }
 
+"""
+aggregated selection of "pools"
+"""
 type pools_aggregate {
   aggregate: pools_aggregate_fields
   nodes: [pools!]!
+}
+
+input pools_aggregate_bool_exp {
+  bool_and: pools_aggregate_bool_exp_bool_and
+  bool_or: pools_aggregate_bool_exp_bool_or
+  count: pools_aggregate_bool_exp_count
+}
+
+input pools_aggregate_bool_exp_bool_and {
+  arguments: pools_select_column_pools_aggregate_bool_exp_bool_and_arguments_columns!
+  distinct: Boolean
+  filter: pools_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input pools_aggregate_bool_exp_bool_or {
+  arguments: pools_select_column_pools_aggregate_bool_exp_bool_or_arguments_columns!
+  distinct: Boolean
+  filter: pools_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input pools_aggregate_bool_exp_count {
+  arguments: [pools_select_column!]
+  distinct: Boolean
+  filter: pools_bool_exp
+  predicate: Int_comparison_exp!
 }
 
 """
@@ -3943,6 +4993,16 @@ input pools_aggregate_order_by {
 """append existing jsonb value of filtered columns with new jsonb value"""
 input pools_append_input {
   metadata: jsonb
+}
+
+"""
+input type for inserting array relation for remote table "pools"
+"""
+input pools_arr_rel_insert_input {
+  data: [pools_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: pools_on_conflict
 }
 
 """
@@ -4175,6 +5235,28 @@ enum pools_select_column {
 
   """column name"""
   version
+}
+
+"""
+select "pools_aggregate_bool_exp_bool_and_arguments_columns" columns of table "pools"
+"""
+enum pools_select_column_pools_aggregate_bool_exp_bool_and_arguments_columns {
+  """column name"""
+  alternateDns
+
+  """column name"""
+  proxyIp
+}
+
+"""
+select "pools_aggregate_bool_exp_bool_or_arguments_columns" columns of table "pools"
+"""
+enum pools_select_column_pools_aggregate_bool_exp_bool_or_arguments_columns {
+  """column name"""
+  alternateDns
+
+  """column name"""
+  proxyIp
 }
 
 """
@@ -4715,9 +5797,7 @@ type query_root {
   """fetch data from the table: "device_pools" using primary key columns"""
   device_pools_by_pk(deviceId: uuid!, poolId: uuid!): device_pools
 
-  """
-  fetch data from the table: "devices"
-  """
+  """An array relationship"""
   devices(
     """distinct select on columns"""
     distinct_on: [devices_select_column!]
@@ -4735,9 +5815,7 @@ type query_root {
     where: devices_bool_exp
   ): [devices!]!
 
-  """
-  fetch aggregated fields from the table: "devices"
-  """
+  """An aggregate relationship"""
   devices_aggregate(
     """distinct select on columns"""
     distinct_on: [devices_select_column!]
@@ -4844,6 +5922,99 @@ type query_root {
   groups_by_pk(id: uuid!): groups
 
   """
+  fetch data from the table: "org_settings"
+  """
+  org_settings(
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): [org_settings!]!
+
+  """
+  fetch aggregated fields from the table: "org_settings"
+  """
+  org_settings_aggregate(
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): org_settings_aggregate!
+
+  """fetch data from the table: "org_settings" using primary key columns"""
+  org_settings_by_pk(key: String!, org_id: uuid!): org_settings
+
+  """
+  execute function "org_settings_with_defaults" which returns "org_settings"
+  """
+  org_settings_with_defaults(
+    """
+    input parameters for function "org_settings_with_defaults"
+    """
+    args: org_settings_with_defaults_args!
+
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): [org_settings!]!
+
+  """
+  execute function "org_settings_with_defaults" and query aggregates on result of table type "org_settings"
+  """
+  org_settings_with_defaults_aggregate(
+    """
+    input parameters for function "org_settings_with_defaults_aggregate"
+    """
+    args: org_settings_with_defaults_args!
+
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): org_settings_aggregate!
+
+  """
   fetch data from the table: "organizations"
   """
   organizations(
@@ -4909,9 +6080,7 @@ type query_root {
   """fetch data from the table: "plan" using primary key columns"""
   plan_by_pk(value: String!): plan
 
-  """
-  fetch data from the table: "policies"
-  """
+  """An array relationship"""
   policies(
     """distinct select on columns"""
     distinct_on: [policies_select_column!]
@@ -4929,9 +6098,7 @@ type query_root {
     where: policies_bool_exp
   ): [policies!]!
 
-  """
-  fetch aggregated fields from the table: "policies"
-  """
+  """An aggregate relationship"""
   policies_aggregate(
     """distinct select on columns"""
     distinct_on: [policies_select_column!]
@@ -4952,9 +6119,7 @@ type query_root {
   """fetch data from the table: "policies" using primary key columns"""
   policies_by_pk(id: uuid!): policies
 
-  """
-  fetch data from the table: "pools"
-  """
+  """An array relationship"""
   pools(
     """distinct select on columns"""
     distinct_on: [pools_select_column!]
@@ -4972,9 +6137,7 @@ type query_root {
     where: pools_bool_exp
   ): [pools!]!
 
-  """
-  fetch aggregated fields from the table: "pools"
-  """
+  """An aggregate relationship"""
   pools_aggregate(
     """distinct select on columns"""
     distinct_on: [pools_select_column!]
@@ -5018,9 +6181,7 @@ type query_root {
   """fetch data from the table: "protocol" using primary key columns"""
   protocol_by_pk(value: String!): protocol
 
-  """
-  fetch data from the table: "rules"
-  """
+  """An array relationship"""
   rules(
     """distinct select on columns"""
     distinct_on: [rules_select_column!]
@@ -5038,9 +6199,7 @@ type query_root {
     where: rules_bool_exp
   ): [rules!]!
 
-  """
-  fetch aggregated fields from the table: "rules"
-  """
+  """An aggregate relationship"""
   rules_aggregate(
     """distinct select on columns"""
     distinct_on: [rules_select_column!]
@@ -5060,6 +6219,49 @@ type query_root {
 
   """fetch data from the table: "rules" using primary key columns"""
   rules_by_pk(id: uuid!): rules
+
+  """
+  fetch data from the table: "setting_keys"
+  """
+  setting_keys(
+    """distinct select on columns"""
+    distinct_on: [setting_keys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [setting_keys_order_by!]
+
+    """filter the rows returned"""
+    where: setting_keys_bool_exp
+  ): [setting_keys!]!
+
+  """
+  fetch aggregated fields from the table: "setting_keys"
+  """
+  setting_keys_aggregate(
+    """distinct select on columns"""
+    distinct_on: [setting_keys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [setting_keys_order_by!]
+
+    """filter the rows returned"""
+    where: setting_keys_bool_exp
+  ): setting_keys_aggregate!
+
+  """fetch data from the table: "setting_keys" using primary key columns"""
+  setting_keys_by_pk(key: String!): setting_keys
 
   """
   fetch data from the table: "status"
@@ -5412,6 +6614,33 @@ type rules_aggregate {
   nodes: [rules!]!
 }
 
+input rules_aggregate_bool_exp {
+  bool_and: rules_aggregate_bool_exp_bool_and
+  bool_or: rules_aggregate_bool_exp_bool_or
+  count: rules_aggregate_bool_exp_count
+}
+
+input rules_aggregate_bool_exp_bool_and {
+  arguments: rules_select_column_rules_aggregate_bool_exp_bool_and_arguments_columns!
+  distinct: Boolean
+  filter: rules_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input rules_aggregate_bool_exp_bool_or {
+  arguments: rules_select_column_rules_aggregate_bool_exp_bool_or_arguments_columns!
+  distinct: Boolean
+  filter: rules_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input rules_aggregate_bool_exp_count {
+  arguments: [rules_select_column!]
+  distinct: Boolean
+  filter: rules_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "rules"
 """
@@ -5429,14 +6658,48 @@ type rules_aggregate_fields {
   variance: rules_variance_fields
 }
 
+"""
+order by aggregate values of table "rules"
+"""
+input rules_aggregate_order_by {
+  avg: rules_avg_order_by
+  count: order_by
+  max: rules_max_order_by
+  min: rules_min_order_by
+  stddev: rules_stddev_order_by
+  stddev_pop: rules_stddev_pop_order_by
+  stddev_samp: rules_stddev_samp_order_by
+  sum: rules_sum_order_by
+  var_pop: rules_var_pop_order_by
+  var_samp: rules_var_samp_order_by
+  variance: rules_variance_order_by
+}
+
 """append existing jsonb value of filtered columns with new jsonb value"""
 input rules_append_input {
   metadata: jsonb
 }
 
+"""
+input type for inserting array relation for remote table "rules"
+"""
+input rules_arr_rel_insert_input {
+  data: [rules_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: rules_on_conflict
+}
+
 """aggregate avg on columns"""
 type rules_avg_fields {
   weight: Float
+}
+
+"""
+order by avg() on columns of table "rules"
+"""
+input rules_avg_order_by {
+  weight: order_by
 }
 
 """
@@ -5553,6 +6816,28 @@ type rules_max_fields {
   weight: smallint
 }
 
+"""
+order by max() on columns of table "rules"
+"""
+input rules_max_order_by {
+  appId: order_by
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  destination: order_by
+  destinationPort: order_by
+  displayName: order_by
+  id: order_by
+  orgId: order_by
+  source: order_by
+  sourcePort: order_by
+  tags: order_by
+  throttleRate: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  weight: order_by
+}
+
 """aggregate min on columns"""
 type rules_min_fields {
   appId: String
@@ -5571,6 +6856,28 @@ type rules_min_fields {
   updatedAt: timestamptz
   updatedBy: uuid
   weight: smallint
+}
+
+"""
+order by min() on columns of table "rules"
+"""
+input rules_min_order_by {
+  appId: order_by
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  destination: order_by
+  destinationPort: order_by
+  displayName: order_by
+  id: order_by
+  orgId: order_by
+  source: order_by
+  sourcePort: order_by
+  tags: order_by
+  throttleRate: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  weight: order_by
 }
 
 """
@@ -5707,6 +7014,22 @@ enum rules_select_column {
 }
 
 """
+select "rules_aggregate_bool_exp_bool_and_arguments_columns" columns of table "rules"
+"""
+enum rules_select_column_rules_aggregate_bool_exp_bool_and_arguments_columns {
+  """column name"""
+  shared
+}
+
+"""
+select "rules_aggregate_bool_exp_bool_or_arguments_columns" columns of table "rules"
+"""
+enum rules_select_column_rules_aggregate_bool_exp_bool_or_arguments_columns {
+  """column name"""
+  shared
+}
+
+"""
 input type for updating data in table "rules"
 """
 input rules_set_input {
@@ -5732,14 +7055,35 @@ type rules_stddev_fields {
   weight: Float
 }
 
+"""
+order by stddev() on columns of table "rules"
+"""
+input rules_stddev_order_by {
+  weight: order_by
+}
+
 """aggregate stddev_pop on columns"""
 type rules_stddev_pop_fields {
   weight: Float
 }
 
+"""
+order by stddev_pop() on columns of table "rules"
+"""
+input rules_stddev_pop_order_by {
+  weight: order_by
+}
+
 """aggregate stddev_samp on columns"""
 type rules_stddev_samp_fields {
   weight: Float
+}
+
+"""
+order by stddev_samp() on columns of table "rules"
+"""
+input rules_stddev_samp_order_by {
+  weight: order_by
 }
 
 """
@@ -5781,6 +7125,13 @@ input rules_stream_cursor_value_input {
 """aggregate sum on columns"""
 type rules_sum_fields {
   weight: smallint
+}
+
+"""
+order by sum() on columns of table "rules"
+"""
+input rules_sum_order_by {
+  weight: order_by
 }
 
 """
@@ -5870,14 +7221,274 @@ type rules_var_pop_fields {
   weight: Float
 }
 
+"""
+order by var_pop() on columns of table "rules"
+"""
+input rules_var_pop_order_by {
+  weight: order_by
+}
+
 """aggregate var_samp on columns"""
 type rules_var_samp_fields {
   weight: Float
 }
 
+"""
+order by var_samp() on columns of table "rules"
+"""
+input rules_var_samp_order_by {
+  weight: order_by
+}
+
 """aggregate variance on columns"""
 type rules_variance_fields {
   weight: Float
+}
+
+"""
+order by variance() on columns of table "rules"
+"""
+input rules_variance_order_by {
+  weight: order_by
+}
+
+"""
+Table containing Organization unique Setting keys and Feature Flags, act like enum
+"""
+type setting_keys {
+  allowed_values(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  default_value(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  description: String
+  key: String!
+}
+
+"""
+aggregated selection of "setting_keys"
+"""
+type setting_keys_aggregate {
+  aggregate: setting_keys_aggregate_fields
+  nodes: [setting_keys!]!
+}
+
+"""
+aggregate fields of "setting_keys"
+"""
+type setting_keys_aggregate_fields {
+  count(columns: [setting_keys_select_column!], distinct: Boolean): Int!
+  max: setting_keys_max_fields
+  min: setting_keys_min_fields
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input setting_keys_append_input {
+  allowed_values: jsonb
+  default_value: jsonb
+}
+
+"""
+Boolean expression to filter rows from the table "setting_keys". All fields are combined with a logical 'AND'.
+"""
+input setting_keys_bool_exp {
+  _and: [setting_keys_bool_exp!]
+  _not: setting_keys_bool_exp
+  _or: [setting_keys_bool_exp!]
+  allowed_values: jsonb_comparison_exp
+  default_value: jsonb_comparison_exp
+  description: String_comparison_exp
+  key: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "setting_keys"
+"""
+enum setting_keys_constraint {
+  """
+  unique or primary key constraint on columns "key"
+  """
+  setting_keys_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input setting_keys_delete_at_path_input {
+  allowed_values: [String!]
+  default_value: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input setting_keys_delete_elem_input {
+  allowed_values: Int
+  default_value: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input setting_keys_delete_key_input {
+  allowed_values: String
+  default_value: String
+}
+
+"""
+input type for inserting data into table "setting_keys"
+"""
+input setting_keys_insert_input {
+  allowed_values: jsonb
+  default_value: jsonb
+  description: String
+  key: String
+}
+
+"""aggregate max on columns"""
+type setting_keys_max_fields {
+  description: String
+  key: String
+}
+
+"""aggregate min on columns"""
+type setting_keys_min_fields {
+  description: String
+  key: String
+}
+
+"""
+response of any mutation on the table "setting_keys"
+"""
+type setting_keys_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [setting_keys!]!
+}
+
+"""
+on_conflict condition type for table "setting_keys"
+"""
+input setting_keys_on_conflict {
+  constraint: setting_keys_constraint!
+  update_columns: [setting_keys_update_column!]! = []
+  where: setting_keys_bool_exp
+}
+
+"""Ordering options when selecting data from "setting_keys"."""
+input setting_keys_order_by {
+  allowed_values: order_by
+  default_value: order_by
+  description: order_by
+  key: order_by
+}
+
+"""primary key columns input for table: setting_keys"""
+input setting_keys_pk_columns_input {
+  key: String!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input setting_keys_prepend_input {
+  allowed_values: jsonb
+  default_value: jsonb
+}
+
+"""
+select columns of table "setting_keys"
+"""
+enum setting_keys_select_column {
+  """column name"""
+  allowed_values
+
+  """column name"""
+  default_value
+
+  """column name"""
+  description
+
+  """column name"""
+  key
+}
+
+"""
+input type for updating data in table "setting_keys"
+"""
+input setting_keys_set_input {
+  allowed_values: jsonb
+  default_value: jsonb
+  description: String
+  key: String
+}
+
+"""
+Streaming cursor of the table "setting_keys"
+"""
+input setting_keys_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: setting_keys_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input setting_keys_stream_cursor_value_input {
+  allowed_values: jsonb
+  default_value: jsonb
+  description: String
+  key: String
+}
+
+"""
+update columns of table "setting_keys"
+"""
+enum setting_keys_update_column {
+  """column name"""
+  allowed_values
+
+  """column name"""
+  default_value
+
+  """column name"""
+  description
+
+  """column name"""
+  key
+}
+
+input setting_keys_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: setting_keys_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: setting_keys_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: setting_keys_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: setting_keys_delete_key_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: setting_keys_prepend_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: setting_keys_set_input
+
+  """filter the rows which have to be updated"""
+  where: setting_keys_bool_exp!
 }
 
 scalar smallint
@@ -6478,9 +8089,7 @@ type subscription_root {
     where: device_pools_bool_exp
   ): [device_pools!]!
 
-  """
-  fetch data from the table: "devices"
-  """
+  """An array relationship"""
   devices(
     """distinct select on columns"""
     distinct_on: [devices_select_column!]
@@ -6498,9 +8107,7 @@ type subscription_root {
     where: devices_bool_exp
   ): [devices!]!
 
-  """
-  fetch aggregated fields from the table: "devices"
-  """
+  """An aggregate relationship"""
   devices_aggregate(
     """distinct select on columns"""
     distinct_on: [devices_select_column!]
@@ -6663,6 +8270,113 @@ type subscription_root {
   ): [groups!]!
 
   """
+  fetch data from the table: "org_settings"
+  """
+  org_settings(
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): [org_settings!]!
+
+  """
+  fetch aggregated fields from the table: "org_settings"
+  """
+  org_settings_aggregate(
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): org_settings_aggregate!
+
+  """fetch data from the table: "org_settings" using primary key columns"""
+  org_settings_by_pk(key: String!, org_id: uuid!): org_settings
+
+  """
+  fetch data from the table in a streaming manner: "org_settings"
+  """
+  org_settings_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [org_settings_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): [org_settings!]!
+
+  """
+  execute function "org_settings_with_defaults" which returns "org_settings"
+  """
+  org_settings_with_defaults(
+    """
+    input parameters for function "org_settings_with_defaults"
+    """
+    args: org_settings_with_defaults_args!
+
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): [org_settings!]!
+
+  """
+  execute function "org_settings_with_defaults" and query aggregates on result of table type "org_settings"
+  """
+  org_settings_with_defaults_aggregate(
+    """
+    input parameters for function "org_settings_with_defaults_aggregate"
+    """
+    args: org_settings_with_defaults_args!
+
+    """distinct select on columns"""
+    distinct_on: [org_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [org_settings_order_by!]
+
+    """filter the rows returned"""
+    where: org_settings_bool_exp
+  ): org_settings_aggregate!
+
+  """
   fetch data from the table: "organizations"
   """
   organizations(
@@ -6756,9 +8470,7 @@ type subscription_root {
     where: plan_bool_exp
   ): [plan!]!
 
-  """
-  fetch data from the table: "policies"
-  """
+  """An array relationship"""
   policies(
     """distinct select on columns"""
     distinct_on: [policies_select_column!]
@@ -6776,9 +8488,7 @@ type subscription_root {
     where: policies_bool_exp
   ): [policies!]!
 
-  """
-  fetch aggregated fields from the table: "policies"
-  """
+  """An aggregate relationship"""
   policies_aggregate(
     """distinct select on columns"""
     distinct_on: [policies_select_column!]
@@ -6813,9 +8523,7 @@ type subscription_root {
     where: policies_bool_exp
   ): [policies!]!
 
-  """
-  fetch data from the table: "pools"
-  """
+  """An array relationship"""
   pools(
     """distinct select on columns"""
     distinct_on: [pools_select_column!]
@@ -6833,9 +8541,7 @@ type subscription_root {
     where: pools_bool_exp
   ): [pools!]!
 
-  """
-  fetch aggregated fields from the table: "pools"
-  """
+  """An aggregate relationship"""
   pools_aggregate(
     """distinct select on columns"""
     distinct_on: [pools_select_column!]
@@ -6907,9 +8613,7 @@ type subscription_root {
     where: protocol_bool_exp
   ): [protocol!]!
 
-  """
-  fetch data from the table: "rules"
-  """
+  """An array relationship"""
   rules(
     """distinct select on columns"""
     distinct_on: [rules_select_column!]
@@ -6927,9 +8631,7 @@ type subscription_root {
     where: rules_bool_exp
   ): [rules!]!
 
-  """
-  fetch aggregated fields from the table: "rules"
-  """
+  """An aggregate relationship"""
   rules_aggregate(
     """distinct select on columns"""
     distinct_on: [rules_select_column!]
@@ -6963,6 +8665,63 @@ type subscription_root {
     """filter the rows returned"""
     where: rules_bool_exp
   ): [rules!]!
+
+  """
+  fetch data from the table: "setting_keys"
+  """
+  setting_keys(
+    """distinct select on columns"""
+    distinct_on: [setting_keys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [setting_keys_order_by!]
+
+    """filter the rows returned"""
+    where: setting_keys_bool_exp
+  ): [setting_keys!]!
+
+  """
+  fetch aggregated fields from the table: "setting_keys"
+  """
+  setting_keys_aggregate(
+    """distinct select on columns"""
+    distinct_on: [setting_keys_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [setting_keys_order_by!]
+
+    """filter the rows returned"""
+    where: setting_keys_bool_exp
+  ): setting_keys_aggregate!
+
+  """fetch data from the table: "setting_keys" using primary key columns"""
+  setting_keys_by_pk(key: String!): setting_keys
+
+  """
+  fetch data from the table in a streaming manner: "setting_keys"
+  """
+  setting_keys_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [setting_keys_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: setting_keys_bool_exp
+  ): [setting_keys!]!
 
   """
   fetch data from the table: "status"
@@ -7535,6 +9294,17 @@ input subscriptions_min_order_by {
   validUntil: order_by
 }
 
+"""
+response of any mutation on the table "subscriptions"
+"""
+type subscriptions_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [subscriptions!]!
+}
+
 """Ordering options when selecting data from "subscriptions"."""
 input subscriptions_order_by {
   createdAt: order_by
@@ -7551,6 +9321,11 @@ input subscriptions_order_by {
   updatedAt: order_by
   updatedBy: order_by
   validUntil: order_by
+}
+
+"""primary key columns input for table: subscriptions"""
+input subscriptions_pk_columns_input {
+  id: uuid!
 }
 
 """
@@ -7595,6 +9370,16 @@ enum subscriptions_select_column {
 
   """column name"""
   validUntil
+}
+
+"""
+input type for updating data in table "subscriptions"
+"""
+input subscriptions_set_input {
+  plan: plan_enum
+  stripeCheckoutSessionId: String
+  stripeCustomerId: String
+  stripeSubscriptionId: String
 }
 
 """aggregate stddev on columns"""
@@ -7671,6 +9456,14 @@ order by sum() on columns of table "subscriptions"
 """
 input subscriptions_sum_order_by {
   credits: order_by
+}
+
+input subscriptions_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: subscriptions_set_input
+
+  """filter the rows which have to be updated"""
+  where: subscriptions_bool_exp!
 }
 
 """aggregate var_pop on columns"""
