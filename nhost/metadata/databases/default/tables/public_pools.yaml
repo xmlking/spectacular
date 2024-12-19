@@ -84,7 +84,7 @@ update_permissions:
           _eq: X-Hasura-Org-Id
       check: null
       set:
-        org_id: x-hasura-User-Id
+        updated_by: x-hasura-User-Id
     comment: ""
 delete_permissions:
   - role: org:admin

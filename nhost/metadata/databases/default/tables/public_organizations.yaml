@@ -43,12 +43,47 @@ object_relationships:
     using:
       foreign_key_constraint_on: owner_id
 array_relationships:
+  - name: devices
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: devices
+          schema: public
   - name: groups
     using:
       foreign_key_constraint_on:
         column: org_id
         table:
           name: groups
+          schema: public
+  - name: policies
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: policies
+          schema: public
+  - name: pools
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: pools
+          schema: public
+  - name: rules
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: rules
+          schema: public
+  - name: settings
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: org_settings
           schema: public
   - name: subscriptions
     using:
@@ -64,6 +99,12 @@ array_relationships:
         table:
           name: user_org_roles
           schema: public
+computed_fields:
+  - name: settingsWithDefaults
+    definition:
+      function:
+        name: org_settings_with_defaults
+        schema: public
 insert_permissions:
   - role: user
     permission:

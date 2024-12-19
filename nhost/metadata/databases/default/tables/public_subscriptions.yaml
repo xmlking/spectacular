@@ -58,3 +58,18 @@ select_permissions:
           _eq: X-Hasura-Org-Id
       allow_aggregations: true
     comment: ""
+update_permissions:
+  - role: org:billing
+    permission:
+      columns:
+        - plan
+        - stripe_checkout_session_id
+        - stripe_customer_id
+        - stripe_subscription_id
+      filter:
+        org_id:
+          _eq: X-Hasura-Org-Id
+      check: null
+      set:
+        updated_by: x-hasura-User-Id
+    comment: ""

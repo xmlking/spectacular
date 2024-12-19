@@ -1,0 +1,50 @@
+table:
+  name: setting_keys
+  schema: public
+insert_permissions:
+  - role: sys:admin
+    permission:
+      check: {}
+      columns:
+        - allowed_values
+        - default_value
+        - description
+        - key
+    comment: ""
+select_permissions:
+  - role: org:admin
+    permission:
+      columns:
+        - allowed_values
+        - default_value
+        - description
+        - key
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - allowed_values
+        - default_value
+        - description
+        - key
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: sys:admin
+    permission:
+      columns:
+        - allowed_values
+        - default_value
+        - description
+        - key
+      filter: {}
+      check: null
+    comment: ""
+delete_permissions:
+  - role: sys:admin
+    permission:
+      filter: {}
+    comment: ""

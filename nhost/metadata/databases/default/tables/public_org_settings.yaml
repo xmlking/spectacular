@@ -1,32 +1,6 @@
 table:
-  name: groups
+  name: org_settings
   schema: public
-configuration:
-  column_config:
-    created_at:
-      custom_name: createdAt
-    created_by:
-      custom_name: createdBy
-    display_name:
-      custom_name: displayName
-    org_id:
-      custom_name: orgId
-    updated_at:
-      custom_name: updatedAt
-    updated_by:
-      custom_name: updatedBy
-  custom_column_names:
-    created_at: createdAt
-    created_by: createdBy
-    display_name: displayName
-    org_id: orgId
-    updated_at: updatedAt
-    updated_by: updatedBy
-  custom_root_fields: {}
-object_relationships:
-  - name: organization
-    using:
-      foreign_key_constraint_on: org_id
 insert_permissions:
   - role: org:admin
     permission:
@@ -36,23 +10,18 @@ insert_permissions:
         org_id: x-hasura-Org-Id
         updated_by: x-hasura-User-Id
       columns:
-        - description
-        - display_name
-        - metadata
-        - tags
+        - key
+        - value
     comment: ""
 select_permissions:
   - role: org:admin
     permission:
       columns:
-        - tags
-        - metadata
-        - description
-        - display_name
+        - value
+        - key
         - created_at
         - updated_at
         - created_by
-        - id
         - org_id
         - updated_by
       filter:
@@ -64,10 +33,7 @@ update_permissions:
   - role: org:admin
     permission:
       columns:
-        - description
-        - display_name
-        - metadata
-        - tags
+        - value
       filter:
         org_id:
           _eq: X-Hasura-Org-Id
