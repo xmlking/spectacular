@@ -4,20 +4,25 @@ import { Github } from 'lucide-svelte';
 import { getNhostClient } from '$lib/stores/nhost';
 import { Logger } from '@spectacular/utils';
 import { ROUTE_DASHBOARD } from '$lib/constants';
+import { page } from '$app/stores';
 
 const log = new Logger('auth:signin:social:browser');
 
 // Variables
 const nhost = getNhostClient();
-const origin = new URL(window.location.href).origin;
-const redirectTo = `${origin}${ROUTE_DASHBOARD}`;
+
 const locale = 'en';
+
+// Reactivity
+$: urlOrigin = new URL($page.url).origin;
+$: redirectTo = `${urlOrigin}${ROUTE_DASHBOARD}`;
+$: log.debug('redirectTo', redirectTo);
 </script>
 
 <!-- Signin with social -->
 <form method="POST">
   <div class="flex flex-row justify-evenly">
-    <button type="button"  on:click={() => { nhost.auth.signIn({ provider: 'apple', options: {redirectTo, locale} }) }} class="variant-filled-warning btn-icon"
+    <button type="button"  on:click={() => { nhost.auth.signIn({ provider: 'google', options: {redirectTo, locale} }) }} class="variant-filled-warning btn-icon"
       ><Icon name="google" /></button
     >
     <button type="button" on:click={() => { nhost.auth.signIn({ provider: 'github', options: {redirectTo, locale} }) }}  class="variant-filled-secondary btn-icon"><Github /></button>
