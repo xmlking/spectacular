@@ -8,13 +8,17 @@ export const load = loadFlash(
   async ({
     locals: {
       paraglide: { lang, textDirection },
+      nhost,
     },
   }) => {
+    const claims = nhost.auth.getHasuraClaims();
     log.debug(lang, textDirection);
-
     // pass locale information from "server-context" to "shared server + client context"
     return {
       vercelEnv: secrets.VERCEL_ENV ?? 'development',
+      userId: claims?.['x-hasura-user-id'],
+      orgId: claims?.['x-hasura-org-id'],
+      defaultRole: claims?.['x-hasura-default-role'],
     };
   },
 );

@@ -9,10 +9,7 @@ const log = new Logger('user.profile.browser');
 export const _GetUserVariables: Variables = async (event) => {
   // const user = nhost.auth.getUser()
   // const userId = user?.id;
-  const aaaa = await event.parent();
-  console.log('aaaa', aaaa);
-  const { session } = await event.parent();
-  const userId = session?.user.id;
+  const { userId, orgId, defaultRole } = await event.parent();
   if (!userId) {
     log.error('not authenticated');
     throw error(400, 'not authenticated');
