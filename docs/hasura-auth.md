@@ -237,6 +237,10 @@ From this diagram, here are some info you need to know:
 In some cases it is necessary to act **on behalf of** a user. While the **Auth** service doesn’t allow that it is not difficult to implement such functionality as a serverless function.  
 You can find an example of a function that can generate a valid access token for your application with customized values here: [Custom JWTs](https://docs.nhost.io/guides/auth/custom-jwts)
 
+## TODO
+
+- [FedCM](https://developer.mozilla.org/en-US/docs/Web/API/Credential_Management_API/Credential_types)
+
 ## Reference
 
 - [Authentication and authorization in multi-tenancy B2B scenarios](https://zitadel.com/docs/guides/solution-scenarios/b2b)
@@ -245,3 +249,4 @@ You can find an example of a function that can generate a valid access token for
 - [logto: Understand how organizations work](https://docs.logto.io/docs/recipes/organizations/understand-how-it-works/)
 - [FedCA](https://developer.mozilla.org/en-US/docs/Web/API/Credential_Management_API/Credential_types)
 - [Best Practices for Storing Access Tokens in the Browser](https://curity.medium.com/best-practices-for-storing-access-tokens-in-the-browser-6b3d515d9814)
+- [The Ultimate Guide to handling JWTs on frontend clients (GraphQL)](https://hasura.io/blog/best-practices-of-using-jwt-with-graphql)

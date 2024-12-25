@@ -102,7 +102,7 @@
       "dependsOn": ["sync", "^test:unit:coverage"]
     },
     "test:integration": {
-      "dependsOn": ["build"]
+      "dependsOn": ["^build"]
     },
     "lang:lint": {},
     "lang:validate": {},
