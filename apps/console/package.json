@@ -8,6 +8,8 @@
     "build:production": "NODE_ENV=production dotenv-run -f .env -f .secrets -v -- vite build",
     "sv:check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "sv:check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "check": "biome check .",
+    "check:fix": "biome check . --write",
     "clean": "git clean -xdf -e .vercel -e config",
     "dev": "dotenv-run -f .env -f .secrets -v -- vite dev",
     "dev:debug": "DEBUG=* dotenv-run -f .env -f .secrets -v '.*' -u -- vite dev",

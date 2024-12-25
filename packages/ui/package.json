@@ -25,6 +25,8 @@
     "./tailwind.config": "./tailwind.config.ts"
   },
   "scripts": {
+    "check": "biome check .",
+    "check:fix": "biome check . --write",
     "clean": "git clean -xdf",
     "sync": "svelte-kit sync",
     "format": "biome format --write",
