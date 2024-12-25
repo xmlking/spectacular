@@ -1,5 +1,5 @@
 import { CachePolicy, GetOrgsbyOrgStore } from '$houdini';
-import { updateOrganizationsSchema as schema } from '$lib/schema/organization';
+import { updateOrganizationSchema as schema } from '$lib/schema/organization';
 import { error } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
 import { superValidate } from 'sveltekit-superforms';

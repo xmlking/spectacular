@@ -3620,6 +3620,7 @@ type organizations {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
   autoEnroll: Boolean!
+  avatarUrl: String
   blockedEmailDomains: [String!]
   blockedEmails: [String!]
   createdAt: timestamptz!
@@ -3978,6 +3979,7 @@ input organizations_bool_exp {
   allowedEmailDomains: String_array_comparison_exp
   allowedEmails: String_array_comparison_exp
   autoEnroll: Boolean_comparison_exp
+  avatarUrl: String_comparison_exp
   blockedEmailDomains: String_array_comparison_exp
   blockedEmails: String_array_comparison_exp
   createdAt: timestamptz_comparison_exp
@@ -4048,6 +4050,7 @@ input organizations_insert_input {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
   autoEnroll: Boolean
+  avatarUrl: String
   blockedEmailDomains: [String!]
   blockedEmails: [String!]
   description: String
@@ -4066,6 +4069,7 @@ input organizations_insert_input {
 type organizations_max_fields {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
+  avatarUrl: String
   blockedEmailDomains: [String!]
   blockedEmails: [String!]
   createdAt: timestamptz
@@ -4083,6 +4087,7 @@ type organizations_max_fields {
 type organizations_min_fields {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
+  avatarUrl: String
   blockedEmailDomains: [String!]
   blockedEmails: [String!]
   createdAt: timestamptz
@@ -4131,6 +4136,7 @@ input organizations_order_by {
   allowedEmailDomains: order_by
   allowedEmails: order_by
   autoEnroll: order_by
+  avatarUrl: order_by
   blockedEmailDomains: order_by
   blockedEmails: order_by
   createdAt: order_by
@@ -4181,6 +4187,9 @@ enum organizations_select_column {
   autoEnroll
 
   """column name"""
+  avatarUrl
+
+  """column name"""
   blockedEmailDomains
 
   """column name"""
@@ -4224,6 +4233,7 @@ input organizations_set_input {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
   autoEnroll: Boolean
+  avatarUrl: String
   blockedEmailDomains: [String!]
   blockedEmails: [String!]
   description: String
@@ -4249,6 +4259,7 @@ input organizations_stream_cursor_value_input {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
   autoEnroll: Boolean
+  avatarUrl: String
   blockedEmailDomains: [String!]
   blockedEmails: [String!]
   createdAt: timestamptz
@@ -4275,6 +4286,9 @@ enum organizations_update_column {
 
   """column name"""
   autoEnroll
+
+  """column name"""
+  avatarUrl
 
   """column name"""
   blockedEmailDomains

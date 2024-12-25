@@ -1,5 +1,5 @@
 import { UpdateOrgsStore, type organizations_set_input } from '$houdini';
-import { updateOrganizationsSchema as schema } from '$lib/schema/organization';
+import { updateOrganizationSchema as schema } from '$lib/schema/organization';
 import { Logger, cleanClone } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
 import type { GraphQLError } from 'graphql';
@@ -50,7 +50,7 @@ export const actions = {
       );
 
     const message = {
-      message: `Organization: ${result.organization} updated`,
+      message: `Organization: ${result.displayName} updated`,
       dismissible: true,
       duration: 10000,
       type: 'success',

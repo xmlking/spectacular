@@ -19,7 +19,7 @@ const resultsCopy = [
   ...menuNavLinks['/policies'],
   ...menuNavLinks['/flows'],
   ...menuNavLinks['/reports'],
-  ...menuNavLinks['/account'],
+  ...menuNavLinks['/settings'],
 ] as const;
 let results = resultsCopy;
 const modalStore = getModalStore();

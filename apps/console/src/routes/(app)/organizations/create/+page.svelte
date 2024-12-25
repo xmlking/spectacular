@@ -1,5 +1,5 @@
 <script lang="ts">
-import { organizationsCreateSchema as schema } from '$lib/schema/organization';
+import { createOrganizationSchema as schema } from '$lib/schema/organization';
 import { InputChip } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -56,11 +56,11 @@ function isValidEmailDomain(value: string): boolean {
     <Alerts errors={$errors._errors} message={$message} />
 		<div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
 			<div class="col-span-3">
-				<Field {form} name="organization">
+				<Field {form} name="displayName">
 					<Control let:attrs>
 						<div class="grid gap-2">
-							<Label class="label">Organization</Label>
-							<input {...attrs} class="input" bind:value={$formData.organization} />
+							<Label class="label">Name</Label>
+							<input {...attrs} class="input" bind:value={$formData.displayName} />
 							<FieldErrors class="data-[fs-error]:text-error-500" />
 						</div>
 					</Control>

@@ -60,36 +60,38 @@ export const menuNavLinks: MenuNavLinks = {
       ],
     },
   ],
-  '/account': [
+  '/settings': [
     {
-      title: 'Settings',
+      title: 'Account',
       list: [
-        { href: '/profile', label: 'Profile', keywords: 'account, settings, profile' },
-        { href: '/feature-flags', label: 'Flags', keywords: 'account, settings, flags' },
+        { href: '/profile', label: 'Profile', keywords: 'settings, profile, account' },
+        { href: '/signup?redirectTo=/dashboard', label: 'Signup', keywords: 'signup, account' },
+        { href: '/signin?redirectTo=/dashboard', label: 'Signin', keywords: 'signin, login, account' },
+        { href: '/settings', label: 'AI Settings', keywords: 'settings, ai, account', badge: '✨' },
+        { href: '/feature-flags', label: 'Feature Flags', keywords: 'settings, feature-flags, account' },
       ],
     },
     {
-      title: 'Auth',
+      title: 'Organization',
       list: [
-        { href: '/signup?redirectTo=/dashboard', label: 'Signup', keywords: 'signup, users' },
-        { href: '/signin?redirectTo=/dashboard', label: 'Signin', keywords: 'signin, login, users' },
+        { href: '/organization', label: 'Organization', keywords: 'organization', roles: [Roles.Owner, Roles.Admin] },
+        { href: '/org-settings', label: 'Configuration', keywords: 'settings, configuration, environment-variables, organization', roles: [Roles.Owner, Roles.Admin] },
+        { href: '/org-feature-flags', label: 'Features', keywords: 'settings, feature-flags, organization', roles: [Roles.Owner, Roles.Admin] },
+        { href: '/users', label: 'Members', keywords: 'account, user, member, organization', roles: [Roles.Owner, Roles.Admin] },
+        { href: '/groups', label: 'User Groups', keywords: 'account, group, organization', roles: [Roles.Owner, Roles.Admin] },
+        { href: '/billing', label: 'Billing', keywords: 'billing, plan, organization', roles: [Roles.Owner, Roles.Billing] },
+        { href: '/invoices', label: 'Invoices', keywords: 'billing, invoices, organization', roles: [Roles.Owner, Roles.Billing] },
+        { href: '/organizations/create', label: '＋ New Organization', keywords: 'create, organization' },
       ],
     },
     {
-      title: 'Administration',
+      title: 'Sys Admin',
       list: [
         {
           href: '/organizations',
           label: 'Organizations',
-          keywords: 'account, organization',
-          roles: [Roles.Owner, Roles.Admin],
-        },
-        { href: '/users', label: 'Users', keywords: 'account, user, admin', roles: [Roles.Owner, Roles.Admin] },
-        {
-          href: '/groups',
-          label: 'Groups',
-          keywords: 'account, group, admin',
-          roles: [Roles.Owner, Roles.Admin],
+          keywords: 'system, admin, organization',
+          roles: [Roles.SysAdmin],
         },
       ],
     },

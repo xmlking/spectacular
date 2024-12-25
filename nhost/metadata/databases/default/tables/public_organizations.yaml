@@ -9,6 +9,8 @@ configuration:
       custom_name: allowedEmails
     auto_enroll:
       custom_name: autoEnroll
+    avatar_url:
+      custom_name: avatarUrl
     blocked_email_domains:
       custom_name: blockedEmailDomains
     blocked_emails:
@@ -29,6 +31,7 @@ configuration:
     allowed_email_domains: allowedEmailDomains
     allowed_emails: allowedEmails
     auto_enroll: autoEnroll
+    avatar_url: avatarUrl
     blocked_email_domains: blockedEmailDomains
     blocked_emails: blockedEmails
     created_at: createdAt
@@ -117,6 +120,7 @@ insert_permissions:
         - allowed_email_domains
         - allowed_emails
         - auto_enroll
+        - avatar_url
         - blocked_email_domains
         - blocked_emails
         - description
@@ -130,18 +134,19 @@ select_permissions:
       columns:
         - allowed_email_domains
         - allowed_emails
+        - auto_enroll
+        - avatar_url
         - blocked_email_domains
         - blocked_emails
-        - tags
-        - auto_enroll
-        - metadata
+        - created_at
+        - created_by
         - description
         - display_name
-        - created_at
-        - updated_at
-        - created_by
         - id
+        - metadata
         - owner_id
+        - tags
+        - updated_at
         - updated_by
       filter:
         id:
@@ -153,18 +158,19 @@ select_permissions:
       columns:
         - allowed_email_domains
         - allowed_emails
+        - auto_enroll
+        - avatar_url
         - blocked_email_domains
         - blocked_emails
-        - tags
-        - auto_enroll
-        - metadata
+        - created_at
+        - created_by
         - description
         - display_name
-        - created_at
-        - updated_at
-        - created_by
         - id
+        - metadata
         - owner_id
+        - tags
+        - updated_at
         - updated_by
       filter: {}
       allow_aggregations: true
@@ -172,6 +178,7 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - avatar_url
         - description
         - display_name
         - id
@@ -190,6 +197,7 @@ update_permissions:
         - allowed_email_domains
         - allowed_emails
         - auto_enroll
+        - avatar_url
         - blocked_email_domains
         - blocked_emails
         - description

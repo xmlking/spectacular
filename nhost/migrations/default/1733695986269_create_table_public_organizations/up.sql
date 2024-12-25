@@ -15,6 +15,7 @@ CREATE TABLE public.organizations
     blocked_email_domains text[],
     blocked_emails        text[],
     auto_enroll           boolean     NOT NULL DEFAULT false,
+    avatar_url            text,
     PRIMARY KEY (id),
     FOREIGN KEY (owner_id) REFERENCES auth.users (id) ON UPDATE restrict ON DELETE cascade
 );

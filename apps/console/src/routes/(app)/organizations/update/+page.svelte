@@ -1,5 +1,5 @@
 <script lang="ts">
-import { updateOrganizationsSchema as schema } from '$lib/schema/organization';
+import { updateOrganizationSchema as schema } from '$lib/schema/organization';
 import { InputChip } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';

@@ -2,7 +2,7 @@ import { goto } from '$app/navigation';
 import { CreateOrgStore } from '$houdini';
 import type { organizations_insert_input } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { organizationsCreateSchema as schema } from '$lib/schema/organization';
+import { createOrganizationSchema as schema } from '$lib/schema/organization';
 import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import { Logger, cleanClone } from '@spectacular/utils';
 import { fail } from '@sveltejs/kit';
