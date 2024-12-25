@@ -1,10 +1,10 @@
 // TODO: Natural Language PostgreSQL https://github.com/vercel-labs/natural-language-postgres/tree/main
 
-import type { Config, Result } from './types';
-import { configSchema, explanationsSchema } from './types';
 import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
 import { z } from 'zod';
+import type { Config, Result } from './types';
+import { configSchema, explanationsSchema } from './types';
 
 export const generateQuery = async (input: string) => {
   try {

@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
-import { PenTool, SpellCheck2, Replace, Crop } from 'lucide-svelte';
 // import { IconSummary } from '@spectacular/ui/components/icons';
 import { IconTranslate } from '@spectacular/ui/components/icons';
+import { Crop, PenTool, Replace, SpellCheck2 } from 'lucide-svelte';
 
 const toolOptions = {
   writer: {

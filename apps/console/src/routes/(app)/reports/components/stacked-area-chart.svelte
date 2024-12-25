@@ -1,6 +1,6 @@
 <script lang='ts'>
-import { VisXYContainer, VisAxis, VisArea, VisXYLabels } from '@unovis/svelte';
-import { data, formats, type DataRecord, getLabels } from './sac.data';
+import { VisArea, VisAxis, VisXYContainer, VisXYLabels } from '@unovis/svelte';
+import { type DataRecord, data, formats, getLabels } from './sac.data';
 
 const labels = getLabels(data);
 

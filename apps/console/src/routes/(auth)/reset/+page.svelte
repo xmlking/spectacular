@@ -1,21 +1,21 @@
 <script lang="ts">
-import * as m from '$i18n/messages';
 import { goto } from '$app/navigation';
+import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+import { ROUTE_DASHBOARD, ROUTE_PROFILE } from '$lib/constants';
+import { i18n } from '$lib/i18n';
 import { resetPasswordSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
-import { getNhostClient } from '$lib/stores/nhost';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
+import { onMount } from 'svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { i18n } from '$lib/i18n';
-import { onMount } from 'svelte';
-import { ROUTE_DASHBOARD, ROUTE_PROFILE } from '$lib/constants';
 
 const log = new Logger('auth:reset:browser');
 

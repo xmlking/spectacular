@@ -1,11 +1,11 @@
 <script lang="ts">
-import { Support } from '@spectacular/smart';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import * as Smart from '@spectacular/smart';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
+import { Support } from '@spectacular/smart';
+import * as Smart from '@spectacular/smart';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';

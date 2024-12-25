@@ -1,6 +1,6 @@
 import type { Action } from 'svelte/action';
-import type { JSONSchema } from 'sveltekit-superforms';
 import type { Writable } from 'svelte/store';
+import type { JSONSchema } from 'sveltekit-superforms';
 
 type Options<T extends Item = Item> = {
   api: string;

@@ -1,8 +1,8 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 
-import type AI from '@aibrow/dom-types';
 import type { AvailableLanguageTag } from '$lib/paraglide/runtime';
+import type AI from '@aibrow/dom-types';
 import type { ParaglideLocals } from '@inlang/paraglide-sveltekit';
 
 declare global {

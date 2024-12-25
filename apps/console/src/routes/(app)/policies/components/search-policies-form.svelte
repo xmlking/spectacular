@@ -13,8 +13,8 @@ import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { LoaderIcon, MoreHorizontalIcon, ScaleIcon, SearchIcon, ShieldCheckIcon } from 'lucide-svelte';
 import type { FormEventHandler } from 'svelte/elements';
+import { queryParameters, ssp } from 'sveltekit-search-params';
 import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms';
-import { ssp, queryParameters } from 'sveltekit-search-params';
 
 const log = new Logger('policies:search-form:browser');
 

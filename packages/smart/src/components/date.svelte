@@ -22,8 +22,8 @@ import { Logger } from '@spectacular/utils';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';
 import { Sparkles } from 'lucide-svelte';
-import { z } from 'zod';
 import type { HTMLInputAttributes } from 'svelte/elements';
+import { z } from 'zod';
 import { default as LoaderIcon } from './loader-icon.svelte';
 
 interface $$Props extends HTMLInputAttributes {

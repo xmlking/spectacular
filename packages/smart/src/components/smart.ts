@@ -129,10 +129,7 @@ export function createStreamStore(stream: ReadableStream<string>) {
   });
 }
 
-export function languageTagToHumanReadable(
-  languageTag: Intl.UnicodeBCP47LocaleIdentifier,
-  targetLanguage: string = 'en-US',
-) {
+export function languageTagToHumanReadable(languageTag: Intl.UnicodeBCP47LocaleIdentifier, targetLanguage = 'en-US') {
   const displayNames = new Intl.DisplayNames([targetLanguage], { type: 'language' });
   return displayNames.of(languageTag);
 }

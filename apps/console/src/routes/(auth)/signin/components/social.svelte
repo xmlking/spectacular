@@ -1,10 +1,10 @@
 <script lang="ts">
-import { Icon } from '@spectacular/skeleton/components/icons';
-import { Github } from 'lucide-svelte';
-import { getNhostClient } from '$lib/stores/nhost';
-import { Logger } from '@spectacular/utils';
-import { ROUTE_DASHBOARD } from '$lib/constants';
 import { page } from '$app/stores';
+import { ROUTE_DASHBOARD } from '$lib/constants';
+import { getNhostClient } from '$lib/stores/nhost';
+import { Icon } from '@spectacular/skeleton/components/icons';
+import { Logger } from '@spectacular/utils';
+import { Github } from 'lucide-svelte';
 
 const log = new Logger('auth:signin:social:browser');
 

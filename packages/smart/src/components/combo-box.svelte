@@ -21,8 +21,8 @@
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import Select from 'svelte-select';
-import { writable } from 'svelte/store';
 import type { HTMLSelectAttributes } from 'svelte/elements';
+import { writable } from 'svelte/store';
 interface $$Props extends HTMLSelectAttributes {
   value: string;
   items: Readonly<string[]>;

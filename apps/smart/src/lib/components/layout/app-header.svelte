@@ -1,13 +1,13 @@
 <script lang="ts">
+import CommandMenu from '$lib/components/layout/command-menu.svelte';
+import ModeToggle from '$lib/components/layout/mode-toggle.svelte';
+import { siteConfig } from '$lib/config/site.js';
+import { cn } from '$lib/utils.js';
 import * as Breadcrumb from '@spectacular/ui/components/breadcrumb';
+import { buttonVariants } from '@spectacular/ui/components/button';
+import * as Icon from '@spectacular/ui/components/icons';
 import { Separator } from '@spectacular/ui/components/separator';
 import * as Sidebar from '@spectacular/ui/components/sidebar';
-import * as Icon from '@spectacular/ui/components/icons';
-import { siteConfig } from '$lib/config/site.js';
-import { buttonVariants } from '@spectacular/ui/components/button';
-import ModeToggle from '$lib/components/layout/mode-toggle.svelte';
-import CommandMenu from '$lib/components/layout/command-menu.svelte';
-import { cn } from '$lib/utils.js';
 </script>
 
 <header class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">

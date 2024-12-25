@@ -1,11 +1,11 @@
 import { browser } from '$app/environment';
+import { invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
 import { SearchSecurityKeysStore } from '$houdini';
 import { NHOST_SESSION_KEY } from '$lib/constants';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
 import type { User } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
-import { invalidateAll } from '$app/navigation';
 import Cookies from 'js-cookie';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { type Readable, type Writable, derived, get, readable, readonly, writable } from 'svelte/store';

@@ -1,9 +1,9 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
+import { page } from '$app/stores';
+import * as m from '$i18n/messages';
 import type { AvailableLanguageTag } from '$i18n/runtime';
 import { i18n } from '$lib/i18n';
-import { page } from '$app/stores';
-import { goto } from '$app/navigation';
-import * as m from '$i18n/messages';
 
 function switchToLanguage(newLanguage: AvailableLanguageTag) {
   const canonicalPath = i18n.route($page.url.pathname);

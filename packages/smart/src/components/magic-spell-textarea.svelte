@@ -3,9 +3,9 @@ import { useCompletion } from '@ai-sdk/svelte';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { Logger } from '@spectacular/utils';
 import { AlertTriangle, Sparkles } from 'lucide-svelte';
+import { onMount } from 'svelte';
 import type { HTMLTextareaAttributes } from 'svelte/elements';
 import { fade } from 'svelte/transition';
-import { onMount } from 'svelte';
 import { default as LoaderIcon } from './loader-icon.svelte';
 
 const log = new Logger('experiments:ai:ms:browser');

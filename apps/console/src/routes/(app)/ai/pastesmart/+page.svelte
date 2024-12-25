@@ -1,20 +1,20 @@
 <script lang="ts">
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { SmartSupport } from '@spectacular/smart';
-import { smartPaste } from '@spectacular/smart/actions';
 import { getLoadingState } from '$lib/stores/loading';
-import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
+import { SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts, ErrorMessage } from '@spectacular/skeleton/components/form';
+import { SmartSupport } from '@spectacular/smart';
+import { smartPaste } from '@spectacular/smart/actions';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
+import { Loader, MoreHorizontal, Sparkles } from 'lucide-svelte';
+import { writable } from 'svelte/store';
 import SuperDebug, { defaults, superForm, setError } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { personSchema, personJsonSchema as jsonSchema, type Person } from './schema.js';
 import Sample from './sample.svelte';
-import { writable } from 'svelte/store';
-import { Loader, MoreHorizontal, Sparkles } from 'lucide-svelte';
+import { type Person, personJsonSchema as jsonSchema, personSchema } from './schema.js';
 
 const log = new Logger('ai:smart:browser');
 export let data;

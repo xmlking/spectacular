@@ -1,14 +1,14 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
+import { ROUTE_DASHBOARD } from '$lib/constants';
+import { i18n } from '$lib/i18n';
+import { getNhostClient } from '$lib/stores/nhost';
+import { Logger } from '@spectacular/utils';
+import { onMount } from 'svelte';
 import Divider from './components/divider.svelte';
 import PasswordSigninForm from './components/password.svelte';
 import PasswordlessSigninForm from './components/passwordless.svelte';
 import SocialSigninForm from './components/social.svelte';
-import { Logger } from '@spectacular/utils';
-import { getNhostClient } from '$lib/stores/nhost';
-import { onMount } from 'svelte';
-import { goto } from '$app/navigation';
-import { i18n } from '$lib/i18n';
-import { ROUTE_DASHBOARD } from '$lib/constants';
 
 const log = new Logger('auth:signin:browser');
 

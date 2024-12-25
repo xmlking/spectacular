@@ -1,20 +1,20 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
-import { goto } from '$app/navigation';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+import { i18n } from '$lib/i18n';
 import { pwSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
-import { getNhostClient } from '$lib/stores/nhost';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { i18n } from '$lib/i18n';
 
 const log = new Logger('auth:signin:password:browser');
 

@@ -1,7 +1,7 @@
 import { dev } from '$app/environment';
-import { Logger } from '@spectacular/utils';
-import type { HandleClientError, ClientInit } from '@sveltejs/kit';
 import { NHOST_SESSION_KEY } from '$lib/constants';
+import { Logger } from '@spectacular/utils';
+import type { ClientInit, HandleClientError } from '@sveltejs/kit';
 
 /**
  * Code in `init` method in `hooks.client.ts` will run one-time in browser, when the application starts up,

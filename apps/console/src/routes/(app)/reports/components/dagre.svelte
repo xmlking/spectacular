@@ -1,7 +1,7 @@
 <script lang='ts'>
-import { VisSingleContainer, VisGraph } from '@unovis/svelte';
+import { VisGraph, VisSingleContainer } from '@unovis/svelte';
 import { GraphLayoutType, type GraphNodeShape } from '@unovis/ts';
-import { data, type NodeDatum, type LinkDatum } from './dagar.data';
+import { type LinkDatum, type NodeDatum, data } from './dagar.data';
 
 const layoutType = GraphLayoutType.Dagre;
 const nodeLabel = (n: NodeDatum) => n.label;

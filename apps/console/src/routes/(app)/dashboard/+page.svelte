@@ -3,7 +3,7 @@
 // TODO: Drag-and-Drop Dashboard https://github.com/olliethedev/dnd-dashboard
 import { onDestroy, onMount } from 'svelte';
 import { persisted } from 'svelte-persisted-store';
-import { createSwapy, type Swapy } from 'swapy';
+import { type Swapy, createSwapy } from 'swapy';
 
 let container: HTMLDivElement;
 let swapy: Swapy;
