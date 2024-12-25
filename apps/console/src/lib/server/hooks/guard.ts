@@ -43,7 +43,7 @@ export const guard = (async ({ event, resolve }) => {
   // check if role has access to target route
 
   const {
-    url: { pathname },
+    url: { pathname, searchParams },
     locals: {
       paraglide: { lang },
       nhost,
@@ -59,8 +59,11 @@ export const guard = (async ({ event, resolve }) => {
 
   // Check isAuthenticated
   const { isAuthenticated, isLoading } = nhost.auth.getAuthenticationStatus();
-  log.debug({ isAuthenticated, isLoading, lang });
-  if (!isAuthenticated) {
+  const hasRefreshToken = searchParams.has('refreshToken');
+  log.debug({ hasRefreshToken, isAuthenticated, isLoading, lang });
+
+  // HINT: only redirect to signin page when not authenticated and not RefreshToken case
+  if (!hasRefreshToken && !isAuthenticated) {
     const message: App.Superforms.Message = { type: 'error', message: 'Not authenticated' } as const;
     redirectWithFlash(303, i18n.resolveRoute(`/signin?redirectTo=${pathname}`), message, event);
   }

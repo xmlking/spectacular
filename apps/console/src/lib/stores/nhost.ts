@@ -1,16 +1,14 @@
 import { browser } from '$app/environment';
 import { env } from '$env/dynamic/public';
-import { SearchSecurityKeysStore, extractSession, getClientSession, setClientSession } from '$houdini';
+import { SearchSecurityKeysStore } from '$houdini';
 import { NHOST_SESSION_KEY } from '$lib/constants';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
 import type { User } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
+import { invalidateAll } from '$app/navigation';
 import Cookies from 'js-cookie';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { type Readable, type Writable, derived, get, readable, readonly, writable } from 'svelte/store';
-
-// WORKAROUND: remove next line
-export let at: string | undefined;
 
 // TODO: change to Svelte 5 Class: https://x.com/ankurpsinghal/status/1856719524059283897
 const skQuery = new SearchSecurityKeysStore().artifact.raw;
@@ -68,13 +66,10 @@ export class SvelteKitNhostClient extends NhostClient {
         set(this.auth.getAccessToken() ?? null);
         this.auth.onTokenChanged((session) => {
           this.#log.debug('The access token refreshed:', { session });
+          // invalidateAll trigger reloading layout data and set the houdini client session
+          invalidateAll();
           const accessToken = session?.accessToken;
           set(accessToken ?? null);
-          // set fresh accessToken into HoudiniClient's session (client-side only)
-          setClientSession({ accessToken });
-          // FIXME: after setClientSession() AT changes back to stale server-side AT in few sec
-          // WORKAROUND: remove next line
-          at = accessToken;
           // save session as cookie everytime token is refreshed or user signin via WebAuthN.
           // Cookie will be removed when browser closed or user explicitly SIGNED_OUT.
           Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {

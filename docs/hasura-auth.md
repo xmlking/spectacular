@@ -244,3 +244,4 @@ You can find an example of a function that can generate a valid access token for
 - [Hasura Authentication Using JWTs](https://hasura.io/docs/latest/auth/authentication/jwt/)
 - [logto: Understand how organizations work](https://docs.logto.io/docs/recipes/organizations/understand-how-it-works/)
 - [FedCA](https://developer.mozilla.org/en-US/docs/Web/API/Credential_Management_API/Credential_types)
+- [Best Practices for Storing Access Tokens in the Browser](https://curity.medium.com/best-practices-for-storing-access-tokens-in-the-browser-6b3d515d9814)

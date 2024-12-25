@@ -7,7 +7,6 @@ import { GRAPHQL_URL } from '$lib/constants';
 import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacular/utils';
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
-import { at } from '$lib/stores/nhost';
 
 const url = env.PUBLIC_NHOST_GRAPHQL_URL ?? GRAPHQL_URL;
 const log = new Logger(browser ? 'houdini.browser.client' : 'houdini.server.client');
@@ -54,15 +53,6 @@ export default new HoudiniClient({
     const useRole = metadata?.useRole;
     const adminSecret = metadata?.adminSecret;
 
-    // FIXME: after setClientSession() AT changes back to stale server-side AT in few sec
-    // if (browser && getClientSession()?.accessToken) {
-    //   accessToken = getClientSession().accessToken;
-    // }
-    // WORKAROUND: remove next block
-    if (browser && at) {
-      accessToken = at;
-    }
-
     return {
       headers: {
         ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
@@ -70,6 +60,7 @@ export default new HoudiniClient({
         ...(adminSecret ? { 'X-Hasura-Admin-Secret': adminSecret } : {}),
         ...(backendToken ? { backendToken } : {}),
       },
+      // Instruct the browser to add cookies to cross-origin requests
       credentials: 'include', // Tip: for HTTP-Only cookies
     };
   },

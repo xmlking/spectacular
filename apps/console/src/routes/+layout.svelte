@@ -28,7 +28,6 @@ import { setupViewTransition } from 'sveltekit-view-transition';
 import '../app.pcss';
 import { setNhostClient } from '$lib/stores/nhost';
 import type { LayoutData } from './$types';
-import { setClientSession, extractSession } from '$houdini';
 
 const log = new Logger('root:layout:browser');
 
@@ -96,8 +95,6 @@ function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
 // Disable left sidebar on homepage
 $: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
 $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
-// HINT: On client-side, nhost client refresh accessToken. No need to copy it from server context.
-// $: setClientSession(extractSession(data));
 </script>
 
 <!-- window info -->
