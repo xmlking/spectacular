@@ -144,7 +144,7 @@ const config = {
         // const server = new Date(val);
         // const offset = server.getTimezoneOffset();
         // return new Date(server.getTime() + offset * 60000);
-        return val ? new Date(val) : null
+        return val ? new Date(val) : null;
       },
       marshal(date) {
         return date?.toISOString();

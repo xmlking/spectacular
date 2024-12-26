@@ -15,8 +15,8 @@ export const organizationSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   ownerId: z.string().trim().uuid(),
-  allowedEmails: z.string().email().array().nullish(),
-  allowedEmailDomains: z.string().trim().min(2).array().nullish(),
+  allowedEmails: z.string().email().array().nullish().default([]),
+  allowedEmailDomains: z.string().trim().min(2).array().nullish().default([]),
   blockedEmails: z.string().email().array().nullish(),
   blockedEmailDomains: z.string().trim().min(2).array().nullish(),
   autoEnroll: z.boolean().default(false),
@@ -32,7 +32,7 @@ export type Organization = z.infer<typeof organizationSchema>;
 export const searchOrganizationSchema = z.object({
   limit: z.number().int().min(5).max(100).default(10),
   offset: z.number().int().min(0).default(0),
-  displayName: z.string().trim().min(3).optional()
+  displayName: z.string().trim().min(3).optional(),
 });
 
 export type SearchOrganizationSchema = typeof searchOrganizationSchema;

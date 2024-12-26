@@ -1,22 +1,46 @@
-import { GetOrganizationsStore } from '$houdini';
-import { error } from '@sveltejs/kit';
+import { order_by } from '$houdini';
+import { searchOrganizationSchema } from '$lib/schema/organization';
+import { Logger } from '@spectacular/utils';
+import { superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
+import type { BeforeLoadEvent, SearchOrganizationsVariables as Variables } from './$houdini';
 
-const getOrganizationsStore = new GetOrganizationsStore();
+const log = new Logger('organizations:search:browser');
+/**
+ * Note: `_houdini_beforeLoad` run first, then `_SearchOrganizationsVariables` then load GQL
+ */
 
-export async function load(event) {
-  const { errors, data } = await getOrganizationsStore.fetch({
-    event,
-    blocking: true,
-  });
-
-  if (errors) {
-    for (const error of errors) {
-      console.log('list Organizations api error', error);
-    }
-
-    return { status: 500 };
-  }
-  const OrganizationsList = data?.organizations;
-  if (!OrganizationsList) error(404, 'Organizations not found');
-  return { OrganizationsList };
+/**
+ * Validate input and return `form` object which is send along with `data` to +page.svelte
+ */
+export async function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
+  log.debug('in _houdini_beforeLoad');
+  const form = await superValidate(url, zod(searchOrganizationSchema));
+  if (!form.valid) return { status: 400, form };
+  // if (!form.valid) return fail(400, { form });
+  // if (!form.valid) throw error(400, 'invalid input');
+  return { form };
 }
+
+/**
+ * Set query Variables for +page.gql
+ */
+export const _SearchOrganizationsVariables: Variables = async (event) => {
+  const { url } = event;
+  log.debug('in _SearchOrganizationsVariables', { url });
+  const {
+    data: { limit, offset, displayName },
+  } = await superValidate(url, zod(searchOrganizationSchema));
+  // const dataCopy = cleanClone(form.data, { empty: 'strip' });
+  const orderBy = [{ updatedAt: order_by.desc_nulls_first }];
+  const where = {
+    ...(displayName ? { displayName: { _ilike: `%${displayName}%` } } : {}),
+  };
+
+  return {
+    limit,
+    offset,
+    orderBy,
+    where,
+  };
+};

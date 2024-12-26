@@ -1,8 +1,0 @@
-mutation AddOrganization($roles: [user_org_roles_insert_input!]!) {
-  insert_user_org_roles(objects: $roles) {
-    returning {
-      userId
-      orgId
-    }
-  }
-}

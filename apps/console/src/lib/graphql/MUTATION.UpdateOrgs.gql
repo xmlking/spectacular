@@ -1,8 +1,0 @@
-mutation UpdateOrgs($id: uuid!, $data: organizations_set_input!) {
-  update_organizations_by_pk(pk_columns: { id: $id }, _set: $data) {
-    displayName
-    description
-    allowedEmails
-    allowedEmailDomains
-  }
-}

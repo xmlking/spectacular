@@ -1,4 +1,4 @@
-query GetOrgsbyOrg($id: uuid!) {
+query GetOrganization($id: uuid!) {
   organizations_by_pk(id: $id) {
     allowedEmailDomains
     allowedEmails

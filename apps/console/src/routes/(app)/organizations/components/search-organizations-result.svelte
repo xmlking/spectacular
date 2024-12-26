@@ -1,5 +1,5 @@
 <script lang="ts">
-import { PendingValue, type SearchPolicies$result, graphql } from '$houdini';
+import { PendingValue, type SearchOrganizations$result, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
@@ -11,49 +11,50 @@ import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 
-const log = new Logger('policies:search-results:browser');
+const log = new Logger('organizations:search-results:browser');
 // Variables
-export let data: SearchPolicies$result;
-let { policies } = data;
-$: ({ policies } = data);
+export let data: SearchOrganizations$result;
+let { organizations } = data;
+$: ({ organizations } = data);
+$: console.log('organizations', organizations);
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 //Datatable handler initialization
-const handler = new DataHandler(policies.filter(loaded), { rowsPerPage: 10 });
-$: handler.setRows(policies);
+const handler = new DataHandler(organizations.filter(loaded), { rowsPerPage: 10 });
+$: handler.setRows(organizations);
 const rows = handler.getRows();
 
 // Functions
 /**
- * Delete Polcy action
+ * Delete Organization action
  */
 let isDeleting = false;
-const deletePolicy = graphql(`
-    mutation DeletePolicy($id: uuid! ) {
-       delete_policies_by_pk(id: $id) {
-        ...Search_Policies_remove
+const deleteOrganization = graphql(`
+    mutation DeleteOrganization($id: uuid! ) {
+       delete_organizations_by_pk(id: $id) {
+        ...Search_Organizations_remove
       }
     }
   `);
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { id, ruleId, displayName } = event.currentTarget.dataset;
-  if (!id || !ruleId || !displayName) {
-    log.error('Misconfiguration: did you mess adding `data-id/data-rule-id/data-display-name` attributes?');
+  const { id, displayName } = event.currentTarget.dataset;
+  if (!id || !displayName) {
+    log.error('Misconfiguration: did you mess adding `data-id/data-display-name` attributes?');
     return;
   }
   // before
   isDeleting = true;
   await sleep(1300);
   const deletedAt = new Date();
-  const { data, errors: gqlErrors } = await deletePolicy.mutate({
+  const { data, errors: gqlErrors } = await deleteOrganization.mutate({
     id,
   });
   if (gqlErrors) {
     handleMessage(
       {
-        message: `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `,
+        message: `Error deleteing Organization: "${displayName}", cause: ${gqlErrors[0].message} `,
         hideDismiss: false,
         timeout: 10000,
         type: 'error',
@@ -61,21 +62,10 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
       toastStore,
     );
     return;
-  }
-  if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
+  } else if (data?.delete_organizations_by_pk) {
     handleMessage(
       {
-        message: `Policy and associated rule: "${displayName}" deleted`,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'success',
-      },
-      toastStore,
-    );
-  } else if (data?.update_policies_by_pk) {
-    handleMessage(
-      {
-        message: `Policy "${displayName}" deleted`,
+        message: `<p class="text-xl">Organization: <span class="text-red-500 font-bold">${displayName}</span> deleted</p>`,
         hideDismiss: false,
         timeout: 10000,
         type: 'success',
@@ -85,7 +75,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   } else {
     handleMessage(
       {
-        message: `Policy not found for ID: ${id}`,
+        message: `Organization not found for ID: ${id}`,
         hideDismiss: false,
         timeout: 50000,
         type: 'error',
@@ -110,46 +100,25 @@ $: loadingState.setFormLoading(isDeleting);
     <table class="table table-hover table-compact w-full table-auto">
       <thead>
         <tr>
-          <Table.Head {handler} orderBy={(row) => row.rule.displayName}
-            >Rule Name</Table.Head
-          >
-          <Table.Head {handler} orderBy="subjectDisplayName">Subject</Table.Head
-          >
+          <Table.Head {handler} orderBy="displayName">Name</Table.Head>
+          <Table.Head {handler} orderBy={(row) => row.owner.displayName}>Owner</Table.Head>
           <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
-          <Table.Head {handler} orderBy={(row) => row.rule.sourcePort}
-            >Source</Table.Head
-          >
-          <Table.Head {handler} orderBy={(row) => row.rule.destinationPort}
-            >Destination</Table.Head
-          >
-          <Table.Head {handler} orderBy="active">Active</Table.Head>
-          <Table.Head {handler} orderBy={(row) => row.rule.shared}
-            >Shared</Table.Head
-          >
+          <Table.Head {handler} orderBy={(row) => row.autoEnroll}>Auto Enroll</Table.Head>
+          <Table.Head {handler} orderBy="allowedEmailDomains">Allowed Email Domains</Table.Head>
+          <Table.Head {handler} orderBy="allowedEmails">Allowed Emails</Table.Head>
+          <Table.Head {handler} orderBy="blockedEmailDomains">Blocked Email Domains</Table.Head>
+          <Table.Head {handler} orderBy="blockedEmails">Blocked Emails</Table.Head>
           <Table.Head {handler}>Delete</Table.Head>
         </tr>
         <tr>
-          <Table.HeadFilter
-            {handler}
-            filterBy={(row) => row.rule.displayName}
-          />
-          <Table.HeadFilter {handler} filterBy="subjectDisplayName" />
+          <Table.HeadFilter {handler} filterBy="displayName" />
+          <Table.HeadFilter {handler} filterBy={(row) => row.owner.displayName} />
           <Table.HeadFilter {handler} filterBy="updatedAt" />
-          <Table.HeadFilter {handler} filterBy={(row) => row.rule.sourcePort} />
-          <Table.HeadFilter
-            {handler}
-            filterBy={(row) => row.rule.destinationPort}
-          />
-          <Table.HeadFilter
-            {handler}
-            filterBy="active"
-            comparator={check.isLike}
-          />
-          <Table.HeadFilter
-            {handler}
-            filterBy={(row) => row.rule.shared}
-            comparator={check.isLike}
-          />
+          <Table.HeadFilter {handler} filterBy={(row) => row.autoEnroll} comparator={check.isLike} />
+          <Table.HeadFilter {handler} filterB="allowedEmailDomains" />
+          <Table.HeadFilter {handler} filterBy="allowedEmails" />
+          <Table.HeadFilter {handler} filterBy="blockedEmailDomains" />
+          <Table.HeadFilter {handler} filterBy="blockedEmails" />
           <th></th>
         </tr>
       </thead>
@@ -165,29 +134,31 @@ $: loadingState.setFormLoading(isDeleting);
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
+              <td><div class="placeholder" /></td>
+              <td><div class="placeholder" /></td>
             </tr>
           {:else}
             <tr>
-              <td
-                ><a
+              <td>
+                <a
                   class="font-semibold"
-                  href={`/policies/${row.id}`}
-                  title={row.rule.description}>{row.rule.displayName}</a
-                ></td
-              >
-              <td>{row.subjectDisplayName}</td>
+                  href={`/organizations/${row.id}`}
+                  title={row.description}>{row.displayName}
+                </a>
+              </td>
+              <td>{row.owner.displayName}</td>
               <td><DateTime distance time={row.updatedAt} /></td>
-              <td>{row.rule.sourcePort}</td>
-              <td>{row.rule.destinationPort}</td>
-              <td>{row.active}</td>
-              <td>{row.rule.shared}</td>
+              <td>{row.autoEnroll}</td>
+              <td>{row.allowedEmailDomains}</td>
+              <td>{row.allowedEmails}</td>
+              <td>{row.blockedEmailDomains}</td>
+              <td>{row.blockedEmails}</td>
               <td>
                 <button
                   type="button"
                   class="btn-icon btn-icon-sm variant-filled-error"
                   data-id={row.id}
-                  data-rule-id={row.rule.id}
-                  data-display-name={row.rule.displayName}
+                  data-display-name={row.displayName}
                   on:click|stopPropagation|capture={handleDelete}
                   disabled={isDeleting}
                 >

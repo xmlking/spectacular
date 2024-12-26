@@ -1,35 +1,87 @@
 <script lang="ts">
+import { browser } from '$app/environment';
+import { goto } from '$app/navigation';
+import { graphql, type policies_insert_input } from '$houdini';
+import * as m from '$i18n/messages';
+import { searchRulesFn } from '$lib/api/search-rules';
+import { searchSubjects } from '$lib/api/search-subjects';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { i18n } from '$lib/i18n';
 import { updateOrganizationSchema as schema } from '$lib/schema/organization';
-import { InputChip } from '@skeletonlabs/skeleton';
-import { DebugShell } from '@spectacular/skeleton/components';
+import { createOrganizationKeys as keys } from '$lib/schema/organization';
+import { getLoadingState } from '$lib/stores/loading';
+import type { PartialGraphQLErrors } from '$lib/types';
+import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
+import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
-import { Control, Field, FieldErrors, Label } from 'formsnap';
+import { Control, Description, Field, FieldErrors, Fieldset, Label, Legend } from 'formsnap';
 import { fade } from 'svelte/transition';
-import { superForm } from 'sveltekit-superforms';
-import SuperDebug from 'sveltekit-superforms';
-import { zodClient } from 'sveltekit-superforms/adapters';
+import { Logger, cleanClone } from '@spectacular/utils';
+import * as Form from 'formsnap';
+import type { GraphQLError } from 'graphql';
+import {
+  Loader,
+  MonitorSmartphone,
+  MoreHorizontal,
+  Search,
+  Server,
+  User,
+  UserRound,
+  Users,
+  UsersRound,
+} from 'lucide-svelte';
+import Select from 'svelte-select';
+import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
+
+const log = new Logger('organizations.update.browser');
 
 export let data;
+
+// Variables
+const toastStore = getToastStore();
+const loadingState = getLoadingState();
+let gqlErrors: PartialGraphQLErrors;
+
+const updateOrganization = graphql(`
+    mutation UpdateOrganization($id: uuid!,  $data: organizations_set_input!) {
+      update_organizations_by_pk(pk_columns: {id: $id}, _set: $data) {
+        displayName
+      }
+    }
+  `);
 // initializing a form based on superForm with zod schema
 const form = superForm(data.form, {
+  SPA: true,
   dataType: 'json',
+  taintedMessage: null,
+  syncFlashMessage: false,
+  resetForm: true,
+  delayMs: 100,
+  timeoutMs: 4000,
   validators: zodClient(schema),
 });
 
 const {
   form: formData,
-  message,
-  errors,
-  tainted,
-  reset,
-  isTainted,
-  submitting,
   delayed,
-  timeout,
-  posted,
-  constraints,
   enhance,
+  errors,
+  constraints,
+  message,
+  isTainted,
+  tainted,
+  allErrors,
+  reset,
+  submitting,
+  timeout,
+  capture,
+  restore,
 } = form;
+export const snapshot = { capture, restore };
+
 function isValidEmail(value: string): boolean {
   return value.includes('@') && value.includes('.');
 }
@@ -38,6 +90,9 @@ function isValidEmailDomain(value: string): boolean {
   const afterdot = value.substring(dotindex + 1);
   return value.includes('.') && afterdot.length >= 2;
 }
+// Reactivity
+$: valid = $allErrors.length === 0;
+$: loadingState.setFormLoading($delayed);
 </script>
 
 <svelte:head>
@@ -57,10 +112,10 @@ function isValidEmailDomain(value: string): boolean {
 
 <div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
 		<div class="col-span-3">
-			<Field {form} name="Organization">
-				<Control let:attrs>
+			<Form.Field {form} name="Organization">
+				<Form.Control let:attrs>
 					<div class="grid gap-2">
-						<Label class="label">Organization</Label>
+						<Form.Label class="label">Organization</Form.Label>
 						<input
 							class="input"
 							{...attrs}
@@ -68,52 +123,52 @@ function isValidEmailDomain(value: string): boolean {
               disabled
 						/>
 					</div>
-				</Control>
+				</Form.Control>
 				<FieldErrors />
-			</Field>
+			</Form.Field>
 		</div>
 		<div class="col-span-3">
-			<Field {form} name="description">
-				<Control let:attrs>
+			<Form.Field {form} name="description">
+				<Form.Control let:attrs>
 					<div class="grid gap-2">
-						<Label class="label">Description</Label>
+						<Form.Label class="label">Description</Form.Label>
 						<input
 							class="input"
 							{...attrs}
 							bind:value={$formData.description}
 						/>
 					</div>
-				</Control>
+				</Form.Control>
 				<FieldErrors />
-			</Field>
+			</Form.Field>
 		</div>
 		<div class="col-span-3">
-			<Field {form} name="allowedEmails">
-				<Control let:attrs>
+			<Form.Field {form} name="allowedEmails">
+				<Form.Control let:attrs>
 					<div class="grid gap-2">
-							<Label class="label">Allowed Emails</Label>
+							<Form.Label class="label">Allowed Emails</Form.Label>
 							<InputChip
 								{...attrs}
 								bind:value={$formData.allowedEmails}
                 validation={isValidEmail}
 							/>
 					</div>
-				</Control>
-			</Field>
+				</Form.Control>
+			</Form.Field>
 		</div>
     <div class="col-span-3">
-			<Field {form} name="allowedEmailDomains">
-				<Control let:attrs>
+			<Form.Field {form} name="allowedEmailDomains">
+				<Form.Control let:attrs>
 					<div class="grid gap-2">
-							<Label class="label">Allowed Email Domains</Label>
+							<Form.Label class="label">Allowed Email Domains</Form.Label>
 							<InputChip
 								{...attrs}
 								bind:value={$formData.allowedEmailDomains}
                 validation={isValidEmailDomain}
 							/>
 					</div>
-				</Control>
-			</Field>
+				</Form.Control>
+			</Form.Field>
 		</div>
 	</div>
     <!-- Form Action Buttons -->
@@ -158,8 +213,7 @@ function isValidEmailDomain(value: string): boolean {
 			isTainted: isTainted,
 			submitting: $submitting,
 			delayed: $delayed,
-			timeout: $timeout,
-			posted: $posted
+			timeout: $timeout
 		}}
 	/>
 	<br />

@@ -6,7 +6,7 @@ import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { BeforeLoadEvent, SearchPoliciesVariables as Variables } from './$houdini';
 
-const log = new Logger('policies:search-ts:browser');
+const log = new Logger('policies:search:browser');
 /**
  * Note: `_houdini_beforeLoad` run first, then `_SearchPoliciesVariables` then load GQL
  */

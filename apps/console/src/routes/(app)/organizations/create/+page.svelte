@@ -1,34 +1,90 @@
 <script lang="ts">
+import { browser } from '$app/environment';
+import { goto } from '$app/navigation';
+import { graphql, type policies_insert_input } from '$houdini';
+import * as m from '$i18n/messages';
+import { searchRulesFn } from '$lib/api/search-rules';
+import { searchSubjects } from '$lib/api/search-subjects';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { i18n } from '$lib/i18n';
 import { createOrganizationSchema as schema } from '$lib/schema/organization';
-import { InputChip } from '@skeletonlabs/skeleton';
-import { DebugShell } from '@spectacular/skeleton/components';
+import { createOrganizationKeys as keys } from '$lib/schema/organization';
+import { getLoadingState } from '$lib/stores/loading';
+import type { PartialGraphQLErrors } from '$lib/types';
+import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
+import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Control, Description, Field, FieldErrors, Fieldset, Label, Legend } from 'formsnap';
 import { fade } from 'svelte/transition';
-import { superForm } from 'sveltekit-superforms';
-import SuperDebug from 'sveltekit-superforms';
-import { zodClient } from 'sveltekit-superforms/adapters';
+import { Logger, cleanClone } from '@spectacular/utils';
+import * as Form from 'formsnap';
+import type { GraphQLError } from 'graphql';
+import {
+  Loader,
+  MonitorSmartphone,
+  MoreHorizontal,
+  Search,
+  Server,
+  User,
+  UserRound,
+  Users,
+  UsersRound,
+} from 'lucide-svelte';
+import Select from 'svelte-select';
+import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
-export let data;
+const log = new Logger('organizations.create.browser');
 
-const form = superForm(data.form, {
+// Variables
+const toastStore = getToastStore();
+const loadingState = getLoadingState();
+let gqlErrors: PartialGraphQLErrors;
+
+const createOrganization = graphql(`
+    mutation CreateOrganization($data: organizations_insert_input!) {
+      insert_organizations_one(object: $data) {
+        displayName
+      }
+    }
+  `);
+
+const form = superForm(defaults(zod(schema)), {
+  SPA: true,
   dataType: 'json',
+  taintedMessage: null,
+  syncFlashMessage: false,
+  resetForm: true,
+  delayMs: 100,
+  timeoutMs: 4000,
   validators: zodClient(schema),
+  async onUpdate({ form, cancel }) {
+    if (!form.valid) return;
+  },
+  onError({ result }) {
+    log.error('superForm onError:', { result });
+  },
 });
+
 const {
   form: formData,
-  message,
-  errors,
-  tainted,
-  reset,
-  isTainted,
-  submitting,
   delayed,
-  timeout,
-  posted,
-  constraints,
   enhance,
+  errors,
+  constraints,
+  message,
+  isTainted,
+  tainted,
+  allErrors,
+  reset,
+  submitting,
+  timeout,
+  capture,
+  restore,
 } = form;
+export const snapshot = { capture, restore };
 
 function isValidEmail(value: string): boolean {
   return value.includes('@') && value.includes('.');
@@ -38,68 +94,85 @@ function isValidEmailDomain(value: string): boolean {
   const afterdot = value.substring(dotindex + 1);
   return value.includes('.') && afterdot.length >= 2;
 }
+// Reactivity
+$: valid = $allErrors.length === 0;
+$: loadingState.setFormLoading($delayed);
 </script>
 
 <svelte:head>
-	<title>Organizations</title>
-	<meta name="description" content="Showcase formsnap" />
+  <title>Organizations</title>
+  <meta name="description" content="Create Organization" />
 </svelte:head>
+
 <div class="page-container">
-	<h1 class="pb-8 text-3xl font-semibold tracking-tight">Create Organization</h1>
-  <form
-    method="POST"
+  <section class="space-y-4">
+    <h1 class="h1">Organizations</h1>
+    <p>create organization</p>
+  </section>
+
+  <section class="space-y-4">
+    <!-- Form Level Errors / Messages -->
+    <Alerts errors={$errors._errors} message={$message} />
+    <!-- GraphQL Errors  -->
+    {#if gqlErrors}
+      <GraphQLErrors errors={gqlErrors} />
+    {/if}
+    <!-- Update User Details Form -->
+    <form
     class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md"
+    method="POST"
     use:enhance
   >
-
-      <!-- Form Level Errors / Messages -->
-    <Alerts errors={$errors._errors} message={$message} />
-		<div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
+      <header class="card-header">
+        <div class="text-xl">Create Organization</div>
+        <!-- <div>Create new Organization</div> -->
+      </header>
+      <section class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6">
 			<div class="col-span-3">
-				<Field {form} name="displayName">
-					<Control let:attrs>
+				<Form.Field {form} name={keys.displayName}>
+					<Form.Control let:attrs>
 						<div class="grid gap-2">
-							<Label class="label">Name</Label>
+							<Form.Label class="label">Name</Form.Label>
 							<input {...attrs} class="input" bind:value={$formData.displayName} />
-							<FieldErrors class="data-[fs-error]:text-error-500" />
+							<Form.FieldErrors class="data-[fs-error]:text-error-500" />
 						</div>
-					</Control>
-				</Field>
+					</Form.Control>
+				</Form.Field>
 			</div>
 			<div class="col-span-3">
-				<Field {form} name="description">
-					<Control let:attrs>
+				<Form.Field {form} name="description">
+					<Form.Control let:attrs>
 						<div class="grid gap-2">
-							<Label class="label">Description</Label>
+							<Form.Label class="label">Description</Form.Label>
 							<input class="input" {...attrs} bind:value={$formData.description} />
 						</div>
-					</Control>
+					</Form.Control>
 					<FieldErrors />
-				</Field>
+				</Form.Field>
 			</div>
 			<div class="col-span-3">
-				<Field {form} name="allowedEmails">
-					<Control let:attrs>
+				<Form.Field {form} name="allowedEmails">
+					<Form.Control let:attrs>
 						<div class="grid gap-2">
-							<Label class="label">Allowed_Emails</Label>
+							<Form.Label class="label">Allowed_Emails</Form.Label>
 							<InputChip {...attrs} bind:value={$formData.allowedEmails} validation={isValidEmail}/>
 						</div>
-					</Control>
+					</Form.Control>
 					<FieldErrors />
-				</Field>
+				</Form.Field>
 			</div>
       <div class="col-span-3">
-				<Field {form} name="allowedEmailDomains">
-					<Control let:attrs>
+				<Form.Field {form} name="allowedEmailDomains">
+					<Form.Control let:attrs>
 						<div class="grid gap-2">
-							<Label class="label">Allowed_Email_Domains</Label>
+							<Form.Label class="label">Allowed_Email_Domains</Form.Label>
 							<InputChip {...attrs} bind:value={$formData.allowedEmailDomains} validation={isValidEmailDomain}/>
 						</div>
-					</Control>
+					</Form.Control>
 					<FieldErrors />
-				</Field>
+				</Form.Field>
 			</div>
-		</div>
+    </section>
     <!-- Form Action Buttons -->
     <button
       type="button"
@@ -132,8 +205,11 @@ function isValidEmailDomain(value: string): boolean {
       {/if}
     </button>
   </form>
+  </section>
 
-	<DebugShell>
+    <section class="space-y-4">
+    <!-- Debug -->
+    <DebugShell label="form-data">
 		<SuperDebug
 			label="Miscellaneous"
 			status={false}
@@ -143,7 +219,6 @@ function isValidEmailDomain(value: string): boolean {
 				submitting: $submitting,
 				delayed: $delayed,
 				timeout: $timeout,
-				posted: $posted
 			}}
 		/>
 		<br />
@@ -155,4 +230,5 @@ function isValidEmailDomain(value: string): boolean {
 		<br />
 		<SuperDebug label="Constraints" status={false} data={$constraints} />
 	</DebugShell>
+    </section>
 </div>

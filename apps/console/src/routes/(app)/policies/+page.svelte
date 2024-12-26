@@ -15,7 +15,7 @@ $: ({ SearchPolicies } = data);
 </script>
 
 <svelte:head>
-  <title>Policies</title>
+  <title>Datablocks | Policies</title>
   <meta name="description" content="policies" />
 </svelte:head>
 

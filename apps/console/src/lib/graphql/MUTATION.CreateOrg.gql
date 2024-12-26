@@ -1,9 +1,0 @@
-mutation CreateOrg($data: organizations_insert_input!) {
-  insert_organizations_one(object: $data) {
-    id
-    displayName
-    description
-    allowedEmails
-    allowedEmailDomains
-  }
-}
