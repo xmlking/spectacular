@@ -36,12 +36,16 @@ const rows = handler.getRows();
 // Functions
 /**
  * Delete Polcy action
+ * FIXME: Cache bust: `policies {id @policies_delete }` is empty !!!
  */
 let isDeleting = false;
 const deleteRule = graphql(`
     mutation DeleteRule($id: uuid!) {
       delete_rules_by_pk(id: $id) {
         ...Search_Rules_remove
+        policies {
+          id @policies_delete
+        }
       }
     }
   `);
@@ -68,7 +72,8 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
     const { data, errors: gqlErrors } = await deleteRule.mutate({
       id: ruleId,
     });
-    // Manuvally delete the policy from cache as policy is deleted via cascade when parent `rule` is deleted
+    // TODO: `policyId @policies_delete` ???
+    // WORKAROUND: Manuvally delete the policy from cache as policy is deleted via cascade by database when parent `rule` is deleted.
     const policy = cache.get('policies', { id });
     policy.delete();
 

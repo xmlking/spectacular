@@ -6609,6 +6609,42 @@ type rules {
     path: String
   ): jsonb
   orgId: uuid!
+
+  """An array relationship"""
+  policies(
+    """distinct select on columns"""
+    distinct_on: [policies_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [policies_order_by!]
+
+    """filter the rows returned"""
+    where: policies_bool_exp
+  ): [policies!]!
+
+  """An aggregate relationship"""
+  policies_aggregate(
+    """distinct select on columns"""
+    distinct_on: [policies_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [policies_order_by!]
+
+    """filter the rows returned"""
+    where: policies_bool_exp
+  ): policies_aggregate!
   protocol: protocol_enum!
   shared: Boolean!
   source: String
@@ -6735,6 +6771,8 @@ input rules_bool_exp {
   id: uuid_comparison_exp
   metadata: jsonb_comparison_exp
   orgId: uuid_comparison_exp
+  policies: policies_bool_exp
+  policies_aggregate: policies_aggregate_bool_exp
   protocol: protocol_enum_comparison_exp
   shared: Boolean_comparison_exp
   source: String_comparison_exp
@@ -6801,6 +6839,7 @@ input rules_insert_input {
   direction: direction_enum
   displayName: String
   metadata: jsonb
+  policies: policies_arr_rel_insert_input
   protocol: protocol_enum
   shared: Boolean
   source: String
@@ -6938,6 +6977,7 @@ input rules_order_by {
   id: order_by
   metadata: order_by
   orgId: order_by
+  policies_aggregate: policies_aggregate_order_by
   protocol: order_by
   shared: order_by
   source: order_by
@@ -10081,6 +10121,7 @@ type users {
     """JSON select path"""
     path: String
   ): jsonb
+  otpMethodLastUsed: String
   phoneNumber: String
   phoneNumberVerified: Boolean!
 
@@ -10277,6 +10318,7 @@ input users_bool_exp {
   lastSeen: timestamptz_comparison_exp
   locale: String_comparison_exp
   metadata: jsonb_comparison_exp
+  otpMethodLastUsed: String_comparison_exp
   phoneNumber: String_comparison_exp
   phoneNumberVerified: Boolean_comparison_exp
   refreshTokens: authRefreshTokens_bool_exp
@@ -10325,6 +10367,7 @@ type users_max_fields {
   id: uuid
   lastSeen: timestamptz
   locale: String
+  otpMethodLastUsed: String
   phoneNumber: String
   updatedAt: timestamptz
 }
@@ -10343,6 +10386,7 @@ type users_min_fields {
   id: uuid
   lastSeen: timestamptz
   locale: String
+  otpMethodLastUsed: String
   phoneNumber: String
   updatedAt: timestamptz
 }
@@ -10377,6 +10421,7 @@ input users_order_by {
   lastSeen: order_by
   locale: order_by
   metadata: order_by
+  otpMethodLastUsed: order_by
   phoneNumber: order_by
   phoneNumberVerified: order_by
   refreshTokens_aggregate: authRefreshTokens_aggregate_order_by
@@ -10442,6 +10487,9 @@ enum users_select_column {
   metadata
 
   """column name"""
+  otpMethodLastUsed
+
+  """column name"""
   phoneNumber
 
   """column name"""
@@ -10490,6 +10538,7 @@ input users_stream_cursor_value_input {
   lastSeen: timestamptz
   locale: String
   metadata: jsonb
+  otpMethodLastUsed: String
   phoneNumber: String
   phoneNumberVerified: Boolean
   updatedAt: timestamptz

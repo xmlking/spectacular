@@ -35,6 +35,14 @@ configuration:
     updated_at: updatedAt
     updated_by: updatedBy
   custom_root_fields: {}
+array_relationships:
+  - name: policies
+    using:
+      foreign_key_constraint_on:
+        column: rule_id
+        table:
+          name: policies
+          schema: public
 insert_permissions:
   - role: org:admin
     permission:

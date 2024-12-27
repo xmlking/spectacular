@@ -63,9 +63,8 @@ const config = {
         return date?.toISOString();
       },
     },
-
     Decimal: {
-      type: 'number',
+      type: 'Number',
       unmarshal(val) {
         return new Number(val);
       },
@@ -74,13 +73,16 @@ const config = {
       },
     },
     smallint: {
-      type: 'number',
+      type: 'Number',
       unmarshal(val) {
         return new Number(val);
       },
       marshal(number) {
         return number.toString();
       },
+    },
+    bigint: {
+      type: 'Number',
     },
     URL: {
       type: 'URL',
@@ -92,7 +94,7 @@ const config = {
       },
     },
     hstore: {
-      type: 'string',
+      type: 'String',
       unmarshal(val) {
         return Object.entries(val)
           .map(([k, v]) => `"${k}" => "${v}"`)
@@ -103,7 +105,7 @@ const config = {
       },
     },
     citext: {
-      type: 'string',
+      type: 'String',
       ...defaultMarshall,
     },
     // FIXME: https://github.com/hasura/graphql-engine/issues/348
@@ -121,11 +123,11 @@ const config = {
     // 	}
     // },
     uuid: {
-      type: 'string',
+      type: 'String',
       ...defaultMarshall,
     },
     jsonb: {
-      type: 'object',
+      type: 'Object',
       ...defaultMarshall,
     },
     timestamp: {
@@ -151,11 +153,11 @@ const config = {
       },
     },
     bigint: {
-      type: 'number',
+      type: 'Number',
       ...defaultMarshall,
     },
     bytea: {
-      type: 'binary',
+      type: 'Binary',
       ...defaultMarshall,
     },
   },

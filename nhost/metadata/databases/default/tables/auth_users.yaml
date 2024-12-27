@@ -204,6 +204,31 @@ select_permissions:
         id:
           _eq: X-Hasura-User-Id
     comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - active_mfa_type
+        - avatar_url
+        - created_at
+        - default_role
+        - disabled
+        - display_name
+        - email
+        - email_verified
+        - id
+        - is_anonymous
+        - last_seen
+        - locale
+        - metadata
+        - otp_method_last_used
+        - phone_number
+        - phone_number_verified
+        - updated_at
+      computed_fields:
+        - currentOrgId
+      filter: {}
+      allow_aggregations: true
+    comment: ""
 update_permissions:
   - role: me
     permission:

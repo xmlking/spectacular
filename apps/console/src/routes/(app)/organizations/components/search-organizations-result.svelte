@@ -16,7 +16,6 @@ const log = new Logger('organizations:search-results:browser');
 export let data: SearchOrganizations$result;
 let { organizations } = data;
 $: ({ organizations } = data);
-$: console.log('organizations', organizations);
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -99,7 +98,7 @@ $: loadingState.setFormLoading(isDeleting);
       <thead>
         <tr>
           <Table.Head {handler} orderBy="displayName">Name</Table.Head>
-          <Table.Head {handler} orderBy={(row) => row.owner.displayName}>Owner</Table.Head>
+          <Table.Head {handler} orderBy="ownerId">Owner</Table.Head>
           <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
           <Table.Head {handler} orderBy={(row) => row.autoEnroll}>Auto Enroll</Table.Head>
           <Table.Head {handler} orderBy="allowedEmailDomains">Allowed Email Domains</Table.Head>
@@ -110,7 +109,7 @@ $: loadingState.setFormLoading(isDeleting);
         </tr>
         <tr>
           <Table.HeadFilter {handler} filterBy="displayName" />
-          <Table.HeadFilter {handler} filterBy={(row) => row.owner.displayName} />
+          <Table.HeadFilter {handler} filterBy="ownerId" />
           <Table.HeadFilter {handler} filterBy="updatedAt" />
           <Table.HeadFilter {handler} filterBy={(row) => row.autoEnroll} comparator={check.isLike} />
           <Table.HeadFilter {handler} filterB="allowedEmailDomains" />
@@ -145,13 +144,13 @@ $: loadingState.setFormLoading(isDeleting);
                   >{row.displayName}
                 </a>
               </td>
-              <td>{row.owner.displayName}</td>
+              <td>{@html row.ownerId}</td>
               <td><DateTime distance time={row.updatedAt} /></td>
               <td>{row.autoEnroll}</td>
-              <td>{row.allowedEmailDomains}</td>
-              <td>{row.allowedEmails}</td>
-              <td>{row.blockedEmailDomains}</td>
-              <td>{row.blockedEmails}</td>
+              <td>{@html row.allowedEmailDomains}</td>
+              <td>{@html row.allowedEmails}</td>
+              <td>{@html row.blockedEmailDomains}</td>
+              <td>{@html row.blockedEmails}</td>
               <td>
                 <button
                   type="button"

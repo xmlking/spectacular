@@ -30,3 +30,15 @@ query SearchRules(
     ...RuleCardFields
   }
 }
+
+# sample to delete cache
+mutation DeleteRule($id: ID!) {
+  deletePage(id: $id) {
+    ... on MutationDeletePageSuccess {
+      data {
+        title
+        id @Rule_delete
+      }
+    }
+  }
+}

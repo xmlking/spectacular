@@ -9,9 +9,6 @@ query SearchOrganizations(
     displayName
     description
     ownerId
-    owner {
-      displayName
-    }
     updatedAt
     avatarUrl
     autoEnroll
