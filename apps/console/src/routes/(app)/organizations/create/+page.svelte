@@ -163,10 +163,63 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
+        <div class="md:grid-cols-3 col-span-6">
+          <Form.Field {form} name={keys.avatarUrl}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Avatar URL</Form.Label>
+              <input
+                type="url"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="https://example.com/avatar.jpg"
+                bind:value={$formData.avatarUrl}
+              />
+            </Form.Control>
+            <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Org's Avatar URL</Form.Description>
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div class="col-span-3">
+          <Form.Field {form} name={keys.tags}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Tags</Form.Label>
+              <InputChip
+                {...attrs}
+                placeholder="Enter tags..."
+                class="input data-[fs-error]:input-error"
+                bind:value={$formData.tags}
+              />
+            </Form.Control>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the tags and press <strong>Enter</strong></Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div class="col-span-3">
+          <Form.Field {form} name={keys.metadata}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Metadata</Form.Label>
+              <input
+                type="text"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="Enter Metadata..."
+                bind:value={$formData.metadata}
+              />
+            </Form.Control>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the metadata</Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
         <div class="col-span-3">
           <Form.Field {form} name={keys.allowedEmails}>
             <Form.Control let:attrs>
-              <Form.Label class="label">Allowed_Emails</Form.Label>
+              <Form.Label class="label">Allowed Emails</Form.Label>
               <InputChip
                 {...attrs}
                 placeholder="Enter Allowed Emails..."
@@ -186,7 +239,7 @@ $: loadingState.setFormLoading($delayed);
         <div class="col-span-3">
           <Form.Field {form} name={keys.allowedEmailDomains}>
             <Form.Control let:attrs>
-              <Form.Label class="label">Allowed_Email_Domains</Form.Label>
+              <Form.Label class="label">Allowed Email Domains</Form.Label>
               <InputChip
                 class="input data-[fs-error]:input-error"
                 {...attrs}
@@ -203,35 +256,91 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
+        <div class="col-span-3">
+          <Form.Field {form} name={keys.blockedEmails}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Blocked Emails</Form.Label>
+              <InputChip
+                {...attrs}
+                placeholder="Enter Blocked Emails..."
+                class="input data-[fs-error]:input-error"
+                bind:value={$formData.blockedEmails}
+                validation={isValidEmail}
+              />
+            </Form.Control>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Type valid email address and press <strong>Enter</strong
+              ></Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div class="col-span-3">
+          <Form.Field {form} name={keys.blockedEmailDomains}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Blocked Email Domains</Form.Label>
+              <InputChip
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="Enter Blocked Email Domains..."
+                bind:value={$formData.blockedEmailDomains}
+                validation={isValidEmailDomain}
+              />
+            </Form.Control>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Type valid email domains name and press <strong>Enter</strong
+              ></Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
       </section>
-      <footer class="card-footer flex justify-end space-x-2">
-        <button
-          type="button"
-          class="variant-ghost-secondary btn"
-          on:click={() => history.back()}>Back</button
-        >
-        <button
-          type="button"
-          class="variant-ghost-warning btn"
-          disabled={!$tainted}
-          on:click={() => reset()}
-        >
-          Reset
-        </button>
-
-        <button
-          type="submit"
-          class="btn variant-ghost-success"
-          disabled={!$tainted || !valid || $submitting}
-        >
-          {#if $timeout}
-            <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
-          {:else if $delayed}
-            <Loader class="m-2 h-4 w-4 animate-spin" />
-          {:else}
-            {m.buttons_create()}
-          {/if}
-        </button>
+      <footer class="card-footer flex justify-between">
+          <Form.Field {form} name={keys.autoEnroll}>
+            <Form.Control let:attrs>
+              <SlideToggle
+                active="variant-filled-secondary"
+                size="md"
+                {...attrs}
+                bind:checked={$formData.autoEnroll}
+              >
+                <Form.Label class="inline-block text-left">
+                  Auto Enroll <strong>{$formData.autoEnroll ? "ON" : "OFF"}</strong></Form.Label
+                >
+              </SlideToggle>
+            </Form.Control>
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        <div class="space-x-2">
+          <button
+            type="button"
+            class="btn variant-filled-primary"
+            on:click={() => history.back()}>Back</button
+          >
+          <button
+            type="button"
+            class="btn variant-filled-warning"
+            disabled={!$tainted}
+            on:click={() => reset()}
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            class="btn variant-filled"
+            disabled={!$tainted || !valid || $submitting}
+          >
+            {#if $timeout}
+              <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+            {:else if $delayed}
+              <Loader class="m-2 h-4 w-4 animate-spin" />
+            {:else}
+              {m.buttons_create()}
+            {/if}
+          </button>
+        </div>
       </footer>
     </form>
   </section>

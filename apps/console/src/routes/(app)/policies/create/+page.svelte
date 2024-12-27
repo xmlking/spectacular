@@ -801,24 +801,6 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
-        <div class="justify-start content-center">
-          <Form.Field {form} name="active">
-            <Form.Control let:attrs>
-              <SlideToggle
-                active="variant-filled-secondary"
-                size="md"
-                {...attrs}
-                bind:checked={$formData.active}
-              >
-                <Form.Label class="inline-block w-[100px] text-left"
-                  >Active {$formData.active ? "On" : "Off"}</Form.Label
-                >
-              </SlideToggle>
-            </Form.Control>
-            <!-- <Form.Description>Temporarily disable policy</Form.Description> -->
-            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-          </Form.Field>
-        </div>
         <div class="col-start-5">
           <Form.Field {form} name={keys.validFrom}>
             <Form.Control let:attrs>
@@ -856,20 +838,50 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
       </section>
-      <footer class="card-footer flex justify-end">
-        <button
-          type="submit"
-          class="btn variant-filled-secondary"
-          disabled={!$tainted || !valid || $submitting}
-        >
-          {#if $timeout}
-            <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
-          {:else if $delayed}
-            <Loader class="m-2 h-4 w-4 animate-spin" />
-          {:else}
-            {m.buttons_create()}
-          {/if}
-        </button>
+      <footer class="card-footer flex justify-between">
+          <Form.Field {form} name={keys.active}>
+            <Form.Control let:attrs>
+              <SlideToggle
+                active="variant-filled-secondary"
+                size="md"
+                {...attrs}
+                bind:checked={$formData.active}
+              >
+                <Form.Label class="inline-block text-left">
+                  Active <strong>{$formData.active ? "ON" : "OFF"}</strong></Form.Label
+                >
+              </SlideToggle>
+            </Form.Control>
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        <div class="space-x-2">
+          <button
+            type="button"
+            class="btn variant-filled-primary"
+            on:click={() => history.back()}>Back</button
+          >
+          <button
+            type="button"
+            class="btn variant-filled-warning"
+            disabled={!$tainted}
+            on:click={() => reset()}
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            class="btn variant-filled"
+            disabled={!$tainted || !valid || $submitting}
+          >
+            {#if $timeout}
+              <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+            {:else if $delayed}
+              <Loader class="m-2 h-4 w-4 animate-spin" />
+            {:else}
+              {m.buttons_create()}
+            {/if}
+          </button>
+        </div>
       </footer>
     </form>
   </section>

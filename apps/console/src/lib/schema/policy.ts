@@ -28,7 +28,7 @@ export const policySchema = z.object({
     id: z.string().trim().uuid(),
     displayName: z.string().trim().min(4).max(256),
     description: z.string().trim().max(256).nullish(),
-    tags: z.string().trim().min(2).array().max(5).default([]),
+    tags: z.string().trim().min(2).array().max(5).optional().default([]),
     // metadata: z.string().trim().nullish(),
     metadata: z.record(z.string(), z.string()).nullish(),
     source: z.string().ip().nullish(),
