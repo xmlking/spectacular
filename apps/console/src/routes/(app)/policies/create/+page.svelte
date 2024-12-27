@@ -33,12 +33,10 @@ import {
 import Select from 'svelte-select';
 import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-// import type { PageData } from './$types';
 
 const log = new Logger('policies.create.browser');
 
 // Variables
-// export let data: PageData;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
@@ -92,7 +90,7 @@ const createPolicy = graphql(`
     }
   `);
 
-const superform = superForm(defaults(zod(schema)), {
+const form = superForm(defaults(zod(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -178,7 +176,7 @@ const superform = superForm(defaults(zod(schema)), {
 });
 
 const {
-  form,
+  form: formData,
   delayed,
   enhance,
   errors,
@@ -192,20 +190,20 @@ const {
   timeout,
   capture,
   restore,
-} = superform;
+} = form;
 export const snapshot = { capture, restore };
 
 // subject settings
-let subject = $form?.subjectId
+let subject = $formData?.subjectId
   ? {
-      id: $form.subjectId,
-      displayName: $form.subjectDisplayName,
-      secondaryId: $form.subjectSecondaryId,
+      id: $formData.subjectId,
+      displayName: $formData.subjectDisplayName,
+      secondaryId: $formData.subjectSecondaryId,
     }
   : null;
 
 async function fetchSubjects(filterText: string) {
-  const result = await searchSubjects($form.subjectType, filterText);
+  const result = await searchSubjects($formData.subjectType, filterText);
   if (result.isErr()) {
     gqlErrors = result.error;
     return [];
@@ -217,13 +215,13 @@ async function onSubjectChange(changedSubject: CustomEvent) {
   log.debug('onSubjectChange', changedSubject.detail);
   if (browser) {
     if (changedSubject?.detail) {
-      $form.subjectId = changedSubject.detail.id;
-      $form.subjectDisplayName = changedSubject.detail.displayName;
-      $form.subjectSecondaryId = changedSubject.detail.id;
+      $formData.subjectId = changedSubject.detail.id;
+      $formData.subjectDisplayName = changedSubject.detail.displayName;
+      $formData.subjectSecondaryId = changedSubject.detail.id;
     } else {
-      $form.subjectId = '';
-      $form.subjectDisplayName = '';
-      $form.subjectSecondaryId = '';
+      $formData.subjectId = '';
+      $formData.subjectDisplayName = '';
+      $formData.subjectSecondaryId = '';
     }
   }
 }
@@ -235,17 +233,17 @@ function clearSubject(event: CustomEvent | Event) {
   // log.debug('onSubjectTypeChange', event.detail);
   if (browser) {
     subject = null;
-    $form.subjectId = '';
-    $form.subjectDisplayName = '';
-    $form.subjectSecondaryId = '';
+    $formData.subjectId = '';
+    $formData.subjectDisplayName = '';
+    $formData.subjectSecondaryId = '';
   }
 }
 
 // rule settings
-let rule = $form?.ruleId
+let rule = $formData?.ruleId
   ? {
-      id: $form.ruleId,
-      displayName: $form.rule.displayName,
+      id: $formData.ruleId,
+      displayName: $formData.rule.displayName,
     }
   : null;
 
@@ -253,41 +251,41 @@ async function onRuleChange(changedSubject: CustomEvent) {
   log.debug('onRuleChange', changedSubject.detail);
   if (browser) {
     if (changedSubject?.detail) {
-      $form.ruleId = changedSubject.detail.id;
-      $form.rule.shared = changedSubject.detail.shared;
-      $form.rule.displayName = changedSubject.detail.displayName;
-      $form.rule.description = changedSubject.detail.description;
-      $form.rule.tags = changedSubject.detail.tags;
-      $form.rule.metadata = changedSubject.detail.metadata;
-      $form.rule.source = changedSubject.detail.source;
-      $form.rule.sourcePort = changedSubject.detail.sourcePort;
-      $form.rule.destination = changedSubject.detail.destination;
-      $form.rule.destinationPort = changedSubject.detail.destinationPort;
-      $form.rule.protocol = changedSubject.detail.protocol;
-      $form.rule.direction = changedSubject.detail.direction;
-      $form.rule.action = changedSubject.detail.action;
-      $form.rule.appId = changedSubject.detail.appId;
-      $form.rule.weight = changedSubject.detail.weight;
+      $formData.ruleId = changedSubject.detail.id;
+      $formData.rule.shared = changedSubject.detail.shared;
+      $formData.rule.displayName = changedSubject.detail.displayName;
+      $formData.rule.description = changedSubject.detail.description;
+      $formData.rule.tags = changedSubject.detail.tags;
+      $formData.rule.metadata = changedSubject.detail.metadata;
+      $formData.rule.source = changedSubject.detail.source;
+      $formData.rule.sourcePort = changedSubject.detail.sourcePort;
+      $formData.rule.destination = changedSubject.detail.destination;
+      $formData.rule.destinationPort = changedSubject.detail.destinationPort;
+      $formData.rule.protocol = changedSubject.detail.protocol;
+      $formData.rule.direction = changedSubject.detail.direction;
+      $formData.rule.action = changedSubject.detail.action;
+      $formData.rule.appId = changedSubject.detail.appId;
+      $formData.rule.weight = changedSubject.detail.weight;
       // HINT: we copy `rule.weight` to `policy.weight` initially and let users overwrite weightage afterwords.
-      $form.weight = changedSubject.detail.weight;
+      $formData.weight = changedSubject.detail.weight;
     } else {
       // Reset rule section of form
       rule = null;
-      $form.ruleId = undefined;
-      $form.rule.shared = false;
-      $form.rule.displayName = '';
-      $form.rule.description = undefined;
-      $form.rule.tags = [];
-      $form.rule.metadata = undefined;
-      $form.rule.source = undefined;
-      $form.rule.sourcePort = undefined;
-      $form.rule.destination = undefined;
-      $form.rule.destinationPort = undefined;
-      $form.rule.protocol = 'Any';
-      $form.rule.direction = 'egress';
-      $form.rule.action = 'block';
-      $form.rule.appId = undefined;
-      $form.rule.weight = 1000;
+      $formData.ruleId = undefined;
+      $formData.rule.shared = false;
+      $formData.rule.displayName = '';
+      $formData.rule.description = undefined;
+      $formData.rule.tags = [];
+      $formData.rule.metadata = undefined;
+      $formData.rule.source = undefined;
+      $formData.rule.sourcePort = undefined;
+      $formData.rule.destination = undefined;
+      $formData.rule.destinationPort = undefined;
+      $formData.rule.protocol = 'Any';
+      $formData.rule.direction = 'egress';
+      $formData.rule.action = 'block';
+      $formData.rule.appId = undefined;
+      $formData.rule.weight = 1000;
     }
   }
 }
@@ -296,21 +294,21 @@ function clearRule(event: Event) {
   if (browser) {
     // Reset rule section of form
     rule = null;
-    $form.ruleId = undefined;
-    $form.rule.shared = false;
-    $form.rule.displayName = '';
-    $form.rule.description = undefined;
-    $form.rule.tags = [];
-    $form.rule.metadata = undefined;
-    $form.rule.source = undefined;
-    $form.rule.sourcePort = undefined;
-    $form.rule.destination = undefined;
-    $form.rule.destinationPort = undefined;
-    $form.rule.protocol = 'Any';
-    $form.rule.direction = 'egress';
-    $form.rule.action = 'block';
-    $form.rule.appId = undefined;
-    $form.rule.weight = 1000;
+    $formData.ruleId = undefined;
+    $formData.rule.shared = false;
+    $formData.rule.displayName = '';
+    $formData.rule.description = undefined;
+    $formData.rule.tags = [];
+    $formData.rule.metadata = undefined;
+    $formData.rule.source = undefined;
+    $formData.rule.sourcePort = undefined;
+    $formData.rule.destination = undefined;
+    $formData.rule.destinationPort = undefined;
+    $formData.rule.protocol = 'Any';
+    $formData.rule.direction = 'egress';
+    $formData.rule.action = 'block';
+    $formData.rule.appId = undefined;
+    $formData.rule.weight = 1000;
   }
 }
 
@@ -326,7 +324,7 @@ async function fetchRule(filterText: string) {
 // Reactivity
 const validFrom = dateProxy(form, 'validFrom', { format: 'datetime-utc' });
 const validTo = dateProxy(form, 'validTo', { format: 'datetime-utc' });
-// $: disabled=$form.rule.shared
+// $: disabled=$formData.rule.shared
 $: disabled = rule != null;
 $: valid = $allErrors.length === 0;
 $: loadingState.setFormLoading($delayed);
@@ -358,13 +356,13 @@ $: loadingState.setFormLoading($delayed);
       </header>
       <section class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6">
         <div class="col-span-2 leading-3">
-          <Form.Fieldset form={superform} name={keys.subjectType}>
+          <Form.Fieldset form={form} name={keys.subjectType}>
             <RadioGroup active="variant-filled-secondary">
               {#each subjectTypeOptions as sType}
                 <Form.Control let:attrs>
                   <RadioItem
                     {...attrs}
-                    bind:group={$form.subjectType}
+                    bind:group={$formData.subjectType}
                     value={sType.value}
                     on:change={clearSubject}
                   >
@@ -415,13 +413,13 @@ $: loadingState.setFormLoading($delayed);
             --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
           >
             <b slot="prepend">
-              {#if $form.subjectType == "group"}
+              {#if $formData.subjectType == "group"}
                 <UsersRound />
-              {:else if $form.subjectType == "service_account"}
+              {:else if $formData.subjectType == "service_account"}
                 <User />
-              {:else if $form.subjectType == "device"}
+              {:else if $formData.subjectType == "device"}
                 <MonitorSmartphone />
-              {:else if $form.subjectType == "device_pool"}
+              {:else if $formData.subjectType == "device_pool"}
                 <Server />
               {:else}
                 <UserRound />
@@ -487,7 +485,7 @@ $: loadingState.setFormLoading($delayed);
           </Select>
         </div>
         <div class="col-span-2">
-          <Form.Field form={superform} name="rule.displayName">
+          <Form.Field form={form} name="rule.displayName">
             <Form.Control let:attrs>
               <Form.Label class="label">Display Name</Form.Label>
               <input
@@ -496,7 +494,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Display Name"
-                bind:value={$form.rule.displayName}
+                bind:value={$formData.rule.displayName}
               />
             </Form.Control>
             <Form.Description
@@ -507,7 +505,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-4">
-          <Form.Field form={superform} name="rule.description">
+          <Form.Field form={form} name="rule.description">
             <Form.Control let:attrs>
               <Form.Label class="label">Description</Form.Label>
               <input
@@ -516,7 +514,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Display Name"
-                bind:value={$form.rule.description}
+                bind:value={$formData.rule.description}
               />
             </Form.Control>
             <Form.Description
@@ -527,7 +525,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.tags">
+          <Form.Field form={form} name="rule.tags">
             <Form.Control let:attrs>
               <Form.Label class="label">Tags</Form.Label>
               <!-- <input
@@ -536,14 +534,14 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter tags..."
-                bind:value={$form.rule.tags}
+                bind:value={$formData.rule.tags}
               /> -->
               <InputChip
                 {...attrs}
                 {disabled}
                 placeholder="Enter tags..."
                 class="input data-[fs-error]:input-error"
-                bind:value={$form.rule.tags}
+                bind:value={$formData.rule.tags}
               />
             </Form.Control>
             <Form.Description
@@ -554,7 +552,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.metadata">
+          <Form.Field form={form} name="rule.metadata">
             <Form.Control let:attrs>
               <Form.Label class="label">Metadata</Form.Label>
               <input
@@ -563,7 +561,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Metadata..."
-                bind:value={$form.rule.metadata}
+                bind:value={$formData.rule.metadata}
               />
             </Form.Control>
             <Form.Description
@@ -574,7 +572,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.source">
+          <Form.Field form={form} name="rule.source">
             <Form.Control let:attrs>
               <Form.Label class="label">Source</Form.Label>
               <input
@@ -583,7 +581,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Source..."
-                bind:value={$form.rule.source}
+                bind:value={$formData.rule.source}
               />
             </Form.Control>
             <Form.Description
@@ -594,7 +592,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.sourcePort">
+          <Form.Field form={form} name="rule.sourcePort">
             <Form.Control let:attrs>
               <Form.Label class="label">Source port</Form.Label>
               <input
@@ -603,7 +601,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Source port..."
-                bind:value={$form.rule.sourcePort}
+                bind:value={$formData.rule.sourcePort}
               />
             </Form.Control>
             <Form.Description
@@ -614,7 +612,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.destination">
+          <Form.Field form={form} name="rule.destination">
             <Form.Control let:attrs>
               <Form.Label class="label">Destination</Form.Label>
               <input
@@ -623,7 +621,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Destination..."
-                bind:value={$form.rule.destination}
+                bind:value={$formData.rule.destination}
               />
             </Form.Control>
             <Form.Description
@@ -634,7 +632,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.destinationPort">
+          <Form.Field form={form} name="rule.destinationPort">
             <Form.Control let:attrs>
               <Form.Label class="label">Destination port</Form.Label>
               <input
@@ -643,7 +641,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Destination port..."
-                bind:value={$form.rule.destinationPort}
+                bind:value={$formData.rule.destinationPort}
               />
             </Form.Control>
             <Form.Description
@@ -654,14 +652,14 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="leading-3">
-          <Form.Field form={superform} name="rule.protocol">
+          <Form.Field form={form} name="rule.protocol">
             <Form.Control let:attrs>
               <Form.Label class="label">Protocols</Form.Label>
               <select
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 {disabled}
-                bind:value={$form.rule.protocol}
+                bind:value={$formData.rule.protocol}
               >
                 {#each protocols as protocol}
                   <option value={protocol.value}>{protocol.name}</option>
@@ -676,7 +674,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="leading-3">
-          <Form.Fieldset form={superform} name="rule.action">
+          <Form.Fieldset form={form} name="rule.action">
             <Form.Legend>Action</Form.Legend>
             <RadioGroup active="variant-filled-secondary">
               {#each actionOptions as action}
@@ -684,7 +682,7 @@ $: loadingState.setFormLoading($delayed);
                   <RadioItem
                     {...attrs}
                     {disabled}
-                    bind:group={$form.rule.action}
+                    bind:group={$formData.rule.action}
                     value={action.value}
                   >
                     <Form.Label class="label">{action.label}</Form.Label>
@@ -700,7 +698,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Fieldset>
         </div>
         <div class="leading-3">
-          <Form.Fieldset form={superform} name="rule.direction">
+          <Form.Fieldset form={form} name="rule.direction">
             <Form.Legend>Direction</Form.Legend>
             <RadioGroup active="variant-filled-secondary">
               {#each directionOptions as direction}
@@ -708,7 +706,7 @@ $: loadingState.setFormLoading($delayed);
                   <RadioItem
                     {...attrs}
                     {disabled}
-                    bind:group={$form.rule.direction}
+                    bind:group={$formData.rule.direction}
                     value={direction.value}
                   >
                     <Form.Label class="label">{direction.label}</Form.Label>
@@ -724,17 +722,17 @@ $: loadingState.setFormLoading($delayed);
           </Form.Fieldset>
         </div>
         <div class="col-start-5 justify-end content-center">
-          <Form.Field form={superform} name="rule.shared">
+          <Form.Field form={form} name="rule.shared">
             <Form.Control let:attrs>
               <SlideToggle
                 active="variant-filled-secondary"
                 size="md"
                 {...attrs}
                 {disabled}
-                bind:checked={$form.rule.shared}
+                bind:checked={$formData.rule.shared}
               >
                 <Form.Label class="inline-block w-[100px] text-left">
-                  {$form.rule.shared ? "" : "Not"} Shared</Form.Label
+                  {$formData.rule.shared ? "" : "Not"} Shared</Form.Label
                 >
               </SlideToggle>
             </Form.Control>
@@ -743,7 +741,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-end-7">
-          <Form.Field form={superform} name={keys.weight}>
+          <Form.Field form={form} name={keys.weight}>
             <Form.Control let:attrs>
               <Form.Label class="label">Weight</Form.Label>
               <input
@@ -751,7 +749,7 @@ $: loadingState.setFormLoading($delayed);
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 {disabled}
-                bind:value={$form.rule.weight}
+                bind:value={$formData.rule.weight}
               />
             </Form.Control>
             <Form.Description
@@ -763,7 +761,7 @@ $: loadingState.setFormLoading($delayed);
         </div>
 
         <div class="col-span-4">
-          <Form.Field form={superform} name="rule.appId">
+          <Form.Field form={form} name="rule.appId">
             <Form.Control let:attrs>
               <Form.Label class="label">App id</Form.Label>
               <input
@@ -772,7 +770,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Display Name"
-                bind:value={$form.rule.appId}
+                bind:value={$formData.rule.appId}
               />
             </Form.Control>
             <Form.Description
@@ -783,12 +781,12 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-2">
-          <Form.Field form={superform} name="rule.throttleRate">
+          <Form.Field form={form} name="rule.throttleRate">
             <Form.Control let:attrs>
               <RangeSlider
                 {...attrs}
                 {disabled}
-                bind:value={$form.rule.throttleRate}
+                bind:value={$formData.rule.throttleRate}
                 min={0}
                 max={100}
                 step={1}
@@ -796,7 +794,7 @@ $: loadingState.setFormLoading($delayed);
               >
                 <div class="flex justify-between items-center">
                   <Form.Label class="label">Bandwidth limit</Form.Label>
-                  <div class="text-xs">{$form.rule.throttleRate} /100</div>
+                  <div class="text-xs">{$formData.rule.throttleRate} /100</div>
                 </div>
               </RangeSlider>
             </Form.Control>
@@ -808,16 +806,16 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="justify-start content-center">
-          <Form.Field form={superform} name="active">
+          <Form.Field form={form} name="active">
             <Form.Control let:attrs>
               <SlideToggle
                 active="variant-filled-secondary"
                 size="md"
                 {...attrs}
-                bind:checked={$form.active}
+                bind:checked={$formData.active}
               >
                 <Form.Label class="inline-block w-[100px] text-left"
-                  >Active {$form.active ? "On" : "Off"}</Form.Label
+                  >Active {$formData.active ? "On" : "Off"}</Form.Label
                 >
               </SlideToggle>
             </Form.Control>
@@ -826,7 +824,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-start-5">
-          <Form.Field form={superform} name={keys.validFrom}>
+          <Form.Field form={form} name={keys.validFrom}>
             <Form.Control let:attrs>
               <Form.Label class="label">Valid From</Form.Label>
               <input
@@ -844,7 +842,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-end-auto">
-          <Form.Field form={superform} name={keys.validTo}>
+          <Form.Field form={form} name={keys.validTo}>
             <Form.Control let:attrs>
               <Form.Label class="label">Valid To</Form.Label>
               <input
@@ -893,7 +891,7 @@ $: loadingState.setFormLoading($delayed);
         }}
       />
       <br />
-      <SuperDebug label="Form" data={$form} />
+      <SuperDebug label="Form" data={$formData} />
       <br />
       <SuperDebug label="Tainted" status={false} data={$tainted} />
       <br />

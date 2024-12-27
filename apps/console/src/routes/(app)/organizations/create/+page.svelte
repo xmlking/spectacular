@@ -16,7 +16,6 @@ import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@ske
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
-import { Control, Description, Field, FieldErrors, Fieldset, Label, Legend } from 'formsnap';
 import { fade } from 'svelte/transition';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
@@ -147,7 +146,7 @@ $: loadingState.setFormLoading($delayed);
 							<input class="input" {...attrs} bind:value={$formData.description} />
 						</div>
 					</Form.Control>
-					<FieldErrors />
+					<Form.FieldErrors />
 				</Form.Field>
 			</div>
 			<div class="col-span-3">
@@ -158,7 +157,7 @@ $: loadingState.setFormLoading($delayed);
 							<InputChip {...attrs} bind:value={$formData.allowedEmails} validation={isValidEmail}/>
 						</div>
 					</Form.Control>
-					<FieldErrors />
+					<Form.FieldErrors />
 				</Form.Field>
 			</div>
       <div class="col-span-3">
@@ -169,7 +168,7 @@ $: loadingState.setFormLoading($delayed);
 							<InputChip {...attrs} bind:value={$formData.allowedEmailDomains} validation={isValidEmailDomain}/>
 						</div>
 					</Form.Control>
-					<FieldErrors />
+					<Form.FieldErrors />
 				</Form.Field>
 			</div>
     </section>
