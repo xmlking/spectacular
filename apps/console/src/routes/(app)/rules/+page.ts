@@ -34,13 +34,15 @@ export const _SearchRulesVariables: Variables = async (event) => {
   } = await superValidate(url, zod(searchRuleSchema));
   // const dataCopy = cleanClone(form.data, { empty: 'strip' });
   const orderBy = [{ updatedAt: order_by.desc_nulls_first }];
-  log.debug('variables', { limit, offset, orderBy, displayName, shared });
+  const where = {
+    ...(displayName ? { displayName: { _ilike: `%${displayName}%` } } : {}),
+    ...(shared !== undefined ? { shared: { _eq: shared } } : {}),
+  };
 
   return {
     limit,
     offset,
     orderBy,
-    displayName,
-    shared,
+    where,
   };
 };

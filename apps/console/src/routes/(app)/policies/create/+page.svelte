@@ -1,13 +1,13 @@
 <script lang="ts">
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
-import { graphql, type policies_insert_input } from '$houdini';
+import { cache, graphql, type policies_insert_input } from '$houdini';
 import * as m from '$i18n/messages';
 import { searchRulesFn } from '$lib/api/search-rules';
 import { searchSubjects } from '$lib/api/search-subjects';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { createPolicySchema } from '$lib/schema/policy';
+import { createPolicySchema as schema } from '$lib/schema/policy';
 import { createPolicyKeys as keys } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
@@ -49,7 +49,7 @@ let gqlErrors: PartialGraphQLErrors;
 const createPolicy = graphql(`
     mutation CreatePolicy($data: policies_insert_input!) {
       insert_policies_one(object: $data) {
-        ...Search_Policies_insert
+        ...Search_Policies_insert @prepend
         id
         weight
         active
@@ -65,7 +65,7 @@ const createPolicy = graphql(`
         updatedBy
         orgId
         rule {
-          ...Search_Rules_insert @when(shared: false)
+          ...Search_Rules_insert @when(shared: false) @prepend
           id
           displayName
           description
@@ -92,7 +92,7 @@ const createPolicy = graphql(`
     }
   `);
 
-const superform = superForm(defaults(zod(createPolicySchema)), {
+const superform = superForm(defaults(zod(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -100,7 +100,7 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
   resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(createPolicySchema),
+  validators: zodClient(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
 
@@ -138,7 +138,6 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
     log.debug('payload:', payload);
 
     const { data, errors } = await createPolicy.mutate({ data: payload }, { metadata: { logResult: true } });
-    // TODO: add role cache for role id
 
     if (errors) {
       for (const error of errors) {
@@ -165,6 +164,10 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
     } as const;
     setMessage(form, message);
     handleMessage(message, toastStore);
+
+    // FIXME: workaround untile we can inject newly created rule into rules cache.
+    // workaround: make all rules stale to bust the cache on new policy insert.
+    if (ruleId === undefined) cache.markStale('rules');
     await goto(i18n.resolveRoute('/policies'), {
       invalidateAll: false,
     });

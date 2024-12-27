@@ -14,10 +14,14 @@ export const menuNavLinks: MenuNavLinks = {
       title: 'Policies',
       list: [
         { href: '/policies', label: 'Policies', keywords: 'svelte, sirens, license, release', preload: 'false' },
-        { href: '/rules', label: 'Golden Rules', keywords: 'start, install, cli, tailwind, themes, stylesheets' },
         {
-          href: '/rules?shared=false',
-          label: 'Solo Rules',
+          href: '/rules?shared=true',
+          label: 'Golden Rules',
+          keywords: 'start, install, cli, tailwind, themes, stylesheets',
+        },
+        {
+          href: '/rules',
+          label: 'All Rules',
           keywords: 'start, install, cli, tailwind, themes, stylesheets',
         },
       ],
