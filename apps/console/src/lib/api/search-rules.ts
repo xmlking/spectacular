@@ -1,4 +1,4 @@
-import { CachePolicy, type SearchRules$result, graphql, order_by } from '$houdini';
+import { CachePolicy, type SearchRulesAPI$result, graphql, order_by } from '$houdini';
 import type { PartialGraphQLErrors, Subject } from '$lib/types';
 import { Logger } from '@spectacular/utils';
 import { type Result, err, ok } from 'neverthrow';
@@ -11,7 +11,7 @@ import { type Result, err, ok } from 'neverthrow';
 const log = new Logger('api:rules:search');
 
 const searchRules = graphql(`
-        query SearchRules(
+        query SearchRulesAPI(
           $where: rules_bool_exp
           $limit: Int = 50
           $offset: Int = 0
@@ -46,7 +46,7 @@ const orderBy = [{ updatedAt: order_by.desc_nulls_last }];
 // TODO: throttle-debounce , prevent double calling, finish
 export async function searchRulesFn(
   displayNameTerm: string,
-): Promise<Result<SearchRules$result['rules'], PartialGraphQLErrors>> {
+): Promise<Result<SearchRulesAPI$result['rules'], PartialGraphQLErrors>> {
   if (displayNameTerm.length < 4) return ok([]);
 
   const where = {

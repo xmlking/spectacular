@@ -1,7 +1,7 @@
 <script lang="ts">
+import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
 import { Logger } from '@spectacular/utils';
 import SuperDebug from 'sveltekit-superforms';
-import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
 import type { PageData } from './$houdini';
 import SearchOrganizationsForm from './components/search-organizations-form.svelte';
 import SearchOrganizationsResult from './components/search-organizations-result.svelte';

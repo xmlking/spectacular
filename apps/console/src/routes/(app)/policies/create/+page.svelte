@@ -44,9 +44,12 @@ const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 // let subjects: Subject[] | undefined;
 
+// FIXME:  ...Search_Rules_insert @when(shared: false)
+// `shared` has to be the arguments of the field marked with @list ???
 const createPolicy = graphql(`
     mutation CreatePolicy($data: policies_insert_input!) {
       insert_policies_one(object: $data) {
+        ...Search_Policies_insert
         id
         weight
         active
@@ -62,6 +65,7 @@ const createPolicy = graphql(`
         updatedBy
         orgId
         rule {
+          ...Search_Rules_insert @when(shared: false)
           id
           displayName
           description
@@ -134,6 +138,7 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
     log.debug('payload:', payload);
 
     const { data, errors } = await createPolicy.mutate({ data: payload }, { metadata: { logResult: true } });
+    // TODO: add role cache for role id
 
     if (errors) {
       for (const error of errors) {

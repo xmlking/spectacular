@@ -1,5 +1,16 @@
-query Rules {
-  rules(order_by: { createdAt: asc }) @list(name: "Rules") {
+query SearchRules(
+  $limit: Int = 50
+  $offset: Int = 0
+  $orderBy: [rules_order_by!] = [{ updatedAt: desc_nulls_last }]
+  $shared: Boolean = true
+  $displayName: String = "%%"
+) @loading(cascade: true) {
+  rules(
+    limit: $limit
+    offset: $offset
+    order_by: $orderBy
+    where: { shared: { _eq: $shared }, displayName: { _ilike: $displayName } }
+  ) @list(name: "Search_Rules") {
     action
     metadata
     appId

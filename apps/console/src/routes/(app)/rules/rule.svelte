@@ -17,7 +17,7 @@ $: data = fragment(
     `),
 );
 
-$: ({ id, createdAt, updatedAt, organization, tags } = $data);
+$: ({ id, createdAt, updatedAt, orgId, tags } = $data);
 </script>
 
 <div
@@ -29,7 +29,7 @@ $: ({ id, createdAt, updatedAt, organization, tags } = $data);
       <p class="font-bold">{id}</p>
       <p class="font-bold">{createdAt}</p>
       <p class="font-bold">{updatedAt}</p>
-      <p class="font-bold">{organization}</p>
+      <p class="font-bold">{orgId}</p>
       <p class="font-bold">{tags}</p>
     </div>
   </div>

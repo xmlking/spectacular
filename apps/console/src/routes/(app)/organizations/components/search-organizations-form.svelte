@@ -80,7 +80,7 @@ $: loadingState.setFormLoading($delayed);
           />
         </Form.Control>
       </Form.Field>
-       <button type="submit" class="variant-filled-primary">Search</button>
+       <button type="submit" class="variant-filled">Search</button>
     </div>
 
     <svelte:fragment slot="trail">
@@ -98,7 +98,7 @@ $: loadingState.setFormLoading($delayed);
   <ErrorMessage error={$errors?.offset?.[0]} />
 </form>
 
-<DebugShell label="form-data">
+<DebugShell label="search-form-data">
   <SuperDebug
     label="Miscellaneous"
     status={false}

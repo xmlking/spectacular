@@ -46,8 +46,6 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   }
   // before
   isDeleting = true;
-  await sleep(1300);
-  const deletedAt = new Date();
   const { data, errors: gqlErrors } = await deleteOrganization.mutate({
     id,
   });
@@ -143,7 +141,8 @@ $: loadingState.setFormLoading(isDeleting);
                 <a
                   class="font-semibold"
                   href={`/organizations/${row.id}`}
-                  title={row.description}>{row.displayName}
+                  title={row.description}
+                  >{row.displayName}
                 </a>
               </td>
               <td>{row.owner.displayName}</td>

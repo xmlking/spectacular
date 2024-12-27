@@ -15,6 +15,11 @@ export const menuNavLinks: MenuNavLinks = {
       list: [
         { href: '/policies', label: 'Policies', keywords: 'svelte, sirens, license, release', preload: 'false' },
         { href: '/rules', label: 'Golden Rules', keywords: 'start, install, cli, tailwind, themes, stylesheets' },
+        {
+          href: '/rules?shared=false',
+          label: 'Solo Rules',
+          keywords: 'start, install, cli, tailwind, themes, stylesheets',
+        },
       ],
     },
     {

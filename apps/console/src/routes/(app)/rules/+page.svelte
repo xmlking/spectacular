@@ -4,8 +4,8 @@ import RulesCard from './rules.svelte';
 
 export let data: PageData;
 
-$: ({ Rules: RulesData } = data);
-$: rules = $RulesData.data?.rules ?? [];
+$: ({ SearchRules: SearchRulesData } = data);
+$: rules = $SearchRulesData.data?.rules ?? [];
 </script>
 
 <svelte:head>
@@ -15,7 +15,7 @@ $: rules = $RulesData.data?.rules ?? [];
 
 <h2 class="h2">Rules</h2>
 
-  {#if $RulesData.fetching}
+  {#if $SearchRulesData.fetching}
     <span>loading...</span>
   {:else}
       <span>done....</span>

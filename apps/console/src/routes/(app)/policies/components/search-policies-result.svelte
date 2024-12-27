@@ -1,15 +1,23 @@
 <script lang="ts">
-import { PendingValue, type SearchPolicies$result, graphql } from '$houdini';
+import {
+  type DeletePolicy$result,
+  type DeleteRule$result,
+  PendingValue,
+  type SearchPolicies$result,
+  cache,
+  graphql,
+} from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '@spectacular/skeleton/components';
 import * as Table from '@spectacular/skeleton/components/table';
-import { Logger, sleep } from '@spectacular/utils';
+import { Logger } from '@spectacular/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
+import { message } from 'sveltekit-superforms';
 
 const log = new Logger('policies:search-results:browser');
 // Variables
@@ -30,30 +38,63 @@ const rows = handler.getRows();
  * Delete Polcy action
  */
 let isDeleting = false;
+const deleteRule = graphql(`
+    mutation DeleteRule($id: uuid!) {
+      delete_rules_by_pk(id: $id) {
+        ...Search_Rules_remove
+      }
+    }
+  `);
 const deletePolicy = graphql(`
-    mutation DeletePolicy($id: uuid! ) {
-       delete_policies_by_pk(id: $id) {
+    mutation DeletePolicy($id: uuid!) {
+      delete_policies_by_pk(id: $id) {
         ...Search_Policies_remove
       }
     }
   `);
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { id, ruleId, displayName } = event.currentTarget.dataset;
+  const { id, ruleId, ruleShared, displayName } = event.currentTarget.dataset;
   if (!id || !ruleId || !displayName) {
     log.error('Misconfiguration: did you mess adding `data-id/data-rule-id/data-display-name` attributes?');
     return;
   }
   // before
   isDeleting = true;
-  await sleep(1300);
-  const deletedAt = new Date();
-  const { data, errors: gqlErrors } = await deletePolicy.mutate({
-    id,
-  });
-  if (gqlErrors) {
+  let deletedId: string | undefined;
+  let message: string | undefined;
+  let error: string | undefined;
+  // Delete role if not shared, this will cascade delete the policy as well.
+  if (ruleShared === 'false') {
+    const { data, errors: gqlErrors } = await deleteRule.mutate({
+      id: ruleId,
+    });
+    // Manuvally delete the policy from cache as policy is deleted via cascade when parent `rule` is deleted
+    const policy = cache.get('policies', { id });
+    policy.delete();
+
+    if (gqlErrors) {
+      error = `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `;
+    } else {
+      message = `Policy and associated rule: "${displayName}" deleted`;
+      deletedId = data?.delete_rules_by_pk?.id;
+    }
+  } else {
+    const { data, errors: gqlErrors } = await deletePolicy.mutate({
+      id,
+    });
+
+    if (gqlErrors) {
+      error = `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `;
+    } else {
+      message = `Policy "${displayName}" deleted`;
+      deletedId = data?.delete_policies_by_pk?.id;
+    }
+  }
+
+  if (error) {
     handleMessage(
       {
-        message: `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `,
+        message: error,
         hideDismiss: false,
         timeout: 10000,
         type: 'error',
@@ -62,20 +103,11 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
     );
     return;
   }
-  if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
+
+  if (deletedId && message) {
     handleMessage(
       {
-        message: `Policy and associated rule: "${displayName}" deleted`,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'success',
-      },
-      toastStore,
-    );
-  } else if (data?.update_policies_by_pk) {
-    handleMessage(
-      {
-        message: `Policy "${displayName}" deleted`,
+        message,
         hideDismiss: false,
         timeout: 10000,
         type: 'success',
@@ -187,6 +219,7 @@ $: loadingState.setFormLoading(isDeleting);
                   class="btn-icon btn-icon-sm variant-filled-error"
                   data-id={row.id}
                   data-rule-id={row.rule.id}
+                  data-rule-shared={row.rule.shared}
                   data-display-name={row.rule.displayName}
                   on:click|stopPropagation|capture={handleDelete}
                   disabled={isDeleting}
