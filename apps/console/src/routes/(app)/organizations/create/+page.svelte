@@ -16,7 +16,6 @@ import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@ske
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
-import { fade } from 'svelte/transition';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';
@@ -85,6 +84,7 @@ const {
 } = form;
 export const snapshot = { capture, restore };
 
+// Functions
 function isValidEmail(value: string): boolean {
   return value.includes('@') && value.includes('.');
 }
@@ -117,117 +117,149 @@ $: loadingState.setFormLoading($delayed);
       <GraphQLErrors errors={gqlErrors} />
     {/if}
     <!-- Update User Details Form -->
-    <form
-    class=" variant-ghost-surface space-y-6 rounded-md p-4 shadow-md"
-    method="POST"
-    use:enhance
-  >
+    <form class="card md:space-y-8" method="POST" use:enhance>
       <header class="card-header">
         <div class="text-xl">Create Organization</div>
         <!-- <div>Create new Organization</div> -->
       </header>
-      <section class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6">
-			<div class="col-span-3">
-				<Form.Field {form} name={keys.displayName}>
-					<Form.Control let:attrs>
-						<div class="grid gap-2">
-							<Form.Label class="label">Name</Form.Label>
-							<input {...attrs} class="input" bind:value={$formData.displayName} />
-							<Form.FieldErrors class="data-[fs-error]:text-error-500" />
-						</div>
-					</Form.Control>
-				</Form.Field>
-			</div>
-			<div class="col-span-3">
-				<Form.Field {form} name="description">
-					<Form.Control let:attrs>
-						<div class="grid gap-2">
-							<Form.Label class="label">Description</Form.Label>
-							<input class="input" {...attrs} bind:value={$formData.description} />
-						</div>
-					</Form.Control>
-					<Form.FieldErrors />
-				</Form.Field>
-			</div>
-			<div class="col-span-3">
-				<Form.Field {form} name="allowedEmails">
-					<Form.Control let:attrs>
-						<div class="grid gap-2">
-							<Form.Label class="label">Allowed_Emails</Form.Label>
-							<InputChip {...attrs} bind:value={$formData.allowedEmails} validation={isValidEmail}/>
-						</div>
-					</Form.Control>
-					<Form.FieldErrors />
-				</Form.Field>
-			</div>
-      <div class="col-span-3">
-				<Form.Field {form} name="allowedEmailDomains">
-					<Form.Control let:attrs>
-						<div class="grid gap-2">
-							<Form.Label class="label">Allowed_Email_Domains</Form.Label>
-							<InputChip {...attrs} bind:value={$formData.allowedEmailDomains} validation={isValidEmailDomain}/>
-						</div>
-					</Form.Control>
-					<Form.FieldErrors />
-				</Form.Field>
-			</div>
-    </section>
-    <!-- Form Action Buttons -->
-    <button
-      type="button"
-      class="variant-ghost-secondary btn"
-      on:click={() => history.back()}>Back</button
-    >
-    <button
-      type="button"
-      class="variant-ghost-warning btn"
-      disabled={!$tainted}
-      on:click={() => reset()}
-    >
-      Reset
-    </button>
-
-    <button
-      class="variant-ghost-success btn"
-      type="submit"
-      disabled={!$tainted || $submitting}
-    >
-      {#if $submitting}
-        <aside
-          class="alert rounded-sm"
-          transition:fade|local={{ duration: 400 }}
+      <section
+        class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6"
+      >
+        <div class="col-span-3">
+          <Form.Field {form} name={keys.displayName}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Display Name</Form.Label>
+              <input
+                type="text"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="Enter Display Name..."
+                bind:value={$formData.displayName}
+              />
+              <Form.Description
+                class="sr-only md:not-sr-only text-sm text-gray-500"
+                >Enter the org display name</Form.Description
+              >
+              <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+            </Form.Control>
+          </Form.Field>
+        </div>
+        <div class="col-span-3">
+          <Form.Field {form} name={keys.description}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Description</Form.Label>
+              <input
+                type="text"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="Enter Description..."
+                bind:value={$formData.description}
+              />
+            </Form.Control>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Enter the org description</Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div class="col-span-3">
+          <Form.Field {form} name={keys.allowedEmails}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Allowed_Emails</Form.Label>
+              <InputChip
+                {...attrs}
+                placeholder="Enter Allowed Emails..."
+                class="input data-[fs-error]:input-error"
+                bind:value={$formData.allowedEmails}
+                validation={isValidEmail}
+              />
+            </Form.Control>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Type valid email address and press <strong>Enter</strong
+              ></Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div class="col-span-3">
+          <Form.Field {form} name={keys.allowedEmailDomains}>
+            <Form.Control let:attrs>
+              <Form.Label class="label">Allowed_Email_Domains</Form.Label>
+              <InputChip
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                placeholder="Enter Allowed Email Domains..."
+                bind:value={$formData.allowedEmailDomains}
+                validation={isValidEmailDomain}
+              />
+            </Form.Control>
+            <Form.Description
+              class="sr-only md:not-sr-only text-sm text-gray-500"
+              >Type valid email domains name and press <strong>Enter</strong
+              ></Form.Description
+            >
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+      </section>
+      <footer class="card-footer flex justify-end space-x-2">
+        <button
+          type="button"
+          class="variant-ghost-secondary btn"
+          on:click={() => history.back()}>Back</button
         >
-          Saving..
-        </aside>
-      {:else}
-        Create
-      {/if}
-    </button>
-  </form>
+        <button
+          type="button"
+          class="variant-ghost-warning btn"
+          disabled={!$tainted}
+          on:click={() => reset()}
+        >
+          Reset
+        </button>
+
+        <button
+          type="submit"
+          class="btn variant-ghost-success"
+          disabled={!$tainted || !valid || $submitting}
+        >
+          {#if $timeout}
+            <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+          {:else if $delayed}
+            <Loader class="m-2 h-4 w-4 animate-spin" />
+          {:else}
+            {m.buttons_create()}
+          {/if}
+        </button>
+      </footer>
+    </form>
   </section>
 
-    <section class="space-y-4">
+  <section class="space-y-4">
     <!-- Debug -->
     <DebugShell label="form-data">
-		<SuperDebug
-			label="Miscellaneous"
-			status={false}
-			data={{
-				message: $message,
-				isTainted: isTainted,
-				submitting: $submitting,
-				delayed: $delayed,
-				timeout: $timeout,
-			}}
-		/>
-		<br />
-		<SuperDebug label="Form" data={$formData} />
-		<br />
-		<SuperDebug label="Tainted" status={false} data={$tainted} />
-		<br />
-		<SuperDebug label="Errors" status={false} data={$errors} />
-		<br />
-		<SuperDebug label="Constraints" status={false} data={$constraints} />
-	</DebugShell>
-    </section>
+      <SuperDebug
+        label="Miscellaneous"
+        status={false}
+        data={{
+          message: $message,
+          isTainted: isTainted,
+          submitting: $submitting,
+          delayed: $delayed,
+          timeout: $timeout,
+        }}
+      />
+      <br />
+      <SuperDebug label="Form" data={$formData} />
+      <br />
+      <SuperDebug label="Tainted" status={false} data={$tainted} />
+      <br />
+      <SuperDebug label="Errors" status={false} data={$errors} />
+      <br />
+      <SuperDebug label="Constraints" status={false} data={$constraints} />
+      <!-- <br />
+	<SuperDebug label="$page data" status={false} data={$page} /> -->
+    </DebugShell>
+  </section>
 </div>

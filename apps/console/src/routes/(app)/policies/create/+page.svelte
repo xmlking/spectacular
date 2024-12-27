@@ -354,9 +354,11 @@ $: loadingState.setFormLoading($delayed);
         <div class="text-xl">Create Policy</div>
         <!-- <div>Create new policy</div> -->
       </header>
-      <section class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6">
+      <section
+        class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6"
+      >
         <div class="col-span-2 leading-3">
-          <Form.Fieldset form={form} name={keys.subjectType}>
+          <Form.Fieldset {form} name={keys.subjectType}>
             <RadioGroup active="variant-filled-secondary">
               {#each subjectTypeOptions as sType}
                 <Form.Control let:attrs>
@@ -393,17 +395,14 @@ $: loadingState.setFormLoading($delayed);
             --border-focused="var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))"
             --error-background="rgb(var(--color-error-200) / var(--tw-bg-opacity))"
             --error-border="rgb(var(--color-error-500) / var(--tw-bg-opacity))"
-
             --disabled-color="rgb(var(--color-surface-400) / 2)"
             --disabled-border-color="rgb(var(--color-surface-400) / 2)"
             --disabled-background="rgb(var(--color-surface-200) / 2)"
-
             --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
             --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
             --list-border-radius="var(--theme-rounded-container)"
             --list-empty-padding="10px"
             --list-z-index="100"
-
             --item-color="var(--body-text-color)"
             --item-border="var(--comfy-dropdown-border-color)"
             --item-is-active-color="rgba(var(--theme-font-color-dark))"
@@ -453,17 +452,14 @@ $: loadingState.setFormLoading($delayed);
             --border-focused="var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))"
             --error-background="rgb(var(--color-error-200) / var(--tw-bg-opacity))"
             --error-border="rgb(var(--color-error-500) / var(--tw-bg-opacity))"
-
             --disabled-color="rgb(var(--color-surface-400) / 2)"
             --disabled-border-color="rgb(var(--color-surface-400) / 2)"
             --disabled-background="rgb(var(--color-surface-200) / 2)"
-
             --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
             --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
             --list-border-radius="var(--theme-rounded-container)"
             --list-empty-padding="10px"
             --list-z-index="100"
-
             --item-color="var(--body-text-color)"
             --item-border="var(--comfy-dropdown-border-color)"
             --item-is-active-color="rgba(var(--theme-font-color-dark))"
@@ -485,7 +481,7 @@ $: loadingState.setFormLoading($delayed);
           </Select>
         </div>
         <div class="col-span-2">
-          <Form.Field form={form} name="rule.displayName">
+          <Form.Field {form} name="rule.displayName">
             <Form.Control let:attrs>
               <Form.Label class="label">Display Name</Form.Label>
               <input
@@ -505,7 +501,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-4">
-          <Form.Field form={form} name="rule.description">
+          <Form.Field {form} name="rule.description">
             <Form.Control let:attrs>
               <Form.Label class="label">Description</Form.Label>
               <input
@@ -525,7 +521,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={form} name="rule.tags">
+          <Form.Field {form} name="rule.tags">
             <Form.Control let:attrs>
               <Form.Label class="label">Tags</Form.Label>
               <!-- <input
@@ -552,7 +548,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={form} name="rule.metadata">
+          <Form.Field {form} name="rule.metadata">
             <Form.Control let:attrs>
               <Form.Label class="label">Metadata</Form.Label>
               <input
@@ -572,7 +568,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={form} name="rule.source">
+          <Form.Field {form} name="rule.source">
             <Form.Control let:attrs>
               <Form.Label class="label">Source</Form.Label>
               <input
@@ -592,7 +588,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={form} name="rule.sourcePort">
+          <Form.Field {form} name="rule.sourcePort">
             <Form.Control let:attrs>
               <Form.Label class="label">Source port</Form.Label>
               <input
@@ -612,7 +608,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={form} name="rule.destination">
+          <Form.Field {form} name="rule.destination">
             <Form.Control let:attrs>
               <Form.Label class="label">Destination</Form.Label>
               <input
@@ -632,7 +628,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={form} name="rule.destinationPort">
+          <Form.Field {form} name="rule.destinationPort">
             <Form.Control let:attrs>
               <Form.Label class="label">Destination port</Form.Label>
               <input
@@ -652,7 +648,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="leading-3">
-          <Form.Field form={form} name="rule.protocol">
+          <Form.Field {form} name="rule.protocol">
             <Form.Control let:attrs>
               <Form.Label class="label">Protocols</Form.Label>
               <select
@@ -674,7 +670,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="leading-3">
-          <Form.Fieldset form={form} name="rule.action">
+          <Form.Fieldset {form} name="rule.action">
             <Form.Legend>Action</Form.Legend>
             <RadioGroup active="variant-filled-secondary">
               {#each actionOptions as action}
@@ -698,7 +694,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Fieldset>
         </div>
         <div class="leading-3">
-          <Form.Fieldset form={form} name="rule.direction">
+          <Form.Fieldset {form} name="rule.direction">
             <Form.Legend>Direction</Form.Legend>
             <RadioGroup active="variant-filled-secondary">
               {#each directionOptions as direction}
@@ -722,7 +718,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Fieldset>
         </div>
         <div class="col-start-5 justify-end content-center">
-          <Form.Field form={form} name="rule.shared">
+          <Form.Field {form} name="rule.shared">
             <Form.Control let:attrs>
               <SlideToggle
                 active="variant-filled-secondary"
@@ -741,7 +737,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-end-7">
-          <Form.Field form={form} name={keys.weight}>
+          <Form.Field {form} name={keys.weight}>
             <Form.Control let:attrs>
               <Form.Label class="label">Weight</Form.Label>
               <input
@@ -761,7 +757,7 @@ $: loadingState.setFormLoading($delayed);
         </div>
 
         <div class="col-span-4">
-          <Form.Field form={form} name="rule.appId">
+          <Form.Field {form} name="rule.appId">
             <Form.Control let:attrs>
               <Form.Label class="label">App id</Form.Label>
               <input
@@ -781,7 +777,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-2">
-          <Form.Field form={form} name="rule.throttleRate">
+          <Form.Field {form} name="rule.throttleRate">
             <Form.Control let:attrs>
               <RangeSlider
                 {...attrs}
@@ -806,7 +802,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="justify-start content-center">
-          <Form.Field form={form} name="active">
+          <Form.Field {form} name="active">
             <Form.Control let:attrs>
               <SlideToggle
                 active="variant-filled-secondary"
@@ -824,7 +820,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-start-5">
-          <Form.Field form={form} name={keys.validFrom}>
+          <Form.Field {form} name={keys.validFrom}>
             <Form.Control let:attrs>
               <Form.Label class="label">Valid From</Form.Label>
               <input
@@ -842,7 +838,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-end-auto">
-          <Form.Field form={form} name={keys.validTo}>
+          <Form.Field {form} name={keys.validTo}>
             <Form.Control let:attrs>
               <Form.Label class="label">Valid To</Form.Label>
               <input
@@ -886,8 +882,10 @@ $: loadingState.setFormLoading($delayed);
         status={false}
         data={{
           message: $message,
+          isTainted: isTainted,
           submitting: $submitting,
           delayed: $delayed,
+          timeout: $timeout,
         }}
       />
       <br />
@@ -905,46 +903,41 @@ $: loadingState.setFormLoading($delayed);
 </div>
 
 <style lang="postcss">
-	/*
+  /*
 			CSS variables can be used to control theming.
 			https://github.com/rob-balfre/svelte-select/blob/master/docs/theming_variables.md
 	*/
-	.select1 {
-		--border-radius: var(--theme-rounded-container);
-		--border-color: rgb(var(--color-secondary-500));
-		--border-focused: 1px solid rgb(var(--color-secondary-500));
-		--border-hover: 1px solid rgb(var(--color-secondary-500));
-		--multi-item-active-outline: 1px solid rgb(var(--color-secondary-500));
-		--multi-item-outline: 1px solid rgb(var(--color-secondary-500));
-		--clear-select-focus-outline: 1px solid rgb(var(--color-secondary-500));
-		--height: 3rem;
-		--multi-select-input-margin: 0px;
+  .select1 {
+    --border-radius: var(--theme-rounded-container);
+    --border-color: rgb(var(--color-secondary-500));
+    --border-focused: 1px solid rgb(var(--color-secondary-500));
+    --border-hover: 1px solid rgb(var(--color-secondary-500));
+    --multi-item-active-outline: 1px solid rgb(var(--color-secondary-500));
+    --multi-item-outline: 1px solid rgb(var(--color-secondary-500));
+    --clear-select-focus-outline: 1px solid rgb(var(--color-secondary-500));
+    --height: 3rem;
+    --multi-select-input-margin: 0px;
 
-    --tw-border-opacity: 1
-    --tw-bg-opacity: 1
-    --background: rgb(var(--color-surface-200))
-    --border-radius: var(--theme-rounded-base)
-    --border: var(--theme-border-base) solid rgb(var(--color-surface-400))
-    --border-hover: var(--theme-border-base) solid rgb(var(--color-surface-500))
-    --border-focused: var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))
-    --error-background: rgb(var(--color-error-200) / var(--tw-bg-opacity))
-    --error-border: rgb(var(--color-error-500) / var(--tw-bg-opacity))
-
-    --disabled-color: rgb(var(--color-surface-400) / 2)
-    --disabled-border-color: rgb(var(--color-surface-400) / 2)
-    --disabled-background: rgb(var(--color-surface-200) / 2)
-
-    --list-background: rgb(var(--color-surface-200) / var(--tw-bg-opacity))
-    --list-border: var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))
-    --list-empty-padding: 10px
-    --list-z-index: 100
-
-    --item-color: var(--body-text-color)
-    --item-border: var(--comfy-dropdown-border-color)
-    --item-is-active-color: var(--pd-dropdown-item-text)
-    --item-hover-color: var(--pd-dropdown-item-hover-text)
-    --item-active-background: var(--pd-input-field-hover-stroke)
-    --item-is-active-bg: var(--pd-input-field-hover-stroke)
-    --item-hover-bg: rgba(var(--color-secondary-500) / 1)
-	}
+    --tw-border-opacity: 1 --tw-bg-opacity: 1 --background:
+      rgb(var(--color-surface-200)) --border-radius: var(--theme-rounded-base)
+      --border: var(--theme-border-base) solid rgb(var(--color-surface-400))
+      --border-hover: var(--theme-border-base) solid
+      rgb(var(--color-surface-500)) --border-focused: var(--theme-border-base)
+      solid rgb(var(--color-primary-500) / var(--tw-border-opacity))
+      --error-background: rgb(var(--color-error-200) / var(--tw-bg-opacity))
+      --error-border: rgb(var(--color-error-500) / var(--tw-bg-opacity))
+      --disabled-color: rgb(var(--color-surface-400) / 2)
+      --disabled-border-color: rgb(var(--color-surface-400) / 2)
+      --disabled-background: rgb(var(--color-surface-200) / 2) --list-background:
+      rgb(var(--color-surface-200) / var(--tw-bg-opacity)) --list-border:
+      var(--theme-border-base) solid
+      rgb(var(--color-surface-400) / var(--tw-bg-opacity)) --list-empty-padding:
+      10px --list-z-index: 100 --item-color: var(--body-text-color)
+      --item-border: var(--comfy-dropdown-border-color) --item-is-active-color:
+      var(--pd-dropdown-item-text) --item-hover-color:
+      var(--pd-dropdown-item-hover-text) --item-active-background:
+      var(--pd-input-field-hover-stroke) --item-is-active-bg:
+      var(--pd-input-field-hover-stroke) --item-hover-bg:
+      rgba(var(--color-secondary-500) / 1);
+  }
 </style>
