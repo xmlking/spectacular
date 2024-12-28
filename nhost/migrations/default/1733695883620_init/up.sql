@@ -38,10 +38,9 @@ CREATE OR REPLACE FUNCTION public.log_deleted_record()
   RETURNS TRIGGER AS
 $$
 DECLARE
-  pk_columns   TEXT[]; -- Array of primary key column names passed via TG_ARGV
-  pk_values    JSONB; -- JSONB object to hold primary key values
-  column_name  TEXT; -- Placeholder for individual column name
-  column_value TEXT; -- Placeholder for individual column value
+  pk_columns  TEXT[]; -- Array of primary key column names passed via TG_ARGV
+  pk_values   JSONB; -- JSONB object to hold primary key values
+  column_name TEXT; -- Placeholder for individual column name
 BEGIN
   -- Get the primary key columns from TG_ARGV
   pk_columns := TG_ARGV;
@@ -58,9 +57,7 @@ BEGIN
     LOOP
       BEGIN
         -- Dynamically get the value of the column from the OLD record
-        EXECUTE format('SELECT ($1).%I::TEXT', column_name) INTO column_value USING OLD;
-        -- Add the column name and value to the JSONB object
-        pk_values := pk_values || jsonb_build_object(column_name, column_value);
+        pk_values := pk_values || jsonb_build_object(column_name, (row_to_json(OLD) ->> column_name));
       EXCEPTION
         WHEN OTHERS THEN
           -- If the column does not exist, raise a NOTICE and skip it
