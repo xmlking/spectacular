@@ -38,9 +38,9 @@ CREATE OR REPLACE FUNCTION public.log_deleted_record()
   RETURNS TRIGGER AS
 $$
 DECLARE
-  pk_columns  TEXT[]; -- Array of primary key column names passed via TG_ARGV
-  pk_values   JSONB; -- JSONB object to hold primary key values
-  column_name TEXT; -- Placeholder for individual column name
+  pk_columns   TEXT[]; -- Array of primary key column names passed via TG_ARGV
+  pk_values    JSONB; -- JSONB object to hold primary key values
+  column_name  TEXT; -- Placeholder for individual column name
   column_value TEXT; -- Placeholder for individual column value
 BEGIN
   -- Get the primary key columns from TG_ARGV
@@ -49,7 +49,7 @@ BEGIN
   -- Check if TG_ARGV is empty; if so, fallback to 'id'
   IF array_length(pk_columns, 1) IS NULL THEN
     -- Fallback to 'id'
-    pk_columns := ARRAY['id'];
+    pk_columns := ARRAY ['id'];
   END IF;
 
   -- Build a JSON object of primary key values dynamically
@@ -61,9 +61,10 @@ BEGIN
         EXECUTE format('SELECT ($1).%I::TEXT', column_name) INTO column_value USING OLD;
         -- Add the column name and value to the JSONB object
         pk_values := pk_values || jsonb_build_object(column_name, column_value);
-      EXCEPTION WHEN OTHERS THEN
-        -- If the column does not exist, raise a NOTICE and skip it
-        RAISE NOTICE 'Column "%" not found in Table "%".', column_name, TG_TABLE_NAME;
+      EXCEPTION
+        WHEN OTHERS THEN
+          -- If the column does not exist, raise a NOTICE and skip it
+          RAISE NOTICE 'Column "%" not found in Table "%".', column_name, TG_TABLE_NAME;
       END;
     END LOOP;
 
