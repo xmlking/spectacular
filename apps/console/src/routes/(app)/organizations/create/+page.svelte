@@ -44,7 +44,7 @@ let gqlErrors: PartialGraphQLErrors;
 const createOrganization = graphql(`
     mutation CreateOrganization($data: organizations_insert_input!) {
       insert_organizations_one(object: $data) {
-        displayName
+        ...Search_Organizations_insert @prepend
       }
     }
   `);
@@ -60,6 +60,38 @@ const form = superForm(defaults(zod(schema)), {
   validators: zodClient(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
+
+    const dataCopy = cleanClone(form.data, { empty: 'strip' });
+
+    const { data, errors } = await createOrganization.mutate({ data: dataCopy }, { metadata: { logResult: true } });
+
+    if (errors) {
+      for (const error of errors) {
+        if (error.message.includes('Uniqueness violation')) {
+          setError(form, 'displayName', 'Display Name already taken');
+        } else {
+          gqlErrors = errors;
+        }
+      }
+      log.error('create organization api call error:', errors);
+      return;
+    }
+
+    const result = data?.insert_organizations_one;
+    if (!result) {
+      setMessage(form, { type: 'error', message: 'Create organization failed: responce empty' }, { status: 404 });
+      return;
+    }
+
+    // Finally notify user: successfully creattion
+    const message: App.Superforms.Message = {
+      type: 'success',
+      timeout: 10000,
+      message: `Organization: ${dataCopy.displayName} created successfully`,
+    } as const;
+    setMessage(form, message);
+    handleMessage(message, toastStore);
+    await goto(i18n.resolveRoute('/organizations'));
   },
   onError({ result }) {
     log.error('superForm onError:', { result });

@@ -114,7 +114,7 @@ insert_permissions:
       check: {}
       set:
         created_by: x-hasura-User-Id
-        owner_id: x-hasura-Org-Id
+        owner_id: x-hasura-User-Id
         updated_by: x-hasura-User-Id
       columns:
         - allowed_email_domains

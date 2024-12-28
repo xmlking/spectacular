@@ -37,10 +37,10 @@ CREATE TRIGGER set_public_rules_updated_at
 EXECUTE FUNCTION public.set_current_timestamp_updated_at();
 COMMENT ON TRIGGER set_public_rules_updated_at ON public.rules IS 'trigger to set value of column updated_at to current timestamp on row update';
 ---
-CREATE TRIGGER insert_deleted_record_when_public_rules_deleted
+CREATE TRIGGER log_deleted_record_when_public_rules_deleted
     AFTER DELETE
     ON public.rules
     FOR EACH ROW
-EXECUTE FUNCTION public.deleted_record_insert();
-COMMENT ON TRIGGER insert_deleted_record_when_public_rules_deleted ON public.rules IS 'trigger to save deleted records for audit';
+EXECUTE FUNCTION public.log_deleted_record();
+COMMENT ON TRIGGER log_deleted_record_when_public_rules_deleted ON public.rules IS 'trigger to save deleted records for audit';
 

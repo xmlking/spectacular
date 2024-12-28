@@ -48,43 +48,8 @@ const createPolicy = graphql(`
     mutation CreatePolicy($data: policies_insert_input!) {
       insert_policies_one(object: $data) {
         ...Search_Policies_insert @prepend
-        id
-        weight
-        active
-        validFrom
-        validTo
-        subjectId
-        subjectType
-        subjectDisplayName
-        subjectSecondaryId
-        createdBy
-        createdAt
-        updatedAt
-        updatedBy
-        orgId
         rule {
           ...Search_Rules_insert @when(shared: false) @prepend
-          id
-          displayName
-          description
-          tags
-          metadata
-          shared
-          source
-          sourcePort
-          destination
-          destinationPort
-          protocol
-          direction
-          action
-          appId
-          throttleRate
-          weight
-          createdBy
-          createdAt
-          updatedAt
-          updatedBy
-          orgId
         }
       }
     }
@@ -158,7 +123,8 @@ const form = superForm(defaults(zod(schema)), {
     // Finally notify user: successfully created new policy
     const message: App.Superforms.Message = {
       type: 'success',
-      message: `Policy created with Rule: ${result.rule.displayName}`,
+      timeout: 10000,
+      message: `Policy created with Rule: ${payload.rule?.data.displayName}`,
     } as const;
     setMessage(form, message);
     handleMessage(message, toastStore);
