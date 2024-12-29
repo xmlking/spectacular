@@ -1,0 +1,7 @@
+mutation MakeCurrentOrg($orgId: uuid!, $userId: uuid!) @role(name: "user") {
+  update_user_org_roles_by_pk(pk_columns: { orgId: $orgId, userId: $userId }, _set: { isCurrentOrg: true }) {
+    orgId
+    userId
+    isCurrentOrg
+  }
+}

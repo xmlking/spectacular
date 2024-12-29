@@ -92,3 +92,56 @@ query ListOrganizations($limit: Int = 50, $offset: Int = 0, $orderBy: [organizat
     description
   }
 }
+
+
+### switch org to species
+# @name switchOrgToSpecies
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles: user me org:owner
+x-hasura-default-role: org:owner
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
+
+mutation MakeCurrentOrg($orgId: uuid!, $userId: uuid!) {
+  update_user_org_roles_by_pk(pk_columns: {orgId: $orgId, userId: $userId}, _set: {isCurrentOrg: true}) {
+    orgId
+    userId
+    isCurrentOrg
+  }
+}
+
+{
+  "orgId": "d5dbb6b6-5e43-4dca-b855-be9b65b6695b",
+  "userId": "572ad1c0-f97b-4e16-b1f6-8b5ca90f931f"
+}
+
+### switch org back to chinthagunta
+# @name switchOrgToChinthagunta
+POST  {{graphqlEndpoint}}
+X-REQUEST-TYPE: GraphQL
+Content-Type: application/json
+x-hasura-admin-secret: {{graphqlAdminToken}}
+x-hasura-allowed-roles: user me org:member
+x-hasura-default-role: org:member
+x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-org-id: d5dbb6b6-5e43-4dca-b855-be9b65b6695b
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
+
+mutation MakeCurrentOrg($orgId: uuid!, $userId: uuid!) {
+  update_user_org_roles_by_pk(pk_columns: {orgId: $orgId, userId: $userId}, _set: {isCurrentOrg: true}) {
+    orgId
+    userId
+    isCurrentOrg
+  }
+}
+
+{
+  "orgId": "8dfd9a31-de01-47be-92a7-ba1c720c6270",
+  "userId": "572ad1c0-f97b-4e16-b1f6-8b5ca90f931f"
+}
+
+

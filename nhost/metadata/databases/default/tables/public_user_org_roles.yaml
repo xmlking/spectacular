@@ -37,8 +37,11 @@ insert_permissions:
   - role: org:admin
     permission:
       check:
-        org_id:
-          _eq: X-Hasura-Org-Id
+        _and:
+          - role:
+              _neq: org:owner
+          - org_id:
+              _eq: X-Hasura-Org-Id
       set:
         created_by: x-hasura-User-Id
         updated_by: x-hasura-User-Id
@@ -85,26 +88,14 @@ update_permissions:
   - role: org:admin
     permission:
       columns:
+        - is_current_org
         - role
       filter:
         _and:
-          - user_id:
-              _neq: X-Hasura-User-Id
           - role:
               _neq: org:owner
           - org_id:
               _eq: X-Hasura-Org-Id
-      check: null
-      set:
-        updated_by: x-hasura-User-Id
-    comment: ""
-  - role: org:member
-    permission:
-      columns:
-        - is_current_org
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
       check: null
       set:
         updated_by: x-hasura-User-Id
@@ -121,13 +112,22 @@ update_permissions:
       set:
         updated_by: x-hasura-User-Id
     comment: ""
+  - role: user
+    permission:
+      columns:
+        - is_current_org
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
+      set:
+        updated_by: x-hasura-User-Id
+    comment: "user can switch orgs that they belongs to"
 delete_permissions:
   - role: org:admin
     permission:
       filter:
         _and:
-          - user_id:
-              _neq: X-Hasura-User-Id
           - role:
               _neq: org:owner
           - org_id:

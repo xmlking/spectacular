@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
-import { SearchSecurityKeysStore } from '$houdini';
+import { SearchSecurityKeysStore, MakeCurrentOrgStore } from '$houdini';
 import { NHOST_SESSION_KEY } from '$lib/constants';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
 import type { User } from '@nhost/nhost-js';
@@ -12,6 +12,7 @@ import { type Readable, type Writable, derived, get, readable, readonly, writabl
 
 // TODO: change to Svelte 5 Class: https://x.com/ankurpsinghal/status/1856719524059283897
 const skQuery = new SearchSecurityKeysStore().artifact.raw;
+const soQuery = new MakeCurrentOrgStore().artifact.raw;
 export class SvelteKitNhostClient extends NhostClient {
   #log = new Logger('auth.store.client');
 
@@ -128,6 +129,30 @@ export class SvelteKitNhostClient extends NhostClient {
       return false;
     }
     return data?.authUserSecurityKeys.length > 0;
+  }
+
+  /**
+   * switch user's org
+   * @param orgId
+   * NOTE: after org switch, we need reload page
+   * ex: location.replace(i18n.resolveRoute(ROUTE_DASHBOARD));
+   */
+  async switchOrg(orgId: string) {
+    const userId = get(this.#user)?.id;
+    const { data, error } = await this.graphql.request(
+      soQuery,
+      { orgId, userId },
+      {
+        headers: {
+          'x-hasura-role': 'user',
+        },
+      },
+    );
+    if (error) {
+      this.#log.error({ error });
+      return false;
+    }
+    return data?.update_user_org_roles_by_pk?.isCurrentOrg as boolean;
   }
 }
 

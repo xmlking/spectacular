@@ -1,3 +1,4 @@
+-- this trigger add new user as 'org:member' of matching org. added to user_org_roles table.
 CREATE OR REPLACE FUNCTION check_and_add_to_org_roles()
   RETURNS TRIGGER AS
 $$
@@ -67,6 +68,7 @@ CREATE TRIGGER trg_check_and_add_to_user_org_roles
   FOR EACH ROW
 EXECUTE FUNCTION check_and_add_to_org_roles();
 ---
+-- this trigger add new org to user_org_roles and make it as current.
 CREATE OR REPLACE FUNCTION add_user_org_role_for_org_owner()
   RETURNS TRIGGER AS
 $$
