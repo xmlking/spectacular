@@ -42,7 +42,7 @@ const handleSwitchOrg: MouseEventHandler<HTMLButtonElement> = async (event) => {
   }
   const status = await nhost.switchOrg(orgId);
   if (status) {
-    location.replace(i18n.resolveRoute(ROUTE_DASHBOARD));
+    log.debug('all good');
   } else {
     log.error('org switch failed');
   }

@@ -1,8 +1,9 @@
 import { browser } from '$app/environment';
-import { invalidateAll } from '$app/navigation';
+import { goto, invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
-import { SearchSecurityKeysStore, MakeCurrentOrgStore } from '$houdini';
-import { NHOST_SESSION_KEY } from '$lib/constants';
+import { SearchSecurityKeysStore, MakeCurrentOrgStore, cache } from '$houdini';
+import { NHOST_SESSION_KEY, ROUTE_DASHBOARD } from '$lib/constants';
+import { i18n } from '$lib/i18n';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
 import type { User } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
@@ -71,6 +72,8 @@ export class SvelteKitNhostClient extends NhostClient {
           invalidateAll();
           const accessToken = session?.accessToken;
           set(accessToken ?? null);
+          // HINT: user profile will change when org switched.
+          this.#user.set(session?.user || null);
           // save session as cookie everytime token is refreshed or user signin via WebAuthN.
           // Cookie will be removed when browser closed or user explicitly SIGNED_OUT.
           Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
@@ -152,6 +155,12 @@ export class SvelteKitNhostClient extends NhostClient {
       this.#log.error({ error });
       return false;
     }
+    // after org switch, we need to flush cache, refresh session
+    cache.markStale();
+    await this.auth.refreshSession();
+    await goto(i18n.resolveRoute(ROUTE_DASHBOARD), {
+      invalidateAll: true,
+    });
     return data?.update_user_org_roles_by_pk?.isCurrentOrg as boolean;
   }
 }

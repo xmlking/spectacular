@@ -1,17 +1,15 @@
 import { NHOST_SESSION_KEY } from '$lib/constants';
-import { getServerNhost } from '$lib/server/utils/nhost';
-import type { NhostSession } from '@nhost/nhost-js';
+import { NhostClient, type NhostSession } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
 import type { Handle } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
+import { waitFor } from 'xstate/lib/waitFor';
+
 export const log = new Logger('server:middleware:auth');
 /**
- * Auth middleware goal is to set `NhostClient` initialized from  session cookie.
- * If either cookie not present, a dummy `NhostClient` is set into locals.
+ * Auth middleware goal is to create/initialize NhostClient from session cookie.
+ * If cookie not present, a dummy `NhostClient` is set into locals.
  * So next middleware or `+server.ts` has to check validity of session.
- * TODO:
- * Use nhost.setRole('manager'), nhost.setRole('superviser'), nhost.unsetRole('manager') etc to
- * to set/unset/switch the user role for all subsequent graphql, storage and functions calls temporarily.
- * by default, user's default_role is used.
  */
 export const auth = (async ({ event, resolve }) => {
   const { url, cookies } = event;
@@ -23,3 +21,33 @@ export const auth = (async ({ event, resolve }) => {
   const result = await resolve(event);
   return result;
 }) satisfies Handle;
+
+/**
+ * Creates nHost client that runs on the server-side.
+ * @param initialSession
+ * @returns
+ */
+async function getServerNhost(initialSession: NhostSession | undefined) {
+  const nhost = new NhostClient({
+    // subdomain: env.NHOST_SUBDOMAIN ?? 'local',
+    // region: env.NHOST_REGION,
+    authUrl: env.NHOST_AUTH_URL,
+    graphqlUrl: env.NHOST_GRAPHQL_URL,
+    storageUrl: env.NHOST_STORAGE_URL,
+    functionsUrl: env.NHOST_FUNCTIONS_URL,
+    autoSignIn: false,
+    autoRefreshToken: false,
+    clientStorageType: 'cookie',
+    start: false,
+  });
+
+  log.debug('initializing nhost cleint...');
+
+  nhost.auth.client.start({ initialSession });
+
+  if (nhost.auth.client.interpreter) {
+    await waitFor(nhost.auth.client.interpreter, (state) => !state.hasTag('loading'));
+  }
+
+  return nhost;
+}
