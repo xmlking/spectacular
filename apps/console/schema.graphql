@@ -2276,7 +2276,6 @@ enum memberships_constraint {
 input type for inserting data into table "memberships"
 """
 input memberships_insert_input {
-  orgId: uuid
   organization: organizations_obj_rel_insert_input
   role: String
   userId: uuid
