@@ -36,14 +36,30 @@ insert_permissions:
       check:
         _and:
           - role:
-              _neq: org:owner
-          - org_id:
-              _eq: x-hasura-default-org
+              _in:
+                - org:member
       set:
         created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
         updated_by: x-hasura-user-id
       columns:
-        - org_id
+        - role
+        - user_id
+    comment: ""
+  - role: org:owner
+    permission:
+      check:
+        _and:
+          - role:
+              _in:
+                - org:member
+                - org:billing
+                - org:admin
+      set:
+        created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
         - role
         - user_id
     comment: ""
@@ -79,7 +95,7 @@ select_permissions:
       allow_aggregations: true
     comment: ""
 update_permissions:
-  - role: org:admin
+  - role: org:owner
     permission:
       columns:
         - role
@@ -94,23 +110,6 @@ update_permissions:
       check:
         role:
           _in:
-            - org:member
-            - org:admin
-            - org:billing
-      set:
-        updated_by: x-hasura-user-id
-    comment: ""
-  - role: org:owner
-    permission:
-      columns:
-        - role
-      filter:
-        org_id:
-          _eq: x-hasura-default-org
-      check:
-        role:
-          _in:
-            - org:owner
             - org:admin
             - org:billing
             - org:member
@@ -122,8 +121,17 @@ delete_permissions:
     permission:
       filter:
         _and:
-          - role:
-              _neq: org:owner
           - org_id:
               _eq: x-hasura-default-org
+          - role:
+              _eq: org:member
+    comment: ""
+  - role: org:owner
+    permission:
+      filter:
+        _and:
+          - org_id:
+              _eq: x-hasura-default-org
+          - role:
+              _neq: org:owner
     comment: ""

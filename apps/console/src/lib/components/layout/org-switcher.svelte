@@ -8,8 +8,11 @@ const log = new Logger('profile:org-switcher:browser');
 
 const nhost = getNhostClient();
 
+let value = $page.data.orgId
+
 // TODO load allowedOrgs from +layout.gql
 export const allowedOrgs = [
+  { value: '', name: 'Switch Org' },
   { value: '8dfd9a31-de01-47be-92a7-ba1c720c6270', name: 'Chinthagunta' },
   { value: 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b', name: 'Species' },
   { value: 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b', name: 'Something' },
@@ -29,7 +32,7 @@ const handleSwitchOrg: ChangeEventHandler<HTMLSelectElement> = async (event) => 
 
 <select
   class="select"
-  bind:value={$page.data.orgId}
+  bind:value
   on:change={handleSwitchOrg}
 >
   {#each allowedOrgs as org}
