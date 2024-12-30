@@ -1,8 +1,8 @@
 // Navigation Sitemap
 // `blockPreload: 'false'` means adding data-sveltekit-preload-data="false" to link.
 
-import { Roles } from './types';
 import type { MenuNavLinks } from './types';
+import { Roles } from './types';
 
 export const menuNavLinks: MenuNavLinks = {
   '/policies': [
@@ -13,29 +13,43 @@ export const menuNavLinks: MenuNavLinks = {
     {
       title: 'Policies',
       list: [
-        { href: '/policies', label: 'Policies', keywords: 'svelte, sirens, license, release', preload: 'false' },
+        {
+          href: '/policies',
+          label: 'Policies',
+          keywords: 'svelte, sirens, license, release',
+          preload: 'false',
+          roles: [Roles.Owner, Roles.Admin],
+        },
         {
           href: '/rules?shared=true',
           label: 'Golden Rules',
           keywords: 'start, install, cli, tailwind, themes, stylesheets',
+          roles: [Roles.Owner, Roles.Admin],
         },
         {
           href: '/rules',
           label: 'All Rules',
           keywords: 'start, install, cli, tailwind, themes, stylesheets',
+          roles: [Roles.Owner, Roles.Admin],
         },
       ],
     },
     {
       title: 'Devices',
       list: [
-        { href: '/devices', label: 'Devices', keywords: 'start, setup, tutorial, guide' },
-        { href: '/pools', label: 'Pools', keywords: 'start, setup, tutorial, guide' },
+        {
+          href: '/devices',
+          label: 'Devices',
+          keywords: 'start, setup, tutorial, guide',
+          roles: [Roles.Owner, Roles.Admin],
+        },
+        {
+          href: '/pools',
+          label: 'Pools',
+          keywords: 'start, setup, tutorial, guide',
+          roles: [Roles.Owner, Roles.Admin],
+        },
       ],
-    },
-    {
-      title: 'Experiments',
-      list: [{ href: '/customers', label: 'Customers', keywords: 'customers, users' }],
     },
     {
       title: 'AI',
@@ -55,8 +69,18 @@ export const menuNavLinks: MenuNavLinks = {
     {
       title: 'Visualization',
       list: [
-        { href: '/network', label: 'Network', keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider' },
-        { href: '/segments', label: 'Segments', keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider' },
+        {
+          href: '/network',
+          label: 'Network',
+          keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider',
+          roles: [Roles.Owner, Roles.Admin],
+        },
+        {
+          href: '/segments',
+          label: 'Segments',
+          keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider',
+          roles: [Roles.Owner, Roles.Admin],
+        },
       ],
     },
   ],
@@ -64,8 +88,18 @@ export const menuNavLinks: MenuNavLinks = {
     {
       title: 'Reports',
       list: [
-        { href: '/reports', label: 'Access Reports', keywords: 'copy, contenteditable, html, input' },
-        { href: '/usage-reports', label: 'Usage Reports', keywords: 'usage' },
+        {
+          href: '/reports',
+          label: 'Access Reports',
+          keywords: 'copy, contenteditable, html, input',
+          roles: [Roles.Owner, Roles.Admin],
+        },
+        {
+          href: '/usage-reports',
+          label: 'Usage Reports',
+          keywords: 'usage, metrics',
+          roles: [Roles.Owner, Roles.Admin, Roles.SysAdmin],
+        },
       ],
     },
   ],
@@ -74,8 +108,6 @@ export const menuNavLinks: MenuNavLinks = {
       title: 'Account',
       list: [
         { href: '/profile', label: 'Profile', keywords: 'settings, profile, account' },
-        { href: '/signup?redirectTo=/dashboard', label: 'Signup', keywords: 'signup, account' },
-        { href: '/signin?redirectTo=/dashboard', label: 'Signin', keywords: 'signin, login, account' },
         { href: '/settings', label: 'AI Settings', keywords: 'settings, ai, account', badge: '✨' },
         { href: '/feature-flags', label: 'Feature Flags', keywords: 'settings, feature-flags, account' },
       ],
@@ -130,7 +162,7 @@ export const menuNavLinks: MenuNavLinks = {
           href: '/organizations',
           label: 'Organizations',
           keywords: 'system, admin, organization',
-          roles: [Roles.SysAdmin, Roles.Owner],
+          roles: [Roles.SysAdmin],
         },
       ],
     },

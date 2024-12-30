@@ -9752,12 +9752,12 @@ type users {
     """filter the rows returned"""
     where: groups_bool_exp
   ): [groups!]
-  avatarUrl: String!
-  createdAt: timestamptz!
+  avatarUrl: String
+  createdAt: timestamptz
   defaultOrg: uuid
-  defaultRole: String!
-  disabled: Boolean!
-  displayName: String!
+  defaultRole: String
+  disabled: Boolean
+  displayName: String
 
   """Used as Computed Field on Users Table"""
   dissociatedGroups(
@@ -9777,17 +9777,20 @@ type users {
     where: groups_bool_exp
   ): [groups!]
   email: citext
-  emailVerified: Boolean!
+  emailVerified: Boolean
   id: uuid!
-  isAnonymous: Boolean!
+  isAnonymous: Boolean
   lastSeen: timestamptz
-  locale: String!
+  locale: String
   metadata(
     """JSON select path"""
     path: String
   ): jsonb
+
+  """An object relationship"""
+  organization: organizations
   phoneNumber: String
-  phoneNumberVerified: Boolean!
+  phoneNumberVerified: Boolean
 
   """An array relationship"""
   refreshTokens(
@@ -9896,7 +9899,7 @@ type users {
     """filter the rows returned"""
     where: authUserSecurityKeys_bool_exp
   ): authUserSecurityKeys_aggregate!
-  updatedAt: timestamptz!
+  updatedAt: timestamptz
 
   """An array relationship"""
   userProviders(
@@ -9977,6 +9980,7 @@ input users_bool_exp {
   lastSeen: timestamptz_comparison_exp
   locale: String_comparison_exp
   metadata: jsonb_comparison_exp
+  organization: organizations_bool_exp
   phoneNumber: String_comparison_exp
   phoneNumberVerified: Boolean_comparison_exp
   refreshTokens: authRefreshTokens_bool_exp
@@ -10052,6 +10056,7 @@ input users_order_by {
   lastSeen: order_by
   locale: order_by
   metadata: order_by
+  organization: organizations_order_by
   phoneNumber: order_by
   phoneNumberVerified: order_by
   refreshTokens_aggregate: authRefreshTokens_aggregate_order_by

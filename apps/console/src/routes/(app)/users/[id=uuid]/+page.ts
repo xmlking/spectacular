@@ -19,7 +19,7 @@ export const load = async (event) => {
   });
   if (errors) error(400, errors[0] as GraphQLError);
   const user = data?.user;
-  const memberships  = data?.memberships;
+  const memberships = data?.memberships;
   const organizations = data?.organizations;
   const roles = data?.authUserRoles;
   console.log('user:', user);

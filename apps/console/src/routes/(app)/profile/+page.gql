@@ -8,7 +8,7 @@ query GetUser($userId: uuid!) @role(name: "me") {
   user(id: $userId) @loading(cascade: true) {
     email
     ...UserDetailsFragment
-    ...UserOrgRolesFragment
+    ...MembershipsFragment
     ...PersonalAccessTokensFragment
     ...AuthProvidersFragment
     ...SecurityKeysFragment

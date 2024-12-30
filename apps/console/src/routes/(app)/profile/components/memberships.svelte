@@ -1,24 +1,20 @@
 <script lang="ts">
-import { PendingValue, type UserOrgRolesFragment, fragment, graphql } from '$houdini';
+import { PendingValue, type MembershipsFragment, fragment, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler } from '@vincjo/datatables/legacy';
-import { UsersRound } from 'lucide-svelte';
-import type { MouseEventHandler } from 'svelte/elements';
 import { Logger } from '@spectacular/utils';
 import { getNhostClient } from '$lib/stores/nhost';
-import { i18n } from '$lib/i18n';
-import { ROUTE_DASHBOARD } from '$lib/constants';
 
-const log = new Logger('profile:user-org-roles:browser');
+const log = new Logger('profile:memberships:browser');
 
 const nhost = getNhostClient();
 
-export let user: UserOrgRolesFragment;
+export let user: MembershipsFragment;
 $: data = fragment(
   user,
   graphql(`
-      fragment UserOrgRolesFragment on users {
+      fragment MembershipsFragment on users {
         allowedOrgs(order_by: { orgId: asc }) @list(name: "User_Org_Roles") @loading(cascade: true) {
           orgId
           organization {
@@ -33,19 +29,6 @@ $: data = fragment(
 $: ({ allowedOrgs } = $data);
 
 // Functions
-const handleSwitchOrg: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { orgId, orgDisplayName } = event.currentTarget.dataset;
-  if (!orgId || !orgDisplayName) {
-    log.error('Misconfiguration: did you mess adding `data-org-id/data-org-display-name` attributes?');
-    return;
-  }
-  const status = await nhost.switchOrg(orgId);
-  if (status) {
-    log.debug('all good');
-  } else {
-    log.error('org switch failed');
-  }
-};
 
 //variables
 const handler = new DataHandler(allowedOrgs?.filter(loaded), {
@@ -67,7 +50,6 @@ const rows = handler.getRows();
           <Table.Head {handler} orderBy="organization">Organization</Table.Head>
           <Table.Head {handler} orderBy="role">Description</Table.Head>
           <Table.Head {handler} orderBy="role">Role</Table.Head>
-          <th>Switch Org</th>
         </tr>
       </thead>
       <tbody>
@@ -77,24 +59,12 @@ const rows = handler.getRows();
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
             </tr>
           {:else}
             <tr>
               <td>{role.organization.displayName}</td>
               <td>{role.organization.description}</td>
               <td>{role.role}</td>
-              <td>
-                <button
-                  type="button"
-                  class="btn-icon btn-icon-sm variant-filled-warning"
-                  data-org-id={role.orgId}
-                  data-org-display-name={role.organization.displayName}
-                  on:click|stopPropagation|capture={handleSwitchOrg}
-                >
-                  <UsersRound />
-                </button>
-              </td>
             </tr>
           {/if}
         {:else}

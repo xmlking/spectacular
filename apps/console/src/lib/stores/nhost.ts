@@ -161,7 +161,7 @@ export class SvelteKitNhostClient extends NhostClient {
     await goto(i18n.resolveRoute(ROUTE_DASHBOARD), {
       invalidateAll: true,
     });
-    return data?.update_users_by_pk?.id !== undefined;
+    return data?.updateUser?.id !== undefined;
   }
 }
 

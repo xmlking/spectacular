@@ -195,6 +195,18 @@ select_permissions:
           _eq: x-hasura-default-org
       allow_aggregations: true
     comment: ""
+  - role: org:member
+    permission:
+      columns:
+        - default_org
+        - id
+      filter:
+        _and:
+          - id:
+              _eq: x-hasura-user-id
+          - default_org:
+              _in: x-hasura-allowed-orgs
+    comment: ""
   - role: private
     permission:
       columns:
@@ -227,6 +239,18 @@ select_permissions:
       filter: {}
       allow_aggregations: true
     comment: ""
+  - role: user
+    permission:
+      columns:
+        - default_org
+        - id
+      filter:
+        _and:
+          - id:
+              _eq: x-hasura-user-id
+          - default_org:
+              _in: x-hasura-allowed-orgs
+    comment: ""
 update_permissions:
   - role: me
     permission:
@@ -247,7 +271,22 @@ update_permissions:
       columns:
         - default_org
       filter:
-        default_org:
-          _in: x-hasura-allowed-orgs
+        _and:
+          - id:
+              _eq: x-hasura-user-id
+          - default_org:
+              _in: x-hasura-allowed-orgs
+      check: null
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - default_org
+      filter:
+        _and:
+          - id:
+              _eq: x-hasura-user-id
+          - default_org:
+              _in: x-hasura-allowed-orgs
       check: null
     comment: ""
