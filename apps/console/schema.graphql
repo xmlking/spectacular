@@ -2861,6 +2861,27 @@ type mutation_root {
   update single row of the table: "auth.users"
   """
   updateUser(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: users_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: users_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: users_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: users_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: users_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: users_set_input
     pk_columns: users_pk_columns_input!
@@ -2870,6 +2891,27 @@ type mutation_root {
   update data of the table: "auth.users"
   """
   updateUsers(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: users_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: users_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: users_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: users_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: users_prepend_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: users_set_input
 
@@ -3732,12 +3774,12 @@ Table containing organizations owned by users. Auto-enroll members based on emai
 type organizations {
   allowedEmailDomains: [String!]
   allowedEmails: [String!]
-  autoEnroll: Boolean!
+  autoEnroll: Boolean
   avatarUrl: String
   blockedEmailDomains: [String!]
   blockedEmails: [String!]
-  createdAt: timestamptz!
-  createdBy: uuid!
+  createdAt: timestamptz
+  createdBy: uuid
   description: String
 
   """An array relationship"""
@@ -4020,8 +4062,8 @@ type organizations {
     where: subscriptions_bool_exp
   ): subscriptions_aggregate!
   tags: [String!]
-  updatedAt: timestamptz!
-  updatedBy: uuid!
+  updatedAt: timestamptz
+  updatedBy: uuid
 
   """An array relationship"""
   users(
@@ -9752,12 +9794,15 @@ type users {
     """filter the rows returned"""
     where: groups_bool_exp
   ): [groups!]
-  avatarUrl: String
-  createdAt: timestamptz
+  avatarUrl: String!
+  createdAt: timestamptz!
+
+  """An object relationship"""
+  currentOrg: organizations
   defaultOrg: uuid
-  defaultRole: String
+  defaultRole: String!
   disabled: Boolean
-  displayName: String
+  displayName: String!
 
   """Used as Computed Field on Users Table"""
   dissociatedGroups(
@@ -9777,20 +9822,17 @@ type users {
     where: groups_bool_exp
   ): [groups!]
   email: citext
-  emailVerified: Boolean
+  emailVerified: Boolean!
   id: uuid!
-  isAnonymous: Boolean
+  isAnonymous: Boolean!
   lastSeen: timestamptz
-  locale: String
+  locale: String!
   metadata(
     """JSON select path"""
     path: String
   ): jsonb
-
-  """An object relationship"""
-  organization: organizations
   phoneNumber: String
-  phoneNumberVerified: Boolean
+  phoneNumberVerified: Boolean!
 
   """An array relationship"""
   refreshTokens(
@@ -9899,7 +9941,7 @@ type users {
     """filter the rows returned"""
     where: authUserSecurityKeys_bool_exp
   ): authUserSecurityKeys_aggregate!
-  updatedAt: timestamptz
+  updatedAt: timestamptz!
 
   """An array relationship"""
   userProviders(
@@ -9955,6 +9997,11 @@ type users_aggregate_fields {
   min: users_min_fields
 }
 
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input users_append_input {
+  metadata: jsonb
+}
+
 """
 Boolean expression to filter rows from the table "auth.users". All fields are combined with a logical 'AND'.
 """
@@ -9968,6 +10015,7 @@ input users_bool_exp {
   associatedGroups: groups_bool_exp
   avatarUrl: String_comparison_exp
   createdAt: timestamptz_comparison_exp
+  currentOrg: organizations_bool_exp
   defaultOrg: uuid_comparison_exp
   defaultRole: String_comparison_exp
   disabled: Boolean_comparison_exp
@@ -9980,7 +10028,6 @@ input users_bool_exp {
   lastSeen: timestamptz_comparison_exp
   locale: String_comparison_exp
   metadata: jsonb_comparison_exp
-  organization: organizations_bool_exp
   phoneNumber: String_comparison_exp
   phoneNumberVerified: Boolean_comparison_exp
   refreshTokens: authRefreshTokens_bool_exp
@@ -9992,6 +10039,27 @@ input users_bool_exp {
   updatedAt: timestamptz_comparison_exp
   userProviders: authUserProviders_bool_exp
   userProviders_aggregate: authUserProviders_aggregate_bool_exp
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input users_delete_at_path_input {
+  metadata: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input users_delete_elem_input {
+  metadata: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input users_delete_key_input {
+  metadata: String
 }
 
 """aggregate max on columns"""
@@ -10044,6 +10112,7 @@ input users_order_by {
   associatedGroups_aggregate: groups_aggregate_order_by
   avatarUrl: order_by
   createdAt: order_by
+  currentOrg: organizations_order_by
   defaultOrg: order_by
   defaultRole: order_by
   disabled: order_by
@@ -10056,7 +10125,6 @@ input users_order_by {
   lastSeen: order_by
   locale: order_by
   metadata: order_by
-  organization: organizations_order_by
   phoneNumber: order_by
   phoneNumberVerified: order_by
   refreshTokens_aggregate: authRefreshTokens_aggregate_order_by
@@ -10069,6 +10137,11 @@ input users_order_by {
 """primary key columns input for table: auth.users"""
 input users_pk_columns_input {
   id: uuid!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input users_prepend_input {
+  metadata: jsonb
 }
 
 scalar users_scalar
@@ -10133,7 +10206,12 @@ enum users_select_column {
 input type for updating data in table "auth.users"
 """
 input users_set_input {
+  avatarUrl: String
   defaultOrg: uuid
+  displayName: String
+  locale: String
+  metadata: jsonb
+  phoneNumber: String
 }
 
 """
@@ -10169,6 +10247,27 @@ input users_stream_cursor_value_input {
 }
 
 input users_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: users_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: users_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: users_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: users_delete_key_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: users_prepend_input
+
   """sets the columns of the filtered rows to the given values"""
   _set: users_set_input
 

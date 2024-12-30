@@ -85,11 +85,18 @@ update_permissions:
         - role
       filter:
         _and:
-          - role:
-              _neq: org:owner
           - org_id:
               _eq: x-hasura-default-org
-      check: null
+          - user_id:
+              _neq: x-hasura-user-id
+          - role:
+              _neq: org:owner
+      check:
+        role:
+          _in:
+            - org:member
+            - org:admin
+            - org:billing
       set:
         updated_by: x-hasura-user-id
     comment: ""
@@ -100,7 +107,13 @@ update_permissions:
       filter:
         org_id:
           _eq: x-hasura-default-org
-      check: null
+      check:
+        role:
+          _in:
+            - org:owner
+            - org:admin
+            - org:billing
+            - org:member
       set:
         updated_by: x-hasura-user-id
     comment: ""

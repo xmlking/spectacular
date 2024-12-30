@@ -91,20 +91,18 @@ configuration:
     update: updateUsers
     update_by_pk: updateUser
 object_relationships:
+  - name: currentOrg
+    using:
+      foreign_key_constraint_on: default_org
   - name: defaultRoleByRole
     using:
       foreign_key_constraint_on: default_role
-  - name: organization
-    using:
-      foreign_key_constraint_on: default_org
 array_relationships:
   - name: allowedOrgs
     using:
-      manual_configuration:
-        column_mapping:
-          id: user_id
-        insertion_order: null
-        remote_table:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
           name: memberships
           schema: public
   - name: refreshTokens
@@ -147,29 +145,6 @@ computed_fields:
         name: user_dissociated_groups
         schema: public
 select_permissions:
-  - role: me
-    permission:
-      columns:
-        - active_mfa_type
-        - avatar_url
-        - created_at
-        - default_org
-        - default_role
-        - display_name
-        - email
-        - email_verified
-        - id
-        - is_anonymous
-        - last_seen
-        - locale
-        - metadata
-        - phone_number
-        - phone_number_verified
-        - updated_at
-      filter:
-        id:
-          _eq: x-hasura-user-id
-    comment: ""
   - role: org:admin
     permission:
       columns:
@@ -191,21 +166,10 @@ select_permissions:
         - phone_number_verified
         - updated_at
       filter:
-        default_org:
-          _eq: x-hasura-default-org
+        allowedOrgs:
+          org_id:
+            _eq: x-hasura-default-org
       allow_aggregations: true
-    comment: ""
-  - role: org:member
-    permission:
-      columns:
-        - default_org
-        - id
-      filter:
-        _and:
-          - id:
-              _eq: x-hasura-user-id
-          - default_org:
-              _in: x-hasura-allowed-orgs
     comment: ""
   - role: private
     permission:
@@ -242,51 +206,39 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - active_mfa_type
+        - avatar_url
+        - created_at
         - default_org
+        - default_role
+        - display_name
+        - email
+        - email_verified
         - id
+        - is_anonymous
+        - last_seen
+        - locale
+        - metadata
+        - phone_number_verified
+        - updated_at
       filter:
-        _and:
-          - id:
-              _eq: x-hasura-user-id
-          - default_org:
-              _in: x-hasura-allowed-orgs
+        id:
+          _eq: x-hasura-user-id
     comment: ""
 update_permissions:
-  - role: me
+  - role: user
     permission:
       columns:
         - avatar_url
+        - default_org
         - display_name
-        - email
         - locale
         - metadata
         - phone_number
       filter:
         id:
           _eq: x-hasura-user-id
-      check: {}
-    comment: ""
-  - role: org:member
-    permission:
-      columns:
-        - default_org
-      filter:
-        _and:
-          - id:
-              _eq: x-hasura-user-id
-          - default_org:
-              _in: x-hasura-allowed-orgs
-      check: null
-    comment: ""
-  - role: user
-    permission:
-      columns:
-        - default_org
-      filter:
-        _and:
-          - id:
-              _eq: x-hasura-user-id
-          - default_org:
-              _in: x-hasura-allowed-orgs
-      check: null
+      check:
+        default_org:
+          _in: x-hasura-allowed-orgs
     comment: ""

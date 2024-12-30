@@ -1,4 +1,4 @@
-mutation UpdateDefaultOrg($userId: uuid!, $orgId: uuid!) @role(name: "user") {
+mutation UpdateDefaultOrg($userId: uuid!, $orgId: uuid!) @role(name: "me") {
   updateUser(pk_columns: { id: $userId }, _set: { defaultOrg: $orgId }) {
     id
     defaultOrg

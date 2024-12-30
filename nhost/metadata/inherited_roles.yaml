@@ -4,10 +4,10 @@
     - private
 - role_name: org:admin
   role_set:
-    - org:member
+    - user
 - role_name: org:billing
   role_set:
-    - org:member
+    - user
 - role_name: org:member
   role_set:
     - user

@@ -178,22 +178,13 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - allowed_email_domains
-        - allowed_emails
-        - auto_enroll
         - avatar_url
-        - blocked_email_domains
-        - blocked_emails
-        - created_at
-        - created_by
         - description
         - display_name
         - id
         - metadata
         - owner_id
         - tags
-        - updated_at
-        - updated_by
       filter:
         id:
           _in: x-hasura-allowed-orgs

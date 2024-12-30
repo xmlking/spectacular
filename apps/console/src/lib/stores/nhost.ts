@@ -147,7 +147,7 @@ export class SvelteKitNhostClient extends NhostClient {
       { orgId, userId },
       {
         headers: {
-          'x-hasura-role': 'user',
+          'x-hasura-role': 'me',
         },
       },
     );
