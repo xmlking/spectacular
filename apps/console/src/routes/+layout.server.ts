@@ -17,7 +17,8 @@ export const load = loadFlash(
     return {
       vercelEnv: secrets.VERCEL_ENV ?? 'development',
       userId: claims?.['x-hasura-user-id'],
-      orgId: claims?.['x-hasura-org-id'],
+      orgId: claims?.['x-hasura-default-org'],
+      defaultOrg: claims?.['x-hasura-default-org'],
       defaultRole: claims?.['x-hasura-default-role'],
     };
   },

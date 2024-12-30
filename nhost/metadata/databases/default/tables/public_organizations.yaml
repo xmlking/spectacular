@@ -100,7 +100,7 @@ array_relationships:
       foreign_key_constraint_on:
         column: org_id
         table:
-          name: user_org_roles
+          name: memberships
           schema: public
 computed_fields:
   - name: settingsWithDefaults
@@ -113,9 +113,9 @@ insert_permissions:
     permission:
       check: {}
       set:
-        created_by: x-hasura-User-Id
-        owner_id: x-hasura-User-Id
-        updated_by: x-hasura-User-Id
+        created_by: x-hasura-user-id
+        owner_id: x-hasura-user-id
+        updated_by: x-hasura-user-id
       columns:
         - allowed_email_domains
         - allowed_emails
@@ -150,7 +150,7 @@ select_permissions:
         - updated_by
       filter:
         id:
-          _in: X-Hasura-Org-Ids
+          _in: x-hasura-allowed-orgs
       allow_aggregations: true
     comment: ""
   - role: sys:admin
@@ -196,7 +196,7 @@ select_permissions:
         - updated_by
       filter:
         id:
-          _in: X-Hasura-Org-Ids
+          _in: x-hasura-allowed-orgs
       allow_aggregations: true
     comment: ""
 update_permissions:
@@ -216,15 +216,15 @@ update_permissions:
         - tags
       filter:
         owner_id:
-          _eq: X-Hasura-User-Id
+          _eq: x-hasura-user-id
       check: null
       set:
-        updated_by: x-hasura-User-Id
+        updated_by: x-hasura-user-id
     comment: ""
 delete_permissions:
   - role: org:owner
     permission:
       filter:
         owner_id:
-          _eq: X-Hasura-User-Id
+          _eq: x-hasura-user-id
     comment: ""

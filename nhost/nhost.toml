@@ -1,3 +1,5 @@
+[global]
+
 [hasura]
 version = 'v2.44.0-ce'
 adminSecret = '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
@@ -88,11 +90,11 @@ rating = 'g'
 expiresIn = 900
 
 [[auth.session.accessToken.customClaims]]
-key = 'Org-Id'
-value = 'currentOrgId'
+key = 'default-org'
+value = 'defaultOrg'
 
 [[auth.session.accessToken.customClaims]]
-key = 'Org-Ids'
+key = 'allowed-orgs'
 value = 'allowedOrgs.orgId[]'
 
 [[auth.session.accessToken.customClaims]]
@@ -270,3 +272,8 @@ synchPeriodMinutes = 10
 [observability]
 [observability.grafana]
 adminPassword = '{{ secrets.GRAFANA_ADMIN_PASSWORD }}'
+
+[observability.grafana.alerting]
+enabled = false
+
+[observability.grafana.contacts]

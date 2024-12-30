@@ -44,7 +44,7 @@ select_permissions:
       filter:
         _and:
           - user_id:
-              _eq: X-Hasura-User-Id
+              _eq: x-hasura-user-id
           - type:
               _eq: pat
       allow_aggregations: true
@@ -54,6 +54,6 @@ delete_permissions:
       filter:
         _and:
           - user_id:
-              _eq: X-Hasura-User-Id
+              _eq: x-hasura-user-id
           - type:
               _eq: pat

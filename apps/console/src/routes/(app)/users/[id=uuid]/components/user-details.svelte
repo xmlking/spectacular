@@ -31,7 +31,7 @@ const {
 } = form;
 const groupRolesByOrganization = () => {
   const groupedRoles: { [key: string]: string[] } = {};
-  for (const { organization, role } of data.orgRoles ?? []) {
+  for (const { organization, role } of data.memberships ?? []) {
     if (!groupedRoles[organization]) {
       groupedRoles[organization] = [];
     }
@@ -42,7 +42,7 @@ const groupRolesByOrganization = () => {
 const myorgroles = writable([]);
 $: {
   myorgroles.set(
-    data.orgRoles.filter((item) => item.organization === $formData.metadata.default_org).map((item) => item.role),
+    data.memberships.filter((item) => item.organization === $formData.metadata.default_org).map((item) => item.role),
   );
 }
 </script>

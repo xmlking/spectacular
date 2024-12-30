@@ -26,7 +26,6 @@ $: data = fragment(
             description
           }
           role
-          isCurrentOrg
         }
       }
     `),
@@ -68,9 +67,6 @@ const rows = handler.getRows();
           <Table.Head {handler} orderBy="organization">Organization</Table.Head>
           <Table.Head {handler} orderBy="role">Description</Table.Head>
           <Table.Head {handler} orderBy="role">Role</Table.Head>
-          <Table.Head {handler} orderBy="isCurrentOrg"
-            >isCurrentOrg</Table.Head
-          >
           <th>Switch Org</th>
         </tr>
       </thead>
@@ -82,14 +78,12 @@ const rows = handler.getRows();
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
             </tr>
           {:else}
             <tr>
               <td>{role.organization.displayName}</td>
               <td>{role.organization.description}</td>
               <td>{role.role}</td>
-              <td>{role.isCurrentOrg}</td>
               <td>
                 <button
                   type="button"
@@ -97,7 +91,6 @@ const rows = handler.getRows();
                   data-org-id={role.orgId}
                   data-org-display-name={role.organization.displayName}
                   on:click|stopPropagation|capture={handleSwitchOrg}
-                  disabled={role.isCurrentOrg}
                 >
                   <UsersRound />
                 </button>

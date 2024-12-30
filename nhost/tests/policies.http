@@ -14,8 +14,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query IntrospectionQuery {
@@ -41,8 +41,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query ListPolicies(
@@ -109,8 +109,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query SearchAgentPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [policies_order_by!] = [{updatedAt: desc_nulls_last}]) {
@@ -160,8 +160,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query SearchPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [policies_order_by!] = [{updatedAt: desc_nulls_last}]) {
@@ -229,8 +229,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query GetPolicy($id: uuid!) {
@@ -294,8 +294,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $ruleId: uuid!,$ruleData: rules_set_input!) {
@@ -379,8 +379,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation CreatePolicy($data: policies_insert_input!) {
@@ -472,8 +472,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation DeletePolicyFail($id:uuid!) {
@@ -496,8 +496,8 @@ x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
 x-hasura-role: org:admin
-x-hasura-org-ids: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
-x-hasura-org-id: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!) {

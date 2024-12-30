@@ -25,10 +25,10 @@ insert_permissions:
         _and:
           - device:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
           - pool:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
       columns:
         - device_id
         - pool_id
@@ -43,10 +43,10 @@ select_permissions:
         _and:
           - device:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
           - pool:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
       allow_aggregations: true
     comment: ""
 delete_permissions:
@@ -56,8 +56,8 @@ delete_permissions:
         _and:
           - device:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
           - pool:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
     comment: ""

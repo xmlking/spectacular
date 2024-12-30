@@ -32,9 +32,9 @@ insert_permissions:
     permission:
       check: {}
       set:
-        created_by: x-hasura-User-Id
-        org_id: x-hasura-Org-Id
-        updated_by: x-hasura-User-Id
+        created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
+        updated_by: x-hasura-user-id
       columns:
         - description
         - display_name
@@ -57,7 +57,7 @@ select_permissions:
         - updated_by
       filter:
         org_id:
-          _eq: X-Hasura-Org-Id
+          _eq: x-hasura-default-org
       allow_aggregations: true
     comment: ""
 update_permissions:
@@ -70,15 +70,15 @@ update_permissions:
         - tags
       filter:
         org_id:
-          _eq: X-Hasura-Org-Id
+          _eq: x-hasura-default-org
       check: null
       set:
-        updated_by: x-hasura-User-Id
+        updated_by: x-hasura-user-id
     comment: ""
 delete_permissions:
   - role: org:admin
     permission:
       filter:
         org_id:
-          _eq: X-Hasura-Org-Id
+          _eq: x-hasura-default-org
     comment: ""

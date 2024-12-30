@@ -34,7 +34,7 @@ $: data = fragment(
         displayName
         email
         phoneNumber
-        currentOrgId
+        defaultOrg
         defaultRole
         avatarUrl
         locale
@@ -43,7 +43,7 @@ $: data = fragment(
     `),
 );
 
-$: ({ id, displayName, email, phoneNumber, currentOrgId, defaultRole, avatarUrl, locale, note } = $data);
+$: ({ id, displayName, email, phoneNumber, defaultOrg, defaultRole, avatarUrl, locale, note } = $data);
 
 const updateUserDetails = graphql(`
     mutation UpdateUserDetails($id: uuid!,  $data: users_set_input!) {

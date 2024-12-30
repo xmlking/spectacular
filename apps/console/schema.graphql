@@ -2180,6 +2180,266 @@ input jsonb_comparison_exp {
   _nin: [jsonb!]
 }
 
+"""Table containing user's org and org's default_role"""
+type memberships {
+  createdAt: timestamptz!
+  createdBy: uuid!
+  orgId: uuid!
+
+  """An object relationship"""
+  organization: organizations!
+  role: String!
+  updatedAt: timestamptz!
+  updatedBy: uuid!
+
+  """An object relationship"""
+  user: users!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "memberships"
+"""
+type memberships_aggregate {
+  aggregate: memberships_aggregate_fields
+  nodes: [memberships!]!
+}
+
+input memberships_aggregate_bool_exp {
+  count: memberships_aggregate_bool_exp_count
+}
+
+input memberships_aggregate_bool_exp_count {
+  arguments: [memberships_select_column!]
+  distinct: Boolean
+  filter: memberships_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "memberships"
+"""
+type memberships_aggregate_fields {
+  count(columns: [memberships_select_column!], distinct: Boolean): Int!
+  max: memberships_max_fields
+  min: memberships_min_fields
+}
+
+"""
+order by aggregate values of table "memberships"
+"""
+input memberships_aggregate_order_by {
+  count: order_by
+  max: memberships_max_order_by
+  min: memberships_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "memberships"
+"""
+input memberships_arr_rel_insert_input {
+  data: [memberships_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: memberships_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "memberships". All fields are combined with a logical 'AND'.
+"""
+input memberships_bool_exp {
+  _and: [memberships_bool_exp!]
+  _not: memberships_bool_exp
+  _or: [memberships_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  createdBy: uuid_comparison_exp
+  orgId: uuid_comparison_exp
+  organization: organizations_bool_exp
+  role: String_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: uuid_comparison_exp
+  user: users_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "memberships"
+"""
+enum memberships_constraint {
+  """
+  unique or primary key constraint on columns "user_id", "org_id"
+  """
+  memberships_pkey
+}
+
+"""
+input type for inserting data into table "memberships"
+"""
+input memberships_insert_input {
+  orgId: uuid
+  organization: organizations_obj_rel_insert_input
+  role: String
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type memberships_max_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  orgId: uuid
+  role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "memberships"
+"""
+input memberships_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  orgId: order_by
+  role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type memberships_min_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  orgId: uuid
+  role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "memberships"
+"""
+input memberships_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  orgId: order_by
+  role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "memberships"
+"""
+type memberships_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [memberships!]!
+}
+
+"""
+on_conflict condition type for table "memberships"
+"""
+input memberships_on_conflict {
+  constraint: memberships_constraint!
+  update_columns: [memberships_update_column!]! = []
+  where: memberships_bool_exp
+}
+
+"""Ordering options when selecting data from "memberships"."""
+input memberships_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  orgId: order_by
+  organization: organizations_order_by
+  role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  user: users_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: memberships"""
+input memberships_pk_columns_input {
+  orgId: uuid!
+  userId: uuid!
+}
+
+"""
+select columns of table "memberships"
+"""
+enum memberships_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  createdBy
+
+  """column name"""
+  orgId
+
+  """column name"""
+  role
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  updatedBy
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "memberships"
+"""
+input memberships_set_input {
+  role: String
+}
+
+"""
+Streaming cursor of the table "memberships"
+"""
+input memberships_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: memberships_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input memberships_stream_cursor_value_input {
+  createdAt: timestamptz
+  createdBy: uuid
+  orgId: uuid
+  role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+  userId: uuid
+}
+
+"""
+update columns of table "memberships"
+"""
+enum memberships_update_column {
+  """column name"""
+  role
+}
+
+input memberships_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: memberships_set_input
+
+  """filter the rows which have to be updated"""
+  where: memberships_bool_exp!
+}
+
 """mutation root"""
 type mutation_root {
   """
@@ -2287,6 +2547,19 @@ type mutation_root {
   delete_groups_by_pk(id: uuid!): groups
 
   """
+  delete data from the table: "memberships"
+  """
+  delete_memberships(
+    """filter the rows which have to be deleted"""
+    where: memberships_bool_exp!
+  ): memberships_mutation_response
+
+  """
+  delete single row from the table: "memberships"
+  """
+  delete_memberships_by_pk(orgId: uuid!, userId: uuid!): memberships
+
+  """
   delete data from the table: "org_settings"
   """
   delete_org_settings(
@@ -2352,19 +2625,6 @@ type mutation_root {
   delete_rules_by_pk(id: uuid!): rules
 
   """
-  delete data from the table: "setting_keys"
-  """
-  delete_setting_keys(
-    """filter the rows which have to be deleted"""
-    where: setting_keys_bool_exp!
-  ): setting_keys_mutation_response
-
-  """
-  delete single row from the table: "setting_keys"
-  """
-  delete_setting_keys_by_pk(key: String!): setting_keys
-
-  """
   delete data from the table: "user_groups"
   """
   delete_user_groups(
@@ -2376,19 +2636,6 @@ type mutation_root {
   delete single row from the table: "user_groups"
   """
   delete_user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
-
-  """
-  delete data from the table: "user_org_roles"
-  """
-  delete_user_org_roles(
-    """filter the rows which have to be deleted"""
-    where: user_org_roles_bool_exp!
-  ): user_org_roles_mutation_response
-
-  """
-  delete single row from the table: "user_org_roles"
-  """
-  delete_user_org_roles_by_pk(orgId: uuid!, userId: uuid!): user_org_roles
 
   """
   insert a single row into the table: "storage.files"
@@ -2455,6 +2702,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: groups_on_conflict
   ): groups
+
+  """
+  insert data into the table: "memberships"
+  """
+  insert_memberships(
+    """the rows to be inserted"""
+    objects: [memberships_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: memberships_on_conflict
+  ): memberships_mutation_response
+
+  """
+  insert a single row into the table: "memberships"
+  """
+  insert_memberships_one(
+    """the row to be inserted"""
+    object: memberships_insert_input!
+
+    """upsert condition"""
+    on_conflict: memberships_on_conflict
+  ): memberships
 
   """
   insert data into the table: "org_settings"
@@ -2567,28 +2836,6 @@ type mutation_root {
   ): rules
 
   """
-  insert data into the table: "setting_keys"
-  """
-  insert_setting_keys(
-    """the rows to be inserted"""
-    objects: [setting_keys_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: setting_keys_on_conflict
-  ): setting_keys_mutation_response
-
-  """
-  insert a single row into the table: "setting_keys"
-  """
-  insert_setting_keys_one(
-    """the row to be inserted"""
-    object: setting_keys_insert_input!
-
-    """upsert condition"""
-    on_conflict: setting_keys_on_conflict
-  ): setting_keys
-
-  """
   insert data into the table: "user_groups"
   """
   insert_user_groups(
@@ -2611,52 +2858,9 @@ type mutation_root {
   ): user_groups
 
   """
-  insert data into the table: "user_org_roles"
-  """
-  insert_user_org_roles(
-    """the rows to be inserted"""
-    objects: [user_org_roles_insert_input!]!
-
-    """upsert condition"""
-    on_conflict: user_org_roles_on_conflict
-  ): user_org_roles_mutation_response
-
-  """
-  insert a single row into the table: "user_org_roles"
-  """
-  insert_user_org_roles_one(
-    """the row to be inserted"""
-    object: user_org_roles_insert_input!
-
-    """upsert condition"""
-    on_conflict: user_org_roles_on_conflict
-  ): user_org_roles
-
-  """
   update single row of the table: "auth.users"
   """
   updateUser(
-    """append existing jsonb value of filtered columns with new jsonb value"""
-    _append: users_append_input
-
-    """
-    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-    """
-    _delete_at_path: users_delete_at_path_input
-
-    """
-    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-    """
-    _delete_elem: users_delete_elem_input
-
-    """
-    delete key/value pair or string element. key/value pairs are matched based on their key value
-    """
-    _delete_key: users_delete_key_input
-
-    """prepend existing jsonb value of filtered columns with new jsonb value"""
-    _prepend: users_prepend_input
-
     """sets the columns of the filtered rows to the given values"""
     _set: users_set_input
     pk_columns: users_pk_columns_input!
@@ -2666,27 +2870,6 @@ type mutation_root {
   update data of the table: "auth.users"
   """
   updateUsers(
-    """append existing jsonb value of filtered columns with new jsonb value"""
-    _append: users_append_input
-
-    """
-    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-    """
-    _delete_at_path: users_delete_at_path_input
-
-    """
-    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-    """
-    _delete_elem: users_delete_elem_input
-
-    """
-    delete key/value pair or string element. key/value pairs are matched based on their key value
-    """
-    _delete_key: users_delete_key_input
-
-    """prepend existing jsonb value of filtered columns with new jsonb value"""
-    _prepend: users_prepend_input
-
     """sets the columns of the filtered rows to the given values"""
     _set: users_set_input
 
@@ -2833,6 +3016,34 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [groups_updates!]!
   ): [groups_mutation_response]
+
+  """
+  update data of the table: "memberships"
+  """
+  update_memberships(
+    """sets the columns of the filtered rows to the given values"""
+    _set: memberships_set_input
+
+    """filter the rows which have to be updated"""
+    where: memberships_bool_exp!
+  ): memberships_mutation_response
+
+  """
+  update single row of the table: "memberships"
+  """
+  update_memberships_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: memberships_set_input
+    pk_columns: memberships_pk_columns_input!
+  ): memberships
+
+  """
+  update multiples rows of table: "memberships"
+  """
+  update_memberships_many(
+    """updates to execute, in order"""
+    updates: [memberships_updates!]!
+  ): [memberships_mutation_response]
 
   """
   update data of the table: "org_settings"
@@ -3155,76 +3366,6 @@ type mutation_root {
   ): [rules_mutation_response]
 
   """
-  update data of the table: "setting_keys"
-  """
-  update_setting_keys(
-    """append existing jsonb value of filtered columns with new jsonb value"""
-    _append: setting_keys_append_input
-
-    """
-    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-    """
-    _delete_at_path: setting_keys_delete_at_path_input
-
-    """
-    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-    """
-    _delete_elem: setting_keys_delete_elem_input
-
-    """
-    delete key/value pair or string element. key/value pairs are matched based on their key value
-    """
-    _delete_key: setting_keys_delete_key_input
-
-    """prepend existing jsonb value of filtered columns with new jsonb value"""
-    _prepend: setting_keys_prepend_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: setting_keys_set_input
-
-    """filter the rows which have to be updated"""
-    where: setting_keys_bool_exp!
-  ): setting_keys_mutation_response
-
-  """
-  update single row of the table: "setting_keys"
-  """
-  update_setting_keys_by_pk(
-    """append existing jsonb value of filtered columns with new jsonb value"""
-    _append: setting_keys_append_input
-
-    """
-    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-    """
-    _delete_at_path: setting_keys_delete_at_path_input
-
-    """
-    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-    """
-    _delete_elem: setting_keys_delete_elem_input
-
-    """
-    delete key/value pair or string element. key/value pairs are matched based on their key value
-    """
-    _delete_key: setting_keys_delete_key_input
-
-    """prepend existing jsonb value of filtered columns with new jsonb value"""
-    _prepend: setting_keys_prepend_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: setting_keys_set_input
-    pk_columns: setting_keys_pk_columns_input!
-  ): setting_keys
-
-  """
-  update multiples rows of table: "setting_keys"
-  """
-  update_setting_keys_many(
-    """updates to execute, in order"""
-    updates: [setting_keys_updates!]!
-  ): [setting_keys_mutation_response]
-
-  """
   update data of the table: "subscriptions"
   """
   update_subscriptions(
@@ -3251,34 +3392,6 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [subscriptions_updates!]!
   ): [subscriptions_mutation_response]
-
-  """
-  update data of the table: "user_org_roles"
-  """
-  update_user_org_roles(
-    """sets the columns of the filtered rows to the given values"""
-    _set: user_org_roles_set_input
-
-    """filter the rows which have to be updated"""
-    where: user_org_roles_bool_exp!
-  ): user_org_roles_mutation_response
-
-  """
-  update single row of the table: "user_org_roles"
-  """
-  update_user_org_roles_by_pk(
-    """sets the columns of the filtered rows to the given values"""
-    _set: user_org_roles_set_input
-    pk_columns: user_org_roles_pk_columns_input!
-  ): user_org_roles
-
-  """
-  update multiples rows of table: "user_org_roles"
-  """
-  update_user_org_roles_many(
-    """updates to execute, in order"""
-    updates: [user_org_roles_updates!]!
-  ): [user_org_roles_mutation_response]
 
   """
   update multiples rows of table: "auth.users"
@@ -3913,7 +4026,7 @@ type organizations {
   """An array relationship"""
   users(
     """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
+    distinct_on: [memberships_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -3922,16 +4035,16 @@ type organizations {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
+    order_by: [memberships_order_by!]
 
     """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): [user_org_roles!]!
+    where: memberships_bool_exp
+  ): [memberships!]!
 
   """An aggregate relationship"""
   users_aggregate(
     """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
+    distinct_on: [memberships_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -3940,11 +4053,11 @@ type organizations {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
+    order_by: [memberships_order_by!]
 
     """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): user_org_roles_aggregate!
+    where: memberships_bool_exp
+  ): memberships_aggregate!
 }
 
 """
@@ -4008,8 +4121,8 @@ input organizations_bool_exp {
   tags: String_array_comparison_exp
   updatedAt: timestamptz_comparison_exp
   updatedBy: uuid_comparison_exp
-  users: user_org_roles_bool_exp
-  users_aggregate: user_org_roles_aggregate_bool_exp
+  users: memberships_bool_exp
+  users_aggregate: memberships_aggregate_bool_exp
 }
 
 """
@@ -4062,7 +4175,7 @@ input organizations_insert_input {
   rules: rules_arr_rel_insert_input
   settings: org_settings_arr_rel_insert_input
   tags: [String!]
-  users: user_org_roles_arr_rel_insert_input
+  users: memberships_arr_rel_insert_input
 }
 
 """aggregate max on columns"""
@@ -4158,7 +4271,7 @@ input organizations_order_by {
   tags: order_by
   updatedAt: order_by
   updatedBy: order_by
-  users_aggregate: user_org_roles_aggregate_order_by
+  users_aggregate: memberships_aggregate_order_by
 }
 
 """primary key columns input for table: organizations"""
@@ -5936,6 +6049,49 @@ type query_root {
   groups_by_pk(id: uuid!): groups
 
   """
+  fetch data from the table: "memberships"
+  """
+  memberships(
+    """distinct select on columns"""
+    distinct_on: [memberships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [memberships_order_by!]
+
+    """filter the rows returned"""
+    where: memberships_bool_exp
+  ): [memberships!]!
+
+  """
+  fetch aggregated fields from the table: "memberships"
+  """
+  memberships_aggregate(
+    """distinct select on columns"""
+    distinct_on: [memberships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [memberships_order_by!]
+
+    """filter the rows returned"""
+    where: memberships_bool_exp
+  ): memberships_aggregate!
+
+  """fetch data from the table: "memberships" using primary key columns"""
+  memberships_by_pk(orgId: uuid!, userId: uuid!): memberships
+
+  """
   fetch data from the table: "org_settings"
   """
   org_settings(
@@ -6507,49 +6663,6 @@ type query_root {
 
   """fetch data from the table: "user_groups" using primary key columns"""
   user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
-
-  """
-  fetch data from the table: "user_org_roles"
-  """
-  user_org_roles(
-    """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
-
-    """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): [user_org_roles!]!
-
-  """
-  fetch aggregated fields from the table: "user_org_roles"
-  """
-  user_org_roles_aggregate(
-    """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
-
-    """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): user_org_roles_aggregate!
-
-  """fetch data from the table: "user_org_roles" using primary key columns"""
-  user_org_roles_by_pk(orgId: uuid!, userId: uuid!): user_org_roles
 
   """
   fetch data from the table: "auth.users"
@@ -7339,12 +7452,6 @@ type setting_keys_aggregate_fields {
   min: setting_keys_min_fields
 }
 
-"""append existing jsonb value of filtered columns with new jsonb value"""
-input setting_keys_append_input {
-  allowed_values: jsonb
-  default_value: jsonb
-}
-
 """
 Boolean expression to filter rows from the table "setting_keys". All fields are combined with a logical 'AND'.
 """
@@ -7356,50 +7463,6 @@ input setting_keys_bool_exp {
   default_value: jsonb_comparison_exp
   description: String_comparison_exp
   key: String_comparison_exp
-}
-
-"""
-unique or primary key constraints on table "setting_keys"
-"""
-enum setting_keys_constraint {
-  """
-  unique or primary key constraint on columns "key"
-  """
-  setting_keys_pkey
-}
-
-"""
-delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-"""
-input setting_keys_delete_at_path_input {
-  allowed_values: [String!]
-  default_value: [String!]
-}
-
-"""
-delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-"""
-input setting_keys_delete_elem_input {
-  allowed_values: Int
-  default_value: Int
-}
-
-"""
-delete key/value pair or string element. key/value pairs are matched based on their key value
-"""
-input setting_keys_delete_key_input {
-  allowed_values: String
-  default_value: String
-}
-
-"""
-input type for inserting data into table "setting_keys"
-"""
-input setting_keys_insert_input {
-  allowed_values: jsonb
-  default_value: jsonb
-  description: String
-  key: String
 }
 
 """aggregate max on columns"""
@@ -7414,43 +7477,12 @@ type setting_keys_min_fields {
   key: String
 }
 
-"""
-response of any mutation on the table "setting_keys"
-"""
-type setting_keys_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
-
-  """data from the rows affected by the mutation"""
-  returning: [setting_keys!]!
-}
-
-"""
-on_conflict condition type for table "setting_keys"
-"""
-input setting_keys_on_conflict {
-  constraint: setting_keys_constraint!
-  update_columns: [setting_keys_update_column!]! = []
-  where: setting_keys_bool_exp
-}
-
 """Ordering options when selecting data from "setting_keys"."""
 input setting_keys_order_by {
   allowed_values: order_by
   default_value: order_by
   description: order_by
   key: order_by
-}
-
-"""primary key columns input for table: setting_keys"""
-input setting_keys_pk_columns_input {
-  key: String!
-}
-
-"""prepend existing jsonb value of filtered columns with new jsonb value"""
-input setting_keys_prepend_input {
-  allowed_values: jsonb
-  default_value: jsonb
 }
 
 """
@@ -7471,16 +7503,6 @@ enum setting_keys_select_column {
 }
 
 """
-input type for updating data in table "setting_keys"
-"""
-input setting_keys_set_input {
-  allowed_values: jsonb
-  default_value: jsonb
-  description: String
-  key: String
-}
-
-"""
 Streaming cursor of the table "setting_keys"
 """
 input setting_keys_stream_cursor_input {
@@ -7497,52 +7519,6 @@ input setting_keys_stream_cursor_value_input {
   default_value: jsonb
   description: String
   key: String
-}
-
-"""
-update columns of table "setting_keys"
-"""
-enum setting_keys_update_column {
-  """column name"""
-  allowed_values
-
-  """column name"""
-  default_value
-
-  """column name"""
-  description
-
-  """column name"""
-  key
-}
-
-input setting_keys_updates {
-  """append existing jsonb value of filtered columns with new jsonb value"""
-  _append: setting_keys_append_input
-
-  """
-  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-  """
-  _delete_at_path: setting_keys_delete_at_path_input
-
-  """
-  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-  """
-  _delete_elem: setting_keys_delete_elem_input
-
-  """
-  delete key/value pair or string element. key/value pairs are matched based on their key value
-  """
-  _delete_key: setting_keys_delete_key_input
-
-  """prepend existing jsonb value of filtered columns with new jsonb value"""
-  _prepend: setting_keys_prepend_input
-
-  """sets the columns of the filtered rows to the given values"""
-  _set: setting_keys_set_input
-
-  """filter the rows which have to be updated"""
-  where: setting_keys_bool_exp!
 }
 
 scalar smallint
@@ -8324,6 +8300,63 @@ type subscription_root {
   ): [groups!]!
 
   """
+  fetch data from the table: "memberships"
+  """
+  memberships(
+    """distinct select on columns"""
+    distinct_on: [memberships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [memberships_order_by!]
+
+    """filter the rows returned"""
+    where: memberships_bool_exp
+  ): [memberships!]!
+
+  """
+  fetch aggregated fields from the table: "memberships"
+  """
+  memberships_aggregate(
+    """distinct select on columns"""
+    distinct_on: [memberships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [memberships_order_by!]
+
+    """filter the rows returned"""
+    where: memberships_bool_exp
+  ): memberships_aggregate!
+
+  """fetch data from the table: "memberships" using primary key columns"""
+  memberships_by_pk(orgId: uuid!, userId: uuid!): memberships
+
+  """
+  fetch data from the table in a streaming manner: "memberships"
+  """
+  memberships_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [memberships_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: memberships_bool_exp
+  ): [memberships!]!
+
+  """
   fetch data from the table: "org_settings"
   """
   org_settings(
@@ -9065,63 +9098,6 @@ type subscription_root {
   ): [user_groups!]!
 
   """
-  fetch data from the table: "user_org_roles"
-  """
-  user_org_roles(
-    """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
-
-    """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): [user_org_roles!]!
-
-  """
-  fetch aggregated fields from the table: "user_org_roles"
-  """
-  user_org_roles_aggregate(
-    """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
-
-    """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): user_org_roles_aggregate!
-
-  """fetch data from the table: "user_org_roles" using primary key columns"""
-  user_org_roles_by_pk(orgId: uuid!, userId: uuid!): user_org_roles
-
-  """
-  fetch data from the table in a streaming manner: "user_org_roles"
-  """
-  user_org_roles_stream(
-    """maximum number of rows returned in a single batch"""
-    batch_size: Int!
-
-    """cursor to stream the results returned by the query"""
-    cursor: [user_org_roles_stream_cursor_input]!
-
-    """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): [user_org_roles!]!
-
-  """
   fetch data from the table: "auth.users"
   """
   users(
@@ -9717,315 +9693,6 @@ enum user_groups_update_column {
   _PLACEHOLDER
 }
 
-"""Table containing user's org and default_role"""
-type user_org_roles {
-  createdAt: timestamptz!
-  createdBy: uuid!
-  isCurrentOrg: Boolean!
-  orgId: uuid!
-
-  """An object relationship"""
-  organization: organizations!
-  role: String!
-  updatedAt: timestamptz!
-  updatedBy: uuid!
-
-  """An object relationship"""
-  user: users!
-  userId: uuid!
-}
-
-"""
-aggregated selection of "user_org_roles"
-"""
-type user_org_roles_aggregate {
-  aggregate: user_org_roles_aggregate_fields
-  nodes: [user_org_roles!]!
-}
-
-input user_org_roles_aggregate_bool_exp {
-  bool_and: user_org_roles_aggregate_bool_exp_bool_and
-  bool_or: user_org_roles_aggregate_bool_exp_bool_or
-  count: user_org_roles_aggregate_bool_exp_count
-}
-
-input user_org_roles_aggregate_bool_exp_bool_and {
-  arguments: user_org_roles_select_column_user_org_roles_aggregate_bool_exp_bool_and_arguments_columns!
-  distinct: Boolean
-  filter: user_org_roles_bool_exp
-  predicate: Boolean_comparison_exp!
-}
-
-input user_org_roles_aggregate_bool_exp_bool_or {
-  arguments: user_org_roles_select_column_user_org_roles_aggregate_bool_exp_bool_or_arguments_columns!
-  distinct: Boolean
-  filter: user_org_roles_bool_exp
-  predicate: Boolean_comparison_exp!
-}
-
-input user_org_roles_aggregate_bool_exp_count {
-  arguments: [user_org_roles_select_column!]
-  distinct: Boolean
-  filter: user_org_roles_bool_exp
-  predicate: Int_comparison_exp!
-}
-
-"""
-aggregate fields of "user_org_roles"
-"""
-type user_org_roles_aggregate_fields {
-  count(columns: [user_org_roles_select_column!], distinct: Boolean): Int!
-  max: user_org_roles_max_fields
-  min: user_org_roles_min_fields
-}
-
-"""
-order by aggregate values of table "user_org_roles"
-"""
-input user_org_roles_aggregate_order_by {
-  count: order_by
-  max: user_org_roles_max_order_by
-  min: user_org_roles_min_order_by
-}
-
-"""
-input type for inserting array relation for remote table "user_org_roles"
-"""
-input user_org_roles_arr_rel_insert_input {
-  data: [user_org_roles_insert_input!]!
-
-  """upsert condition"""
-  on_conflict: user_org_roles_on_conflict
-}
-
-"""
-Boolean expression to filter rows from the table "user_org_roles". All fields are combined with a logical 'AND'.
-"""
-input user_org_roles_bool_exp {
-  _and: [user_org_roles_bool_exp!]
-  _not: user_org_roles_bool_exp
-  _or: [user_org_roles_bool_exp!]
-  createdAt: timestamptz_comparison_exp
-  createdBy: uuid_comparison_exp
-  isCurrentOrg: Boolean_comparison_exp
-  orgId: uuid_comparison_exp
-  organization: organizations_bool_exp
-  role: String_comparison_exp
-  updatedAt: timestamptz_comparison_exp
-  updatedBy: uuid_comparison_exp
-  user: users_bool_exp
-  userId: uuid_comparison_exp
-}
-
-"""
-unique or primary key constraints on table "user_org_roles"
-"""
-enum user_org_roles_constraint {
-  """
-  unique or primary key constraint on columns "user_id", "org_id"
-  """
-  user_org_roles_pkey
-
-  """
-  unique or primary key constraint on columns "user_id"
-  """
-  user_org_roles_unique_current_org
-}
-
-"""
-input type for inserting data into table "user_org_roles"
-"""
-input user_org_roles_insert_input {
-  isCurrentOrg: Boolean
-  orgId: uuid
-  organization: organizations_obj_rel_insert_input
-  role: String
-  userId: uuid
-}
-
-"""aggregate max on columns"""
-type user_org_roles_max_fields {
-  createdAt: timestamptz
-  createdBy: uuid
-  orgId: uuid
-  role: String
-  updatedAt: timestamptz
-  updatedBy: uuid
-  userId: uuid
-}
-
-"""
-order by max() on columns of table "user_org_roles"
-"""
-input user_org_roles_max_order_by {
-  createdAt: order_by
-  createdBy: order_by
-  orgId: order_by
-  role: order_by
-  updatedAt: order_by
-  updatedBy: order_by
-  userId: order_by
-}
-
-"""aggregate min on columns"""
-type user_org_roles_min_fields {
-  createdAt: timestamptz
-  createdBy: uuid
-  orgId: uuid
-  role: String
-  updatedAt: timestamptz
-  updatedBy: uuid
-  userId: uuid
-}
-
-"""
-order by min() on columns of table "user_org_roles"
-"""
-input user_org_roles_min_order_by {
-  createdAt: order_by
-  createdBy: order_by
-  orgId: order_by
-  role: order_by
-  updatedAt: order_by
-  updatedBy: order_by
-  userId: order_by
-}
-
-"""
-response of any mutation on the table "user_org_roles"
-"""
-type user_org_roles_mutation_response {
-  """number of rows affected by the mutation"""
-  affected_rows: Int!
-
-  """data from the rows affected by the mutation"""
-  returning: [user_org_roles!]!
-}
-
-"""
-on_conflict condition type for table "user_org_roles"
-"""
-input user_org_roles_on_conflict {
-  constraint: user_org_roles_constraint!
-  update_columns: [user_org_roles_update_column!]! = []
-  where: user_org_roles_bool_exp
-}
-
-"""Ordering options when selecting data from "user_org_roles"."""
-input user_org_roles_order_by {
-  createdAt: order_by
-  createdBy: order_by
-  isCurrentOrg: order_by
-  orgId: order_by
-  organization: organizations_order_by
-  role: order_by
-  updatedAt: order_by
-  updatedBy: order_by
-  user: users_order_by
-  userId: order_by
-}
-
-"""primary key columns input for table: user_org_roles"""
-input user_org_roles_pk_columns_input {
-  orgId: uuid!
-  userId: uuid!
-}
-
-"""
-select columns of table "user_org_roles"
-"""
-enum user_org_roles_select_column {
-  """column name"""
-  createdAt
-
-  """column name"""
-  createdBy
-
-  """column name"""
-  isCurrentOrg
-
-  """column name"""
-  orgId
-
-  """column name"""
-  role
-
-  """column name"""
-  updatedAt
-
-  """column name"""
-  updatedBy
-
-  """column name"""
-  userId
-}
-
-"""
-select "user_org_roles_aggregate_bool_exp_bool_and_arguments_columns" columns of table "user_org_roles"
-"""
-enum user_org_roles_select_column_user_org_roles_aggregate_bool_exp_bool_and_arguments_columns {
-  """column name"""
-  isCurrentOrg
-}
-
-"""
-select "user_org_roles_aggregate_bool_exp_bool_or_arguments_columns" columns of table "user_org_roles"
-"""
-enum user_org_roles_select_column_user_org_roles_aggregate_bool_exp_bool_or_arguments_columns {
-  """column name"""
-  isCurrentOrg
-}
-
-"""
-input type for updating data in table "user_org_roles"
-"""
-input user_org_roles_set_input {
-  isCurrentOrg: Boolean
-  role: String
-}
-
-"""
-Streaming cursor of the table "user_org_roles"
-"""
-input user_org_roles_stream_cursor_input {
-  """Stream column input with initial value"""
-  initial_value: user_org_roles_stream_cursor_value_input!
-
-  """cursor ordering"""
-  ordering: cursor_ordering
-}
-
-"""Initial value of the column from where the streaming should start"""
-input user_org_roles_stream_cursor_value_input {
-  createdAt: timestamptz
-  createdBy: uuid
-  isCurrentOrg: Boolean
-  orgId: uuid
-  role: String
-  updatedAt: timestamptz
-  updatedBy: uuid
-  userId: uuid
-}
-
-"""
-update columns of table "user_org_roles"
-"""
-enum user_org_roles_update_column {
-  """column name"""
-  isCurrentOrg
-
-  """column name"""
-  role
-}
-
-input user_org_roles_updates {
-  """sets the columns of the filtered rows to the given values"""
-  _set: user_org_roles_set_input
-
-  """filter the rows which have to be updated"""
-  where: user_org_roles_bool_exp!
-}
-
 """
 User account information. Don't modify its structure as Hasura Auth relies on it to function properly.
 """
@@ -10035,7 +9702,7 @@ type users {
   """An array relationship"""
   allowedOrgs(
     """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
+    distinct_on: [memberships_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -10044,16 +9711,16 @@ type users {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
+    order_by: [memberships_order_by!]
 
     """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): [user_org_roles!]!
+    where: memberships_bool_exp
+  ): [memberships!]!
 
   """An aggregate relationship"""
   allowedOrgs_aggregate(
     """distinct select on columns"""
-    distinct_on: [user_org_roles_select_column!]
+    distinct_on: [memberships_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -10062,11 +9729,11 @@ type users {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [user_org_roles_order_by!]
+    order_by: [memberships_order_by!]
 
     """filter the rows returned"""
-    where: user_org_roles_bool_exp
-  ): user_org_roles_aggregate!
+    where: memberships_bool_exp
+  ): memberships_aggregate!
 
   """Used as Computed Field on Users Table"""
   associatedGroups(
@@ -10087,9 +9754,7 @@ type users {
   ): [groups!]
   avatarUrl: String!
   createdAt: timestamptz!
-
-  """Function Used as Computed Field on Users Table"""
-  currentOrgId: uuid
+  defaultOrg: uuid
   defaultRole: String!
   disabled: Boolean!
   displayName: String!
@@ -10121,7 +9786,6 @@ type users {
     """JSON select path"""
     path: String
   ): jsonb
-  otpMethodLastUsed: String
   phoneNumber: String
   phoneNumberVerified: Boolean!
 
@@ -10288,11 +9952,6 @@ type users_aggregate_fields {
   min: users_min_fields
 }
 
-"""append existing jsonb value of filtered columns with new jsonb value"""
-input users_append_input {
-  metadata: jsonb
-}
-
 """
 Boolean expression to filter rows from the table "auth.users". All fields are combined with a logical 'AND'.
 """
@@ -10301,12 +9960,12 @@ input users_bool_exp {
   _not: users_bool_exp
   _or: [users_bool_exp!]
   activeMfaType: String_comparison_exp
-  allowedOrgs: user_org_roles_bool_exp
-  allowedOrgs_aggregate: user_org_roles_aggregate_bool_exp
+  allowedOrgs: memberships_bool_exp
+  allowedOrgs_aggregate: memberships_aggregate_bool_exp
   associatedGroups: groups_bool_exp
   avatarUrl: String_comparison_exp
   createdAt: timestamptz_comparison_exp
-  currentOrgId: uuid_comparison_exp
+  defaultOrg: uuid_comparison_exp
   defaultRole: String_comparison_exp
   disabled: Boolean_comparison_exp
   displayName: String_comparison_exp
@@ -10318,7 +9977,6 @@ input users_bool_exp {
   lastSeen: timestamptz_comparison_exp
   locale: String_comparison_exp
   metadata: jsonb_comparison_exp
-  otpMethodLastUsed: String_comparison_exp
   phoneNumber: String_comparison_exp
   phoneNumberVerified: Boolean_comparison_exp
   refreshTokens: authRefreshTokens_bool_exp
@@ -10332,42 +9990,18 @@ input users_bool_exp {
   userProviders_aggregate: authUserProviders_aggregate_bool_exp
 }
 
-"""
-delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-"""
-input users_delete_at_path_input {
-  metadata: [String!]
-}
-
-"""
-delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-"""
-input users_delete_elem_input {
-  metadata: Int
-}
-
-"""
-delete key/value pair or string element. key/value pairs are matched based on their key value
-"""
-input users_delete_key_input {
-  metadata: String
-}
-
 """aggregate max on columns"""
 type users_max_fields {
   activeMfaType: String
   avatarUrl: String
   createdAt: timestamptz
-
-  """Function Used as Computed Field on Users Table"""
-  currentOrgId: uuid
+  defaultOrg: uuid
   defaultRole: String
   displayName: String
   email: citext
   id: uuid
   lastSeen: timestamptz
   locale: String
-  otpMethodLastUsed: String
   phoneNumber: String
   updatedAt: timestamptz
 }
@@ -10377,16 +10011,13 @@ type users_min_fields {
   activeMfaType: String
   avatarUrl: String
   createdAt: timestamptz
-
-  """Function Used as Computed Field on Users Table"""
-  currentOrgId: uuid
+  defaultOrg: uuid
   defaultRole: String
   displayName: String
   email: citext
   id: uuid
   lastSeen: timestamptz
   locale: String
-  otpMethodLastUsed: String
   phoneNumber: String
   updatedAt: timestamptz
 }
@@ -10405,11 +10036,11 @@ type users_mutation_response {
 """Ordering options when selecting data from "auth.users"."""
 input users_order_by {
   activeMfaType: order_by
-  allowedOrgs_aggregate: user_org_roles_aggregate_order_by
+  allowedOrgs_aggregate: memberships_aggregate_order_by
   associatedGroups_aggregate: groups_aggregate_order_by
   avatarUrl: order_by
   createdAt: order_by
-  currentOrgId: order_by
+  defaultOrg: order_by
   defaultRole: order_by
   disabled: order_by
   displayName: order_by
@@ -10421,7 +10052,6 @@ input users_order_by {
   lastSeen: order_by
   locale: order_by
   metadata: order_by
-  otpMethodLastUsed: order_by
   phoneNumber: order_by
   phoneNumberVerified: order_by
   refreshTokens_aggregate: authRefreshTokens_aggregate_order_by
@@ -10434,11 +10064,6 @@ input users_order_by {
 """primary key columns input for table: auth.users"""
 input users_pk_columns_input {
   id: uuid!
-}
-
-"""prepend existing jsonb value of filtered columns with new jsonb value"""
-input users_prepend_input {
-  metadata: jsonb
 }
 
 scalar users_scalar
@@ -10455,6 +10080,9 @@ enum users_select_column {
 
   """column name"""
   createdAt
+
+  """column name"""
+  defaultOrg
 
   """column name"""
   defaultRole
@@ -10487,9 +10115,6 @@ enum users_select_column {
   metadata
 
   """column name"""
-  otpMethodLastUsed
-
-  """column name"""
   phoneNumber
 
   """column name"""
@@ -10503,13 +10128,7 @@ enum users_select_column {
 input type for updating data in table "auth.users"
 """
 input users_set_input {
-  avatarUrl: String
-  defaultRole: String
-  disabled: Boolean
-  displayName: String
-  email: citext
-  locale: String
-  metadata: jsonb
+  defaultOrg: uuid
 }
 
 """
@@ -10528,6 +10147,7 @@ input users_stream_cursor_value_input {
   activeMfaType: String
   avatarUrl: String
   createdAt: timestamptz
+  defaultOrg: uuid
   defaultRole: String
   disabled: Boolean
   displayName: String
@@ -10538,34 +10158,12 @@ input users_stream_cursor_value_input {
   lastSeen: timestamptz
   locale: String
   metadata: jsonb
-  otpMethodLastUsed: String
   phoneNumber: String
   phoneNumberVerified: Boolean
   updatedAt: timestamptz
 }
 
 input users_updates {
-  """append existing jsonb value of filtered columns with new jsonb value"""
-  _append: users_append_input
-
-  """
-  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-  """
-  _delete_at_path: users_delete_at_path_input
-
-  """
-  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-  """
-  _delete_elem: users_delete_elem_input
-
-  """
-  delete key/value pair or string element. key/value pairs are matched based on their key value
-  """
-  _delete_key: users_delete_key_input
-
-  """prepend existing jsonb value of filtered columns with new jsonb value"""
-  _prepend: users_prepend_input
-
   """sets the columns of the filtered rows to the given values"""
   _set: users_set_input
 

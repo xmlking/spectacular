@@ -10,10 +10,9 @@ query GetUserById($id: uuid!) {
     avatarUrl
     metadata
   }
-  user_org_roles(where: { userId: { _eq: $id } }) {
+  memberships(where: { userId: { _eq: $id } }) {
     orgId
     role
-    isCurrentOrg
   }
   authUserRoles {
     role

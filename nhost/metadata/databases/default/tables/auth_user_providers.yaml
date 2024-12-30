@@ -58,7 +58,7 @@ select_permissions:
         - user_id
       filter:
         user_id:
-          _eq: X-Hasura-User-Id
+          _eq: x-hasura-user-id
       allow_aggregations: true
     comment: ""
 delete_permissions:
@@ -66,5 +66,5 @@ delete_permissions:
     permission:
       filter:
         user_id:
-          _eq: X-Hasura-User-Id
+          _eq: x-hasura-user-id
     comment: ""

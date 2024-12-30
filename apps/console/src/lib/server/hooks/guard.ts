@@ -88,8 +88,8 @@ export const guard = (async ({ event, resolve }) => {
   // log.debug({ claims });
   const roles = nhost.auth.getHasuraClaim('allowed-roles');
   const role = nhost.auth.getHasuraClaim('default-role');
-  const orgs = nhost.auth.getHasuraClaim('org-ids');
-  const org = nhost.auth.getHasuraClaim('org-id');
+  const orgs = nhost.auth.getHasuraClaim('allowed-orgs');
+  const org = nhost.auth.getHasuraClaim('default-org');
   log.debug({ roles, role, orgs, org });
 
   if (startsWith(pathname, adminPaths)) {

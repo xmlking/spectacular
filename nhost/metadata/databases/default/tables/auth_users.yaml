@@ -9,6 +9,8 @@ configuration:
       custom_name: avatarUrl
     created_at:
       custom_name: createdAt
+    default_org:
+      custom_name: defaultOrg
     default_role:
       custom_name: defaultRole
     disabled:
@@ -55,6 +57,7 @@ configuration:
     active_mfa_type: activeMfaType
     avatar_url: avatarUrl
     created_at: createdAt
+    default_org: defaultOrg
     default_role: defaultRole
     disabled: disabled
     display_name: displayName
@@ -91,6 +94,9 @@ object_relationships:
   - name: defaultRoleByRole
     using:
       foreign_key_constraint_on: default_role
+  - name: organization
+    using:
+      foreign_key_constraint_on: default_org
 array_relationships:
   - name: allowedOrgs
     using:
@@ -99,7 +105,7 @@ array_relationships:
           id: user_id
         insertion_order: null
         remote_table:
-          name: user_org_roles
+          name: memberships
           schema: public
   - name: refreshTokens
     using:
@@ -135,11 +141,6 @@ computed_fields:
       function:
         name: user_associated_groups
         schema: public
-  - name: currentOrgId
-    definition:
-      function:
-        name: user_current_org
-        schema: public
   - name: dissociatedGroups
     definition:
       function:
@@ -152,6 +153,7 @@ select_permissions:
         - active_mfa_type
         - avatar_url
         - created_at
+        - default_org
         - default_role
         - display_name
         - email
@@ -164,11 +166,9 @@ select_permissions:
         - phone_number
         - phone_number_verified
         - updated_at
-      computed_fields:
-        - currentOrgId
       filter:
         id:
-          _eq: X-Hasura-User-Id
+          _eq: x-hasura-user-id
     comment: ""
   - role: org:admin
     permission:
@@ -176,6 +176,7 @@ select_permissions:
         - active_mfa_type
         - avatar_url
         - created_at
+        - default_org
         - default_role
         - disabled
         - display_name
@@ -189,11 +190,9 @@ select_permissions:
         - phone_number
         - phone_number_verified
         - updated_at
-      computed_fields:
-        - currentOrgId
       filter:
-        currentOrgId:
-          _eq: X-Hasura-Org-Id
+        default_org:
+          _eq: x-hasura-default-org
       allow_aggregations: true
     comment: ""
   - role: private
@@ -202,7 +201,7 @@ select_permissions:
         - phone_number
       filter:
         id:
-          _eq: X-Hasura-User-Id
+          _eq: x-hasura-user-id
     comment: ""
   - role: sys:admin
     permission:
@@ -210,6 +209,7 @@ select_permissions:
         - active_mfa_type
         - avatar_url
         - created_at
+        - default_org
         - default_role
         - disabled
         - display_name
@@ -224,8 +224,6 @@ select_permissions:
         - phone_number
         - phone_number_verified
         - updated_at
-      computed_fields:
-        - currentOrgId
       filter: {}
       allow_aggregations: true
     comment: ""
@@ -241,21 +239,15 @@ update_permissions:
         - phone_number
       filter:
         id:
-          _eq: X-Hasura-User-Id
+          _eq: x-hasura-user-id
       check: {}
     comment: ""
-  - role: org:admin
+  - role: org:member
     permission:
       columns:
-        - avatar_url
-        - default_role
-        - disabled
-        - display_name
-        - email
-        - locale
-        - metadata
+        - default_org
       filter:
-        currentOrgId:
-          _eq: X-Hasura-Org-Id
+        default_org:
+          _in: x-hasura-allowed-orgs
       check: null
     comment: ""

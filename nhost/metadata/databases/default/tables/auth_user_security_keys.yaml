@@ -40,7 +40,7 @@ select_permissions:
         - user_id
       filter:
         user_id:
-          _eq: X-Hasura-User-Id
+          _eq: x-hasura-user-id
       allow_aggregations: true
     comment: users can read their security keys
 delete_permissions:

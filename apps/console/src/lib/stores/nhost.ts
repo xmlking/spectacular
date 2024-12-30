@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { goto, invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
-import { SearchSecurityKeysStore, MakeCurrentOrgStore, cache } from '$houdini';
+import { SearchSecurityKeysStore, UpdateDefaultOrgStore, cache } from '$houdini';
 import { NHOST_SESSION_KEY, ROUTE_DASHBOARD } from '$lib/constants';
 import { i18n } from '$lib/i18n';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
@@ -13,7 +13,7 @@ import { type Readable, type Writable, derived, get, readable, readonly, writabl
 
 // TODO: change to Svelte 5 Class: https://x.com/ankurpsinghal/status/1856719524059283897
 const skQuery = new SearchSecurityKeysStore().artifact.raw;
-const soQuery = new MakeCurrentOrgStore().artifact.raw;
+const soQuery = new UpdateDefaultOrgStore().artifact.raw;
 export class SvelteKitNhostClient extends NhostClient {
   #log = new Logger('auth.store.client');
 
@@ -161,7 +161,7 @@ export class SvelteKitNhostClient extends NhostClient {
     await goto(i18n.resolveRoute(ROUTE_DASHBOARD), {
       invalidateAll: true,
     });
-    return data?.update_user_org_roles_by_pk?.isCurrentOrg as boolean;
+    return data?.update_users_by_pk?.id !== undefined;
   }
 }
 

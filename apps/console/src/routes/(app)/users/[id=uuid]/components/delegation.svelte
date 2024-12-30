@@ -12,7 +12,7 @@ export let data: any;
 
 const groupRolesByOrganization = () => {
   const groupedRoles: { [key: string]: string[] } = {};
-  for (const { organization, role } of data.orgRoles ?? []) {
+  for (const { organization, role } of data.memberships ?? []) {
     if (!groupedRoles[organization]) {
       groupedRoles[organization] = [];
     }
@@ -27,7 +27,7 @@ const handler = new DataHandler(Object.entries(groupRolesByOrganization()), {
 const rows = handler.getRows();
 const inputChip = '';
 const def_org = data.user.metadata.default_org;
-const roles: string[] = data.orgRoles.map((rol: { role: string }) => rol.role);
+const roles: string[] = data.memberships.map((rol: { role: string }) => rol.role);
 const organizations: string[] = data.organizations.map((org) => org.organization);
 const allowedOrgs = data.user.allowedOrgs.map((item: { organization: string }) => item.organization);
 const filterOrgs = organizations.filter((role) => !allowedOrgs.includes(role));
@@ -62,7 +62,7 @@ async function addorg(Org: string, roless: string[], defrole: string, userId: st
   if (errors) {
     console.log(errors.toString());
   }
-  if (data?.insert_user_org_roles) {
+  if (data?.insert_memberships) {
     handleMessage(
       {
         message: `<p class="text-xl">User: New <span class="text-red-500 font-bold"> ${Org}</span> Added with <span class="text-red-500 font-bold">${roless}</span> roles and <span class="text-red-500 font-bold">${defaultRole}</span> as default role </p>`,
@@ -85,8 +85,8 @@ async function updorg(Org: string, roless: string[], userId: string) {
     defrole = defaultRole;
   }
   let myorg: string[] = [];
-  if (data.orgRoles.length > 0) {
-    myorg = data.orgRoles
+  if (data.memberships.length > 0) {
+    myorg = data.memberships
       .filter((item: { organization: string }) => item.organization === Org)
       .map((item: { role: string }) => item.role);
   }
@@ -133,7 +133,7 @@ async function updorg(Org: string, roless: string[], userId: string) {
     if (errors) {
       console.log(errors.toString());
     }
-    if (data?.insert_user_org_roles) {
+    if (data?.insert_memberships) {
       handleMessage(
         {
           message: `<p class="text-xl">User: <span class="text-red-500 font-bold">${Org}</span> Updated with <span class="text-red-500 font-bold">${roless}</span> roles</p>`,
@@ -223,7 +223,7 @@ function handleupdateRoles(role: string, event: Event) {
           <td
             >{#each row[1] as tag}
               <span class="chip {tag ? 'variant-filled' : 'variant-soft'}">
-                {#if tag == data.orgRoles.find((role) => role.isDefaultRole === true && role.organization === row[0]).role}
+                {#if tag == data.memberships.find((role) => role.isDefaultRole === true && role.organization === row[0]).role}
                   <span class="text-green-400">●</span>
                 {/if}
                 <span>{tag}</span>
@@ -244,7 +244,7 @@ function handleupdateRoles(role: string, event: Event) {
                 on:click={() => {
                   neworg = row[0];
                   $updateroles = row[1];
-                  defrole = data.orgRoles.find(
+                  defrole = data.memberships.find(
                     (role) =>
                       role.isDefaultRole === true &&
                       role.organization === row[0],

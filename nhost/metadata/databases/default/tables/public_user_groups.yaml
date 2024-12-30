@@ -25,10 +25,10 @@ insert_permissions:
         _and:
           - group:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
           - user:
-              currentOrgId:
-                _eq: X-Hasura-Org-Id
+              default_org:
+                _eq: x-hasura-default-org
       columns:
         - group_id
         - user_id
@@ -43,10 +43,10 @@ select_permissions:
         _and:
           - group:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
           - user:
-              currentOrgId:
-                _eq: X-Hasura-Org-Id
+              default_org:
+                _eq: x-hasura-default-org
       allow_aggregations: true
     comment: ""
 delete_permissions:
@@ -56,8 +56,8 @@ delete_permissions:
         _and:
           - group:
               org_id:
-                _eq: X-Hasura-Org-Id
+                _eq: x-hasura-default-org
           - user:
-              currentOrgId:
-                _eq: X-Hasura-Org-Id
+              default_org:
+                _eq: x-hasura-default-org
     comment: ""

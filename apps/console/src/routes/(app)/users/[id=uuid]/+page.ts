@@ -19,11 +19,11 @@ export const load = async (event) => {
   });
   if (errors) error(400, errors[0] as GraphQLError);
   const user = data?.user;
-  const orgRoles = data?.user_org_roles;
+  const memberships  = data?.memberships;
   const organizations = data?.organizations;
   const roles = data?.authUserRoles;
   console.log('user:', user);
   if (!user) error(404, 'User not found');
   const form = await superValidate(user, zod(schema));
-  return { form, user, orgRoles, organizations, roles };
+  return { form, user, memberships, organizations, roles };
 };

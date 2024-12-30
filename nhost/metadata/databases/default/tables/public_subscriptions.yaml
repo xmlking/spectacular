@@ -55,7 +55,7 @@ select_permissions:
         - updated_by
       filter:
         org_id:
-          _eq: X-Hasura-Org-Id
+          _eq: x-hasura-default-org
       allow_aggregations: true
     comment: ""
 update_permissions:
@@ -68,8 +68,8 @@ update_permissions:
         - stripe_subscription_id
       filter:
         org_id:
-          _eq: X-Hasura-Org-Id
+          _eq: x-hasura-default-org
       check: null
       set:
-        updated_by: x-hasura-User-Id
+        updated_by: x-hasura-user-id
     comment: ""

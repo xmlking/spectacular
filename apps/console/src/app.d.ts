@@ -12,7 +12,7 @@ declare global {
     // houdini session
     interface Session {
       accessToken?: string;
-      // TODO: currentOrg?: string; // active user's org. default value is user's default_org
+      // TODO: defaultOrg?: string; // active user's org. default value is user's default_org
     }
     namespace Superforms {
       type Message = Pick<ToastSettings, 'message' | 'hideDismiss' | 'timeout'> & {

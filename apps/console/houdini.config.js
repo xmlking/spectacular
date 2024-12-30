@@ -17,12 +17,12 @@ const config = {
     // HINT: we need to generate scheam for highest role level that app support.
     headers: {
       'X-Hasura-Admin-Secret': (env) => env.HASURA_GRAPHQL_ADMIN_SECRET,
-      'x-hasura-allowed-roles': 'user me sys:admin',
-      'x-hasura-role': 'sys:admin',
+      'x-hasura-allowed-roles': 'user me sys:admin org:member org:admin org:owner',
+      'x-hasura-role': 'org:owner',
     },
   },
   types: {
-    user_org_roles: {
+    memberships: {
       keys: ['userId', 'orgId'],
     },
   },
