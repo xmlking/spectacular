@@ -9,10 +9,16 @@ export const houdini = (async ({ event, resolve }) => {
   // FIXME: https://github.com/nextauthjs/next-auth/discussions/6186
   if (building) return await resolve(event);
 
-  const { locals } = event;
-  const accessToken = locals.nhost.auth.getAccessToken();
+  const {
+    locals: { nhost },
+  } = event;
+  const accessToken = nhost.auth.getAccessToken();
+  const claims = nhost.auth.getHasuraClaims();
+  const userId = claims?.['x-hasura-user-id'];
+  const orgId = claims?.['x-hasura-default-org'] as string;
+
   log.debug('setting accessToken:', accessToken);
-  if (accessToken) setSession(event, { accessToken });
+  if (accessToken) setSession(event, { accessToken, userId, orgId });
 
   const response = await resolve(event);
   return response;

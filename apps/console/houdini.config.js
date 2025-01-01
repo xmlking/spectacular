@@ -26,19 +26,18 @@ const config = {
       keys: ['userId', 'orgId'],
     },
   },
-  // types: {
-  //   user: {
-  //     keys: ['id'],
-  //   },
-  // },
-  // features: {
-  //   runtimeScalars: {
-  //     UserId: {
-  //       type: 'uuid',
-  //       resolve: ({ session }) => session?.userId,
-  //     },
-  //   },
-  // },
+  features: {
+    runtimeScalars: {
+      UserIdFromSession: {
+        type: 'uuid',
+        resolve: ({ session }) => session?.userId,
+      },
+      OrgIdFromSession: {
+        type: 'uuid',
+        resolve: ({ session }) => session?.orgId,
+      },
+    },
+  },
   plugins: {
     // 'houdini-plugin-svelte-global-stores': {
     // 	generate: 'all'
@@ -83,6 +82,7 @@ const config = {
     },
     bigint: {
       type: 'Number',
+      ...defaultMarshall,
     },
     URL: {
       type: 'URL',
@@ -151,10 +151,6 @@ const config = {
       marshal(date) {
         return date?.toISOString();
       },
-    },
-    bigint: {
-      type: 'Number',
-      ...defaultMarshall,
     },
     bytea: {
       type: 'Binary',

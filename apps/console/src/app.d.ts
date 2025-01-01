@@ -12,7 +12,8 @@ declare global {
     // houdini session
     interface Session {
       accessToken?: string;
-      // TODO: defaultOrg?: string; // active user's org. default value is user's default_org
+      orgId?: string;
+      userId?: string;
     }
     namespace Superforms {
       type Message = Pick<ToastSettings, 'message' | 'hideDismiss' | 'timeout'> & {
@@ -58,5 +59,3 @@ declare global {
     readonly aibrow: typeof AI;
   }
 }
-
-export type {};

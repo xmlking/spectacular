@@ -33,6 +33,7 @@ import {
 import Select from 'svelte-select';
 import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { CreatePolicy } from '../mutations.js';
 
 const log = new Logger('policies.create.browser');
 
@@ -41,19 +42,6 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 // let subjects: Subject[] | undefined;
-
-// FIXME:  ...Search_Rules_insert @when(shared: false)
-// `shared` has to be the arguments of the field marked with @list ???
-const createPolicy = graphql(`
-    mutation CreatePolicy($data: policies_insert_input!) {
-      insert_policies_one(object: $data) {
-        ...Search_Policies_insert @prepend
-        rule {
-          ...Search_Rules_insert @when(shared: false) @prepend
-        }
-      }
-    }
-  `);
 
 const form = superForm(defaults(zod(schema)), {
   SPA: true,
@@ -100,7 +88,7 @@ const form = superForm(defaults(zod(schema)), {
     }
     log.debug('payload:', payload);
 
-    const { data, errors } = await createPolicy.mutate({ data: payload }, { metadata: { logResult: true } });
+    const { data, errors } = await CreatePolicy.mutate({ data: payload }, { metadata: { logResult: true } });
 
     if (errors) {
       for (const error of errors) {

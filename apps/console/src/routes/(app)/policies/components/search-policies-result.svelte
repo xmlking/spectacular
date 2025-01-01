@@ -5,7 +5,9 @@ import {
   PendingValue,
   type SearchPolicies$result,
   cache,
+  fragment,
   graphql,
+  type SearchPoliciesFragment,
 } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
@@ -18,12 +20,11 @@ import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { message } from 'sveltekit-superforms';
+import { DeletePolicy, DeleteRule } from '../mutations';
 
 const log = new Logger('policies:search-results:browser');
 // Variables
-export let data: SearchPolicies$result;
-let { policies } = data;
-$: ({ policies } = data);
+export let policies: SearchPolicies$result['policies'];
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -39,23 +40,7 @@ const rows = handler.getRows();
  * FIXME: Cache bust: `policies {id @policies_delete }` is empty !!!
  */
 let isDeleting = false;
-const deleteRule = graphql(`
-    mutation DeleteRule($id: uuid!) {
-      delete_rules_by_pk(id: $id) {
-        ...Search_Rules_remove
-        policies {
-          id @policies_delete
-        }
-      }
-    }
-  `);
-const deletePolicy = graphql(`
-    mutation DeletePolicy($id: uuid!) {
-      delete_policies_by_pk(id: $id) {
-        ...Search_Policies_remove
-      }
-    }
-  `);
+
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   const { id, ruleId, ruleShared, displayName } = event.currentTarget.dataset;
   if (!id || !ruleId || !displayName) {
@@ -69,7 +54,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   let error: string | undefined;
   // Delete role if not shared, this will cascade delete the policy as well.
   if (ruleShared === 'false') {
-    const { data, errors: gqlErrors } = await deleteRule.mutate({
+    const { data, errors: gqlErrors } = await DeleteRule.mutate({
       id: ruleId,
     });
     // TODO: `policyId @policies_delete` ???
@@ -84,7 +69,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
       deletedId = data?.delete_rules_by_pk?.id;
     }
   } else {
-    const { data, errors: gqlErrors } = await deletePolicy.mutate({
+    const { data, errors: gqlErrors } = await DeletePolicy.mutate({
       id,
     });
 
