@@ -12,7 +12,7 @@ export const _GetUserVariables: Variables = async (event) => {
   const { userId, orgId, defaultRole } = await event.parent();
   if (!userId) {
     log.error('not authenticated');
-    throw error(400, 'not authenticated');
+    error(400, 'not authenticated');
   }
   return { userId };
 };

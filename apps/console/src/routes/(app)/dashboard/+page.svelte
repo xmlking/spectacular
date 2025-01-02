@@ -2,8 +2,31 @@
 // NOTE: from https://swapy.tahazsh.com/
 // TODO: Drag-and-Drop Dashboard https://github.com/olliethedev/dnd-dashboard
 import { onDestroy, onMount } from 'svelte';
-import { persisted } from 'svelte-persisted-store';
+// import { persisted } from 'svelte-persisted-store';
 import { type Swapy, createSwapy } from 'swapy';
+import { fragment, graphql, type WelcomeUserFragment } from '$houdini';
+import type { PageData } from './$houdini';
+
+export let data: PageData;
+let { AppLayout } = data;
+let user: WelcomeUserFragment;
+
+// Reactivity
+$: ({ AppLayout } = data);
+$: if ($AppLayout?.data?.user) {
+  user = $AppLayout?.data?.user;
+}
+$: fragmentData = fragment(
+  user,
+  graphql(`
+      fragment WelcomeUserFragment on users {
+        displayName
+        currentOrg {
+          displayName
+        }
+      }
+    `),
+);
 
 let container: HTMLDivElement;
 let swapy: Swapy;
@@ -53,6 +76,7 @@ onDestroy(() => {
   <section class="space-y-4">
     <h1 class="h1">Dashboard</h1>
     <p>Stats, Reports, Metrics</p>
+    <p class="text-xl font-semiblod md:text-2xl">Welcome <strong>{$fragmentData?.displayName}</strong> to <strong class="uppercase">{$fragmentData?.currentOrg?.displayName}</strong></p>
   </section>
 
   <section class="space-y-4">
@@ -80,7 +104,9 @@ onDestroy(() => {
 
   <section class="space-y-4">
     <h2 class="h2">Metrics Gallery</h2>
-    <p>Show metrics at a glance. you can rearrange the widgets by drag and drop</p>
+    <p>
+      Show metrics at a glance. you can rearrange the widgets by drag and drop
+    </p>
 
     <div
       class="grid grid-cols-3 gap-4 font-mono text-white text-sm text-center font-bold leading-6"
@@ -145,17 +171,4 @@ onDestroy(() => {
     </div>
   </section>
 </div>
-
-<style lang="postcss">
-  .handle {
-    cursor: grab;
-    width: 24px;
-    height: 24px;
-    background-image: url(data:image/svg+xml,%3csvg%20viewBox='0%200%2024%2024'%20xmlns='http://www.w3.org/2000/svg'%20id='fi_3793594'%3e%3ccircle%20cx='8'%20cy='4'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='8'%20cy='12'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='8'%20cy='20'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='16'%20cy='4'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='16'%20cy='12'%20r='2'%3e%3c/circle%3e%3ccircle%20cx='16'%20cy='20'%20r='2'%3e%3c/circle%3e%3c/svg%3e);
-    opacity: .5;
-    position: absolute;
-    top: 14px;
-    left: 10px;
-  }
-</style>
 

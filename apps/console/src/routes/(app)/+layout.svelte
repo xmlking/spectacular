@@ -6,7 +6,6 @@ import WaitForAuth from '$lib/components/layout/wait-for-auth.svelte';
 import { getNhostClient } from '$lib/stores/nhost';
 import { onMount } from 'svelte';
 
-export let data;
 const nhost = getNhostClient();
 
 /**

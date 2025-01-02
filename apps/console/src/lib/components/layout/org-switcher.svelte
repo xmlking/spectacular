@@ -3,21 +3,35 @@ import type { ChangeEventHandler } from 'svelte/elements';
 import { getNhostClient } from '$lib/stores/nhost';
 import { Logger } from '@spectacular/utils';
 import { page } from '$app/stores';
+import { fragment, graphql, type AllowedOrgsFragment } from '$houdini';
 
 const log = new Logger('profile:org-switcher:browser');
 
+// Variables
 const nhost = getNhostClient();
+let value = $page.data.orgId;
 
-let value = $page.data.orgId
+// Reactivity
+let { AppLayout } = $page.data;
+$: ({ AppLayout } = $page.data);
+let user: AllowedOrgsFragment = $AppLayout?.data?.user;
+$: user = $AppLayout?.data?.user;
+$: data = fragment(
+  user,
+  graphql(`
+      fragment AllowedOrgsFragment on users {
+        allowedOrgs(order_by: { orgId: asc }) @list(name: "User_Allowed_Orgs") {
+          orgId
+          organization {
+            displayName
+          }
+          role
+        }
+      }
+    `),
+);
 
-// TODO load allowedOrgs from +layout.gql
-export const allowedOrgs = [
-  { value: '', name: 'Switch Org' },
-  { value: '8dfd9a31-de01-47be-92a7-ba1c720c6270', name: 'Chinthagunta' },
-  { value: 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b', name: 'Species' },
-  { value: 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b', name: 'Something' },
-];
-
+// Functions
 const handleSwitchOrg: ChangeEventHandler<HTMLSelectElement> = async (event) => {
   // const value = (event.target as HTMLSelectElement).value;
   const orgId = (event.target as HTMLSelectElement)?.selectedOptions[0]?.value;
@@ -30,12 +44,15 @@ const handleSwitchOrg: ChangeEventHandler<HTMLSelectElement> = async (event) => 
 };
 </script>
 
-<select
-  class="select"
-  bind:value
-  on:change={handleSwitchOrg}
->
-  {#each allowedOrgs as org}
-    <option value={org.value} >{org.name}</option>
-  {/each}
-</select>
+{#if $data}
+  {@const allowedOrgs = $data.allowedOrgs}
+  <select
+    class="select"
+    bind:value
+    on:change={handleSwitchOrg}
+  >
+    {#each allowedOrgs as org}
+        <option value={org.orgId}>{org.organization.displayName}</option>
+    {/each}
+  </select>
+{/if}
