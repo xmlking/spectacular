@@ -2,7 +2,7 @@
 import { page } from '$app/stores';
 import {
   CachePolicy,
-  GetUserStore,
+  ProfileDataStore,
   PendingValue,
   type UpdateUserDetails$input,
   type UserDetailsFragment,
@@ -84,7 +84,7 @@ const form = superForm(defaults(zod(updateUserDetailsSchema)), {
       return;
     }
     // Second, update user profile
-    // const id = $page.data.session.user.id;
+    // const userId = $page.data.userId;
     const payload: users_set_input = {
       // ...form.data,
       displayName: form.data.displayName,
@@ -146,14 +146,10 @@ const {
  * https://github.com/HoudiniGraphql/houdini/issues/891
  */
 async function reload() {
-  const getUserStore = new GetUserStore();
-  // const userId = '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'
-  const userId = $page.data.session.user.id;
-  console.log({ userId });
-  const { data, errors } = await getUserStore.fetch({
+  const profileDataStore = new ProfileDataStore();
+  const { data, errors } = await profileDataStore.fetch({
     blocking: true,
     policy: CachePolicy.NetworkOnly,
-    variables: { userId },
   });
   console.log({ data, errors });
 }
