@@ -16,10 +16,10 @@ export const load = loadFlash(
     // pass locale information from "server-context" to "shared server + client context"
     return {
       vercelEnv: secrets.VERCEL_ENV ?? 'development',
-      userId: claims?.['x-hasura-user-id'], // TODO remove unused
-      orgId: claims?.['x-hasura-default-org'], // TODO remove unused
-      defaultOrg: claims?.['x-hasura-default-org'], // TODO remove unused
-      defaultRole: claims?.['x-hasura-default-role'], // TODO remove unused
+      // HINT: svelte pages and components can access them from anyware via '$page.data.userId' etc
+      userId: claims?.['x-hasura-user-id'],
+      orgId: claims?.['x-hasura-default-org'],
+      role: claims?.['x-hasura-default-role'],
     };
   },
 );

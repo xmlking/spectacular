@@ -14,11 +14,12 @@ export const houdini = (async ({ event, resolve }) => {
   } = event;
   const accessToken = nhost.auth.getAccessToken();
   const claims = nhost.auth.getHasuraClaims();
+  // HINT: role, userId, orgId will be globally available in Houdini Session to be used as `runtimeScalars`
+  const role = claims?.['x-hasura-default-role'];
   const userId = claims?.['x-hasura-user-id'];
   const orgId = claims?.['x-hasura-default-org'] as string;
 
-  log.debug('setting accessToken:', accessToken);
-  if (accessToken) setSession(event, { accessToken, userId, orgId });
+  if (accessToken) setSession(event, { accessToken, role, userId, orgId });
 
   const response = await resolve(event);
   return response;

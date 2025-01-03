@@ -16,6 +16,7 @@ export const init: ClientInit = async () => {
 
   // for debug cookies in development mode.
   if (dev) {
+    // @ts-ignore
     cookieStore.onchange = (event: CookieChangeEvent) => {
       // console.log("cookie changed", {event});
       if (event.deleted[0] && event.deleted[0].name === NHOST_SESSION_KEY) {
