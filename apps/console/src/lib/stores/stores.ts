@@ -25,3 +25,9 @@ export const lang = derived(page, ($page) => $page.data.lang);
  * current scrollLeft and scrollTop values
  */
 export const scroll = writable<{ x: number; y: number }>({ x: 0, y: 0 });
+
+/**
+ * Cloudflare Turnstile state
+ */
+export const turnstileResponse = writable<string>();
+export const turnstilePassed = writable<boolean>(false);

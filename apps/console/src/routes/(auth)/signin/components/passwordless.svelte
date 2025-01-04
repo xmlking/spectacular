@@ -7,6 +7,7 @@ import { i18n } from '$lib/i18n';
 import { pwlSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
+import { turnstilePassed } from '$lib/stores/stores';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -43,7 +44,10 @@ const form = superForm(defaults(zod(pwlSchema)), {
     if (error) {
       log.error(error);
       setError(form, '', error.message);
-      handleMessage({ type: 'error', message: `Signin failed: ${error?.message}` } as const, toastStore);
+      handleMessage(
+        { type: 'error', message: `Signin failed: ${error?.message}`, hideDismiss: false, timeout: 10000 } as const,
+        toastStore,
+      );
       return;
     }
     loadingState.setFormLoading(false); // workaround
@@ -81,23 +85,34 @@ export const snapshot = { capture, restore };
 // Functions
 async function webauthnSignin() {
   if ($errors.email) {
-    handleMessage({ type: 'error', message: 'Invalid email' } as const, toastStore);
+    handleMessage({ type: 'error', message: 'Invalid email', hideDismiss: false, timeout: 10000 } as const, toastStore);
   } else {
     const { session, error: signInError } = await nhost.auth.signIn({ email: $formData.email, securityKey: true });
     if (session) {
-      handleMessage({ type: 'success', message: 'Signin successful 😎' } as const, toastStore);
+      handleMessage(
+        { type: 'success', message: 'Signin successful 😎', hideDismiss: true, timeout: 10000 } as const,
+        toastStore,
+      );
       await goto(i18n.resolveRoute($formData.redirectTo), {
         invalidateAll: true, // workaround for profile page
       });
     } else {
       log.error(signInError);
-      handleMessage({ type: 'error', message: `Signin failed: ${signInError?.message}` } as const, toastStore);
+      handleMessage(
+        {
+          type: 'error',
+          message: `Signin failed: ${signInError?.message}`,
+          hideDismiss: false,
+          timeout: 10000,
+        } as const,
+        toastStore,
+      );
     }
   }
 }
 
 // Reactivity
-$: valid = $allErrors.length === 0;
+$: valid = $allErrors.length === 0 && $turnstilePassed;
 $: loadingState.setFormLoading($delayed);
 $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
 </script>

@@ -254,6 +254,14 @@ pnpm add -D mode-watcher --filter "./apps/web"
 pnpm add -D svelte-persisted-store --filter "./apps/console"
 ```
 
+#### Bot Protection
+
+Bot Protection for nhost-auth with Cloudflare Turnstile
+
+```shell
+pnpm add -D svelte-turnstile --filter "./apps/console"
+```
+
 ### UI Blocks
 
 - [Kometa UI Kit](https://kitwind.io/products/kometa) (Free) [Blocks](https://kitwind.io/products/kometa/components)

@@ -25,6 +25,16 @@ export const showSocialLogin = flag<boolean>({
   },
 });
 
+export const enableBotProtection = flag<boolean>({
+  key: 'enableBotProtection',
+  description: 'Enable Cloudflare Turnstile Bot Protection',
+  origin: 'https://docs.nhost.io/guides/auth/bot-protection',
+  options: [{ value: true }, { value: false }],
+  decide(event) {
+    return true;
+  },
+});
+
 export const simulateLoadingState = flag<boolean>({
   key: 'simulateLoadingState',
   description: 'Enable simulating loading states for testing',

@@ -7,6 +7,7 @@ import { i18n } from '$lib/i18n';
 import { updateUserDetailsKeys as keys, signUpSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
+import { turnstilePassed } from '$lib/stores/stores';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -47,6 +48,7 @@ const form = superForm(defaults(zod(signUpSchema)), {
     if (!form.valid) return;
 
     const { firstName, lastName, email, password, locale, redirectTo } = form.data;
+    // signUpEmailPasswordPromise(service, email, password as string, valueOptions, requestOptions)
     const { session, error } = await nhost.auth.signUp({
       email,
       password,
@@ -57,8 +59,12 @@ const form = superForm(defaults(zod(signUpSchema)), {
     });
     if (error) {
       log.error(error);
+      // FIXME: workaround for `missing x-cf-turnstile-response`
+      if (typeof error.error === 'string') {
+        error.message = error.error;
+      }
       setError(form, '', error.message);
-      setMessage(form, { type: 'error', message: 'Account creation failed' });
+      setMessage(form, { type: 'error', message: 'Account creation failed', hideDismiss: false, timeout: 10000 });
       return;
     }
 
@@ -105,7 +111,7 @@ export const snapshot = { capture, restore };
 // Functions
 
 // Reactivity
-$: valid = $allErrors.length === 0;
+$: valid = $allErrors.length === 0 && $turnstilePassed;
 $: loadingState.setFormLoading($delayed);
 $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
 </script>

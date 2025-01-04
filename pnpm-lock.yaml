@@ -262,6 +262,9 @@ importers:
       svelte-select:
         specifier: 5.8.3
         version: 5.8.3
+      svelte-turnstile:
+        specifier: 0.9.0
+        version: 0.9.0(svelte@4.2.19)
       sveltekit-flash-message:
         specifier: 2.4.4
         version: 2.4.4(@sveltejs/kit@2.12.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.2)))(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.2)))(svelte@4.2.19)
@@ -7097,6 +7100,11 @@ packages:
     peerDependencies:
       svelte: ^5.0.0-next.126
 
+  svelte-turnstile@0.9.0:
+    resolution: {integrity: sha512-fyU2Ym2qSHzNTPvbOkZTQh7n8Fd8Uk+SvT05aRP3E/pK+x8DjL/Bl2NjVjqXD0MspkwEsmLhMI5DGsG3vZ++eA==}
+    peerDependencies:
+      svelte: ^3.58.0 || ^4.0.0 || ^5.0.0
+
   svelte2tsx@0.7.31:
     resolution: {integrity: sha512-exrN1o9mdCLAA7hTCudz731FIxomH/0SN9ZIX+WrY/XnlLuno/NNC1PF6JXPZVqp/4sMMDKteqyKoG44hliljQ==}
     peerDependencies:
@@ -7398,6 +7406,9 @@ packages:
   turbo@2.3.3:
     resolution: {integrity: sha512-DUHWQAcC8BTiUZDRzAYGvpSpGLiaOQPfYXlCieQbwUvmml/LRGIe3raKdrOPOoiX0DYlzxs2nH6BoWJoZrj8hA==}
     hasBin: true
+
+  turnstile-types@1.2.3:
+    resolution: {integrity: sha512-EDjhDB9TDwda2JRbhzO/kButPio3JgrC3gXMVAMotxldybTCJQVMvPNJ89rcAiN9vIrCb2i1E+VNBCqB8wue0A==}
 
   type-fest@2.19.0:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
@@ -15443,6 +15454,11 @@ snapshots:
       style-to-object: 1.0.8
       svelte: 5.14.4
 
+  svelte-turnstile@0.9.0(svelte@4.2.19):
+    dependencies:
+      svelte: 4.2.19
+      turnstile-types: 1.2.3
+
   svelte2tsx@0.7.31(svelte@5.14.4)(typescript@5.7.2):
     dependencies:
       dedent-js: 1.0.1
@@ -15829,6 +15845,8 @@ snapshots:
       turbo-linux-arm64: 2.3.3
       turbo-windows-64: 2.3.3
       turbo-windows-arm64: 2.3.3
+
+  turnstile-types@1.2.3: {}
 
   type-fest@2.19.0:
     optional: true

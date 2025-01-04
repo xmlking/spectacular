@@ -63,9 +63,13 @@ allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:51
 enabled = true
 disableNewUsers = false
 
-# TODO: https://docs.nhost.io/guides/auth/bot-protection
 # [auth.signUp.turnstile]
-# secretKey = 'turnstileSecretKey'
+# secretKey = '{{ secrets.CLOUDFLARE_TURNSTILE_SECRET_KEY }}'
+# {
+#   "op": "replace",
+#   "path": "/auth/signUp/turnstile/secretKey",
+#   "value": "1x0000000000000000000000000000000AA"
+# },
 
 [auth.user]
 [auth.user.roles]

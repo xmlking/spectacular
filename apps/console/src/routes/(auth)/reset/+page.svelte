@@ -7,6 +7,7 @@ import { i18n } from '$lib/i18n';
 import { resetPasswordSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
+import { turnstilePassed } from '$lib/stores/stores';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -94,7 +95,7 @@ export const snapshot = { capture, restore };
 // Functions
 
 // Reactivity
-$: valid = $allErrors.length === 0;
+$: valid = $allErrors.length === 0 && $turnstilePassed;
 $: loadingState.setFormLoading($delayed);
 // const conicStops: ConicStop[] = [
 //   { color: 'transparent', start: 0, end: 25 },

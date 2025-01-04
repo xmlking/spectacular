@@ -7,6 +7,7 @@ import { i18n } from '$lib/i18n';
 import { pwSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
+import { turnstilePassed } from '$lib/stores/stores';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -41,7 +42,7 @@ const form = superForm(defaults(zod(pwSchema)), {
     if (error) {
       log.error(error);
       setError(form, '', error.message);
-      setMessage(form, { type: 'error', message: 'Signin failed' });
+      setMessage(form, { type: 'error', message: 'Signin failed', hideDismiss: false, timeout: 10000 });
       return;
     }
 
@@ -88,7 +89,7 @@ export const snapshot = { capture, restore };
 // Functions
 
 // Reactivity
-$: valid = $allErrors.length === 0;
+$: valid = $allErrors.length === 0 && $turnstilePassed;
 $: loadingState.setFormLoading($delayed);
 $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
 </script>
