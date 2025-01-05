@@ -313,7 +313,7 @@ $: loadingState.setFormLoading($delayed);
       >
         <div class="col-span-2 leading-3">
           <Form.Fieldset {form} name={keys.subjectType}>
-            <RadioGroup active="variant-filled-secondary">
+            <RadioGroup active="variant-filled">
               {#each subjectTypeOptions as sType}
                 <Form.Control let:attrs>
                   <RadioItem
@@ -626,7 +626,7 @@ $: loadingState.setFormLoading($delayed);
         <div class="leading-3">
           <Form.Fieldset {form} name="rule.action">
             <Form.Legend>Action</Form.Legend>
-            <RadioGroup active="variant-filled-secondary">
+            <RadioGroup active="variant-filled">
               {#each actionOptions as action}
                 <Form.Control let:attrs>
                   <RadioItem
@@ -650,7 +650,7 @@ $: loadingState.setFormLoading($delayed);
         <div class="leading-3">
           <Form.Fieldset {form} name="rule.direction">
             <Form.Legend>Direction</Form.Legend>
-            <RadioGroup active="variant-filled-secondary">
+            <RadioGroup active="variant-filled">
               {#each directionOptions as direction}
                 <Form.Control let:attrs>
                   <RadioItem
@@ -675,7 +675,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="rule.shared">
             <Form.Control let:attrs>
               <SlideToggle
-                active="variant-filled-secondary"
+                active="variant-filled"
                 size="md"
                 {...attrs}
                 {disabled}
@@ -796,7 +796,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.active}>
             <Form.Control let:attrs>
               <SlideToggle
-                active="variant-filled-secondary"
+                active="variant-filled"
                 size="md"
                 {...attrs}
                 bind:checked={$formData.active}

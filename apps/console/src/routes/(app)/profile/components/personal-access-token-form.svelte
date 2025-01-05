@@ -176,7 +176,7 @@ $: loadingState.setFormLoading($delayed);
     <svelte:fragment slot="trail">
       <button
         type="submit"
-        class="btn variant-filled-secondary"
+        class="btn variant-filled"
         disabled={!$tainted || !valid || $submitting}
       >
         {#if $timeout}

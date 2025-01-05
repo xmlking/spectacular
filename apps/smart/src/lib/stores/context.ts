@@ -1,4 +1,4 @@
-import { Context } from "runed";
+import { Context } from 'runed';
 
 /**
  * Usage
@@ -8,4 +8,4 @@ import { Context } from "runed";
  *   const theme = myTheme.get();
  *   const theme = myTheme.getOr("light");
  */
-export const myTheme = new Context<"light" | "dark">("theme");
+export const myTheme = new Context<'light' | 'dark'>('theme');

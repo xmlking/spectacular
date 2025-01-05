@@ -333,7 +333,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.autoEnroll}>
             <Form.Control let:attrs>
               <SlideToggle
-                active="variant-filled-secondary"
+                active="variant-filled"
                 size="md"
                 {...attrs}
                 bind:checked={$formData.autoEnroll}

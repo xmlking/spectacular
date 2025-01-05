@@ -226,6 +226,17 @@ select_permissions:
           _eq: x-hasura-user-id
     comment: ""
 update_permissions:
+  - role: sys:admin
+    permission:
+      columns:
+        - avatar_url
+        - display_name
+        - locale
+        - metadata
+        - phone_number
+      filter: {}
+      check: null
+    comment: ""
   - role: user
     permission:
       columns:

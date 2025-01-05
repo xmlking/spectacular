@@ -201,7 +201,7 @@ const setTheme: SubmitFunction = ({ formData }) => {
                     >
                       <span>{icon}</span>
                       <span class="flex-auto text-left">{name}</span>
-                      {#if badge}<span class="variant-filled-secondary badge">{badge}</span>{/if}
+                      {#if badge}<span class="variant-filled badge">{badge}</span>{/if}
                     </button>
                   </li>
                 {/each}

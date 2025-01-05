@@ -23,7 +23,8 @@ $: fragmentData = fragment(
         displayName
         currentOrg {
           displayName
-        }
+        },
+        defaultRole
       }
     `),
 );
@@ -76,7 +77,7 @@ onDestroy(() => {
   <section class="space-y-4">
     <h1 class="h1">Dashboard</h1>
     <p>Stats, Reports, Metrics</p>
-    <p class="text-xl font-semiblod md:text-2xl">Welcome <strong>{$fragmentData?.displayName}</strong> to <strong class="uppercase">{$fragmentData?.currentOrg?.displayName}</strong></p>
+    <p class="text-xl font-semiblod md:text-2xl">Welcome <strong>{$fragmentData?.displayName}</strong> to <strong class="uppercase">{$fragmentData?.currentOrg?.displayName ?? 'no org'}</strong>, Your Role <strong class="uppercase">{$fragmentData?.defaultRole}</strong></p>
   </section>
 
   <section class="space-y-4">

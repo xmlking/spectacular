@@ -104,7 +104,7 @@ $: loadingState.setFormLoading($delayed);
               placeholder={m.profile_forms_change_email_placeholder()}
             />
             <button
-              class="variant-filled-secondary"
+              class="variant-filled"
               disabled={!$tainted || !valid || $submitting}
             >
               {#if $timeout}

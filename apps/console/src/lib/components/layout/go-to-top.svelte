@@ -36,7 +36,7 @@ const showGotoTop = derived(scroll, ($scroll) => {
     class={cn(
       'fixed bottom-10 right-10 z-50 text-white',
       'transform transition hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none',
-      'variant-filled-secondary btn-icon btn-icon-lg',
+      'variant-filled btn-icon btn-icon-lg',
       className,
     )}
   >

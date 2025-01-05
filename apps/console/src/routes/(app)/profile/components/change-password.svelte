@@ -127,7 +127,7 @@ $: loadingState.setFormLoading($delayed);
     <footer class="card-footer flex justify-end">
       <button
         type="submit"
-        class="btn variant-filled-secondary"
+        class="btn variant-filled"
         disabled={!$tainted || !valid || $submitting}
       >
         {#if $timeout}
