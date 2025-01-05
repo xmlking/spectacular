@@ -33,7 +33,7 @@ import {
 import Select from 'svelte-select';
 import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { CreatePolicy } from '../mutations.js';
+import { CreatePolicy } from '../mutations';
 
 const log = new Logger('policies.create.browser');
 

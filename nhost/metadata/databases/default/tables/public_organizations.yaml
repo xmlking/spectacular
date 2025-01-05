@@ -212,6 +212,25 @@ update_permissions:
       set:
         updated_by: x-hasura-user-id
     comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - auto_enroll
+        - avatar_url
+        - blocked_email_domains
+        - blocked_emails
+        - description
+        - display_name
+        - metadata
+        - owner_id
+        - tags
+      filter: {}
+      check: {}
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
 delete_permissions:
   - role: org:owner
     permission:

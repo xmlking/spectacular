@@ -250,3 +250,4 @@ You can find an example of a function that can generate a valid access token for
 - [FedCA](https://developer.mozilla.org/en-US/docs/Web/API/Credential_Management_API/Credential_types)
 - [Best Practices for Storing Access Tokens in the Browser](https://curity.medium.com/best-practices-for-storing-access-tokens-in-the-browser-6b3d515d9814)
 - [The Ultimate Guide to handling JWTs on frontend clients (GraphQL)](https://hasura.io/blog/best-practices-of-using-jwt-with-graphql)
+- [Permissions - Permissions with unrelated tables or views](https://hasura.io/docs/2.0/auth/authorization/permissions/row-level-permissions/#unrelated-tables-in-permissions)

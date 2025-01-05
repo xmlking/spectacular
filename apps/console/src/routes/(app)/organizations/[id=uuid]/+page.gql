@@ -1,9 +1,18 @@
-query GetOrganization($id: uuid!) {
+query OrganizationData($id: uuid!) {
   organizations_by_pk(id: $id) {
-    allowedEmailDomains
-    allowedEmails
-    description
-    displayName
     id
+    displayName
+    description
+    tags
+    metadata
+    ownerId
+    avatarUrl
+    autoEnroll
+    allowedEmailDomains @include(if: true)
+    allowedEmails @skip(if: false)
+    blockedEmailDomains
+    blockedEmails
+    autoEnroll
+    avatarUrl
   }
 }

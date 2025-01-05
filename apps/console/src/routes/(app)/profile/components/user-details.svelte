@@ -24,6 +24,7 @@ import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';
 import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { UpdateUserDetails } from '../mutations';
 
 export let user: UserDetailsFragment;
 $: data = fragment(
@@ -45,17 +46,6 @@ $: data = fragment(
 
 $: ({ id, displayName, email, phoneNumber, defaultOrg, defaultRole, avatarUrl, locale, note } = $data);
 
-const updateUserDetails = graphql(`
-    mutation UpdateUserDetails($id: uuid!,  $data: users_set_input!) {
-      updateUser(pk_columns: { id: $id },  _set: $data) {
-      displayName
-      phoneNumber
-      locale
-      note: metadata(path: "note")
-      avatarUrl
-      }
-    }
-  `);
 
 // Variables
 const log = new Logger('profile:profile:details:browser');
@@ -94,7 +84,7 @@ const form = superForm(defaults(zod(updateUserDetailsSchema)), {
       avatarUrl: form.data.avatarUrl,
     };
     const variables: UpdateUserDetails$input = { id, data: payload };
-    const { errors, data } = await updateUserDetails.mutate(variables, {
+    const { errors, data } = await UpdateUserDetails.mutate(variables, {
       metadata: { logResult: true, useRole: 'me' },
     });
     if (errors) {

@@ -1,9 +1,11 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 import type AI from '@aibrow/dom-types';
-type NhostClient = import('@nhost/nhost-js').NhostClient;
+// type NhostClient = import('@nhost/nhost-js').NhostClient;
+import type { NhostClient } from '@nhost/nhost-js';
 import type { AvailableLanguageTag } from '$lib/paraglide/runtime';
 import type { ParaglideLocals } from '@inlang/paraglide-sveltekit';
+import type { ToastSettings } from '@skeletonlabs/skeleton';
 
 declare global {
   namespace App {

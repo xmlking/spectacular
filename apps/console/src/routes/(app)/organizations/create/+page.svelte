@@ -148,7 +148,7 @@ $: loadingState.setFormLoading($delayed);
     {#if gqlErrors}
       <GraphQLErrors errors={gqlErrors} />
     {/if}
-    <!-- Update User Details Form -->
+    <!-- Create Organization Form -->
     <form class="card md:space-y-8" method="POST" use:enhance>
       <header class="card-header">
         <div class="text-xl">Create Organization</div>

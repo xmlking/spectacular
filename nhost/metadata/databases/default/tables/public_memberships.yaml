@@ -45,7 +45,7 @@ insert_permissions:
       columns:
         - role
         - user_id
-    comment: ""
+    comment: org admins can only manage org members. so not edit permissions are required for org admins.
   - role: org:owner
     permission:
       check:
@@ -62,7 +62,7 @@ insert_permissions:
       columns:
         - role
         - user_id
-    comment: ""
+    comment: 'org owner can add org members, billing and admin type of memberships. owner can upgrade and downgrade role of a member but admin cannot change role '
 select_permissions:
   - role: org:admin
     permission:
@@ -115,7 +115,7 @@ update_permissions:
             - org:member
       set:
         updated_by: x-hasura-user-id
-    comment: ""
+    comment: owner can upgrade and downgrade role of a member except for owner membership
 delete_permissions:
   - role: org:admin
     permission:

@@ -10,6 +10,7 @@ import { Logger, sleep } from '@spectacular/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
+import { DeleteOrganization } from '../mutations';
 
 const log = new Logger('organizations:search-results:browser');
 // Variables
@@ -30,13 +31,7 @@ const rows = handler.getRows();
  * Delete Organization action
  */
 let isDeleting = false;
-const deleteOrganization = graphql(`
-    mutation DeleteOrganization($id: uuid! ) {
-       delete_organizations_by_pk(id: $id) {
-        ...Search_Organizations_remove
-      }
-    }
-  `);
+
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   const { id, displayName } = event.currentTarget.dataset;
   if (!id || !displayName) {
@@ -45,7 +40,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   }
   // before
   isDeleting = true;
-  const { data, errors: gqlErrors } = await deleteOrganization.mutate({
+  const { data, errors: gqlErrors } = await DeleteOrganization.mutate({
     id,
   });
   if (gqlErrors) {
