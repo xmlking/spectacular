@@ -1,4 +1,5 @@
 import { flag } from '@vercel/flags/sveltekit';
+import { env } from '$env/dynamic/private';
 
 export const showMagicLinkLogin = flag<boolean>({
   key: 'showMagicLinkLogin',
@@ -31,7 +32,7 @@ export const enableBotProtection = flag<boolean>({
   origin: 'https://docs.nhost.io/guides/auth/bot-protection',
   options: [{ value: true }, { value: false }],
   decide(event) {
-    return true;
+    return env.FEATURE_SHOW_BOT_PROTECTION === 'true';
   },
 });
 

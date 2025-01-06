@@ -30,4 +30,4 @@ export const scroll = writable<{ x: number; y: number }>({ x: 0, y: 0 });
  * Cloudflare Turnstile state
  */
 export const turnstileResponse = writable<string>();
-export const turnstilePassed = writable<boolean>(false);
+export const turnstilePassed = writable<boolean>(true);
