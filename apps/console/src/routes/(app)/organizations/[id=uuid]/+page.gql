@@ -1,4 +1,4 @@
-query OrganizationData($id: uuid!) {
+query OrganizationData1($id: uuid!) {
   organizations_by_pk(id: $id) {
     id
     displayName
@@ -6,8 +6,6 @@ query OrganizationData($id: uuid!) {
     tags
     metadata
     ownerId
-    avatarUrl
-    autoEnroll
     allowedEmailDomains @include(if: true)
     allowedEmails @skip(if: false)
     blockedEmailDomains

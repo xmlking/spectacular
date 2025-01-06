@@ -1,14 +1,14 @@
 <script lang="ts">
-import { browser } from '$app/environment';
-import { goto, invalidateAll } from '$app/navigation';
+import { goto } from '$app/navigation';
 import { cache, type UpdateOrganizationDetails$input, type policies_insert_input } from '$houdini';
 import * as m from '$i18n/messages';
-import { searchRulesFn } from '$lib/api/search-rules';
-import { searchSubjects } from '$lib/api/search-subjects';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { updateOrganizationSchema as schema, type UpdateOrganization } from '$lib/schema/organization';
-import { updateOrganizationKeys as keys } from '$lib/schema/organization';
+import {
+  updateOrganizationSchema as schema,
+  updateOrganizationKeys as keys,
+  type UpdateOrganization,
+} from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
@@ -20,58 +20,24 @@ import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { UpdateOrganizationDetails } from '../mutations';
 import type { GraphQLError } from 'graphql';
-import {
-  Loader,
-  MonitorSmartphone,
-  MoreHorizontal,
-  Search,
-  Server,
-  User,
-  UserRound,
-  Users,
-  UsersRound,
-} from 'lucide-svelte';
+import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';
-import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm, superValidate, type SuperValidated } from 'sveltekit-superforms';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import type { PageData } from './$houdini';
 
 const log = new Logger('organizations.update.browser');
 
 export let data: PageData;
-let { OrganizationData } = data;
-$: ({ OrganizationData } = data);
+let { OrganizationData1 } = data;
+$: ({ OrganizationData1 } = data);
 
 // Variables
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 
-// export let organization: OrganizationDetailsFragment;
-// $: data = fragment(
-//   organization,
-//   graphql(`
-//       fragment OrganizationDetailsFragment on organizations @loading(cascade: true) {
-//         id
-//         displayName
-//         description
-//         tags
-//         metadata
-//         ownerId
-//         avatarUrl
-//         autoEnroll
-//         allowedEmailDomains @include(if: true)
-//         allowedEmails @skip(if: false)
-//         blockedEmailDomains
-//         blockedEmails
-//         autoEnroll
-//         avatarUrl
-//       }
-//     `),
-// );
-
-
-const { id, ...initialData } = $OrganizationData.data?.organizations_by_pk;
+const { id, ...initialData } = $OrganizationData1.data?.organizations_by_pk;
 initialData.tags = initialData.tags || [];
 initialData.allowedEmailDomains = initialData.allowedEmailDomains || [];
 initialData.allowedEmails = initialData.allowedEmails || [];
@@ -366,7 +332,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.autoEnroll}>
             <Form.Control let:attrs>
               <SlideToggle
-                active="variant-filled-secondary"
+                active="variant-filled"
                 size="md"
                 {...attrs}
                 bind:checked={$formData.autoEnroll}
