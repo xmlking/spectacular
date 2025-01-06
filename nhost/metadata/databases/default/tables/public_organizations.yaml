@@ -60,6 +60,13 @@ array_relationships:
         table:
           name: groups
           schema: public
+  - name: memberships
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: memberships
+          schema: public
   - name: policies
     using:
       foreign_key_constraint_on:
@@ -94,13 +101,6 @@ array_relationships:
         column: org_id
         table:
           name: subscriptions
-          schema: public
-  - name: users
-    using:
-      foreign_key_constraint_on:
-        column: org_id
-        table:
-          name: memberships
           schema: public
 computed_fields:
   - name: settingsWithDefaults

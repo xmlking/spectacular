@@ -3854,6 +3854,42 @@ type organizations {
     where: groups_bool_exp
   ): groups_aggregate!
   id: uuid!
+
+  """An array relationship"""
+  memberships(
+    """distinct select on columns"""
+    distinct_on: [memberships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [memberships_order_by!]
+
+    """filter the rows returned"""
+    where: memberships_bool_exp
+  ): [memberships!]!
+
+  """An aggregate relationship"""
+  memberships_aggregate(
+    """distinct select on columns"""
+    distinct_on: [memberships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [memberships_order_by!]
+
+    """filter the rows returned"""
+    where: memberships_bool_exp
+  ): memberships_aggregate!
   metadata(
     """JSON select path"""
     path: String
@@ -4063,42 +4099,6 @@ type organizations {
   tags: [String!]
   updatedAt: timestamptz
   updatedBy: uuid
-
-  """An array relationship"""
-  users(
-    """distinct select on columns"""
-    distinct_on: [memberships_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [memberships_order_by!]
-
-    """filter the rows returned"""
-    where: memberships_bool_exp
-  ): [memberships!]!
-
-  """An aggregate relationship"""
-  users_aggregate(
-    """distinct select on columns"""
-    distinct_on: [memberships_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [memberships_order_by!]
-
-    """filter the rows returned"""
-    where: memberships_bool_exp
-  ): memberships_aggregate!
 }
 
 """
@@ -4145,6 +4145,8 @@ input organizations_bool_exp {
   groups: groups_bool_exp
   groups_aggregate: groups_aggregate_bool_exp
   id: uuid_comparison_exp
+  memberships: memberships_bool_exp
+  memberships_aggregate: memberships_aggregate_bool_exp
   metadata: jsonb_comparison_exp
   owner: users_bool_exp
   ownerId: uuid_comparison_exp
@@ -4162,8 +4164,6 @@ input organizations_bool_exp {
   tags: String_array_comparison_exp
   updatedAt: timestamptz_comparison_exp
   updatedBy: uuid_comparison_exp
-  users: memberships_bool_exp
-  users_aggregate: memberships_aggregate_bool_exp
 }
 
 """
@@ -4210,13 +4210,13 @@ input organizations_insert_input {
   description: String
   displayName: String
   groups: groups_arr_rel_insert_input
+  memberships: memberships_arr_rel_insert_input
   metadata: jsonb
   policies: policies_arr_rel_insert_input
   pools: pools_arr_rel_insert_input
   rules: rules_arr_rel_insert_input
   settings: org_settings_arr_rel_insert_input
   tags: [String!]
-  users: memberships_arr_rel_insert_input
 }
 
 """aggregate max on columns"""
@@ -4300,6 +4300,7 @@ input organizations_order_by {
   displayName: order_by
   groups_aggregate: groups_aggregate_order_by
   id: order_by
+  memberships_aggregate: memberships_aggregate_order_by
   metadata: order_by
   owner: users_order_by
   ownerId: order_by
@@ -4312,7 +4313,6 @@ input organizations_order_by {
   tags: order_by
   updatedAt: order_by
   updatedBy: order_by
-  users_aggregate: memberships_aggregate_order_by
 }
 
 """primary key columns input for table: organizations"""
@@ -6089,9 +6089,7 @@ type query_root {
   """fetch data from the table: "groups" using primary key columns"""
   groups_by_pk(id: uuid!): groups
 
-  """
-  fetch data from the table: "memberships"
-  """
+  """An array relationship"""
   memberships(
     """distinct select on columns"""
     distinct_on: [memberships_select_column!]
@@ -6109,9 +6107,7 @@ type query_root {
     where: memberships_bool_exp
   ): [memberships!]!
 
-  """
-  fetch aggregated fields from the table: "memberships"
-  """
+  """An aggregate relationship"""
   memberships_aggregate(
     """distinct select on columns"""
     distinct_on: [memberships_select_column!]
@@ -8340,9 +8336,7 @@ type subscription_root {
     where: groups_bool_exp
   ): [groups!]!
 
-  """
-  fetch data from the table: "memberships"
-  """
+  """An array relationship"""
   memberships(
     """distinct select on columns"""
     distinct_on: [memberships_select_column!]
@@ -8360,9 +8354,7 @@ type subscription_root {
     where: memberships_bool_exp
   ): [memberships!]!
 
-  """
-  fetch aggregated fields from the table: "memberships"
-  """
+  """An aggregate relationship"""
   memberships_aggregate(
     """distinct select on columns"""
     distinct_on: [memberships_select_column!]

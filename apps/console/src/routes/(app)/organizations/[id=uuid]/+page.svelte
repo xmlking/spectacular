@@ -30,7 +30,6 @@ const log = new Logger('organizations.update.browser');
 
 export let data: PageData;
 let { OrganizationData1 } = data;
-$: ({ OrganizationData1 } = data);
 
 // Variables
 const toastStore = getToastStore();

@@ -1,0 +1,23 @@
+query Memberships($id: OrgIdFromSession!) {
+  memberships(where: { orgId: { _eq: $id } }) {
+    user {
+      id
+      displayName
+    }
+    role
+    updatedAt
+  }
+}
+
+# query OrgMemberships($id: OrgIdFromSession!) {
+#   organizations_by_pk(id: $id) {
+#     memberships {
+#       user {
+#         id
+#         displayName
+#       }
+#       role
+#       updatedAt
+#     }
+#   }
+# }

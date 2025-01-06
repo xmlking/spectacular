@@ -108,7 +108,7 @@ export const menuNavLinks: MenuNavLinks = {
       title: 'Account',
       list: [
         { href: '/profile', label: 'Profile', keywords: 'settings, profile, account' },
-        { href: '/settings', label: 'AI Settings', keywords: 'settings, ai, account', badge: '✨' },
+        { href: '/features', label: 'Settings', keywords: 'settings, ai, account', badge: '✨' },
         { href: '/feature-flags', label: 'Feature Flags', keywords: 'settings, feature-flags, account' },
       ],
     },
@@ -117,19 +117,13 @@ export const menuNavLinks: MenuNavLinks = {
       list: [
         { href: '/organization', label: 'Organization', keywords: 'organization', roles: [Roles.Owner, Roles.Admin] },
         {
-          href: '/org-settings',
+          href: '/settings',
           label: 'Configuration',
           keywords: 'settings, configuration, environment-variables, organization',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/org-feature-flags',
-          label: 'Features',
-          keywords: 'settings, feature-flags, organization',
-          roles: [Roles.Owner, Roles.Admin],
-        },
-        {
-          href: '/users',
+          href: '/memberships',
           label: 'Members',
           keywords: 'account, user, member, organization',
           roles: [Roles.Owner, Roles.Admin],
@@ -162,6 +156,12 @@ export const menuNavLinks: MenuNavLinks = {
           href: '/organizations',
           label: 'Organizations',
           keywords: 'system, admin, organization',
+          roles: [Roles.SysAdmin],
+        },
+        {
+          href: '/users',
+          label: 'Users',
+          keywords: 'system, admin, users',
           roles: [Roles.SysAdmin],
         },
       ],

@@ -9,13 +9,14 @@ import * as Smart from '@spectacular/smart';
 
 <div class="page-container">
   <section class="space-y-4">
-    <h1 class="h1">Configuration</h1>
-    <p>Here you can change org settings</p>
+    <h1 class="h1">Setting</h1>
+    <p>Here you can change user settings</p>
   </section>
 
   <div class="page-section">
-    <h3 class="h2">Org Settings</h3>
-
+    <h3 class="h2">AI Settings</h3>
+    <p>Update AI model settings</p>
+    <Smart.Settings />
   </div>
 </div>
 

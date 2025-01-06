@@ -1,0 +1,33 @@
+query SearchUsersAll(
+  $where: users_bool_exp
+  $limit: Int = 50
+  $offset: Int = 0
+  $orderBy: [users_order_by!] = [{ updatedAt: desc_nulls_last }]
+) @loading(cascade: true) {
+  # usersAggregate(where: $where) {
+  #   aggregate {
+  #     count
+  #   }
+  # }
+  users(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) @list(name: "Search_Users") {
+    id
+    displayName
+    email
+    emailVerified
+    phoneNumber
+    phoneNumberVerified
+    avatarUrl
+    locale
+    metadata
+    defaultRole
+    currentOrg {
+      displayName
+      id
+    }
+    disabled
+    disabled
+    lastSeen
+    createdAt
+    updatedAt
+  }
+}
