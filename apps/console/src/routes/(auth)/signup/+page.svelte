@@ -17,7 +17,7 @@ import { Loader, MoreHorizontal } from 'lucide-svelte';
 import { onMount } from 'svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-// import { signUpEmailPasswordPromise, getAuthenticationResult } from '@nhost/nhost-js';
+import { signUpEmailPasswordPromise, getAuthenticationResult } from '@nhost/nhost-js';
 
 const log = new Logger('auth:signup:browser');
 
@@ -49,32 +49,35 @@ const form = superForm(defaults(zod(signUpSchema)), {
     if (!form.valid) return;
 
     const { firstName, lastName, email, password, locale, redirectTo } = form.data;
-    // const { session, error } = getAuthenticationResult(
-    //   await signUpEmailPasswordPromise(
-    //     nhost.auth.client.interpreter!,
-    //     email,
-    //     password as string,
-    //     {
-    //       displayName: `${firstName} ${lastName}`,
-    //       locale,
-    //     },
-    //     {
-    //       headers: {
-    //         'x-cf-turnstile-response': $turnstileResponse,
-    //       },
-    //     },
-    //   ),
-    // );
 
-    log.debug('TODO: use turnstileResponse:', $turnstileResponse);
-    const { session, error } = await nhost.auth.signUp({
-      email,
-      password,
-      options: {
-        displayName: `${firstName} ${lastName}`,
-        locale,
-      },
-    });
+    // FIXME: remove this block after nhost.auth.signUp support headers
+    const { session, error } = getAuthenticationResult(
+      await signUpEmailPasswordPromise(
+        nhost.auth.client.interpreter!,
+        email,
+        password as string,
+        {
+          displayName: `${firstName} ${lastName}`,
+          locale,
+        },
+        {
+          headers: {
+            'x-cf-turnstile-response': $turnstileResponse,
+          },
+        },
+      ),
+    );
+
+    // log.debug('TODO: use turnstileResponse:', $turnstileResponse);
+    // const { session, error } = await nhost.auth.signUp({
+    //   email,
+    //   password,
+    //   options: {
+    //     displayName: `${firstName} ${lastName}`,
+    //     locale,
+    //   },
+    // });
+
     if (error) {
       log.error(error);
       // FIXME: workaround for `missing x-cf-turnstile-response`

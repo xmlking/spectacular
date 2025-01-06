@@ -44,6 +44,11 @@
   },
   {
     "op": "replace",
+    "path": "/auth/signUp/turnstile/secretKey",
+    "value": "1x0000000000000000000000000000000AA"
+  },
+  {
+    "op": "replace",
     "path": "/postgres/settings/maxConnections",
     "value": 99
   },
