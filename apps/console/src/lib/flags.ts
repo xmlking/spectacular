@@ -12,7 +12,7 @@ export const showMagicLinkLogin = flag<boolean>({
     // In real live you would probably query an external source such as
     // Vercel Edge Config (https://vercel.com/docs/storage/edge-config)
     // return event.url.searchParams.has('svelteColor');
-    return true;
+    return env.FEATURE_SHOW_MAGIC_LINK_LOGIN === 'true';
   },
 });
 
@@ -22,7 +22,7 @@ export const showSocialLogin = flag<boolean>({
   origin: 'https://example.com/#showSocialLogin',
   options: [{ value: true }, { value: false }],
   decide(event) {
-    return true;
+    return env.FEATURE_SHOW_SOCIAL_LOGIN === 'true';
   },
 });
 
@@ -42,6 +42,6 @@ export const simulateLoadingState = flag<boolean>({
   origin: 'https://example.com/#simulateLoadingState',
   options: [{ value: true }, { value: false }],
   decide(event) {
-    return false;
+    return env.FEATURE_SIMULATE_LOADING_STATE === 'true';
   },
 });
