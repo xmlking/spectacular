@@ -18,6 +18,7 @@ import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
+import { InputPairs, type KeyValueMap } from "@spectacular/skeleton/components/form";
 import type { GraphQLError } from 'graphql';
 import {
   Loader,
@@ -42,6 +43,19 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 // let subjects: Subject[] | undefined;
+let metadata: KeyValueMap<typeof allowedKeyValues> = new Map([["name", "Bob"]]);
+metadata.set("name", "John"); // No error
+metadata.set("age", 25); // No error
+metadata.set("active", true); // No error
+
+const allowedKeyValues = {
+  name: ["John", "Jane", "Alice", "Bob"] as const,
+  age: [20, 25, 30, 35] as const,
+  active: [true, false] as const,
+  city: ["New York", "Los Angeles", "Chicago", "Houston"] as const,
+  country: ["USA", "Canada", "UK", "India"] as const,
+} as const;
+
 
 const form = superForm(defaults(zod(schema)), {
   SPA: true,
@@ -505,18 +519,26 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="rule.metadata">
             <Form.Control let:attrs>
               <Form.Label class="label">Metadata</Form.Label>
-              <input
+              <!-- <input
                 type="text"
-                class="input data-[fs-error]:input-error"
                 {...attrs}
                 {disabled}
                 placeholder="Enter Metadata..."
+                class="input data-[fs-error]:input-error"
+                bind:value={$formData.rule.metadata}
+              /> -->
+              <InputPairs
+                {...attrs}
+                {disabled}
+                placeholder="Enter metadata..."
+                class="input data-[fs-error]:input-error"
+                {allowedKeyValues}
                 bind:value={$formData.rule.metadata}
               />
             </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
-              >Format: key1=>value1 (or) "key2" => "value2 with space"</Form.Description
+              >Format: key1: value1</Form.Description
             >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
