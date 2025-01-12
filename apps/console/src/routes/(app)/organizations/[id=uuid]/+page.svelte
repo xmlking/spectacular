@@ -12,10 +12,10 @@ import {
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
-import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
+import { SlideToggle } from '@skeletonlabs/skeleton';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { UpdateOrganizationDetails } from '../mutations';
@@ -37,11 +37,6 @@ const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 
 const { id, ...initialData } = $OrganizationData1.data?.organizations_by_pk;
-initialData.tags = initialData.tags || [];
-initialData.allowedEmailDomains = initialData.allowedEmailDomains || [];
-initialData.allowedEmails = initialData.allowedEmails || [];
-initialData.blockedEmailDomains = initialData.blockedEmailDomains || [];
-initialData.blockedEmails = initialData.blockedEmails || [];
 
 const form = superForm(defaults(initialData, zod(schema)), {
   SPA: true,
@@ -213,7 +208,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.tags}>
             <Form.Control let:attrs>
               <Form.Label class="label">Tags</Form.Label>
-              <InputChip
+              <InputChipWrapper
                 {...attrs}
                 placeholder="Enter tags..."
                 class="input data-[fs-error]:input-error"
@@ -250,7 +245,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.allowedEmails}>
             <Form.Control let:attrs>
               <Form.Label class="label">Allowed Emails</Form.Label>
-              <InputChip
+              <InputChipWrapper
                 {...attrs}
                 placeholder="Enter Allowed Emails..."
                 class="input data-[fs-error]:input-error"
@@ -270,7 +265,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.allowedEmailDomains}>
             <Form.Control let:attrs>
               <Form.Label class="label">Allowed Email Domains</Form.Label>
-              <InputChip
+              <InputChipWrapper
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 placeholder="Enter Allowed Email Domains..."
@@ -290,7 +285,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.blockedEmails}>
             <Form.Control let:attrs>
               <Form.Label class="label">Blocked Emails</Form.Label>
-              <InputChip
+              <InputChipWrapper
                 {...attrs}
                 placeholder="Enter Blocked Emails..."
                 class="input data-[fs-error]:input-error"
@@ -310,7 +305,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.blockedEmailDomains}>
             <Form.Control let:attrs>
               <Form.Label class="label">Blocked Email Domains</Form.Label>
-              <InputChip
+              <InputChipWrapper
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 placeholder="Enter Blocked Email Domains..."

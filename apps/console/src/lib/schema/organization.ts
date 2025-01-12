@@ -7,7 +7,7 @@ export const organizationSchema = z.object({
   id: z.string().trim().uuid(),
   displayName: z.string().trim().min(4).max(256), //.default(env.PUBLIC_DEFAULT_ORGANIZATION ?? DEFAULT_ORGANIZATION),
   description: z.string().trim().min(4).max(256).nullish(),
-  tags: z.string().trim().min(2).array().max(5).optional().default([]),
+  tags: z.string().trim().min(2).array().max(5).optional(),
   // metadata: z.string().trim().nullish(),
   metadata: z.record(z.string(), z.string()).nullish(),
   createdBy: z.string().trim().uuid(),
@@ -15,12 +15,12 @@ export const organizationSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   ownerId: z.string().trim().uuid(),
-  allowedEmails: z.string().email().array().optional().default([]),
-  allowedEmailDomains: z.string().trim().min(2).array().optional().default([]),
-  blockedEmails: z.string().email().array().optional().default([]),
-  blockedEmailDomains: z.string().trim().min(2).array().optional().default([]),
-  autoEnroll: z.boolean().nullable().default(false),
-  avatarUrl: z.string().url().nullable(),
+  allowedEmails: z.string().email().array().optional(),
+  allowedEmailDomains: z.string().trim().min(2).array().optional(),
+  blockedEmails: z.string().email().array().optional(),
+  blockedEmailDomains: z.string().trim().min(2).array().optional(),
+  autoEnroll: z.boolean().optional().default(false),
+  avatarUrl: z.string().url().optional(),
 });
 
 export type OrganizationSchema = typeof organizationSchema;

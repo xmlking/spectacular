@@ -6,7 +6,7 @@ proxy InputChip  component
 import { InputChip } from '@skeletonlabs/skeleton';
 
 export let name: string;
-export let value: string[];
+export let value: string[] | undefined;
 
 $: _value = value ?? [];
 
