@@ -19,7 +19,7 @@ export const organizationSchema = z.object({
   allowedEmailDomains: z.string().trim().min(2).array().optional().default([]),
   blockedEmails: z.string().email().array().optional().default([]),
   blockedEmailDomains: z.string().trim().min(2).array().optional().default([]),
-  autoEnroll: z.boolean().default(false),
+  autoEnroll: z.boolean().nullable().default(false),
   avatarUrl: z.string().url().nullable(),
 });
 

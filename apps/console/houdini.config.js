@@ -94,7 +94,7 @@ const config = {
       },
     },
     hstore: {
-      type: 'String',
+      type: 'string',
       unmarshal(val) {
         return Object.entries(val)
           .map(([k, v]) => `"${k}" => "${v}"`)
@@ -105,7 +105,7 @@ const config = {
       },
     },
     citext: {
-      type: 'String',
+      type: 'string',
       ...defaultMarshall,
     },
     // FIXME: https://github.com/hasura/graphql-engine/issues/348
@@ -123,7 +123,7 @@ const config = {
     // 	}
     // },
     uuid: {
-      type: 'String',
+      type: 'string',
       ...defaultMarshall,
     },
     jsonb: {
