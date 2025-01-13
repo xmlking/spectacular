@@ -10,7 +10,7 @@ import {
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { updateOrganizationSchema as schema, updateOrganizationKeys as keys, type UpdateOrganization } from '$lib/schema/organization';
+import { updateOrganizationSchema as schema, updateOrganizationKeys as keys, type UpdateOrganization, allowedMetadata as allowedKeyValues } from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
@@ -24,6 +24,7 @@ import { Loader, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm, type SuperValidated } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { invalidate } from '$app/navigation';
+import { InputPairs, type KeyValueRecord } from "@spectacular/skeleton/components/form";
 
 const log = new Logger('organization:org:details:browser');
 
@@ -50,7 +51,7 @@ $: data = fragment(
 
 // Reactivity
 // let initialData: SuperValidated<UpdateOrganization>
-$: ({id, ...initialData} = $data);
+$: ({id, __typename, ...initialData} = $data);
 $: if (id) {
   // this will reset initialData after data is loaded.
     reset({newState: { ...initialData } })
@@ -250,11 +251,18 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name={keys.metadata}>
           <Form.Control let:attrs>
             <Form.Label class="label">Metadata</Form.Label>
-            <input
+            <!-- <input
               type="text"
               class="input data-[fs-error]:input-error"
               {...attrs}
               placeholder="Enter Metadata..."
+              bind:value={$formData.metadata}
+            /> -->
+            <InputPairs
+              {...attrs}
+              placeholder="Enter metadata..."
+              class="input data-[fs-error]:input-error"
+              {allowedKeyValues}
               bind:value={$formData.metadata}
             />
           </Form.Control>

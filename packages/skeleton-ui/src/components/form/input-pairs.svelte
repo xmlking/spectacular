@@ -41,8 +41,11 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
     string,
     readonly (string | number | boolean)[]
   >;
-  export let value: KeyValueRecord<typeof allowedKeyValues>  = {};
+  export let value: KeyValueRecord<typeof allowedKeyValues> | null  = {};
   export let chips = "variant-filled";
+
+   // when value is set to null from parent, reset it to empty Map
+  $: value = value ?? {};
 
   let currentInput = "";
   let allowedKey = Object.keys(allowedKeyValues);
@@ -54,7 +57,7 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
   function addKeyValuePair() {
     const [key, val] = currentInput.split(":").map((s) => s.trim());
     if (key && val) {
-      value[key] = convertToType(val)
+      if(value) value[key] = convertToType(val)
       // Force Svelte to detect the change by reassigning the Record
       value = value;
       currentInput = "";
@@ -113,15 +116,16 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
   }
 
   function removeKeyValuePair(key: string) {
-    delete value[key]
+    value && delete value[key]
     // Force Svelte to detect the change by reassigning the Record
     value = value;
   }
 
   function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === "Enter") {
+    if (event.key !== 'Enter') return;
+    // Prevent default behavior
+      event.preventDefault();
       addKeyValuePair();
-    }
   }
 
   // Reset Form

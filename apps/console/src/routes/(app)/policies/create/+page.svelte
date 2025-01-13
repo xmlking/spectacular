@@ -7,18 +7,18 @@ import { searchRulesFn } from '$lib/api/search-rules';
 import { searchSubjects } from '$lib/api/search-subjects';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { createPolicySchema as schema } from '$lib/schema/policy';
+import { allowedMetadata as allowedKeyValues, createPolicySchema as schema } from '$lib/schema/policy';
 import { createPolicyKeys as keys } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
-import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
+import { RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import { InputPairs, type KeyValueMap } from "@spectacular/skeleton/components/form";
+import { InputPairs, type KeyValueRecord } from "@spectacular/skeleton/components/form";
 import type { GraphQLError } from 'graphql';
 import {
   Loader,
@@ -43,19 +43,6 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 // let subjects: Subject[] | undefined;
-let metadata: KeyValueMap<typeof allowedKeyValues> = new Map([["name", "Bob"]]);
-metadata.set("name", "John"); // No error
-metadata.set("age", 25); // No error
-metadata.set("active", true); // No error
-
-const allowedKeyValues = {
-  name: ["John", "Jane", "Alice", "Bob"] as const,
-  age: [20, 25, 30, 35] as const,
-  active: [true, false] as const,
-  city: ["New York", "Los Angeles", "Chicago", "Houston"] as const,
-  country: ["USA", "Canada", "UK", "India"] as const,
-} as const;
-
 
 const form = superForm(defaults(zod(schema)), {
   SPA: true,
@@ -492,15 +479,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="rule.tags">
             <Form.Control let:attrs>
               <Form.Label class="label">Tags</Form.Label>
-              <!-- <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter tags..."
-                bind:value={$formData.rule.tags}
-              /> -->
-              <InputChip
+              <InputChipWrapper
                 {...attrs}
                 {disabled}
                 placeholder="Enter tags..."

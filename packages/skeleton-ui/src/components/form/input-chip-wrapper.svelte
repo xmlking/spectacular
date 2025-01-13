@@ -8,7 +8,7 @@ import { InputChip } from '@skeletonlabs/skeleton';
 
 // TODO: after svelte 5, use [Function bindings](https://svelte.dev/docs/svelte/bind#Function-bindings)
 export let name: string;
-export let value: string[] | undefined;
+export let value: string[] | null | undefined;
 
 $: _value = value ?? [];
 

@@ -1,6 +1,14 @@
 import { action_enum, direction_enum, protocol_enum } from '$houdini';
 import { z } from 'zod';
 
+export const allowedMetadata = {
+  name: ["John", "Jane", "Alice", "Bob"] as const,
+  age: [20, 25, 30, 35] as const,
+  active: [true, false] as const,
+  city: ["New York", "Los Angeles", "Chicago", "Houston"] as const,
+  country: ["USA", "Canada", "UK", "India"] as const,
+} as const;
+
 /**
  * Rule Schema
  */
@@ -8,8 +16,7 @@ export const ruleSchema = z.object({
   id: z.string().trim().uuid(),
   displayName: z.string().trim().min(4).max(256),
   description: z.string().trim().max(256).nullish(),
-  tags: z.string().trim().min(2).array().max(5).default([]),
-  // metadata: z.string().trim().nullish(),
+  tags: z.string().trim().min(2).array().max(5).nullish(),
   metadata: z.record(z.string(), z.string()).nullish(),
   source: z.string().ip().nullish(),
   sourcePort: z.string().trim().nullish(),

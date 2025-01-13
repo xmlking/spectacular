@@ -7,6 +7,14 @@ import {
 } from '$houdini';
 import { z } from 'zod';
 
+export const allowedMetadata = {
+  name: ["John", "Jane", "Alice", "Bob"] as const,
+  age: [20, 25, 30, 35] as const,
+  active: [true, false] as const,
+  city: ["New York", "Los Angeles", "Chicago", "Houston"] as const,
+  country: ["USA", "Canada", "UK", "India"] as const,
+} as const;
+
 /**
  * Policy Schema
  */
@@ -28,9 +36,8 @@ export const policySchema = z.object({
     id: z.string().trim().uuid(),
     displayName: z.string().trim().min(4).max(256),
     description: z.string().trim().max(256).nullish(),
-    tags: z.string().trim().min(2).array().max(5).optional().default([]),
-    // metadata: z.string().trim().nullish(),
-    metadata: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
+    tags: z.string().trim().min(2).array().max(5).nullish(),
+    metadata: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).nullish(),
     source: z.string().ip().nullish(),
     sourcePort: z.string().trim().nullish(),
     destination: z.string().ip().nullish(),

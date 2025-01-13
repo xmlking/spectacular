@@ -1,7 +1,7 @@
 import Alerts from './form-alerts.svelte';
 import ErrorMessage from './form-error.svelte';
 import InputPairs from './input-pairs.svelte';
-import type { AllowedKeyValues, KeyValueMap } from './input-pairs.svelte';
+import type { AllowedKeyValues, KeyValueRecord } from './input-pairs.svelte';
 import InputChipWrapper from './input-chip-wrapper.svelte';
 export {
   Alerts,
@@ -14,5 +14,5 @@ export {
   InputPairs as FormInputPairs,
   // Types
   type AllowedKeyValues,
-  type KeyValueMap,
+  type KeyValueRecord,
 };
