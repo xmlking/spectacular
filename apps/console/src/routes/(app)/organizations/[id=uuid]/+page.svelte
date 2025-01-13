@@ -7,6 +7,7 @@ import { i18n } from '$lib/i18n';
 import {
   updateOrganizationSchema as schema,
   updateOrganizationKeys as keys,
+  allowedMetadata as allowedKeyValues,
   type UpdateOrganization,
 } from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
@@ -15,7 +16,7 @@ import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '
 import { SlideToggle } from '@skeletonlabs/skeleton';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
+import { Alerts, InputChipWrapper, InputPairs } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { UpdateOrganizationDetails } from '../mutations';
@@ -226,11 +227,11 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.metadata}>
             <Form.Control let:attrs>
               <Form.Label class="label">Metadata</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
+              <InputPairs
                 {...attrs}
-                placeholder="Enter Metadata..."
+                placeholder="Enter metadata..."
+                class="input data-[fs-error]:input-error"
+                {allowedKeyValues}
                 bind:value={$formData.metadata}
               />
             </Form.Control>

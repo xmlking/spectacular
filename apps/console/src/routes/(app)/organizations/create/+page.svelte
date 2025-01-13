@@ -5,19 +5,23 @@ import { graphql, type organizations_insert_input } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { createOrganizationSchema as schema } from '$lib/schema/organization';
-import { createOrganizationKeys as keys } from '$lib/schema/organization';
+import {
+  updateOrganizationSchema as schema,
+  updateOrganizationKeys as keys,
+  allowedMetadata as allowedKeyValues,
+  type UpdateOrganization,
+} from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { SlideToggle } from '@skeletonlabs/skeleton';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
+import { Alerts, InputChipWrapper, InputPairs } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import {Loader,MoreHorizontal} from 'lucide-svelte';
 import Select from 'svelte-select';
-import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('organizations.create.browser');
@@ -219,11 +223,11 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name={keys.metadata}>
             <Form.Control let:attrs>
               <Form.Label class="label">Metadata</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
+              <InputPairs
                 {...attrs}
-                placeholder="Enter Metadata..."
+                placeholder="Enter metadata..."
+                class="input data-[fs-error]:input-error"
+                {allowedKeyValues}
                 bind:value={$formData.metadata}
               />
             </Form.Control>

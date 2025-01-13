@@ -251,13 +251,6 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name={keys.metadata}>
           <Form.Control let:attrs>
             <Form.Label class="label">Metadata</Form.Label>
-            <!-- <input
-              type="text"
-              class="input data-[fs-error]:input-error"
-              {...attrs}
-              placeholder="Enter Metadata..."
-              bind:value={$formData.metadata}
-            /> -->
             <InputPairs
               {...attrs}
               placeholder="Enter metadata..."
