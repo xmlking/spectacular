@@ -1,40 +1,32 @@
 <!--
 @component InputPairs - allow users to input allowed key:value pairs
   @prop {AllowedKeyValues} allowedKeyValues
-  @prop {Map<string, readonly (string | number | boolean)[]>} value - Selected key:value map
+  @prop {Record<string, readonly (string | number | boolean)>} value -  Record with user selected key:value pairs.
 
   Usage:
   ```svelte
-    import  { InputPairs, type KeyValueMap } from '@spectacular/skeleton/components/form';
+    import  { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
 
     const allowedKeyValues = {
-      name: ["John", "Jane", "Alice", "Bob"] as const,
+      name: ['John', 'Jane', 'Alice', 'Bob'] as const,
       age: [20, 25, 30, 35] as const,
       active: [true, false] as const,
-      city: ["New York", "Los Angeles", "Chicago", "Houston"] as const,
-      country: ["USA", "Canada", "UK", "India"] as const,
+      city: ['New York', 'Los Angeles', 'Chicago', 'Houston'] as const,
+      country: ['USA', 'Canada', 'UK', 'India'] as const,
     } as const;
 
-    let value: KeyValueMap<typeof allowedKeyValues> = new Map([['name', 'Bob']])
-    value.set("name", "John");
-    value.set("age", 25);
-    value.set("active", true);
+    let value: KeyValueRecord<typeof allowedKeyValues> = {}
+    value['name'] = 'John';
+    value['age'] = 25;
+    value['active'] = true;
     <InputPairs {allowedKeyValues}  bind:value chips="variant-filled-secondary" />
-    <pre>{JSON.stringify(Array.from(value.entries()))}</pre>
+    <pre>{JSON.stringify(value)}</pre>
   ```
 -->
 <!-- for svelte 5+ <script module lang="ts"> -->
 <script context="module" lang="ts">
 export type AllowedKeyValues<K extends string, V extends readonly (string | number | boolean)[]> = Record<K, V>;
-
-// export type KeyValueMap<KV extends AllowedKeyValues<string, readonly (string | number | boolean)[]>> = {
-//   set<Key extends keyof KV>(
-//     key: Key,
-//     value: KV[Key][number]
-//   ): void;
-//   delete<Key extends keyof KV>(key: Key) : void;
-// };
-export type KeyValueMap<KV extends AllowedKeyValues<string, readonly (string | number | boolean)[]>> = Map<
+export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string | number | boolean)[]>> = Record<
   keyof KV,
   KV[keyof KV][number]
 >;
@@ -49,11 +41,8 @@ export type KeyValueMap<KV extends AllowedKeyValues<string, readonly (string | n
     string,
     readonly (string | number | boolean)[]
   >;
-  export let value: KeyValueMap<typeof allowedKeyValues>;
+  export let value: KeyValueRecord<typeof allowedKeyValues>  = {};
   export let chips = "variant-filled";
-
-  // when value is set to null from parent, reset it to empty Map
-  $: value = value ?? new Map();
 
   let currentInput = "";
   let allowedKey = Object.keys(allowedKeyValues);
@@ -65,8 +54,8 @@ export type KeyValueMap<KV extends AllowedKeyValues<string, readonly (string | n
   function addKeyValuePair() {
     const [key, val] = currentInput.split(":").map((s) => s.trim());
     if (key && val) {
-      value.set(key, convertToType(val));
-      // Force Svelte to detect the change by reassigning the map
+      value[key] = convertToType(val)
+      // Force Svelte to detect the change by reassigning the Record
       value = value;
       currentInput = "";
       suggestions = [];
@@ -97,7 +86,7 @@ export type KeyValueMap<KV extends AllowedKeyValues<string, readonly (string | n
       // Suggest keys
       // suggestions = Object.keys(allowedKeyValues).filter(k => k.toLowerCase().startsWith(currentInput.toLowerCase()));
       suggestions = allowedKey.filter((k) =>
-        k.toLowerCase().startsWith(currentInput.toLowerCase()),
+        k.trim().toLowerCase().startsWith(currentInput.toLowerCase()),
       );
     } else if (key in allowedKeyValues) {
       // Suggest values
@@ -124,8 +113,8 @@ export type KeyValueMap<KV extends AllowedKeyValues<string, readonly (string | n
   }
 
   function removeKeyValuePair(key: string) {
-    value.delete(key);
-    // Force Svelte to detect the change by reassigning the map
+    delete value[key]
+    // Force Svelte to detect the change by reassigning the Record
     value = value;
   }
 
@@ -137,7 +126,7 @@ export type KeyValueMap<KV extends AllowedKeyValues<string, readonly (string | n
 
   // Reset Form
   function resetFormHandler() {
-    value = new Map();
+    value =  {};
   }
 
   // Pruned RestProps
@@ -193,9 +182,9 @@ export type KeyValueMap<KV extends AllowedKeyValues<string, readonly (string | n
       {...prunedRestProps()}
     />
     <!-- Chip List -->
-    {#if value.size}
+    {#if value && Object.keys(value).length > 0}
       <div class="input-chip-list flex flex-wrap gap-2">
-        {#each Array.from(value.entries()) as [key, val]}
+        {#each Object.entries(value) as [key, val]}
           <!-- Wrapping div required for FLIP animation -->
           <div>
             <button

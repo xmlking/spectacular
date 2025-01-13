@@ -13,7 +13,7 @@ import { i18n } from '$lib/i18n';
 import { updateOrganizationSchema as schema, updateOrganizationKeys as keys, type UpdateOrganization } from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { InputChip, SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
+import { SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';

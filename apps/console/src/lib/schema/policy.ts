@@ -30,7 +30,7 @@ export const policySchema = z.object({
     description: z.string().trim().max(256).nullish(),
     tags: z.string().trim().min(2).array().max(5).optional().default([]),
     // metadata: z.string().trim().nullish(),
-    metadata: z.record(z.string(), z.string()).nullish(),
+    metadata: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
     source: z.string().ip().nullish(),
     sourcePort: z.string().trim().nullish(),
     destination: z.string().ip().nullish(),
