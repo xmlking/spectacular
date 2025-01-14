@@ -13,6 +13,7 @@ ENV SCOPE=${SCOPE}
 #https://github.com/vercel/turbo/tree/main/examples/with-docker
 
 # Install pnpm
+# RUN corepack enable pnpm
 ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="${PATH}:${PNPM_HOME}"
 SHELL ["/bin/bash", "-c"]
