@@ -7,17 +7,18 @@ import { searchRulesFn } from '$lib/api/search-rules';
 import { searchSubjects } from '$lib/api/search-subjects';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { createPolicySchema as schema } from '$lib/schema/policy';
+import { allowedMetadata as allowedKeyValues, createPolicySchema as schema } from '$lib/schema/policy';
 import { createPolicyKeys as keys } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
-import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
+import { RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
+import { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
 import type { GraphQLError } from 'graphql';
 import {
   Loader,
@@ -478,15 +479,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="rule.tags">
             <Form.Control let:attrs>
               <Form.Label class="label">Tags</Form.Label>
-              <!-- <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter tags..."
-                bind:value={$formData.rule.tags}
-              /> -->
-              <InputChip
+              <InputChipWrapper
                 {...attrs}
                 {disabled}
                 placeholder="Enter tags..."
@@ -505,18 +498,18 @@ $: loadingState.setFormLoading($delayed);
           <Form.Field {form} name="rule.metadata">
             <Form.Control let:attrs>
               <Form.Label class="label">Metadata</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
+              <InputPairs
                 {...attrs}
                 {disabled}
-                placeholder="Enter Metadata..."
+                placeholder="Enter metadata..."
+                class="input data-[fs-error]:input-error"
+                {allowedKeyValues}
                 bind:value={$formData.rule.metadata}
               />
             </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
-              >Format: key1=>value1 (or) "key2" => "value2 with space"</Form.Description
+              >Format: key1: value1</Form.Description
             >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>

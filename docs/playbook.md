@@ -6,6 +6,25 @@ Show how this repo is setup via step-by-step guild
 
 ### Prerequisite
 
+Install **node** and **pnpm**
+
+> [!NOTE]
+> Since v16.13, Node.js is shipping Corepack for managing package managers.
+
+```shell
+brew install node
+# This will automatically install pnpm on your system.
+corepack enable pnpm
+```
+
+> [!NOTE]
+> You can pin the version of pnpm used on your project using the following command
+
+```shell
+cd ~/Developer/Work/SPA/spectacular
+corepack use pnpm@latest-10 
+```
+
 Install following CLI tools globally
 
 - [svelte CLI](https://github.com/sveltejs/cli)

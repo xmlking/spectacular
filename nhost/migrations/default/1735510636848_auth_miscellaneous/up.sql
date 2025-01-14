@@ -12,7 +12,11 @@ ON CONFLICT (role) DO NOTHING;
 
 -- Create index on refresh_tokens table metadata column
 SET ROLE postgres;
-CREATE UNIQUE INDEX refresh_tokens_metadata_name_unique ON auth.refresh_tokens USING btree (((metadata ->> 'name'::text))) WHERE (metadata IS NOT NULL);
+CREATE UNIQUE INDEX refresh_tokens_metadata_name_user_id_unique ON auth.refresh_tokens USING btree (
+    ((metadata ->> 'name'::text)),
+    user_id
+)
+WHERE (metadata IS NOT NULL);
 ---
 ALTER TABLE auth.users
   ADD COLUMN default_org uuid;

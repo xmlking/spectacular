@@ -10,20 +10,26 @@ import {
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { updateOrganizationSchema as schema, updateOrganizationKeys as keys } from '$lib/schema/organization';
+import {
+  updateOrganizationSchema as schema,
+  updateOrganizationKeys as keys,
+  type UpdateOrganization,
+  allowedMetadata as allowedKeyValues,
+} from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { InputChip, SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
+import { SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { UpdateOrganizationDetails } from '../../organizations/mutations';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, setError, setMessage, superForm, type SuperValidated } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { invalidate } from '$app/navigation';
+import { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
 
 const log = new Logger('organization:org:details:browser');
 
@@ -49,35 +55,11 @@ $: data = fragment(
 );
 
 // Reactivity
-$: ({
-  id,
-  displayName,
-  description,
-  tags,
-  metadata,
-  ownerId,
-  allowedEmailDomains,
-  allowedEmails,
-  blockedEmailDomains,
-  blockedEmails,
-  autoEnroll,
-  avatarUrl,
-} = $data);
-$: orgData = {
-  displayName,
-  description,
-  tags: tags || [],
-  metadata,
-  ownerId,
-  allowedEmailDomains: allowedEmailDomains || [],
-  allowedEmails: allowedEmails || [],
-  blockedEmailDomains: blockedEmailDomains || [],
-  blockedEmails: blockedEmails || [],
-  autoEnroll,
-  avatarUrl,
-};
+// let initialData: SuperValidated<UpdateOrganization>
+$: ({ id, __typename, ...initialData } = $data);
 $: if (id) {
-  $formData = { ...orgData };
+  // this will reset initialData after data is loaded.
+  reset({ newState: { ...initialData } });
 }
 
 // Variables
@@ -92,6 +74,7 @@ const form = superForm(defaults(zod(schema)), {
   clearOnSubmit: 'errors-and-message',
   delayMs: 100,
   timeoutMs: 4000,
+  invalidateAll: 'force', // HINT: https://superforms.rocks/concepts/enhance#optimistic-updates
   validators: zodClient(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
@@ -256,7 +239,7 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name={keys.tags}>
           <Form.Control let:attrs>
             <Form.Label class="label">Tags</Form.Label>
-            <InputChip
+            <InputChipWrapper
               {...attrs}
               placeholder="Enter tags..."
               class="input data-[fs-error]:input-error"
@@ -273,11 +256,11 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name={keys.metadata}>
           <Form.Control let:attrs>
             <Form.Label class="label">Metadata</Form.Label>
-            <input
-              type="text"
-              class="input data-[fs-error]:input-error"
+            <InputPairs
               {...attrs}
-              placeholder="Enter Metadata..."
+              placeholder="Enter metadata..."
+              class="input data-[fs-error]:input-error"
+              {allowedKeyValues}
               bind:value={$formData.metadata}
             />
           </Form.Control>
@@ -291,7 +274,7 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name={keys.allowedEmails}>
           <Form.Control let:attrs>
             <Form.Label class="label">Allowed Emails</Form.Label>
-            <InputChip
+            <InputChipWrapper
               {...attrs}
               placeholder="Enter Allowed Emails..."
               class="input data-[fs-error]:input-error"
@@ -310,7 +293,7 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name={keys.allowedEmailDomains}>
           <Form.Control let:attrs>
             <Form.Label class="label">Allowed Email Domains</Form.Label>
-            <InputChip
+            <InputChipWrapper
               class="input data-[fs-error]:input-error"
               {...attrs}
               placeholder="Enter Allowed Email Domains..."
@@ -329,7 +312,7 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name={keys.blockedEmails}>
           <Form.Control let:attrs>
             <Form.Label class="label">Blocked Emails</Form.Label>
-            <InputChip
+            <InputChipWrapper
               {...attrs}
               placeholder="Enter Blocked Emails..."
               class="input data-[fs-error]:input-error"
@@ -348,7 +331,7 @@ $: loadingState.setFormLoading($delayed);
         <Form.Field {form} name={keys.blockedEmailDomains}>
           <Form.Control let:attrs>
             <Form.Label class="label">Blocked Email Domains</Form.Label>
-            <InputChip
+            <InputChipWrapper
               class="input data-[fs-error]:input-error"
               {...attrs}
               placeholder="Enter Blocked Email Domains..."

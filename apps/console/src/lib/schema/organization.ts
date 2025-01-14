@@ -1,5 +1,12 @@
 import { z } from 'zod';
 
+export const allowedMetadata = {
+  group: ['John', 'Jane', 'Alice', 'Bob'] as const,
+  active: [true, false] as const,
+  city: ['New York', 'Los Angeles', 'Chicago', 'Houston'] as const,
+  country: ['USA', 'Canada', 'UK', 'India'] as const,
+} as const;
+
 /**
  * General Organization Schema
  */
@@ -7,20 +14,19 @@ export const organizationSchema = z.object({
   id: z.string().trim().uuid(),
   displayName: z.string().trim().min(4).max(256), //.default(env.PUBLIC_DEFAULT_ORGANIZATION ?? DEFAULT_ORGANIZATION),
   description: z.string().trim().min(4).max(256).nullish(),
-  tags: z.string().trim().min(2).array().max(5).optional().default([]),
-  // metadata: z.string().trim().nullish(),
-  metadata: z.record(z.string(), z.string()).nullish(),
+  tags: z.string().trim().min(2).array().max(5).nullish(),
+  metadata: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).nullish(),
   createdBy: z.string().trim().uuid(),
   updatedBy: z.string().trim().uuid(),
   createdAt: z.date(),
   updatedAt: z.date(),
   ownerId: z.string().trim().uuid(),
-  allowedEmails: z.string().email().array().optional().default([]),
-  allowedEmailDomains: z.string().trim().min(2).array().optional().default([]),
-  blockedEmails: z.string().email().array().optional().default([]),
-  blockedEmailDomains: z.string().trim().min(2).array().optional().default([]),
-  autoEnroll: z.boolean().default(false),
-  avatarUrl: z.string().url().nullable(),
+  allowedEmails: z.string().email().array().nullish(),
+  allowedEmailDomains: z.string().trim().min(2).array().nullish(),
+  blockedEmails: z.string().email().array().nullish(),
+  blockedEmailDomains: z.string().trim().min(2).array().nullish(),
+  autoEnroll: z.boolean().optional().default(false),
+  avatarUrl: z.string().url().nullish(),
 });
 
 export type OrganizationSchema = typeof organizationSchema;
