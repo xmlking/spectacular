@@ -2,11 +2,11 @@ import { action_enum, direction_enum, protocol_enum } from '$houdini';
 import { z } from 'zod';
 
 export const allowedMetadata = {
-  name: ["John", "Jane", "Alice", "Bob"] as const,
+  name: ['John', 'Jane', 'Alice', 'Bob'] as const,
   age: [20, 25, 30, 35] as const,
   active: [true, false] as const,
-  city: ["New York", "Los Angeles", "Chicago", "Houston"] as const,
-  country: ["USA", "Canada", "UK", "India"] as const,
+  city: ['New York', 'Los Angeles', 'Chicago', 'Houston'] as const,
+  country: ['USA', 'Canada', 'UK', 'India'] as const,
 } as const;
 
 /**

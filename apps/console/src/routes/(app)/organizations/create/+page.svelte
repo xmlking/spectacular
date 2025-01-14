@@ -19,7 +19,7 @@ import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts, InputChipWrapper, InputPairs } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import {Loader,MoreHorizontal} from 'lucide-svelte';
+import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';

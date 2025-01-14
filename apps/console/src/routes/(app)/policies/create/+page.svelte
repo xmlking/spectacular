@@ -18,7 +18,7 @@ import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import { InputPairs, type KeyValueRecord } from "@spectacular/skeleton/components/form";
+import { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
 import type { GraphQLError } from 'graphql';
 import {
   Loader,

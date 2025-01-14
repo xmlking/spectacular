@@ -1,3 +1,10 @@
+<script context="module" lang="ts">
+export type AllowedKeyValues<K extends string, V extends readonly (string | number | boolean)[]> = Record<K, V>;
+export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string | number | boolean)[]>> = Record<
+  keyof KV,
+  KV[keyof KV][number]
+>;
+</script>
 <!--
 @component InputPairs - allow users to input allowed key:value pairs
   @prop {AllowedKeyValues} allowedKeyValues
@@ -23,15 +30,6 @@
     <pre>{JSON.stringify(value)}</pre>
   ```
 -->
-<!-- for svelte 5+ <script module lang="ts"> -->
-<script context="module" lang="ts">
-export type AllowedKeyValues<K extends string, V extends readonly (string | number | boolean)[]> = Record<K, V>;
-export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string | number | boolean)[]>> = Record<
-  keyof KV,
-  KV[keyof KV][number]
->;
-</script>
-
 <script lang="ts">
   // import { SvelteMap } from 'svelte/reactivity';
   import { fly, scale, slide } from "svelte/transition";
