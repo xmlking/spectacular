@@ -26,6 +26,8 @@
     }
   },
   "scripts": {
+    "check": "biome check .",
+    "check:fix": "biome check . --write",
     "clean": "git clean -xdf",
     "lint": "biome lint",
     "format": "biome format --write",
@@ -36,13 +38,13 @@
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts"
   },
   "dependencies": {
-    "houdini": "1.3.1"
+    "houdini": "1.4.0"
   },
   "devDependencies": {
     "@spectacular/biome-config": "workspace:*",
     "@spectacular/typescript-config": "workspace:*",
-    "graphql": "16.9.0",
+    "graphql": "16.10.0",
     "tsup": "8.3.5",
-    "typescript": "5.7.2"
+    "typescript": "5.7.3"
   }
 }

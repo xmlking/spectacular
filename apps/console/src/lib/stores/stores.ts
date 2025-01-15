@@ -25,3 +25,12 @@ export const lang = derived(page, ($page) => $page.data.lang);
  * current scrollLeft and scrollTop values
  */
 export const scroll = writable<{ x: number; y: number }>({ x: 0, y: 0 });
+
+/**
+ * Cloudflare Turnstile state
+ * Ref: https://developers.cloudflare.com/turnstile/troubleshooting/testing/
+ * default value is a dummy token to bypass the turnstile when this feature is disabled
+ * ie., when `FEATURE_SHOW_BOT_PROTECTION = false`
+ */
+export const turnstileResponse = writable<string>('XXXX.DUMMY.TOKEN.XXXX');
+export const turnstilePassed = writable<boolean>(true);

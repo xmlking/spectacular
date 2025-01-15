@@ -1,0 +1,16 @@
+query OrganizationData1($id: uuid!) {
+  organizations_by_pk(id: $id) {
+    id
+    displayName
+    description
+    tags
+    metadata
+    ownerId
+    allowedEmailDomains @include(if: true)
+    allowedEmails @skip(if: false)
+    blockedEmailDomains
+    blockedEmails
+    autoEnroll
+    avatarUrl
+  }
+}

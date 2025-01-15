@@ -1,7 +1,7 @@
 <script lang='ts'>
-import { VisSingleContainer, VisGraph } from '@unovis/svelte';
+import { VisGraph, VisSingleContainer } from '@unovis/svelte';
 import { GraphLayoutType, GraphNodeShape } from '@unovis/ts';
-import { data, type NodeDatum, type LinkDatum, panels } from './lgl.data';
+import { type LinkDatum, type NodeDatum, data, panels } from './lgl.data';
 
 const layoutElkSettings = {
   'layered.crossingMinimization.forceNodeModelOrder': 'true',

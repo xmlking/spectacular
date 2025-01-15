@@ -6,6 +6,8 @@ export const ROUTE_HOME = '/';
 export const ROUTE_AUTH = '/auth';
 export const ROUTE_PROFILE = '/profile';
 export const ROUTE_DASHBOARD = '/dashboard';
+export const ROUTE_SIGNIN = '/signin';
+export const ROUTE_SIGNUP = '/signup';
 
 // API Routes
 export const API_AUTH = '/api/auth.json';

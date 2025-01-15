@@ -72,7 +72,7 @@ const {
   delayed,
   timeout,
   tainted,
-  posted,
+  isTainted,
   allErrors,
   enhance,
 } = form;
@@ -104,7 +104,7 @@ $: loadingState.setFormLoading($delayed);
               placeholder={m.profile_forms_change_email_placeholder()}
             />
             <button
-              class="variant-filled-secondary"
+              class="variant-filled"
               disabled={!$tainted || !valid || $submitting}
             >
               {#if $timeout}
@@ -127,19 +127,28 @@ $: loadingState.setFormLoading($delayed);
 </div>
 
 <!-- Debug -->
-<DebugShell>
+<DebugShell label="change-email-form-data">
   <SuperDebug
+    label="Miscellaneous"
+    status={false}
     data={{
       message: $message,
+      isTainted: isTainted,
       submitting: $submitting,
       delayed: $delayed,
       timeout: $timeout,
-      posted: $posted,
-      formData: $formData,
-      errors: $errors,
-      constraints: $constraints,
     }}
     theme="vscode"
     --sd-code-date="lightgreen"
   />
+  <br />
+  <SuperDebug label="Form" data={$formData} />
+  <br />
+  <SuperDebug label="Tainted" status={false} data={$tainted} />
+  <br />
+  <SuperDebug label="Errors" status={false} data={$errors} />
+  <br />
+  <SuperDebug label="Constraints" status={false} data={$constraints} />
+  <!-- <br />
+  <SuperDebug label="$page data" status={false} data={$page} /> -->
 </DebugShell>

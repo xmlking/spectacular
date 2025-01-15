@@ -87,6 +87,8 @@ Starting and Stoping local nhost stack
 > To set custom CA certs for all _nhost_ containers, set: `export NHOST_CA_CERTIFICATES=./nhost/ca-certificates.crt`
 
 ```shell
+# Initialize a new nhost project
+nhost init
 # start nhost services
 nhost up
 # or start with applying seed data

@@ -156,5 +156,7 @@ cat  /var/lib/pgsql/14/data/pg_hba.conf
 ## Reference
 
 - [Automatic Data Classification using OpenAI, PostgreSQL, pgai, and pgvector](https://github.com/quamernasim/automatic-data-classification-using-openai-postgreSQL-pgai-and-pgvector)
-- [Use pgai with OpenAI](https://github.com/timescale/pgai/blob/main/docs/openai.md) 
+- [Use pgai with OpenAI](https://github.com/timescale/pgai/blob/main/docs/openai.md)
 - [Use pgai with Ollama](https://github.com/timescale/pgai/blob/main/docs/ollama.md)
+- [supavisor](https://github.com/supabase/supavisor) - PostgreSQL connection pooler _extention_. Multi-tenant alternative for **PgBouncer**.  
+- [pgmq](https://github.com/tembo-io/pgmq) - PostgreSQL _extention_ for _LISTEN/NOTIFY_. [usecases](https://supabase.com/blog/supabase-queues)

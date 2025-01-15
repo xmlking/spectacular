@@ -1,5 +1,5 @@
 <script lang="ts">
-import { onMount, onDestroy } from 'svelte';
+import { onDestroy, onMount } from 'svelte';
 import { languageModelOptions } from '#components/settings.js';
 
 let assistant: AILanguageModel | undefined;

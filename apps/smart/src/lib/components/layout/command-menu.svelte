@@ -1,15 +1,15 @@
 <script lang="ts">
+import { docsConfig } from '$lib/config/docs.js';
+import { cn } from '$lib/utils.js';
+import { Button } from '@spectacular/ui/components/button';
+import * as Command from '@spectacular/ui/components/command';
+import { resetMode, setMode } from 'mode-watcher';
+import type { ComponentProps } from 'svelte';
 import Circle from 'svelte-radix/Circle.svelte';
 import File from 'svelte-radix/File.svelte';
 import Laptop from 'svelte-radix/Laptop.svelte';
 import Moon from 'svelte-radix/Moon.svelte';
 import Sun from 'svelte-radix/Sun.svelte';
-import type { ComponentProps } from 'svelte';
-import { resetMode, setMode } from 'mode-watcher';
-import * as Command from '@spectacular/ui/components/command';
-import { Button } from '@spectacular/ui/components/button';
-import { cn } from '$lib/utils.js';
-import { docsConfig } from '$lib/config/docs.js';
 
 let restProps: ComponentProps<typeof Button> = $props();
 

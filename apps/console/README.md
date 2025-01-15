@@ -102,15 +102,3 @@ You can preview the production build with `turbo preview`.
 ```shell
 gcloud run deploy --allow-unauthenticated
 ```
-
-To reset deleted (soft) `policies` and `rules`
-
-```sql
-UPDATE public.rules SET deleted_at = null WHERE deleted_at is not null;
-UPDATE public.policies SET deleted_at = null WHERE deleted_at is not null;
-```
-
-## TODO
-
-- After user record created for first-time (i.e., after user login), have admins assign `organization` and `groups` via Web UI:
-- use [lcl.host](https://anchor.dev/docs/lcl-host/why-lcl)

@@ -1,8 +1,8 @@
 <script lang="ts">
 import { Send } from 'lucide-svelte';
 
-import { onMount } from 'svelte';
 import { Avatar, CodeBlock } from '@skeletonlabs/skeleton';
+import { onMount } from 'svelte';
 
 // Types
 interface Person {

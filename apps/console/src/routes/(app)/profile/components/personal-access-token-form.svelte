@@ -1,6 +1,7 @@
 <script lang="ts">
 import { page } from '$app/stores';
-import { CachePolicy, GetUserStore, cache } from '$houdini';
+import { invalidate, invalidateAll } from '$app/navigation';
+import { cache } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { createPATSchema } from '$lib/schema/user';
@@ -40,7 +41,6 @@ const form = superForm(defaults(zod(createPATSchema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: true,
-  invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
   validators: zodClient(createPATSchema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
@@ -78,8 +78,9 @@ const form = superForm(defaults(zod(createPATSchema)), {
     setMessage(form, message);
     // handleMessage(message, toastStore);
     // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
-    // TODO: add { id, personalAccessToken }  to cache, instead of reload()
-    await reload();
+    const user = cache.get('users', { id: $page.data.userId });
+    user.markStale();
+    await invalidate(() => true);
   },
 });
 
@@ -93,7 +94,7 @@ const {
   delayed,
   tainted,
   timeout,
-  posted,
+  isTainted,
   enhance,
 } = form;
 
@@ -102,22 +103,6 @@ onMount(() => {
   proxyExpiresAt = dateProxy(form, 'expiresAt', { format: 'date-local', empty: 'undefined' });
 });
 // Functions
-/**
- * FIXME: Workaround for refresh page, after first time security token added
- * https://github.com/HoudiniGraphql/houdini/issues/891
- */
-async function reload() {
-  const getUserStore = new GetUserStore();
-  // const userId = '076a79f9-ed08-4e28-a4c3-8d4e0aa269a3'
-  const userId = $page.data.session.user.id;
-  console.log({ userId });
-  const { data, errors } = await getUserStore.fetch({
-    blocking: true,
-    policy: CachePolicy.NetworkOnly,
-    variables: { userId },
-  });
-  console.log({ data, errors });
-}
 // Reactivity
 $: valid = $allErrors.length === 0;
 $: loadingState.setFormLoading($delayed);
@@ -180,7 +165,7 @@ $: loadingState.setFormLoading($delayed);
     <svelte:fragment slot="trail">
       <button
         type="submit"
-        class="btn variant-filled-secondary"
+        class="btn variant-filled"
         disabled={!$tainted || !valid || $submitting}
       >
         {#if $timeout}
@@ -196,21 +181,29 @@ $: loadingState.setFormLoading($delayed);
 </form>
 
 <!-- Debug -->
-<DebugShell>
+<DebugShell label="pat-form-data">
   <SuperDebug
+    label="Miscellaneous"
+    status={false}
     data={{
-      pat,
       message: $message,
+      isTainted: isTainted,
       submitting: $submitting,
       delayed: $delayed,
       timeout: $timeout,
-      posted: $posted,
-      formData: $formData,
-      errors: $errors,
-      constraints: $constraints,
     }}
     theme="vscode"
     --sd-code-date="lightgreen"
   />
-  <SuperDebug label="$page data" data={page} collapsible />
+  <br />
+  <SuperDebug label="Form" data={$formData} />
+  <br />
+  <SuperDebug label="Tainted" status={false} data={$tainted} />
+  <br />
+  <SuperDebug label="Errors" status={false} data={$errors} />
+  <br />
+  <SuperDebug label="Constraints" status={false} data={$constraints} />
+  <!-- <br />
+  <SuperDebug label="$page data" status={false} data={$page} /> -->
 </DebugShell>
+

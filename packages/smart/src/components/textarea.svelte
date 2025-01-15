@@ -22,7 +22,7 @@
   ```
 -->
 <script lang="ts" context="module">
-import { PenTool, SpellCheck2, Replace, Crop } from 'lucide-svelte';
+import { Crop, PenTool, Replace, SpellCheck2 } from 'lucide-svelte';
 import Translate from './translate-icon.svelte';
 // import Summary from "./summary-icon.svelte";
 const toolOptions = {

@@ -15,7 +15,7 @@ const SITE_URL = process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL 
 export default defineConfig({
   site: SITE_URL,
   integrations: [
-    starlight({ title: 'Web' }),
+    starlight({ title: 'Web', disable404Route: true }),
     tailwind({
       // Disable the default base styles:
       // Example: Disable injecting a basic `base.css` import on every page.
@@ -28,7 +28,6 @@ export default defineConfig({
     expressiveCode(),
     mdx(),
   ],
-  output: 'hybrid',
   // HINT: To set build output, same way like sveltekit for Dockerfile
   build: {
     server: './build',
@@ -51,34 +50,31 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: 'hover',
   },
-  experimental: {
-    serverIslands: true,
-    clientPrerender: true,
-    env: {
-      schema: {
-        API_VERSION: envField.enum({
-          context: 'server',
-          access: 'secret',
-          values: ['v1', 'v2'],
-          optional: true,
-        }),
-        API_PORT: envField.number({
-          context: 'server',
-          access: 'secret',
-          gt: 1024,
-          default: 7000,
-        }),
-        PUBLIC_SOME_SERVER_FEATURE_FLAG: envField.boolean({
-          context: 'server',
-          access: 'public',
-          default: false,
-        }),
-        PUBLIC_SOME_CLIENT_FEATURE_FLAG: envField.boolean({
-          context: 'client',
-          access: 'public',
-          default: false,
-        }),
-      },
+
+  env: {
+    schema: {
+      API_VERSION: envField.enum({
+        context: 'server',
+        access: 'secret',
+        values: ['v1', 'v2'],
+        optional: true,
+      }),
+      API_PORT: envField.number({
+        context: 'server',
+        access: 'secret',
+        gt: 1024,
+        default: 7000,
+      }),
+      PUBLIC_SOME_SERVER_FEATURE_FLAG: envField.boolean({
+        context: 'server',
+        access: 'public',
+        default: false,
+      }),
+      PUBLIC_SOME_CLIENT_FEATURE_FLAG: envField.boolean({
+        context: 'client',
+        access: 'public',
+        default: false,
+      }),
     },
   },
 });

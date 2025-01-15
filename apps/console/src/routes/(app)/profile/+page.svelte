@@ -3,6 +3,7 @@ import { page } from '$app/stores';
 import { PendingValue } from '$houdini';
 import { Meta } from '$lib/components';
 import { allLoaded, loaded, loading } from '$lib/graphql/loading';
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import { GraphQLErrors } from '@spectacular/skeleton/components';
 import type { PageData } from './$houdini';
 import ChangeEmailForm from './components/change-email.svelte';
@@ -15,7 +16,7 @@ import PersonalAccessTokens from './components/personal-access-tokens.svelte';
 import SecurityKeyForm from './components/security-key-form.svelte';
 import SecurityKeys from './components/security-keys.svelte';
 import UserDetails from './components/user-details.svelte';
-import UserOrgRoles from './components/user-org-roles.svelte';
+import Memberships from './components/memberships.svelte';
 
 /**
  * Loading states example: https://houdini-intro.pages.dev/
@@ -28,8 +29,8 @@ export let data: PageData;
 // Functions
 
 // Reactivity
-let { GetUser } = data;
-$: ({ GetUser } = data);
+let { ProfileData } = data;
+$: ({ ProfileData } = data);
 
 $: meta = {
   title: 'Datablocks | Profile',
@@ -49,10 +50,12 @@ $: meta = {
     <p>Update your profile details</p>
   </section>
 
-  {#if $GetUser.errors}
-    <GraphQLErrors errors={$GetUser.errors} />
-  {:else if $GetUser.data?.user}
-    {@const user = $GetUser.data.user}
+  <MaybeError
+    entityName="User"
+    result={$ProfileData}
+    let:data={{ user }}
+  >
+  {#if user}
     {@const { email } = user}
 
     <section class="space-y-4">
@@ -62,9 +65,9 @@ $: meta = {
     </section>
 
     <section class="space-y-4">
-      <h2 class="h2">User Org Roles</h2>
+      <h2 class="h2">Memberships</h2>
       <p>Orgs and roles you are granted</p>
-      <UserOrgRoles {user} />
+      <Memberships {user} />
     </section>
 
     <section class="space-y-4">
@@ -122,4 +125,5 @@ $: meta = {
       <HasuraJwtClaims />
     </section>
   {/if}
+  </MaybeError>
 </div>

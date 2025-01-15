@@ -61,9 +61,9 @@ $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? '
       <svelte:fragment slot="lead"><Icon name="svelte" width="w-6" height="h-6" /></svelte:fragment>
       <span>Reports</span>
     </AppRailTile>
-    <AppRailTile bind:group={currentRailCategory} name="account" value={'/account'}>
+    <AppRailTile bind:group={currentRailCategory} name="settings" value={'/settings'}>
       <svelte:fragment slot="lead"><Icon name="screwdriverWrench" width="w-6" height="h-6" /></svelte:fragment>
-      <span>Account</span>
+      <span>Settings</span>
     </AppRailTile>
   </AppRail>
   <!-- Nav Links -->
@@ -80,7 +80,7 @@ $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? '
             <li on:keypress on:click={drawerStore.close}>
               <a {href} class={listboxItemActive(href)} data-sveltekit-preload-data={preload || 'hover'}>
                 <span class="flex-auto">{@html label}</span>
-                {#if badge}<span class="variant-filled-secondary badge">{badge}</span>{/if}
+                {#if badge}<span class="variant-filled badge">{badge}</span>{/if}
               </a>
             </li>
             {/if}

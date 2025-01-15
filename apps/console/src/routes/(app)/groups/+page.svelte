@@ -6,7 +6,7 @@ import { popup } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger } from '@spectacular/utils';
-import { DataHandler } from '@vincjo/datatables';
+import { DataHandler } from '@vincjo/datatables/legacy';
 import { CircleAlert, Plus, Search, UsersRound } from 'lucide-svelte';
 import SuperDebug from 'sveltekit-superforms';
 import { superForm } from 'sveltekit-superforms/client';

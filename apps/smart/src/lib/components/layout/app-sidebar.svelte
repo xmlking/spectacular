@@ -4,13 +4,13 @@ import BookOpen from 'lucide-svelte/icons/book-open';
 import Bot from 'lucide-svelte/icons/bot';
 import ChartPie from 'lucide-svelte/icons/chart-pie';
 import Command from 'lucide-svelte/icons/command';
+import FlaskRound from 'lucide-svelte/icons/flask-round';
 import Frame from 'lucide-svelte/icons/frame';
 import GalleryVerticalEnd from 'lucide-svelte/icons/gallery-vertical-end';
 import Map from 'lucide-svelte/icons/map';
 import Settings2 from 'lucide-svelte/icons/settings-2';
-import SquareTerminal from 'lucide-svelte/icons/square-terminal';
 import Sparkles from 'lucide-svelte/icons/sparkles';
-import FlaskRound from 'lucide-svelte/icons/flask-round';
+import SquareTerminal from 'lucide-svelte/icons/square-terminal';
 
 // This is sample data.
 const data = {

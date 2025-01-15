@@ -1,8 +1,8 @@
 <script lang="ts">
-import { VisSingleContainer, VisGraph } from '@unovis/svelte';
+import { VisGraph, VisSingleContainer } from '@unovis/svelte';
 import { Graph, GraphLayoutType } from '@unovis/ts';
 
-import { nodes, links, sites, StatusMap, type NodeDatum, type LinkDatum } from './network.data';
+import { type LinkDatum, type NodeDatum, StatusMap, links, nodes, sites } from './network.data';
 
 const mainSite = nodes[0].site;
 

@@ -1,7 +1,9 @@
 import { browser } from '$app/environment';
+import { goto, invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
-import { SearchSecurityKeysStore, extractSession, getClientSession, setClientSession } from '$houdini';
-import { NHOST_SESSION_KEY } from '$lib/constants';
+import { SearchSecurityKeysStore, UpdateDefaultOrgStore, cache } from '$houdini';
+import { NHOST_SESSION_KEY, ROUTE_DASHBOARD } from '$lib/constants';
+import { i18n } from '$lib/i18n';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
 import type { User } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
@@ -9,7 +11,9 @@ import Cookies from 'js-cookie';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { type Readable, type Writable, derived, get, readable, readonly, writable } from 'svelte/store';
 
+// TODO: change to Svelte 5 Class: https://x.com/ankurpsinghal/status/1856719524059283897
 const skQuery = new SearchSecurityKeysStore().artifact.raw;
+const soQuery = new UpdateDefaultOrgStore().artifact.raw;
 export class SvelteKitNhostClient extends NhostClient {
   #log = new Logger('auth.store.client');
 
@@ -64,14 +68,18 @@ export class SvelteKitNhostClient extends NhostClient {
         set(this.auth.getAccessToken() ?? null);
         this.auth.onTokenChanged((session) => {
           this.#log.debug('The access token refreshed:', { session });
+          // invalidateAll trigger reloading layout data and set the houdini client session
+          invalidateAll();
           const accessToken = session?.accessToken;
           set(accessToken ?? null);
-          // set fresh accessToken into HoudiniClient's session (client-side only)
-          setClientSession({ accessToken });
+          // HINT: user profile will change when org switched.
+          this.#user.set(session?.user || null);
           // save session as cookie everytime token is refreshed or user signin via WebAuthN.
           // Cookie will be removed when browser closed or user explicitly SIGNED_OUT.
           Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), {
             path: '/',
+            // Not setting `expires` explicitly means, cookie expires when browser is closed.
+            // expires: session?.accessTokenExpiresIn,
             sameSite: 'strict',
             secure: true,
           });
@@ -124,6 +132,36 @@ export class SvelteKitNhostClient extends NhostClient {
       return false;
     }
     return data?.authUserSecurityKeys.length > 0;
+  }
+
+  /**
+   * switch user's org
+   * @param orgId
+   * NOTE: after org switch, we need reload page
+   * ex: location.replace(i18n.resolveRoute(ROUTE_DASHBOARD));
+   */
+  async switchOrg(orgId: string) {
+    const userId = get(this.#user)?.id;
+    const { data, error } = await this.graphql.request(
+      soQuery,
+      { orgId, userId },
+      {
+        headers: {
+          'x-hasura-role': 'me',
+        },
+      },
+    );
+    if (error) {
+      this.#log.error({ error });
+      return false;
+    }
+    // after org switch, we need to flush cache, refresh session
+    cache.markStale();
+    await this.auth.refreshSession();
+    await goto(i18n.resolveRoute(ROUTE_DASHBOARD), {
+      invalidateAll: true,
+    });
+    return data?.updateUser?.id !== undefined;
   }
 }
 

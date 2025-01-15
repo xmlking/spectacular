@@ -33,12 +33,12 @@ X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 Authorization: Bearer {{graphqlUserToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor manager
-x-hasura-default-role: manager
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta}
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
 x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query ListDevices($limit: Int = 50, $offset: Int = 0, $order_by: [devices_order_by!] = [{updatedAt: desc_nulls_last}]) {
   devices(limit: $limit, offset: $offset, order_by: $order_by) {
@@ -68,12 +68,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor manager
-x-hasura-default-role: manager
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta}
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
 x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 
 query SearchDevices($where: devices_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [devices_order_by!] = [{updatedAt: desc_nulls_last}]) {
@@ -110,12 +110,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor manager
-x-hasura-default-role: manager
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta}
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
 x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query GetDevice($id: uuid!) {
   devices_by_pk(id: $id) {
@@ -145,12 +145,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor manager
-x-hasura-default-role: manager
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta}
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
 x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation UpdateDevice($id: uuid!, $data: devices_set_input!) {
   update_devices_by_pk(pk_columns: { id: $id }, _set: $data) {
@@ -177,12 +177,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor manager
-x-hasura-default-role: manager
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta}
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
 x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation CreateDevice($data: devices_insert_input!) {
   insert_devices_one(object: $data, on_conflict: {update_columns: [ip, description, tags, annotations], constraint: devices_display_name_organization_key, where: {deletedAt: {_is_null: true}}}) {
@@ -221,12 +221,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me supervisor manager
-x-hasura-default-role: manager
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta}
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
 x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation DeleteDevice($id: uuid!, $deletedAt: timestamptz!) {
 	update_devices_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {

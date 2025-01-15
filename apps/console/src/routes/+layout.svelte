@@ -14,7 +14,7 @@ import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { setLoadingState } from '$lib/stores/loading';
 import { online, orientation, size } from '$lib/stores/window';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import { ParaglideJS } from '@inlang/paraglide-js-adapter-sveltekit';
+import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
 import type { ModalComponent } from '@skeletonlabs/skeleton';
 // biome-ignore lint/style/useImportType: biome still don't understand svelte
@@ -95,39 +95,6 @@ function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
 // Disable left sidebar on homepage
 $: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
 $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
-
-// update nhost session
-// HINT: https://blog.flotes.app/posts/performant-reactivity
-$: ({ session } = data);
-$: if (browser) {
-  if (session) {
-    log.debug('trigger SESSION_UPDATE', { session });
-    nhost.auth.client.interpreter?.send('SESSION_UPDATE', {
-      data: { session },
-    });
-  } else {
-    log.debug('session empty, trigger SIGNOUT');
-    // nhost.auth.client.interpreter?.send('SIGNOUT');
-    (async () => {
-      const { error } = await nhost.auth.signOut();
-      if (error) log.error({ error });
-    })();
-  }
-}
-
-// if(browser) {
-//   cookieStore.onchange = (event: CookieChangeEvent) => {
-//      console.log("cookie changed", {event});
-//     if(event.deleted[0] && event.deleted[0].name === NHOST_SESSION_KEY) {
-//        console.log("cookie deleted", {deleted: event.deleted[0].name});
-//        init();
-//     }
-//     if(event.changed[0] && event.changed[0].name === NHOST_SESSION_KEY) {
-//        console.log("cookie changed", {changed: event.changed[0].name});
-//        init();
-//     }
-//   };
-// }
 </script>
 
 <!-- window info -->

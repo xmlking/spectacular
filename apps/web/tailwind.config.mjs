@@ -1,5 +1,5 @@
-import colors from 'tailwindcss/colors';
 import typography from '@tailwindcss/typography';
+import colors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */

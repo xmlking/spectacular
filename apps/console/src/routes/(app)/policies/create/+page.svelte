@@ -1,23 +1,24 @@
 <script lang="ts">
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
-import { graphql, type policies_insert_input } from '$houdini';
+import { cache, graphql, type policies_insert_input } from '$houdini';
 import * as m from '$i18n/messages';
 import { searchRulesFn } from '$lib/api/search-rules';
 import { searchSubjects } from '$lib/api/search-subjects';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { createPolicySchema } from '$lib/schema/policy';
+import { allowedMetadata as allowedKeyValues, createPolicySchema as schema } from '$lib/schema/policy';
 import { createPolicyKeys as keys } from '$lib/schema/policy';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
-import { InputChip, RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
+import { RadioGroup, RadioItem, RangeSlider, SlideToggle } from '@skeletonlabs/skeleton';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
+import { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
 import type { GraphQLError } from 'graphql';
 import {
   Loader,
@@ -33,62 +34,17 @@ import {
 import Select from 'svelte-select';
 import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-// import type { PageData } from './$types';
+import { CreatePolicy } from '../mutations';
 
 const log = new Logger('policies.create.browser');
 
 // Variables
-// export let data: PageData;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 // let subjects: Subject[] | undefined;
 
-const createPolicy = graphql(`
-    mutation CreatePolicy($data: policies_insert_input!) {
-      insert_policies_one(object: $data) {
-        id
-        weight
-        active
-        validFrom
-        validTo
-        subjectId
-        subjectType
-        subjectDisplayName
-        subjectSecondaryId
-        createdBy
-        createdAt
-        updatedAt
-        updatedBy
-        organization
-        rule {
-          id
-          displayName
-          description
-          tags
-          annotations
-          shared
-          source
-          sourcePort
-          destination
-          destinationPort
-          protocol
-          direction
-          action
-          appId
-          throttleRate
-          weight
-          createdBy
-          createdAt
-          updatedAt
-          updatedBy
-          organization
-        }
-      }
-    }
-  `);
-
-const superform = superForm(defaults(zod(createPolicySchema)), {
+const form = superForm(defaults(zod(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -96,7 +52,7 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
   resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(createPolicySchema),
+  validators: zodClient(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
 
@@ -133,10 +89,7 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
     }
     log.debug('payload:', payload);
 
-    const { data, errors } = await createPolicy.mutate(
-      { data: payload },
-      { metadata: { logResult: true, useRole: 'user' } },
-    );
+    const { data, errors } = await CreatePolicy.mutate({ data: payload }, { metadata: { logResult: true } });
 
     if (errors) {
       for (const error of errors) {
@@ -159,11 +112,16 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
     // Finally notify user: successfully created new policy
     const message: App.Superforms.Message = {
       type: 'success',
-      message: `Policy created with Rule: ${result.rule.displayName}`,
+      timeout: 10000,
+      message: `Policy created with Rule: ${payload.rule?.data.displayName}`,
     } as const;
     setMessage(form, message);
     handleMessage(message, toastStore);
-    await goto(i18n.resolveRoute('/dashboard/policies'), {
+
+    // FIXME: workaround untile we can inject newly created rule into rules cache.
+    // workaround: make all rules stale to bust the cache on new policy insert.
+    if (ruleId === undefined) cache.markStale('rules');
+    await goto(i18n.resolveRoute('/policies'), {
       invalidateAll: false,
     });
   },
@@ -173,7 +131,7 @@ const superform = superForm(defaults(zod(createPolicySchema)), {
 });
 
 const {
-  form,
+  form: formData,
   delayed,
   enhance,
   errors,
@@ -187,20 +145,20 @@ const {
   timeout,
   capture,
   restore,
-} = superform;
+} = form;
 export const snapshot = { capture, restore };
 
 // subject settings
-let subject = $form?.subjectId
+let subject = $formData?.subjectId
   ? {
-      id: $form.subjectId,
-      displayName: $form.subjectDisplayName,
-      secondaryId: $form.subjectSecondaryId,
+      id: $formData.subjectId,
+      displayName: $formData.subjectDisplayName,
+      secondaryId: $formData.subjectSecondaryId,
     }
   : null;
 
 async function fetchSubjects(filterText: string) {
-  const result = await searchSubjects($form.subjectType, filterText);
+  const result = await searchSubjects($formData.subjectType, filterText);
   if (result.isErr()) {
     gqlErrors = result.error;
     return [];
@@ -212,13 +170,13 @@ async function onSubjectChange(changedSubject: CustomEvent) {
   log.debug('onSubjectChange', changedSubject.detail);
   if (browser) {
     if (changedSubject?.detail) {
-      $form.subjectId = changedSubject.detail.id;
-      $form.subjectDisplayName = changedSubject.detail.displayName;
-      $form.subjectSecondaryId = changedSubject.detail.id;
+      $formData.subjectId = changedSubject.detail.id;
+      $formData.subjectDisplayName = changedSubject.detail.displayName;
+      $formData.subjectSecondaryId = changedSubject.detail.id;
     } else {
-      $form.subjectId = '';
-      $form.subjectDisplayName = '';
-      $form.subjectSecondaryId = '';
+      $formData.subjectId = '';
+      $formData.subjectDisplayName = '';
+      $formData.subjectSecondaryId = '';
     }
   }
 }
@@ -230,17 +188,17 @@ function clearSubject(event: CustomEvent | Event) {
   // log.debug('onSubjectTypeChange', event.detail);
   if (browser) {
     subject = null;
-    $form.subjectId = '';
-    $form.subjectDisplayName = '';
-    $form.subjectSecondaryId = '';
+    $formData.subjectId = '';
+    $formData.subjectDisplayName = '';
+    $formData.subjectSecondaryId = '';
   }
 }
 
 // rule settings
-let rule = $form?.ruleId
+let rule = $formData?.ruleId
   ? {
-      id: $form.ruleId,
-      displayName: $form.rule.displayName,
+      id: $formData.ruleId,
+      displayName: $formData.rule.displayName,
     }
   : null;
 
@@ -248,41 +206,41 @@ async function onRuleChange(changedSubject: CustomEvent) {
   log.debug('onRuleChange', changedSubject.detail);
   if (browser) {
     if (changedSubject?.detail) {
-      $form.ruleId = changedSubject.detail.id;
-      $form.rule.shared = changedSubject.detail.shared;
-      $form.rule.displayName = changedSubject.detail.displayName;
-      $form.rule.description = changedSubject.detail.description;
-      $form.rule.tags = changedSubject.detail.tags;
-      $form.rule.annotations = changedSubject.detail.annotations;
-      $form.rule.source = changedSubject.detail.source;
-      $form.rule.sourcePort = changedSubject.detail.sourcePort;
-      $form.rule.destination = changedSubject.detail.destination;
-      $form.rule.destinationPort = changedSubject.detail.destinationPort;
-      $form.rule.protocol = changedSubject.detail.protocol;
-      $form.rule.direction = changedSubject.detail.direction;
-      $form.rule.action = changedSubject.detail.action;
-      $form.rule.appId = changedSubject.detail.appId;
-      $form.rule.weight = changedSubject.detail.weight;
+      $formData.ruleId = changedSubject.detail.id;
+      $formData.rule.shared = changedSubject.detail.shared;
+      $formData.rule.displayName = changedSubject.detail.displayName;
+      $formData.rule.description = changedSubject.detail.description;
+      $formData.rule.tags = changedSubject.detail.tags;
+      $formData.rule.metadata = changedSubject.detail.metadata;
+      $formData.rule.source = changedSubject.detail.source;
+      $formData.rule.sourcePort = changedSubject.detail.sourcePort;
+      $formData.rule.destination = changedSubject.detail.destination;
+      $formData.rule.destinationPort = changedSubject.detail.destinationPort;
+      $formData.rule.protocol = changedSubject.detail.protocol;
+      $formData.rule.direction = changedSubject.detail.direction;
+      $formData.rule.action = changedSubject.detail.action;
+      $formData.rule.appId = changedSubject.detail.appId;
+      $formData.rule.weight = changedSubject.detail.weight;
       // HINT: we copy `rule.weight` to `policy.weight` initially and let users overwrite weightage afterwords.
-      $form.weight = changedSubject.detail.weight;
+      $formData.weight = changedSubject.detail.weight;
     } else {
       // Reset rule section of form
       rule = null;
-      $form.ruleId = undefined;
-      $form.rule.shared = false;
-      $form.rule.displayName = '';
-      $form.rule.description = undefined;
-      $form.rule.tags = [];
-      $form.rule.annotations = undefined;
-      $form.rule.source = undefined;
-      $form.rule.sourcePort = undefined;
-      $form.rule.destination = undefined;
-      $form.rule.destinationPort = undefined;
-      $form.rule.protocol = 'Any';
-      $form.rule.direction = 'egress';
-      $form.rule.action = 'block';
-      $form.rule.appId = undefined;
-      $form.rule.weight = 1000;
+      $formData.ruleId = undefined;
+      $formData.rule.shared = false;
+      $formData.rule.displayName = '';
+      $formData.rule.description = undefined;
+      $formData.rule.tags = [];
+      $formData.rule.metadata = undefined;
+      $formData.rule.source = undefined;
+      $formData.rule.sourcePort = undefined;
+      $formData.rule.destination = undefined;
+      $formData.rule.destinationPort = undefined;
+      $formData.rule.protocol = 'Any';
+      $formData.rule.direction = 'egress';
+      $formData.rule.action = 'block';
+      $formData.rule.appId = undefined;
+      $formData.rule.weight = 1000;
     }
   }
 }
@@ -291,21 +249,21 @@ function clearRule(event: Event) {
   if (browser) {
     // Reset rule section of form
     rule = null;
-    $form.ruleId = undefined;
-    $form.rule.shared = false;
-    $form.rule.displayName = '';
-    $form.rule.description = undefined;
-    $form.rule.tags = [];
-    $form.rule.annotations = undefined;
-    $form.rule.source = undefined;
-    $form.rule.sourcePort = undefined;
-    $form.rule.destination = undefined;
-    $form.rule.destinationPort = undefined;
-    $form.rule.protocol = 'Any';
-    $form.rule.direction = 'egress';
-    $form.rule.action = 'block';
-    $form.rule.appId = undefined;
-    $form.rule.weight = 1000;
+    $formData.ruleId = undefined;
+    $formData.rule.shared = false;
+    $formData.rule.displayName = '';
+    $formData.rule.description = undefined;
+    $formData.rule.tags = [];
+    $formData.rule.metadata = undefined;
+    $formData.rule.source = undefined;
+    $formData.rule.sourcePort = undefined;
+    $formData.rule.destination = undefined;
+    $formData.rule.destinationPort = undefined;
+    $formData.rule.protocol = 'Any';
+    $formData.rule.direction = 'egress';
+    $formData.rule.action = 'block';
+    $formData.rule.appId = undefined;
+    $formData.rule.weight = 1000;
   }
 }
 
@@ -321,7 +279,7 @@ async function fetchRule(filterText: string) {
 // Reactivity
 const validFrom = dateProxy(form, 'validFrom', { format: 'datetime-utc' });
 const validTo = dateProxy(form, 'validTo', { format: 'datetime-utc' });
-// $: disabled=$form.rule.shared
+// $: disabled=$formData.rule.shared
 $: disabled = rule != null;
 $: valid = $allErrors.length === 0;
 $: loadingState.setFormLoading($delayed);
@@ -342,22 +300,26 @@ $: loadingState.setFormLoading($delayed);
     <!-- Form Level Errors / Messages -->
     <Alerts errors={$errors._errors} message={$message} />
     <!-- GraphQL Errors  -->
-    <GraphQLErrors errors={gqlErrors} />
+    {#if gqlErrors}
+      <GraphQLErrors errors={gqlErrors} />
+    {/if}
     <!-- Update User Details Form -->
     <form class="card md:space-y-8" method="POST" use:enhance>
       <header class="card-header">
         <div class="text-xl">Create Policy</div>
         <!-- <div>Create new policy</div> -->
       </header>
-      <section class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6">
+      <section
+        class="p-4 grid gap-6 content-center md:grid-cols-3 lg:grid-cols-6"
+      >
         <div class="col-span-2 leading-3">
-          <Form.Fieldset form={superform} name={keys.subjectType}>
-            <RadioGroup active="variant-filled-secondary">
+          <Form.Fieldset {form} name={keys.subjectType}>
+            <RadioGroup active="variant-filled">
               {#each subjectTypeOptions as sType}
                 <Form.Control let:attrs>
                   <RadioItem
                     {...attrs}
-                    bind:group={$form.subjectType}
+                    bind:group={$formData.subjectType}
                     value={sType.value}
                     on:change={clearSubject}
                   >
@@ -388,17 +350,14 @@ $: loadingState.setFormLoading($delayed);
             --border-focused="var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))"
             --error-background="rgb(var(--color-error-200) / var(--tw-bg-opacity))"
             --error-border="rgb(var(--color-error-500) / var(--tw-bg-opacity))"
-
             --disabled-color="rgb(var(--color-surface-400) / 2)"
             --disabled-border-color="rgb(var(--color-surface-400) / 2)"
             --disabled-background="rgb(var(--color-surface-200) / 2)"
-
             --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
             --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
             --list-border-radius="var(--theme-rounded-container)"
             --list-empty-padding="10px"
             --list-z-index="100"
-
             --item-color="var(--body-text-color)"
             --item-border="var(--comfy-dropdown-border-color)"
             --item-is-active-color="rgba(var(--theme-font-color-dark))"
@@ -408,13 +367,13 @@ $: loadingState.setFormLoading($delayed);
             --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
           >
             <b slot="prepend">
-              {#if $form.subjectType == "group"}
+              {#if $formData.subjectType == "group"}
                 <UsersRound />
-              {:else if $form.subjectType == "service_account"}
+              {:else if $formData.subjectType == "service_account"}
                 <User />
-              {:else if $form.subjectType == "device"}
+              {:else if $formData.subjectType == "device"}
                 <MonitorSmartphone />
-              {:else if $form.subjectType == "device_pool"}
+              {:else if $formData.subjectType == "device_pool"}
                 <Server />
               {:else}
                 <UserRound />
@@ -448,17 +407,14 @@ $: loadingState.setFormLoading($delayed);
             --border-focused="var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))"
             --error-background="rgb(var(--color-error-200) / var(--tw-bg-opacity))"
             --error-border="rgb(var(--color-error-500) / var(--tw-bg-opacity))"
-
             --disabled-color="rgb(var(--color-surface-400) / 2)"
             --disabled-border-color="rgb(var(--color-surface-400) / 2)"
             --disabled-background="rgb(var(--color-surface-200) / 2)"
-
             --list-background="rgb(var(--color-surface-200) / var(--tw-bg-opacity))"
             --list-border="var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))"
             --list-border-radius="var(--theme-rounded-container)"
             --list-empty-padding="10px"
             --list-z-index="100"
-
             --item-color="var(--body-text-color)"
             --item-border="var(--comfy-dropdown-border-color)"
             --item-is-active-color="rgba(var(--theme-font-color-dark))"
@@ -480,7 +436,7 @@ $: loadingState.setFormLoading($delayed);
           </Select>
         </div>
         <div class="col-span-2">
-          <Form.Field form={superform} name="rule.displayName">
+          <Form.Field {form} name="rule.displayName">
             <Form.Control let:attrs>
               <Form.Label class="label">Display Name</Form.Label>
               <input
@@ -489,7 +445,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Display Name"
-                bind:value={$form.rule.displayName}
+                bind:value={$formData.rule.displayName}
               />
             </Form.Control>
             <Form.Description
@@ -500,7 +456,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-4">
-          <Form.Field form={superform} name="rule.description">
+          <Form.Field {form} name="rule.description">
             <Form.Control let:attrs>
               <Form.Label class="label">Description</Form.Label>
               <input
@@ -509,7 +465,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Display Name"
-                bind:value={$form.rule.description}
+                bind:value={$formData.rule.description}
               />
             </Form.Control>
             <Form.Description
@@ -520,23 +476,15 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.tags">
+          <Form.Field {form} name="rule.tags">
             <Form.Control let:attrs>
               <Form.Label class="label">Tags</Form.Label>
-              <!-- <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                {disabled}
-                placeholder="Enter tags..."
-                bind:value={$form.rule.tags}
-              /> -->
-              <InputChip
+              <InputChipWrapper
                 {...attrs}
                 {disabled}
                 placeholder="Enter tags..."
                 class="input data-[fs-error]:input-error"
-                bind:value={$form.rule.tags}
+                bind:value={$formData.rule.tags}
               />
             </Form.Control>
             <Form.Description
@@ -547,27 +495,27 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.annotations">
+          <Form.Field {form} name="rule.metadata">
             <Form.Control let:attrs>
-              <Form.Label class="label">Annotations</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
+              <Form.Label class="label">Metadata</Form.Label>
+              <InputPairs
                 {...attrs}
                 {disabled}
-                placeholder="Enter Annotations..."
-                bind:value={$form.rule.annotations}
+                placeholder="Enter metadata..."
+                class="input data-[fs-error]:input-error"
+                {allowedKeyValues}
+                bind:value={$formData.rule.metadata}
               />
             </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
-              >Format: key1=>value1 (or) "key2" => "value2 with space"</Form.Description
+              >Format: key1: value1</Form.Description
             >
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.source">
+          <Form.Field {form} name="rule.source">
             <Form.Control let:attrs>
               <Form.Label class="label">Source</Form.Label>
               <input
@@ -576,7 +524,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Source..."
-                bind:value={$form.rule.source}
+                bind:value={$formData.rule.source}
               />
             </Form.Control>
             <Form.Description
@@ -587,7 +535,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.sourcePort">
+          <Form.Field {form} name="rule.sourcePort">
             <Form.Control let:attrs>
               <Form.Label class="label">Source port</Form.Label>
               <input
@@ -596,7 +544,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Source port..."
-                bind:value={$form.rule.sourcePort}
+                bind:value={$formData.rule.sourcePort}
               />
             </Form.Control>
             <Form.Description
@@ -607,7 +555,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.destination">
+          <Form.Field {form} name="rule.destination">
             <Form.Control let:attrs>
               <Form.Label class="label">Destination</Form.Label>
               <input
@@ -616,7 +564,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Destination..."
-                bind:value={$form.rule.destination}
+                bind:value={$formData.rule.destination}
               />
             </Form.Control>
             <Form.Description
@@ -627,7 +575,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-3">
-          <Form.Field form={superform} name="rule.destinationPort">
+          <Form.Field {form} name="rule.destinationPort">
             <Form.Control let:attrs>
               <Form.Label class="label">Destination port</Form.Label>
               <input
@@ -636,7 +584,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Enter Destination port..."
-                bind:value={$form.rule.destinationPort}
+                bind:value={$formData.rule.destinationPort}
               />
             </Form.Control>
             <Form.Description
@@ -647,14 +595,14 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="leading-3">
-          <Form.Field form={superform} name="rule.protocol">
+          <Form.Field {form} name="rule.protocol">
             <Form.Control let:attrs>
               <Form.Label class="label">Protocols</Form.Label>
               <select
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 {disabled}
-                bind:value={$form.rule.protocol}
+                bind:value={$formData.rule.protocol}
               >
                 {#each protocols as protocol}
                   <option value={protocol.value}>{protocol.name}</option>
@@ -669,15 +617,15 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="leading-3">
-          <Form.Fieldset form={superform} name="rule.action">
+          <Form.Fieldset {form} name="rule.action">
             <Form.Legend>Action</Form.Legend>
-            <RadioGroup active="variant-filled-secondary">
+            <RadioGroup active="variant-filled">
               {#each actionOptions as action}
                 <Form.Control let:attrs>
                   <RadioItem
                     {...attrs}
                     {disabled}
-                    bind:group={$form.rule.action}
+                    bind:group={$formData.rule.action}
                     value={action.value}
                   >
                     <Form.Label class="label">{action.label}</Form.Label>
@@ -693,15 +641,15 @@ $: loadingState.setFormLoading($delayed);
           </Form.Fieldset>
         </div>
         <div class="leading-3">
-          <Form.Fieldset form={superform} name="rule.direction">
+          <Form.Fieldset {form} name="rule.direction">
             <Form.Legend>Direction</Form.Legend>
-            <RadioGroup active="variant-filled-secondary">
+            <RadioGroup active="variant-filled">
               {#each directionOptions as direction}
                 <Form.Control let:attrs>
                   <RadioItem
                     {...attrs}
                     {disabled}
-                    bind:group={$form.rule.direction}
+                    bind:group={$formData.rule.direction}
                     value={direction.value}
                   >
                     <Form.Label class="label">{direction.label}</Form.Label>
@@ -717,17 +665,17 @@ $: loadingState.setFormLoading($delayed);
           </Form.Fieldset>
         </div>
         <div class="col-start-5 justify-end content-center">
-          <Form.Field form={superform} name="rule.shared">
+          <Form.Field {form} name="rule.shared">
             <Form.Control let:attrs>
               <SlideToggle
-                active="variant-filled-secondary"
+                active="variant-filled"
                 size="md"
                 {...attrs}
                 {disabled}
-                bind:checked={$form.rule.shared}
+                bind:checked={$formData.rule.shared}
               >
                 <Form.Label class="inline-block w-[100px] text-left">
-                  {$form.rule.shared ? "" : "Not"} Shared</Form.Label
+                  {$formData.rule.shared ? "" : "Not"} Shared</Form.Label
                 >
               </SlideToggle>
             </Form.Control>
@@ -736,7 +684,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-end-7">
-          <Form.Field form={superform} name={keys.weight}>
+          <Form.Field {form} name={keys.weight}>
             <Form.Control let:attrs>
               <Form.Label class="label">Weight</Form.Label>
               <input
@@ -744,7 +692,7 @@ $: loadingState.setFormLoading($delayed);
                 class="input data-[fs-error]:input-error"
                 {...attrs}
                 {disabled}
-                bind:value={$form.rule.weight}
+                bind:value={$formData.rule.weight}
               />
             </Form.Control>
             <Form.Description
@@ -756,7 +704,7 @@ $: loadingState.setFormLoading($delayed);
         </div>
 
         <div class="col-span-4">
-          <Form.Field form={superform} name="rule.appId">
+          <Form.Field {form} name="rule.appId">
             <Form.Control let:attrs>
               <Form.Label class="label">App id</Form.Label>
               <input
@@ -765,7 +713,7 @@ $: loadingState.setFormLoading($delayed);
                 {...attrs}
                 {disabled}
                 placeholder="Display Name"
-                bind:value={$form.rule.appId}
+                bind:value={$formData.rule.appId}
               />
             </Form.Control>
             <Form.Description
@@ -776,12 +724,12 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-span-2">
-          <Form.Field form={superform} name="rule.throttleRate">
+          <Form.Field {form} name="rule.throttleRate">
             <Form.Control let:attrs>
               <RangeSlider
                 {...attrs}
                 {disabled}
-                bind:value={$form.rule.throttleRate}
+                bind:value={$formData.rule.throttleRate}
                 min={0}
                 max={100}
                 step={1}
@@ -789,7 +737,7 @@ $: loadingState.setFormLoading($delayed);
               >
                 <div class="flex justify-between items-center">
                   <Form.Label class="label">Bandwidth limit</Form.Label>
-                  <div class="text-xs">{$form.rule.throttleRate} /100</div>
+                  <div class="text-xs">{$formData.rule.throttleRate} /100</div>
                 </div>
               </RangeSlider>
             </Form.Control>
@@ -800,26 +748,8 @@ $: loadingState.setFormLoading($delayed);
             <Form.FieldErrors class="data-[fs-error]:text-error-500" />
           </Form.Field>
         </div>
-        <div class="justify-start content-center">
-          <Form.Field form={superform} name="active">
-            <Form.Control let:attrs>
-              <SlideToggle
-                active="variant-filled-secondary"
-                size="md"
-                {...attrs}
-                bind:checked={$form.active}
-              >
-                <Form.Label class="inline-block w-[100px] text-left"
-                  >Active {$form.active ? "On" : "Off"}</Form.Label
-                >
-              </SlideToggle>
-            </Form.Control>
-            <!-- <Form.Description>Temporarily disable policy</Form.Description> -->
-            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-          </Form.Field>
-        </div>
         <div class="col-start-5">
-          <Form.Field form={superform} name={keys.validFrom}>
+          <Form.Field {form} name={keys.validFrom}>
             <Form.Control let:attrs>
               <Form.Label class="label">Valid From</Form.Label>
               <input
@@ -837,7 +767,7 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
         <div class="col-end-auto">
-          <Form.Field form={superform} name={keys.validTo}>
+          <Form.Field {form} name={keys.validTo}>
             <Form.Control let:attrs>
               <Form.Label class="label">Valid To</Form.Label>
               <input
@@ -855,20 +785,50 @@ $: loadingState.setFormLoading($delayed);
           </Form.Field>
         </div>
       </section>
-      <footer class="card-footer flex justify-end">
-        <button
-          type="submit"
-          class="btn variant-filled-secondary"
-          disabled={!$tainted || !valid || $submitting}
-        >
-          {#if $timeout}
-            <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
-          {:else if $delayed}
-            <Loader class="m-2 h-4 w-4 animate-spin" />
-          {:else}
-            {m.buttons_create()}
-          {/if}
-        </button>
+      <footer class="card-footer flex justify-between">
+          <Form.Field {form} name={keys.active}>
+            <Form.Control let:attrs>
+              <SlideToggle
+                active="variant-filled"
+                size="md"
+                {...attrs}
+                bind:checked={$formData.active}
+              >
+                <Form.Label class="inline-block text-left">
+                  Active <strong>{$formData.active ? "ON" : "OFF"}</strong></Form.Label
+                >
+              </SlideToggle>
+            </Form.Control>
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        <div class="space-x-2">
+          <button
+            type="button"
+            class="btn variant-filled-primary"
+            on:click={() => history.back()}>Back</button
+          >
+          <button
+            type="button"
+            class="btn variant-filled-warning"
+            disabled={!$tainted}
+            on:click={() => reset()}
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            class="btn variant-filled"
+            disabled={!$tainted || !valid || $submitting}
+          >
+            {#if $timeout}
+              <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+            {:else if $delayed}
+              <Loader class="m-2 h-4 w-4 animate-spin" />
+            {:else}
+              {m.buttons_create()}
+            {/if}
+          </button>
+        </div>
       </footer>
     </form>
   </section>
@@ -881,12 +841,14 @@ $: loadingState.setFormLoading($delayed);
         status={false}
         data={{
           message: $message,
+          isTainted: isTainted,
           submitting: $submitting,
           delayed: $delayed,
+          timeout: $timeout,
         }}
       />
       <br />
-      <SuperDebug label="Form" data={$form} />
+      <SuperDebug label="Form" data={$formData} />
       <br />
       <SuperDebug label="Tainted" status={false} data={$tainted} />
       <br />
@@ -900,46 +862,41 @@ $: loadingState.setFormLoading($delayed);
 </div>
 
 <style lang="postcss">
-	/*
+  /*
 			CSS variables can be used to control theming.
 			https://github.com/rob-balfre/svelte-select/blob/master/docs/theming_variables.md
 	*/
-	.select1 {
-		--border-radius: var(--theme-rounded-container);
-		--border-color: rgb(var(--color-secondary-500));
-		--border-focused: 1px solid rgb(var(--color-secondary-500));
-		--border-hover: 1px solid rgb(var(--color-secondary-500));
-		--multi-item-active-outline: 1px solid rgb(var(--color-secondary-500));
-		--multi-item-outline: 1px solid rgb(var(--color-secondary-500));
-		--clear-select-focus-outline: 1px solid rgb(var(--color-secondary-500));
-		--height: 3rem;
-		--multi-select-input-margin: 0px;
+  .select1 {
+    --border-radius: var(--theme-rounded-container);
+    --border-color: rgb(var(--color-secondary-500));
+    --border-focused: 1px solid rgb(var(--color-secondary-500));
+    --border-hover: 1px solid rgb(var(--color-secondary-500));
+    --multi-item-active-outline: 1px solid rgb(var(--color-secondary-500));
+    --multi-item-outline: 1px solid rgb(var(--color-secondary-500));
+    --clear-select-focus-outline: 1px solid rgb(var(--color-secondary-500));
+    --height: 3rem;
+    --multi-select-input-margin: 0px;
 
-    --tw-border-opacity: 1
-    --tw-bg-opacity: 1
-    --background: rgb(var(--color-surface-200))
-    --border-radius: var(--theme-rounded-base)
-    --border: var(--theme-border-base) solid rgb(var(--color-surface-400))
-    --border-hover: var(--theme-border-base) solid rgb(var(--color-surface-500))
-    --border-focused: var(--theme-border-base) solid rgb(var(--color-primary-500) / var(--tw-border-opacity))
-    --error-background: rgb(var(--color-error-200) / var(--tw-bg-opacity))
-    --error-border: rgb(var(--color-error-500) / var(--tw-bg-opacity))
-
-    --disabled-color: rgb(var(--color-surface-400) / 2)
-    --disabled-border-color: rgb(var(--color-surface-400) / 2)
-    --disabled-background: rgb(var(--color-surface-200) / 2)
-
-    --list-background: rgb(var(--color-surface-200) / var(--tw-bg-opacity))
-    --list-border: var(--theme-border-base) solid rgb(var(--color-surface-400) / var(--tw-bg-opacity))
-    --list-empty-padding: 10px
-    --list-z-index: 100
-
-    --item-color: var(--body-text-color)
-    --item-border: var(--comfy-dropdown-border-color)
-    --item-is-active-color: var(--pd-dropdown-item-text)
-    --item-hover-color: var(--pd-dropdown-item-hover-text)
-    --item-active-background: var(--pd-input-field-hover-stroke)
-    --item-is-active-bg: var(--pd-input-field-hover-stroke)
-    --item-hover-bg: rgba(var(--color-secondary-500) / 1)
-	}
+    --tw-border-opacity: 1 --tw-bg-opacity: 1 --background:
+      rgb(var(--color-surface-200)) --border-radius: var(--theme-rounded-base)
+      --border: var(--theme-border-base) solid rgb(var(--color-surface-400))
+      --border-hover: var(--theme-border-base) solid
+      rgb(var(--color-surface-500)) --border-focused: var(--theme-border-base)
+      solid rgb(var(--color-primary-500) / var(--tw-border-opacity))
+      --error-background: rgb(var(--color-error-200) / var(--tw-bg-opacity))
+      --error-border: rgb(var(--color-error-500) / var(--tw-bg-opacity))
+      --disabled-color: rgb(var(--color-surface-400) / 2)
+      --disabled-border-color: rgb(var(--color-surface-400) / 2)
+      --disabled-background: rgb(var(--color-surface-200) / 2) --list-background:
+      rgb(var(--color-surface-200) / var(--tw-bg-opacity)) --list-border:
+      var(--theme-border-base) solid
+      rgb(var(--color-surface-400) / var(--tw-bg-opacity)) --list-empty-padding:
+      10px --list-z-index: 100 --item-color: var(--body-text-color)
+      --item-border: var(--comfy-dropdown-border-color) --item-is-active-color:
+      var(--pd-dropdown-item-text) --item-hover-color:
+      var(--pd-dropdown-item-hover-text) --item-active-background:
+      var(--pd-input-field-hover-stroke) --item-is-active-bg:
+      var(--pd-input-field-hover-stroke) --item-hover-bg:
+      rgba(var(--color-secondary-500) / 1);
+  }
 </style>

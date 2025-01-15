@@ -1,5 +1,9 @@
 <script lang="ts">
-import ChevronDown from 'svelte-radix/ChevronDown.svelte';
+import { Button } from '@spectacular/ui/components/button';
+import { FlexRender, createSvelteTable, renderComponent, renderSnippet } from '@spectacular/ui/components/data-table';
+import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
+import { Input } from '@spectacular/ui/components/input';
+import * as Table from '@spectacular/ui/components/table';
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -13,14 +17,10 @@ import {
   getSortedRowModel,
 } from '@tanstack/table-core';
 import { createRawSnippet } from 'svelte';
+import ChevronDown from 'svelte-radix/ChevronDown.svelte';
+import DataTableActions from './data-table-actions.svelte';
 import DataTableCheckbox from './data-table-checkbox.svelte';
 import DataTableEmailButton from './data-table-email-button.svelte';
-import DataTableActions from './data-table-actions.svelte';
-import * as Table from '@spectacular/ui/components/table';
-import { Button } from '@spectacular/ui/components/button';
-import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
-import { Input } from '@spectacular/ui/components/input';
-import { FlexRender, createSvelteTable, renderComponent, renderSnippet } from '@spectacular/ui/components/data-table';
 
 type Payment = {
   id: string;

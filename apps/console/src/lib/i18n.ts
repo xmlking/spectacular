@@ -1,6 +1,6 @@
 import * as m from '$i18n/messages';
 import * as runtime from '$i18n/runtime.js';
-import { createI18n } from '@inlang/paraglide-js-adapter-sveltekit';
+import { createI18n } from '@inlang/paraglide-sveltekit';
 
 export const i18n = createI18n(runtime, {
   pathnames: {
@@ -9,6 +9,7 @@ export const i18n = createI18n(runtime, {
   exclude: ['/base/not-translated'],
   textDirection: {
     en: 'ltr',
+    es: 'ltr',
     de: 'ltr',
   },
 });

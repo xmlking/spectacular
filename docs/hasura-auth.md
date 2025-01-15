@@ -14,7 +14,7 @@ JWT token issued during `SignIn` step is used as `Session` token to access backe
 Users can `SugnUp` via **WebApp** to a specific `organization` with an email in `allowed email domains` or `allowed emails` defined in `public.organizations` for that `organization`.  
 They will automatically get _allowed roles_ defined in `AUTH_USER_DEFAULT_ALLOWED_ROLES` i.e., `user,me` and _default role_ defined in `AUTH_USER_DEFAULT_ROLE` i.e., `user`
 
-Optionally, additional higher roles can be added to user's _allowed roles_ by administrator (manager) by [Deligation](#deligation) UI.
+Optionally, additional higher roles can be added to user's _allowed roles_ by administrator (org:owner) by [Deligation](#deligation) UI.
 
 ### Service Accounts
 
@@ -105,6 +105,12 @@ await nhost.auth.signUp({
 })
 ```
 
+Current user's `allowed-roles` and `default-role` once they switch to an `Org` in multi-tenancy setup :
+
+> allowed roles = user roles (auth.user_roles) + org role (public.user_org_roles)
+
+> default role =  org role (public.user_org_roles)  =  user default role (auth.user)
+
 ### Set Role for GraphQL Requests
 
 When no role is specified, the user’s default role will be used:
@@ -131,10 +137,14 @@ await nhost.graphql.request(
 
 | Role       | Action | Permissions                                                                                                                           |
 | ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| org:member | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
+| user       | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
 | org:admin  | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
-| org:member | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
+| org:owner  | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| sys:admin  | select | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| user       | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}},{"created_by":{"_eq":"x-hasura-user-id"}}]} |
 | org:admin  | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| org:owner  | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
+| sys:admin  | update | {"_and":[{"deleted_at":{"_is_null":true}},{"organization":{"_eq":"x-hasura-default-org"}}]}                                           |
 
 > `delete` action is desable for most cases, as we do `soft-delete`
 
@@ -208,17 +218,17 @@ From this diagram, here are some info you need to know:
 
 ### Deligation
 
-**Deligation** is the process where higher role users can assign elevated roles (supervisor, manager) to other users via custom UI with in his/her default `Organization` or diffrent `Organization` with in multi-tenant deployment.
+**Deligation** is the process where higher role users can assign elevated roles (org:admin, org:owner) to other users via custom UI with in his/her default `Organization` or diffrent `Organization` with in multi-tenant deployment.
 
 > **Assumptions:** there will be `public.user_roles_orgs` table that manage `user-role` assignment for a give `Organization`
 
 #### Types of Deligation
 
-1. An administrator (with `manager` role) can add additional higher roles to existing user's `allowed_roles` in the same user's `default_org` and set it as user's `default_role`.
-   e.g., Administrator can promote a regular `user` role up to `supervisor` role with in the user's **default_org**, 1. by setting user's `default_role` as `supervisor` in `auth.users` table and 2. by adding `supervisor` role to `auth.user_roles` table. A databse trigger should also insert corresponding rows in `public.user_roles_orgs` with user's `default_org`.
-2. An administrator (with `manager` role) can also assign a role (up to `supervisor`) to existing user to **other** `Organizations` in `public.user_roles_orgs` table and set user's `allowed_roles` and `default_role` flag with that new `Organization` in `public.user_roles_orgs` table.
-3. To assign `manager` role to an user, set `default_role` as `manager` in `auth.users` and add `manager` role for that user in `auth.user_roles` table.
-   > Admin users will have exactly one `manager` role defined as `default_role` in their `default_org` in `auth.users` table.
+1. An administrator (with `org:owner` role) can add additional higher roles to existing user's `allowed_roles` in the same user's `default_org` and set it as user's `default_role`.
+   e.g., Administrator can promote a regular `user` role up to `org:admin` role with in the user's **default_org**, 1. by setting user's `default_role` as `org:admin` in `auth.users` table and 2. by adding `org:admin` role to `auth.user_roles` table. A databse trigger should also insert corresponding rows in `public.user_roles_orgs` with user's `default_org`.
+2. An administrator (with `org:owner` role) can also assign a role (up to `org:admin`) to existing user to **other** `Organizations` in `public.user_roles_orgs` table and set user's `allowed_roles` and `default_role` flag with that new `Organization` in `public.user_roles_orgs` table.
+3. To assign `org:owner` role to an user, set `default_role` as `org:owner` in `auth.users` and add `org:owner` role for that user in `auth.user_roles` table.
+   > Admin users will have exactly one `org:owner` role defined as `default_role` in their `default_org` in `auth.users` table.
 
 ## FAQ
 
@@ -227,9 +237,17 @@ From this diagram, here are some info you need to know:
 In some cases it is necessary to act **on behalf of** a user. While the **Auth** service doesn’t allow that it is not difficult to implement such functionality as a serverless function.  
 You can find an example of a function that can generate a valid access token for your application with customized values here: [Custom JWTs](https://docs.nhost.io/guides/auth/custom-jwts)
 
+## TODO
+
+- [FedCM](https://developer.mozilla.org/en-US/docs/Web/API/Credential_Management_API/Credential_types)
+
 ## Reference
 
 - [Authentication and authorization in multi-tenancy B2B scenarios](https://zitadel.com/docs/guides/solution-scenarios/b2b)
 - [user management in nhost](https://docs.nhost.io/guides/auth/users)
 - [Hasura Authentication Using JWTs](https://hasura.io/docs/latest/auth/authentication/jwt/)
 - [logto: Understand how organizations work](https://docs.logto.io/docs/recipes/organizations/understand-how-it-works/)
+- [FedCA](https://developer.mozilla.org/en-US/docs/Web/API/Credential_Management_API/Credential_types)
+- [Best Practices for Storing Access Tokens in the Browser](https://curity.medium.com/best-practices-for-storing-access-tokens-in-the-browser-6b3d515d9814)
+- [The Ultimate Guide to handling JWTs on frontend clients (GraphQL)](https://hasura.io/blog/best-practices-of-using-jwt-with-graphql)
+- [Permissions - Permissions with unrelated tables or views](https://hasura.io/docs/2.0/auth/authorization/permissions/row-level-permissions/#unrelated-tables-in-permissions)

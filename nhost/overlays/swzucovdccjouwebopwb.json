@@ -31,24 +31,6 @@
     ]
   },
   {
-    "op": "add",
-    "path": "/global/environment/2",
-    "value": {
-      "name": "TEST_ENV",
-      "value": "mytest"
-    }
-  },
-  {
-    "op": "replace",
-    "path": "/global/environment/0/value",
-    "value": "Spectacular"
-  },
-  {
-    "op": "replace",
-    "path": "/global/environment/1/value",
-    "value": "Spectacular Console App"
-  },
-  {
     "op": "replace",
     "path": "/hasura/settings/devMode",
     "value": false
@@ -62,14 +44,6 @@
     "op": "replace",
     "path": "/auth/session/accessToken/expiresIn",
     "value": 3600
-  },
-  {
-    "op": "remove",
-    "path": "/auth/user/email/allowed"
-  },
-  {
-    "op": "remove",
-    "path": "/auth/user/emailDomains/allowed"
   },
   {
     "op": "remove",

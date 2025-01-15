@@ -7,6 +7,14 @@ import {
 } from '$houdini';
 import { z } from 'zod';
 
+export const allowedMetadata = {
+  name: ['John', 'Jane', 'Alice', 'Bob'] as const,
+  age: [20, 25, 30, 35] as const,
+  active: [true, false] as const,
+  city: ['New York', 'Los Angeles', 'Chicago', 'Houston'] as const,
+  country: ['USA', 'Canada', 'UK', 'India'] as const,
+} as const;
+
 /**
  * Policy Schema
  */
@@ -28,10 +36,8 @@ export const policySchema = z.object({
     id: z.string().trim().uuid(),
     displayName: z.string().trim().min(4).max(256),
     description: z.string().trim().max(256).nullish(),
-    tags: z.string().trim().min(2).array().max(5).default([]),
-    // annotations: z.preprocess(stringToJSON, z.record(z.string().trim().min(3), z.string().trim().min(3)).nullish()),
-    // annotations: z.preprocess(stringToMap, z.map(z.string().trim().min(3), z.string().trim().min(3))).nullish(),
-    annotations: z.string().trim().nullish(), // TODO: validate map string
+    tags: z.string().trim().min(2).array().max(5).nullish(),
+    metadata: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).nullish(),
     source: z.string().ip().nullish(),
     sourcePort: z.string().trim().nullish(),
     destination: z.string().ip().nullish(),

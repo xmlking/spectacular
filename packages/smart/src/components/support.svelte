@@ -1,7 +1,7 @@
 <script lang="ts">
-import { Wifi, Sparkles, Chrome, Languages } from 'lucide-svelte';
-import { onDestroy, onMount } from 'svelte';
 import type { ai as AI } from '@aibrow/dom-types';
+import { Chrome, Languages, Sparkles, Wifi } from 'lucide-svelte';
+import { onDestroy, onMount } from 'svelte';
 import { checkAibrowInstalled, getAiBrow, isPolyfilledAI, isPolyfilledTranslation, printAIStats } from './smart.js';
 
 let chromeAISupported = false;

@@ -1,8 +1,8 @@
 <script lang="ts">
-import MultiLineChart from './components/multi-line-chart.svelte';
-import NetworkGraph from './components/network.svelte';
 import DagreGraph from './components/dagre.svelte';
 import LayeredGraphLayout from './components/layered-graph-layout.svelte';
+import MultiLineChart from './components/multi-line-chart.svelte';
+import NetworkGraph from './components/network.svelte';
 import StackedAreaChart from './components/stacked-area-chart.svelte';
 </script>
 

@@ -1,15 +1,15 @@
 <script lang="ts">
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import * as Smart from '@spectacular/smart';
+import { SPECIALIZATIONS } from '$lib/constants.js';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
+import * as Smart from '@spectacular/smart';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { SPECIALIZATIONS } from '$lib/constants.js';
 import { aiSchema } from './schema.js';
 
 const log = new Logger('ai:smart:browser');

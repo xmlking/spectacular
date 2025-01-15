@@ -11,13 +11,15 @@ export const load = loadFlash(
       nhost,
     },
   }) => {
+    const claims = nhost.auth.getHasuraClaims();
     log.debug(lang, textDirection);
-    const session = nhost.auth.getSession();
-
     // pass locale information from "server-context" to "shared server + client context"
     return {
       vercelEnv: secrets.VERCEL_ENV ?? 'development',
-      session,
+      // HINT: svelte pages and components can access them from anyware via '$page.data.userId' etc
+      userId: claims?.['x-hasura-user-id'],
+      orgId: claims?.['x-hasura-default-org'],
+      role: claims?.['x-hasura-default-role'],
     };
   },
 );

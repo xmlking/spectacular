@@ -1,11 +1,36 @@
 <script lang="ts">
 // NOTE: from https://swapy.tahazsh.com/
 // TODO: Drag-and-Drop Dashboard https://github.com/olliethedev/dnd-dashboard
-import { onMount } from 'svelte';
-import { persisted } from 'svelte-persisted-store';
-import { createSwapy } from 'swapy';
+import { onDestroy, onMount } from 'svelte';
+// import { persisted } from 'svelte-persisted-store';
+import { type Swapy, createSwapy } from 'swapy';
+import { fragment, graphql, type WelcomeUserFragment } from '$houdini';
+import type { PageData } from './$houdini';
+
+export let data: PageData;
+let { AppLayout } = data;
+let user: WelcomeUserFragment;
+
+// Reactivity
+$: ({ AppLayout } = data);
+$: if ($AppLayout?.data?.user) {
+  user = $AppLayout?.data?.user;
+}
+$: fragmentData = fragment(
+  user,
+  graphql(`
+      fragment WelcomeUserFragment on users {
+        displayName
+        currentOrg {
+          displayName
+        },
+        defaultRole
+      }
+    `),
+);
 
 let container: HTMLDivElement;
+let swapy: Swapy;
 
 /*
   const DEFAULT = {
@@ -27,7 +52,7 @@ let container: HTMLDivElement;
 
 onMount(() => {
   if (container) {
-    const swapy = createSwapy(container, {
+    swapy = createSwapy(container, {
       animation: 'dynamic', // or spring or none
     });
 
@@ -35,12 +60,11 @@ onMount(() => {
     //   console.log({ data: data.object });
     //   slotItems.set(data.object);
     // });
-
-    // cleanup after onDestroy
-    return () => {
-      swapy.enable(false);
-    };
   }
+});
+onDestroy(() => {
+  // Destroy the swapy instance on component destroy
+  swapy?.destroy();
 });
 </script>
 
@@ -53,6 +77,7 @@ onMount(() => {
   <section class="space-y-4">
     <h1 class="h1">Dashboard</h1>
     <p>Stats, Reports, Metrics</p>
+    <p class="text-xl font-semiblod md:text-2xl">Welcome <strong>{$fragmentData?.displayName}</strong> to <strong class="uppercase">{$fragmentData?.currentOrg?.displayName ?? 'no org'}</strong>, Your Role <strong class="uppercase">{$fragmentData?.defaultRole}</strong></p>
   </section>
 
   <section class="space-y-4">
@@ -80,7 +105,9 @@ onMount(() => {
 
   <section class="space-y-4">
     <h2 class="h2">Metrics Gallery</h2>
-    <p>Show metrics at a glance. you can rearrange the widgets by drag and drop</p>
+    <p>
+      Show metrics at a glance. you can rearrange the widgets by drag and drop
+    </p>
 
     <div
       class="grid grid-cols-3 gap-4 font-mono text-white text-sm text-center font-bold leading-6"
@@ -105,9 +132,8 @@ onMount(() => {
       <div data-swapy-slot="3">
         <div
           data-swapy-item="c"
-          class="p-4 rounded-lg bg-orange-300 dark:bg-orange-800 dark:text-orange-400"
+          class="p-4 rounded-lg bg-lime-300 dark:bg-lime-800 dark:text-lime-400 cursor-move"
         >
-          <div class="handle cursor-move" data-swapy-handle></div>
           <div>03</div>
         </div>
       </div>
@@ -147,13 +173,3 @@ onMount(() => {
   </section>
 </div>
 
-<style lang="postcss">
-  .handle {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 20px;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-  }
-</style>

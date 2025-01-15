@@ -2,6 +2,7 @@
 // import '@fontsource-variable/inter';
 // import '@fontsource/source-code-pro';
 import '@styles/tailwind.css';
+import { ClientRouter } from 'astro:transitions';
 import AppFooter from '@components/app-footer.astro';
 import AppHeader from '@components/app-header.astro';
 import { SEO } from 'astro-seo';
@@ -49,6 +50,7 @@ const { title } = Astro.props;
         },
       }}
     />
+    <ClientRouter />
   </head>
   <ModeWatcher />
   <body class="bg-white dark:bg-gray-900">

@@ -1,43 +1,41 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  onMount(() => {
-    // The page is ready.
-    console.log("chat mounted");
-    const assistant = document.querySelector("msc-ai-assistant");
-    assistant?.show(); // toggle(force)
-  });
+import { onMount } from 'svelte';
+onMount(() => {
+  // The page is ready.
+  console.log('chat mounted');
+  const assistant = document.querySelector('msc-ai-assistant');
+  assistant?.show(); // toggle(force)
+});
 
-  const mappings = {
-    "front-end-expert": {
-      prompts:
-        "You are a front-end engineer and very good at CSS, HTML and JavaScript.",
-      subject: "AI Assistant (front-end)",
-    },
-    "top-sales": {
-      prompts:
-        "You are a top sales and very good at product consulting. You are also good at rewriting product information and make them more vivid.",
-      subject: "AI Assistant (top sales)",
-    },
-    translator: {
-      prompts:
-        "You are a translator and very good at translate English to Traditional Chinese or Traditional Chinese to English.",
-      subject: "AI Assistant (translator)",
-    },
-    writer: {
-      prompts:
-        "You are a writer and very good at rewriting article and make them more vivid.",
-      subject: "AI Assistant (writer)",
-    },
-    gamer: {
-      prompts:
-        "You are a gamer and very good at playing PC games and video games. You also know to all games' background and stories.",
-      subject: "AI Assistant (gamer)",
-    },
-    none: {
-      prompts: "",
-      subject: "AI Assistant",
-    },
-  };
+const mappings = {
+  'front-end-expert': {
+    prompts: 'You are a front-end engineer and very good at CSS, HTML and JavaScript.',
+    subject: 'AI Assistant (front-end)',
+  },
+  'top-sales': {
+    prompts:
+      'You are a top sales and very good at product consulting. You are also good at rewriting product information and make them more vivid.',
+    subject: 'AI Assistant (top sales)',
+  },
+  translator: {
+    prompts:
+      'You are a translator and very good at translate English to Traditional Chinese or Traditional Chinese to English.',
+    subject: 'AI Assistant (translator)',
+  },
+  writer: {
+    prompts: 'You are a writer and very good at rewriting article and make them more vivid.',
+    subject: 'AI Assistant (writer)',
+  },
+  gamer: {
+    prompts:
+      "You are a gamer and very good at playing PC games and video games. You also know to all games' background and stories.",
+    subject: 'AI Assistant (gamer)',
+  },
+  none: {
+    prompts: '',
+    subject: 'AI Assistant',
+  },
+};
 </script>
 
 <svelte:head>

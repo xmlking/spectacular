@@ -1,21 +1,30 @@
 <script lang="ts">
-import { PendingValue, type SearchPolicies$result, graphql } from '$houdini';
+import {
+  type DeletePolicy$result,
+  type DeleteRule$result,
+  PendingValue,
+  type SearchPolicies$result,
+  cache,
+  fragment,
+  graphql,
+  type SearchPoliciesFragment,
+} from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '@spectacular/skeleton/components';
 import * as Table from '@spectacular/skeleton/components/table';
-import { Logger, sleep } from '@spectacular/utils';
-import { DataHandler, type Row, check } from '@vincjo/datatables';
+import { Logger } from '@spectacular/utils';
+import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
+import { message } from 'sveltekit-superforms';
+import { DeletePolicy, DeleteRule } from '../mutations';
 
 const log = new Logger('policies:search-results:browser');
 // Variables
-export let data: SearchPolicies$result;
-let { policies } = data;
-$: ({ policies } = data);
+export let policies: SearchPolicies$result['policies'];
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -28,49 +37,54 @@ const rows = handler.getRows();
 // Functions
 /**
  * Delete Polcy action
+ * FIXME: Cache bust: `policies {id @policies_delete }` is empty !!!
  */
 let isDeleting = false;
-const deletePolicy = graphql(`
-    mutation DeletePolicy(
-      $policyId: uuid!
-      $ruleId: uuid!
-      $deletedAt: timestamptz!
-    ) {
-      update_policies_by_pk(
-        pk_columns: { id: $policyId }
-        _set: { deletedAt: $deletedAt }
-      ) {
-        id
-        ...Search_Policies_remove
-      }
-      update_rules(
-        where: { shared: { _eq: false }, id: { _eq: $ruleId } }
-        _set: { deletedAt: $deletedAt }
-      ) {
-        affected_rows
-        # ...Search_Rules_remove
-      }
-    }
-  `);
+
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { policyId, ruleId, displayName } = event.currentTarget.dataset;
-  if (!policyId || !ruleId || !displayName) {
+  const { id, ruleId, ruleShared, displayName } = event.currentTarget.dataset;
+  if (!id || !ruleId || !displayName) {
     log.error('Misconfiguration: did you mess adding `data-id/data-rule-id/data-display-name` attributes?');
     return;
   }
   // before
   isDeleting = true;
-  await sleep(1300);
-  const deletedAt = new Date();
-  const { data, errors: gqlErrors } = await deletePolicy.mutate({
-    policyId,
-    ruleId,
-    deletedAt,
-  });
-  if (gqlErrors) {
+  let deletedId: string | undefined;
+  let message: string | undefined;
+  let error: string | undefined;
+  // Delete role if not shared, this will cascade delete the policy as well.
+  if (ruleShared === 'false') {
+    const { data, errors: gqlErrors } = await DeleteRule.mutate({
+      id: ruleId,
+    });
+    // TODO: `policyId @policies_delete` ???
+    // WORKAROUND: Manuvally delete the policy from cache as policy is deleted via cascade by database when parent `rule` is deleted.
+    const policy = cache.get('policies', { id });
+    policy.delete();
+
+    if (gqlErrors) {
+      error = `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `;
+    } else {
+      message = `Policy and associated rule: "${displayName}" deleted`;
+      deletedId = data?.delete_rules_by_pk?.id;
+    }
+  } else {
+    const { data, errors: gqlErrors } = await DeletePolicy.mutate({
+      id,
+    });
+
+    if (gqlErrors) {
+      error = `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `;
+    } else {
+      message = `Policy "${displayName}" deleted`;
+      deletedId = data?.delete_policies_by_pk?.id;
+    }
+  }
+
+  if (error) {
     handleMessage(
       {
-        message: `Error deleteing policy: "${displayName}", cause: ${gqlErrors[0].message} `,
+        message: error,
         hideDismiss: false,
         timeout: 10000,
         type: 'error',
@@ -79,20 +93,11 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
     );
     return;
   }
-  if (data?.update_policies_by_pk && data?.update_rules?.affected_rows) {
+
+  if (deletedId && message) {
     handleMessage(
       {
-        message: `Policy and associated rule: "${displayName}" deleted`,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'success',
-      },
-      toastStore,
-    );
-  } else if (data?.update_policies_by_pk) {
-    handleMessage(
-      {
-        message: `Policy "${displayName}" deleted`,
+        message,
         hideDismiss: false,
         timeout: 10000,
         type: 'success',
@@ -102,7 +107,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   } else {
     handleMessage(
       {
-        message: `Policy not found for ID: ${policyId}`,
+        message: `Policy not found for ID: ${id}`,
         hideDismiss: false,
         timeout: 50000,
         type: 'error',
@@ -202,8 +207,9 @@ $: loadingState.setFormLoading(isDeleting);
                 <button
                   type="button"
                   class="btn-icon btn-icon-sm variant-filled-error"
-                  data-policy-id={row.id}
+                  data-id={row.id}
                   data-rule-id={row.rule.id}
+                  data-rule-shared={row.rule.shared}
                   data-display-name={row.rule.displayName}
                   on:click|stopPropagation|capture={handleDelete}
                   disabled={isDeleting}

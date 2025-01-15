@@ -9,12 +9,12 @@ configuration:
       custom_name: createdAt
     created_by:
       custom_name: createdBy
-    deleted_at:
-      custom_name: deletedAt
     destination_port:
       custom_name: destinationPort
     display_name:
       custom_name: displayName
+    org_id:
+      custom_name: orgId
     source_port:
       custom_name: sourcePort
     throttle_rate:
@@ -27,55 +27,39 @@ configuration:
     app_id: appId
     created_at: createdAt
     created_by: createdBy
-    deleted_at: deletedAt
     destination_port: destinationPort
     display_name: displayName
+    org_id: orgId
     source_port: sourcePort
     throttle_rate: throttleRate
     updated_at: updatedAt
     updated_by: updatedBy
   custom_root_fields: {}
+array_relationships:
+  - name: policies
+    using:
+      foreign_key_constraint_on:
+        column: rule_id
+        table:
+          name: policies
+          schema: public
 insert_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       check: {}
       set:
         created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
         updated_by: x-hasura-user-id
       columns:
         - action
-        - annotations
-        - app_id
-        - created_by
-        - description
-        - destination
-        - destination_port
-        - direction
-        - display_name
-        - organization
-        - protocol
-        - shared
-        - source
-        - source_port
-        - tags
-        - throttle_rate
-        - weight
-  - role: supervisor
-    permission:
-      check: {}
-      set:
-        created_by: x-hasura-user-id
-        organization: x-hasura-default-org
-        updated_by: x-hasura-user-id
-      columns:
-        - action
-        - annotations
         - app_id
         - description
         - destination
         - destination_port
         - direction
         - display_name
+        - metadata
         - protocol
         - shared
         - source
@@ -84,136 +68,48 @@ insert_permissions:
         - throttle_rate
         - weight
     comment: ""
-  - role: user
-    permission:
-      check: {}
-      set:
-        created_by: x-hasura-user-id
-        organization: x-hasura-default-org
-        updated_by: x-hasura-user-id
-      columns:
-        - action
-        - annotations
-        - app_id
-        - description
-        - destination
-        - destination_port
-        - direction
-        - display_name
-        - protocol
-        - shared
-        - source
-        - source_port
-        - tags
-        - throttle_rate
-        - weight
 select_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
+        - tags
+        - shared
+        - metadata
+        - weight
         - action
-        - annotations
         - app_id
-        - created_at
-        - created_by
         - description
         - destination
         - destination_port
         - direction
         - display_name
-        - id
-        - organization
         - protocol
-        - shared
         - source
         - source_port
-        - tags
         - throttle_rate
-        - updated_at
-        - updated_by
-        - weight
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-  - role: supervisor
-    permission:
-      columns:
-        - action
-        - annotations
-        - app_id
         - created_at
-        - created_by
-        - description
-        - destination
-        - destination_port
-        - direction
-        - display_name
-        - id
-        - organization
-        - protocol
-        - shared
-        - source
-        - source_port
-        - tags
-        - throttle_rate
         - updated_at
-        - updated_by
-        - weight
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _eq: x-hasura-default-org
-  - role: user
-    permission:
-      columns:
-        - action
-        - annotations
-        - app_id
-        - created_at
         - created_by
-        - description
-        - destination
-        - destination_port
-        - direction
-        - display_name
         - id
-        - organization
-        - protocol
-        - shared
-        - source
-        - source_port
-        - tags
-        - throttle_rate
-        - updated_at
+        - org_id
         - updated_by
-        - weight
       filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-          - created_by:
-              _eq: x-hasura-user-id
+        org_id:
+          _eq: x-hasura-default-org
+      allow_aggregations: true
+    comment: ""
 update_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
         - action
-        - annotations
         - app_id
-        - deleted_at
         - description
         - destination
         - destination_port
         - direction
         - display_name
-        - organization
+        - metadata
         - protocol
         - shared
         - source
@@ -222,70 +118,16 @@ update_permissions:
         - throttle_rate
         - weight
       filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-      check: {}
-      set:
-        updated_by: x-hasura-user-id
-  - role: supervisor
-    permission:
-      columns:
-        - action
-        - annotations
-        - app_id
-        - deleted_at
-        - description
-        - destination
-        - destination_port
-        - direction
-        - display_name
-        - protocol
-        - shared
-        - source
-        - source_port
-        - tags
-        - throttle_rate
-        - weight
-      filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _eq: x-hasura-default-org
+        org_id:
+          _eq: x-hasura-default-org
       check: null
       set:
         updated_by: x-hasura-user-id
     comment: ""
-  - role: user
+delete_permissions:
+  - role: org:admin
     permission:
-      columns:
-        - action
-        - annotations
-        - app_id
-        - deleted_at
-        - description
-        - destination
-        - destination_port
-        - direction
-        - display_name
-        - protocol
-        - shared
-        - source
-        - source_port
-        - tags
-        - throttle_rate
-        - weight
       filter:
-        _and:
-          - deleted_at:
-              _is_null: true
-          - organization:
-              _in: x-hasura-allowed-orgs
-          - created_by:
-              _eq: x-hasura-user-id
-      check: {}
-      set:
-        updated_by: x-hasura-user-id
+        org_id:
+          _eq: x-hasura-default-org
+    comment: ""

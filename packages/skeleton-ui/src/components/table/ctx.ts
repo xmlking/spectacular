@@ -1,4 +1,4 @@
-import type { DataHandler, Row } from '@vincjo/datatables';
+import type { DataHandler, Row } from '@vincjo/datatables/legacy';
 import { getContext, setContext } from 'svelte';
 
 const DATA_HANDLER = Symbol('DATA_HANDLER');

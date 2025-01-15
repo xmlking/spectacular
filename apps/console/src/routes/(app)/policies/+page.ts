@@ -1,12 +1,12 @@
 import { order_by } from '$houdini';
 import { policySearchSchema } from '$lib/schema/policy';
-import { Logger, sleep } from '@spectacular/utils';
+import { Logger } from '@spectacular/utils';
 import { error, fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { BeforeLoadEvent, SearchPoliciesVariables as Variables } from './$houdini';
 
-const log = new Logger('policies:search-ts:browser');
+const log = new Logger('policies:search:browser');
 /**
  * Note: `_houdini_beforeLoad` run first, then `_SearchPoliciesVariables` then load GQL
  */

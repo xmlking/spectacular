@@ -1,6 +1,6 @@
 import type { ai } from '@aibrow/dom-types';
-import { readable } from 'svelte/store';
 import { IsSupported } from 'runed';
+import { readable } from 'svelte/store';
 
 type AI = typeof ai;
 /**
@@ -143,10 +143,7 @@ export function createStreamStore(stream: ReadableStream<string>) {
   });
 }
 
-export function languageTagToHumanReadable(
-  languageTag: Intl.UnicodeBCP47LocaleIdentifier,
-  targetLanguage: string = 'en-US',
-) {
+export function languageTagToHumanReadable(languageTag: Intl.UnicodeBCP47LocaleIdentifier, targetLanguage = 'en-US') {
   const displayNames = new Intl.DisplayNames([targetLanguage], { type: 'language' });
   return displayNames.of(languageTag);
 }

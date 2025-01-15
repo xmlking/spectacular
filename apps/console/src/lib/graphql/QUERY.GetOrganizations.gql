@@ -1,8 +1,0 @@
-query GetOrganizations @cache(policy: NetworkOnly) {
-  organizations {
-    allowedEmailDomains
-    allowedEmails
-    description
-    organization
-  }
-}
