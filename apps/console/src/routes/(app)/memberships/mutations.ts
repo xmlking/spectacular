@@ -3,15 +3,14 @@ import { graphql } from '$houdini';
 export const CreateMembership = graphql(`
     mutation CreateMembership($data: memberships_insert_input!) {
       insert_memberships_one(object: $data) {
-        role
-        # ...Search_Memberships_incert
+        ...Search_Memberships_insert @prepend
       }
     }
   `);
 
 export const UpdateMembership = graphql(`
-    mutation UpdateMembership($orgId: uuid!, $userId: uuid!, $data: memberships_set_input!) {
-      update_memberships_by_pk(pk_columns: {orgId: $orgId, userId: $userId}, _set: $data) {
+    mutation UpdateMembership($orgId: uuid!, $userId: uuid!, $role: String!) {
+      update_memberships_by_pk(pk_columns: {orgId: $orgId, userId: $userId}, _set: { role: $role }) {
         orgId
         userId
         role
@@ -19,11 +18,10 @@ export const UpdateMembership = graphql(`
     }
   `);
 
-export const DeleteeMembership = graphql(`
-    mutation DeleteeMembership($orgId: uuid!, $userId: uuid!) {
+export const DeleteMembership = graphql(`
+    mutation DeleteMembership($orgId: uuid!, $userId: uuid!) {
        delete_memberships_by_pk(orgId: $orgId, userId: $userId) {
-        role
-        # ...Search_Memberships_remove
+        ...Search_Memberships_remove
       }
     }
   `);

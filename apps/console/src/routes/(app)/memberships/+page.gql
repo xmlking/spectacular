@@ -1,23 +1,13 @@
 query Memberships($id: OrgIdFromSession!) {
-  memberships(where: { orgId: { _eq: $id } }) {
-    user {
-      id
-      displayName
-    }
+  memberships(where: { orgId: { _eq: $id } })@list(name: "Search_Memberships") {
+    userId
+    orgId
     role
     updatedAt
+    user {
+      displayName
+      avatarUrl
+      email
+    }
   }
 }
-
-# query OrgMemberships($id: OrgIdFromSession!) {
-#   organizations_by_pk(id: $id) {
-#     memberships {
-#       user {
-#         id
-#         displayName
-#       }
-#       role
-#       updatedAt
-#     }
-#   }
-# }
