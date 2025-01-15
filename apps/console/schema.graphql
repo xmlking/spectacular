@@ -2143,6 +2143,204 @@ input groups_updates {
   where: groups_bool_exp!
 }
 
+"""Table containing invitations for non-org members to join an org."""
+type invitations {
+  createdAt: timestamptz!
+  createdBy: uuid!
+  email: citext!
+  orgId: uuid!
+
+  """An object relationship"""
+  organization: organizations!
+  role: String!
+  updatedAt: timestamptz!
+  updatedBy: uuid!
+}
+
+"""
+aggregated selection of "invitations"
+"""
+type invitations_aggregate {
+  aggregate: invitations_aggregate_fields
+  nodes: [invitations!]!
+}
+
+"""
+aggregate fields of "invitations"
+"""
+type invitations_aggregate_fields {
+  count(columns: [invitations_select_column!], distinct: Boolean): Int!
+  max: invitations_max_fields
+  min: invitations_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "invitations". All fields are combined with a logical 'AND'.
+"""
+input invitations_bool_exp {
+  _and: [invitations_bool_exp!]
+  _not: invitations_bool_exp
+  _or: [invitations_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  createdBy: uuid_comparison_exp
+  email: citext_comparison_exp
+  orgId: uuid_comparison_exp
+  organization: organizations_bool_exp
+  role: String_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "invitations"
+"""
+enum invitations_constraint {
+  """
+  unique or primary key constraint on columns "email", "org_id"
+  """
+  invitations_pkey
+}
+
+"""
+input type for inserting data into table "invitations"
+"""
+input invitations_insert_input {
+  email: citext
+  organization: organizations_obj_rel_insert_input
+  role: String
+}
+
+"""aggregate max on columns"""
+type invitations_max_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  email: citext
+  orgId: uuid
+  role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""aggregate min on columns"""
+type invitations_min_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  email: citext
+  orgId: uuid
+  role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""
+response of any mutation on the table "invitations"
+"""
+type invitations_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [invitations!]!
+}
+
+"""
+on_conflict condition type for table "invitations"
+"""
+input invitations_on_conflict {
+  constraint: invitations_constraint!
+  update_columns: [invitations_update_column!]! = []
+  where: invitations_bool_exp
+}
+
+"""Ordering options when selecting data from "invitations"."""
+input invitations_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  email: order_by
+  orgId: order_by
+  organization: organizations_order_by
+  role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+}
+
+"""primary key columns input for table: invitations"""
+input invitations_pk_columns_input {
+  email: citext!
+  orgId: uuid!
+}
+
+"""
+select columns of table "invitations"
+"""
+enum invitations_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  createdBy
+
+  """column name"""
+  email
+
+  """column name"""
+  orgId
+
+  """column name"""
+  role
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  updatedBy
+}
+
+"""
+input type for updating data in table "invitations"
+"""
+input invitations_set_input {
+  role: String
+}
+
+"""
+Streaming cursor of the table "invitations"
+"""
+input invitations_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: invitations_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input invitations_stream_cursor_value_input {
+  createdAt: timestamptz
+  createdBy: uuid
+  email: citext
+  orgId: uuid
+  role: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""
+update columns of table "invitations"
+"""
+enum invitations_update_column {
+  """column name"""
+  role
+}
+
+input invitations_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: invitations_set_input
+
+  """filter the rows which have to be updated"""
+  where: invitations_bool_exp!
+}
+
 scalar jsonb
 
 input jsonb_cast_exp {
@@ -2546,6 +2744,19 @@ type mutation_root {
   delete_groups_by_pk(id: uuid!): groups
 
   """
+  delete data from the table: "invitations"
+  """
+  delete_invitations(
+    """filter the rows which have to be deleted"""
+    where: invitations_bool_exp!
+  ): invitations_mutation_response
+
+  """
+  delete single row from the table: "invitations"
+  """
+  delete_invitations_by_pk(email: citext!, orgId: uuid!): invitations
+
+  """
   delete data from the table: "memberships"
   """
   delete_memberships(
@@ -2701,6 +2912,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: groups_on_conflict
   ): groups
+
+  """
+  insert data into the table: "invitations"
+  """
+  insert_invitations(
+    """the rows to be inserted"""
+    objects: [invitations_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: invitations_on_conflict
+  ): invitations_mutation_response
+
+  """
+  insert a single row into the table: "invitations"
+  """
+  insert_invitations_one(
+    """the row to be inserted"""
+    object: invitations_insert_input!
+
+    """upsert condition"""
+    on_conflict: invitations_on_conflict
+  ): invitations
 
   """
   insert data into the table: "memberships"
@@ -3057,6 +3290,34 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [groups_updates!]!
   ): [groups_mutation_response]
+
+  """
+  update data of the table: "invitations"
+  """
+  update_invitations(
+    """sets the columns of the filtered rows to the given values"""
+    _set: invitations_set_input
+
+    """filter the rows which have to be updated"""
+    where: invitations_bool_exp!
+  ): invitations_mutation_response
+
+  """
+  update single row of the table: "invitations"
+  """
+  update_invitations_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: invitations_set_input
+    pk_columns: invitations_pk_columns_input!
+  ): invitations
+
+  """
+  update multiples rows of table: "invitations"
+  """
+  update_invitations_many(
+    """updates to execute, in order"""
+    updates: [invitations_updates!]!
+  ): [invitations_mutation_response]
 
   """
   update data of the table: "memberships"
@@ -6089,6 +6350,49 @@ type query_root {
   """fetch data from the table: "groups" using primary key columns"""
   groups_by_pk(id: uuid!): groups
 
+  """
+  fetch data from the table: "invitations"
+  """
+  invitations(
+    """distinct select on columns"""
+    distinct_on: [invitations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [invitations_order_by!]
+
+    """filter the rows returned"""
+    where: invitations_bool_exp
+  ): [invitations!]!
+
+  """
+  fetch aggregated fields from the table: "invitations"
+  """
+  invitations_aggregate(
+    """distinct select on columns"""
+    distinct_on: [invitations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [invitations_order_by!]
+
+    """filter the rows returned"""
+    where: invitations_bool_exp
+  ): invitations_aggregate!
+
+  """fetch data from the table: "invitations" using primary key columns"""
+  invitations_by_pk(email: citext!, orgId: uuid!): invitations
+
   """An array relationship"""
   memberships(
     """distinct select on columns"""
@@ -8335,6 +8639,63 @@ type subscription_root {
     """filter the rows returned"""
     where: groups_bool_exp
   ): [groups!]!
+
+  """
+  fetch data from the table: "invitations"
+  """
+  invitations(
+    """distinct select on columns"""
+    distinct_on: [invitations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [invitations_order_by!]
+
+    """filter the rows returned"""
+    where: invitations_bool_exp
+  ): [invitations!]!
+
+  """
+  fetch aggregated fields from the table: "invitations"
+  """
+  invitations_aggregate(
+    """distinct select on columns"""
+    distinct_on: [invitations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [invitations_order_by!]
+
+    """filter the rows returned"""
+    where: invitations_bool_exp
+  ): invitations_aggregate!
+
+  """fetch data from the table: "invitations" using primary key columns"""
+  invitations_by_pk(email: citext!, orgId: uuid!): invitations
+
+  """
+  fetch data from the table in a streaming manner: "invitations"
+  """
+  invitations_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [invitations_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: invitations_bool_exp
+  ): [invitations!]!
 
   """An array relationship"""
   memberships(
