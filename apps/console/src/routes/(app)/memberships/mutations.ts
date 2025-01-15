@@ -9,8 +9,8 @@ export const CreateMembership = graphql(`
   `);
 
 export const UpdateMembership = graphql(`
-    mutation UpdateMembership($orgId: uuid!, $userId: uuid!, $data: memberships_set_input!) {
-      update_memberships_by_pk(pk_columns: {orgId: $orgId, userId: $userId}, _set: $data) {
+    mutation UpdateMembership($orgId: uuid!, $userId: uuid!, $role: String!) {
+      update_memberships_by_pk(pk_columns: {orgId: $orgId, userId: $userId}, _set: { role: $role }) {
         orgId
         userId
         role
@@ -19,7 +19,7 @@ export const UpdateMembership = graphql(`
   `);
 
 export const DeleteMembership = graphql(`
-    mutation DeleteeMembership($orgId: OrgIdFromSession!, $userId: uuid!) {
+    mutation DeleteMembership($orgId: uuid!, $userId: uuid!) {
        delete_memberships_by_pk(orgId: $orgId, userId: $userId) {
         ...Search_Memberships_remove
       }

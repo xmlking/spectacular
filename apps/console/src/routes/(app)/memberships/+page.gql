@@ -1,12 +1,13 @@
 query Memberships($id: OrgIdFromSession!) {
   memberships(where: { orgId: { _eq: $id } })@list(name: "Search_Memberships") {
+    userId
+    orgId
+    role
+    updatedAt
     user {
-      id
       displayName
       avatarUrl
       email
     }
-    role
-    updatedAt
   }
 }

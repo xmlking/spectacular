@@ -4,9 +4,7 @@
   import { loaded } from "$lib/graphql/loading";
   import { getLoadingState } from "$lib/stores/loading";
   import { getToastStore } from "@skeletonlabs/skeleton";
-  import { DateTime } from "@spectacular/skeleton/components";
-  import * as Table from "@spectacular/skeleton/components/table";
-  import { Logger, sleep } from "@spectacular/utils";
+  import { Logger } from "@spectacular/utils";
   import { invalidate } from "$app/navigation";
   import { DataHandler, type Row, check } from "@vincjo/datatables/legacy";
   import {
@@ -47,9 +45,8 @@
   let isDeleting = false;
 
   const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-    const { userId, dispalyName } = event.currentTarget.dataset;
+    const { userId, orgId, userDisplayName } = event.currentTarget.dataset;
     console.log(event.currentTarget.dataset);
-    const orgId = nhost.auth.getHasuraClaims()?.["x-hasura-default-org"] || "";
     if (!userId) {
       log.error(
         "Misconfiguration: did you mess adding `data-user-id` attributes?",
@@ -65,7 +62,7 @@
     if (gqlErrors) {
       handleMessage(
         {
-          message: `Error deleteing Membership : "${dispalyName}", cause: ${gqlErrors[0].message} `,
+          message: `Error deleting Membership : "${userDisplayName}", cause: ${gqlErrors[0].message} `,
           hideDismiss: false,
           timeout: 10000,
           type: "error",
@@ -73,10 +70,11 @@
         toastStore,
       );
       return;
-    } else if (data?.delete_memberships_by_pk) {
+    }
+    if (data?.delete_memberships_by_pk) {
       handleMessage(
         {
-          message: `<p class="text-xl">Memebership : <span class="text-red-500 font-bold">${dispalyName}</span> deleted</p>`,
+          message: `<p class="text-xl">Memebership : <span class="text-red-500 font-bold">${userDisplayName}</span> deleted</p>`,
           hideDismiss: false,
           timeout: 1000,
           type: "success",
@@ -86,7 +84,7 @@
     } else {
       handleMessage(
         {
-          message: `Membership not found for : ${dispalyName}`,
+          message: `Membership not found for : ${userDisplayName}`,
           hideDismiss: false,
           timeout: 50000,
           type: "error",
@@ -94,7 +92,7 @@
         toastStore,
       );
     }
-    invalidate(() => true);
+    await invalidate(() => true);
     // after
     isDeleting = false;
   };
@@ -102,29 +100,29 @@
    * Update MemberShip role action
    */
 
-  const handleupdateRole: MouseEventHandler<HTMLButtonElement> = async (
+  const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (
     event,
   ) => {
-    const { userId, role, dispalyName } = event.currentTarget.dataset;
+    const { orgId, userId, role, userDisplayName } = event.currentTarget.dataset;
     console.log(event.currentTarget.dataset);
-    const orgId = nhost.auth.getHasuraClaims()?.["x-hasura-default-org"] || "";
-    if (!userId) {
+    if (!orgId || !userId || !role) {
       log.error(
-        "Misconfiguration: did you mess adding `data-user-id` attributes?",
+        "Misconfiguration: did you miss adding `data-org-id` `data-user-id` `data-role` attributes?",
       );
       return;
     }
+
     // before
     isDeleting = true;
     const { data, errors: gqlErrors } = await UpdateMembership.mutate({
       orgId,
       userId,
-      data: { role },
+      role,
     });
     if (gqlErrors) {
       handleMessage(
         {
-          message: `Error while updating membership: "${dispalyName}", cause: ${gqlErrors[0].message} `,
+          message: `Error while updating membership for: "${userDisplayName}", cause: ${gqlErrors[0].message} `,
           hideDismiss: false,
           timeout: 10000,
           type: "error",
@@ -132,10 +130,11 @@
         toastStore,
       );
       return;
-    } else if (data?.update_memberships_by_pk) {
+    }
+    if (data?.update_memberships_by_pk) {
       handleMessage(
         {
-          message: `<p class="text-xl">Membership : <span class="text-red-500 font-bold">${dispalyName}</span> role successfully updated to <span class="text-red-500 font-bold">${role}</span></p>`,
+          message: `<p class="text-xl">Membership : <span class="text-red-500 font-bold">${userDisplayName}</span> role successfully updated to <span class="text-red-500 font-bold">${role}</span></p>`,
           hideDismiss: false,
           timeout: 10000,
           type: "success",
@@ -145,7 +144,7 @@
     } else {
       handleMessage(
         {
-          message: `Membership not found for : ${dispalyName}`,
+          message: `Membership not found for : ${userDisplayName}`,
           hideDismiss: false,
           timeout: 50000,
           type: "error",
@@ -156,7 +155,7 @@
     // after
     isDeleting = false;
   };
-  let showActionsFor: String = "";
+  let showActionsFor = "";
   // Reactivity
   $: loadingState.setFormLoading(isDeleting);
 </script>
@@ -195,7 +194,7 @@
                 (showActionsFor =
                   showActionsFor === member.user.id ? "" : member.user.id)}
               class="btn hover:variant-ghost-success"
-              disabled={member.role == "org:owner" ? true : false}
+              disabled={member.role === "org:owner"}
             >
               <MoreHorizontal size={20} />
             </button>
@@ -212,10 +211,11 @@
                   {#if role !== member.role}
                     <button
                       class="w-full px-4 py-1.5 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
-                      data-user-id={member.user.id}
+                      data-user-id={member.userId}
+                      data-org-id={member.orgId}
                       data-role={role}
-                      data-dispaly-name={member.user.displayName}
-                      on:click|stopPropagation|capture={handleupdateRole}
+                      data-user-dispaly-name={member.user.displayName}
+                      on:click|stopPropagation|capture={handleUpdate}
                     >
                       <UserCog size={16} />
                       {role}
@@ -225,8 +225,9 @@
                 <div class="h-px bg-gray-200 my-1" />
                 <button
                   class="w-full px-4 py-1.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
-                  data-user-id={member.user.id}
-                  data-dispaly-name={member.user.displayName}
+                  data-user-id={member.userId}
+                  data-org-id={member.orgId}
+                  data-user-dispaly-name={member.user.displayName}
                   on:click|stopPropagation|capture={handleDelete}
                   disabled={isDeleting}
                 >

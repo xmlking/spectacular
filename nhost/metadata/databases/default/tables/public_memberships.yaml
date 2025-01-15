@@ -45,7 +45,7 @@ insert_permissions:
       columns:
         - role
         - user_id
-    comment: org admins can only manage org members. so not edit permissions are required for org admins.
+    comment: org admins can only manage org members. so no edit permissions are required for org admins.
   - role: org:owner
     permission:
       check:
