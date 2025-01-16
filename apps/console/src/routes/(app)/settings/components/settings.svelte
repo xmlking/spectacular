@@ -1,20 +1,14 @@
 <script lang="ts">
-  import {
-    cache,
-    PendingValue,
-    graphql,
-    fragment,
-    type OrgSettingsFragment,
-  } from "$houdini";
-  import { loaded } from "$lib/graphql/loading";
-  import * as Table from "@spectacular/skeleton/components/table";
-  import { DataHandler, type Row, check } from "@vincjo/datatables/legacy";
-  import { User, Plus } from "lucide-svelte";
-  // Variables
-  export let organization: OrgSettingsFragment;
-  $: dataa = fragment(
-    organization,
-    graphql(`
+import { cache, PendingValue, graphql, fragment, type OrgSettingsFragment } from '$houdini';
+import { loaded } from '$lib/graphql/loading';
+import * as Table from '@spectacular/skeleton/components/table';
+import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
+import { User, Plus } from 'lucide-svelte';
+// Variables
+export let organization: OrgSettingsFragment;
+$: dataa = fragment(
+  organization,
+  graphql(`
       fragment OrgSettingsFragment on organizations {
         settings {
           key
@@ -22,14 +16,14 @@
         }
       }
     `),
-  );
-  $: ({ settings } = $dataa);
-  //Datatable handler initialization
-  const handler = new DataHandler(settings?.filter(loaded), {
-    rowsPerPage: 10,
-  });
-  $: handler.setRows(settings);
-  const rows = handler.getRows();
+);
+$: ({ settings } = $dataa);
+//Datatable handler initialization
+const handler = new DataHandler(settings?.filter(loaded), {
+  rowsPerPage: 10,
+});
+$: handler.setRows(settings);
+const rows = handler.getRows();
 </script>
 
 <div class="card p-4">

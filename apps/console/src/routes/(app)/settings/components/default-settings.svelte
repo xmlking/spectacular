@@ -1,22 +1,15 @@
 <script lang="ts">
-  import {
-    cache,
-    PendingValue,
-    graphql,
-    fragment,
-    type OrgDefSettingsFragment,
-    type OrgSettings$result,
-  } from "$houdini";
-  import { loaded } from "$lib/graphql/loading";
-  import * as Table from "@spectacular/skeleton/components/table";
-  import { DataHandler, type Row, check } from "@vincjo/datatables/legacy";
-  import { Settings } from "lucide-svelte";
-  // Variables
-  export let data: OrgSettings$result;
-  export let organization: OrgDefSettingsFragment;
-  $: dataa = fragment(
-    organization,
-    graphql(`
+import { cache, PendingValue, graphql, fragment, type OrgDefSettingsFragment, type OrgSettings$result } from '$houdini';
+import { loaded } from '$lib/graphql/loading';
+import * as Table from '@spectacular/skeleton/components/table';
+import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
+import { Settings } from 'lucide-svelte';
+// Variables
+export let data: OrgSettings$result;
+export let organization: OrgDefSettingsFragment;
+$: dataa = fragment(
+  organization,
+  graphql(`
       fragment OrgDefSettingsFragment on organizations {
         settingsWithDefaults {
           key
@@ -24,53 +17,51 @@
         }
       }
     `),
-  );
-  const settingg_keys = data?.data?.setting_keys || [];
-  const settingKeyss = settingg_keys.map((setting) => ({
-    key: setting.key,
-    description: setting.description,
-    allowed_values: setting.allowed_values,
-    default_value: setting.default_value,
-  }));
-  $: ({ settingsWithDefaults } = $dataa);
-  //Datatable handler initialization
-  const handler = new DataHandler(settingsWithDefaults?.filter(loaded), {
-    rowsPerPage: 10,
+);
+const settingg_keys = data?.data?.setting_keys || [];
+const settingKeyss = settingg_keys.map((setting) => ({
+  key: setting.key,
+  description: setting.description,
+  allowed_values: setting.allowed_values,
+  default_value: setting.default_value,
+}));
+$: ({ settingsWithDefaults } = $dataa);
+//Datatable handler initialization
+const handler = new DataHandler(settingsWithDefaults?.filter(loaded), {
+  rowsPerPage: 10,
+});
+
+// Function to get default value for a given key
+function getDefaultValue(key) {
+  const setting = settingKeyss.find((item) => item.key === key);
+  return setting ? setting.default_value : null;
+}
+
+// Ensure all settings have default values and add missing settings
+function ensureDefaultValues(settings) {
+  const settingKeys = settingKeyss || [];
+  const settingsMap = new Map(settings.map((setting) => [setting.key, setting]));
+
+  settingKeys.forEach((settingKey) => {
+    if (!settingsMap.has(settingKey.key)) {
+      settingsMap.set(settingKey.key, {
+        key: settingKey.key,
+        value: getDefaultValue(settingKey.key),
+      });
+    }
   });
 
-  // Function to get default value for a given key
-  function getDefaultValue(key) {
-    const setting = settingKeyss.find((item) => item.key === key);
-    return setting ? setting.default_value : null;
-  }
+  return Array.from(settingsMap.values()).map((setting) => {
+    return setting;
+  });
+}
 
-  // Ensure all settings have default values and add missing settings
-  function ensureDefaultValues(settings) {
-    const settingKeys = settingKeyss || [];
-    const settingsMap = new Map(
-      settings.map((setting) => [setting.key, setting]),
-    );
-
-    settingKeys.forEach((settingKey) => {
-      if (!settingsMap.has(settingKey.key)) {
-        settingsMap.set(settingKey.key, {
-          key: settingKey.key,
-          value: getDefaultValue(settingKey.key),
-        });
-      }
-    });
-
-    return Array.from(settingsMap.values()).map((setting) => {
-      return setting;
-    });
-  }
-
-  // Ensure default values for settingsWithDefaults
-  $: {
-    settingsWithDefaults = ensureDefaultValues(settingsWithDefaults);
-    handler.setRows(settingsWithDefaults);
-  }
-  const rows = handler.getRows();
+// Ensure default values for settingsWithDefaults
+$: {
+  settingsWithDefaults = ensureDefaultValues(settingsWithDefaults);
+  handler.setRows(settingsWithDefaults);
+}
+const rows = handler.getRows();
 </script>
 
 <div class="card p-4">

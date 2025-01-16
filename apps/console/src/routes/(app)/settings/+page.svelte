@@ -1,15 +1,15 @@
 <script lang="ts">
-  import type { PageData } from "./$houdini";
-  import SettingKeys from "./components/setting-keys.svelte";
-  import Settings from "./components/settings.svelte";
-  import MaybeError from "$lib/components/layout/maybe-error.svelte";
-  import DefaultSettings from "./components/default-settings.svelte";
-  import { Logger } from "@spectacular/utils";
-  const log = new Logger("Settings:browser");
-  export let data: PageData;
-  // Reactivity
-  let { OrgSettings } = data;
-  $: ({ OrgSettings } = data);
+import type { PageData } from './$houdini';
+import SettingKeys from './components/setting-keys.svelte';
+import Settings from './components/settings.svelte';
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
+import DefaultSettings from './components/default-settings.svelte';
+import { Logger } from '@spectacular/utils';
+const log = new Logger('Settings:browser');
+export let data: PageData;
+// Reactivity
+let { OrgSettings } = data;
+$: ({ OrgSettings } = data);
 </script>
 
 <svelte:head>

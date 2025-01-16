@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { PendingValue, type OrgSettings$result, graphql } from "$houdini";
-  import { loaded } from "$lib/graphql/loading";
-  import * as Table from "@spectacular/skeleton/components/table";
-  import { DataHandler, type Row, check } from "@vincjo/datatables/legacy";
-  import { Settings, User } from "lucide-svelte";
-  // Variables
-  export let data: OrgSettings$result;
-  let { setting_keys } = data;
-  $: ({ setting_keys } = data);
+import { PendingValue, type OrgSettings$result, graphql } from '$houdini';
+import { loaded } from '$lib/graphql/loading';
+import * as Table from '@spectacular/skeleton/components/table';
+import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
+import { Settings, User } from 'lucide-svelte';
+// Variables
+export let data: OrgSettings$result;
+let { setting_keys } = data;
+$: ({ setting_keys } = data);
 
-  //Datatable handler initialization
-  const handler = new DataHandler(setting_keys.filter(loaded), {
-    rowsPerPage: 10,
-  });
-  $: handler.setRows(setting_keys);
-  const rows = handler.getRows();
+//Datatable handler initialization
+const handler = new DataHandler(setting_keys.filter(loaded), {
+  rowsPerPage: 10,
+});
+$: handler.setRows(setting_keys);
+const rows = handler.getRows();
 </script>
 
 <div class="card p-4">
