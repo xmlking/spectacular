@@ -1,18 +1,4 @@
-# query Memberships($id: OrgIdFromSession!) {
-#   memberships(where: { orgId: { _eq: $id } })@list(name: "List_Members") {
-#     userId
-#     orgId
-#     role
-#     updatedAt
-#     user {
-#       displayName
-#       avatarUrl
-#       email
-#     }
-#   }
-# }
-
-query MembershipsData($id: OrgIdFromSession!) {
+query MembershipData($id: OrgIdFromSession!) {
   organizations_by_pk(id: $id) {
     ...MembersFragment
     ...InvitationsFragment

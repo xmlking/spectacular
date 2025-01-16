@@ -6,7 +6,7 @@ import Members from './components/members.svelte';
 import Invitations from './components/invitations.svelte';
 import InviteMembersForm from './components/invite-members-form.svelte';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import type { PageData } from '../memberships/$houdini';
+import type { PageData } from './$houdini';
 
 const log = new Logger('memberships:add:browser');
 export let data: PageData;
@@ -17,8 +17,8 @@ let tabSet = 0;
 // Functions
 
 // Reactivity
-let { MembershipsData } = data;
-$: ({ MembershipsData } = data);
+let { MembershipData } = data;
+$: ({ MembershipData } = data);
 </script>
 
 <svelte:head>
@@ -35,7 +35,7 @@ $: ({ MembershipsData } = data);
   <MaybeError
     debug={true}
     entityName="Memberships"
-    result={$MembershipsData}
+    result={$MembershipData}
     let:data={{ organizations_by_pk }}
   >
     <section class="space-y-4">
