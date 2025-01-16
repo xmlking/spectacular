@@ -1,25 +1,34 @@
 <script lang="ts">
-  import { PendingValue, type OrgSettings$result, graphql } from "$houdini";
+  import {
+    cache,
+    PendingValue,
+    graphql,
+    fragment,
+    type OrgSettingsFragment,
+  } from "$houdini";
   import { loaded } from "$lib/graphql/loading";
   import * as Table from "@spectacular/skeleton/components/table";
   import { DataHandler, type Row, check } from "@vincjo/datatables/legacy";
   import { User, Plus } from "lucide-svelte";
   // Variables
-  export let data: OrgSettings$result;
-  let { organizations_by_pk } = data;
-  $: ({ organizations_by_pk } = data);
-
-  //Datatable handler initialization
-  console.log(organizations_by_pk);
-  const handler = new DataHandler(
-    organizations_by_pk?.settings?.filter(loaded) || [],
-    {
-      rowsPerPage: 10,
-    },
+  export let organization: OrgSettingsFragment;
+  $: dataa = fragment(
+    organization,
+    graphql(`
+      fragment OrgSettingsFragment on organizations {
+        settings {
+          key
+          value
+        }
+      }
+    `),
   );
-  $: if (organizations_by_pk && organizations_by_pk.settings) {
-    handler.setRows(organizations_by_pk.settings);
-  }
+  $: ({ settings } = $dataa);
+  //Datatable handler initialization
+  const handler = new DataHandler(settings?.filter(loaded), {
+    rowsPerPage: 10,
+  });
+  $: handler.setRows(settings);
   const rows = handler.getRows();
 </script>
 

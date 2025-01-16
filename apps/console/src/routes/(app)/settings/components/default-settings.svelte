@@ -1,31 +1,52 @@
 <script lang="ts">
-  import { type OrgSettings$result } from "$houdini";
+  import {
+    cache,
+    PendingValue,
+    graphql,
+    fragment,
+    type OrgDefSettingsFragment,
+    type OrgSettings$result,
+  } from "$houdini";
   import { loaded } from "$lib/graphql/loading";
   import * as Table from "@spectacular/skeleton/components/table";
   import { DataHandler, type Row, check } from "@vincjo/datatables/legacy";
   import { Settings } from "lucide-svelte";
   // Variables
   export let data: OrgSettings$result;
-  let { organizations_by_pk, setting_keys } = data;
-  $: ({ organizations_by_pk, setting_keys } = data);
-
-  //Datatable handler initialization
-  const handler = new DataHandler(
-    organizations_by_pk?.settingsWithDefaults?.filter(loaded) || [],
-    {
-      rowsPerPage: 10,
-    },
+  export let organization: OrgDefSettingsFragment;
+  $: dataa = fragment(
+    organization,
+    graphql(`
+      fragment OrgDefSettingsFragment on organizations {
+        settingsWithDefaults {
+          key
+          value
+        }
+      }
+    `),
   );
+  const settingg_keys = data?.data?.setting_keys || [];
+  const settingKeyss = settingg_keys.map((setting) => ({
+    key: setting.key,
+    description: setting.description,
+    allowed_values: setting.allowed_values,
+    default_value: setting.default_value,
+  }));
+  $: ({ settingsWithDefaults } = $dataa);
+  //Datatable handler initialization
+  const handler = new DataHandler(settingsWithDefaults?.filter(loaded), {
+    rowsPerPage: 10,
+  });
 
   // Function to get default value for a given key
   function getDefaultValue(key) {
-    const setting = setting_keys.find((item) => item.key === key);
+    const setting = settingKeyss.find((item) => item.key === key);
     return setting ? setting.default_value : null;
   }
 
   // Ensure all settings have default values and add missing settings
   function ensureDefaultValues(settings) {
-    const settingKeys = setting_keys || [];
+    const settingKeys = settingKeyss || [];
     const settingsMap = new Map(
       settings.map((setting) => [setting.key, setting]),
     );
@@ -46,13 +67,8 @@
 
   // Ensure default values for settingsWithDefaults
   $: {
-    const orgSettings = organizations_by_pk;
-    if (orgSettings) {
-      orgSettings.settingsWithDefaults = ensureDefaultValues(
-        orgSettings.settingsWithDefaults,
-      );
-      handler.setRows(orgSettings.settingsWithDefaults);
-    }
+    settingsWithDefaults = ensureDefaultValues(settingsWithDefaults);
+    handler.setRows(settingsWithDefaults);
   }
   const rows = handler.getRows();
 </script>
@@ -61,7 +77,7 @@
   <div class="page-container p-0">
     <div class="flex items-center gap-2">
       <Settings class="w-5 h-5" />
-      <h1>Combined Settings Overview</h1>
+      <h1>Effective Settings</h1>
     </div>
     <table class="table table-hover table-compact w-full table-auto">
       <thead>

@@ -1,13 +1,7 @@
-query OrgSettings($id: OrgIdFromSession!) @cache(policy: NetworkOnly){
+query OrgSettings($id: OrgIdFromSession!){
   organizations_by_pk(id: $id) {
-     settings {
-      key
-      value
-    }
-    settingsWithDefaults {
-      key
-      value
-    }
+    ...OrgSettingsFragment
+    ...OrgDefSettingsFragment
   }
   setting_keys {
     key

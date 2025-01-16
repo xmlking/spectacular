@@ -4,7 +4,8 @@
   import Settings from "./components/settings.svelte";
   import MaybeError from "$lib/components/layout/maybe-error.svelte";
   import DefaultSettings from "./components/default-settings.svelte";
-
+  import { Logger } from "@spectacular/utils";
+  const log = new Logger("Settings:browser");
   export let data: PageData;
   // Reactivity
   let { OrgSettings } = data;
@@ -34,16 +35,9 @@
     debug={false}
     entityName="OrgSettings"
     result={$OrgSettings}
-    let:data={$OrgSettings}
+    let:data={{ organizations_by_pk }}
   >
-    <Settings data={$OrgSettings} />
-  </MaybeError>
-  <MaybeError
-    debug={false}
-    entityName="OrgSettings"
-    result={$OrgSettings}
-    let:data={$OrgSettings}
-  >
-    <DefaultSettings data={$OrgSettings} />
+    <Settings organization={organizations_by_pk} />
+    <DefaultSettings data={$OrgSettings} organization={organizations_by_pk} />
   </MaybeError>
 </div>
