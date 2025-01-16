@@ -160,7 +160,7 @@ $: loadingState.setFormLoading(isDeleting);
 </script>
 
 <!-- Filter Section -->
-<Filter {handler} />
+<Filter {handler} searchFields={['email']} />
 
 <!-- Members List -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200">

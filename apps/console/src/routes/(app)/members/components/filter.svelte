@@ -1,14 +1,18 @@
 <script lang="ts">
-import type { DataHandler, Row } from '@vincjo/datatables/legacy';
+import type { DataHandler, Field, Comparator, Row } from '@vincjo/datatables/legacy';
 import { check } from '@vincjo/datatables/legacy';
-import { Search } from 'lucide-svelte';
+import { Search, SearchIcon } from 'lucide-svelte';
 
 type T = $$Generic<Row>;
 
 export let handler: DataHandler<T>;
+export let searchFields: Field<T>[] = ['displayName', 'email'];
+export let orderBy: Field<T> = 'updatedAt';
+export let filterBy: Field<T> = 'role';
+export let comparator: Comparator<T> = check.isEqualTo;
+
 let value = '';
 let role = '';
-let orderBy = '';
 
 handler.on('clearSearch', () => (value = ''));
 handler.on('clearFilters', () => (role = ''));
@@ -16,35 +20,38 @@ handler.on('clearFilters', () => (role = ''));
 
 <!-- Filter Section -->
 <div class="mb-6 flex flex-col sm:flex-row gap-4">
-  <div class="flex-1 relative">
-    <Search size={20} class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+  <div class="grow input-group input-group-divider grid-cols-[auto_1fr_auto]">
+    <div class="input-group-shim"><SearchIcon size={17} /></div>
     <input
-      type="text"
-      bind:value
+      class="pl-10"
+      type="search"
       placeholder="Search by name or email..."
+      autocomplete="off"
       spellcheck="false"
-      on:input={() => handler.search(value, ['user.displayName', 'user.email'])}
-      class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+      autocorrect="off"
+      bind:value
+      on:input={() => handler.search(value, searchFields)}
     />
+    <select
+      bind:value={role}
+      on:change={() => handler.filter(role, filterBy, comparator)}
+    >
+      <option value="">All Roles</option>
+      <option value="org:member">Member</option>
+      <option value="org:billing">Billing</option>
+      <option value="org:admin">Admin</option>
+      <option value="org:owner">Owner</option>
+    </select>
   </div>
-  <select
-    bind:value={role}
-    on:change={() => handler.filter(role, 'role', check.isEqualTo)}
-    class="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-  >
-    <option value="all">All Roles</option>
-    <option value="member">Member</option>
-    <option value="billing">Billing</option>
-    <option value="admin">Admin</option>
-    <option value="owner">Owner</option>
-  </select>
-  <select
-    bind:value={orderBy}
-    on:change={() => handler.sort(orderBy)}
-    class="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-  >
-      <option value="date">Date</option>
-      <option value="role">Name(A-Z)</option>
-      <option value="user">Name(Z-A)</option>
-  </select>
+  <div>
+    <select
+      class="select"
+      bind:value={orderBy}
+      on:change={() => handler.sort(orderBy)}
+    >
+      <option value="updatedAt">Date</option>
+      <option value="displayName">Name(A-Z)</option>
+      <option value="role">Name(Z-A)</option>
+    </select>
+  </div>
 </div>
