@@ -2165,6 +2165,17 @@ type invitations_aggregate {
   nodes: [invitations!]!
 }
 
+input invitations_aggregate_bool_exp {
+  count: invitations_aggregate_bool_exp_count
+}
+
+input invitations_aggregate_bool_exp_count {
+  arguments: [invitations_select_column!]
+  distinct: Boolean
+  filter: invitations_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "invitations"
 """
@@ -2172,6 +2183,25 @@ type invitations_aggregate_fields {
   count(columns: [invitations_select_column!], distinct: Boolean): Int!
   max: invitations_max_fields
   min: invitations_min_fields
+}
+
+"""
+order by aggregate values of table "invitations"
+"""
+input invitations_aggregate_order_by {
+  count: order_by
+  max: invitations_max_order_by
+  min: invitations_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "invitations"
+"""
+input invitations_arr_rel_insert_input {
+  data: [invitations_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: invitations_on_conflict
 }
 
 """
@@ -2221,6 +2251,19 @@ type invitations_max_fields {
   updatedBy: uuid
 }
 
+"""
+order by max() on columns of table "invitations"
+"""
+input invitations_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  email: order_by
+  orgId: order_by
+  role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+}
+
 """aggregate min on columns"""
 type invitations_min_fields {
   createdAt: timestamptz
@@ -2230,6 +2273,19 @@ type invitations_min_fields {
   role: String
   updatedAt: timestamptz
   updatedBy: uuid
+}
+
+"""
+order by min() on columns of table "invitations"
+"""
+input invitations_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  email: order_by
+  orgId: order_by
+  role: order_by
+  updatedAt: order_by
+  updatedBy: order_by
 }
 
 """
@@ -4117,6 +4173,42 @@ type organizations {
   id: uuid!
 
   """An array relationship"""
+  invitations(
+    """distinct select on columns"""
+    distinct_on: [invitations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [invitations_order_by!]
+
+    """filter the rows returned"""
+    where: invitations_bool_exp
+  ): [invitations!]!
+
+  """An aggregate relationship"""
+  invitations_aggregate(
+    """distinct select on columns"""
+    distinct_on: [invitations_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [invitations_order_by!]
+
+    """filter the rows returned"""
+    where: invitations_bool_exp
+  ): invitations_aggregate!
+
+  """An array relationship"""
   memberships(
     """distinct select on columns"""
     distinct_on: [memberships_select_column!]
@@ -4406,6 +4498,8 @@ input organizations_bool_exp {
   groups: groups_bool_exp
   groups_aggregate: groups_aggregate_bool_exp
   id: uuid_comparison_exp
+  invitations: invitations_bool_exp
+  invitations_aggregate: invitations_aggregate_bool_exp
   memberships: memberships_bool_exp
   memberships_aggregate: memberships_aggregate_bool_exp
   metadata: jsonb_comparison_exp
@@ -4471,6 +4565,7 @@ input organizations_insert_input {
   description: String
   displayName: String
   groups: groups_arr_rel_insert_input
+  invitations: invitations_arr_rel_insert_input
   memberships: memberships_arr_rel_insert_input
   metadata: jsonb
   policies: policies_arr_rel_insert_input
@@ -4561,6 +4656,7 @@ input organizations_order_by {
   displayName: order_by
   groups_aggregate: groups_aggregate_order_by
   id: order_by
+  invitations_aggregate: invitations_aggregate_order_by
   memberships_aggregate: memberships_aggregate_order_by
   metadata: order_by
   owner: users_order_by
@@ -6350,9 +6446,7 @@ type query_root {
   """fetch data from the table: "groups" using primary key columns"""
   groups_by_pk(id: uuid!): groups
 
-  """
-  fetch data from the table: "invitations"
-  """
+  """An array relationship"""
   invitations(
     """distinct select on columns"""
     distinct_on: [invitations_select_column!]
@@ -6370,9 +6464,7 @@ type query_root {
     where: invitations_bool_exp
   ): [invitations!]!
 
-  """
-  fetch aggregated fields from the table: "invitations"
-  """
+  """An aggregate relationship"""
   invitations_aggregate(
     """distinct select on columns"""
     distinct_on: [invitations_select_column!]
@@ -8640,9 +8732,7 @@ type subscription_root {
     where: groups_bool_exp
   ): [groups!]!
 
-  """
-  fetch data from the table: "invitations"
-  """
+  """An array relationship"""
   invitations(
     """distinct select on columns"""
     distinct_on: [invitations_select_column!]
@@ -8660,9 +8750,7 @@ type subscription_root {
     where: invitations_bool_exp
   ): [invitations!]!
 
-  """
-  fetch aggregated fields from the table: "invitations"
-  """
+  """An aggregate relationship"""
   invitations_aggregate(
     """distinct select on columns"""
     distinct_on: [invitations_select_column!]

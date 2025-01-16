@@ -1,17 +1,17 @@
 <script lang="ts">
-    import type { DataHandler, Row } from '@vincjo/datatables/legacy'
-    import  { check } from '@vincjo/datatables/legacy'
-    import { Search } from 'lucide-svelte';
+import type { DataHandler, Row } from '@vincjo/datatables/legacy';
+import { check } from '@vincjo/datatables/legacy';
+import { Search } from 'lucide-svelte';
 
-    type T = $$Generic<Row>
+type T = $$Generic<Row>;
 
-    export let handler: DataHandler<T>
-    let value = ''
-    let role = ''
-    let orderBy = ''
+export let handler: DataHandler<T>;
+let value = '';
+let role = '';
+let orderBy = '';
 
-    handler.on('clearSearch', () => value = '')
-    handler.on('clearFilters', () => role = '')
+handler.on('clearSearch', () => (value = ''));
+handler.on('clearFilters', () => (role = ''));
 </script>
 
 <!-- Filter Section -->

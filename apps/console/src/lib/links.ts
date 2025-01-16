@@ -123,7 +123,7 @@ export const menuNavLinks: MenuNavLinks = {
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/memberships',
+          href: '/members',
           label: 'Members',
           keywords: 'account, user, member, organization',
           roles: [Roles.Owner, Roles.Admin],

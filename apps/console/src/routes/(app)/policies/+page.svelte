@@ -1,9 +1,9 @@
 <script lang="ts">
 import { Logger } from '@spectacular/utils';
-import type { PageData } from './$houdini';
 import SearchPoliciesForm from './components/search-policies-form.svelte';
 import SearchPoliciesResult from './components/search-policies-result.svelte';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
+import type { PageData } from './$houdini';
 
 const log = new Logger('policies:search:browser');
 export let data: PageData;

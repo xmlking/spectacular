@@ -7,7 +7,6 @@ import {
   cache,
   fragment,
   graphql,
-  type SearchPoliciesFragment,
 } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';

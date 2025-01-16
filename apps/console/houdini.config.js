@@ -25,6 +25,9 @@ const config = {
     memberships: {
       keys: ['userId', 'orgId'],
     },
+    invitations: {
+      keys: ['email', 'orgId'],
+    },
   },
   features: {
     runtimeScalars: {
