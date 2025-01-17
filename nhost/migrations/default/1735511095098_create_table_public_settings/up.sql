@@ -27,21 +27,22 @@ CREATE TRIGGER log_deleted_record_when_public_settings_deleted
 EXECUTE FUNCTION public.log_deleted_record('key', 'org_id');
 COMMENT ON TRIGGER log_deleted_record_when_public_settings_deleted ON public.settings IS 'trigger to save deleted records for audit';
 ---
-CREATE FUNCTION public.settings_with_defaults(org_row public.organizations) RETURNS SETOF public.settings
-  LANGUAGE sql
-  STABLE AS
-$$
-SELECT SM.key                               as key,
-       COALESCE(OS.value, SM.default_value) AS value,
-       OS.org_id                            AS org_id,
-       OS.created_by                        AS created_by,
-       OS.updated_by                        AS updated_by,
-       OS.created_at                        AS created_at,
-       OS.updated_at                        AS updated_at
-FROM public.settings_metadata SM
-       LEFT JOIN public.settings OS ON SM.key = OS.key AND OS.org_id = org_row.id;
-$$;
-COMMENT ON FUNCTION public.settings_with_defaults(org_row public.organizations) IS 'Used as Computed Field on Organizations Table';
+CREATE OR REPLACE VIEW public.settings_with_defaults AS
+SELECT sm.key                              AS key,
+       COALESCE(s.value, sm.default_value) AS value,
+       org.id                              AS org_id,
+       s.created_by,
+       s.updated_by,
+       s.created_at,
+       s.updated_at
+FROM public.settings_metadata sm
+       CROSS JOIN
+     public.organizations org
+       LEFT JOIN
+     public.settings s
+     ON
+       sm.key = s.key AND org.id = s.org_id;
+COMMENT ON VIEW public.settings_with_defaults IS 'View that expand public.setting table with missing key/values from public.settings_metadata';
 ---
 /*
 -- Optional: Enforcing allowed_values Validation with a Trigger

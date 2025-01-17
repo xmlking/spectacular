@@ -1,12 +1,12 @@
 <script lang="ts">
-import { cache, PendingValue, graphql, fragment, type SettingsFragment } from '$houdini';
+import { graphql, fragment, type SettingsFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
-import { User, Plus } from 'lucide-svelte';
-// Variables
+import { User } from 'lucide-svelte';
+
 export let organization: SettingsFragment;
-$: dataa = fragment(
+$: data = fragment(
   organization,
   graphql(`
       fragment SettingsFragment on organizations {
@@ -17,11 +17,9 @@ $: dataa = fragment(
       }
     `),
 );
-$: ({ settings } = $dataa);
-//Datatable handler initialization
-const handler = new DataHandler(settings?.filter(loaded), {
-  rowsPerPage: 10,
-});
+$: ({ settings } = $data);
+
+const handler = new DataHandler(settings?.filter(loaded), { rowsPerPage: 10 });
 $: handler.setRows(settings);
 const rows = handler.getRows();
 </script>
@@ -46,7 +44,8 @@ const rows = handler.getRows();
         </tr>
       </thead>
       <tbody>
-        {#each $rows as row}
+        <!-- {#each $rows as row, i (row.key)} -->
+        {#each $rows as row (row.key)}
           <tr>
             <td>{row.key}</td>
             <td

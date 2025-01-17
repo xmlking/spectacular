@@ -1,18 +1,10 @@
 <script lang="ts">
-import {
-  cache,
-  PendingValue,
-  graphql,
-  fragment,
-  type SettingsWithDefaultsFragment,
-  type SettingsData$result,
-} from '$houdini';
+import { graphql, fragment, type SettingsWithDefaultsFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Settings } from 'lucide-svelte';
-// Variables
-// export let data: SettingsData$result;
+
 export let organization: SettingsWithDefaultsFragment;
 $: data = fragment(
   organization,
@@ -25,49 +17,10 @@ $: data = fragment(
       }
     `),
 );
-// const settings_metadata = data?.data?.settings_metadata || [];
-// const settingKeyss = settings_metadata.map((setting) => ({
-//   key: setting.key,
-//   description: setting.description,
-//   allowedValues: setting.allowedValues,
-//   defaultValue: setting.defaultValue,
-// }));
 $: ({ settingsWithDefaults } = $data);
-//Datatable handler initialization
-const handler = new DataHandler(settingsWithDefaults?.filter(loaded), {
-  rowsPerPage: 10,
-});
 
-// Function to get default value for a given key
-// function getDefaultValue(key) {
-//   const setting = settingKeyss.find((item) => item.key === key);
-//   return setting ? setting.defaultValue : null;
-// }
-
-// Ensure all settings have default values and add missing settings
-// function ensureDefaultValues(settings) {
-//   const settingKeys = settingKeyss || [];
-//   const settingsMap = new Map(settings.map((setting) => [setting.key, setting]));
-
-//   settingKeys.forEach((settingKey) => {
-//     if (!settingsMap.has(settingKey.key)) {
-//       settingsMap.set(settingKey.key, {
-//         key: settingKey.key,
-//         value: getDefaultValue(settingKey.key),
-//       });
-//     }
-//   });
-
-//   return Array.from(settingsMap.values()).map((setting) => {
-//     return setting;
-//   });
-// }
-
-// Ensure default values for settingsWithDefaults
-$: {
-  // settingsWithDefaults = ensureDefaultValues(settingsWithDefaults);
-  handler.setRows(settingsWithDefaults);
-}
+const handler = new DataHandler(settingsWithDefaults?.filter(loaded), { rowsPerPage: 10 });
+$: handler.setRows(settingsWithDefaults);
 const rows = handler.getRows();
 </script>
 
@@ -85,20 +38,18 @@ const rows = handler.getRows();
         </tr>
       </thead>
       <tbody>
-        <!-- {#each $rows as row, i (row.id)} -->
-        {#each $rows as setting (setting.key)}
-          {#key setting.key}
-            <tr>
-              <td>{setting.key}</td>
-              <td
-                >{#if typeof setting.value === "object"}
-                  {JSON.stringify(setting.value)}
-                {:else}
-                  {setting.value}
-                {/if}</td
-              >
-            </tr>
-          {/key}
+        <!-- {#each $rows as row, i (row.key)} -->
+        {#each $rows as row (row.key)}
+          <tr>
+            <td>{row.key}</td>
+            <td
+              >{#if typeof row.value === "object"}
+                {JSON.stringify(row.value)}
+              {:else}
+                {row.value}
+              {/if}</td
+            >
+          </tr>
         {/each}
       </tbody>
     </table>

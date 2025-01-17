@@ -4075,10 +4075,10 @@ type organizations {
     where: settings_bool_exp
   ): [settings!]!
 
-  """Used as Computed Field on Organizations Table"""
+  """An array relationship"""
   settingsWithDefaults(
     """distinct select on columns"""
-    distinct_on: [settings_select_column!]
+    distinct_on: [settings_with_defaults_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -4087,11 +4087,29 @@ type organizations {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [settings_order_by!]
+    order_by: [settings_with_defaults_order_by!]
 
     """filter the rows returned"""
-    where: settings_bool_exp
-  ): [settings!]
+    where: settings_with_defaults_bool_exp
+  ): [settings_with_defaults!]!
+
+  """An aggregate relationship"""
+  settingsWithDefaults_aggregate(
+    """distinct select on columns"""
+    distinct_on: [settings_with_defaults_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [settings_with_defaults_order_by!]
+
+    """filter the rows returned"""
+    where: settings_with_defaults_bool_exp
+  ): settings_with_defaults_aggregate!
 
   """An aggregate relationship"""
   settings_aggregate(
@@ -4209,7 +4227,8 @@ input organizations_bool_exp {
   rules: rules_bool_exp
   rules_aggregate: rules_aggregate_bool_exp
   settings: settings_bool_exp
-  settingsWithDefaults: settings_bool_exp
+  settingsWithDefaults: settings_with_defaults_bool_exp
+  settingsWithDefaults_aggregate: settings_with_defaults_aggregate_bool_exp
   settings_aggregate: settings_aggregate_bool_exp
   subscriptions: subscriptions_bool_exp
   subscriptions_aggregate: subscriptions_aggregate_bool_exp
@@ -4361,7 +4380,7 @@ input organizations_order_by {
   policies_aggregate: policies_aggregate_order_by
   pools_aggregate: pools_aggregate_order_by
   rules_aggregate: rules_aggregate_order_by
-  settingsWithDefaults_aggregate: settings_aggregate_order_by
+  settingsWithDefaults_aggregate: settings_with_defaults_aggregate_order_by
   settings_aggregate: settings_aggregate_order_by
   subscriptions_aggregate: subscriptions_aggregate_order_by
   tags: order_by
@@ -4378,8 +4397,6 @@ input organizations_pk_columns_input {
 input organizations_prepend_input {
   metadata: jsonb
 }
-
-scalar organizations_scalar
 
 """
 select columns of table "organizations"
@@ -6512,16 +6529,11 @@ type query_root {
   settings_metadata_by_pk(key: String!): settings_metadata
 
   """
-  execute function "settings_with_defaults" which returns "settings"
+  fetch data from the table: "settings_with_defaults"
   """
   settings_with_defaults(
-    """
-    input parameters for function "settings_with_defaults"
-    """
-    args: settings_with_defaults_args!
-
     """distinct select on columns"""
-    distinct_on: [settings_select_column!]
+    distinct_on: [settings_with_defaults_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -6530,23 +6542,18 @@ type query_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [settings_order_by!]
+    order_by: [settings_with_defaults_order_by!]
 
     """filter the rows returned"""
-    where: settings_bool_exp
-  ): [settings!]!
+    where: settings_with_defaults_bool_exp
+  ): [settings_with_defaults!]!
 
   """
-  execute function "settings_with_defaults" and query aggregates on result of table type "settings"
+  fetch aggregated fields from the table: "settings_with_defaults"
   """
   settings_with_defaults_aggregate(
-    """
-    input parameters for function "settings_with_defaults_aggregate"
-    """
-    args: settings_with_defaults_args!
-
     """distinct select on columns"""
-    distinct_on: [settings_select_column!]
+    distinct_on: [settings_with_defaults_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -6555,11 +6562,11 @@ type query_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [settings_order_by!]
+    order_by: [settings_with_defaults_order_by!]
 
     """filter the rows returned"""
-    where: settings_bool_exp
-  ): settings_aggregate!
+    where: settings_with_defaults_bool_exp
+  ): settings_with_defaults_aggregate!
 
   """
   fetch data from the table: "status"
@@ -7948,8 +7955,176 @@ input settings_updates {
   where: settings_bool_exp!
 }
 
-input settings_with_defaults_args {
-  org_row: organizations_scalar
+"""
+View that expand public.setting table with missing key/values from public.settings_metadata
+"""
+type settings_with_defaults {
+  created_at: timestamptz
+  created_by: uuid
+  key: String
+  org_id: uuid
+  updated_at: timestamptz
+  updated_by: uuid
+  value(
+    """JSON select path"""
+    path: String
+  ): jsonb
+}
+
+"""
+aggregated selection of "settings_with_defaults"
+"""
+type settings_with_defaults_aggregate {
+  aggregate: settings_with_defaults_aggregate_fields
+  nodes: [settings_with_defaults!]!
+}
+
+input settings_with_defaults_aggregate_bool_exp {
+  count: settings_with_defaults_aggregate_bool_exp_count
+}
+
+input settings_with_defaults_aggregate_bool_exp_count {
+  arguments: [settings_with_defaults_select_column!]
+  distinct: Boolean
+  filter: settings_with_defaults_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "settings_with_defaults"
+"""
+type settings_with_defaults_aggregate_fields {
+  count(columns: [settings_with_defaults_select_column!], distinct: Boolean): Int!
+  max: settings_with_defaults_max_fields
+  min: settings_with_defaults_min_fields
+}
+
+"""
+order by aggregate values of table "settings_with_defaults"
+"""
+input settings_with_defaults_aggregate_order_by {
+  count: order_by
+  max: settings_with_defaults_max_order_by
+  min: settings_with_defaults_min_order_by
+}
+
+"""
+Boolean expression to filter rows from the table "settings_with_defaults". All fields are combined with a logical 'AND'.
+"""
+input settings_with_defaults_bool_exp {
+  _and: [settings_with_defaults_bool_exp!]
+  _not: settings_with_defaults_bool_exp
+  _or: [settings_with_defaults_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  created_by: uuid_comparison_exp
+  key: String_comparison_exp
+  org_id: uuid_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  updated_by: uuid_comparison_exp
+  value: jsonb_comparison_exp
+}
+
+"""aggregate max on columns"""
+type settings_with_defaults_max_fields {
+  created_at: timestamptz
+  created_by: uuid
+  key: String
+  org_id: uuid
+  updated_at: timestamptz
+  updated_by: uuid
+}
+
+"""
+order by max() on columns of table "settings_with_defaults"
+"""
+input settings_with_defaults_max_order_by {
+  created_at: order_by
+  created_by: order_by
+  key: order_by
+  org_id: order_by
+  updated_at: order_by
+  updated_by: order_by
+}
+
+"""aggregate min on columns"""
+type settings_with_defaults_min_fields {
+  created_at: timestamptz
+  created_by: uuid
+  key: String
+  org_id: uuid
+  updated_at: timestamptz
+  updated_by: uuid
+}
+
+"""
+order by min() on columns of table "settings_with_defaults"
+"""
+input settings_with_defaults_min_order_by {
+  created_at: order_by
+  created_by: order_by
+  key: order_by
+  org_id: order_by
+  updated_at: order_by
+  updated_by: order_by
+}
+
+"""Ordering options when selecting data from "settings_with_defaults"."""
+input settings_with_defaults_order_by {
+  created_at: order_by
+  created_by: order_by
+  key: order_by
+  org_id: order_by
+  updated_at: order_by
+  updated_by: order_by
+  value: order_by
+}
+
+"""
+select columns of table "settings_with_defaults"
+"""
+enum settings_with_defaults_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  created_by
+
+  """column name"""
+  key
+
+  """column name"""
+  org_id
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  updated_by
+
+  """column name"""
+  value
+}
+
+"""
+Streaming cursor of the table "settings_with_defaults"
+"""
+input settings_with_defaults_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: settings_with_defaults_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input settings_with_defaults_stream_cursor_value_input {
+  created_at: timestamptz
+  created_by: uuid
+  key: String
+  org_id: uuid
+  updated_at: timestamptz
+  updated_by: uuid
+  value: jsonb
 }
 
 scalar smallint
@@ -9239,16 +9414,11 @@ type subscription_root {
   ): [settings!]!
 
   """
-  execute function "settings_with_defaults" which returns "settings"
+  fetch data from the table: "settings_with_defaults"
   """
   settings_with_defaults(
-    """
-    input parameters for function "settings_with_defaults"
-    """
-    args: settings_with_defaults_args!
-
     """distinct select on columns"""
-    distinct_on: [settings_select_column!]
+    distinct_on: [settings_with_defaults_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -9257,23 +9427,18 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [settings_order_by!]
+    order_by: [settings_with_defaults_order_by!]
 
     """filter the rows returned"""
-    where: settings_bool_exp
-  ): [settings!]!
+    where: settings_with_defaults_bool_exp
+  ): [settings_with_defaults!]!
 
   """
-  execute function "settings_with_defaults" and query aggregates on result of table type "settings"
+  fetch aggregated fields from the table: "settings_with_defaults"
   """
   settings_with_defaults_aggregate(
-    """
-    input parameters for function "settings_with_defaults_aggregate"
-    """
-    args: settings_with_defaults_args!
-
     """distinct select on columns"""
-    distinct_on: [settings_select_column!]
+    distinct_on: [settings_with_defaults_select_column!]
 
     """limit the number of rows returned"""
     limit: Int
@@ -9282,11 +9447,25 @@ type subscription_root {
     offset: Int
 
     """sort the rows by one or more columns"""
-    order_by: [settings_order_by!]
+    order_by: [settings_with_defaults_order_by!]
 
     """filter the rows returned"""
-    where: settings_bool_exp
-  ): settings_aggregate!
+    where: settings_with_defaults_bool_exp
+  ): settings_with_defaults_aggregate!
+
+  """
+  fetch data from the table in a streaming manner: "settings_with_defaults"
+  """
+  settings_with_defaults_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [settings_with_defaults_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: settings_with_defaults_bool_exp
+  ): [settings_with_defaults!]!
 
   """
   fetch data from the table: "status"

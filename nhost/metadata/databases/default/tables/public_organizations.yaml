@@ -102,6 +102,15 @@ array_relationships:
         table:
           name: settings
           schema: public
+  - name: settingsWithDefaults
+    using:
+      manual_configuration:
+        column_mapping:
+          id: org_id
+        insertion_order: null
+        remote_table:
+          name: settings_with_defaults
+          schema: public
   - name: subscriptions
     using:
       foreign_key_constraint_on:
@@ -109,12 +118,6 @@ array_relationships:
         table:
           name: subscriptions
           schema: public
-computed_fields:
-  - name: settingsWithDefaults
-    definition:
-      function:
-        name: settings_with_defaults
-        schema: public
 insert_permissions:
   - role: user
     permission:
