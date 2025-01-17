@@ -1,4 +1,4 @@
-query OrgSettings($id: OrgIdFromSession!) {
+query SettingsData($id: OrgIdFromSession!) {
   organizations_by_pk(id: $id) {
     ...SettingsFragment
     ...SettingsWithDefaultsFragment

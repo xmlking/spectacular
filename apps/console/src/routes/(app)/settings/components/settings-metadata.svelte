@@ -1,5 +1,5 @@
 <script lang="ts">
-import { PendingValue, type OrgSettings$result, graphql } from '$houdini';
+import { PendingValue, type SettingsData$result, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger } from '@spectacular/utils';
@@ -8,7 +8,7 @@ import { Settings, User } from 'lucide-svelte';
 
 const log = new Logger('settings:allowed-keys:browser');
 // Variables
-export let data: OrgSettings$result;
+export let data: SettingsData$result;
 
 let { settings_metadata } = data;
 $: ({ settings_metadata } = data);
@@ -25,7 +25,7 @@ const rows = handler.getRows();
   <div class="page-container p-0">
     <div class="flex items-center gap-2">
       <Settings class="w-5 h-5" />
-      <h1>Settings Definitions</h1>
+      <h1>Settings Metadata</h1>
     </div>
     <table class="table table-hover table-compact w-full table-auto">
       <thead>

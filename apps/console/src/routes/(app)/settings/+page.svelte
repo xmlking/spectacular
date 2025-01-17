@@ -6,40 +6,47 @@ import SettingsWithDefaults from './components/settings-with-defaults.svelte';
 import SettingsMetadata from './components/settings-metadata.svelte';
 import { Logger } from '@spectacular/utils';
 
-const log = new Logger('Settings:browser');
+const log = new Logger('settings:browser');
 export let data: PageData;
 
 // Reactivity
-let { OrgSettings } = data;
-$: ({ OrgSettings } = data);
+let { SettingsData } = data;
+$: ({ SettingsData } = data);
 </script>
 
 <svelte:head>
   <title>Datablocks | Settings</title>
-  <meta name="description" content="User Settings" />
+  <meta name="description" content="Org Settings" />
 </svelte:head>
 <div class="page-container">
   <section class="space-y-4">
     <h1 class="h1">Configuration</h1>
     <p>Here you can change org settings</p>
   </section>
-  <section class="space-y-4">
-    <MaybeError
-      debug={true}
-      entityName="OrgSettings"
-      result={$OrgSettings}
-      let:data={$OrgSettings}
-    >
-      <SettingsMetadata data={$OrgSettings} />
-    </MaybeError>
-  </section>
+
+  <MaybeError
+    debug={true}
+    entityName="Settings"
+    result={$SettingsData}
+    let:data={$SettingsData}
+  >
+    <section class="space-y-4">
+      <SettingsMetadata data={$SettingsData} />
+    </section>
+  </MaybeError>
   <MaybeError
     debug={false}
-    entityName="OrgSettings"
-    result={$OrgSettings}
+    entityName="Settings"
+    result={$SettingsData}
     let:data={{ organizations_by_pk }}
   >
-    <Settings organization={organizations_by_pk} />
-    <SettingsWithDefaults data={$OrgSettings} organization={organizations_by_pk} />
+    {#if organizations_by_pk}
+      <section class="space-y-4">
+        <Settings organization={organizations_by_pk} />
+      </section>
+      <section class="space-y-4">
+        <SettingsWithDefaults organization={organizations_by_pk} />
+      </section>
+    {/if}
   </MaybeError>
 </div>

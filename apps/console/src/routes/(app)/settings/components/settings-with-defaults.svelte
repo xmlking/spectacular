@@ -1,11 +1,18 @@
 <script lang="ts">
-import { cache, PendingValue, graphql, fragment, type SettingsWithDefaultsFragment, type OrgSettings$result } from '$houdini';
+import {
+  cache,
+  PendingValue,
+  graphql,
+  fragment,
+  type SettingsWithDefaultsFragment,
+  type SettingsData$result,
+} from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Settings } from 'lucide-svelte';
 // Variables
-// export let data: OrgSettings$result;
+// export let data: SettingsData$result;
 export let organization: SettingsWithDefaultsFragment;
 $: data = fragment(
   organization,
@@ -68,13 +75,13 @@ const rows = handler.getRows();
   <div class="page-container p-0">
     <div class="flex items-center gap-2">
       <Settings class="w-5 h-5" />
-      <h1>Effective Settings</h1>
+      <h1>Settings with defaults</h1>
     </div>
     <table class="table table-hover table-compact w-full table-auto">
       <thead>
         <tr>
           <Table.Head {handler} orderBy="key">Key</Table.Head>
-          <Table.Head {handler} orderBy="value">Default Value</Table.Head>
+          <Table.Head {handler} orderBy="value">Value</Table.Head>
         </tr>
       </thead>
       <tbody>

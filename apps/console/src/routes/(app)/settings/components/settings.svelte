@@ -32,7 +32,7 @@ const rows = handler.getRows();
       <div class="flex justify-between items-center">
         <div class="flex items-center gap-2">
           <User class="w-5 h-5" />
-          <h1>Org Settings</h1>
+          <h1>Settings</h1>
         </div>
         <button class="btn variant-filled-primary"> Add Settings </button>
       </div>
@@ -42,7 +42,7 @@ const rows = handler.getRows();
       <thead>
         <tr>
           <Table.Head {handler} orderBy="key">Key</Table.Head>
-          <Table.Head {handler} orderBy="value">Default Value</Table.Head>
+          <Table.Head {handler} orderBy="value">Value</Table.Head>
         </tr>
       </thead>
       <tbody>
