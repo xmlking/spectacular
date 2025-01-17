@@ -2,7 +2,8 @@
 import { graphql, fragment, type SettingsWithDefaultsFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
-import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
+import { DateTime } from '@spectacular/skeleton/components';
+import { DataHandler } from '@vincjo/datatables/legacy';
 import { Settings } from 'lucide-svelte';
 
 export let organization: SettingsWithDefaultsFragment;
@@ -13,6 +14,7 @@ $: data = fragment(
         settingsWithDefaults(order_by: { key: asc }) {
           key
           value
+          updatedAt
         }
       }
     `),
@@ -35,6 +37,7 @@ const rows = handler.getRows();
         <tr>
           <Table.Head {handler} orderBy="key">Key</Table.Head>
           <Table.Head {handler} orderBy="value">Value</Table.Head>
+          <Table.Head {handler} orderBy="updatedAt">Updated At</Table.Head>
         </tr>
       </thead>
       <tbody>
@@ -49,6 +52,13 @@ const rows = handler.getRows();
                 {row.value}
               {/if}</td
             >
+            <td>
+              {#if row.updatedAt}
+                 <DateTime distance time={row.updatedAt} />
+              {:else}
+                 <p>N/A</p>
+              {/if}
+            </td>
           </tr>
         {/each}
       </tbody>

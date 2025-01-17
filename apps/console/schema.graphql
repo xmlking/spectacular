@@ -7959,12 +7959,12 @@ input settings_updates {
 View that expand public.setting table with missing key/values from public.settings_metadata
 """
 type settings_with_defaults {
-  created_at: timestamptz
-  created_by: uuid
+  createdAt: timestamptz
+  createdBy: uuid
   key: String
-  org_id: uuid
-  updated_at: timestamptz
-  updated_by: uuid
+  orgId: uuid
+  updatedAt: timestamptz
+  updatedBy: uuid
   value(
     """JSON select path"""
     path: String
@@ -8015,67 +8015,67 @@ input settings_with_defaults_bool_exp {
   _and: [settings_with_defaults_bool_exp!]
   _not: settings_with_defaults_bool_exp
   _or: [settings_with_defaults_bool_exp!]
-  created_at: timestamptz_comparison_exp
-  created_by: uuid_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  createdBy: uuid_comparison_exp
   key: String_comparison_exp
-  org_id: uuid_comparison_exp
-  updated_at: timestamptz_comparison_exp
-  updated_by: uuid_comparison_exp
+  orgId: uuid_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: uuid_comparison_exp
   value: jsonb_comparison_exp
 }
 
 """aggregate max on columns"""
 type settings_with_defaults_max_fields {
-  created_at: timestamptz
-  created_by: uuid
+  createdAt: timestamptz
+  createdBy: uuid
   key: String
-  org_id: uuid
-  updated_at: timestamptz
-  updated_by: uuid
+  orgId: uuid
+  updatedAt: timestamptz
+  updatedBy: uuid
 }
 
 """
 order by max() on columns of table "settings_with_defaults"
 """
 input settings_with_defaults_max_order_by {
-  created_at: order_by
-  created_by: order_by
+  createdAt: order_by
+  createdBy: order_by
   key: order_by
-  org_id: order_by
-  updated_at: order_by
-  updated_by: order_by
+  orgId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
 }
 
 """aggregate min on columns"""
 type settings_with_defaults_min_fields {
-  created_at: timestamptz
-  created_by: uuid
+  createdAt: timestamptz
+  createdBy: uuid
   key: String
-  org_id: uuid
-  updated_at: timestamptz
-  updated_by: uuid
+  orgId: uuid
+  updatedAt: timestamptz
+  updatedBy: uuid
 }
 
 """
 order by min() on columns of table "settings_with_defaults"
 """
 input settings_with_defaults_min_order_by {
-  created_at: order_by
-  created_by: order_by
+  createdAt: order_by
+  createdBy: order_by
   key: order_by
-  org_id: order_by
-  updated_at: order_by
-  updated_by: order_by
+  orgId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
 }
 
 """Ordering options when selecting data from "settings_with_defaults"."""
 input settings_with_defaults_order_by {
-  created_at: order_by
-  created_by: order_by
+  createdAt: order_by
+  createdBy: order_by
   key: order_by
-  org_id: order_by
-  updated_at: order_by
-  updated_by: order_by
+  orgId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
   value: order_by
 }
 
@@ -8084,22 +8084,22 @@ select columns of table "settings_with_defaults"
 """
 enum settings_with_defaults_select_column {
   """column name"""
-  created_at
+  createdAt
 
   """column name"""
-  created_by
+  createdBy
 
   """column name"""
   key
 
   """column name"""
-  org_id
+  orgId
 
   """column name"""
-  updated_at
+  updatedAt
 
   """column name"""
-  updated_by
+  updatedBy
 
   """column name"""
   value
@@ -8118,12 +8118,12 @@ input settings_with_defaults_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input settings_with_defaults_stream_cursor_value_input {
-  created_at: timestamptz
-  created_by: uuid
+  createdAt: timestamptz
+  createdBy: uuid
   key: String
-  org_id: uuid
-  updated_at: timestamptz
-  updated_by: uuid
+  orgId: uuid
+  updatedAt: timestamptz
+  updatedBy: uuid
   value: jsonb
 }
 

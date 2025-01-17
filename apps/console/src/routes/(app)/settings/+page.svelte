@@ -25,7 +25,6 @@ $: ({ SettingsData } = data);
   </section>
 
   <MaybeError
-    debug={true}
     entityName="Settings"
     result={$SettingsData}
     let:data={$SettingsData}
@@ -35,7 +34,6 @@ $: ({ SettingsData } = data);
     </section>
   </MaybeError>
   <MaybeError
-    debug={false}
     entityName="Settings"
     result={$SettingsData}
     let:data={{ organizations_by_pk }}
