@@ -45,11 +45,11 @@ query ListRules($limit: Int = 50, $offset: Int = 0, $order_by: [rules_order_by!]
     createdBy
     description
     displayName
-    organization
+    orgId
     updatedBy
     createdAt
     updatedAt
-    annotations
+    metadata
     shared
     id
     action
@@ -86,7 +86,7 @@ x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 query SearchSharedRules($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy: [rules_order_by!] = [{updatedAt: desc_nulls_last}]) {
   rules(order_by: $orderBy, limit: $limit, offset: $offset, where: {displayName: {_like: $filter}, shared: {_eq: true}}) {
     action
-    annotations
+    metadata
     appId
 	throttleRate
     createdAt
@@ -97,7 +97,7 @@ query SearchSharedRules($filter: String!, $limit: Int = 50, $offset: Int = 0, $o
     direction
     displayName
     id
-    organization
+    orgId
     protocol
     shared
     source
@@ -135,7 +135,7 @@ x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 query GetRule($id: uuid!) {
   rules_by_pk(id: $id) {
     action
-    annotations
+    metadata
     appId
 	throttleRate
     createdAt
@@ -146,7 +146,7 @@ query GetRule($id: uuid!) {
     direction
     displayName
     id
-    organization
+    orgId
     protocol
     shared
     source
@@ -180,7 +180,7 @@ x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 mutation CreateRule($data: rules_insert_input!) {
   insert_rules_one(object: $data) {
     action
-    annotations
+    metadata
     appId
 	throttleRate
     createdAt
@@ -191,7 +191,7 @@ mutation CreateRule($data: rules_insert_input!) {
     direction
     displayName
     id
-    organization
+    orgId
     protocol
     shared
     source
@@ -208,15 +208,15 @@ mutation CreateRule($data: rules_insert_input!) {
     "displayName": "youtube_blocker_2",
     "description":"Block Youtube from work IP",
     "tags":["tz","us"],
-    "annotations":"sumo=>demo",
-	"destination": "199.223.232.0",
-	"destinationPort": "443",
-	"source": "127.0.0.1",
-	"sourcePort": "*",
-	"direction": "egress",
-	"action": "block",
-	"protocol": "ICMPV6",
-	"shared": true,
+    "metadata": {"sumo2": "demo2"},
+    "destination": "199.223.232.0",
+    "destinationPort": "443",
+    "source": "127.0.0.1",
+    "sourcePort": "*",
+    "direction": "egress",
+    "action": "block",
+    "protocol": "ICMPV6",
+    "shared": true,
     "weight": 555
   }
 }
@@ -245,9 +245,9 @@ x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 mutation UpdateRule($id: uuid!, $data: rules_set_input!) {
   update_rules_by_pk(pk_columns: {id: $id}, _set: $data) {
     action
-    annotations
+    metadata
     appId
-	throttleRate
+    throttleRate
     createdAt
     createdBy
     description
@@ -256,7 +256,7 @@ mutation UpdateRule($id: uuid!, $data: rules_set_input!) {
     direction
     displayName
     id
-    organization
+    orgId
     protocol
     shared
     source
@@ -273,7 +273,7 @@ mutation UpdateRule($id: uuid!, $data: rules_set_input!) {
   "data": {
 	"description":"Block Youtube from work IP v2",
     "tags":["tz","us"],
-    "annotations":"sumo2=>demo2"
+    "metadata": {"sumo2": "demo2"}
   }
 }
 
@@ -291,13 +291,12 @@ x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4
 x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
-mutation DeleteRule($id: uuid!, $deletedAt: timestamptz!) {
-	update_rules_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+mutation DeleteRule($id: uuid!) {
+	delete_rules_by_pk( id: $id ) {
 		displayName
 	}
 }
 
 {
-  "id": "{{createdRuleId}}",
-  "deletedAt": "{{$localDatetime iso8601}}"
+  "id": "{{createdRuleId}}"
 }

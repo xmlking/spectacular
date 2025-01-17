@@ -45,12 +45,11 @@ query ListPools($limit: Int = 50, $offset: Int = 0, $order_by: [pools_order_by!]
 	createdBy
 	description
 	displayName
-	organization
-    updatedBy
+	orgId
+  updatedBy
 	createdAt
-	deletedAt
 	updatedAt
-	annotations
+	metadata
 	id
   }
 }
@@ -79,18 +78,17 @@ query SearchPools($filter: String!, $limit: Int = 50, $offset: Int = 0, $orderBy
     createdBy
     description
     displayName
-    organization
+    orgId
     updatedBy
     createdAt
-    deletedAt
     updatedAt
-    annotations
+    metadata
     id
   }
 }
 
 {
-  "filter": "%sumanth%",
+  "filter": "%pool%",
   "limit": 2
 }
 
@@ -116,14 +114,13 @@ query GetPool($id: uuid!) {
     id
     displayName
     description
-    organization
+    orgId
     tags
-    annotations
+    metadata
     createdAt
     createdBy
     updatedAt
     updatedBy
-    deletedAt
   }
 }
 
@@ -152,7 +149,7 @@ mutation CreatePool($data: pools_insert_input!) {
     displayName
 	description
 	tags
-	annotations
+	metadata
   }
 }
 
@@ -161,7 +158,7 @@ mutation CreatePool($data: pools_insert_input!) {
     "displayName": "1_SumouserPool",
     "description":"SumouserPool Description",
     "tags":["tz","us"],
-    "annotations":"sumanthKey=>SumanthValue"
+    "metadata": {"sumo2": "demo2"}
   }
 }
 ###
@@ -188,8 +185,8 @@ mutation UpdatePool($id: uuid!, $data: pools_set_input!) {
     id
     displayName
     description
-	tags
-	annotations
+    tags
+    metadata
     updatedAt
   }
 }
@@ -199,7 +196,7 @@ mutation UpdatePool($id: uuid!, $data: pools_set_input!) {
   "data": {
 	"description":"SumouserPool Description updated v1",
     "tags":["tz","us"],
-    "annotations":"updatedSumanthKey=>updatedSumanthValue"
+    "metadata": {"sumo2": "demo2"}
   }
 }
 
@@ -217,13 +214,12 @@ x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4
 x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
-mutation DeletePool($id: uuid!, $deletedAt: timestamptz!) {
-	update_pools_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+mutation DeletePool($id: uuid!) {
+	delete_pools_by_pk(id: $id ) {
 		displayName
 	}
 }
 
 {
-  "id": "{{createdPoolId}}",
-  "deletedAt": "{{$localDatetime iso8601}}"
+  "id": "{{createdPoolId}}"
 }

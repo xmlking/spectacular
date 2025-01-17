@@ -100,7 +100,7 @@ array_relationships:
       foreign_key_constraint_on:
         column: org_id
         table:
-          name: org_settings
+          name: settings
           schema: public
   - name: subscriptions
     using:
@@ -113,7 +113,7 @@ computed_fields:
   - name: settingsWithDefaults
     definition:
       function:
-        name: org_settings_with_defaults
+        name: settings_with_defaults
         schema: public
 insert_permissions:
   - role: user

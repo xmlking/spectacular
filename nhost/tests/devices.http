@@ -43,17 +43,16 @@ x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 query ListDevices($limit: Int = 50, $offset: Int = 0, $order_by: [devices_order_by!] = [{updatedAt: desc_nulls_last}]) {
   devices(limit: $limit, offset: $offset, order_by: $order_by) {
     ip
-	tags
-	createdBy
-	description
-	displayName
-	organization
+    tags
+    createdBy
+    description
+    displayName
+    orgId
     updatedBy
-	createdAt
-	deletedAt
-	updatedAt
-	annotations
-	id
+    createdAt
+    updatedAt
+    metadata
+    id
   }
 }
 
@@ -75,7 +74,6 @@ x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
-
 query SearchDevices($where: devices_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [devices_order_by!] = [{updatedAt: desc_nulls_last}]) {
   devices(order_by: $orderBy, limit: $limit, offset: $offset, where: $where) {
     ip
@@ -83,12 +81,11 @@ query SearchDevices($where: devices_bool_exp, $limit: Int = 50, $offset: Int = 0
     createdBy
     description
     displayName
-    organization
+    orgId
     updatedBy
     createdAt
-    deletedAt
     updatedAt
-    annotations
+    metadata
     id
   }
 }
@@ -123,14 +120,13 @@ query GetDevice($id: uuid!) {
 	ip
     displayName
     description
-    organization
+    orgId
     tags
-    annotations
+    metadata
     createdAt
     createdBy
     updatedAt
     updatedBy
-    deletedAt
   }
 }
 
@@ -166,7 +162,7 @@ mutation UpdateDevice($id: uuid!, $data: devices_set_input!) {
   "data":{
     "description":"user 1 device v3",
     "tags":["tz","us"],
-    "annotations":"\"sumo\"=>\"demo3\""
+    "metadata": {"sumo": "demo3"}
   }
 }
 
@@ -185,26 +181,25 @@ x-hasura-default-org: chinthagunta
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 mutation CreateDevice($data: devices_insert_input!) {
-  insert_devices_one(object: $data, on_conflict: {update_columns: [ip, description, tags, annotations], constraint: devices_display_name_organization_key, where: {deletedAt: {_is_null: true}}}) {
-    annotations
+  insert_devices_one(object: $data, on_conflict: {update_columns: [ip, description, tags, metadata], constraint: devices_display_name_organization_key}) {
+    metadata
     ip
     id
     displayName
     tags
-    organization
+    orgId
     description
     createdAt
     createdBy
     updatedAt
     updatedBy
-    deletedAt
   }
 }
 
 
 {
   "data":{
-    "annotations": "\"sumo\"=>\"demo\"",
+    "metadata": {"sumo": "demo3"},
     "displayName": "test-ddd",
     "ip": "1.1.1.2"
   }
@@ -228,13 +223,12 @@ x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4
 x-hasura-default-org: chinthagunta
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
-mutation DeleteDevice($id: uuid!, $deletedAt: timestamptz!) {
-	update_devices_by_pk(pk_columns: { id: $id }, _set: { deletedAt: $deletedAt }) {
+mutation DeleteDevice($id: uuid!) {
+	delete_devices_by_pk( id: $id) {
 		displayName
 	}
 }
 
 {
-  "id": "{{createdDeviceId}}",
-  "deletedAt": "{{$localDatetime iso8601}}"
+  "id": "{{createdDeviceId}}"
 }

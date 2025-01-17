@@ -2,18 +2,22 @@
 import { PendingValue, type OrgSettings$result, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
+import { Logger } from '@spectacular/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Settings, User } from 'lucide-svelte';
+
+const log = new Logger('settings:allowed-keys:browser');
 // Variables
 export let data: OrgSettings$result;
-let { setting_keys } = data;
-$: ({ setting_keys } = data);
+
+let { settings_metadata } = data;
+$: ({ settings_metadata } = data);
 
 //Datatable handler initialization
-const handler = new DataHandler(setting_keys.filter(loaded), {
+const handler = new DataHandler(settings_metadata.filter(loaded), {
   rowsPerPage: 10,
 });
-$: handler.setRows(setting_keys);
+$: handler.setRows(settings_metadata);
 const rows = handler.getRows();
 </script>
 

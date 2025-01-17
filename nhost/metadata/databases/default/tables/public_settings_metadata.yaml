@@ -1,5 +1,5 @@
 table:
-  name: setting_keys
+  name: settings_metadata
   schema: public
 insert_permissions:
   - role: sys:admin
@@ -41,7 +41,7 @@ update_permissions:
         - description
         - key
       filter: {}
-      check: null
+      check: {}
     comment: ""
 delete_permissions:
   - role: sys:admin

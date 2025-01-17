@@ -40,8 +40,7 @@ Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
 x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: org:admin
-x-hasura-role: org:admin
-x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-allowed-orgs: {"8dfd9a31-de01-47be-92a7-ba1c720c6270", "d5dbb6b6-5e43-4dca-b855-be9b65b6695b"}
 x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
@@ -68,13 +67,12 @@ query ListPolicies(
     createdAt
     updatedAt
     updatedBy
-    organization
     rule {
       id
       displayName
       description
       tags
-      annotations
+      metadata
       shared
       source
       sourcePort
@@ -84,13 +82,13 @@ query ListPolicies(
       direction
       action
       appId
-	  throttleRate
+      throttleRate
       weight
       createdBy
       createdAt
       updatedAt
       updatedBy
-      organization
+      orgId
     }
   }
 }
@@ -134,9 +132,9 @@ query SearchAgentPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: 
       direction
       action
       appId
-	  throttleRate
+      throttleRate
       weight
-      organization
+      orgId
     }
   }
 }
@@ -179,13 +177,13 @@ query SearchPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int =
     createdAt
     updatedAt
     updatedBy
-    organization
+    orgId
     rule {
       id
       displayName
       description
       tags
-      annotations
+      metadata
       shared
       source
       sourcePort
@@ -195,13 +193,13 @@ query SearchPolicies($where: policies_bool_exp, $limit: Int = 50, $offset: Int =
       direction
       action
       appId
-	  throttleRate
+	    throttleRate
       weight
       createdBy
       createdAt
       updatedAt
       updatedBy
-      organization
+      orgId
     }
   }
 }
@@ -248,13 +246,13 @@ query GetPolicy($id: uuid!) {
     createdAt
     updatedAt
     updatedBy
-    organization
+    orgId
     rule {
       id
       displayName
       description
       tags
-      annotations
+      metadata
       shared
       source
       sourcePort
@@ -264,13 +262,13 @@ query GetPolicy($id: uuid!) {
       direction
       action
       appId
-	  throttleRate
+      throttleRate
       weight
       createdBy
       createdAt
       updatedAt
       updatedBy
-      organization
+      orgId
     }
   }
 }
@@ -313,13 +311,13 @@ mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $rule
     createdAt
     updatedAt
     updatedBy
-    organization
+    orgId
     rule {
       id
       displayName
       description
       tags
-      annotations
+      metadata
       shared
       source
       sourcePort
@@ -329,13 +327,13 @@ mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $rule
       direction
       action
       appId
-	  throttleRate
+      throttleRate
       weight
       createdBy
       createdAt
       updatedAt
       updatedBy
-      organization
+      orgId
     }
   }
   update_rules_by_pk(pk_columns: {id: $ruleId}, _set: $ruleData) {
@@ -355,13 +353,13 @@ mutation UpdatePolicy($policyId: uuid!, $policyData: policies_set_input!,  $rule
     "displayName":"block youtube {{$randomInt 5 200}}",
     "description":"block youtube policy",
     "tags":["tz","us"],
-    "annotations":"sumo2=>demo2",
+    "metadata": {"sumo2": "demo2"},
     "weight": 670,
     "action": "block",
     "direction": "egress",
     "protocol": "Any",
     "appId":"myapp.exe",
-	"throttleRate": "75",
+    "throttleRate": "75",
     "destination":"1.1.1.1",
     "destinationPort":"443",
     "source":"0.0.0.0",
@@ -398,13 +396,13 @@ mutation CreatePolicy($data: policies_insert_input!) {
     createdAt
     updatedAt
     updatedBy
-    organization
+    orgId
     rule {
       id
       displayName
       description
       tags
-      annotations
+      metadata
       shared
       source
       sourcePort
@@ -420,7 +418,7 @@ mutation CreatePolicy($data: policies_insert_input!) {
       createdAt
       updatedAt
       updatedBy
-      organization
+      orgId
     }
   }
 }
@@ -440,7 +438,7 @@ mutation CreatePolicy($data: policies_insert_input!) {
 				"displayName":"block youtube {{$randomInt 5 200}}",
 				"description":"block youtube policy",
 				"tags":["tz","us"],
-				"annotations":"\"sumo\"=>\"demo\"",
+				"metadata": {"sumo2": "demo2"},
 				"shared": false,
 				"weight": 670,
 				"action": "block",
@@ -500,15 +498,15 @@ x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4
 x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
 x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
-mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!) {
-  update_policies_by_pk(pk_columns: {id: $policyId}, _set: {deletedAt: $deletedAt}) {
+mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!) {
+  update_policies_by_pk(id: $policyId) {
     id
   }
-  update_rules(where: {shared: {_eq: false}, id: {_eq: $ruleId}}, _set: {deletedAt: $deletedAt}) {
+  delete_rules(where: {shared: {_eq: false}, id: {_eq: $ruleId}}) {
     affected_rows
     returning {
       id
-	  displayName
+      displayName
     }
   }
 }
@@ -516,16 +514,5 @@ mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!
 
 {
   "policyId":"{{createdPoliciyId}}",
-  "ruleId": "{{createdPolicyRuleId}}",
-  "deletedAt": "{{$localDatetime iso8601}}"
+  "ruleId": "{{createdPolicyRuleId}}"
 }
-
-
-# mutation DeletePolicy($policyId: uuid!, $ruleId: uuid!, $deletedAt: timestamptz!) {
-#   update_policies_by_pk(pk_columns: {id: $policyId}, _set: {deletedAt: $deletedAt}) {
-#     id
-#   }
-#   update_rules_by_pk(pk_columns: {id: $ruleId}, _set: {deletedAt: $deletedAt}) {
-#     id
-#   }
-# }

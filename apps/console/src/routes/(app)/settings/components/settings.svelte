@@ -1,16 +1,16 @@
 <script lang="ts">
-import { cache, PendingValue, graphql, fragment, type OrgSettingsFragment } from '$houdini';
+import { cache, PendingValue, graphql, fragment, type SettingsFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { User, Plus } from 'lucide-svelte';
 // Variables
-export let organization: OrgSettingsFragment;
+export let organization: SettingsFragment;
 $: dataa = fragment(
   organization,
   graphql(`
-      fragment OrgSettingsFragment on organizations {
-        settings {
+      fragment SettingsFragment on organizations {
+        settings(order_by: { key: asc }) {
           key
           value
         }

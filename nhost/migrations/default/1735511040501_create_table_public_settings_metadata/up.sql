@@ -1,7 +1,7 @@
 -- Metadata for Constraints: Allows flexible definitions of permissible values for settings.
 -- Dynamic Validation: Enables runtime checks (via application or triggers) to ensure values adhere to allowed options.
 -- Extensibility: Can store complex rules for validation (e.g., ranges, lists, or logical conditions).
-CREATE TABLE public.setting_keys
+CREATE TABLE public.settings_metadata
 (
   key            text PRIMARY KEY,
   description    text,
@@ -9,9 +9,9 @@ CREATE TABLE public.setting_keys
   allowed_values JSONB,
   CHECK (key ~ '^[A-Z]+(_[A-Z]+)*$') -- Allows only uppercase letters and underscores
 );
-COMMENT ON TABLE public.setting_keys IS 'Table containing Organization unique Setting keys and Feature Flags, act like enum';
+COMMENT ON TABLE public.settings_metadata IS 'Table containing Organization unique Setting keys and Feature Flags, act like enum';
 ---
-INSERT INTO public.setting_keys (key, description, default_value, allowed_values)
+INSERT INTO public.settings_metadata (key, description, default_value, allowed_values)
 VALUES
   ('THEME_COLOR', 'Theme color for the application', '"dark"', '["dark", "light"]'),
   ('ITEMS_PER_PAGE', 'Number of items displayed per page', '10', '{"min": 1, "max": 100}'),
