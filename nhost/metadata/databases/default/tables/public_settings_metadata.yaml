@@ -1,6 +1,16 @@
 table:
   name: settings_metadata
   schema: public
+configuration:
+  column_config:
+    allowed_values:
+      custom_name: allowedValues
+    default_value:
+      custom_name: defaultValue
+  custom_column_names:
+    allowed_values: allowedValues
+    default_value: defaultValue
+  custom_root_fields: {}
 insert_permissions:
   - role: sys:admin
     permission:

@@ -2888,7 +2888,7 @@ type mutation_root {
   """
   delete single row from the table: "settings"
   """
-  delete_settings_by_pk(key: String!, org_id: uuid!): settings
+  delete_settings_by_pk(key: String!, orgId: uuid!): settings
 
   """
   delete data from the table: "user_groups"
@@ -6464,7 +6464,7 @@ type query_root {
   ): settings_aggregate!
 
   """fetch data from the table: "settings" using primary key columns"""
-  settings_by_pk(key: String!, org_id: uuid!): settings
+  settings_by_pk(key: String!, orgId: uuid!): settings
 
   """
   fetch data from the table: "settings_metadata"
@@ -7549,12 +7549,12 @@ input rules_variance_order_by {
 
 """Table containing organization's settings and feature flags"""
 type settings {
-  created_at: timestamptz!
-  created_by: uuid!
+  createdAt: timestamptz!
+  createdBy: uuid!
   key: String!
-  org_id: uuid!
-  updated_at: timestamptz!
-  updated_by: uuid!
+  orgId: uuid!
+  updatedAt: timestamptz!
+  updatedBy: uuid!
   value(
     """JSON select path"""
     path: String
@@ -7620,12 +7620,12 @@ input settings_bool_exp {
   _and: [settings_bool_exp!]
   _not: settings_bool_exp
   _or: [settings_bool_exp!]
-  created_at: timestamptz_comparison_exp
-  created_by: uuid_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  createdBy: uuid_comparison_exp
   key: String_comparison_exp
-  org_id: uuid_comparison_exp
-  updated_at: timestamptz_comparison_exp
-  updated_by: uuid_comparison_exp
+  orgId: uuid_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: uuid_comparison_exp
   value: jsonb_comparison_exp
 }
 
@@ -7670,35 +7670,35 @@ input settings_insert_input {
 
 """aggregate max on columns"""
 type settings_max_fields {
-  created_at: timestamptz
-  created_by: uuid
+  createdAt: timestamptz
+  createdBy: uuid
   key: String
-  org_id: uuid
-  updated_at: timestamptz
-  updated_by: uuid
+  orgId: uuid
+  updatedAt: timestamptz
+  updatedBy: uuid
 }
 
 """
 order by max() on columns of table "settings"
 """
 input settings_max_order_by {
-  created_at: order_by
-  created_by: order_by
+  createdAt: order_by
+  createdBy: order_by
   key: order_by
-  org_id: order_by
-  updated_at: order_by
-  updated_by: order_by
+  orgId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
 }
 
 """
 Table containing Organization unique Setting keys and Feature Flags, act like enum
 """
 type settings_metadata {
-  allowed_values(
+  allowedValues(
     """JSON select path"""
     path: String
   ): jsonb
-  default_value(
+  defaultValue(
     """JSON select path"""
     path: String
   ): jsonb
@@ -7730,8 +7730,8 @@ input settings_metadata_bool_exp {
   _and: [settings_metadata_bool_exp!]
   _not: settings_metadata_bool_exp
   _or: [settings_metadata_bool_exp!]
-  allowed_values: jsonb_comparison_exp
-  default_value: jsonb_comparison_exp
+  allowedValues: jsonb_comparison_exp
+  defaultValue: jsonb_comparison_exp
   description: String_comparison_exp
   key: String_comparison_exp
 }
@@ -7750,8 +7750,8 @@ type settings_metadata_min_fields {
 
 """Ordering options when selecting data from "settings_metadata"."""
 input settings_metadata_order_by {
-  allowed_values: order_by
-  default_value: order_by
+  allowedValues: order_by
+  defaultValue: order_by
   description: order_by
   key: order_by
 }
@@ -7761,10 +7761,10 @@ select columns of table "settings_metadata"
 """
 enum settings_metadata_select_column {
   """column name"""
-  allowed_values
+  allowedValues
 
   """column name"""
-  default_value
+  defaultValue
 
   """column name"""
   description
@@ -7786,32 +7786,32 @@ input settings_metadata_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input settings_metadata_stream_cursor_value_input {
-  allowed_values: jsonb
-  default_value: jsonb
+  allowedValues: jsonb
+  defaultValue: jsonb
   description: String
   key: String
 }
 
 """aggregate min on columns"""
 type settings_min_fields {
-  created_at: timestamptz
-  created_by: uuid
+  createdAt: timestamptz
+  createdBy: uuid
   key: String
-  org_id: uuid
-  updated_at: timestamptz
-  updated_by: uuid
+  orgId: uuid
+  updatedAt: timestamptz
+  updatedBy: uuid
 }
 
 """
 order by min() on columns of table "settings"
 """
 input settings_min_order_by {
-  created_at: order_by
-  created_by: order_by
+  createdAt: order_by
+  createdBy: order_by
   key: order_by
-  org_id: order_by
-  updated_at: order_by
-  updated_by: order_by
+  orgId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
 }
 
 """
@@ -7836,19 +7836,19 @@ input settings_on_conflict {
 
 """Ordering options when selecting data from "settings"."""
 input settings_order_by {
-  created_at: order_by
-  created_by: order_by
+  createdAt: order_by
+  createdBy: order_by
   key: order_by
-  org_id: order_by
-  updated_at: order_by
-  updated_by: order_by
+  orgId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
   value: order_by
 }
 
 """primary key columns input for table: settings"""
 input settings_pk_columns_input {
   key: String!
-  org_id: uuid!
+  orgId: uuid!
 }
 
 """prepend existing jsonb value of filtered columns with new jsonb value"""
@@ -7861,22 +7861,22 @@ select columns of table "settings"
 """
 enum settings_select_column {
   """column name"""
-  created_at
+  createdAt
 
   """column name"""
-  created_by
+  createdBy
 
   """column name"""
   key
 
   """column name"""
-  org_id
+  orgId
 
   """column name"""
-  updated_at
+  updatedAt
 
   """column name"""
-  updated_by
+  updatedBy
 
   """column name"""
   value
@@ -7902,12 +7902,12 @@ input settings_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input settings_stream_cursor_value_input {
-  created_at: timestamptz
-  created_by: uuid
+  createdAt: timestamptz
+  createdBy: uuid
   key: String
-  org_id: uuid
-  updated_at: timestamptz
-  updated_by: uuid
+  orgId: uuid
+  updatedAt: timestamptz
+  updatedBy: uuid
   value: jsonb
 }
 
@@ -9163,7 +9163,7 @@ type subscription_root {
   ): settings_aggregate!
 
   """fetch data from the table: "settings" using primary key columns"""
-  settings_by_pk(key: String!, org_id: uuid!): settings
+  settings_by_pk(key: String!, orgId: uuid!): settings
 
   """
   fetch data from the table: "settings_metadata"

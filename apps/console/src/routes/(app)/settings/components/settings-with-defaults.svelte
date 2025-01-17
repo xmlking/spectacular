@@ -29,8 +29,8 @@ $: data = fragment(
 // const settingKeyss = settings_metadata.map((setting) => ({
 //   key: setting.key,
 //   description: setting.description,
-//   allowed_values: setting.allowed_values,
-//   default_value: setting.default_value,
+//   allowedValues: setting.allowedValues,
+//   defaultValue: setting.defaultValue,
 // }));
 $: ({ settingsWithDefaults } = $data);
 //Datatable handler initialization
@@ -41,7 +41,7 @@ const handler = new DataHandler(settingsWithDefaults?.filter(loaded), {
 // Function to get default value for a given key
 // function getDefaultValue(key) {
 //   const setting = settingKeyss.find((item) => item.key === key);
-//   return setting ? setting.default_value : null;
+//   return setting ? setting.defaultValue : null;
 // }
 
 // Ensure all settings have default values and add missing settings

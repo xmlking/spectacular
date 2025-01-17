@@ -6,7 +6,7 @@ query SettingsData($id: OrgIdFromSession!) {
   settings_metadata(order_by: { key: asc }) {
     key
     description
-    allowed_values
-    default_value
+    allowedValues
+    defaultValue
   }
 }

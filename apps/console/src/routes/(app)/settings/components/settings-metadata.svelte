@@ -34,10 +34,10 @@ const rows = handler.getRows();
             >Key</Table.Head
           >
           <Table.Head {handler} orderBy="description">Description</Table.Head>
-          <Table.Head {handler} orderBy="allowed_values"
+          <Table.Head {handler} orderBy="allowedValues"
             >Allowed Values</Table.Head
           >
-          <Table.Head {handler} orderBy="default_value"
+          <Table.Head {handler} orderBy="defaultValue"
             >Default Value</Table.Head
           >
         </tr>
@@ -49,17 +49,17 @@ const rows = handler.getRows();
             <td>{row.key}</td>
             <td>{row.description}</td>
             <td
-              >{#if Array.isArray(row.allowed_values)}
-                {row.allowed_values.join(", ")}
+              >{#if Array.isArray(row.allowedValues)}
+                {row.allowedValues.join(", ")}
               {:else}
-                {JSON.stringify(row.allowed_values)}
+                {JSON.stringify(row.allowedValues)}
               {/if}</td
             >
             <td
-              >{#if typeof row.default_value === "object"}
-                {JSON.stringify(row.default_value)}
+              >{#if typeof row.defaultValue === "object"}
+                {JSON.stringify(row.defaultValue)}
               {:else}
-                {row.default_value}
+                {row.defaultValue}
               {/if}</td
             >
           </tr>
