@@ -1,8 +1,12 @@
 query OrgSettings($id: OrgIdFromSession!) {
   organizations_by_pk(id: $id) {
-    settingsWithDefaults {
-      key
-      value
-    }
+    ...OrgSettingsFragment
+    ...OrgDefSettingsFragment
+  }
+  setting_keys {
+    key
+    description
+    allowed_values
+    default_value
   }
 }
