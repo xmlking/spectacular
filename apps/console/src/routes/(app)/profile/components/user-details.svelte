@@ -165,7 +165,8 @@ export const snapshot = { capture, restore };
 $: valid = $allErrors.length === 0;
 $: loadingState.setFormLoading($delayed);
 $: if (id !== PendingValue) {
-  $formData = { ...initialData };
+  // this will reset initialData after data is loaded.
+  reset({ newState: { ...initialData } });
 }
 </script>
 

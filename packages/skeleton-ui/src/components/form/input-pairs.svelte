@@ -32,6 +32,7 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
 -->
 <script lang="ts">
   // import { SvelteMap } from 'svelte/reactivity';
+  // TODO: add/remove animation like input-chips
   import { fly, scale, slide } from "svelte/transition";
   import { onMount, onDestroy } from "svelte";
 
@@ -39,11 +40,8 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
     string,
     readonly (string | number | boolean)[]
   >;
-  export let value: KeyValueRecord<typeof allowedKeyValues> | null  = {};
+  export let value: KeyValueRecord<typeof allowedKeyValues> | null;
   export let chips = "variant-filled";
-
-   // when value is set to null from parent, reset it to empty Map
-  $: value = value ?? {};
 
   let currentInput = "";
   let allowedKey = Object.keys(allowedKeyValues);
@@ -55,7 +53,9 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
   function addKeyValuePair() {
     const [key, val] = currentInput.split(":").map((s) => s.trim());
     if (key && val) {
-      if(value) value[key] = convertToType(val)
+       // when value is set to null from parent, set it to empty Map befor adding key
+      value = value ?? {}
+      value[key] = convertToType(val)
       // Force Svelte to detect the change by reassigning the Record
       value = value;
       currentInput = "";

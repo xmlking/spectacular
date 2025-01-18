@@ -1,29 +1,29 @@
 <script lang="ts">
-	import { X } from "lucide-svelte";
-	import { fade } from "svelte/transition";
-	import { Select, SelectContent, SelectItem, SelectTrigger } from "@spectacular/ui/components/select";
+import { X } from 'lucide-svelte';
+import { fade } from 'svelte/transition';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@spectacular/ui/components/select';
 
-	// Available roles for new member
-	const roles = ["owner", "admin", "member"];
+// Available roles for new member
+const roles = ['owner', 'admin', 'member'];
 
-	// Component props with default values
-	let { onClose = () => {}, onAdd = (member: any) => {} } = $props();
+// Component props with default values
+let { onClose = () => {}, onAdd = (member: any) => {} } = $props();
 
-	// Form data using $state
-	let name = $state("");
-	let selectedRole = $state("member");
+// Form data using $state
+let name = $state('');
+let selectedRole = $state('member');
 
-	/** Handle form submission */
-	const handleSubmit = (e: SubmitEvent) => {
-		e.preventDefault();
-		if (name.trim()) {
-			onAdd({
-				name,
-				role: selectedRole,
-				avatar: "$assets/ui-user.png",
-			});
-		}
-	};
+/** Handle form submission */
+const handleSubmit = (e: SubmitEvent) => {
+  e.preventDefault();
+  if (name.trim()) {
+    onAdd({
+      name,
+      role: selectedRole,
+      avatar: '$assets/ui-user.png',
+    });
+  }
+};
 </script>
 
 <div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4" transition:fade>

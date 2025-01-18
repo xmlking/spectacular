@@ -1,40 +1,42 @@
 <script lang="ts">
-	import { Search, Plus, Trash2 } from "lucide-svelte";
-	import MemberList from "./MemberList.svelte";
-	import AddMemberDialog from "./AddMemberDialog.svelte";
-	import { fade } from "svelte/transition";
+import { Search, Plus, Trash2 } from 'lucide-svelte';
+import MemberList from './MemberList.svelte';
+import AddMemberDialog from './AddMemberDialog.svelte';
+import { fade } from 'svelte/transition';
 
-	// Search query for filtering members
-	let searchQuery = $state("");
+// Search query for filtering members
+let searchQuery = $state('');
 
-	// Show/hide add member dialog
-	let showAddDialog = $state(false);
+// Show/hide add member dialog
+let showAddDialog = $state(false);
 
-	// Members list with their information
-	let members = $state([
-		{ id: 1, name: "John Doe", role: "owner", avatar: "$assets/ui-user.png" },
-		{ id: 2, name: "Jane Smith", role: "admin", avatar: "$assets/ui-user.png" },
-		{ id: 3, name: "Mike Johnson", role: "member", avatar: "$assets/ui-user.png" },
-	]);
+// Members list with their information
+let members = $state([
+  { id: 1, name: 'John Doe', role: 'owner', avatar: '$assets/ui-user.png' },
+  { id: 2, name: 'Jane Smith', role: 'admin', avatar: '$assets/ui-user.png' },
+  { id: 3, name: 'Mike Johnson', role: 'member', avatar: '$assets/ui-user.png' },
+]);
 
-	// Filter members based on search query
-	const filteredMembers = $derived(members.filter((member) => member.name.toLowerCase().includes(searchQuery.toLowerCase())));
+// Filter members based on search query
+const filteredMembers = $derived(
+  members.filter((member) => member.name.toLowerCase().includes(searchQuery.toLowerCase())),
+);
 
-	/** Handle member deletion */
-	const handleDeleteMember = (id: number) => {
-		members = members.filter((member) => member.id !== id);
-	};
+/** Handle member deletion */
+const handleDeleteMember = (id: number) => {
+  members = members.filter((member) => member.id !== id);
+};
 
-	/** Handle adding new member */
-	const handleAddMember = (member: any) => {
-		members = [...members, { ...member, id: members.length + 1 }];
-		showAddDialog = false;
-	};
+/** Handle adding new member */
+const handleAddMember = (member: any) => {
+  members = [...members, { ...member, id: members.length + 1 }];
+  showAddDialog = false;
+};
 
-	/** Handle role update */
-	const handleUpdateRole = (id: number, newRole: string) => {
-		members = members.map((member) => (member.id === id ? { ...member, role: newRole } : member));
-	};
+/** Handle role update */
+const handleUpdateRole = (id: number, newRole: string) => {
+  members = members.map((member) => (member.id === id ? { ...member, role: newRole } : member));
+};
 </script>
 
 <div class="w-full min-h-screen bg-background text-foreground p-6">

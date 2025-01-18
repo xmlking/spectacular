@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { Trash2 } from "lucide-svelte";
-	import { slide } from "svelte/transition";
-	import { Select, SelectContent, SelectItem, SelectTrigger } from "@spectacular/ui/components/select";
+import { Trash2 } from 'lucide-svelte';
+import { slide } from 'svelte/transition';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@spectacular/ui/components/select';
 
-	// Available roles for members
-	const roles = ["owner", "admin", "member"];
+// Available roles for members
+const roles = ['owner', 'admin', 'member'];
 
-	// Component props using proper svelte 5 syntax
-	let { members = [], onDelete = (id: number) => {}, onUpdateRole = (id: number, role: string) => {} } = $props();
+// Component props using proper svelte 5 syntax
+let { members = [], onDelete = (id: number) => {}, onUpdateRole = (id: number, role: string) => {} } = $props();
 </script>
 
 <div class="space-y-4">

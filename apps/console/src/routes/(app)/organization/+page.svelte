@@ -36,7 +36,7 @@ $: ({ OrganizationData } = data);
     {#if organizations_by_pk}
       <section class="space-y-4">
         <h2 class="h2">User Details</h2>
-        <p>Update your account information</p>
+        <p>Update your organization information</p>
         <OrganizationDetails organization={organizations_by_pk} />
       </section>
     {/if}

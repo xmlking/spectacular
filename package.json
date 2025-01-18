@@ -68,10 +68,10 @@
     "@spectacular/typescript-config": "workspace:*",
     "cspell": "8.17.2",
     "husky": "9.1.7",
-    "lint-staged": "15.3.0",
+    "lint-staged": "15.4.1",
     "markuplint": "4.11.4",
     "turbo": "2.3.3",
-    "vitest": "2.1.8"
+    "vitest": "3.0.2"
   },
   "packageManager": "pnpm@10.0.0",
   "engines": {
@@ -82,7 +82,9 @@
     "overrides": {
       "cross-spawn": ">=7.0.5"
     },
-    "onlyBuiltDependencies": ["@sveltejs/kit", "@vercel/speed-insights"]
+    "onlyBuiltDependencies": [
+      "@vercel/speed-insights"
+    ]
   },
   "manypkg": {
     "defaultBranch": "main",

@@ -56,7 +56,7 @@
 - [ ] Implement Changesets [(link)](https://github.com/changesets/changesets) with [turborepo](https://turbo.build/repo/docs/handbook/publishing-packages/versioning-and-publishing)
 - [ ] **TAURI:** Use [Tauri](https://tauri.app/) with [Skeleton](https://www.skeleton.dev/docs/tauri) for multi-platform.
 - [x] Charts with [Unovis](https://unovis.dev/). Explore [Gallery](https://unovis.dev/gallery)
-- [x] [Feature Flags](https://vercel.com/docs/workflow-collaboration/feature-flags/feature-flags-pattern) with [Vercel Feature Flags](https://vercel.com/docs/workflow-collaboration/feature-flags) and [Vercel Toolbar](https://vercel.com/docs/workflow-collaboration/vercel-toolbar)
+- [x] [Feature Flags](https://flags-sdk.dev/) with [Vercel Feature Flags](https://vercel.com/docs/workflow-collaboration/feature-flags) and [Vercel Toolbar](https://vercel.com/docs/workflow-collaboration/vercel-toolbar)
 
 ## Setup
 
