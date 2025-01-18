@@ -3,7 +3,6 @@ import { NhostClient, type NhostSession } from '@nhost/nhost-js';
 import { Logger } from '@spectacular/utils';
 import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
-import { waitFor } from 'xstate/lib/waitFor';
 
 export const log = new Logger('server:middleware:auth');
 /**
@@ -27,7 +26,7 @@ export const auth = (async ({ event, resolve }) => {
  * @param initialSession
  * @returns
  */
-async function getServerNhost(initialSession: NhostSession | undefined) {
+async function getServerNhost(session: NhostSession | undefined) {
   const nhost = new NhostClient({
     // subdomain: env.NHOST_SUBDOMAIN ?? 'local',
     // region: env.NHOST_REGION,
@@ -42,11 +41,8 @@ async function getServerNhost(initialSession: NhostSession | undefined) {
   });
 
   log.debug('initializing nhost cleint...');
-
-  nhost.auth.client.start({ initialSession });
-
-  if (nhost.auth.client.interpreter) {
-    await waitFor(nhost.auth.client.interpreter, (state) => !state.hasTag('loading'));
+  if (session) {
+    await nhost.auth.initWithSession({ session });
   }
 
   return nhost;

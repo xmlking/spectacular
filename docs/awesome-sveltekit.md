@@ -9,7 +9,7 @@ Awesome **SvelteKit** Links
   - [Skeleton UI](https://www.skeleton.dev/) UI components designed for Tailwind, Svelte and SvelteKit.
   - [GrailUI](https://grail-ui.vercel.app/) is a set of headless UI components, actions and utilities.
   - [Flowbite](https://flowbite-svelte.com/) components for Svelte, built on Tailwind CSS
-  - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSS
+  - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSSx
   - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
   - [Melt UI](https://www.melt-ui.com/) strives to be the de-facto headless UI library for Svelte.
   - [svelte-headlessui](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit
@@ -100,6 +100,7 @@ Awesome **SvelteKit** Links
   - [Svelte Hover Draw SVG](https://github.com/davipon/svelte-hover-draw-svg)
   - [Draggable Sections](https://github.com/TIKramer/svelte-section-list)
   - [SvelteDnD](https://github.com/thisuxhq/SvelteDnD) - A lightweight, flexible drag and drop library for Svelte 5 applications.
+  - [DnD Kit](https://dnd-kit-svelte.vercel.app/) - Draggable Containers, Nested Sortable List
   - [svelte-splitpanes](https://github.com/orefalo/svelte-splitpanes), [docs](https://orefalo.github.io/svelte-splitpanes/)
 
 ## Animation
@@ -174,8 +175,7 @@ Awesome **SvelteKit** Links
 - [Churros](https://github.com/inp-net/churros) - use `houdini` Fragments, `@loading` and `kustomization` for deployment. [Demo](https://git.inpt.fr/churros/churros)
 - [Turborepo Svelte starter](https://github.com/kevingdc/turborepo-sveltekit-shadcn/tree/main)
 - [JustShip](https://www.justship.today/) - Skip the boring parts, Ship **svelte 5** apps in days not weeks. Components: Stripe, Auth, tailwind
-- [next-forge](https://www.next-forge.com/) - Production-grade `Turborepo` template for` Next.js` apps. Components:
-
+- [next-forge](https://www.next-forge.com/) - Production-grade `Turborepo` template for`Next.js` apps. Components:
 
 ## Deployment
 

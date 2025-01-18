@@ -6,7 +6,6 @@ settings:
 
 overrides:
   cross-spawn: '>=7.0.5'
-  xstate: 4.38.3
 
 importers:
 
@@ -300,9 +299,6 @@ importers:
       vitest:
         specifier: 2.1.8
         version: 2.1.8(@types/node@22.10.6)(@vitest/ui@2.1.8)(jsdom@26.0.0)
-      xstate:
-        specifier: 4.38.3
-        version: 4.38.3
       zod:
         specifier: 3.24.1
         version: 3.24.1
@@ -527,7 +523,7 @@ importers:
         version: 5.1.4(astro@5.1.6(@types/node@22.10.6)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.17)
       '@astrojs/vercel':
         specifier: 8.0.2
-        version: 8.0.2(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(astro@5.1.6(@types/node@22.10.6)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0))(react@18.3.1)(rollup@4.30.1)(svelte@5.17.4)
+        version: 8.0.2(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)))(astro@5.1.6(@types/node@22.10.6)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0))(react@18.3.1)(rollup@4.30.1)(svelte@5.17.4)
       '@fontsource-variable/inter':
         specifier: 5.1.1
         version: 5.1.1
@@ -8477,27 +8473,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/vercel@8.0.2(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(astro@5.1.6(@types/node@22.10.6)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0))(react@18.3.1)(rollup@4.30.1)(svelte@5.17.4)':
-    dependencies:
-      '@astrojs/internal-helpers': 0.4.2
-      '@vercel/analytics': 1.4.1(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(react@18.3.1)(svelte@5.17.4)
-      '@vercel/edge': 1.2.1
-      '@vercel/nft': 0.29.0(rollup@4.30.1)
-      astro: 5.1.6(@types/node@22.10.6)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0)
-      esbuild: 0.24.2
-      fast-glob: 3.3.3
-    transitivePeerDependencies:
-      - '@remix-run/react'
-      - '@sveltejs/kit'
-      - encoding
-      - next
-      - react
-      - rollup
-      - supports-color
-      - svelte
-      - vue
-      - vue-router
-
   '@astrojs/vercel@8.0.2(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)))(astro@5.1.6(@types/node@22.10.6)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.3)(yaml@2.7.0))(react@18.3.1)(rollup@4.30.1)(svelte@5.17.4)':
     dependencies:
       '@astrojs/internal-helpers': 0.4.2
@@ -10637,25 +10612,6 @@ snapshots:
       tiny-glob: 0.2.9
       vite: 6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)
 
-  '@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6))':
-    dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6))
-      '@types/cookie': 0.6.0
-      cookie: 0.6.0
-      devalue: 5.1.1
-      esm-env: 1.2.2
-      import-meta-resolve: 4.1.0
-      kleur: 4.1.5
-      magic-string: 0.30.17
-      mrmime: 2.0.0
-      sade: 1.8.1
-      set-cookie-parser: 2.7.1
-      sirv: 3.0.0
-      svelte: 5.17.4
-      tiny-glob: 0.2.9
-      vite: 5.4.11(@types/node@22.10.6)
-    optional: true
-
   '@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0))
@@ -10683,16 +10639,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6))':
-    dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6))
-      debug: 4.4.0
-      svelte: 5.17.4
-      vite: 5.4.11(@types/node@22.10.6)
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
-
   '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0))
@@ -10715,20 +10661,6 @@ snapshots:
       vitefu: 0.2.5(vite@5.4.11(@types/node@22.10.6))
     transitivePeerDependencies:
       - supports-color
-
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6))':
-    dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6))
-      debug: 4.4.0
-      deepmerge: 4.3.1
-      kleur: 4.1.5
-      magic-string: 0.30.17
-      svelte: 5.17.4
-      vite: 5.4.11(@types/node@22.10.6)
-      vitefu: 1.0.5(vite@5.4.11(@types/node@22.10.6))
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
 
   '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0))':
     dependencies:
@@ -11249,12 +11181,6 @@ snapshots:
       '@sveltejs/kit': 2.15.2(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.6)))(svelte@4.2.19)(vite@5.4.11(@types/node@22.10.6))
       react: 18.3.1
       svelte: 4.2.19
-
-  '@vercel/analytics@1.4.1(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(react@18.3.1)(svelte@5.17.4)':
-    optionalDependencies:
-      '@sveltejs/kit': 2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6)))(svelte@5.17.4)(vite@5.4.11(@types/node@22.10.6))
-      react: 18.3.1
-      svelte: 5.17.4
 
   '@vercel/analytics@1.4.1(@sveltejs/kit@2.15.2(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.17.4)(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)))(react@18.3.1)(svelte@5.17.4)':
     optionalDependencies:
@@ -16589,11 +16515,6 @@ snapshots:
   vitefu@0.2.5(vite@5.4.11(@types/node@22.10.6)):
     optionalDependencies:
       vite: 5.4.11(@types/node@22.10.6)
-
-  vitefu@1.0.5(vite@5.4.11(@types/node@22.10.6)):
-    optionalDependencies:
-      vite: 5.4.11(@types/node@22.10.6)
-    optional: true
 
   vitefu@1.0.5(vite@6.0.7(@types/node@22.10.6)(jiti@1.21.7)(yaml@2.7.0)):
     optionalDependencies:

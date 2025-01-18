@@ -94,7 +94,6 @@ export const guard = (async ({ event, resolve }) => {
 
   if (startsWith(pathname, adminPaths)) {
     if (role !== 'sys:admin') {
-      // if (!roles?.includes('manager')) {
       const message: App.Superforms.Message = { type: 'warning', message: "You don't have access" } as const;
       redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
     }
