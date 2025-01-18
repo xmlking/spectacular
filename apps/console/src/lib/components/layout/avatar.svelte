@@ -53,7 +53,7 @@ async function signOut() {
   <nav class="list-nav">
     <ul>
       <li>
-        <a href="/settings">
+        <a href="/user-settings">
           <span class="w-6 text-center"><Settings class="w-5 justify-center" /></span>
           <span>Settings</span>
         </a>

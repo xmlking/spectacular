@@ -108,8 +108,7 @@ export const menuNavLinks: MenuNavLinks = {
       title: 'Account',
       list: [
         { href: '/profile', label: 'Profile', keywords: 'settings, profile, account' },
-        { href: '/features', label: 'Settings', keywords: 'settings, ai, account', badge: '✨' },
-        { href: '/feature-flags', label: 'Feature Flags', keywords: 'settings, feature-flags, account' },
+        { href: '/user-settings', label: 'Settings', keywords: 'settings, ai, feature-flags, account', badge: '✨' },
       ],
     },
     {
@@ -117,8 +116,8 @@ export const menuNavLinks: MenuNavLinks = {
       list: [
         { href: '/organization', label: 'Organization', keywords: 'organization', roles: [Roles.Owner, Roles.Admin] },
         {
-          href: '/settings',
-          label: 'Configuration',
+          href: '/org-settings',
+          label: 'Settings',
           keywords: 'settings, configuration, environment-variables, organization',
           roles: [Roles.Owner, Roles.Admin],
         },
