@@ -18,7 +18,7 @@ VALUES
   ('THEME_COLOR', 'Theme color for the application', '"dark"', '["dark", "light"]', 'org'),
   ('ITEMS_PER_PAGE', 'Number of items displayed per page', '10', '{"min": 1, "max": 100}', 'org'),
   ('NOTIFICATIONS_ENABLED', 'Enable Org Level Notifications', 'true', '[true, false]', 'org'),
-  ('USER_NOTIFICATIONS_ENABLED', 'Enable User Level Notifications', 'true', '[true, false]', 'user'),
+  ('USER_NOTIFICATIONS_ENABLED', 'Opt-in User Notifications. Do-not-disturb', 'true', '[true, false]', 'user'),
   ('COMMUNICATION_PREFERENCES', 'User communication preferences', '{"email": true}', '{"email": true, "sms": true, "web": true, "push": true}', 'org'),
   ('AGENT_VERSION', 'Agent application version', '"v1.0.87"', '{"min": "v1.0.0", "max": "v3.0.0"}', 'org'),
   ('FEATURE_SHOW_MAGIC_LINK_LOGIN', 'Feature - show magic link login', 'true', '[true, false]', 'org'),

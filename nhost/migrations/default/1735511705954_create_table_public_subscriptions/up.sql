@@ -15,8 +15,8 @@ CREATE TABLE public.subscriptions
   stripe_customer_id         text,
   PRIMARY KEY (id),
   FOREIGN KEY (org_id) REFERENCES public.organizations (id) ON UPDATE RESTRICT ON DELETE CASCADE,
-  FOREIGN KEY (status) REFERENCES public.status (value) ON UPDATE RESTRICT ON DELETE CASCADE,
-  FOREIGN KEY (plan) REFERENCES public.plan (value) ON UPDATE RESTRICT ON DELETE CASCADE,
+  FOREIGN KEY (status) REFERENCES public.status (value) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  FOREIGN KEY (plan) REFERENCES public.plan (value) ON UPDATE RESTRICT ON DELETE RESTRICT,
   UNIQUE (org_id, plan)
 );
 COMMENT ON TABLE public.subscriptions IS 'Table containing subscriptions for an organization';
