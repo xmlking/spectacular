@@ -1,16 +1,16 @@
 <script lang="ts">
-import { graphql, fragment, type OrgSettingsWithDefaultsFragment } from '$houdini';
+import { graphql, fragment, type UserSettingsWithDefaultsFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DateTime } from '@spectacular/skeleton/components';
 import { DataHandler } from '@vincjo/datatables/legacy';
 import { Settings } from 'lucide-svelte';
 
-export let organization: OrgSettingsWithDefaultsFragment;
+export let user: UserSettingsWithDefaultsFragment;
 $: data = fragment(
-  organization,
+  user,
   graphql(`
-      fragment OrgSettingsWithDefaultsFragment on organizations {
+      fragment UserSettingsWithDefaultsFragment on users {
         settingsWithDefaults(order_by: { key: asc }) {
           key
           value

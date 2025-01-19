@@ -1,17 +1,17 @@
 <script lang="ts">
-import { graphql, fragment, type OrgSettingsWithDefaultsFragment } from '$houdini';
+import { graphql, fragment, type UserSettingsFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { DateTime } from '@spectacular/skeleton/components';
 import { DataHandler } from '@vincjo/datatables/legacy';
-import { Settings } from 'lucide-svelte';
+import { User } from 'lucide-svelte';
 
-export let organization: OrgSettingsWithDefaultsFragment;
+export let user: UserSettingsFragment;
 $: data = fragment(
-  organization,
+  user,
   graphql(`
-      fragment OrgSettingsWithDefaultsFragment on organizations {
-        settingsWithDefaults(order_by: { key: asc }) {
+      fragment UserSettingsFragment on users {
+        settings(order_by: { key: asc }) {
           key
           value
           updatedAt
@@ -19,18 +19,24 @@ $: data = fragment(
       }
     `),
 );
-$: ({ settingsWithDefaults } = $data);
+$: ({ settings } = $data);
 
-const handler = new DataHandler(settingsWithDefaults?.filter(loaded), { rowsPerPage: 10 });
-$: handler.setRows(settingsWithDefaults);
+const handler = new DataHandler(settings?.filter(loaded), { rowsPerPage: 10 });
+$: handler.setRows(settings);
 const rows = handler.getRows();
 </script>
 
 <div class="card p-4">
   <div class="page-container p-0">
-    <div class="flex items-center gap-2">
-      <Settings class="w-5 h-5" />
-      <h1>Settings with defaults</h1>
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <User class="w-5 h-5" />
+          <h1>Settings</h1>
+        </div>
+        <button class="btn variant-filled-primary"> Add Settings </button>
+      </div>
+      <p class="text-gray-600">Here you can change or add user settings</p>
     </div>
     <table class="table table-hover table-compact w-full table-auto">
       <thead>
@@ -52,13 +58,7 @@ const rows = handler.getRows();
                 {row.value}
               {/if}</td
             >
-            <td>
-              {#if row.updatedAt}
-                 <DateTime distance time={row.updatedAt} />
-              {:else}
-                 <p>N/A</p>
-              {/if}
-            </td>
+            <td><DateTime distance time={row.updatedAt} /></td>
           </tr>
         {/each}
       </tbody>

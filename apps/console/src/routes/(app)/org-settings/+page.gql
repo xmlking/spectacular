@@ -1,9 +1,9 @@
-query SettingsData($id: OrgIdFromSession!) {
+query OrgSettingsData($id: OrgIdFromSession!) {
   organizations_by_pk(id: $id) {
-    ...SettingsFragment
-    ...SettingsWithDefaultsFragment
+    ...OrgSettingsFragment
+    ...OrgSettingsWithDefaultsFragment
   }
-  settings_metadata(order_by: {key: asc}, where: {type: {_eq: "org"}}) {
+  settings_metadata(order_by: { key: asc }, where: { type: { _eq: org } }) {
     key
     description
     allowedValues

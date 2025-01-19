@@ -25,7 +25,7 @@ query SettingsData($id: uuid!) {
     ...SettingsWithDefaultsFragment
     id
   }
-  settings_metadata(order_by: {key: asc}, where: {type: {_eq: "org"}}) {
+  settings_metadata(order_by: {key: asc}, where: {type: {_eq: org}}) {
     key
     description
     allowedValues
@@ -73,7 +73,7 @@ query SettingsData($id: uuid!) {
     ...SettingsWithDefaultsFragment
     id
   }
-  settings_metadata(order_by: {key: asc}, where: {type: {_eq: "org"}}) {
+  settings_metadata(order_by: {key: asc}, where: {type: {_eq: org}}) {
     key
     description
     allowedValues

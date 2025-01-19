@@ -1,0 +1,12 @@
+query UserSettingsData($id: UserIdFromSession!) {
+  user(id: $id) {
+    ...UserSettingsFragment
+    ...UserSettingsWithDefaultsFragment
+  }
+  settings_metadata(order_by: { key: asc }, where: { type: { _eq: user } }) {
+    key
+    description
+    allowedValues
+    defaultValue
+  }
+}

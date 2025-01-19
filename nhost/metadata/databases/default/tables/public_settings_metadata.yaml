@@ -45,6 +45,18 @@ select_permissions:
       filter: {}
       allow_aggregations: true
     comment: ""
+  - role: user
+    permission:
+      columns:
+        - allowed_values
+        - default_value
+        - description
+        - key
+        - type
+      filter:
+        type:
+          _eq: user
+    comment: ""
 update_permissions:
   - role: sys:admin
     permission:

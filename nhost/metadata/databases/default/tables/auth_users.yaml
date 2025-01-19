@@ -97,15 +97,6 @@ object_relationships:
   - name: defaultRoleByRole
     using:
       foreign_key_constraint_on: default_role
-  - name: settingsWithDefaults
-    using:
-      manual_configuration:
-        column_mapping:
-          id: user_id
-        insertion_order: null
-        remote_table:
-          name: user_settings_with_defaults
-          schema: public
 array_relationships:
   - name: allowedOrgs
     using:
@@ -141,6 +132,15 @@ array_relationships:
         column: user_id
         table:
           name: user_settings
+          schema: public
+  - name: settingsWithDefaults
+    using:
+      manual_configuration:
+        column_mapping:
+          id: user_id
+        insertion_order: null
+        remote_table:
+          name: user_settings_with_defaults
           schema: public
   - name: userProviders
     using:

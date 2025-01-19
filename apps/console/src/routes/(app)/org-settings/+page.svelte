@@ -1,17 +1,17 @@
 <script lang="ts">
-import type { PageData } from './$houdini';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import Settings from './components/settings.svelte';
 import SettingsWithDefaults from './components/settings-with-defaults.svelte';
 import SettingsMetadata from './components/settings-metadata.svelte';
 import { Logger } from '@spectacular/utils';
+import type { PageData } from './$houdini';
 
 const log = new Logger('settings:browser');
 export let data: PageData;
 
 // Reactivity
-let { SettingsData } = data;
-$: ({ SettingsData } = data);
+let { OrgSettingsData } = data;
+$: ({ OrgSettingsData } = data);
 </script>
 
 <svelte:head>
@@ -22,21 +22,21 @@ $: ({ SettingsData } = data);
 <div class="page-container">
   <section class="space-y-4">
     <h1 class="h1">Org Settings</h1>
-    <p>Here you can change org settings</p>
+    <p>Here you can change <strong>org</strong> settings</p>
   </section>
 
   <MaybeError
     entityName="Settings"
-    result={$SettingsData}
-    let:data={$SettingsData}
+    result={$OrgSettingsData}
+    let:data
   >
     <section class="space-y-4">
-      <SettingsMetadata data={$SettingsData} />
+      <SettingsMetadata {data} />
     </section>
   </MaybeError>
   <MaybeError
     entityName="Settings"
-    result={$SettingsData}
+    result={$OrgSettingsData}
     let:data={{ organizations_by_pk }}
   >
     {#if organizations_by_pk}

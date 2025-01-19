@@ -5162,13 +5162,13 @@ input plan_bool_exp {
 }
 
 enum plan_enum {
-  """Enterprise"""
+  """ENTERPRISE"""
   enterprise
 
-  """Pro"""
+  """PRO"""
   pro
 
-  """Starter"""
+  """STARTER"""
   starter
 }
 
@@ -8259,6 +8259,25 @@ input setting_type_bool_exp {
   value: String_comparison_exp
 }
 
+enum setting_type_enum {
+  """ORGANIZATION"""
+  org
+
+  """USER"""
+  user
+}
+
+"""
+Boolean expression to compare columns of type "setting_type_enum". All fields are combined with logical 'AND'.
+"""
+input setting_type_enum_comparison_exp {
+  _eq: setting_type_enum
+  _in: [setting_type_enum!]
+  _is_null: Boolean
+  _neq: setting_type_enum
+  _nin: [setting_type_enum!]
+}
+
 """Ordering options when selecting data from "setting_type"."""
 input setting_type_order_by {
   description: order_by
@@ -8294,7 +8313,7 @@ input setting_type_stream_cursor_value_input {
 }
 
 """
-Table containing Organization unique Setting keys and Feature Flags, act like enum
+Table containing unique Setting keys and Feature Flags for Orgs and Users, act like enum
 """
 type settings_metadata {
   allowedValues(
@@ -8307,7 +8326,7 @@ type settings_metadata {
   ): jsonb
   description: String
   key: String!
-  type: String!
+  type: setting_type_enum!
 }
 
 """
@@ -8338,21 +8357,19 @@ input settings_metadata_bool_exp {
   defaultValue: jsonb_comparison_exp
   description: String_comparison_exp
   key: String_comparison_exp
-  type: String_comparison_exp
+  type: setting_type_enum_comparison_exp
 }
 
 """aggregate max on columns"""
 type settings_metadata_max_fields {
   description: String
   key: String
-  type: String
 }
 
 """aggregate min on columns"""
 type settings_metadata_min_fields {
   description: String
   key: String
-  type: String
 }
 
 """Ordering options when selecting data from "settings_metadata"."""
@@ -8401,7 +8418,7 @@ input settings_metadata_stream_cursor_value_input {
   defaultValue: jsonb
   description: String
   key: String
-  type: String
+  type: setting_type_enum
 }
 
 scalar smallint
@@ -8439,13 +8456,13 @@ input status_bool_exp {
 }
 
 enum status_enum {
-  """Active"""
+  """ACTIVE"""
   active
 
-  """Closed"""
+  """CLOSED"""
   closed
 
-  """Disabled"""
+  """DISABLED"""
   disabled
 }
 
@@ -11105,6 +11122,17 @@ type user_settings_with_defaults_aggregate {
   nodes: [user_settings_with_defaults!]!
 }
 
+input user_settings_with_defaults_aggregate_bool_exp {
+  count: user_settings_with_defaults_aggregate_bool_exp_count
+}
+
+input user_settings_with_defaults_aggregate_bool_exp_count {
+  arguments: [user_settings_with_defaults_select_column!]
+  distinct: Boolean
+  filter: user_settings_with_defaults_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "user_settings_with_defaults"
 """
@@ -11112,6 +11140,15 @@ type user_settings_with_defaults_aggregate_fields {
   count(columns: [user_settings_with_defaults_select_column!], distinct: Boolean): Int!
   max: user_settings_with_defaults_max_fields
   min: user_settings_with_defaults_min_fields
+}
+
+"""
+order by aggregate values of table "user_settings_with_defaults"
+"""
+input user_settings_with_defaults_aggregate_order_by {
+  count: order_by
+  max: user_settings_with_defaults_max_order_by
+  min: user_settings_with_defaults_min_order_by
 }
 
 """
@@ -11142,6 +11179,19 @@ type user_settings_with_defaults_max_fields {
   userId: uuid
 }
 
+"""
+order by max() on columns of table "user_settings_with_defaults"
+"""
+input user_settings_with_defaults_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  key: order_by
+  orgId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  userId: order_by
+}
+
 """aggregate min on columns"""
 type user_settings_with_defaults_min_fields {
   createdAt: timestamptz
@@ -11151,6 +11201,19 @@ type user_settings_with_defaults_min_fields {
   updatedAt: timestamptz
   updatedBy: uuid
   userId: uuid
+}
+
+"""
+order by min() on columns of table "user_settings_with_defaults"
+"""
+input user_settings_with_defaults_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  key: order_by
+  orgId: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+  userId: order_by
 }
 
 """
@@ -11444,8 +11507,41 @@ type users {
     where: user_settings_bool_exp
   ): [user_settings!]!
 
-  """An object relationship"""
-  settingsWithDefaults: user_settings_with_defaults
+  """An array relationship"""
+  settingsWithDefaults(
+    """distinct select on columns"""
+    distinct_on: [user_settings_with_defaults_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_settings_with_defaults_order_by!]
+
+    """filter the rows returned"""
+    where: user_settings_with_defaults_bool_exp
+  ): [user_settings_with_defaults!]!
+
+  """An aggregate relationship"""
+  settingsWithDefaults_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_settings_with_defaults_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_settings_with_defaults_order_by!]
+
+    """filter the rows returned"""
+    where: user_settings_with_defaults_bool_exp
+  ): user_settings_with_defaults_aggregate!
 
   """An aggregate relationship"""
   settings_aggregate(
@@ -11561,6 +11657,7 @@ input users_bool_exp {
   securityKeys_aggregate: authUserSecurityKeys_aggregate_bool_exp
   settings: user_settings_bool_exp
   settingsWithDefaults: user_settings_with_defaults_bool_exp
+  settingsWithDefaults_aggregate: user_settings_with_defaults_aggregate_bool_exp
   settings_aggregate: user_settings_aggregate_bool_exp
   updatedAt: timestamptz_comparison_exp
   userProviders: authUserProviders_bool_exp
@@ -11656,7 +11753,7 @@ input users_order_by {
   refreshTokens_aggregate: authRefreshTokens_aggregate_order_by
   roles_aggregate: authUserRoles_aggregate_order_by
   securityKeys_aggregate: authUserSecurityKeys_aggregate_order_by
-  settingsWithDefaults: user_settings_with_defaults_order_by
+  settingsWithDefaults_aggregate: user_settings_with_defaults_aggregate_order_by
   settings_aggregate: user_settings_aggregate_order_by
   updatedAt: order_by
   userProviders_aggregate: authUserProviders_aggregate_order_by
