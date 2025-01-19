@@ -1,0 +1,45 @@
+table:
+  name: user_settings_with_defaults
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    org_id:
+      custom_name: orgId
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    org_id: orgId
+    updated_at: updatedAt
+    updated_by: updatedBy
+    user_id: userId
+  custom_root_fields: {}
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - created_by
+        - key
+        - org_id
+        - updated_at
+        - updated_by
+        - user_id
+        - value
+      filter:
+        _and:
+          - org_id:
+              _eq: x-hasura-default-org
+          - user_id:
+              _eq: x-hasura-user-id
+      allow_aggregations: true
+    comment: ""

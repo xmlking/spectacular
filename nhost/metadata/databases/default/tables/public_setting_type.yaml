@@ -1,0 +1,12 @@
+table:
+  name: setting_type
+  schema: public
+is_enum: true
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - description
+        - value
+      filter: {}
+    comment: ""

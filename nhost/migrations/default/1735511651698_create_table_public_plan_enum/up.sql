@@ -6,8 +6,8 @@ CREATE TABLE public.plan
 COMMENT ON TABLE public.plan IS 'plan enum';
 ---
 INSERT INTO public.plan (value, description)
-VALUES ('starter', 'Starter'),
-       ('pro', 'Pro'),
-       ('enterprise', 'Enterprise')
+VALUES ('starter', 'STARTER'),
+       ('pro', 'PRO'),
+       ('enterprise', 'ENTERPRISE')
 
 ON CONFLICT (value) DO NOTHING;

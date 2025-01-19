@@ -1,5 +1,5 @@
 SET check_function_bodies = false;
-INSERT INTO public.settings (key, value, org_id, created_by, updated_by, created_at, updated_at)
+INSERT INTO public.org_settings (key, value, org_id, created_by, updated_by, created_at, updated_at)
 VALUES
   ('THEME_COLOR', '"light"', '8dfd9a31-de01-47be-92a7-ba1c720c6270', '572ad1c0-f97b-4e16-b1f6-8b5ca90f931f', '572ad1c0-f97b-4e16-b1f6-8b5ca90f931f', '2024-12-19 06:13:04.806093+00', '2024-12-19 06:13:04.806093+00'),
   ('FEATURE_SHOW_SOCIAL_LOGIN', 'false', '8dfd9a31-de01-47be-92a7-ba1c720c6270', '572ad1c0-f97b-4e16-b1f6-8b5ca90f931f', '572ad1c0-f97b-4e16-b1f6-8b5ca90f931f', '2024-12-19 06:14:14.90919+00', '2024-12-19 06:29:26.199716+00'),

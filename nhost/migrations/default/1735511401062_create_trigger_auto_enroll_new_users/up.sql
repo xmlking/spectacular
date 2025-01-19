@@ -72,4 +72,4 @@ CREATE TRIGGER trg_match_email_to_org_rules_and_auto_enroll_new_users
 EXECUTE FUNCTION match_email_to_org_rules_and_auto_enroll_new_users();
 
 COMMENT ON TRIGGER trg_match_email_to_org_rules_and_auto_enroll_new_users ON auth.users IS 'This trigger matches user''s email to org rules and auto enroll new users membership with ''org:member'' role';
----;
+---

@@ -20,6 +20,7 @@ insert_permissions:
         - default_value
         - description
         - key
+        - type
     comment: ""
 select_permissions:
   - role: org:admin
@@ -29,6 +30,7 @@ select_permissions:
         - default_value
         - description
         - key
+        - type
       filter: {}
       allow_aggregations: true
     comment: ""
@@ -39,6 +41,7 @@ select_permissions:
         - default_value
         - description
         - key
+        - type
       filter: {}
       allow_aggregations: true
     comment: ""
@@ -50,6 +53,7 @@ update_permissions:
         - default_value
         - description
         - key
+        - type
       filter: {}
       check: {}
     comment: ""

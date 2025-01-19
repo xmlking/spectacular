@@ -100,7 +100,7 @@ array_relationships:
       foreign_key_constraint_on:
         column: org_id
         table:
-          name: settings
+          name: org_settings
           schema: public
   - name: settingsWithDefaults
     using:
@@ -109,7 +109,7 @@ array_relationships:
           id: org_id
         insertion_order: null
         remote_table:
-          name: settings_with_defaults
+          name: org_settings_with_defaults
           schema: public
   - name: subscriptions
     using:

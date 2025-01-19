@@ -1,5 +1,5 @@
 table:
-  name: settings_with_defaults
+  name: org_settings
   schema: public
 configuration:
   column_config:
@@ -20,6 +20,18 @@ configuration:
     updated_at: updatedAt
     updated_by: updatedBy
   custom_root_fields: {}
+insert_permissions:
+  - role: org:admin
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - key
+        - value
+    comment: ""
 select_permissions:
   - role: org:admin
     permission:
@@ -35,4 +47,23 @@ select_permissions:
         org_id:
           _eq: x-hasura-default-org
       allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: org:admin
+    permission:
+      columns:
+        - value
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
+delete_permissions:
+  - role: org:admin
+    permission:
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
     comment: ""
