@@ -91,9 +91,9 @@ export const pwSchema = userSchema
   });
 
 /**
- * Sign in passwordless
+ * Sign in magic-link
  */
-export const pwlSchema = userSchema
+export const mlSchema = userSchema
   .pick({
     email: true,
   })

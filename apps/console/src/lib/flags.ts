@@ -30,7 +30,10 @@ export const enableBotProtection = flag<boolean>({
   key: 'enableBotProtection',
   description: 'Enable Cloudflare Turnstile Bot Protection',
   origin: 'https://docs.nhost.io/guides/auth/bot-protection',
-  options: [{ value: true }, { value: false }],
+  options: [
+    { value: true, label: 'on' },
+    { value: false, label: 'off' },
+  ],
   decide(event) {
     return env.FEATURE_SHOW_BOT_PROTECTION === 'true';
   },

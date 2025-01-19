@@ -4,7 +4,7 @@ import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { pwlSchema } from '$lib/schema/user';
+import { mlSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { turnstilePassed } from '$lib/stores/stores';
@@ -24,7 +24,7 @@ const loadingState = getLoadingState();
 const toastStore = getToastStore();
 const nhost = getNhostClient();
 
-const form = superForm(defaults(zod(pwlSchema)), {
+const form = superForm(defaults(zod(mlSchema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -32,7 +32,7 @@ const form = superForm(defaults(zod(pwlSchema)), {
   resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(pwlSchema),
+  validators: zodClient(mlSchema),
   clearOnSubmit: 'errors-and-message',
   async onUpdate({ form, cancel }) {
     // THIS IS CALLED ON MAGIC_LINK SUBMIT
@@ -40,12 +40,20 @@ const form = superForm(defaults(zod(pwlSchema)), {
 
     const { email, redirectTo } = form.data;
     const origin = new URL(window.location.href).origin;
-    const { error } = await nhost.auth.signIn({ email, options: { redirectTo: `${origin}${redirectTo}` } });
+    const { error } = await nhost.auth.signIn({
+      email,
+      options: { redirectTo: `${origin}${redirectTo}` },
+    });
     if (error) {
       log.error(error);
       setError(form, '', error.message);
       handleMessage(
-        { type: 'error', message: `Signin failed: ${error?.message}`, hideDismiss: false, timeout: 10000 } as const,
+        {
+          type: 'error',
+          message: `Signin failed: ${error?.message}`,
+          hideDismiss: false,
+          timeout: 10000,
+        } as const,
         toastStore,
       );
       return;
@@ -84,30 +92,31 @@ export const snapshot = { capture, restore };
 
 // Functions
 async function webauthnSignin() {
-  if ($errors.email) {
-    handleMessage({ type: 'error', message: 'Invalid email', hideDismiss: false, timeout: 10000 } as const, toastStore);
+  const { session, error: signInError } = await nhost.auth.signInSecurityKey();
+  if (session) {
+    handleMessage(
+      {
+        type: 'success',
+        message: 'Signin successful 😎',
+        hideDismiss: true,
+        timeout: 10000,
+      } as const,
+      toastStore,
+    );
+    await goto(i18n.resolveRoute($formData.redirectTo), {
+      invalidateAll: true, // workaround for profile page
+    });
   } else {
-    const { session, error: signInError } = await nhost.auth.signIn({ email: $formData.email, securityKey: true });
-    if (session) {
-      handleMessage(
-        { type: 'success', message: 'Signin successful 😎', hideDismiss: true, timeout: 10000 } as const,
-        toastStore,
-      );
-      await goto(i18n.resolveRoute($formData.redirectTo), {
-        invalidateAll: true, // workaround for profile page
-      });
-    } else {
-      log.error(signInError);
-      handleMessage(
-        {
-          type: 'error',
-          message: `Signin failed: ${signInError?.message}`,
-          hideDismiss: false,
-          timeout: 10000,
-        } as const,
-        toastStore,
-      );
-    }
+    log.error(signInError);
+    handleMessage(
+      {
+        type: 'error',
+        message: `Signin failed: ${signInError?.message}`,
+        hideDismiss: false,
+        timeout: 10000,
+      } as const,
+      toastStore,
+    );
   }
 }
 
@@ -124,7 +133,9 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
   <div class="mt-6">
     <Form.Field {form} name="email">
       <Form.Control let:attrs>
-        <Form.Label class="label sr-only">{m.auth_forms_email_label()}</Form.Label>
+        <Form.Label class="label sr-only"
+          >{m.auth_forms_email_label()}</Form.Label
+        >
         <input
           type="email"
           autocomplete="email"
@@ -156,9 +167,10 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
       name="webauthn"
       type="button"
       class="variant-filled-primary btn"
-      disabled={!$tainted || !valid || $submitting}
-      on:click|preventDefault={webauthnSignin} >
-        {m.auth_labels_signin_with_webauthn()} <Fingerprint class="pl-2"/>
+      on:click|preventDefault={webauthnSignin}
+    >
+      {m.auth_labels_signin_with_webauthn()}
+      <Fingerprint class="pl-2" />
     </button>
   </div>
 </form>

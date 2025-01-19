@@ -21,7 +21,7 @@ const nhost = getNhostClient();
 const toastStore = getToastStore();
 
 async function signOut() {
-  await nhost.auth.signOut();
+  await nhost.auth.signOut({ all: true });
   Cookies.remove(NHOST_SESSION_KEY, { path: '/' });
   const message: App.Superforms.Message = { type: 'success', message: 'Signout sucessfull 😎' } as const;
   handleMessage(message, toastStore);
