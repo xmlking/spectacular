@@ -109,6 +109,7 @@ export const menuNavLinks: MenuNavLinks = {
       list: [
         { href: '/profile', label: 'Profile', keywords: 'settings, profile, account' },
         { href: '/user-settings', label: 'Settings', keywords: 'settings, ai, feature-flags, account', badge: '✨' },
+        { href: '/user-notifications', label: 'Notifications', keywords: 'notifications, user' },
       ],
     },
     {
@@ -119,6 +120,12 @@ export const menuNavLinks: MenuNavLinks = {
           href: '/org-settings',
           label: 'Settings',
           keywords: 'settings, configuration, environment-variables, organization',
+          roles: [Roles.Owner, Roles.Admin],
+        },
+        {
+          href: '/notifications',
+          label: 'Notifications',
+          keywords: 'notifications, organization',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
@@ -154,13 +161,19 @@ export const menuNavLinks: MenuNavLinks = {
         {
           href: '/organizations',
           label: 'Organizations',
-          keywords: 'system, admin, organization',
+          keywords: 'organization, admin, system',
           roles: [Roles.SysAdmin],
         },
         {
           href: '/users',
           label: 'Users',
-          keywords: 'system, admin, users',
+          keywords: 'users, admin, system',
+          roles: [Roles.SysAdmin],
+        },
+        {
+          href: '/notifications',
+          label: 'Notifications',
+          keywords: 'notifications, admin, system',
           roles: [Roles.SysAdmin],
         },
       ],

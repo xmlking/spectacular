@@ -105,6 +105,20 @@ array_relationships:
         table:
           name: memberships
           schema: public
+  - name: groups
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: user_groups
+          schema: public
+  - name: notifications
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: user_notifications
+          schema: public
   - name: refreshTokens
     using:
       foreign_key_constraint_on:

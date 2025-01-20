@@ -74,6 +74,13 @@ array_relationships:
         table:
           name: memberships
           schema: public
+  - name: notifications
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: notifications
+          schema: public
   - name: policies
     using:
       foreign_key_constraint_on:

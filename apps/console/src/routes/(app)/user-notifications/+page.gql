@@ -1,0 +1,23 @@
+query UserNotificationsData($id: UserIdFromSession!) {
+  user(id: $id) {
+    notifications(order_by: { updatedAt: desc }) {
+      metadata
+      createdAt
+      updatedAt
+      notificationId
+      status
+      notification {
+        id
+        displayName
+        description
+        metadata
+        tags
+        title
+        type
+        organization {
+          displayName
+        }
+      }
+    }
+  }
+}

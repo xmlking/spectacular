@@ -2826,6 +2826,19 @@ type mutation_root {
   delete_memberships_by_pk(orgId: uuid!, userId: uuid!): memberships
 
   """
+  delete data from the table: "notifications"
+  """
+  delete_notifications(
+    """filter the rows which have to be deleted"""
+    where: notifications_bool_exp!
+  ): notifications_mutation_response
+
+  """
+  delete single row from the table: "notifications"
+  """
+  delete_notifications_by_pk(id: uuid!): notifications
+
+  """
   delete data from the table: "org_settings"
   """
   delete_org_settings(
@@ -3025,6 +3038,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: memberships_on_conflict
   ): memberships
+
+  """
+  insert data into the table: "notifications"
+  """
+  insert_notifications(
+    """the rows to be inserted"""
+    objects: [notifications_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: notifications_on_conflict
+  ): notifications_mutation_response
+
+  """
+  insert a single row into the table: "notifications"
+  """
+  insert_notifications_one(
+    """the row to be inserted"""
+    object: notifications_insert_input!
+
+    """upsert condition"""
+    on_conflict: notifications_on_conflict
+  ): notifications
 
   """
   insert data into the table: "org_settings"
@@ -3439,6 +3474,76 @@ type mutation_root {
   ): [memberships_mutation_response]
 
   """
+  update data of the table: "notifications"
+  """
+  update_notifications(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: notifications_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: notifications_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: notifications_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: notifications_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: notifications_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: notifications_set_input
+
+    """filter the rows which have to be updated"""
+    where: notifications_bool_exp!
+  ): notifications_mutation_response
+
+  """
+  update single row of the table: "notifications"
+  """
+  update_notifications_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: notifications_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: notifications_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: notifications_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: notifications_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: notifications_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: notifications_set_input
+    pk_columns: notifications_pk_columns_input!
+  ): notifications
+
+  """
+  update multiples rows of table: "notifications"
+  """
+  update_notifications_many(
+    """updates to execute, in order"""
+    updates: [notifications_updates!]!
+  ): [notifications_mutation_response]
+
+  """
   update data of the table: "org_settings"
   """
   update_org_settings(
@@ -3787,6 +3892,34 @@ type mutation_root {
   ): [subscriptions_mutation_response]
 
   """
+  update data of the table: "user_notifications"
+  """
+  update_user_notifications(
+    """sets the columns of the filtered rows to the given values"""
+    _set: user_notifications_set_input
+
+    """filter the rows which have to be updated"""
+    where: user_notifications_bool_exp!
+  ): user_notifications_mutation_response
+
+  """
+  update single row of the table: "user_notifications"
+  """
+  update_user_notifications_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: user_notifications_set_input
+    pk_columns: user_notifications_pk_columns_input!
+  ): user_notifications
+
+  """
+  update multiples rows of table: "user_notifications"
+  """
+  update_user_notifications_many(
+    """updates to execute, in order"""
+    updates: [user_notifications_updates!]!
+  ): [user_notifications_mutation_response]
+
+  """
   update data of the table: "user_settings"
   """
   update_user_settings(
@@ -3863,6 +3996,450 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [users_updates!]!
   ): [users_mutation_response]
+}
+
+enum notification_status_enum {
+  """ARCHIVED"""
+  archived
+
+  """READ"""
+  read
+
+  """UNREAD"""
+  unread
+}
+
+"""
+Boolean expression to compare columns of type "notification_status_enum". All fields are combined with logical 'AND'.
+"""
+input notification_status_enum_comparison_exp {
+  _eq: notification_status_enum
+  _in: [notification_status_enum!]
+  _is_null: Boolean
+  _neq: notification_status_enum
+  _nin: [notification_status_enum!]
+}
+
+enum notification_type_enum {
+  """ERROR"""
+  error
+
+  """INFO"""
+  info
+
+  """WARNING"""
+  warning
+}
+
+"""
+Boolean expression to compare columns of type "notification_type_enum". All fields are combined with logical 'AND'.
+"""
+input notification_type_enum_comparison_exp {
+  _eq: notification_type_enum
+  _in: [notification_type_enum!]
+  _is_null: Boolean
+  _neq: notification_type_enum
+  _nin: [notification_type_enum!]
+}
+
+"""Table to store the notifications triggered by the application"""
+type notifications {
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  displayName: String!
+  id: uuid!
+  message: String!
+  metadata(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  orgId: uuid
+
+  """An object relationship"""
+  organization: organizations
+  tags: [String!]
+  title: String!
+  type: notification_type_enum!
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""
+aggregated selection of "notifications"
+"""
+type notifications_aggregate {
+  aggregate: notifications_aggregate_fields
+  nodes: [notifications!]!
+}
+
+input notifications_aggregate_bool_exp {
+  count: notifications_aggregate_bool_exp_count
+}
+
+input notifications_aggregate_bool_exp_count {
+  arguments: [notifications_select_column!]
+  distinct: Boolean
+  filter: notifications_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "notifications"
+"""
+type notifications_aggregate_fields {
+  count(columns: [notifications_select_column!], distinct: Boolean): Int!
+  max: notifications_max_fields
+  min: notifications_min_fields
+}
+
+"""
+order by aggregate values of table "notifications"
+"""
+input notifications_aggregate_order_by {
+  count: order_by
+  max: notifications_max_order_by
+  min: notifications_min_order_by
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input notifications_append_input {
+  metadata: jsonb
+}
+
+"""
+input type for inserting array relation for remote table "notifications"
+"""
+input notifications_arr_rel_insert_input {
+  data: [notifications_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: notifications_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "notifications". All fields are combined with a logical 'AND'.
+"""
+input notifications_bool_exp {
+  _and: [notifications_bool_exp!]
+  _not: notifications_bool_exp
+  _or: [notifications_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  createdBy: uuid_comparison_exp
+  description: String_comparison_exp
+  displayName: String_comparison_exp
+  id: uuid_comparison_exp
+  message: String_comparison_exp
+  metadata: jsonb_comparison_exp
+  orgId: uuid_comparison_exp
+  organization: organizations_bool_exp
+  tags: String_array_comparison_exp
+  title: String_comparison_exp
+  type: notification_type_enum_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  updatedBy: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "notifications"
+"""
+enum notifications_constraint {
+  """
+  unique or primary key constraint on columns "display_name", "org_id"
+  """
+  notifications_org_id_display_name_key
+
+  """
+  unique or primary key constraint on columns "id"
+  """
+  notifications_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input notifications_delete_at_path_input {
+  metadata: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input notifications_delete_elem_input {
+  metadata: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input notifications_delete_key_input {
+  metadata: String
+}
+
+"""
+input type for inserting data into table "notifications"
+"""
+input notifications_insert_input {
+  description: String
+  displayName: String
+  message: String
+  metadata: jsonb
+  organization: organizations_obj_rel_insert_input
+  tags: [String!]
+  title: String
+  type: notification_type_enum
+}
+
+"""aggregate max on columns"""
+type notifications_max_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  displayName: String
+  id: uuid
+  message: String
+  orgId: uuid
+  tags: [String!]
+  title: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""
+order by max() on columns of table "notifications"
+"""
+input notifications_max_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  displayName: order_by
+  id: order_by
+  message: order_by
+  orgId: order_by
+  tags: order_by
+  title: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+}
+
+"""aggregate min on columns"""
+type notifications_min_fields {
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  displayName: String
+  id: uuid
+  message: String
+  orgId: uuid
+  tags: [String!]
+  title: String
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""
+order by min() on columns of table "notifications"
+"""
+input notifications_min_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  displayName: order_by
+  id: order_by
+  message: order_by
+  orgId: order_by
+  tags: order_by
+  title: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+}
+
+"""
+response of any mutation on the table "notifications"
+"""
+type notifications_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [notifications!]!
+}
+
+"""
+on_conflict condition type for table "notifications"
+"""
+input notifications_on_conflict {
+  constraint: notifications_constraint!
+  update_columns: [notifications_update_column!]! = []
+  where: notifications_bool_exp
+}
+
+"""Ordering options when selecting data from "notifications"."""
+input notifications_order_by {
+  createdAt: order_by
+  createdBy: order_by
+  description: order_by
+  displayName: order_by
+  id: order_by
+  message: order_by
+  metadata: order_by
+  orgId: order_by
+  organization: organizations_order_by
+  tags: order_by
+  title: order_by
+  type: order_by
+  updatedAt: order_by
+  updatedBy: order_by
+}
+
+"""primary key columns input for table: notifications"""
+input notifications_pk_columns_input {
+  id: uuid!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input notifications_prepend_input {
+  metadata: jsonb
+}
+
+"""
+select columns of table "notifications"
+"""
+enum notifications_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  createdBy
+
+  """column name"""
+  description
+
+  """column name"""
+  displayName
+
+  """column name"""
+  id
+
+  """column name"""
+  message
+
+  """column name"""
+  metadata
+
+  """column name"""
+  orgId
+
+  """column name"""
+  tags
+
+  """column name"""
+  title
+
+  """column name"""
+  type
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  updatedBy
+}
+
+"""
+input type for updating data in table "notifications"
+"""
+input notifications_set_input {
+  description: String
+  displayName: String
+  message: String
+  metadata: jsonb
+  tags: [String!]
+  title: String
+  type: notification_type_enum
+}
+
+"""
+Streaming cursor of the table "notifications"
+"""
+input notifications_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: notifications_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input notifications_stream_cursor_value_input {
+  createdAt: timestamptz
+  createdBy: uuid
+  description: String
+  displayName: String
+  id: uuid
+  message: String
+  metadata: jsonb
+  orgId: uuid
+  tags: [String!]
+  title: String
+  type: notification_type_enum
+  updatedAt: timestamptz
+  updatedBy: uuid
+}
+
+"""
+update columns of table "notifications"
+"""
+enum notifications_update_column {
+  """column name"""
+  description
+
+  """column name"""
+  displayName
+
+  """column name"""
+  message
+
+  """column name"""
+  metadata
+
+  """column name"""
+  tags
+
+  """column name"""
+  title
+
+  """column name"""
+  type
+}
+
+input notifications_updates {
+  """append existing jsonb value of filtered columns with new jsonb value"""
+  _append: notifications_append_input
+
+  """
+  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+  """
+  _delete_at_path: notifications_delete_at_path_input
+
+  """
+  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+  """
+  _delete_elem: notifications_delete_elem_input
+
+  """
+  delete key/value pair or string element. key/value pairs are matched based on their key value
+  """
+  _delete_key: notifications_delete_key_input
+
+  """prepend existing jsonb value of filtered columns with new jsonb value"""
+  _prepend: notifications_prepend_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: notifications_set_input
+
+  """filter the rows which have to be updated"""
+  where: notifications_bool_exp!
 }
 
 """column ordering options"""
@@ -4523,6 +5100,42 @@ type organizations {
     path: String
   ): jsonb
 
+  """An array relationship"""
+  notifications(
+    """distinct select on columns"""
+    distinct_on: [notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notifications_order_by!]
+
+    """filter the rows returned"""
+    where: notifications_bool_exp
+  ): [notifications!]!
+
+  """An aggregate relationship"""
+  notifications_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notifications_order_by!]
+
+    """filter the rows returned"""
+    where: notifications_bool_exp
+  ): notifications_aggregate!
+
   """An object relationship"""
   owner: users!
   ownerId: uuid!
@@ -4796,6 +5409,8 @@ input organizations_bool_exp {
   memberships: memberships_bool_exp
   memberships_aggregate: memberships_aggregate_bool_exp
   metadata: jsonb_comparison_exp
+  notifications: notifications_bool_exp
+  notifications_aggregate: notifications_aggregate_bool_exp
   owner: users_bool_exp
   ownerId: uuid_comparison_exp
   policies: policies_bool_exp
@@ -4862,6 +5477,7 @@ input organizations_insert_input {
   invitations: invitations_arr_rel_insert_input
   memberships: memberships_arr_rel_insert_input
   metadata: jsonb
+  notifications: notifications_arr_rel_insert_input
   policies: policies_arr_rel_insert_input
   pools: pools_arr_rel_insert_input
   rules: rules_arr_rel_insert_input
@@ -4953,6 +5569,7 @@ input organizations_order_by {
   invitations_aggregate: invitations_aggregate_order_by
   memberships_aggregate: memberships_aggregate_order_by
   metadata: order_by
+  notifications_aggregate: notifications_aggregate_order_by
   owner: users_order_by
   ownerId: order_by
   policies_aggregate: policies_aggregate_order_by
@@ -6816,6 +7433,45 @@ type query_root {
   """fetch data from the table: "memberships" using primary key columns"""
   memberships_by_pk(orgId: uuid!, userId: uuid!): memberships
 
+  """An array relationship"""
+  notifications(
+    """distinct select on columns"""
+    distinct_on: [notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notifications_order_by!]
+
+    """filter the rows returned"""
+    where: notifications_bool_exp
+  ): [notifications!]!
+
+  """An aggregate relationship"""
+  notifications_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notifications_order_by!]
+
+    """filter the rows returned"""
+    where: notifications_bool_exp
+  ): notifications_aggregate!
+
+  """fetch data from the table: "notifications" using primary key columns"""
+  notifications_by_pk(id: uuid!): notifications
+
   """
   fetch data from the table: "org_settings"
   """
@@ -7403,6 +8059,51 @@ type query_root {
 
   """fetch data from the table: "user_groups" using primary key columns"""
   user_groups_by_pk(groupId: uuid!, userId: uuid!): user_groups
+
+  """
+  fetch data from the table: "user_notifications"
+  """
+  user_notifications(
+    """distinct select on columns"""
+    distinct_on: [user_notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_notifications_order_by!]
+
+    """filter the rows returned"""
+    where: user_notifications_bool_exp
+  ): [user_notifications!]!
+
+  """
+  fetch aggregated fields from the table: "user_notifications"
+  """
+  user_notifications_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_notifications_order_by!]
+
+    """filter the rows returned"""
+    where: user_notifications_bool_exp
+  ): user_notifications_aggregate!
+
+  """
+  fetch data from the table: "user_notifications" using primary key columns
+  """
+  user_notifications_by_pk(notificationId: uuid!, userId: uuid!): user_notifications
 
   """
   fetch data from the table: "user_settings"
@@ -9305,6 +10006,59 @@ type subscription_root {
     where: memberships_bool_exp
   ): [memberships!]!
 
+  """An array relationship"""
+  notifications(
+    """distinct select on columns"""
+    distinct_on: [notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notifications_order_by!]
+
+    """filter the rows returned"""
+    where: notifications_bool_exp
+  ): [notifications!]!
+
+  """An aggregate relationship"""
+  notifications_aggregate(
+    """distinct select on columns"""
+    distinct_on: [notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [notifications_order_by!]
+
+    """filter the rows returned"""
+    where: notifications_bool_exp
+  ): notifications_aggregate!
+
+  """fetch data from the table: "notifications" using primary key columns"""
+  notifications_by_pk(id: uuid!): notifications
+
+  """
+  fetch data from the table in a streaming manner: "notifications"
+  """
+  notifications_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [notifications_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: notifications_bool_exp
+  ): [notifications!]!
+
   """
   fetch data from the table: "org_settings"
   """
@@ -10090,6 +10844,65 @@ type subscription_root {
   ): [user_groups!]!
 
   """
+  fetch data from the table: "user_notifications"
+  """
+  user_notifications(
+    """distinct select on columns"""
+    distinct_on: [user_notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_notifications_order_by!]
+
+    """filter the rows returned"""
+    where: user_notifications_bool_exp
+  ): [user_notifications!]!
+
+  """
+  fetch aggregated fields from the table: "user_notifications"
+  """
+  user_notifications_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_notifications_order_by!]
+
+    """filter the rows returned"""
+    where: user_notifications_bool_exp
+  ): user_notifications_aggregate!
+
+  """
+  fetch data from the table: "user_notifications" using primary key columns
+  """
+  user_notifications_by_pk(notificationId: uuid!, userId: uuid!): user_notifications
+
+  """
+  fetch data from the table in a streaming manner: "user_notifications"
+  """
+  user_notifications_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [user_notifications_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: user_notifications_bool_exp
+  ): [user_notifications!]!
+
+  """
   fetch data from the table: "user_settings"
   """
   user_settings(
@@ -10679,6 +11492,17 @@ type user_groups_aggregate {
   nodes: [user_groups!]!
 }
 
+input user_groups_aggregate_bool_exp {
+  count: user_groups_aggregate_bool_exp_count
+}
+
+input user_groups_aggregate_bool_exp_count {
+  arguments: [user_groups_select_column!]
+  distinct: Boolean
+  filter: user_groups_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "user_groups"
 """
@@ -10686,6 +11510,15 @@ type user_groups_aggregate_fields {
   count(columns: [user_groups_select_column!], distinct: Boolean): Int!
   max: user_groups_max_fields
   min: user_groups_min_fields
+}
+
+"""
+order by aggregate values of table "user_groups"
+"""
+input user_groups_aggregate_order_by {
+  count: order_by
+  max: user_groups_max_order_by
+  min: user_groups_min_order_by
 }
 
 """
@@ -10726,10 +11559,26 @@ type user_groups_max_fields {
   userId: uuid
 }
 
+"""
+order by max() on columns of table "user_groups"
+"""
+input user_groups_max_order_by {
+  groupId: order_by
+  userId: order_by
+}
+
 """aggregate min on columns"""
 type user_groups_min_fields {
   groupId: uuid
   userId: uuid
+}
+
+"""
+order by min() on columns of table "user_groups"
+"""
+input user_groups_min_order_by {
+  groupId: order_by
+  userId: order_by
 }
 
 """
@@ -10794,6 +11643,203 @@ placeholder for update columns of table "user_groups" (current role has no relev
 enum user_groups_update_column {
   """placeholder (do not use)"""
   _PLACEHOLDER
+}
+
+"""Table containing User's  Notifications collection"""
+type user_notifications {
+  createdAt: timestamptz!
+  metadata(
+    """JSON select path"""
+    path: String
+  ): jsonb
+
+  """An object relationship"""
+  notification: notifications!
+  notificationId: uuid!
+  status: notification_status_enum!
+  updatedAt: timestamptz!
+
+  """An object relationship"""
+  user: users!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "user_notifications"
+"""
+type user_notifications_aggregate {
+  aggregate: user_notifications_aggregate_fields
+  nodes: [user_notifications!]!
+}
+
+input user_notifications_aggregate_bool_exp {
+  count: user_notifications_aggregate_bool_exp_count
+}
+
+input user_notifications_aggregate_bool_exp_count {
+  arguments: [user_notifications_select_column!]
+  distinct: Boolean
+  filter: user_notifications_bool_exp
+  predicate: Int_comparison_exp!
+}
+
+"""
+aggregate fields of "user_notifications"
+"""
+type user_notifications_aggregate_fields {
+  count(columns: [user_notifications_select_column!], distinct: Boolean): Int!
+  max: user_notifications_max_fields
+  min: user_notifications_min_fields
+}
+
+"""
+order by aggregate values of table "user_notifications"
+"""
+input user_notifications_aggregate_order_by {
+  count: order_by
+  max: user_notifications_max_order_by
+  min: user_notifications_min_order_by
+}
+
+"""
+Boolean expression to filter rows from the table "user_notifications". All fields are combined with a logical 'AND'.
+"""
+input user_notifications_bool_exp {
+  _and: [user_notifications_bool_exp!]
+  _not: user_notifications_bool_exp
+  _or: [user_notifications_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  metadata: jsonb_comparison_exp
+  notification: notifications_bool_exp
+  notificationId: uuid_comparison_exp
+  status: notification_status_enum_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  user: users_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""aggregate max on columns"""
+type user_notifications_max_fields {
+  createdAt: timestamptz
+  notificationId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "user_notifications"
+"""
+input user_notifications_max_order_by {
+  createdAt: order_by
+  notificationId: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type user_notifications_min_fields {
+  createdAt: timestamptz
+  notificationId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "user_notifications"
+"""
+input user_notifications_min_order_by {
+  createdAt: order_by
+  notificationId: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "user_notifications"
+"""
+type user_notifications_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [user_notifications!]!
+}
+
+"""Ordering options when selecting data from "user_notifications"."""
+input user_notifications_order_by {
+  createdAt: order_by
+  metadata: order_by
+  notification: notifications_order_by
+  notificationId: order_by
+  status: order_by
+  updatedAt: order_by
+  user: users_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: user_notifications"""
+input user_notifications_pk_columns_input {
+  notificationId: uuid!
+  userId: uuid!
+}
+
+"""
+select columns of table "user_notifications"
+"""
+enum user_notifications_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  metadata
+
+  """column name"""
+  notificationId
+
+  """column name"""
+  status
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "user_notifications"
+"""
+input user_notifications_set_input {
+  status: notification_status_enum
+}
+
+"""
+Streaming cursor of the table "user_notifications"
+"""
+input user_notifications_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: user_notifications_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input user_notifications_stream_cursor_value_input {
+  createdAt: timestamptz
+  metadata: jsonb
+  notificationId: uuid
+  status: notification_status_enum
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+input user_notifications_updates {
+  """sets the columns of the filtered rows to the given values"""
+  _set: user_notifications_set_input
+
+  """filter the rows which have to be updated"""
+  where: user_notifications_bool_exp!
 }
 
 """Table containing user's settings and feature flags"""
@@ -11370,6 +12416,42 @@ type users {
   ): [groups!]
   email: citext
   emailVerified: Boolean!
+
+  """An array relationship"""
+  groups(
+    """distinct select on columns"""
+    distinct_on: [user_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_groups_bool_exp
+  ): [user_groups!]!
+
+  """An aggregate relationship"""
+  groups_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_groups_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_groups_order_by!]
+
+    """filter the rows returned"""
+    where: user_groups_bool_exp
+  ): user_groups_aggregate!
   id: uuid!
   isAnonymous: Boolean!
   lastSeen: timestamptz
@@ -11378,6 +12460,42 @@ type users {
     """JSON select path"""
     path: String
   ): jsonb
+
+  """An array relationship"""
+  notifications(
+    """distinct select on columns"""
+    distinct_on: [user_notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_notifications_order_by!]
+
+    """filter the rows returned"""
+    where: user_notifications_bool_exp
+  ): [user_notifications!]!
+
+  """An aggregate relationship"""
+  notifications_aggregate(
+    """distinct select on columns"""
+    distinct_on: [user_notifications_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [user_notifications_order_by!]
+
+    """filter the rows returned"""
+    where: user_notifications_bool_exp
+  ): user_notifications_aggregate!
   phoneNumber: String
   phoneNumberVerified: Boolean!
 
@@ -11642,11 +12760,15 @@ input users_bool_exp {
   dissociatedGroups: groups_bool_exp
   email: citext_comparison_exp
   emailVerified: Boolean_comparison_exp
+  groups: user_groups_bool_exp
+  groups_aggregate: user_groups_aggregate_bool_exp
   id: uuid_comparison_exp
   isAnonymous: Boolean_comparison_exp
   lastSeen: timestamptz_comparison_exp
   locale: String_comparison_exp
   metadata: jsonb_comparison_exp
+  notifications: user_notifications_bool_exp
+  notifications_aggregate: user_notifications_aggregate_bool_exp
   phoneNumber: String_comparison_exp
   phoneNumberVerified: Boolean_comparison_exp
   refreshTokens: authRefreshTokens_bool_exp
@@ -11743,11 +12865,13 @@ input users_order_by {
   dissociatedGroups_aggregate: groups_aggregate_order_by
   email: order_by
   emailVerified: order_by
+  groups_aggregate: user_groups_aggregate_order_by
   id: order_by
   isAnonymous: order_by
   lastSeen: order_by
   locale: order_by
   metadata: order_by
+  notifications_aggregate: user_notifications_aggregate_order_by
   phoneNumber: order_by
   phoneNumberVerified: order_by
   refreshTokens_aggregate: authRefreshTokens_aggregate_order_by
