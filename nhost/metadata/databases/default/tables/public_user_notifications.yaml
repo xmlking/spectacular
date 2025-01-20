@@ -38,9 +38,13 @@ select_permissions:
         _and:
           - user_id:
               _eq: x-hasura-user-id
-          - notification:
-              org_id:
-                _eq: x-hasura-default-org
+          - _or:
+              - notification:
+                  org_id:
+                    _is_null: true
+              - notification:
+                  org_id:
+                    _eq: x-hasura-default-org
       allow_aggregations: true
     comment: ""
 update_permissions:
@@ -53,7 +57,11 @@ update_permissions:
         _and:
           - user_id:
               _eq: x-hasura-user-id
-          - notification:
-              org_id:
-                _eq: x-hasura-default-org
+          - _or:
+              - notification:
+                  org_id:
+                    _is_null: true
+              - notification:
+                  org_id:
+                    _eq: x-hasura-default-org
     comment: ""

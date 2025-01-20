@@ -10,7 +10,7 @@ CREATE TABLE public.notifications
   updated_by   uuid        NOT NULL,
   created_at   timestamptz NOT NULL DEFAULT now(),
   updated_at   timestamptz NOT NULL DEFAULT now(),
-  org_id       uuid        NOT NULL,
+  org_id       uuid,                                      -- if null, then it is global notification shared with all orgs
   title        text        NOT NULL,
   message      text        NOT NULL,
   type         text        NOT NULL DEFAULT 'info'::text, -- e.g., "info", "warning", "error"
@@ -35,3 +35,11 @@ CREATE TRIGGER log_deleted_record_when_public_notifications_deleted
 EXECUTE FUNCTION public.log_deleted_record();
 COMMENT ON TRIGGER log_deleted_record_when_public_notifications_deleted ON public.notifications IS 'trigger to save deleted records for audit';
 ---
+SET check_function_bodies = false;
+-- setup some global notifications that are shared with all organizations
+INSERT INTO public.notifications (id, display_name, description, tags, metadata, created_by, updated_by, created_at, updated_at, title, message, type)
+VALUES
+  ('92eaf45e-5d9d-41b2-9f9e-96bbde1e6b64', 'upcoming_payments', 'upcoming payments', '{payment}', '{"priority": "high"}', '8e91bfc4-520d-4349-9888-b628a848f649', '8e91bfc4-520d-4349-9888-b628a848f649', '2025-01-19 22:50:54.467739+00', '2025-01-19 22:50:54.467739+00',  'upcoming payments', 'you payment due: ', 'info'),
+  ('4759bf67-9fb7-4bb1-902d-61378c66d03b', 'certs_expiring', 'certs expiring', '{certs}', '{"priority": "high"}', '8e91bfc4-520d-4349-9888-b628a848f649', '8e91bfc4-520d-4349-9888-b628a848f649', '2025-01-19 22:52:51.370365+00', '2025-01-19 22:52:51.370365+00', 'certs expiring', 'you certs are  expiring', 'warning')
+
+ON CONFLICT (id) DO NOTHING;

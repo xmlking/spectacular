@@ -41,6 +41,9 @@ select_permissions:
         - title
         - type
       filter:
-        org_id:
-          _eq: x-hasura-default-org
+        _or:
+          - org_id:
+              _is_null: true
+          - org_id:
+              _eq: x-hasura-default-org
     comment: ""
