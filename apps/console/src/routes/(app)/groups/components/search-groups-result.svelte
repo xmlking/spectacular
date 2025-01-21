@@ -127,17 +127,18 @@ $: loadingState.setFormLoading(isDeleting);
                   >{row.displayName}
                 </a>
               </td>
-               <td>{row.description}</td>
-              <td>{ #if row.tags === null}
-  N/A
-{:else}
-  {#each row.tags as tag }
-    <span class="chip {tag? 'variant-filled' : 'variant-soft'}">
-      <span>{tag}</span>
-      </span>&nbsp
-  {/each}
-{/if}</td>
-                <td><DateTime distance time={row.updatedAt} /></td>
+              <td>{row.description}</td>
+              <td>
+                { #if row.tags === null}
+                  N/A
+                  {:else}
+                    {#each row.tags as tag }
+                        <span class="chip {tag? 'variant-filled' : 'variant-soft'}">
+                        <span>{tag}</span>
+                        </span>&nbsp
+                      {/each}
+                {/if}</td>
+              <td><DateTime distance time={row.updatedAt} /></td>
               <td>
                 <div
                   use:popup={{
