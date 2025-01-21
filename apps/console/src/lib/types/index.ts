@@ -66,6 +66,12 @@ export enum Roles {
   SysAdmin = 'sys:admin',
 }
 
+export enum OrgRoles {
+  Member = 'org:member',
+  Billing = 'org:billing',
+  Admin = 'org:admin',
+}
+
 export type Link = {
   href: string;
   label: string;

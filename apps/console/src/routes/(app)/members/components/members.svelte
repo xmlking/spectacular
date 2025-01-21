@@ -11,7 +11,7 @@ import { MoreHorizontal, Trash, UserCog } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { fade, slide } from 'svelte/transition';
 import { cn } from '@spectacular/skeleton/utils';
-import { DeleteMembership, UpdateMembership } from '../mutations';
+import { DeleteMember, UpdateMember } from '../mutations';
 import Filter from './filter.svelte';
 
 const log = new Logger('memberships:search-results:browser');
@@ -74,7 +74,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   }
   // before
   isDeleting = true;
-  const { data, errors: gqlErrors } = await DeleteMembership.mutate({
+  const { data, errors: gqlErrors } = await DeleteMember.mutate({
     orgId,
     userId,
   });
@@ -129,7 +129,7 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
 
   // before
   isDeleting = true;
-  const { data, errors: gqlErrors } = await UpdateMembership.mutate({
+  const { data, errors: gqlErrors } = await UpdateMember.mutate({
     orgId,
     userId,
     role,
