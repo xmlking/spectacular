@@ -1,0 +1,13 @@
+query SearchGroups($where: groups_bool_exp, $limit: Int = 50, $offset: Int = 0, $orderBy: [groups_order_by!] = [{updatedAt: desc_nulls_last}]) @loading(cascade: true){
+  groups(where: $where, order_by: $orderBy, limit: $limit, offset: $offset)@list(name: "Search_Groups") {
+    id
+    displayName
+    description
+    tags
+    updatedAt
+    organization {
+      displayName
+    }
+    orgId
+  }
+}
