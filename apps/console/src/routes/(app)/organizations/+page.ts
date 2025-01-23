@@ -1,5 +1,5 @@
 import { order_by } from '$houdini';
-import { searchOrganizationSchema } from '$lib/schema/organization';
+import { searchOrganizationSchema as schema } from '$lib/schema/organization';
 import { Logger } from '@spectacular/utils';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -15,7 +15,7 @@ const log = new Logger('organizations:search:browser');
  */
 export async function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
   log.debug('in _houdini_beforeLoad');
-  const form = await superValidate(url, zod(searchOrganizationSchema));
+  const form = await superValidate(url, zod(schema));
   if (!form.valid) return { status: 400, form };
   // if (!form.valid) return fail(400, { form });
   // if (!form.valid) throw error(400, 'invalid input');
@@ -30,7 +30,7 @@ export const _SearchOrganizationsVariables: Variables = async (event) => {
   log.debug('in _SearchOrganizationsVariables', { url });
   const {
     data: { limit, offset, displayName },
-  } = await superValidate(url, zod(searchOrganizationSchema));
+  } = await superValidate(url, zod(schema));
   // const dataCopy = cleanClone(form.data, { empty: 'strip' });
   const orderBy = [{ updatedAt: order_by.desc_nulls_first }];
   const where = {

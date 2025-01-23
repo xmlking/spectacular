@@ -1,32 +1,32 @@
 <script lang="ts">
-import { PendingValue, type SearchOrganizations$result, graphql } from '$houdini';
+import { PendingValue, type SearchGroups$result, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
-import { getToastStore } from '@skeletonlabs/skeleton';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import { DateTime } from '@spectacular/skeleton/components';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger, sleep } from '@spectacular/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
-import { DeleteOrganization } from '../mutations';
+import { DeleteGroup } from '../mutations';
 
-const log = new Logger('organizations:search-results:browser');
+const log = new Logger('groups:search-results:browser');
 // Variables
-export let organizations: SearchOrganizations$result['organizations'];
+export let groups: SearchGroups$result['groups'];
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 //Datatable handler initialization
-const handler = new DataHandler(organizations.filter(loaded), { rowsPerPage: 10 });
-$: handler.setRows(organizations);
+const handler = new DataHandler(groups.filter(loaded), { rowsPerPage: 10 });
+$: handler.setRows(groups);
 const rows = handler.getRows();
 
 // Functions
 /**
- * Delete Organization action
+ * Delete Group action
  */
 let isDeleting = false;
 
@@ -38,13 +38,13 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   }
   // before
   isDeleting = true;
-  const { data, errors: gqlErrors } = await DeleteOrganization.mutate({
+  const { data, errors: gqlErrors } = await DeleteGroup.mutate({
     id,
   });
   if (gqlErrors) {
     handleMessage(
       {
-        message: `Error deleteing Organization: "${displayName}", cause: ${gqlErrors[0].message} `,
+        message: `Error deleteing Group: "${displayName}", cause: ${gqlErrors[0].message} `,
         hideDismiss: false,
         timeout: 10000,
         type: 'error',
@@ -52,10 +52,10 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
       toastStore,
     );
     return;
-  } else if (data?.delete_organizations_by_pk) {
+  } else if (data?.delete_groups_by_pk) {
     handleMessage(
       {
-        message: `<p class="text-xl">Organization: <span class="text-red-500 font-bold">${displayName}</span> deleted</p>`,
+        message: `<p class="text-xl">Group: <span class="text-red-500 font-bold">${displayName}</span> deleted</p>`,
         hideDismiss: false,
         timeout: 10000,
         type: 'success',
@@ -65,7 +65,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   } else {
     handleMessage(
       {
-        message: `Organization not found for ID: ${id}`,
+        message: `Group not found for ID: ${id}`,
         hideDismiss: false,
         timeout: 50000,
         type: 'error',
@@ -91,24 +91,16 @@ $: loadingState.setFormLoading(isDeleting);
       <thead>
         <tr>
           <Table.Head {handler} orderBy="displayName">Name</Table.Head>
-          <Table.Head {handler} orderBy="ownerId">Owner</Table.Head>
+          <Table.Head {handler} orderBy="description">Description</Table.Head>
+          <Table.Head {handler} orderBy="tags">Tags</Table.Head>
           <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
-          <Table.Head {handler} orderBy={(row) => row.autoEnroll}>Auto Enroll</Table.Head>
-          <Table.Head {handler} orderBy="allowedEmailDomains">Allowed Email Domains</Table.Head>
-          <Table.Head {handler} orderBy="allowedEmails">Allowed Emails</Table.Head>
-          <Table.Head {handler} orderBy="blockedEmailDomains">Blocked Email Domains</Table.Head>
-          <Table.Head {handler} orderBy="blockedEmails">Blocked Emails</Table.Head>
           <Table.Head {handler}>Delete</Table.Head>
         </tr>
         <tr>
           <Table.HeadFilter {handler} filterBy="displayName" />
-          <Table.HeadFilter {handler} filterBy="ownerId" />
+          <Table.HeadFilter {handler} filterBy="description" />
+          <Table.HeadFilter {handler} filterBy="tags" />
           <Table.HeadFilter {handler} filterBy="updatedAt" />
-          <Table.HeadFilter {handler} filterBy={(row) => row.autoEnroll} comparator={check.isLike} />
-          <Table.HeadFilter {handler} filterB="allowedEmailDomains" />
-          <Table.HeadFilter {handler} filterBy="allowedEmails" />
-          <Table.HeadFilter {handler} filterBy="blockedEmailDomains" />
-          <Table.HeadFilter {handler} filterBy="blockedEmails" />
           <th></th>
         </tr>
       </thead>
@@ -122,41 +114,67 @@ $: loadingState.setFormLoading(isDeleting);
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
               <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
             </tr>
           {:else}
             <tr>
               <td>
                 <a
                   class="font-semibold"
-                  href={`/organizations/${row.id}`}
+                  href={`/groups/${row.id}`}
                   title={row.description}
                   >{row.displayName}
                 </a>
               </td>
-              <td>{@html row.ownerId}</td>
-              <td><DateTime distance time={row.updatedAt} /></td>
-              <td>{row.autoEnroll}</td>
-              <td>{@html row.allowedEmailDomains}</td>
-              <td>{@html row.allowedEmails}</td>
-              <td>{@html row.blockedEmailDomains}</td>
-              <td>{@html row.blockedEmails}</td>
+              <td>{row.description}</td>
               <td>
-                <button
-                  type="button"
-                  class="btn-icon btn-icon-sm variant-filled-error"
-                  data-id={row.id}
-                  data-display-name={row.displayName}
-                  on:click|stopPropagation|capture={handleDelete}
-                  disabled={isDeleting}
+                { #if row.tags === null}
+                  N/A
+                  {:else}
+                    {#each row.tags as tag }
+                        <span class="chip {tag? 'variant-filled' : 'variant-soft'}">
+                        <span>{tag}</span>
+                        </span>&nbsp
+                      {/each}
+                {/if}</td>
+              <td><DateTime distance time={row.updatedAt} /></td>
+              <td>
+                <div
+                  use:popup={{
+                    event: "click",
+                    target: "delete" + row.displayName,
+                    placement: "left",
+                  }}
+                  >
+              <button
+                class="btn hover:variant-soft-primary"
                 >
                   <Trash2 />
                 </button>
+                </div>
               </td>
             </tr>
+            <div
+          class="card variant-filled-primary p-4"
+          data-popup="delete{row.displayName}"
+        >
+          <div class="alert-message">
+            <h3 class="h3">Alert</h3>
+            <p class="text-xl">
+              Are you sure you want to delete group <span class="text-red-500"
+                >{row.displayName}</span
+              >?
+            </p>
+          </div>
+          <button
+            type="button"
+            class="variant-filled-error btn"
+            data-id={row.id}
+                  data-display-name={row.displayName}
+                  on:click|stopPropagation|capture={handleDelete}
+                  disabled={isDeleting}>Delete</button
+          >
+          <button type="button" class="variant-filled-error btn">Cancel</button>
+        </div>
           {/if}
         {/each}
       </tbody>
