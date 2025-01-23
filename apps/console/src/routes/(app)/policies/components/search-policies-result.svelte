@@ -18,7 +18,6 @@ import { Logger } from '@spectacular/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
-import { message } from 'sveltekit-superforms';
 import { DeletePolicy, DeleteRule } from '../mutations';
 
 const log = new Logger('policies:search-results:browser');

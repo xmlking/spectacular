@@ -23,6 +23,7 @@ import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { createGroup } from '../mutations';
 
 const log = new Logger('groups.create.browser');
 
@@ -30,14 +31,6 @@ const log = new Logger('groups.create.browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
-
-const createGroup = graphql(`
-    mutation CreateGroup($data: groups_insert_input!) {
-      insert_groups_one(object: $data) {
-        ...Search_Groups_insert @prepend
-      }
-    }
-  `);
 
 const form = superForm(defaults(zod(schema)), {
   SPA: true,

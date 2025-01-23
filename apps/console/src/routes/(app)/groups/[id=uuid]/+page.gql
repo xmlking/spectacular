@@ -1,4 +1,4 @@
-query GroupData1($id: uuid!) {
+query GroupData($id: uuid!) {
   groups_by_pk(id: $id) {
     id
     displayName

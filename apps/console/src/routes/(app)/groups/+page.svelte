@@ -3,15 +3,17 @@ import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
 import { Logger } from '@spectacular/utils';
 import SuperDebug from 'sveltekit-superforms';
 import type { PageData } from './$houdini';
-import SearchGroupsForm from './components/search-groups-form.svelte';
-import SearchGroupsResult from './components/search-groups-result.svelte';
+import ListGroupsForm from './components/search-groups-form.svelte';
+import ListGroupsResult from './components/search-groups-result.svelte';
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
+import SearchPoliciesResult from '../policies/components/search-policies-result.svelte';
 
 const log = new Logger('groups:search:browser');
 export let data: PageData;
 
 // Reactivity
-let { SearchGroups } = data;
-$: ({ SearchGroups } = data);
+let { ListGroups } = data;
+$: ({ ListGroups } = data);
 </script>
 
 <svelte:head>
@@ -26,19 +28,18 @@ $: ({ SearchGroups } = data);
   </section>
 
   <section class="space-y-4">
-    <SearchGroupsForm formInitData={data.form}/>
+    <ListGroupsForm formInitData={data.form}/>
   </section>
 
 <section class="space-y-4">
-  <DebugShell label="table-data">
-    <SuperDebug label="table-data" data={$SearchGroups} />
-  </DebugShell>
-
-  {#if $SearchGroups.errors}
-    <GraphQLErrors errors={$SearchGroups.errors} />
-  {:else if $SearchGroups.data}
-    <SearchGroupsResult data={$SearchGroups.data}/>
-  {/if}
+  <MaybeError
+    debug={true}
+    entityName="SearchPolicies"
+    result={$ListGroups}
+    let:data={{ groups }}
+  >
+    <ListGroupsResult {groups} />
+  </MaybeError>
 </section>
 
 </div>

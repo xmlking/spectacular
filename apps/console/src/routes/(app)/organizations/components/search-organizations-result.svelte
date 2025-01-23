@@ -14,9 +14,7 @@ import { DeleteOrganization } from '../mutations';
 
 const log = new Logger('organizations:search-results:browser');
 // Variables
-export let data: SearchOrganizations$result;
-let { organizations } = data;
-$: ({ organizations } = data);
+export let organizations: SearchOrganizations$result['organizations'];
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();

@@ -14,9 +14,7 @@ import { DeleteGroup } from '../mutations';
 
 const log = new Logger('groups:search-results:browser');
 // Variables
-export let data: SearchGroups$result;
-let { groups } = data;
-$: ({ groups } = data);
+export let groups: SearchGroups$result['groups'];
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();

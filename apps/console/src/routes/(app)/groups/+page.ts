@@ -1,13 +1,13 @@
 import { order_by } from '$houdini';
-import { searchGroupSchema } from '$lib/schema/group';
+import { searchGroupSchema as schema } from '$lib/schema/group';
 import { Logger } from '@spectacular/utils';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
-import type { BeforeLoadEvent, SearchGroupsVariables as Variables } from './$houdini';
+import type { BeforeLoadEvent, ListGroupsVariables as Variables } from './$houdini';
 
 const log = new Logger('groups:search:browser');
 /**
- * Note: `_houdini_beforeLoad` run first, then `_SearchGroupsVariables` then load GQL
+ * Note: `_houdini_beforeLoad` run first, then `_ListGroupsVariables` then load GQL
  */
 
 /**
@@ -15,7 +15,7 @@ const log = new Logger('groups:search:browser');
  */
 export async function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
   log.debug('in _houdini_beforeLoad');
-  const form = await superValidate(url, zod(searchGroupSchema));
+  const form = await superValidate(url, zod(schema));
   if (!form.valid) return { status: 400, form };
   // if (!form.valid) return fail(400, { form });
   // if (!form.valid) throw error(400, 'invalid input');
@@ -25,12 +25,12 @@ export async function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
 /**
  * Set query Variables for +page.gql
  */
-export const _SearchGroupsVariables: Variables = async (event) => {
+export const _ListGroupsVariables: Variables = async (event) => {
   const { url } = event;
-  log.debug('in _SearchGroupsVariables', { url });
+  log.debug('in _ListGroupsVariables', { url });
   const {
     data: { limit, offset, displayName },
-  } = await superValidate(url, zod(searchGroupSchema));
+  } = await superValidate(url, zod(schema));
   // const dataCopy = cleanClone(form.data, { empty: 'strip' });
   const orderBy = [{ updatedAt: order_by.desc_nulls_first }];
   const where = {

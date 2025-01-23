@@ -1,6 +1,6 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
-import { cache, type UpdateGroupDetails$input, type policies_insert_input } from '$houdini';
+import { cache, type UpdateGroup$input, type policies_insert_input } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
@@ -19,7 +19,7 @@ import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts, InputChipWrapper, InputPairs } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import { UpdateGroupDetails } from '../mutations';
+import { UpdateGroup } from '../mutations';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';
@@ -30,14 +30,14 @@ import type { PageData } from './$houdini';
 const log = new Logger('groups.update.browser');
 
 export let data: PageData;
-let { GroupData1 } = data;
+let { GroupData } = data;
 
 // Variables
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 
-const { id, ...initialData } = $GroupData1.data?.groups_by_pk;
+const { id, ...initialData } = $GroupData.data?.groups_by_pk;
 
 const form = superForm(defaults(initialData, zod(schema)), {
   SPA: true,
@@ -53,9 +53,9 @@ const form = superForm(defaults(initialData, zod(schema)), {
     if (!form.valid) return;
 
     const dataCopy = cleanClone(form.data, { empty: 'null' });
-    const variables: UpdateGroupDetails$input = { id, data: dataCopy };
+    const variables: UpdateGroup$input = { id, data: dataCopy };
 
-    const { data, errors } = await UpdateGroupDetails.mutate(variables, { metadata: { logResult: true } });
+    const { data, errors } = await UpdateGroup.mutate(variables, { metadata: { logResult: true } });
 
     if (errors) {
       for (const error of errors) {

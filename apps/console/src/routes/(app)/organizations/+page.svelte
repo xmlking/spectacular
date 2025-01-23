@@ -5,6 +5,8 @@ import SuperDebug from 'sveltekit-superforms';
 import type { PageData } from './$houdini';
 import SearchOrganizationsForm from './components/search-organizations-form.svelte';
 import SearchOrganizationsResult from './components/search-organizations-result.svelte';
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
+import ListGroupsResult from '../groups/components/search-groups-result.svelte';
 
 const log = new Logger('organizations:search:browser');
 export let data: PageData;
@@ -30,15 +32,14 @@ $: ({ SearchOrganizations } = data);
   </section>
 
 <section class="space-y-4">
-  <DebugShell label="table-data">
-    <SuperDebug label="table-data" data={$SearchOrganizations} />
-  </DebugShell>
-
-  {#if $SearchOrganizations.errors}
-    <GraphQLErrors errors={$SearchOrganizations.errors} />
-  {:else if $SearchOrganizations.data}
-    <SearchOrganizationsResult data={$SearchOrganizations.data}/>
-  {/if}
+  <MaybeError
+    debug={true}
+    entityName="SearchPolicies"
+    result={$SearchOrganizations}
+    let:data={{ organizations }}
+  >
+    <SearchOrganizationsResult {organizations} />
+  </MaybeError>
 </section>
 
 </div>

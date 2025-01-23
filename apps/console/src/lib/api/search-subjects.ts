@@ -24,8 +24,8 @@ const searchUsers = graphql(`
         }
     `);
 
-const searchGroup = graphql(`
-        query searchGroup(
+const searchGroups = graphql(`
+        query SearchGroups(
             $where: groups_bool_exp
             $limit: Int = 50
             $offset: Int = 0
@@ -94,7 +94,7 @@ export async function searchSubjects(
       return data?.users ? ok(data.users) : err(errors);
     }
     case subject_type_enum.group: {
-      const { data, errors } = await searchGroup.fetch({
+      const { data, errors } = await searchGroups.fetch({
         blocking: true,
         policy: CachePolicy.CacheAndNetwork,
         metadata: { logResult: true },
