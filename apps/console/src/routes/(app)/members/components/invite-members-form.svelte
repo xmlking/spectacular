@@ -5,7 +5,7 @@ import {
   type UserDetailsFragment,
   fragment,
   graphql,
-  type users_set_input,
+  type invitations_insert_input,
   PendingValue,
 } from '$houdini';
 import * as m from '$i18n/messages';
@@ -20,7 +20,7 @@ import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { fade, slide } from 'svelte/transition';
-import { AddMember } from '../mutations';
+import { InviteMembers } from '../mutations';
 import type { GraphQLError } from 'graphql';
 import {
   CirclePlus,
@@ -37,7 +37,6 @@ import {
 import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { page } from '$app/stores';
-import { is } from 'date-fns/locale';
 
 // Variables
 const log = new Logger('memberships:invite:form:browser');
@@ -60,67 +59,54 @@ const form = superForm(defaults(zod(schema)), {
   clearOnSubmit: 'errors-and-message',
   delayMs: 100,
   timeoutMs: 4000,
-  resetForm: false,
+  resetForm: true,
   validators: zodClient(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
-    // const payload: users_set_input = {
-    //   // ...form.data,
-    //   displayName: form.data.displayName,
-    //   phoneNumber: form.data.phoneNumber,
-    //   locale: form.data.locale,
-    //   metadata: { note: form.data.note },
-    //   avatarUrl: form.data.avatarUrl,
-    // };
-    // const variables: UpdateUserDetails$input = { id, data: payload };
-    // const { errors, data } = await AddMember.mutate(variables, {
-    //   metadata: {
-    //     logResult: true,
-    //     useRole: role === 'sys:admin' ? 'sys:admin' : 'me',
-    //   },
-    // });
-    // if (errors) {
-    //   for (const error of errors) {
-    //     log.error(error);
-    //     if (error.message.includes('Uniqueness violation')) {
-    //       setError(form, 'displayName', 'Display Name already taken');
-    //     } else {
-    //       gqlErrors = errors;
-    //     }
-    //     setError(form, '', (error as GraphQLError).message);
-    //   }
-    //   setMessage(form, {
-    //     type: 'error',
-    //     message: 'Update failed',
-    //   });
-    //   return;
-    // }
+    const { data, errors } = await InviteMembers.mutate(
+      { objects: form.data.invites },
+      {
+        metadata: { logResult: true },
+      },
+    );
+    if (errors) {
+      for (const error of errors) {
+        if (error.message.includes('Uniqueness violation')) {
+          setError(form, '', 'Members with some of the emails supplied are already invited');
+        } else {
+          gqlErrors = errors;
+        }
+      }
+      log.error('Invite members api call error:', errors);
+      return;
+    }
 
-    // const result = data?.updateUser?.displayName;
-    // if (!result) {
-    //   log.error('no data returned');
-    //   setMessage(
-    //     form,
-    //     {
-    //       type: 'error',
-    //       message: 'Update profile failed: responce empty',
-    //     },
-    //     { status: 404 },
-    //   );
-    //   return;
-    // }
+    const result = data?.insert_invitations?.returning;
+    if (!result) {
+      log.error('no data returned');
+      setMessage(
+        form,
+        {
+          type: 'error',
+          message: 'Invite members failed: response empty',
+        },
+        { status: 404 },
+      );
+      return;
+    }
 
-    // // Finally notify user: successfully creattion
-    // const message = {
-    //   message: 'User Details Updated',
-    //   type: 'success',
-    //   timeout: 10000,
-    // } as const;
-    // setMessage(form, message);
-    // handleMessage(message, toastStore);
-    // // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
+    // Finally notify user: successfully invites
+    const message = {
+      message: 'Invitations saved successfully',
+      type: 'success',
+      timeout: 10000,
+    } as const;
+    setMessage(form, message);
+    handleMessage(message, toastStore);
+    // TODO: https://github.com/HoudiniGraphql/houdini/issues/891
     // const user = cache.get('users', { id });
     // user.markStale();
+    // TODO: add the returning results to invites cache.
   },
   onError({ result }) {
     log.error('superForm onError:', { result });

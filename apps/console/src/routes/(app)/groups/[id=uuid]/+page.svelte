@@ -8,7 +8,6 @@ import {
   updateGroupSchema as schema,
   updateGroupKeys as keys,
   allowedMetadata as allowedKeyValues,
-  type UpdateGroup,
 } from '$lib/schema/group';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
