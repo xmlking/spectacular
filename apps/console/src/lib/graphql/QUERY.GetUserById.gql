@@ -14,7 +14,4 @@ query GetUserById($id: uuid!) {
     orgId
     role
   }
-  authUserRoles {
-    role
-  }
 }
