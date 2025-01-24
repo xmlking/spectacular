@@ -150,7 +150,7 @@ function getDndOptions(list: any[]) {
 </script>
 
 <div class="page-container">
-  <h1 class="text-2xl font-bold text-center mb-8">Drag and Drop Lists</h1>
+  <h1 class="text-2xl font-bold text-center mb-8">Drag and Drop Groups</h1>
 
   <div class="grid md:grid-cols-2 gap-4">
     <!-- Left List -->
