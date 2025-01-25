@@ -41,6 +41,11 @@ $: data = fragment(
         defaultRole
         avatarUrl
         locale
+        groups {
+          group {
+            displayName
+          }
+        }
         note: metadata(path: "note")
       }
     `),
@@ -308,6 +313,18 @@ $: if (id !== PendingValue) {
           <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User's Notes</Form.Description> -->
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
+      </div>
+    </div>
+    <div class="col-span-2 space-y-4">
+      <div class="grid gap-2">
+        <div class="flex items-center">
+           <strong>Groups:</strong>
+          <div>
+            {#each  initialData.groups as group}
+              <span class="badge variant-filled-primary m-2">{group.group.displayName}</span>
+            {/each}
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-span-2 space-y-4">

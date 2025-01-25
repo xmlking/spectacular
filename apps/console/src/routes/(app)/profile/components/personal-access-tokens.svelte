@@ -13,6 +13,7 @@ import { DataHandler } from '@vincjo/datatables/legacy';
 import { GraphQLError } from 'graphql';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
+import { deletePersonalAccessToken } from '../mutations';
 
 // Variables
 const log = new Logger('profile:pat:browser');
@@ -50,13 +51,6 @@ const rows = handler.getRows();
  * PAT delete handler
  */
 let isDeleting = false;
-const deletePersonalAccessToken = graphql(`
-    mutation DeletePersonalAccessToken($id: uuid!) {
-      deleteAuthRefreshToken(id: $id) {
-        ...Personal_Access_Tokens_remove @allLists
-      }
-    }
-  `);
 
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   const { id, name } = event.currentTarget.dataset;

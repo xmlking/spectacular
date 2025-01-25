@@ -11,6 +11,7 @@ import { Icon } from '@spectacular/skeleton/components/icons';
 import { Github } from 'lucide-svelte';
 import { onMount } from 'svelte';
 import { writable } from 'svelte/store';
+import { deleteSocialConnect } from '../mutations';
 const modalStore = getModalStore();
 initializeStores();
 const nhost = getNhostClient();
@@ -96,14 +97,7 @@ async function login(nhost: NhostClient, provider: Provider) {
 function click(event: MouseEvent, provider: Provider) {
   login(nhost, provider);
 }
-//delete socail connect
-const deleteSocialConnect = graphql(`
-    mutation DeleteAuthUserProvider($id: uuid!) {
-      deleteAuthUserProvider(id: $id) {
-        userId
-      }
-    }
-  `);
+
 async function handleDelete(id: string, provider: string) {
   const { errors, data } = await deleteSocialConnect.mutate({ id });
   if (data) {

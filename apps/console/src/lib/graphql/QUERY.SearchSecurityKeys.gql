@@ -1,6 +1,0 @@
-query SearchSecurityKeys($userId: uuid!) {
-  authUserSecurityKeys(where: { userId: { _eq: $userId } }) {
-    id
-    nickname
-  }
-}

@@ -60,6 +60,19 @@ export const userSchema = z.object({
 });
 
 /**
+ * Search User Schema
+ */
+export const searchUserSchema = z.object({
+  limit: z.number().int().min(5).max(100).default(10),
+  offset: z.number().int().min(0).default(0),
+  displayName: z.string().trim().min(3).optional(),
+});
+
+export type SearchUserSchema = typeof searchUserSchema;
+export type SearchUser = z.infer<typeof searchUserSchema>;
+export const searchUserKeys = searchUserSchema.keyof().Enum;
+
+/**
  * Update User Details
  */
 export const updateUserDetailsSchema = userSchema.omit({

@@ -1,12 +1,9 @@
 <script lang="ts">
-import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
 import { Logger } from '@spectacular/utils';
-import SuperDebug from 'sveltekit-superforms';
-import type { PageData } from './$houdini';
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import SearchOrganizationsForm from './components/search-organizations-form.svelte';
 import SearchOrganizationsResult from './components/search-organizations-result.svelte';
-import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import ListGroupsResult from '../groups/components/search-groups-result.svelte';
+import type { PageData } from './$houdini';
 
 const log = new Logger('organizations:search:browser');
 export let data: PageData;

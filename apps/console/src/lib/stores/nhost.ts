@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { goto, invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
-import { SearchSecurityKeysStore, UpdateDefaultOrgStore, cache } from '$houdini';
+import { cache } from '$houdini';
 import { NHOST_SESSION_KEY, ROUTE_DASHBOARD } from '$lib/constants';
 import { i18n } from '$lib/i18n';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
@@ -11,9 +11,23 @@ import Cookies from 'js-cookie';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { type Readable, type Writable, derived, get, readable, readonly, writable } from 'svelte/store';
 
+// const skQuery = new SearchSecurityKeysStore().artifact.raw;
+// const soQuery = new UpdateDefaultOrgStore().artifact.raw;
+const skQuery = `query SearchSecurityKeys($userId: uuid!) {
+  authUserSecurityKeys(where: { userId: { _eq: $userId } }) {
+    id
+    nickname
+  }
+}`;
+
+const soQuery = `mutation UpdateDefaultOrg($userId: uuid!, $orgId: uuid!) @role(name: "me") {
+  updateUser(pk_columns: { id: $userId }, _set: { defaultOrg: $orgId }) {
+    id
+    defaultOrg
+  }
+}`;
+
 // TODO: change to Svelte 5 Class: https://x.com/ankurpsinghal/status/1856719524059283897
-const skQuery = new SearchSecurityKeysStore().artifact.raw;
-const soQuery = new UpdateDefaultOrgStore().artifact.raw;
 export class SvelteKitNhostClient extends NhostClient {
   #log = new Logger('auth.store.client');
 

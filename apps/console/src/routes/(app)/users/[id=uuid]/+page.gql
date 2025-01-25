@@ -1,18 +1,6 @@
-query UserData1($id: uuid!) @cache(policy: NetworkOnly) {
+query UserData($id: uuid!) {
   user(id: $id) {
-    displayName
-    defaultOrg
-    defaultRole
-    avatarUrl
-    email
-    id
-    associatedGroups(order_by: { displayName: asc }) {
-      displayName
-      id
-    }
-    dissociatedGroups(order_by: { displayName: asc }) {
-      displayName
-      id
-    }
+    ...UserDetailFragment
+    ...UserGroupsFragment
   }
 }

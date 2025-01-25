@@ -1,33 +1,61 @@
 <script lang="ts">
+import {
+  cache,
+  type UserData$result,
+  type UserGroupsFragment,
+  fragment,
+  graphql,
+  type users_set_input,
+  PendingValue,
+} from '$houdini';
 import { crossfade } from 'svelte/transition';
 import { ArrowLeftIcon, ArrowRightIcon, Plus } from 'lucide-svelte';
 import { writable } from 'svelte/store';
-import { PendingValue, type UserData1$result, graphql } from '$houdini';
 import { AddUser_Group, DeleteUser_Group } from '../mutations';
 import { invalidateAll } from '$app/navigation';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import { dndzone, type DndEvent } from 'svelte-dnd-action';
+import { Logger } from '@spectacular/utils';
+const log = new Logger('user:groups:browser');
+
+export let user: UserGroupsFragment;
+$: data = fragment(
+  user,
+  graphql(`
+      fragment UserGroupsFragment on users @loading(cascade: true) {
+        associatedGroups(order_by: { displayName: asc }) {
+          displayName
+          id
+        }
+        dissociatedGroups(order_by: { displayName: asc }) {
+          displayName
+          id
+        }
+      }
+    `),
+);
+
+// Reactivity
+$: ({ dissociatedGroups, associatedGroups } = $data);
+
 // Variables
-export let data: UserData1$result;
-let { user } = data;
-$: ({ user } = data);
 const toastStore = getToastStore();
 // Initial maps data using writable stores
 const map1 = writable(
-  user?.dissociatedGroups.map((group) => ({
+  dissociatedGroups?.map((group) => ({
     id: group.id,
     name: group.displayName,
-  })),
+  })) ?? [],
 );
 const map2 = writable(
-  user?.associatedGroups.map((group) => ({
+  associatedGroups?.map((group) => ({
     id: group.id,
     name: group.displayName,
-  })),
+  })) ?? [],
 );
-let tempMap1: string[] = user?.dissociatedGroups.map((group) => group.id) || [];
-let tempMap2: string[] = user?.associatedGroups.map((group) => group.id) || [];
+let tempMap1: string[] = dissociatedGroups?.map((group) => group.id) || [];
+let tempMap2: string[] = associatedGroups?.map((group) => group.id) || [];
 // Flip between considering as items from list 1 or 2
 function handleDndConsider(e: CustomEvent<{ items: any[] }>, targetList: 'map1' | 'map2') {
   const { items } = e.detail;
@@ -167,7 +195,7 @@ function getDndOptions(list: any[]) {
           on:finalize={(e) => handleDndFinalize(e, "map1")}
           class="space-y-2 h-full overflow-y-auto pr-2"
         >
-          {#if $map1.length === 0}
+          {#if $map1?.length === 0}
             <div class="text-center p-4 text-zinc-500 dark:text-zinc-400">
               No groups available
             </div>

@@ -26,14 +26,32 @@ insert_permissions:
           - group:
               org_id:
                 _eq: x-hasura-default-org
-          - user:
-              default_org:
-                _eq: x-hasura-default-org
+          - _exists:
+              _table:
+                name: memberships
+                schema: public
+              _where:
+                _and:
+                  - user_id:
+                      _ceq:
+                        - $
+                        - user_id
+                  - org_id:
+                      _eq: x-hasura-default-org
       columns:
         - group_id
         - user_id
     comment: ""
 select_permissions:
+  - role: me
+    permission:
+      columns:
+        - group_id
+        - user_id
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
+    comment: ""
   - role: org:admin
     permission:
       columns:
@@ -44,9 +62,26 @@ select_permissions:
           - group:
               org_id:
                 _eq: x-hasura-default-org
-          - user:
-              default_org:
-                _eq: x-hasura-default-org
+          - _exists:
+              _table:
+                name: memberships
+                schema: public
+              _where:
+                _and:
+                  - user_id:
+                      _ceq:
+                        - $
+                        - user_id
+                  - org_id:
+                      _eq: x-hasura-default-org
+      allow_aggregations: true
+    comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - group_id
+        - user_id
+      filter: {}
       allow_aggregations: true
     comment: ""
 delete_permissions:
@@ -57,7 +92,16 @@ delete_permissions:
           - group:
               org_id:
                 _eq: x-hasura-default-org
-          - user:
-              default_org:
-                _eq: x-hasura-default-org
+          - _exists:
+              _table:
+                name: memberships
+                schema: public
+              _where:
+                _and:
+                  - user_id:
+                      _ceq:
+                        - $
+                        - user_id
+                  - org_id:
+                      _eq: x-hasura-default-org
     comment: ""
