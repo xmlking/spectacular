@@ -2,6 +2,13 @@ import { ROUTE_DASHBOARD } from '$lib/constants';
 import { Roles } from '$lib/types';
 import { z } from 'zod';
 
+export const allowedMetadata = {
+  plan: ['Starter', 'Pro', 'Team', 'Family'] as const,
+  active: [true, false] as const,
+  zone: ['north', 'east', 'west', 'south'] as const,
+  region: ['APAC', 'North America', 'South America', 'Europe', 'Middle East', 'Africa'] as const,
+} as const;
+
 // const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
 const phoneRegex = /^\+[1-9]\d{1,14}$/;
 // Regular expression to match ASCII characters
@@ -50,7 +57,7 @@ export const userSchema = z.object({
   phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!').min(10).max(15).nullable(),
   avatarUrl: z.string().url().nullable(),
   defaultRole: z.nativeEnum(Roles, { required_error: 'You must have a role' }).default(Roles.User),
-  note: z.string().optional(),
+  metadata: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).nullish(),
   locale: z.enum(['en', 'es', 'de']).default('en'),
   verified: z.boolean().default(false),
   token: z.string().optional(),

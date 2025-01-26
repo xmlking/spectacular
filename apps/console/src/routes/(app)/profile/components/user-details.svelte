@@ -11,12 +11,12 @@ import {
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { updateUserDetailsKeys as keys, updateUserDetailsSchema as schema } from '$lib/schema/user';
+import { updateUserDetailsKeys as keys, updateUserDetailsSchema as schema, allowedMetadata as allowedKeyValues } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { Alerts, InputPairs } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { UpdateUserDetails } from '../mutations';
@@ -46,7 +46,7 @@ $: data = fragment(
             displayName
           }
         }
-        note: metadata(path: "note")
+        metadata
       }
     `),
 );
@@ -88,7 +88,7 @@ const form = superForm(defaults(zod(schema)), {
       displayName: form.data.displayName,
       phoneNumber: form.data.phoneNumber,
       locale: form.data.locale,
-      metadata: { note: form.data.note },
+      metadata: form.data.metadata,
       avatarUrl: form.data.avatarUrl,
     };
     const variables: UpdateUserDetails$input = { id, data: payload };
@@ -299,18 +299,21 @@ $: if (id !== PendingValue) {
         </Form.Field>
       </div>
       <div class="grid gap-2">
-        <Form.Field {form} name={keys.note}>
+        <Form.Field {form} name={keys.metadata}>
           <Form.Control let:attrs>
-            <Form.Label class="label">Notes</Form.Label>
-            <input
-              type="text"
-              class="input data-[fs-error]:input-error"
+            <Form.Label class="label">Metadata</Form.Label>
+            <InputPairs
               {...attrs}
-              placeholder="User Notes..."
-              bind:value={$formData.note}
+              placeholder="Enter metadata..."
+              class="input data-[fs-error]:input-error"
+              {allowedKeyValues}
+              bind:value={$formData.metadata}
             />
           </Form.Control>
-          <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User's Notes</Form.Description> -->
+          <Form.Description
+            class="sr-only md:not-sr-only text-sm text-gray-500"
+            >Enter the metadata</Form.Description
+          >
           <Form.FieldErrors class="data-[fs-error]:text-error-500" />
         </Form.Field>
       </div>

@@ -43,15 +43,6 @@ insert_permissions:
         - user_id
     comment: ""
 select_permissions:
-  - role: me
-    permission:
-      columns:
-        - group_id
-        - user_id
-      filter:
-        user_id:
-          _eq: x-hasura-user-id
-    comment: ""
   - role: org:admin
     permission:
       columns:
@@ -83,6 +74,15 @@ select_permissions:
         - user_id
       filter: {}
       allow_aggregations: true
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - group_id
+        - user_id
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
     comment: ""
 delete_permissions:
   - role: org:admin

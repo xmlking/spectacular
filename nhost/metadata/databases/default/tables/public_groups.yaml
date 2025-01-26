@@ -42,19 +42,6 @@ insert_permissions:
         - tags
     comment: ""
 select_permissions:
-  - role: me
-    permission:
-      columns:
-        - description
-        - display_name
-        - id
-        - metadata
-        - tags
-        - updated_by
-      filter:
-        org_id:
-          _eq: x-hasura-default-org
-    comment: ""
   - role: org:admin
     permission:
       columns:
@@ -89,6 +76,18 @@ select_permissions:
       filter: {}
       allow_aggregations: true
     comment: ""
+  - role: user
+    permission:
+      columns:
+        - description
+        - display_name
+        - id
+        - metadata
+        - tags
+        - updated_by
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
 update_permissions:
   - role: org:admin
     permission:
