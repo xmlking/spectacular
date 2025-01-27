@@ -260,9 +260,12 @@ update_permissions:
     permission:
       columns:
         - avatar_url
+        - default_org
         - disabled
         - display_name
+        - locale
         - metadata
+        - phone_number
       filter: {}
       check: null
     comment: ""
