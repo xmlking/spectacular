@@ -60,6 +60,34 @@ select_permissions:
           _eq: x-hasura-default-org
       allow_aggregations: true
     comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - tags
+        - metadata
+        - description
+        - display_name
+        - created_at
+        - updated_at
+        - created_by
+        - id
+        - org_id
+        - updated_by
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - description
+        - display_name
+        - id
+        - metadata
+        - tags
+        - updated_by
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
 update_permissions:
   - role: org:admin
     permission:
@@ -74,6 +102,16 @@ update_permissions:
       check: null
       set:
         updated_by: x-hasura-user-id
+    comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - description
+        - display_name
+        - metadata
+        - tags
+      filter: {}
+      check: null
     comment: ""
 delete_permissions:
   - role: org:admin

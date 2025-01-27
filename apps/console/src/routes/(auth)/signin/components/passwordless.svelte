@@ -36,6 +36,7 @@ const form = superForm(defaults(zod(mlSchema)), {
   clearOnSubmit: 'errors-and-message',
   async onUpdate({ form, cancel }) {
     // THIS IS CALLED ON MAGIC_LINK SUBMIT
+    // TODO: fix email client issue: https://nhost.io/blog/protect-magic-links-from-email-clients
     if (!form.valid) return;
 
     const { email, redirectTo } = form.data;

@@ -1,8 +1,8 @@
 <script lang="ts">
 import {
   cache,
-  type UpdateUserDetails$input,
-  type UserDetailsFragment,
+  type UpdateUserDetail$input,
+  type UserDetailFragment,
   fragment,
   graphql,
   type users_set_input,
@@ -23,7 +23,7 @@ import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts, InputPairs } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import { UpdateUserDetails } from '../mutations';
+import { UpdateUserDetail } from '../mutations';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';
 import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
@@ -31,26 +31,34 @@ import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { getNhostClient } from '$lib/stores/nhost';
 import { page } from '$app/stores';
 
-const log = new Logger('profile:profile:details:browser');
+const log = new Logger('user:details:browser');
 
-export let user: UserDetailsFragment;
+export let user: UserDetailFragment;
 $: data = fragment(
   user,
   graphql(`
-      fragment UserDetailsFragment on users @loading(cascade: true) {
+      fragment UserDetailFragment on users @loading(cascade: true) {
         id
         displayName
         email
+        emailVerified
         phoneNumber
-        defaultRole
         avatarUrl
         locale
+        metadata
+        defaultRole
+        currentOrg {
+          displayName
+        }
         groups {
           group {
             displayName
           }
         }
-        metadata
+        disabled
+        lastSeen
+        createdAt
+        updatedAt
       }
     `),
 );
@@ -95,8 +103,8 @@ const form = superForm(defaults(zod(schema)), {
       metadata: form.data.metadata,
       avatarUrl: form.data.avatarUrl,
     };
-    const variables: UpdateUserDetails$input = { id, data: payload };
-    const { errors, data } = await UpdateUserDetails.mutate(variables, {
+    const variables: UpdateUserDetail$input = { id, data: payload };
+    const { errors, data } = await UpdateUserDetail.mutate(variables, {
       metadata: {
         logResult: true,
         useRole: role === 'sys:admin' ? 'sys:admin' : 'me',

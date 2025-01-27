@@ -1779,8 +1779,8 @@ enum files_update_column {
 
 """Table containing user groups that belongs to an organization"""
 type groups {
-  createdAt: timestamptz!
-  createdBy: uuid!
+  createdAt: timestamptz
+  createdBy: uuid
   description: String
   displayName: String!
   id: uuid!
@@ -1788,12 +1788,12 @@ type groups {
     """JSON select path"""
     path: String
   ): jsonb
-  orgId: uuid!
+  orgId: uuid
 
   """An object relationship"""
   organization: organizations!
   tags: [String!]
-  updatedAt: timestamptz!
+  updatedAt: timestamptz
   updatedBy: uuid!
 }
 

@@ -260,6 +260,8 @@ update_permissions:
     permission:
       columns:
         - avatar_url
+        - default_org
+        - disabled
         - display_name
         - locale
         - metadata
@@ -282,4 +284,9 @@ update_permissions:
       check:
         default_org:
           _in: x-hasura-allowed-orgs
+    comment: ""
+delete_permissions:
+  - role: sys:admin
+    permission:
+      filter: {}
     comment: ""

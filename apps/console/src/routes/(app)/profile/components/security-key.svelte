@@ -7,6 +7,7 @@ import { Logger } from '@spectacular/utils';
 import { GraphQLError } from 'graphql';
 import { KeyRound, Trash2 } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
+import { deleteSecurityKey } from '../mutations';
 
 export let message: App.Superforms.Message | undefined;
 export let errors: string[];
@@ -36,13 +37,6 @@ $: ({ id, nickname } = $data);
  * delete handler
  */
 let isDeleting = false;
-const deleteSecurityKey = graphql(`
-    mutation RemoveSecurityKey($id: uuid!) {
-      deleteAuthUserSecurityKey(id: $id) {
-        ...Security_Keys_remove @allLists
-      }
-    }
-  `);
 
 const handleDelete = async () => {
   // before

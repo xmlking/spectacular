@@ -13,21 +13,13 @@ query SearchUsersAll(
     id
     displayName
     email
-    emailVerified
-    phoneNumber
-    phoneNumberVerified
     avatarUrl
-    locale
-    metadata
     defaultRole
     currentOrg {
       displayName
       id
     }
     disabled
-    disabled
     lastSeen
-    createdAt
-    updatedAt
   }
 }
