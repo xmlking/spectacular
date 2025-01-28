@@ -88,8 +88,12 @@ select_permissions:
         - group_id
         - user_id
       filter:
-        user_id:
-          _eq: x-hasura-user-id
+        _and:
+          - user_id:
+              _eq: x-hasura-user-id
+          - group:
+              org_id:
+                _eq: x-hasura-default-org
     comment: ""
 delete_permissions:
   - role: org:admin

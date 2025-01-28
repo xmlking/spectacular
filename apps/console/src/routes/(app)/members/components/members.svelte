@@ -190,7 +190,7 @@ $: loadingState.setFormLoading(isDeleting);
             class="w-10 h-10 rounded-full"
           />
           <div>
-            <h3 class="font-medium text-gray-900">{member.displayName}</h3>
+            <h3 class="font-medium text-gray-900"><a href="/users/{member.userId}">{member.displayName}</a></h3>
             <p class="text-sm text-gray-500">{member.email}</p>
           </div>
         </div>
