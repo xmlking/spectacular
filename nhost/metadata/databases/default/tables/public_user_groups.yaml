@@ -42,6 +42,13 @@ insert_permissions:
         - group_id
         - user_id
     comment: ""
+  - role: sys:admin
+    permission:
+      check: {}
+      columns:
+        - group_id
+        - user_id
+    comment: ""
 select_permissions:
   - role: org:admin
     permission:
@@ -104,4 +111,8 @@ delete_permissions:
                         - user_id
                   - org_id:
                       _eq: x-hasura-default-org
+    comment: ""
+  - role: sys:admin
+    permission:
+      filter: {}
     comment: ""

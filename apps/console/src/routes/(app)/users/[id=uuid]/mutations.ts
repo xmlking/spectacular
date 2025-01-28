@@ -12,17 +12,17 @@ export const UpdateUserDetail = graphql(`
     }
   `);
 
-export const AddUser_Group = graphql(`
-  mutation AddUserGroup($group: user_groups_insert_input!) {
-    insert_user_groups_one(object: $group) {
+export const AddUserGroup = graphql(`
+  mutation AddUserGroup($userId: uuid!, $groupId: uuid!) {
+    insert_user_groups_one(object: {userId: $userId, groupId: $groupId}) {
       userId
       groupId
     }
   }
   `);
 
-export const DeleteUser_Group = graphql(`
-  mutation DeleteUserGroups($userId: uuid!, $groupId: uuid!) {
+export const DeleteUserGroup = graphql(`
+  mutation DeleteUserGroup($userId: uuid!, $groupId: uuid!) {
     delete_user_groups_by_pk(groupId: $groupId, userId: $userId) {
       userId
       groupId

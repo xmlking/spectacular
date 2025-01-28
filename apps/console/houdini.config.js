@@ -28,8 +28,12 @@ const config = {
     invitations: {
       keys: ['email', 'orgId'],
     },
+    user_groups: {
+      keys: ['userId', 'groupId'],
+    },
   },
   features: {
+    imperativeCache: true,
     runtimeScalars: {
       UserIdFromSession: {
         type: 'uuid',
