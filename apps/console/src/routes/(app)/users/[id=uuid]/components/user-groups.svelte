@@ -154,7 +154,6 @@ async function deleteUserGroup(groupId: string) {
       {#each availableGroups as group (group.id)}
         <li class="list-option cursor-move justify-between bg-surface-200 border border-surface-300 !rounded-container-token" animate:flip="{{duration: flipDurationMs}}">
           <span class="flex-auto font-medium">{group.displayName}</span>
-
 					<button class="btn-icon btn-icon-sm" on:click={() => handleAdd(group)}>
 						 <Plus class="w-4 h-4" />
 					</button>
@@ -185,7 +184,7 @@ async function deleteUserGroup(groupId: string) {
       {#each assignedGroups as group (group.id)}
         <li class="list-option cursor-move justify-between bg-surface-200 border border-surface-300 !rounded-container-token" animate:flip="{{duration: flipDurationMs}}">
           <span class="flex-auto font-medium">{group.displayName}</span>
-					<button class="btn btn-sm" on:click={() => handleRemove(group)}>
+					<button class="btn-icon btn-icon-sm" on:click={() => handleRemove(group)}>
 						<X class="w-4 h-4" />
 					</button>
         </li>
