@@ -24,6 +24,17 @@ object_relationships:
   - name: organization
     using:
       foreign_key_constraint_on: org_id
+computed_fields:
+  - name: inviter_name
+    definition:
+      function:
+        name: inviter_name
+        schema: public
+  - name: inviter_org_name
+    definition:
+      function:
+        name: inviter_org_name
+        schema: public
 insert_permissions:
   - role: org:admin
     permission:
@@ -61,16 +72,39 @@ select_permissions:
   - role: org:admin
     permission:
       columns:
-        - role
         - created_at
-        - updated_at
-        - email
         - created_by
+        - email
         - org_id
+        - role
+        - status
+        - updated_at
         - updated_by
+      computed_fields:
+        - inviter_name
+        - inviter_org_name
       filter:
         org_id:
           _eq: x-hasura-default-org
+      allow_aggregations: true
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - created_by
+        - email
+        - org_id
+        - role
+        - status
+        - updated_at
+        - updated_by
+      computed_fields:
+        - inviter_name
+        - inviter_org_name
+      filter:
+        email:
+          _eq: x-hasura-user-email
       allow_aggregations: true
     comment: ""
 update_permissions:
@@ -93,6 +127,15 @@ update_permissions:
       set:
         updated_by: x-hasura-user-id
     comment: owner can upgrade and downgrade role of a member except for owner membership
+  - role: user
+    permission:
+      columns:
+        - status
+      filter: {}
+      check:
+        email:
+          _eq: x-hasura-user-email
+    comment: ""
 delete_permissions:
   - role: org:admin
     permission:

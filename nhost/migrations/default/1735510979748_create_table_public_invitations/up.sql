@@ -4,13 +4,15 @@ CREATE TABLE public.invitations
   email      auth.email  NOT NULL,
   org_id     uuid        NOT NULL,
   role       text        NOT NULL,
+  status     text        NOT NULL DEFAULT 'pending'::text, -- Status: pending, accepted, declined
   created_by uuid        NOT NULL,
   updated_by uuid        NOT NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now(),
   PRIMARY KEY (email, org_id),
   FOREIGN KEY (org_id) REFERENCES public.organizations (id) ON UPDATE RESTRICT ON DELETE CASCADE,
-  FOREIGN KEY (role) REFERENCES auth.roles (role) ON UPDATE CASCADE ON DELETE RESTRICT
+  FOREIGN KEY (role) REFERENCES auth.roles (role) ON UPDATE CASCADE ON DELETE RESTRICT,
+  FOREIGN KEY (status) REFERENCES public.status (value) ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 COMMENT ON TABLE public.invitations IS 'Table containing invitations for non-org members to join an org.';
 ---
@@ -28,32 +30,48 @@ CREATE TRIGGER log_deleted_record_when_public_invitations_deleted
 EXECUTE FUNCTION public.log_deleted_record(email, org_id);
 COMMENT ON TRIGGER log_deleted_record_when_public_invitations_deleted ON public.invitations IS 'trigger to save deleted records for audit';
 ---
-CREATE OR REPLACE FUNCTION handle_invitations_insert()
+CREATE OR REPLACE FUNCTION public.inviter_org_name(invitation_row public.invitations) RETURNS TEXT AS
+$$
+SELECT display_name
+FROM public.organizations
+WHERE id = invitation_row.org_id
+$$ LANGUAGE sql STABLE;
+COMMENT ON FUNCTION public.inviter_org_name(invitation_row public.invitations) IS 'Used as Computed Field on Invitations Table';
+---
+CREATE OR REPLACE FUNCTION public.inviter_name(invitation_row public.invitations) RETURNS TEXT AS
+$$
+SELECT display_name
+FROM auth.users
+WHERE id = invitation_row.created_by
+$$ LANGUAGE sql STABLE;
+COMMENT ON FUNCTION public.inviter_name(invitation_row public.invitations) IS 'Used as Computed Field on Invitations Table';
+---
+-- let invites to accept or reject the invitation and auto convert invitations to memberships
+CREATE OR REPLACE FUNCTION handle_invitation_acceptance()
   RETURNS TRIGGER AS
 $$
 BEGIN
-  -- Check if the email exists in the auth.users table
-  IF EXISTS (SELECT 1 FROM auth.users WHERE email = NEW.email) THEN
-    -- Get the user ID associated with the email
-    INSERT INTO public.memberships (user_id, org_id, role, created_by, updated_by)
-    SELECT id, NEW.org_id, NEW.role, NEW.created_by, NEW.updated_by
-    FROM auth.users
-    WHERE email = NEW.email;
+  -- Only proceed if status is changing from 'pending' to 'accepted'
+  IF OLD.status = 'pending' AND NEW.status = 'accepted' THEN
 
-    -- Skip inserting into the public.invitations table
-    RETURN NULL;
-  ELSE
-    -- Email doesn't exist in auth.users, allow insertion into public.invitations
-    RETURN NEW;
+    -- Insert only if a user with the given email exists
+    INSERT INTO public.memberships (user_id, org_id, role, created_by, updated_by)
+    SELECT u.id, NEW.org_id, NEW.role, NEW.created_by, NEW.updated_by
+    FROM auth.users u
+    WHERE u.email = NEW.email
+    ON CONFLICT (user_id, org_id) DO NOTHING; -- Prevent duplicate entries
   END IF;
-END;
+
+  RETURN NEW;
+END
 $$ LANGUAGE plpgsql;
-COMMENT ON FUNCTION handle_invitations_insert () IS 'This function enroll membership if invite found in users table';
+COMMENT ON FUNCTION handle_invitation_acceptance () IS 'This function enroll membership if invite accepts the invitation';
 ---
-CREATE TRIGGER trg_handle_invitations_insert
-  BEFORE INSERT
+CREATE TRIGGER trg_on_invitation_acceptance
+  AFTER UPDATE
   ON public.invitations
   FOR EACH ROW
-EXECUTE FUNCTION handle_invitations_insert();
-COMMENT ON TRIGGER trg_handle_invitations_insert ON public.invitations IS 'This trigger enroll membership if invite found in users table';
+  WHEN (OLD.status = 'pending' AND NEW.status = 'accepted')
+EXECUTE FUNCTION handle_invitation_acceptance();
+COMMENT ON TRIGGER trg_on_invitation_acceptance ON public.invitations IS 'This trigger enroll membership if invite accepts the invitation';
 ---

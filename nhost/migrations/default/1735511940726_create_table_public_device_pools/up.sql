@@ -8,7 +8,7 @@ CREATE TABLE public.device_pools
 );
 COMMENT ON TABLE public.device_pools IS 'Device to Pool association table';
 ---
-CREATE FUNCTION public.device_associated_pools(device_row public.devices) RETURNS SETOF public.pools
+CREATE OR REPLACE FUNCTION public.device_associated_pools(device_row public.devices) RETURNS SETOF public.pools
   LANGUAGE sql
   STABLE AS
 $$
@@ -18,7 +18,7 @@ WHERE id IN (SELECT pool_id FROM public.device_pools WHERE device_id = device_ro
 $$;
 COMMENT ON FUNCTION public.device_associated_pools(device_row public.devices) IS 'Used as Computed Field on Devices Table';
 ---
-CREATE FUNCTION public.device_dissociated_pools(device_row public.devices) RETURNS SETOF public.pools
+CREATE OR REPLACE FUNCTION public.device_dissociated_pools(device_row public.devices) RETURNS SETOF public.pools
   LANGUAGE sql
   STABLE AS
 $$
