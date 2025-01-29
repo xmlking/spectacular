@@ -1,5 +1,5 @@
 <script lang="ts">
-import { fragment, graphql, PendingValue, type InvitationsFragment } from '$houdini';
+import { fragment, graphql, PendingValue, type UserInvitationsFragment } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
@@ -11,20 +11,22 @@ import { MoreHorizontal, Trash, UserCog } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { fade, slide } from 'svelte/transition';
 import { cn } from '@spectacular/skeleton/utils';
-import { DeleteMember, UpdateMember } from '../mutations';
+import { AcceptInvitation, DeclineInvitation } from '../mutations';
 import Filter from './filter.svelte';
 
 const log = new Logger('memberships:search-results:browser');
 // Variables
 
-export let organization: InvitationsFragment;
+export let user: UserInvitationsFragment;
 $: data = fragment(
-  organization,
+  user,
   graphql(`
-      fragment InvitationsFragment on organizations {
-        invitations(order_by: { updatedAt: asc }) @list(name: "List_Invitations") {
+      fragment UserInvitationsFragment on users {
+        invitations(order_by: { updatedAt: asc }) @list(name: "List_User_Invitations") {
           email
           orgId
+          inviter_name
+          inviter_org_name
           role
           status
           updatedAt
@@ -46,23 +48,23 @@ const rows = handler.getRows();
 
 // Functions
 /**
- * Delete Organization action
+ * Accept Invitation action
  */
 let isDeleting = false;
 
-const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { userId, orgId, userDisplayName } = event.currentTarget.dataset;
+const acceptInvitation: MouseEventHandler<HTMLButtonElement> = async (event) => {
+  const { email, orgId, userDisplayName } = event.currentTarget.dataset;
   console.log(event.currentTarget.dataset);
-  if (!userId || !orgId) {
-    log.error('Misconfiguration: did you miss adding `data-user-id`, `data-org-id` attributes?');
+  if (!email || !orgId) {
+    log.error('Misconfiguration: did you miss adding `data-email`, `data-org-id` attributes?');
     return;
   }
   // before
   isDeleting = true;
-  const { data, errors: gqlErrors } = await DeleteMember.mutate({
-    orgId,
-    userId,
-  });
+  const { data, errors: gqlErrors } = await AcceptInvitation.mutate(
+    { email, orgId },
+    { metadata: { logResult: true, useRole: 'me' } },
+  );
   if (gqlErrors) {
     handleMessage(
       {
@@ -75,7 +77,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
     );
     return;
   }
-  if (data?.delete_memberships_by_pk) {
+  if (data?.update_invitations_by_pk) {
     handleMessage(
       {
         message: `<p class="text-xl">Memebership : <span class="text-red-500 font-bold">${userDisplayName}</span> deleted</p>`,
@@ -101,28 +103,27 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   isDeleting = false;
 };
 /**
- * Update MemberShip role action
+ * Decline Invitation action
  */
 
-const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { orgId, userId, role, userDisplayName } = event.currentTarget.dataset;
+const declineInvitation: MouseEventHandler<HTMLButtonElement> = async (event) => {
+  const { email, orgId } = event.currentTarget.dataset;
   console.log(event.currentTarget.dataset);
-  if (!orgId || !userId || !role) {
-    log.error('Misconfiguration: did you miss adding `data-org-id` `data-user-id` `data-role` attributes?');
+  if (!email || !orgId) {
+    log.error('Misconfiguration: did you miss adding `data-email` `data-org-id` attributes?');
     return;
   }
 
   // before
   isDeleting = true;
-  const { data, errors: gqlErrors } = await UpdateMember.mutate({
-    orgId,
-    userId,
-    role,
-  });
+  const { data, errors: gqlErrors } = await DeclineInvitation.mutate(
+    { email, orgId },
+    { metadata: { logResult: true, useRole: 'me' } },
+  );
   if (gqlErrors) {
     handleMessage(
       {
-        message: `Error while updating membership for: "${userDisplayName}", cause: ${gqlErrors[0].message} `,
+        message: `Error while updating membership for:, cause: ${gqlErrors[0].message} `,
         hideDismiss: false,
         timeout: 10000,
         type: 'error',
@@ -131,10 +132,10 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
     );
     return;
   }
-  if (data?.update_memberships_by_pk) {
+  if (data?.update_invitations_by_pk) {
     handleMessage(
       {
-        message: `<p class="text-xl">Membership : <span class="text-red-500 font-bold">${userDisplayName}</span> role successfully updated to <span class="text-red-500 font-bold">${role}</span></p>`,
+        message: `<p class="text-xl">Membership : <span class="text-red-500 font-bold"> </span> role successfully updated to <span class="text-red-500 font-bold"> </span></p>`,
         hideDismiss: false,
         timeout: 10000,
         type: 'success',
@@ -144,7 +145,7 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
   } else {
     handleMessage(
       {
-        message: `Membership not found for : ${userDisplayName}`,
+        message: `Membership not found for :`,
         hideDismiss: false,
         timeout: 50000,
         type: 'error',
@@ -161,27 +162,15 @@ $: loadingState.setFormLoading(isDeleting);
 </script>
 
 <!-- Filter Section -->
-<Filter {handler} searchFields={['email']} />
+<Filter {handler} searchFields={['inviter_name', 'inviter_org_name']} />
 
 <!-- Members List -->
 <div class="bg-white rounded-lg shadow-sm border border-gray-200">
   <div class="divide-y divide-gray-200">
-    {#each $rows as invite (invite.email)}
+    {#each $rows as invite (invite.inviter_org_name)}
       <div transition:slide class="p-4 flex items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-          <p class="text-sm text-gray-500">{invite.email}</p>
-        </div>
-        <div class="flex items-center gap-3">
-          Status:
-          <span
-            class={cn(
-              "px-3 py-1 text-sm rounded-full",
-              invite.status === "declined" && "bg-error-100",
-              invite.status === "accepted" && "bg-success-100",
-            )}
-          >
-            {invite.status}
-          </span>
+          <p class="text-sm text-gray-500">Invited to <span class="font-semibold uppercase">{invite.inviter_org_name}</span>  By <span class="font-semibold">{invite.inviter_name}</span></p>
         </div>
 
         <div class="flex items-center gap-3">
@@ -201,47 +190,39 @@ $: loadingState.setFormLoading(isDeleting);
             <button
               on:click={() =>
                 (showActionsFor =
-                  showActionsFor === invite.email ? "" : invite.email)}
+                  showActionsFor === invite.orgId ? "" : invite.orgId)}
               class="btn hover:variant-ghost-success"
               disabled={invite.role === "org:owner"}
             >
               <MoreHorizontal size={20} />
             </button>
 
-            {#if showActionsFor === invite.email}
+            {#if showActionsFor === invite.orgId}
               <div
                 transition:fade
                 class="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-10"
               >
-                <div class="px-2 py-1.5 text-sm text-gray-500">
-                  Change role to:
+
+                  <button
+                  class="w-full px-4 py-1.5 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
+                    data-email={invite.email}
+                    data-org-id={invite.orgId}
+                    on:click|stopPropagation|capture={acceptInvitation}
+                  >
+                    <UserCog size={16} />
+                    Accept
+                  </button>
+                  <button
+                    class="w-full px-4 py-1.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                    data-email={invite.email}
+                    data-org-id={invite.orgId}
+                    on:click|stopPropagation|capture={declineInvitation}
+                    disabled={isDeleting}
+                  >
+                    <Trash size={16} />
+                    Decline
+                  </button>
                 </div>
-                {#each ["org:admin", "org:billing", "org:member"] as role}
-                  {#if role !== invite.role}
-                    <button
-                      class="w-full px-4 py-1.5 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
-                      data-email={invite.email}
-                      data-org-id={invite.orgId}
-                      data-role={role}
-                      on:click|stopPropagation|capture={handleUpdate}
-                    >
-                      <UserCog size={16} />
-                      {role}
-                    </button>
-                  {/if}
-                {/each}
-                <div class="h-px bg-gray-200 my-1" />
-                <button
-                  class="w-full px-4 py-1.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
-                  data-email={invite.email}
-                  data-org-id={invite.orgId}
-                  on:click|stopPropagation|capture={handleDelete}
-                  disabled={isDeleting}
-                >
-                  <Trash size={16} />
-                  Remove Invite
-                </button>
-              </div>
             {/if}
           </div>
         </div>

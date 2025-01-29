@@ -36,3 +36,21 @@ export const deleteSecurityKey = graphql(`
       }
     }
   `);
+
+export const AcceptInvitation = graphql(`
+    mutation AcceptInvitation($email: citext!, $orgId: uuid!) {
+      update_invitations_by_pk(pk_columns: { email: $email, orgId: $orgId }, _set: { status: accepted }) {
+        email
+        orgId
+      }
+    }
+  `);
+
+export const DeclineInvitation = graphql(`
+    mutation DeclineInvitation($email: citext!, $orgId: uuid!) {
+      update_invitations_by_pk(pk_columns: { email: $email, orgId: $orgId }, _set: { status: declined }) {
+        email
+        orgId
+      }
+    }
+  `);

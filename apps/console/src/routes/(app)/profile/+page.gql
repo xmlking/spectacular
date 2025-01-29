@@ -9,6 +9,7 @@ query ProfileData($id: UserIdFromSession!) @role(name: "me") {
     email
     ...UserDetailsFragment
     ...MembershipsFragment
+    ...UserInvitationsFragment
     ...PersonalAccessTokensFragment
     ...AuthProvidersFragment
     ...SecurityKeysFragment

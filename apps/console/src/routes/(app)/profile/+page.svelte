@@ -17,6 +17,7 @@ import SecurityKeyForm from './components/security-key-form.svelte';
 import SecurityKeys from './components/security-keys.svelte';
 import UserDetails from './components/user-details.svelte';
 import Memberships from './components/memberships.svelte';
+import Invitations from './components/invitations.svelte';
 
 /**
  * Loading states example: https://houdini-intro.pages.dev/
@@ -68,6 +69,12 @@ $: meta = {
       <h2 class="h2">Memberships</h2>
       <p>Orgs and roles you are granted</p>
       <Memberships {user} />
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="h2">Invitations</h2>
+      <p>Invitations to join new Orgs</p>
+      <Invitations {user} />
     </section>
 
     <section class="space-y-4">

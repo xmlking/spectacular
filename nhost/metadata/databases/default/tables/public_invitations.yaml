@@ -131,10 +131,16 @@ update_permissions:
     permission:
       columns:
         - status
-      filter: {}
-      check:
+      filter:
         email:
           _eq: x-hasura-user-email
+      check:
+        status:
+          _in:
+            - accepted
+            - declined
+      set:
+        updated_by: x-hasura-user-id
     comment: ""
 delete_permissions:
   - role: org:admin

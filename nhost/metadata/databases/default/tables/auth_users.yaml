@@ -112,6 +112,15 @@ array_relationships:
         table:
           name: user_groups
           schema: public
+  - name: invitations
+    using:
+      manual_configuration:
+        column_mapping:
+          email: email
+        insertion_order: null
+        remote_table:
+          name: invitations
+          schema: public
   - name: notifications
     using:
       foreign_key_constraint_on:

@@ -142,7 +142,7 @@ const handleDeleteMember = (id: string) => {
 						</div>
 					</div>
 				{:else}
-					<div class="p-8 text-center text-gray-500">No members found matching your search criteria.</div>
+					<div class="p-8 text-center text-gray-500">No records found matching your search criteria.</div>
 				{/each}
 			</div>
 		</div>

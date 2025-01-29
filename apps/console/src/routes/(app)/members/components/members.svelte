@@ -259,7 +259,7 @@ $: loadingState.setFormLoading(isDeleting);
       </div>
     {:else}
       <div class="p-8 text-center text-gray-500">
-        No members found matching your search criteria.
+        No records found matching your search criteria.
       </div>
     {/each}
   </div>
@@ -287,7 +287,7 @@ $: loadingState.setFormLoading(isDeleting);
       </div>
     {:else}
       <p class="p-4 text-center opacity-60">
-        No members found matching your search criteria.
+        No records found matching your search criteria.
       </p>
     {/each}
   </dl>

@@ -68,3 +68,4 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
   - Vercel AI SDK [Tutorial](https://www.aihero.dev/vercel-ai-sdk-tutorial)
   - Building AI Agent Workflows With Vercel’s AI SDK: [A Practical Guide](https://www.callstack.com/blog/building-ai-agent-workflows-with-vercels-ai-sdk-a-practical-guide)
   - [flows-ai](https://flows-ai.callstack.com/) - A lightweight, type-safe AI workflow orchestrator inspired by Anthropic's agent patterns. Built on top of Vercel AI SDK.
+  - Vercel AI SDK [Agents](https://sdk.vercel.ai/docs/foundations/agents)

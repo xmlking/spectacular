@@ -18,7 +18,6 @@ const config = {
     headers: {
       'X-Hasura-Admin-Secret': (env) => env.HASURA_GRAPHQL_ADMIN_SECRET,
       'x-hasura-allowed-roles': 'user me sys:admin org:member org:admin org:billing org:owner',
-      'x-hasura-role': 'org:owner',
     },
   },
   types: {
