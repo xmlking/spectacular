@@ -50,16 +50,26 @@ COMMENT ON FUNCTION public.inviter_name(invitation_row public.invitations) IS 'U
 CREATE OR REPLACE FUNCTION handle_invitation_acceptance()
   RETURNS TRIGGER AS
 $$
+DECLARE
+  v_user_id UUID;
 BEGIN
   -- Only proceed if status is changing from 'pending' to 'accepted'
   IF OLD.status = 'pending' AND NEW.status = 'accepted' THEN
 
-    -- Insert only if a user with the given email exists
-    INSERT INTO public.memberships (user_id, org_id, role, created_by, updated_by)
-    SELECT u.id, NEW.org_id, NEW.role, NEW.created_by, NEW.updated_by
-    FROM auth.users u
-    WHERE u.email = NEW.email
-    ON CONFLICT (user_id, org_id) DO NOTHING; -- Prevent duplicate entries
+    -- Check if user exists and get the user_id
+    SELECT id INTO v_user_id FROM auth.users WHERE email = NEW.email;
+
+    -- If user exists, insert into memberships and delete the invitation
+    IF v_user_id IS NOT NULL THEN
+      INSERT INTO public.memberships (user_id, org_id, role, created_by, updated_by)
+      VALUES (v_user_id, NEW.org_id, NEW.role, NEW.created_by, NEW.updated_by)
+      ON CONFLICT (user_id, org_id) DO NOTHING;
+      -- Prevent duplicate entries
+
+      -- Delete the invitation after successful insertion
+      DELETE FROM public.invitations WHERE email = NEW.email AND org_id = NEW.org_id;
+    END IF;
+
   END IF;
 
   RETURN NEW;

@@ -18,6 +18,7 @@ import SecurityKeys from './components/security-keys.svelte';
 import UserDetails from './components/user-details.svelte';
 import Memberships from './components/memberships.svelte';
 import Invitations from './components/invitations.svelte';
+import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 
 /**
  * Loading states example: https://houdini-intro.pages.dev/
@@ -26,6 +27,7 @@ import Invitations from './components/invitations.svelte';
 export let data: PageData;
 
 // Variables
+let tabSet = 0;
 
 // Functions
 
@@ -67,14 +69,20 @@ $: meta = {
 
     <section class="space-y-4">
       <h2 class="h2">Memberships</h2>
-      <p>Orgs and roles you are granted</p>
-      <Memberships {user} />
-    </section>
-
-    <section class="space-y-4">
-      <h2 class="h2">Invitations</h2>
-      <p>Invitations to join new Orgs</p>
-      <Invitations {user} />
+      <p>Org memberships and pending invitations</p>
+      <TabGroup>
+        <Tab bind:group={tabSet} name="tab1" value={0}>Memberships</Tab>
+        <Tab bind:group={tabSet} name="tab2" value={1}>Pending Invitations</Tab>
+        <svelte:fragment slot="panel">
+          {#if user}
+            {#if tabSet === 0}
+              <Memberships {user} />
+            {:else if tabSet === 1}
+              <Invitations {user} />
+            {/if}
+          {/if}
+        </svelte:fragment>
+      </TabGroup>
     </section>
 
     <section class="space-y-4">

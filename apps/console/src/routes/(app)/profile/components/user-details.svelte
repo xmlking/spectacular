@@ -327,8 +327,12 @@ $: if (id !== PendingValue) {
         <div class="flex items-center">
            <strong>Groups:</strong>
           <div>
-            {#each  initialData.groups as group}
-              <span class="badge variant-filled-primary m-2">{group.group.displayName}</span>
+            {#each initialData.groups as group}
+              {#if group.group.displayName === PendingValue}
+                <div class="placeholder animate-pulse" />
+              {:else}
+                <span class="badge variant-filled-primary m-2">{group.group.displayName}</span>
+              {/if}
             {/each}
           </div>
         </div>

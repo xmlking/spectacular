@@ -135,3 +135,14 @@ delete_permissions:
           - role:
               _neq: org:owner
     comment: ""
+  - role: user
+    permission:
+      filter:
+        _and:
+          - user_id:
+              _eq: x-hasura-user-id
+          - org_id:
+              _neq: x-hasura-default-org
+          - role:
+              _neq: org:owner
+    comment: ""

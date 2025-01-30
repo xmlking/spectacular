@@ -54,3 +54,13 @@ export const DeclineInvitation = graphql(`
       }
     }
   `);
+
+export const LeaveOrganization = graphql(`
+  mutation LeaveOrganization($userId: uuid!, $orgId: uuid!) {
+     delete_memberships_by_pk(userId: $userId, orgId: $orgId) {
+      userId
+      orgId
+      # ...User_Org_Memberships_remove
+    }
+  }
+`);

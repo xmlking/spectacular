@@ -49,7 +49,7 @@ $: ({ MembershipData } = data);
         <svelte:fragment slot="panel">
           {#if organizations_by_pk}
             {#if tabSet === 0}
-                <Members organization={organizations_by_pk} />
+              <Members organization={organizations_by_pk} />
             {:else if tabSet === 1}
               <Invitations organization={organizations_by_pk} />
             {/if}

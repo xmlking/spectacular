@@ -100,7 +100,10 @@ async function addUserGroup(groupId: string) {
     return false;
   }
   if (!data?.insert_user_groups_one) {
-    handleMessage({ message: 'No responce from server: may be userId. groupId not found', type: 'error' }, toastStore);
+    handleMessage(
+      { message: 'No responce from server: may be userId. groupId not found', type: 'error', timeout: 5000 },
+      toastStore,
+    );
     return false;
   }
   // const userGroup = cache.get('user_groups', { userId, groupId })
@@ -116,7 +119,10 @@ async function deleteUserGroup(groupId: string) {
     return false;
   }
   if (!data?.delete_user_groups_by_pk) {
-    handleMessage({ message: 'No responce from server: may be userId. groupId not found', type: 'error' }, toastStore);
+    handleMessage(
+      { message: 'No responce from server: may be userId. groupId not found', type: 'error', timeout: 5000 },
+      toastStore,
+    );
     return false;
   }
   // const userGroup = cache.get('user_groups', { userId, groupId })

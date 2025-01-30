@@ -1,28 +1,30 @@
 <script lang="ts">
-import { fragment, graphql, PendingValue, type UserInvitationsFragment } from '$houdini';
+import { cache, fragment, graphql, PendingValue, type UserInvitationsFragment } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
-import { getToastStore } from '@skeletonlabs/skeleton';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
+import * as Table from '@spectacular/skeleton/components/table';
 import { Logger } from '@spectacular/utils';
 import { invalidate } from '$app/navigation';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
-import { MoreHorizontal, Trash, UserCog } from 'lucide-svelte';
+import { Check, MoreHorizontal, X } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
-import { fade, slide } from 'svelte/transition';
+import { slide } from 'svelte/transition';
 import { cn } from '@spectacular/skeleton/utils';
 import { AcceptInvitation, DeclineInvitation } from '../mutations';
-import Filter from './filter.svelte';
+import { DateTime, GraphQLErrors } from '@spectacular/skeleton';
+import type { PartialGraphQLErrors } from '$lib/types';
+import { page } from '$app/stores';
 
-const log = new Logger('memberships:search-results:browser');
-// Variables
+const log = new Logger('profile:invitations:browser');
 
 export let user: UserInvitationsFragment;
 $: data = fragment(
   user,
   graphql(`
       fragment UserInvitationsFragment on users {
-        invitations(order_by: { updatedAt: asc }) @list(name: "List_User_Invitations") {
+        invitations(order_by: { updatedAt: asc }) @list(name: "User_Org_Invitations") @loading(cascade: true) {
           email
           orgId
           inviter_name
@@ -36,201 +38,194 @@ $: data = fragment(
 );
 $: ({ invitations } = $data);
 
+// Variables
+let gqlErrors: PartialGraphQLErrors;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 //Datatable handler initialization
 const handler = new DataHandler(invitations?.filter(loaded), {
-  rowsPerPage: 10,
+  rowsPerPage: 5,
 });
 $: handler.setRows(invitations);
 const rows = handler.getRows();
 
 // Functions
+
 /**
  * Accept Invitation action
  */
-let isDeleting = false;
-
 const acceptInvitation: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { email, orgId, userDisplayName } = event.currentTarget.dataset;
+  const { email, orgId, orgName } = event.currentTarget.dataset;
   console.log(event.currentTarget.dataset);
-  if (!email || !orgId) {
-    log.error('Misconfiguration: did you miss adding `data-email`, `data-org-id` attributes?');
+  if (!email || !orgId || !orgName) {
+    log.error('Misconfiguration: did you miss adding `data-email`, `data-org-id`, `data-org-name` attributes?');
     return;
   }
   // before
-  isDeleting = true;
-  const { data, errors: gqlErrors } = await AcceptInvitation.mutate(
-    { email, orgId },
-    { metadata: { logResult: true, useRole: 'me' } },
-  );
-  if (gqlErrors) {
+  loadingState.setFormLoading(true);
+
+  const { data, errors } = await AcceptInvitation.mutate({ email, orgId }, { metadata: { useRole: 'me' } });
+  if (errors) {
+    gqlErrors = errors;
+    log.error('acceptInvitation api error:', errors);
+    return;
+  }
+  if (!data?.update_invitations_by_pk) {
     handleMessage(
-      {
-        message: `Error deleting Membership : "${userDisplayName}", cause: ${gqlErrors[0].message} `,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'error',
-      },
+      { message: 'No responce from server: may be orgId, email not found', type: 'error', timeout: 5000 },
       toastStore,
     );
     return;
   }
-  if (data?.update_invitations_by_pk) {
-    handleMessage(
-      {
-        message: `<p class="text-xl">Memebership : <span class="text-red-500 font-bold">${userDisplayName}</span> deleted</p>`,
-        hideDismiss: false,
-        timeout: 1000,
-        type: 'success',
-      },
-      toastStore,
-    );
-  } else {
-    handleMessage(
-      {
-        message: `Membership not found for : ${userDisplayName}`,
-        hideDismiss: false,
-        timeout: 50000,
-        type: 'error',
-      },
-      toastStore,
-    );
-  }
-  await invalidate(() => true);
+  handleMessage({ message: 'Invitation accepted successfully', type: 'success' }, toastStore);
+  // refresh profile data  TODO: https://github.com/HoudiniGraphql/houdini/issues/891
+  const user = cache.get('users', { id: $page.data.userId });
+  user.markStale();
   // after
-  isDeleting = false;
+  loadingState.setFormLoading(false);
+  await invalidate(() => true);
 };
+
 /**
  * Decline Invitation action
  */
-
 const declineInvitation: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { email, orgId } = event.currentTarget.dataset;
+  const { email, orgId, orgName } = event.currentTarget.dataset;
   console.log(event.currentTarget.dataset);
-  if (!email || !orgId) {
-    log.error('Misconfiguration: did you miss adding `data-email` `data-org-id` attributes?');
+  if (!email || !orgId || !orgName) {
+    log.error('Misconfiguration: did you miss adding `data-email`, `data-org-id`, `data-org-name` attributes?');
     return;
   }
-
   // before
-  isDeleting = true;
-  const { data, errors: gqlErrors } = await DeclineInvitation.mutate(
-    { email, orgId },
-    { metadata: { logResult: true, useRole: 'me' } },
-  );
-  if (gqlErrors) {
+  loadingState.setFormLoading(true);
+  const { data, errors } = await DeclineInvitation.mutate({ email, orgId }, { metadata: { useRole: 'me' } });
+  if (errors) {
+    gqlErrors = errors;
+    log.error('declineInvitation api error:', errors);
+    return;
+  }
+  if (!data?.update_invitations_by_pk) {
     handleMessage(
-      {
-        message: `Error while updating membership for:, cause: ${gqlErrors[0].message} `,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'error',
-      },
+      { message: 'No responce from server: may be orgId, email not found', type: 'error', timeout: 5000 },
       toastStore,
     );
     return;
   }
-  if (data?.update_invitations_by_pk) {
-    handleMessage(
-      {
-        message: `<p class="text-xl">Membership : <span class="text-red-500 font-bold"> </span> role successfully updated to <span class="text-red-500 font-bold"> </span></p>`,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'success',
-      },
-      toastStore,
-    );
-  } else {
-    handleMessage(
-      {
-        message: `Membership not found for :`,
-        hideDismiss: false,
-        timeout: 50000,
-        type: 'error',
-      },
-      toastStore,
-    );
-  }
+  handleMessage({ message: 'Invitation declined successfully', type: 'success' }, toastStore);
+  // refresh profile data  TODO: https://github.com/HoudiniGraphql/houdini/issues/891
+  const user = cache.get('users', { id: $page.data.userId });
+  user.markStale();
   // after
-  isDeleting = false;
+  loadingState.setFormLoading(false);
+  await invalidate(() => true);
 };
-let showActionsFor = '';
-// Reactivity
-$: loadingState.setFormLoading(isDeleting);
 </script>
 
-<!-- Filter Section -->
-<Filter {handler} searchFields={['inviter_name', 'inviter_org_name']} />
+{#if gqlErrors}
+  <GraphQLErrors errors={gqlErrors} />
+{/if}
 
-<!-- Members List -->
-<div class="bg-white rounded-lg shadow-sm border border-gray-200">
-  <div class="divide-y divide-gray-200">
-    {#each $rows as invite (invite.inviter_org_name)}
-      <div transition:slide class="p-4 flex items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <p class="text-sm text-gray-500">Invited to <span class="font-semibold uppercase">{invite.inviter_org_name}</span>  By <span class="font-semibold">{invite.inviter_name}</span></p>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <span
-            class={cn(
-              "px-3 py-1 text-sm rounded-full",
-              invite.role === "org:owner" && "bg-purple-100 text-purple-700",
-              invite.role === "org:admin" && "bg-blue-100 text-blue-700",
-              invite.role === "org:member" && "bg-gray-100 text-gray-700",
-            )}
-          >
-            {invite.role}
-          </span>
-
-          <!-- try button class class="p-2 hover:bg-gray-100 rounded-lg transition-colors" -->
-          <div class="relative">
-            <button
-              on:click={() =>
-                (showActionsFor =
-                  showActionsFor === invite.orgId ? "" : invite.orgId)}
-              class="btn hover:variant-ghost-success"
-              disabled={invite.role === "org:owner"}
-            >
-              <MoreHorizontal size={20} />
-            </button>
-
-            {#if showActionsFor === invite.orgId}
-              <div
-                transition:fade
-                class="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-10"
-              >
-
-                  <button
-                  class="w-full px-4 py-1.5 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
-                    data-email={invite.email}
-                    data-org-id={invite.orgId}
-                    on:click|stopPropagation|capture={acceptInvitation}
+<div class="card p-4">
+  <div class="page-container p-0">
+    <header class="flex justify-between">
+      <Table.Search {handler} />
+      <Table.RowsPerPage {handler} />
+    </header>
+    <table class="table table-hover table-compact w-full table-auto">
+      <thead>
+        <tr>
+          <Table.Head {handler} orderBy="inviter_name">Inviter</Table.Head>
+          <Table.Head {handler} orderBy="inviter_org_name">Organization</Table.Head>
+          <Table.Head {handler} orderBy="role">Role</Table.Head>
+          <Table.Head {handler} orderBy="updatedAt">Updated At</Table.Head>
+          <Table.Head {handler} class="table-cell-fit">Actions</Table.Head>
+        </tr>
+      </thead>
+      <tbody>
+        {#each $rows as invitation, i}
+          {#if invitation.orgId === PendingValue}
+            <tr class="animate-pulse">
+              <td><div class="placeholder" /></td>
+              <td><div class="placeholder" /></td>
+              <td><div class="placeholder" /></td>
+              <td><div class="placeholder" /></td>
+              <td class="table-cell-fit text-center align-middle"><div class="placeholder" /></td>
+            </tr>
+          {:else}
+            <tr transition:slide={{ duration: 300, axis: 'y' }}>
+              <td>{invitation.inviter_name}</td>
+              <td>{invitation.inviter_org_name}</td>
+              <td>
+                <span
+                    class={cn(
+                      "px-3 py-1 text-sm rounded-full",
+                      invitation.role === "org:owner" && "bg-purple-100 text-purple-700",
+                      invitation.role === "org:admin" && "bg-blue-100 text-blue-700",
+                      invitation.role === "org:member" && "bg-gray-100 text-gray-700",
+                    )}
                   >
-                    <UserCog size={16} />
-                    Accept
-                  </button>
-                  <button
-                    class="w-full px-4 py-1.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
-                    data-email={invite.email}
-                    data-org-id={invite.orgId}
-                    on:click|stopPropagation|capture={declineInvitation}
-                    disabled={isDeleting}
-                  >
-                    <Trash size={16} />
-                    Decline
-                  </button>
+                    {invitation.role}
+                  </span>
+              </td>
+              <td><DateTime distance time={invitation.updatedAt} /></td>
+              <td class="table-cell-fit text-center align-middle">
+                <button
+                  type="button"
+                  class="btn btn-sm variant-filled"
+                  use:popup={{ event: 'click', placement: 'bottom', target: 'actionPopup-' + i }}
+                >
+                  <MoreHorizontal size={20} />
+                </button>
+                <!-- popup -->
+                <div class="card w-48 shadow-xl py-2 z-50" data-popup="actionPopup-{i}">
+                  <nav class="list-nav">
+                    <ul>
+                      <li>
+                        <button type="button"
+                          class="btn w-full"
+                          data-email={invitation.email}
+                          data-org-id={invitation.orgId}
+                          data-org-name={invitation.inviter_org_name}
+                          on:click|stopPropagation|capture={acceptInvitation}
+                        >
+                          <Check class="w-5 justify-center" />
+                          <p class="flex-grow text-justify">Accept</p>
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button"
+                          class="btn w-full"
+                          data-email={invitation.email}
+                          data-org-id={invitation.orgId}
+                          data-org-name={invitation.inviter_org_name}
+                          on:click|stopPropagation|capture={declineInvitation}
+                        >
+                          <X class="w-5 justify-center" />
+                          <p class="flex-grow text-justify">Decline</p>
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                   <div class="arrow bg-surface-100-800-token" />
                 </div>
-            {/if}
-          </div>
-        </div>
-      </div>
-    {:else}
-      <div class="p-8 text-center text-gray-500">
-        No records found matching your search criteria.
-      </div>
-    {/each}
+              </td>
+            </tr>
+          {/if}
+        {:else}
+          <tr>
+            <td colspan="5"
+              ><div class="text-center text-gray-500">
+                No org invitations found.
+              </div></td
+            >
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+    <footer class="flex justify-between">
+      <Table.RowCount {handler} />
+      <Table.Pagination {handler} />
+    </footer>
   </div>
 </div>
