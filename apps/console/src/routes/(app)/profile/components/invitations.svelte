@@ -6,7 +6,7 @@ import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger } from '@spectacular/utils';
-import { invalidate } from '$app/navigation';
+import { invalidateAll } from '$app/navigation';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Check, MoreHorizontal, X } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
@@ -16,6 +16,7 @@ import { AcceptInvitation, DeclineInvitation } from '../mutations';
 import { DateTime, GraphQLErrors } from '@spectacular/skeleton';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { page } from '$app/stores';
+  import { getNhostClient } from '$lib/stores/nhost';
 
 const log = new Logger('profile:invitations:browser');
 
@@ -40,6 +41,7 @@ $: ({ invitations } = $data);
 
 // Variables
 let gqlErrors: PartialGraphQLErrors;
+const nhost = getNhostClient();
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
@@ -62,8 +64,6 @@ const acceptInvitation: MouseEventHandler<HTMLButtonElement> = async (event) => 
     log.error('Misconfiguration: did you miss adding `data-email`, `data-org-id`, `data-org-name` attributes?');
     return;
   }
-  // before
-  loadingState.setFormLoading(true);
 
   const { data, errors } = await AcceptInvitation.mutate({ email, orgId }, { metadata: { useRole: 'me' } });
   if (errors) {
@@ -78,13 +78,12 @@ const acceptInvitation: MouseEventHandler<HTMLButtonElement> = async (event) => 
     );
     return;
   }
+
+  // after Invitation accepted, we need to flush cache, refresh session
+  cache.markStale();
+  await nhost.auth.refreshSession();
+  await invalidateAll();
   handleMessage({ message: 'Invitation accepted successfully', type: 'success' }, toastStore);
-  // refresh profile data  TODO: https://github.com/HoudiniGraphql/houdini/issues/891
-  const user = cache.get('users', { id: $page.data.userId });
-  user.markStale();
-  // after
-  loadingState.setFormLoading(false);
-  await invalidate(() => true);
 };
 
 /**
@@ -112,13 +111,13 @@ const declineInvitation: MouseEventHandler<HTMLButtonElement> = async (event) =>
     );
     return;
   }
-  handleMessage({ message: 'Invitation declined successfully', type: 'success' }, toastStore);
   // refresh profile data  TODO: https://github.com/HoudiniGraphql/houdini/issues/891
   const user = cache.get('users', { id: $page.data.userId });
   user.markStale();
   // after
   loadingState.setFormLoading(false);
-  await invalidate(() => true);
+  await invalidateAll();
+  handleMessage({ message: 'Invitation declined successfully', type: 'success' }, toastStore);
 };
 </script>
 

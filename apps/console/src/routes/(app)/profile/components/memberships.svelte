@@ -10,12 +10,13 @@ import { slide } from 'svelte/transition';
 import { cn } from '@spectacular/skeleton/utils';
 import { Check, MoreHorizontal, X } from 'lucide-svelte';
 import { GraphQLErrors } from '@spectacular/skeleton';
-import { invalidate } from '$app/navigation';
+import { invalidate, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import type { PartialGraphQLErrors } from '$lib/types';
 import type { MouseEventHandler } from 'svelte/elements';
 import { LeaveOrganization } from '../mutations';
+  import { getNhostClient } from '$lib/stores/nhost';
 
 const log = new Logger('profile:memberships:browser');
 
@@ -40,6 +41,7 @@ $: ({ allowedOrgs } = $data);
 
 // Variables
 let gqlErrors: PartialGraphQLErrors;
+const nhost = getNhostClient();
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
@@ -62,8 +64,6 @@ const leaveOrganization: MouseEventHandler<HTMLButtonElement> = async (event) =>
     log.error('Misconfiguration: did you miss adding `data-user-id`, `data-org-id`, `data-org-name` attributes?');
     return;
   }
-  // before
-  loadingState.setFormLoading(true);
   const { data, errors } = await LeaveOrganization.mutate({ userId, orgId }, { metadata: { useRole: 'me' } });
   if (errors) {
     gqlErrors = errors;
@@ -77,13 +77,11 @@ const leaveOrganization: MouseEventHandler<HTMLButtonElement> = async (event) =>
     );
     return;
   }
+  // after Membership removal, we need to flush cache, refresh session
+  cache.markStale();
+  await nhost.auth.refreshSession();
+  await invalidateAll();
   handleMessage({ message: 'Leave organization successfully', type: 'success' }, toastStore);
-  // refresh profile data  TODO: https://github.com/HoudiniGraphql/houdini/issues/891
-  const user = cache.get('users', { id: $page.data.userId });
-  user.markStale();
-  // after
-  loadingState.setFormLoading(false);
-  await invalidate(() => true);
 };
 </script>
 

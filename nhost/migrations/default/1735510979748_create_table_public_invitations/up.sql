@@ -46,42 +46,43 @@ WHERE id = invitation_row.created_by
 $$ LANGUAGE sql STABLE;
 COMMENT ON FUNCTION public.inviter_name(invitation_row public.invitations) IS 'Used as Computed Field on Invitations Table';
 ---
--- let invites to accept or reject the invitation and auto convert invitations to memberships
-CREATE OR REPLACE FUNCTION handle_invitation_acceptance()
+CREATE OR REPLACE FUNCTION handle_invitation_status_change()
   RETURNS TRIGGER AS
 $$
 DECLARE
   v_user_id UUID;
 BEGIN
-  -- Only proceed if status is changing from 'pending' to 'accepted'
+  -- If status changed from 'pending' to 'accepted'
   IF OLD.status = 'pending' AND NEW.status = 'accepted' THEN
 
     -- Check if user exists and get the user_id
     SELECT id INTO v_user_id FROM auth.users WHERE email = NEW.email;
 
-    -- If user exists, insert into memberships and delete the invitation
+    -- If user exists, insert into memberships
     IF v_user_id IS NOT NULL THEN
       INSERT INTO public.memberships (user_id, org_id, role, created_by, updated_by)
       VALUES (v_user_id, NEW.org_id, NEW.role, NEW.created_by, NEW.updated_by)
-      ON CONFLICT (user_id, org_id) DO NOTHING;
-      -- Prevent duplicate entries
-
-      -- Delete the invitation after successful insertion
-      DELETE FROM public.invitations WHERE email = NEW.email AND org_id = NEW.org_id;
+      ON CONFLICT (user_id, org_id) DO NOTHING; -- Prevent duplicate entries
     END IF;
 
+    -- Delete the invitation after successful processing
+    DELETE FROM public.invitations WHERE email = NEW.email AND org_id = NEW.org_id;
+
+  -- If status changed from 'pending' to 'declined', just delete the invitation
+  ELSIF OLD.status = 'pending' AND NEW.status = 'declined' THEN
+    DELETE FROM public.invitations WHERE email = NEW.email AND org_id = NEW.org_id;
   END IF;
 
   RETURN NEW;
 END
 $$ LANGUAGE plpgsql;
-COMMENT ON FUNCTION handle_invitation_acceptance () IS 'This function enroll membership if invite accepts the invitation';
+COMMENT ON FUNCTION handle_invitation_status_change () IS 'This function let invites to accept or decline the invitation and auto convert invitations to memberships';
 ---
-CREATE TRIGGER trg_on_invitation_acceptance
+CREATE TRIGGER trg_on_invitation_status_change
   AFTER UPDATE
   ON public.invitations
   FOR EACH ROW
-  WHEN (OLD.status = 'pending' AND NEW.status = 'accepted')
-EXECUTE FUNCTION handle_invitation_acceptance();
-COMMENT ON TRIGGER trg_on_invitation_acceptance ON public.invitations IS 'This trigger enroll membership if invite accepts the invitation';
+  WHEN (OLD.status = 'pending' AND (NEW.status = 'accepted' OR NEW.status = 'declined'))
+EXECUTE FUNCTION handle_invitation_status_change();
+COMMENT ON TRIGGER trg_on_invitation_status_change ON public.invitations IS 'This trigger let invites to accept or decline the invitation and auto convert invitations to memberships';
 ---
