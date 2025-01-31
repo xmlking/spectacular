@@ -16,7 +16,7 @@ import { handleMessage } from '$lib/components/layout/toast-manager';
 import type { PartialGraphQLErrors } from '$lib/types';
 import type { MouseEventHandler } from 'svelte/elements';
 import { LeaveOrganization } from '../mutations';
-  import { getNhostClient } from '$lib/stores/nhost';
+import { getNhostClient } from '$lib/stores/nhost';
 
 const log = new Logger('profile:memberships:browser');
 

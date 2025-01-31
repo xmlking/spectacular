@@ -16,7 +16,7 @@ import { AcceptInvitation, DeclineInvitation } from '../mutations';
 import { DateTime, GraphQLErrors } from '@spectacular/skeleton';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { page } from '$app/stores';
-  import { getNhostClient } from '$lib/stores/nhost';
+import { getNhostClient } from '$lib/stores/nhost';
 
 const log = new Logger('profile:invitations:browser');
 
