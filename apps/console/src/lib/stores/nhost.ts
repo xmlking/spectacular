@@ -20,7 +20,7 @@ const skQuery = `query SearchSecurityKeys($userId: uuid!) {
   }
 }`;
 
-const soQuery = `mutation UpdateDefaultOrg($userId: uuid!, $orgId: uuid!) @role(name: "me") {
+const soQuery = `mutation UpdateDefaultOrg($userId: uuid!, $orgId: uuid!) {
   updateUser(pk_columns: { id: $userId }, _set: { defaultOrg: $orgId }) {
     id
     defaultOrg
