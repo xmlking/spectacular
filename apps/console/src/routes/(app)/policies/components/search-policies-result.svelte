@@ -121,108 +121,106 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
 $: loadingState.setFormLoading(isDeleting);
 </script>
 
-<div class="card p-4">
-  <div class="page-container p-0">
-    <header class="flex justify-between">
-      <Table.Search {handler} />
-      <Table.RowsPerPage {handler} />
-    </header>
-    <table class="table table-hover table-compact w-full table-auto">
-      <thead>
-        <tr>
-          <Table.Head {handler} orderBy={(row) => row.rule.displayName}
-            >Rule Name</Table.Head
-          >
-          <Table.Head {handler} orderBy="subjectDisplayName">Subject</Table.Head
-          >
-          <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
-          <Table.Head {handler} orderBy={(row) => row.rule.sourcePort}
-            >Source</Table.Head
-          >
-          <Table.Head {handler} orderBy={(row) => row.rule.destinationPort}
-            >Destination</Table.Head
-          >
-          <Table.Head {handler} orderBy="active">Active</Table.Head>
-          <Table.Head {handler} orderBy={(row) => row.rule.shared}
-            >Shared</Table.Head
-          >
-          <Table.Head {handler}>Delete</Table.Head>
-        </tr>
-        <tr>
-          <Table.HeadFilter
-            {handler}
-            filterBy={(row) => row.rule.displayName}
-          />
-          <Table.HeadFilter {handler} filterBy="subjectDisplayName" />
-          <Table.HeadFilter {handler} filterBy="updatedAt" />
-          <Table.HeadFilter {handler} filterBy={(row) => row.rule.sourcePort} />
-          <Table.HeadFilter
-            {handler}
-            filterBy={(row) => row.rule.destinationPort}
-          />
-          <Table.HeadFilter
-            {handler}
-            filterBy="active"
-            comparator={check.isLike}
-          />
-          <Table.HeadFilter
-            {handler}
-            filterBy={(row) => row.rule.shared}
-            comparator={check.isLike}
-          />
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- {#each $rows as row, i (row.id)} -->
-        {#each $rows as row}
-          {#if row.id === PendingValue}
-            <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-            </tr>
-          {:else}
-            <tr>
-              <td
-                ><a
-                  class="font-semibold"
-                  href={`/policies/${row.id}`}
-                  title={row.rule.description}>{row.rule.displayName}</a
-                ></td
+<div class="card p-4 space-y-10">
+  <header class="flex justify-between">
+    <Table.Search {handler} />
+    <Table.RowsPerPage {handler} />
+  </header>
+  <table class="table table-hover table-compact w-full table-auto">
+    <thead>
+      <tr>
+        <Table.Head {handler} orderBy={(row) => row.rule.displayName}
+          >Rule Name</Table.Head
+        >
+        <Table.Head {handler} orderBy="subjectDisplayName">Subject</Table.Head
+        >
+        <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
+        <Table.Head {handler} orderBy={(row) => row.rule.sourcePort}
+          >Source</Table.Head
+        >
+        <Table.Head {handler} orderBy={(row) => row.rule.destinationPort}
+          >Destination</Table.Head
+        >
+        <Table.Head {handler} orderBy="active">Active</Table.Head>
+        <Table.Head {handler} orderBy={(row) => row.rule.shared}
+          >Shared</Table.Head
+        >
+        <Table.Head {handler}>Delete</Table.Head>
+      </tr>
+      <tr>
+        <Table.HeadFilter
+          {handler}
+          filterBy={(row) => row.rule.displayName}
+        />
+        <Table.HeadFilter {handler} filterBy="subjectDisplayName" />
+        <Table.HeadFilter {handler} filterBy="updatedAt" />
+        <Table.HeadFilter {handler} filterBy={(row) => row.rule.sourcePort} />
+        <Table.HeadFilter
+          {handler}
+          filterBy={(row) => row.rule.destinationPort}
+        />
+        <Table.HeadFilter
+          {handler}
+          filterBy="active"
+          comparator={check.isLike}
+        />
+        <Table.HeadFilter
+          {handler}
+          filterBy={(row) => row.rule.shared}
+          comparator={check.isLike}
+        />
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- {#each $rows as row, i (row.id)} -->
+      {#each $rows as row}
+        {#if row.id === PendingValue}
+          <tr class="animate-pulse">
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+          </tr>
+        {:else}
+          <tr>
+            <td
+              ><a
+                class="font-semibold"
+                href={`/policies/${row.id}`}
+                title={row.rule.description}>{row.rule.displayName}</a
+              ></td
+            >
+            <td>{row.subjectDisplayName}</td>
+            <td><DateTime distance time={row.updatedAt} /></td>
+            <td>{row.rule.sourcePort}</td>
+            <td>{row.rule.destinationPort}</td>
+            <td>{row.active}</td>
+            <td>{row.rule.shared}</td>
+            <td>
+              <button
+                type="button"
+                class="btn-icon btn-icon-sm variant-filled-error"
+                data-id={row.id}
+                data-rule-id={row.rule.id}
+                data-rule-shared={row.rule.shared}
+                data-display-name={row.rule.displayName}
+                on:click|stopPropagation|capture={handleDelete}
+                disabled={isDeleting}
               >
-              <td>{row.subjectDisplayName}</td>
-              <td><DateTime distance time={row.updatedAt} /></td>
-              <td>{row.rule.sourcePort}</td>
-              <td>{row.rule.destinationPort}</td>
-              <td>{row.active}</td>
-              <td>{row.rule.shared}</td>
-              <td>
-                <button
-                  type="button"
-                  class="btn-icon btn-icon-sm variant-filled-error"
-                  data-id={row.id}
-                  data-rule-id={row.rule.id}
-                  data-rule-shared={row.rule.shared}
-                  data-display-name={row.rule.displayName}
-                  on:click|stopPropagation|capture={handleDelete}
-                  disabled={isDeleting}
-                >
-                  <Trash2 />
-                </button>
-              </td>
-            </tr>
-          {/if}
-        {/each}
-      </tbody>
-    </table>
-    <footer class="flex justify-between">
-      <Table.RowCount {handler} />
-      <Table.Pagination {handler} />
-    </footer>
-  </div>
+                <Trash2 />
+              </button>
+            </td>
+          </tr>
+        {/if}
+      {/each}
+    </tbody>
+  </table>
+  <footer class="flex justify-between">
+    <Table.RowCount {handler} />
+    <Table.Pagination {handler} />
+  </footer>
 </div>

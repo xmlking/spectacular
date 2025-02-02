@@ -81,81 +81,79 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
 $: loadingState.setFormLoading(isDeleting);
 </script>
 
-<div class="card p-4">
-  <div class="page-container p-0">
-    <header class="flex justify-between">
-      <Table.Search {handler} />
-      <Table.RowsPerPage {handler} />
-    </header>
-    <table class="table table-hover table-compact w-full table-auto">
-      <thead>
-        <tr>
-          <Table.Head {handler} orderBy="avatarUrl">Avatar</Table.Head>
-          <Table.Head {handler} orderBy="displayName">Name</Table.Head>
-          <Table.Head {handler} orderBy="currentOrg">Organization</Table.Head>
-          <Table.Head {handler} orderBy="defaultRole">Role</Table.Head>
-          <Table.Head {handler} orderBy="email">Email</Table.Head>
-          <Table.Head {handler} orderBy="lastSeen">Last Seen</Table.Head>
-          <Table.Head {handler}>Disable</Table.Head>
-        </tr>
-        <tr>
-          <th></th>
-          <Table.HeadFilter {handler} filterBy="displayName" />
-          <Table.HeadFilter {handler} filterBy="currentOrg" />
-          <Table.HeadFilter {handler} filterBy="defaultRole" />
-          <Table.HeadFilter {handler} filterB="email" />
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- {#each $rows as row, i (row.id)} -->
-        {#each $rows as row}
-          {#if row.id === PendingValue}
-            <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-            </tr>
-          {:else}
-            <tr>
-              <td><Avatar src={row.avatarUrl} width="w-10" rounded="rounded-full" /></td>
-              <td>
-                <a
-                  class="font-semibold"
-                  href={`/users/${row.id}`}
-                  title={row.displayName}
-                  >{row.displayName}
-                </a>
-              </td>
-              <td>{@html row.currentOrg?.displayName ?? 'N/A'}</td>
-              <td>{row.defaultRole}</td>
-              <td>{@html row.email}</td>
-               <td><DateTime distance time={row.lastSeen} /></td>
-              <td>
-                <button
-                  type="button"
-                  class="btn-icon btn-icon-sm variant-filled-error"
-                  data-id={row.id}
-                  data-display-name={row.displayName}
-                  on:click|stopPropagation|capture={handleDelete}
-                  disabled={isDeleting}
-                >
-                  <Trash2 />
-                </button>
-              </td>
-            </tr>
-          {/if}
-        {/each}
-      </tbody>
-    </table>
-    <footer class="flex justify-between">
-      <Table.RowCount {handler} />
-      <Table.Pagination {handler} />
-    </footer>
-  </div>
+<div class="card p-4 space-y-10">
+  <header class="flex justify-between">
+    <Table.Search {handler} />
+    <Table.RowsPerPage {handler} />
+  </header>
+  <table class="table table-hover table-compact w-full table-auto">
+    <thead>
+      <tr>
+        <Table.Head {handler} orderBy="avatarUrl">Avatar</Table.Head>
+        <Table.Head {handler} orderBy="displayName">Name</Table.Head>
+        <Table.Head {handler} orderBy="currentOrg">Organization</Table.Head>
+        <Table.Head {handler} orderBy="defaultRole">Role</Table.Head>
+        <Table.Head {handler} orderBy="email">Email</Table.Head>
+        <Table.Head {handler} orderBy="lastSeen">Last Seen</Table.Head>
+        <Table.Head {handler}>Disable</Table.Head>
+      </tr>
+      <tr>
+        <th></th>
+        <Table.HeadFilter {handler} filterBy="displayName" />
+        <Table.HeadFilter {handler} filterBy="currentOrg" />
+        <Table.HeadFilter {handler} filterBy="defaultRole" />
+        <Table.HeadFilter {handler} filterB="email" />
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- {#each $rows as row, i (row.id)} -->
+      {#each $rows as row}
+        {#if row.id === PendingValue}
+          <tr class="animate-pulse">
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+          </tr>
+        {:else}
+          <tr>
+            <td><Avatar src={row.avatarUrl} width="w-10" rounded="rounded-full" /></td>
+            <td>
+              <a
+                class="font-semibold"
+                href={`/users/${row.id}`}
+                title={row.displayName}
+                >{row.displayName}
+              </a>
+            </td>
+            <td>{@html row.currentOrg?.displayName ?? 'N/A'}</td>
+            <td>{row.defaultRole}</td>
+            <td>{@html row.email}</td>
+              <td><DateTime distance time={row.lastSeen} /></td>
+            <td>
+              <button
+                type="button"
+                class="btn-icon btn-icon-sm variant-filled-error"
+                data-id={row.id}
+                data-display-name={row.displayName}
+                on:click|stopPropagation|capture={handleDelete}
+                disabled={isDeleting}
+              >
+                <Trash2 />
+              </button>
+            </td>
+          </tr>
+        {/if}
+      {/each}
+    </tbody>
+  </table>
+  <footer class="flex justify-between">
+    <Table.RowCount {handler} />
+    <Table.Pagination {handler} />
+  </footer>
 </div>

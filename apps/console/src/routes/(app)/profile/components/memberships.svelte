@@ -89,91 +89,89 @@ const leaveOrganization: MouseEventHandler<HTMLButtonElement> = async (event) =>
   <GraphQLErrors errors={gqlErrors} />
 {/if}
 
-<div class="card p-4">
-  <div class="page-container p-0">
-    <header class="flex justify-between">
-      <Table.Search {handler} />
-      <Table.RowsPerPage {handler} />
-    </header>
-    <table class="table table-hover table-compact w-full table-auto">
-      <thead>
-        <tr>
-          <Table.Head {handler} orderBy="organization">Organization</Table.Head>
-          <Table.Head {handler} orderBy="role">Description</Table.Head>
-          <Table.Head {handler} orderBy="role">Role</Table.Head>
-          <Table.Head {handler} class="table-cell-fit">Actions</Table.Head>
-        </tr>
-      </thead>
-      <tbody>
-        {#each $rows as membership, i}
-          {#if membership.orgId === PendingValue}
-            <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td class="table-cell-fit text-center align-middle"><div class="placeholder" /></td>
-            </tr>
-          {:else}
-            <tr transition:slide={{ duration: 300, axis: 'y' }}>
-              <td>{membership.organization.displayName}</td>
-              <td>{membership.organization.description}</td>
-              <td>
-                <span
-                    class={cn(
-                      "px-3 py-1 text-sm rounded-full",
-                      membership.role === "org:owner" && "bg-purple-100 text-purple-700",
-                      membership.role === "org:admin" && "bg-blue-100 text-blue-700",
-                      membership.role === "org:member" && "bg-gray-100 text-gray-700",
-                    )}
-                  >
-                    {membership.role}
-                  </span>
-              </td>
-              <td class="table-cell-fit text-center align-middle">
-                <button
-                  type="button"
-                  class="btn btn-sm variant-filled"
-                  use:popup={{ event: 'click', placement: 'bottom', target: 'actionPopup-' + i }}
-                >
-                  <MoreHorizontal size={20} />
-                </button>
-                <!-- popup -->
-                <div class="card w-48 shadow-xl py-2 z-50" data-popup="actionPopup-{i}">
-                  <nav class="list-nav">
-                    <ul>
-                      <li>
-                        <button type="button"
-                          class="btn w-full"
-                          data-user-id={membership.userId}
-                          data-org-id={membership.orgId}
-                          data-org-name={membership.organization.displayName}
-                          on:click|stopPropagation|capture={leaveOrganization}
-                        >
-                          <X class="w-5 justify-center" />
-                          <p class="flex-grow text-justify">Leave</p>
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
-                   <div class="arrow bg-surface-100-800-token" />
-                </div>
-              </td>
-            </tr>
-          {/if}
-        {:else}
-          <tr>
-            <td colspan="4"
-              ><div class="text-center text-gray-500">
-                No org memberships found.
-              </div></td
-            >
+<div class="card p-4 space-y-10">
+  <header class="flex justify-between">
+    <Table.Search {handler} />
+    <Table.RowsPerPage {handler} />
+  </header>
+  <table class="table table-hover table-compact w-full table-auto">
+    <thead>
+      <tr>
+        <Table.Head {handler} orderBy="organization">Organization</Table.Head>
+        <Table.Head {handler} orderBy="role">Description</Table.Head>
+        <Table.Head {handler} orderBy="role">Role</Table.Head>
+        <Table.Head {handler} class="table-cell-fit">Actions</Table.Head>
+      </tr>
+    </thead>
+    <tbody>
+      {#each $rows as membership, i}
+        {#if membership.orgId === PendingValue}
+          <tr class="animate-pulse">
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td class="table-cell-fit text-center align-middle"><div class="placeholder" /></td>
           </tr>
-        {/each}
-      </tbody>
-    </table>
-    <footer class="flex justify-between">
-      <Table.RowCount {handler} />
-      <Table.Pagination {handler} />
-    </footer>
-  </div>
+        {:else}
+          <tr transition:slide={{ duration: 300, axis: 'y' }}>
+            <td>{membership.organization.displayName}</td>
+            <td>{membership.organization.description}</td>
+            <td>
+              <span
+                  class={cn(
+                    "px-3 py-1 text-sm rounded-full",
+                    membership.role === "org:owner" && "bg-purple-100 text-purple-700",
+                    membership.role === "org:admin" && "bg-blue-100 text-blue-700",
+                    membership.role === "org:member" && "bg-gray-100 text-gray-700",
+                  )}
+                >
+                  {membership.role}
+                </span>
+            </td>
+            <td class="table-cell-fit text-center align-middle">
+              <button
+                type="button"
+                class="btn btn-sm variant-filled"
+                use:popup={{ event: 'click', placement: 'bottom', target: 'actionPopup-' + i }}
+              >
+                <MoreHorizontal size={20} />
+              </button>
+              <!-- popup -->
+              <div class="card w-48 shadow-xl py-2 z-50" data-popup="actionPopup-{i}">
+                <nav class="list-nav">
+                  <ul>
+                    <li>
+                      <button type="button"
+                        class="btn w-full"
+                        data-user-id={membership.userId}
+                        data-org-id={membership.orgId}
+                        data-org-name={membership.organization.displayName}
+                        on:click|stopPropagation|capture={leaveOrganization}
+                      >
+                        <X class="w-5 justify-center" />
+                        <p class="flex-grow text-justify">Leave</p>
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+                  <div class="arrow bg-surface-100-800-token" />
+              </div>
+            </td>
+          </tr>
+        {/if}
+      {:else}
+        <tr>
+          <td colspan="4"
+            ><div class="text-center text-gray-500">
+              No org memberships found.
+            </div></td
+          >
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+  <footer class="flex justify-between">
+    <Table.RowCount {handler} />
+    <Table.Pagination {handler} />
+  </footer>
 </div>

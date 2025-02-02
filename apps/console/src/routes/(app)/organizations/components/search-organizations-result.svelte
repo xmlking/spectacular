@@ -81,89 +81,87 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
 $: loadingState.setFormLoading(isDeleting);
 </script>
 
-<div class="card p-4">
-  <div class="page-container p-0">
-    <header class="flex justify-between">
-      <Table.Search {handler} />
-      <Table.RowsPerPage {handler} />
-    </header>
-    <table class="table table-hover table-compact w-full table-auto">
-      <thead>
-        <tr>
-          <Table.Head {handler} orderBy="displayName">Name</Table.Head>
-          <Table.Head {handler} orderBy="ownerId">Owner</Table.Head>
-          <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
-          <Table.Head {handler} orderBy={(row) => row.autoEnroll}>Auto Enroll</Table.Head>
-          <Table.Head {handler} orderBy="allowedEmailDomains">Allowed Email Domains</Table.Head>
-          <Table.Head {handler} orderBy="allowedEmails">Allowed Emails</Table.Head>
-          <Table.Head {handler} orderBy="blockedEmailDomains">Blocked Email Domains</Table.Head>
-          <Table.Head {handler} orderBy="blockedEmails">Blocked Emails</Table.Head>
-          <Table.Head {handler}>Delete</Table.Head>
-        </tr>
-        <tr>
-          <Table.HeadFilter {handler} filterBy="displayName" />
-          <Table.HeadFilter {handler} filterBy="ownerId" />
-          <Table.HeadFilter {handler} filterBy="updatedAt" />
-          <Table.HeadFilter {handler} filterBy={(row) => row.autoEnroll} comparator={check.isLike} />
-          <Table.HeadFilter {handler} filterB="allowedEmailDomains" />
-          <Table.HeadFilter {handler} filterBy="allowedEmails" />
-          <Table.HeadFilter {handler} filterBy="blockedEmailDomains" />
-          <Table.HeadFilter {handler} filterBy="blockedEmails" />
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- {#each $rows as row, i (row.id)} -->
-        {#each $rows as row}
-          {#if row.id === PendingValue}
-            <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-            </tr>
-          {:else}
-            <tr>
-              <td>
-                <a
-                  class="font-semibold"
-                  href={`/organizations/${row.id}`}
-                  title={row.description}
-                  >{row.displayName}
-                </a>
-              </td>
-              <td>{@html row.ownerId}</td>
-              <td><DateTime distance time={row.updatedAt} /></td>
-              <td>{row.autoEnroll}</td>
-              <td>{@html row.allowedEmailDomains}</td>
-              <td>{@html row.allowedEmails}</td>
-              <td>{@html row.blockedEmailDomains}</td>
-              <td>{@html row.blockedEmails}</td>
-              <td>
-                <button
-                  type="button"
-                  class="btn-icon btn-icon-sm variant-filled-error"
-                  data-id={row.id}
-                  data-display-name={row.displayName}
-                  on:click|stopPropagation|capture={handleDelete}
-                  disabled={isDeleting}
-                >
-                  <Trash2 />
-                </button>
-              </td>
-            </tr>
-          {/if}
-        {/each}
-      </tbody>
-    </table>
-    <footer class="flex justify-between">
-      <Table.RowCount {handler} />
-      <Table.Pagination {handler} />
-    </footer>
-  </div>
+<div class="card p-4 space-y-10">
+  <header class="flex justify-between">
+    <Table.Search {handler} />
+    <Table.RowsPerPage {handler} />
+  </header>
+  <table class="table table-hover table-compact w-full table-auto">
+    <thead>
+      <tr>
+        <Table.Head {handler} orderBy="displayName">Name</Table.Head>
+        <Table.Head {handler} orderBy="ownerId">Owner</Table.Head>
+        <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
+        <Table.Head {handler} orderBy={(row) => row.autoEnroll}>Auto Enroll</Table.Head>
+        <Table.Head {handler} orderBy="allowedEmailDomains">Allowed Email Domains</Table.Head>
+        <Table.Head {handler} orderBy="allowedEmails">Allowed Emails</Table.Head>
+        <Table.Head {handler} orderBy="blockedEmailDomains">Blocked Email Domains</Table.Head>
+        <Table.Head {handler} orderBy="blockedEmails">Blocked Emails</Table.Head>
+        <Table.Head {handler}>Delete</Table.Head>
+      </tr>
+      <tr>
+        <Table.HeadFilter {handler} filterBy="displayName" />
+        <Table.HeadFilter {handler} filterBy="ownerId" />
+        <Table.HeadFilter {handler} filterBy="updatedAt" />
+        <Table.HeadFilter {handler} filterBy={(row) => row.autoEnroll} comparator={check.isLike} />
+        <Table.HeadFilter {handler} filterB="allowedEmailDomains" />
+        <Table.HeadFilter {handler} filterBy="allowedEmails" />
+        <Table.HeadFilter {handler} filterBy="blockedEmailDomains" />
+        <Table.HeadFilter {handler} filterBy="blockedEmails" />
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- {#each $rows as row, i (row.id)} -->
+      {#each $rows as row}
+        {#if row.id === PendingValue}
+          <tr class="animate-pulse">
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+          </tr>
+        {:else}
+          <tr>
+            <td>
+              <a
+                class="font-semibold"
+                href={`/organizations/${row.id}`}
+                title={row.description}
+                >{row.displayName}
+              </a>
+            </td>
+            <td>{@html row.ownerId}</td>
+            <td><DateTime distance time={row.updatedAt} /></td>
+            <td>{row.autoEnroll}</td>
+            <td>{@html row.allowedEmailDomains}</td>
+            <td>{@html row.allowedEmails}</td>
+            <td>{@html row.blockedEmailDomains}</td>
+            <td>{@html row.blockedEmails}</td>
+            <td>
+              <button
+                type="button"
+                class="btn-icon btn-icon-sm variant-filled-error"
+                data-id={row.id}
+                data-display-name={row.displayName}
+                on:click|stopPropagation|capture={handleDelete}
+                disabled={isDeleting}
+              >
+                <Trash2 />
+              </button>
+            </td>
+          </tr>
+        {/if}
+      {/each}
+    </tbody>
+  </table>
+  <footer class="flex justify-between">
+    <Table.RowCount {handler} />
+    <Table.Pagination {handler} />
+  </footer>
 </div>

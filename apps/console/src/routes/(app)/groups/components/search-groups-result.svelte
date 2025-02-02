@@ -81,107 +81,105 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
 $: loadingState.setFormLoading(isDeleting);
 </script>
 
-<div class="card p-4">
-  <div class="page-container p-0">
-    <header class="flex justify-between">
-      <Table.Search {handler} />
-      <Table.RowsPerPage {handler} />
-    </header>
-    <table class="table table-hover table-compact w-full table-auto">
-      <thead>
-        <tr>
-          <Table.Head {handler} orderBy="displayName">Name</Table.Head>
-          <Table.Head {handler} orderBy="description">Description</Table.Head>
-          <Table.Head {handler} orderBy="tags">Tags</Table.Head>
-          <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
-          <Table.Head {handler}>Delete</Table.Head>
-        </tr>
-        <tr>
-          <Table.HeadFilter {handler} filterBy="displayName" />
-          <Table.HeadFilter {handler} filterBy="description" />
-          <Table.HeadFilter {handler} filterBy="tags" />
-          <Table.HeadFilter {handler} filterBy="updatedAt" />
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- {#each $rows as row, i (row.id)} -->
-        {#each $rows as row}
-          {#if row.id === PendingValue}
-            <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-            </tr>
-          {:else}
-            <tr>
-              <td>
-                <a
-                  class="font-semibold"
-                  href={`/groups/${row.id}`}
-                  title={row.description}
-                  >{row.displayName}
-                </a>
-              </td>
-              <td>{row.description}</td>
-              <td>
-                { #if row.tags === null}
-                  N/A
-                  {:else}
-                    {#each row.tags as tag }
-                        <span class="chip {tag? 'variant-filled' : 'variant-soft'}">
-                        <span>{tag}</span>
-                        </span>&nbsp
-                      {/each}
-                {/if}</td>
-              <td><DateTime distance time={row.updatedAt} /></td>
-              <td>
-                <div
-                  use:popup={{
-                    event: "click",
-                    target: "delete" + row.displayName,
-                    placement: "left",
-                  }}
-                  >
-              <button
-                class="btn hover:variant-soft-primary"
+<div class="card p-4 space-y-10">
+  <header class="flex justify-between">
+    <Table.Search {handler} />
+    <Table.RowsPerPage {handler} />
+  </header>
+  <table class="table table-hover table-compact w-full table-auto">
+    <thead>
+      <tr>
+        <Table.Head {handler} orderBy="displayName">Name</Table.Head>
+        <Table.Head {handler} orderBy="description">Description</Table.Head>
+        <Table.Head {handler} orderBy="tags">Tags</Table.Head>
+        <Table.Head {handler} orderBy="updatedAt">Updated</Table.Head>
+        <Table.Head {handler}>Delete</Table.Head>
+      </tr>
+      <tr>
+        <Table.HeadFilter {handler} filterBy="displayName" />
+        <Table.HeadFilter {handler} filterBy="description" />
+        <Table.HeadFilter {handler} filterBy="tags" />
+        <Table.HeadFilter {handler} filterBy="updatedAt" />
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- {#each $rows as row, i (row.id)} -->
+      {#each $rows as row}
+        {#if row.id === PendingValue}
+          <tr class="animate-pulse">
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+          </tr>
+        {:else}
+          <tr>
+            <td>
+              <a
+                class="font-semibold"
+                href={`/groups/${row.id}`}
+                title={row.description}
+                >{row.displayName}
+              </a>
+            </td>
+            <td>{row.description}</td>
+            <td>
+              { #if row.tags === null}
+                N/A
+                {:else}
+                  {#each row.tags as tag }
+                      <span class="chip {tag? 'variant-filled' : 'variant-soft'}">
+                      <span>{tag}</span>
+                      </span>&nbsp
+                    {/each}
+              {/if}</td>
+            <td><DateTime distance time={row.updatedAt} /></td>
+            <td>
+              <div
+                use:popup={{
+                  event: "click",
+                  target: "delete" + row.displayName,
+                  placement: "left",
+                }}
                 >
-                  <Trash2 />
-                </button>
-                </div>
-              </td>
-            </tr>
-            <div
-          class="card variant-filled-primary p-4"
-          data-popup="delete{row.displayName}"
-        >
-          <div class="alert-message">
-            <h3 class="h3">Alert</h3>
-            <p class="text-xl">
-              Are you sure you want to delete group <span class="text-red-500"
-                >{row.displayName}</span
-              >?
-            </p>
-          </div>
-          <button
-            type="button"
-            class="variant-filled-error btn"
-            data-id={row.id}
-                  data-display-name={row.displayName}
-                  on:click|stopPropagation|capture={handleDelete}
-                  disabled={isDeleting}>Delete</button
-          >
-          <button type="button" class="variant-filled-error btn">Cancel</button>
+            <button
+              class="btn hover:variant-soft-primary"
+              >
+                <Trash2 />
+              </button>
+              </div>
+            </td>
+          </tr>
+          <div
+        class="card variant-filled-primary p-4"
+        data-popup="delete{row.displayName}"
+      >
+        <div class="alert-message">
+          <h3 class="h3">Alert</h3>
+          <p class="text-xl">
+            Are you sure you want to delete group <span class="text-red-500"
+              >{row.displayName}</span
+            >?
+          </p>
         </div>
-          {/if}
-        {/each}
-      </tbody>
-    </table>
-    <footer class="flex justify-between">
-      <Table.RowCount {handler} />
-      <Table.Pagination {handler} />
-    </footer>
-  </div>
+        <button
+          type="button"
+          class="variant-filled-error btn"
+          data-id={row.id}
+                data-display-name={row.displayName}
+                on:click|stopPropagation|capture={handleDelete}
+                disabled={isDeleting}>Delete</button
+        >
+        <button type="button" class="variant-filled-error btn">Cancel</button>
+      </div>
+        {/if}
+      {/each}
+    </tbody>
+  </table>
+  <footer class="flex justify-between">
+    <Table.RowCount {handler} />
+    <Table.Pagination {handler} />
+  </footer>
 </div>

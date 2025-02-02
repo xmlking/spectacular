@@ -134,64 +134,62 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
 <!-- Form Level Errors / Messages -->
 <Alerts {errors} {message} />
 
-<div class="card p-4">
-  <div class="page-container p-0">
-    <header class="flex justify-between">
-      <Table.Search {handler} />
-      <Table.RowsPerPage {handler} />
-    </header>
-    <table class="table table-hover table-compact w-full table-auto">
-      <thead>
-        <tr>
-          <Table.Head {handler} orderBy="name">Name</Table.Head>
-          <Table.Head {handler} orderBy="createdAt">Created At</Table.Head>
-          <Table.Head {handler} orderBy="expiresAt">Expires At</Table.Head>
-          <Table.Head {handler}>Delete</Table.Head>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- {#each $rows as token, i (token.id)} -->
-        {#each $rows as token, i}
-          {#if token.id === PendingValue}
-            <tr class="animate-pulse">
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-              <td><div class="placeholder" /></td>
-            </tr>
-          {:else}
-            <tr>
-              <td>{token.name}</td>
-              <td><DateTime distance time={token.createdAt}/></td>
-              <td><DateTime distance time={token.expiresAt}/></td>
-              <td>
-                <button
-                type="button"
-                class="btn-icon btn-icon-sm variant-filled-error"
-                data-id={token.id}
-                data-name={token.name}
-                on:click|stopPropagation|capture={handleDelete}
-                disabled={isDeleting}
-                >
-                  <Trash2 />
-                </button>
-              </td>
-            </tr>
-          {/if}
+<div class="card p-4 space-y-10">
+  <header class="flex justify-between">
+    <Table.Search {handler} />
+    <Table.RowsPerPage {handler} />
+  </header>
+  <table class="table table-hover table-compact w-full table-auto">
+    <thead>
+      <tr>
+        <Table.Head {handler} orderBy="name">Name</Table.Head>
+        <Table.Head {handler} orderBy="createdAt">Created At</Table.Head>
+        <Table.Head {handler} orderBy="expiresAt">Expires At</Table.Head>
+        <Table.Head {handler}>Delete</Table.Head>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- {#each $rows as token, i (token.id)} -->
+      {#each $rows as token, i}
+        {#if token.id === PendingValue}
+          <tr class="animate-pulse">
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+            <td><div class="placeholder" /></td>
+          </tr>
         {:else}
           <tr>
-            <td colspan="5"
-              ><div class="text-center text-gray-500">
-                No personal access tokens found.
-              </div></td
-            >
+            <td>{token.name}</td>
+            <td><DateTime distance time={token.createdAt}/></td>
+            <td><DateTime distance time={token.expiresAt}/></td>
+            <td>
+              <button
+              type="button"
+              class="btn-icon btn-icon-sm variant-filled-error"
+              data-id={token.id}
+              data-name={token.name}
+              on:click|stopPropagation|capture={handleDelete}
+              disabled={isDeleting}
+              >
+                <Trash2 />
+              </button>
+            </td>
           </tr>
-        {/each}
-      </tbody>
-    </table>
-    <footer class="flex justify-between">
-      <Table.RowCount {handler} />
-      <Table.Pagination {handler} />
-    </footer>
-  </div>
+        {/if}
+      {:else}
+        <tr>
+          <td colspan="5"
+            ><div class="text-center text-gray-500">
+              No personal access tokens found.
+            </div></td
+          >
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+  <footer class="flex justify-between">
+    <Table.RowCount {handler} />
+    <Table.Pagination {handler} />
+  </footer>
 </div>
