@@ -3,7 +3,7 @@ import { fragment, graphql, PendingValue, type InvitationsFragment } from '$houd
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
-import { getToastStore } from '@skeletonlabs/skeleton';
+import { Avatar, getToastStore, popup } from '@skeletonlabs/skeleton';
 import { Logger } from '@spectacular/utils';
 import { invalidate } from '$app/navigation';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
@@ -11,11 +11,15 @@ import { MoreHorizontal, Trash, UserCog } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { fade, slide } from 'svelte/transition';
 import { cn } from '@spectacular/skeleton/utils';
-import { DeleteMember, UpdateMember } from '../mutations';
+import { DeleteInvite, UpdateInvite } from '../mutations';
 import Filter from './filter.svelte';
+import type { PartialGraphQLErrors } from '$lib/types';
+import { GraphQLErrors } from '@spectacular/skeleton';
+import { ListBox, ListBoxItem } from '@spectacular/skeleton/components/listbox';
+import * as Table from '@spectacular/skeleton/components/table';
+import { page } from '$app/stores';
 
-const log = new Logger('memberships:search-results:browser');
-// Variables
+const log = new Logger('invitations:list:browser');
 
 export let organization: InvitationsFragment;
 $: data = fragment(
@@ -34,222 +38,188 @@ $: data = fragment(
 );
 $: ({ invitations } = $data);
 
+// Variables
+const subjectRole = $page.data.role;
+let gqlErrors: PartialGraphQLErrors;
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 //Datatable handler initialization
 const handler = new DataHandler(invitations?.filter(loaded), {
-  rowsPerPage: 10,
+  rowsPerPage: 5,
 });
 $: handler.setRows(invitations);
 const rows = handler.getRows();
 
 // Functions
-/**
- * Delete Organization action
- */
-let isDeleting = false;
 
+/**
+ * Delete Invitation action
+ */
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { userId, orgId, userDisplayName } = event.currentTarget.dataset;
-  console.log(event.currentTarget.dataset);
-  if (!userId || !orgId) {
-    log.error('Misconfiguration: did you miss adding `data-user-id`, `data-org-id` attributes?');
+  const { orgId, email } = event.currentTarget.dataset;
+  if (!orgId || !email) {
+    log.error('Misconfiguration: did you miss adding `data-org-id`, `data-email` attributes?');
     return;
   }
-  // before
-  isDeleting = true;
-  const { data, errors: gqlErrors } = await DeleteMember.mutate({
-    orgId,
-    userId,
-  });
-  if (gqlErrors) {
+
+  const { data, errors } = await DeleteInvite.mutate({ orgId, email });
+  if (errors) {
+    gqlErrors = errors;
+    log.error('handleDelete api error:', errors);
+    return;
+  }
+  if (!data?.delete_invitations_by_pk) {
     handleMessage(
-      {
-        message: `Error deleting Membership : "${userDisplayName}", cause: ${gqlErrors[0].message} `,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'error',
-      },
+      { message: 'No responce from server: may be orgId not found', type: 'error', timeout: 5000 },
       toastStore,
     );
     return;
   }
-  if (data?.delete_memberships_by_pk) {
-    handleMessage(
-      {
-        message: `<p class="text-xl">Memebership : <span class="text-red-500 font-bold">${userDisplayName}</span> deleted</p>`,
-        hideDismiss: false,
-        timeout: 1000,
-        type: 'success',
-      },
-      toastStore,
-    );
-  } else {
-    handleMessage(
-      {
-        message: `Membership not found for : ${userDisplayName}`,
-        hideDismiss: false,
-        timeout: 50000,
-        type: 'error',
-      },
-      toastStore,
-    );
-  }
-  await invalidate(() => true);
-  // after
-  isDeleting = false;
+
+  // await invalidate(() => true);
+  handleMessage({ message: `Invitation to: ${email} removed successfully`, type: 'success' }, toastStore);
 };
+
 /**
- * Update MemberShip role action
+ * Update Invitation role action
  */
-
 const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
-  const { orgId, userId, role, userDisplayName } = event.currentTarget.dataset;
-  console.log(event.currentTarget.dataset);
-  if (!orgId || !userId || !role) {
-    log.error('Misconfiguration: did you miss adding `data-org-id` `data-user-id` `data-role` attributes?');
+  const { orgId, email, role } = event.currentTarget.dataset;
+  if (!orgId || !email || !role) {
+    log.error('Misconfiguration: did you miss adding  `data-org-id`, `data-email`, `data-role` attributes?');
     return;
   }
-
   // before
-  isDeleting = true;
-  const { data, errors: gqlErrors } = await UpdateMember.mutate({
-    orgId,
-    userId,
-    role,
-  });
-  if (gqlErrors) {
+  loadingState.setFormLoading(true);
+  const { data, errors } = await UpdateInvite.mutate({ orgId, email, role });
+  if (errors) {
+    gqlErrors = errors;
+    log.error('handleUpdate api error:', errors);
+    return;
+  }
+  if (!data?.update_invitations_by_pk) {
     handleMessage(
-      {
-        message: `Error while updating membership for: "${userDisplayName}", cause: ${gqlErrors[0].message} `,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'error',
-      },
+      { message: 'No responce from server: may be userId, orgId not found', type: 'error', timeout: 5000 },
       toastStore,
     );
     return;
-  }
-  if (data?.update_memberships_by_pk) {
-    handleMessage(
-      {
-        message: `<p class="text-xl">Membership : <span class="text-red-500 font-bold">${userDisplayName}</span> role successfully updated to <span class="text-red-500 font-bold">${role}</span></p>`,
-        hideDismiss: false,
-        timeout: 10000,
-        type: 'success',
-      },
-      toastStore,
-    );
-  } else {
-    handleMessage(
-      {
-        message: `Membership not found for : ${userDisplayName}`,
-        hideDismiss: false,
-        timeout: 50000,
-        type: 'error',
-      },
-      toastStore,
-    );
   }
   // after
-  isDeleting = false;
+  loadingState.setFormLoading(false);
+  // await invalidate(() => true);
+  handleMessage({ message: `${email} role changed to: ${role}`, type: 'success' }, toastStore);
 };
-let showActionsFor = '';
-// Reactivity
-$: loadingState.setFormLoading(isDeleting);
 </script>
 
-<!-- Filter Section -->
-<Filter {handler} searchFields={['email']} />
+<!-- GraphQL errors -->
+{#if gqlErrors}
+  <GraphQLErrors errors={gqlErrors} />
+{/if}
 
-<!-- Members List -->
-<div class="bg-white rounded-lg shadow-sm border border-gray-200">
-  <div class="divide-y divide-gray-200">
+<!-- Invitations List -->
+<div class="w-full text-token card p-4 space-y-10">
+  <!-- invitation filter header -->
+  <header class="flex flex-col sm:flex-row gap-4">
+    <Filter {handler} searchFields={['email']} />
+  </header>
+
+  <!-- invitation list body -->
+  <div class="grid gap-4 md:grid-cols-1">
     {#each $rows as invite (invite.email)}
-      <div transition:slide class="p-4 flex items-center justify-between gap-4">
+      <div
+        class="card variant-soft-surface overflow-hidden p-3 md:p-4 transition-all shadow-md hover:shadow-xl flex justify-between items-center"
+        transition:slide={{ duration: 300, axis: 'y' }}
+      >
+        <!-- Avatar Left -->
         <div class="flex items-center gap-3">
-          <p class="text-sm text-gray-500">{invite.email}</p>
-        </div>
-        <div class="flex items-center gap-3">
-          Status:
-          <span
-            class={cn(
-              "px-3 py-1 text-sm rounded-full",
-              invite.status === "declined" && "bg-error-100",
-              invite.status === "accepted" && "bg-success-100",
-            )}
-          >
-            {invite.status}
-          </span>
+          <Avatar initials={invite.email} width="w-12"></Avatar>
+          <div>
+            <h3 class="font-semibold text-lg">{invite.email}</h3>
+            <p class="text-sm text-gray-500">
+              <span
+                class="badge"
+                class:variant-filled-surface={invite.status === "pending"}
+                class:variant-filled-success={invite.status === "accepted"}
+                class:variant-filled-warning={invite.status === "declined"}
+                >
+                {invite.status}
+              </span>
+            </p>
+          </div>
         </div>
 
-        <div class="flex items-center gap-3">
+        <!-- Actions Right -->
+        <div class="flex items-center align-middle gap-3">
+          <!-- Role -->
           <span
-            class={cn(
-              "px-3 py-1 text-sm rounded-full",
-              invite.role === "org:owner" && "bg-purple-100 text-purple-700",
-              invite.role === "org:admin" && "bg-blue-100 text-blue-700",
-              invite.role === "org:member" && "bg-gray-100 text-gray-700",
-            )}
+            class="badge"
+            class:variant-filled-primary={invite.role === "org:member"}
+            class:variant-filled-secondary={invite.role === "org:admin"}
+            class:variant-filled-warning={invite.role === "org:billing"}
+            class:variant-filled-error={invite.role === "org:owner"}
           >
             {invite.role}
           </span>
-
-          <!-- try button class class="p-2 hover:bg-gray-100 rounded-lg transition-colors" -->
-          <div class="relative">
-            <button
-              on:click={() =>
-                (showActionsFor =
-                  showActionsFor === invite.email ? "" : invite.email)}
-              class="btn hover:variant-ghost-success"
-              disabled={invite.role === "org:owner"}
-            >
-              <MoreHorizontal size={20} />
-            </button>
-
-            {#if showActionsFor === invite.email}
-              <div
-                transition:fade
-                class="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-10"
-              >
-                <div class="px-2 py-1.5 text-sm text-gray-500">
-                  Change role to:
-                </div>
-                {#each ["org:admin", "org:billing", "org:member"] as role}
-                  {#if role !== invite.role}
-                    <button
-                      class="w-full px-4 py-1.5 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
-                      data-email={invite.email}
-                      data-org-id={invite.orgId}
-                      data-role={role}
-                      on:click|stopPropagation|capture={handleUpdate}
-                    >
-                      <UserCog size={16} />
-                      {role}
-                    </button>
-                  {/if}
-                {/each}
-                <div class="h-px bg-gray-200 my-1" />
-                <button
-                  class="w-full px-4 py-1.5 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
-                  data-email={invite.email}
+          <!-- Popover Trigger -->
+          <button
+            type="button"
+            class="btn btn-sm hover:variant-soft"
+            use:popup={{ event: 'click', placement: 'bottom', target: 'actionPopup-' + invite.email }}
+          >
+            <MoreHorizontal size={20} />
+          </button>
+          <!-- Popover Content -->
+          <div class="card w-48 shadow-xl py-2 z-50" data-popup="actionPopup-{invite.email}">
+            <ListBox rounded="rounded-none" spacing="space-y-0" padding="px-4 py-1.5">
+              <div class="px-2 py-1.5 text-sm text-gray-500">Change role to:</div>
+              {#each ["org:admin", "org:billing", "org:member"] as role}
+                {#if role !== invite.role}
+                  <ListBoxItem>
+                      <button
+                        type="button"
+                        class="btn p-0 text-sm"
+                        data-org-id={invite.orgId}
+                        data-email={invite.email}
+                        data-role={role}
+                        disabled={subjectRole !== "org:owner"}
+                        on:click|stopPropagation|capture={handleUpdate}
+                      >
+                        <span><UserCog size={16} /></span>
+                        <span>{role}</span>
+                      </button>
+                  </ListBoxItem>
+                {/if}
+              {/each}
+              <div class="h-px bg-surface-300 my-1" />
+              <ListBoxItem hover="bg-error-hover-token" regionDefault="text-error-600">
+                <button type="button"
+                  class="btn p-0 text-sm"
                   data-org-id={invite.orgId}
+                  data-email={invite.email}
+                  disabled={subjectRole !== "org:owner" && invite.role !== "org:member"}
                   on:click|stopPropagation|capture={handleDelete}
-                  disabled={isDeleting}
                 >
-                  <Trash size={16} />
-                  Remove Invite
+                  <span><Trash size={16} /></span>
+                  <span>Remove member</span>
                 </button>
-              </div>
-            {/if}
+              </ListBoxItem>
+            </ListBox>
+            <div class="arrow bg-surface-100-800-token" />
           </div>
         </div>
       </div>
     {:else}
-      <div class="p-8 text-center text-gray-500">
+      <p class="p-4 text-center opacity-60">
         No records found matching your search criteria.
-      </div>
+      </p>
     {/each}
   </div>
+
+  <!-- member list footer -->
+  <footer class="flex justify-between">
+    <Table.RowCount {handler} />
+    <Table.Pagination {handler} />
+  </footer>
 </div>
+

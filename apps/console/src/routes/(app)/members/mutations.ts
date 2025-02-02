@@ -16,7 +16,7 @@ export const InviteMembers = graphql(`
   `);
 
 export const UpdateInvite = graphql(`
-  mutation UpdateInvite($orgId: uuid!, $email: citext!, $role: String!) {
+  mutation UpdateInvite($orgId: uuid!, $email: citext!, $role: String!) @dedupe(cancelFirst: true) {
     update_invitations_by_pk(pk_columns: {orgId: $orgId, email: $email}, _set: { role: $role }) {
       email
       role
