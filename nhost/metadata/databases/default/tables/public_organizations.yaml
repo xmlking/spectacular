@@ -46,13 +46,6 @@ object_relationships:
     using:
       foreign_key_constraint_on: owner_id
 array_relationships:
-  - name: devices
-    using:
-      foreign_key_constraint_on:
-        column: org_id
-        table:
-          name: devices
-          schema: public
   - name: groups
     using:
       foreign_key_constraint_on:
@@ -80,27 +73,6 @@ array_relationships:
         column: org_id
         table:
           name: notifications
-          schema: public
-  - name: policies
-    using:
-      foreign_key_constraint_on:
-        column: org_id
-        table:
-          name: policies
-          schema: public
-  - name: pools
-    using:
-      foreign_key_constraint_on:
-        column: org_id
-        table:
-          name: pools
-          schema: public
-  - name: rules
-    using:
-      foreign_key_constraint_on:
-        column: org_id
-        table:
-          name: rules
           schema: public
   - name: settings
     using:

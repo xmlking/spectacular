@@ -5,47 +5,41 @@ import type { MenuNavLinks } from './types';
 import { Roles } from './types';
 
 export const menuNavLinks: MenuNavLinks = {
-  '/policies': [
+  '/customers': [
     {
       title: '',
       list: [{ href: '/dashboard', label: 'Dashboard', keywords: 'reports, graph' }],
     },
     {
-      title: 'Policies',
+      title: 'Customers',
       list: [
         {
-          href: '/policies',
-          label: 'Policies',
+          href: '/customers',
+          label: 'Customers',
           keywords: 'svelte, sirens, license, release',
           preload: 'false',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/rules?shared=true',
-          label: 'Golden Rules',
-          keywords: 'start, install, cli, tailwind, themes, stylesheets',
-          roles: [Roles.Owner, Roles.Admin],
-        },
-        {
-          href: '/rules',
-          label: 'All Rules',
+          href: '/customers',
+          label: 'Products',
           keywords: 'start, install, cli, tailwind, themes, stylesheets',
           roles: [Roles.Owner, Roles.Admin],
         },
       ],
     },
     {
-      title: 'Devices',
+      title: 'Vendors',
       list: [
         {
-          href: '/devices',
-          label: 'Devices',
+          href: '/customers',
+          label: 'Small',
           keywords: 'start, setup, tutorial, guide',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/pools',
-          label: 'Pools',
+          href: '/customers',
+          label: 'Large',
           keywords: 'start, setup, tutorial, guide',
           roles: [Roles.Owner, Roles.Admin],
         },

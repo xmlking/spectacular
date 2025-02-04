@@ -23,11 +23,11 @@ page.subscribe((page) => {
   const basePath = canonicalPath.split('/')[1];
   if (!basePath) return;
   // Translate base path to link section
-  currentRailCategory = hrefToCategoryIndex[basePath] ?? '/policies';
+  currentRailCategory = hrefToCategoryIndex[basePath] ?? '/customers';
 });
 
 // Reactive
-$: submenu = menuNavLinks[currentRailCategory ?? '/policies'];
+$: submenu = menuNavLinks[currentRailCategory ?? '/customers'];
 $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '');
 </script>
 
@@ -48,9 +48,9 @@ $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? '
 			<span>Blog</span>
 		</AppRailAnchor>
     <!-- --- / --- -->
-    <AppRailTile bind:group={currentRailCategory} name="policies" value={'/policies'}>
+    <AppRailTile bind:group={currentRailCategory} name="customers" value={'/customers'}>
       <svelte:fragment slot="lead"><Icon name="book" width="w-6" height="h-6" /></svelte:fragment>
-      <span>Policies</span>
+      <span>Customers</span>
     </AppRailTile>
     <hr class="opacity-30" />
     <AppRailTile bind:group={currentRailCategory} name="flows" value={'/flows'}>

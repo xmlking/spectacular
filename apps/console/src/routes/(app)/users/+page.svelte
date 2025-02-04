@@ -31,7 +31,7 @@ $: ({ SearchUsersAll } = data);
 <section class="space-y-4">
   <MaybeError
     debug={true}
-    entityName="SearchPolicies"
+    entityName="SearchGroups"
     result={$SearchUsersAll}
     let:data={{ users }}
   >

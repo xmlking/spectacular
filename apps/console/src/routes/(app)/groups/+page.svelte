@@ -6,7 +6,6 @@ import type { PageData } from './$houdini';
 import ListGroupsForm from './components/search-groups-form.svelte';
 import ListGroupsResult from './components/search-groups-result.svelte';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import SearchPoliciesResult from '../policies/components/search-policies-result.svelte';
 
 const log = new Logger('groups:search:browser');
 export let data: PageData;
@@ -34,7 +33,7 @@ $: ({ ListGroups } = data);
 <section class="space-y-4">
   <MaybeError
     debug={true}
-    entityName="SearchPolicies"
+    entityName="SearchGroups"
     result={$ListGroups}
     let:data={{ groups }}
   >

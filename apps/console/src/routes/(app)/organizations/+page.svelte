@@ -31,7 +31,7 @@ $: ({ SearchOrganizations } = data);
 <section class="space-y-4">
   <MaybeError
     debug={true}
-    entityName="SearchPolicies"
+    entityName="SearchGroups"
     result={$SearchOrganizations}
     let:data={{ organizations }}
   >
