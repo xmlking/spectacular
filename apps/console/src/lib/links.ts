@@ -55,7 +55,6 @@ export const menuNavLinks: MenuNavLinks = {
       title: 'AI',
       list: [
         { href: '/ai/smart', label: 'Smart Components', keywords: 'Smart Components, ai, completion' },
-        { href: '/ai/speech', label: 'Speech', keywords: 'Lang, Speech' },
         { href: '/ai/writing', label: 'Smart Writing', keywords: 'Smart Components, ai, writing' },
         { href: '/ai/pastesmart', label: 'Smart Paste', keywords: 'Smart Paste, ai, smart-forms' },
         { href: '/ai/assistants', label: 'Assistants', keywords: 'assistants, smart-forms, ai' },
