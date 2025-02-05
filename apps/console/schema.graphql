@@ -8321,6 +8321,11 @@ unique or primary key constraints on table "organizations"
 """
 enum organizations_constraint {
   """
+  unique or primary key constraint on columns "id", "display_name"
+  """
+  organizations_id_display_name_key
+
+  """
   unique or primary key constraint on columns "id"
   """
   organizations_pkey

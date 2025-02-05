@@ -1,0 +1,5 @@
+query OrganizationData1($id: uuid!) {
+  organizations_by_pk(id: $id) {
+    ...OrganizationFragment
+  }
+}

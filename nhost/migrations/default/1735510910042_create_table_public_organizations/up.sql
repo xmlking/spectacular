@@ -17,6 +17,7 @@ CREATE TABLE public.organizations
   auto_enroll           boolean     NOT NULL DEFAULT false,
   avatar_url            text,
   PRIMARY KEY (id),
+  UNIQUE (owner_id, display_name),
   FOREIGN KEY (owner_id) REFERENCES auth.users (id) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 COMMENT ON TABLE public.organizations IS 'Table containing organizations owned by users. Auto-enroll members based on email domain';

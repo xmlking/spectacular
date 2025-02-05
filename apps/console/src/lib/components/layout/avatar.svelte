@@ -8,7 +8,7 @@ import { getNhostClient } from '$lib/stores/nhost';
 // Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/Avatar.svelte
 import { Avatar, getToastStore, popup } from '@skeletonlabs/skeleton';
 import Cookies from 'js-cookie';
-import { Settings } from 'lucide-svelte';
+import { Plus, Settings } from 'lucide-svelte';
 import { CircleUserRound } from 'lucide-svelte';
 import { LogOut } from 'lucide-svelte';
 
@@ -53,13 +53,13 @@ async function signOut() {
   <nav class="list-nav">
     <ul>
       <li>
-        <a href="/user-settings">
+        <a href="/user/settings">
           <span class="w-6 text-center"><Settings class="w-5 justify-center" /></span>
           <span>Settings</span>
         </a>
       </li>
       <li>
-        <a href="/profile">
+        <a href="/user/profile">
           <span class="w-6 text-center"><CircleUserRound class="w-5 justify-center" /></span>
           <span>Profile</span>
         </a>

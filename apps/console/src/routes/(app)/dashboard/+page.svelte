@@ -3,6 +3,8 @@
 // TODO: Drag-and-Drop Dashboard https://github.com/olliethedev/dnd-dashboard
 import { onDestroy, onMount } from 'svelte';
 // import { persisted } from 'svelte-persisted-store';
+// import { RemoteTeamClock, ImgCard, CalendarIndev  } from "$lib/components/craft";
+import { RemoteTeamClock, Typewriter } from '$lib/components/craft';
 import { type Swapy, createSwapy } from 'swapy';
 import { fragment, graphql, type WelcomeUserFragment } from '$houdini';
 import type { PageData } from './$houdini';
@@ -173,3 +175,7 @@ onDestroy(() => {
   </section>
 </div>
 
+
+<!-- <ImgCard /> -->
+<RemoteTeamClock />
+<Typewriter />

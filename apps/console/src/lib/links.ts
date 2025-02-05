@@ -5,56 +5,27 @@ import type { MenuNavLinks } from './types';
 import { Roles } from './types';
 
 export const menuNavLinks: MenuNavLinks = {
-  '/customers': [
+  '/bookstore': [
     {
       title: '',
       list: [{ href: '/dashboard', label: 'Dashboard', keywords: 'reports, graph' }],
     },
     {
-      title: 'Customers',
+      title: 'Catalog',
       list: [
         {
-          href: '/customers',
-          label: 'Customers',
+          href: '/bookstore/books',
+          label: 'Books',
           keywords: 'svelte, sirens, license, release',
           preload: 'false',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/customers',
-          label: 'Products',
+          href: '/bookstore/reviews',
+          label: 'Review',
           keywords: 'start, install, cli, tailwind, themes, stylesheets',
           roles: [Roles.Owner, Roles.Admin],
         },
-      ],
-    },
-    {
-      title: 'Vendors',
-      list: [
-        {
-          href: '/customers',
-          label: 'Small',
-          keywords: 'start, setup, tutorial, guide',
-          roles: [Roles.Owner, Roles.Admin],
-        },
-        {
-          href: '/customers',
-          label: 'Large',
-          keywords: 'start, setup, tutorial, guide',
-          roles: [Roles.Owner, Roles.Admin],
-        },
-      ],
-    },
-    {
-      title: 'AI',
-      list: [
-        { href: '/ai/smart', label: 'Smart Components', keywords: 'Smart Components, ai, completion' },
-        { href: '/ai/writing', label: 'Smart Writing', keywords: 'Smart Components, ai, writing' },
-        { href: '/ai/pastesmart', label: 'Smart Paste', keywords: 'Smart Paste, ai, smart-forms' },
-        { href: '/ai/assistants', label: 'Assistants', keywords: 'assistants, smart-forms, ai' },
-        { href: '/ai/ragapps', label: 'RAG Apps', keywords: 'RAG, ai, completion' },
-        { href: '/ai/chat', label: 'Chat', keywords: 'chat, OpenAI' },
-        { href: '/ai/bot', label: 'Chat Bot', keywords: 'chatbot, OpenAI' },
       ],
     },
   ],
@@ -63,13 +34,13 @@ export const menuNavLinks: MenuNavLinks = {
       title: 'Visualization',
       list: [
         {
-          href: '/network',
+          href: '/flows/network',
           label: 'Network',
           keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/segments',
+          href: '/flows/segments',
           label: 'Segments',
           keywords: 'body, scroll, scrollbar, hr, horizontal, rule, divider',
           roles: [Roles.Owner, Roles.Admin],
@@ -82,13 +53,13 @@ export const menuNavLinks: MenuNavLinks = {
       title: 'Reports',
       list: [
         {
-          href: '/reports',
+          href: '/reports/access',
           label: 'Access Reports',
           keywords: 'copy, contenteditable, html, input',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/usage-reports',
+          href: '/reports/usage',
           label: 'Usage Reports',
           keywords: 'usage, metrics',
           roles: [Roles.Owner, Roles.Admin, Roles.SysAdmin],
@@ -96,79 +67,96 @@ export const menuNavLinks: MenuNavLinks = {
       ],
     },
   ],
-  '/settings': [
+  '/account': [
     {
       title: 'Account',
       list: [
-        { href: '/profile', label: 'Profile', keywords: 'settings, profile, account' },
-        { href: '/user-settings', label: 'Settings', keywords: 'settings, ai, feature-flags, account', badge: '✨' },
-        { href: '/user-notifications', label: 'Notifications', keywords: 'notifications, user' },
+        { href: '/user/profile', label: 'Profile', keywords: 'settings, profile, account' },
+        { href: '/user/settings', label: 'Settings', keywords: 'settings, ai, feature-flags, account', badge: '✨' },
+        { href: '/user/notifications', label: 'Notifications', keywords: 'notifications, user' },
+        { href: '/user/create-organization', label: '＋ Add Organization', keywords: 'add, organization' },
       ],
     },
     {
       title: 'Organization',
       list: [
-        { href: '/organization', label: 'Organization', keywords: 'organization', roles: [Roles.Owner, Roles.Admin] },
         {
-          href: '/org-settings',
+          href: '/org/update-organization',
+          label: 'Organization',
+          keywords: 'organization',
+          roles: [Roles.Owner, Roles.Admin],
+        },
+        {
+          href: '/org/settings',
           label: 'Settings',
           keywords: 'settings, configuration, environment-variables, organization',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/notifications',
+          href: '/org/notifications',
           label: 'Notifications',
           keywords: 'notifications, organization',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/members',
+          href: '/org/members',
           label: 'Members',
           keywords: 'account, user, member, organization',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/groups',
+          href: '/org/groups',
           label: 'Groups',
           keywords: 'account, group, organization',
           roles: [Roles.Owner, Roles.Admin],
         },
         {
-          href: '/billing',
+          href: '/org/billing',
           label: 'Billing',
           keywords: 'billing, plan, organization',
           roles: [Roles.Owner, Roles.Billing],
         },
         {
-          href: '/invoices',
+          href: '/org/invoices',
           label: 'Invoices',
           keywords: 'billing, invoices, organization',
           roles: [Roles.Owner, Roles.Billing],
         },
-        { href: '/organizations/create', label: '＋ New Organization', keywords: 'create, organization' },
       ],
     },
     {
-      title: 'Sys Admin',
+      title: 'Admin',
       list: [
         {
-          href: '/organizations',
+          href: '/admin/organizations',
           label: 'Organizations',
           keywords: 'organization, admin, system',
           roles: [Roles.SysAdmin],
         },
         {
-          href: '/users',
+          href: '/admin/users',
           label: 'Users',
           keywords: 'users, admin, system',
           roles: [Roles.SysAdmin],
         },
         {
-          href: '/notifications',
+          href: '/org/notifications',
           label: 'Notifications',
           keywords: 'notifications, admin, system',
           roles: [Roles.SysAdmin],
         },
+      ],
+    },
+  ],
+  '/ai': [
+    {
+      title: 'AI',
+      list: [
+        { href: '/ai/writing', label: 'Smart Writing', keywords: 'Smart Components, ai, writing' },
+        { href: '/ai/pastesmart', label: 'Smart Paste', keywords: 'Smart Paste, ai, smart-forms' },
+        { href: '/ai/smart', label: 'Smart Components', keywords: 'Smart Components, ai, completion' },
+        { href: '/ai/chat', label: 'Chat', keywords: 'chat, OpenAI' },
+        { href: '/ai/rag', label: 'RAG Apps', keywords: 'RAG, ai, completion' },
       ],
     },
   ],
