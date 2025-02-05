@@ -17,7 +17,7 @@
 - GraphQL: [Houdini](https://www.houdinigraphql.com/) & [Hasura](https://hasura.io/)
 - Authentication: [Auth.js](https://authjs.dev/),  [nhost-auth](https://nhost.io/product/auth)
 - PWA: [Vite PWA](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html)
-- Linter/Formatter: [Biome](https://biomejs.dev/)
+- Linter/Formatter: [Biome](https://biomejs.dev/) and [Ultracite](https://github.com/haydenbleasel/ultracite) linting configuration.
 
 ## Features
 
