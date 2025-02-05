@@ -490,6 +490,7 @@ export const links: LinkDatum[] = [
 
 export const sites: Record<string, SiteConfig> = nodes.reduce(
   (acc, curr) => ({
+    // biome-ignore lint/performance/noAccumulatingSpread: <explanation>
     ...acc,
     [curr.site]: {
       groupNodeId: curr.id,

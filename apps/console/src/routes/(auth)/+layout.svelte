@@ -29,8 +29,10 @@ function pass(event: CustomEvent) {
 let theme: 'light' | 'dark' | 'auto' | undefined;
 $: theme = $modeUserPrefers ? 'light' : 'dark';
 const siteKey = dev
-  ? env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY_ALWAYS_PASSES!
-  : env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!;
+  ? // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY_ALWAYS_PASSES!
+  : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!;
 </script>
 
 <div class="mx-auto flex max-w-md flex-col justify-center px-6 py-12 lg:px-8 lg:py-32">

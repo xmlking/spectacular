@@ -2,6 +2,7 @@ import { dev } from '$app/environment';
 import { env as secrets } from '$env/dynamic/private';
 import { env } from '$env/dynamic/public';
 
+// biome-ignore lint/style/noNonNullAssertion: <explanation>
 const CHALLENGE_URL = env.PUBLIC_CLOUDFLARE_TURNSTILE_CHALLENGE_URL!;
 const SECRET = dev ? secrets.CLOUDFLARE_TURNSTILE_SECRET_KEY_ALWAYS_PASSES : secrets.CLOUDFLARE_TURNSTILE_SECRET_KEY;
 

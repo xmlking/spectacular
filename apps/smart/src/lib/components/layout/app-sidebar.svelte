@@ -7,7 +7,7 @@ import Command from 'lucide-svelte/icons/command';
 import FlaskRound from 'lucide-svelte/icons/flask-round';
 import Frame from 'lucide-svelte/icons/frame';
 import GalleryVerticalEnd from 'lucide-svelte/icons/gallery-vertical-end';
-import Map from 'lucide-svelte/icons/map';
+import MapIcon from 'lucide-svelte/icons/map';
 import Settings2 from 'lucide-svelte/icons/settings-2';
 import Sparkles from 'lucide-svelte/icons/sparkles';
 import SquareTerminal from 'lucide-svelte/icons/square-terminal';
@@ -187,7 +187,7 @@ const data = {
     {
       name: 'Travel',
       url: '#',
-      icon: Map,
+      icon: MapIcon,
     },
   ],
 };

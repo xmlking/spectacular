@@ -52,7 +52,8 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
       toastStore,
     );
     return;
-  } else if (data?.delete_users_by_pk) {
+  }
+  if (data?.deleteUser) {
     handleMessage(
       {
         message: `<p class="text-xl">User: <span class="text-red-500 font-bold">${displayName}</span> deleted</p>`,

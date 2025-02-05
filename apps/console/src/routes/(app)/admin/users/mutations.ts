@@ -10,11 +10,11 @@ export const UpdateUser = graphql(`
 
 export const DeleteUser = graphql(`
     mutation DeleteUser($id: uuid!) {
-      #  deleteUser(id: $id) {
-      #   ...Search_Users_remove
-      # }
-      updateUser(pk_columns: {id: $id}, _set: {}) {
-        displayName
-      }
+      deleteUser(id: $id) {
+         ...Search_Users_remove
+       }
+#      updateUser(pk_columns: {id: $id}, _set: {}) {
+#        displayName
+#      }
     }
   `);

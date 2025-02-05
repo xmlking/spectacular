@@ -53,6 +53,7 @@ const form = superForm(defaults(zod(signUpSchema)), {
     // FIXME: remove this block after nhost.auth.signUp support headers
     const { session, error } = getAuthenticationResult(
       await signUpEmailPasswordPromise(
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
         nhost.auth.client.interpreter!,
         email,
         password as string,
