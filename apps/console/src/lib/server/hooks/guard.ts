@@ -10,7 +10,7 @@ import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
  */
 const log = new Logger('server:middleware:guard');
 // TODO define roles in apps/console/src/lib/links.ts
-const adminPaths = ['/all/organizations'];
+const adminPaths = ['/admin/organizations', '/admin/users'];
 const publicPaths = [
   '/favicon.ico',
   '/robots.txt',
