@@ -48,7 +48,7 @@ export default new HoudiniClient({
       log.debug('session...', { session });
     }
     // use client-side AT if avaiable !!!
-    let accessToken = session?.accessToken;
+    const accessToken = session?.accessToken;
     const backendToken = metadata?.backendToken;
     const useRole = metadata?.useRole;
     const adminSecret = metadata?.adminSecret;
