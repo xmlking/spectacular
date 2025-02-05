@@ -2,11 +2,11 @@
   "$schema": "https://turbo.build/schema.json",
   "extends": ["//"],
   "tasks": {
-    "check:watch": {
+    "sv:check:watch": {
       "persistent": true,
       "outputs": [".svelte-kit/**"]
     },
-    "check": {
+    "sv:check": {
       "outputs": [".svelte-kit/**"]
     },
     "sync": {

@@ -1,0 +1,69 @@
+table:
+  name: org_settings
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    org_id:
+      custom_name: orgId
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    org_id: orgId
+    updated_at: updatedAt
+    updated_by: updatedBy
+  custom_root_fields: {}
+insert_permissions:
+  - role: org:admin
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - key
+        - value
+    comment: ""
+select_permissions:
+  - role: org:admin
+    permission:
+      columns:
+        - value
+        - key
+        - created_at
+        - updated_at
+        - created_by
+        - org_id
+        - updated_by
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: org:admin
+    permission:
+      columns:
+        - value
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
+delete_permissions:
+  - role: org:admin
+    permission:
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+    comment: ""

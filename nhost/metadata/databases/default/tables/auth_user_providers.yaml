@@ -59,6 +59,7 @@ select_permissions:
       filter:
         user_id:
           _eq: x-hasura-user-id
+      allow_aggregations: true
     comment: ""
 delete_permissions:
   - role: user

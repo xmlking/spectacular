@@ -6,8 +6,8 @@ import LangSwitch from '$lib/components/layout/lang-switch.svelte';
 // import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
 import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
 import { storeTheme } from '$lib/stores';
-import { online } from '$lib/stores/window';
 import { getNhostClient } from '$lib/stores/nhost';
+import { online } from '$lib/stores/window';
 import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 import { AppBar, LightSwitch, getDrawerStore, getModalStore, popup } from '@skeletonlabs/skeleton';
 import { LogoIcon } from '@spectacular/skeleton/components/logos';
@@ -24,6 +24,7 @@ import {
   Search,
 } from 'lucide-svelte';
 import Avatar from './avatar.svelte';
+import OrgSwitcher from './org-switcher.svelte';
 
 const drawerStore = getDrawerStore();
 
@@ -111,6 +112,8 @@ const setTheme: SubmitFunction = ({ formData }) => {
     </div>
   </svelte:fragment>
   <svelte:fragment slot="trail">
+    <!-- OrgSwitcher -->
+    <OrgSwitcher />
     <!-- Explore -->
     <div class="relative hidden lg:block">
       <!-- trigger -->
@@ -198,7 +201,7 @@ const setTheme: SubmitFunction = ({ formData }) => {
                     >
                       <span>{icon}</span>
                       <span class="flex-auto text-left">{name}</span>
-                      {#if badge}<span class="variant-filled-secondary badge">{badge}</span>{/if}
+                      {#if badge}<span class="variant-filled badge">{badge}</span>{/if}
                     </button>
                   </li>
                 {/each}

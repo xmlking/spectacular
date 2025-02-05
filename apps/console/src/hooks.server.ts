@@ -5,21 +5,23 @@ import * as flags from '$lib/flags';
 import { i18n } from '$lib/i18n';
 import { auth, guard, houdini, theme } from '$lib/server/hooks';
 import { Logger, sleep } from '@spectacular/utils';
-import type { Handle, HandleFetch, HandleServerError } from '@sveltejs/kit';
+import type { Handle, HandleFetch, HandleServerError, ServerInit } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { createHandle } from '@vercel/flags/sveltekit';
 import { GraphQLError } from 'graphql';
 import { ZodError } from 'zod';
 
 /**
- * Code in hooks.server.ts will run when the application starts up,
+ * Code in `init` method in `hooks.server.ts` will run one-time on server, when the application starts up,
  * making them useful for initializing database clients, logger, Sentry and so on.
  */
-
-// Setup logger
-if (!dev) {
-  Logger.enableProductionMode();
-}
+export const init: ServerInit = async () => {
+  console.log('in hooks.server.ts init:');
+  // Setup logger
+  if (!dev) {
+    Logger.enableProductionMode();
+  }
+};
 
 const log = new Logger('hooks:server');
 

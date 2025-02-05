@@ -1,5 +1,6 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "extends": ["ultracite"],
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -8,7 +9,16 @@
   },
   "formatter": {
     "useEditorconfig": true,
-    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*", "nhost/emails/*"],
+    "ignore": [
+      "**/node_modules/*",
+      "**/dist/*",
+      "**/.svelte-kit/*",
+      "**/build/*",
+      "**/$houdini/**",
+      "**/.turbo/*",
+      "**/.vercel/*",
+      "nhost/emails/*"
+    ],
     "enabled": true,
     "formatWithErrors": true,
     "indentStyle": "space",
@@ -18,11 +28,28 @@
     "attributePosition": "auto"
   },
   "organizeImports": {
-    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*", "nhost/emails/*"],
+    "ignore": [
+      "**/node_modules/*",
+      "**/dist/*",
+      "**/.svelte-kit/*",
+      "**/build/*",
+      "**/$houdini/**",
+      "**/.turbo/*",
+      "**/.vercel/*",
+      "nhost/emails/*"
+    ],
     "enabled": true
   },
   "linter": {
-    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*"],
+    "ignore": [
+      "**/node_modules/*",
+      "**/dist/*",
+      "**/.svelte-kit/*",
+      "**/build/*",
+      "**/$houdini/**",
+      "**/.turbo/*",
+      "**/.vercel/*"
+    ],
     "enabled": true,
     "rules": {
       "recommended": true,
@@ -65,7 +92,7 @@
         "useSortedClasses": {
           "fix": "safe",
           "level": "error",
-          "options": { "functions": ["twMerge"] }
+          "options": { "functions": ["cn", "tw", "twMerge"] }
         }
       }
     }
@@ -102,6 +129,32 @@
         "parser": {
           "allowComments": true,
           "allowTrailingCommas": true
+        }
+      }
+    },
+    {
+      "include": ["*.svelte"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUndeclaredVariables": "off"
+          },
+          "suspicious": {
+            "noImplicitAnyLet": "off"
+          },
+          "style": {
+            "useConst": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["src/routes/(legal)/+layout@.svelte"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
+          }
         }
       }
     }

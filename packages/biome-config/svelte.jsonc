@@ -8,7 +8,16 @@
   },
   "formatter": {
     "useEditorconfig": true,
-    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*", "nhost/emails/*"],
+    "ignore": [
+      "**/node_modules/*",
+      "**/dist/*",
+      "**/.svelte-kit/*",
+      "**/build/*",
+      "**/$houdini/**",
+      "**/.turbo/*",
+      "**/.vercel/*",
+      "nhost/emails/*"
+    ],
     "enabled": true,
     "formatWithErrors": true,
     "indentStyle": "space",
@@ -18,11 +27,28 @@
     "attributePosition": "auto"
   },
   "organizeImports": {
-    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*", "nhost/emails/*"],
+    "ignore": [
+      "**/node_modules/*",
+      "**/dist/*",
+      "**/.svelte-kit/*",
+      "**/build/*",
+      "**/$houdini/**",
+      "**/.turbo/*",
+      "**/.vercel/*",
+      "nhost/emails/*"
+    ],
     "enabled": true
   },
   "linter": {
-    "ignore": ["**/node_modules/*", "**/dist/*", "**/.svelte-kit/*", "**/build/*"],
+    "ignore": [
+      "**/node_modules/*",
+      "**/dist/*",
+      "**/.svelte-kit/*",
+      "**/build/*",
+      "**/$houdini/**",
+      "**/.turbo/*",
+      "**/.vercel/*"
+    ],
     "enabled": true,
     "rules": {
       "recommended": true,
@@ -47,7 +73,7 @@
         "useSortedClasses": {
           "fix": "safe",
           "level": "error",
-          "options": { "functions": ["twMerge"] }
+          "options": { "functions": ["cn", "tw", "twMerge"] }
         }
       }
     }
@@ -73,7 +99,8 @@
       "**/node_modules/*",
       "**/dist/*",
       "**/.svelte-kit/*",
-      "**/build/*"
+      "**/build/*",
+      "nhost/metadata/actions.graphql"
     ]
   },
   "overrides": [

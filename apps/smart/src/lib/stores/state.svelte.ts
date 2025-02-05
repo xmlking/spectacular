@@ -1,6 +1,6 @@
 // See https://dev.to/jdgamble555/using-sharable-runes-with-typescript-in-svelte5-5hcp
 
-import { writable, readable } from 'svelte/store';
+import { readable, writable } from 'svelte/store';
 import { useSharedStore } from './use-shared.svelte';
 
 export const rune = <T>(initialValue?: T) => {

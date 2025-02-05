@@ -1,6 +1,0 @@
-mutation UpdateRole($id: uuid!, $data: users_set_input!) {
-  updateUser(pk_columns: { id: $id }, _set: $data) {
-    defaultRole
-    displayName
-  }
-}

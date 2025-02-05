@@ -1,5 +1,5 @@
-import { z } from 'zod';
 import { zodToJsonSchema } from 'openai-zod-to-json-schema';
+import { z } from 'zod';
 
 export const personSchema = z.object({
   firstName: z.string().nullish(),

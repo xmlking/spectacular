@@ -1,0 +1,6 @@
+query UserData($id: uuid!) @cache(policy: CacheAndNetwork, partial: true) {
+  user(id: $id) {
+    ...UserDetailFragment
+    ...UserGroupsFragment
+  }
+}

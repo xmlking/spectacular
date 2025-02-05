@@ -1,0 +1,17 @@
+# CacheOrNetwork is default cache strategy.
+# We are leveraging Houdini's Optimistic updates for this usecase
+# HINT: If you find yourself wanting @loading on every field in your document (fragment or query),
+# you can put it on the document definition to implicitly add it to every field.
+# ex: query ProfileData($id: UserIdFromSession!) @loading @role(name: "me")
+query ProfileData($id: UserIdFromSession!) @role(name: "me") {
+  # get all fragments needed for profile page.
+  user(id: $id) @loading(cascade: true) {
+    email
+    ...UserDetailsFragment
+    ...MembershipsFragment
+    ...UserInvitationsFragment
+    ...PersonalAccessTokensFragment
+    ...AuthProvidersFragment
+    ...SecurityKeysFragment
+  }
+}

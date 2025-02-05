@@ -36,6 +36,8 @@ const subClient: ClientPlugin = subscription(({ session }) =>
 );
 
 // Export the Houdini client
+// Ref: https://github.com/hanshoi/sveltekit-nhost-houdini-example/blob/master/src/client.ts
+// HINT: If your API uses HTTP-Only cookies, don’t forget to add credentials: "include" to fetchParams return value
 export default new HoudiniClient({
   url,
   fetchParams({ session, metadata }) {
@@ -46,14 +48,10 @@ export default new HoudiniClient({
       log.debug('session...', { session });
     }
     // use client-side AT if avaiable !!!
-    let accessToken = session?.accessToken;
+    const accessToken = session?.accessToken;
     const backendToken = metadata?.backendToken;
     const useRole = metadata?.useRole;
     const adminSecret = metadata?.adminSecret;
-
-    if (browser && getClientSession()?.accessToken) {
-      accessToken = getClientSession().accessToken;
-    }
 
     return {
       headers: {
@@ -62,6 +60,8 @@ export default new HoudiniClient({
         ...(adminSecret ? { 'X-Hasura-Admin-Secret': adminSecret } : {}),
         ...(backendToken ? { backendToken } : {}),
       },
+      // Instruct the browser to add cookies to cross-origin requests
+      credentials: 'include', // Tip: for HTTP-Only cookies
     };
   },
   /*

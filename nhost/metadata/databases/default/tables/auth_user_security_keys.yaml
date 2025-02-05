@@ -41,9 +41,12 @@ select_permissions:
       filter:
         user_id:
           _eq: x-hasura-user-id
+      allow_aggregations: true
+    comment: users can read their security keys
 delete_permissions:
   - role: user
     permission:
       filter:
         user_id:
           _eq: x-hasura-auth-elevated
+    comment: users can delete their security keys

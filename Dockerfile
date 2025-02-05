@@ -2,7 +2,7 @@ ARG SCOPE=console
 ###################################################################
 # Stage 0: base image											                        #
 ###################################################################
-FROM node:22-slim AS base
+FROM node:23-slim AS base
 ENV GIT_SSL_NO_VERIFY=1
 RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
@@ -13,6 +13,7 @@ ENV SCOPE=${SCOPE}
 #https://github.com/vercel/turbo/tree/main/examples/with-docker
 
 # Install pnpm
+# RUN corepack enable pnpm
 ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="${PATH}:${PNPM_HOME}"
 SHELL ["/bin/bash", "-c"]
@@ -70,8 +71,11 @@ COPY turbo.json turbo.json
 ARG TURBO_TEAM
 ENV TURBO_TEAM=$TURBO_TEAM
 
-ARG TURBO_TOKEN
-ENV TURBO_TOKEN=$TURBO_TOKEN
+ARG TURBO_TEAM
+ENV TURBO_TEAM=$TURBO_TEAM
+
+ARG TURBO_REMOTE_ONLY=true
+ENV TURBO_REMOTE_ONLY=$TURBO_REMOTE_ONLY
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm turbo run build --filter=${SCOPE}...

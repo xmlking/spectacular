@@ -1,18 +1,18 @@
 <script lang="ts">
 import { DebugShell } from '@spectacular/skeleton/components';
-import { getChromeAI } from './chrome-ai.js';
+import { onMount } from 'svelte';
 import SuperDebug from 'sveltekit-superforms';
+import { getChromeAI } from './chrome-ai.js';
 import {
   aiProvider,
-  languageModelStyle,
   languageModelOptions,
+  languageModelStyle,
+  preferedLang,
+  rewriterOptions,
   summarizerOptions,
   writerOptions,
-  rewriterOptions,
-  preferedLang,
 } from './settings.js';
 import { Provider } from './settings.js';
-import { onMount } from 'svelte';
 // import { langs } from './constants';
 const chromeAI = getChromeAI();
 const { isAISupported, assistantCapabilities, isLoading } = chromeAI;

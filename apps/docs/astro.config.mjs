@@ -1,8 +1,8 @@
 import node from '@astrojs/node';
 import starlight from '@astrojs/starlight';
-import tailwind from '@astrojs/tailwind';
 // import vercel from "@astrojs/vercel/serverless";
 import vercel from '@astrojs/vercel/static';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
@@ -16,6 +16,7 @@ console.log('which runtime?', { site, base });
 export default defineConfig({
   site,
   base,
+
   integrations: [
     starlight({
       title: 'Docs',
@@ -130,24 +131,17 @@ export default defineConfig({
         '@fontsource-variable/inter',
         // Fontsource files for code.
         '@fontsource/source-code-pro',
-        // Path to your Tailwind base styles:
-        './src/styles/tailwind.css',
       ],
     }),
-    tailwind({
-      // Disable the default base styles:
-      // Example: Disable injecting a basic `base.css` import on every page.
-      // Useful if you need to define and/or import your own custom `base.css`.
-      applyBaseStyles: false,
-    }),
   ],
-  output: process.env.CI ? 'static' : 'hybrid',
+
   // HINT: To set build output, same way like sveltekit for Dockerfile
   build: {
     server: './build',
     client: './build/client',
     serverEntry: 'index.js',
   },
+
   adapter: process.env.VERCEL
     ? vercel({
         webAnalytics: {
@@ -162,4 +156,8 @@ export default defineConfig({
       : node({
           mode: 'standalone',
         }),
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

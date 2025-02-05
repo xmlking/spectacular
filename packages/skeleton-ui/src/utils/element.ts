@@ -48,7 +48,7 @@ const focusableElements = `
  * Returns true if the node is focusable.
  */
 export function isFocusable(node: HTMLElement) {
-  return node && node.matches(focusableElements);
+  return node?.matches(focusableElements);
 }
 
 /**

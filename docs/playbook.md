@@ -6,6 +6,25 @@ Show how this repo is setup via step-by-step guild
 
 ### Prerequisite
 
+Install **node** and **pnpm**
+
+> [!NOTE]
+> Since v16.13, Node.js is shipping Corepack for managing package managers.
+
+```shell
+brew install node
+# This will automatically install pnpm on your system.
+corepack enable pnpm
+```
+
+> [!NOTE]
+> You can pin the version of pnpm used on your project using the following command
+
+```shell
+cd ~/Developer/Work/SPA/spectacular
+corepack use pnpm@latest-10
+```
+
 Install following CLI tools globally
 
 - [svelte CLI](https://github.com/sveltejs/cli)
@@ -254,6 +273,14 @@ pnpm add -D mode-watcher --filter "./apps/web"
 pnpm add -D svelte-persisted-store --filter "./apps/console"
 ```
 
+#### Bot Protection
+
+Bot Protection for nhost-auth with Cloudflare Turnstile
+
+```shell
+pnpm add -D svelte-turnstile --filter "./apps/console"
+```
+
 ### UI Blocks
 
 - [Kometa UI Kit](https://kitwind.io/products/kometa) (Free) [Blocks](https://kitwind.io/products/kometa/components)
@@ -413,8 +440,8 @@ pnpm add -D svelte-select
 We switched to inlang's [Paraglide JS](https://inlang.com/m/dxnzrydw/library-inlang-paraglideJsAdapterSvelteKit) for i18n
 
 ```shell
-npx @inlang/paraglide-js init
-npm i -D @inlang/paraglide-js-adapter-sveltekit
+npx @inlang/paraglide-sveltekit init
+npm install
 ```
 
 #### Progressive Web Apps (PWA)

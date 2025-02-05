@@ -1,8 +1,0 @@
-mutation UpdateOrgs($organization: String!, $data: organizations_set_input!) {
-  update_organizations_by_pk(pk_columns: { organization: $organization }, _set: $data) {
-    organization
-    description
-    allowedEmails
-    allowedEmailDomains
-  }
-}

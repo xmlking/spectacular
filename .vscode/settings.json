@@ -31,19 +31,13 @@
   ////////// Editor //////////
   "editor.autoIndent": "full",
   "editor.lineHeight": 2,
-  "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
-  },
   "editor.cursorBlinking": "solid",
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorStyle": "line",
   // "editor.fontSize": 16, // or "window.zoomLevel": 1,
   "editor.fontFamily": " SourceCodePro-Regular, FiraCode-Retina, Menlo",
   "editor.fontLigatures": true,
-  "editor.formatOnPaste": true,
   "editor.formatOnType": false,
-  "editor.formatOnSave": true,
   // "editor.letterSpacing": 0.5,
   // "editor.lineHeight": 25,
   "editor.minimap.enabled": false,
@@ -55,7 +49,7 @@
   // To make tailwindcss-intellisense work in .svelte files
   "editor.quickSuggestions": {
     "comments": false,
-     "strings": "on"
+    "strings": "on"
   },
   ////////// Search //////////
   "search.followSymlinks": false,
@@ -121,6 +115,7 @@
   "cSpell.diagnosticLevel": "Hint",
   ////////// svelte //////////
   "svelte.enable-ts-plugin": true,
+  "svelte.plugin.svelte.format.enable": false,
   "svelte.plugin.svelte.defaultScriptLanguage": "ts",
   "svelte.plugin.svelte.compilerWarnings": {
     // "css-unused-selector": "ignore",
@@ -303,6 +298,17 @@
       "path": "packages/utils"
     }
   ],
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "emmet.showExpandedAbbreviation": "never",
+  "prettier.enable": false,
+  "tailwindCSS.experimental.configFile": "./packages/skeleton-ui/tailwind.config.ts",
+  "typescript.tsdk": "node_modules/typescript/lib",
   // ##################################################
   // ###           Language customisations          ###
   // ##################################################
@@ -312,10 +318,19 @@
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  "[jsonc]": {
+  "[json]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
   "[html]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[svelte]": {
@@ -327,17 +342,8 @@
       "source.fixAll.biome": "never"
     }
   },
-  // "[typescript]": {
-  //   "editor.defaultFormatter": "biomejs.biome"
-  // },
-  // "[typescriptreact]": {
-  //   "editor.defaultFormatter": "biomejs.biome"
-  // },
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
   },
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one",

@@ -1,10 +1,10 @@
 <script lang="ts" context="module">
-import type { Row } from '@vincjo/datatables';
+import type { Row } from '@vincjo/datatables/legacy';
 type T = Row;
 </script>
 
 <script lang="ts" generics="T extends Row">
-import type { DataHandler } from '@vincjo/datatables';
+import type { DataHandler } from '@vincjo/datatables/legacy';
 import type { HTMLSelectAttributes } from 'svelte/elements';
 import { getCtx } from './ctx.js';
 import { cn } from '#utils';

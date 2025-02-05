@@ -1,0 +1,67 @@
+table:
+  name: user_notifications
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    notification_id:
+      custom_name: notificationId
+    updated_at:
+      custom_name: updatedAt
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    created_at: createdAt
+    notification_id: notificationId
+    updated_at: updatedAt
+    user_id: userId
+  custom_root_fields: {}
+object_relationships:
+  - name: notification
+    using:
+      foreign_key_constraint_on: notification_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - metadata
+        - notification_id
+        - status
+        - updated_at
+        - user_id
+      filter:
+        _and:
+          - user_id:
+              _eq: x-hasura-user-id
+          - _or:
+              - notification:
+                  org_id:
+                    _is_null: true
+              - notification:
+                  org_id:
+                    _eq: x-hasura-default-org
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - status
+      filter: {}
+      check:
+        _and:
+          - user_id:
+              _eq: x-hasura-user-id
+          - _or:
+              - notification:
+                  org_id:
+                    _is_null: true
+              - notification:
+                  org_id:
+                    _eq: x-hasura-default-org
+    comment: ""

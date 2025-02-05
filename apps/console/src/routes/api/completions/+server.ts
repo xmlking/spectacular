@@ -18,7 +18,7 @@ const log = new Logger('experiments:ai:completion:server');
 // free https://platform.openai.com/docs/guides/rate-limits/free-tier-rate-limits
 const model = openai('gpt-4o-mini');
 // const model = openai('gpt-4o');
-// const model = openai('gpt-4-turbo');
+// const model = openai('o3-mini');
 // const model = openai('llama3-8b-8192');
 // const model = ollama('phi3'); // phi3, mistral, llama3
 

@@ -1,0 +1,75 @@
+table:
+  name: subscriptions
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    org_id:
+      custom_name: orgId
+    stripe_checkout_session_id:
+      custom_name: stripeCheckoutSessionId
+    stripe_customer_id:
+      custom_name: stripeCustomerId
+    stripe_subscription_id:
+      custom_name: stripeSubscriptionId
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+    valid_until:
+      custom_name: validUntil
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    org_id: orgId
+    stripe_checkout_session_id: stripeCheckoutSessionId
+    stripe_customer_id: stripeCustomerId
+    stripe_subscription_id: stripeSubscriptionId
+    updated_at: updatedAt
+    updated_by: updatedBy
+    valid_until: validUntil
+  custom_root_fields: {}
+object_relationships:
+  - name: organization
+    using:
+      foreign_key_constraint_on: org_id
+select_permissions:
+  - role: org:billing
+    permission:
+      columns:
+        - credits
+        - plan
+        - status
+        - stripe_checkout_session_id
+        - stripe_customer_id
+        - stripe_subscription_id
+        - created_at
+        - updated_at
+        - valid_until
+        - created_by
+        - id
+        - org_id
+        - updated_by
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: org:billing
+    permission:
+      columns:
+        - plan
+        - stripe_checkout_session_id
+        - stripe_customer_id
+        - stripe_subscription_id
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+      check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""

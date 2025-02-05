@@ -108,12 +108,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager
-x-hasura-default-role: manager
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query MyQuery {
 	SearchRestrooms(arg1: { city: "Riverside" }) {
@@ -145,12 +145,12 @@ POST  {{graphqlEndpoint}}
 X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user manager
-x-hasura-default-role: manager
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta}
-x-hasura-default-org: chinthagunta
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query MyQuery {
 	ListUniversities(arg1: { name: "middle" }) {

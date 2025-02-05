@@ -1,0 +1,2 @@
+DROP TRIGGER IF EXISTS trg_update_users_default_role_default_org_on_memberships_change ON public.memberships;
+DROP FUNCTION IF EXISTS update_users_default_role_default_org_on_memberships_change();

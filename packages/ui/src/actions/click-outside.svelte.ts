@@ -1,5 +1,5 @@
-import { on } from 'svelte/events';
 import type { Action } from 'svelte/action';
+import { on } from 'svelte/events';
 
 type Options = {
   onClickOutside?: (event: MouseEvent | TouchEvent) => void;

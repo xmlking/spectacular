@@ -15,13 +15,12 @@ X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 # Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me manager
+x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: user
 x-hasura-role: user
-x-hasura-allowed-orgs: {chinthagunta,example}
-x-hasura-default-org: chinthagunta
-x-hasura-user-email: sumo@demo.com
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query SearchSecurityKeys($userId: uuid!) {
   authUserSecurityKeys(where: { userId: { _eq: $userId } }) {
@@ -41,20 +40,19 @@ X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 # Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me manager
-x-hasura-default-role: user
-x-hasura-role: manager
-x-hasura-allowed-orgs: {chinthagunta,example}
-x-hasura-default-org: chinthagunta
-x-hasura-user-email: sumo@demo.com
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-roles: user me org:admin
+x-hasura-default-role: org:admin
+x-hasura-role: org:admin
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query GetOrganizations {
   organizations {
     allowedEmailDomains
     allowedEmails
     description
-    organization
+    id
   }
 }
 
@@ -64,15 +62,11 @@ POST {{authEndpoint}}/signup/email-password
 Content-Type: application/json
 
 {
-  "email": "john.smith@gmail.com",
+  "email": "john.smith@chinthagunta.com",
   "password": "Str0ngPassw#ord-94|%",
   "options": {
     "displayName": "John Smith",
     "locale": "en",
-    "metadata": {
-      "plan": "free",
-      "default_org": "chinthagunta"
-    },
     "redirectTo": "https://console.traefik.me:5173/dashboard"
   }
 }
@@ -80,6 +74,43 @@ Content-Type: application/json
 ###
 @accessToken = {{createUser.response.body.$.session.accessToken}}
 ###
+
+### Create User2
+# @name createUser2
+POST {{authEndpoint}}/signup/email-password
+Content-Type: application/json
+
+{
+  "email": "david.bowie@species.com",
+  "password": "Str0ngPassw#ord-94|%",
+  "options": {
+    "displayName": "David Bowie",
+    "locale": "en",
+    "redirectTo": "https://console.traefik.me:5173/dashboard"
+  }
+}
+
+
+
+### SignIn1
+# @name signIn
+POST {{authEndpoint}}/signin/email-password
+Content-Type: application/json
+
+{
+  "email": "john.smith@chinthagunta.com",
+  "password": "Str0ngPassw#ord-94|%"
+}
+
+### SignIn2
+# @name signIn
+POST {{authEndpoint}}/signin/email-password
+Content-Type: application/json
+
+{
+  "email": "david.bowie@species.com",
+  "password": "Str0ngPassw#ord-94|%"
+}
 
 ### Create PAT
 # @name createPAT
@@ -105,13 +136,12 @@ X-REQUEST-TYPE: GraphQL
 Content-Type: application/json
 # Authorization: Bearer {{accessToken}}
 x-hasura-admin-secret: {{graphqlAdminToken}}
-x-hasura-allowed-roles: user me manager
+x-hasura-allowed-roles: user me org:admin
 x-hasura-default-role: user
 x-hasura-role: me
-x-hasura-allowed-orgs: {chinthagunta,example}
-x-hasura-default-org: chinthagunta
-x-hasura-user-email: sumo@demo.com
-x-hasura-user-id: 076a79f9-ed08-4e28-a4c3-8d4e0aa269a3
+x-hasura-allowed-orgs: {'8dfd9a31-de01-47be-92a7-ba1c720c6270', 'd5dbb6b6-5e43-4dca-b855-be9b65b6695b'}
+x-hasura-default-org: 8dfd9a31-de01-47be-92a7-ba1c720c6270
+x-hasura-user-id: 572ad1c0-f97b-4e16-b1f6-8b5ca90f931f
 
 query GetMyPATs {
   users {

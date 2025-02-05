@@ -1,17 +1,17 @@
 <script lang="ts">
 import { DebugShell } from '@spectacular/skeleton/components';
+import { onMount } from 'svelte';
 import SuperDebug from 'sveltekit-superforms';
 import {
   aiProvider,
-  languageModelStyle,
   languageModelOptions,
+  languageModelStyle,
+  preferedLang,
+  rewriterOptions,
   summarizerOptions,
   writerOptions,
-  rewriterOptions,
-  preferedLang,
 } from './settings.js';
 import { Provider } from './settings.js';
-import { onMount } from 'svelte';
 // import { langs } from './constants';
 
 let voices: { label: string; value: string; isDefault: boolean }[] = [];

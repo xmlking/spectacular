@@ -17,23 +17,33 @@ const config = {
     // HINT: we need to generate scheam for highest role level that app support.
     headers: {
       'X-Hasura-Admin-Secret': (env) => env.HASURA_GRAPHQL_ADMIN_SECRET,
-      'x-hasura-allowed-roles': 'user me supervisor manager',
-      'x-hasura-role': 'manager',
+      'x-hasura-allowed-roles': 'user me sys:admin org:member org:admin org:billing org:owner',
     },
   },
-  // types: {
-  //   user: {
-  //     keys: ['id'],
-  //   },
-  // },
-  // features: {
-  //   runtimeScalars: {
-  //     UserId: {
-  //       type: 'uuid',
-  //       resolve: ({ session }) => session?.userId,
-  //     },
-  //   },
-  // },
+  types: {
+    memberships: {
+      keys: ['userId', 'orgId'],
+    },
+    invitations: {
+      keys: ['email', 'orgId'],
+    },
+    user_groups: {
+      keys: ['userId', 'groupId'],
+    },
+  },
+  features: {
+    imperativeCache: true,
+    runtimeScalars: {
+      UserIdFromSession: {
+        type: 'uuid',
+        resolve: ({ session }) => session?.userId,
+      },
+      OrgIdFromSession: {
+        type: 'uuid',
+        resolve: ({ session }) => session?.orgId,
+      },
+    },
+  },
   plugins: {
     // 'houdini-plugin-svelte-global-stores': {
     // 	generate: 'all'
@@ -58,9 +68,8 @@ const config = {
         return date?.toISOString();
       },
     },
-
     Decimal: {
-      type: 'number',
+      type: 'Number',
       unmarshal(val) {
         return new Number(val);
       },
@@ -69,13 +78,17 @@ const config = {
       },
     },
     smallint: {
-      type: 'number',
+      type: 'Number',
       unmarshal(val) {
         return new Number(val);
       },
       marshal(number) {
         return number.toString();
       },
+    },
+    bigint: {
+      type: 'Number',
+      ...defaultMarshall,
     },
     URL: {
       type: 'URL',
@@ -120,7 +133,7 @@ const config = {
       ...defaultMarshall,
     },
     jsonb: {
-      type: 'object',
+      type: 'Object',
       ...defaultMarshall,
     },
     timestamp: {
@@ -139,18 +152,14 @@ const config = {
         // const server = new Date(val);
         // const offset = server.getTimezoneOffset();
         // return new Date(server.getTime() + offset * 60000);
-        return new Date(val);
+        return val ? new Date(val) : null;
       },
       marshal(date) {
         return date?.toISOString();
       },
     },
-    bigint: {
-      type: 'number',
-      ...defaultMarshall,
-    },
     bytea: {
-      type: 'binary',
+      type: 'Binary',
       ...defaultMarshall,
     },
   },

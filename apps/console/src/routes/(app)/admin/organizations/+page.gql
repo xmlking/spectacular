@@ -1,0 +1,20 @@
+query SearchOrganizations(
+  $where: organizations_bool_exp
+  $limit: Int = 50
+  $offset: Int = 0
+  $orderBy: [organizations_order_by!] = [{ updatedAt: desc_nulls_last }]
+) @loading(cascade: true) {
+  organizations(where: $where, order_by: $orderBy, limit: $limit, offset: $offset) @list(name: "Search_Organizations") {
+    id
+    displayName
+    description
+    ownerId
+    updatedAt
+    avatarUrl
+    autoEnroll
+    allowedEmailDomains
+    allowedEmails
+    blockedEmailDomains
+    blockedEmails
+  }
+}

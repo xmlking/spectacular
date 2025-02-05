@@ -23,6 +23,11 @@
     ]
   },
   {
+    "op": "replace",
+    "path": "/auth/rateLimit/signups/limit",
+    "value": 100
+  },
+  {
     "op": "add",
     "path": "/auth/method/webauthn/relyingParty/origins/1",
     "value": "https://console.traefik.me:3000"
@@ -39,13 +44,8 @@
   },
   {
     "op": "replace",
-    "path": "/global/environment/0/value",
-    "value": "Spectacular"
-  },
-  {
-    "op": "replace",
-    "path": "/global/environment/1/value",
-    "value": "Spectacular Console App"
+    "path": "/auth/signUp/turnstile/secretKey",
+    "value": "1x0000000000000000000000000000000AA"
   },
   {
     "op": "replace",

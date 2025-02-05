@@ -9,12 +9,13 @@ Awesome **SvelteKit** Links
   - [Skeleton UI](https://www.skeleton.dev/) UI components designed for Tailwind, Svelte and SvelteKit.
   - [GrailUI](https://grail-ui.vercel.app/) is a set of headless UI components, actions and utilities.
   - [Flowbite](https://flowbite-svelte.com/) components for Svelte, built on Tailwind CSS
-  - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSS
+  - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSSx
   - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
   - [Melt UI](https://www.melt-ui.com/) strives to be the de-facto headless UI library for Svelte.
   - [svelte-headlessui](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit
   - [VisualSearch.js](https://documentcloud.github.io/visualsearch/), [magic-search](https://eucalyptus.github.io/magic-search/) for facet search.
     - TODO: use this to add/edit `annotations` Input.
+- - [svelte-jsoneditor](https://github.com/josdejong/svelte-jsoneditor) - A web-based tool to view, edit, format, transform, and validate JSON.
 
 - Tables
 
@@ -77,6 +78,10 @@ Awesome **SvelteKit** Links
   - [Konsta UI](https://konstaui.com) Pixel perfect mobile UI components built with Tailwind CSS
   - [Framework7 Svelte](https://framework7.io/svelte/) Build full featured iOS, Android & Desktop apps
 
+- Desktop/ Native
+
+  - [powersync-tauri](https://github.com/MrLightful/powersync-tauri) - An exhaustive boilerplate project of `Tauri` + `Shadcn UI` + `PowerSync`.
+
 - Security
 
   - [lucia](https://lucia-auth.com/) OIDC auth with [SvelteKit](https://lucia-auth.com/guidebook/github-oauth/sveltekit)
@@ -96,6 +101,7 @@ Awesome **SvelteKit** Links
   - [Svelte Hover Draw SVG](https://github.com/davipon/svelte-hover-draw-svg)
   - [Draggable Sections](https://github.com/TIKramer/svelte-section-list)
   - [SvelteDnD](https://github.com/thisuxhq/SvelteDnD) - A lightweight, flexible drag and drop library for Svelte 5 applications.
+  - [DnD Kit](https://dnd-kit-svelte.vercel.app/) - Draggable Containers, Nested Sortable List
   - [svelte-splitpanes](https://github.com/orefalo/svelte-splitpanes), [docs](https://orefalo.github.io/svelte-splitpanes/)
 
 ## Animation
@@ -105,6 +111,7 @@ Awesome **SvelteKit** Links
 - [Motion](https://motion.dev/) (preferred)
 - [lottiefiles](https://lottiefiles.github.io/lottie-docs/) Lottie is a **vector** animation format, used to build marketing pages. See [Examples](https://lottiefiles.com/use-cases/website)
 - [Magic UI](https://magicui.design/) - **React**, **Typescript**, **Tailwind CSS**, and **Framer Motion**. Perfect companion for **shadcn/ui**.
+- [NumberFlow](https://github.com/barvian/number-flow) - An animated number component for React, Vue, and Svelte.
 
 ## State Management
 
@@ -166,7 +173,10 @@ Awesome **SvelteKit** Links
 - [climbing_noteboo](https://github.com/diericx/climbing_notebook) - Use skeleton, Superforms, sveltekit-flash-message
 - [Vercel Toolbar and Feature Flags SvelteKit Starter](https://github.com/vercel/examples/tree/main/toolbar/toolbar-feature-flags-sveltekit), [Demo](https://toolbar-feature-flags-sveltekit.vercel.app/), [Blog](https://vercel.com/blog/flags-as-code-in-next-js)
 - [JavaFlavors](https://github.com/Critteros/JavaFlavors/tree/main/web) - use `houdini` and `setClientSession()`, drizzle, superforms, shadcn-svelte
+- [Churros](https://github.com/inp-net/churros) - use `houdini` Fragments, `@loading` and `kustomization` for deployment. [Demo](https://git.inpt.fr/churros/churros)
 - [Turborepo Svelte starter](https://github.com/kevingdc/turborepo-sveltekit-shadcn/tree/main)
+- [JustShip](https://www.justship.today/) - Skip the boring parts, Ship **svelte 5** apps in days not weeks. Components: Stripe, Auth, tailwind
+- [next-forge](https://www.next-forge.com/) - Production-grade `Turborepo` template for`Next.js` apps. Components:
 
 ## Deployment
 

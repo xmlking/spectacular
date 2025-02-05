@@ -10,6 +10,27 @@ export type Project = {
 };
 
 /**
+ * SerializableDate used to encode/decode hooks.ts example
+ */
+export class SerializableDate {
+  private readonly dateObj: Date;
+  private readonly rawDate: string;
+
+  constructor(isoString: string) {
+    this.dateObj = new Date(isoString);
+    this.rawDate = isoString;
+  }
+
+  public get raw() {
+    return this.rawDate;
+  }
+
+  public get date() {
+    return this.dateObj;
+  }
+}
+
+/**
  * Policy
  */
 
@@ -35,11 +56,20 @@ interface GQLResult<T> {
  */
 
 export enum Roles {
-  Me = 'me',
   Anonymous = 'anonymous',
   User = 'user',
-  Supervisor = 'supervisor',
-  Manager = 'manager',
+  Me = 'me',
+  Member = 'org:member',
+  Billing = 'org:billing',
+  Admin = 'org:admin',
+  Owner = 'org:owner',
+  SysAdmin = 'sys:admin',
+}
+
+export enum OrgRoles {
+  Member = 'org:member',
+  Billing = 'org:billing',
+  Admin = 'org:admin',
 }
 
 export type Link = {

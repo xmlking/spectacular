@@ -47,6 +47,7 @@ select_permissions:
               _eq: x-hasura-user-id
           - type:
               _eq: pat
+      allow_aggregations: true
 delete_permissions:
   - role: user
     permission:

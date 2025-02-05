@@ -1,42 +1,77 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+import { ROUTE_DASHBOARD, ROUTE_PROFILE } from '$lib/constants';
+import { i18n } from '$lib/i18n';
 import { resetPasswordSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
+import { turnstilePassed } from '$lib/stores/stores';
 import { getToastStore } from '@skeletonlabs/skeleton';
-// import { ConicGradient } from '@skeletonlabs/skeleton';
-// import type { ConicStop } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import { onMount } from 'svelte';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
-export let data;
 const log = new Logger('auth:reset:browser');
+
 // Variables
 const loadingState = getLoadingState();
 const toastStore = getToastStore();
+const nhost = getNhostClient();
+
+onMount(async () => {
+  const isAuthenticated = nhost.auth.isAuthenticated();
+  if (isAuthenticated) {
+    await goto(i18n.resolveRoute(ROUTE_DASHBOARD));
+  }
+});
 
 const form = superForm(defaults(zod(resetPasswordSchema)), {
+  SPA: true,
   dataType: 'json',
   taintedMessage: null,
-  clearOnSubmit: 'errors-and-message',
   syncFlashMessage: false,
+  resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
   validators: zodClient(resetPasswordSchema),
-  onUpdated({ form }) {
-    if (form.message) {
-      handleMessage(form.message, toastStore);
+  clearOnSubmit: 'errors-and-message',
+  async onUpdate({ form, cancel }) {
+    loadingState.setFormLoading(false); // workaround
+    if (!form.valid) return;
+
+    const origin = new URL(window.location.href).origin;
+    const { email } = form.data;
+    const { error } = await nhost.auth.resetPassword({
+      email,
+      options: {
+        redirectTo: `${origin}${ROUTE_PROFILE}`,
+      },
+    });
+
+    if (error) {
+      log.error(error);
+      setError(form, `Failed to send reset password instructions: ${error.message}`, { status: 409 }); // 424 ???
+      return;
     }
+
+    const message: App.Superforms.Message = {
+      message: 'Send reset password instructions to email provided',
+      hideDismiss: true,
+      timeout: 10000,
+      type: 'success',
+    } as const;
+    setMessage(form, message);
+    handleMessage(message, toastStore);
   },
   onError({ result }) {
-    // TODO:
-    // setError(form, '', result.error.message);
-    log.error('reset password error:', { result });
+    log.error('superForm onError:', { result });
   },
 });
 
@@ -49,7 +84,6 @@ const {
   delayed,
   timeout,
   tainted,
-  posted,
   allErrors,
   capture,
   restore,
@@ -61,8 +95,8 @@ export const snapshot = { capture, restore };
 // Functions
 
 // Reactivity
+$: valid = $allErrors.length === 0 && $turnstilePassed;
 $: loadingState.setFormLoading($delayed);
-$: valid = $allErrors.length === 0;
 // const conicStops: ConicStop[] = [
 //   { color: 'transparent', start: 0, end: 25 },
 //   { color: 'rgb(var(--color-primary-900))', start: 75, end: 100 }
@@ -118,7 +152,6 @@ $: valid = $allErrors.length === 0;
     </button>
   </div>
 </form>
-
 <!-- Debug -->
 <DebugShell>
   <SuperDebug
@@ -128,8 +161,7 @@ $: valid = $allErrors.length === 0;
       message: $message,
       submitting: $submitting,
       delayed: $delayed,
-      timeout: $timeout,
-      posted: $posted,
+      timeout: $timeout
     }}
   />
   <br />

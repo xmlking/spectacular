@@ -1,5 +1,5 @@
-import { on } from 'svelte/events';
 import type { Action } from 'svelte/action';
+import { on } from 'svelte/events';
 import type { Writable } from 'svelte/store';
 
 type Parameter = Writable<boolean>;

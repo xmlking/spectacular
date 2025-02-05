@@ -1,0 +1,14 @@
+query NotificationsData {
+  notifications(order_by: { updatedAt: desc }) {
+    id
+    displayName
+    description
+    metadata
+    tags
+    title
+    type
+    organization {
+      displayName
+    }
+  }
+}

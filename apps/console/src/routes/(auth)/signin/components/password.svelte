@@ -1,40 +1,71 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+import { i18n } from '$lib/i18n';
 import { pwSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
+import { turnstilePassed } from '$lib/stores/stores';
 import { getToastStore } from '@skeletonlabs/skeleton';
-import { DebugShell } from '@spectacular/skeleton';
+import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { defaults, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('auth:signin:password:browser');
+
 // Variables
 const loadingState = getLoadingState();
 const toastStore = getToastStore();
+const nhost = getNhostClient();
 
 const form = superForm(defaults(zod(pwSchema)), {
+  SPA: true,
   dataType: 'json',
   taintedMessage: null,
-  clearOnSubmit: 'errors-and-message',
   syncFlashMessage: false,
+  resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
   validators: zodClient(pwSchema),
-  onUpdated({ form }) {
-    if (form.message) {
-      handleMessage(form.message, toastStore);
+  clearOnSubmit: 'errors-and-message',
+  async onUpdate({ form, cancel }) {
+    if (!form.valid) return;
+
+    const { email, password, redirectTo } = form.data;
+    const { session, error } = await nhost.auth.signIn({ email, password });
+    if (error) {
+      log.error(error);
+      setError(form, '', error.message);
+      setMessage(form, { type: 'error', message: 'Signin failed', hideDismiss: false, timeout: 10000 });
+      return;
+    }
+
+    if (session) {
+      loadingState.setFormLoading(false); // workaround
+      const message: App.Superforms.Message = {
+        message: 'Signin sucessfull 😎',
+        hideDismiss: true,
+        timeout: 10000,
+        type: 'success',
+      } as const;
+      setMessage(form, message);
+      handleMessage(message, toastStore);
+      // await goto(i18n.resolveRoute(redirectTo), {
+      //   invalidateAll: false,
+      // });
+      await goto(i18n.resolveRoute(redirectTo), {
+        invalidateAll: true, // workaround for profile page
+      });
     }
   },
   onError({ result }) {
-    // TODO:
-    // setError(form, '', result.error.message);
-    log.error('signin error:', { result });
+    log.error('superForm onError:', { result });
   },
 });
 
@@ -47,7 +78,6 @@ const {
   delayed,
   timeout,
   tainted,
-  posted,
   allErrors,
   capture,
   restore,
@@ -59,15 +89,15 @@ export const snapshot = { capture, restore };
 // Functions
 
 // Reactivity
+$: valid = $allErrors.length === 0 && $turnstilePassed;
 $: loadingState.setFormLoading($delayed);
-$: valid = $allErrors.length === 0;
 $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
 </script>
 
 <!-- Form Level Errors / Messages -->
 <Alerts errors={$errors._errors} message={$message} />
  <!-- Signin with email/password Form -->
-<form method="POST" action="/signin?/password" use:enhance>
+<form method="POST" use:enhance>
   <div class="mt-6">
     <Form.Field {form} name="email">
       <Form.Control let:attrs>
@@ -128,7 +158,6 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
       submitting: $submitting,
       delayed: $delayed,
       timeout: $timeout,
-      posted: $posted,
       formData: $formData,
       errors: $errors,
       constraints: $constraints,

@@ -69,10 +69,12 @@ pnpx create-turbo@latest -e with-svelte
 ### Setup Remote Caching for Turborepo on Vercel
 
 ```shell
-npx turbo login
-npx turbo link
+pnpx turbo login
+pnpx turbo link
 # bunx turbo login
 ```
+
+To disable Remote Caching, run `pnpx turbo unlink`
 
 ### Environment Variables
 

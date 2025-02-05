@@ -9,6 +9,8 @@ configuration:
       custom_name: avatarUrl
     created_at:
       custom_name: createdAt
+    default_org:
+      custom_name: defaultOrg
     default_role:
       custom_name: defaultRole
     disabled:
@@ -55,6 +57,7 @@ configuration:
     active_mfa_type: activeMfaType
     avatar_url: avatarUrl
     created_at: createdAt
+    default_org: defaultOrg
     default_role: defaultRole
     disabled: disabled
     display_name: displayName
@@ -88,10 +91,43 @@ configuration:
     update: updateUsers
     update_by_pk: updateUser
 object_relationships:
+  - name: currentOrg
+    using:
+      foreign_key_constraint_on: default_org
   - name: defaultRoleByRole
     using:
       foreign_key_constraint_on: default_role
 array_relationships:
+  - name: allowedOrgs
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: memberships
+          schema: public
+  - name: groups
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: user_groups
+          schema: public
+  - name: invitations
+    using:
+      manual_configuration:
+        column_mapping:
+          email: email
+        insertion_order: null
+        remote_table:
+          name: invitations
+          schema: public
+  - name: notifications
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: user_notifications
+          schema: public
   - name: refreshTokens
     using:
       foreign_key_constraint_on:
@@ -113,12 +149,21 @@ array_relationships:
         table:
           name: user_security_keys
           schema: auth
-  - name: userOrgRoles
+  - name: settings
     using:
       foreign_key_constraint_on:
         column: user_id
         table:
-          name: user_org_roles
+          name: user_settings
+          schema: public
+  - name: settingsWithDefaults
+    using:
+      manual_configuration:
+        column_mapping:
+          id: user_id
+        insertion_order: null
+        remote_table:
+          name: user_settings_with_defaults
           schema: public
   - name: userProviders
     using:
@@ -128,23 +173,24 @@ array_relationships:
           name: user_providers
           schema: auth
 computed_fields:
-  - name: allowedOrgs
+  - name: associatedGroups
     definition:
       function:
-        name: user_allowed_orgs
+        name: user_associated_groups
         schema: public
-  - name: defaultOrg
+  - name: dissociatedGroups
     definition:
       function:
-        name: user_default_org
+        name: user_dissociated_groups
         schema: public
 select_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
         - active_mfa_type
         - avatar_url
         - created_at
+        - default_org
         - default_role
         - disabled
         - display_name
@@ -158,11 +204,11 @@ select_permissions:
         - phone_number
         - phone_number_verified
         - updated_at
-      computed_fields:
-        - defaultOrg
       filter:
-        defaultOrg:
-          _in: x-hasura-allowed-orgs
+        allowedOrgs:
+          org_id:
+            _eq: x-hasura-default-org
+      allow_aggregations: true
     comment: ""
   - role: private
     permission:
@@ -172,12 +218,13 @@ select_permissions:
         id:
           _eq: x-hasura-user-id
     comment: ""
-  - role: supervisor
+  - role: sys:admin
     permission:
       columns:
         - active_mfa_type
         - avatar_url
         - created_at
+        - default_org
         - default_role
         - disabled
         - display_name
@@ -188,14 +235,12 @@ select_permissions:
         - last_seen
         - locale
         - metadata
+        - otp_method_last_used
         - phone_number
         - phone_number_verified
         - updated_at
-      computed_fields:
-        - defaultOrg
-      filter:
-        defaultOrg:
-          _eq: x-hasura-default-org
+      filter: {}
+      allow_aggregations: true
     comment: ""
   - role: user
     permission:
@@ -203,6 +248,7 @@ select_permissions:
         - active_mfa_type
         - avatar_url
         - created_at
+        - default_org
         - default_role
         - display_name
         - email
@@ -214,50 +260,29 @@ select_permissions:
         - metadata
         - phone_number_verified
         - updated_at
-      computed_fields:
-        - defaultOrg
       filter:
         id:
           _eq: x-hasura-user-id
     comment: ""
 update_permissions:
-  - role: manager
+  - role: sys:admin
     permission:
       columns:
         - avatar_url
-        - default_role
+        - default_org
         - disabled
         - display_name
-        - email
         - locale
         - metadata
         - phone_number
-      filter:
-        defaultOrg:
-          _in: x-hasura-allowed-orgs
-      check: null
-    comment: ""
-  - role: supervisor
-    permission:
-      columns:
-        - avatar_url
-        - default_role
-        - disabled
-        - display_name
-        - email
-        - locale
-        - metadata
-        - phone_number
-      filter:
-        defaultOrg:
-          _eq: x-hasura-default-org
+      filter: {}
       check: null
     comment: ""
   - role: user
     permission:
       columns:
         - avatar_url
-        - default_role
+        - default_org
         - display_name
         - locale
         - metadata
@@ -265,5 +290,12 @@ update_permissions:
       filter:
         id:
           _eq: x-hasura-user-id
-      check: null
+      check:
+        default_org:
+          _in: x-hasura-allowed-orgs
+    comment: ""
+delete_permissions:
+  - role: sys:admin
+    permission:
+      filter: {}
     comment: ""

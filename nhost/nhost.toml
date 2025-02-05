@@ -1,11 +1,4 @@
 [global]
-[[global.environment]]
-name = 'APP_NAME'
-value = 'Spectacular'
-
-[[global.environment]]
-name = 'APP_DESCRIPTION'
-value = 'Spectacular Console App'
 
 [hasura]
 version = 'v2.44.0-ce'
@@ -15,6 +8,11 @@ webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 [[hasura.jwtSecrets]]
 type = 'HS256'
 key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
+
+# [[hasura.jwtSecrets.claims_map]]
+# claim = "x-hasura-allowed-roles"
+# path = "$.https://hasura.io/jwt/claims.tenant-roles"
+# default = ["user", "editor"]
 
 [hasura.settings]
 corsDomain = ['*']
@@ -26,12 +24,17 @@ enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
 inferFunctionPermissions = true
 liveQueriesMultiplexedRefetchInterval = 1000
 stringifyNumericTypes = false
+unauthorizedRole = 'public'
 
 [hasura.logs]
 level = 'warn'
 
 [hasura.events]
 httpPoolSize = 100
+
+[hasura.rateLimit]
+limit = 100
+interval = '1m'
 
 [graphql]
 [graphql.security]
@@ -42,12 +45,15 @@ maxDepthQueries = 4
 [functions.node]
 version = 20
 
+[functions.rateLimit]
+limit = 100
+interval = '15m'
+
 [auth]
-version = '0.36.1'
-# version = '0.36.1-sumo'
+version = '0.37.0'
 
 [auth.elevatedPrivileges]
-mode = 'required'
+mode = 'recommended'
 
 [auth.redirections]
 clientUrl = 'https://console.traefik.me:5173'
@@ -57,9 +63,8 @@ allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:51
 enabled = true
 disableNewUsers = false
 
-# TODO: https://docs.nhost.io/guides/auth/bot-protection
-# [auth.signUp.turnstile]
-# secretKey = 'turnstileSecretKey'
+[auth.signUp.turnstile]
+secretKey = '{{ secrets.CLOUDFLARE_TURNSTILE_SECRET_KEY }}'
 
 [auth.user]
 [auth.user.roles]
@@ -76,24 +81,20 @@ default = 'mp'
 rating = 'g'
 
 [auth.user.email]
-allowed = ['sumo@demo.com', 'manager@chinthagunta.com', 'supervisor@chinthagunta.com', 'user1@chinthagunta.com', 'user2@chinthagunta.com']
-blocked = ['bad@example.com']
 
 [auth.user.emailDomains]
-allowed = ['gmail.com', 'outlook.com']
-blocked = ['example.org']
 
 [auth.session]
 [auth.session.accessToken]
 expiresIn = 900
 
 [[auth.session.accessToken.customClaims]]
-key = 'allowed-orgs'
-value = 'allowedOrgs[].organization'
+key = 'default-org'
+value = 'defaultOrg'
 
 [[auth.session.accessToken.customClaims]]
-key = 'default-org'
-value = 'metadata.default_org'
+key = 'allowed-orgs'
+value = 'allowedOrgs.orgId[]'
 
 [[auth.session.accessToken.customClaims]]
 key = 'user-email'
@@ -214,7 +215,7 @@ limit = 100
 interval = '1m'
 
 [postgres]
-version = '16.4-202401126-1'
+version = '17.2-20250131-1'
 
 [postgres.resources]
 enablePublicAccess = true
@@ -244,6 +245,10 @@ method = 'PLAIN'
 [storage]
 version = '0.6.1'
 
+[storage.rateLimit]
+limit = 100
+interval = '15m'
+
 # [storage.antivirus]
 # server = 'tcp://run-clamav:3310'
 
@@ -266,3 +271,8 @@ synchPeriodMinutes = 10
 [observability]
 [observability.grafana]
 adminPassword = '{{ secrets.GRAFANA_ADMIN_PASSWORD }}'
+
+[observability.grafana.alerting]
+enabled = false
+
+[observability.grafana.contacts]

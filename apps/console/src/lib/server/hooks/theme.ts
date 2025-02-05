@@ -2,6 +2,7 @@ import { Logger } from '@spectacular/utils';
 import type { Handle } from '@sveltejs/kit';
 
 export const log = new Logger('server:middleware:detect-theme');
+const in2035 = new Date('2035-01-01');
 
 export const theme = (async ({ event, resolve }) => {
   let theme = '';
@@ -11,7 +12,7 @@ export const theme = (async ({ event, resolve }) => {
   if (cookieTheme) {
     theme = cookieTheme;
   } else {
-    event.cookies.set('theme', 'skeleton', { path: '/' });
+    event.cookies.set('theme', 'skeleton', { path: '/', expires: in2035 });
     theme = 'skeleton';
   }
 

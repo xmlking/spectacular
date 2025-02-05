@@ -5,6 +5,7 @@ import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
 import { getNhostClient } from '$lib/stores/nhost';
 import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 import { Icon } from '@spectacular/skeleton/components/icons';
+import { WandSparkles } from 'lucide-svelte';
 
 // Local
 let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
@@ -23,11 +24,11 @@ page.subscribe((page) => {
   const basePath = canonicalPath.split('/')[1];
   if (!basePath) return;
   // Translate base path to link section
-  currentRailCategory = hrefToCategoryIndex[basePath] ?? '/policies';
+  currentRailCategory = hrefToCategoryIndex[basePath] ?? '/bookstore';
 });
 
 // Reactive
-$: submenu = menuNavLinks[currentRailCategory ?? '/policies'];
+$: submenu = menuNavLinks[currentRailCategory ?? '/bookstore'];
 $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? 'bg-primary-active-token' : '');
 </script>
 
@@ -48,9 +49,9 @@ $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? '
 			<span>Blog</span>
 		</AppRailAnchor>
     <!-- --- / --- -->
-    <AppRailTile bind:group={currentRailCategory} name="policies" value={'/policies'}>
+    <AppRailTile bind:group={currentRailCategory} name="bookstore" value={'/bookstore'}>
       <svelte:fragment slot="lead"><Icon name="book" width="w-6" height="h-6" /></svelte:fragment>
-      <span>Policies</span>
+      <span>Bookstore</span>
     </AppRailTile>
     <hr class="opacity-30" />
     <AppRailTile bind:group={currentRailCategory} name="flows" value={'/flows'}>
@@ -64,6 +65,10 @@ $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? '
     <AppRailTile bind:group={currentRailCategory} name="account" value={'/account'}>
       <svelte:fragment slot="lead"><Icon name="screwdriverWrench" width="w-6" height="h-6" /></svelte:fragment>
       <span>Account</span>
+    </AppRailTile>
+    <AppRailTile bind:group={currentRailCategory} name="account" value={'/ai'}>
+      <svelte:fragment slot="lead"><WandSparkles class="inline-block outline-none"/> </svelte:fragment>
+      <span>Smart</span>
     </AppRailTile>
   </AppRail>
   <!-- Nav Links -->
@@ -80,7 +85,7 @@ $: listboxItemActive = (href: string) => ($page.url.pathname?.includes(href) ? '
             <li on:keypress on:click={drawerStore.close}>
               <a {href} class={listboxItemActive(href)} data-sveltekit-preload-data={preload || 'hover'}>
                 <span class="flex-auto">{@html label}</span>
-                {#if badge}<span class="variant-filled-secondary badge">{badge}</span>{/if}
+                {#if badge}<span class="variant-filled badge">{badge}</span>{/if}
               </a>
             </li>
             {/if}

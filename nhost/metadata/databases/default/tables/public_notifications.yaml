@@ -1,0 +1,177 @@
+table:
+  name: notifications
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    display_name:
+      custom_name: displayName
+    org_id:
+      custom_name: orgId
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    display_name: displayName
+    org_id: orgId
+    updated_at: updatedAt
+    updated_by: updatedBy
+  custom_root_fields: {}
+object_relationships:
+  - name: organization
+    using:
+      foreign_key_constraint_on: org_id
+insert_permissions:
+  - role: org:admin
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - description
+        - display_name
+        - message
+        - metadata
+        - tags
+        - title
+        - type
+    comment: ""
+  - role: sys:admin
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-user-id
+        org_id: "null"
+        updated_by: x-hasura-user-id
+      columns:
+        - description
+        - display_name
+        - message
+        - metadata
+        - tags
+        - title
+        - type
+    comment: ""
+select_permissions:
+  - role: org:admin
+    permission:
+      columns:
+        - tags
+        - metadata
+        - description
+        - display_name
+        - message
+        - title
+        - type
+        - created_at
+        - updated_at
+        - created_by
+        - id
+        - org_id
+        - updated_by
+      filter:
+        _or:
+          - org_id:
+              _is_null: true
+          - org_id:
+              _eq: x-hasura-default-org
+      allow_aggregations: true
+    comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - tags
+        - metadata
+        - description
+        - display_name
+        - message
+        - title
+        - type
+        - created_at
+        - updated_at
+        - created_by
+        - id
+        - org_id
+        - updated_by
+      filter:
+        org_id:
+          _is_null: true
+      allow_aggregations: true
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - description
+        - display_name
+        - id
+        - message
+        - metadata
+        - org_id
+        - tags
+        - title
+        - type
+      filter:
+        _or:
+          - org_id:
+              _is_null: true
+          - org_id:
+              _eq: x-hasura-default-org
+    comment: ""
+update_permissions:
+  - role: org:admin
+    permission:
+      columns:
+        - description
+        - display_name
+        - message
+        - metadata
+        - tags
+        - title
+        - type
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+      check:
+        org_id:
+          _eq: x-hasura-default-org
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - description
+        - display_name
+        - message
+        - metadata
+        - tags
+        - title
+        - type
+      filter: {}
+      check:
+        org_id:
+          _is_null: true
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
+delete_permissions:
+  - role: org:admin
+    permission:
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+    comment: ""
+  - role: sys:admin
+    permission:
+      filter:
+        org_id:
+          _is_null: true
+    comment: ""

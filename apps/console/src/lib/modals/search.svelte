@@ -16,10 +16,10 @@ const cFooter = 'hidden md:flex items-center gap-2 bg-surface-300-600-token p-4 
 // Local
 let searchTerm = '';
 const resultsCopy = [
-  ...menuNavLinks['/policies'],
+  ...menuNavLinks['/customers'],
   ...menuNavLinks['/flows'],
   ...menuNavLinks['/reports'],
-  ...menuNavLinks['/account'],
+  ...menuNavLinks['/settings'],
 ] as const;
 let results = resultsCopy;
 const modalStore = getModalStore();

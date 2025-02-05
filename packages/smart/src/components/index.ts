@@ -2,15 +2,15 @@ export * from './constants.js';
 export * from './settings.js';
 export * from './smart.js';
 
-import Stats from './stats.svelte';
-import Settings from './settings.svelte';
-import Support from './support.svelte';
-import MagicSpellTextarea from './magic-spell-textarea.svelte';
-import Textarea from './textarea.svelte';
-import Date from './date.svelte';
-import ComboBox from './combo-box.svelte';
-import Sentiment from './sentiment.svelte';
 import Chat from './chat.svelte';
+import ComboBox from './combo-box.svelte';
+import Date from './date.svelte';
+import MagicSpellTextarea from './magic-spell-textarea.svelte';
+import Sentiment from './sentiment.svelte';
+import Settings from './settings.svelte';
+import Stats from './stats.svelte';
+import Support from './support.svelte';
+import Textarea from './textarea.svelte';
 
 export {
   Stats,

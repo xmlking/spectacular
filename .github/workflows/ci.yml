@@ -31,6 +31,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}/${{ inputs.app || 'console' }}
   TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_REMOTE_ONLY: true
   ## app build time environment variables
   VERCEL_ENV: ${{ vars.VERCEL_ENV }}
   PUBLIC_TERMS_PRIVACY_COMPANY: ${{ vars.PUBLIC_TERMS_PRIVACY_COMPANY }}
@@ -111,7 +112,7 @@ jobs:
       # Ref: https://github.blog/security/supply-chain-security/configure-github-artifact-attestations-for-secure-cloud-native-delivery/
       - name: Generate Artifact Attestation
         id: attest
-        uses: actions/attest-build-provenance@v1.4.3
+        uses: actions/attest-build-provenance@v2
         with:
           subject-name: ${{ env.GHCR_REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.push.outputs.digest }}

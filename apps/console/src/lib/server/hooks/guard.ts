@@ -10,7 +10,7 @@ import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
  */
 const log = new Logger('server:middleware:guard');
 // TODO define roles in apps/console/src/lib/links.ts
-const managerPaths = ['/organizations', '/users', '/groups', '/delegation'];
+const adminPaths = ['/admin/organizations', '/admin/users'];
 const publicPaths = [
   '/favicon.ico',
   '/robots.txt',
@@ -43,7 +43,7 @@ export const guard = (async ({ event, resolve }) => {
   // check if role has access to target route
 
   const {
-    url: { pathname },
+    url: { pathname, searchParams },
     locals: {
       paraglide: { lang },
       nhost,
@@ -59,8 +59,11 @@ export const guard = (async ({ event, resolve }) => {
 
   // Check isAuthenticated
   const { isAuthenticated, isLoading } = nhost.auth.getAuthenticationStatus();
-  log.debug({ isAuthenticated, isLoading, lang });
-  if (!isAuthenticated) {
+  const hasRefreshToken = searchParams.has('refreshToken');
+  log.debug({ hasRefreshToken, isAuthenticated, isLoading, lang });
+
+  // HINT: only redirect to signin page when not authenticated and not RefreshToken case
+  if (!hasRefreshToken && !isAuthenticated) {
     const message: App.Superforms.Message = { type: 'error', message: 'Not authenticated' } as const;
     redirectWithFlash(303, i18n.resolveRoute(`/signin?redirectTo=${pathname}`), message, event);
   }
@@ -89,9 +92,8 @@ export const guard = (async ({ event, resolve }) => {
   const org = nhost.auth.getHasuraClaim('default-org');
   log.debug({ roles, role, orgs, org });
 
-  if (startsWith(pathname, managerPaths)) {
-    if (role !== 'manager') {
-      // if (!roles?.includes('manager')) {
+  if (startsWith(pathname, adminPaths)) {
+    if (role !== 'sys:admin') {
       const message: App.Superforms.Message = { type: 'warning', message: "You don't have access" } as const;
       redirectWithFlash(303, i18n.resolveRoute('/dashboard'), message, event);
     }

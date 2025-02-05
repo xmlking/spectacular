@@ -1,0 +1,148 @@
+table:
+  name: memberships
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    org_id:
+      custom_name: orgId
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+    user_id:
+      custom_name: userId
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    org_id: orgId
+    updated_at: updatedAt
+    updated_by: updatedBy
+    user_id: userId
+  custom_root_fields: {}
+object_relationships:
+  - name: organization
+    using:
+      foreign_key_constraint_on: org_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: org:admin
+    permission:
+      check:
+        _and:
+          - role:
+              _in:
+                - org:member
+      set:
+        created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - role
+        - user_id
+    comment: org admins can only manage org members. so no edit permissions are required for org admins.
+  - role: org:owner
+    permission:
+      check:
+        _and:
+          - role:
+              _in:
+                - org:member
+                - org:billing
+                - org:admin
+      set:
+        created_by: x-hasura-user-id
+        org_id: x-hasura-default-org
+        updated_by: x-hasura-user-id
+      columns:
+        - role
+        - user_id
+    comment: org owner can add org members, billing and admin type of memberships. owner can upgrade and downgrade role of a member but admin cannot change role
+select_permissions:
+  - role: org:admin
+    permission:
+      columns:
+        - role
+        - created_at
+        - updated_at
+        - created_by
+        - org_id
+        - updated_by
+        - user_id
+      filter:
+        org_id:
+          _eq: x-hasura-default-org
+      allow_aggregations: true
+    comment: ""
+  - role: user
+    permission:
+      columns:
+        - role
+        - created_at
+        - updated_at
+        - created_by
+        - org_id
+        - updated_by
+        - user_id
+      filter:
+        user_id:
+          _eq: x-hasura-user-id
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: org:owner
+    permission:
+      columns:
+        - role
+      filter:
+        _and:
+          - org_id:
+              _eq: x-hasura-default-org
+          - user_id:
+              _neq: x-hasura-user-id
+          - role:
+              _neq: org:owner
+      check:
+        role:
+          _in:
+            - org:admin
+            - org:billing
+            - org:member
+      set:
+        updated_by: x-hasura-user-id
+    comment: owner can upgrade and downgrade role of a member except for owner membership
+delete_permissions:
+  - role: org:admin
+    permission:
+      filter:
+        _and:
+          - org_id:
+              _eq: x-hasura-default-org
+          - role:
+              _eq: org:member
+    comment: ""
+  - role: org:owner
+    permission:
+      filter:
+        _and:
+          - org_id:
+              _eq: x-hasura-default-org
+          - role:
+              _neq: org:owner
+    comment: ""
+  - role: user
+    permission:
+      filter:
+        _and:
+          - user_id:
+              _eq: x-hasura-user-id
+          - org_id:
+              _neq: x-hasura-default-org
+          - role:
+              _neq: org:owner
+    comment: ""

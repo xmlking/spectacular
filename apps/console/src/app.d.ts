@@ -1,16 +1,20 @@
+import type { AvailableLanguageTag } from '$lib/paraglide/runtime';
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 import type AI from '@aibrow/dom-types';
-type NhostClient = import('@nhost/nhost-js').NhostClient;
-type ToastSettings = import('@skeletonlabs/skeleton').ToastSettings;
-type AvailableLanguageTag = import('$i18n/runtime').AvailableLanguageTag;
+import type { ParaglideLocals } from '@inlang/paraglide-sveltekit';
+// type NhostClient = import('@nhost/nhost-js').NhostClient;
+import type { NhostClient } from '@nhost/nhost-js';
+import type { ToastSettings } from '@skeletonlabs/skeleton';
 
 declare global {
   namespace App {
     // houdini session
     interface Session {
       accessToken?: string;
-      // TODO: currentOrg?: string; // active user's org. default value is user's default_org
+      role?: string;
+      orgId?: string;
+      userId?: string;
     }
     namespace Superforms {
       type Message = Pick<ToastSettings, 'message' | 'hideDismiss' | 'timeout'> & {
@@ -24,6 +28,9 @@ declare global {
     }
     interface Locals {
       nhost: NhostClient;
+    }
+    interface Locals {
+      paraglide: ParaglideLocals<AvailableLanguageTag>;
     }
     interface PageData {
       // user?: Omit<User, 'userId'>;
@@ -53,5 +60,3 @@ declare global {
     readonly aibrow: typeof AI;
   }
 }
-
-export type {};

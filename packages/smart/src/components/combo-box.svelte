@@ -21,8 +21,8 @@
 import { ErrorMessage } from '@spectacular/skeleton/components/form';
 import { Logger } from '@spectacular/utils';
 import Select from 'svelte-select';
-import { writable } from 'svelte/store';
 import type { HTMLSelectAttributes } from 'svelte/elements';
+import { writable } from 'svelte/store';
 interface $$Props extends HTMLSelectAttributes {
   value: string;
   items: Readonly<string[]>;
@@ -36,7 +36,7 @@ export let value = '';
 export let items: Readonly<string[]>;
 export let debounceWait = 300;
 export let name: string | null = null;
-export let api: string = '/api/combobox';
+export let api = '/api/combobox';
 
 // Variables
 const log = new Logger('smart:textarea:browser');
@@ -50,11 +50,10 @@ async function handleOptions(filterText: string) {
   if (filterText.length === 0) return [...items];
   if (self.aibrow) {
     return useLocalModel(filterText);
-  } else {
-    let res = await useRemoteModel(filterText);
-    log.debug({ res });
-    return res;
   }
+  let res = await useRemoteModel(filterText);
+  log.debug({ res });
+  return res;
 }
 
 // Define the type of object we want returned

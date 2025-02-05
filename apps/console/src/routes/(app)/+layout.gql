@@ -1,0 +1,6 @@
+query AppLayout($id: UserIdFromSession!) {
+  user(id: $id) @loading(cascade: true) {
+    ...WelcomeUserFragment
+    ...AllowedOrgsFragment
+  }
+}

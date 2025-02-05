@@ -17,7 +17,7 @@
 - GraphQL: [Houdini](https://www.houdinigraphql.com/) & [Hasura](https://hasura.io/)
 - Authentication: [Auth.js](https://authjs.dev/),  [nhost-auth](https://nhost.io/product/auth)
 - PWA: [Vite PWA](https://vite-pwa-org.netlify.app/frameworks/sveltekit.html)
-- Linter/Formatter: [Biome](https://biomejs.dev/)
+- Linter/Formatter: [Biome](https://biomejs.dev/) and [Ultracite](https://github.com/haydenbleasel/ultracite) linting configuration.
 
 ## Features
 
@@ -49,14 +49,15 @@
   - [ ] Use [Bob.Build](https://bob.build/) for Smart Builds, Build Cache etc and Bob's [github-actions](https://bob.build/docs/ci-recipes/github-actions/)
   - [ ] Use [earthly.dev](https://earthly.dev/) - Great for monorepos, Compatible with Every Language, Framework, and Build Tool
 - [x] Use [sveltekit-og](https://github.com/etherCorps/sveltekit-og) for Open Graph Image Generation
-- [x] Internationalization(i18n) with [inlang](https://inlang.com/c/libraries) `Paraglide JS Adapter SvelteKit`
+- [x] **Internationalization(i18n)** with [inlang](https://inlang.com/c/libraries) `Paraglide JS Adapter SvelteKit`
+- [ ] **User Notifications**: - multi-tenant, communication preferences. [Design](https://www.linkedin.com/pulse/design-notification-system-omar-ismail/)
 
 ## Experementing
 
 - [ ] Implement Changesets [(link)](https://github.com/changesets/changesets) with [turborepo](https://turbo.build/repo/docs/handbook/publishing-packages/versioning-and-publishing)
 - [ ] **TAURI:** Use [Tauri](https://tauri.app/) with [Skeleton](https://www.skeleton.dev/docs/tauri) for multi-platform.
 - [x] Charts with [Unovis](https://unovis.dev/). Explore [Gallery](https://unovis.dev/gallery)
-- [x] [Feature Flags](https://vercel.com/docs/workflow-collaboration/feature-flags/feature-flags-pattern) with [Vercel Feature Flags](https://vercel.com/docs/workflow-collaboration/feature-flags) and [Vercel Toolbar](https://vercel.com/docs/workflow-collaboration/vercel-toolbar)
+- [x] [Feature Flags](https://flags-sdk.dev/) with [Vercel Feature Flags](https://vercel.com/docs/workflow-collaboration/feature-flags) and [Vercel Toolbar](https://vercel.com/docs/workflow-collaboration/vercel-toolbar)
 
 ## Setup
 

@@ -1,0 +1,5 @@
+query OrganizationData($id: OrgIdFromSession!) {
+  organizations_by_pk(id: $id) {
+    ...OrganizationFragment
+  }
+}

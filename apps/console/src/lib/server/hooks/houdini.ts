@@ -9,14 +9,18 @@ export const houdini = (async ({ event, resolve }) => {
   // FIXME: https://github.com/nextauthjs/next-auth/discussions/6186
   if (building) return await resolve(event);
 
-  const { locals } = event;
-  const accessToken = locals.nhost.auth.getAccessToken();
-  const session = locals.nhost.auth.getSession();
+  const {
+    locals: { nhost },
+  } = event;
+  const accessToken = nhost.auth.getAccessToken();
+  const claims = nhost.auth.getHasuraClaims();
+  // HINT: role, userId, orgId will be globally available in Houdini Session to be used as `runtimeScalars`
+  const role = claims?.['x-hasura-default-role'];
+  const userId = claims?.['x-hasura-user-id'];
+  const orgId = claims?.['x-hasura-default-org'] as string;
 
-  log.debug('setting accessToken:', accessToken);
-  if (session && accessToken)
-    // FIXME: remove session check after https://github.com/nhost/nhost/issues/2028
-    setSession(event, { accessToken });
+  if (accessToken) setSession(event, { accessToken, role, userId, orgId });
+
   const response = await resolve(event);
   return response;
 }) satisfies Handle;

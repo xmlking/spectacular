@@ -7,83 +7,227 @@ configuration:
       custom_name: allowedEmailDomains
     allowed_emails:
       custom_name: allowedEmails
+    auto_enroll:
+      custom_name: autoEnroll
+    avatar_url:
+      custom_name: avatarUrl
+    blocked_email_domains:
+      custom_name: blockedEmailDomains
+    blocked_emails:
+      custom_name: blockedEmails
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    display_name:
+      custom_name: displayName
+    owner_id:
+      custom_name: ownerId
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
   custom_column_names:
     allowed_email_domains: allowedEmailDomains
     allowed_emails: allowedEmails
+    auto_enroll: autoEnroll
+    avatar_url: avatarUrl
+    blocked_email_domains: blockedEmailDomains
+    blocked_emails: blockedEmails
+    created_at: createdAt
+    created_by: createdBy
+    display_name: displayName
+    owner_id: ownerId
+    updated_at: updatedAt
+    updated_by: updatedBy
   custom_root_fields: {}
+object_relationships:
+  - name: owner
+    using:
+      foreign_key_constraint_on: owner_id
+array_relationships:
+  - name: groups
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: groups
+          schema: public
+  - name: invitations
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: invitations
+          schema: public
+  - name: memberships
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: memberships
+          schema: public
+  - name: notifications
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: notifications
+          schema: public
+  - name: settings
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: org_settings
+          schema: public
+  - name: settingsWithDefaults
+    using:
+      manual_configuration:
+        column_mapping:
+          id: org_id
+        insertion_order: null
+        remote_table:
+          name: org_settings_with_defaults
+          schema: public
+  - name: subscriptions
+    using:
+      foreign_key_constraint_on:
+        column: org_id
+        table:
+          name: subscriptions
+          schema: public
 insert_permissions:
-  - role: manager
+  - role: user
     permission:
       check: {}
+      set:
+        created_by: x-hasura-user-id
+        owner_id: x-hasura-user-id
+        updated_by: x-hasura-user-id
       columns:
         - allowed_email_domains
         - allowed_emails
+        - auto_enroll
+        - avatar_url
+        - blocked_email_domains
+        - blocked_emails
         - description
-        - organization
+        - display_name
+        - metadata
+        - tags
     comment: ""
 select_permissions:
-  - role: manager
+  - role: org:admin
     permission:
       columns:
         - allowed_email_domains
         - allowed_emails
+        - auto_enroll
+        - avatar_url
+        - blocked_email_domains
+        - blocked_emails
+        - created_at
+        - created_by
         - description
-        - organization
-      filter: {}
-  - role: public
-    permission:
-      columns:
-        - description
-        - organization
-      filter: {}
-    comment: ""
-  - role: supervisor
-    permission:
-      columns:
-        - allowed_email_domains
-        - allowed_emails
-        - description
-        - organization
+        - display_name
+        - id
+        - metadata
+        - owner_id
+        - tags
+        - updated_at
+        - updated_by
       filter:
-        organization:
-          _eq: x-hasura-default-org
+        id:
+          _in: x-hasura-allowed-orgs
+      allow_aggregations: true
+    comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - auto_enroll
+        - avatar_url
+        - blocked_email_domains
+        - blocked_emails
+        - created_at
+        - created_by
+        - description
+        - display_name
+        - id
+        - metadata
+        - owner_id
+        - tags
+        - updated_at
+        - updated_by
+      filter: {}
+      allow_aggregations: true
+    comment: sys:admin can see all orgs
   - role: user
     permission:
       columns:
+        - avatar_url
         - description
-        - organization
+        - display_name
+        - id
+        - metadata
+        - owner_id
+        - tags
       filter:
-        organization:
+        id:
           _in: x-hasura-allowed-orgs
-update_permissions:
-  - role: manager
-    permission:
-      columns:
-        - allowed_email_domains
-        - allowed_emails
-        - description
-        - organization
-      filter:
-        organization:
-          _in: x-hasura-allowed-orgs
-      check: null
+      allow_aggregations: true
     comment: ""
-  - role: supervisor
+update_permissions:
+  - role: org:owner
     permission:
       columns:
         - allowed_email_domains
         - allowed_emails
+        - auto_enroll
+        - avatar_url
+        - blocked_email_domains
+        - blocked_emails
         - description
-        - organization
+        - display_name
+        - metadata
+        - owner_id
+        - tags
       filter:
-        organization:
-          _eq: x-hasura-default-org
+        owner_id:
+          _eq: x-hasura-user-id
       check: null
+      set:
+        updated_by: x-hasura-user-id
+    comment: ""
+  - role: sys:admin
+    permission:
+      columns:
+        - allowed_email_domains
+        - allowed_emails
+        - auto_enroll
+        - avatar_url
+        - blocked_email_domains
+        - blocked_emails
+        - description
+        - display_name
+        - metadata
+        - owner_id
+        - tags
+      filter: {}
+      check: {}
+      set:
+        updated_by: x-hasura-user-id
     comment: ""
 delete_permissions:
-  - role: manager
+  - role: org:owner
     permission:
       filter:
-        organization:
-          _in: x-hasura-allowed-orgs
+        owner_id:
+          _eq: x-hasura-user-id
+    comment: ""
+  - role: sys:admin
+    permission:
+      filter: {}
     comment: ""

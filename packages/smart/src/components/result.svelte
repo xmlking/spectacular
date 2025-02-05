@@ -1,6 +1,6 @@
 <script lang="ts">
 import { clipboard } from '@skeletonlabs/skeleton';
-import { Copy, ThumbsUp, ArrowUpFromLine } from 'lucide-svelte';
+import { ArrowUpFromLine, Copy, ThumbsUp } from 'lucide-svelte';
 import { createEventDispatcher } from 'svelte';
 
 // Props

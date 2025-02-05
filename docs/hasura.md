@@ -40,24 +40,41 @@ hasura console
 
 # Create a new seed by exporting data from tables already present in the database:
 # use `--insecure-skip-tls-verify` if needed
-hasura seed create organizations --database-name default --from-table organizations --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create users --database-name default --from-table auth.users --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed create devices --database-name default --from-table devices --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create user_roles --database-name default --from-table auth.user_roles --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create organizations --database-name default --from-table public.organizations --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create user_org_roles --database-name default --from-table public.user_org_roles --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create groups --database-name default --from-table public.groups --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create user_groups --database-name default --from-table public.user_groups --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create rules --database-name default --from-table rules --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed create pools --database-name default --from-table pools --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create policies --database-name default --from-table policies --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create devices --database-name default --from-table devices --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create pools --database-name default --from-table pools --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create org_settings --database-name default --from-table org_settings --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create user_settings --database-name default --from-table user_settings --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create notifications --database-name default --from-table notifications --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create user_notifications --database-name default --from-table user_notifications --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 
 # Export data from multiple tables:
 # hasura seed create policies_organization --database-name default --from-table policies --from-table organization
 # Apply all seed file:
 hasura seed apply --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # (Or) Apply only a particular files:
-hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 002_users.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 011_devices.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 012_rules.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 013_pools.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 014_policies.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 001_users.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 002_user_roles.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 003_organizations.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 004_memberships.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 005_groups.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 006_user_groups.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 007_org_settings.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 008_user_settings.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 009_notifications.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 010_user_notifications.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+
+hasura seed apply --file 011_rules.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 012_policies.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 013_devices.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 014_pools.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 
 # To apply all the Migrations present in the `migrations/` directory and the Metadata present in the `metadata/` directory on a new, "fresh",
 # instance of the Hasura Server at http://another-server-instance.hasura.app:
@@ -142,12 +159,18 @@ hasura deploy --endpoint https://local.hasura.local.nhost.run --admin-secret <HA
 # Apply all seed file:
 hasura seed apply --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 # (Or) Apply only a particular files:
-hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 002_users.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 011_devices.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 012_rules.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 013_pools.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed apply --file 014_policies.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 001_users.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 002_user_roles.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 003_organizations.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 004_memberships.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 005_groups.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 006_user_groups.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 007_settings.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+
+hasura seed apply --file 011_rules.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 012_policies.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 013_devices.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed apply --file 014_pools.sql --database-name default --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 ```
 
 Check the status

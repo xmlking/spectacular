@@ -1,0 +1,12 @@
+table:
+  name: status
+  schema: public
+is_enum: true
+select_permissions:
+  - role: org:billing
+    permission:
+      columns:
+        - description
+        - value
+      filter: {}
+    comment: ""

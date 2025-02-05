@@ -1,5 +1,5 @@
 import * as child_process from 'node:child_process';
-import { paraglide } from '@inlang/paraglide-js-adapter-sveltekit/vite';
+import { paraglide } from '@inlang/paraglide-sveltekit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { vercelToolbar } from '@vercel/toolbar/plugins/vite';
@@ -28,6 +28,7 @@ export default defineConfig({
     paraglide({
       project: './project.inlang',
       outdir: './src/i18n',
+      // experimentalUseVirtualModules: true, // TODO not working with svelte 4
     }),
     vercelToolbar(),
   ],

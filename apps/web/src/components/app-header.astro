@@ -154,17 +154,21 @@ const links = [
 
 <style>
   #toggle_nav:checked ~ div #hamburger #line {
-    @apply translate-y-1.5 rotate-45;
+    /* @apply translate-y-1.5 rotate-45; */
+    @reference ranslate-y-1.5 rotate-45;
   }
 
   #toggle_nav:checked ~ div #hamburger #line2 {
-    @apply -translate-y-1 -rotate-45;
+    /* @apply -translate-y-1 -rotate-45; */
+    @reference -translate-y-1 -rotate-45;
   }
 
   .toggled div:first-child {
-    @apply translate-y-1.5 rotate-45;
+    /* @apply translate-y-1.5 rotate-45; */
+    @reference ranslate-y-1.5 rotate-45;
   }
   .toggled div:last-child {
-    @apply -translate-y-1 -rotate-45;
+    /* @apply -translate-y-1 -rotate-45; */
+    @reference -translate-y-1 -rotate-45;
   }
 </style>
