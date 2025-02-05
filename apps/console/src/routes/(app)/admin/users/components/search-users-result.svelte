@@ -8,7 +8,7 @@ import { DateTime } from '@spectacular/skeleton/components';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger, sleep } from '@spectacular/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
-import { Trash2 } from 'lucide-svelte';
+import { BadgeCheck, BadgeMinus, Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { DeleteUser } from '../mutations';
 
@@ -95,6 +95,7 @@ $: loadingState.setFormLoading(isDeleting);
         <Table.Head {handler} orderBy="currentOrg">Organization</Table.Head>
         <Table.Head {handler} orderBy="defaultRole">Role</Table.Head>
         <Table.Head {handler} orderBy="email">Email</Table.Head>
+        <Table.Head {handler} orderBy="emailVerified">Verified</Table.Head>
         <Table.Head {handler} orderBy="lastSeen">Last Seen</Table.Head>
         <Table.Head {handler}>Disable</Table.Head>
       </tr>
@@ -106,6 +107,7 @@ $: loadingState.setFormLoading(isDeleting);
         <Table.HeadFilter {handler} filterB="email" />
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -113,6 +115,7 @@ $: loadingState.setFormLoading(isDeleting);
       {#each $rows as row}
         {#if row.id === PendingValue}
           <tr class="animate-pulse">
+            <td><div class="placeholder" /></td>
             <td><div class="placeholder" /></td>
             <td><div class="placeholder" /></td>
             <td><div class="placeholder" /></td>
@@ -135,7 +138,14 @@ $: loadingState.setFormLoading(isDeleting);
             <td>{@html row.currentOrg?.displayName ?? 'N/A'}</td>
             <td>{row.defaultRole}</td>
             <td>{@html row.email}</td>
-              <td><DateTime distance time={row.lastSeen} /></td>
+            <td>
+              {#if row.emailVerified}
+                  <BadgeCheck fill="green" />
+              {:else}
+                 <BadgeMinus />
+              {/if}
+            </td>
+            <td><DateTime distance time={row.lastSeen} /></td>
             <td>
               <button
                 type="button"
