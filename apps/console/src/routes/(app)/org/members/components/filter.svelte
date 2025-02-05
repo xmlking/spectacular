@@ -14,8 +14,12 @@ export let comparator: Comparator<T> = check.isEqualTo;
 let value = '';
 let role = '';
 
-handler.on('clearSearch', () => (value = ''));
-handler.on('clearFilters', () => (role = ''));
+handler.on('clearSearch', () => {
+  value = '';
+});
+handler.on('clearFilters', () => {
+  role = '';
+});
 </script>
 
 <!-- Filter Section -->

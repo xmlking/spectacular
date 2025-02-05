@@ -1,7 +1,6 @@
 <script lang="ts">
 import { typewriter } from '@spectacular/skeleton/transitions';
 
-// biome-ignore lint/style/useConst: <explanation>
 let visible = false;
 </script>
 

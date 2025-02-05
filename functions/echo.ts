@@ -1,5 +1,5 @@
+import process from 'node:process';
 import type { Request, Response } from 'express';
-import process from 'process';
 
 export default (req: Request, res: Response) => {
   return res.status(200).json({

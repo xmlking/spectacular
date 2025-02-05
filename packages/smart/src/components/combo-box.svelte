@@ -50,11 +50,10 @@ async function handleOptions(filterText: string) {
   if (filterText.length === 0) return [...items];
   if (self.aibrow) {
     return useLocalModel(filterText);
-  } else {
-    let res = await useRemoteModel(filterText);
-    log.debug({ res });
-    return res;
   }
+  let res = await useRemoteModel(filterText);
+  log.debug({ res });
+  return res;
 }
 
 // Define the type of object we want returned
