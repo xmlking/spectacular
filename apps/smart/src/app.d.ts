@@ -22,5 +22,3 @@ declare global {
   }
   declare module '*.png?enhanced';
 }
-
-export {};

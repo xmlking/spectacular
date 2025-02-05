@@ -1,9 +1,9 @@
 <script lang="ts">
-import { Logger } from '@spectacular/utils';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
+import { Logger } from '@spectacular/utils';
+import type { PageData } from './$houdini';
 import SearchUsersForm from './components/search-users-form.svelte';
 import SearchUsersResult from './components/search-users-result.svelte';
-import type { PageData } from './$houdini';
 
 const log = new Logger('users:search:browser');
 export let data: PageData;

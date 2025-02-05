@@ -1,11 +1,11 @@
 <script lang="ts">
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
 import { Logger } from '@spectacular/utils';
 import SuperDebug from 'sveltekit-superforms';
 import type { PageData } from './$houdini';
 import ListGroupsForm from './components/search-groups-form.svelte';
 import ListGroupsResult from './components/search-groups-result.svelte';
-import MaybeError from '$lib/components/layout/maybe-error.svelte';
 
 const log = new Logger('groups:search:browser');
 export let data: PageData;

@@ -1,7 +1,7 @@
 <script lang="ts">
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import { Logger } from '@spectacular/utils';
 import UpdateOrganizationsForm from '$lib/components/organizations/update-organizations-form.svelte';
+import { Logger } from '@spectacular/utils';
 import type { PageData } from './$houdini';
 
 const log = new Logger('org:organizations:update:page');

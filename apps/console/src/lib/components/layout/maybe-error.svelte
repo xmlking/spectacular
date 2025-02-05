@@ -1,12 +1,12 @@
 <script lang="ts" generics="T">
+import type { QueryResult } from '$houdini';
 import { getLoadingState } from '$lib/stores/loading';
-import { DebugShell, NotFound, SomethingWentWrong, GraphQLErrors } from '@spectacular/skeleton/components';
+import { DebugShell, GraphQLErrors, NotFound, SomethingWentWrong } from '@spectacular/skeleton/components';
 import SuperDebug from 'sveltekit-superforms';
-import { type QueryResult } from '$houdini';
 
 export let entityName: string;
 export let result: QueryResult<T>;
-export let debug: boolean = false;
+export let debug = false;
 
 // Variables
 const loadingState = getLoadingState();

@@ -1,7 +1,6 @@
 <script lang="ts">
 import { PendingValue, type SearchOrganizations$result, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import { DeleteOrganization } from './mutations';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
@@ -11,6 +10,7 @@ import { Logger, sleep } from '@spectacular/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
+import { DeleteOrganization } from './mutations';
 
 const log = new Logger('org:search:results:component');
 // Variables
@@ -52,7 +52,8 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
       toastStore,
     );
     return;
-  } else if (data?.delete_organizations_by_pk) {
+  }
+  if (data?.delete_organizations_by_pk) {
     handleMessage(
       {
         message: `<p class="text-xl">Organization: <span class="text-red-500 font-bold">${displayName}</span> deleted</p>`,

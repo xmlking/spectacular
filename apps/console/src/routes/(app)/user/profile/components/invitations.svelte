@@ -1,22 +1,22 @@
 <script lang="ts">
-import { cache, fragment, graphql, PendingValue, type UserInvitationsFragment } from '$houdini';
+import { invalidateAll } from '$app/navigation';
+import { page } from '$app/stores';
+import { PendingValue, type UserInvitationsFragment, cache, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
+import type { PartialGraphQLErrors } from '$lib/types';
 import { getToastStore, popup } from '@skeletonlabs/skeleton';
+import { DateTime, GraphQLErrors } from '@spectacular/skeleton';
 import * as Table from '@spectacular/skeleton/components/table';
+import { cn } from '@spectacular/skeleton/utils';
 import { Logger } from '@spectacular/utils';
-import { invalidateAll } from '$app/navigation';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Check, MoreHorizontal, X } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { slide } from 'svelte/transition';
-import { cn } from '@spectacular/skeleton/utils';
 import { AcceptInvitation, DeclineInvitation } from '../mutations';
-import { DateTime, GraphQLErrors } from '@spectacular/skeleton';
-import type { PartialGraphQLErrors } from '$lib/types';
-import { page } from '$app/stores';
-import { getNhostClient } from '$lib/stores/nhost';
 
 const log = new Logger('user:profile:invitations:browser');
 

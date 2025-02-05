@@ -6,10 +6,10 @@ import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
 import {
-  updateGroupSchema as schema,
-  updateGroupKeys as keys,
-  allowedMetadata as allowedKeyValues,
   type UpdateGroup,
+  allowedMetadata as allowedKeyValues,
+  updateGroupKeys as keys,
+  updateGroupSchema as schema,
 } from '$lib/schema/group';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';

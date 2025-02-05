@@ -1,22 +1,22 @@
 <script lang="ts">
-import { PendingValue, type MembershipsFragment, fragment, graphql, cache } from '$houdini';
-import { loaded } from '$lib/graphql/loading';
-import * as Table from '@spectacular/skeleton/components/table';
-import { DataHandler } from '@vincjo/datatables/legacy';
-import { Logger } from '@spectacular/utils';
-import { getToastStore, popup } from '@skeletonlabs/skeleton';
-import { getLoadingState } from '$lib/stores/loading';
-import { slide } from 'svelte/transition';
-import { cn } from '@spectacular/skeleton/utils';
-import { Check, MoreHorizontal, X } from 'lucide-svelte';
-import { GraphQLErrors } from '@spectacular/skeleton';
 import { invalidate, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
+import { type MembershipsFragment, PendingValue, cache, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
-import type { PartialGraphQLErrors } from '$lib/types';
-import type { MouseEventHandler } from 'svelte/elements';
-import { LeaveOrganization } from '../mutations';
+import { loaded } from '$lib/graphql/loading';
+import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
+import type { PartialGraphQLErrors } from '$lib/types';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
+import { GraphQLErrors } from '@spectacular/skeleton';
+import * as Table from '@spectacular/skeleton/components/table';
+import { cn } from '@spectacular/skeleton/utils';
+import { Logger } from '@spectacular/utils';
+import { DataHandler } from '@vincjo/datatables/legacy';
+import { Check, MoreHorizontal, X } from 'lucide-svelte';
+import type { MouseEventHandler } from 'svelte/elements';
+import { slide } from 'svelte/transition';
+import { LeaveOrganization } from '../mutations';
 
 const log = new Logger('user:profile:memberships:browser');
 

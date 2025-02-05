@@ -1,29 +1,29 @@
 <script lang="ts">
-import { cache, type UpdateOrganization$input, type OrganizationFragment, fragment, graphql } from '$houdini';
+import { goto, invalidate } from '$app/navigation';
+import { page } from '$app/stores';
+import { type OrganizationFragment, type UpdateOrganization$input, cache, fragment, graphql } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
+import { i18n } from '$lib/i18n';
 import {
-  updateOrganizationSchema as schema,
-  updateOrganizationKeys as keys,
   allowedMetadata as allowedKeyValues,
+  updateOrganizationKeys as keys,
+  updateOrganizationSchema as schema,
 } from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
+import { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import { UpdateOrganization } from './mutations';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, Search } from 'lucide-svelte';
+import Select from 'svelte-select';
 import SuperDebug, { defaults, setError, setMessage, superForm, type SuperValidated } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { goto, invalidate } from '$app/navigation';
-import { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
-import { page } from '$app/stores';
-import { i18n } from '$lib/i18n';
-import Select from 'svelte-select';
+import { UpdateOrganization } from './mutations';
 
 const log = new Logger('org:update:component');
 
@@ -51,10 +51,6 @@ $: data = fragment(
 // Reactivity
 // let initialData: SuperValidated<UpdateOrganization>
 $: ({ id, __typename, ...initialData } = $data);
-$: if (id) {
-  // this will reset initialData after data is loaded.
-  reset({ newState: { ...initialData } });
-}
 
 // Variables
 const toastStore = getToastStore();
@@ -150,6 +146,10 @@ function isValidEmailDomain(value: string): boolean {
 // Reactivity
 $: valid = $allErrors.length === 0;
 $: loadingState.setFormLoading($delayed);
+$: if (id) {
+  // this will reset initialData after data is loaded.
+  reset({ newState: { ...initialData } });
+}
 </script>
 
 <section class="space-y-4">

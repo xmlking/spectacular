@@ -1,5 +1,5 @@
-import { on } from 'svelte/events';
 import type { Action } from 'svelte/action';
+import { on } from 'svelte/events';
 import { getElement, getTextContent, setTextContent } from '#utils/element.js';
 import type { ElementOrSelector } from '#utils/element.js';
 

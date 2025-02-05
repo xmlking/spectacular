@@ -1,8 +1,8 @@
 <script lang="ts">
-import { Logger } from '@spectacular/utils';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import SearchOrganizationsForm from '$lib/components/organizations/search-organizations-form.svelte';
 import SearchOrganizationsResult from '$lib/components/organizations/search-organizations-result.svelte';
+import { Logger } from '@spectacular/utils';
 import type { PageData } from './$houdini';
 
 const log = new Logger('organizations:search:browser');

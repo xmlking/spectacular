@@ -227,3 +227,7 @@ delete_permissions:
         owner_id:
           _eq: x-hasura-user-id
     comment: ""
+  - role: sys:admin
+    permission:
+      filter: {}
+    comment: ""

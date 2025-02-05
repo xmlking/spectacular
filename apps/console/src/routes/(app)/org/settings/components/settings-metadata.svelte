@@ -1,5 +1,5 @@
 <script lang="ts">
-import { PendingValue, type OrgSettingsData$result, graphql } from '$houdini';
+import { type OrgSettingsData$result, PendingValue, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '@spectacular/skeleton/components/table';
 import { Logger } from '@spectacular/utils';

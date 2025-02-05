@@ -1,6 +1,6 @@
 <script lang="ts">
-import { page } from '$app/stores';
 import { invalidate, invalidateAll } from '$app/navigation';
+import { page } from '$app/stores';
 import { cache } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';

@@ -1,10 +1,10 @@
 <script lang="ts">
-import { Logger } from '@spectacular/utils';
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import { GraphQLErrors } from '@spectacular/skeleton/components';
+import { Logger } from '@spectacular/utils';
 import type { PageData } from './$houdini';
 import UserDetails from './components/user-details.svelte';
 import UserGroups from './components/user-groups.svelte';
-import MaybeError from '$lib/components/layout/maybe-error.svelte';
 
 const log = new Logger('users.update.browser');
 

@@ -35,7 +35,7 @@ interface $$Props extends HTMLInputAttributes {
 // Props
 export let value: string | null = null;
 export let name: string | null = null;
-export let api: string = '/api/date';
+export let api = '/api/date';
 
 // Variables
 const log = new Logger('ai:date:browser');

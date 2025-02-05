@@ -1,8 +1,8 @@
 <script lang="ts">
-import { graphql, fragment, type OrgSettingsWithDefaultsFragment } from '$houdini';
+import { type OrgSettingsWithDefaultsFragment, fragment, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
-import * as Table from '@spectacular/skeleton/components/table';
 import { DateTime } from '@spectacular/skeleton/components';
+import * as Table from '@spectacular/skeleton/components/table';
 import { DataHandler } from '@vincjo/datatables/legacy';
 import { Settings } from 'lucide-svelte';
 

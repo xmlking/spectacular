@@ -36,7 +36,7 @@ export let value = '';
 export let items: Readonly<string[]>;
 export let debounceWait = 300;
 export let name: string | null = null;
-export let api: string = '/api/combobox';
+export let api = '/api/combobox';
 
 // Variables
 const log = new Logger('smart:textarea:browser');

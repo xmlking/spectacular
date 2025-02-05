@@ -1,35 +1,35 @@
 <script lang="ts">
+import { page } from '$app/stores';
 import {
-  cache,
+  PendingValue,
   type UpdateUserDetails$input,
   type UserDetailsFragment,
+  cache,
   fragment,
   graphql,
   type users_set_input,
-  PendingValue,
 } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
 import {
+  allowedMetadata as allowedKeyValues,
   updateUserDetailsKeys as keys,
   updateUserDetailsSchema as schema,
-  allowedMetadata as allowedKeyValues,
 } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts, InputPairs } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import { UpdateUserDetails } from '../mutations';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';
 import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { getNhostClient } from '$lib/stores/nhost';
-import { page } from '$app/stores';
+import { UpdateUserDetails } from '../mutations';
 
 const log = new Logger('user:profile:details:browser');
 

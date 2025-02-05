@@ -1,7 +1,7 @@
 <script lang="ts">
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@spectacular/ui/components/select';
 import { Trash2 } from 'lucide-svelte';
 import { slide } from 'svelte/transition';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@spectacular/ui/components/select';
 
 // Available roles for members
 const roles = ['owner', 'admin', 'member'];

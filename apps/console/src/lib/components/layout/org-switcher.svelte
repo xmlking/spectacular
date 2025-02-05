@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { ChangeEventHandler } from 'svelte/elements';
+import { page } from '$app/stores';
+import { type AllowedOrgsFragment, fragment, graphql } from '$houdini';
 import { getNhostClient } from '$lib/stores/nhost';
 import { Logger } from '@spectacular/utils';
-import { page } from '$app/stores';
-import { fragment, graphql, type AllowedOrgsFragment } from '$houdini';
+import type { ChangeEventHandler } from 'svelte/elements';
 
 const log = new Logger('profile:org-switcher:browser');
 

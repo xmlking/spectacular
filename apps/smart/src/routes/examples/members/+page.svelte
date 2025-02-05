@@ -1,8 +1,8 @@
 <script lang="ts">
-import { Search, Plus, Trash2 } from 'lucide-svelte';
-import MemberList from './MemberList.svelte';
-import AddMemberDialog from './AddMemberDialog.svelte';
+import { Plus, Search, Trash2 } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
+import AddMemberDialog from './AddMemberDialog.svelte';
+import MemberList from './MemberList.svelte';
 
 // Search query for filtering members
 let searchQuery = $state('');

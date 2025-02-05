@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { DataHandler, Field, Comparator, Row } from '@vincjo/datatables/legacy';
+import type { Comparator, DataHandler, Field, Row } from '@vincjo/datatables/legacy';
 import { check } from '@vincjo/datatables/legacy';
 import { Search, SearchIcon } from 'lucide-svelte';
 

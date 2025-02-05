@@ -1,12 +1,14 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
+import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { CreateOrganization } from '$lib/components/organizations/mutations';
+import { i18n } from '$lib/i18n';
 import {
-  createOrganizationSchema as schema,
-  createOrganizationKeys as keys,
   allowedMetadata as allowedKeyValues,
+  createOrganizationKeys as keys,
+  createOrganizationSchema as schema,
 } from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
@@ -20,8 +22,6 @@ import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { page } from '$app/stores';
-import { i18n } from '$lib/i18n';
 
 const log = new Logger('org:create:component');
 

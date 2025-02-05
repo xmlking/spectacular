@@ -1,12 +1,12 @@
 <script lang="ts">
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
+import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 import { Logger } from '@spectacular/utils';
 import { Plus } from 'lucide-svelte';
-import { TabGroup, Tab } from '@skeletonlabs/skeleton';
-import Members from './components/members.svelte';
+import type { PageData } from './$houdini';
 import Invitations from './components/invitations.svelte';
 import InviteMembersForm from './components/invite-members-form.svelte';
-import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import type { PageData } from './$houdini';
+import Members from './components/members.svelte';
 
 const log = new Logger('memberships:add:browser');
 export let data: PageData;

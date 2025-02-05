@@ -1,8 +1,8 @@
 import node from '@astrojs/node';
 import starlight from '@astrojs/starlight';
-import tailwindcss from '@tailwindcss/vite';
 // import vercel from "@astrojs/vercel/serverless";
 import vercel from '@astrojs/vercel/static';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */

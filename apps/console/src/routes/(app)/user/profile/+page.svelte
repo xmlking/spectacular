@@ -2,23 +2,23 @@
 import { page } from '$app/stores';
 import { PendingValue } from '$houdini';
 import { Meta } from '$lib/components';
-import { allLoaded, loaded, loading } from '$lib/graphql/loading';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
+import { allLoaded, loaded, loading } from '$lib/graphql/loading';
+import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 import { GraphQLErrors } from '@spectacular/skeleton/components';
 import type { PageData } from './$houdini';
 import ChangeEmailForm from './components/change-email.svelte';
 import ChangePasswordForm from './components/change-password.svelte';
 import ConnectSocials from './components/connect-socials.svelte';
 import HasuraJwtClaims from './components/hasura-jwt-claims.svelte';
+import Invitations from './components/invitations.svelte';
+import Memberships from './components/memberships.svelte';
 import MultiFactorAuth from './components/multi-factor-auth.svelte';
 import PersonalAccessTokenForm from './components/personal-access-token-form.svelte';
 import PersonalAccessTokens from './components/personal-access-tokens.svelte';
 import SecurityKeyForm from './components/security-key-form.svelte';
 import SecurityKeys from './components/security-keys.svelte';
 import UserDetails from './components/user-details.svelte';
-import Memberships from './components/memberships.svelte';
-import Invitations from './components/invitations.svelte';
-import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 
 /**
  * Loading states example: https://houdini-intro.pages.dev/

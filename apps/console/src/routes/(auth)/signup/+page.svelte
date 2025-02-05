@@ -8,6 +8,7 @@ import { updateUserDetailsKeys as keys, signUpSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { turnstilePassed, turnstileResponse } from '$lib/stores/stores';
+import { getAuthenticationResult, signUpEmailPasswordPromise } from '@nhost/nhost-js';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
@@ -17,7 +18,6 @@ import { Loader, MoreHorizontal } from 'lucide-svelte';
 import { onMount } from 'svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
-import { signUpEmailPasswordPromise, getAuthenticationResult } from '@nhost/nhost-js';
 
 const log = new Logger('auth:signup:browser');
 

@@ -1,13 +1,13 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
-import { cache, type UpdateGroup$input } from '$houdini';
+import { type UpdateGroup$input, cache } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
 import {
-  updateGroupSchema as schema,
-  updateGroupKeys as keys,
   allowedMetadata as allowedKeyValues,
+  updateGroupKeys as keys,
+  updateGroupSchema as schema,
 } from '$lib/schema/group';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
@@ -18,12 +18,12 @@ import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
 import { Alerts, InputChipWrapper, InputPairs } from '@spectacular/skeleton/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
-import { UpdateGroup } from '../mutations';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { UpdateGroup } from '../mutations';
 import type { PageData } from './$houdini';
 
 const log = new Logger('groups.update.browser');

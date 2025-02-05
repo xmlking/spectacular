@@ -1,5 +1,5 @@
-import { flag } from '@vercel/flags/sveltekit';
 import { env } from '$env/dynamic/private';
+import { flag } from '@vercel/flags/sveltekit';
 
 export const showMagicLinkLogin = flag<boolean>({
   key: 'showMagicLinkLogin',
