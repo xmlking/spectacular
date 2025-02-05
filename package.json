@@ -25,7 +25,10 @@
     "url": "https://github.com/xmlking/spectacular.git"
   },
   "license": "MIT",
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "//": "For tasks that you run frequently, you can write your turbo commands directly into your root package.json.",
     "build": "turbo run build --affected",
@@ -71,7 +74,7 @@
     "ultracite": "4.1.18",
     "vitest": "3.0.5"
   },
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.2.0",
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
@@ -80,10 +83,14 @@
     "overrides": {
       "cross-spawn": ">=7.0.5"
     },
-    "onlyBuiltDependencies": ["@vercel/speed-insights"]
+    "onlyBuiltDependencies": [
+      "@vercel/speed-insights"
+    ]
   },
   "manypkg": {
     "defaultBranch": "main",
-    "ignoredRules": ["ROOT_HAS_DEV_DEPENDENCIES"]
+    "ignoredRules": [
+      "ROOT_HAS_DEV_DEPENDENCIES"
+    ]
   }
 }

@@ -22,7 +22,7 @@ corepack enable pnpm
 
 ```shell
 cd ~/Developer/Work/SPA/spectacular
-corepack use pnpm@latest-10 
+corepack use pnpm@latest-10
 ```
 
 Install following CLI tools globally
