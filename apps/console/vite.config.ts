@@ -45,9 +45,9 @@ export default defineConfig({
         process.env.BUILD_TIME,
     ),
   },
-  ssr: {
-      noExternal: ['@nhost/nhost-js', 'graphql'],
-  },
+  // ssr: {
+  //     noExternal: ['@nhost/nhost-js', 'graphql'],
+  // },
   test: {
     include: ['src/**/*.{test,spec}.{js,ts}'],
   },
