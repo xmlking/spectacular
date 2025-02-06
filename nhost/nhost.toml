@@ -24,7 +24,6 @@ enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
 inferFunctionPermissions = true
 liveQueriesMultiplexedRefetchInterval = 1000
 stringifyNumericTypes = false
-unauthorizedRole = 'public'
 
 [hasura.logs]
 level = 'warn'
