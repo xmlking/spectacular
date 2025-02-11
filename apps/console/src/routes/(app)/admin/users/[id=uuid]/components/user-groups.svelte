@@ -35,6 +35,9 @@ $: data = fragment(
 $: ({ dissociatedGroups, associatedGroups } = $data);
 $: availableGroups = dissociatedGroups ?? [];
 $: assignedGroups = associatedGroups ?? [];
+// Initialize tempAvailableGroups and tempAssignedGroups with IDs from dissociatedGroups and associatedGroups
+  $: tempAvailableGroups = dissociatedGroups ? dissociatedGroups.map((group) => group.id) : [];
+  $: tempAssignedGroups = associatedGroups ? associatedGroups.map((group) => group.id) : [];
 
 // Variables
 const toastStore = getToastStore();
@@ -63,8 +66,13 @@ async function handleAvailableFinalize(e: CustomEvent) {
     items,
     info: { id: groupId },
   } = e.detail;
-  if (items.some((e) => e.id === groupId) && (await deleteUserGroup(groupId))) {
+  if (items.some((e) => e.id === groupId)) {
     availableGroups = items;
+  }
+  // Remove group from associatedGroups if dissociatedGroups does not include this group
+  if(!tempAvailableGroups.includes(groupId))
+  {
+    await deleteUserGroup(groupId);
   }
 }
 async function handleAssignedFinalize(e: CustomEvent) {
@@ -72,8 +80,13 @@ async function handleAssignedFinalize(e: CustomEvent) {
     items,
     info: { id: groupId },
   } = e.detail;
-  if (items.some((e) => e.id === groupId) && (await addUserGroup(groupId))) {
+  if (items.some((e) => e.id === groupId)) {
     assignedGroups = items;
+  }
+  // Add group to associatedGroups if associatedGroups does not include this group
+  if(!tempAssignedGroups.includes(groupId))
+  {
+    await addUserGroup(groupId);
   }
 }
 async function handleAdd(group: { id: string; displayName: string }) {
@@ -106,6 +119,9 @@ async function addUserGroup(groupId: string) {
     );
     return false;
   }
+  // Update tempAvailableGroups and tempAssignedGroups
+  tempAssignedGroups = tempAssignedGroups.concat(data?.insert_user_groups_one?.groupId);
+  tempAvailableGroups = tempAvailableGroups.filter((id) => id !== data?.insert_user_groups_one?.groupId);
   // const userGroup = cache.get('user_groups', { userId, groupId })
   // console.log({userGroup})
   // userGroup.markStale()
@@ -125,6 +141,9 @@ async function deleteUserGroup(groupId: string) {
     );
     return false;
   }
+  // Update tempAvailableGroups and tempAssignedGroups
+  tempAvailableGroups = tempAvailableGroups.concat(data?.delete_user_groups_by_pk?.groupId);
+  tempAssignedGroups = tempAssignedGroups.filter((id) => id !== data?.delete_user_groups_by_pk?.groupId);
   // const userGroup = cache.get('user_groups', { userId, groupId })
   // console.log({userGroup})
   // userGroup.markStale()
