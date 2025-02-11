@@ -11,6 +11,7 @@ import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
 const log = new Logger('server:middleware:guard');
 // TODO define roles in apps/console/src/lib/links.ts
 const adminPaths = ['/admin/organizations', '/admin/users'];
+const orgPaths = ['/org/', '/reports/', '/flows/'];
 const publicPaths = [
   '/favicon.ico',
   '/robots.txt',
@@ -87,10 +88,17 @@ export const guard = (async ({ event, resolve }) => {
   // const claims = nhost.auth.getHasuraClaims()
   // log.debug({ claims });
   const roles = nhost.auth.getHasuraClaim('allowed-roles');
-  const role = nhost.auth.getHasuraClaim('default-role');
+  const role = nhost.auth.getHasuraClaim('default-role') as string;
   const orgs = nhost.auth.getHasuraClaim('allowed-orgs');
   const org = nhost.auth.getHasuraClaim('default-org');
   log.debug({ roles, role, orgs, org });
+
+  if (startsWith(pathname, orgPaths)) {
+    if (!['org:owner', 'org:admin', 'org:billing'].includes(role)) {
+      const message: App.Superforms.Message = { type: 'warning', message: "You don't have access" } as const;
+      redirectWithFlash(303, i18n.resolveRoute('/profile'), message, event);
+    }
+  }
 
   if (startsWith(pathname, adminPaths)) {
     if (role !== 'sys:admin') {

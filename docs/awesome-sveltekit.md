@@ -62,7 +62,11 @@ Awesome **SvelteKit** Links
 
   - [Svelte MapBox](https://github.com/beyonk-group/svelte-mapbox) Maps and Geocoding (Autocomplete) MapBox components in Vanilla JS (or Svelte)
 
+- Communication
+- [Svelte WebSocket](https://github.com/ubermanu/sveltekit-websocket) - This is a small websocket plugin for SvelteKit. It uses [ws](https://github.com/websockets/ws) under the hood.
+  
 - Toast
+
   - [Svelte Sonner](https://svelte-sonner.vercel.app/)
   - [svelte-french-toast](https://svelte-french-toast.com/)
 

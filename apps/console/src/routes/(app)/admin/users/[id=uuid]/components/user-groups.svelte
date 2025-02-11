@@ -36,8 +36,8 @@ $: ({ dissociatedGroups, associatedGroups } = $data);
 $: availableGroups = dissociatedGroups ?? [];
 $: assignedGroups = associatedGroups ?? [];
 // Initialize tempAvailableGroups and tempAssignedGroups with IDs from dissociatedGroups and associatedGroups
-  $: tempAvailableGroups = dissociatedGroups ? dissociatedGroups.map((group) => group.id) : [];
-  $: tempAssignedGroups = associatedGroups ? associatedGroups.map((group) => group.id) : [];
+$: tempAvailableGroups = dissociatedGroups ? dissociatedGroups.map((group) => group.id) : [];
+$: tempAssignedGroups = associatedGroups ? associatedGroups.map((group) => group.id) : [];
 
 // Variables
 const toastStore = getToastStore();
@@ -70,8 +70,7 @@ async function handleAvailableFinalize(e: CustomEvent) {
     availableGroups = items;
   }
   // Remove group from associatedGroups if dissociatedGroups does not include this group
-  if(!tempAvailableGroups.includes(groupId))
-  {
+  if (!tempAvailableGroups.includes(groupId)) {
     await deleteUserGroup(groupId);
   }
 }
@@ -84,8 +83,7 @@ async function handleAssignedFinalize(e: CustomEvent) {
     assignedGroups = items;
   }
   // Add group to associatedGroups if associatedGroups does not include this group
-  if(!tempAssignedGroups.includes(groupId))
-  {
+  if (!tempAssignedGroups.includes(groupId)) {
     await addUserGroup(groupId);
   }
 }

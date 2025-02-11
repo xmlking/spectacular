@@ -17,9 +17,9 @@ key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
 [hasura.settings]
 corsDomain = ['*']
 devMode = true
-enableAllowList = false
+enableAllowList = false # enable it for prod
 enableConsole = true
-enableRemoteSchemaPermissions = false
+enableRemoteSchemaPermissions = true
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
 inferFunctionPermissions = true
 liveQueriesMultiplexedRefetchInterval = 1000
@@ -29,7 +29,7 @@ stringifyNumericTypes = false
 level = 'warn'
 
 [hasura.events]
-httpPoolSize = 100
+httpPoolSize = 10
 
 [hasura.rateLimit]
 limit = 100
@@ -37,7 +37,7 @@ interval = '1m'
 
 [graphql]
 [graphql.security]
-forbidAminSecret = false
+forbidAminSecret = false # enable it in prod
 maxDepthQueries = 4
 
 [functions]
@@ -85,7 +85,7 @@ rating = 'g'
 
 [auth.session]
 [auth.session.accessToken]
-expiresIn = 900
+expiresIn = 900 # for prod, set 3600
 
 [[auth.session.accessToken.customClaims]]
 key = 'default-org'
@@ -100,7 +100,7 @@ key = 'user-email'
 value = 'email'
 
 [auth.session.refreshToken]
-expiresIn = 2592000
+expiresIn = 2629800 # set lower in prod
 
 [auth.method]
 [auth.method.anonymous]
@@ -114,9 +114,9 @@ enabled = true
 enabled = true
 
 [auth.method.emailPassword]
-hibpEnabled = false
-emailVerificationRequired = false
-passwordMinLength = 9
+hibpEnabled = false # enable in prod
+emailVerificationRequired = false # enable in prod
+passwordMinLength = 9 # 12 in prod
 
 [auth.method.smsPasswordless]
 enabled = false
@@ -142,6 +142,7 @@ enabled = false
 
 [auth.method.oauth.github]
 enabled = true
+# audience = 'audience'
 clientId = '{{ secrets.AUTH_PROVIDER_GITHUB_CLIENT_ID }}'
 scope = ['openid', 'email', 'profile']
 clientSecret = '{{ secrets.AUTH_PROVIDER_GITHUB_CLIENT_SECRET }}'
@@ -151,6 +152,7 @@ enabled = false
 
 [auth.method.oauth.google]
 enabled = true
+# audience = 'audience'
 clientId = '{{ secrets.AUTH_PROVIDER_GOOGLE_CLIENT_ID }}'
 scope = ['openid', 'email', 'profile']
 clientSecret = '{{ secrets.AUTH_PROVIDER_GOOGLE_CLIENT_SECRET }}'
@@ -211,13 +213,16 @@ interval = '5m'
 
 [auth.rateLimit.global]
 limit = 100
-interval = '1m'
+interval = '15m'
 
 [postgres]
 version = '17.2-20250131-1'
 
 [postgres.resources]
 enablePublicAccess = true
+
+[postgres.resources.storage]
+capacity = 1
 
 [postgres.settings]
 maxConnections = 100
@@ -244,12 +249,12 @@ method = 'PLAIN'
 [storage]
 version = '0.6.1'
 
+# [storage.antivirus]
+# server = 'tcp://run-clamav:3310'
+
 [storage.rateLimit]
 limit = 100
 interval = '15m'
-
-# [storage.antivirus]
-# server = 'tcp://run-clamav:3310'
 
 [ai]
 version = '0.6.1'
@@ -272,6 +277,6 @@ synchPeriodMinutes = 10
 adminPassword = '{{ secrets.GRAFANA_ADMIN_PASSWORD }}'
 
 [observability.grafana.alerting]
-enabled = false
+enabled = true
 
 [observability.grafana.contacts]
