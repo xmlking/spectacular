@@ -15,7 +15,8 @@ Awesome **SvelteKit** Links
   - [svelte-headlessui](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit
   - [VisualSearch.js](https://documentcloud.github.io/visualsearch/), [magic-search](https://eucalyptus.github.io/magic-search/) for facet search.
     - TODO: use this to add/edit `annotations` Input.
-- - [svelte-jsoneditor](https://github.com/josdejong/svelte-jsoneditor) - A web-based tool to view, edit, format, transform, and validate JSON.
+  - [svelte-jsoneditor](https://github.com/josdejong/svelte-jsoneditor) - A web-based tool to view, edit, format, transform, and validate JSON.
+  - [Yeezy-Dates](https://yeezy-dates.vercel.app/) -  date parser for human-friendly inputs
 
 - Tables
 
@@ -81,6 +82,7 @@ Awesome **SvelteKit** Links
 
   - [Konsta UI](https://konstaui.com) Pixel perfect mobile UI components built with Tailwind CSS
   - [Framework7 Svelte](https://framework7.io/svelte/) Build full featured iOS, Android & Desktop apps
+  - [snail-ai](https://github.com/PrabhuKiran8790/snail-ai) - **Tauri** + **SvelteKit** + **TypeScript** template
 
 - Desktop/ Native
 

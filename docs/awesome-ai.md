@@ -1,4 +1,4 @@
-# Agent Swarm
+# AI Agents
 
 **Agentic AI** to transform  Web Apps into Hybrid AI WebApps
 
@@ -52,16 +52,29 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
 
 ## References
 
-- <https://x.com/blazity/status/1852380275981893952>
-- <https://shadcn-chatbot-kit.vercel.app/>
-- <https://github.com/Blazity/shadcn-chatbot-kit>
+- Chat Apps
+  - [shadcn-chatbot-kit](https://x.com/blazity/status/1852380275981893952), [demo](https://shadcn-chatbot-kit.vercel.app/), [source](https://github.com/Blazity/shadcn-chatbot-kit)
+
+- Web AI
 - [AiBrow](https://aibrow.ai/) - Use *in-browser* and *on-device* AI to enable powerful and private genAI features in your Web Applications.
   - aibrow All [Demos](https://aibrow.ai/demo.html)
   - Chrome Built-in AI [Playground](https://ai.zaps.dev/)
-- Vercel Swarm
-  - SDK news <https://x.com/lgrammel/status/1852647732185285106?s=46>
-  - API <https://github.com/vercel/ai/tree/main/packages/swarm>
-  - Video <https://youtu.be/Rs8B8fQsl28>
+  - AI Agents using Web AI
+- [WebLLM](https://webllm.mlc.ai/) - High-Performance In-Browser LLM Inference Engine. [Demo](https://chat.webllm.ai/)
+  - [Build a local and offline-capable chatbot with WebLLM](https://web.dev/articles/ai-chatbot-webllm)
+  - Example **Todo App** with [web-llm](https://github.com/christianliebel/todo-ai/tree/web-llm) and [prompt-api](https://github.com/christianliebel/todo-ai/tree/prompt-api)
+
+- Agentic Frameworks
+  - [eliza](https://elizaos.github.io/eliza/) (TypeScript) - is a powerful multi-agent simulation framework designed to create, deploy, and manage autonomous AI agents.
+  - Vercel Swarm
+    - SDK news <https://x.com/lgrammel/status/1852647732185285106?s=46>
+    - API <https://github.com/vercel/ai/tree/main/packages/swarm>
+    - Video <https://youtu.be/Rs8B8fQsl28>
+
+- Agentic Platforms
+  - **n8n** [Self-hosted AI starter kit](https://github.com/coleam00/ai-agents-masterclass/tree/main/local-ai-packaged)
+  - [arkai](https://arkai.app/) - AI Workflows for everyone
+
 - Libs
   - Gradual JSON Parser for Generative Pretrained Transformers [gjp-4-gpt](https://github.com/JacksonKearl/gjp-4-gpt)
   - zod-to-json-schema [openai-zod-to-json-schema](https://github.com/transitive-bullshit/openai-zod-to-json-schema)
@@ -69,3 +82,38 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
   - Building AI Agent Workflows With Vercel’s AI SDK: [A Practical Guide](https://www.callstack.com/blog/building-ai-agent-workflows-with-vercels-ai-sdk-a-practical-guide)
   - [flows-ai](https://flows-ai.callstack.com/) - A lightweight, type-safe AI workflow orchestrator inspired by Anthropic's agent patterns. Built on top of Vercel AI SDK.
   - Vercel AI SDK [Agents](https://sdk.vercel.ai/docs/foundations/agents)
+
+- Tutorials
+  - [AI Agents Masterclass](https://github.com/coleam00/ai-agents-masterclass)
+
+## Terms
+
+Model charectors (e.g., `Llama-3.2-3B-Instruct-q4f32_1-MLC`)
+
+- **Token:** The smallest unit of text an LLM can process.
+- **Context window:** The maximum number of tokens the model can process.
+- **Parameters or weights:** The internal variables learned during training, counted in billions.
+- **Quantization:** The number of bits representing the weights. More bits mean higher precision, but also higher memory usage.
+- **Floating-point number formats:** 32-bit floating numbers (full-precision, F32) offer better accuracy, while 16-bit floating numbers (half-precision, F16) have higher speeds and less memory usage but require compatible hardware.
+
+Model prompts
+
+- **System prompt:** This prompt defines the model's behavior, role, and character. It can also be used for grounding, that is, feeding custom data into the model that is not part of its training set (such as your domain-specific data). You can only specify one system prompt.
+- **User prompt:** Prompts entered by the user.
+- **Assistant prompt:** Answers from the assistant, optional.
+
+> [!NOTE]
+> User and assistant prompts can be used for **N-shot** prompting by providing natural language examples to the LLM on how it should behave or respond.
+
+Example:
+
+```js
+const messages = [
+  { role: "system",
+    content: `You are a helpful assistant. You will answer questions related to
+    the user's to-do list. Decline all other requests not related to the user's
+    todos. This is the to-do list in JSON: ${JSON.stringify(todos)}`
+  },
+  {role: "user", content: "How many open todos do I have?"}
+];
+```

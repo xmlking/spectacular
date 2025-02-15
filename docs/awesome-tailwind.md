@@ -35,6 +35,7 @@ Awesome **Tailwind CSS** Links
 - [Collection of Tailwind Components](https://github.com/unlight/tailwind-components)
 - [Beautiful CSS box-shadow examples](https://getcssscan.com/css-box-shadow-examples)
 - [storyblok-that-speakers](https://github.com/bradgarropy/jqq-demos/tree/main/storyblok-that-speakers#visual-editing) showcase [responsive grid](https://github.com/bradgarropy/jqq-demos/blob/main/storyblok-that-speakers/my-app/src/routes/speakers/%2Bpage.svelte#L17-L20)
+- [Sticky-Top-Bottom](https://developer.chrome.com/blog/css-scroll-state-queries) - Use CSS `scroll-state()`
 
 ## FQA
 
