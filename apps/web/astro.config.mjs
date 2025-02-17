@@ -1,13 +1,12 @@
 import node from '@astrojs/node';
-import partytown from '@astrojs/partytown';
-import starlight from '@astrojs/starlight';
+import { defineConfig, envField } from 'astro/config';
 import svelte from '@astrojs/svelte';
+import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
+import starlight from '@astrojs/starlight';
+import partytown from '@astrojs/partytown';
 import expressiveCode from 'astro-expressive-code';
 import mdx from '@astrojs/mdx';
-import { defineConfig, envField } from 'astro/config';
-
-import tailwindcss from '@tailwindcss/vite';
 
 const SITE_URL = process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL : 'http://localhost:4321';
 
@@ -16,27 +15,6 @@ export default defineConfig({
   site: SITE_URL,
 
   integrations: [svelte(), starlight({ title: 'Web', disable404Route: true }), partytown(), expressiveCode(), mdx()],
-
-  // HINT: To set build output, same way like sveltekit for Dockerfile
-  build: {
-    server: './build',
-    client: './build/client',
-    serverEntry: 'index.js',
-  },
-
-  adapter: process.env.VERCEL
-    ? vercel({
-        webAnalytics: {
-          enabled: true,
-        },
-        speedInsights: {
-          enabled: true,
-        },
-      })
-    : node({
-        mode: 'standalone',
-      }),
-
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'hover',
@@ -72,4 +50,17 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: process.env.VERCEL
+    ? vercel({
+        webAnalytics: {
+          enabled: true,
+        },
+        speedInsights: {
+          enabled: true,
+        },
+      })
+    : node({
+        mode: 'standalone',
+      }),
 });
