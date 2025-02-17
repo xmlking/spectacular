@@ -499,16 +499,6 @@ importers:
 
   apps/web:
     dependencies:
-      '@tailwindcss/vite':
-        specifier: 4.0.6
-        version: 4.0.6(vite@6.1.0(@types/node@22.13.4)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))
-      sharp:
-        specifier: 0.33.5
-        version: 0.33.5
-    devDependencies:
-      '@astrojs/check':
-        specifier: 0.9.4
-        version: 0.9.4(typescript@5.7.3)
       '@astrojs/mdx':
         specifier: 4.0.8
         version: 4.0.8(astro@5.3.0(@types/node@22.13.4)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.7)(typescript@5.7.3)(yaml@2.7.0))
@@ -536,18 +526,9 @@ importers:
       '@fontsource/source-code-pro':
         specifier: 5.1.1
         version: 5.1.1
-      '@spectacular/biome-config':
-        specifier: workspace:*
-        version: link:../../packages/biome-config
-      '@spectacular/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
-      '@spectacular/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
-      '@tailwindcss/typography':
-        specifier: 0.5.16
-        version: 0.5.16(tailwindcss@4.0.6)
+      '@tailwindcss/vite':
+        specifier: 4.0.6
+        version: 4.0.6(vite@6.1.0(@types/node@22.13.4)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))
       '@vitest/coverage-v8':
         specifier: 3.0.5
         version: 3.0.5(vitest@3.0.5)
@@ -566,6 +547,9 @@ importers:
       mode-watcher:
         specifier: 0.5.1
         version: 0.5.1(svelte@5.20.1)
+      sharp:
+        specifier: 0.33.5
+        version: 0.33.5
       svelte:
         specifier: 5.20.1
         version: 5.20.1
@@ -581,6 +565,13 @@ importers:
       vitest:
         specifier: 3.0.5
         version: 3.0.5(@types/debug@4.1.12)(@types/node@22.13.4)(@vitest/ui@3.0.5)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.29.1)(yaml@2.7.0)
+    devDependencies:
+      '@spectacular/biome-config':
+        specifier: workspace:*
+        version: link:../../packages/biome-config
+      '@spectacular/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
 
   packages/assets:
     devDependencies:
@@ -11193,14 +11184,6 @@ snapshots:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.17
-
-  '@tailwindcss/typography@0.5.16(tailwindcss@4.0.6)':
-    dependencies:
-      lodash.castarray: 4.4.0
-      lodash.isplainobject: 4.0.6
-      lodash.merge: 4.6.2
-      postcss-selector-parser: 6.0.10
-      tailwindcss: 4.0.6
 
   '@tailwindcss/vite@4.0.6(vite@6.1.0(@types/node@22.13.4)(jiti@2.4.2)(lightningcss@1.29.1)(yaml@2.7.0))':
     dependencies:

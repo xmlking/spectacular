@@ -1,11 +1,10 @@
-import mdx from '@astrojs/mdx';
 import node from '@astrojs/node';
 import partytown from '@astrojs/partytown';
-import sitemap from '@astrojs/sitemap';
 import starlight from '@astrojs/starlight';
 import svelte from '@astrojs/svelte';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 import expressiveCode from 'astro-expressive-code';
+import mdx from '@astrojs/mdx';
 import { defineConfig, envField } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
@@ -16,14 +15,7 @@ const SITE_URL = process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL 
 export default defineConfig({
   site: SITE_URL,
 
-  integrations: [
-    starlight({ title: 'Web', disable404Route: true }),
-    svelte(),
-    sitemap(),
-    partytown(),
-    expressiveCode(),
-    mdx(),
-  ],
+  integrations: [svelte(), starlight({ title: 'Web', disable404Route: true }), partytown(), expressiveCode(), mdx()],
 
   // HINT: To set build output, same way like sveltekit for Dockerfile
   build: {
