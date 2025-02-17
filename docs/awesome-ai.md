@@ -74,6 +74,7 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
 - Agentic Platforms
   - **n8n** [Self-hosted AI starter kit](https://github.com/coleam00/ai-agents-masterclass/tree/main/local-ai-packaged)
   - [arkai](https://arkai.app/) - AI Workflows for everyone
+  - [flowiseai](https://flowiseai.com/) - Open source low-code tool for developers to build customized LLM orchestration flow & AI agents
 
 - Libs
   - Gradual JSON Parser for Generative Pretrained Transformers [gjp-4-gpt](https://github.com/JacksonKearl/gjp-4-gpt)
