@@ -222,7 +222,7 @@ version = '17.2-20250131-1'
 enablePublicAccess = true
 
 [postgres.resources.storage]
-capacity = 1
+capacity = 10
 
 [postgres.settings]
 maxConnections = 100
