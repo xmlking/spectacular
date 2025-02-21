@@ -43,7 +43,7 @@ hasura console
 hasura seed create users --database-name default --from-table auth.users --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create user_roles --database-name default --from-table auth.user_roles --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create organizations --database-name default --from-table public.organizations --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
-hasura seed create user_org_roles --database-name default --from-table public.user_org_roles --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
+hasura seed create memberships --database-name default --from-table public.memberships --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create groups --database-name default --from-table public.groups --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create user_groups --database-name default --from-table public.user_groups --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret
 hasura seed create rules --database-name default --from-table rules --endpoint https://local.hasura.local.nhost.run --admin-secret hasura-admin-secret

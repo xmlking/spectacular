@@ -9,7 +9,7 @@ Awesome **SvelteKit** Links
   - [Skeleton UI](https://www.skeleton.dev/) UI components designed for Tailwind, Svelte and SvelteKit.
   - [GrailUI](https://grail-ui.vercel.app/) is a set of headless UI components, actions and utilities.
   - [Flowbite](https://flowbite-svelte.com/) components for Svelte, built on Tailwind CSS
-  - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSSx
+  - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSS
   - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
   - [Melt UI](https://www.melt-ui.com/) strives to be the de-facto headless UI library for Svelte.
   - [svelte-headlessui](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit

@@ -107,9 +107,9 @@ await nhost.auth.signUp({
 
 Current user's `allowed-roles` and `default-role` once they switch to an `Org` in multi-tenancy setup :
 
-> allowed roles = user roles (auth.user_roles) + org role (public.user_org_roles)
+> allowed roles = user roles (auth.user_roles) + org role (public.memberships)
 
-> default role =  org role (public.user_org_roles)  =  user default role (auth.user)
+> default role =  org role (public.memberships)  =  user default role (auth.user)
 
 ### Set Role for GraphQL Requests
 
@@ -180,7 +180,7 @@ From this diagram, here are some info you need to know:
 3. `org:owner` and `org:admin` of an _organization_ can invite any pre-registered or un-registered users to join their _organization_ by inviting via Web UI.
    1. Users are invited with one of the roles: `org:member` or  `org:admin`  or  `org:billing` etc. NOT `org:owner`
    2. An organization can have only one owner, and ownership can be transferred.
-4. `sys:admin` can have a Custom UI to assign/unassign _Organizations_ to _Users_ in bulk. This data is stored in `public.user_org_roles` table.
+4. `sys:admin` can have a Custom UI to assign/unassign _Organizations_ to _Users_ in bulk. This data is stored in `public.memberships` table.
 
 ### Org Permissions
 
@@ -209,11 +209,11 @@ From this diagram, here are some info you need to know:
 
 1. **Anonymous** (`public` role) user should be able to self register account as long as their email domain is in the allowed email domains (`AUTH_ACCESS_CONTROL_ALLOWED_EMAIL_DOMAINS`) and not in blacklist(`AUTH_ACCESS_CONTROL_BLOCKED_EMAILS`) for a give `Organization`. Checks are handled by `hadura-auth` for home-org.
    1. This should result creating row in `auth.users` table with with `default_org=AUTH_USER_DEFAULT_ROLE` and multiple rows added in `auth.user_roles` matching to `AUTH_USER_DEFAULT_ALLOWED_ROLES` _automatically_.
-   2. This should result creating multiple rows  _automatically_ in  `public.user_org_roles` table with one of the row having `is_default_role=true` that match to `auth.user.default_role` via _trigger_.
+   2. This should result creating multiple rows  _automatically_ in  `public.memberships` table with one of the row having `is_default_role=true` that match to `auth.user.default_role` via _trigger_.
 2. **User** should be able switch the `default_org` and `default_role` for home/non-home `orgs` applied only during that user **session**.
-3. **Administrator** should be able **ADD** new  **non-home** `orgs` and assciated `allowed_roles` for **any** selected user and set  `is_default_role` in `public.user_org_roles`.
-4. **Administrator** should be able **REMOVE** existing  **non-home** `orgs` and assciated `allowed_roles` for **any** selected user in  `public.user_org_roles` for `non-home` org.
-5. **Administrator** should be able update **any** user's default role in `public.user_org_roles` for `non-home` orgs. This should change `is_default_role` appropriately by **trigger**.
+3. **Administrator** should be able **ADD** new  **non-home** `orgs` and assciated `allowed_roles` for **any** selected user and set  `is_default_role` in `public.memberships`.
+4. **Administrator** should be able **REMOVE** existing  **non-home** `orgs` and assciated `allowed_roles` for **any** selected user in  `public.memberships` for `non-home` org.
+5. **Administrator** should be able update **any** user's default role in `public.memberships` for `non-home` orgs. This should change `is_default_role` appropriately by **trigger**.
 6. Similarly **Administrator** should **ADD** / **REMOVE** roles in **home** `org` by add/remove roles in `auth.user_roles` table and set **home** org's `default_role`  in `auth.users` table.
 
 ### Deligation
