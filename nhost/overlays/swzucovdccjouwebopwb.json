@@ -24,14 +24,15 @@
     "path": "/auth/redirections/allowedUrls",
     "value": [
       "https://console.traefik.me:5173",
-      "https://console.traefik.me:5173/profile",
-      "https://console.traefik.me:5173/dashboard/profile",
-      "https://console.traefik.me",
-      "https://console.traefik.me/profile",
-      "https://console.traefik.me/dashboard/profile",
+      "https://console.traefik.me:5173/user/profile",
+      "https://console.traefik.me:3000",
+      "https://console.traefik.me:3000/user/profile",
+      "https://console.traefik.me:4173",
+      "https://console.traefik.me:4173/user/profile",
       "https://spectacular-console.vercel.app",
-      "https://spectacular-console.vercel.app/profile",
-      "https://spectacular-console.vercel.app/dashboard/profile",
+      "https://spectacular-console.vercel.app/user/profile",
+      "https://spectacular-console-git-main-spectacular.vercel.app",
+      "https://spectacular-console-git-main-spectacular.vercel.app/user/profile",
       "https://*.vercel.app"
     ]
   },

@@ -9,17 +9,11 @@
     "path": "/auth/redirections/allowedUrls",
     "value": [
       "https://console.traefik.me:5173",
-      "https://console.traefik.me:5173/profile",
-      "https://console.traefik.me:5173/dashboard/profile",
+      "https://console.traefik.me:5173/user/profile",
       "https://console.traefik.me:3000",
-      "https://console.traefik.me:3000/profile",
-      "https://console.traefik.me:3000/dashboard/profile",
+      "https://console.traefik.me:3000/user/profile",
       "https://console.traefik.me:4173",
-      "https://console.traefik.me:4173/profile",
-      "https://console.traefik.me:4173/dashboard/profile",
-      "https://console.traefik.me",
-      "https://console.traefik.me/profile",
-      "https://console.traefik.me/dashboard/profile"
+      "https://console.traefik.me:4173/user/profile"
     ]
   },
   {
@@ -29,18 +23,18 @@
   },
   {
     "op": "add",
-    "path": "/auth/method/webauthn/relyingParty/origins/1",
+    "path": "/auth/method/webauthn/relyingParty/origins/-",
+    "value": "https://console.traefik.me:5173"
+  },
+  {
+    "op": "add",
+    "path": "/auth/method/webauthn/relyingParty/origins/-",
     "value": "https://console.traefik.me:3000"
   },
   {
     "op": "add",
-    "path": "/auth/method/webauthn/relyingParty/origins/2",
+    "path": "/auth/method/webauthn/relyingParty/origins/-",
     "value": "https://console.traefik.me:4173"
-  },
-  {
-    "op": "add",
-    "path": "/auth/method/webauthn/relyingParty/origins/3",
-    "value": "https://console.traefik.me"
   },
   {
     "op": "replace",
