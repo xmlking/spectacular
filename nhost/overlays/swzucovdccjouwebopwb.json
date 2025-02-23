@@ -6,13 +6,18 @@
   },
   {
     "op": "add",
-    "path": "/auth/method/webauthn/relyingParty/origins/1",
+    "path": "/auth/method/webauthn/relyingParty/origins/-",
     "value": "https://spectacular-console.vercel.app"
   },
   {
     "op": "add",
-    "path": "/auth/method/webauthn/relyingParty/origins/2",
+    "path": "/auth/method/webauthn/relyingParty/origins/-",
     "value": "https://spectacular-console-git-main-spectacular.vercel.app"
+  },
+  {
+    "op": "add",
+    "path": "/auth/method/webauthn/relyingParty/origins/-",
+    "value": "https://console.traefik.me:5173"
   },
   {
     "op": "replace",
