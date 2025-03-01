@@ -43,11 +43,6 @@
   },
   {
     "op": "replace",
-    "path": "/graphql/security/forbidAminSecret",
-    "value": true
-  },
-  {
-    "op": "replace",
     "path": "/auth/session/accessToken/expiresIn",
     "value": 3600
   },
