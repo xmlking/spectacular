@@ -42,6 +42,10 @@
     "value": false
   },
   {
+    "op": "remove",
+    "path": "/graphql/security/maxDepthQueries"
+  },
+  {
     "op": "replace",
     "path": "/auth/session/accessToken/expiresIn",
     "value": 3600
