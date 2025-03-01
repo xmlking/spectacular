@@ -46,13 +46,15 @@ const handleSwitchOrg: ChangeEventHandler<HTMLSelectElement> = async (event) => 
 
 {#if $data}
   {@const allowedOrgs = $data.allowedOrgs}
-  <select
-    class="select"
-    bind:value
-    on:change={handleSwitchOrg}
-  >
-    {#each allowedOrgs as org}
-        <option value={org.orgId}>{org.organization.displayName}</option>
-    {/each}
-  </select>
+  {#if allowedOrgs && allowedOrgs.length > 0}
+    <select
+      class="select"
+      bind:value
+      on:change={handleSwitchOrg}
+    >
+      {#each allowedOrgs as org}
+          <option value={org.orgId}>{org.organization.displayName}</option>
+      {/each}
+    </select>
+  {/if}
 {/if}

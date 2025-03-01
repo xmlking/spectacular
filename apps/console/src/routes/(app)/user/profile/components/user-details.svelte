@@ -327,7 +327,7 @@ $: if (id !== PendingValue) {
         <div class="flex items-center">
            <strong>Groups:</strong>
           <div>
-            {#each initialData.groups as group}
+            {#each initialData.groups ?? [] as group}
               {#if group.group.displayName === PendingValue}
                 <div class="placeholder animate-pulse" />
               {:else}
