@@ -19,7 +19,7 @@ corsDomain = ['*']
 devMode = true
 enableAllowList = false # enable it for prod
 enableConsole = true
-enableRemoteSchemaPermissions = true
+enableRemoteSchemaPermissions = false
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
 inferFunctionPermissions = true
 liveQueriesMultiplexedRefetchInterval = 1000
@@ -277,6 +277,6 @@ synchPeriodMinutes = 10
 adminPassword = '{{ secrets.GRAFANA_ADMIN_PASSWORD }}'
 
 [observability.grafana.alerting]
-enabled = true
+enabled = false
 
 [observability.grafana.contacts]
