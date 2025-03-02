@@ -935,8 +935,8 @@ importers:
         specifier: 0.5.1
         version: 0.5.1(svelte@5.20.5)
       paneforge:
-        specifier: 1.0.0-next.3
-        version: 1.0.0-next.3(svelte@5.20.5)
+        specifier: 1.0.0-next.4
+        version: 1.0.0-next.4(svelte@5.20.5)
       postcss-import:
         specifier: 16.1.0
         version: 16.1.0(postcss@8.5.3)
@@ -6647,10 +6647,10 @@ packages:
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.1
 
-  paneforge@1.0.0-next.3:
-    resolution: {integrity: sha512-he/IlhHhugS8L0MLNEjzdY8EuKio5vu2FOzkzonQv8jgfRuukAMaDkEMXWhgkTgfqV++kE2adc353NG8wsnH5w==}
+  paneforge@1.0.0-next.4:
+    resolution: {integrity: sha512-xB7iqIx6sT+XDRx/Eps+lddN3X7zRy8RIqXXFimGuFF6d+3s4YoXrk8SdNwEK5U/mqwupeKX0BbSfy0z9W9feA==}
     peerDependencies:
-      svelte: ^5.11.0
+      svelte: ^5.20.0
 
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -15559,10 +15559,10 @@ snapshots:
       nanoid: 5.1.2
       svelte: 4.2.19
 
-  paneforge@1.0.0-next.3(svelte@5.20.5):
+  paneforge@1.0.0-next.4(svelte@5.20.5):
     dependencies:
       svelte: 5.20.5
-      svelte-toolbelt: 0.4.6(svelte@5.20.5)
+      svelte-toolbelt: 0.7.1(svelte@5.20.5)
 
   parent-module@1.0.1:
     dependencies:
