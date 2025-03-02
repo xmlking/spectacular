@@ -222,7 +222,7 @@ version = '17.2-20250226-1'
 enablePublicAccess = true
 
 [postgres.resources.storage]
-capacity = 10
+capacity = 1
 
 [postgres.settings]
 maxConnections = 100
@@ -247,7 +247,7 @@ method = 'PLAIN'
 # messagingServiceId = 'twilioMessagingServiceId'
 
 [storage]
-version = '0.7.0'
+version = '0.7.1'
 
 # [storage.antivirus]
 # server = 'tcp://run-clamav:3310'
