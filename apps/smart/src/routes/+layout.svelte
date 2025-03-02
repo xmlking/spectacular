@@ -1,11 +1,10 @@
 <script lang="ts">
-import { page } from '$app/stores';
 import AppFooter from '$lib/components/layout/app-footer.svelte';
 import AppHeader from '$lib/components/layout/app-header.svelte';
 import AppSidebar from '$lib/components/layout/app-sidebar.svelte';
 import Metadata from '$lib/components/layout/metadata.svelte';
-import { i18n } from '$lib/i18n';
-import { ParaglideJS } from '@inlang/paraglide-sveltekit';
+import { page } from '$app/state';
+import { locales, localizeHref } from '$i18n/runtime';
 import * as Sidebar from '@spectacular/ui/components/sidebar';
 import { Toaster } from '@spectacular/ui/components/sonner';
 import { ModeWatcher } from 'mode-watcher';
@@ -22,7 +21,7 @@ type Props = {
 let { children }: Props = $props();
 
 $effect(() => {
-  updateTheme($config.theme, $page.url.pathname);
+  updateTheme($config.theme, page.url.pathname);
 });
 </script>
 
@@ -30,7 +29,6 @@ $effect(() => {
 <Metadata />
 <Toaster />
 
-<ParaglideJS {i18n}>
 <Sidebar.Provider>
 	<AppSidebar />
 	<Sidebar.Inset>
@@ -41,4 +39,9 @@ $effect(() => {
 		<AppFooter />
 	</Sidebar.Inset>
 </Sidebar.Provider>
-</ParaglideJS>
+
+<div style="display:none">
+	{#each locales as locale}
+		<a href={localizeHref(page.url.pathname, { locale })}>{locale}</a>
+	{/each}
+</div>

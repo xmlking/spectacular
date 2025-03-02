@@ -1,14 +1,16 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
-import { page } from '$app/stores';
+import { page } from '$app/state';
 import * as m from '$i18n/messages';
-import type { AvailableLanguageTag } from '$i18n/runtime';
-import { i18n } from '$lib/i18n';
+import type { Locale } from '$i18n/runtime';
+import { setLocale, overwriteSetLocale } from '$i18n/runtime';
+// import { resolveRoute } from '@inlang/paraglide-js/adapter-utils';
 
-function switchToLanguage(newLanguage: AvailableLanguageTag) {
-  const canonicalPath = i18n.route($page.url.pathname);
-  const localisedPath = i18n.resolveRoute(canonicalPath, newLanguage);
-  goto(localisedPath);
+function switchToLanguage(newLanguage: Locale) {
+  // const canonicalPath = i18n.route(page.url.pathname);
+  // const localisedPath = i18n.resolveRoute(canonicalPath, newLanguage);
+  // goto(localisedPath);
+  setLocale(newLanguage);
 }
 </script>
 

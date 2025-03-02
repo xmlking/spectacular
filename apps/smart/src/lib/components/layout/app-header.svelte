@@ -1,4 +1,5 @@
 <script lang="ts">
+import { localizeHref } from '$i18n/runtime';
 import CommandMenu from '$lib/components/layout/command-menu.svelte';
 import ModeToggle from '$lib/components/layout/mode-toggle.svelte';
 import { siteConfig } from '$lib/config/site.js';
@@ -32,7 +33,7 @@ import * as Sidebar from '@spectacular/ui/components/sidebar';
       <CommandMenu />
     </div>
     <nav class="flex items-center">
-      <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">
+      <a href={localizeHref(siteConfig.links.github)} target="_blank" rel="noopener noreferrer">
         <div
           class={cn(
             buttonVariants({
@@ -46,7 +47,7 @@ import * as Sidebar from '@spectacular/ui/components/sidebar';
           <span class="sr-only">GitHub</span>
         </div>
       </a>
-      <a href={siteConfig.links.twitter} target="_blank" rel="noreferrer">
+      <a href={localizeHref(siteConfig.links.twitter)} target="_blank" rel="noreferrer">
         <div
           class={cn(
             buttonVariants({

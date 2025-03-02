@@ -24,7 +24,7 @@
     "lang:validate": "inlang validate --project ./project.inlang",
     "lint": "biome lint",
     "preview": "ORIGIN=https://console.traefik.me:4173 dotenv-run -f .env -f .secrets -v -- vite preview",
-    "prepare": "svelte-kit sync",
+    "prepare": "svelte-kit sync || echo ''",
     "sync": "dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
     "sync:production": "NODE_ENV=production dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
     "test": "pnpm run test:integration && pnpm run test:unit",

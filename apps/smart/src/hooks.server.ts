@@ -1,4 +1,12 @@
-import { i18n } from '$lib/i18n';
 import type { Handle } from '@sveltejs/kit';
-const handleParaglide: Handle = i18n.handle();
-export const handle: Handle = handleParaglide;
+import { paraglideMiddleware } from '$i18n/server';
+
+// creating a handle to use the paraglide middleware
+const paraglideHandle: Handle = ({ event, resolve }) =>
+  paraglideMiddleware(event.request, ({ locale }) => {
+    return resolve(event, {
+      transformPageChunk: ({ html }) => html.replace('%lang%', locale),
+    });
+  });
+
+export const handle: Handle = paraglideHandle;

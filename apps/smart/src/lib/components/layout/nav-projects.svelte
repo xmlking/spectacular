@@ -1,4 +1,5 @@
 <script lang="ts">
+import { localizeHref } from '$i18n/runtime';
 import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
 import { useSidebar } from '@spectacular/ui/components/sidebar';
 import * as Sidebar from '@spectacular/ui/components/sidebar';
@@ -29,7 +30,7 @@ const sidebar = useSidebar();
 			<Sidebar.MenuItem>
 				<Sidebar.MenuButton>
 					{#snippet child({ props })}
-						<a href={item.url} {...props}>
+						<a href={localizeHref(item.url)} {...props}>
 							<item.icon />
 							<span>{item.name}</span>
 						</a>

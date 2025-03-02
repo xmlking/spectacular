@@ -1,4 +1,5 @@
 <script lang="ts">
+import { localizeHref } from '$i18n/runtime';
 import * as Collapsible from '@spectacular/ui/components/collapsible';
 import * as Sidebar from '@spectacular/ui/components/sidebar';
 import ChevronRight from 'lucide-svelte/icons/chevron-right';
@@ -51,7 +52,7 @@ let {
 										<Sidebar.MenuSubItem>
 											<Sidebar.MenuSubButton>
 												{#snippet child({ props })}
-													<a href={subItem.url} {...props}>
+													<a href={localizeHref(subItem.url)} {...props}>
 														<span>{subItem.title}</span>
 													</a>
 												{/snippet}

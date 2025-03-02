@@ -1,9 +1,9 @@
 <script lang="ts">
 import { dev } from '$app/environment';
-import { page } from '$app/stores';
+import { page } from '$app/state';
 import { siteConfig } from '$lib/config/site.js';
 
-const title = $derived($page.data?.title ? `${$page.data.title} - ${siteConfig.name}` : siteConfig.name);
+const title = $derived(page.data?.title ? `${page.data.title} - ${siteConfig.name}` : siteConfig.name);
 </script>
 
 <svelte:head>
@@ -20,7 +20,7 @@ const title = $derived($page.data?.title ? `${$page.data.title} - ${siteConfig.n
 	<meta name="twitter:creator" content="huntabyte" />
 	<meta property="og:title" content={title} />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content={siteConfig.url + $page.url.pathname} />
+	<meta property="og:url" content={siteConfig.url + page.url.pathname} />
 	<meta property="og:image" content={siteConfig.ogImage} />
 	<meta property="og:image:alt" content={siteConfig.name} />
 	<meta property="og:image:width" content="1200" />
