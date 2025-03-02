@@ -5,4 +5,5 @@ VALUES
 
 ON CONFLICT (user_id, org_id) DO NOTHING;
 
+UPDATE public.memberships SET role = 'sys:admin' WHERE user_id = '8e91bfc4-520d-4349-9888-b628a848f649' AND org_id = '00000000-0000-0000-0000-000000000000';
 UPDATE public.memberships SET role = 'sys:admin' WHERE user_id = '8e91bfc4-520d-4349-9888-b628a848f649' AND org_id = 'ce1f436e-6e84-4c31-8c78-44d869b27b30';
