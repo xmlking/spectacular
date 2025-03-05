@@ -130,6 +130,7 @@ you can connect to the database using the database connection string from remote
 
 ```shell
 psql postgresql://hasurauser:hasura_password@db_host:5432/postgres
+psql postgres://postgres:[YOUR-PASSWORD]@swzucovdccjouwebopwb.db.us-west-2.nhost.run:5432/swzucovdccjouwebopwb
 ```
 
 ## Usage

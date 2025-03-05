@@ -216,14 +216,16 @@ hasura migrate status --database-name default --endpoint https://swzucovdccjouwe
 -- SET ROLE postgres;
 -- DROP SCHEMA storage CASCADE;
 -- DROP SCHEMA auth CASCADE;
+-- DROP SCHEMA graphite CASCADE;
 -- apply storage and auth schemas manually
+SET ROLE postgres;
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO public;
 ```
 
-If needed
+Only If needed
 
 ```sql
 SET ROLE postgres;
