@@ -218,6 +218,8 @@ hasura migrate status --database-name default --endpoint https://swzucovdccjouwe
 -- DROP SCHEMA auth CASCADE;
 -- DROP SCHEMA graphite CASCADE;
 -- apply storage and auth schemas manually
+-- https://github.com/nhost/hasura-auth/tree/main/migrations
+-- https://github.com/nhost/hasura-storage/tree/main/migrations/postgres 
 SET ROLE postgres;
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
@@ -247,12 +249,17 @@ hasura deploy --with-seeds --endpoint https://swzucovdccjouwebopwb.hasura.us-wes
 # (optionally) Apply all seed file:
 hasura seed apply --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 # (Or) Apply only a particular files:
-hasura seed apply --file 001_organizations.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 002_users.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 011_devices.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 012_rules.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 013_pools.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
-hasura seed apply --file 014_policies.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 001_users.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 002_user_roles.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 003_organizations.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 004_memberships.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 005_groups.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 006_user_groups.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 007_org_settings.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 008_user_settings.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 009_notifications.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 010_user_notifications.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
+hasura seed apply --file 015_invitations.sql --database-name default --endpoint https://swzucovdccjouwebopwb.hasura.us-west-2.nhost.run --admin-secret <HASURA_GRAPHQL_ADMIN_SECRET>
 ```
 
 ## Configuration
