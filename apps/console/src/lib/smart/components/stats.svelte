@@ -1,6 +1,6 @@
 <script lang="ts">
 import { onDestroy, onMount } from 'svelte';
-import { languageModelOptions } from '#components/settings.js';
+import { languageModelOptions } from '$lib/smart/components/settings.js';
 
 let assistant: AILanguageModel | undefined;
 onMount(async () => {

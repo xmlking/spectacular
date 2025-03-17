@@ -5,7 +5,7 @@ import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '@spectacular/skeleton/components';
 import { Alerts } from '@spectacular/skeleton/components/form';
-import * as Smart from '@spectacular/smart';
+import * as Smart from '$lib/smart/components';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';

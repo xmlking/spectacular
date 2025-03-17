@@ -15,7 +15,6 @@ export default {
     './src/**/*.{html,js,svelte,ts,md,svx}',
     join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}'),
     join(require.resolve('@spectacular/skeleton'), '../**/*.{html,js,svelte,ts}'),
-    join(require.resolve('@spectacular/smart'), '../**/*.{html,js,svelte,ts}'),
   ],
   theme: {
     extend: {

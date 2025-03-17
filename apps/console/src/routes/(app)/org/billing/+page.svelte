@@ -1,5 +1,5 @@
 <script lang="ts">
-import * as Smart from '@spectacular/smart';
+import * as Smart from '$lib/smart/components';
 </script>
 
 <svelte:head>
