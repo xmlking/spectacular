@@ -1,6 +1,6 @@
 <script lang="ts">
 import { getNhostClient } from '$lib/stores/nhost';
-import { Debug } from '@spectacular/skeleton/components';
+import { Debug } from '$lib/ui/components';
 
 const { user, accessToken } = getNhostClient();
 </script>

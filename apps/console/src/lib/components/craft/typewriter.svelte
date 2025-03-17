@@ -1,5 +1,5 @@
 <script lang="ts">
-import { typewriter } from '@spectacular/skeleton/transitions';
+import { typewriter } from '$lib/ui/transitions';
 
 let visible = false;
 </script>

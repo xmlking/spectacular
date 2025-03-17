@@ -16,8 +16,8 @@ import { type AddMembers, addMembersKeys as keys, addMembersSchema as schema } f
 import { getLoadingState } from '$lib/stores/loading';
 import { OrgRoles, type PartialGraphQLErrors } from '$lib/types';
 import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
-import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { DebugShell, GraphQLErrors } from '$lib/ui/components';
+import { Alerts } from '$lib/ui/components/form';
 import { Logger } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';

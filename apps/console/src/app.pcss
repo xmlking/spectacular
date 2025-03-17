@@ -1,4 +1,131 @@
-@import '@spectacular/skeleton/styles/default';
+@import '@fontsource-variable/inter';
+/* @import '@fontsource-variable/inter' layer(base) */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+  /* modern theme */
+  @font-face {
+    font-family: 'Quicksand';
+    src: url('/fonts/Quicksand.ttf');
+    font-display: swap;
+  }
+  /* rocket theme */
+  @font-face {
+    font-family: 'Space Grotesk';
+    src: url('/fonts/SpaceGrotesk.ttf');
+    font-display: swap;
+  }
+  /* seafoam theme */
+  @font-face {
+    font-family: 'Playfair Display';
+    src: url('/fonts/PlayfairDisplay-Italic.ttf');
+    font-display: swap;
+  }
+  /* vintage theme */
+  @font-face {
+    font-family: 'Abril Fatface';
+    src: url('/fonts/AbrilFatface.ttf');
+    font-display: swap;
+  }
+
+  html,
+  body {
+    @apply h-full overflow-hidden;
+  }
+}
+
+/* TODO */
+/* https://github.com/pevey/saluna/blob/main/src/app.pcss
+https://github.com/sharmapukar217/onblockit/blob/1d27bf8ef54394efb6e55651a72d6affd36f5394/src/lib/assets/styles/globals.pcss#L177
+https://github.com/pevey/saluna/blob/0258967cdcae3bfdfb61f5fa991fcc4921b7290c/src/app.pcss#L2 */
+
+@layer components {
+  /* Page Styles */
+  /* Use these to define common page styles. */
+  .page-container {
+    @apply page-padding container mx-auto space-y-10;
+  }
+  .page-container-wide {
+    @apply mx-auto w-full max-w-7xl space-y-10;
+  }
+  .page-container-aside {
+    @apply mx-auto w-full max-w-4xl space-y-10;
+  }
+  .page-padding {
+    @apply p-4 md:p-10;
+  }
+  .page-section {
+    @apply space-y-4;
+  }
+
+  /* apply skeleton FORM styles automatically */
+  /*
+  form {
+    input[type='color'],
+    input[type='text'],
+    input[type='email'],
+    input[type='url'],
+    input[type='password'],
+    input[type='number'],
+    input[type='date'],
+    input[type='datetime-local'],
+    input[type='month'],
+    input[type='search'],
+    input[type='tel'],
+    input[type='time'],
+    input[type='week']
+    input[type='file'] {
+      @apply input;
+    }
+    input[type='checkbox'] {
+      @apply checkbox;
+    }
+    input[type='radio'] {
+      @apply radio;
+    }
+    label {
+      @apply label;
+    }
+    textarea {
+      @apply textarea;
+    }
+    select {
+      @apply select;
+    }
+    input[type],
+    select,
+    textarea {
+      &[data-fs-error] {
+        @apply input-error;
+      }
+      &[data-fs-success] {
+        @apply input-success;
+      }
+      &[data-fs-warning] {
+        @apply input-warning;
+      }
+    }
+    label {
+      &[data-fs-error] {
+        @apply text-error-500;
+      }
+    }
+  }
+*/
+}
+
+/*
+@layer utilities {
+	.content-auto1 {
+		content-visibility: auto;
+	}
+}
+*/
+
 
 @layer components {
   /* Page Styles */

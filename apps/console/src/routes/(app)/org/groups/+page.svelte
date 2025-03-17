@@ -1,6 +1,6 @@
 <script lang="ts">
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import { DebugShell, GraphQLErrors } from '@spectacular/skeleton/components';
+import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Logger } from '@spectacular/utils';
 import SuperDebug from 'sveltekit-superforms';
 import type { PageData } from './$houdini';
