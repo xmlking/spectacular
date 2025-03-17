@@ -157,6 +157,7 @@ export const menuNavLinks: MenuNavLinks = {
         { href: '/ai/smart', label: 'Smart Components', keywords: 'Smart Components, ai, completion' },
         { href: '/ai/chat', label: 'Chat', keywords: 'chat, OpenAI' },
         { href: '/ai/rag', label: 'RAG Apps', keywords: 'RAG, ai, completion' },
+        { href: '/ai/gql', label: 'GQL Apps', keywords: 'GQL, ai, GraphQL' },
       ],
     },
   ],
