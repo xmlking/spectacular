@@ -5,7 +5,7 @@ import { Meta } from '$lib/components';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import { allLoaded, loaded, loading } from '$lib/graphql/loading';
 import { Tab, TabGroup } from '@skeletonlabs/skeleton';
-import { GraphQLErrors } from '@spectacular/skeleton/components';
+import { GraphQLErrors } from '$lib/ui/components';
 import type { PageData } from './$houdini';
 import ChangeEmailForm from './components/change-email.svelte';
 import ChangePasswordForm from './components/change-password.svelte';

@@ -2,8 +2,8 @@
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
-import { DebugShell } from '@spectacular/skeleton/components';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { DebugShell } from '$lib/ui/components';
+import { Alerts } from '$lib/ui/components/form';
 import { Support } from '$lib/smart/components';
 import * as Smart from '$lib/smart/components';
 import { Logger } from '@spectacular/utils';

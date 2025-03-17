@@ -1,5 +1,5 @@
 <script lang="ts">
-import { cn } from '#utils';
+import { cn } from '$lib/ui/utils';
 export let error: string | undefined;
 </script>
 

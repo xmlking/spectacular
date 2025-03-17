@@ -7,7 +7,7 @@ type T = Row;
 import type { DataHandler } from '@vincjo/datatables/legacy';
 import type { HTMLAttributes } from 'svelte/elements';
 import { getCtx } from './ctx.js';
-import { cn } from '#utils';
+import { cn } from '$lib/ui/utils';
 
 type $$Props = HTMLAttributes<HTMLTableSectionElement>;
 let className: $$Props['class'] = undefined;

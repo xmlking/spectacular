@@ -2,7 +2,7 @@
 import { page } from '$app/stores';
 import { ROUTE_DASHBOARD } from '$lib/constants';
 import { getNhostClient } from '$lib/stores/nhost';
-import { Icon } from '@spectacular/skeleton/components/icons';
+import { Icon } from '$lib/ui/components/icons';
 import { Logger } from '@spectacular/utils';
 import { Github } from 'lucide-svelte';
 

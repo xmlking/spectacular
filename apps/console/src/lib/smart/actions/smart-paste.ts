@@ -32,7 +32,7 @@ type SmartPasteAction<T extends Item> = Action<HTMLFormElement, Options<T> | und
  * @example
  * ```svelte
  * <script lang="ts">
- *   import { smartPaste } from "@spectacular/smart/actions";
+ *   import { smartPaste } from "$lib/smart/actions";
  *   let loading = writable(false);
  *   const jsonSchema = zod(personSchema).jsonSchema;
  *

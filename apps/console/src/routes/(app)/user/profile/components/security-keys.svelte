@@ -1,7 +1,7 @@
 <script lang="ts">
 import { type SecurityKeysFragment, fragment, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
-import { Alerts } from '@spectacular/skeleton/components/form';
+import { Alerts } from '$lib/ui/components/form';
 import { flip } from 'svelte/animate';
 import { quintOut } from 'svelte/easing';
 import { fade } from 'svelte/transition';

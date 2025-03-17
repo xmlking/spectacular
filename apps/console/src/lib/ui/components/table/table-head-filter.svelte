@@ -7,7 +7,7 @@ type T = Row;
 import type { DataHandler, Field, Comparator } from '@vincjo/datatables/legacy';
 import type { HTMLInputAttributes } from 'svelte/elements';
 import { getCtx } from './ctx.js';
-import { cn } from '#utils';
+import { cn } from '$lib/ui/utils';
 
 type $$Props = HTMLInputAttributes;
 let className: $$Props['class'] = undefined;

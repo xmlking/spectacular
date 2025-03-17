@@ -1,7 +1,7 @@
-import { getElement, getTextContent, setTextContent } from '#utils';
+import { getElement, getTextContent, setTextContent } from '$lib/ui/utils';
 
 import type { ActionReturn } from 'svelte/action';
-import type { ElementOrSelector } from '#utils';
+import type { ElementOrSelector } from '$lib/ui/utils';
 
 interface CopyAttributes {
   'on:!copy'?: (event: CustomEvent<string>) => void;

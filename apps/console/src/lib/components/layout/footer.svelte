@@ -1,5 +1,5 @@
 <script lang="ts">
-import { LogoIcon } from '@spectacular/skeleton/components/logos';
+import { LogoIcon } from '$lib/ui/components/logos';
 import { VERSION } from '@sveltejs/kit';
 import { Github, Linkedin, Twitter, Youtube } from 'lucide-svelte';
 

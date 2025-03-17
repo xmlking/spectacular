@@ -17,7 +17,7 @@
   ```
 -->
 <script lang="ts">
-import { ErrorMessage } from '@spectacular/skeleton/components/form';
+import { ErrorMessage } from '$lib/ui/components/form';
 import { Logger } from '@spectacular/utils';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
 import { chromeai } from 'chrome-ai';

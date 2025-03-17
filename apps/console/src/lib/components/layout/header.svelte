@@ -10,7 +10,7 @@ import { getNhostClient } from '$lib/stores/nhost';
 import { online } from '$lib/stores/window';
 import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 import { AppBar, LightSwitch, getDrawerStore, getModalStore, popup } from '@skeletonlabs/skeleton';
-import { LogoIcon } from '@spectacular/skeleton/components/logos';
+import { LogoIcon } from '$lib/ui/components/logos';
 import type { SubmitFunction } from '@sveltejs/kit';
 import {
   BookText,

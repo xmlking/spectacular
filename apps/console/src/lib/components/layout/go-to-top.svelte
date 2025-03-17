@@ -1,7 +1,7 @@
 <script lang="ts">
 import { browser } from '$app/environment';
 import { scroll } from '$lib/stores';
-import { cn } from '@spectacular/skeleton/utils';
+import { cn } from '$lib/ui/utils';
 import { ArrowUp } from 'lucide-svelte';
 import type { HTMLButtonAttributes } from 'svelte/elements';
 import { derived } from 'svelte/store';

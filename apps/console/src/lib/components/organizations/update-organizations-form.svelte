@@ -13,9 +13,9 @@ import {
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
-import { DebugShell, GraphQLErrors } from '@spectacular/skeleton';
-import { Alerts, InputChipWrapper } from '@spectacular/skeleton/components/form';
-import { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
+import { DebugShell, GraphQLErrors } from '$lib/ui/components';
+import { Alerts, InputChipWrapper } from '$lib/ui/components/form';
+import { InputPairs, type KeyValueRecord } from '$lib/ui/components/form';
 import { Logger, cleanClone } from '@spectacular/utils';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';

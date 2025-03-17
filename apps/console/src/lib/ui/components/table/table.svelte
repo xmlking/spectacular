@@ -11,7 +11,7 @@ import RowCount from './table-row-count.svelte';
 import RowsPerPage from './table-rows-per-page.svelte';
 import Pagination from './table-pagination.svelte';
 import { setCtx } from './ctx.js';
-import { cn } from '#utils';
+import { cn } from '$lib/ui/utils';
 
 type $$Props = HTMLTableAttributes;
 let className: $$Props['class'] = undefined;

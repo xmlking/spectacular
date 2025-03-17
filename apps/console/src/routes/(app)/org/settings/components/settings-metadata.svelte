@@ -1,7 +1,7 @@
 <script lang="ts">
 import { type OrgSettingsData$result, PendingValue, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
-import * as Table from '@spectacular/skeleton/components/table';
+import * as Table from '$lib/ui/components/table';
 import { Logger } from '@spectacular/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Settings, User } from 'lucide-svelte';

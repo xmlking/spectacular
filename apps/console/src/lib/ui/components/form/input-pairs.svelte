@@ -12,7 +12,7 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
 
   Usage:
   ```svelte
-    import  { InputPairs, type KeyValueRecord } from '@spectacular/skeleton/components/form';
+    import  { InputPairs, type KeyValueRecord } from '$lib/ui/components/form';
 
     const allowedKeyValues = {
       name: ['John', 'Jane', 'Alice', 'Bob'] as const,

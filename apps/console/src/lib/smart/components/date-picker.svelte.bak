@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ErrorMessage } from '@spectacular/skeleton/components/form';
+import { ErrorMessage } from '$lib/ui/components/form';
 import { Logger } from '@spectacular/utils';
 import { z } from 'zod';
 import { DatePicker } from '@svelte-plugins/datepicker';

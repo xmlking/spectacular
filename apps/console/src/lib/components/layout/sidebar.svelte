@@ -4,7 +4,7 @@ import { i18n } from '$lib/i18n';
 import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
 import { getNhostClient } from '$lib/stores/nhost';
 import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
-import { Icon } from '@spectacular/skeleton/components/icons';
+import { Icon } from '$lib/ui/components/icons';
 import { WandSparkles } from 'lucide-svelte';
 
 // Local

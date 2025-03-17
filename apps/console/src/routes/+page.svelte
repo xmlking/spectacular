@@ -2,7 +2,7 @@
 import { version } from '$app/environment';
 import * as m from '$i18n/messages';
 import { languageTag } from '$i18n/runtime';
-import { LogoAnim } from '@spectacular/skeleton/components/logos';
+import { LogoAnim } from '$lib/ui/components/logos';
 console.log(`Client version: ${version}`);
 </script>
 

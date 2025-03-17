@@ -104,12 +104,6 @@ importers:
       '@spectacular/role-houdini':
         specifier: workspace:*
         version: link:../../packages/role-houdini
-      '@spectacular/skeleton':
-        specifier: workspace:*
-        version: link:../../packages/skeleton-ui
-      '@spectacular/smart':
-        specifier: workspace:*
-        version: link:../../packages/smart
       '@spectacular/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -200,6 +194,9 @@ importers:
       chrome-ai:
         specifier: 1.11.1
         version: 1.11.1
+      clsx:
+        specifier: 2.1.1
+        version: 2.1.1
       date-fns:
         specifier: 4.1.0
         version: 4.1.0

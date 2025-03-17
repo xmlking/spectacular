@@ -1,7 +1,7 @@
 <script lang="ts" generics="T">
 import type { QueryResult } from '$houdini';
 import { getLoadingState } from '$lib/stores/loading';
-import { DebugShell, GraphQLErrors, NotFound, SomethingWentWrong } from '@spectacular/skeleton/components';
+import { DebugShell, GraphQLErrors, NotFound, SomethingWentWrong } from '$lib/ui/components';
 import SuperDebug from 'sveltekit-superforms';
 
 export let entityName: string;

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { DebugShell } from '@spectacular/skeleton';
+import { DebugShell } from '$lib/ui/components';
 import { Logger } from '@spectacular/utils';
 import type { MouseEventHandler } from 'svelte/elements';
 import SuperDebug from 'sveltekit-superforms';
