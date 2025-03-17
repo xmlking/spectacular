@@ -2,6 +2,30 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [v0.7.1](https://github.com/xmlking/spectacular/compare/e86d55e1a9b2c8ba0b4c618c828482dff08b9b19..v0.7.1) - 2025-03-17
+#### Bug Fixes
+- **(docs)** updated hasura cli docs - ([6daf768](https://github.com/xmlking/spectacular/commit/6daf768817cfd67d594a2b540dc9422a3204975d)) - [@xmlking](https://github.com/xmlking)
+- **(nhost)** schema - ([b373610](https://github.com/xmlking/spectacular/commit/b373610b7320d7c6e568e7c0ca788e296c3c005b)) - [@xmlking](https://github.com/xmlking)
+- **(smart)** upgrade inlang i18n to v2 - ([afe61ff](https://github.com/xmlking/spectacular/commit/afe61ff437d5d676d97002b8c376e969a37a595c)) - [@xmlking](https://github.com/xmlking)
+- **(smart)** upgrade inlang i18n to v2 - ([603e24a](https://github.com/xmlking/spectacular/commit/603e24a141b93575a61047a8331c4c1fa4c4ad28)) - [@xmlking](https://github.com/xmlking)
+- **(ui)** updated shadcn components - ([d33b5b7](https://github.com/xmlking/spectacular/commit/d33b5b72a9b81681af06c71ce98256bcf45b1f74)) - [@xmlking](https://github.com/xmlking)
+- adding text-to-gql example - ([b17a6b3](https://github.com/xmlking/spectacular/commit/b17a6b39be7796434b14ff3a663c7d84354152a3)) - [@xmlking](https://github.com/xmlking)
+- adding uuid_nil() as default_org for new users - ([642265a](https://github.com/xmlking/spectacular/commit/642265a3990010d1ac2577e8a990f2541c6c0648)) - [@xmlking](https://github.com/xmlking)
+- added languine - ([2564580](https://github.com/xmlking/spectacular/commit/2564580155aaa138c55a869e503d57b777f2f5a6)) - [@xmlking](https://github.com/xmlking)
+- removed pro feature maxDepthQueries for cloud env - ([60c52de](https://github.com/xmlking/spectacular/commit/60c52de2d292205eb350622cd18535fe075ddf03)) - [@xmlking](https://github.com/xmlking)
+- removed pro feature forbidAminSecret for cloud env - ([0d8d1b8](https://github.com/xmlking/spectacular/commit/0d8d1b8edaeacf9de65647ff4007361e56d9fd86)) - [@xmlking](https://github.com/xmlking)
+- update nhost versions - ([bf84888](https://github.com/xmlking/spectacular/commit/bf84888f225219e928e5b07d48b27ae7816a4d94)) - [@xmlking](https://github.com/xmlking)
+- update nhost versions - ([ae94a47](https://github.com/xmlking/spectacular/commit/ae94a4774ceccc476529481e9194733f07a19291)) - [@xmlking](https://github.com/xmlking)
+- update nhost versions - ([dccfd54](https://github.com/xmlking/spectacular/commit/dccfd54057b89578cc5c4a2c209124f0b67c8862)) - [@xmlking](https://github.com/xmlking)
+- format - ([b15a5a4](https://github.com/xmlking/spectacular/commit/b15a5a4e25f54b0a184212032046bead7ed01899)) - [@xmlking](https://github.com/xmlking)
+- capacity = 10 in nhost.toml - ([e86d55e](https://github.com/xmlking/spectacular/commit/e86d55e1a9b2c8ba0b4c618c828482dff08b9b19)) - [@xmlking](https://github.com/xmlking)
+#### Build system
+- deps updated - ([e1103ac](https://github.com/xmlking/spectacular/commit/e1103ac1a4e916ecb14872354bd2162cea04929d)) - [@xmlking](https://github.com/xmlking)
+- nhost postgres.resources.storage.capacity changed to 1 - ([0984e3c](https://github.com/xmlking/spectacular/commit/0984e3cc59b15e38b6dfcbd6a5c91d4a4f7d2388)) - [@xmlking](https://github.com/xmlking)
+- deps updated - ([3f059ee](https://github.com/xmlking/spectacular/commit/3f059eebcdbf03feae1c5284b9cdfcb3413c2595)) - [@xmlking](https://github.com/xmlking)
+
+- - -
+
 ## [v0.7.0](https://github.com/xmlking/spectacular/compare/43ae4cd3db3e95d10daf3dd162fc4651bdb087c3..v0.7.0) - 2025-02-17
 #### Bug Fixes
 - **(console)** updated permissions for org for user role - ([6154819](https://github.com/xmlking/spectacular/commit/61548199d41f2542dbb4205c007dfe7dc9e5d238)) - [@xmlking](https://github.com/xmlking)
