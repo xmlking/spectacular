@@ -1,4 +1,7 @@
-# Setup
+---
+title: Setup Guide
+description: A guide to setup the SvelteKit application from the scratch.
+---
 
 ## Overview
 
