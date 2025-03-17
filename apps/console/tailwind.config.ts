@@ -21,9 +21,9 @@ export default {
         sans: ['Inter Variable', 'Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-      	// Your preferred accent color. Indigo is closest to Starlight’s defaults.
-      	accent: colors.amber
-      }
+        // Your preferred accent color. Indigo is closest to Starlight’s defaults.
+        accent: colors.amber,
+      },
     },
   },
   plugins: [
