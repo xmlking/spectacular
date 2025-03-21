@@ -4,6 +4,7 @@ import starlight from '@astrojs/starlight';
 import vercel from '@astrojs/vercel/static';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
+import rehypeMermaid from 'rehype-mermaid';
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
 /* https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables */
@@ -16,6 +17,11 @@ console.log('which runtime?', { site, base });
 export default defineConfig({
   site,
   base,
+
+  markdown: {
+    // Applied to .md and .mdx files
+    rehypePlugins: [rehypeMermaid],
+  },
 
   integrations: [
     starlight({

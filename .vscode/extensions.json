@@ -1,7 +1,6 @@
 {
   // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
   // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
-
   // List of extensions which should be recommended for users of this workspace.
   "recommendations": [
     // General
@@ -13,7 +12,7 @@
     "PKief.material-icon-theme",
     "hediet.vscode-drawio",
     "mikestead.dotenv",
-    "alberto-varela.monorepo-focus-workspace",
+    "folke.vscode-monorepo-workspace",
     "biomejs.biome",
     "ms-azuretools.vscode-docker",
     // Database
@@ -51,5 +50,8 @@
     "astro-build.astro-vscode"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
-  "unwantedRecommendations": ["ardenivanov.svelte-intellisense", "moalamri.inline-fold"]
+  "unwantedRecommendations": [
+    "ardenivanov.svelte-intellisense",
+    "moalamri.inline-fold"
+  ]
 }
