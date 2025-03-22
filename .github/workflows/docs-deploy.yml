@@ -51,6 +51,9 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      # Download Playwright and browser binaries for rehype-mermaid
+      - name: Install Playwright Browsers
+        run: pnpx playwright install --with-deps chromium
       - name: 🏗️ Build
         run: turbo run docs#build
       - name: ☁️ Upload Artifact
