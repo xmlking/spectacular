@@ -70,7 +70,6 @@ Awesome **SvelteKit** Links
 
   - [Svelte Sonner](https://svelte-sonner.vercel.app/)
   - [svelte-french-toast](https://svelte-french-toast.com/)
-  - [languine-ai/languine](https://github.com/languine-ai/languine) - Translate your application with Languine CLI powered by AI.
 
 - Icons
 

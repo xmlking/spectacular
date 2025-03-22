@@ -16,7 +16,6 @@
     "biome.jsonc": "biome.json*,.markuplintrc.cjs,.markdownlintignore,.lintstagedrc.cjs,.editorconfig,.textlintignore",
     ".env": ".env*,.secrets*",
     ".gitignore": ".gitattributes,.vercelignore",
-    "languine.json": "languine.json,languine.lock",
     "README.md": "DEVELOPERS.md,CHANGELOG.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,LICENSE",
     "Dockerfile": "*.Dockerfile,Dockerfile.*,compose*.yml,.dockerignore",
     "vitest.config.ts": "vitest.*",
@@ -123,7 +122,9 @@
     // "a11y-label-has-associated-control": "ignore"
   },
   ////////// vitest //////////
-  "vitest.include": ["**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,svelte}"],
+  "vitest.include": [
+    "**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,svelte}"
+  ],
   "vitest.exclude": [
     "**/node_modules/**",
     "$houdini/**",
@@ -139,14 +140,22 @@
     "plaintext": "html"
   },
   // for tailwind-variants
-  "tailwindCSS.experimental.classRegex": [["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]],
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "([\"'`][^\"'`]*.*?[\"'`])",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
+  ],
   ////////// TypeScript //////////
   // astro requires this
   "typescript.inlayHints.parameterNames.enabled": "all",
   ////////// Proto //////////
   "clang-format.style": "google",
   "protoc": {
-    "options": ["--proto_path=${workspaceRoot}/proto", "--proto_path=${env.GOPATH}/src"]
+    "options": [
+      "--proto_path=${workspaceRoot}/proto",
+      "--proto_path=${env.GOPATH}/src"
+    ]
   },
   ////////// Skeleton UI //////////
   "tailwindCSS.classAttributes": [
@@ -262,7 +271,6 @@
     "width",
     "zIndex"
   ],
-
   // ##################################################
   // ### Biome                                      ###
   // ##################################################
