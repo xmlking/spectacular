@@ -81,7 +81,11 @@
   },
   "pnpm": {
     "overrides": {
-      "cross-spawn": ">=7.0.5"
+      "cross-spawn": ">=7.0.5",
+      "cookie@<0.7.0": ">=0.7.0",
+      "path-to-regexp@>=4.0.0 <6.3.0": ">=6.3.0",
+      "esbuild@<=0.24.2": ">=0.25.0",
+      "solid-js@<1.9.4": ">=1.9.4"
     },
     "onlyBuiltDependencies": [
       "@vercel/speed-insights",
