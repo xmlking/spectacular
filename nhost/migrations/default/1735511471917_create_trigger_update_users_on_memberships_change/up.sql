@@ -9,7 +9,7 @@ BEGIN
     SET default_role = NEW.role,
         default_org  = NEW.org_id
     WHERE id = NEW.user_id
-      AND (default_org IS NULL OR default_org = uuid_nil());
+      AND default_org IS NULL;
   END IF;
 
   -- Case 2: Update users default_role when membership role changed, and it is user's current org

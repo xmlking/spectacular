@@ -17,7 +17,7 @@ key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
 [hasura.settings]
 corsDomain = ['*']
 devMode = true
-enableAllowList = false # enable it for prod
+enableAllowList = false                                   # enable it for prod
 enableConsole = true
 enableRemoteSchemaPermissions = false
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
@@ -49,14 +49,23 @@ limit = 100
 interval = '15m'
 
 [auth]
-version = '0.37.1'
+# version = '0.37.1'
+version = '0.0.0-dev'
 
 [auth.elevatedPrivileges]
 mode = 'recommended'
 
 [auth.redirections]
 clientUrl = 'https://console.traefik.me:5173'
-allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:5173/user/profile', 'https://console.traefik.me:4173', 'https://console.traefik.me:4173/user/profile', 'https://console.traefik.me:3000', 'https://console.traefik.me:3000/user/profile', 'https://*.vercel.app']
+allowedUrls = [
+  'https://console.traefik.me:5173',
+  'https://console.traefik.me:5173/user/profile',
+  'https://console.traefik.me:4173',
+  'https://console.traefik.me:4173/user/profile',
+  'https://console.traefik.me:3000',
+  'https://console.traefik.me:3000/user/profile',
+  'https://*.vercel.app',
+]
 
 [auth.signUp]
 enabled = true
@@ -99,6 +108,11 @@ value = 'allowedOrgs.orgId[]'
 key = 'user-email'
 value = 'email'
 
+[[auth.session.accessToken.CustomClaimsDefaults]]
+key = 'default-org'
+value = '00000000-0000-0000-0000-000000000000'
+
+
 [auth.session.refreshToken]
 expiresIn = 2629800 # set lower in prod
 
@@ -114,9 +128,9 @@ enabled = true
 enabled = true
 
 [auth.method.emailPassword]
-hibpEnabled = false # enable in prod
+hibpEnabled = false               # enable in prod
 emailVerificationRequired = false # enable in prod
-passwordMinLength = 9 # 12 in prod
+passwordMinLength = 9             # 12 in prod
 
 [auth.method.smsPasswordless]
 enabled = false
