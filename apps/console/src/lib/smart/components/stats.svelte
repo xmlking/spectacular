@@ -2,7 +2,7 @@
 import { onDestroy, onMount } from 'svelte';
 import { languageModelOptions } from '$lib/smart/components/settings.js';
 
-let assistant: AILanguageModel | undefined;
+let assistant: AILanguageModel | undefined = $state();
 onMount(async () => {
   assistant = await self.ai?.languageModel.create($languageModelOptions);
 });
@@ -11,7 +11,7 @@ onDestroy(() => {
 });
 </script>
 
-{#if self.ai?.languageModel }
+{#if self.ai?.languageModel}
   <div class="my-12">
     <div class="h2">Session stats</div>
     <table class="table table-hover">

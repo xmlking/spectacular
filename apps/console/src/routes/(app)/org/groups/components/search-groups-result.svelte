@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, stopPropagation } from 'svelte/legacy';
+
 import { PendingValue, type SearchGroups$result, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
@@ -13,22 +15,29 @@ import type { MouseEventHandler } from 'svelte/elements';
 import { DeleteGroup } from '../mutations';
 
 const log = new Logger('groups:search-results:browser');
-// Variables
-export let groups: SearchGroups$result['groups'];
+
+  interface Props {
+    // Variables
+    groups: SearchGroups$result['groups'];
+  }
+
+  let { groups }: Props = $props();
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 //Datatable handler initialization
 const handler = new DataHandler(groups.filter(loaded), { rowsPerPage: 10 });
-$: handler.setRows(groups);
+run(() => {
+    handler.setRows(groups);
+  });
 const rows = handler.getRows();
 
 // Functions
 /**
  * Delete Group action
  */
-let isDeleting = false;
+let isDeleting = $state(false);
 
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   const { id, displayName } = event.currentTarget.dataset;
@@ -79,7 +88,9 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
 };
 
 // Reactivity
-$: loadingState.setFormLoading(isDeleting);
+run(() => {
+    loadingState.setFormLoading(isDeleting);
+  });
 </script>
 
 <div class="card p-4 space-y-10">
@@ -109,11 +120,11 @@ $: loadingState.setFormLoading(isDeleting);
       {#each $rows as row}
         {#if row.id === PendingValue}
           <tr class="animate-pulse">
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
           </tr>
         {:else}
           <tr>
@@ -127,7 +138,7 @@ $: loadingState.setFormLoading(isDeleting);
             </td>
             <td>{row.description}</td>
             <td>
-              { #if row.tags === null}
+              {#if row.tags === null}
                 N/A
                 {:else}
                   {#each row.tags as tag }
@@ -170,7 +181,7 @@ $: loadingState.setFormLoading(isDeleting);
           class="variant-filled-error btn"
           data-id={row.id}
                 data-display-name={row.displayName}
-                on:click|stopPropagation|capture={handleDelete}
+                onclickcapture={stopPropagation(handleDelete)}
                 disabled={isDeleting}>Delete</button
         >
         <button type="button" class="variant-filled-error btn">Cancel</button>

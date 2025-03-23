@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, preventDefault } from 'svelte/legacy';
+
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
@@ -122,8 +124,10 @@ async function webauthnSignin() {
 }
 
 // Reactivity
-$: valid = $allErrors.length === 0 && $turnstilePassed;
-$: loadingState.setFormLoading($delayed);
+let valid = $derived($allErrors.length === 0 && $turnstilePassed);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.redirectTo;
 </script>
 
@@ -133,19 +137,21 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
 <form method="POST" use:enhance>
   <div class="mt-6">
     <Form.Field {form} name="email">
-      <Form.Control let:attrs>
-        <Form.Label class="label sr-only"
-          >{m.auth_forms_email_label()}</Form.Label
-        >
-        <input
-          type="email"
-          autocomplete="email"
-          class="input data-[fs-error]:input-error"
-          placeholder={m.auth_forms_email_placeholder()}
-          {...attrs}
-          bind:value={$formData.email}
-        />
-      </Form.Control>
+      <Form.Control >
+        {#snippet children({ attrs })}
+                <Form.Label class="label sr-only"
+            >{m.auth_forms_email_label()}</Form.Label
+          >
+          <input
+            type="email"
+            autocomplete="email"
+            class="input data-[fs-error]:input-error"
+            placeholder={m.auth_forms_email_placeholder()}
+            {...attrs}
+            bind:value={$formData.email}
+          />
+                      {/snippet}
+            </Form.Control>
       <Form.FieldErrors class="data-[fs-error]:text-error-500" />
     </Form.Field>
   </div>
@@ -168,7 +174,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
       name="webauthn"
       type="button"
       class="variant-filled-primary btn"
-      on:click|preventDefault={webauthnSignin}
+      onclick={preventDefault(webauthnSignin)}
     >
       {m.auth_labels_signin_with_webauthn()}
       <Fingerprint class="pl-2" />

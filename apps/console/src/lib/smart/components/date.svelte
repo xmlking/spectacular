@@ -1,3 +1,4 @@
+<!-- @migration-task Error while migrating Svelte code: $$props is used together with named props in a way that cannot be automatically migrated. -->
 <!--
 @component SmartDate - Interpret the given natural language string as a specific date and time using On-Device AI
   @prop {string} value - 	Selected value(s)

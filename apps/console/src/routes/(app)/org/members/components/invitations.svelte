@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, stopPropagation } from 'svelte/legacy';
+
 import { invalidate } from '$app/navigation';
 import { page } from '$app/stores';
 import { type InvitationsFragment, PendingValue, fragment, graphql } from '$houdini';
@@ -21,8 +23,12 @@ import Filter from './filter.svelte';
 
 const log = new Logger('invitations:list:browser');
 
-export let organization: InvitationsFragment;
-$: data = fragment(
+  interface Props {
+    organization: InvitationsFragment;
+  }
+
+  let { organization }: Props = $props();
+let data = $derived(fragment(
   organization,
   graphql(`
       fragment InvitationsFragment on organizations {
@@ -35,12 +41,12 @@ $: data = fragment(
         }
       }
     `),
-);
-$: ({ invitations } = $data);
+));
+let { invitations } = $derived($data);
 
 // Variables
 const subjectRole = $page.data.role;
-let gqlErrors: PartialGraphQLErrors;
+let gqlErrors: PartialGraphQLErrors = $state();
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
@@ -48,7 +54,9 @@ const loadingState = getLoadingState();
 const handler = new DataHandler(invitations?.filter(loaded), {
   rowsPerPage: 5,
 });
-$: handler.setRows(invitations);
+run(() => {
+    handler.setRows(invitations);
+  });
 const rows = handler.getRows();
 
 // Functions
@@ -183,7 +191,7 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
                         data-email={invite.email}
                         data-role={role}
                         disabled={subjectRole !== "org:owner"}
-                        on:click|stopPropagation|capture={handleUpdate}
+                        onclickcapture={stopPropagation(handleUpdate)}
                       >
                         <span><UserCog size={16} /></span>
                         <span>{role}</span>
@@ -191,21 +199,21 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
                   </ListBoxItem>
                 {/if}
               {/each}
-              <div class="h-px bg-surface-300 my-1" />
+              <div class="h-px bg-surface-300 my-1"></div>
               <ListBoxItem hover="bg-error-hover-token" regionDefault="text-error-600">
                 <button type="button"
                   class="btn p-0 text-sm"
                   data-org-id={invite.orgId}
                   data-email={invite.email}
                   disabled={subjectRole !== "org:owner" && invite.role !== "org:member"}
-                  on:click|stopPropagation|capture={handleDelete}
+                  onclickcapture={stopPropagation(handleDelete)}
                 >
                   <span><Trash size={16} /></span>
                   <span>Remove member</span>
                 </button>
               </ListBoxItem>
             </ListBox>
-            <div class="arrow bg-surface-100-800-token" />
+            <div class="arrow bg-surface-100-800-token"></div>
           </div>
         </div>
       </div>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { type OrgSettingsData$result, PendingValue, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '$lib/ui/components/table';
@@ -7,17 +9,24 @@ import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Settings, User } from 'lucide-svelte';
 
 const log = new Logger('settings:allowed-keys:browser');
-// Variables
-export let data: OrgSettingsData$result;
 
-let { settings_metadata } = data;
-$: ({ settings_metadata } = data);
+  interface Props {
+    // Variables
+    data: OrgSettingsData$result;
+  }
+
+  let { data }: Props = $props();
+
+// let { settings_metadata } = $state(data);
+let { settings_metadata } = $derived(data);
 
 //Datatable handler initialization
 const handler = new DataHandler(settings_metadata.filter(loaded), {
   rowsPerPage: 10,
 });
-$: handler.setRows(settings_metadata);
+run(() => {
+    handler.setRows(settings_metadata);
+  });
 const rows = handler.getRows();
 </script>
 

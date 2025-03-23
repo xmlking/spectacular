@@ -4,10 +4,10 @@ import { Chrome, Languages, Sparkles, Wifi } from 'lucide-svelte';
 import { onDestroy, onMount } from 'svelte';
 import { checkAibrowInstalled, getAiBrow, isPolyfilledAI, isPolyfilledTranslation, printAIStats } from './smart.js';
 
-let chromeAISupported = false;
-let aibrowInstalled = false;
-let aiPolyfilled = false;
-let translationPolyfilled = false;
+let chromeAISupported = $state(false);
+let aibrowInstalled = $state(false);
+let aiPolyfilled = $state(false);
+let translationPolyfilled = $state(false);
 
 let aibrowAI: typeof AI | undefined;
 

@@ -7,8 +7,12 @@ import { quintOut } from 'svelte/easing';
 import { fade } from 'svelte/transition';
 import SecurityKeyItem from './security-key.svelte';
 
-export let user: SecurityKeysFragment;
-$: data = fragment(
+  interface Props {
+    user: SecurityKeysFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment SecurityKeysFragment on users {
@@ -19,13 +23,13 @@ $: data = fragment(
         }
       }
     `),
-);
+));
 
-$: ({ securityKeys } = $data);
+let { securityKeys } = $derived($data);
 
 // Variables
-let message: App.Superforms.Message | undefined;
-let errors: string[] = [];
+let message: App.Superforms.Message | undefined = $state();
+let errors: string[] = $state([]);
 </script>
 
 <!-- Form Level Errors / Messages -->

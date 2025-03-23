@@ -3,15 +3,26 @@ import { clipboard } from '@skeletonlabs/skeleton';
 import { ArrowUpFromLine, Copy, ThumbsUp } from 'lucide-svelte';
 import { createEventDispatcher } from 'svelte';
 
-// Props
-export let loading: boolean;
-export let header: string;
-export let placeholder: string;
-export let completion: string;
-export let error: string;
+
+  interface Props {
+    // Props
+    loading: boolean;
+    header: string;
+    placeholder: string;
+    completion: string;
+    error: string;
+  }
+
+  let {
+    loading,
+    header,
+    placeholder,
+    completion,
+    error
+  }: Props = $props();
 
 // Variables
-let copied: boolean;
+let copied: boolean = $state();
 const dispatch = createEventDispatcher();
 </script>
 
@@ -34,7 +45,7 @@ const dispatch = createEventDispatcher();
           title="Copy to Clipboard"
           class="btn-icon btn-icon-sm bg-initial"
           use:clipboard={completion}
-          on:click={() => {
+          onclick={() => {
             copied = true;
             setTimeout(() => {
               copied = false;
@@ -51,7 +62,7 @@ const dispatch = createEventDispatcher();
           type="button"
           title="Accept and Replace Above"
           class="btn-icon btn-icon-sm bg-initial"
-          on:click={() => {
+          onclick={() => {
              dispatch('accepted');
           }}
         >

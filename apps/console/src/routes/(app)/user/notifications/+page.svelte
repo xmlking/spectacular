@@ -2,11 +2,15 @@
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import type { PageData } from './$houdini';
 
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { UserNotificationsData } = data;
-$: ({ UserNotificationsData } = data);
+// let { UserNotificationsData } = $state(data);
+let { UserNotificationsData } = $derived(data);
 </script>
 
 <svelte:head>
@@ -25,9 +29,11 @@ $: ({ UserNotificationsData } = data);
       debug={true}
       entityName="Memberships"
       result={$UserNotificationsData}
-      let:data={{ user }}
+
     >
-      <pre class="pre">{JSON.stringify(user, null, 2)}</pre>
-    </MaybeError>
+      {#snippet children({ data: { user } })}
+            <pre class="pre">{JSON.stringify(user, null, 2)}</pre>
+                {/snippet}
+        </MaybeError>
   </section>
 </div>

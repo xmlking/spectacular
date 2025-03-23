@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { type UserSettingsWithDefaultsFragment, fragment, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import { DateTime } from '$lib/ui/components';
@@ -6,8 +8,12 @@ import * as Table from '$lib/ui/components/table';
 import { DataHandler } from '@vincjo/datatables/legacy';
 import { Settings } from 'lucide-svelte';
 
-export let user: UserSettingsWithDefaultsFragment;
-$: data = fragment(
+  interface Props {
+    user: UserSettingsWithDefaultsFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment UserSettingsWithDefaultsFragment on users {
@@ -18,11 +24,13 @@ $: data = fragment(
         }
       }
     `),
-);
-$: ({ settingsWithDefaults } = $data);
+));
+let { settingsWithDefaults } = $derived($data);
 
 const handler = new DataHandler(settingsWithDefaults?.filter(loaded), { rowsPerPage: 10 });
-$: handler.setRows(settingsWithDefaults);
+run(() => {
+    handler.setRows(settingsWithDefaults);
+  });
 const rows = handler.getRows();
 </script>
 

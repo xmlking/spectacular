@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 // Scroll heading into view
 function scrollHeadingIntoView(): void {
   if (!window.location.hash) return;

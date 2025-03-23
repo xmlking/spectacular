@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, stopPropagation } from 'svelte/legacy';
+
 import { invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import { PendingValue, type UserInvitationsFragment, cache, fragment, graphql } from '$houdini';
@@ -20,8 +22,12 @@ import { AcceptInvitation, DeclineInvitation } from '../mutations';
 
 const log = new Logger('user:profile:invitations:browser');
 
-export let user: UserInvitationsFragment;
-$: data = fragment(
+  interface Props {
+    user: UserInvitationsFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment UserInvitationsFragment on users {
@@ -36,11 +42,11 @@ $: data = fragment(
         }
       }
     `),
-);
-$: ({ invitations } = $data);
+));
+let { invitations } = $derived($data);
 
 // Variables
-let gqlErrors: PartialGraphQLErrors;
+let gqlErrors: PartialGraphQLErrors = $state();
 const nhost = getNhostClient();
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -49,7 +55,9 @@ const loadingState = getLoadingState();
 const handler = new DataHandler(invitations?.filter(loaded), {
   rowsPerPage: 5,
 });
-$: handler.setRows(invitations);
+run(() => {
+    handler.setRows(invitations);
+  });
 const rows = handler.getRows();
 
 // Functions
@@ -144,11 +152,11 @@ const declineInvitation: MouseEventHandler<HTMLButtonElement> = async (event) =>
       {#each $rows as invitation, i}
         {#if invitation.orgId === PendingValue}
           <tr class="animate-pulse">
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td class="table-cell-fit text-center align-middle"><div class="placeholder" /></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td class="table-cell-fit text-center align-middle"><div class="placeholder"></div></td>
           </tr>
         {:else}
           <tr transition:slide={{ duration: 300, axis: 'y' }}>
@@ -185,7 +193,7 @@ const declineInvitation: MouseEventHandler<HTMLButtonElement> = async (event) =>
                         data-email={invitation.email}
                         data-org-id={invitation.orgId}
                         data-org-name={invitation.inviter_org_name}
-                        on:click|stopPropagation|capture={acceptInvitation}
+                        onclickcapture={stopPropagation(acceptInvitation)}
                       >
                         <Check class="w-5 justify-center" />
                         <p class="flex-grow text-justify">Accept</p>
@@ -197,7 +205,7 @@ const declineInvitation: MouseEventHandler<HTMLButtonElement> = async (event) =>
                         data-email={invitation.email}
                         data-org-id={invitation.orgId}
                         data-org-name={invitation.inviter_org_name}
-                        on:click|stopPropagation|capture={declineInvitation}
+                        onclickcapture={stopPropagation(declineInvitation)}
                       >
                         <X class="w-5 justify-center" />
                         <p class="flex-grow text-justify">Decline</p>
@@ -205,7 +213,7 @@ const declineInvitation: MouseEventHandler<HTMLButtonElement> = async (event) =>
                     </li>
                   </ul>
                 </nav>
-                  <div class="arrow bg-surface-100-800-token" />
+                  <div class="arrow bg-surface-100-800-token"></div>
               </div>
             </td>
           </tr>

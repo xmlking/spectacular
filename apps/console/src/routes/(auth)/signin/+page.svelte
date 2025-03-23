@@ -12,7 +12,7 @@ import SocialSigninForm from './components/social.svelte';
 
 const log = new Logger('auth:signin:browser');
 
-export let data;
+  let { data } = $props();
 
 // Variables
 const nhost = getNhostClient();

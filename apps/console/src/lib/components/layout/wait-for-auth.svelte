@@ -4,10 +4,15 @@
  * Otherwise all authorized graphql queries will get errors.
  */
 import { getNhostClient } from '$lib/stores/nhost';
+  interface Props {
+    children?: import('svelte').Snippet;
+  }
+
+  let { children }: Props = $props();
 
 const { isAuthenticated } = getNhostClient();
 </script>
 
 {#if $isAuthenticated}
-  <slot />
+  {@render children?.()}
 {/if}

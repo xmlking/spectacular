@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { type ChangeEmail, changeEmailSchema } from '$lib/schema/user';
@@ -13,7 +15,11 @@ import { Loader, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm, type ErrorStatus } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
-export let initialData: ChangeEmail;
+  interface Props {
+    initialData: ChangeEmail;
+  }
+
+  let { initialData }: Props = $props();
 // Variables
 const log = new Logger('user:profile:email:browser');
 const toastStore = getToastStore();
@@ -78,8 +84,10 @@ const {
 } = form;
 
 // Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+let valid = $derived($allErrors.length === 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <!-- Form Level Errors / Messages -->
@@ -93,30 +101,32 @@ $: loadingState.setFormLoading($delayed);
   <section class="p-4">
     <form method="POST" use:enhance>
       <Form.Field {form} name="email">
-        <Form.Control let:attrs>
-          <!-- <Form.Label class="label">Email</Form.Label> -->
-          <div class="input-group input-group-divider grid-cols-[1fr_auto]">
-            <input
-              type="email"
-              class="input data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.email}
-              placeholder={m.profile_forms_change_email_placeholder()}
-            />
-            <button
-              class="variant-filled"
-              disabled={!$tainted || !valid || $submitting}
-            >
-              {#if $timeout}
-                <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
-              {:else if $delayed}
-                <Loader class="m-2 h-4 w-4 animate-spin" />
-              {:else}
-                {m.buttons_update()}
-              {/if}
-            </button>
-          </div>
-        </Form.Control>
+        <Form.Control >
+          {#snippet children({ attrs })}
+                    <!-- <Form.Label class="label">Email</Form.Label> -->
+            <div class="input-group input-group-divider grid-cols-[1fr_auto]">
+              <input
+                type="email"
+                class="input data-[fs-error]:input-error"
+                {...attrs}
+                bind:value={$formData.email}
+                placeholder={m.profile_forms_change_email_placeholder()}
+              />
+              <button
+                class="variant-filled"
+                disabled={!$tainted || !valid || $submitting}
+              >
+                {#if $timeout}
+                  <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+                {:else if $delayed}
+                  <Loader class="m-2 h-4 w-4 animate-spin" />
+                {:else}
+                  {m.buttons_update()}
+                {/if}
+              </button>
+            </div>
+                            {/snippet}
+                </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">
           {m.profile_forms_change_email_description()}
         </Form.Description>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { type WelcomeUserFragment, fragment, graphql } from '$houdini';
 // import { persisted } from 'svelte-persisted-store';
 // import { RemoteTeamClock, ImgCard, CalendarIndev  } from "$lib/components/craft";
@@ -9,16 +11,22 @@ import { onDestroy, onMount } from 'svelte';
 import { type Swapy, createSwapy } from 'swapy';
 import type { PageData } from './$houdini';
 
-export let data: PageData;
-let { AppLayout } = data;
-let user: WelcomeUserFragment;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
+// let { AppLayout } = $state(data);
+let user: WelcomeUserFragment = $state();
 
 // Reactivity
-$: ({ AppLayout } = data);
-$: if ($AppLayout?.data?.user) {
-  user = $AppLayout?.data?.user;
-}
-$: fragmentData = fragment(
+let { AppLayout } = $derived(data);
+run(() => {
+    if ($AppLayout?.data?.user) {
+    user = $AppLayout?.data?.user;
+  }
+  });
+let fragmentData = $derived(fragment(
   user,
   graphql(`
       fragment WelcomeUserFragment on users {
@@ -29,9 +37,9 @@ $: fragmentData = fragment(
         defaultRole
       }
     `),
-);
+));
 
-let container: HTMLDivElement;
+let container: HTMLDivElement = $state();
 let swapy: Swapy;
 
 /*

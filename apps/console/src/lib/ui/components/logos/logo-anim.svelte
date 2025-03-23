@@ -1,7 +1,7 @@
 <!-- Source: https://twitter.com/_davideast/status/1586091388826886145 -->
 <!-- https://fjolt.com/article/css-3d-interactive-flippable-cards -->
 <figure>
-  <section class="img-bg" />
+  <section class="img-bg"></section>
   <!-- <svg class="fill-token -scale-x-[100%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
 		<path
 			fill-rule="evenodd"

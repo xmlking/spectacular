@@ -14,8 +14,12 @@ import { AddUserGroup, DeleteUserGroup } from '../mutations';
 
 const log = new Logger('user-groups.assign.browser');
 
-export let user: UserGroupsFragment;
-$: data = fragment(
+  interface Props {
+    user: UserGroupsFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment UserGroupsFragment on users {
@@ -29,15 +33,15 @@ $: data = fragment(
         }
       }
     `),
-);
+));
 
 // Reactivity
-$: ({ dissociatedGroups, associatedGroups } = $data);
-$: availableGroups = dissociatedGroups ?? [];
-$: assignedGroups = associatedGroups ?? [];
+let { dissociatedGroups, associatedGroups } = $derived($data);
+let availableGroups = $derived(dissociatedGroups ?? []);
+let assignedGroups = $derived(associatedGroups ?? []);
 // Initialize tempAvailableGroups and tempAssignedGroups with IDs from dissociatedGroups and associatedGroups
-$: tempAvailableGroups = dissociatedGroups ? dissociatedGroups.map((group) => group.id) : [];
-$: tempAssignedGroups = associatedGroups ? associatedGroups.map((group) => group.id) : [];
+let tempAvailableGroups = $derived(dissociatedGroups ? dissociatedGroups.map((group) => group.id) : []);
+let tempAssignedGroups = $derived(associatedGroups ? associatedGroups.map((group) => group.id) : []);
 
 // Variables
 const toastStore = getToastStore();
@@ -45,7 +49,7 @@ const loadingState = getLoadingState();
 const role = $page.data.role;
 const userId = $page.params.id;
 
-let gqlErrors: PartialGraphQLErrors;
+let gqlErrors: PartialGraphQLErrors = $state();
 // DND Configuration
 const flipDurationMs = 300;
 const dropTargetStyle = {
@@ -171,13 +175,13 @@ async function deleteUserGroup(groupId: string) {
           dropFromOthersDisabled: false,
           dropTargetStyle,
         }}
-        on:consider={handleAvailableConsider}
-        on:finalize={handleAvailableFinalize}
+        onconsider={handleAvailableConsider}
+        onfinalize={handleAvailableFinalize}
     >
       {#each availableGroups as group (group.id)}
         <li class="card card-hover variant-soft-surface p-3 cursor-move !rounded-container-token" animate:flip="{{duration: flipDurationMs}}">
           <span class="flex-auto font-medium">{group.displayName}</span>
-					<button class="btn-icon btn-icon-sm" on:click={() => handleAdd(group)}>
+					<button class="btn-icon btn-icon-sm" onclick={() => handleAdd(group)}>
 						 <Plus class="w-4 h-4" />
 					</button>
         </li>
@@ -201,13 +205,13 @@ async function deleteUserGroup(groupId: string) {
           dropFromOthersDisabled: false,
           dropTargetStyle,
         }}
-        on:consider={handleAssignedConsider}
-        on:finalize={handleAssignedFinalize}
+        onconsider={handleAssignedConsider}
+        onfinalize={handleAssignedFinalize}
     >
       {#each assignedGroups as group (group.id)}
         <li class="card card-hover variant-soft-surface p-3 cursor-move !rounded-container-token" animate:flip="{{duration: flipDurationMs}}">
           <span class="flex-auto font-medium">{group.displayName}</span>
-					<button class="btn-icon btn-icon-sm" on:click={() => handleRemove(group)}>
+					<button class="btn-icon btn-icon-sm" onclick={() => handleRemove(group)}>
 						<X class="w-4 h-4" />
 					</button>
         </li>

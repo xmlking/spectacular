@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 import type { Row } from '@vincjo/datatables/legacy';
 type T = Row;
 </script>
@@ -14,18 +14,33 @@ import { setCtx } from './ctx.js';
 import { cn } from '$lib/ui/utils';
 
 type $$Props = HTMLTableAttributes;
-let className: $$Props['class'] = undefined;
-export { className as class };
 
-export let handler: DataHandler<T>;
 
-export let search = true;
-export let rowsPerPage = true;
-export let rowCount = true;
-export let pagination = true;
 
-let element: HTMLElement;
-let clientWidth = 1000;
+  interface Props {
+    class?: $$Props['class'];
+    handler: DataHandler<T>;
+    search?: boolean;
+    rowsPerPage?: boolean;
+    rowCount?: boolean;
+    pagination?: boolean;
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let {
+    class: className = undefined,
+    handler,
+    search = true,
+    rowsPerPage = true,
+    rowCount = true,
+    pagination = true,
+    children,
+    ...rest
+  }: Props = $props();
+
+let element: HTMLElement = $state();
+let clientWidth = $state(1000);
 
 setCtx(handler);
 
@@ -37,7 +52,7 @@ handler.on('change', () => {
 </script>
 
 <!-- FIXME: clientWidth `position:inherit` https://github.com/sveltejs/svelte/issues/4776 -->
-<section bind:clientWidth class={cn('space-y-4', className)} style="position:inherit" {...$$restProps}>
+<section bind:clientWidth class={cn('space-y-4', className)} style="position:inherit" {...rest}>
   <header class="flex justify-between">
     {#if search}
       <Search {handler} />
@@ -48,7 +63,7 @@ handler.on('change', () => {
   </header>
 
   <article bind:this={element} style="height:calc(100% - {height}px)">
-    <slot />
+    {@render children?.()}
   </article>
 
   <footer class="flex justify-between">

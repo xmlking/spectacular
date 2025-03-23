@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { type OrgSettingsFragment, fragment, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import { DateTime } from '$lib/ui/components';
@@ -6,8 +8,12 @@ import * as Table from '$lib/ui/components/table';
 import { DataHandler } from '@vincjo/datatables/legacy';
 import { User } from 'lucide-svelte';
 
-export let organization: OrgSettingsFragment;
-$: data = fragment(
+  interface Props {
+    organization: OrgSettingsFragment;
+  }
+
+  let { organization }: Props = $props();
+let data = $derived(fragment(
   organization,
   graphql(`
       fragment OrgSettingsFragment on organizations {
@@ -18,11 +24,13 @@ $: data = fragment(
         }
       }
     `),
-);
-$: ({ settings } = $data);
+));
+let { settings } = $derived($data);
 
 const handler = new DataHandler(settings?.filter(loaded), { rowsPerPage: 10 });
-$: handler.setRows(settings);
+run(() => {
+    handler.setRows(settings);
+  });
 const rows = handler.getRows();
 </script>
 

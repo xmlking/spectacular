@@ -9,16 +9,20 @@ import InviteMembersForm from './components/invite-members-form.svelte';
 import Members from './components/members.svelte';
 
 const log = new Logger('memberships:add:browser');
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Variables
-let tabSet = 0;
+let tabSet = $state(0);
 
 // Functions
 
 // Reactivity
-let { MembershipData } = data;
-$: ({ MembershipData } = data);
+// let { MembershipData } = $state(data);
+let { MembershipData } = $derived(data);
 </script>
 
 <svelte:head>
@@ -36,26 +40,30 @@ $: ({ MembershipData } = data);
     debug={true}
     entityName="Memberships"
     result={$MembershipData}
-    let:data={{ organizations_by_pk }}
-  >
-    <section class="space-y-4">
-      <InviteMembersForm />
-    </section>
 
-    <section class="space-y-4">
-      <TabGroup>
-        <Tab bind:group={tabSet} name="tab1" value={0}>Org Members</Tab>
-        <Tab bind:group={tabSet} name="tab2" value={1}>Pending Invitations</Tab>
-        <svelte:fragment slot="panel">
-          {#if organizations_by_pk}
-            {#if tabSet === 0}
-              <Members organization={organizations_by_pk} />
-            {:else if tabSet === 1}
-              <Invitations organization={organizations_by_pk} />
-            {/if}
-          {/if}
-        </svelte:fragment>
-      </TabGroup>
-    </section>
-  </MaybeError>
+  >
+    {#snippet children({ data: { organizations_by_pk } })}
+        <section class="space-y-4">
+        <InviteMembersForm />
+      </section>
+
+      <section class="space-y-4">
+        <TabGroup>
+          <Tab bind:group={tabSet} name="tab1" value={0}>Org Members</Tab>
+          <Tab bind:group={tabSet} name="tab2" value={1}>Pending Invitations</Tab>
+          {#snippet panel()}
+
+              {#if organizations_by_pk}
+                {#if tabSet === 0}
+                  <Members organization={organizations_by_pk} />
+                {:else if tabSet === 1}
+                  <Invitations organization={organizations_by_pk} />
+                {/if}
+              {/if}
+
+              {/snippet}
+        </TabGroup>
+      </section>
+          {/snippet}
+    </MaybeError>
 </div>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 import { graphql, type groups_insert_input } from '$houdini';
@@ -30,7 +32,7 @@ const log = new Logger('groups.create.browser');
 // Variables
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
-let gqlErrors: PartialGraphQLErrors;
+let gqlErrors: PartialGraphQLErrors = $state();
 
 const form = superForm(defaults(zod(schema)), {
   SPA: true,
@@ -109,8 +111,10 @@ function isValidEmailDomain(value: string): boolean {
   return value.includes('.') && afterdot.length >= 2;
 }
 // Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+let valid = $derived($allErrors.length === 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <svelte:head>
@@ -142,35 +146,39 @@ $: loadingState.setFormLoading($delayed);
       >
         <div class="col-span-3">
           <Form.Field {form} name={keys.displayName}>
-            <Form.Control let:attrs>
-              <Form.Label class="label">Display Name</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                placeholder="Enter Display Name..."
-                bind:value={$formData.displayName}
-              />
-              <Form.Description
-                class="sr-only md:not-sr-only text-sm text-gray-500"
-                >Enter the group display name</Form.Description
-              >
-              <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Display Name</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  placeholder="Enter Display Name..."
+                  bind:value={$formData.displayName}
+                />
+                <Form.Description
+                  class="sr-only md:not-sr-only text-sm text-gray-500"
+                  >Enter the group display name</Form.Description
+                >
+                <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+                                        {/snippet}
+                        </Form.Control>
           </Form.Field>
         </div>
         <div class="col-span-3">
           <Form.Field {form} name={keys.description}>
-            <Form.Control let:attrs>
-              <Form.Label class="label">Description</Form.Label>
-              <input
-                type="text"
-                class="input data-[fs-error]:input-error"
-                {...attrs}
-                placeholder="Enter Description..."
-                bind:value={$formData.description}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Description</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  placeholder="Enter Description..."
+                  bind:value={$formData.description}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the group description</Form.Description
@@ -180,15 +188,17 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-3">
           <Form.Field {form} name={keys.tags}>
-            <Form.Control let:attrs>
-              <Form.Label class="label">Tags</Form.Label>
-              <InputChipWrapper
-                {...attrs}
-                placeholder="Enter tags..."
-                class="input data-[fs-error]:input-error"
-                bind:value={$formData.tags}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Tags</Form.Label>
+                <InputChipWrapper
+                  {...attrs}
+                  placeholder="Enter tags..."
+                  class="input data-[fs-error]:input-error"
+                  bind:value={$formData.tags}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the tags and press <strong>Enter</strong></Form.Description
@@ -198,16 +208,18 @@ $: loadingState.setFormLoading($delayed);
         </div>
         <div class="col-span-3">
           <Form.Field {form} name={keys.metadata}>
-            <Form.Control let:attrs>
-              <Form.Label class="label">Metadata</Form.Label>
-              <InputPairs
-                {...attrs}
-                placeholder="Enter metadata..."
-                class="input data-[fs-error]:input-error"
-                {allowedKeyValues}
-                bind:value={$formData.metadata}
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Metadata</Form.Label>
+                <InputPairs
+                  {...attrs}
+                  placeholder="Enter metadata..."
+                  class="input data-[fs-error]:input-error"
+                  {allowedKeyValues}
+                  bind:value={$formData.metadata}
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description
               class="sr-only md:not-sr-only text-sm text-gray-500"
               >Enter the metadata</Form.Description
@@ -221,13 +233,13 @@ $: loadingState.setFormLoading($delayed);
           <button
             type="button"
             class="btn variant-filled-primary"
-            on:click={() => history.back()}>Back</button
+            onclick={() => history.back()}>Back</button
           >
           <button
             type="button"
             class="btn variant-filled-warning"
             disabled={!$tainted}
-            on:click={() => reset()}
+            onclick={() => reset()}
           >
             Reset
           </button>

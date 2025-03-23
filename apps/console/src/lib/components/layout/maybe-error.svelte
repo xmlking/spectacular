@@ -1,12 +1,24 @@
 <script lang="ts" generics="T">
+  import { run } from 'svelte/legacy';
+
 import type { QueryResult } from '$houdini';
 import { getLoadingState } from '$lib/stores/loading';
 import { DebugShell, GraphQLErrors, NotFound, SomethingWentWrong } from '$lib/ui/components';
 import SuperDebug from 'sveltekit-superforms';
 
-export let entityName: string;
-export let result: QueryResult<T>;
-export let debug = false;
+  interface Props {
+    entityName: string;
+    result: QueryResult<T>;
+    debug?: boolean;
+    children?: import('svelte').Snippet<[any]>;
+  }
+
+  let {
+    entityName,
+    result,
+    debug = false,
+    children
+  }: Props = $props();
 
 // Variables
 const loadingState = getLoadingState();
@@ -15,8 +27,10 @@ const loadingState = getLoadingState();
 const bang = <T>(x: T) => x!;
 
 // Reactivity
-$: ({ data, errors, fetching } = result);
-$: loadingState.setFormLoading(fetching);
+let { data, errors, fetching } = $derived(result);
+run(() => {
+    loadingState.setFormLoading(fetching);
+  });
 </script>
 
 {#if debug}
@@ -31,5 +45,5 @@ $: loadingState.setFormLoading(fetching);
 {:else if data === null}
   <NotFound {entityName} />
 {:else}
-  <slot data={bang(data)} />
+  {@render children?.({ data: bang(data), })}
 {/if}

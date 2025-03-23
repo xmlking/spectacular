@@ -7,11 +7,15 @@ import SettingsWithDefaults from './components/settings-with-defaults.svelte';
 import Settings from './components/settings.svelte';
 
 const log = new Logger('settings:browser');
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { OrgSettingsData } = data;
-$: ({ OrgSettingsData } = data);
+// let { OrgSettingsData } = $state(data);
+let { OrgSettingsData } = $derived(data);
 </script>
 
 <svelte:head>
@@ -28,24 +32,28 @@ $: ({ OrgSettingsData } = data);
   <MaybeError
     entityName="Settings"
     result={$OrgSettingsData}
-    let:data
+
   >
-    <section class="space-y-4">
-      <SettingsMetadata {data} />
-    </section>
-  </MaybeError>
+    {#snippet children({ data })}
+        <section class="space-y-4">
+        <SettingsMetadata {data} />
+      </section>
+          {/snippet}
+    </MaybeError>
   <MaybeError
     entityName="Settings"
     result={$OrgSettingsData}
-    let:data={{ organizations_by_pk }}
+
   >
-    {#if organizations_by_pk}
-      <section class="space-y-4">
-        <Settings organization={organizations_by_pk} />
-      </section>
-      <section class="space-y-4">
-        <SettingsWithDefaults organization={organizations_by_pk} />
-      </section>
-    {/if}
-  </MaybeError>
+    {#snippet children({ data: { organizations_by_pk } })}
+        {#if organizations_by_pk}
+        <section class="space-y-4">
+          <Settings organization={organizations_by_pk} />
+        </section>
+        <section class="space-y-4">
+          <SettingsWithDefaults organization={organizations_by_pk} />
+        </section>
+      {/if}
+          {/snippet}
+    </MaybeError>
 </div>

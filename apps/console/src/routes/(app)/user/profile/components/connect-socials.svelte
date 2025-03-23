@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { type AuthProvidersFragment, PendingValue, fragment, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
@@ -15,8 +17,12 @@ import { deleteSocialConnect } from '../mutations';
 const modalStore = getModalStore();
 initializeStores();
 const nhost = getNhostClient();
-export let user: AuthProvidersFragment;
-$: data = fragment(
+  interface Props {
+    user: AuthProvidersFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment AuthProvidersFragment on users {
@@ -30,24 +36,24 @@ $: data = fragment(
         }
       }
     `),
-);
-$: ({ providers } = $data);
+));
+let { providers } = $derived($data);
 
-let Ids: string[] = [];
-let message: App.Superforms.Message | undefined;
+// let Ids: string[] = $state([]);
+let message: App.Superforms.Message | undefined = $state();
 const errors: string[] = [];
 let error: string | null = null;
-let errorDescription: string | null = null;
+let errorDescription: string | null = $state(null);
 const toastStore = getToastStore();
-$: Ids = providers?.map((provider) => provider.providerId);
-$: isGithub = Ids?.includes('github');
-$: isAzure = Ids?.includes('azuread');
-$: isGoogle = Ids?.includes('google');
+let Ids = $derived(providers?.map((provider) => provider.providerId));
+let isGithub = $derived(Ids?.includes('github'));
+let isAzure = $derived(Ids?.includes('azuread'));
+let isGoogle = $derived(Ids?.includes('google'));
 //to get details
-let gitid = '';
-let azureid = '';
-let googleid = '';
-$: {
+let gitid = $state('');
+let azureid = $state('');
+let googleid = $state('');
+run(() => {
   for (const item of providers || []) {
     switch (item?.providerId) {
       case 'github':
@@ -61,7 +67,7 @@ $: {
         break;
     }
   }
-}
+});
 onMount(() => {
   const searchParams = new URLSearchParams(window.location.search);
   error = searchParams.get('error');
@@ -137,7 +143,7 @@ function modalConfirm(id: string, provider: string): void {
     <button
       type="button"
       class="variant-filled-primary btn ml-0"
-      on:click={(event) => click(event, "github")}
+      onclick={(event) => click(event, "github")}
     >
       <Github />&nbsp; Connect with Github</button
     >
@@ -146,14 +152,14 @@ function modalConfirm(id: string, provider: string): void {
       type="button"
       class="variant-ghost-primary btn ml-0"
       title={`Connected with Github`}
-      on:click={() => modalConfirm(gitid, "Github")}
+      onclick={() => modalConfirm(gitid, "Github")}
       ><Github />&nbsp; Github Connected</button
     >
   {/if}
   {#if !isAzure}
     <button
       class="variant-filled-primary btn ml-auto"
-      on:click={(event) => click(event, "azuread")}
+      onclick={(event) => click(event, "azuread")}
       ><Icon name="microsoft" />&nbsp; Connect with Microsoft</button
     >
   {:else}
@@ -161,7 +167,7 @@ function modalConfirm(id: string, provider: string): void {
       type="button"
       class="variant-ghost-primary btn ml-auto"
       title={`Connected with Microsoft`}
-      on:click={() => modalConfirm(azureid, "Microsoft")}
+      onclick={() => modalConfirm(azureid, "Microsoft")}
       ><Icon name="microsoft" />&nbsp; Microsoft Connected</button
     >
   {/if}
@@ -169,7 +175,7 @@ function modalConfirm(id: string, provider: string): void {
     <button
       type="button"
       class="variant-filled-primary btn ml-auto"
-      on:click={(event) => click(event, "google")}
+      onclick={(event) => click(event, "google")}
       ><Icon name="google" />&nbsp; Connect with Google</button
     >
   {:else}
@@ -177,7 +183,7 @@ function modalConfirm(id: string, provider: string): void {
       type="button"
       class="variant-ghost-primary btn ml-auto"
       title={`Connected with Google`}
-      on:click={() => modalConfirm(googleid, "Google")}
+      onclick={() => modalConfirm(googleid, "Google")}
       ><Icon name="google" />&nbsp; Google Connected</button
     >
   {/if}

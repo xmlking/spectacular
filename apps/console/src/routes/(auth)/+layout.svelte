@@ -10,7 +10,7 @@ import { modeCurrent, modeUserPrefers } from '@skeletonlabs/skeleton';
 import { UserRound } from 'lucide-svelte';
 import { Turnstile } from 'svelte-turnstile';
 
-export let data;
+  let { data, children } = $props();
 
 // Functions
 let showTurnstileOverlay = false;
@@ -26,8 +26,8 @@ function pass(event: CustomEvent) {
 }
 
 // Reactivity
-let theme: 'light' | 'dark' | 'auto' | undefined;
-$: theme = $modeUserPrefers ? 'light' : 'dark';
+let theme: 'light' | 'dark' | 'auto' | undefined = $derived($modeUserPrefers ? 'light' : 'dark');
+
 const siteKey = dev
   ? // biome-ignore lint/style/noNonNullAssertion: <explanation>
     env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY_ALWAYS_PASSES!
@@ -63,7 +63,7 @@ const siteKey = dev
           <span>{m.auth_labels_signup()}</span>
         </TabAnchor>
       </TabGroup>
-      <slot />
+      {@render children?.()}
     </div>
   </div>
 </div>

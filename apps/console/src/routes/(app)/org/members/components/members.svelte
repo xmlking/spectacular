@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, stopPropagation } from 'svelte/legacy';
+
 import { invalidate } from '$app/navigation';
 import { page } from '$app/stores';
 import { type MembersFragment, PendingValue, fragment, graphql } from '$houdini';
@@ -21,8 +23,12 @@ import Filter from './filter.svelte';
 
 const log = new Logger('members:list:browser');
 
-export let organization: MembersFragment;
-$: data = fragment(
+  interface Props {
+    organization: MembersFragment;
+  }
+
+  let { organization }: Props = $props();
+let data = $derived(fragment(
   organization,
   graphql(`
       fragment MembersFragment on organizations {
@@ -39,9 +45,9 @@ $: data = fragment(
         }
       }
     `),
-);
-$: ({ memberships } = $data);
-$: flattenedMembers = memberships?.map(
+));
+let { memberships } = $derived($data);
+let flattenedMembers = $derived(memberships?.map(
   ({ userId, orgId, role, updatedAt, user: { displayName, avatarUrl, email } }) => ({
     userId,
     orgId,
@@ -51,11 +57,11 @@ $: flattenedMembers = memberships?.map(
     avatarUrl,
     email,
   }),
-);
+));
 
 // Variables
 const subjectRole = $page.data.role;
-let gqlErrors: PartialGraphQLErrors;
+let gqlErrors: PartialGraphQLErrors = $state();
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
@@ -63,7 +69,9 @@ const loadingState = getLoadingState();
 const handler = new DataHandler(flattenedMembers?.filter(loaded), {
   rowsPerPage: 5,
 });
-$: handler.setRows(flattenedMembers);
+run(() => {
+    handler.setRows(flattenedMembers);
+  });
 const rows = handler.getRows();
 
 // Functions
@@ -191,7 +199,7 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
                         data-role={role}
                         data-user-name={member.displayName}
                         disabled={subjectRole !== "org:owner"}
-                        on:click|stopPropagation|capture={handleUpdate}
+                        onclickcapture={stopPropagation(handleUpdate)}
                       >
                         <span><UserCog size={16} /></span>
                         <span>{role}</span>
@@ -199,7 +207,7 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
                   </ListBoxItem>
                 {/if}
               {/each}
-              <div class="h-px bg-surface-300 my-1" />
+              <div class="h-px bg-surface-300 my-1"></div>
               <ListBoxItem hover="bg-error-hover-token" regionDefault="text-error-600">
                 <button type="button"
                     class="btn p-0 text-sm"
@@ -207,14 +215,14 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
                   data-org-id={member.orgId}
                   data-user-name={member.displayName}
                   disabled={subjectRole !== "org:owner" && member.role !== "org:member"}
-                  on:click|stopPropagation|capture={handleDelete}
+                  onclickcapture={stopPropagation(handleDelete)}
                 >
                   <span><Trash size={16} /></span>
                   <span>Remove member</span>
                 </button>
               </ListBoxItem>
             </ListBox>
-            <div class="arrow bg-surface-100-800-token" />
+            <div class="arrow bg-surface-100-800-token"></div>
           </div>
         </div>
       </div>

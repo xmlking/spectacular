@@ -4,10 +4,19 @@ import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 import SuperDebug from 'sveltekit-superforms';
 import { Icon } from '$lib/ui/components/icons/index.js';
 
-export let data: any;
-export let open = false;
-export let label = 'Toggle SuperDebug';
-export let status = true;
+  interface Props {
+    data: any;
+    open?: boolean;
+    label?: string;
+    status?: boolean;
+  }
+
+  let {
+    data,
+    open = false,
+    label = 'Toggle SuperDebug',
+    status = true
+  }: Props = $props();
 </script>
 
 {#if dev}
@@ -15,9 +24,15 @@ export let status = true;
   <div class="card p-2">
     <Accordion>
       <AccordionItem {open}>
-        <svelte:fragment slot="lead"><Icon name="debug" /></svelte:fragment>
-        <svelte:fragment slot="summary">{label}</svelte:fragment>
-        <svelte:fragment slot="content"><SuperDebug {status} {data} /></svelte:fragment>
+        {#snippet lead()}
+                <Icon name="debug" />
+              {/snippet}
+        {#snippet summary()}
+                {label}
+              {/snippet}
+        {#snippet content()}
+                <SuperDebug {status} {data} />
+              {/snippet}
       </AccordionItem>
     </Accordion>
   </div>

@@ -8,11 +8,15 @@ import SettingsWithDefaults from './components/settings-with-defaults.svelte';
 import Settings from './components/settings.svelte';
 
 const log = new Logger('settings:browser');
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { UserSettingsData } = data;
-$: ({ UserSettingsData } = data);
+// let { UserSettingsData } = $state(data);
+let { UserSettingsData } = $derived(data);
 </script>
 
 <svelte:head>
@@ -29,26 +33,30 @@ $: ({ UserSettingsData } = data);
   <MaybeError
     entityName="Settings"
     result={$UserSettingsData}
-    let:data
+
   >
-    <section class="space-y-4">
-      <SettingsMetadata {data} />
-    </section>
-  </MaybeError>
+    {#snippet children({ data })}
+        <section class="space-y-4">
+        <SettingsMetadata {data} />
+      </section>
+          {/snippet}
+    </MaybeError>
   <MaybeError
     entityName="Settings"
     result={$UserSettingsData}
-    let:data={{ user }}
+
   >
-    {#if user}
-      <section class="space-y-4">
-        <Settings user={user} />
-      </section>
-      <section class="space-y-4">
-        <SettingsWithDefaults user={user} />
-      </section>
-    {/if}
-  </MaybeError>
+    {#snippet children({ data: { user } })}
+        {#if user}
+        <section class="space-y-4">
+          <Settings user={user} />
+        </section>
+        <section class="space-y-4">
+          <SettingsWithDefaults user={user} />
+        </section>
+      {/if}
+          {/snippet}
+    </MaybeError>
 
   <div class="page-section">
     <h3 class="h2">AI Settings</h3>

@@ -6,11 +6,15 @@ import { Logger } from '@spectacular/utils';
 import type { PageData } from './$houdini';
 
 const log = new Logger('organizations:search:browser');
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { SearchOrganizations } = data;
-$: ({ SearchOrganizations } = data);
+// let { SearchOrganizations } = $state(data);
+let { SearchOrganizations } = $derived(data);
 </script>
 
 <svelte:head>
@@ -33,10 +37,12 @@ $: ({ SearchOrganizations } = data);
     debug={true}
     entityName="SearchGroups"
     result={$SearchOrganizations}
-    let:data={{ organizations }}
+
   >
-    <SearchOrganizationsResult {organizations} />
-  </MaybeError>
+    {#snippet children({ data: { organizations } })}
+            <SearchOrganizationsResult {organizations} />
+              {/snippet}
+        </MaybeError>
 </section>
 
 </div>

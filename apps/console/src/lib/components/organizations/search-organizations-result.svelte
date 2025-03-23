@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, stopPropagation } from 'svelte/legacy';
+
 import { PendingValue, type SearchOrganizations$result, graphql } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
@@ -13,22 +15,29 @@ import type { MouseEventHandler } from 'svelte/elements';
 import { DeleteOrganization } from './mutations';
 
 const log = new Logger('org:search:results:component');
-// Variables
-export let organizations: SearchOrganizations$result['organizations'];
+
+  interface Props {
+    // Variables
+    organizations: SearchOrganizations$result['organizations'];
+  }
+
+  let { organizations }: Props = $props();
 
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 //Datatable handler initialization
 const handler = new DataHandler(organizations.filter(loaded), { rowsPerPage: 10 });
-$: handler.setRows(organizations);
+run(() => {
+    handler.setRows(organizations);
+  });
 const rows = handler.getRows();
 
 // Functions
 /**
  * Delete Organization action
  */
-let isDeleting = false;
+let isDeleting = $state(false);
 
 const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   const { id, displayName } = event.currentTarget.dataset;
@@ -79,7 +88,9 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
 };
 
 // Reactivity
-$: loadingState.setFormLoading(isDeleting);
+run(() => {
+    loadingState.setFormLoading(isDeleting);
+  });
 </script>
 
 <div class="card p-4 space-y-10">
@@ -117,15 +128,15 @@ $: loadingState.setFormLoading(isDeleting);
       {#each $rows as row}
         {#if row.id === PendingValue}
           <tr class="animate-pulse">
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
           </tr>
         {:else}
           <tr>
@@ -150,7 +161,7 @@ $: loadingState.setFormLoading(isDeleting);
                 class="btn-icon btn-icon-sm variant-filled-error"
                 data-id={row.id}
                 data-display-name={row.displayName}
-                on:click|stopPropagation|capture={handleDelete}
+                onclickcapture={stopPropagation(handleDelete)}
                 disabled={isDeleting}
               >
                 <Trash2 />

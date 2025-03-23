@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 import type { Row } from '@vincjo/datatables/legacy';
 type T = Row;
 </script>
@@ -10,11 +10,16 @@ import { getCtx } from './ctx.js';
 import { cn } from '$lib/ui/utils';
 
 type $$Props = HTMLSelectAttributes;
-let className: $$Props['class'] = undefined;
-export { className as class };
 
-export let handler: DataHandler<T>;
-export let small = false;
+
+  interface Props {
+    class?: $$Props['class'];
+    handler: DataHandler<T>;
+    small?: boolean;
+    [key: string]: any
+  }
+
+  let { class: className = undefined, handler = $bindable(), small = false, ...rest }: Props = $props();
 
 handler ??= getCtx();
 
@@ -30,8 +35,8 @@ const options = [5, 10, 20, 50, 100];
   <select
     class={cn('select ml-2', className)}
     bind:value={$rowsPerPage}
-    on:change={() => handler.setPage(1)}
-    {...$$restProps}
+    onchange={() => handler.setPage(1)}
+    {...rest}
   >
     {#each options as option}
       <option value={option}>

@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 import type { Row } from '@vincjo/datatables/legacy';
 type T = Row;
 </script>
@@ -10,11 +10,16 @@ import { getCtx } from './ctx.js';
 import { cn } from '$lib/ui/utils';
 
 type $$Props = HTMLInputAttributes;
-let className: $$Props['class'] = undefined;
-export { className as class };
 
-export let handler: DataHandler<T>;
-let value = '';
+
+  interface Props {
+    class?: $$Props['class'];
+    handler: DataHandler<T>;
+    [key: string]: any
+  }
+
+  let { class: className = undefined, handler = $bindable(), ...rest }: Props = $props();
+let value = $state('');
 
 handler ??= getCtx();
 
@@ -26,7 +31,7 @@ handler.on('clearSearch', () => (value = ''));
   type="search"
   placeholder={handler.i18n.search}
   spellcheck="false"
-  {...$$restProps}
+  {...rest}
   bind:value
-  on:input={() => handler.search(value)}
+  oninput={() => handler.search(value)}
 />

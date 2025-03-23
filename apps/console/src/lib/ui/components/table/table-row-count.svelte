@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 import type { Row } from '@vincjo/datatables/legacy';
 type T = Row;
 </script>
@@ -10,11 +10,15 @@ import { getCtx } from './ctx.js';
 import { cn } from '$lib/ui/utils';
 
 type $$Props = HTMLAttributes<HTMLTableSectionElement>;
-let className: $$Props['class'] = undefined;
-export { className as class };
 
-export let handler: DataHandler<T>;
-export let small = false;
+
+  interface Props {
+    class?: $$Props['class'];
+    handler: DataHandler<T>;
+    small?: boolean;
+  }
+
+  let { class: className = undefined, handler = $bindable(), small = false }: Props = $props();
 
 handler ??= getCtx();
 

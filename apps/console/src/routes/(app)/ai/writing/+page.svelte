@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
@@ -58,7 +60,9 @@ const {
 export const snapshot = { capture, restore };
 
 // Reactivity
-$: loadingState.setFormLoading($delayed);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <div class="page-container">
@@ -77,18 +81,20 @@ $: loadingState.setFormLoading($delayed);
       <section class="p-6 space-y-4">
         <div>
           <Form.Field {form} name="content">
-            <Form.Control let:attrs>
-              <Form.Label class="label">Writing Tools</Form.Label>
-              <Smart.Textarea
-                class="textarea data-[fs-error]:input-error"
-                {...attrs}
-                bind:value={$formData.content}
-                {...$constraints.content}
-                stream={true}
-                placeholder="Write an email to my bank asking them to raise my credit limit from $1,000 to $10,000."
-                context="I'm a long-standing customer."
-              />
-            </Form.Control>
+            <Form.Control >
+              {#snippet children({ attrs })}
+                            <Form.Label class="label">Writing Tools</Form.Label>
+                <Smart.Textarea
+                  class="textarea data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$formData.content}
+                  {...$constraints.content}
+                  stream={true}
+                  placeholder="Write an email to my bank asking them to raise my credit limit from $1,000 to $10,000."
+                  context="I'm a long-standing customer."
+                />
+                                        {/snippet}
+                        </Form.Control>
             <Form.Description class="sr-only"
               >Put writing1 description here</Form.Description
             >

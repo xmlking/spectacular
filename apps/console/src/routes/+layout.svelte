@@ -31,7 +31,12 @@ import type { LayoutData } from './$types';
 
 const log = new Logger('root:layout:browser');
 
-export let data: LayoutData;
+  interface Props {
+    data: LayoutData;
+    children?: import('svelte').Snippet;
+  }
+
+  let { data, children }: Props = $props();
 
 //*** initializations ***//
 // Floating UI for Popups
@@ -93,17 +98,17 @@ function scrollHandler(event: ComponentEvents<AppShell>['scroll']) {
 
 // Reactive
 // Disable left sidebar on homepage
-$: slotSidebarLeft = matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto';
-$: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
+let slotSidebarLeft = $derived(matchNoSidebarPaths($page.url.pathname) ? 'w-0' : 'bg-surface-50-900-token lg:w-auto');
+let allyPageSmoothScroll = $derived(!$prefersReducedMotionStore ? 'scroll-smooth' : '');
 </script>
 
 <!-- window info -->
 <svelte:window
   bind:online={$online}
-  on:resize={() => {
+  onresize={() => {
     $size = { height: window.innerHeight, width: window.innerWidth };
   }}
-  on:orientationchange={() => {
+  onorientationchange={() => {
     $orientation = screen.orientation.type;
   }}
 />
@@ -123,14 +128,18 @@ $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
     on:scroll={scrollHandler}
   >
     <!-- Header -->
-    <svelte:fragment slot="header">
-      <Header />
-    </svelte:fragment>
+    {#snippet header()}
+      
+        <Header />
+      
+      {/snippet}
 
     <!-- Sidebar (Left) -->
-    <svelte:fragment slot="sidebarLeft">
-      <Sidebar class="hidden w-[360px] overflow-hidden lg:grid" />
-    </svelte:fragment>
+    {#snippet sidebarLeft()}
+      
+        <Sidebar class="hidden w-[360px] overflow-hidden lg:grid" />
+      
+      {/snippet}
 
     <!-- Page Content -->
     <!--
@@ -139,12 +148,14 @@ $: allyPageSmoothScroll = !$prefersReducedMotionStore ? 'scroll-smooth' : '';
 			https://github.com/opral/monorepo/tree/paraglide-js-adapter-sveltekit/inlang/source-code/paraglide/paraglide-js-adapter-sveltekit
 
 		-->
-    <slot />
+    {@render children?.()}
 
     <!-- Page Footer -->
-    <svelte:fragment slot="pageFooter">
-      <Footer />
-    </svelte:fragment>
+    {#snippet pageFooter()}
+      
+        <Footer />
+      
+      {/snippet}
   </AppShell>
 </ParaglideJS>
 <!-- Change showAtPixel to 0 to show the button right after scroll -->

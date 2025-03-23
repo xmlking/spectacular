@@ -6,11 +6,15 @@ import type { PageData } from './$houdini';
 
 const log = new Logger('admin:organizations:update:page');
 
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { OrganizationData1 } = data;
-$: ({ OrganizationData1 } = data);
+// let { OrganizationData1 } = $state(data);
+let { OrganizationData1 } = $derived(data);
 </script>
 
 <svelte:head>
@@ -27,10 +31,12 @@ $: ({ OrganizationData1 } = data);
   <MaybeError
     entityName="Organization"
     result={$OrganizationData1}
-    let:data={{organizations_by_pk}}
+
   >
-    {#if organizations_by_pk}
-      <UpdateOrganizationsForm organization={organizations_by_pk} />
-    {/if}
-  </MaybeError>
+    {#snippet children({ data: {organizations_by_pk} })}
+        {#if organizations_by_pk}
+        <UpdateOrganizationsForm organization={organizations_by_pk} />
+      {/if}
+          {/snippet}
+    </MaybeError>
 </div>

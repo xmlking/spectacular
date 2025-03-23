@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 import { page } from '$app/stores';
 import { ROUTE_DASHBOARD } from '$lib/constants';
 import { getNhostClient } from '$lib/stores/nhost';
@@ -14,19 +16,21 @@ const nhost = getNhostClient();
 const locale = 'en';
 
 // Reactivity
-$: urlOrigin = new URL($page.url).origin;
-$: redirectTo = `${urlOrigin}${ROUTE_DASHBOARD}`;
-$: log.debug('redirectTo', redirectTo);
+let urlOrigin = $derived(new URL($page.url).origin);
+let redirectTo = $derived(`${urlOrigin}${ROUTE_DASHBOARD}`);
+run(() => {
+		log.debug('redirectTo', redirectTo);
+	});
 </script>
 
 <!-- Signin with social -->
 <form method="POST">
   <div class="flex flex-row justify-evenly">
-    <button type="button"  on:click={() => { nhost.auth.signIn({ provider: 'google', options: {redirectTo, locale} }) }} class="variant-filled-warning btn-icon"
+    <button type="button"  onclick={() => { nhost.auth.signIn({ provider: 'google', options: {redirectTo, locale} }) }} class="variant-filled-warning btn-icon"
       ><Icon name="google" /></button
     >
-    <button type="button" on:click={() => { nhost.auth.signIn({ provider: 'github', options: {redirectTo, locale} }) }}  class="variant-filled-secondary btn-icon"><Github /></button>
-    <button type="button" on:click={() => { nhost.auth.signIn({ provider: 'azuread', options: {redirectTo, locale} }) }} class="variant-filled-error btn-icon"
+    <button type="button" onclick={() => { nhost.auth.signIn({ provider: 'github', options: {redirectTo, locale} }) }}  class="variant-filled-secondary btn-icon"><Github /></button>
+    <button type="button" onclick={() => { nhost.auth.signIn({ provider: 'azuread', options: {redirectTo, locale} }) }} class="variant-filled-error btn-icon"
       ><Icon name="microsoft" /></button
     >
   </div>

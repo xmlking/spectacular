@@ -6,11 +6,15 @@ import SearchUsersForm from './components/search-users-form.svelte';
 import SearchUsersResult from './components/search-users-result.svelte';
 
 const log = new Logger('users:search:browser');
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { SearchUsersAll } = data;
-$: ({ SearchUsersAll } = data);
+// let { SearchUsersAll } = $state(data);
+let { SearchUsersAll } = $derived(data);
 </script>
 
 <svelte:head>
@@ -33,10 +37,12 @@ $: ({ SearchUsersAll } = data);
     debug={true}
     entityName="SearchGroups"
     result={$SearchUsersAll}
-    let:data={{ users }}
+
   >
-    <SearchUsersResult {users} />
-  </MaybeError>
+    {#snippet children({ data: { users } })}
+            <SearchUsersResult {users} />
+              {/snippet}
+        </MaybeError>
 </section>
 
 </div>

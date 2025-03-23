@@ -1,21 +1,21 @@
 <script lang="ts">
-import { page } from '$app/stores';
+import { page } from '$app/state';
 import * as m from '$i18n/messages';
 import { i18n } from '$lib/i18n';
 import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 import { LogoAnim } from '$lib/ui/components/logos';
 
-const details = $page.error?.details;
+const details = page.error?.details;
 </script>
 
 <ParaglideJS {i18n}>
-  {#if $page}
+  {#if page}
     <div class="flex h-full w-full items-center justify-center">
       <div class="space-y-4 text-center">
         <LogoAnim />
         <h2 class="h2">
-          {$page.status}:{#if $page.error}
-            {$page.error.message}
+          {page.status}:{#if page.error}
+            {page.error.message}
           {/if}
         </h2>
         <p>{m.error_page_message()}</p>

@@ -6,8 +6,8 @@ import SuperDebug from 'sveltekit-superforms';
 
 const log = new Logger('ai:smart:gql');
 
-let result = {};
-let prompt = 'list first 10 users ordered by displayName';
+let result = $state({});
+let prompt = $state('list first 10 users ordered by displayName');
 
 const useRemoteModel = async (prompt: string) => {
   const response = await fetch('/api/gql', {
@@ -52,7 +52,7 @@ const onclick: MouseEventHandler<HTMLButtonElement> = async (event) => {
         <button
           type="submit"
           class="btn variant-filled-primary"
-          on:click={onclick}
+          {onclick}
           data-prompt={prompt}
         >
           Generate GraphQL

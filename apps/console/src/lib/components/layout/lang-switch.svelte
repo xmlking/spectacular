@@ -4,12 +4,12 @@
 -->
 <script lang="ts">
 import { goto } from '$app/navigation';
-import { page } from '$app/stores';
+import { page } from '$app/state';
 import { availableLanguageTags, languageTag } from '$i18n/runtime';
 import { i18n } from '$lib/i18n';
 import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 
-let locl: string = languageTag();
+let locl: string = $state(languageTag());
 </script>
 
 <!-- TODO: make it pretty-->
@@ -19,7 +19,7 @@ let locl: string = languageTag();
       bind:group={locl}
       name="justify"
       value={l}
-      on:click={() => goto(i18n.resolveRoute(i18n.route($page.url.pathname), l))}>{l}</RadioItem
+      on:click={() => goto(i18n.resolveRoute(i18n.route(page.url.pathname), l))}>{l}</RadioItem
     >
   {/each}
 </RadioGroup>

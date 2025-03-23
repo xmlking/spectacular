@@ -3,12 +3,17 @@ import { clipboard } from '@skeletonlabs/skeleton';
 import { Copy, ThumbsUp } from 'lucide-svelte';
 import { createEventDispatcher } from 'svelte';
 
-// Props
-export let header: string;
-export let content: string;
+
+  interface Props {
+    // Props
+    header: string;
+    content: string;
+  }
+
+  let { header, content }: Props = $props();
 
 // Variables
-let copied: boolean;
+let copied: boolean = $state();
 const dispatch = createEventDispatcher();
 </script>
 
@@ -21,7 +26,7 @@ const dispatch = createEventDispatcher();
       title="Copy to Clipboard"
       class="btn-icon btn-icon-sm bg-initial"
       use:clipboard={content}
-      on:click={() => {
+      onclick={() => {
         copied = true;
         setTimeout(() => {
           copied = false;

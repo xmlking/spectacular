@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { page } from '$app/stores';
 import {
   PendingValue,
@@ -49,7 +51,7 @@ const roles = [
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const role = $page.data.role;
-let gqlErrors: PartialGraphQLErrors;
+let gqlErrors: PartialGraphQLErrors = $state();
 let isDeleting = false;
 
 const form = superForm(defaults(zod(schema)), {
@@ -145,9 +147,11 @@ function removeMemberRow(index: number) {
 }
 
 // Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
-$: isOwner = role === 'org:owner';
+let valid = $derived($allErrors.length === 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
+let isOwner = $derived(role === 'org:owner');
 </script>
 
 <!-- Form Level Errors / Messages -->
@@ -172,48 +176,52 @@ $: isOwner = role === 'org:owner';
           <!-- Email Field -->
           <div class="space-y-2">
             <Form.ElementField {form} name="invites[{i}].email">
-              <Form.Control let:attrs>
-                <Form.Label class="text-sm font-medium"
-                  >Email Address</Form.Label
-                >
-                <input
-                  {...attrs}
-                  type="email"
-                  placeholder="e.g. jane@example.com"
-                  class="input data-[fs-error]:input-error"
-                  bind:value={invite.email}
-                  disabled={$submitting}
-                />
-                <Form.Description class="sr-only">
-                  Member email address.
-                </Form.Description>
-                <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <Form.Label class="text-sm font-medium"
+                    >Email Address</Form.Label
+                  >
+                  <input
+                    {...attrs}
+                    type="email"
+                    placeholder="e.g. jane@example.com"
+                    class="input data-[fs-error]:input-error"
+                    bind:value={invite.email}
+                    disabled={$submitting}
+                  />
+                  <Form.Description class="sr-only">
+                    Member email address.
+                  </Form.Description>
+                  <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+                                              {/snippet}
+                            </Form.Control>
             </Form.ElementField>
           </div>
 
           <!-- Role Field -->
           <div class="space-y-2">
             <Form.ElementField {form} name="invites[{i}].role">
-              <Form.Control let:attrs>
-                <Form.Label class="text-sm font-medium">Role</Form.Label>
-                <select
-                  {...attrs}
-                  class="select data-[fs-error]:input-error"
-                  bind:value={invite.role}
-                  disabled={$submitting || !isOwner}
-                >
-                  <option value="">Select Role</option>
-                  {#each roles as role}
-                    <option value={role.value}>{role.label}</option>
-                  {/each}
-                </select>
-                <Form.Description class="sr-only">
-                  Org Role: Member, Admin, or Billing. Admin can only invite
-                  Members.
-                </Form.Description>
-                <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <Form.Label class="text-sm font-medium">Role</Form.Label>
+                  <select
+                    {...attrs}
+                    class="select data-[fs-error]:input-error"
+                    bind:value={invite.role}
+                    disabled={$submitting || !isOwner}
+                  >
+                    <option value="">Select Role</option>
+                    {#each roles as role}
+                      <option value={role.value}>{role.label}</option>
+                    {/each}
+                  </select>
+                  <Form.Description class="sr-only">
+                    Org Role: Member, Admin, or Billing. Admin can only invite
+                    Members.
+                  </Form.Description>
+                  <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+                                              {/snippet}
+                            </Form.Control>
             </Form.ElementField>
           </div>
 
@@ -225,7 +233,7 @@ $: isOwner = role === 'org:owner';
             {#if $formData.invites.length > 1}
               <button
                 type="button"
-                on:click={() => removeMemberRow(i)}
+                onclick={() => removeMemberRow(i)}
                 class="p-2 text-destructive hover:bg-destructive/10 rounded-md"
                 title="Delete member"
                 disabled={isDeleting || $submitting}
@@ -244,7 +252,7 @@ $: isOwner = role === 'org:owner';
     <div class="flex justify-between items-center">
       <button
         type="button"
-        on:click={addMemberRow}
+        onclick={addMemberRow}
         class="btn variant-ringed"
         disabled={$submitting}
       >

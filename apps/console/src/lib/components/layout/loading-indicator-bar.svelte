@@ -10,7 +10,7 @@ const loadingState = getLoadingState(); // HINT: `loadingState` is also subscrib
 const wait = (delay: number) => new Promise((res) => setTimeout(res, delay));
 </script>
 
-{#if $loadingState }
+{#if $loadingState}
   {#await wait(150) then}
     <div transition:fade|global>
       <div class="absolute inset-x-0 top-0 w-full">

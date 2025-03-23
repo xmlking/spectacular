@@ -3,8 +3,13 @@ import { dev } from '$app/environment';
 import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 import { Icon } from '$lib/ui/components/icons/index.js';
 
-export let open = false;
-export let label = 'Toggle SuperDebug';
+  interface Props {
+    open?: boolean;
+    label?: string;
+    children?: import('svelte').Snippet;
+  }
+
+  let { open = false, label = 'Toggle SuperDebug', children }: Props = $props();
 </script>
 
 {#if dev}
@@ -12,9 +17,15 @@ export let label = 'Toggle SuperDebug';
   <div class="card p-2">
     <Accordion>
       <AccordionItem {open}>
-        <svelte:fragment slot="lead"><Icon name="debug" /></svelte:fragment>
-        <svelte:fragment slot="summary">{label}</svelte:fragment>
-        <svelte:fragment slot="content"><slot /></svelte:fragment>
+        {#snippet lead()}
+                <Icon name="debug" />
+              {/snippet}
+        {#snippet summary()}
+                {label}
+              {/snippet}
+        {#snippet content()}
+                {@render children?.()}
+              {/snippet}
       </AccordionItem>
     </Accordion>
   </div>

@@ -23,27 +23,33 @@ import { Logger } from '@spectacular/utils';
 import Select from 'svelte-select';
 import type { HTMLSelectAttributes } from 'svelte/elements';
 import { writable } from 'svelte/store';
-interface $$Props extends HTMLSelectAttributes {
-  value: string;
-  items: Readonly<string[]>;
-  debounceWait?: number;
-  name?: string | null;
-  api?: Readonly<string>;
-}
+
 
 // Props
-export let value = '';
-export let items: Readonly<string[]>;
-export let debounceWait = 300;
-export let name: string | null = null;
-export let api = '/api/combobox';
+  interface Props {
+    value: string;
+    items: Readonly<string[]>;
+    debounceWait?: number;
+    name?: string | null;
+    api?: Readonly<string>;
+    [key: string]: any
+  }
+
+  let {
+    value = $bindable(''),
+    items,
+    debounceWait = 300,
+    name = null,
+    api = '/api/combobox',
+    ...rest
+  }: Props = $props();
 
 // Variables
 const log = new Logger('smart:textarea:browser');
-let loading = false;
-let error: string;
+let loading = $state(false);
+let error: string = $state();
 // const options = writable([]);
-let filterText = '';
+let filterText = $state('');
 
 // Functions
 async function handleOptions(filterText: string) {
@@ -148,7 +154,7 @@ const useRemoteModel = async (filterText: string) => {
   --item-active-background="rgb(var(--color-surface-400) /2)"
   --item-is-active-bg="var(--pd-input-field-hover-stroke)"
   --item-hover-bg="rgba(var(--color-secondary-500) / 1)"
-  {...$$restProps}
+  {...rest}
 />
 
 <ErrorMessage {error} />

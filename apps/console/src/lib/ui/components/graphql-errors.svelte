@@ -6,7 +6,11 @@ import { TriangleAlert } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
 
 const log = new Logger('graphql:error:client');
-export let errors: readonly Partial<GraphQLError>[] | undefined | null;
+  interface Props {
+    errors: readonly Partial<GraphQLError>[] | undefined | null;
+  }
+
+  let { errors }: Props = $props();
 log.error({ errors });
 </script>
 

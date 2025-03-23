@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import * as m from '$i18n/messages';
 import type { SearchGroup } from '$lib/schema/group.js';
 import { searchGroupKeys as keys } from '$lib/schema/group.js';
@@ -14,7 +16,11 @@ import SuperDebug, { superForm, type SuperValidated } from 'sveltekit-superforms
 
 const log = new Logger('groups:search-form:browser');
 
-export let formInitData: SuperValidated<SearchGroup>;
+  interface Props {
+    formInitData: SuperValidated<SearchGroup>;
+  }
+
+  let { formInitData }: Props = $props();
 
 // Variables
 const loadingState = getLoadingState();
@@ -37,8 +43,10 @@ const { form: formData, delayed, allErrors, errors, constraints, message, tainte
 let gqlErrors: PartialGraphQLErrors;
 
 // Reactivity
-$: invalid = $allErrors.length > 0;
-$: loadingState.setFormLoading($delayed);
+let invalid = $derived($allErrors.length > 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <!-- Form Level Errors / Messages -->
@@ -54,10 +62,12 @@ $: loadingState.setFormLoading($delayed);
     slotLead="place-content-start !justify-start"
     slotTrail="place-content-end"
   >
-    <svelte:fragment slot="lead">
-    <UserRound />
-      <h3 class="h3 pl-2 hidden md:block">Groups</h3>
-    </svelte:fragment>
+    {#snippet lead()}
+      
+      <UserRound />
+        <h3 class="h3 pl-2 hidden md:block">Groups</h3>
+      
+      {/snippet}
 
     <div
       class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
@@ -67,29 +77,33 @@ $: loadingState.setFormLoading($delayed);
         <SearchIcon size={17} />
       </div>
       <Form.Field {form} name={keys.displayName}>
-        <Form.Control let:attrs>
-          <input
-            type="search"
-            class="data-[fs-error]:input-error hidden md:block"
-            placeholder="Display Name"
-            autocomplete="off"
-            spellcheck="false"
-            autocorrect="off"
-            {...attrs}
-            bind:value={$formData.displayName}
-          />
-        </Form.Control>
+        <Form.Control >
+          {#snippet children({ attrs })}
+                    <input
+              type="search"
+              class="data-[fs-error]:input-error hidden md:block"
+              placeholder="Display Name"
+              autocomplete="off"
+              spellcheck="false"
+              autocorrect="off"
+              {...attrs}
+              bind:value={$formData.displayName}
+            />
+                            {/snippet}
+                </Form.Control>
       </Form.Field>
        <button type="submit" class="variant-filled">Search</button>
     </div>
 
-    <svelte:fragment slot="trail">
-      <a
-        href="/org/groups/create"
-        class="btn variant-filled"
-        data-sveltekit-preload-data="hover">Add Group</a
-      >
-    </svelte:fragment>
+    {#snippet trail()}
+      
+        <a
+          href="/org/groups/create"
+          class="btn variant-filled"
+          data-sveltekit-preload-data="hover">Add Group</a
+        >
+      
+      {/snippet}
   </AppBar>
   <input name={keys.limit} bind:value={$formData.limit} type="hidden" />
   <input name={keys.offset} bind:value={$formData.offset} type="hidden" />

@@ -59,8 +59,8 @@ let minutebar = tweened(90, { duration: 100 });
 let secondbar = tweened(-41, { duration: 10 });
 
 // Clock Text Settings
-let hourText = 12;
-let minuteText = 15;
+let hourText = $state(12);
+let minuteText = $state(15);
 onMount(() => {
   let interval = setInterval(() => {
     secondbar.update((val) => val + 6);
@@ -123,14 +123,14 @@ onMount(() => {
     >
       {#each cards as card}
         <button
-          on:mouseenter={() => {
+          onmouseenter={() => {
             hrsbar.set(card.hrs);
             minutebar.set(card.min);
             let timeSplit = card.time.split(":");
             hourText = Number(timeSplit[0]);
             minuteText = Number(timeSplit[1]);
           }}
-          on:mouseleave={() => {
+          onmouseleave={() => {
             hrsbar.set(7);
             minutebar.set(90);
 

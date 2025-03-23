@@ -8,11 +8,15 @@ import UserGroups from './components/user-groups.svelte';
 
 const log = new Logger('users.update.browser');
 
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { UserData } = data;
-$: ({ UserData } = data);
+// let { UserData } = $state(data);
+let { UserData } = $derived(data);
 </script>
 
 <svelte:head>
@@ -29,19 +33,21 @@ $: ({ UserData } = data);
   <MaybeError
     entityName="User"
     result={$UserData}
-    let:data={{ user }}
+
   >
-    {#if user}
-    <section class="space-y-4">
-      <h2 class="h2">User Details</h2>
-      <p>Update your account information</p>
-     <UserDetails {user} />
-    </section>
-    <section class="space-y-4">
-      <h2 class="h2">User Groups</h2>
-      <p>Drag and Drop Groups to add/remove groups to user</p>
-       <UserGroups {user} />
-    </section>
-  {/if}
- </MaybeError>
+    {#snippet children({ data: { user } })}
+        {#if user}
+      <section class="space-y-4">
+        <h2 class="h2">User Details</h2>
+        <p>Update your account information</p>
+       <UserDetails {user} />
+      </section>
+      <section class="space-y-4">
+        <h2 class="h2">User Groups</h2>
+        <p>Drag and Drop Groups to add/remove groups to user</p>
+         <UserGroups {user} />
+      </section>
+    {/if}
+         {/snippet}
+    </MaybeError>
 </div>

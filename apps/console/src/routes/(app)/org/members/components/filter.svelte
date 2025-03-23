@@ -5,14 +5,24 @@ import { Search, SearchIcon } from 'lucide-svelte';
 
 type T = $$Generic<Row>;
 
-export let handler: DataHandler<T>;
-export let searchFields: Field<T>[] = ['displayName', 'email'];
-export let orderBy: Field<T> = 'updatedAt';
-export let filterBy: Field<T> = 'role';
-export let comparator: Comparator<T> = check.isEqualTo;
+  interface Props {
+    handler: DataHandler<T>;
+    searchFields?: Field<T>[];
+    orderBy?: Field<T>;
+    filterBy?: Field<T>;
+    comparator?: Comparator<T>;
+  }
 
-let value = '';
-let role = '';
+  let {
+    handler,
+    searchFields = ['displayName', 'email'],
+    orderBy = $bindable('updatedAt'),
+    filterBy = 'role',
+    comparator = check.isEqualTo
+  }: Props = $props();
+
+let value = $state('');
+let role = $state('');
 
 handler.on('clearSearch', () => {
   value = '';
@@ -32,11 +42,11 @@ handler.on('clearFilters', () => {
     spellcheck="false"
     autocorrect="off"
     bind:value
-    on:input={() => handler.search(value, searchFields)}
+    oninput={() => handler.search(value, searchFields)}
   />
   <select
     bind:value={role}
-    on:change={() => handler.filter(role, filterBy, comparator)}
+    onchange={() => handler.filter(role, filterBy, comparator)}
   >
     <option value="">All Roles</option>
     <option value="org:member">Member</option>
@@ -49,7 +59,7 @@ handler.on('clearFilters', () => {
   <select
     class="select"
     bind:value={orderBy}
-    on:change={() => handler.sort(orderBy)}
+    onchange={() => handler.sort(orderBy)}
   >
     <option value="updatedAt">Date</option>
     <option value="displayName">Name(A-Z)</option>

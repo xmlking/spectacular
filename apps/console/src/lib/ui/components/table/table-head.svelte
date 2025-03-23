@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 import type { Row } from '@vincjo/datatables/legacy';
 type T = Row;
 </script>
@@ -10,13 +10,27 @@ import { getCtx } from './ctx.js';
 import { cn } from '$lib/ui/utils';
 
 type $$Props = HTMLThAttributes;
-let className: $$Props['class'] = undefined;
-export { className as class };
 
-export let handler: DataHandler<T>;
-export let orderBy: Field<T>;
-export let align: 'left' | 'right' | 'center' = 'left';
-export let rowSpan: number = 1;
+
+  interface Props {
+    class?: $$Props['class'];
+    handler: DataHandler<T>;
+    orderBy: Field<T>;
+    align?: 'left' | 'right' | 'center';
+    rowSpan?: number;
+    children?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let {
+    class: className = undefined,
+    handler = $bindable(),
+    orderBy,
+    align = 'left',
+    rowSpan = 1,
+    children,
+    ...rest
+  }: Props = $props();
 
 handler ??= getCtx();
 
@@ -25,18 +39,18 @@ const sort = handler.getSort();
 </script>
 
 <th
-  on:click={() => handler.sort(orderBy)}
+  onclick={() => handler.sort(orderBy)}
   class:sortable={orderBy}
   class:active={$sort.identifier === identifier}
   rowspan={rowSpan}
   class={cn(' ', className)}
-  {...$$restProps}
+  {...rest}
 >
   <div class="flex" style:justify-content={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center'}>
     <strong>
-      <slot />
+      {@render children?.()}
     </strong>
-    <span class:asc={$sort.direction === 'asc'} class:desc={$sort.direction === 'desc'} />
+    <span class:asc={$sort.direction === 'asc'} class:desc={$sort.direction === 'desc'}></span>
   </div>
 </th>
 

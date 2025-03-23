@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { goto } from '$app/navigation';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
@@ -95,8 +97,10 @@ export const snapshot = { capture, restore };
 // Functions
 
 // Reactivity
-$: valid = $allErrors.length === 0 && $turnstilePassed;
-$: loadingState.setFormLoading($delayed);
+let valid = $derived($allErrors.length === 0 && $turnstilePassed);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 // const conicStops: ConicStop[] = [
 //   { color: 'transparent', start: 0, end: 25 },
 //   { color: 'rgb(var(--color-primary-900))', start: 75, end: 100 }
@@ -119,19 +123,21 @@ $: loadingState.setFormLoading($delayed);
 <form method="POST" use:enhance>
   <div class="mt-6">
     <Form.Field {form} name="email">
-      <Form.Control let:attrs>
-        <Form.Label class="label sr-only"
-          >{m.auth_forms_email_label()}</Form.Label
-        >
-        <input
-          type="email"
-          autocomplete="email"
-          class="input data-[fs-error]:input-error"
-          placeholder={m.auth_forms_email_placeholder()}
-          {...attrs}
-          bind:value={$formData.email}
-        />
-      </Form.Control>
+      <Form.Control >
+        {#snippet children({ attrs })}
+                <Form.Label class="label sr-only"
+            >{m.auth_forms_email_label()}</Form.Label
+          >
+          <input
+            type="email"
+            autocomplete="email"
+            class="input data-[fs-error]:input-error"
+            placeholder={m.auth_forms_email_placeholder()}
+            {...attrs}
+            bind:value={$formData.email}
+          />
+                      {/snippet}
+            </Form.Control>
       <Form.FieldErrors class="data-[fs-error]:text-error-500" />
     </Form.Field>
   </div>

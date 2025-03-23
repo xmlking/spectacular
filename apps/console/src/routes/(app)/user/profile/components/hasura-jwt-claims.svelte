@@ -9,12 +9,12 @@ import { UserRound } from 'lucide-svelte';
 import SuperDebug from 'sveltekit-superforms';
 
 // Variables
-let message: App.Superforms.Message | undefined;
+let message: App.Superforms.Message | undefined = $state();
 const errors: string[] = [];
 const toastStore = getToastStore();
 const nhost = getNhostClient();
 const { elevated } = nhost;
-let claims = nhost.auth.getHasuraClaims();
+let claims = $state(nhost.auth.getHasuraClaims());
 
 // Functions
 async function handleRefresh() {
@@ -50,19 +50,23 @@ async function handleElevate() {
     <!-- <div>Here you can see your session claims</div> -->
   </header>
   <AppBar>
-    <svelte:fragment slot="lead"><UserRound /></svelte:fragment>
+    {#snippet lead()}
+        <UserRound />
+      {/snippet}
    <h3 class="h3"><span class="gradient-heading">Elevation status: {$elevated}</span></h3>
-    <svelte:fragment slot="trail">
-      <button
-        type="button"
-        class="variant-filled-primary btn"
-        on:click={handleRefresh}
-        >{m.profile_nhost_refresh_session_label()}</button
-      >
-      <button type="button" class="btn variant-filled" on:click={handleElevate}
-        >Elevate</button
-      >
-    </svelte:fragment>
+    {#snippet trail()}
+      
+        <button
+          type="button"
+          class="variant-filled-primary btn"
+          onclick={handleRefresh}
+          >{m.profile_nhost_refresh_session_label()}</button
+        >
+        <button type="button" class="btn variant-filled" onclick={handleElevate}
+          >Elevate</button
+        >
+      
+      {/snippet}
   </AppBar>
   <section class="p-4 space-y-4">
     <SuperDebug label="Claims" data={claims} />

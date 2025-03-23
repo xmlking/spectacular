@@ -9,7 +9,7 @@ const { isLoading } = getLoadingState();
 const wait = (delay: number) => new Promise((res) => setTimeout(res, delay));
 </script>
 
-{#if $isLoading }
+{#if $isLoading}
   {#await wait(150) then}
     <div transition:fade|global>
       <ProgressRadial stroke={125} meter="stroke-secondary-500" track="stroke-primary-800/20" width="w-10" />

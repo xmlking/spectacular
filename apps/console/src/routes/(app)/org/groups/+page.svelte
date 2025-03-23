@@ -8,11 +8,15 @@ import ListGroupsForm from './components/search-groups-form.svelte';
 import ListGroupsResult from './components/search-groups-result.svelte';
 
 const log = new Logger('groups:search:browser');
-export let data: PageData;
+  interface Props {
+    data: PageData;
+  }
+
+  let { data }: Props = $props();
 
 // Reactivity
-let { ListGroups } = data;
-$: ({ ListGroups } = data);
+// let { ListGroups } = $state(data);
+let { ListGroups } = $derived(data);
 </script>
 
 <svelte:head>
@@ -35,10 +39,12 @@ $: ({ ListGroups } = data);
     debug={true}
     entityName="SearchGroups"
     result={$ListGroups}
-    let:data={{ groups }}
+
   >
-    <ListGroupsResult {groups} />
-  </MaybeError>
+    {#snippet children({ data: { groups } })}
+            <ListGroupsResult {groups} />
+              {/snippet}
+        </MaybeError>
 </section>
 
 </div>

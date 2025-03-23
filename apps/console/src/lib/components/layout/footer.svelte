@@ -42,7 +42,7 @@ const socialLinks = [
     <span class="mt-4 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start">
       {#each socialLinks as sl}
         <a class="ml-3 text-gray-500" href={sl.href} target="_blank" rel="noreferrer" title={sl.title}>
-          <svelte:component this={sl.icon} />
+          <sl.icon />
         </a>
       {/each}
     </span>

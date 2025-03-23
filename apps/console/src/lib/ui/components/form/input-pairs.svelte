@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 export type AllowedKeyValues<K extends string, V extends readonly (string | number | boolean)[]> = Record<K, V>;
 export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string | number | boolean)[]>> = Record<
   keyof KV,
@@ -31,24 +31,32 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
   ```
 -->
 <script lang="ts">
+  import { createBubbler, handlers } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   // import { SvelteMap } from 'svelte/reactivity';
   // TODO: add/remove animation like input-chips
   import { fly, scale, slide } from "svelte/transition";
   import { onMount, onDestroy } from "svelte";
 
-  export let allowedKeyValues: AllowedKeyValues<
+  interface Props {
+    allowedKeyValues: AllowedKeyValues<
     string,
     readonly (string | number | boolean)[]
   >;
-  export let value: KeyValueRecord<typeof allowedKeyValues> | null;
-  export let chips = "variant-filled";
+    value: KeyValueRecord<typeof allowedKeyValues> | null;
+    chips?: string;
+    [key: string]: any
+  }
 
-  let currentInput = "";
+  let { allowedKeyValues, value = $bindable(), chips = "variant-filled", ...rest }: Props = $props();
+
+  let currentInput = $state("");
   let allowedKey = Object.keys(allowedKeyValues);
-  let showSuggestions = false;
-  let suggestions: (string | number | boolean)[] = [];
-  let inputElement: HTMLInputElement;
-  let containerElement: HTMLDivElement;
+  let showSuggestions = $state(false);
+  let suggestions: (string | number | boolean)[] = $state([]);
+  let inputElement: HTMLInputElement = $state();
+  let containerElement: HTMLDivElement = $state();
 
   function addKeyValuePair() {
     const [key, val] = currentInput.split(":").map((s) => s.trim());
@@ -133,8 +141,8 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
 
   // Pruned RestProps
   function prunedRestProps() {
-    delete $$restProps.class;
-    return $$restProps;
+    delete rest.class;
+    return rest;
   }
 
   function handleClickOutside(event: MouseEvent) {
@@ -165,7 +173,7 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
 <div
   bind:this={containerElement}
   class="relative input-chip textarea cursor-pointer p-2 rounded-container-token"
-  class:opacity-50={$$restProps.disabled}
+  class:opacity-50={rest.disabled}
 >
   <!-- Chip Wrapper -->
   <div class="input-chip-wrapper space-y-4">
@@ -173,14 +181,14 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
     <input
       class="input-chip-field unstyled bg-transparent border-0 !ring-0 p-0 w-full"
       type="text"
-      placeholder={$$restProps.placeholder ?? "Enter Key: Value"}
+      placeholder={rest.placeholder ?? "Enter Key: Value"}
       bind:value={currentInput}
-      on:input={() => updateSuggestions()}
-      on:keydown={handleKeyDown}
-      on:focus
-      on:blur
+      oninput={() => updateSuggestions()}
+      onkeydown={handleKeyDown}
+      onfocus={bubble('focus')}
+      onblur={bubble('blur')}
       bind:this={inputElement}
-      disabled={$$restProps.disabled}
+      disabled={rest.disabled}
       {...prunedRestProps()}
     />
     <!-- Chip List -->
@@ -191,12 +199,11 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
           <div>
             <button
               type="button"
-              disabled={$$restProps.disabled}
-              on:click={() => removeKeyValuePair(key)}
-              on:click
-              on:keypress
-              on:keydown
-              on:keyup
+              disabled={rest.disabled}
+              onclick={handlers(() => removeKeyValuePair(key), bubble('click'))}
+              onkeypress={bubble('keypress')}
+              onkeydown={bubble('keydown')}
+              onkeyup={bubble('keyup')}
               class="chip {chips}"
             >
               <span>{key}: {val}</span>
@@ -218,7 +225,7 @@ export type KeyValueRecord<KV extends AllowedKeyValues<string, readonly (string 
         <button
           type="button"
           class="w-full px-4 py-2 text-left hover:bg-slate-200 transition-colors"
-          on:click={() => selectSuggestion(suggestion)}
+          onclick={() => selectSuggestion(suggestion)}
         >
           {suggestion}
         </button>

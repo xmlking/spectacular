@@ -9,14 +9,14 @@ const log = new Logger('profile:org-switcher:browser');
 
 // Variables
 const nhost = getNhostClient();
-let value = $page.data.orgId;
+let value = $state($page.data.orgId);
 
 // Reactivity
-let { AppLayout } = $page.data;
-$: ({ AppLayout } = $page.data);
-let user: AllowedOrgsFragment = $AppLayout?.data?.user;
-$: user = $AppLayout?.data?.user;
-$: data = fragment(
+// let { AppLayout } = $state($page.data);
+let { AppLayout } = $derived($page.data);
+// let user: AllowedOrgsFragment = $state($AppLayout?.data?.user);
+let user = $derived($AppLayout?.data?.user);
+let data = $derived(fragment(
   user,
   graphql(`
       fragment AllowedOrgsFragment on users {
@@ -29,7 +29,7 @@ $: data = fragment(
         }
       }
     `),
-);
+));
 
 // Functions
 const handleSwitchOrg: ChangeEventHandler<HTMLSelectElement> = async (event) => {
@@ -50,7 +50,7 @@ const handleSwitchOrg: ChangeEventHandler<HTMLSelectElement> = async (event) => 
     <select
       class="select"
       bind:value
-      on:change={handleSwitchOrg}
+      onchange={handleSwitchOrg}
     >
       {#each allowedOrgs as org}
           <option value={org.orgId}>{org.organization.displayName}</option>

@@ -21,7 +21,7 @@
     />
   ```
 -->
-<script lang="ts" context="module">
+<script lang="ts" module>
 import { Crop, PenTool, Replace, SpellCheck2 } from 'lucide-svelte';
 import Translate from './translate-icon.svelte';
 // import Summary from "./summary-icon.svelte";
@@ -56,6 +56,8 @@ export type ToolType = keyof typeof toolOptions;
 </script>
 
 <script lang="ts">
+  import { stopPropagation } from 'svelte/legacy';
+
   import type { HTMLTextareaAttributes } from "svelte/elements";
   import { Logger } from "@spectacular/utils";
   import { Sparkles, SearchIcon } from "lucide-svelte";
@@ -67,7 +69,9 @@ export type ToolType = keyof typeof toolOptions;
 
   const log = new Logger("smart:textarea:browser");
 
-  interface $$Props extends HTMLTextareaAttributes {
+  
+
+  interface Props {
     value?: string;
     tool?: ToolType;
     writerOptions?: AIWriterCreateOptions;
@@ -75,41 +79,45 @@ export type ToolType = keyof typeof toolOptions;
     summarizerOptions?: AISummarizerCreateOptions;
     context?: string;
     stream?: boolean;
+    [key: string]: any
   }
 
-  export let value = "";
-  export let tool: ToolType = "writer";
-  export let writerOptions: AIWriterCreateOptions = {
+  let {
+    value = $bindable(""),
+    tool = $bindable("writer"),
+    writerOptions = $bindable({
     tone: "neutral",
     format: "plain-text",
     length: "medium",
-  };
-  export let rewriterOptions: AIRewriterCreateOptions = {
+  }),
+    rewriterOptions = $bindable({
     tone: "as-is",
     format: "as-is",
     length: "as-is",
-  };
-  export let summarizerOptions: AISummarizerCreateOptions = {
+  }),
+    summarizerOptions = $bindable({
     type: "tl;dr",
     format: "plain-text",
     length: "medium",
-  };
-  export let context = "";
-  export let stream = false;
+  }),
+    context = "",
+    stream = false,
+    ...rest
+  }: Props = $props();
 
   // Variables
   // const { errors } = getFormField();
-  let loading = false;
-  let sharedContext = context;
-  let completion: string;
-  let error: string;
-  let translationOps: AITranslatorCreateOptions = {
+  let loading = $state(false);
+  let sharedContext = $state(context);
+  let completion: string = $state();
+  let error: string = $state();
+  let translationOps: AITranslatorCreateOptions = $state({
     sourceLanguage: "en",
     targetLanguage: "en",
-  };
+  });
   const controller = new AbortController();
-  let detectedLanguage: LanguageDetectionResult | null;
-  let inputEl: HTMLTextAreaElement;
+  let detectedLanguage: LanguageDetectionResult | null = $state();
+  let inputEl: HTMLTextAreaElement = $state();
 
   function clearPreviousResults() {
     error = "";
@@ -368,22 +376,22 @@ export type ToolType = keyof typeof toolOptions;
   // Reactivity
   // $: console.log (`---${completion}---`)
   // Placeholder text based on selected tool
-  let placeholder: string;
+  let placeholder: string = $derived(toolOptions[tool].placeholder);
   // Reactive block to update placeholder whenever tool changes
-  $: placeholder = toolOptions[tool].placeholder;
-  let header: string;
-  $: header = toolOptions[tool].header;
+  
+  let header: string = $derived(toolOptions[tool].header);
+  
 </script>
 
 <div class="relative">
   <textarea
     bind:this={inputEl}
-    {...$$restProps}
+    {...rest}
     class="textarea pr-10"
     disabled={loading}
     bind:value
-    on:change={detectLanguage}
-  />
+    onchange={detectLanguage}
+></textarea>
 
   {#if value && detectedLanguage && detectedLanguage.detectedLanguage}
     <p
@@ -400,7 +408,7 @@ export type ToolType = keyof typeof toolOptions;
     class="btn-icon btn-icon-sm bg-initial absolute right-2 bottom-2 p-1 h-auto"
     type="button"
     title="Use AI"
-    on:click|stopPropagation|capture={handleSubmit}
+    onclickcapture={stopPropagation(handleSubmit)}
   >
     {#if loading}
       <LoaderIcon />
@@ -423,7 +431,7 @@ export type ToolType = keyof typeof toolOptions;
         title={ent.name}
         on:change={clearPreviousResults}
       >
-        <svelte:component this={ent.icon} />
+        <ent.icon />
       </RadioItem>
     {/each}
   </RadioGroup>
@@ -456,7 +464,7 @@ export type ToolType = keyof typeof toolOptions;
       {:else if tool === "rewriter"}
         <select
           bind:value={rewriterOptions.tone}
-          on:change={() => (rewriterOptions.length = "as-is")}
+          onchange={() => (rewriterOptions.length = "as-is")}
         >
           <option value="as-is">As Is</option>
           <option value="more-casual">More Casual</option>
@@ -464,7 +472,7 @@ export type ToolType = keyof typeof toolOptions;
         </select>
         <select
           bind:value={rewriterOptions.length}
-          on:change={() => (rewriterOptions.tone = "as-is")}
+          onchange={() => (rewriterOptions.tone = "as-is")}
         >
           <option value="as-is">As Is</option>
           <option value="shorter">Shorter</option>

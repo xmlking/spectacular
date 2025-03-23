@@ -12,10 +12,19 @@ import { Plus, Settings } from 'lucide-svelte';
 import { CircleUserRound } from 'lucide-svelte';
 import { LogOut } from 'lucide-svelte';
 
-export let initials: string | undefined = undefined;
-export let src: string | undefined = undefined;
-export let elevated = false;
-export let online = true;
+  interface Props {
+    initials?: string | undefined;
+    src?: string | undefined;
+    elevated?: boolean;
+    online?: boolean;
+  }
+
+  let {
+    initials = undefined,
+    src = undefined,
+    elevated = false,
+    online = true
+  }: Props = $props();
 
 const nhost = getNhostClient();
 const toastStore = getToastStore();
@@ -66,7 +75,7 @@ async function signOut() {
       </li>
       <hr class="!my-4" />
       <li>
-        <button type="button" on:click={signOut} class="bg-primary-hover-token btn w-full rounded-container-token">
+        <button type="button" onclick={signOut} class="bg-primary-hover-token btn w-full rounded-container-token">
           <LogOut class="w-5 justify-center" />
           <p class="flex-grow text-justify">Sign out</p>
         </button>

@@ -14,7 +14,7 @@ import {
 import { Provider } from './settings.js';
 // import { langs } from './constants';
 
-let voices: { label: string; value: string; isDefault: boolean }[] = [];
+let voices: { label: string; value: string; isDefault: boolean }[] = $state([]);
 onMount(() => {
   speechSynthesis.onvoiceschanged = () => {
     voices =
@@ -28,7 +28,7 @@ onMount(() => {
 });
 </script>
 
-{#if self.ai?.languageModel && self.ai?.summarizer && self.ai?.languageDetector }
+{#if self.ai?.languageModel && self.ai?.summarizer && self.ai?.languageDetector}
   <form class="card p-6 shadow-lg">
     <fieldset class="border border-surface-400 rounded-md p-4 mb-6">
       <legend class="text-sm font-semibold px-2">LanguageModel Options</legend>
@@ -159,7 +159,7 @@ onMount(() => {
     <fieldset class="border border-surface-400 rounded-md p-4 mb-6">
       <legend class="text-sm font-semibold px-2">Preferences</legend>
       <div class="flex items-center space-x-2">
-        <checkbox class="checkbox" id="newsletter" />
+        <checkbox class="checkbox" id="newsletter"></checkbox>
         <label for="newsletter"><span>Subscribe to newsletter</span> </label>
       </div>
       <div class="flex items-center space-x-2 mt-2">

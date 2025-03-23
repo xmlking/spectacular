@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { changePasswordSchema } from '$lib/schema/user';
@@ -76,8 +78,10 @@ const {
 } = form;
 
 // Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+let valid = $derived($allErrors.length === 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <!-- Form Level Errors / Messages -->
@@ -91,33 +95,37 @@ $: loadingState.setFormLoading($delayed);
     </header>
     <section class="p-4 space-y-2">
       <Form.Field {form} name="password">
-        <Form.Control let:attrs>
-          <!-- <Form.Label class="label data-[fs-error]:text-error-500">Password</Form.Label> -->
-          <Form.Label class="label">{m.profile_forms_change_password_label()}</Form.Label>
-          <input
-            type="password"
-            class="input data-[fs-error]:input-error"
-            {...attrs}
-            bind:value={$formData.password}
-            placeholder="{m.profile_forms_change_password_placeholder()}"
-          />
-        </Form.Control>
+        <Form.Control >
+          {#snippet children({ attrs })}
+                    <!-- <Form.Label class="label data-[fs-error]:text-error-500">Password</Form.Label> -->
+            <Form.Label class="label">{m.profile_forms_change_password_label()}</Form.Label>
+            <input
+              type="password"
+              class="input data-[fs-error]:input-error"
+              {...attrs}
+              bind:value={$formData.password}
+              placeholder="{m.profile_forms_change_password_placeholder()}"
+            />
+                            {/snippet}
+                </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">
           {m.profile_forms_change_password_description()}
         </Form.Description>
         <Form.FieldErrors class="data-[fs-error]:text-error-500" />
       </Form.Field>
       <Form.Field {form} name="confirmPassword">
-        <Form.Control let:attrs>
-          <Form.Label>{m.profile_forms_change_password_confirm_label()}</Form.Label>
-          <input
-            type="password"
-            class="input data-[fs-error]:input-error"
-            {...attrs}
-            bind:value={$formData.confirmPassword}
-            placeholder="{m.profile_forms_change_password_confirm_placeholder()}"
-          />
-        </Form.Control>
+        <Form.Control >
+          {#snippet children({ attrs })}
+                    <Form.Label>{m.profile_forms_change_password_confirm_label()}</Form.Label>
+            <input
+              type="password"
+              class="input data-[fs-error]:input-error"
+              {...attrs}
+              bind:value={$formData.confirmPassword}
+              placeholder="{m.profile_forms_change_password_confirm_placeholder()}"
+            />
+                            {/snippet}
+                </Form.Control>
         <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500"
           >{m.profile_forms_change_password_confirm_description()}</Form.Description
         >

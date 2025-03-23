@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import { invalidate, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import { cache } from '$houdini';
@@ -27,8 +29,8 @@ import SuperDebug, {
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 // Variables
-let copied: boolean;
-let pat: string;
+let copied: boolean = $state();
+let pat: string = $state();
 const log = new Logger('user:profile:pat:form:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -98,24 +100,27 @@ const {
   enhance,
 } = form;
 
-let proxyExpiresAt: Writable<string>;
+let proxyExpiresAt: Writable<string> = $state();
 onMount(() => {
   proxyExpiresAt = dateProxy(form, 'expiresAt', { format: 'date-local', empty: 'undefined' });
 });
 // Functions
 // Reactivity
-$: valid = $allErrors.length === 0;
-$: loadingState.setFormLoading($delayed);
+let valid = $derived($allErrors.length === 0);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
 </script>
 
 <!-- Form Level Errors / Messages -->
 <Alerts errors={$errors._errors} message={$message}>
-    <button
+    <!-- @migration-task: migrate this slot by hand, `message` would shadow a prop on the parent component -->
+  <button
       slot="message"
       class:hidden={$message?.type !== "success"}
       class="btn variant-filled ml-2"
       use:clipboard={pat}
-      on:click={() => {
+      onclick={() => {
         copied = true;
         setTimeout(() => {
           copied = false;
@@ -127,56 +132,64 @@ $: loadingState.setFormLoading($delayed);
 <!-- Creating new PAT token  Form -->
 <form method="POST" use:enhance>
   <AppBar gridColumns="grid-cols-3" slotTrail="place-content-end">
-    <svelte:fragment slot="lead">
-      <div>
-        <Form.Field {form} name="name">
-          <Form.Control let:attrs>
-            <Form.Label class="label">Name</Form.Label>
-            <input
-              type="text"
-              class="input data-[fs-error]:input-error"
-              {...attrs}
-              bind:value={$formData.name}
-            />
-          </Form.Control>
-          <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter name for the PAT</Form.Description> -->
-          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-        </Form.Field>
-      </div>
-      <div>
-        <Form.Field {form} name="expiresAt">
-          <Form.Control let:attrs>
-            <Form.Label class="space-y-3">Expiry Date</Form.Label>
-            <input
-              type="date"
-              class="input data-[fs-error]:input-error"
-              {...attrs}
-              {...$constraints.expiresAt}
-              min={$constraints.expiresAt?.min?.toString().slice(0, 10)}
-              max={$constraints.expiresAt?.max?.toString().slice(0, 10)}
-              bind:value={$proxyExpiresAt}
-            />
-          </Form.Control>
-          <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the desired expiry date</Form.Description> -->
-          <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-        </Form.Field>
-      </div>
-    </svelte:fragment>
-    <svelte:fragment slot="trail">
-      <button
-        type="submit"
-        class="btn variant-filled"
-        disabled={!$tainted || !valid || $submitting}
-      >
-        {#if $timeout}
-          <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
-        {:else if $delayed}
-          <Loader class="m-2 h-4 w-4 animate-spin" />
-        {:else}
-          {m.buttons_add()}
-        {/if}
-      </button>
-    </svelte:fragment>
+    {#snippet lead()}
+      
+        <div>
+          <Form.Field {form} name="name">
+            <Form.Control >
+              {#snippet children({ attrs })}
+                        <Form.Label class="label">Name</Form.Label>
+                <input
+                  type="text"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  bind:value={$formData.name}
+                />
+                                    {/snippet}
+                    </Form.Control>
+            <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter name for the PAT</Form.Description> -->
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+        <div>
+          <Form.Field {form} name="expiresAt">
+            <Form.Control >
+              {#snippet children({ attrs })}
+                        <Form.Label class="space-y-3">Expiry Date</Form.Label>
+                <input
+                  type="date"
+                  class="input data-[fs-error]:input-error"
+                  {...attrs}
+                  {...$constraints.expiresAt}
+                  min={$constraints.expiresAt?.min?.toString().slice(0, 10)}
+                  max={$constraints.expiresAt?.max?.toString().slice(0, 10)}
+                  bind:value={$proxyExpiresAt}
+                />
+                                    {/snippet}
+                    </Form.Control>
+            <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">Enter the desired expiry date</Form.Description> -->
+            <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+          </Form.Field>
+        </div>
+      
+      {/snippet}
+    {#snippet trail()}
+      
+        <button
+          type="submit"
+          class="btn variant-filled"
+          disabled={!$tainted || !valid || $submitting}
+        >
+          {#if $timeout}
+            <MoreHorizontal class="m-2 h-4 w-4 animate-ping" />
+          {:else if $delayed}
+            <Loader class="m-2 h-4 w-4 animate-spin" />
+          {:else}
+            {m.buttons_add()}
+          {/if}
+        </button>
+      
+      {/snippet}
   </AppBar>
 </form>
 

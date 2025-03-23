@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { FormPath, FormPathLeaves } from 'sveltekit-superforms';
 type T = Record<string, unknown>;
@@ -6,6 +6,9 @@ type U = unknown;
 </script>
 
 <script lang="ts" generics="T extends Record<string, unknown>, U extends FormPath<T>">
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   // Source: https://github.com/diericx/climbing_notebook/blob/master/src/lib/components/forms/fields/Autocomplete.svelte
   import type { AutocompleteOption } from '@skeletonlabs/skeleton';
   import { popup, type PopupSettings } from '@skeletonlabs/skeleton';
@@ -16,12 +19,27 @@ type U = unknown;
 
 
 
-  export let form: SuperForm<T>;
-  // export let form: SuperForm<ZodValidation<T>, unknown>;
-  export let field: FormPathLeaves<z.infer<T>>;
-  export let label: string | undefined = undefined;
-  export let options: AutocompleteOption[];
-  export let searchValue = '';
+  
+  interface Props {
+    form: SuperForm<T>;
+    // export let form: SuperForm<ZodValidation<T>, unknown>;
+    field: FormPathLeaves<z.infer<T>>;
+    label?: string | undefined;
+    options: AutocompleteOption[];
+    searchValue?: string;
+    pre?: import('svelte').Snippet;
+    [key: string]: any
+  }
+
+  let {
+    form,
+    field,
+    label = undefined,
+    options,
+    searchValue = $bindable(''),
+    pre,
+    ...rest
+  }: Props = $props();
 
   const { path, value, errors } = formFieldProxy(form, field);
 
@@ -44,15 +62,15 @@ type U = unknown;
   {#if $errors}
     <div class="invalid">{$errors}</div>
   {/if}
-  <slot name="pre" />
+  {@render pre?.()}
   <input
     class="autocomplete w-full"
     type="search"
     bind:value={searchValue}
-    on:keyup
+    onkeyup={bubble('keyup')}
     placeholder="Type to Search..."
     use:popup={popupSettings}
-    {...$$restProps}
+    {...rest}
   />
 </label>
 

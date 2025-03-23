@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run, stopPropagation } from 'svelte/legacy';
+
 import { invalidate, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import { type MembershipsFragment, PendingValue, cache, fragment, graphql } from '$houdini';
@@ -20,8 +22,12 @@ import { LeaveOrganization } from '../mutations';
 
 const log = new Logger('user:profile:memberships:browser');
 
-export let user: MembershipsFragment;
-$: data = fragment(
+  interface Props {
+    user: MembershipsFragment;
+  }
+
+  let { user }: Props = $props();
+let data = $derived(fragment(
   user,
   graphql(`
       fragment MembershipsFragment on users {
@@ -36,11 +42,11 @@ $: data = fragment(
         }
       }
     `),
-);
-$: ({ allowedOrgs } = $data);
+));
+let { allowedOrgs } = $derived($data);
 
 // Variables
-let gqlErrors: PartialGraphQLErrors;
+let gqlErrors: PartialGraphQLErrors = $state();
 const nhost = getNhostClient();
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
@@ -49,7 +55,9 @@ const loadingState = getLoadingState();
 const handler = new DataHandler(allowedOrgs?.filter(loaded), {
   rowsPerPage: 5,
 });
-$: handler.setRows(allowedOrgs);
+run(() => {
+    handler.setRows(allowedOrgs);
+  });
 const rows = handler.getRows();
 
 // Functions
@@ -107,10 +115,10 @@ const leaveOrganization: MouseEventHandler<HTMLButtonElement> = async (event) =>
       {#each $rows as membership, i}
         {#if membership.orgId === PendingValue}
           <tr class="animate-pulse">
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td><div class="placeholder" /></td>
-            <td class="table-cell-fit text-center align-middle"><div class="placeholder" /></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td><div class="placeholder"></div></td>
+            <td class="table-cell-fit text-center align-middle"><div class="placeholder"></div></td>
           </tr>
         {:else}
           <tr transition:slide={{ duration: 300, axis: 'y' }}>
@@ -146,7 +154,7 @@ const leaveOrganization: MouseEventHandler<HTMLButtonElement> = async (event) =>
                         data-user-id={membership.userId}
                         data-org-id={membership.orgId}
                         data-org-name={membership.organization.displayName}
-                        on:click|stopPropagation|capture={leaveOrganization}
+                        onclickcapture={stopPropagation(leaveOrganization)}
                       >
                         <X class="w-5 justify-center" />
                         <p class="flex-grow text-justify">Leave</p>
@@ -154,7 +162,7 @@ const leaveOrganization: MouseEventHandler<HTMLButtonElement> = async (event) =>
                     </li>
                   </ul>
                 </nav>
-                  <div class="arrow bg-surface-100-800-token" />
+                  <div class="arrow bg-surface-100-800-token"></div>
               </div>
             </td>
           </tr>

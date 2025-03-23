@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getLoadingState } from '$lib/stores/loading';
@@ -17,7 +19,7 @@ import Sample from './sample.svelte';
 import { type Person, personJsonSchema as jsonSchema, personSchema } from './schema.js';
 
 const log = new Logger('ai:smart:browser');
-export let data;
+  let { data } = $props();
 
 // Variables
 const toastStore = getToastStore();
@@ -25,7 +27,7 @@ const loadingState = getLoadingState();
 let loading = writable(false);
 let smartError = writable<string>();
 // const jsonSchema = zod(personSchema).jsonSchema; // HINT: openai-zod-to-json-schema is better
-let useLocal = false;
+let useLocal = $state(false);
 
 // Search form
 // const form = superForm(defaults(schemasafe(personSchema)), {
@@ -90,8 +92,12 @@ function handleError(event: CustomEvent<Error>) {
 }
 
 // Reactivity
-$: loadingState.setFormLoading($delayed);
-$: loadingState.setFormLoading($loading);
+run(() => {
+    loadingState.setFormLoading($delayed);
+  });
+run(() => {
+    loadingState.setFormLoading($loading);
+  });
 </script>
 
 <div class="page-container">
@@ -107,8 +113,8 @@ $: loadingState.setFormLoading($loading);
       method="POST"
       class="card shadow-lg"
       use:enhance
-      on:smartPaste={handlePaste}
-      on:smartError={handleError}
+      onsmartPaste={handlePaste}
+      onsmartError={handleError}
       use:smartPaste={{api: '/api/smartpaste', loading, jsonSchema, useLocal }}
     >
       <header class="card-header">
@@ -120,143 +126,163 @@ $: loadingState.setFormLoading($loading);
         <div class="md:grid-cols-col-span-3 mb-6 grid gap-6 lg:grid-cols-6">
           <div class="col-span-3">
             <Form.Field {form} name="firstName">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label>First Name</Form.Label>
-                  <input
-                    {...attrs}
-                    class="input"
-                    bind:value={$formData.firstName}
-                  />
-                  <Form.FieldErrors class="data-[fs-error]:text-error-500" />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label>First Name</Form.Label>
+                    <input
+                      {...attrs}
+                      class="input"
+                      bind:value={$formData.firstName}
+                    />
+                    <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="lastName">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label>Last Name</Form.Label>
-                  <input
-                    class="input"
-                    {...attrs}
-                    bind:value={$formData.lastName}
-                  />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label>Last Name</Form.Label>
+                    <input
+                      class="input"
+                      {...attrs}
+                      bind:value={$formData.lastName}
+                    />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="phoneNumber">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label>Phone Number</Form.Label>
-                  <input
-                    class="input"
-                    {...attrs}
-                    bind:value={$formData.phoneNumber}
-                  />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label>Phone Number</Form.Label>
+                    <input
+                      class="input"
+                      {...attrs}
+                      bind:value={$formData.phoneNumber}
+                    />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="email">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label>Email</Form.Label>
-                  <input
-                    class="input"
-                    {...attrs}
-                    bind:value={$formData.email}
-                  />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label>Email</Form.Label>
+                    <input
+                      class="input"
+                      {...attrs}
+                      bind:value={$formData.email}
+                    />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="line1">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label>Line 1</Form.Label>
-                  <input
-                    class="input"
-                    {...attrs}
-                    bind:value={$formData.line1}
-                  />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label>Line 1</Form.Label>
+                    <input
+                      class="input"
+                      {...attrs}
+                      bind:value={$formData.line1}
+                    />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="line2">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label>Line 2</Form.Label>
-                  <input
-                    class="input"
-                    {...attrs}
-                    bind:value={$formData.line2}
-                  />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label>Line 2</Form.Label>
+                    <input
+                      class="input"
+                      {...attrs}
+                      bind:value={$formData.line2}
+                    />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="city">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label>City</Form.Label>
-                  <input class="input" {...attrs} bind:value={$formData.city} />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label>City</Form.Label>
+                    <input class="input" {...attrs} bind:value={$formData.city} />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="state">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label>State</Form.Label>
-                  <input
-                    class="input"
-                    {...attrs}
-                    bind:value={$formData.state}
-                  />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label>State</Form.Label>
+                    <input
+                      class="input"
+                      {...attrs}
+                      bind:value={$formData.state}
+                    />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="zip">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label class="label">Zip</Form.Label>
-                  <input class="input" {...attrs} bind:value={$formData.zip} />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label class="label">Zip</Form.Label>
+                    <input class="input" {...attrs} bind:value={$formData.zip} />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
           <div class="col-span-3">
             <Form.Field {form} name="country">
-              <Form.Control let:attrs>
-                <div class="grid gap-2">
-                  <Form.Label class="label">Country</Form.Label>
-                  <input
-                    class="input"
-                    {...attrs}
-                    bind:value={$formData.country}
-                  />
-                </div>
-              </Form.Control>
+              <Form.Control >
+                {#snippet children({ attrs })}
+                                <div class="grid gap-2">
+                    <Form.Label class="label">Country</Form.Label>
+                    <input
+                      class="input"
+                      {...attrs}
+                      bind:value={$formData.country}
+                    />
+                  </div>
+                                              {/snippet}
+                            </Form.Control>
               <Form.FieldErrors />
             </Form.Field>
           </div>
@@ -279,13 +305,13 @@ $: loadingState.setFormLoading($loading);
         <button
           type="button"
           class="variant-ghost-secondary btn"
-          on:click={() => history.back()}>Back</button
+          onclick={() => history.back()}>Back</button
         >
         <button
           type="button"
           class="variant-ghost-warning btn"
           disabled={!$tainted}
-          on:click={() => reset()}
+          onclick={() => reset()}
         >
           Reset
         </button>
