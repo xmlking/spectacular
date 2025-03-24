@@ -19,4 +19,4 @@ CREATE UNIQUE INDEX refresh_tokens_metadata_name_user_id_unique ON auth.refresh_
 WHERE (metadata IS NOT NULL);
 ---
 ALTER TABLE auth.users
-  ADD COLUMN default_org UUID DEFAULT uuid_nil();
+  ADD COLUMN default_org UUID;
