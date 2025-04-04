@@ -1,7 +1,7 @@
 [global]
 
 [hasura]
-version = 'v2.44.0-ce'
+version = 'v2.46.0-ce'
 adminSecret = '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
 webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 
@@ -42,14 +42,14 @@ maxDepthQueries = 4
 
 [functions]
 [functions.node]
-version = 20
+version = 22
 
 [functions.rateLimit]
 limit = 100
 interval = '15m'
 
 [auth]
-# version = '0.37.1'
+#version = '0.38.0'
 version = '0.0.0-dev'
 
 [auth.elevatedPrivileges]
@@ -57,15 +57,7 @@ mode = 'recommended'
 
 [auth.redirections]
 clientUrl = 'https://console.traefik.me:5173'
-allowedUrls = [
-  'https://console.traefik.me:5173',
-  'https://console.traefik.me:5173/user/profile',
-  'https://console.traefik.me:4173',
-  'https://console.traefik.me:4173/user/profile',
-  'https://console.traefik.me:3000',
-  'https://console.traefik.me:3000/user/profile',
-  'https://*.vercel.app',
-]
+allowedUrls = ['https://console.traefik.me:5173', 'https://console.traefik.me:5173/user/profile', 'https://console.traefik.me:4173', 'https://console.traefik.me:4173/user/profile', 'https://console.traefik.me:3000', 'https://console.traefik.me:3000/user/profile', 'https://*.vercel.app']
 
 [auth.signUp]
 enabled = true

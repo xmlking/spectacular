@@ -20,7 +20,7 @@
       "outputLogs": "new-only",
       "cache": false, // No outputs will be cached
       "persistent": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets", "$TURBO_ROOT$/.env", "$TURBO_ROOT$/.secrets"]
     },
     "dev:debug": {
       "dependsOn": ["generate"],

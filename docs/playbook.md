@@ -437,11 +437,10 @@ pnpm add -D svelte-select
 
 #### i18n
 
-We switched to inlang's [Paraglide JS](https://inlang.com/m/dxnzrydw/library-inlang-paraglideJsAdapterSvelteKit) for i18n
+We switched to inlang's [Paraglide JS](https://inlang.com/m/gerre34r/library-inlang-paraglideJs/sveltekit) for i18n
 
 ```shell
-npx @inlang/paraglide-sveltekit init
-npm install
+pnpx @inlang/paraglide-js@latest init
 ```
 
 #### Progressive Web Apps (PWA)
@@ -484,13 +483,14 @@ pnpm add -D  vite-plugin-mkcert
 Update `vite.config.ts`
 
 ```ts
-# vite.config.ts
-
+// vite.config.ts
+import { defineConfig } from 'vite'
 import mkcert from 'vite-plugin-mkcert';
 
 const config: UserConfig = {
  server: {
-  https: true
+   https: true,
+   host: 'console.traefik.me'
  },
  plugins: [
   mkcert(),

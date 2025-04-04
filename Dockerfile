@@ -34,7 +34,7 @@ RUN turbo prune --scope=${SCOPE} --docker
 
 ###################################################################
 # Stage 2: Install dependencies                                   #
-# Add lockfile and package.json's of isolated subworkspace         #
+# Add lockfile and package.json's of isolated subworkspace        #
 ###################################################################
 FROM base AS builder
 
