@@ -1,9 +1,9 @@
-ARG SCOPE=playground
+ARG SCOPE=console
 ###################################################################
 # Stage 0: base image											                        #
 ###################################################################
 FROM oven/bun:1.1.29 AS base
-ENV GIT_SSL_NO_VERIFY 1
+ENV GIT_SSL_NO_VERIFY=1
 RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
 ARG SCOPE
@@ -15,8 +15,19 @@ ENV SCOPE=${SCOPE}
 RUN bun --version
 
 ###################################################################
-# Stage 1: Install dependencies                                   #
-# Add lockfile and package.json's of isolated subworkspace         #
+# Stage 1: Prune monorepo                                         #
+###################################################################
+FROM base AS pruner
+
+WORKDIR /app
+RUN bun add -g turbo
+COPY . .
+RUN mv .git dotgit
+RUN turbo prune --scope=${SCOPE} --docker
+
+###################################################################
+# Stage 2: Install dependencies                                   #
+# Add lockfile and package.json's of isolated subworkspace        #
 ###################################################################
 FROM base AS builder
 
@@ -40,22 +51,24 @@ ENV TURBO_TEAM=$TURBO_TEAM
 ARG TURBO_TOKEN
 ENV TURBO_TOKEN=$TURBO_TOKEN
 
-# TODO: set any extra ENV needed for build
+ARG TURBO_REMOTE_ONLY=true
+ENV TURBO_REMOTE_ONLY=$TURBO_REMOTE_ONLY
+
+#ENV NODE_OPTIONS="--max-old-space-size=4096"
 ENV BUN_ENV=true
 RUN bun run build --filter=@spectacular/${SCOPE}...
-RUN ls -la  /app/apps/web
 
 ###################################################################
-# Stage 2: Run the app (production)                                     #
+# Stage 4: Run the app (prod)                                     #
 ###################################################################
 FROM base AS runner
 USER bun:bun
 
 WORKDIR /app
-ENV NODE_ENV production
+ENV NODE_ENV=production
 ARG SCOPE
 
-# copy tini
+## copy tini
 COPY --from=builder --chown=bun:bun /usr/bin/tini /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "-s", "--", "bun"]
 
@@ -67,11 +80,11 @@ COPY --from=builder --chown=bun:bun /app/apps/${SCOPE}/package.json .
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=bun:bun /app/apps/${SCOPE}/build ./build
 
-
+ENV HOST=0.0.0.0
 EXPOSE 3000
-ENV PORT 3000
+ENV PORT=3000
 
-# Metadata params
+## Metadata params
 ARG DOCKER_REGISTRY=ghcr.io
 ARG VCS_CONTEXT_PATH=xmlking/spectacular
 ARG BUILD_TIME
@@ -79,7 +92,10 @@ ARG BUILD_VERSION
 ARG VCS_REF=1
 ARG VENDOR=xmlking
 
-# Metadata
+## for faster docker shutdown
+STOPSIGNAL SIGINT
+
+## Metadata
 LABEL org.opencontainers.image.created=$BUILD_TIME \
 	org.opencontainers.image.name="${SCOPE}" \
 	org.opencontainers.image.title="${SCOPE}" \
@@ -93,5 +109,4 @@ LABEL org.opencontainers.image.created=$BUILD_TIME \
 	org.opencontainers.image.licenses=MIT \
 	org.opencontainers.image.documentation="docker run -it -e NODE_ENV=production -p 3000:3000  ${DOCKER_REGISTRY:+${DOCKER_REGISTRY}/}${VCS_CONTEXT_PATH}/${SCOPE}:${BUILD_VERSION}"
 
-#Start the application
-CMD ["./build/index.js" ]
+CMD ["build"]
