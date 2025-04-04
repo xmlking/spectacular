@@ -4,11 +4,10 @@ import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { updateUserDetailsKeys as keys, signUpSchema } from '$lib/schema/user';
+import { signUpSchema, updateUserDetailsKeys as keys } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { turnstilePassed, turnstileResponse } from '$lib/stores/stores';
-import { getAuthenticationResult, signUpEmailPasswordPromise } from '@nhost/nhost-js';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
@@ -49,35 +48,21 @@ const form = superForm(defaults(zod(signUpSchema)), {
     if (!form.valid) return;
 
     const { firstName, lastName, email, password, locale, redirectTo } = form.data;
-
-    // FIXME: remove this block after nhost.auth.signUp support headers
-    const { session, error } = getAuthenticationResult(
-      await signUpEmailPasswordPromise(
-        // biome-ignore lint/style/noNonNullAssertion: <explanation>
-        nhost.auth.client.interpreter!,
+    const { session, error } = await nhost.auth.signUp(
+      {
         email,
-        password as string,
-        {
+        password,
+        options: {
           displayName: `${firstName} ${lastName}`,
           locale,
         },
-        {
-          headers: {
-            'x-cf-turnstile-response': $turnstileResponse,
-          },
+      },
+      {
+        headers: {
+          'x-cf-turnstile-response': $turnstileResponse,
         },
-      ),
+      },
     );
-
-    // log.debug('TODO: use turnstileResponse:', $turnstileResponse);
-    // const { session, error } = await nhost.auth.signUp({
-    //   email,
-    //   password,
-    //   options: {
-    //     displayName: `${firstName} ${lastName}`,
-    //     locale,
-    //   },
-    // });
 
     if (error) {
       log.error(error);
@@ -140,18 +125,18 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
 
 <svelte:head>
   <title>Datablocks | Signup</title>
-  <meta name="description" content="Create Account" />
+  <meta name="description" content="Create Account"/>
 </svelte:head>
 
 <!-- Form Level Errors / Messages -->
-<Alerts errors={$errors._errors} message={$message} />
+<Alerts errors={$errors._errors} message={$message}/>
 <!-- Signup Form -->
 <form method="POST" use:enhance>
   <div class="mt-6">
     <Form.Field {form} name="firstName">
       <Form.Control let:attrs>
         <Form.Label class="label sr-only"
-          >{m.auth_forms_first_name_label()}</Form.Label
+        >{m.auth_forms_first_name_label()}</Form.Label
         >
         <input
           type="text"
@@ -162,14 +147,14 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           bind:value={$formData.firstName}
         />
       </Form.Control>
-      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+      <Form.FieldErrors class="data-[fs-error]:text-error-500"/>
     </Form.Field>
   </div>
   <div class="mt-6">
     <Form.Field {form} name="lastName">
       <Form.Control let:attrs>
         <Form.Label class="label sr-only"
-          >{m.auth_forms_last_name_label()}</Form.Label
+        >{m.auth_forms_last_name_label()}</Form.Label
         >
         <input
           type="text"
@@ -180,14 +165,14 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           bind:value={$formData.lastName}
         />
       </Form.Control>
-      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+      <Form.FieldErrors class="data-[fs-error]:text-error-500"/>
     </Form.Field>
   </div>
   <div class="mt-6">
     <Form.Field {form} name="email">
       <Form.Control let:attrs>
         <Form.Label class="label sr-only"
-          >{m.auth_forms_email_label()}</Form.Label
+        >{m.auth_forms_email_label()}</Form.Label
         >
         <input
           type="email"
@@ -198,14 +183,14 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           bind:value={$formData.email}
         />
       </Form.Control>
-      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+      <Form.FieldErrors class="data-[fs-error]:text-error-500"/>
     </Form.Field>
   </div>
   <div class="mt-6">
     <Form.Field {form} name="password">
       <Form.Control let:attrs>
         <Form.Label class="label sr-only"
-          >{m.auth_forms_password_label()}</Form.Label
+        >{m.auth_forms_password_label()}</Form.Label
         >
         <input
           type="password"
@@ -215,14 +200,14 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           bind:value={$formData.password}
         />
       </Form.Control>
-      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+      <Form.FieldErrors class="data-[fs-error]:text-error-500"/>
     </Form.Field>
   </div>
   <div class="mt-6">
     <Form.Field {form} name="confirmPassword">
       <Form.Control let:attrs>
         <Form.Label class="label sr-only"
-          >{m.auth_forms_confirm_password_label()}</Form.Label
+        >{m.auth_forms_confirm_password_label()}</Form.Label
         >
         <input
           type="password"
@@ -232,13 +217,13 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           bind:value={$formData.confirmPassword}
         />
       </Form.Control>
-      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+      <Form.FieldErrors class="data-[fs-error]:text-error-500"/>
     </Form.Field>
   </div>
   <div class="mt-6">
     <Form.Field {form} name={keys.locale}>
       <Form.Control let:attrs>
-        <Form.Label  class="label sr-only">Locale</Form.Label>
+        <Form.Label class="label sr-only">Locale</Form.Label>
         <select
           class="select data-[fs-error]:input-error"
           {...attrs}
@@ -250,7 +235,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
         </select>
       </Form.Control>
       <!-- <Form.Description class="sr-only md:not-sr-only text-sm text-gray-500">User preferred Locale</Form.Description> -->
-      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+      <Form.FieldErrors class="data-[fs-error]:text-error-500"/>
     </Form.Field>
   </div>
   <div class="mt-6">
@@ -268,11 +253,11 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
           <a href="/terms" class="text-primaryHover underline">terms</a>
           and
           <a href="/privacy" class="text-primaryHover underline"
-            >privacy policy</a
+          >privacy policy</a
           >
         </span>
       </Form.Control>
-      <Form.FieldErrors class="data-[fs-error]:text-error-500" />
+      <Form.FieldErrors class="data-[fs-error]:text-error-500"/>
     </Form.Field>
   </div>
   <div class="mt-6">
@@ -282,9 +267,9 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
       disabled={!$tainted || !valid || $submitting}
     >
       {#if $timeout}
-        <MoreHorizontal class="animate-ping" />
+        <MoreHorizontal class="animate-ping"/>
       {:else if $delayed}
-        <Loader class="animate-spin" />
+        <Loader class="animate-spin"/>
       {:else}
         {m.auth_labels_signup()}
       {/if}
@@ -303,14 +288,14 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
       timeout: $timeout
     }}
   />
-  <br />
-  <SuperDebug label="Form" data={$formData} />
-  <br />
-  <SuperDebug label="Tainted" status={false} data={$tainted} />
-  <br />
-  <SuperDebug label="Errors" status={false} data={$errors} />
-  <br />
-  <SuperDebug label="Constraints" status={false} data={$constraints} />
+  <br/>
+  <SuperDebug label="Form" data={$formData}/>
+  <br/>
+  <SuperDebug label="Tainted" status={false} data={$tainted}/>
+  <br/>
+  <SuperDebug label="Errors" status={false} data={$errors}/>
+  <br/>
+  <SuperDebug label="Constraints" status={false} data={$constraints}/>
   <!-- <br />
  	<SuperDebug label="$page data" status={false} data={$page} /> -->
 </DebugShell>

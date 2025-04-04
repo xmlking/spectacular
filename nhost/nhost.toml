@@ -1,7 +1,7 @@
 [global]
 
 [hasura]
-version = 'v2.44.0-ce'
+version = 'v2.46.0-ce'
 adminSecret = '{{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}'
 webhookSecret = '{{ secrets.NHOST_WEBHOOK_SECRET }}'
 
@@ -17,7 +17,7 @@ key = '{{ secrets.HASURA_GRAPHQL_JWT_SECRET }}'
 [hasura.settings]
 corsDomain = ['*']
 devMode = true
-enableAllowList = false # enable it for prod
+enableAllowList = false                                   # enable it for prod
 enableConsole = true
 enableRemoteSchemaPermissions = false
 enabledAPIs = ['metadata', 'graphql', 'pgdump', 'config']
@@ -42,14 +42,14 @@ maxDepthQueries = 4
 
 [functions]
 [functions.node]
-version = 20
+version = 22
 
 [functions.rateLimit]
 limit = 100
 interval = '15m'
 
 [auth]
-version = '0.37.1'
+version = '0.38.0'
 
 [auth.elevatedPrivileges]
 mode = 'recommended'
@@ -114,9 +114,9 @@ enabled = true
 enabled = true
 
 [auth.method.emailPassword]
-hibpEnabled = false # enable in prod
+hibpEnabled = false               # enable in prod
 emailVerificationRequired = false # enable in prod
-passwordMinLength = 9 # 12 in prod
+passwordMinLength = 9             # 12 in prod
 
 [auth.method.smsPasswordless]
 enabled = false
