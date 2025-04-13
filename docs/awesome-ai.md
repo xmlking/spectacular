@@ -53,7 +53,9 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
 ## References
 
 - Chat Apps
-  - [shadcn-chatbot-kit](https://x.com/blazity/status/1852380275981893952), [demo](https://shadcn-chatbot-kit.vercel.app/), [source](https://github.com/Blazity/shadcn-chatbot-kit)
+  - Vercel Svelte Chat [Demo](https://ai-chatbot-svelte.vercel.sh/), [Source](https://github.com/vercel/ai-chatbot-svelte)
+  - Vercel React Chat [Docs](https://chat-sdk.dev/), [Demo](https://ai-chatbot-svelte.vercel.sh/) [Source](https://github.com/vercel/ai-chatbot)
+  - shadcn-chatbot-kit [Docs](https://shadcn-chatbot-kit.vercel.app/docs), [Demo](https://shadcn-chatbot-kit.vercel.app/), [Source](https://github.com/Blazity/shadcn-chatbot-kit) - React
 
 - Web AI
 - [AiBrow](https://aibrow.ai/) - Use *in-browser* and *on-device* AI to enable powerful and private genAI features in your Web Applications.

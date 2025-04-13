@@ -161,3 +161,4 @@ cat  /var/lib/pgsql/14/data/pg_hba.conf
 - [Use pgai with Ollama](https://github.com/timescale/pgai/blob/main/docs/ollama.md)
 - [supavisor](https://github.com/supabase/supavisor) - PostgreSQL connection pooler _extention_. Multi-tenant alternative for **PgBouncer**.  
 - [pgmq](https://github.com/tembo-io/pgmq) - PostgreSQL _extention_ for _LISTEN/NOTIFY_. [usecases](https://supabase.com/blog/supabase-queues)
+- [PostgreSQL Row Level Security](https://aws.amazon.com/blogs/database/multi-tenant-data-isolation-with-postgresql-row-level-security/) Multi-tenant data isolation with PostgreSQL Row Level Security
