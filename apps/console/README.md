@@ -13,18 +13,6 @@ cd apps/console/config/certs
 mkcert -key-file traefik.me.key -cert-file traefik.me.crt console.traefik.me
 ```
 
-> [!WARNING]
-> This method is deprecated. use **mkcert**
-
-d~~ownload latest `traefik.me` certs for _svelte_ dev server.~~
-
-> ~~NOTE: they will expire every 60 days~~
-
-```shell
-curl traefik.me/fullchain.pem -o apps/console/config/certs/traefik.me.crt
-curl traefik.me/privkey.pem -o apps/console/config/certs/traefik.me.key
-```
-
 ### Backend
 
 Start backend services with [nhost cli](../../docs/nhost.md)
