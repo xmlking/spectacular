@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Facebook, Github, Instagram, Twitter } from 'lucide-svelte';
+import { Facebook, Github, Instagram, Twitter } from '@lucide/svelte';
 </script>
 
 <!-- svelte-ignore a11y_invalid_attribute -->

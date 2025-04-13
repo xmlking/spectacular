@@ -6,7 +6,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["dist/**"],
+  "files": [
+    "dist/**"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -45,6 +47,6 @@
     "@spectacular/typescript-config": "workspace:*",
     "graphql": "16.10.0",
     "tsup": "8.4.0",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   }
 }

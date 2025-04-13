@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@spectacular/ui/components/select';
-import { Trash2 } from 'lucide-svelte';
+import { Trash2 } from '@lucide/svelte';
 import { slide } from 'svelte/transition';
 
 // Available roles for members

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { copy } from '@spectacular/ui/actions';
-import { Copy, ThumbsUp } from 'lucide-svelte';
+import { Copy, ThumbsUp } from '@lucide/svelte';
 
 // Props
 export let loading: boolean;

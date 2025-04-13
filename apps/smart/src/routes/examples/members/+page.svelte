@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Plus, Search, Trash2 } from 'lucide-svelte';
+import { Plus, Search, Trash2 } from '@lucide/svelte';
 import { fade } from 'svelte/transition';
 import AddMemberDialog from './add-member-dialog.svelte';
 import MemberList from './member-list.svelte';

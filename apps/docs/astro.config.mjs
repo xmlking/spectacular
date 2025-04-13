@@ -63,10 +63,10 @@ export default defineConfig({
           },
         },
       ],
-      social: {
-        'x.com': 'https://x.com/xmlking',
-        github: 'https://github.com/xmlking/spectacular',
-      },
+      social:[
+        { icon: 'x.com', label: 'X', href: 'https://x.com/xmlking'},
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/xmlking/spectacular'},
+      ],
       editLink: {
         baseUrl: 'https://github.com/xmlking/spectacular/tree/main/apps/docs',
       },

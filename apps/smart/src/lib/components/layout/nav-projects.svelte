@@ -3,10 +3,10 @@ import { localizeHref } from '$i18n/runtime';
 import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
 import { useSidebar } from '@spectacular/ui/components/sidebar';
 import * as Sidebar from '@spectacular/ui/components/sidebar';
-import Ellipsis from 'lucide-svelte/icons/ellipsis';
-import Folder from 'lucide-svelte/icons/folder';
-import Forward from 'lucide-svelte/icons/forward';
-import Trash2 from 'lucide-svelte/icons/trash-2';
+import Ellipsis from '@lucide/svelte/icons/ellipsis';
+import Folder from '@lucide/svelte/icons/folder';
+import Forward from '@lucide/svelte/icons/forward';
+import Trash2 from '@lucide/svelte/icons/trash-2';
 
 let {
   projects,
@@ -14,7 +14,7 @@ let {
   projects: {
     name: string;
     url: string;
-    // This should be `Component` after lucide-svelte updates types
+    // This should be `Component` after @lucide/svelte updates types
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     icon: any;
   }[];

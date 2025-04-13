@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 // import { IconSummary } from '@spectacular/ui/components/icons';
 import { IconTranslate } from '@spectacular/ui/components/icons';
-import { Crop, PenTool, Replace, SpellCheck2 } from 'lucide-svelte';
+import { Crop, PenTool, Replace, SpellCheck2 } from '@lucide/svelte';
 
 const toolOptions = {
   writer: {
@@ -51,7 +51,7 @@ export type SummarizerOptions = {
 <script lang="ts">
   import type { HTMLTextareaAttributes } from "svelte/elements";
   import { Logger } from "@spectacular/utils";
-  import { Sparkles, SearchIcon } from "lucide-svelte";
+  import { Sparkles, SearchIcon } from "@lucide/svelte";
   import { IconLoading } from '@spectacular/ui/components/icons';
   import * as ToggleGroup  from '@spectacular/ui/components/toggle-group';
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
