@@ -23,7 +23,7 @@ export class AdapterOpenAI extends Adapter {
         },
         { role: 'user' as const, content: 'Ping' },
       ],
-      model: 'gpt-4o-mini',
+      model: 'gpt-4.1-nano',
     });
 
     const content = response.choices[0].message.content;
@@ -46,7 +46,8 @@ export class AdapterOpenAI extends Adapter {
 
     const response = await this.openai.chat.completions.create({
       messages,
-      model: 'gpt-4o-mini',
+      model: 'gpt-4.1-mini',
+      // model: 'gpt-4.1',
       response_format: { type: 'json_object' },
     });
 

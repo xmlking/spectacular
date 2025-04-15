@@ -41,9 +41,12 @@ function prompt_template(question: string) {
 }
 
 // console.log({ gqlSchema });
-const model = openai('gpt-4o-mini');
-// const model = openai('gpt-4o-mini', { structuredOutputs: true });
-// const model = openai('gpt-4o', { structuredOutputs: true });
+// const model = openai('gpt-4.1-nano');
+const model = openai('gpt-4.1-mini');
+// const model = openai('gpt-4.1');
+// const model = openai('o3-mini');
+// const model = openai('gpt-4.1-mini', { structuredOutputs: true });
+// const model = openai('gpt-4.1', { structuredOutputs: true });
 // const model = ollama('gemma3:12b', { structuredOutputs: true });
 
 export const POST = async (event) => {

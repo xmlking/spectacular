@@ -10,13 +10,13 @@ import { personSchema as schema } from '../../(app)/ai/pastesmart/schema';
 const log = new Logger('smart:past:server');
 
 // free https://platform.openai.com/docs/guides/rate-limits/free-tier-rate-limits
-const model = openai('gpt-4o-mini');
-// const model = openai('gpt-4o-mini', {
+// const model = openai('gpt-4.1-nano');
+const model = openai('gpt-4.1-mini');
+// const model = openai('gpt-4.1');
+// const model = openai('o3-mini');
+// const model = openai('gpt-4.1-mini', {
 //   structuredOutputs: true
 // });
-// const model = openai('gpt-4o');
-// const model = openai('o3-mini');
-// const model = openai('llama3-8b-8192');
 // const model = ollama('phi3'); // phi3, mistral, llama3
 
 export const POST = async (event) => {

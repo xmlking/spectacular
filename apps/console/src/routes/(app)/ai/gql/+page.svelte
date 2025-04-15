@@ -60,8 +60,6 @@ const onclick: MouseEventHandler<HTMLButtonElement> = async (event) => {
       </div>
     </form>
 
-    <DebugShell label="AI GraphQL" open>
-      <SuperDebug label="result" data={result} />
-    </DebugShell>
+    <SuperDebug label="result" data={result} />
   </div>
 </div>

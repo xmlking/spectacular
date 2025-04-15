@@ -8,11 +8,13 @@ import { JSONParseError, type LanguageModel, TypeValidationError, generateObject
 import { ollama } from 'ollama-ai-provider';
 import { z } from 'zod';
 
-const log = new Logger('experiments:ai:date:server');
+const log = new Logger('experiments:ai:combobox:server');
 
 // free https://platform.openai.com/docs/guides/rate-limits/free-tier-rate-limits
 // const model = openai('gpt-4o-mini');
-const model = openai('gpt-4o');
+// const model = openai('gpt-4.1-nano');
+// const model = openai('gpt-4.1-mini');
+const model = openai('gpt-4.1');
 // const model = openai('o3-mini');
 // const model = openai('llama3-8b-8192');
 // const model = ollama('phi3'); // phi3, mistral, llama3
