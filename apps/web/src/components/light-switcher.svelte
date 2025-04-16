@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Moon, Sun } from 'lucide-svelte';
+import { Moon, Sun } from '@lucide/svelte';
 import { mode, toggleMode } from 'mode-watcher';
 import { twMerge } from 'tailwind-merge';
 

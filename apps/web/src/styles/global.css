@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-roboto);
+  /* --font-sans: var(--font-inter); */
+  /* --font-sans: var(--font-source-code-pro); */
+}
+
 @layer base {
   @view-transition {
     navigation: auto; /* enabled! */

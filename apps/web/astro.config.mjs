@@ -1,5 +1,5 @@
 import node from '@astrojs/node';
-import { defineConfig, envField } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import svelte from '@astrojs/svelte';
 import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
@@ -18,6 +18,30 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'hover',
+  },
+
+  experimental: {
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: 'Roboto',
+        cssVariable: '--font-roboto',
+      },
+      {
+        provider: fontProviders.fontsource(),
+        name: 'Inter',
+        cssVariable: '--font-inter',
+      },
+      {
+        provider: fontProviders.google(),
+        name: 'Source Code Pro',
+        cssVariable: '--font-source-code-pro',
+        display: 'swap',
+        fallbacks: ['monospace'],
+        weights: [300, 400, 700],
+        optimizedFallbacks: true,
+      },
+    ],
   },
 
   env: {
