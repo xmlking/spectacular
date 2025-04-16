@@ -6,7 +6,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["dist/**"],
+  "files": [
+    "dist/**"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -38,7 +40,7 @@
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts"
   },
   "dependencies": {
-    "houdini": "1.5.4"
+    "houdini": "1.5.5"
   },
   "devDependencies": {
     "@spectacular/biome-config": "workspace:*",

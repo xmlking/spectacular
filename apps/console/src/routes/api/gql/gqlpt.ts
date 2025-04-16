@@ -1,11 +1,12 @@
-import { Adapter } from './types';
+import type { Adapter } from './types';
 import { clearOperationNames, compressTypeDefs, hashTypeDefs, introspection, postGeneratedQuery } from './utils';
 
+import { promises } from 'node:fs';
+import path from 'node:path';
 import { sortAST } from '@apollo/utils.sortast';
-import { promises } from 'fs';
 import {
   type DocumentNode,
-  GraphQLSchema,
+  type GraphQLSchema,
   type SelectionNode,
   buildClientSchema,
   buildSchema,
@@ -16,10 +17,10 @@ import {
   printSchema,
   validate,
 } from 'graphql';
-import path from 'path';
 
 const log = new Logger('smart:gqlpt:server');
 
+import { Logger } from '@spectacular/utils';
 import {
   JSON_RESPONSE_FORMAT,
   QUERY_GENERATION_RULES,
@@ -27,7 +28,6 @@ import {
   TYPE_GENERATION_RULES,
 } from './rules';
 import type { DefaultTypeMap, GeneratedTypeMap } from './types';
-import { Logger } from '@spectacular/utils';
 
 export interface GQLPTClientOptions {
   url?: string;
@@ -270,7 +270,7 @@ export class GQLPTClient<T extends MergedTypeMap = MergedTypeMap> {
   private async generateQueryWithRetry(
     plainText: string,
     schema: string,
-    retryCount: number = 0,
+    retryCount = 0,
     conversationId?: string,
     currentQuery?: string,
   ): Promise<{ query: string; variables?: Record<string, unknown> }> {
