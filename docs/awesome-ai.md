@@ -86,6 +86,18 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
   - [flows-ai](https://flows-ai.callstack.com/) - A lightweight, type-safe AI workflow orchestrator inspired by Anthropic's agent patterns. Built on top of Vercel AI SDK.
   - Vercel AI SDK [Agents](https://sdk.vercel.ai/docs/foundations/agents)
 
+- AI Infra
+  - [Arch Gateway](https://github.com/katanemo/archgw) - The intelligent (edge and LLM) proxy server for agentic applications.
+  - [HelixDB](https://github.com/HelixDB/helix-db) - is a graph-vector database built for performance and simplicity.
+
+- IDE GitHub Copilot
+  - [copilot-instructions](https://copilot-instructions.md/)
+  - **llms.txt**
+    - [svelte-llm](https://svelte-llm.khromov.se/) - Recommended - LLM Distilled
+    - [llmctx](https://llmctx.com/)
+    - [shadcn-svelte](https://llmctx.com/shadcn-svelte)
+    - [svelte.dev](https://svelte.dev/docs/llms)
+
 - Tutorials
   - [AI Agents Masterclass](https://github.com/coleam00/ai-agents-masterclass)
 
