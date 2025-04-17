@@ -1,9 +1,9 @@
+// @ts-check
 import node from '@astrojs/node';
 import starlight from '@astrojs/starlight';
-// import vercel from "@astrojs/vercel/serverless";
-import vercel from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import rehypeMermaid from 'rehype-mermaid';
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
@@ -120,7 +120,7 @@ export default defineConfig({
           label: 'Guides',
           items: [
             // Each item here is one entry in the navigation menu.
-            { label: 'Example Guide', link: '/guides/example/' },
+            { label: 'Example Guide', slug: 'guides/example' },
           ],
         },
         {
@@ -132,15 +132,60 @@ export default defineConfig({
           autogenerate: { directory: 'faq' },
         },
       ],
-      customCss: [
-        // Fontsource files for to regular and semi-bold font weights.
-        '@fontsource-variable/inter',
-        // Fontsource files for code.
-        '@fontsource/source-code-pro',
-      ],
+      customCss: ['./src/styles/global.css'],
     }),
   ],
 
+  experimental: {
+    fonts: [
+      {
+        provider: fontProviders.google(),
+        name: 'Roboto',
+        cssVariable: '--font-roboto',
+      },
+      {
+        provider: fontProviders.fontsource(),
+        name: 'Inter',
+        cssVariable: '--font-inter',
+      },
+      {
+        provider: fontProviders.google(),
+        name: 'Source Code Pro',
+        cssVariable: '--font-source-code-pro',
+        display: 'swap',
+        fallbacks: ['monospace'],
+        weights: [300, 400, 700],
+        optimizedFallbacks: true,
+      },
+    ],
+  },
+
+  env: {
+    schema: {
+      API_VERSION: envField.enum({
+        context: 'server',
+        access: 'secret',
+        values: ['v1', 'v2'],
+        optional: true,
+      }),
+      API_PORT: envField.number({
+        context: 'server',
+        access: 'secret',
+        gt: 1024,
+        default: 7000,
+      }),
+      PUBLIC_SOME_SERVER_FEATURE_FLAG: envField.boolean({
+        context: 'server',
+        access: 'public',
+        default: false,
+      }),
+      PUBLIC_SOME_CLIENT_FEATURE_FLAG: envField.boolean({
+        context: 'client',
+        access: 'public',
+        default: false,
+      }),
+    },
+  },
   // HINT: To set build output, same way like sveltekit for Dockerfile
   build: {
     server: './build',

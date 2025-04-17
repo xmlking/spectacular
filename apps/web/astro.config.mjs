@@ -1,18 +1,23 @@
-import node from '@astrojs/node';
-import { defineConfig, envField, fontProviders } from 'astro/config';
-import svelte from '@astrojs/svelte';
-import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel';
-import starlight from '@astrojs/starlight';
-import partytown from '@astrojs/partytown';
-import expressiveCode from 'astro-expressive-code';
+// @ts-check
 import mdx from '@astrojs/mdx';
+import node from '@astrojs/node';
+import partytown from '@astrojs/partytown';
+import starlight from '@astrojs/starlight';
+import svelte from '@astrojs/svelte';
+import vercel from '@astrojs/vercel';
+import tailwindcss from '@tailwindcss/vite';
+import expressiveCode from 'astro-expressive-code';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 
-const SITE_URL = process.env.VERCEL_ENV === 'production' ? process.env.SITE_URL : 'http://localhost:4321';
+const VERCEL_SITE_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined;
+const site = VERCEL_SITE_URL ?? process.env.GH_SITE_URL ?? 'http://localhost:4321';
+const base = process.env.GITHUB_ACTIONS ? (process.env.GH_BASE_PATH ?? '/spectacular') : undefined;
 
+console.log('which runtime?', { site, base });
 // https://astro.build/config
 export default defineConfig({
-  site: SITE_URL,
+  site,
+  base,
 
   integrations: [svelte(), starlight({ title: 'Web', disable404Route: true }), partytown(), expressiveCode(), mdx()],
   prefetch: {
@@ -71,10 +76,6 @@ export default defineConfig({
     },
   },
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
-
   adapter: process.env.VERCEL
     ? vercel({
         webAnalytics: {
@@ -84,7 +85,13 @@ export default defineConfig({
           enabled: true,
         },
       })
-    : node({
-        mode: 'standalone',
-      }),
+    : process.env.GITHUB_ACTIONS
+      ? undefined
+      : node({
+          mode: 'standalone',
+        }),
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
