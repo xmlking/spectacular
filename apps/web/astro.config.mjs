@@ -81,9 +81,6 @@ export default defineConfig({
         webAnalytics: {
           enabled: true,
         },
-        speedInsights: {
-          enabled: true,
-        },
       })
     : process.env.GITHUB_ACTIONS
       ? undefined
