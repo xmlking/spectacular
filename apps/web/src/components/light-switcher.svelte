@@ -9,7 +9,7 @@ export const labelClass =
 
 <div>
   <input
-    checked={$mode === 'dark'}
+    checked={mode.current === 'dark'}
     on:click={toggleMode}
     type="checkbox"
     name="light-switch"

@@ -29,14 +29,14 @@
     "test:e2e": "dotenv-run -f .env -f .secrets -v -- playwright test"
   },
   "devDependencies": {
-    "@ai-sdk/azure": "1.3.13",
-    "@ai-sdk/openai": "1.3.12",
+    "@ai-sdk/azure": "1.3.17",
+    "@ai-sdk/openai": "1.3.16",
     "@ai-sdk/svelte": "2.1.9",
     "@aibrow/dom-types": "1.3.9",
     "@inlang/cli": "3.0.10",
     "@inlang/paraglide-js": "2.0.11",
     "@lucide/svelte": "0.488.0",
-    "@playwright/test": "1.51.1",
+    "@playwright/test": "1.52.0",
     "@spectacular/biome-config": "workspace:*",
     "@spectacular/typescript-config": "workspace:*",
     "@spectacular/ui": "workspace:*",
@@ -52,15 +52,15 @@
     "@tailwindcss/typography": "0.5.16",
     "@tanstack/table-core": "8.21.3",
     "@types/dom-chromium-ai": "0.0.6",
-    "ai": "4.3.7",
+    "ai": "4.3.9",
     "autoprefixer": "10.4.21",
     "bits-ui": "1.3.19",
     "clsx": "2.1.1",
     "formsnap": "2.0.1",
-    "mode-watcher": "0.5.1",
+    "mode-watcher": "1.0.2",
     "openai-zod-to-json-schema": "1.0.3",
     "runed": "0.25.0",
-    "svelte": "5.27.0",
+    "svelte": "5.27.1",
     "svelte-check": "4.1.6",
     "svelte-persisted-store": "0.12.0",
     "svelte-radix": "2.0.1",
@@ -72,8 +72,8 @@
     "tailwindcss-animate": "1.0.7",
     "typescript": "5.8.3",
     "vaul-svelte": "1.0.0-next.3",
-    "vite": "6.2.6",
+    "vite": "6.3.1",
     "vitest": "3.1.1",
-    "zod": "3.24.2"
+    "zod": "3.24.3"
   }
 }
