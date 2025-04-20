@@ -78,6 +78,9 @@ Awesome **SvelteKit** Links
   - [flowbite-svelte-icons](https://github.com/themesberg/flowbite-svelte-icons) 480+ SVG [Flowbite icons](https://flowbite.com/icons/) components for Svelte. list of icon [names](https://flowbite-svelte-icons.vercel.app/icons)
   - [heroicons](https://heroicons.com/) Icons via [svelte-heros-v2](https://github.com/shinokada/svelte-heros-v2) Icon Components. list of icon [names](https://svelte-heros-v2.vercel.app/outline)
 
+- [Microinteractions](https://uxdesign.cc/micro-interactions-why-when-and-how-to-use-them-to-boost-the-ux-17094b3baaa0)
+  - [khagwal's interactions](https://khagwal.com/interactions/) and his [blog](https://medium.com/@nitishkmrk)
+
 - Mobile
 
   - [Konsta UI](https://konstaui.com) Pixel perfect mobile UI components built with Tailwind CSS
@@ -90,6 +93,7 @@ Awesome **SvelteKit** Links
 
 - Security
 
+  - [Better Auth](https://www.better-auth.com/) - The most comprehensive authentication framework for TypeScript.
   - [lucia](https://lucia-auth.com/) OIDC auth with [SvelteKit](https://lucia-auth.com/guidebook/github-oauth/sveltekit)
   - [Auth.js](https://authjs.dev/) OIDC auth with [SvelteKit](https://authjs.dev/reference/sveltekit)
 
