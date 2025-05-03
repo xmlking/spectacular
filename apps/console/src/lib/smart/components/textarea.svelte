@@ -161,21 +161,16 @@ export type ToolType = keyof typeof toolOptions;
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim(),
       });
-      writer = await self.ai.writer.create({
+      writer = await Writer.create({
         ...writerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
       if (stream) {
         const readableStream = writer.writeStreaming(value.trim());
-        // for await (const value of readableStream) {
-        //   completion = value;
-        // }
-        const reader = readableStream.getReader();
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          completion = value;
+        for await (const value of readableStream) {
+          completion += value;
         }
+
       } else {
         completion = await writer.write(value.trim());
       }
@@ -206,7 +201,7 @@ export type ToolType = keyof typeof toolOptions;
           prompt: value.trim(),
         }),
       });
-      rewriter = await self.ai.rewriter.create({
+      rewriter = await Rewriter.create({
         ...rewriterOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -214,14 +209,8 @@ export type ToolType = keyof typeof toolOptions;
         const readableStream = rewriter.rewriteStreaming(value.trim(), {
           context,
         });
-        // for await (const value of readableStream) {
-        //   completion = value;
-        // }
-        const reader = readableStream.getReader();
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          completion = value;
+        for await (const value of readableStream) {
+          completion += value;
         }
       } else {
         completion = await rewriter.rewrite(value.trim(), { context });
@@ -251,20 +240,14 @@ export type ToolType = keyof typeof toolOptions;
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim(),
       });
-      summarizer = await self.ai.summarizer.create({
+      summarizer = await Summarizer.create({
         ...summarizerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
       if (stream) {
         const readableStream = summarizer.summarizeStreaming(value.trim());
-        // for await (const value of readableStream) {
-        //   completion = value;
-        // }
-        const reader = readableStream.getReader();
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          completion = value;
+        for await (const value of readableStream) {
+          completion += value;
         }
       } else {
         completion = await summarizer.summarize(value.trim());
@@ -288,7 +271,7 @@ export type ToolType = keyof typeof toolOptions;
     try {
       if (!value.trim()) return;
       loading = true;
-      detector = await self.ai.languageDetector.create();
+      detector = await LanguageDetector.create();
       const results = await detector.detect(value.trim());
       if (Array.isArray(results) && results.length > 0) {
         detectedLanguage = results[0];
@@ -317,13 +300,8 @@ export type ToolType = keyof typeof toolOptions;
     let translator;
     let streamSupported = isPolyfilledTranslation();
     try {
-      if (self.ai.translator) {
-        translator = await self.ai.translator.create(translationOps);
-      } else if (
-        "translation" in self &&
-        "createTranslator" in self.translation
-      ) {
-        translator = await window.translation.createTranslator(translationOps);
+      if (Translator) {
+        translator = await Translator.create(translationOps);
       } else {
         error = "translation not supported";
         // errors?.update((items) => {

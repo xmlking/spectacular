@@ -245,7 +245,7 @@ export type SummarizerOptions = {
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim(),
       });
-      summarizer = await self.ai.summarizer.create({
+      summarizer = await Summarizer.create({
         ...summarizerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -336,7 +336,7 @@ export type SummarizerOptions = {
         tool: "translator",
         prompt,
       });
-      translator = await self.ai.languageModel.create();
+      translator = await LanguageModel.create();
       if (stream) {
         const readableStream = translator.promptStreaming(prompt);
         // for await (const value of readableStream) {
