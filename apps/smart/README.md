@@ -42,3 +42,7 @@ turbo run smart#build
 You can preview the production build with `turbo run smart#preview`.
 
 > To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+## Reference
+
+- [mastra](https://mastra.ai/) - The TypeScript Agent Framework

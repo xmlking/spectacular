@@ -18,8 +18,10 @@ Awesome **SvelteKit** Links
   - [svelte-jsoneditor](https://github.com/josdejong/svelte-jsoneditor) - A web-based tool to view, edit, format, transform, and validate JSON.
   - [Yeezy-Dates](https://yeezy-dates.vercel.app/) -  date parser for human-friendly inputs
 
-- Tables
+- UI Blocks
+  - [Svelte Shadcn Blocks](https://sv-blocks.vercel.app/)
 
+- Tables
   - [svelte simple datatables](https://github.com/vincjo/datatables)
   - [simple-datatables-skeleton](https://github.com/kmalloy24/simple-datatables-skeleton)
   - [Svelte Headless Table](https://svelte-headless-table.bryanmylee.com/)
