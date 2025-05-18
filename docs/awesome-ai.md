@@ -56,6 +56,8 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
   - Vercel Svelte Chat [Demo](https://ai-chatbot-svelte.vercel.sh/), [Source](https://github.com/vercel/ai-chatbot-svelte)
   - Vercel React Chat [Docs](https://chat-sdk.dev/), [Demo](https://ai-chatbot-svelte.vercel.sh/) [Source](https://github.com/vercel/ai-chatbot)
   - shadcn-chatbot-kit [Docs](https://shadcn-chatbot-kit.vercel.app/docs), [Demo](https://shadcn-chatbot-kit.vercel.app/), [Source](https://github.com/Blazity/shadcn-chatbot-kit) - React
+  - CopilotKit - Headleass Copilot UI [components](https://docs.copilotkit.ai/guides/custom-look-and-feel/built-in-ui-components), [Guardrails](https://docs.copilotkit.ai/guides/guardrails), Copilot [Textarea](https://docs.copilotkit.ai/guides/copilot-textarea) , [coagents](https://www.copilotkit.ai/coagents/)
+  - [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit)- Works seamlessly with shadcn CLI,Voice Input,Copy & Paste Components
 
 - Web AI
 - [AiBrow](https://aibrow.ai/) - Use *in-browser* and *on-device* AI to enable powerful and private genAI features in your Web Applications.
@@ -94,6 +96,11 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
 - AI Infra
   - [Arch Gateway](https://github.com/katanemo/archgw) - The intelligent (edge and LLM) proxy server for agentic applications.
   - [HelixDB](https://github.com/HelixDB/helix-db) - is a graph-vector database built for performance and simplicity.
+
+- AI Protocols
+  - **[AG-UI](https://docs.ag-ui.com/introduction):** Deep agent-user collaboration, by bringing agents into frontend applications.
+  - **[MCP](https://modelcontextprotocol.io/introduction):** Standardizes tool calls and context handling across different models
+  - **[A2A](https://google.github.io/A2A/):** Facilitates agent-to-agent communication and collaboration
 
 - IDE GitHub Copilot
   - [copilot-instructions](https://copilot-instructions.md/)

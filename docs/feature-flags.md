@@ -11,7 +11,7 @@ Test changes with small groups of users before rolling out wider. Analyze usage 
 ### Using flags in SvelteKit
 
 > [!TIP]
-> Learn the best practices for creating feature flags in SvelteKit by using the @vercel/flags/sveltekit package, follow [SvelteKit Guide](https://vercel.com/docs/workflow-collaboration/feature-flags/flags-pattern-sveltekit)
+> Learn the best practices for creating feature flags in SvelteKit by using the `flags` package, follow [SvelteKit Guide](https://flags-sdk.dev/frameworks/sveltekit)
 
 ### Available flags
 

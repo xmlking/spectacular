@@ -189,6 +189,7 @@ Awesome **SvelteKit** Links
 - [Turborepo Svelte starter](https://github.com/kevingdc/turborepo-sveltekit-shadcn/tree/main)
 - [JustShip](https://www.justship.today/) - Skip the boring parts, Ship **svelte 5** apps in days not weeks. Components: Stripe, Auth, tailwind
 - [next-forge](https://www.next-forge.com/) - Production-grade `Turborepo` template for`Next.js` apps. Components:
+- [Titan](https://titan.rdsx.dev/) - Modern Next.js 15 stack with Better-Auth, Drizzle ORM, PostgreSQL, Shadcn UI, and Tailwind v4 for fast, secure web app development.
 
 ## Deployment
 

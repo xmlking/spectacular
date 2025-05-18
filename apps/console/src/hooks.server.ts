@@ -7,7 +7,7 @@ import { auth, guard, houdini, theme } from '$lib/server/hooks';
 import { Logger, sleep } from '@spectacular/utils';
 import type { Handle, HandleFetch, HandleServerError, ServerInit } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
-import { createHandle } from '@vercel/flags/sveltekit';
+import { createHandle } from 'flags/sveltekit';
 import { GraphQLError } from 'graphql';
 import { ZodError } from 'zod';
 
