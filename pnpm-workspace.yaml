@@ -4,3 +4,28 @@ packages:
  # exclude some packages
   - "!apps/swyxkit"
   - "!apps/urara"
+
+catalog:
+  "@types/dom-chromium-ai": 0.0.7
+  "@inlang/paraglide-js": 2.0.12
+
+catalogs:
+  svelte4:
+    "svelte": 4.2.19
+    "@ai-sdk/svelte": 1.1.24
+    "@sveltejs/vite-plugin-svelte": 3.1.2
+    "@xyflow/svelte": 0.1.37
+    "@inlang/paraglide-sveltekit": 0.14.0
+    "@sveltejs/enhanced-img": 0.3.10
+    "formsnap": 1.0.1
+    "vite": 5.4.18
+
+
+
+  svelte5:
+    "svelte": 5.30.2
+    "@ai-sdk/svelte": 2.1.12
+    "@sveltejs/enhanced-img": 0.6.0
+    "@sveltejs/vite-plugin-svelte": 5.0.3
+    "formsnap": 2.0.1
+    "vite": 6.3.5
