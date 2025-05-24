@@ -12,7 +12,7 @@ import type { Snippet } from 'svelte';
 
 import { config } from '$lib/stores/index.js';
 import { updateTheme } from '$lib/utils.js';
-import '../app.pcss';
+import '../app.css';
 
 type Props = {
   children?: Snippet;

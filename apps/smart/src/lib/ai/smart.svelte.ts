@@ -37,29 +37,92 @@ export async function checkAibrowInstalled() {
   return true;
 }
 
-export function getBrowserAI() {
-  // Always get the browsers AI, regardless of the user's preference in AiBrow
-  const ai: AI = self.ai && self.ai.aibrow === true ? self.ai.browserAI : self.ai;
-  if (!self.ai) {
-    // Eventually this check wont be needed as all browsers support self.ai
-    // throw new Error('Your browser doesn\'t support self.ai')
-    console.log("%cYour browser doesn't support self.ai", 'color: magenta');
-    return undefined;
-  }
-  return ai;
-}
+export async function checkBrowserAIInstalled() {
+  let status = false
 
-export function getAiBrow(): AI | undefined {
-  if (!self.aibrow) {
-    // Send user to the download page
-    // throw new Error('AiBrow is not installed')
-    return undefined;
+  if ('LanguageDetector' in self) {
+    const availability = await self.LanguageDetector.availability();
+    if (availability === 'available') {
+      status = true;
+    } else {
+      console.log("%cYour browser LanguageDetector API isn't usable", 'color: magenta');
+    }
+  } else {
+    console.log("%cYour browser doesn't support AI LanguageDetector", 'color: magenta');
   }
-  return self.aibrow;
-}
 
-// const browserAI = getBrowserAI()
-// const aibrowAI = getAiBrow()
+  if ('Translator' in self) {
+    const availability = await self.Translator.availability({
+      sourceLanguage: 'es',
+      targetLanguage: 'fr',
+    });
+    if (availability === 'available') {
+      status = true;
+    } else {
+      console.log("%cYour browser Translator API isn't usable", 'color: magenta');
+    }
+  } else {
+    console.log("%cYour browser doesn't support AI Translator", 'color: magenta');
+  }
+
+  if ('Writer' in self) {
+    const availability = await self.Writer.availability();
+    if (availability === 'available') {
+      status = true;
+    } else {
+      console.log("%cYour browser Writer API isn't usable", 'color: magenta');
+    }
+  } else {
+    console.log("%cYour browser doesn't support AI Writer", 'color: magenta');
+  }
+
+  if ('Rewriter' in self) {
+    const availability = await self.Rewriter.availability();
+    if (availability === 'available') {
+      status = true;
+    } else {
+      console.log("%cYour browser Rewriter API isn't usable", 'color: magenta');
+    }
+  } else {
+    console.log("%cYour browser doesn't support AI Rewriter", 'color: magenta');
+  }
+
+  if ('Summarizer' in self) {
+    const availability = await self.Summarizer.availability();
+    if (availability === 'available') {
+      status = true;
+    } else {
+      console.log("%cYour browser Summarizer API isn't usable", 'color: magenta');
+    }
+
+  } else {
+    console.log("%cYour browser doesn't support AI Summarizer", 'color: magenta');
+  }
+
+  if ('Proofreader' in self) {
+    const availability = await self.Proofreader.availability();
+    if (availability === 'available') {
+      status = true;
+    } else {
+      console.log("%cYour browser Proofreader API isn't usable", 'color: magenta');
+    }
+  } else {
+    console.log("%cYour browser doesn't support AI Proofreader", 'color: magenta');
+  }
+
+  if ('LanguageModel' in self) {
+    const availability = await self.LanguageModel.availability();
+    if (availability === 'available') {
+      status = true;
+    } else {
+      console.log("%cYour browser LanguageModel API isn't usable", 'color: magenta');
+    }
+  } else {
+    console.log("%cYour browser doesn't support AI LanguageModel", 'color: magenta');
+  }
+
+  return status;
+}
 
 // Both can be then used interchangeably as needed
 // await browserAI.summarizer.create()
@@ -69,12 +132,32 @@ export function getAiBrow(): AI | undefined {
 // const writer = browserAI.writer || aibrowAI.writer || throw new Error('Writer is not supported')
 // await writer.create()
 
-export function isPolyfilledAI() {
-  return self.ai && self.ai.aibrow === true;
+export function isPolyfilledLanguageModel() {
+  return self.LanguageModel && self.LanguageModel.aibrow === true;
 }
 
 export function isPolyfilledTranslation() {
-  return self.translation?.aibrow === true;
+  return self.Translator && self.Translator.aibrow === true;
+}
+
+export function isPolyfilledLanguageDetector() {
+  return self.LanguageDetector && self.LanguageDetector.aibrow === true;
+}
+
+export function isPolyfilledWriter() {
+  return self.Writer && self.Writer.aibrow === true;
+}
+
+export function isPolyfilledRewriter() {
+  return self.Rewriter && self.Rewriter.aibrow === true;
+}
+
+export function isPolyfilledSummarizer() {
+  return self.Summarizer && self.Summarizer.aibrow === true;
+}
+
+export function isPolyfilledProofreader() {
+  return self.Proofreader && self.Proofreader.aibrow === true;
 }
 
 /**
@@ -88,13 +171,13 @@ export function isPolyfilledTranslation() {
  *  }
  * </script>
  */
-const isPolyfilledAI2 = new IsSupported(() => self.ai && 'aibrow' in self.ai);
+const isPolyfilledAI2 = new IsSupported(() => 'aibrow' in self);
 
 /**
  * print ai status to console
  */
 export async function printAIStats() {
-  const browserAI = getBrowserAI();
+  const browserAI = await checkBrowserAIInstalled();
   const aibrowAI = await checkAibrowInstalled();
 
   if (browserAI) {

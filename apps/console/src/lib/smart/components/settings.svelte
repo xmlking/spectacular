@@ -28,7 +28,7 @@ onMount(() => {
 });
 </script>
 
-{#if self.ai?.languageModel && self.ai?.summarizer && self.ai?.languageDetector }
+{#if self.LanguageModel && self.Summarizer && self.LanguageDetector }
   <form class="card p-6 shadow-lg">
     <fieldset class="border border-surface-400 rounded-md p-4 mb-6">
       <legend class="text-sm font-semibold px-2">LanguageModel Options</legend>

@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-// import { IconSummary } from '@spectacular/ui/components/icons';
-import { IconTranslate } from '@spectacular/ui/components/icons';
+// import { IconSummary } from '$lib/components/icons';
+import { IconTranslate } from '$lib/components/icons';
 import { Crop, PenTool, Replace, SpellCheck2 } from '@lucide/svelte';
 
 const toolOptions = {
@@ -52,7 +52,7 @@ export type SummarizerOptions = {
   import type { HTMLTextareaAttributes } from "svelte/elements";
   import { Logger } from "@spectacular/utils";
   import { Sparkles, SearchIcon } from "@lucide/svelte";
-  import { IconLoading } from '@spectacular/ui/components/icons';
+  import { IconLoading } from '$lib/components//icons';;
   import * as ToggleGroup  from '@spectacular/ui/components/toggle-group';
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   import { getFormField } from "formsnap";
@@ -155,7 +155,7 @@ export type SummarizerOptions = {
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
         prompt: value.trim(),
       });
-      writer = await (self.aibrow || self.ai).writer.create({
+      writer = await self.writer.create({
         ...writerOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });
@@ -200,7 +200,7 @@ export type SummarizerOptions = {
           prompt: value.trim(),
         }),
       });
-      rewriter = await (self.aibrow || self.ai).rewriter.create({
+      rewriter = await self.rewriter.create({
         ...rewriterOptions,
         ...(sharedContext?.trim() && { sharedContext: sharedContext.trim() }),
       });

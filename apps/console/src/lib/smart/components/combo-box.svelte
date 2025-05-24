@@ -37,6 +37,7 @@ export let items: Readonly<string[]>;
 export let debounceWait = 300;
 export let name: string | null = null;
 export let api = '/api/combobox';
+export let useLocal = false; // FIXME: local model not good with enums
 
 // Variables
 const log = new Logger('smart:textarea:browser');
@@ -48,7 +49,7 @@ let filterText = '';
 // Functions
 async function handleOptions(filterText: string) {
   if (filterText.length === 0) return [...items];
-  if (self.aibrow) {
+  if (useLocal && self.LanguageModel) {
     return useLocalModel(filterText);
   }
   let res = await useRemoteModel(filterText);
@@ -61,7 +62,7 @@ const grammar = {
   title: 'provider specialization',
   type: 'object',
   properties: {
-    specializations: {
+    options: {
       type: 'array',
       items: {
         type: 'string',
@@ -71,15 +72,27 @@ const grammar = {
   },
 };
 
+const grammar1 = {
+  title: 'provider specialization',
+  type: 'object',
+    properties: {
+      options: { anyOf: [...items] }
+    },
+  required: [],
+    additionalProperties: false,
+  '$schema': 'https://json-schema.org/draft/2020-12/schema'
+}
+
 const useLocalModel = async (filterText: string) => {
   let session;
   try {
     loading = true;
-    session = await self.aibrow.coreModel.create({ grammar });
+    session = await self.LanguageModel.create();
     const prompt = `Extract data from the following text: ${filterText}`;
-    const output = await session.prompt(prompt);
+    const output = await session.prompt(prompt, { responseConstraint: grammar });
+    console.log({ output });
     log.debug({ output });
-    return JSON.parse(output).specializations;
+    return JSON.parse(output).options;
   } catch (err) {
     console.error(err);
     error = `${err}`;

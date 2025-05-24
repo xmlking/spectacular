@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as FormPrimitive from "formsnap";
-	import type { WithoutChild } from "bits-ui";
-	import { cn } from "#utils.js";
+	import { cn, type WithoutChild } from "#utils.js";
 
 	let {
 		ref = $bindable(null),

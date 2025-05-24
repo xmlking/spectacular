@@ -20,7 +20,6 @@
 import { ErrorMessage } from '$lib/ui/components/form';
 import { Logger } from '@spectacular/utils';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
-import { chromeai } from 'chrome-ai';
 import { Sparkles } from 'lucide-svelte';
 import type { HTMLInputAttributes } from 'svelte/elements';
 import { z } from 'zod';
@@ -88,9 +87,10 @@ const useLocalLocal = async (event: SubmitEvent) => {
   try {
     loading = true;
 
-    session = await self.aibrow.coreModel.create({ grammar, model: undefined });
+    session = await self.LanguageModel.create();
     const resp = await session.prompt(
       `The current ISO datetime is: ${new Date().toISOString()}. Extract the data from the following: ${prompt}`,
+      { responseConstraint: grammar }
     );
     log.debug(resp);
 
@@ -111,7 +111,7 @@ const useLocalLocal = async (event: SubmitEvent) => {
 <form
   class="flex flex-col items-center"
   on:submit|preventDefault={(event) => {
-    self.aibrow?.coreModel ? useLocalLocal(event) : useRemoteModel(event);
+    self.LanguageModel ? useLocalLocal(event) : useRemoteModel(event);
   }}
 >
   <input

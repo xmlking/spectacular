@@ -2,7 +2,7 @@
 import type { ai as AI } from '@aibrow/dom-types';
 import { Chrome, Languages, Sparkles, Wifi } from 'lucide-svelte';
 import { onDestroy, onMount } from 'svelte';
-import { checkAibrowInstalled, getAiBrow, isPolyfilledAI, isPolyfilledTranslation, printAIStats } from './smart.js';
+import { checkAibrowInstalled, isPolyfilledLanguageModel, isPolyfilledTranslation, printAIStats } from './smart.js';
 
 let chromeAISupported = false;
 let aibrowInstalled = false;
@@ -15,9 +15,9 @@ onMount(async () => {
   printAIStats();
   chromeAISupported = 'ai' in window;
   aibrowInstalled = await checkAibrowInstalled();
-  aiPolyfilled = isPolyfilledAI();
+  aiPolyfilled = isPolyfilledLanguageModel();
   translationPolyfilled = isPolyfilledTranslation();
-  aibrowAI = getAiBrow();
+  aibrowAI = self.aibrow;
 });
 </script>
 

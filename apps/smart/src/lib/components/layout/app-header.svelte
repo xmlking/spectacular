@@ -6,7 +6,7 @@ import { siteConfig } from '$lib/config/site.js';
 import { cn } from '$lib/utils.js';
 import * as Breadcrumb from '@spectacular/ui/components/breadcrumb';
 import { buttonVariants } from '@spectacular/ui/components/button';
-import * as Icon from '@spectacular/ui/components/icons';
+import * as Icon from '$lib/components/icons';
 import { Separator } from '@spectacular/ui/components/separator';
 import * as Sidebar from '@spectacular/ui/components/sidebar';
 </script>

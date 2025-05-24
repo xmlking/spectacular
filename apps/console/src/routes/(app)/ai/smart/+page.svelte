@@ -237,4 +237,4 @@ $: loadingState.setFormLoading($delayed);
 </div>
 
 <!--Smart-Chat-->
-<Smart.Chat />
+<!--<Smart.Chat />-->
