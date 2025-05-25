@@ -87,7 +87,7 @@ const useLocalLocal = async (event: SubmitEvent) => {
   try {
     loading = true;
 
-    session = await self.LanguageModel.create();
+    session = await LanguageModel.create();
     const resp = await session.prompt(
       `The current ISO datetime is: ${new Date().toISOString()}. Extract the data from the following: ${prompt}`,
       { responseConstraint: grammar }
@@ -111,7 +111,7 @@ const useLocalLocal = async (event: SubmitEvent) => {
 <form
   class="flex flex-col items-center"
   on:submit|preventDefault={(event) => {
-    self.LanguageModel ? useLocalLocal(event) : useRemoteModel(event);
+    'LanguageModel' in self ? useLocalLocal(event) : useRemoteModel(event);
   }}
 >
   <input

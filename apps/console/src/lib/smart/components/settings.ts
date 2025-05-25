@@ -26,21 +26,21 @@ export const languageModelOptions = derived<Writable<AIStyles>, { topK: number; 
 );
 
 export const summarizerOptions: Writable<{
-  type?: AISummarizerType;
-  format?: AISummarizerFormat;
-  length?: AISummarizerLength;
+  type?: SummarizerType;
+  format?: SummarizerFormat;
+  length?: SummarizerLength;
 }> = writable({ type: 'tl;dr', format: 'plain-text', length: 'short' });
 
 export const writerOptions: Writable<{
-  tone?: AIWriterTone;
-  format?: AIWriterFormat;
-  length?: AIWriterLength;
+  tone?: WriterTone;
+  format?: WriterFormat;
+  length?: WriterLength;
 }> = writable({ tone: 'neutral', format: 'plain-text', length: 'short' });
 
 export const rewriterOptions: Writable<{
-  tone?: AIRewriterTone;
-  format?: AIRewriterFormat;
-  length?: AIRewriterLength;
+  tone?: RewriterTone;
+  format?: RewriterFormat;
+  length?: RewriterLength;
 }> = writable({ tone: 'as-is', format: 'as-is', length: 'as-is' });
 
 const lang = browser ? navigator.language : 'en-US';

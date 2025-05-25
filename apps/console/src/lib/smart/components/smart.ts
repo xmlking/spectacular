@@ -40,7 +40,7 @@ export async function checkBrowserAIInstalled() {
   let status = false
 
   if ('LanguageDetector' in self) {
-    const availability = await self.LanguageDetector.availability();
+    const availability = await LanguageDetector.availability();
     if (availability === 'available') {
       status = true;
     } else {
@@ -51,7 +51,7 @@ export async function checkBrowserAIInstalled() {
   }
 
   if ('Translator' in self) {
-    const availability = await self.Translator.availability({
+    const availability = await Translator.availability({
       sourceLanguage: 'es',
       targetLanguage: 'fr',
     });
@@ -65,7 +65,7 @@ export async function checkBrowserAIInstalled() {
   }
 
   if ('Writer' in self) {
-    const availability = await self.Writer.availability();
+    const availability = await Writer.availability();
     if (availability === 'available') {
       status = true;
     } else {
@@ -76,7 +76,7 @@ export async function checkBrowserAIInstalled() {
   }
 
   if ('Rewriter' in self) {
-    const availability = await self.Rewriter.availability();
+    const availability = await Rewriter.availability();
     if (availability === 'available') {
       status = true;
     } else {
@@ -87,7 +87,7 @@ export async function checkBrowserAIInstalled() {
   }
 
   if ('Summarizer' in self) {
-    const availability = await self.Summarizer.availability();
+    const availability = await Summarizer.availability();
     if (availability === 'available') {
       status = true;
     } else {
@@ -99,7 +99,7 @@ export async function checkBrowserAIInstalled() {
   }
 
   if ('Proofreader' in self) {
-    const availability = await self.Proofreader.availability();
+    const availability = await Proofreader.availability();
     if (availability === 'available') {
       status = true;
     } else {
@@ -110,7 +110,7 @@ export async function checkBrowserAIInstalled() {
   }
 
   if ('LanguageModel' in self) {
-    const availability = await self.LanguageModel.availability();
+    const availability = await LanguageModel.availability();
     if (availability === 'available') {
       status = true;
     } else {
@@ -132,31 +132,31 @@ export async function checkBrowserAIInstalled() {
 // await writer.create()
 
 export function isPolyfilledLanguageModel() {
-  return self.LanguageModel && self.LanguageModel.aibrow === true;
+  return 'LanguageModel' in self && self.LanguageModel.aibrow === true;
 }
 
 export function isPolyfilledTranslation() {
-  return self.Translator && self.Translator.aibrow === true;
+  return 'Translator' in self && self.Translator.aibrow === true;
 }
 
 export function isPolyfilledLanguageDetector() {
-  return self.LanguageDetector && self.LanguageDetector.aibrow === true;
+  return 'LanguageDetector' in self && self.LanguageDetector.aibrow === true;
 }
 
 export function isPolyfilledWriter() {
-  return self.Writer && self.Writer.aibrow === true;
+  return 'Writer' in self && self.Writer.aibrow === true;
 }
 
 export function isPolyfilledRewriter() {
-  return self.Rewriter && self.Rewriter.aibrow === true;
+  return 'Rewriter' in self && self.Rewriter.aibrow === true;
 }
 
 export function isPolyfilledSummarizer() {
-  return self.Summarizer && self.Summarizer.aibrow === true;
+  return 'Summarizer' in self && self.Summarizer.aibrow === true;
 }
 
 export function isPolyfilledProofreader() {
-  return self.Proofreader && self.Proofreader.aibrow === true;
+  return 'Proofreader' in self && self.Proofreader.aibrow === true;
 }
 
 

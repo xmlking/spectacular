@@ -2,9 +2,9 @@
 @component SmartTextarea - allow users write/rewrite/summarize with On-Device AI
   @prop {string} value - The field value, this is the seed for Writer.
   @prop {ToolType} tool - Which writing tool? - Writer, Rewriter, Summarizer, Translator
-  @prop {AIWriterCreateOptions} writerOptions - Writer Create Options
-  @prop {AIRewriterCreateOptions} rewriterOptions - Rewriter Create Options
-  @prop {AISummarizerCreateOptions} summarizerOptions - Summarizer Create Options
+  @prop {WriterCreateOptions} writerOptions - Writer Create Options
+  @prop {RewriterCreateOptions} rewriterOptions - Rewriter Create Options
+  @prop {SummarizerCreateOptions} summarizerOptions - Summarizer Create Options
   @prop {string} context - AI Writer/Rewriter Context
   @prop {boolean} stream - streaming output enabled?
   @slot default - The map container with image, vector, and text annotations
@@ -70,26 +70,26 @@ export type ToolType = keyof typeof toolOptions;
   interface $$Props extends HTMLTextareaAttributes {
     value?: string;
     tool?: ToolType;
-    writerOptions?: AIWriterCreateOptions;
-    rewriterOptions?: AIRewriterCreateOptions;
-    summarizerOptions?: AISummarizerCreateOptions;
+    writerOptions?: WriterCreateOptions;
+    rewriterOptions?: RewriterCreateOptions;
+    summarizerOptions?: SummarizerCreateOptions;
     context?: string;
     stream?: boolean;
   }
 
   export let value = "";
   export let tool: ToolType = "writer";
-  export let writerOptions: AIWriterCreateOptions = {
+  export let writerOptions: WriterCreateOptions = {
     tone: "neutral",
     format: "plain-text",
     length: "medium",
   };
-  export let rewriterOptions: AIRewriterCreateOptions = {
+  export let rewriterOptions: RewriterCreateOptions = {
     tone: "as-is",
     format: "as-is",
     length: "as-is",
   };
-  export let summarizerOptions: AISummarizerCreateOptions = {
+  export let summarizerOptions: SummarizerCreateOptions = {
     type: "tl;dr",
     format: "plain-text",
     length: "medium",
@@ -103,7 +103,7 @@ export type ToolType = keyof typeof toolOptions;
   let sharedContext = context;
   let completion: string;
   let error: string;
-  let translationOps: AITranslatorCreateOptions = {
+  let translationOps: TranslatorCreateOptions = {
     sourceLanguage: "en",
     targetLanguage: "en",
   };
@@ -298,9 +298,8 @@ export type ToolType = keyof typeof toolOptions;
   }
   async function translate() {
     let translator;
-    let streamSupported = isPolyfilledTranslation();
     try {
-      if (Translator) {
+      if ('Translator' in self) {
         translator = await Translator.create(translationOps);
       } else {
         error = "translation not supported";
@@ -310,19 +309,17 @@ export type ToolType = keyof typeof toolOptions;
         // });
         return;
       }
-      if (stream && streamSupported) {
-        const readableStream = (translator as AITranslator).translateStreaming(
+      if (stream) {
+        const readableStream = translator.translateStreaming(
           value.trim(),
         );
         // for await (const value of readableStream) {
         //   completion = value;
         // }
-        const reader = readableStream.getReader();
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          completion = value;
+        for await (const value of readableStream) {
+          completion += value;
         }
+        const reader = readableStream.getReader();
       } else {
         completion = await translator.translate(value.trim());
       }
@@ -336,10 +333,8 @@ export type ToolType = keyof typeof toolOptions;
         // });
       }
     } finally {
-      if (streamSupported) {
-        (translator as AITranslator)?.destroy();
-      }
-      loading = false;
+        translator?.destroy();
+        loading = false;
     }
   }
 

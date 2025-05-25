@@ -50,7 +50,7 @@ Summarizer.capabilities
 export const getAiApi = () => {
   return {
     create: LanguageModel
-      ? LanguageModel.create.bind(self.LanguageModel)
+      ? LanguageModel.create.bind(LanguageModel)
       : self.ai.createTextSession.bind(self.ai),
   };
 };

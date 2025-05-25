@@ -72,7 +72,7 @@ export const smartPaste: SmartPasteAction<Item> = (node, options) => {
     return {};
   }
   const useLocalLocal = async <T>(content: string) => {
-    const session = await self.LanguageModel.create();
+    const session = await LanguageModel.create();
     const prompt = `Extract the data from the following: ${content}`;
     const output = await session.prompt(prompt, { responseConstraint: jsonSchema });
     session?.destroy();
@@ -102,7 +102,7 @@ export const smartPaste: SmartPasteAction<Item> = (node, options) => {
       loading?.set(true);
       const content = clipboardData.getData('text');
       event.preventDefault();
-      const detail = useLocal && self.LanguageModel ? await useLocalLocal(content) : await useRemoteModel(content);
+      const detail = useLocal && 'LanguageModel' in self ? await useLocalLocal(content) : await useRemoteModel(content);
       // Dispatch a custom event upon successful paste
       node.dispatchEvent(new CustomEvent('smartPaste', { detail }));
     } catch (error) {

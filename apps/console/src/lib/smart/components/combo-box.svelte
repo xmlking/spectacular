@@ -49,7 +49,7 @@ let filterText = '';
 // Functions
 async function handleOptions(filterText: string) {
   if (filterText.length === 0) return [...items];
-  if (useLocal && self.LanguageModel) {
+  if (useLocal && 'LanguageModel' in self) {
     return useLocalModel(filterText);
   }
   let res = await useRemoteModel(filterText);
@@ -87,7 +87,7 @@ const useLocalModel = async (filterText: string) => {
   let session;
   try {
     loading = true;
-    session = await self.LanguageModel.create();
+    session = await LanguageModel.create();
     const prompt = `Extract data from the following text: ${filterText}`;
     const output = await session.prompt(prompt, { responseConstraint: grammar });
     console.log({ output });

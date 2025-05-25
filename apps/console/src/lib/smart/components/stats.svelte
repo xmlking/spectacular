@@ -4,14 +4,14 @@ import { languageModelOptions } from '$lib/smart/components/settings.js';
 
 let assistant: AILanguageModel | undefined;
 onMount(async () => {
-  assistant = await self.LanguageModel.create($languageModelOptions);
+  assistant = await LanguageModel.create($languageModelOptions);
 });
 onDestroy(() => {
   assistant?.destroy();
 });
 </script>
 
-{#if self.LanguageModel }
+{#if 'LanguageModel' in self }
   <div class="my-12">
     <div class="h2">Session stats</div>
     <table class="table table-hover">
