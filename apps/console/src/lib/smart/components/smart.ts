@@ -37,7 +37,7 @@ export async function checkAibrowInstalled() {
 }
 
 export async function checkBrowserAIInstalled() {
-  let status = false
+  let status = false;
 
   if ('LanguageDetector' in self) {
     const availability = await LanguageDetector.availability();
@@ -93,7 +93,6 @@ export async function checkBrowserAIInstalled() {
     } else {
       console.log("%cYour browser Summarizer API isn't usable", 'color: magenta');
     }
-
   } else {
     console.log("%cYour browser doesn't support AI Summarizer", 'color: magenta');
   }
@@ -158,7 +157,6 @@ export function isPolyfilledSummarizer() {
 export function isPolyfilledProofreader() {
   return 'Proofreader' in self && self.Proofreader.aibrow === true;
 }
-
 
 /**
  * print ai status to console

@@ -75,13 +75,13 @@ const grammar = {
 const grammar1 = {
   title: 'provider specialization',
   type: 'object',
-    properties: {
-      options: { anyOf: [...items] }
-    },
+  properties: {
+    options: { anyOf: [...items] },
+  },
   required: [],
-    additionalProperties: false,
-  '$schema': 'https://json-schema.org/draft/2020-12/schema'
-}
+  additionalProperties: false,
+  $schema: 'https://json-schema.org/draft/2020-12/schema',
+};
 
 const useLocalModel = async (filterText: string) => {
   let session;
