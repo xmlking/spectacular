@@ -39,10 +39,6 @@
     "ci:version-status": "changeset status -v",
     "clean": "git clean -xdf .DS_Store .nhost .turbo node_modules",
     "cs": "changeset",
-    "dev:web": "turbo run web#dev",
-    "dev:docs": "turbo run docs#dev",
-    "dev:console": "turbo run console#dev",
-    "dev:console:production": "turbo run console#dev:production",
     "format": "manypkg fix && biome format --write --reporter=summary",
     "format:workspaces": "turbo run format --parallel --affected",
     "lint": "manypkg check && biome lint",
@@ -76,8 +72,7 @@
   },
   "packageManager": "pnpm@10.10.0",
   "engines": {
-    "node": ">=20",
-    "pnpm": ">=9"
+    "node": ">=20"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

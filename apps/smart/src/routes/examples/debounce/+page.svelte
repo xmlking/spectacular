@@ -1,14 +1,14 @@
 <svelte:options runes={true} />
 <script lang="ts">
-import { debounce } from '@spectacular/ui/actions';
+import { debounced_input } from '@spectacular/ui/attachments';
+import { Input } from '@spectacular/ui/components/input';
 let debouncedValue = $state('');
 </script>
 
 <h1> Svelte Action: debounced input demo</h1>
 <div class="card">
-  <input
-  use:debounce={{delay: 200, eventTypeToDebounce: 'keydown'}}
-  ondebounced={ (e) => debouncedValue = e.currentTarget.value}
+  <Input
+  {@attach debounced_input({ ondebounced: (v: string) => { debouncedValue = v}, delay: 200, eventTypeToDebounce: 'keydown' })}
   />
   <!-- {@debug debouncedValue} -->
   <p>Debounced value: {debouncedValue}</p>
