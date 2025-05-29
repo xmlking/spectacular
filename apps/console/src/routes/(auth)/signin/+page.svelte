@@ -3,7 +3,7 @@ import { goto } from '$app/navigation';
 import { ROUTE_DASHBOARD } from '$lib/constants';
 import { i18n } from '$lib/i18n';
 import { getNhostClient } from '$lib/stores/nhost';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { onMount } from 'svelte';
 import Divider from './components/divider.svelte';
 import PasswordSigninForm from './components/password.svelte';

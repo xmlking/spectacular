@@ -17,11 +17,11 @@ export default plugin('role-houdini', async () => {
      * Add the client plugin to the runtime
      */
     clientPlugins: {
-      '@spectacular/role-houdini/client': null,
+      '@repo/role-houdini/client': null,
     },
 
     /** Configure the default set of scalars supported by Hasura */
-    config: '@spectacular/role-houdini/config',
+    config: '@repo/role-houdini/config',
 
     /**
      * We want to perform special logic for the the @role directive so we're going to persist

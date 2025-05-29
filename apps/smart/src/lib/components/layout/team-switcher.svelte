@@ -1,7 +1,7 @@
 <script lang="ts">
-import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
-import * as Sidebar from '@spectacular/ui/components/sidebar';
-import { useSidebar } from '@spectacular/ui/components/sidebar';
+import * as DropdownMenu from '@repo/ui/components/dropdown-menu';
+import * as Sidebar from '@repo/ui/components/sidebar';
+import { useSidebar } from '@repo/ui/components/sidebar';
 import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 import Plus from '@lucide/svelte/icons/plus';
 

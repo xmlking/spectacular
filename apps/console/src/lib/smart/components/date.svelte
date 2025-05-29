@@ -18,7 +18,7 @@
 -->
 <script lang="ts">
 import { ErrorMessage } from '$lib/ui/components/form';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { JSONParseError, TypeValidationError, generateObject } from 'ai';
 import { Sparkles } from 'lucide-svelte';
 import type { HTMLInputAttributes } from 'svelte/elements';

@@ -57,7 +57,7 @@ export type ToolType = keyof typeof toolOptions;
 
 <script lang="ts">
   import type { HTMLTextareaAttributes } from "svelte/elements";
-  import { Logger } from "@spectacular/utils";
+  import { Logger } from "@repo/utils";
   import { Sparkles, SearchIcon } from "lucide-svelte";
   import { default as LoaderIcon } from "./loader-icon.svelte";
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";

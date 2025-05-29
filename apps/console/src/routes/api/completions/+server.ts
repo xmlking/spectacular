@@ -1,6 +1,6 @@
 import { limiter } from '$lib/server/limiter/limiter';
 import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { error } from '@sveltejs/kit';
 import { streamText } from 'ai';
 import { ollama } from 'ollama-ai-provider';

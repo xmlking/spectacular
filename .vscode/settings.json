@@ -157,158 +157,13 @@
       "--proto_path=${env.GOPATH}/src"
     ]
   },
-  ////////// Skeleton UI //////////
-  "tailwindCSS.classAttributes": [
-    "class",
-    "accent",
-    "active",
-    "aspectRatio",
-    "background",
-    "badge",
-    "bgBackdrop",
-    "bgDark",
-    "bgDrawer",
-    "bgLight",
-    "blur",
-    "border",
-    "button",
-    "buttonAction",
-    "buttonBack",
-    "buttonClasses",
-    "buttonComplete",
-    "buttonDismiss",
-    "buttonNeutral",
-    "buttonNext",
-    "buttonPositive",
-    "buttonTextCancel",
-    "buttonTextConfirm",
-    "buttonTextFirst",
-    "buttonTextLast",
-    "buttonTextNext",
-    "buttonTextPrevious",
-    "buttonTextSubmit",
-    "caretClosed",
-    "caretOpen",
-    "chips",
-    "color",
-    "controlSeparator",
-    "controlVariant",
-    "cursor",
-    "display",
-    "element",
-    "fill",
-    "fillDark",
-    "fillLight",
-    "flex",
-    "gap",
-    "gridColumns",
-    "height",
-    "hover",
-    "inactive",
-    "indent",
-    "justify",
-    "meter",
-    "padding",
-    "position",
-    "regionAnchor",
-    "regionBackdrop",
-    "regionBody",
-    "regionCaption",
-    "regionCaret",
-    "regionCell",
-    "regionChildren",
-    "regionChipList",
-    "regionChipWrapper",
-    "regionCone",
-    "regionContent",
-    "regionControl",
-    "regionDefault",
-    "regionDrawer",
-    "regionFoot",
-    "regionFootCell",
-    "regionFooter",
-    "regionHead",
-    "regionHeadCell",
-    "regionHeader",
-    "regionIcon",
-    "regionInput",
-    "regionInterface",
-    "regionInterfaceText",
-    "regionLabel",
-    "regionLead",
-    "regionLegend",
-    "regionList",
-    "regionListItem",
-    "regionNavigation",
-    "regionPage",
-    "regionPanel",
-    "regionRowHeadline",
-    "regionRowMain",
-    "regionSummary",
-    "regionSymbol",
-    "regionTab",
-    "regionTrail",
-    "ring",
-    "rounded",
-    "select",
-    "shadow",
-    "slotDefault",
-    "slotFooter",
-    "slotHeader",
-    "slotLead",
-    "slotMessage",
-    "slotMeta",
-    "slotPageContent",
-    "slotPageFooter",
-    "slotPageHeader",
-    "slotSidebarLeft",
-    "slotSidebarRight",
-    "slotTrail",
-    "spacing",
-    "text",
-    "track",
-    "transition",
-    "width",
-    "zIndex"
-  ],
+
   // ##################################################
   // ### Biome                                      ###
   // ##################################################
-  "biome.enabled": false,
-  "biome.experimental.rename": true,
-  "biome.projects": [
-    {
-      "path": "apps/console"
-    },
-    {
-      "path": "apps/docs"
-    },
-    {
-      "path": "apps/web"
-    },
-    {
-      "path": "apps/smart"
-    },
-    {
-      "path": "packages/role-houdini",
-      "configFile": "biome.jsonc"
-    },
-    {
-      "path": "packages/skeleton-ui"
-    },
-    {
-      "path": "packages/smart",
-      "biome.enabled": false
-    },
-    {
-      "path": "packages/ui"
-    },
-    {
-      "path": "packages/utils"
-    }
-  ],
+  "biome.enabled": true,
   "editor.codeActionsOnSave": {
-    "quickfix.biome": "explicit",
+    "source.fixAll.biome": "explicit",
     "source.organizeImports.biome": "explicit"
   },
   "editor.defaultFormatter": "biomejs.biome",
@@ -316,7 +171,6 @@
   "editor.formatOnSave": true,
   "emmet.showExpandedAbbreviation": "never",
   "prettier.enable": false,
-  "tailwindCSS.experimental.configFile": "./packages/skeleton-ui/tailwind.config.ts",
   "typescript.tsdk": "node_modules/typescript/lib",
   // ##################################################
   // ###           Language customisations          ###
@@ -324,23 +178,11 @@
   // Make sure we're using biomejs for all filetypes
   // Need this because we need to override the default json and svelte formatters that folks might have configured
   // "editor.defaultFormatter": "biomejs.biome",
-  "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[json]": {
+  "[javascript][javascriptreact][typescript][typescriptreact][json][html]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
   },
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode",

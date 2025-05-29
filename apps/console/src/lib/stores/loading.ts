@@ -1,4 +1,4 @@
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { type Invalidator, type Readable, type Subscriber, derived, writable } from 'svelte/store';
 

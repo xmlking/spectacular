@@ -23,7 +23,7 @@ import type { PartialGraphQLErrors } from '$lib/types';
 import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputPairs } from '$lib/ui/components/form';
-import { Logger, cleanClone } from '@spectacular/utils';
+import { Logger, cleanClone } from '@repo/utils';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';

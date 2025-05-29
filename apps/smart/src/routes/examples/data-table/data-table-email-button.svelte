@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Button } from '@spectacular/ui/components/button';
+import type { Button } from '@repo/ui/components/button';
 import type { ComponentProps } from 'svelte';
 import CaretSort from 'svelte-radix/CaretSort.svelte';
 

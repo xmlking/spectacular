@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@spectacular/ui/components/select';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/components/select';
 import { Trash2 } from '@lucide/svelte';
 import { slide } from 'svelte/transition';
 

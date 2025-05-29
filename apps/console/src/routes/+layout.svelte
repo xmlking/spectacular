@@ -19,7 +19,7 @@ import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '
 import type { ModalComponent } from '@skeletonlabs/skeleton';
 // biome-ignore lint/style/useImportType: biome still don't understand svelte
 import { AppShell } from '@skeletonlabs/skeleton';
-import { Logger, startsWith } from '@spectacular/utils';
+import { Logger, startsWith } from '@repo/utils';
 import { inject } from '@vercel/analytics';
 import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 import { mountVercelToolbar } from '@vercel/toolbar/vite';

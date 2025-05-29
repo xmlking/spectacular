@@ -16,7 +16,7 @@ import { SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputChipWrapper } from '$lib/ui/components/form';
 import { InputPairs, type KeyValueRecord } from '$lib/ui/components/form';
-import { Logger, cleanClone } from '@spectacular/utils';
+import { Logger, cleanClone } from '@repo/utils';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, Search } from 'lucide-svelte';

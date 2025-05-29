@@ -1,5 +1,5 @@
 <script lang="ts">
-import { copy } from '@spectacular/ui/actions';
+import { copy } from '@repo/ui/actions';
 import { Copy, ThumbsUp } from '@lucide/svelte';
 
 // Props

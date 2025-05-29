@@ -1,6 +1,6 @@
 import { dev } from '$app/environment';
 import { NHOST_SESSION_KEY } from '$lib/constants';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import type { ClientInit, HandleClientError } from '@sveltejs/kit';
 
 /**

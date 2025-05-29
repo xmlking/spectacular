@@ -56,7 +56,7 @@ ENV TURBO_REMOTE_ONLY=$TURBO_REMOTE_ONLY
 
 #ENV NODE_OPTIONS="--max-old-space-size=4096"
 ENV BUN_ENV=true
-RUN bun run build --filter=@spectacular/${SCOPE}...
+RUN bun run build --filter=${SCOPE}...
 
 ###################################################################
 # Stage 4: Run the app (prod)                                     #

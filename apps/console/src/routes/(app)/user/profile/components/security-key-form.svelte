@@ -10,7 +10,7 @@ import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import * as Form from 'formsnap';
 import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';

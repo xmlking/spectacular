@@ -1,0 +1,136 @@
+{
+  "folders": [
+    {
+      "name": "☀️ spectacular",
+      "path": ".."
+    },
+    {
+      "name": "🔥 console",
+      "path": "../apps/console"
+    },
+    {
+      "name": "📚 docs",
+      "path": "../apps/docs"
+    },
+    {
+      "name": "✨ smart",
+      "path": "../apps/smart"
+    },
+    {
+      "name": "🚀 web",
+      "path": "../apps/web"
+    },
+    {
+      "name": "📦 @repo/assets",
+      "path": "../packages/assets"
+    },
+    {
+      "name": "📦 @repo/role-houdini",
+      "path": "../packages/role-houdini"
+    },
+    {
+      "name": "📦 @repo/typescript-config",
+      "path": "../packages/typescript-config"
+    },
+    {
+      "name": "📦 @repo/ui",
+      "path": "../packages/ui"
+    },
+    {
+      "name": "📦 @repo/utils",
+      "path": "../packages/utils"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "node_modules/": true,
+      "apps/": true,
+      "packages/": true
+    },
+    "monorepoWorkspace.folders.custom": [
+      {
+        "regex": "spectacular",
+        "prefix": "☀️ "
+      },
+      {
+        "regex": "console",
+        "prefix": "🔥 "
+      },
+      {
+        "regex": "docs",
+        "prefix": "📚 "
+      },
+      {
+        "regex": "smart",
+        "prefix": "✨ "
+      },
+      {
+        "regex": "web",
+        "prefix": "🚀 "
+      },
+      {
+        "regex": "packages",
+        "prefix": "📦 "
+      }
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+    // General
+    "EditorConfig.EditorConfig",
+    "mikestead.dotenv",
+    "Tyriar.sort-lines",
+    "wmaurer.change-case",
+    "streetsidesoftware.code-spell-checker",
+    // AI
+    "VisualStudioExptTeam.vscodeintellicode",
+    // workspace
+    "folke.vscode-monorepo-workspace",
+    "biomejs.biome",
+    "ms-azuretools.vscode-docker",
+    // Git
+    "eamodio.gitlens",
+    "github.github-vscode-theme",
+    "github.vscode-pull-request-github",
+    "github.vscode-github-actions",
+    "PKief.material-icon-theme",
+    "codezombiech.gitignore",
+    // Dwawing
+    "pomdtr.excalidraw-editor",
+    "hediet.vscode-drawio",
+    // Database
+    "ms-ossdata.vscode-pgsql",
+    // inlang (i18n)
+    "inlang.vs-code-extension",
+    // markdown
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "unifiedjs.vscode-mdx",
+    "bierner.markdown-mermaid",
+    "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+    // Rust
+    "tamasfe.even-better-toml",
+    // WebApps
+    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
+    "ms-playwright.playwright",
+    "vunguyentuan.vscode-css-variables",
+    "wix.vscode-import-cost",
+    "vitest.explorer",
+    "GraphQL.vscode-graphql",
+    "humao.rest-client",
+    // svelte
+    "svelte.svelte-vscode",
+    "thonymg.svelte-5-kit-snippets",
+    "Chanzhaoyu.svelte-5-snippets",
+    "Selemondev.vscode-shadcn-svelte",
+    // astro
+    "astro-build.astro-vscode"
+    ],
+    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+    "unwantedRecommendations": [
+      "ardenivanov.svelte-intellisense",
+      "moalamri.inline-fold"
+    ]
+  }
+}

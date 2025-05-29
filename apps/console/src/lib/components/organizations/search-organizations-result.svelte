@@ -6,7 +6,7 @@ import { getLoadingState } from '$lib/stores/loading';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
-import { Logger, sleep } from '@spectacular/utils';
+import { Logger, sleep } from '@repo/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';

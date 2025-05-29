@@ -1,5 +1,5 @@
 {
-  "name": "@spectacular/ui",
+  "name": "@repo/ui",
   "description": "Shared shadcn UI components",
   "sideEffects": false,
   "type": "module",
@@ -39,9 +39,8 @@
   },
   "devDependencies": {
     "@lucide/svelte": "catalog:",
-    "@spectacular/biome-config": "workspace:*",
-    "@spectacular/typescript-config": "workspace:*",
-    "@spectacular/utils": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@repo/utils": "workspace:*",
     "@sveltejs/adapter-auto": "6.0.1",
     "@sveltejs/kit": "catalog:",
     "@sveltejs/vite-plugin-svelte": "5.0.3",

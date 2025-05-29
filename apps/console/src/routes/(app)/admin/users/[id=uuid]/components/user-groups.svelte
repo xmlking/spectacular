@@ -6,7 +6,7 @@ import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { GraphQLErrors } from '$lib/ui/components';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { Plus, X } from 'lucide-svelte';
 import { dndzone } from 'svelte-dnd-action';
 import { flip } from 'svelte/animate';

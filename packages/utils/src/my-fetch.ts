@@ -66,7 +66,7 @@ export function handleError(err: unkown) {
 
 /**
  * in-source testing
- * RUN: turbo run test --filter=@spectacular/utils
+ * RUN: turbo run test --filter=@repo/utils
  */
 
 if (import.meta.vitest) {

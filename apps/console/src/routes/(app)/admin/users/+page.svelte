@@ -1,6 +1,6 @@
 <script lang="ts">
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import type { PageData } from './$houdini';
 import SearchUsersForm from './components/search-users-form.svelte';
 import SearchUsersResult from './components/search-users-result.svelte';

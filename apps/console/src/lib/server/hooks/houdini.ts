@@ -1,6 +1,6 @@
 import { building } from '$app/environment';
 import { setSession } from '$houdini';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import type { Handle } from '@sveltejs/kit';
 
 const log = new Logger('server:middleware:houdini');

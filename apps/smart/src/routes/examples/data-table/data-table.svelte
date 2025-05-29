@@ -1,9 +1,9 @@
 <script lang="ts">
-import { Button } from '@spectacular/ui/components/button';
-import { FlexRender, createSvelteTable, renderComponent, renderSnippet } from '@spectacular/ui/components/data-table';
-import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
-import { Input } from '@spectacular/ui/components/input';
-import * as Table from '@spectacular/ui/components/table';
+import { Button } from '@repo/ui/components/button';
+import { FlexRender, createSvelteTable, renderComponent, renderSnippet } from '@repo/ui/components/data-table';
+import * as DropdownMenu from '@repo/ui/components/dropdown-menu';
+import { Input } from '@repo/ui/components/input';
+import * as Table from '@repo/ui/components/table';
 import {
   type ColumnDef,
   type ColumnFiltersState,

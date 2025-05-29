@@ -6,7 +6,7 @@ import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
 import { Support } from '$lib/smart/components';
 import * as Smart from '$lib/smart/components';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import * as Form from 'formsnap';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';

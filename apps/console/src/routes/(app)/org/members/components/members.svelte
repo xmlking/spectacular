@@ -11,7 +11,7 @@ import { GraphQLErrors } from '$lib/ui/components';
 import { ListBox, ListBoxItem } from '$lib/ui/components/listbox';
 import * as Table from '$lib/ui/components/table';
 import { cn } from '$lib/ui/utils';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { MoreHorizontal, Trash, UserCog } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';

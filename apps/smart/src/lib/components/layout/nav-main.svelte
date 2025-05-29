@@ -1,7 +1,7 @@
 <script lang="ts">
 import { localizeHref } from '$i18n/runtime';
-import * as Collapsible from '@spectacular/ui/components/collapsible';
-import * as Sidebar from '@spectacular/ui/components/sidebar';
+import * as Collapsible from '@repo/ui/components/collapsible';
+import * as Sidebar from '@repo/ui/components/sidebar';
 import ChevronRight from '@lucide/svelte/icons/chevron-right';
 
 let {

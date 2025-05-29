@@ -1,6 +1,6 @@
 <script lang="ts">
 import { page } from '$app/stores';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import type { GraphQLError } from 'graphql';
 import { TriangleAlert } from 'lucide-svelte';
 import { fade } from 'svelte/transition';

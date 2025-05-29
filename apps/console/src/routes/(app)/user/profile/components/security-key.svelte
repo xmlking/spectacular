@@ -3,7 +3,7 @@ import { PendingValue, type SecurityKeyFragment, cache, fragment, graphql, isPen
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
 import { getToastStore } from '@skeletonlabs/skeleton';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { GraphQLError } from 'graphql';
 import { KeyRound, Trash2 } from 'lucide-svelte';
 import { fade } from 'svelte/transition';

@@ -19,7 +19,7 @@
 -->
 <script lang="ts">
 import { ErrorMessage } from '$lib/ui/components/form';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import Select from 'svelte-select';
 import type { HTMLSelectAttributes } from 'svelte/elements';
 import { writable } from 'svelte/store';

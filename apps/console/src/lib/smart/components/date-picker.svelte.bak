@@ -1,6 +1,6 @@
 <script lang="ts">
 import { ErrorMessage } from '$lib/ui/components/form';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { z } from 'zod';
 import { DatePicker } from '@svelte-plugins/datepicker';
 import { format } from 'date-fns';

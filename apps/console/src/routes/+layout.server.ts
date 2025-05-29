@@ -1,5 +1,5 @@
 import { env as secrets } from '$env/dynamic/private';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { loadFlash } from 'sveltekit-flash-message/server';
 
 const log = new Logger('root:layout:server');

@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { error } from '@sveltejs/kit';
 import { JSONParseError, type LanguageModel, TypeValidationError, generateObject, streamObject, streamText } from 'ai';
 import { zodToJsonSchema } from 'openai-zod-to-json-schema';

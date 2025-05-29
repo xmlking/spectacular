@@ -18,7 +18,7 @@ import { OrgRoles, type PartialGraphQLErrors } from '$lib/types';
 import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';
 import {

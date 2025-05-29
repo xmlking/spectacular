@@ -1,6 +1,6 @@
 import { dev } from '$app/environment';
 import { limiter } from '$lib/server/limiter/limiter';
-import { Logger, startsWith } from '@spectacular/utils';
+import { Logger, startsWith } from '@repo/utils';
 import type { Handle } from '@sveltejs/kit';
 
 /**

@@ -47,13 +47,13 @@ integrations/      # These are packages that rely on the core packages
 
 First, clone this repository:
 
-```sh
+```shell
 git clone https://github.com/xmlking/spectacular.git
 ```
 
 Then, install the dependencies with `pnpm`:
 
-```sh
+```shell
 cd spectacular
 pnpm install
 ```
@@ -64,7 +64,7 @@ Although package references are correctly updated on the fly for TypeScript, exa
 
 Running packages in development mode from the root folder is as simple as:
 
-```sh
+```shell
 turbo run web#dev -- --open
 ```
 
@@ -74,7 +74,7 @@ Our packages are linked together using [PNPM's workspace](https://pnpm.io/worksp
 
 The easier way to contribute to our documentation is to go to the `apps/docs` folder and follow the [instructions to start local development](https://github.com/xmlking/spectacular/blob/main/apps/docs/README.md):
 
-```sh
+```shell
 # not necessary if you've already done this step somewhere in the repository
 turbo run docs#dev
 ```
@@ -85,7 +85,7 @@ turbo run docs#dev
 
 You can run the unit tests with the following command from the repository root:
 
-```sh
+```shell
 turbo run console#test:unit
 ```
 
@@ -95,9 +95,28 @@ Each package that defines end-to-end tests embeds their own Spectacular configur
 
 You can run the e2e tests with the following command from the repository root:
 
-```sh
+```shell
 turbo run console#test:integration
 ```
+
+## Linting and Formatting
+
+We uses [biome](https://biomejs.dev/) as a linter and formatter. To just check for errors, run
+
+```shell
+turbo run biome:check
+```
+
+To fix them, run
+
+```shell
+turbo run biome:fix
+turbo run biome:fix:unsafe
+```
+
+both at the root of the monorepo. Not all errors can be fixed automatically.
+
+There are a good number of errors in much of the older code, but please try not to introduce new ones.
 
 ## Changesets
 
@@ -106,7 +125,7 @@ We use [changesets](https://github.com/changesets/changesets) to support our ver
 
 To create a changeset, run the following command from the repository root:
 
-```sh
+```shell
 pnpm changeset
 ```
 

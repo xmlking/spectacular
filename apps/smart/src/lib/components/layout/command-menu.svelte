@@ -1,8 +1,8 @@
 <script lang="ts">
 import { docsConfig } from '$lib/config/docs.js';
 import { cn } from '$lib/utils.js';
-import { Button } from '@spectacular/ui/components/button';
-import * as Command from '@spectacular/ui/components/command';
+import { Button } from '@repo/ui/components/button';
+import * as Command from '@repo/ui/components/command';
 import { resetMode, setMode } from 'mode-watcher';
 import type { ComponentProps } from 'svelte';
 import Circle from 'svelte-radix/Circle.svelte';

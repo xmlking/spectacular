@@ -20,7 +20,7 @@ import {
 
 const log = new Logger('smart:gqlpt:server');
 
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import {
   JSON_RESPONSE_FORMAT,
   QUERY_GENERATION_RULES,

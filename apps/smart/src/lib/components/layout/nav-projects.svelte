@@ -1,8 +1,8 @@
 <script lang="ts">
 import { localizeHref } from '$i18n/runtime';
-import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
-import { useSidebar } from '@spectacular/ui/components/sidebar';
-import * as Sidebar from '@spectacular/ui/components/sidebar';
+import * as DropdownMenu from '@repo/ui/components/dropdown-menu';
+import { useSidebar } from '@repo/ui/components/sidebar';
+import * as Sidebar from '@repo/ui/components/sidebar';
 import Ellipsis from '@lucide/svelte/icons/ellipsis';
 import Folder from '@lucide/svelte/icons/folder';
 import Forward from '@lucide/svelte/icons/forward';

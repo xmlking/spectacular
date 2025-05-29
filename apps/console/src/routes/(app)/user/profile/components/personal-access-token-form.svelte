@@ -11,7 +11,7 @@ import { AppBar, getToastStore } from '@skeletonlabs/skeleton';
 import { clipboard } from '@skeletonlabs/skeleton';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import { onMount } from 'svelte';

@@ -35,11 +35,11 @@
       "inputs": ["$TURBO_DEFAULT$", ".env", ".env.production", ".secrets", ".secrets.production"]
     },
     "generate": {
-      "dependsOn": ["sync", "@spectacular/role-houdini#build"],
+      "dependsOn": ["sync", "@repo/role-houdini#build"],
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
     },
     "generate:production": {
-      "dependsOn": ["sync:production", "@spectacular/role-houdini#build"],
+      "dependsOn": ["sync:production", "@repo/role-houdini#build"],
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
     },
     "build": {

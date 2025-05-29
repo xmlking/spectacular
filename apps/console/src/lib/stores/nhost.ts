@@ -6,7 +6,7 @@ import { NHOST_SESSION_KEY, ROUTE_DASHBOARD } from '$lib/constants';
 import { i18n } from '$lib/i18n';
 import { NhostClient, type NhostClientConstructorParams } from '@nhost/nhost-js';
 import type { User } from '@nhost/nhost-js';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import Cookies from 'js-cookie';
 import { getContext, onDestroy, setContext } from 'svelte';
 import { type Readable, type Writable, derived, get, readable, readonly, writable } from 'svelte/store';

@@ -3,9 +3,9 @@
 ## Development
 
 ```shell
-turbo run format --filter=@spectacular/utils
-turbo run lint --filter=@spectacular/utils
-turbo run test --filter=@spectacular/utils
+turbo run format --filter=@repo/utils
+turbo run lint --filter=@repo/utils
+turbo run test --filter=@repo/utils
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ turbo run test --filter=@spectacular/utils
 keys.ts
 
 ```ts
-import type { InjectionKey } from '@spectacular/utils';
+import type { InjectionKey } from '@repo/utils';
 import type { DataHandler, Row } from '@vincjo/datatables';
 type T = Row;
 

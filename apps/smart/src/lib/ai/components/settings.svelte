@@ -1,5 +1,5 @@
 <script lang="ts">
-import { DebugShell } from '@spectacular/skeleton/components';
+import { DebugShell } from '@repo/skeleton/components';
 import { onMount } from 'svelte';
 import SuperDebug from 'sveltekit-superforms';
 import { getChromeAI } from './chrome-ai.js';

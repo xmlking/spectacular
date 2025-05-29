@@ -1,5 +1,5 @@
 {
-  "name": "@spectacular/utils",
+  "name": "@repo/utils",
   "description": "utils functions",
   "sideEffects": false,
   "type": "module",
@@ -21,8 +21,7 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
-    "@spectacular/biome-config": "workspace:*",
-    "@spectacular/typescript-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@vitest/coverage-v8": "catalog:",
     "zod": "catalog:",
     "zod-validation-error": "3.4.1"

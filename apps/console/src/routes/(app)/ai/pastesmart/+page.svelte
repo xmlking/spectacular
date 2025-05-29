@@ -7,7 +7,7 @@ import { DebugShell } from '$lib/ui/components';
 import { Alerts, ErrorMessage } from '$lib/ui/components/form';
 import { SmartSupport } from '$lib/smart/components';
 import { smartPaste } from '$lib/smart/actions';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal, Sparkles } from 'lucide-svelte';
 import { writable } from 'svelte/store';

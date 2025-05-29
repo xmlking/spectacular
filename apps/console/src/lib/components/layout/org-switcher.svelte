@@ -2,7 +2,7 @@
 import { page } from '$app/stores';
 import { type AllowedOrgsFragment, fragment, graphql } from '$houdini';
 import { getNhostClient } from '$lib/stores/nhost';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import type { ChangeEventHandler } from 'svelte/elements';
 
 const log = new Logger('profile:org-switcher:browser');

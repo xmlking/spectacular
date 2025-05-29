@@ -1,4 +1,4 @@
-import { Logger, sleep } from '@spectacular/utils';
+import { Logger, sleep } from '@repo/utils';
 import { fail } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';

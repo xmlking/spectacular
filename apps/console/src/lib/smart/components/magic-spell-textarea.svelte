@@ -1,7 +1,7 @@
 <script lang="ts">
 import { useCompletion } from '@ai-sdk/svelte';
 import { getToastStore } from '@skeletonlabs/skeleton';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { AlertTriangle, Sparkles } from 'lucide-svelte';
 import { onMount } from 'svelte';
 import type { HTMLTextareaAttributes } from 'svelte/elements';

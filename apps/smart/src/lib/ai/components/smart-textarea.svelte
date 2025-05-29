@@ -50,10 +50,10 @@ export type SummarizerOptions = {
 
 <script lang="ts">
   import type { HTMLTextareaAttributes } from "svelte/elements";
-  import { Logger } from "@spectacular/utils";
+  import { Logger } from "@repo/utils";
   import { Sparkles, SearchIcon } from "@lucide/svelte";
   import { IconLoading } from '$lib/components//icons';;
-  import * as ToggleGroup  from '@spectacular/ui/components/toggle-group';
+  import * as ToggleGroup  from '@repo/ui/components/toggle-group';
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   import { getFormField } from "formsnap";
   import Result from "./result.svelte";

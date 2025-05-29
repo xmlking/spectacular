@@ -8,7 +8,7 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
 import * as Table from '$lib/ui/components/table';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { DataHandler } from '@vincjo/datatables/legacy';
 import { GraphQLError } from 'graphql';
 import { Trash2 } from 'lucide-svelte';

@@ -19,11 +19,11 @@ export default defineConfig({
     include: ['src/**/*.{test,spec}.{js,ts}'],
   },
   optimizeDeps: {
-    include: ['@spectacular/ui'],
+    include: ['@repo/ui'],
   },
   build: {
     commonjsOptions: {
-      include: [/@spectacular-ui/, /node_modules/],
+      include: [/@repo-ui/, /node_modules/],
     },
   },
 });

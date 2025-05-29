@@ -4,7 +4,7 @@ import type { ClientPlugin } from 'houdini';
 
 const plugin: ClientPlugin = () => ({
   start(ctx, { next }) {
-    const role = ctx.artifact.pluginData?.['@spectacular/role-houdini']?.role;
+    const role = ctx.artifact.pluginData?.['@repo/role-houdini']?.role;
     if (role && ctx.fetchParams?.headers) {
       ctx.fetchParams.headers = { ...ctx.fetchParams.headers, 'x-hasura-role': role };
     }

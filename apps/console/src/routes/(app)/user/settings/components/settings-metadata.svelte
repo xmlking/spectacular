@@ -2,7 +2,7 @@
 import { PendingValue, type UserSettingsData$result, graphql } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import * as Table from '$lib/ui/components/table';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Settings, User } from 'lucide-svelte';
 

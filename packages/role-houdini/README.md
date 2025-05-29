@@ -4,13 +4,13 @@ Inspired by [grafbase-houdini](https://github.com/grafbase/grafbase/tree/main/pa
 
 ## Setup
 
-1. Add `@spectacular/role-houdini` plugin to `houdini.config.js`
+1. Add `@repo/role-houdini` plugin to `houdini.config.js`
 
   ```js
   const config = {
     plugins: {
       'houdini-svelte': {},
-      '@spectacular/role-houdini': {}
+      '@repo/role-houdini': {}
     },
   }
   ```

@@ -1,12 +1,14 @@
 {
-  "name": "@spectacular/role-houdini",
+  "name": "@repo/role-houdini",
   "description": "houdini rule codegen plugin",
   "sideEffects": false,
   "type": "module",
   "publishConfig": {
     "access": "public"
   },
-  "files": ["dist/**"],
+  "files": [
+    "dist/**"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -41,8 +43,7 @@
     "houdini": "catalog:"
   },
   "devDependencies": {
-    "@spectacular/biome-config": "workspace:*",
-    "@spectacular/typescript-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "graphql": "16.11.0",
     "tsup": "8.5.0",
     "typescript": "catalog:"

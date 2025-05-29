@@ -3,7 +3,7 @@ import { page } from '$app/stores';
 import { ROUTE_DASHBOARD } from '$lib/constants';
 import { getNhostClient } from '$lib/stores/nhost';
 import { Icon } from '$lib/ui/components/icons';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { Github } from 'lucide-svelte';
 
 const log = new Logger('auth:signin:social:browser');

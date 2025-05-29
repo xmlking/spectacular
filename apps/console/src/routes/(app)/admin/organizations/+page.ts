@@ -1,6 +1,6 @@
 import { order_by } from '$houdini';
 import { searchOrganizationSchema as schema } from '$lib/schema/organization';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { BeforeLoadEvent, SearchOrganizationsVariables as Variables } from './$houdini';

@@ -1,6 +1,6 @@
 <script lang="ts">
 import CreateOrganizationForm from '$lib/components/organizations/create-organizations-form.svelte';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 
 const log = new Logger('user:organizations:create:page');
 </script>

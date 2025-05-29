@@ -2,7 +2,7 @@
 import { getNhostClient } from '$lib/stores/nhost';
 // import { createEnableMfaMachine, generateQrCodePromise } from '@nhost/nhost-js';
 import { getToastStore } from '@skeletonlabs/skeleton';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 
 // Variables
 const log = new Logger('user:profile:mfa:browser');

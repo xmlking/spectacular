@@ -4,7 +4,7 @@ import { env } from '$env/dynamic/public';
 import { type ClientPlugin, HoudiniClient, getClientSession } from '$houdini';
 import { subscription } from '$houdini/plugins';
 import { GRAPHQL_URL } from '$lib/constants';
-import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@spectacular/utils';
+import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@repo/utils';
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
 

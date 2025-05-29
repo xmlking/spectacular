@@ -5,8 +5,8 @@ import AppSidebar from '$lib/components/layout/app-sidebar.svelte';
 import Metadata from '$lib/components/layout/metadata.svelte';
 import { page } from '$app/state';
 import { locales, localizeHref } from '$i18n/runtime';
-import * as Sidebar from '@spectacular/ui/components/sidebar';
-import { Toaster } from '@spectacular/ui/components/sonner';
+import * as Sidebar from '@repo/ui/components/sidebar';
+import { Toaster } from '@repo/ui/components/sonner';
 import { ModeWatcher } from 'mode-watcher';
 import type { Snippet } from 'svelte';
 

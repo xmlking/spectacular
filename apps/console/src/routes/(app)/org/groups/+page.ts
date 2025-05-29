@@ -1,6 +1,6 @@
 import { order_by } from '$houdini';
 import { searchGroupSchema as schema } from '$lib/schema/group';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { BeforeLoadEvent, ListGroupsVariables as Variables } from './$houdini';

@@ -7,21 +7,18 @@ docs:
 console:
   - apps/console/**/*
   - change-notes/**/*console*
+smart:
+  - apps/smart/**/*
+  - change-notes/**/*smart*
 ui:
   - packages/ui/**/*
   - change-notes/**/*ui*
 assets:
   - packages/assets/**/*
   - change-notes/**/*assets*
-biome-config:
-  - packages/biome-config/**/*
-  - change-notes/**/*biome-config*
 role-houdini:
   - packages/role-houdini/**/*
   - change-notes/**/*role-houdini*
-skeleton-ui:
-  - packages/skeleton-ui/**/*
-  - change-notes/**/*skeleton-ui*
 typescript-config:
   - packages/typescript-config/**/*
   - change-notes/**/*typescript-config*

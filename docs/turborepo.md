@@ -21,7 +21,6 @@ This Turborepo includes the following packages/apps:
   - `console`: a sample **dashboard** web app build with [svelte-kit](https://kit.svelte.dev/)
 - Packages
   - `ui`: a stub Svelte component library shared by both `web` and `docs` applications
-  - `biome-config`: shared `biome.jsonc` files
   - `typescript-config`: shared `tsconfig` files
   - `utils`: utility functions used throughout the monorepo
 
@@ -132,7 +131,7 @@ turbo --filter=console --log-order=stream dev
 ### Test
 
 ```shell
-turbo --filter=@spectacular/utils test
+turbo --filter=@repo/utils test
 ```
 
 ### Build

@@ -11,7 +11,7 @@ import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import { DateTime, GraphQLErrors } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
 import { cn } from '$lib/ui/utils';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
 import { Check, MoreHorizontal, X } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';

@@ -1,8 +1,8 @@
 <script lang="ts">
-import * as Avatar from '@spectacular/ui/components/avatar';
-import * as DropdownMenu from '@spectacular/ui/components/dropdown-menu';
-import * as Sidebar from '@spectacular/ui/components/sidebar';
-import { useSidebar } from '@spectacular/ui/components/sidebar';
+import * as Avatar from '@repo/ui/components/avatar';
+import * as DropdownMenu from '@repo/ui/components/dropdown-menu';
+import * as Sidebar from '@repo/ui/components/sidebar';
+import { useSidebar } from '@repo/ui/components/sidebar';
 import BadgeCheck from '@lucide/svelte/icons/badge-check';
 import Bell from '@lucide/svelte/icons/bell';
 import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';

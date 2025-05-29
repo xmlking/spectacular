@@ -1,6 +1,6 @@
 <script lang="ts">
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 import type { PageData } from './$houdini';
 import SettingsMetadata from './components/settings-metadata.svelte';
 import SettingsWithDefaults from './components/settings-with-defaults.svelte';

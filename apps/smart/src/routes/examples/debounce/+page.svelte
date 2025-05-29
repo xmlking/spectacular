@@ -1,7 +1,7 @@
 <svelte:options runes={true} />
 <script lang="ts">
-import { debounced_input } from '@spectacular/ui/attachments';
-import { Input } from '@spectacular/ui/components/input';
+import { debounced_input } from '@repo/ui/attachments';
+import { Input } from '@repo/ui/components/input';
 let debouncedValue = $state('');
 </script>
 

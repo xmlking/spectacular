@@ -232,7 +232,7 @@ export function languageTagToHumanReadable(languageTag: Intl.UnicodeBCP47LocaleI
 
 /**
  * in-source testing
- * RUN: turbo run @spectacular/smart#test
+ * RUN: turbo run @repo/smart#test
  */
 if (import.meta.vitest) {
   const { it, expect } = import.meta.vitest;

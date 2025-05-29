@@ -1,6 +1,6 @@
 import { env as secrets } from '$env/dynamic/private';
 import { enableBotProtection, showMagicLinkLogin, showSocialLogin } from '$lib/flags';
-import { Logger } from '@spectacular/utils';
+import { Logger } from '@repo/utils';
 
 const log = new Logger('server:auth:signin');
 
