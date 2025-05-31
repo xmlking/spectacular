@@ -1,5 +1,5 @@
 <script lang="ts">
-import { copy } from '@repo/ui/actions';
+import { copy } from '@repo/ui/lib/actions/index.js';
 import { Copy, ThumbsUp } from '@lucide/svelte';
 
 // Props

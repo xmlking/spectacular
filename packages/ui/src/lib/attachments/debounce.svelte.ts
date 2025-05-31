@@ -12,7 +12,6 @@ export function debounced_input({
   delay = 300,
   eventTypeToDebounce = 'input',
 }: DebouncedInputOptions): Attachment<HTMLInputElement> {
-  console.log('debounced_input attachment', ondebounced, delay, eventTypeToDebounce);
   let timeoutId: ReturnType<typeof setTimeout>;
   function wrapper(ev: Event) {
     timeoutId && clearTimeout(timeoutId);

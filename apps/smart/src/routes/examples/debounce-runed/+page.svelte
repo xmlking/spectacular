@@ -1,6 +1,6 @@
 <svelte:options runes={true} />
 <script lang="ts">
-import { Input } from '@repo/ui/components/input';
+import { Input } from '@repo/ui/components/ui/input/index.js';
 import { Debounced } from 'runed';
 
 let search = $state('');

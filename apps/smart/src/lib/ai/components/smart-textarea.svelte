@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
-// import { IconSummary } from '$lib/components/icons';
-import { IconTranslate } from '$lib/components/icons';
+// import { IconSummary } from '@repo/ui/components/icons';
+import { IconTranslate } from '@repo/ui/components/icons';
 import { Crop, PenTool, Replace, SpellCheck2 } from '@lucide/svelte';
 
 const toolOptions = {
@@ -53,7 +53,7 @@ export type SummarizerOptions = {
   import { Logger } from "@repo/utils";
   import { Sparkles, SearchIcon } from "@lucide/svelte";
   import { IconLoading } from '$lib/components//icons';;
-  import * as ToggleGroup  from '@repo/ui/components/toggle-group';
+  import * as ToggleGroup  from '@repo/ui/components/ui/toggle-group';
   import { RadioGroup, RadioItem } from "@skeletonlabs/skeleton";
   import { getFormField } from "formsnap";
   import Result from "./result.svelte";

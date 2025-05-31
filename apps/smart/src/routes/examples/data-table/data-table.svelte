@@ -1,9 +1,9 @@
 <script lang="ts">
-import { Button } from '@repo/ui/components/button';
-import { FlexRender, createSvelteTable, renderComponent, renderSnippet } from '@repo/ui/components/data-table';
-import * as DropdownMenu from '@repo/ui/components/dropdown-menu';
-import { Input } from '@repo/ui/components/input';
-import * as Table from '@repo/ui/components/table';
+import { Button } from '@repo/ui/components/ui/button/index.js';
+import { FlexRender, createSvelteTable, renderComponent, renderSnippet } from '@repo/ui/components/ui/data-table/index.js';
+import * as DropdownMenu from '@repo/ui/components/ui/dropdown-menu/index.js';
+import { Input } from '@repo/ui/components/ui/input/index.js';
+import * as Table from '@repo/ui/components/ui/table/index.js';
 import {
   type ColumnDef,
   type ColumnFiltersState,

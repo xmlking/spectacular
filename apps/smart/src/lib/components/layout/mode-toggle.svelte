@@ -1,7 +1,7 @@
 <script lang="ts">
-import { cn } from '$lib/utils.js';
-import { buttonVariants } from '@repo/ui/components/button';
-import * as DropdownMenu from '@repo/ui/components/dropdown-menu';
+import { cn } from '@repo/ui/lib/utils.js';
+import { buttonVariants } from '@repo/ui/components/ui/button/index.js';
+import * as DropdownMenu from '@repo/ui/components/ui/dropdown-menu/index.js';
 import { resetMode, setMode } from 'mode-watcher';
 import Moon from 'svelte-radix/Moon.svelte';
 import Sun from 'svelte-radix/Sun.svelte';

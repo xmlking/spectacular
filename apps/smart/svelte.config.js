@@ -15,6 +15,9 @@ const config = {
     adapter: adapter(),
     alias: {
       $i18n: 'src/i18n',
+      // NOTE: we are using `exports` in package.json of `@repo/ui` package.
+      // so no need to use `@repo/ui/*` alias.
+      // '@repo/ui/*': '../../packages/ui/src/*',
     },
     version: {
       name: process.env.npm_package_version,

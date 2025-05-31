@@ -1,6 +1,6 @@
 <svelte:options runes={true} />
 <script lang="ts">
-import { clickOutside } from '@repo/ui/actions';
+import { clickOutside } from '@repo/ui/lib/actions/click-outside.svelte.js';
 let counter = $state(0);
 let second: HTMLElement;
 let third: HTMLElement;

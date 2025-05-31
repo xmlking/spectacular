@@ -28,8 +28,8 @@
 </script>
 
 <script lang="ts">
-	import * as Tooltip from "#components/ui/tooltip/index.js";
-	import { cn, type WithElementRef, type WithoutChildrenOrChild } from "#utils.js";
+	import * as Tooltip from "@repo/ui/components/ui/tooltip/index.js";
+	import { cn, type WithElementRef, type WithoutChildrenOrChild } from "@repo/ui/lib/utils.js";
 	import { mergeProps } from "bits-ui";
 	import type { ComponentProps, Snippet } from "svelte";
 	import type { HTMLAttributes } from "svelte/elements";

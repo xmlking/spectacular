@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/components/select';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/components/ui/select/index.js';
 import { X } from '@lucide/svelte';
 import { fade } from 'svelte/transition';
 

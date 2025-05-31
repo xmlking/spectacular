@@ -1,6 +1,6 @@
 <script lang="ts">
-import { Button } from '@repo/ui/components/button';
-import * as DropdownMenu from '@repo/ui/components/dropdown-menu';
+import { Button } from '@repo/ui/components/ui/button/index.js';
+import * as DropdownMenu from '@repo/ui/components/ui/dropdown-menu/index.js';
 import DotsHorizontal from 'svelte-radix/DotsHorizontal.svelte';
 
 let { id }: { id: string } = $props();

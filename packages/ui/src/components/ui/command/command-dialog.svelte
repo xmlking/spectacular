@@ -2,8 +2,8 @@
 	import type { Command as CommandPrimitive, Dialog as DialogPrimitive } from "bits-ui";
 	import type { Snippet } from "svelte";
 	import Command from "./command.svelte";
-	import * as Dialog from "#components/ui/dialog/index.js";
-	import type { WithoutChildrenOrChild } from "#utils.js";
+	import * as Dialog from "@repo/ui/components/ui/dialog/index.js";
+	import type { WithoutChildrenOrChild } from "@repo/ui/lib/utils.js";
 
 	let {
 		open = $bindable(false),

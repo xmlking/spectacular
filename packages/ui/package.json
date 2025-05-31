@@ -3,32 +3,24 @@
   "description": "Shared shadcn UI components",
   "sideEffects": false,
   "type": "module",
-  "imports": {
-    "#*": "./src/*"
-  },
   "exports": {
     ".": {
-      "types": "./index.ts",
-      "svelte": "./index.ts",
-      "default": "./index.ts"
+      "types": "./src/index.ts",
+      "svelte": "./src/index.ts",
+      "default": "./src/index.ts"
     },
-    "./actions": "./src/actions/index.ts",
-    "./actions/*": "./src/actions/*.ts",
-    "./attachments": "./src/attachments/index.ts",
-    "./attachments/*": "./src/attachments/*.ts",
-    "./transitions": "./src/transitions/index.ts",
-    "./transitions/*": "./src/transitions/*.ts",
-    "./components/*": "./src/components/ui/*/index.ts",
-    "./utils": "./src/utils.ts",
+    "./components/*": "./src/components/*",
+    "./lib/*": "./src/lib/*",
     "./hooks/*": "./src/hooks/*",
-    "./styles/default": "./styles/default.css",
-    "./styles/theme": "./styles/theme.css"
+    "./styles/*": "./src/styles/*"
   },
   "scripts": {
+    "sv:check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "sv:check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "check": "biome check .",
     "check:fix": "biome check . --write",
     "clean": "git clean -xdf",
-    "prepare": "svelte-kit sync",
+    "prepare": "svelte-kit sync || echo ''",
     "sync": "svelte-kit sync",
     "format": "biome format --write",
     "lint": "biome lint",
@@ -38,7 +30,8 @@
     "ui:update": "pnpx shadcn-svelte@next update"
   },
   "devDependencies": {
-    "@lucide/svelte": "catalog:",
+    "@internationalized/date": "^3.8.1",
+    "@lucide/svelte": "^0.482.0",
     "@repo/typescript-config": "workspace:*",
     "@repo/utils": "workspace:*",
     "@sveltejs/adapter-auto": "6.0.1",
@@ -48,7 +41,7 @@
     "@tailwindcss/typography": "0.5.16",
     "@tailwindcss/vite": "4.1.7",
     "@tanstack/table-core": "8.21.3",
-    "bits-ui": "catalog:",
+    "bits-ui": "^2.4.0",
     "clsx": "2.1.1",
     "embla-carousel-svelte": "8.6.0",
     "formsnap": "2.0.1",
@@ -57,7 +50,7 @@
     "paneforge": "1.0.0-next.5",
     "svelte": "catalog:svelte5",
     "svelte-check": "catalog:",
-    "svelte-sonner": "catalog:",
+    "svelte-sonner": "^1.0.3",
     "sveltekit-superforms": "2.25.0",
     "tailwind-merge": "3.3.0",
     "tailwind-variants": "1.0.0",

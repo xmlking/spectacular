@@ -1,8 +1,8 @@
 <script lang="ts">
 import { docsConfig } from '$lib/config/docs.js';
-import { cn } from '$lib/utils.js';
-import { Button } from '@repo/ui/components/button';
-import * as Command from '@repo/ui/components/command';
+import { cn } from '@repo/ui/lib/utils.js';
+import { Button } from '@repo/ui/components/ui/button/index.js';
+import * as Command from '@repo/ui/components/ui/command/index.js';
 import { resetMode, setMode } from 'mode-watcher';
 import type { ComponentProps } from 'svelte';
 import Circle from 'svelte-radix/Circle.svelte';

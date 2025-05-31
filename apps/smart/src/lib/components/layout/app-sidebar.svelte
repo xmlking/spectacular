@@ -198,7 +198,7 @@ const data = {
 	import NavProjects from "$lib/components/layout/nav-projects.svelte";
 	import NavUser from "$lib/components/layout/nav-user.svelte";
 	import TeamSwitcher from "$lib/components/layout/team-switcher.svelte";
-	import * as Sidebar from "@repo/ui/components/sidebar";
+	import * as Sidebar from "@repo/ui/components/ui/sidebar/index.js";
 	import type { ComponentProps } from "svelte";
 
 	let {

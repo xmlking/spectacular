@@ -1,8 +1,8 @@
 <script lang="ts">
 import AppSidebar from '$lib/components/layout/app-sidebar.svelte';
-import * as Breadcrumb from '@repo/ui/components/breadcrumb';
-import { Separator } from '@repo/ui/components/separator';
-import * as Sidebar from '@repo/ui/components/sidebar';
+import * as Breadcrumb from '@repo/ui/components/ui/breadcrumb/index.js';
+import { Separator } from '@repo/ui/components/ui/separator/index.js';
+import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
 </script>
 
 <svelte:head>
