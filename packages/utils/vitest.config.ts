@@ -8,5 +8,5 @@ export default mergeConfig(
       // setupFiles: ['../../vitest.setup.ts'],
       environment: 'node',
     },
-  }),
+  })
 );

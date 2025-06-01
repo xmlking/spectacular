@@ -1,7 +1,8 @@
-import { type Writable, derived, get } from 'svelte/store';
+import { derived, get } from 'svelte/store';
+import type Writable from 'svelte/store';
 
 export const debounce = (func: (...args: any) => void, timeout = 300) => {
-  let timer: ReturnType<typeof setTimeout> | undefined = undefined;
+  let timer: ReturnType<typeof setTimeout> | undefined;
   return (...args: any) => {
     if (timer) {
       clearTimeout(timer);
@@ -14,7 +15,7 @@ export const debounce = (func: (...args: any) => void, timeout = 300) => {
 };
 
 export const debounceAsync = (func: (...args: any) => void, wait = 300, immediate = false) => {
-  let timer: ReturnType<typeof setTimeout> | undefined = undefined;
+  let timer: ReturnType<typeof setTimeout> | undefined;
   return function (...args: any) {
     return new Promise((resolve) => {
       if (timer) {
@@ -41,5 +42,5 @@ export const debouncer = <T>(store: Writable<T>, timeoutMs = 500) =>
       const intervalId = setTimeout(() => set($value), timeoutMs);
       return () => clearTimeout(intervalId);
     },
-    get(store),
+    get(store)
   );
