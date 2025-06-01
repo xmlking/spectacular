@@ -1,6 +1,6 @@
 <svelte:options runes={true} />
 <script lang="ts">
-import { hover } from '@repo/ui/lib/actions/hover.svelte.js';
+import { hover } from '@repo/ui/actions/hover.svelte.js';
 import { buttonVariants } from '@repo/ui/components/ui/button/index.js';
 import { writable } from 'svelte/store';
 

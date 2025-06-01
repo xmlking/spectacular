@@ -2,7 +2,7 @@
 	import { RangeCalendar as RangeCalendarPrimitive } from "bits-ui";
 	import ChevronLeftIcon from "@lucide/svelte/icons/chevron-left";
 	import { buttonVariants } from "@repo/ui/components/ui/button/index.js";
-	import { cn } from "@repo/ui/lib/utils.js";
+	import { cn } from "@repo/ui/utils.js";
 
 	let {
 		ref = $bindable(null),

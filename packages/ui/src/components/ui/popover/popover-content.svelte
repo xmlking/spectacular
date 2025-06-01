@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from "@repo/ui/lib/utils.js";
+	import { cn } from "@repo/ui/utils.js";
 	import { Popover as PopoverPrimitive } from "bits-ui";
 
 	let {

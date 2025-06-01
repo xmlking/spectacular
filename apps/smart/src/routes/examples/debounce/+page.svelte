@@ -1,6 +1,6 @@
 <svelte:options runes={true} />
 <script lang="ts">
-import { debounced_input } from '@repo/ui/lib/attachments/index.js';
+import { debounced_input } from '@repo/ui/attachments/index.js';
 import { Input } from '@repo/ui/components/ui/input/index.js';
 let debouncedValue = $state('');
 </script>

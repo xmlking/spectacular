@@ -1,6 +1,6 @@
 <script lang="ts">
 import { docsConfig } from '$lib/config/docs.js';
-import { cn } from '@repo/ui/lib/utils.js';
+import { cn } from '@repo/ui/utils.js';
 import { Button } from '@repo/ui/components/ui/button/index.js';
 import * as Command from '@repo/ui/components/ui/command/index.js';
 import { resetMode, setMode } from 'mode-watcher';

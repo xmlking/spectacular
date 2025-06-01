@@ -3,7 +3,7 @@ import { localizeHref } from '$i18n/runtime';
 import CommandMenu from '$lib/components/layout/command-menu.svelte';
 import ModeToggle from '$lib/components/layout/mode-toggle.svelte';
 import { siteConfig } from '$lib/config/site.js';
-import { cn } from '@repo/ui/lib/utils.js';
+import { cn } from '@repo/ui/utils.js';
 import * as Breadcrumb from '@repo/ui/components/ui/breadcrumb/index.js';
 import { buttonVariants } from '@repo/ui/components/ui/button/index.js';
 import * as Icon from '@repo/ui/components/icons/index.js';

@@ -12,16 +12,26 @@ Run this command and select `shadcn` components you want to add/update
 cd packages/ui
 # first time only run `pnpm run sync` this will create `.svelte-kit` folder
 pnpm run sync
-# then run add/update commands
-pnpm run ui:add button # this is command is equal to `pnpm dlx shadcn-svelte@next add button`
-# or 
-pnpm run ui:add --all  # equal to `pnpm dlx shadcn-svelte@next add --all`
-# FIXME : https://github.com/huntabyte/shadcn-svelte/issues/1368
-pnpm run ui:update button
-# or 
-pnpm run ui:update --all # equal to `pnpm dlx shadcn-svelte@next update --all`
+# create all shadcn-svelte files.
+# --base-color =  "gray" | "neutral" | "slate" | "stone" | "zinc"
+pnpm dlx shadcn-svelte@next init  -o \
+--base-color=neutral \
+--css=src/styles/neutral.css \
+--components-alias=@repo/ui/components \
+--lib-alias=@repo/ui \
+--utils-alias=@repo/ui/utils \
+--hooks-alias=@repo/ui/hooks \
+--ui-alias=@repo/ui/components/ui
 ```
 
-## TODO
+## Update
 
-change `$ui/components` to internal `#ui/components` in `components.json` and remove alias in `tsconfig.json` add internal to `package.json`
+To add/update shadcn-svelte components, run:
+
+```shell
+cd packages/ui
+# to add/update specific component
+pnpm run ui:add button # this is command is equal to `pnpm dlx shadcn-svelte@next add button`
+# OR to add/update all components
+pnpm run ui:add --all  # equal to `pnpm dlx shadcn-svelte@next add --all`
+```
