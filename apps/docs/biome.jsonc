@@ -1,0 +1,27 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.0.0-beta.5/schema.json",
+  "extends": [
+    "../../biome.jsonc"
+  ],
+  "files": {
+    "includes": [
+      "**",
+      "!dist/*"
+    ]
+  },
+  "overrides": [
+    {
+      "includes": [
+        "*.astro"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,7 +1,15 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "extends": ["@spectacular/biome-config/svelte-library"],
+  "$schema": "https://biomejs.dev/schemas/2.0.0-beta.5/schema.json",
+  "extends": [
+    "../../biome.jsonc"
+  ],
   "files": {
-    "ignore": ["src/components/ui", "src/hooks", "src/utils.ts", "components.json"]
+    "includes": [
+      "**",
+      "!src/components/ui",
+      "!src/hooks",
+      "!src/utils.ts",
+      "!components.json"
+    ]
   }
 }

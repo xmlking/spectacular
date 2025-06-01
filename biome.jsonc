@@ -1,4 +1,180 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "extends": ["@spectacular/biome-config/root"]
+  "$schema": "https://biomejs.dev/schemas/2.0.0-beta.5/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": [
+      "**",
+      "!**/.env*",
+      "!**/.secrets*",
+      "!**/coverage/",
+      "!**/.turbo/",
+      "!**/.vercel/",
+      "!**/build/*",
+      "!**/dist/*",
+      "!bun.lock",
+      "!pnpm-lock.yaml",
+      "!**/nhost/emails/*",
+      "!**/nhost/metadata/actions.graphql"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "useEditorconfig": true,
+    "attributePosition": "auto",
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "formatWithErrors": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUndeclaredVariables": "warn"
+        // "noUnusedImports": "warn",
+        // "noUnusedVariables": "warn"
+      },
+      "suspicious": {
+        "noExplicitAny": "off" // `any` is amazing
+      },
+      "style": {
+        // "useNamingConvention": {
+        //   "level": "error",
+        //   "options": {
+        //     "strictCase": false,
+        //     "requireAscii": true,
+        //     "enumMemberCase": "PascalCase",
+        //     "conventions": [
+        //       {
+        //         "selector": {
+        //           "kind": "classMember",
+        //           "modifiers": ["private"]
+        //         },
+        //         "match": "_(.+)",
+        //         "formats": ["camelCase"]
+        //       }
+        //     ]
+        //   }
+        // },
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "filenameCases": [
+              "kebab-case",
+              "export"
+            ]
+          }
+        },
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "error",
+          "options": {
+            "functions": [
+              "cn",
+              "tw",
+              "twMerge"
+            ]
+          }
+        }
+      }
+    },
+    "domains": {}
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "recommended": true,
+        "organizeImports": "on",
+        "useSortedProperties": "on",
+        "useSortedAttributes": "on"
+      }
+    }
+  },
+  "html": {
+    "formatter": {
+      "enabled": true,
+      // "indentScriptAndStyle": false,
+      "bracketSameLine": false
+    }
+  },
+  "javascript": {
+    "globals": [
+      "Bun",
+      "Astro",
+      "App",
+      "App.Superforms.Message",
+      "$",
+      "__GIT_TAG__",
+      "__GIT_DATE__",
+      "__APP_VERSION__"
+    ],
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
+  },
+  "graphql": {
+    "assist": {
+      "enabled": true
+    },
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2,
+      "lineEnding": "lf",
+      "quoteStyle": "double",
+      "bracketSpacing": true
+    },
+    "linter": {
+      "enabled": true
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "**/tsconfig.json",
+        "**/.vscode/*"
+      ],
+      "json": {
+        "parser": {
+          "allowComments": true,
+          "allowTrailingCommas": true
+        }
+      }
+    },
+    {
+      "includes": [
+        "package.json"
+      ],
+      "json": {
+        "formatter": {
+          "lineWidth": 1
+        }
+      }
+    }
+  ]
 }

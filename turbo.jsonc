@@ -18,11 +18,27 @@
   ],
   "globalDependencies": [".env", ".secrets", "pnpm-lock.yaml"],
   "tasks": {
+    "build": {},
+    "clean": {
+      "cache": false
+    },
+    "//#clean": {
+      "cache": false
+    },
+    "ci": {
+      "dependsOn": [
+        "^ci"
+      ]
+    },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^check"
+      ]
     },
     "format": {
-      "dependsOn": ["^format"],
+      "dependsOn": [
+        "^format"
+      ],
       "outputLogs": "new-only"
     },
     "test": {
@@ -36,21 +52,6 @@
     "test:watch": {
       "cache": false,
       "persistent": true
-    },
-    "build": {},
-    "clean": {
-      "cache": false
-    },
-    "//#clean": {
-      "cache": false
-    },
-    "check": {},
-    "check:fix": {
-      "cache": false
-    },
-    "//#check": {},
-    "//#check:fix": {
-      "cache": false
     }
   }
 }

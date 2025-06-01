@@ -17,6 +17,7 @@ Awesome **SvelteKit** Links
     - TODO: use this to add/edit `annotations` Input.
   - [svelte-jsoneditor](https://github.com/josdejong/svelte-jsoneditor) - A web-based tool to view, edit, format, transform, and validate JSON.
   - [Yeezy-Dates](https://yeezy-dates.vercel.app/) -  date parser for human-friendly inputs
+  - [CoastalUI](https://www.coastalui.com/) - copy-pasted Svelte 5 components build with tailwind CSS v4, lucide icons. Dashboard, Portfolio [templates](https://www.coastalui.com/templates).
 
 - UI Blocks
   - [Svelte Shadcn Blocks](https://sv-blocks.vercel.app/)
@@ -64,6 +65,7 @@ Awesome **SvelteKit** Links
 - Maps
 
   - [Svelte MapBox](https://github.com/beyonk-group/svelte-mapbox) Maps and Geocoding (Autocomplete) MapBox components in Vanilla JS (or Svelte)
+  - [Svelte MapLibre GL](https://svelte-maplibre-gl.mierune.dev/) - Svelte 5 wrapper for **MapLibre GL JS**, [examples](https://svelte-maplibre-gl.mierune.dev/examples/plain)
 
 - Communication
 - [Svelte WebSocket](https://github.com/ubermanu/sveltekit-websocket) - This is a small websocket plugin for SvelteKit. It uses [ws](https://github.com/websockets/ws) under the hood.

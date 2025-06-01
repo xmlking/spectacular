@@ -1,0 +1,49 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.0.0-beta.5/schema.json",
+  "extends": [
+    "../../biome.jsonc"
+  ],
+  "files": {
+    "includes": [
+      "**",
+      "!schema.graphql",
+      "!$houdini/*",
+      "!build/*",
+      "!src/i18n",
+      "!.svelte-kit/*",
+      "!src/lib/models/types/**"
+    ]
+  },
+  "overrides": [
+    {
+      "includes": [
+        "src/**/*.svelte"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUndeclaredVariables": "off"
+          },
+          "suspicious": {
+            "noImplicitAnyLet": "off"
+          },
+          "style": {
+            "useConst": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "src/routes/(legal)/+layout@.svelte"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": "off"
+          }
+        }
+      }
+    }
+  ]
+}

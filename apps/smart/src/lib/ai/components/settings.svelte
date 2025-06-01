@@ -1,5 +1,4 @@
 <script lang="ts">
-import { DebugShell } from '@repo/skeleton/components';
 import { onMount } from 'svelte';
 import SuperDebug from 'sveltekit-superforms';
 import { getChromeAI } from './chrome-ai.js';
@@ -182,7 +181,6 @@ onMount(() => {
 {/if}
 
 <!-- Debug -->
-<DebugShell label="AI Settings Form">
   <SuperDebug label="aiProvider" data={$aiProvider} />
   <br />
   <SuperDebug label="languageModelStyle" status={false} data={$languageModelStyle} />
@@ -205,4 +203,4 @@ onMount(() => {
   <br />
   <SuperDebug label="preferedLang" status={false} data={$preferedLang} />
   <br />
-</DebugShell>
+

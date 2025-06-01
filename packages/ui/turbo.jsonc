@@ -6,10 +6,6 @@
       "persistent": true,
       "dependsOn": ["sync"]
     },
-    "ui:update": {
-      "persistent": true,
-      "dependsOn": ["sync"]
-    },
     "sync": {
       "outputs": [".svelte-kit"]
     }

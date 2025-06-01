@@ -2,13 +2,23 @@
   "$schema": "https://turbo.build/schema.json",
   "extends": ["//"],
   "tasks": {
+    "sv:check": {
+      "outputs": [
+        ".svelte-kit/**"
+      ]
+    },
     "sv:check:watch": {
       "persistent": true,
       "outputs": [".svelte-kit/**"]
     },
-    "sv:check": {
-      "outputs": [".svelte-kit/**"]
+    "lint": {
+      "dependsOn": [
+        // "sv:check",
+        "lang:lint"
+      ]
     },
+    "fotmat": {},
+    "ci": {},
     "sync": {
       "outputs": [".svelte-kit/**"]
     },
@@ -45,7 +55,11 @@
     "build": {
       "dependsOn": ["generate", "^build"],
       // Consider all default inputs except the package's README
-      "inputs": ["$TURBO_DEFAULT$", "!README.md"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*",
+        "!README.md"
+      ],
       // File outputs will be cached
       "outputs": [
         "build/**",
@@ -101,8 +115,8 @@
     "test:unit:coverage": {
       "dependsOn": ["sync", "^test:unit:coverage"]
     },
-    "test:integration": {
-      "dependsOn": ["^build"]
+    "test:e2e": {
+      "dependsOn": ["build"]
     },
     "lang:lint": {},
     "lang:validate": {},

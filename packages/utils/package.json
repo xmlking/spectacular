@@ -11,14 +11,12 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "check": "biome check .",
-    "check:fix": "biome check . --write",
+    "ci": "biome ci",
+    "lint": "biome check .",
+    "format": "biome check . --write",
     "clean": "git clean -xdf",
-    "format": "biome format --write",
-    "lint": "biome lint",
     "test": "vitest run",
-    "test:unit:coverage": "vitest run --coverage",
-    "test:watch": "vitest"
+    "test:unit:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

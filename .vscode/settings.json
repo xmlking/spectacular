@@ -13,7 +13,7 @@
     "+layout.svelte": "+layout.ts,+layout.js,+layout.server.ts,+layout.server.js,+layout.gql",
     "+page.svelte": "+page.ts,+page.js,+page.server.ts,+page.server.js,+page.gql",
     "*.svelte": "${capture}.stories.ts",
-    "biome.jsonc": "biome.json*,.markuplintrc.cjs,.markdownlintignore,.lintstagedrc.cjs,.editorconfig,.textlintignore",
+    "biome.jsonc": "biome.json*,.markdownlintignore,.lintstagedrc.cjs,.editorconfig,.textlintignore",
     ".env": ".env*,.secrets*",
     ".gitignore": ".gitattributes,.vercelignore",
     "README.md": "DEVELOPERS.md,CHANGELOG.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,LICENSE",
