@@ -1,5 +1,5 @@
-import { derived, get } from 'svelte/store';
 import type Writable from 'svelte/store';
+import { derived, get } from 'svelte/store';
 
 export const debounce = (func: (...args: any) => void, timeout = 300) => {
   let timer: ReturnType<typeof setTimeout> | undefined;
