@@ -31,7 +31,7 @@ export function toWithId(obj: any) {
  * target: target fields striped or set to `null` (WIP)
  */
 export type CleanOpts = { empty?: 'strip' | 'null'; target?: string[] };
-// biome-ignore lint/complexity/noBannedTypes: <explanation>
+// biome-ignore lint/complexity/noBannedTypes: <ok>
 export function cleanClone<T extends Object>(obj: T, opts: CleanOpts): T {
   // TODO: check 'structuredClone' available in window
   const cloneObj = structuredClone(obj);
@@ -47,8 +47,7 @@ export function cleanClone<T extends Object>(obj: T, opts: CleanOpts): T {
 
 function stripEmptyProperties(obj) {
   for (const key in obj) {
-    // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
-    if (obj.hasOwnProperty(key)) {
+    if (Object.hasOwn(obj, key)) {
       if (obj[key] === null || obj[key] === undefined || (typeof obj[key] === 'string' && obj[key].trim() === '')) {
         delete obj[key];
       } else if (typeof obj[key] === 'object' && !(obj[key] instanceof Date)) {
@@ -62,8 +61,7 @@ function stripEmptyProperties(obj) {
 }
 function nullifyEmptyProperties(obj) {
   for (const key in obj) {
-    // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
-    if (obj.hasOwnProperty(key)) {
+    if (Object.hasOwn(obj, key)) {
       if (obj[key] === null || obj[key] === undefined || (typeof obj[key] === 'string' && obj[key].trim() === '')) {
         obj[key] = null;
       } else if (typeof obj[key] === 'object' && !(obj[key] instanceof Date)) {
