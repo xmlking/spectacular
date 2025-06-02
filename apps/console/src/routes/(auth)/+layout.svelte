@@ -28,9 +28,9 @@ function pass(event: CustomEvent) {
 let theme: 'light' | 'dark' | 'auto' | undefined;
 $: theme = $modeUserPrefers ? 'light' : 'dark';
 const siteKey = dev
-  ? // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  ? // biome-ignore lint/style/noNonNullAssertion: <ok>
     env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY_ALWAYS_PASSES!
-  : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  : // biome-ignore lint/style/noNonNullAssertion: <ok>
     env.PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!;
 </script>
 

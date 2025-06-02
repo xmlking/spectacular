@@ -88,7 +88,7 @@ export const runGenerateSQLQuery = async (query: string) => {
       console.log('Table does not exist, creating and seeding it with dummy data now...');
       // throw error
       throw Error('Table does not exist');
-      // biome-ignore lint/style/noUselessElse: <explanation>
+      // biome-ignore lint/style/noUselessElse: <ok>
     } else {
       throw e;
     }

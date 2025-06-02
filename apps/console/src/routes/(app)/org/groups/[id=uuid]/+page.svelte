@@ -35,6 +35,8 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 
+// biome-ignore lint/correctness/noUnsafeOptionalChaining: <ok>
+// biome-ignore lint/correctness/noUndeclaredVariables: <ok>
 const { id, ...initialData } = $GroupData.data?.groups_by_pk;
 
 const form = superForm(defaults(initialData, zod(schema)), {

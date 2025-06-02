@@ -17,9 +17,14 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noUnusedImports": "off"
+        "noUnusedImports": "off",
+        "noUnusedVariables": "off",
+        "noUnusedFunctionParameters": "off"
       }
     }
+  },
+  "javascript": {
+    "globals": ["LanguageModel", "Proofreader", "Summarizer", "Rewriter", "Writer", "Translator", "LanguageDetector"]
   },
   "overrides": [
     {

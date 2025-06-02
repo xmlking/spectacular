@@ -39,6 +39,7 @@ const form = superForm(defaults(zod(schema)), {
   delayMs: 100,
   timeoutMs: 4000,
   validators: zodClient(schema),
+
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
 

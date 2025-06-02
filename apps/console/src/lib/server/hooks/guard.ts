@@ -35,7 +35,7 @@ const publicPaths = [
 // if (building) return await resolve(event);
 
 export const guard = (async ({ event, resolve }) => {
-  // biome-ignore format: <explanation>
+  // biome-ignore format: <ok>
   if (building) return await resolve(event);
 
   // TODO:

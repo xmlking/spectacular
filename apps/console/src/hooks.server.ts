@@ -4,7 +4,6 @@ import { env as secrets } from '$env/dynamic/private';
 import * as flags from '$lib/flags';
 import { i18n } from '$lib/i18n';
 import { auth, guard, houdini, theme } from '$lib/server/hooks';
-// biome-ignore lint/correctness/noUnusedImports: <ok>
 import { Logger, sleep } from '@repo/utils';
 import type { Handle, HandleFetch, HandleServerError, ServerInit } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';

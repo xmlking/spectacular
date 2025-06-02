@@ -17,7 +17,6 @@ import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floati
 import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 import { Logger, startsWith } from '@repo/utils';
 import type { ModalComponent } from '@skeletonlabs/skeleton';
-// biome-ignore lint/style/useImportType: biome still don't understand svelte
 import { AppShell, initializeStores, Modal, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
 import { inject } from '@vercel/analytics';
 import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';

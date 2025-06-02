@@ -4,6 +4,7 @@ export * from './smart.js';
 
 import Chat from './chat.svelte';
 import ComboBox from './combo-box.svelte';
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <ok>
 import Date from './date.svelte';
 import MagicSpellTextarea from './magic-spell-textarea.svelte';
 import Sentiment from './sentiment.svelte';
