@@ -1,10 +1,10 @@
 import { join } from 'node:path';
 import { skeleton } from '@skeletonlabs/tw-plugin';
 import containerQueries from '@tailwindcss/container-queries';
-import colors from 'tailwindcss/colors';
 import forms from '@tailwindcss/forms';
 import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
+import colors from 'tailwindcss/colors';
 import defaultTheme from 'tailwindcss/defaultTheme.js';
 import { customTheme } from './custom.theme';
 // import { join } from 'path';

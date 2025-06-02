@@ -1,8 +1,6 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.0.0-beta.5/schema.json",
-  "extends": [
-    "../../biome.jsonc"
-  ],
+  "extends": ["../../biome.jsonc"],
   "files": {
     "includes": [
       "**",
@@ -16,9 +14,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "src/**/*.svelte"
-      ],
+      "includes": ["src/**/*.svelte"],
       "linter": {
         "rules": {
           "suspicious": {
@@ -31,15 +27,13 @@
           "correctness": {
             "noUnusedVariables": "off",
             "noUnusedImports": "off",
-            "noUndeclaredVariables": "off",
+            "noUndeclaredVariables": "off"
           }
         }
       }
     },
     {
-      "includes": [
-        "src/routes/(legal)/+layout@.svelte"
-      ],
+      "includes": ["src/routes/(legal)/+layout@.svelte"],
       "linter": {
         "rules": {
           "style": {

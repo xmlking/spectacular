@@ -3,9 +3,7 @@
   "extends": ["//"],
   "tasks": {
     "sv:check": {
-      "outputs": [
-        ".svelte-kit/**"
-      ]
+      "outputs": [".svelte-kit/**"]
     },
     "sv:check:watch": {
       "persistent": true,
@@ -55,11 +53,7 @@
     "build": {
       "dependsOn": ["generate", "^build"],
       // Consider all default inputs except the package's README
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env*",
-        "!README.md"
-      ],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "!README.md"],
       // File outputs will be cached
       "outputs": [
         "build/**",
