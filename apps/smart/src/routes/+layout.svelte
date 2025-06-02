@@ -1,17 +1,16 @@
 <script lang="ts">
+import { page } from '$app/state';
+import { locales, localizeHref } from '$i18n/runtime';
 import AppFooter from '$lib/components/layout/app-footer.svelte';
 import AppHeader from '$lib/components/layout/app-header.svelte';
 import AppSidebar from '$lib/components/layout/app-sidebar.svelte';
 import Metadata from '$lib/components/layout/metadata.svelte';
-import { page } from '$app/state';
-import { locales, localizeHref } from '$i18n/runtime';
+import { config } from '$lib/stores/index.js';
+import { updateTheme } from '$lib/utils.js';
 import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
 import { Toaster } from '@repo/ui/components/ui/sonner/index.js';
 import { ModeWatcher } from 'mode-watcher';
 import type { Snippet } from 'svelte';
-
-import { config } from '$lib/stores/index.js';
-import { updateTheme } from '$lib/utils.js';
 import '../app.css';
 
 type Props = {

@@ -3,7 +3,8 @@ import { goto } from '$app/navigation';
 import { page } from '$app/state';
 import * as m from '$i18n/messages';
 import type { Locale } from '$i18n/runtime';
-import { setLocale, overwriteSetLocale } from '$i18n/runtime';
+import { overwriteSetLocale, setLocale } from '$i18n/runtime';
+
 // import { resolveRoute } from '@inlang/paraglide-js/adapter-utils';
 
 function switchToLanguage(newLanguage: Locale) {

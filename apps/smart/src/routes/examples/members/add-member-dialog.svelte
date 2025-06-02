@@ -1,13 +1,13 @@
 <script lang="ts">
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/components/ui/select/index.js';
 import { X } from '@lucide/svelte';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/components/ui/select/index.js';
 import { fade } from 'svelte/transition';
 
 // Available roles for new member
 const roles = ['owner', 'admin', 'member'];
 
 // Component props with default values
-let { onClose = () => {}, onAdd = (member: any) => {} } = $props();
+let { onClose = () => {}, onAdd = (_member: any) => {} } = $props();
 
 // Form data using $state
 let name = $state('');

@@ -19,7 +19,7 @@ let members = $state([
 
 // Filter members based on search query
 const filteredMembers = $derived(
-  members.filter((member) => member.name.toLowerCase().includes(searchQuery.toLowerCase())),
+  members.filter((member) => member.name.toLowerCase().includes(searchQuery.toLowerCase()))
 );
 
 /** Handle member deletion */

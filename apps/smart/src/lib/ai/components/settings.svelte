@@ -6,12 +6,13 @@ import {
   aiProvider,
   languageModelOptions,
   languageModelStyle,
+  Provider,
   preferedLang,
   rewriterOptions,
   summarizerOptions,
   writerOptions,
 } from './settings.js';
-import { Provider } from './settings.js';
+
 // import { langs } from './constants';
 const chromeAI = getChromeAI();
 const { isAISupported, assistantCapabilities, isLoading } = chromeAI;

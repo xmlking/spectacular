@@ -1,14 +1,14 @@
 <script lang="ts">
-import * as Avatar from '@repo/ui/components/ui/avatar/index.js';
-import * as DropdownMenu from '@repo/ui/components/ui/dropdown-menu/index.js';
-import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
-import { useSidebar } from '@repo/ui/components/ui/sidebar/index.js';
 import BadgeCheck from '@lucide/svelte/icons/badge-check';
 import Bell from '@lucide/svelte/icons/bell';
 import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 import CreditCard from '@lucide/svelte/icons/credit-card';
 import LogOut from '@lucide/svelte/icons/log-out';
 import Sparkles from '@lucide/svelte/icons/sparkles';
+import * as Avatar from '@repo/ui/components/ui/avatar/index.js';
+import * as DropdownMenu from '@repo/ui/components/ui/dropdown-menu/index.js';
+import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
+import { useSidebar } from '@repo/ui/components/ui/sidebar/index.js';
 
 let { user }: { user: { name: string; email: string; avatar: string } } = $props();
 const sidebar = useSidebar();

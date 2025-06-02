@@ -1,8 +1,8 @@
 <script lang="ts">
 import { localizeHref } from '$i18n/runtime';
+import ChevronRight from '@lucide/svelte/icons/chevron-right';
 import * as Collapsible from '@repo/ui/components/ui/collapsible/index.js';
 import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
-import ChevronRight from '@lucide/svelte/icons/chevron-right';
 
 let {
   items,

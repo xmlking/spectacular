@@ -1,6 +1,6 @@
 <script lang="ts">
-import { copy } from '@repo/ui/actions/index.js';
 import { Copy, ThumbsUp } from '@lucide/svelte';
+import { copy } from '@repo/ui/actions/index.js';
 
 // Props
 export let loading: boolean;

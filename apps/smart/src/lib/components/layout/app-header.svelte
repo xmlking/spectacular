@@ -3,12 +3,12 @@ import { localizeHref } from '$i18n/runtime';
 import CommandMenu from '$lib/components/layout/command-menu.svelte';
 import ModeToggle from '$lib/components/layout/mode-toggle.svelte';
 import { siteConfig } from '$lib/config/site.js';
-import { cn } from '@repo/ui/utils.js';
+import * as Icon from '@repo/ui/components/icons/index.js';
 import * as Breadcrumb from '@repo/ui/components/ui/breadcrumb/index.js';
 import { buttonVariants } from '@repo/ui/components/ui/button/index.js';
-import * as Icon from '@repo/ui/components/icons/index.js';
 import { Separator } from '@repo/ui/components/ui/separator/index.js';
 import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
+import { cn } from '@repo/ui/utils.js';
 </script>
 
 <header class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">

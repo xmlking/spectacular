@@ -1,20 +1,25 @@
 <script lang="ts">
 import { Button } from '@repo/ui/components/ui/button/index.js';
-import { FlexRender, createSvelteTable, renderComponent, renderSnippet } from '@repo/ui/components/ui/data-table/index.js';
+import {
+  createSvelteTable,
+  FlexRender,
+  renderComponent,
+  renderSnippet,
+} from '@repo/ui/components/ui/data-table/index.js';
 import * as DropdownMenu from '@repo/ui/components/ui/dropdown-menu/index.js';
 import { Input } from '@repo/ui/components/ui/input/index.js';
 import * as Table from '@repo/ui/components/ui/table/index.js';
 import {
   type ColumnDef,
   type ColumnFiltersState,
-  type PaginationState,
-  type RowSelectionState,
-  type SortingState,
-  type VisibilityState,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  type PaginationState,
+  type RowSelectionState,
+  type SortingState,
+  type VisibilityState,
 } from '@tanstack/table-core';
 import { createRawSnippet } from 'svelte';
 import ChevronDown from 'svelte-radix/ChevronDown.svelte';

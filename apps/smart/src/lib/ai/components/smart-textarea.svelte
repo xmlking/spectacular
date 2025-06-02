@@ -1,7 +1,8 @@
 <script lang="ts" context="module">
 // import { IconSummary } from '@repo/ui/components/icons';
-import { IconTranslate } from '@repo/ui/components/icons';
+
 import { Crop, PenTool, Replace, SpellCheck2 } from '@lucide/svelte';
+import { IconTranslate } from '@repo/ui/components/icons';
 
 const toolOptions = {
   writer: {

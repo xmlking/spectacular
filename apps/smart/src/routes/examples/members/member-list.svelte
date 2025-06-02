@@ -1,13 +1,13 @@
 <script lang="ts">
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/components/ui/select/index.js';
 import { Trash2 } from '@lucide/svelte';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/components/ui/select/index.js';
 import { slide } from 'svelte/transition';
 
 // Available roles for members
 const roles = ['owner', 'admin', 'member'];
 
 // Component props using proper svelte 5 syntax
-let { members = [], onDelete = (id: number) => {}, onUpdateRole = (id: number, role: string) => {} } = $props();
+let { members = [], onDelete = (_id: number) => {}, onUpdateRole = (_id: number, _role: string) => {} } = $props();
 </script>
 
 <div class="space-y-4">
@@ -25,7 +25,7 @@ let { members = [], onDelete = (id: number) => {}, onUpdateRole = (id: number, r
 
 			<div class="flex items-center gap-4">
 				<!-- Fixed select value binding -->
-				<Select defaultValue={member.role} onValueChange={(value) => onUpdateRole(member.id, value)}>
+				<Select defaultValue={member.role} onValueChange={(value: string) => onUpdateRole(member.id, value)}>
 					<SelectTrigger class="w-32">
              {member.role ??  "Select role"}
 						<!-- <SelectValue placeholder="Select role" /> -->

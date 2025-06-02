@@ -1,12 +1,12 @@
 <script lang="ts">
 import { localizeHref } from '$i18n/runtime';
-import * as DropdownMenu from '@repo/ui/components/ui/dropdown-menu/index.js';
-import { useSidebar } from '@repo/ui/components/ui/sidebar/index.js';
-import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
 import Ellipsis from '@lucide/svelte/icons/ellipsis';
 import Folder from '@lucide/svelte/icons/folder';
 import Forward from '@lucide/svelte/icons/forward';
 import Trash2 from '@lucide/svelte/icons/trash-2';
+import * as DropdownMenu from '@repo/ui/components/ui/dropdown-menu/index.js';
+import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
+import { useSidebar } from '@repo/ui/components/ui/sidebar/index.js';
 
 let {
   projects,

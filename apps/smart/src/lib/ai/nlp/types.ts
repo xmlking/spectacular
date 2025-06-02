@@ -43,13 +43,13 @@ export const configSchema = z
     lineCategories: z
       .array(z.string())
       .describe(
-        'For line charts only: Categories used to compare different lines or data series. Each category represents a distinct line in the chart.',
+        'For line charts only: Categories used to compare different lines or data series. Each category represents a distinct line in the chart.'
       )
       .optional(),
     colors: z
       .record(
         z.string().describe('Any of the yKeys'),
-        z.string().describe('Color value in CSS format (e.g., hex, rgb, hsl)'),
+        z.string().describe('Color value in CSS format (e.g., hex, rgb, hsl)')
       )
       .describe('Mapping of data keys to color values for chart elements')
       .optional(),

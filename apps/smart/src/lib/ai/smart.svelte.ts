@@ -19,7 +19,7 @@ export async function checkAibrowInstalled() {
   if (!self.aibrow) {
     // The extension is not installed
     console.log(
-      'Install the extension from https://chromewebstore.google.com/detail/aibrow/bbkbjiehfkggfkbampigbbakecijicdm',
+      'Install the extension from https://chromewebstore.google.com/detail/aibrow/bbkbjiehfkggfkbampigbbakecijicdm'
     );
     return false;
   }
