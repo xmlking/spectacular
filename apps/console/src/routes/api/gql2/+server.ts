@@ -1,11 +1,11 @@
+import { read } from '$app/server';
 import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
 import { Logger } from '@repo/utils';
 import { error } from '@sveltejs/kit';
-import { JSONParseError, type LanguageModel, TypeValidationError, generateObject, streamObject, streamText } from 'ai';
+import { generateObject, JSONParseError, type LanguageModel, streamObject, streamText, TypeValidationError } from 'ai';
+import { ollama } from 'ollama-ai-provider';
 import { zodToJsonSchema } from 'openai-zod-to-json-schema';
 import { z } from 'zod';
-import { read } from '$app/server';
-import { ollama } from 'ollama-ai-provider';
 import schemaFile from '../../../../schema.graphql?url';
 
 const outputSchema = z.object({

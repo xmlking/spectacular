@@ -1,10 +1,10 @@
 import { browser } from '$app/environment';
 import { invalidateAll } from '$app/navigation';
 import { env } from '$env/dynamic/public';
-import { type ClientPlugin, HoudiniClient, getClientSession } from '$houdini';
+import { type ClientPlugin, getClientSession, HoudiniClient } from '$houdini';
 import { subscription } from '$houdini/plugins';
 import { GRAPHQL_URL } from '$lib/constants';
-import { Logger, hasErrorMessage, hasErrorTypes, isErrorType } from '@repo/utils';
+import { hasErrorMessage, hasErrorTypes, isErrorType, Logger } from '@repo/utils';
 import { error, redirect } from '@sveltejs/kit';
 import { createClient as createWSClient } from 'graphql-ws';
 
@@ -32,7 +32,7 @@ const subClient: ClientPlugin = subscription(({ session }) =>
         },
       };
     },
-  }),
+  })
 );
 
 // Export the Houdini client

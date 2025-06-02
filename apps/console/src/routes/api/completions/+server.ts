@@ -1,7 +1,7 @@
 import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
 import { Logger } from '@repo/utils';
-import { streamText } from 'ai';
 import { error } from '@sveltejs/kit';
+import { streamText } from 'ai';
 import { ollama } from 'ollama-ai-provider';
 
 /**

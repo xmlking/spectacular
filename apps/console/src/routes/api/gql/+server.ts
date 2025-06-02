@@ -1,12 +1,11 @@
 import { read } from '$app/server';
 import { Logger } from '@repo/utils';
+import { ollama } from 'ollama-ai-provider';
 import { zodToJsonSchema } from 'openai-zod-to-json-schema';
 import { z } from 'zod';
 import schemaFile from '../../../../schema.graphql?url';
 import { GQLPTClient } from './gqlpt';
 import { AdapterOpenAI } from './openai';
-// biome-ignore lint/correctness/noUnusedImports: <explanation>
-import { ollama } from 'ollama-ai-provider';
 
 const adapter = new AdapterOpenAI({
   apiKey: process.env.OPENAI_API_KEY,

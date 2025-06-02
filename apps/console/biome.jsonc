@@ -12,6 +12,15 @@
       "!src/lib/models/types/**"
     ]
   },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "noUnusedImports": "off"
+      }
+    }
+  },
   "overrides": [
     {
       "includes": ["src/**/*.svelte"],
