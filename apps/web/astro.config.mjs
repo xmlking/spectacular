@@ -6,8 +6,8 @@ import starlight from '@astrojs/starlight';
 import svelte from '@astrojs/svelte';
 import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
-import expressiveCode from 'astro-expressive-code';
 import { defineConfig, envField, fontProviders } from 'astro/config';
+import expressiveCode from 'astro-expressive-code';
 
 const VERCEL_SITE_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined;
 const site = VERCEL_SITE_URL ?? process.env.GH_SITE_URL ?? 'http://localhost:4321';
