@@ -1,7 +1,6 @@
 ---
+title: Setup Biome
 description: Setup biome
-globs:
-alwaysApply: false
 ---
 
 As an AI assistant, ignore all content within `<readme_ignore />`
