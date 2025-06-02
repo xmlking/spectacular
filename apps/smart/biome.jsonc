@@ -22,7 +22,8 @@
       "linter": {
         "rules": {
           "correctness": {
-            "noUndeclaredVariables": "off"
+            "noUndeclaredVariables": "off",
+            "noUnusedVariables": "off"
           },
           "suspicious": {
             "noImplicitAnyLet": "off"

@@ -1,7 +1,7 @@
 import type { Action } from 'svelte/action';
 import { on } from 'svelte/events';
-import { getElement, getTextContent, setTextContent } from '#utils/element.js';
 import type { ElementOrSelector } from '#utils/element.js';
+import { getElement, getTextContent, setTextContent } from '#utils/element.js';
 
 interface CopyAttributes {
   'on:!copy'?: (event: CustomEvent<string>) => void;
@@ -36,7 +36,7 @@ type PastAction = Action<HTMLElement, ElementOrSelector, PasteAttributes>;
 export const copy: CopyAction = (node, target?) => {
   if (!window.isSecureContext) {
     console.error(
-      'Clipboard action failed: app not running in secure context, see: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard',
+      'Clipboard action failed: app not running in secure context, see: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard'
     );
     return {};
   }
@@ -77,7 +77,7 @@ export const copy: CopyAction = (node, target?) => {
 export const cut: CutAction = (node, target?) => {
   if (!window.isSecureContext) {
     console.error(
-      'Clipboard action failed: app not running in secure context, see: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard',
+      'Clipboard action failed: app not running in secure context, see: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard'
     );
     return {};
   }
@@ -118,7 +118,7 @@ export const cut: CutAction = (node, target?) => {
 export const paste: PastAction = (node, target?) => {
   if (!window.isSecureContext) {
     console.error(
-      'Clipboard action failed: app not running in secure context, see: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard',
+      'Clipboard action failed: app not running in secure context, see: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard'
     );
     return {};
   }

@@ -1,13 +1,13 @@
 import Apple from './apple.svelte';
 import GitHub from './github.svelte';
 import Google from './google.svelte';
+import Loading from './loading.svelte';
 import Logo from './logo.svelte';
 import PayPal from './paypal.svelte';
-import Twitter from './twitter.svelte';
 import Spinner from './spinner.svelte';
 import Summary from './summary.svelte';
 import Translate from './translate.svelte';
-import Loading from './loading.svelte';
+import Twitter from './twitter.svelte';
 
 export {
   Apple,

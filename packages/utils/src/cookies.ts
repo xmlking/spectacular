@@ -24,10 +24,12 @@ function setCookie(cookie_name: string, cookie_value: string, secure = true, sam
   if (samesite_lax) cookie_info.push('SameSite=Lax');
   cookie_info.push(`path=${path}`);
 
+  // biome-ignore lint/suspicious/noDocumentCookie: <ok>
   document.cookie = cookie_info.join('; ');
 }
 
 function deleteCookie(cookie_name: string) {
+  // biome-ignore lint/suspicious/noDocumentCookie: <ok>
   document.cookie = `${cookie_name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
 

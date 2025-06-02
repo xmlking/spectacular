@@ -1,15 +1,35 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.0.0-beta.5/schema.json",
-  "extends": [
-    "../../biome.jsonc"
-  ],
+  "extends": ["../../biome.jsonc"],
   "files": {
     "includes": [
       "**",
+      "!build/*",
+      "!.svelte-kit/*",
       "!src/components/ui",
       "!src/hooks",
       "!src/utils.ts",
       "!components.json"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["src/**/*.svelte"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUndeclaredVariables": "off",
+            "noUnusedVariables": "off"
+          },
+          "suspicious": {
+            "noImplicitAnyLet": "off"
+          },
+          "style": {
+            "useConst": "off"
+            // "useImportType": "off"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -1,4 +1,5 @@
 import type { Attachment } from 'svelte/attachments';
+
 // Ref: https://github.com/ignatiusmb/syv/blob/master/src/lib/attachment/index.ts
 
 type DebouncedInputOptions = {

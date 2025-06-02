@@ -11,8 +11,8 @@ declare const isChecked: unique symbol;
  * Provided as key to getContext and setContext in order to enable strict typing
  */
 
-// biome-ignore lint/suspicious/noEmptyInterface: <explanation>
-export interface InjectionKey<T = unknown> {}
+// biome-ignore lint/suspicious/noEmptyInterface: <ok>
+export interface InjectionKey<_T = unknown> {}
 
 export interface CheckedInjectionKey<T> extends InjectionKey<T> {
   [isChecked]?: never;
