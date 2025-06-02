@@ -1,8 +1,8 @@
 <script lang="ts">
 import { dev } from '$app/environment';
+import { Icon } from '$lib/ui/components/icons/index.js';
 import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 import SuperDebug from 'sveltekit-superforms';
-import { Icon } from '$lib/ui/components/icons/index.js';
 
 export let data: any;
 export let open = false;

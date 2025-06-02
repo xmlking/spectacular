@@ -1,9 +1,9 @@
 <script lang="ts">
-import { PendingValue, type SecurityKeyFragment, cache, fragment, graphql, isPending } from '$houdini';
+import { cache, fragment, graphql, isPending, PendingValue, type SecurityKeyFragment } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import { GraphQLError } from 'graphql';
 import { KeyRound, Trash2 } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
@@ -25,7 +25,7 @@ $: data = fragment(
         id
         nickname
       }
-    `),
+    `)
 );
 
 $: ({ id, nickname } = $data);
@@ -52,7 +52,7 @@ const handleDelete = async () => {
         timeout: 10000,
         type: 'error',
       },
-      toastStore,
+      toastStore
     );
     return;
   }
@@ -62,7 +62,7 @@ const handleDelete = async () => {
       { id },
       {
         metadata: { logResult: true, useRole: 'user' },
-      },
+      }
     );
     if (gqlErrors) {
       errors.push(gqlErrors[0].message);
@@ -73,7 +73,7 @@ const handleDelete = async () => {
           timeout: 10000,
           type: 'error',
         },
-        toastStore,
+        toastStore
       );
       return;
     }
@@ -95,7 +95,7 @@ const handleDelete = async () => {
           timeout: 10000,
           type: 'error',
         },
-        toastStore,
+        toastStore
       );
     }
   } catch (err) {

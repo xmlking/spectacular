@@ -28,7 +28,7 @@ $: data = fragment(
           role
         }
       }
-    `),
+    `)
 );
 
 // Functions

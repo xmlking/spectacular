@@ -46,7 +46,7 @@ export function onceLoaded<I, O>(value: MaybeLoading<I>, compute: (loadedValue: 
 export function onceAllLoaded<T extends unknown[], O, FO>(
   values: { [K in keyof T]: MaybeLoading<T[K]> },
   compute: (...loadedValues: T) => O,
-  fallback: FO,
+  fallback: FO
 ): O | FO {
   if (values.every(loaded)) return compute(...(values as T));
   return fallback;

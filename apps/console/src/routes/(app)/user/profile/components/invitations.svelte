@@ -1,18 +1,18 @@
 <script lang="ts">
 import { invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
-import { PendingValue, type UserInvitationsFragment, cache, fragment, graphql } from '$houdini';
+import { cache, fragment, graphql, PendingValue, type UserInvitationsFragment } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import { DateTime, GraphQLErrors } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
 import { cn } from '$lib/ui/utils';
 import { Logger } from '@repo/utils';
-import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
+import { check, DataHandler, type Row } from '@vincjo/datatables/legacy';
 import { Check, MoreHorizontal, X } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { slide } from 'svelte/transition';
@@ -35,7 +35,7 @@ $: data = fragment(
           updatedAt
         }
       }
-    `),
+    `)
 );
 $: ({ invitations } = $data);
 
@@ -73,7 +73,7 @@ const acceptInvitation: MouseEventHandler<HTMLButtonElement> = async (event) => 
   if (!data?.update_invitations_by_pk) {
     handleMessage(
       { message: 'No responce from server: may be orgId, email not found', type: 'error', timeout: 5000 },
-      toastStore,
+      toastStore
     );
     return;
   }
@@ -105,7 +105,7 @@ const declineInvitation: MouseEventHandler<HTMLButtonElement> = async (event) =>
   if (!data?.update_invitations_by_pk) {
     handleMessage(
       { message: 'No responce from server: may be orgId, email not found', type: 'error', timeout: 5000 },
-      toastStore,
+      toastStore
     );
     return;
   }

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { type OrgSettingsFragment, fragment, graphql } from '$houdini';
+import { fragment, graphql, type OrgSettingsFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import { DateTime } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
@@ -17,7 +17,7 @@ $: data = fragment(
           updatedAt
         }
       }
-    `),
+    `)
 );
 $: ({ settings } = $data);
 

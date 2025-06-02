@@ -1,7 +1,7 @@
 <script lang="ts">
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 import { Logger } from '@repo/utils';
+import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 import { Plus } from 'lucide-svelte';
 import type { PageData } from './$houdini';
 import Invitations from './components/invitations.svelte';

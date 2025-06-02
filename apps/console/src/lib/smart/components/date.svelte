@@ -19,7 +19,7 @@
 <script lang="ts">
 import { ErrorMessage } from '$lib/ui/components/form';
 import { Logger } from '@repo/utils';
-import { JSONParseError, TypeValidationError, generateObject } from 'ai';
+import { generateObject, JSONParseError, TypeValidationError } from 'ai';
 import { Sparkles } from 'lucide-svelte';
 import type { HTMLInputAttributes } from 'svelte/elements';
 import { z } from 'zod';
@@ -90,7 +90,7 @@ const useLocalLocal = async (event: SubmitEvent) => {
     session = await LanguageModel.create();
     const resp = await session.prompt(
       `The current ISO datetime is: ${new Date().toISOString()}. Extract the data from the following: ${prompt}`,
-      { responseConstraint: grammar },
+      { responseConstraint: grammar }
     );
     log.debug(resp);
 

@@ -1,17 +1,17 @@
 <script lang="ts">
-import { type AuthProvidersFragment, PendingValue, fragment, graphql } from '$houdini';
+import { type AuthProvidersFragment, fragment, graphql, PendingValue } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
-import type { NhostClient, Provider } from '@nhost/nhost-js';
-import { getToastStore } from '@skeletonlabs/skeleton';
-import { Modal, getModalStore, initializeStores } from '@skeletonlabs/skeleton';
-import type { ModalSettings } from '@skeletonlabs/skeleton';
 import { Alerts } from '$lib/ui/components/form';
 import { Icon } from '$lib/ui/components/icons';
+import type { NhostClient, Provider } from '@nhost/nhost-js';
+import type { ModalSettings } from '@skeletonlabs/skeleton';
+import { getModalStore, getToastStore, initializeStores, Modal } from '@skeletonlabs/skeleton';
 import { Github } from 'lucide-svelte';
 import { onMount } from 'svelte';
 import { writable } from 'svelte/store';
 import { deleteSocialConnect } from '../mutations';
+
 const modalStore = getModalStore();
 initializeStores();
 const nhost = getNhostClient();
@@ -29,7 +29,7 @@ $: data = fragment(
           updatedAt
         }
       }
-    `),
+    `)
 );
 $: ({ providers } = $data);
 
@@ -75,7 +75,7 @@ onMount(() => {
         timeout: 10000,
         type: 'error',
       },
-      toastStore,
+      toastStore
     );
     // Remove the error parameters
     searchParams.delete('error');

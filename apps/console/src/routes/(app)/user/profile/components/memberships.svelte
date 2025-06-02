@@ -1,17 +1,17 @@
 <script lang="ts">
 import { invalidate, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
-import { type MembershipsFragment, PendingValue, cache, fragment, graphql } from '$houdini';
+import { cache, fragment, graphql, type MembershipsFragment, PendingValue } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import { GraphQLErrors } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
 import { cn } from '$lib/ui/utils';
 import { Logger } from '@repo/utils';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
 import { DataHandler } from '@vincjo/datatables/legacy';
 import { Check, MoreHorizontal, X } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
@@ -35,7 +35,7 @@ $: data = fragment(
           role
         }
       }
-    `),
+    `)
 );
 $: ({ allowedOrgs } = $data);
 
@@ -73,7 +73,7 @@ const leaveOrganization: MouseEventHandler<HTMLButtonElement> = async (event) =>
   if (!data?.delete_memberships_by_pk) {
     handleMessage(
       { message: 'No responce from server: may be orgId, userId not found', type: 'error', timeout: 5000 },
-      toastStore,
+      toastStore
     );
     return;
   }

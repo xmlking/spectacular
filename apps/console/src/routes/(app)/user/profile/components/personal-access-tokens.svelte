@@ -1,14 +1,14 @@
 <script lang="ts">
 import type { PersonalAccessTokensFragment } from '$houdini';
-import { PendingValue, fragment, graphql } from '$houdini';
+import { fragment, graphql, PendingValue } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getNhostClient } from '$lib/stores/nhost';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
 import * as Table from '$lib/ui/components/table';
 import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import { DataHandler } from '@vincjo/datatables/legacy';
 import { GraphQLError } from 'graphql';
 import { Trash2 } from 'lucide-svelte';
@@ -36,7 +36,7 @@ $: data = fragment(
           userId
         }
       }
-    `),
+    `)
 );
 
 $: ({ personalAccessTokens } = $data);
@@ -71,7 +71,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
         timeout: 10000,
         type: 'error',
       },
-      toastStore,
+      toastStore
     );
     return;
   }
@@ -81,7 +81,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
       { id },
       {
         metadata: { logResult: true, useRole: 'user' },
-      },
+      }
     );
     if (gqlErrors) {
       message = { type: 'error', message: gqlErrors[0].message };
@@ -93,7 +93,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
           timeout: 10000,
           type: 'error',
         },
-        toastStore,
+        toastStore
       );
       return;
     }
@@ -114,7 +114,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
           timeout: 10000,
           type: 'error',
         },
-        toastStore,
+        toastStore
       );
     }
   } catch (err) {

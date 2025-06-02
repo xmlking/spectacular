@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 import type { Row } from '@vincjo/datatables/legacy';
+
 type T = Row;
 </script>
 

@@ -12,11 +12,10 @@ import {
 } from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { SlideToggle } from '@skeletonlabs/skeleton';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputChipWrapper, InputPairs } from '$lib/ui/components/form';
-import { Logger, cleanClone } from '@repo/utils';
+import { cleanClone, Logger } from '@repo/utils';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';

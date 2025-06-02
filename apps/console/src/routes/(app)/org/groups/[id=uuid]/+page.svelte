@@ -1,6 +1,6 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
-import { type UpdateGroup$input, cache } from '$houdini';
+import { cache, type UpdateGroup$input } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
@@ -11,12 +11,11 @@ import {
 } from '$lib/schema/group';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
-import { SlideToggle } from '@skeletonlabs/skeleton';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputChipWrapper, InputPairs } from '$lib/ui/components/form';
-import { Logger, cleanClone } from '@repo/utils';
+import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
+import { cleanClone, Logger } from '@repo/utils';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal } from 'lucide-svelte';

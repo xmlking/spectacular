@@ -1,6 +1,6 @@
 import { Logger } from '@repo/utils';
 import { getContext, onDestroy, setContext } from 'svelte';
-import { type Invalidator, type Readable, type Subscriber, derived, writable } from 'svelte/store';
+import { derived, type Invalidator, type Subscriber, writable } from 'svelte/store';
 
 export class LoadingState {
   #log = new Logger('loading.store.client');
@@ -11,7 +11,7 @@ export class LoadingState {
     ([$formLoading, $pageLoading]) => {
       return $pageLoading || $formLoading;
     },
-    false,
+    false
   );
 
   constructor() {

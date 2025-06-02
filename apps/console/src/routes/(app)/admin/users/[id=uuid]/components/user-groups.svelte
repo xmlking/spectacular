@@ -1,15 +1,15 @@
 <script lang="ts">
 import { page } from '$app/stores';
-import { type AddUserGroup$input, type UserGroupsFragment, cache, fragment, graphql } from '$houdini';
+import { type AddUserGroup$input, cache, fragment, graphql, type UserGroupsFragment } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { GraphQLErrors } from '$lib/ui/components';
 import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import { Plus, X } from 'lucide-svelte';
-import { dndzone } from 'svelte-dnd-action';
 import { flip } from 'svelte/animate';
+import { dndzone } from 'svelte-dnd-action';
 import { AddUserGroup, DeleteUserGroup } from '../mutations';
 
 const log = new Logger('user-groups.assign.browser');
@@ -28,7 +28,7 @@ $: data = fragment(
           id
         }
       }
-    `),
+    `)
 );
 
 // Reactivity
@@ -113,7 +113,7 @@ async function addUserGroup(groupId: string) {
   if (!data?.insert_user_groups_one) {
     handleMessage(
       { message: 'No responce from server: may be userId. groupId not found', type: 'error', timeout: 5000 },
-      toastStore,
+      toastStore
     );
     return false;
   }
@@ -135,7 +135,7 @@ async function deleteUserGroup(groupId: string) {
   if (!data?.delete_user_groups_by_pk) {
     handleMessage(
       { message: 'No responce from server: may be userId. groupId not found', type: 'error', timeout: 5000 },
-      toastStore,
+      toastStore
     );
     return false;
   }

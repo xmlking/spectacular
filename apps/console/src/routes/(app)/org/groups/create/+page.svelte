@@ -6,18 +6,17 @@ import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
 import {
-  type UpdateGroup,
   allowedMetadata as allowedKeyValues,
   updateGroupKeys as keys,
   updateGroupSchema as schema,
+  type UpdateGroup,
 } from '$lib/schema/group';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { SlideToggle } from '@skeletonlabs/skeleton';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputChipWrapper, InputPairs } from '$lib/ui/components/form';
-import { Logger, cleanClone } from '@repo/utils';
+import { cleanClone, Logger } from '@repo/utils';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';

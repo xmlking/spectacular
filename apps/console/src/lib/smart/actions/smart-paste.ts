@@ -67,7 +67,7 @@ export const smartPaste: SmartPasteAction<Item> = (node, options) => {
 
   if (!window.isSecureContext) {
     console.error(
-      'Clipboard action failed: app not running in secure context, see: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard',
+      'Clipboard action failed: app not running in secure context, see: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard'
     );
     return {};
   }
@@ -108,7 +108,7 @@ export const smartPaste: SmartPasteAction<Item> = (node, options) => {
     } catch (error) {
       // Dispatch an error event
       node.dispatchEvent(
-        new CustomEvent('smartError', { bubbles: false, cancelable: true, composed: false, detail: error as Error }),
+        new CustomEvent('smartError', { bubbles: false, cancelable: true, composed: false, detail: error as Error })
       );
     } finally {
       loading?.set(false);

@@ -5,7 +5,7 @@ import { tick } from 'svelte';
 import type { Action } from 'svelte/action';
 export const autosize: Action<HTMLTextAreaElement, { useJs: boolean } | undefined> = (
   node,
-  options = { useJs: false },
+  options = { useJs: false }
 ) => {
   const isCSSEnabled = CSS.supports('field-sizing', 'content');
 

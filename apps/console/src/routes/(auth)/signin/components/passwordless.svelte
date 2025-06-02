@@ -8,10 +8,10 @@ import { mlSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { turnstilePassed } from '$lib/stores/stores';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
 import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import { Fingerprint, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
@@ -55,7 +55,7 @@ const form = superForm(defaults(zod(mlSchema)), {
           hideDismiss: false,
           timeout: 10000,
         } as const,
-        toastStore,
+        toastStore
       );
       return;
     }
@@ -102,7 +102,7 @@ async function webauthnSignin() {
         hideDismiss: true,
         timeout: 10000,
       } as const,
-      toastStore,
+      toastStore
     );
     await goto(i18n.resolveRoute($formData.redirectTo), {
       invalidateAll: true, // workaround for profile page
@@ -116,7 +116,7 @@ async function webauthnSignin() {
         hideDismiss: false,
         timeout: 10000,
       } as const,
-      toastStore,
+      toastStore
     );
   }
 }

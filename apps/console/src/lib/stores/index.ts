@@ -1,2 +1,2 @@
-export { scroll, lang, storeTheme, storeVercelProductionMode } from './stores';
-export { setLoadingState, getLoadingState } from './loading';
+export { getLoadingState, setLoadingState } from './loading';
+export { lang, scroll, storeTheme, storeVercelProductionMode } from './stores';

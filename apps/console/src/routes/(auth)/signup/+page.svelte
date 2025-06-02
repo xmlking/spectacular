@@ -4,14 +4,14 @@ import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
-import { signUpSchema, updateUserDetailsKeys as keys } from '$lib/schema/user';
+import { updateUserDetailsKeys as keys, signUpSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { turnstilePassed, turnstileResponse } from '$lib/stores/stores';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
 import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import { onMount } from 'svelte';
@@ -61,7 +61,7 @@ const form = superForm(defaults(zod(signUpSchema)), {
         headers: {
           'x-cf-turnstile-response': $turnstileResponse,
         },
-      },
+      }
     );
 
     if (error) {

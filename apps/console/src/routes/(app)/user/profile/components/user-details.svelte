@@ -1,12 +1,12 @@
 <script lang="ts">
 import { page } from '$app/stores';
 import {
-  PendingValue,
-  type UpdateUserDetails$input,
-  type UserDetailsFragment,
   cache,
   fragment,
   graphql,
+  PendingValue,
+  type UpdateUserDetails$input,
+  type UserDetailsFragment,
   type users_set_input,
 } from '$houdini';
 import * as m from '$i18n/messages';
@@ -20,14 +20,14 @@ import {
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputPairs } from '$lib/ui/components/form';
-import { Logger, cleanClone } from '@repo/utils';
+import { cleanClone, Logger } from '@repo/utils';
+import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';
-import SuperDebug, { type ErrorStatus, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { UpdateUserDetails } from '../mutations';
 
@@ -52,7 +52,7 @@ $: data = fragment(
         }
         metadata
       }
-    `),
+    `)
 );
 
 // Reactivity
@@ -128,7 +128,7 @@ const form = superForm(defaults(zod(schema)), {
           type: 'error',
           message: 'Update profile failed: responce empty',
         },
-        { status: 404 },
+        { status: 404 }
       );
       return;
     }

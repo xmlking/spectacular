@@ -3,9 +3,9 @@ import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import * as Smart from '$lib/smart/components';
 import { Logger } from '@repo/utils';
 import type { PageData } from './$houdini';
+import Settings from './components/settings.svelte';
 import SettingsMetadata from './components/settings-metadata.svelte';
 import SettingsWithDefaults from './components/settings-with-defaults.svelte';
-import Settings from './components/settings.svelte';
 
 const log = new Logger('settings:browser');
 export let data: PageData;

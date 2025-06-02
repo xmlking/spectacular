@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { type Writable, derived, readable, writable } from 'svelte/store';
+import { derived, type Writable, writable } from 'svelte/store';
 import { type AIStyles, TEMP_STYLES } from './constants.js';
 
 export enum Provider {
@@ -22,7 +22,7 @@ export const languageModelOptions = derived<Writable<AIStyles>, { topK: number; 
         return TEMP_STYLES.precise;
     }
   },
-  { topK: 3, temperature: 0.8 },
+  { topK: 3, temperature: 0.8 }
 );
 
 export const summarizerOptions: Writable<{

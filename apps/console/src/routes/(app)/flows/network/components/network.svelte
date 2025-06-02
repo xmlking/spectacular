@@ -2,7 +2,7 @@
 import { VisGraph, VisSingleContainer } from '@unovis/svelte';
 import { Graph, GraphLayoutType } from '@unovis/ts';
 
-import { type LinkDatum, type NodeDatum, StatusMap, links, nodes, sites } from './network.data';
+import { type LinkDatum, links, type NodeDatum, nodes, StatusMap, sites } from './network.data';
 
 const mainSite = nodes[0].site;
 

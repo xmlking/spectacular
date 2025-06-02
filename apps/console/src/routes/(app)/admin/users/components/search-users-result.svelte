@@ -1,13 +1,13 @@
 <script lang="ts">
-import { PendingValue, type SearchUsersAll$result, graphql } from '$houdini';
+import { graphql, PendingValue, type SearchUsersAll$result } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
-import { Avatar, getToastStore } from '@skeletonlabs/skeleton';
 import { DateTime } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
 import { Logger, sleep } from '@repo/utils';
-import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
+import { Avatar, getToastStore } from '@skeletonlabs/skeleton';
+import { check, DataHandler, type Row } from '@vincjo/datatables/legacy';
 import { BadgeCheck, BadgeMinus, Trash2 } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { DeleteUser } from '../mutations';
@@ -49,7 +49,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
         timeout: 10000,
         type: 'error',
       },
-      toastStore,
+      toastStore
     );
     return;
   }
@@ -61,7 +61,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
         timeout: 10000,
         type: 'success',
       },
-      toastStore,
+      toastStore
     );
   } else {
     handleMessage(
@@ -71,7 +71,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
         timeout: 50000,
         type: 'error',
       },
-      toastStore,
+      toastStore
     );
   }
   // after

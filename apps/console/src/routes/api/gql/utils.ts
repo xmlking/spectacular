@@ -1,6 +1,11 @@
-import { getIntrospectionQuery } from 'graphql';
 import crypto from 'crypto';
-import { type DefinitionNode, type DocumentNode, Kind, type OperationDefinitionNode } from 'graphql';
+import {
+  type DefinitionNode,
+  type DocumentNode,
+  getIntrospectionQuery,
+  Kind,
+  type OperationDefinitionNode,
+} from 'graphql';
 
 export function clearOperationNames(doc: DocumentNode): DocumentNode {
   const newAst: DocumentNode = {
@@ -23,13 +28,7 @@ export function clearOperationNames(doc: DocumentNode): DocumentNode {
   return newAst;
 }
 
-export async function introspection({
-  url,
-  headers,
-}: {
-  url: string;
-  headers?: Record<string, string>;
-}) {
+export async function introspection({ url, headers }: { url: string; headers?: Record<string, string> }) {
   const introspectionQuery = getIntrospectionQuery();
 
   const response = await fetch(url, {

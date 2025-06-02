@@ -15,11 +15,10 @@ import { setLoadingState } from '$lib/stores/loading';
 import { online, orientation, size } from '$lib/stores/window';
 import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { ParaglideJS } from '@inlang/paraglide-sveltekit';
-import { Modal, initializeStores, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
+import { Logger, startsWith } from '@repo/utils';
 import type { ModalComponent } from '@skeletonlabs/skeleton';
 // biome-ignore lint/style/useImportType: biome still don't understand svelte
-import { AppShell } from '@skeletonlabs/skeleton';
-import { Logger, startsWith } from '@repo/utils';
+import { AppShell, initializeStores, Modal, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
 import { inject } from '@vercel/analytics';
 import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 import { mountVercelToolbar } from '@vercel/toolbar/vite';

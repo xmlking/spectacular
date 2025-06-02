@@ -1,14 +1,12 @@
-import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
+import { read } from '$app/server';
 import { Logger } from '@repo/utils';
-import { error } from '@sveltejs/kit';
-import { JSONParseError, type LanguageModel, TypeValidationError, generateObject, streamObject, streamText } from 'ai';
 import { zodToJsonSchema } from 'openai-zod-to-json-schema';
 import { z } from 'zod';
+import schemaFile from '../../../../schema.graphql?url';
 import { GQLPTClient } from './gqlpt';
 import { AdapterOpenAI } from './openai';
-import { read } from '$app/server';
+// biome-ignore lint/correctness/noUnusedImports: <explanation>
 import { ollama } from 'ollama-ai-provider';
-import schemaFile from '../../../../schema.graphql?url';
 
 const adapter = new AdapterOpenAI({
   apiKey: process.env.OPENAI_API_KEY,

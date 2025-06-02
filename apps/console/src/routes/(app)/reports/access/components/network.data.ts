@@ -506,5 +506,5 @@ export const sites: Record<string, SiteConfig> = nodes.reduce(
       },
     },
   }),
-  {},
+  {}
 );

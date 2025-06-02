@@ -1,5 +1,5 @@
-import { clsx } from 'clsx';
 import type { ClassValue } from 'clsx';
+import { clsx } from 'clsx';
 import { cubicOut } from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';
 import { twMerge } from 'tailwind-merge';
@@ -17,7 +17,7 @@ type FlyAndScaleParams = {
 
 export const flyAndScale = (
   node: Element,
-  params: FlyAndScaleParams = { y: -8, x: 0, start: 0.95, duration: 150 },
+  params: FlyAndScaleParams = { y: -8, x: 0, start: 0.95, duration: 150 }
 ): TransitionConfig => {
   const style = getComputedStyle(node);
   const transform = style.transform === 'none' ? '' : style.transform;

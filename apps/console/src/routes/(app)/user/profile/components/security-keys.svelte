@@ -1,5 +1,5 @@
 <script lang="ts">
-import { type SecurityKeysFragment, fragment, graphql } from '$houdini';
+import { fragment, graphql, type SecurityKeysFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import { Alerts } from '$lib/ui/components/form';
 import { flip } from 'svelte/animate';
@@ -18,7 +18,7 @@ $: data = fragment(
           ...SecurityKeyFragment @mask_disable
         }
       }
-    `),
+    `)
 );
 
 $: ({ securityKeys } = $data);

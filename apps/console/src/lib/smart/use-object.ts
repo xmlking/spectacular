@@ -1,8 +1,8 @@
 // Usage: https://github.com/vercel/ai/issues/2902#issuecomment-2682643650
 import { type FetchFunction, isAbortError, safeValidateTypes } from '@ai-sdk/provider-utils';
-import { asSchema, isDeepEqualData, parsePartialJson, type Schema, type DeepPartial } from '@ai-sdk/ui-utils';
-import z from 'zod';
-import { writable, type Writable } from 'svelte/store';
+import { asSchema, type DeepPartial, isDeepEqualData, parsePartialJson, type Schema } from '@ai-sdk/ui-utils';
+import { type Writable, writable } from 'svelte/store';
+import type z from 'zod';
 
 // use function to allow for mocking in tests:
 const getOriginalFetch = () => fetch;
@@ -149,7 +149,7 @@ function useObject<RESULT, INPUT = any>({
       }
 
       let accumulatedText = '';
-      let latestObject: DeepPartial<RESULT> | undefined = undefined;
+      let latestObject: DeepPartial<RESULT> | undefined;
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
@@ -185,7 +185,7 @@ function useObject<RESULT, INPUT = any>({
         onFinish(
           validationResult.success
             ? { object: validationResult.value, error: undefined }
-            : { object: undefined, error: validationResult.error },
+            : { object: undefined, error: validationResult.error }
         );
       }
     } catch (err) {

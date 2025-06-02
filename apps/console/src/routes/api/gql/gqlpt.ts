@@ -1,22 +1,21 @@
-import type { Adapter } from './types';
-import { clearOperationNames, compressTypeDefs, hashTypeDefs, introspection, postGeneratedQuery } from './utils';
-
 import { promises } from 'node:fs';
 import path from 'node:path';
 import { sortAST } from '@apollo/utils.sortast';
 import {
-  type DocumentNode,
-  type GraphQLSchema,
-  type SelectionNode,
   buildClientSchema,
   buildSchema,
+  type DocumentNode,
+  type GraphQLSchema,
   graphql,
   lexicographicSortSchema,
   parse,
   print,
   printSchema,
+  type SelectionNode,
   validate,
 } from 'graphql';
+import type { Adapter } from './types';
+import { clearOperationNames, compressTypeDefs, hashTypeDefs, introspection, postGeneratedQuery } from './utils';
 
 const log = new Logger('smart:gqlpt:server');
 
@@ -183,7 +182,7 @@ export class GQLPTClient<T extends MergedTypeMap = MergedTypeMap> {
     }: {
       urlOverride?: string;
       headersOverride?: Record<string, string>;
-    } = {},
+    } = {}
   ): Promise<Q extends keyof T ? T[Q] : any> {
     if (!this.options.url && !urlOverride && !this.options.schema) {
       throw new Error('Missing url or schema to query');
@@ -272,7 +271,7 @@ export class GQLPTClient<T extends MergedTypeMap = MergedTypeMap> {
     schema: string,
     retryCount = 0,
     conversationId?: string,
-    currentQuery?: string,
+    currentQuery?: string
   ): Promise<{ query: string; variables?: Record<string, unknown> }> {
     const isRetry = retryCount > 0;
 
@@ -324,7 +323,7 @@ export class GQLPTClient<T extends MergedTypeMap = MergedTypeMap> {
     if (excludedErrors.length > 0) {
       if (retryCount >= (this.options.maxRetries || 5)) {
         throw new Error(
-          `Could not generate valid query after ${retryCount} attempts. Last errors: ${excludedErrors.join(', ')}`,
+          `Could not generate valid query after ${retryCount} attempts. Last errors: ${excludedErrors.join(', ')}`
         );
       }
 
@@ -351,7 +350,7 @@ export class GQLPTClient<T extends MergedTypeMap = MergedTypeMap> {
 
     if (retryCount >= (this.options.maxRetries || 5)) {
       throw new Error(
-        `Could not generate valid query after ${retryCount} attempts. Last errors: ${validationErrors.join(', ')}`,
+        `Could not generate valid query after ${retryCount} attempts. Last errors: ${validationErrors.join(', ')}`
       );
     }
 
@@ -361,7 +360,7 @@ export class GQLPTClient<T extends MergedTypeMap = MergedTypeMap> {
         schema,
         retryCount + 1,
         response.conversationId,
-        generatedQuery,
+        generatedQuery
       );
     } catch (error) {
       throw new Error(`Failed to generate query on retry ${retryCount + 1}: ${(error as Error).message}`);
@@ -391,7 +390,7 @@ export class GQLPTClient<T extends MergedTypeMap = MergedTypeMap> {
   private validateSelectionSet(
     selections: ReadonlyArray<SelectionNode>,
     operationType: string,
-    errors: string[],
+    errors: string[]
   ): void {
     for (const selection of selections) {
       if (selection.kind === 'Field') {

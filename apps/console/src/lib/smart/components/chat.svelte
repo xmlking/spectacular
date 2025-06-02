@@ -1,5 +1,6 @@
 <script lang="ts">
 import { onMount } from 'svelte';
+
 onMount(() => {
   // The page is ready.
   console.log('chat mounted');

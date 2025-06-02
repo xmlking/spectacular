@@ -21,5 +21,5 @@ export const load = loadFlash(
       orgId: claims?.['x-hasura-default-org'],
       role: claims?.['x-hasura-default-role'],
     };
-  },
+  }
 );

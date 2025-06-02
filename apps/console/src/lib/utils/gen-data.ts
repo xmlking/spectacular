@@ -39,7 +39,7 @@ export function createSeries(options: {
       ...Object.fromEntries(
         keys.map((key) => {
           return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
-        }),
+        })
       ),
     };
   });
@@ -65,7 +65,7 @@ export function createDateSeries(options: {
       ...Object.fromEntries(
         keys.map((key) => {
           return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
-        }),
+        })
       ),
     };
   });
@@ -96,7 +96,7 @@ export function createTimeSeries(options: {
       ...Object.fromEntries(
         keys.map((key) => {
           return [key, options.value === 'integer' ? getRandomInteger(min, max) : getRandomNumber(min, max)];
-        }),
+        })
       ),
     };
   });

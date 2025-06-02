@@ -1,7 +1,6 @@
-import { Adapter, type AdapterResponse } from './types';
-
 import OpenAI, { type ClientOptions } from 'openai';
 import type { ChatCompletionMessageParam } from 'openai/resources/index';
+import { Adapter, type AdapterResponse } from './types';
 
 export type AdapterOpenAIOptions = ClientOptions;
 

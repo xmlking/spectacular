@@ -4,9 +4,8 @@ import { page } from '$app/stores';
 import { env } from '$env/dynamic/public';
 import * as m from '$i18n/messages';
 import { turnstilePassed, turnstileResponse } from '$lib/stores/stores';
-import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 // import { mode } from 'mode-watcher';
-import { modeCurrent, modeUserPrefers } from '@skeletonlabs/skeleton';
+import { modeCurrent, modeUserPrefers, TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 import { UserRound } from 'lucide-svelte';
 import { Turnstile } from 'svelte-turnstile';
 

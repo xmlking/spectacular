@@ -3,12 +3,12 @@ import { page } from '$app/stores';
 import { i18n } from '$lib/i18n';
 import { hrefToCategoryIndex, menuNavLinks } from '$lib/links';
 import { getNhostClient } from '$lib/stores/nhost';
-import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 import { Icon } from '$lib/ui/components/icons';
+import { AppRail, AppRailAnchor, AppRailTile, getDrawerStore } from '@skeletonlabs/skeleton';
 import { WandSparkles } from 'lucide-svelte';
 
 // Local
-let currentRailCategory: keyof typeof menuNavLinks | undefined = undefined;
+let currentRailCategory: keyof typeof menuNavLinks | undefined;
 const drawerStore = getDrawerStore();
 const { user } = getNhostClient();
 

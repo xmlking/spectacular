@@ -4,13 +4,13 @@ import { handleMessage } from '$lib/components/layout/toast-manager';
 import { type ChangeEmail, changeEmailSchema } from '$lib/schema/user';
 import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
-import { getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
 import { Logger, sleep } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { defaults, setError, setMessage, superForm, type ErrorStatus } from 'sveltekit-superforms';
+import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 export let initialData: ChangeEmail;

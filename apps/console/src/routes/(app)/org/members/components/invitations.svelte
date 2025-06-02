@@ -1,18 +1,18 @@
 <script lang="ts">
 import { invalidate } from '$app/navigation';
 import { page } from '$app/stores';
-import { type InvitationsFragment, PendingValue, fragment, graphql } from '$houdini';
+import { fragment, graphql, type InvitationsFragment, PendingValue } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { loaded } from '$lib/graphql/loading';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { Avatar, getToastStore, popup } from '@skeletonlabs/skeleton';
 import { GraphQLErrors } from '$lib/ui/components';
 import { ListBox, ListBoxItem } from '$lib/ui/components/listbox';
 import * as Table from '$lib/ui/components/table';
 import { cn } from '$lib/ui/utils';
 import { Logger } from '@repo/utils';
-import { DataHandler, type Row, check } from '@vincjo/datatables/legacy';
+import { Avatar, getToastStore, popup } from '@skeletonlabs/skeleton';
+import { check, DataHandler, type Row } from '@vincjo/datatables/legacy';
 import { MoreHorizontal, Trash, UserCog } from 'lucide-svelte';
 import type { MouseEventHandler } from 'svelte/elements';
 import { fade, slide } from 'svelte/transition';
@@ -34,7 +34,7 @@ $: data = fragment(
           updatedAt
         }
       }
-    `),
+    `)
 );
 $: ({ invitations } = $data);
 
@@ -72,7 +72,7 @@ const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
   if (!data?.delete_invitations_by_pk) {
     handleMessage(
       { message: 'No responce from server: may be orgId not found', type: 'error', timeout: 5000 },
-      toastStore,
+      toastStore
     );
     return;
   }
@@ -101,7 +101,7 @@ const handleUpdate: MouseEventHandler<HTMLButtonElement> = async (event) => {
   if (!data?.update_invitations_by_pk) {
     handleMessage(
       { message: 'No responce from server: may be userId, orgId not found', type: 'error', timeout: 5000 },
-      toastStore,
+      toastStore
     );
     return;
   }

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { goto, invalidate } from '$app/navigation';
 import { page } from '$app/stores';
-import { type OrganizationFragment, type UpdateOrganization$input, cache, fragment, graphql } from '$houdini';
+import { cache, fragment, graphql, type OrganizationFragment, type UpdateOrganization$input } from '$houdini';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { i18n } from '$lib/i18n';
@@ -12,16 +12,15 @@ import {
 } from '$lib/schema/organization';
 import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
-import { SlideToggle, getToastStore } from '@skeletonlabs/skeleton';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
-import { Alerts, InputChipWrapper } from '$lib/ui/components/form';
-import { InputPairs, type KeyValueRecord } from '$lib/ui/components/form';
-import { Logger, cleanClone } from '@repo/utils';
+import { Alerts, InputChipWrapper, InputPairs, type KeyValueRecord } from '$lib/ui/components/form';
+import { cleanClone, Logger } from '@repo/utils';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, Search } from 'lucide-svelte';
 import Select from 'svelte-select';
-import SuperDebug, { defaults, setError, setMessage, superForm, type SuperValidated } from 'sveltekit-superforms';
+import SuperDebug, { defaults, type SuperValidated, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { UpdateOrganization } from './mutations';
 
@@ -45,7 +44,7 @@ $: data = fragment(
         autoEnroll
         avatarUrl
       }
-    `),
+    `)
 );
 
 // Reactivity
