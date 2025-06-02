@@ -3,18 +3,5 @@
   "extends": ["../../biome.jsonc"],
   "files": {
     "includes": ["**", "!dist/*"]
-  },
-  "overrides": [
-    {
-      "includes": ["*.astro"],
-      "linter": {
-        "rules": {
-          "style": {
-            "useConst": "off",
-            "useImportType": "off"
-          }
-        }
-      }
-    }
-  ]
+  }
 }

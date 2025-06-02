@@ -11,7 +11,8 @@ const publishedTeamMembers = await getCollection('team', ({ data }) => {
 });
 
 import { PUBLIC_SOME_CLIENT_FEATURE_FLAG } from 'astro:env/client';
-import { PUBLIC_SOME_SERVER_FEATURE_FLAG, getSecret } from 'astro:env/server';
+import { getSecret, PUBLIC_SOME_SERVER_FEATURE_FLAG } from 'astro:env/server';
+
 if (PUBLIC_SOME_SERVER_FEATURE_FLAG) {
   const API_PORT = getSecret('API_PORT'); // number
   console.log({ API_PORT });

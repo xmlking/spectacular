@@ -23,7 +23,7 @@ onDestroy(() => {
 });
 $: {
   if (distance) {
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+    // biome-ignore lint/suspicious/noAssignInExpressions: <ok>
     if (!interval) interval = setInterval(() => (text = distanceText()), 1000 * 60);
     text = distanceText();
   } else {

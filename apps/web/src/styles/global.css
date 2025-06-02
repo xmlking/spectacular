@@ -8,7 +8,8 @@
 
 @layer base {
   @view-transition {
-    navigation: auto; /* enabled! */
+    /* biome-ignore lint/correctness/noUnknownProperty: <ok> */
+    navigation: auto;
   }
 }
 

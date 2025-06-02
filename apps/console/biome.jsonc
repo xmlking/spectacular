@@ -21,16 +21,17 @@
       ],
       "linter": {
         "rules": {
-          "correctness": {
-            "noUndeclaredVariables": "off",
-            "noUnusedVariables": "off"
-          },
           "suspicious": {
             "noImplicitAnyLet": "off"
           },
           "style": {
-            "useConst": "off"
-            // "useImportType": "off"
+            "useConst": "off",
+            "useImportType": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off",
+            "noUnusedImports": "off",
+            "noUndeclaredVariables": "off",
           }
         }
       }
