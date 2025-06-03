@@ -194,6 +194,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
         >
         <input
           type="password"
+          autocomplete="new-password"
           class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_password_placeholder()}
           {...attrs}
@@ -211,6 +212,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
         >
         <input
           type="password"
+          autocomplete="new-password"
           class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_confirm_password_placeholder()}
           {...attrs}

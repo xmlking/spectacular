@@ -96,6 +96,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Label class="label">{m.profile_forms_change_password_label()}</Form.Label>
           <input
             type="password"
+            autocomplete="new-password"
             class="input data-[fs-error]:input-error"
             {...attrs}
             bind:value={$formData.password}
@@ -112,6 +113,7 @@ $: loadingState.setFormLoading($delayed);
           <Form.Label>{m.profile_forms_change_password_confirm_label()}</Form.Label>
           <input
             type="password"
+            autocomplete="new-password"
             class="input data-[fs-error]:input-error"
             {...attrs}
             bind:value={$formData.confirmPassword}

@@ -120,6 +120,7 @@ $formData.redirectTo = $page.url.searchParams.get('redirectTo') ?? $formData.red
         <Form.Label class="label sr-only">{m.auth_forms_password_label()}</Form.Label>
         <input
           type="password"
+          autocomplete="current-password"
           class="input data-[fs-error]:input-error"
           placeholder={m.auth_forms_password_placeholder()}
           {...attrs}
