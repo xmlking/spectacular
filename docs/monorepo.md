@@ -99,3 +99,4 @@ turbo run dev --filter=./apps/web
 - [Setup a Monorepo with Turborepo, Next.js, and Tailwind CSS](https://mrizkiaiman.medium.com/setup-a-monorepo-with-turborepo-next-js-and-tailwind-css-5cd751d34bc9)
 - [Turborepo example](https://medium.com/@bogdansikora/turborepo-example-9e3f446215df)
 - [SvelteKit (w/ Houdini) x Tailwind CSS x Storybook x Nhost x Turborepo (pnpm)](https://github.com/usagizmo/webapp-template/tree/main)
+- [turborepo with vitest]([turbo.json](https://github.com/sylphxltd/zen-query))

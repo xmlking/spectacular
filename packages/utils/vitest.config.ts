@@ -1,8 +1,8 @@
 import { defineProject, mergeConfig } from 'vitest/config';
-import configShared from '../../vitest.config';
+import baseConfig from '../../vitest.config';
 
 export default mergeConfig(
-  configShared,
+  baseConfig,
   defineProject({
     test: {
       // setupFiles: ['../../vitest.setup.ts'],

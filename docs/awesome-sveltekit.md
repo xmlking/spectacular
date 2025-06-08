@@ -193,6 +193,7 @@ Awesome **SvelteKit** Links
 - [next-forge](https://www.next-forge.com/) - Production-grade `Turborepo` template for`Next.js` apps. Components:
 - [Titan](https://titan.rdsx.dev/) - Modern Next.js 15 stack with Better-Auth, Drizzle ORM, PostgreSQL, Shadcn UI, and Tailwind v4 for fast, secure web app development.
 - [SveltePlex](https://github.com/Pandoks/svelteplex) - Monorepo Template for Everything Svelte | SvelteKit + Shadcn + Electron + Mobile
+- [@drop-in](https://github.com/stolinski/drop-in) - A platform for building **local-first** apps rapidly with Svelte 5, Svelte Kit and [Zero](https://zero.rocicorp.dev/)
 
 ## Deployment
 

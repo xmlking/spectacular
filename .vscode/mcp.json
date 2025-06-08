@@ -1,0 +1,29 @@
+{
+  "servers": {
+    "mastra": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mastra/mcp-docs-server@latest"
+      ],
+      "type": "stdio"
+    },
+    "svelte": {
+      "url": "https://svelte-llm.khromov.se/mcp/mcp"
+    },
+    "Playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ],
+      "env": {}
+    },
+    "jsrepo": {
+      "command": "npx",
+      "args": [
+        "jsrepo",
+        "mcp"
+      ]
+    }
+  }
+}
