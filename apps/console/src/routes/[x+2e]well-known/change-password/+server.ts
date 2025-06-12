@@ -1,5 +1,5 @@
-import { redirect } from "@sveltejs/kit";
+import { redirect } from '@sveltejs/kit';
 
 export const GET = () => {
-  redirect(303, "user/profile");
+  redirect(303, 'user/profile');
 };

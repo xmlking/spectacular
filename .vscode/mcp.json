@@ -1,12 +1,8 @@
 {
   "servers": {
-    "mastra": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@mastra/mcp-docs-server@latest"
-      ],
-      "type": "stdio"
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
     },
     "svelte": {
       "url": "https://svelte-llm.khromov.se/mcp/mcp"
@@ -24,6 +20,11 @@
         "jsrepo",
         "mcp"
       ]
+    },
+    "mastra": {
+      "command": "npx",
+      "args": ["-y", "@mastra/mcp-docs-server@latest"],
+      "type": "stdio"
     }
   }
 }
