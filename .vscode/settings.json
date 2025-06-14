@@ -122,9 +122,7 @@
     // "a11y-label-has-associated-control": "ignore"
   },
   ////////// vitest //////////
-  "vitest.include": [
-    "**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,svelte}"
-  ],
+  "vitest.include": ["**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx,svelte}"],
   "vitest.exclude": [
     "**/node_modules/**",
     "$houdini/**",
@@ -140,22 +138,14 @@
     "plaintext": "html"
   },
   // for tailwind-variants
-  "tailwindCSS.experimental.classRegex": [
-    [
-      "([\"'`][^\"'`]*.*?[\"'`])",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
-    ]
-  ],
+  "tailwindCSS.experimental.classRegex": [["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]],
   ////////// TypeScript //////////
   // astro requires this
   "typescript.inlayHints.parameterNames.enabled": "all",
   ////////// Proto //////////
   "clang-format.style": "google",
   "protoc": {
-    "options": [
-      "--proto_path=${workspaceRoot}/proto",
-      "--proto_path=${env.GOPATH}/src"
-    ]
+    "options": ["--proto_path=${workspaceRoot}/proto", "--proto_path=${env.GOPATH}/src"]
   },
 
   // ##################################################

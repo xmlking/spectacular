@@ -7,16 +7,8 @@
       "persistent": true
     },
     "build": {
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env",
-        ".secrets"
-      ],
-      "outputs": [
-        "build/**",
-        "dist/**",
-        ".vercel/output/**"
-      ]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"],
+      "outputs": ["build/**", "dist/**", ".vercel/output/**"]
     },
     "astro": {},
     "preview": {

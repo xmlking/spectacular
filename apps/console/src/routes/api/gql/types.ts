@@ -1,6 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 // This will be populated by the CLI if used
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+// biome-ignore lint/complexity/noBannedTypes: <ok>
 export type GeneratedTypeMap = {};
 
 // Default type map for when CLI is not used or for fallback

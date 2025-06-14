@@ -1,11 +1,7 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "stream",
-  "globalEnv": [
-    "LOG_LEVEL",
-    "MASTRA_BASE_URL",
-    "AGNO_BASE_URL"
-  ],
+  "globalEnv": ["LOG_LEVEL", "MASTRA_BASE_URL", "AGNO_BASE_URL"],
   "globalPassThroughEnv": [
     "NODE_ENV",
     "CI",
@@ -23,21 +19,13 @@
     "SENTRY_PROJECT",
     "npm_lifecycle_event"
   ],
-  "globalDependencies": [
-    ".env",
-    ".secrets",
-    "pnpm-lock.yaml"
-  ],
+  "globalDependencies": [".env", ".secrets", "pnpm-lock.yaml"],
   "tasks": {
     "test": {
-      "dependsOn": [
-        "transit"
-      ]
+      "dependsOn": ["transit"]
     },
     "transit": {
-      "dependsOn": [
-        "^transit"
-      ]
+      "dependsOn": ["^transit"]
     },
     "test:ui": {},
     "test:watch": {
@@ -45,39 +33,27 @@
       "persistent": true
     },
     "test:coverage": {
-      "outputs": [
-        "coverage/**"
-      ]
+      "outputs": ["coverage/**"]
     },
     "test:e2e": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": ["^build"],
       "outputLogs": "new-only",
-      "inputs": [
-        "tests/**"
-      ]
+      "inputs": ["tests/**"]
     },
     "ci": {
       "outputs": [],
       "outputLogs": "new-only"
     },
     "lint": {
-      "dependsOn": [
-        "^transit"
-      ],
+      "dependsOn": ["^transit"],
       "outputs": []
     },
     "format": {
-      "dependsOn": [
-        "^transit"
-      ],
+      "dependsOn": ["^transit"],
       "outputLogs": "new-only"
     },
     "typecheck": {
-      "dependsOn": [
-        "transit"
-      ],
+      "dependsOn": ["transit"],
       "outputs": []
     },
     "dev": {
@@ -91,9 +67,7 @@
       "cache": false
     },
     "//#test:root": {
-      "outputs": [
-        "coverage/**"
-      ]
+      "outputs": ["coverage/**"]
     },
     "//#test:watch:root": {
       "cache": false,

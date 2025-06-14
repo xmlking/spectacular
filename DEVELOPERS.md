@@ -110,8 +110,8 @@ turbo run biome:check
 To fix them, run
 
 ```shell
-turbo run biome:fix
-turbo run biome:fix:unsafe
+turbo run format
+turbo run lint
 ```
 
 both at the root of the monorepo. Not all errors can be fixed automatically.

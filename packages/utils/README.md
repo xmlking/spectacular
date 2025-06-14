@@ -3,9 +3,9 @@
 ## Development
 
 ```shell
-turbo run format --filter=@repo/utils
-turbo run lint --filter=@repo/utils
-turbo run test --filter=@repo/utils
+turbo run @repo/utils#format
+turbo run @repo/utils#lint
+turbo run @repo/utils#test
 ```
 
 ## Usage
@@ -26,10 +26,10 @@ table.svelte
 
 ```svelte
 <script lang="ts" generics="T extends Row">
-	import { handlerKey } from './keys';
+ import { handlerKey } from './keys';
 
-	export let handler: DataHandler<T>;
-	setContext(handlerKey, handler);
+ export let handler: DataHandler<T>;
+ setContext(handlerKey, handler);
 </script>
 ```
 
@@ -37,8 +37,8 @@ table-head.svelte
 
 ```svelte
 <script lang="ts" generics="T extends Row">
-	import { handlerKey } from './keys';
+ import { handlerKey } from './keys';
 
-	export let handler: DataHandler<T>;
-	handler ??= getContext(handlerKey);
+ export let handler: DataHandler<T>;
+ handler ??= getContext(handlerKey);
 ```

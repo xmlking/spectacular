@@ -26,25 +26,13 @@
       "outputLogs": "new-only",
       "cache": false, // No outputs will be cached
       "persistent": true,
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env",
-        ".secrets",
-        "$TURBO_ROOT$/.env",
-        "$TURBO_ROOT$/.secrets"
-      ]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets", "$TURBO_ROOT$/.env", "$TURBO_ROOT$/.secrets"]
     },
     "dev:debug": {
       "dependsOn": ["generate"],
       "cache": false,
       "persistent": true,
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env",
-        ".secrets",
-        "$TURBO_ROOT$/.env",
-        "$TURBO_ROOT$/.secrets"
-      ]
+      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets", "$TURBO_ROOT$/.env", "$TURBO_ROOT$/.secrets"]
     },
     "dev:production": {
       "dependsOn": ["generate:production"],
@@ -61,9 +49,7 @@
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
     },
     "build": {
-      "dependsOn": [
-        "generate"
-      ],
+      "dependsOn": ["generate"],
       // Consider all default inputs except the package's README
       "inputs": ["$TURBO_DEFAULT$", ".env*", "!README.md"],
       // File outputs will be cached
@@ -95,9 +81,7 @@
       ]
     },
     "build:production": {
-      "dependsOn": [
-        "generate:production"
-      ],
+      "dependsOn": ["generate:production"],
       "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
       "env": [
         "VERCEL",

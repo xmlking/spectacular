@@ -12,13 +12,19 @@
       "**",
       "!**/.env*",
       "!**/.secrets*",
-      "!**/coverage/",
-      "!**/.turbo/",
-      "!**/.vercel/",
+      "!**/.svelte-kit/**",
+      "!**/coverage/**",
+      "!**/public/**",
+      "!**/static/**",
+      "!**/.turbo/**",
+      "!**/.vercel/**",
+      "!**/migrations/**/*",
       "!**/build/*",
       "!**/dist/*",
       "!bun.lock",
       "!pnpm-lock.yaml",
+      "!apps/**",
+      "!packages/**",
       "!**/nhost/emails/*",
       "!**/nhost/metadata/actions.graphql"
     ]
@@ -69,10 +75,7 @@
         "useFilenamingConvention": {
           "level": "error",
           "options": {
-            "filenameCases": [
-              "kebab-case",
-              "export"
-            ]
+            "filenameCases": ["kebab-case", "export"]
           }
         },
         "noParameterAssign": "error",
@@ -91,11 +94,7 @@
           "fix": "safe",
           "level": "error",
           "options": {
-            "functions": [
-              "cn",
-              "tw",
-              "twMerge"
-            ]
+            "functions": ["cn", "tw", "twMerge"]
           }
         }
       }
@@ -121,16 +120,7 @@
     }
   },
   "javascript": {
-    "globals": [
-      "Bun",
-      "Astro",
-      "App",
-      "App.Superforms.Message",
-      "$",
-      "__GIT_TAG__",
-      "__GIT_DATE__",
-      "__APP_VERSION__"
-    ],
+    "globals": ["Bun", "Astro", "App", "App.Superforms.Message", "$", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"],
     "formatter": {
       "quoteStyle": "single",
       "semicolons": "always",
@@ -155,10 +145,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "**/tsconfig.json",
-        "**/.vscode/*"
-      ],
+      "includes": ["**/tsconfig.json", "**/.vscode/*"],
       "json": {
         "parser": {
           "allowComments": true,
@@ -167,9 +154,7 @@
       }
     },
     {
-      "includes": [
-        "package.json"
-      ],
+      "includes": ["package.json"],
       "json": {
         "formatter": {
           "lineWidth": 1
@@ -177,11 +162,7 @@
       }
     },
     {
-      "includes": [
-        "**/*.svelte",
-        "**/*.astro",
-        "**/*.vue"
-      ],
+      "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
       "linter": {
         "rules": {
           "style": {

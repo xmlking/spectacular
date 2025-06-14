@@ -134,14 +134,22 @@ pnpm up --latest -r
 pnpm audit --fix
 ```
 
-## Format
-
-Format and lint code
+### Format
 
 ```shell
-turbo format
-turbo format --filter=!'@console'
-turbo lint
+# format all packages
+turbo run format
+# format root
+turbo run format:root
+```
+
+### Lint
+
+```shell
+# lint all packages
+turbo run lint
+# lint root
+turbo run lint:root
 ```
 
 ## Testing
@@ -158,10 +166,10 @@ turbo test:ui
 turbo test:coverage
 
 # updating Snapshots
-bunx vitest -u
+pnpx vitest -u
 
 # test specific folder
-bunx vitest apps/web/src/lib/utils
+pnpx vitest apps/web/src/lib/utils
 (or)
 ./node_modules/.bin/vitest run apps/web/src/lib/utils
 ```
