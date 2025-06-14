@@ -1,9 +1,13 @@
 {
   "name": "console",
   "version": "0.0.1",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
+    "dev": "dotenv-run -f .env -f .secrets -v -- vite dev",
+    "dev:debug": "DEBUG=* dotenv-run -f .env -f .secrets -v '.*' -u -- vite dev",
+    "dev:production": "NODE_ENV=production dotenv-run -f .env -f .secrets -v -- vite dev",
+    "dev:sw": "SW_DEV=true dotenv-run -f .env -f .secrets -v -- vite dev",
     "build": "dotenv-run -f .env -f .secrets -v -- vite build",
     "build:production": "NODE_ENV=production dotenv-run -f .env -f .secrets -v -- vite build",
     "sv:check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -12,10 +16,6 @@
     "lint": "biome check .",
     "format": "biome check . --write",
     "clean": "git clean -xdf -e .vercel -e config",
-    "dev": "dotenv-run -f .env -f .secrets -v -- vite dev",
-    "dev:debug": "DEBUG=* dotenv-run -f .env -f .secrets -v '.*' -u -- vite dev",
-    "dev:production": "NODE_ENV=production dotenv-run -f .env -f .secrets -v -- vite dev",
-    "dev:sw": "SW_DEV=true dotenv-run -f .env -f .secrets -v -- vite dev",
     "generate": "dotenv-run -f .env -f .secrets -v -- houdini pull-schema",
     "generate:production": "NODE_ENV=production dotenv-run -f .env -f .secrets -v -- houdini pull-schema",
     "lang:lint": "inlang lint --project ./project.inlang",
@@ -26,11 +26,10 @@
     "prepare": "svelte-kit sync || echo ''",
     "sync": "dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
     "sync:production": "NODE_ENV=production dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
-    "test": "pnpm run test:integration && pnpm run test:unit",
-    "test:integration": "dotenv-run -f .env -f .secrets -v -- playwright test",
-    "test:unit": "dotenv-run -f .env -f .secrets -v -- vitest",
-    "test:unit:coverage": "dotenv-run -f .env -f .secrets -v -- vitest run --coverage",
-    "test:unit:ui": "dotenv-run -f .env -f .secrets -v -- vitest --ui",
+    "test": "dotenv-run -f .env -f .secrets -v -- vitest run",
+    "test:ui": "dotenv-run -f .env -f .secrets -v -- vitest --ui",
+    "test:watch": "dotenv-run -f .env -f .secrets -v -- vitest --watch",
+    "test:coverage": "dotenv-run -f .env -f .secrets -v -- vitest run --coverage",
     "test:e2e": "dotenv-run -f .env -f .secrets -v -- playwright test"
   },
   "devDependencies": {
@@ -71,7 +70,6 @@
     "@vercel/speed-insights": "1.2.0",
     "@vercel/toolbar": "0.1.37",
     "@vincjo/datatables": "2.5.0",
-    "@vitest/coverage-v8": "catalog:",
     "@xyflow/svelte": "catalog:svelte4",
     "ai": "4.3.16",
     "autoprefixer": "10.4.21",
@@ -118,9 +116,5 @@
     "vite": "catalog:svelte4",
     "vitest": "catalog:",
     "zod": "catalog:"
-  },
-  "optionalDependencies": {
-    "@playwright/test": "catalog:",
-    "@vitest/ui": "catalog:"
   }
 }

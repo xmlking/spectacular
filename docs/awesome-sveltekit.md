@@ -10,7 +10,6 @@ Awesome **SvelteKit** Links
   - [GrailUI](https://grail-ui.vercel.app/) is a set of headless UI components, actions and utilities.
   - [Flowbite](https://flowbite-svelte.com/) components for Svelte, built on Tailwind CSS
   - [DaisyUI](https://daisyui.com/) - pure CSS based UI components built on Tailwind CSS
-  - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
   - [Melt UI](https://www.melt-ui.com/) strives to be the de-facto headless UI library for Svelte.
   - [svelte-headlessui](https://svelte-headlessui.goss.io/docs/2.0) Completely **unstyled**, Fully **accessible** [headlessui](https://headlessui.com/) components for sveltekit
   - [VisualSearch.js](https://documentcloud.github.io/visualsearch/), [magic-search](https://eucalyptus.github.io/magic-search/) for facet search.
@@ -20,7 +19,9 @@ Awesome **SvelteKit** Links
   - [CoastalUI](https://www.coastalui.com/) - copy-pasted Svelte 5 components build with tailwind CSS v4, lucide icons. Dashboard, Portfolio [templates](https://www.coastalui.com/templates).
 
 - UI Blocks
-  - [Svelte Shadcn Blocks](https://sv-blocks.vercel.app/)
+  - [shadcn-svelte](https://shadcn-svelte.com/) a set of components you can copy to your project and apply Tailwind CSS
+  - [shadcn-svelte-extras](https://www.shadcn-svelte-extras.com/) - Finish your app with 20+ components and utilities.
+  - [Svelte Shadcn Blocks](https://sv-blocks.vercel.app/) - `Svelte Shadcn` Pre-built UI blocks designed for marketing websites
 
 - Tables
   - [svelte simple datatables](https://github.com/vincjo/datatables)

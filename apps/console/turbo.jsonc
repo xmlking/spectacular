@@ -1,5 +1,5 @@
 {
-  "$schema": "https://turbo.build/schema.json",
+  "$schema": "https://turborepo.com/schema.json",
   "extends": ["//"],
   "tasks": {
     "sv:check": {
@@ -15,8 +15,6 @@
         "lang:lint"
       ]
     },
-    "fotmat": {},
-    "ci": {},
     "sync": {
       "outputs": [".svelte-kit/**"]
     },
@@ -28,13 +26,25 @@
       "outputLogs": "new-only",
       "cache": false, // No outputs will be cached
       "persistent": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets", "$TURBO_ROOT$/.env", "$TURBO_ROOT$/.secrets"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        ".secrets",
+        "$TURBO_ROOT$/.env",
+        "$TURBO_ROOT$/.secrets"
+      ]
     },
     "dev:debug": {
       "dependsOn": ["generate"],
       "cache": false,
       "persistent": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        ".secrets",
+        "$TURBO_ROOT$/.env",
+        "$TURBO_ROOT$/.secrets"
+      ]
     },
     "dev:production": {
       "dependsOn": ["generate:production"],

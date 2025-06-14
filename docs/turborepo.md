@@ -123,6 +123,7 @@ Guidelines for configuring `turbo.json`
 ### Run
 
 ```shell
+turbo run # list all available tasks
 turbo run web#dev
 turbo run docs#dev
 turbo --filter=console --log-order=stream dev

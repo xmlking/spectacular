@@ -58,6 +58,7 @@ Use [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit) for UI c
   - shadcn-chatbot-kit [Docs](https://shadcn-chatbot-kit.vercel.app/docs), [Demo](https://shadcn-chatbot-kit.vercel.app/), [Source](https://github.com/Blazity/shadcn-chatbot-kit) - React
   - CopilotKit - Headleass Copilot UI [components](https://docs.copilotkit.ai/guides/custom-look-and-feel/built-in-ui-components), [Guardrails](https://docs.copilotkit.ai/guides/guardrails), Copilot [Textarea](https://docs.copilotkit.ai/guides/copilot-textarea) , [coagents](https://www.copilotkit.ai/coagents/)
   - [shadcn-chatbot-kit](https://github.com/Blazity/shadcn-chatbot-kit)- Works seamlessly with shadcn CLI,Voice Input,Copy & Paste Components
+  - [assistant-ui](https://github.com/assistant-ui/assistant-ui) - TypeScript/React library for AI chat.
 
 - Web AI
 - [AiBrow](https://aibrow.ai/) - Use *in-browser* and *on-device* AI to enable powerful and private genAI features in your Web Applications.

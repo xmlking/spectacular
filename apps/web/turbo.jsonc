@@ -1,27 +1,21 @@
 {
-  "$schema": "https://turbo.build/schema.json",
+  "$schema": "https://turborepo.com/schema.json",
   "extends": ["//"],
   "tasks": {
     "dev": {
       "cache": false,
-      "persistent": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets"]
+      "persistent": true
     },
     "build": {
-      "outputs": ["build/**", "dist/**", ".vercel/output/**"],
-      "env": [
-        "VERCEL",
-        "VERCEL_URL",
-        "VERCEL_ENV",
-        "BUILD_VERSION",
-        "BUILD_TIME",
-        "BUN_ENV",
-        "SW_DEV",
-        "npm_package_version",
-        "GH_SITE_URL",
-        "GH_BASE_PATH",
-        "GITHUB_ACTIONS",
-        "CI"
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        ".secrets"
+      ],
+      "outputs": [
+        "build/**",
+        "dist/**",
+        ".vercel/output/**"
       ]
     },
     "astro": {},

@@ -1,7 +1,11 @@
 {
-  "$schema": "https://turbo.build/schema.json",
+  "$schema": "https://turborepo.com/schema.json",
   "ui": "stream",
-  "globalEnv": [],
+  "globalEnv": [
+    "LOG_LEVEL",
+    "MASTRA_BASE_URL",
+    "AGNO_BASE_URL"
+  ],
   "globalPassThroughEnv": [
     "NODE_ENV",
     "CI",
@@ -14,44 +18,89 @@
     "VERCEL_ORG_ID",
     "VERCEL_PROJECT_ID",
     "VERCEL_GIT_COMMIT_REF",
+    "SENTRY_AUTH_TOKEN",
+    "SENTRY_ORG",
+    "SENTRY_PROJECT",
     "npm_lifecycle_event"
   ],
-  "globalDependencies": [".env", ".secrets", "pnpm-lock.yaml"],
+  "globalDependencies": [
+    ".env",
+    ".secrets",
+    "pnpm-lock.yaml"
+  ],
   "tasks": {
-    "build": {},
+    "test": {
+      "dependsOn": [
+        "transit"
+      ]
+    },
+    "transit": {
+      "dependsOn": [
+        "^transit"
+      ]
+    },
+    "test:ui": {},
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:coverage": {
+      "outputs": [
+        "coverage/**"
+      ]
+    },
+    "test:e2e": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputLogs": "new-only",
+      "inputs": [
+        "tests/**"
+      ]
+    },
+    "ci": {
+      "outputs": [],
+      "outputLogs": "new-only"
+    },
+    "lint": {
+      "dependsOn": [
+        "^transit"
+      ],
+      "outputs": []
+    },
+    "format": {
+      "dependsOn": [
+        "^transit"
+      ],
+      "outputLogs": "new-only"
+    },
+    "typecheck": {
+      "dependsOn": [
+        "transit"
+      ],
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "clean": {
       "cache": false
     },
     "//#clean": {
       "cache": false
     },
-    "ci": {
-      "dependsOn": [
-        "^ci"
+    "//#test:root": {
+      "outputs": [
+        "coverage/**"
       ]
     },
-    "lint": {
-      "dependsOn": [
-        "^lint"
-      ]
-    },
-    "format": {
-      "dependsOn": [
-        "^format"
-      ],
-      "outputLogs": "new-only"
-    },
-    "test": {
-      "cache": false,
-      "inputs": ["src/**", "tests/**", ".env.test"]
-    },
-    "test:unit": {},
-    "test:unit:coverage": {
-      "outputs": ["coverage/**"]
-    },
-    "test:watch": {
+    "//#test:watch:root": {
       "cache": false,
       "persistent": true
-    }
+    },
+    "//#lint:root": {},
+    "//#format:root": {},
+    "//#ci:root": {}
   }
 }

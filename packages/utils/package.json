@@ -16,11 +16,12 @@
     "format": "biome check . --write",
     "clean": "git clean -xdf",
     "test": "vitest run",
-    "test:unit:coverage": "vitest run --coverage"
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@vitest/coverage-v8": "catalog:",
     "zod": "catalog:",
     "zod-validation-error": "3.4.1"
   }

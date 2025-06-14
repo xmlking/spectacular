@@ -11,9 +11,7 @@
     "lint": "biome check .",
     "format": "biome check . --write",
     "preview": "astro preview",
-    "start": "astro dev",
-    "test": "echo OK",
-    "test:unit:coverage": "echo OK"
+    "start": "astro dev"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
@@ -27,7 +25,7 @@
     "astro": "5.8.1",
     "rehype-mermaid": "3.0.0",
     "sharp": "0.34.2",
-    "tailwindcss": "4.1.8",
+    "tailwindcss": "catalog:",
     "typescript": "catalog:"
   }
 }
