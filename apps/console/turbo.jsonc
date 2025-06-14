@@ -61,7 +61,10 @@
       "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
     },
     "build": {
-      "dependsOn": ["generate", "^build"],
+      "dependsOn": [
+        "generate",
+        "@repo/role-houdini#build"
+      ],
       // Consider all default inputs except the package's README
       "inputs": ["$TURBO_DEFAULT$", ".env*", "!README.md"],
       // File outputs will be cached
@@ -93,7 +96,10 @@
       ]
     },
     "build:production": {
-      "dependsOn": ["generate:production", "^build"],
+      "dependsOn": [
+        "generate:production",
+        "@repo/role-houdini#build"
+      ],
       "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
       "env": [
         "VERCEL",
