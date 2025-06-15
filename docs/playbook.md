@@ -61,10 +61,9 @@ Install Chrome Plugins
 
 ```shell
 # bun create svelte@latest spectacular && cd $_ && code .
-# pnpm create svelte@latest spectacular && cd $_ && code .
-pnpx sv create --no-install --template minimal spectacular
+bunx sv create --no-install --template minimal spectacular
 # select `yes` for TypeScript, vitest, playwright, tailwindcss and paraglide
-# select all tailwindcss plugins
+# select needed tailwindcss plugins (optional)
 # paraglide: Which languages would you like to support?  en,es,de
 ```
 

@@ -12,6 +12,7 @@ export let debug = false;
 const loadingState = getLoadingState();
 
 // Functions
+// biome-ignore lint/style/noNonNullAssertion: <ok>
 const bang = <T>(x: T) => x!;
 
 // Reactivity

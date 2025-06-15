@@ -281,7 +281,10 @@ export class GQLPTClient<T extends MergedTypeMap = MergedTypeMap> {
       ${currentQuery}
 
       Failed with the following validation errors:
-      ${this.validateQueryAgainstSchema(currentQuery!).join('\n')}
+      ${
+        // biome-ignore lint/style/noNonNullAssertion: <ok>
+        this.validateQueryAgainstSchema(currentQuery!).join('\n')
+      }
 
       ${this.options.excludedQueries?.length ? `Note: The following queries cannot be used: ${this.options.excludedQueries.join(', ')}` : ''}
 

@@ -1,15 +1,16 @@
 import * as child_process from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { paraglide } from '@inlang/paraglide-sveltekit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { svelteTesting } from '@testing-library/svelte/vite';
 import { vercelToolbar } from '@vercel/toolbar/plugins/vite';
 import houdini from 'houdini/vite';
 import { defineConfig } from 'vitest/config';
 
-// if (!existsSync('config/certs/traefik.me.crt')) {
-// 	console.log('Missing HTTPS key/cert. You may need to run:  npm run cert');
-// }
-// TODO Lightning CSS  and tailwind v4 https://twitter.com/devongovett/status/1701097560155549756
+if (!existsSync('config/certs/traefik.me.crt')) {
+  console.log('Missing HTTPS key/cert. You may need to run:  npm run cert');
+}
 
 export default defineConfig({
   server: {
@@ -24,13 +25,14 @@ export default defineConfig({
   plugins: [
     houdini(),
     enhancedImages(),
-    sveltekit(),
     paraglide({
       project: './project.inlang',
       outdir: './src/i18n',
-      // experimentalUseVirtualModules: true, // TODO not working with svelte 4
+      strategy: ['url', 'cookie', 'baseLocale'],
     }),
     vercelToolbar(),
+    // svelte({ hot: !process.env.VITEST }),
+    sveltekit(),
   ],
   define: {
     // to burn-in release version in the footer.svelte
@@ -49,10 +51,30 @@ export default defineConfig({
   //     noExternal: ['@nhost/nhost-js', 'graphql'],
   // },
   test: {
-    include: ['src/**/*.{test,spec}.{js,ts}'],
+    projects: [
+      {
+        extends: './vite.config.ts',
+        plugins: [svelteTesting()],
+        test: {
+          name: 'client',
+          environment: 'jsdom',
+          clearMocks: true,
+          include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+          exclude: ['src/lib/server/**'],
+          setupFiles: ['./vitest.setup.ts'],
+        },
+      },
+      {
+        extends: './vite.config.ts',
+        test: {
+          name: 'server',
+          environment: 'node',
+          include: ['src/**/*.{test,spec}.{js,ts}'],
+          exclude: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+        },
+      },
+    ],
   },
-  // Ref: https://vitejs.dev/guide/dep-pre-bundling#monorepos-and-linked-dependencies
-  // Ref: https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/faq.md#what-is-going-on-with-vite-and-pre-bundling-dependencies
   // optimizeDeps: {
   //   include: ['@repo/skeleton'],
   // },

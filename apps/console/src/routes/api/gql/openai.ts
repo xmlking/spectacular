@@ -40,6 +40,7 @@ export class AdapterOpenAI extends Adapter {
     ];
 
     if (conversationId && this.messageHistory.has(conversationId)) {
+      // biome-ignore lint/style/noNonNullAssertion: <ok>
       messages = [...this.messageHistory.get(conversationId)!, ...messages];
     }
 
