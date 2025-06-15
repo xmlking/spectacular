@@ -14,7 +14,7 @@ export default defineConfig({
     includeSource: ['src/**/*.{js,ts,svelte}'],
     include: ['src/**/*.{test,spec}.{js,ts}'],
     // Exclude playwright tests folder
-    exclude: [...configDefaults.exclude, 'tests'],
+    exclude: [...configDefaults.exclude, 'e2e'],
     benchmark: { reporters: ['default'] },
     reporters: ['default'],
     passWithNoTests: true,

@@ -9,7 +9,7 @@ import houdini from 'houdini/vite';
 import { defineConfig } from 'vitest/config';
 
 if (!existsSync('config/certs/traefik.me.crt')) {
-  console.log('Missing HTTPS key/cert. You may need to run:  npm run cert');
+  console.log('Missing HTTPS key/cert. follow the workspace README file to install certs');
 }
 
 export default defineConfig({
