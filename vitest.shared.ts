@@ -3,7 +3,6 @@ import { configDefaults, defineConfig } from 'vitest/config';
 
 /**
  * Shared Vitest Config
- * https://vitest.dev/guide/projects
  */
 export default defineConfig({
   // plugins: [tsconfigPaths()],

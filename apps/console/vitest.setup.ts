@@ -1,5 +1,36 @@
+// Ref: https://github.com/huntabyte/bits-ui/blob/main/tests/other/setup-test.ts
 import '@testing-library/jest-dom/vitest';
+import type * as environment from '$app/environment';
+import type * as navigation from '$app/navigation';
+import { configure } from '@testing-library/dom';
 import { vi } from 'vitest';
+
+configure({
+  asyncUtilTimeout: 1500,
+});
+
+// Mock SvelteKit runtime module $app/environment
+vi.mock('$app/environment', (): typeof environment => ({
+  browser: false,
+  dev: true,
+  building: false,
+  version: 'any',
+}));
+
+// Mock SvelteKit runtime module $app/navigation
+vi.mock('$app/navigation', (): typeof navigation => ({
+  afterNavigate: () => { },
+  beforeNavigate: () => { },
+  disableScrollHandling: () => { },
+  goto: () => Promise.resolve(),
+  invalidate: () => Promise.resolve(),
+  invalidateAll: () => Promise.resolve(),
+  preloadData: () => Promise.resolve({ type: 'loaded' as const, status: 200, data: {} }),
+  preloadCode: () => Promise.resolve(),
+  onNavigate: () => { },
+  pushState: () => { },
+  replaceState: () => { },
+}));
 
 // required for svelte5 + jsdom as jsdom does not support matchMedia
 Object.defineProperty(window, 'matchMedia', {

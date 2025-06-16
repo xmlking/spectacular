@@ -42,6 +42,9 @@ catalogs:
     '@sveltejs/vite-plugin-svelte':
       specifier: 5.1.0
       version: 5.1.0
+    '@testing-library/dom':
+      specifier: 10.4.0
+      version: 10.4.0
     '@testing-library/jest-dom':
       specifier: 6.6.3
       version: 6.6.3
@@ -288,11 +291,14 @@ importers:
       '@tailwindcss/typography':
         specifier: 0.5.16
         version: 0.5.16(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@24.0.1)(typescript@5.8.3)))
+      '@testing-library/dom':
+        specifier: 'catalog:'
+        version: 10.4.0
       '@testing-library/jest-dom':
-        specifier: 6.6.3
+        specifier: 'catalog:'
         version: 6.6.3
       '@testing-library/svelte':
-        specifier: 5.2.8
+        specifier: 'catalog:'
         version: 5.2.8(svelte@4.2.20)(vite@5.4.18(@types/node@24.0.1)(lightningcss@1.30.1))(vitest@3.2.3)
       '@types/d3-scale':
         specifier: 4.0.9
@@ -367,8 +373,8 @@ importers:
         specifier: 3.0.5
         version: 3.0.5
       jsdom:
-        specifier: 26.1.0
-        version: 26.1.0
+        specifier: 'catalog:'
+        version: 26.0.0
       lucide-svelte:
         specifier: 0.515.0
         version: 0.515.0(svelte@4.2.20)
@@ -458,7 +464,7 @@ importers:
         version: 5.4.18(@types/node@24.0.1)(lightningcss@1.30.1)
       vitest:
         specifier: 'catalog:'
-        version: 3.2.3(@types/debug@4.1.12)(@types/node@24.0.1)(@vitest/ui@3.2.3)(jsdom@26.1.0)(lightningcss@1.30.1)
+        version: 3.2.3(@types/debug@4.1.12)(@types/node@24.0.1)(@vitest/ui@3.2.3)(jsdom@26.0.0)(lightningcss@1.30.1)
       zod:
         specifier: 'catalog:'
         version: 3.25.64
@@ -570,6 +576,9 @@ importers:
       '@tanstack/table-core':
         specifier: 8.21.3
         version: 8.21.3
+      '@testing-library/dom':
+        specifier: 'catalog:'
+        version: 10.4.0
       '@testing-library/jest-dom':
         specifier: 'catalog:'
         version: 6.6.3
@@ -11238,7 +11247,7 @@ snapshots:
       svelte: 4.2.20
     optionalDependencies:
       vite: 5.4.18(@types/node@24.0.1)(lightningcss@1.30.1)
-      vitest: 3.2.3(@types/debug@4.1.12)(@types/node@24.0.1)(@vitest/ui@3.2.3)(jsdom@26.1.0)(lightningcss@1.30.1)
+      vitest: 3.2.3(@types/debug@4.1.12)(@types/node@24.0.1)(@vitest/ui@3.2.3)(jsdom@26.0.0)(lightningcss@1.30.1)
 
   '@testing-library/svelte@5.2.8(svelte@5.34.3)(vite@6.3.5(@types/node@24.0.1)(jiti@2.4.2)(lightningcss@1.30.1)(yaml@2.8.0))(vitest@3.2.3)':
     dependencies:
@@ -11897,7 +11906,7 @@ snapshots:
       sirv: 3.0.1
       tinyglobby: 0.2.14
       tinyrainbow: 2.0.0
-      vitest: 3.2.3(@types/debug@4.1.12)(@types/node@24.0.1)(@vitest/ui@3.2.3)(jsdom@26.1.0)(lightningcss@1.30.1)
+      vitest: 3.2.3(@types/debug@4.1.12)(@types/node@24.0.1)(@vitest/ui@3.2.3)(jsdom@26.0.0)(lightningcss@1.30.1)
 
   '@vitest/utils@3.2.3':
     dependencies:
@@ -14632,6 +14641,7 @@ snapshots:
       - bufferutil
       - supports-color
       - utf-8-validate
+    optional: true
 
   jsesc@3.1.0: {}
 
