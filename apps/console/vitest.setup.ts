@@ -19,17 +19,17 @@ vi.mock('$app/environment', (): typeof environment => ({
 
 // Mock SvelteKit runtime module $app/navigation
 vi.mock('$app/navigation', (): typeof navigation => ({
-  afterNavigate: () => { },
-  beforeNavigate: () => { },
-  disableScrollHandling: () => { },
+  afterNavigate: () => {},
+  beforeNavigate: () => {},
+  disableScrollHandling: () => {},
   goto: () => Promise.resolve(),
   invalidate: () => Promise.resolve(),
   invalidateAll: () => Promise.resolve(),
   preloadData: () => Promise.resolve({ type: 'loaded' as const, status: 200, data: {} }),
   preloadCode: () => Promise.resolve(),
-  onNavigate: () => { },
-  pushState: () => { },
-  replaceState: () => { },
+  onNavigate: () => {},
+  pushState: () => {},
+  replaceState: () => {},
 }));
 
 // required for svelte5 + jsdom as jsdom does not support matchMedia
