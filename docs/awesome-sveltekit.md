@@ -175,7 +175,7 @@ Awesome **SvelteKit** Links
 - [SvelteKit Starter with trpc, lucia, skeleton and svelte-headless-table](https://github.com/widiu7omo/my-kit)
 - [Svelte 3.5 + Storybook 7 + TailwindCSS 3](https://github.com/jerriclynsjohn/svelte-storybook-tailwind)
 - [Svelte offline SQLite](https://github.com/phartenfeller/sveltekit-1.0-sqlite-demo-app), [PGlite - Postgres in WASM](https://github.com/electric-sql/pglite)
-- [Svelte runes + Liveblocks demo](https://github.com/CTNicholas/svelte-runes-realtime-drawing)
+- [Svelte runes + Liveblocks demo](https://github.com/CTNicholas/svelte-runes-realtime-drawing) -  real-time drawing with Svelte 5 runes
 - [shadcn-svelte, Superforms sample project](https://github.com/delay/sveltekit-auth)
 - Sveltekit Auth Template - with shadcn: [sveltekit-auth](https://github.com/delay/sveltekit-auth), with SkeletonUI: [sveltekit-auth-starter](https://github.com/delay/sveltekit-auth-starter)
 - Sveltekit Auth Template [sveltekit-shadcn-auth-starter](https://github.com/gribard/sveltekit-shadcn-auth-starter), i18n , superforms
