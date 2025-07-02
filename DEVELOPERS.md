@@ -2,21 +2,18 @@
 
 ## Requirements
 
-### Node.js v20
+### Node.js v24
 
-_⚠️ Node.js v18 is also supported for the time being but support will be dropped in the near future_.
-
-### [pnpm](https://pnpm.io/) package manager
-
-The easiest way to install `pnpm` if it's not installed on your machine yet is to use `npm`:
+### [bun](https://bun.sh/) package manager
 
 ```shell
-$ brew install pnpm # via brew
-$ npm install -g pnpm # OR via npm
+brew tap oven-sh/bun # for macOS and Linux
+brew install bun
+# Upgrading bun itself
+bun upgrade
 
 # other global packages you will need
-$ pnpm add -g turbo
-$ pnpm add -g tsx
+bun add -g turbo
 ```
 
 ### [Nhost CLI](https://docs.nhost.io/cli)
@@ -36,7 +33,7 @@ apps/
  docs/             # Documentation website
  smart/            # AI experemental features
  offline/           # local-first/offline-first demo app
-patches/           # pnpm patched dependencies
+patches/           # bun patched dependencies
 packages/          # Core packages
 integrations/      # These are packages that rely on the core packages
 ```
@@ -51,11 +48,11 @@ First, clone this repository:
 git clone https://github.com/xmlking/spectacular.git
 ```
 
-Then, install the dependencies with `pnpm`:
+Then, install the dependencies with `bun`:
 
 ```shell
 cd spectacular
-pnpm install
+bun install
 ```
 
 ### Development
@@ -68,7 +65,7 @@ Running packages in development mode from the root folder is as simple as:
 turbo run web#dev -- --open
 ```
 
-Our packages are linked together using [PNPM's workspace](https://pnpm.io/workspaces) feature. Next.js and Vite automatically detect changes in the dependencies and rebuild everything, so the changes will be reflected in the examples and the dashboard.
+Our packages are linked together using [BUN's workspace](https://bun.sh/docs/install/workspaces) feature. Next.js and Vite automatically detect changes in the dependencies and rebuild everything, so the changes will be reflected in the examples and the dashboard.
 
 ## Edit Documentation
 
@@ -126,7 +123,7 @@ We use [changesets](https://github.com/changesets/changesets) to support our ver
 To create a changeset, run the following command from the repository root:
 
 ```shell
-pnpm changeset
+bun changeset
 ```
 
 This command will guide you through the process of creating a changeset. It will create a file in the `.changeset` directory.

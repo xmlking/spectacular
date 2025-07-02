@@ -121,7 +121,24 @@
     }
   },
   "javascript": {
-    "globals": ["Bun", "Astro", "App", "App.Superforms.Message", "$", "__GIT_TAG__", "__GIT_DATE__", "__APP_VERSION__"],
+    "globals": [
+      "Bun",
+      "Astro",
+      "App",
+      "App.Superforms.Message",
+      "$",
+      "__GIT_TAG__",
+      "__GIT_DATE__",
+      "__APP_VERSION__",
+      "LanguageModel",
+      "LanguageDetector",
+      "Writer",
+      "Rewriter",
+      "Summarizer",
+      "Translator",
+      "Proofreader",
+      "AI"
+    ],
     "formatter": {
       "quoteStyle": "single",
       "semicolons": "always",
