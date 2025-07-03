@@ -49,7 +49,7 @@ limit = 100
 interval = '15m'
 
 [auth]
-version = '0.38.0'
+version = '0.40.1'
 
 [auth.elevatedPrivileges]
 mode = 'recommended'
@@ -216,7 +216,7 @@ limit = 100
 interval = '15m'
 
 [postgres]
-version = '17.2-20250311-1'
+version = '17.4-20250530-1'
 
 [postgres.resources]
 enablePublicAccess = true
@@ -247,7 +247,7 @@ method = 'PLAIN'
 # messagingServiceId = 'twilioMessagingServiceId'
 
 [storage]
-version = '0.7.1'
+version = '0.7.2'
 
 # [storage.antivirus]
 # server = 'tcp://run-clamav:3310'
@@ -257,7 +257,7 @@ limit = 100
 interval = '15m'
 
 [ai]
-version = '0.7.1'
+version = '0.8.0'
 webhookSecret = '{{ secrets.GRAPHITE_WEBHOOK_SECRET }}'
 
 [ai.resources]
