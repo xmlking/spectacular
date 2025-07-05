@@ -3,22 +3,21 @@ packages:
   - packages/*
 
 catalog:
-  '@changesets/cli': 2.29.4
+  '@changesets/cli': 2.29.5
   '@changesets/changelog-github': 0.5.1
   '@dotenv-run/cli': 1.3.6
   '@types/bun': 1.2.16
-  '@types/node': 24.0.3
-  '@types/dom-chromium-ai': 0.0.8
-  '@aibrow/dom-types': 2.0.4
-  '@inlang/paraglide-js': 2.1.0
-  # '@sveltejs/kit': 2.21.5
+  '@types/node': 24.0.10
+  '@types/dom-chromium-ai': 0.0.9
+  '@aibrow/dom-types': 2.0.5
+  '@inlang/paraglide-js': 2.2.0
   '@sveltejs/kit': https://gitpkg.vercel.app/sveltejs/kit/packages/kit?rpc-ssr-2
-  '@lucide/svelte': 0.518.0
-  '@biomejs/biome': 2.0.0
+  '@lucide/svelte': 0.525.0
+  '@biomejs/biome': 2.0.6
   '@turbo/gen': 2.5.4
-  '@playwright/test': 1.53.1
+  '@playwright/test': 1.53.2
   '@ai-sdk/svelte': 2.1.12
-  '@sveltejs/enhanced-img': 0.6.0
+  '@sveltejs/enhanced-img': 0.6.1
   '@sveltejs/vite-plugin-svelte': 5.1.0
   '@skeletonlabs/skeleton': 3.1.3
   '@testing-library/dom': 10.4.0
@@ -28,24 +27,23 @@ catalog:
   '@vitest/ui': 3.2.4
   jsdom: 26.1.0
   turbo: 2.5.4
-  tailwindcss: 4.1.10
+  tailwindcss: 4.1.11
   tailwind-merge: 3.3.1
-  tw-animate-css: 1.3.4
+  tw-animate-css: 1.3.5
   tailwind-variants: 1.0.0
   typescript: 5.8.3
-  # svelte: 5.34.6
   svelte: https://pkg.pr.new/svelte@15844
   formsnap: 2.0.1
   svelte-meta-tags: 4.3.0
-  cspell: 9.1.1
-  bits-ui: 2.8.2
+  cspell: 9.1.2
+  bits-ui: 2.8.10
   svelte-sonner: 1.0.5
-  svelte-check: 4.2.1
-  houdini: 1.5.7
+  svelte-check: 4.2.2
+  houdini: 1.5.8
   flags: 4.0.1
-  vite: 6.3.5
+  vite: 7.0.2
   vitest: 3.2.4
-  zod: 3.25.67
+  zod: 3.25.74
 
 catalogs:
   svelte4:
@@ -63,3 +61,6 @@ catalogs:
     tailwind-merge: 2.6.0
     tailwind-variants: 0.3.1
     vite: 5.4.18
+
+overrides:
+  "@dotenv-run/core": "1.3.6"

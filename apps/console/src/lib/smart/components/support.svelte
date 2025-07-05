@@ -13,7 +13,7 @@ let aibrowAI: typeof AI | undefined;
 
 onMount(async () => {
   printAIStats();
-  chromeAISupported = 'ai' in window;
+  chromeAISupported = 'LanguageModel' in window;
   aibrowInstalled = await checkAibrowInstalled();
   aiPolyfilled = isPolyfilledLanguageModel();
   translationPolyfilled = isPolyfilledTranslation();
