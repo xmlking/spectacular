@@ -55,6 +55,10 @@ const data = {
           title: 'Settings',
           url: '#',
         },
+        {
+          title: 'Todos',
+          url: '/todos',
+        },
       ],
     },
     {

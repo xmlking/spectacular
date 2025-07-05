@@ -5,10 +5,12 @@ import AppFooter from '$lib/components/layout/app-footer.svelte';
 import AppHeader from '$lib/components/layout/app-header.svelte';
 import AppSidebar from '$lib/components/layout/app-sidebar.svelte';
 import Metadata from '$lib/components/layout/metadata.svelte';
+import SkeletonCard from '$lib/components/layout/skeleton-card.svelte';
 import { config } from '$lib/stores/index.js';
 import { updateTheme } from '$lib/utils.js';
 import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
 import { Toaster } from '@repo/ui/components/ui/sonner/index.js';
+import { isHttpError } from '@sveltejs/kit';
 import { ModeWatcher } from 'mode-watcher';
 import type { Snippet } from 'svelte';
 import '../app.css';
@@ -33,7 +35,19 @@ $effect(() => {
 	<Sidebar.Inset>
 		<AppHeader />
 		<div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-			{@render children?.()}
+      <svelte:boundary>
+        <!-- suspense -->
+        {#snippet pending()}
+          <SkeletonCard />
+        {/snippet}
+
+        {@render children?.()}
+
+        {#snippet failed(error, reset)}
+          <p class="error">{isHttpError(error) ? error.body.message : 'Internal Error'}</p>
+          <button onclick={reset}>oops! try again</button>
+        {/snippet}
+    </svelte:boundary>
 		</div>
 		<AppFooter />
 	</Sidebar.Inset>
