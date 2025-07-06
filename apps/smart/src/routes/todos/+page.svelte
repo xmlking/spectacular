@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { addTodo, deleteTodo, getTime, getTodos, toggleTodo } from './todos.remote'
+import { addTodo, deleteTodo, getTime, getTodos, toggleTodo } from './todos.remote';
 
-	/*
+/*
 		- `getTodos` does a remote function call on the client
 			using `fetch` but is invoked directly on the server
 		- SSR is not implemented yet in the async branch
 	*/
-	const todos = getTodos()
+const todos = getTodos();
 </script>
 
 <main>

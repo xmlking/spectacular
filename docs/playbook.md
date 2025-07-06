@@ -93,6 +93,8 @@ Code coverage via [c8](https://github.com/bcoe/c8) or [istanbul](https://istanbu
 
 For examples checkout [Svelte Component Test Recipes](https://github.com/davipon/svelte-component-test-recipes)
 
+TODO: switch to sveltest <https://sveltest.dev/>
+
 ```shell
 # optional
 pnpm i -O @vitest/ui

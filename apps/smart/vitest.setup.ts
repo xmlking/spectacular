@@ -1,13 +1,10 @@
 // Ref: https://github.com/huntabyte/bits-ui/blob/main/tests/other/setup-test.ts
-import '@testing-library/jest-dom/vitest';
+import '@vitest/browser/matchers';
+import '@vitest/browser/providers/playwright';
 import type * as environment from '$app/environment';
 import type * as navigation from '$app/navigation';
-import { configure } from '@testing-library/dom';
-import { vi } from 'vitest';
 
-configure({
-  asyncUtilTimeout: 1500,
-});
+import { vi } from 'vitest';
 
 // Mock SvelteKit runtime module $app/environment
 vi.mock('$app/environment', (): typeof environment => ({

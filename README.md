@@ -9,6 +9,7 @@
 - CSS: [Tailwind CSS](https://tailwindcss.com/)
 - UI Components: tailwindcss based [SkeletonUI](https://www.skeleton.dev/), [Shadcn](https://www.shadcn-svelte.com/) and [Flowbite](https://flowbite-svelte.com/)
 - Unit/Component testing: [vitest](https://vitest.dev/)
+  - [Sveltest](https://sveltest.dev/) , [Repo](https://github.com/spences10/sveltest), [Migrating](https://scottspence.com/posts/migrating-from-testing-library-svelte-to-vitest-browser-svelte)
   - [Testing Library](https://testing-library.com/)
   - [Svelte Testing Library](https://github.com/testing-library/svelte-testing-library)
 - API Mocking: [Mock Service Worker](https://mswjs.io/)

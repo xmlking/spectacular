@@ -27,6 +27,9 @@
     "test:ui": "dotenv-run -f .env -f .secrets -v -- vitest --ui",
     "test:watch": "dotenv-run -f .env -f .secrets -v -- vitest --watch",
     "test:coverage": "dotenv-run -f .env -f .secrets -v -- vitest run --coverage",
+    "test:server": "dotenv-run -f .env -f .secrets -v -- vitest --project=server",
+    "test:client": "dotenv-run -f .env -f .secrets -v -- vitest --project=client",
+    "test:ssr": "dotenv-run -f .env -f .secrets -v -- vitest --project=ssr",
     "test:e2e": "dotenv-run -f .env -f .secrets -v -- playwright test"
   },
   "devDependencies": {
@@ -51,18 +54,16 @@
     "@tailwindcss/typography": "0.5.16",
     "@tailwindcss/vite": "4.1.11",
     "@tanstack/table-core": "8.21.3",
-    "@testing-library/dom": "catalog:",
-    "@testing-library/jest-dom": "catalog:",
-    "@testing-library/svelte": "catalog:",
     "@types/dom-chromium-ai": "catalog:",
+    "@vitest/browser": "catalog:",
     "ai": "4.3.16",
     "autoprefixer": "10.4.21",
     "bits-ui": "catalog:",
     "clsx": "2.1.1",
     "formsnap": "catalog:",
-    "jsdom": "catalog:",
     "mode-watcher": "1.1.0",
     "openai-zod-to-json-schema": "1.1.1",
+    "playwright": "catalog:",
     "runed": "0.29.1",
     "svelte": "catalog:",
     "svelte-check": "catalog:",
@@ -78,6 +79,7 @@
     "vaul-svelte": "1.0.0-next.7",
     "vite": "catalog:",
     "vitest": "catalog:",
+    "vitest-browser-svelte": "catalog:",
     "zod": "catalog:"
   }
 }
