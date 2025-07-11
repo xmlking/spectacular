@@ -53,8 +53,8 @@ export async function checkBrowserAIInstalled() {
 
   if ('Translator' in self) {
     const availability = await Translator.availability({
-      sourceLanguage: 'es',
-      targetLanguage: 'fr',
+      sourceLanguage: 'en',
+      targetLanguage: 'es',
     });
     if (availability === 'available') {
       status = true;
@@ -81,7 +81,7 @@ export async function checkBrowserAIInstalled() {
     if (availability === 'available') {
       status = true;
     } else {
-      console.log("%cYour browser Rewriter API isn't usable", 'color: magenta');
+      console.log("%cYour browser Rewriter API isn't ready", 'color: magenta');
     }
   } else {
     console.log("%cYour browser doesn't support AI Rewriter", 'color: magenta');
@@ -92,7 +92,7 @@ export async function checkBrowserAIInstalled() {
     if (availability === 'available') {
       status = true;
     } else {
-      console.log("%cYour browser Summarizer API isn't usable", 'color: magenta');
+      console.log("%cYour browser Summarizer API isn't ready", 'color: magenta');
     }
   } else {
     console.log("%cYour browser doesn't support AI Summarizer", 'color: magenta');
@@ -101,9 +101,9 @@ export async function checkBrowserAIInstalled() {
   if ('Proofreader' in self) {
     const availability = await Proofreader.availability();
     if (availability === 'available') {
-      status = true;
+      // status = true; // TODO
     } else {
-      console.log("%cYour browser Proofreader API isn't usable", 'color: magenta');
+      console.log("%cYour browser Proofreader API isn't ready", 'color: magenta');
     }
   } else {
     console.log("%cYour browser doesn't support AI Proofreader", 'color: magenta');

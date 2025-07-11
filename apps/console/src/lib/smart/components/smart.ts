@@ -52,8 +52,8 @@ export async function checkBrowserAIInstalled() {
 
   if ('Translator' in self) {
     const availability = await Translator.availability({
-      sourceLanguage: 'es',
-      targetLanguage: 'fr',
+      sourceLanguage: 'en',
+      targetLanguage: 'es',
     });
     if (availability === 'available') {
       status = true;
@@ -100,7 +100,7 @@ export async function checkBrowserAIInstalled() {
   if ('Proofreader' in self) {
     const availability = await Proofreader.availability();
     if (availability === 'available') {
-      status = true;
+      // status = true; // TODO
     } else {
       console.log("%cYour browser Proofreader API isn't usable", 'color: magenta');
     }

@@ -29,13 +29,13 @@ export const summarizerOptions: Writable<{
   type?: SummarizerType;
   format?: SummarizerFormat;
   length?: SummarizerLength;
-}> = writable({ type: 'tl;dr', format: 'plain-text', length: 'short' });
+}> = writable({ type: 'key-points', format: 'markdown', length: 'medium' });
 
 export const writerOptions: Writable<{
   tone?: WriterTone;
   format?: WriterFormat;
   length?: WriterLength;
-}> = writable({ tone: 'neutral', format: 'plain-text', length: 'short' });
+}> = writable({ tone: 'neutral', format: 'markdown', length: 'medium' });
 
 export const rewriterOptions: Writable<{
   tone?: RewriterTone;
