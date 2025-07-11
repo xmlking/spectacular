@@ -91,7 +91,7 @@ export type ToolType = keyof typeof toolOptions;
     length: "as-is",
   };
   export let summarizerOptions: SummarizerCreateOptions = {
-    type: "tl;dr",
+    type: "tldr",
     format: "plain-text",
     length: "medium",
   };
@@ -451,7 +451,7 @@ export type ToolType = keyof typeof toolOptions;
         </select>
       {:else if tool === "summarizer"}
         <select bind:value={summarizerOptions.type}>
-          <option value="tl;dr">TL;DR</option>
+          <option value="tldr">TLDR</option>
           <option value="key-points">Bullet Points</option>
           <option value="teaser">Teaser</option>
           <option value="headline">Headline</option>
