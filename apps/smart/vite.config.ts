@@ -3,6 +3,7 @@ import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
+import devtoolsJson from 'vite-plugin-devtools-json';
 import { coverageConfigDefaults } from 'vitest/config';
 import pkg from './package.json' with { type: 'json' };
 
@@ -17,6 +18,7 @@ export default defineConfig({
     }),
     // svelte({ hot: !process.env.VITEST }),
     sveltekit(),
+    devtoolsJson(),
   ],
   define: {
     __NAME__: JSON.stringify(pkg.name),
@@ -46,7 +48,7 @@ export default defineConfig({
           },
           include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
           exclude: ['src/lib/server/**', 'src/**/*.ssr.{test,spec}.{js,ts}'],
-          setupFiles: ['./vitest.setup.ts'],
+          setupFiles: ['./vitest-setup-client.ts'],
         },
       },
       {

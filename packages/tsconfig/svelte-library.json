@@ -3,11 +3,7 @@
   "display": "Svelte Library",
   "extends": "./base.json",
   "compilerOptions": {
-    "lib": [
-      "ES2015",
-      "DOM"
-    ],
-    "module": "ESNext",
-    "target": "es6"
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
   }
 }

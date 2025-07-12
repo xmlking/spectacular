@@ -1,6 +1,6 @@
+/// <reference types="@vitest/browser/matchers" />
+/// <reference types="@vitest/browser/providers/playwright" />
 // Ref: https://github.com/huntabyte/bits-ui/blob/main/tests/other/setup-test.ts
-import '@vitest/browser/matchers';
-import '@vitest/browser/providers/playwright';
 import type * as environment from '$app/environment';
 import type * as navigation from '$app/navigation';
 
