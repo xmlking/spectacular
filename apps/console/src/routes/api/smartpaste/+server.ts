@@ -1,11 +1,20 @@
-import { limiter } from '$lib/server/limiter/limiter';
 import { openai } from '@ai-sdk/openai'; // Ensure OPENAI_API_KEY environment variable is set
 import { Logger } from '@repo/utils';
 import { error } from '@sveltejs/kit';
-import { generateObject, JSONParseError, type LanguageModel, streamObject, streamText, TypeValidationError } from 'ai';
+import {
+  generateObject,
+  JSONParseError,
+  jsonSchema,
+  type LanguageModel,
+  streamObject,
+  streamText,
+  TypeValidationError,
+} from 'ai';
 import { ollama } from 'ollama-ai-provider';
 import { z } from 'zod';
-import { personSchema as schema } from '../../(app)/ai/pastesmart/schema';
+import { limiter } from '$lib/server/limiter/limiter';
+// import { personSchema as schema } from '../../(app)/ai/pastesmart/schema';
+import { personJsonSchema } from '../../(app)/ai/pastesmart/schema';
 
 const log = new Logger('smart:past:server');
 
@@ -30,7 +39,7 @@ export const POST = async (event) => {
   try {
     const result = await generateObject({
       model,
-      schema,
+      schema: jsonSchema(personJsonSchema),
       prompt: `Extract the data from the following:\n ${content}`,
     });
     return result.toJsonResponse();

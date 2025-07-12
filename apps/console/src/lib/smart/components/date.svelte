@@ -17,12 +17,12 @@
   ```
 -->
 <script lang="ts">
-import { ErrorMessage } from '$lib/ui/components/form';
 import { Logger } from '@repo/utils';
 import { generateObject, JSONParseError, TypeValidationError } from 'ai';
 import { Sparkles } from 'lucide-svelte';
 import type { HTMLInputAttributes } from 'svelte/elements';
 import { z } from 'zod';
+import { ErrorMessage } from '$lib/ui/components/form';
 import { default as LoaderIcon } from './loader-icon.svelte';
 
 interface $$Props extends HTMLInputAttributes {

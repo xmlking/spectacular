@@ -1,8 +1,8 @@
 <script lang="ts" generics="T">
+import SuperDebug from 'sveltekit-superforms';
 import type { QueryResult } from '$houdini';
 import { getLoadingState } from '$lib/stores/loading';
 import { DebugShell, GraphQLErrors, NotFound, SomethingWentWrong } from '$lib/ui/components';
-import SuperDebug from 'sveltekit-superforms';
 
 export let entityName: string;
 export let result: QueryResult<T>;

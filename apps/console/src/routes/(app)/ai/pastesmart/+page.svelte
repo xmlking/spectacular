@@ -12,7 +12,7 @@ import * as Form from 'formsnap';
 import { Loader, MoreHorizontal, Sparkles } from 'lucide-svelte';
 import { writable } from 'svelte/store';
 import SuperDebug, { defaults, setError, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import Sample from './sample.svelte';
 import { personJsonSchema as jsonSchema, type Person, personSchema } from './schema.js';
 
@@ -24,19 +24,18 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let loading = writable(false);
 let smartError = writable<string>();
-// const jsonSchema = zod(personSchema).jsonSchema; // HINT: openai-zod-to-json-schema is better
 let useLocal = false;
 
 // Search form
 // const form = superForm(defaults(schemasafe(personSchema)), {
-const form = superForm(defaults(zod(personSchema)), {
+const form = superForm(defaults(zod4(personSchema)), {
   id: 'smart-past-form',
   dataType: 'json',
   taintedMessage: null,
   syncFlashMessage: false,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(personSchema),
+  validators: zod4Client(personSchema),
   // validators: schemasafe(personSchema),
   onError({ result }) {
     // TODO:

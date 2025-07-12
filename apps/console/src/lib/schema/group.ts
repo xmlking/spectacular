@@ -32,7 +32,7 @@ export const searchGroupSchema = z.object({
 
 export type SearchGroupSchema = typeof searchGroupSchema;
 export type searchGroup = z.infer<typeof searchGroupSchema>;
-export const searchGroupKeys = searchGroupSchema.keyof().Enum;
+export const searchGroupKeys = searchGroupSchema.keyof().enum;
 
 /**
  * Create Group Schema
@@ -43,7 +43,7 @@ export const createGroupSchema = groupSchema.omit({
 
 export type CreateGroupSchema = typeof createGroupSchema;
 export type CreateGroup = z.infer<typeof createGroupSchema>;
-export const createGroupKeys = createGroupSchema.keyof().Enum;
+export const createGroupKeys = createGroupSchema.keyof().enum;
 
 /**
  * Update Policy Schema
@@ -54,4 +54,4 @@ export const updateGroupSchema = groupSchema.omit({
 
 export type UpdateGroupSchema = typeof updateGroupSchema;
 export type UpdateGroup = z.infer<typeof updateGroupSchema>;
-export const updateGroupKeys = updateGroupSchema.keyof().Enum;
+export const updateGroupKeys = updateGroupSchema.keyof().enum;

@@ -1,9 +1,9 @@
 // Ref: https://github.com/huntabyte/bits-ui/blob/main/tests/other/setup-test.ts
 import '@testing-library/jest-dom/vitest';
-import type * as environment from '$app/environment';
-import type * as navigation from '$app/navigation';
 import { configure } from '@testing-library/dom';
 import { vi } from 'vitest';
+import type * as environment from '$app/environment';
+import type * as navigation from '$app/navigation';
 
 configure({
   asyncUtilTimeout: 1500,

@@ -1,8 +1,7 @@
-import { read } from '$app/server';
 import { Logger } from '@repo/utils';
 import { ollama } from 'ollama-ai-provider';
-import { zodToJsonSchema } from 'openai-zod-to-json-schema';
 import { z } from 'zod';
+import { read } from '$app/server';
 import schemaFile from '../../../../schema.graphql?url';
 import { GQLPTClient } from './gqlpt';
 import { AdapterOpenAI } from './openai';
@@ -15,7 +14,8 @@ const outputSchema = z.object({
   query: z.string().nullish().describe('GraphQL query'),
   variables: z.any().nullish().describe('GraphQL variables'),
 });
-const outputJSONSchema = zodToJsonSchema(outputSchema, { openaiStrictMode: true });
+
+const outputJSONSchema = z.toJSONSchema(outputSchema);
 
 const log = new Logger('smart:gql:server');
 

@@ -1,7 +1,7 @@
 import { Logger, sleep } from '@repo/utils';
 import { fail } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters';
+import { zod4 } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 import { aiSchema } from './schema';
 
@@ -11,7 +11,7 @@ const log = new Logger('smart:date:server');
 
 export const actions = {
   default: async ({ request }) => {
-    const form = await superValidate(request, zod(aiSchema));
+    const form = await superValidate(request, zod4(aiSchema));
 
     await sleep(1000);
 

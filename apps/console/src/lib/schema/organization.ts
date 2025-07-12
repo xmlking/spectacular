@@ -43,7 +43,7 @@ export const searchOrganizationSchema = z.object({
 
 export type SearchOrganizationSchema = typeof searchOrganizationSchema;
 export type SearchOrganization = z.infer<typeof searchOrganizationSchema>;
-export const searchOrganizationKeys = searchOrganizationSchema.keyof().Enum;
+export const searchOrganizationKeys = searchOrganizationSchema.keyof().enum;
 
 /**
  * Create Organization Schema
@@ -59,7 +59,7 @@ export const createOrganizationSchema = organizationSchema.omit({
 
 export type CreateOrganizationSchema = typeof createOrganizationSchema;
 export type CreateOrganization = z.infer<typeof createOrganizationSchema>;
-export const createOrganizationKeys = createOrganizationSchema.keyof().Enum;
+export const createOrganizationKeys = createOrganizationSchema.keyof().enum;
 
 /**
  * Update Organization Schema
@@ -74,4 +74,4 @@ export const updateOrganizationSchema = organizationSchema.omit({
 
 export type UpdateOrganizationSchema = typeof updateOrganizationSchema;
 export type UpdateOrganization = z.infer<typeof updateOrganizationSchema>;
-export const updateOrganizationKeys = updateOrganizationSchema.keyof().Enum;
+export const updateOrganizationKeys = updateOrganizationSchema.keyof().enum;

@@ -2,7 +2,7 @@ import { order_by } from '$houdini';
 import { searchGroupSchema as schema } from '$lib/schema/group';
 import { Logger } from '@repo/utils';
 import { superValidate } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters';
+import { zod4 } from 'sveltekit-superforms/adapters';
 import type { BeforeLoadEvent, ListGroupsVariables as Variables } from './$houdini';
 
 const log = new Logger('groups:search:browser');
@@ -15,7 +15,7 @@ const log = new Logger('groups:search:browser');
  */
 export async function _houdini_beforeLoad({ url }: BeforeLoadEvent) {
   log.debug('in _houdini_beforeLoad');
-  const form = await superValidate(url, zod(schema));
+  const form = await superValidate(url, zod4(schema));
   if (!form.valid) return { status: 400, form };
   // if (!form.valid) return fail(400, { form });
   // if (!form.valid) throw error(400, 'invalid input');

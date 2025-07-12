@@ -21,7 +21,7 @@ import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { createGroup } from '../mutations';
 
 const log = new Logger('groups.create.browser');
@@ -31,7 +31,7 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 
-const form = superForm(defaults(zod(schema)), {
+const form = superForm(defaults(zod4(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -39,7 +39,7 @@ const form = superForm(defaults(zod(schema)), {
   resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(schema),
+  validators: zod4Client(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
 

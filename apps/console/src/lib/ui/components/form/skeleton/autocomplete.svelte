@@ -1,11 +1,12 @@
 <script lang="ts">
 import { createEventDispatcher } from 'svelte';
+
 // import { flip } from 'svelte/animate';
 // import {slide} from 'svelte/transition';
 
+import type { AutocompleteOption } from '@skeletonlabs/skeleton';
 // Types
 import { boldQuery } from '$lib/utils';
-import type { AutocompleteOption } from '@skeletonlabs/skeleton';
 
 // Event Dispatcher
 type AutocompleteEvent = {

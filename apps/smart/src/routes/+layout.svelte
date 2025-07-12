@@ -1,4 +1,9 @@
 <script lang="ts">
+import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
+import { Toaster } from '@repo/ui/components/ui/sonner/index.js';
+import { isHttpError } from '@sveltejs/kit';
+import { ModeWatcher } from 'mode-watcher';
+import type { Snippet } from 'svelte';
 import { page } from '$app/state';
 import { locales, localizeHref } from '$i18n/runtime';
 import AppFooter from '$lib/components/layout/app-footer.svelte';
@@ -8,11 +13,6 @@ import Metadata from '$lib/components/layout/metadata.svelte';
 import SkeletonCard from '$lib/components/layout/skeleton-card.svelte';
 import { config } from '$lib/stores/index.js';
 import { updateTheme } from '$lib/utils.js';
-import * as Sidebar from '@repo/ui/components/ui/sidebar/index.js';
-import { Toaster } from '@repo/ui/components/ui/sonner/index.js';
-import { isHttpError } from '@sveltejs/kit';
-import { ModeWatcher } from 'mode-watcher';
-import type { Snippet } from 'svelte';
 import '../app.css';
 
 type Props = {

@@ -9,7 +9,7 @@ import { Logger } from '@repo/utils';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { writingSchema } from './schema.js';
 
 const log = new Logger('ai:writing:browser');
@@ -19,7 +19,7 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 // form
-const form = superForm(defaults(zod(writingSchema)), {
+const form = superForm(defaults(zod4(writingSchema)), {
   id: 'writing-form',
   dataType: 'json',
   taintedMessage: null,
@@ -27,7 +27,7 @@ const form = superForm(defaults(zod(writingSchema)), {
   resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(writingSchema),
+  validators: zod4Client(writingSchema),
   onError({ result }) {
     // TODO:
     // message.set(result.error.message)

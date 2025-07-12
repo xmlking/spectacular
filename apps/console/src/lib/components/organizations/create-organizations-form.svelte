@@ -1,4 +1,11 @@
 <script lang="ts">
+import { cleanClone, Logger } from '@repo/utils';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import { Loader, MoreHorizontal } from 'lucide-svelte';
+import Select from 'svelte-select';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
@@ -14,13 +21,6 @@ import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputChipWrapper, InputPairs } from '$lib/ui/components/form';
-import { cleanClone, Logger } from '@repo/utils';
-import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import { Loader, MoreHorizontal } from 'lucide-svelte';
-import Select from 'svelte-select';
-import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('org:create:component');
 
@@ -30,7 +30,7 @@ const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 let pathname = $page.url.pathname;
 
-const form = superForm(defaults(zod(schema)), {
+const form = superForm(defaults(zod4(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -38,7 +38,7 @@ const form = superForm(defaults(zod(schema)), {
   resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(schema),
+  validators: zod4Client(schema),
 
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;

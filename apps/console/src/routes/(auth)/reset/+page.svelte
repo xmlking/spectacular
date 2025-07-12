@@ -16,7 +16,7 @@ import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import { onMount } from 'svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('auth:reset:browser');
 
@@ -32,7 +32,7 @@ onMount(async () => {
   }
 });
 
-const form = superForm(defaults(zod(resetPasswordSchema)), {
+const form = superForm(defaults(zod4(resetPasswordSchema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -40,7 +40,7 @@ const form = superForm(defaults(zod(resetPasswordSchema)), {
   resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(resetPasswordSchema),
+  validators: zod4Client(resetPasswordSchema),
   clearOnSubmit: 'errors-and-message',
   async onUpdate({ form, cancel }) {
     loadingState.setFormLoading(false); // workaround

@@ -1,6 +1,6 @@
+import { z } from 'zod';
 import { ROUTE_DASHBOARD } from '$lib/constants';
 import { Roles } from '$lib/types';
-import { z } from 'zod';
 
 export const allowedMetadata = {
   plan: ['Starter', 'Pro', 'Team', 'Family'] as const,
@@ -20,43 +20,43 @@ const asciiRegex = /^[\x20-\x7E]*$/; // printable ascii
  */
 export const userSchema = z.object({
   firstName: z
-    .string({ required_error: 'First Name is required' })
+    .string({ error: (issue) => (issue.input === undefined ? 'First Name is required' : 'Not a string') })
     .regex(asciiRegex, 'Only ASCII characters are allowed')
-    .min(2, { message: 'First Name must contain at least 2 character(s)' })
+    .min(2, { error: 'First Name must contain at least 2 character(s)' })
     .max(256)
     .trim(),
   lastName: z
-    .string({ required_error: 'Last Name is required' })
+    .string({ error: (issue) => (issue.input === undefined ? 'Last Name is required' : 'Not a string') })
     .regex(asciiRegex, 'Only ASCII characters are allowed')
-    .min(2, { message: 'Last Name must contain at least 2 character(s)' })
+    .min(2, { error: 'Last Name must contain at least 2 character(s)' })
     .max(256)
     .trim(),
   email: z
-    .string({ required_error: 'Email is required' })
-    .email({ message: 'Please enter a valid email address' })
+    .string({ error: (issue) => (issue.input === undefined ? 'Email is required' : 'Not a string') })
+    .email({ error: 'Please enter a valid email address' })
     .max(256)
     .trim(),
   password: z
-    .string({ required_error: 'Password is required' })
-    .min(9, { message: 'Password must be at least 9 characters' })
+    .string({ error: (issue) => (issue.input === undefined ? 'Password is required' : 'Not a string') })
+    .min(9, { error: 'Password must be at least 9 characters' })
     .max(256)
     .trim(),
   confirmPassword: z
-    .string({ required_error: 'Confirm Password is required' })
-    .min(9, { message: 'Confirm Password must be at least 9 characters' })
+    .string({ error: (issue) => (issue.input === undefined ? 'Confirm Password is required' : 'Not a string') })
+    .min(9, { error: 'Confirm Password must be at least 9 characters' })
     .max(256)
     .trim(),
-  terms: z
-    .literal<boolean>(true, { errorMap: () => ({ message: 'Please accept Terms of Service to continue' }) })
-    .default(false),
+  terms: z.literal<boolean>(true, { error: 'Please accept Terms of Service to continue' }).default(false),
   displayName: z
-    .string({ required_error: 'Display Name is required' })
-    .min(2, { message: 'Display Name must contain at least 2 character(s)' })
+    .string({ error: (issue) => (issue.input === undefined ? 'Display Name is required' : 'Not a string') })
+    .min(2, { error: 'Display Name must contain at least 2 character(s)' })
     .max(256)
     .trim(),
   phoneNumber: z.string().regex(phoneRegex, 'Invalid Number!').min(10).max(15).nullable(),
   avatarUrl: z.string().url().nullable(),
-  defaultRole: z.nativeEnum(Roles, { required_error: 'You must have a role' }).default(Roles.User),
+  defaultRole: z
+    .enum(Roles, { error: (issue) => (issue.input === undefined ? 'You must have a role' : 'Not a string') })
+    .default(Roles.User),
   metadata: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).nullish(),
   locale: z.enum(['en', 'es', 'de']).default('en'),
   verified: z.boolean().default(false),
@@ -77,7 +77,7 @@ export const searchUserSchema = z.object({
 
 export type SearchUserSchema = typeof searchUserSchema;
 export type SearchUser = z.infer<typeof searchUserSchema>;
-export const searchUserKeys = searchUserSchema.keyof().Enum;
+export const searchUserKeys = searchUserSchema.keyof().enum;
 
 /**
  * Update User Details
@@ -96,7 +96,7 @@ export const updateUserDetailsSchema = userSchema.omit({
 });
 export type UpdateUserDetailsSchema = typeof updateUserDetailsSchema;
 export type updateUserDetails = z.infer<typeof updateUserDetailsSchema>;
-export const updateUserDetailsKeys = updateUserDetailsSchema.keyof().Enum;
+export const updateUserDetailsKeys = updateUserDetailsSchema.keyof().enum;
 
 /**
  * Sign in with password
@@ -140,7 +140,7 @@ export const signUpSchema = userSchema
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
 export type SignUpSchema = typeof signUpSchema;
 export type SignUp = z.infer<typeof signUpSchema>;
-export const signUpKeys = signUpSchema.innerType().keyof().Enum;
+export const signUpKeys = signUpSchema.keyof().enum;
 
 /**
  * Change Password Form
@@ -150,7 +150,7 @@ export const changePasswordSchema = userSchema
   .superRefine((data, ctx) => checkConfirmPassword(ctx, data.confirmPassword, data.password));
 export type ChangePasswordSchema = typeof changePasswordSchema;
 export type ChangePassword = z.infer<typeof changePasswordSchema>;
-export const changePasswordKeys = changePasswordSchema.innerType().keyof().Enum;
+export const changePasswordKeys = changePasswordSchema.keyof().enum;
 
 /**
  * used in reset password in auth page
@@ -163,15 +163,15 @@ export const resetPasswordSchema = userSchema.pick({ email: true });
 export const changeEmailSchema = userSchema.pick({ email: true });
 export type ChangeEmailSchema = typeof changeEmailSchema;
 export type ChangeEmail = z.infer<typeof changeEmailSchema>;
-export const changeEmailKeys = changeEmailSchema.keyof().Enum;
+export const changeEmailKeys = changeEmailSchema.keyof().enum;
 
 /**
  * Add Security Key for WebAuthN Form
  */
 export const webAuthnSchema = z.object({
   nickname: z
-    .string({ required_error: 'Security Key nickname is required' })
-    .min(2, { message: 'Security Key nickname must contain at least 2 character(s)' })
+    .string({ error: (issue) => (issue.input === undefined ? 'Security Key nickname is required' : 'Not a string') })
+    .min(2, { error: 'Security Key nickname must contain at least 2 character(s)' })
     .max(256)
     .trim(),
 });
@@ -183,12 +183,12 @@ function checkConfirmPassword(ctx: z.RefinementCtx, confirmPassword: string, pas
   if (confirmPassword !== password) {
     ctx.addIssue({
       code: 'custom',
-      message: 'Password and Confirm Password must match',
+      error: 'Password and Confirm Password must match',
       path: ['password'],
     });
     ctx.addIssue({
       code: 'custom',
-      message: 'Password and Confirm Password must match',
+      error: 'Password and Confirm Password must match',
       path: ['confirmPassword'],
     });
   }
@@ -199,13 +199,13 @@ const END_OF_YEAR = new Date(`${new Date().getFullYear()}-12-31T23:59:59`);
 const ONE_YEAR_FROM_NOW = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
 export const createPATSchema = z.object({
   name: z
-    .string({ required_error: 'Name is required' })
-    .min(6, { message: 'Name must contain at least 6 character(s)' })
+    .string({ error: (issue) => (issue.input === undefined ? 'Name is required' : 'Not a string') })
+    .min(6, { error: 'Name must contain at least 6 character(s)' })
     .max(256)
     .trim(),
   expiresAt: z
     .date()
-    .min(new Date(), { message: 'Expires date should be in the future' })
-    .max(ONE_YEAR_FROM_NOW, { message: 'Lifetime max is one year' }),
+    .min(new Date(), { error: 'Expires date should be in the future' })
+    .max(ONE_YEAR_FROM_NOW, { error: 'Lifetime max is one year' }),
   // .default(END_OF_YEAR),
 });

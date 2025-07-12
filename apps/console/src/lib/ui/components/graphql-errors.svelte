@@ -1,9 +1,9 @@
 <script lang="ts">
-import { page } from '$app/stores';
 import { Logger } from '@repo/utils';
 import type { GraphQLError } from 'graphql';
 import { TriangleAlert } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
+import { page } from '$app/stores';
 
 const log = new Logger('graphql:error:client');
 export let errors: readonly Partial<GraphQLError>[] | undefined | null;

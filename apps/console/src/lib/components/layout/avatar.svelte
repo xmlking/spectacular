@@ -1,13 +1,13 @@
 <script lang="ts">
+// Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/Avatar.svelte
+import { Avatar, getToastStore, popup } from '@skeletonlabs/skeleton';
+import Cookies from 'js-cookie';
+import { CircleUserRound, LogOut, Plus, Settings } from 'lucide-svelte';
 import { goto } from '$app/navigation';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { NHOST_SESSION_KEY, ROUTE_SIGNIN } from '$lib/constants';
 import { i18n } from '$lib/i18n';
 import { getNhostClient } from '$lib/stores/nhost';
-// Ref: https://github.com/hansaskov/my-skeleton-app/blob/master/src/lib/components/Avatar.svelte
-import { Avatar, getToastStore, popup } from '@skeletonlabs/skeleton';
-import Cookies from 'js-cookie';
-import { CircleUserRound, LogOut, Plus, Settings } from 'lucide-svelte';
 
 export let initials: string | undefined = undefined;
 export let src: string | undefined = undefined;

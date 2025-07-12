@@ -28,7 +28,7 @@ import * as Form from 'formsnap';
 import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';
 import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { UpdateUserDetails } from '../mutations';
 
 const log = new Logger('user:profile:details:browser');
@@ -65,7 +65,7 @@ const nhost = getNhostClient();
 const role = $page.data.role;
 let gqlErrors: PartialGraphQLErrors;
 
-const form = superForm(defaults(zod(schema)), {
+const form = superForm(defaults(zod4(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -73,7 +73,7 @@ const form = superForm(defaults(zod(schema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: false,
-  validators: zodClient(schema),
+  validators: zod4Client(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
     // First, check if elevate is required

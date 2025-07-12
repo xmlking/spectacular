@@ -1,7 +1,7 @@
-import { dev } from '$app/environment';
-import { NHOST_SESSION_KEY } from '$lib/constants';
 import { Logger } from '@repo/utils';
 import type { ClientInit, HandleClientError } from '@sveltejs/kit';
+import { dev } from '$app/environment';
+import { NHOST_SESSION_KEY } from '$lib/constants';
 
 /**
  * Code in `init` method in `hooks.client.ts` will run one-time in browser, when the application starts up,

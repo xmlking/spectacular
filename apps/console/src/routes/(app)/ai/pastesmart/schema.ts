@@ -1,4 +1,3 @@
-import { zodToJsonSchema } from 'openai-zod-to-json-schema';
 import { z } from 'zod';
 
 export const personSchema = z.object({
@@ -14,6 +13,6 @@ export const personSchema = z.object({
   country: z.string().nullish(),
 });
 
-export const personJsonSchema = zodToJsonSchema(personSchema, { openaiStrictMode: true });
+export const personJsonSchema = z.toJSONSchema(personSchema);
 
 export type Person = z.infer<typeof personSchema>;

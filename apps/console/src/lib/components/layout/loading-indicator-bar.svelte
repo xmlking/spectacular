@@ -1,7 +1,7 @@
 <script lang="ts">
-import { getLoadingState } from '$lib/stores/loading';
 import { ProgressBar } from '@skeletonlabs/skeleton';
 import { fade } from 'svelte/transition';
+import { getLoadingState } from '$lib/stores/loading';
 
 // const { isLoading } = getLoadingState();
 const loadingState = getLoadingState(); // HINT: `loadingState` is also subscribable

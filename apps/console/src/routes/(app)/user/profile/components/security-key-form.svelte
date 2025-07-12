@@ -14,14 +14,14 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters';
+import { zod4 } from 'sveltekit-superforms/adapters';
 
 // Variables
 const log = new Logger('user:profile:keys:form:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const nhost = getNhostClient();
-const form = superForm(defaults(zod(webAuthnSchema)), {
+const form = superForm(defaults(zod4(webAuthnSchema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,

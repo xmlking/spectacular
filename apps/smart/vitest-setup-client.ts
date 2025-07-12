@@ -1,10 +1,10 @@
 /// <reference types="@vitest/browser/matchers" />
 /// <reference types="@vitest/browser/providers/playwright" />
 // Ref: https://github.com/huntabyte/bits-ui/blob/main/tests/other/setup-test.ts
-import type * as environment from '$app/environment';
-import type * as navigation from '$app/navigation';
 
 import { vi } from 'vitest';
+import type * as environment from '$app/environment';
+import type * as navigation from '$app/navigation';
 
 // Mock SvelteKit runtime module $app/environment
 vi.mock('$app/environment', (): typeof environment => ({

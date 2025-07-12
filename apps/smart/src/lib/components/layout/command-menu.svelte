@@ -1,5 +1,4 @@
 <script lang="ts">
-import { docsConfig } from '$lib/config/docs.js';
 import { Button } from '@repo/ui/components/ui/button/index.js';
 import * as Command from '@repo/ui/components/ui/command/index.js';
 import { cn } from '@repo/ui/utils.js';
@@ -10,6 +9,7 @@ import File from 'svelte-radix/File.svelte';
 import Laptop from 'svelte-radix/Laptop.svelte';
 import Moon from 'svelte-radix/Moon.svelte';
 import Sun from 'svelte-radix/Sun.svelte';
+import { docsConfig } from '$lib/config/docs.js';
 
 let restProps: ComponentProps<typeof Button> = $props();
 

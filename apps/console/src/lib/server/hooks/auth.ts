@@ -1,8 +1,8 @@
-import { env } from '$env/dynamic/private';
-import { NHOST_SESSION_KEY } from '$lib/constants';
 import { NhostClient, type NhostSession } from '@nhost/nhost-js';
 import { Logger } from '@repo/utils';
 import type { Handle } from '@sveltejs/kit';
+import { env } from '$env/dynamic/private';
+import { NHOST_SESSION_KEY } from '$lib/constants';
 
 export const log = new Logger('server:middleware:auth');
 /**

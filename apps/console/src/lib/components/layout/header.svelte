@@ -1,14 +1,4 @@
 <script lang="ts">
-import { browser } from '$app/environment';
-import { enhance } from '$app/forms';
-import * as m from '$i18n/messages';
-import LangSwitch from '$lib/components/layout/lang-switch.svelte';
-// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
-import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
-import { storeTheme } from '$lib/stores';
-import { getNhostClient } from '$lib/stores/nhost';
-import { online } from '$lib/stores/window';
-import { LogoIcon } from '$lib/ui/components/logos';
 import type { DrawerSettings, ModalSettings } from '@skeletonlabs/skeleton';
 import { AppBar, getDrawerStore, getModalStore, LightSwitch, popup } from '@skeletonlabs/skeleton';
 import type { SubmitFunction } from '@sveltejs/kit';
@@ -23,6 +13,16 @@ import {
   Scroll,
   Search,
 } from 'lucide-svelte';
+import { browser } from '$app/environment';
+import { enhance } from '$app/forms';
+import * as m from '$i18n/messages';
+import LangSwitch from '$lib/components/layout/lang-switch.svelte';
+// import LoadingIndicatorSpinner from '$lib/components/layout/loading-indicator-spinner.svelte';
+import LoadingIndicatorBar from '$lib/components/layout/loading-indicator-bar.svelte';
+import { storeTheme } from '$lib/stores';
+import { getNhostClient } from '$lib/stores/nhost';
+import { online } from '$lib/stores/window';
+import { LogoIcon } from '$lib/ui/components/logos';
 import Avatar from './avatar.svelte';
 import OrgSwitcher from './org-switcher.svelte';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-import { LogoIcon } from '$lib/ui/components/logos';
 import { VERSION } from '@sveltejs/kit';
 import { Github, Linkedin, Twitter, Youtube } from 'lucide-svelte';
+import { LogoIcon } from '$lib/ui/components/logos';
 
 const appVersion = __APP_VERSION__;
 const gitTag = __GIT_TAG__;

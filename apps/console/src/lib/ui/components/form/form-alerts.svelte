@@ -1,7 +1,7 @@
 <script lang="ts">
-import { page } from '$app/stores';
 import { AlertTriangle } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
+import { page } from '$app/stores';
 export let message: App.Superforms.Message | undefined;
 export let errors: string[] | undefined;
 </script>

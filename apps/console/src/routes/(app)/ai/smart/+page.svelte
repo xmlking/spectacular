@@ -9,7 +9,7 @@ import { Logger } from '@repo/utils';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import SuperDebug, { dateProxy, defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { aiSchema } from './schema.js';
 
 const log = new Logger('ai:smart:browser');
@@ -20,14 +20,14 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 
 // Search form
-const form = superForm(defaults(zod(aiSchema)), {
+const form = superForm(defaults(zod4(aiSchema)), {
   id: 'smart-form',
   dataType: 'json',
   taintedMessage: null,
   syncFlashMessage: false,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(aiSchema),
+  validators: zod4Client(aiSchema),
   onError({ result }) {
     // TODO:
     // message.set(result.error.message)

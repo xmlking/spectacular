@@ -1,7 +1,7 @@
-import { building } from '$app/environment';
-import { setSession } from '$houdini';
 import { Logger } from '@repo/utils';
 import type { Handle } from '@sveltejs/kit';
+import { building } from '$app/environment';
+import { setSession } from '$houdini';
 
 const log = new Logger('server:middleware:houdini');
 export const houdini = (async ({ event, resolve }) => {

@@ -1,5 +1,5 @@
-import { env as secrets } from '$env/dynamic/private';
 import { RetryAfterRateLimiter } from 'sveltekit-rate-limiter/server';
+import { env as secrets } from '$env/dynamic/private';
 
 export const limiter = new RetryAfterRateLimiter({
   // A rate is defined as [number, unit]

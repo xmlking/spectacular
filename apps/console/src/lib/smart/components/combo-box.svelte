@@ -18,11 +18,11 @@
   ```
 -->
 <script lang="ts">
-import { ErrorMessage } from '$lib/ui/components/form';
 import { Logger } from '@repo/utils';
 import type { HTMLSelectAttributes } from 'svelte/elements';
 import { writable } from 'svelte/store';
 import Select from 'svelte-select';
+import { ErrorMessage } from '$lib/ui/components/form';
 
 interface $$Props extends HTMLSelectAttributes {
   value: string;

@@ -21,7 +21,7 @@ import type { GraphQLError } from 'graphql';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import Select from 'svelte-select';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { UpdateGroup } from '../mutations';
 import type { PageData } from './$houdini';
 
@@ -39,7 +39,7 @@ let gqlErrors: PartialGraphQLErrors;
 // biome-ignore lint/correctness/noUndeclaredVariables: <ok>
 const { id, ...initialData } = $GroupData.data?.groups_by_pk;
 
-const form = superForm(defaults(initialData, zod(schema)), {
+const form = superForm(defaults(initialData, zod4(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -48,7 +48,7 @@ const form = superForm(defaults(initialData, zod(schema)), {
   timeoutMs: 4000,
 
   invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
-  validators: zodClient(schema),
+  validators: zod4Client(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
 

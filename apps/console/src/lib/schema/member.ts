@@ -1,5 +1,5 @@
-import { OrgRoles } from '$lib/types';
 import { z } from 'zod';
+import { OrgRoles } from '$lib/types';
 
 /**
  * Membership
@@ -18,9 +18,11 @@ export const memberSchema = z.object({
  * Member Invite Schama
  */
 const inviteSchema = z.object({
-  email: z.string({ required_error: 'Email is required' }).email({ message: 'Please enter a valid email address' }),
+  email: z.email({ error: 'Please enter a valid email address' }),
   role: z
-    .nativeEnum(OrgRoles, { invalid_type_error: 'Please select a valid role', required_error: 'Please select a role' })
+    .enum(OrgRoles, {
+      error: (issue) => (issue.input === undefined ? 'Please select a valid role' : 'Please select a role'),
+    })
     .default(OrgRoles.Member),
 });
 
@@ -41,4 +43,4 @@ export const addMembersSchema = z.object({
 
 export type AddMembesrSchema = typeof addMembersSchema;
 export type AddMembers = z.infer<typeof addMembersSchema>;
-export const addMembersKeys = addMembersSchema.keyof().Enum;
+export const addMembersKeys = addMembersSchema.keyof().enum;

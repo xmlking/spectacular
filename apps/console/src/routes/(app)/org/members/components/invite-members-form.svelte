@@ -35,7 +35,7 @@ import {
 } from 'lucide-svelte';
 import { fade, slide } from 'svelte/transition';
 import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { InviteMembers } from '../mutations';
 
 // Variables
@@ -52,7 +52,7 @@ const role = $page.data.role;
 let gqlErrors: PartialGraphQLErrors;
 let isDeleting = false;
 
-const form = superForm(defaults(zod(schema)), {
+const form = superForm(defaults(zod4(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -60,7 +60,7 @@ const form = superForm(defaults(zod(schema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: true,
-  validators: zodClient(schema),
+  validators: zod4Client(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
     const { data, errors } = await InviteMembers.mutate(

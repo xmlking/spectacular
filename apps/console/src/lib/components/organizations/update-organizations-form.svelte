@@ -1,4 +1,12 @@
 <script lang="ts">
+import { cleanClone, Logger } from '@repo/utils';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import type { GraphQLError } from 'graphql';
+import { Loader, MoreHorizontal, Search } from 'lucide-svelte';
+import Select from 'svelte-select';
+import SuperDebug, { defaults, type SuperValidated, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { goto, invalidate } from '$app/navigation';
 import { page } from '$app/stores';
 import { cache, fragment, graphql, type OrganizationFragment, type UpdateOrganization$input } from '$houdini';
@@ -14,14 +22,6 @@ import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputChipWrapper, InputPairs, type KeyValueRecord } from '$lib/ui/components/form';
-import { cleanClone, Logger } from '@repo/utils';
-import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import type { GraphQLError } from 'graphql';
-import { Loader, MoreHorizontal, Search } from 'lucide-svelte';
-import Select from 'svelte-select';
-import SuperDebug, { defaults, type SuperValidated, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
 import { UpdateOrganization } from './mutations';
 
 const log = new Logger('org:update:component');
@@ -57,7 +57,7 @@ const loadingState = getLoadingState();
 let gqlErrors: PartialGraphQLErrors;
 let pathname = $page.url.pathname;
 
-const form = superForm(defaults(initialData, zod(schema)), {
+const form = superForm(defaults(initialData, zod4(schema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -65,7 +65,7 @@ const form = superForm(defaults(initialData, zod(schema)), {
   delayMs: 100,
   timeoutMs: 4000,
   invalidateAll: 'force', // HINT: https://superforms.rocks/concepts/enhance#optimistic-updates
-  validators: zodClient(schema),
+  validators: zod4Client(schema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
 

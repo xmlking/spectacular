@@ -1,7 +1,7 @@
 <script lang="ts">
+import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 import { dev } from '$app/environment';
 import { Icon } from '$lib/ui/components/icons/index.js';
-import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 
 export let open = false;
 export let label = 'Toggle SuperDebug';

@@ -1,5 +1,5 @@
-import { env } from '$env/dynamic/private';
 import { flag } from 'flags/sveltekit';
+import { env } from '$env/dynamic/private';
 
 export const showMagicLinkLogin = flag<boolean>({
   key: 'showMagicLinkLogin',

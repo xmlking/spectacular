@@ -23,7 +23,7 @@ import SuperDebug, {
   setMessage,
   superForm,
 } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 
 // Variables
 let copied: boolean;
@@ -32,7 +32,7 @@ const log = new Logger('user:profile:pat:form:browser');
 const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const nhost = getNhostClient();
-const form = superForm(defaults(zod(createPATSchema)), {
+const form = superForm(defaults(zod4(createPATSchema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -40,7 +40,7 @@ const form = superForm(defaults(zod(createPATSchema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: true,
-  validators: zodClient(createPATSchema),
+  validators: zod4Client(createPATSchema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
     // First, check if elevate is required

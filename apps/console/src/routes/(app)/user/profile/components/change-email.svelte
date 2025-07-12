@@ -11,7 +11,7 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 
 export let initialData: ChangeEmail;
 // Variables
@@ -20,7 +20,7 @@ const toastStore = getToastStore();
 const loadingState = getLoadingState();
 const nhost = getNhostClient();
 
-const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
+const form = superForm(defaults(initialData, zod4(changeEmailSchema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -29,7 +29,7 @@ const form = superForm(defaults(initialData, zod(changeEmailSchema)), {
   timeoutMs: 4000,
   resetForm: true,
   invalidateAll: false, // this is key to avoid unnecessary data fetch call while using houdini smart cache.
-  validators: zodClient(changeEmailSchema),
+  validators: zod4Client(changeEmailSchema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
     // First, check if elevate is required

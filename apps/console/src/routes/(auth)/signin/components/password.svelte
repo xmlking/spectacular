@@ -15,7 +15,7 @@ import { getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
 import { Loader, MoreHorizontal } from 'lucide-svelte';
 import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod, zodClient } from 'sveltekit-superforms/adapters';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('auth:signin:password:browser');
 
@@ -24,7 +24,7 @@ const loadingState = getLoadingState();
 const toastStore = getToastStore();
 const nhost = getNhostClient();
 
-const form = superForm(defaults(zod(pwSchema)), {
+const form = superForm(defaults(zod4(pwSchema)), {
   SPA: true,
   dataType: 'json',
   taintedMessage: null,
@@ -32,7 +32,7 @@ const form = superForm(defaults(zod(pwSchema)), {
   resetForm: true,
   delayMs: 100,
   timeoutMs: 4000,
-  validators: zodClient(pwSchema),
+  validators: zod4Client(pwSchema),
   clearOnSubmit: 'errors-and-message',
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;

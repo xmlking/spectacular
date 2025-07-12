@@ -1,8 +1,8 @@
-import { building } from '$app/environment';
-import { i18n } from '$lib/i18n';
 import { Logger, startsWith } from '@repo/utils';
 import type { Handle } from '@sveltejs/kit';
 import { redirect as redirectWithFlash } from 'sveltekit-flash-message/server';
+import { building } from '$app/environment';
+import { i18n } from '$lib/i18n';
 
 /**
  * Protect the route

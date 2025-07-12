@@ -1,8 +1,8 @@
 import { z } from 'zod';
 export const userSchema = z.object({
-  id: z.string().uuid(),
+  id: z.uuid(),
   displayName: z.string().trim().min(4).max(256),
-  email: z.string().email().nullish(),
+  email: z.email().nullish(),
   defaultRole: z.string().trim().min(2),
   defaultOrg: z.string().trim().min(2),
 });
@@ -14,4 +14,4 @@ export const updateUserSchema = userSchema.omit({
 });
 export type UpdateUserSchema = typeof updateUserSchema;
 export type UpdateUser = z.infer<typeof updateUserSchema>;
-export const updateUserKeys = updateUserSchema.keyof().Enum;
+export const updateUserKeys = updateUserSchema.keyof().enum;
