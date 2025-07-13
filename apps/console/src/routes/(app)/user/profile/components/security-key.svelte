@@ -1,12 +1,12 @@
 <script lang="ts">
-import { cache, fragment, graphql, isPending, PendingValue, type SecurityKeyFragment } from '$houdini';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { getNhostClient } from '$lib/stores/nhost';
 import { Logger } from '@repo/utils';
 import { getToastStore } from '@skeletonlabs/skeleton';
 import { GraphQLError } from 'graphql';
 import { KeyRound, Trash2 } from 'lucide-svelte';
 import { fade } from 'svelte/transition';
+import { cache, fragment, graphql, isPending, PendingValue, type SecurityKeyFragment } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { getNhostClient } from '$lib/stores/nhost';
 import { deleteSecurityKey } from '../mutations';
 
 export let message: App.Superforms.Message | undefined;

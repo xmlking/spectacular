@@ -1,4 +1,10 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
+import { DataHandler } from '@vincjo/datatables/legacy';
+import { Check, MoreHorizontal, X } from 'lucide-svelte';
+import type { MouseEventHandler } from 'svelte/elements';
+import { slide } from 'svelte/transition';
 import { invalidate, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import { cache, fragment, graphql, type MembershipsFragment, PendingValue } from '$houdini';
@@ -10,12 +16,6 @@ import type { PartialGraphQLErrors } from '$lib/types';
 import { GraphQLErrors } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
 import { cn } from '$lib/ui/utils';
-import { Logger } from '@repo/utils';
-import { getToastStore, popup } from '@skeletonlabs/skeleton';
-import { DataHandler } from '@vincjo/datatables/legacy';
-import { Check, MoreHorizontal, X } from 'lucide-svelte';
-import type { MouseEventHandler } from 'svelte/elements';
-import { slide } from 'svelte/transition';
 import { LeaveOrganization } from '../mutations';
 
 const log = new Logger('user:profile:memberships:browser');

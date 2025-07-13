@@ -1,9 +1,9 @@
 <script lang="ts">
+import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
 import { i18n } from '$lib/i18n';
 import { LogoAnim } from '$lib/ui/components/logos';
-import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 
 const details = $page.error?.details;
 </script>

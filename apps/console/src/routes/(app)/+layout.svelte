@@ -1,10 +1,10 @@
 <!-- Layout: (dashboard) -->
 <script lang="ts">
+import { onMount } from 'svelte';
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import WaitForAuth from '$lib/components/layout/wait-for-auth.svelte';
 import { getNhostClient } from '$lib/stores/nhost';
-import { onMount } from 'svelte';
 
 const nhost = getNhostClient();
 

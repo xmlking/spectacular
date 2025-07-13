@@ -1,12 +1,12 @@
 <script lang="ts">
-import { fragment, graphql, type WelcomeUserFragment } from '$houdini';
-// import { persisted } from 'svelte-persisted-store';
-// import { RemoteTeamClock, ImgCard, CalendarIndev  } from "$lib/components/craft";
-import { RemoteTeamClock, Typewriter } from '$lib/components/craft';
 // NOTE: from https://swapy.tahazsh.com/
 // TODO: Drag-and-Drop Dashboard https://github.com/olliethedev/dnd-dashboard
 import { onDestroy, onMount } from 'svelte';
 import { createSwapy, type Swapy } from 'swapy';
+import { fragment, graphql, type WelcomeUserFragment } from '$houdini';
+// import { persisted } from 'svelte-persisted-store';
+// import { RemoteTeamClock, ImgCard, CalendarIndev  } from "$lib/components/craft";
+import { RemoteTeamClock, Typewriter } from '$lib/components/craft';
 import type { PageData } from './$houdini';
 
 export let data: PageData;

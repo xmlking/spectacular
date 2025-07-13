@@ -1,8 +1,8 @@
-import { order_by } from '$houdini';
-import { searchGroupSchema as schema } from '$lib/schema/group';
 import { Logger } from '@repo/utils';
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
+import { order_by } from '$houdini';
+import { searchGroupSchema as schema } from '$lib/schema/group';
 import type { BeforeLoadEvent, ListGroupsVariables as Variables } from './$houdini';
 
 const log = new Logger('groups:search:browser');

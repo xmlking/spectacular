@@ -1,22 +1,4 @@
 <script lang="ts">
-import { page } from '$app/stores';
-import {
-  cache,
-  fragment,
-  graphql,
-  type invitations_insert_input,
-  PendingValue,
-  type UpdateUserDetails$input,
-  type UserDetailsFragment,
-} from '$houdini';
-import * as m from '$i18n/messages';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { i18n } from '$lib/i18n';
-import { type AddMembers, addMembersKeys as keys, addMembersSchema as schema } from '$lib/schema/member';
-import { getLoadingState } from '$lib/stores/loading';
-import { OrgRoles, type PartialGraphQLErrors } from '$lib/types';
-import { DebugShell, GraphQLErrors } from '$lib/ui/components';
-import { Alerts } from '$lib/ui/components/form';
 import { Logger } from '@repo/utils';
 import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
@@ -36,6 +18,24 @@ import {
 import { fade, slide } from 'svelte/transition';
 import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
 import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
+import { page } from '$app/stores';
+import {
+  cache,
+  fragment,
+  graphql,
+  type invitations_insert_input,
+  PendingValue,
+  type UpdateUserDetails$input,
+  type UserDetailsFragment,
+} from '$houdini';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { i18n } from '$lib/i18n';
+import { type AddMembers, addMembersKeys as keys, addMembersSchema as schema } from '$lib/schema/member';
+import { getLoadingState } from '$lib/stores/loading';
+import { OrgRoles, type PartialGraphQLErrors } from '$lib/types';
+import { DebugShell, GraphQLErrors } from '$lib/ui/components';
+import { Alerts } from '$lib/ui/components/form';
 import { InviteMembers } from '../mutations';
 
 // Variables

@@ -1,4 +1,10 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import { Loader, MoreHorizontal } from 'lucide-svelte';
+import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { changePasswordSchema } from '$lib/schema/user';
@@ -6,12 +12,6 @@ import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
-import { Logger } from '@repo/utils';
-import { getToastStore } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import { Loader, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 
 // Variables
 const log = new Logger('user:profile:change:password:browser');

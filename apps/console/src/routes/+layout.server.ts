@@ -1,6 +1,6 @@
-import { env as secrets } from '$env/dynamic/private';
 import { Logger } from '@repo/utils';
 import { loadFlash } from 'sveltekit-flash-message/server';
+import { env as secrets } from '$env/dynamic/private';
 
 const log = new Logger('root:layout:server');
 

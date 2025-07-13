@@ -1,4 +1,10 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import { DataHandler } from '@vincjo/datatables/legacy';
+import { GraphQLError } from 'graphql';
+import { Trash2 } from 'lucide-svelte';
+import type { MouseEventHandler } from 'svelte/elements';
 import type { PersonalAccessTokensFragment } from '$houdini';
 import { fragment, graphql, PendingValue } from '$houdini';
 import { handleMessage } from '$lib/components/layout/toast-manager';
@@ -7,12 +13,6 @@ import { getNhostClient } from '$lib/stores/nhost';
 import { DateTime } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
 import * as Table from '$lib/ui/components/table';
-import { Logger } from '@repo/utils';
-import { getToastStore } from '@skeletonlabs/skeleton';
-import { DataHandler } from '@vincjo/datatables/legacy';
-import { GraphQLError } from 'graphql';
-import { Trash2 } from 'lucide-svelte';
-import type { MouseEventHandler } from 'svelte/elements';
 import { deletePersonalAccessToken } from '../mutations';
 
 // Variables

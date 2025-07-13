@@ -1,4 +1,10 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
+import { getToastStore, popup } from '@skeletonlabs/skeleton';
+import { check, DataHandler, type Row } from '@vincjo/datatables/legacy';
+import { Check, MoreHorizontal, X } from 'lucide-svelte';
+import type { MouseEventHandler } from 'svelte/elements';
+import { slide } from 'svelte/transition';
 import { invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import { cache, fragment, graphql, PendingValue, type UserInvitationsFragment } from '$houdini';
@@ -10,12 +16,6 @@ import type { PartialGraphQLErrors } from '$lib/types';
 import { DateTime, GraphQLErrors } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
 import { cn } from '$lib/ui/utils';
-import { Logger } from '@repo/utils';
-import { getToastStore, popup } from '@skeletonlabs/skeleton';
-import { check, DataHandler, type Row } from '@vincjo/datatables/legacy';
-import { Check, MoreHorizontal, X } from 'lucide-svelte';
-import type { MouseEventHandler } from 'svelte/elements';
-import { slide } from 'svelte/transition';
 import { AcceptInvitation, DeclineInvitation } from '../mutations';
 
 const log = new Logger('user:profile:invitations:browser');

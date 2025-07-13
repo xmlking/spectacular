@@ -1,15 +1,15 @@
 <script lang="ts">
-import { type AuthProvidersFragment, fragment, graphql, PendingValue } from '$houdini';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { getNhostClient } from '$lib/stores/nhost';
-import { Alerts } from '$lib/ui/components/form';
-import { Icon } from '$lib/ui/components/icons';
 import type { NhostClient, Provider } from '@nhost/nhost-js';
 import type { ModalSettings } from '@skeletonlabs/skeleton';
 import { getModalStore, getToastStore, initializeStores, Modal } from '@skeletonlabs/skeleton';
 import { Github } from 'lucide-svelte';
 import { onMount } from 'svelte';
 import { writable } from 'svelte/store';
+import { type AuthProvidersFragment, fragment, graphql, PendingValue } from '$houdini';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { getNhostClient } from '$lib/stores/nhost';
+import { Alerts } from '$lib/ui/components/form';
+import { Icon } from '$lib/ui/components/icons';
 import { deleteSocialConnect } from '../mutations';
 
 const modalStore = getModalStore();

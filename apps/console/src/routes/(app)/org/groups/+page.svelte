@@ -1,8 +1,8 @@
 <script lang="ts">
-import MaybeError from '$lib/components/layout/maybe-error.svelte';
-import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Logger } from '@repo/utils';
 import SuperDebug from 'sveltekit-superforms';
+import MaybeError from '$lib/components/layout/maybe-error.svelte';
+import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import type { PageData } from './$houdini';
 import ListGroupsForm from './components/search-groups-form.svelte';
 import ListGroupsResult from './components/search-groups-result.svelte';

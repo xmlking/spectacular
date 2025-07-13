@@ -1,10 +1,10 @@
 <script lang="ts">
+import { DataHandler } from '@vincjo/datatables/legacy';
+import { Settings } from 'lucide-svelte';
 import { fragment, graphql, type OrgSettingsWithDefaultsFragment } from '$houdini';
 import { loaded } from '$lib/graphql/loading';
 import { DateTime } from '$lib/ui/components';
 import * as Table from '$lib/ui/components/table';
-import { DataHandler } from '@vincjo/datatables/legacy';
-import { Settings } from 'lucide-svelte';
 
 export let organization: OrgSettingsWithDefaultsFragment;
 $: data = fragment(

@@ -1,11 +1,11 @@
 <script lang="ts">
+import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 import { page } from '$app/stores';
 import { PendingValue } from '$houdini';
 import { Meta } from '$lib/components';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import { allLoaded, loaded, loading } from '$lib/graphql/loading';
 import { GraphQLErrors } from '$lib/ui/components';
-import { Tab, TabGroup } from '@skeletonlabs/skeleton';
 import type { PageData } from './$houdini';
 import ChangeEmailForm from './components/change-email.svelte';
 import ChangePasswordForm from './components/change-password.svelte';

@@ -1,4 +1,11 @@
 <script lang="ts">
+import { cleanClone, Logger } from '@repo/utils';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import { Loader, MoreHorizontal } from 'lucide-svelte';
+import Select from 'svelte-select';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 import { graphql, type groups_insert_input } from '$houdini';
@@ -15,13 +22,6 @@ import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputChipWrapper, InputPairs } from '$lib/ui/components/form';
-import { cleanClone, Logger } from '@repo/utils';
-import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import { Loader, MoreHorizontal } from 'lucide-svelte';
-import Select from 'svelte-select';
-import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { createGroup } from '../mutations';
 
 const log = new Logger('groups.create.browser');

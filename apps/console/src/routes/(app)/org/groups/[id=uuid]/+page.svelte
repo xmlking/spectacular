@@ -1,4 +1,12 @@
 <script lang="ts">
+import { cleanClone, Logger } from '@repo/utils';
+import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import type { GraphQLError } from 'graphql';
+import { Loader, MoreHorizontal } from 'lucide-svelte';
+import Select from 'svelte-select';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { goto } from '$app/navigation';
 import { cache, type UpdateGroup$input } from '$houdini';
 import * as m from '$i18n/messages';
@@ -14,14 +22,6 @@ import type { PartialGraphQLErrors } from '$lib/types';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputChipWrapper, InputPairs } from '$lib/ui/components/form';
 import { actionOptions, directionOptions, protocols, subjectTypeOptions } from '$lib/utils/options';
-import { cleanClone, Logger } from '@repo/utils';
-import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import type { GraphQLError } from 'graphql';
-import { Loader, MoreHorizontal } from 'lucide-svelte';
-import Select from 'svelte-select';
-import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { UpdateGroup } from '../mutations';
 import type { PageData } from './$houdini';
 

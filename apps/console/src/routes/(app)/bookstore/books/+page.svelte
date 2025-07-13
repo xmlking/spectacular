@@ -1,6 +1,6 @@
 <script lang="ts">
-import * as Table from '$lib/ui/components/table';
 import { DataHandler } from '@vincjo/datatables/legacy';
+import * as Table from '$lib/ui/components/table';
 // import PageToCLayout from '$lib/components/layout/page-toc-layout.svelte';
 // import PageLayout from '$lib/components/layout/page-layout.svelte';
 

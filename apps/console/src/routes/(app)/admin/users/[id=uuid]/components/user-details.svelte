@@ -1,4 +1,11 @@
 <script lang="ts">
+import { cleanClone, Logger } from '@repo/utils';
+import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import type { GraphQLError } from 'graphql';
+import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';
+import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { page } from '$app/stores';
 import {
   cache,
@@ -22,13 +29,6 @@ import { getNhostClient } from '$lib/stores/nhost';
 import type { PartialGraphQLErrors } from '$lib/types';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, InputPairs } from '$lib/ui/components/form';
-import { cleanClone, Logger } from '@repo/utils';
-import { AppBar, Avatar, filter, getToastStore } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import type { GraphQLError } from 'graphql';
-import { Loader, MoreHorizontal, UserRound } from 'lucide-svelte';
-import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { UpdateUserDetail } from '../mutations';
 
 const log = new Logger('user:details:browser');

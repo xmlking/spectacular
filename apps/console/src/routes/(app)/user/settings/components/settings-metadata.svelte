@@ -1,10 +1,10 @@
 <script lang="ts">
-import { graphql, PendingValue, type UserSettingsData$result } from '$houdini';
-import { loaded } from '$lib/graphql/loading';
-import * as Table from '$lib/ui/components/table';
 import { Logger } from '@repo/utils';
 import { check, DataHandler, type Row } from '@vincjo/datatables/legacy';
 import { Settings, User } from 'lucide-svelte';
+import { graphql, PendingValue, type UserSettingsData$result } from '$houdini';
+import { loaded } from '$lib/graphql/loading';
+import * as Table from '$lib/ui/components/table';
 
 const log = new Logger('settings:allowed-keys:browser');
 // Variables

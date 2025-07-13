@@ -1,8 +1,8 @@
-import { order_by } from '$houdini';
-import { searchUserSchema as schema } from '$lib/schema/user';
 import { Logger } from '@repo/utils';
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
+import { order_by } from '$houdini';
+import { searchUserSchema as schema } from '$lib/schema/user';
 import type { BeforeLoadEvent, SearchUsersAllVariables as Variables } from './$houdini';
 
 const log = new Logger('users:search:browser');

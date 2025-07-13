@@ -1,12 +1,12 @@
 <script lang="ts">
+import { AppBar, getToastStore } from '@skeletonlabs/skeleton';
+import { UserRound } from 'lucide-svelte';
+import SuperDebug from 'sveltekit-superforms';
 import { invalidate } from '$app/navigation';
 import * as m from '$i18n/messages';
 import { handleMessage } from '$lib/components/layout/toast-manager';
 import { getNhostClient } from '$lib/stores/nhost';
 import { Alerts } from '$lib/ui/components/form';
-import { AppBar, getToastStore } from '@skeletonlabs/skeleton';
-import { UserRound } from 'lucide-svelte';
-import SuperDebug from 'sveltekit-superforms';
 
 // Variables
 let message: App.Superforms.Message | undefined;

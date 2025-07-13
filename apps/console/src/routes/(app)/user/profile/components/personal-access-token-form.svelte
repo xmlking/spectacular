@@ -1,14 +1,4 @@
 <script lang="ts">
-import { invalidate, invalidateAll } from '$app/navigation';
-import { page } from '$app/stores';
-import { cache } from '$houdini';
-import * as m from '$i18n/messages';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { createPATSchema } from '$lib/schema/user';
-import { getLoadingState } from '$lib/stores/loading';
-import { getNhostClient } from '$lib/stores/nhost';
-import { DebugShell } from '$lib/ui/components';
-import { Alerts } from '$lib/ui/components/form';
 import { Logger } from '@repo/utils';
 import { AppBar, clipboard, getToastStore } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
@@ -24,6 +14,16 @@ import SuperDebug, {
   superForm,
 } from 'sveltekit-superforms';
 import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
+import { invalidate, invalidateAll } from '$app/navigation';
+import { page } from '$app/stores';
+import { cache } from '$houdini';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { createPATSchema } from '$lib/schema/user';
+import { getLoadingState } from '$lib/stores/loading';
+import { getNhostClient } from '$lib/stores/nhost';
+import { DebugShell } from '$lib/ui/components';
+import { Alerts } from '$lib/ui/components/form';
 
 // Variables
 let copied: boolean;

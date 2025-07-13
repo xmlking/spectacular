@@ -1,7 +1,7 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import UpdateOrganizationsForm from '$lib/components/organizations/update-organizations-form.svelte';
-import { Logger } from '@repo/utils';
 import type { PageData } from './$houdini';
 
 const log = new Logger('org:organizations:update:page');

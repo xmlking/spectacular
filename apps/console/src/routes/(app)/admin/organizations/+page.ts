@@ -1,8 +1,8 @@
-import { order_by } from '$houdini';
-import { searchOrganizationSchema as schema } from '$lib/schema/organization';
 import { Logger } from '@repo/utils';
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
+import { order_by } from '$houdini';
+import { searchOrganizationSchema as schema } from '$lib/schema/organization';
 import type { BeforeLoadEvent, SearchOrganizationsVariables as Variables } from './$houdini';
 
 const log = new Logger('organizations:search:browser');

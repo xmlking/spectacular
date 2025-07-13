@@ -1,5 +1,15 @@
 <!-- Layout: (root) -->
 <script lang="ts">
+import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { ParaglideJS } from '@inlang/paraglide-sveltekit';
+import { Logger, startsWith } from '@repo/utils';
+import type { ModalComponent } from '@skeletonlabs/skeleton';
+import { AppShell, initializeStores, Modal, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
+import { inject } from '@vercel/analytics';
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+import { mountVercelToolbar } from '@vercel/toolbar/vite';
+import { type ComponentEvents, onMount } from 'svelte';
+import { setupViewTransition } from 'sveltekit-view-transition';
 import { browser, dev } from '$app/environment';
 import { page } from '$app/stores';
 import Drawer from '$lib/components/layout/drawer.svelte';
@@ -13,16 +23,6 @@ import Search from '$lib/modals/search.svelte';
 import { scroll, storeTheme, storeVercelProductionMode } from '$lib/stores';
 import { setLoadingState } from '$lib/stores/loading';
 import { online, orientation, size } from '$lib/stores/window';
-import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-import { ParaglideJS } from '@inlang/paraglide-sveltekit';
-import { Logger, startsWith } from '@repo/utils';
-import type { ModalComponent } from '@skeletonlabs/skeleton';
-import { AppShell, initializeStores, Modal, prefersReducedMotionStore, storePopup } from '@skeletonlabs/skeleton';
-import { inject } from '@vercel/analytics';
-import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
-import { mountVercelToolbar } from '@vercel/toolbar/vite';
-import { type ComponentEvents, onMount } from 'svelte';
-import { setupViewTransition } from 'sveltekit-view-transition';
 import '../app.pcss';
 import { setNhostClient } from '$lib/stores/nhost';
 import type { LayoutData } from './$types';

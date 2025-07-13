@@ -1,7 +1,7 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import { GraphQLErrors } from '$lib/ui/components';
-import { Logger } from '@repo/utils';
 import type { PageData } from './$houdini';
 import UserDetails from './components/user-details.svelte';
 import UserGroups from './components/user-groups.svelte';

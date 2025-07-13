@@ -165,3 +165,4 @@ cat  /var/lib/pgsql/14/data/pg_hba.conf
 - [Postgres is a great pub/sub & job server](https://webapp.io/blog/postgres-is-the-answer/)
 - [Building a message queue on Postgres](https://www.oliverlambson.com/pgmq) ,[code](https://github.com/oliverlambson/pgmq/tree/main)
 - [PostgreSQL Row Level Security](https://aws.amazon.com/blogs/database/multi-tenant-data-isolation-with-postgresql-row-level-security/) Multi-tenant data isolation with PostgreSQL Row Level Security
+- [documentdb in postgres](https://github.com/microsoft/documentdb)

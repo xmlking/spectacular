@@ -1,7 +1,7 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
 import MaybeError from '$lib/components/layout/maybe-error.svelte';
 import * as Smart from '$lib/smart/components';
-import { Logger } from '@repo/utils';
 import type { PageData } from './$houdini';
 import Settings from './components/settings.svelte';
 import SettingsMetadata from './components/settings-metadata.svelte';

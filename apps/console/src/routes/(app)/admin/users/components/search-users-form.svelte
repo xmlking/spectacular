@@ -1,4 +1,9 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
+import { AppBar } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import { LoaderIcon, MoreHorizontalIcon, ScaleIcon, SearchIcon, ShieldCheckIcon } from 'lucide-svelte';
+import SuperDebug, { type SuperValidated, superForm } from 'sveltekit-superforms';
 import * as m from '$i18n/messages';
 import type { SearchUser } from '$lib/schema/user.js';
 import { searchUserKeys as keys } from '$lib/schema/user.js';
@@ -6,11 +11,6 @@ import { getLoadingState } from '$lib/stores/loading';
 import type { PartialGraphQLErrors, Subject } from '$lib/types';
 import { DebugShell, GraphQLErrors } from '$lib/ui/components';
 import { Alerts, ErrorMessage } from '$lib/ui/components/form';
-import { Logger } from '@repo/utils';
-import { AppBar } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import { LoaderIcon, MoreHorizontalIcon, ScaleIcon, SearchIcon, ShieldCheckIcon } from 'lucide-svelte';
-import SuperDebug, { type SuperValidated, superForm } from 'sveltekit-superforms';
 
 const log = new Logger('users:search-form:browser');
 

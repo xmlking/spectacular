@@ -1,11 +1,4 @@
 <script lang="ts">
-import * as m from '$i18n/messages';
-import { handleMessage } from '$lib/components/layout/toast-manager';
-import { smartPaste } from '$lib/smart/actions';
-import { SmartSupport } from '$lib/smart/components';
-import { getLoadingState } from '$lib/stores/loading';
-import { DebugShell } from '$lib/ui/components';
-import { Alerts, ErrorMessage } from '$lib/ui/components/form';
 import { Logger } from '@repo/utils';
 import { getToastStore, SlideToggle } from '@skeletonlabs/skeleton';
 import * as Form from 'formsnap';
@@ -13,6 +6,13 @@ import { Loader, MoreHorizontal, Sparkles } from 'lucide-svelte';
 import { writable } from 'svelte/store';
 import SuperDebug, { defaults, setError, superForm } from 'sveltekit-superforms';
 import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
+import * as m from '$i18n/messages';
+import { handleMessage } from '$lib/components/layout/toast-manager';
+import { smartPaste } from '$lib/smart/actions';
+import { SmartSupport } from '$lib/smart/components';
+import { getLoadingState } from '$lib/stores/loading';
+import { DebugShell } from '$lib/ui/components';
+import { Alerts, ErrorMessage } from '$lib/ui/components/form';
 import Sample from './sample.svelte';
 import { personJsonSchema as jsonSchema, type Person, personSchema } from './schema.js';
 

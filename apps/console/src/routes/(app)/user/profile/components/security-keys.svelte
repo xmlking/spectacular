@@ -1,10 +1,10 @@
 <script lang="ts">
-import { fragment, graphql, type SecurityKeysFragment } from '$houdini';
-import { loaded } from '$lib/graphql/loading';
-import { Alerts } from '$lib/ui/components/form';
 import { flip } from 'svelte/animate';
 import { quintOut } from 'svelte/easing';
 import { fade } from 'svelte/transition';
+import { fragment, graphql, type SecurityKeysFragment } from '$houdini';
+import { loaded } from '$lib/graphql/loading';
+import { Alerts } from '$lib/ui/components/form';
 import SecurityKeyItem from './security-key.svelte';
 
 export let user: SecurityKeysFragment;
