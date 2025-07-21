@@ -29,7 +29,7 @@ const form = superForm(defaults(zod4(webAuthnSchema)), {
   delayMs: 100,
   timeoutMs: 4000,
   resetForm: true,
-  validators: zod(webAuthnSchema),
+  validators: zod4(webAuthnSchema),
   async onUpdate({ form, cancel }) {
     if (!form.valid) return;
     // First, check if elevate is required

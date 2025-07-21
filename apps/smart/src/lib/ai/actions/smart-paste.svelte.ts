@@ -34,7 +34,7 @@ type SmartPasteAction<T extends Item> = Action<HTMLFormElement, Options<T> | und
  * <script lang="ts">
  *   import { smartPaste } from "@repo/smart/actions";
  *   let loading = writable(false);
- *   const jsonSchema = zod(personSchema).jsonSchema;
+ *   const jsonSchema = zod4(personSchema).jsonSchema;
  *
  *  function handlePaste(event: CustomEvent<Person>) {
  *   const { detail } = event;

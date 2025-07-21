@@ -30,7 +30,7 @@ export const _ListGroupsVariables: Variables = async (event) => {
   log.debug('in _ListGroupsVariables', { url });
   const {
     data: { limit, offset, displayName },
-  } = await superValidate(url, zod(schema));
+  } = await superValidate(url, zod4(schema));
   // const dataCopy = cleanClone(form.data, { empty: 'strip' });
   const orderBy = [{ updatedAt: order_by.desc_nulls_first }];
   const where = {
