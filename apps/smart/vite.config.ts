@@ -98,9 +98,6 @@ export default defineConfig({
       },
     },
   },
-  optimizeDeps: {
-    include: ['@repo/ui'],
-  },
   build: {
     rollupOptions: {
       output: {
