@@ -1,7 +1,7 @@
 # conductor
 
 ```shell
-pnpx @graphql-conductor/bin ./conductor.config.yaml
+bunx @graphql-conductor/bin ./conductor.config.yaml
 ```
 
 https://github.com/the-guild-org/conductor

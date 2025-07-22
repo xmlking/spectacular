@@ -97,12 +97,12 @@ TODO: switch to sveltest <https://sveltest.dev/>
 
 ```shell
 # optional
-pnpm i -O @vitest/ui
+bun i -O @vitest/ui
 ```
 
 ```shell
 # install supported browsers
-pnpx playwright install
+bunx playwright install
 ```
 
 ### SEO
@@ -112,7 +112,7 @@ pnpx playwright install
 Svelte [Meta Tags](https://github.com/oekazuma/svelte-meta-tags) provides components designed to help you manage SEO for Svelte projects.
 
 ```shell
-pnpm add -D svelte-meta-tags --filter "./apps/**"
+bun add -D svelte-meta-tags --filter "./apps/**"
 ```
 
 #### Image Optimization
@@ -120,7 +120,7 @@ pnpm add -D svelte-meta-tags --filter "./apps/**"
 [Svelte Images](https://kit.svelte.dev/docs/images) A toolbox of import directives for Vite that can transform your image at compile-time.
 
 ```shell
-pnpm add -D @sveltejs/enhanced-img --filter "./apps/**"
+bun add -D @sveltejs/enhanced-img --filter "./apps/**"
 ```
 
 **Setup**
@@ -145,7 +145,7 @@ import Image from 'example.jpg?w=400&h=300&format=webp';
 [docs](https://dev.to/theether0/dynamic-og-image-with-sveltekit-and-satori-4438), [examples](https://github.com/etherCorps/sveltekit-og/tree/main/examples)
 
 ```shell
-pnpm add -D @ethercorps/sveltekit-og --filter "./apps/docs"
+bun add -D @ethercorps/sveltekit-og --filter "./apps/docs"
 ```
 
 ### Release
@@ -156,7 +156,7 @@ working with changesets in [turborepo](https://turbo.build/repo/docs/handbook/pu
 
 ```shell
 npx changeset init
-pnpm add -D @changesets/changelog-github  -w
+bun add -D @changesets/changelog-github  -w
 ```
 
 ### Web Analytics
@@ -164,7 +164,7 @@ pnpm add -D @changesets/changelog-github  -w
 [Vercel Web Analytics](https://vercel.com/docs/frameworks/sveltekit#web-analytics)
 
 ```shell
-pnpm add -D @vercel/analytics --filter "./apps/**"
+bun add -D @vercel/analytics --filter "./apps/**"
 ```
 
 In your SvelteKit project's main `+layout.svelte` file, add the following `<script>`:
@@ -188,7 +188,7 @@ Animation with [tailwindcss-animate](https://github.com/jamiebuilds/tailwindcss-
 Add and configure tailwindcss via [svelte-add](https://github.com/svelte-add/tailwindcss)
 
 ```shell
-pnpx svelte-add@latest tailwindcss  --typography --daisyui
+bunx svelte-add@latest tailwindcss  --typography --daisyui
 # NOTE: tailwindcss's forms plugin and daisyui wont work together
 # also add other tailwind plugins and include them in `tailwind.config.cjs`
 pnpm add --save-peer @tailwindcss/container-queries tailwindcss-animate tailwind-merge clsx --filter ./packages/tailwind-config
@@ -363,7 +363,7 @@ pnpm add -D sveltekit-view-transition@latest --filter "./apps/**"
 #### Markdown CMS
 
 ```shell
-pnpx svelte-add@latest mdsvex
+bunx svelte-add@latest mdsvex
 ```
 
 #### Time Distance
@@ -379,7 +379,7 @@ pnpm add -D svelte-time-distance date-fns
 Sentry helps track errors in code.
 
 ```shell
-pnpx sentry/wizard@latest -i sveltekit
+bunx sentry/wizard@latest -i sveltekit
 ```
 
 #### GraphQL
@@ -397,8 +397,8 @@ Houdini Plugins
 ```shell
 pnpm add -D houdini graphql-ws
 
-# pnpx houdini init
-pnpx houdini@latest init --headers "x-hasura-admin-secret=<HASURA_GRAPHQL_ADMIN_SECRET>"
+# bunx houdini init
+bunx houdini@latest init --headers "x-hasura-admin-secret=<HASURA_GRAPHQL_ADMIN_SECRET>"
 
 # To updated your local schema with latest from the graphql server, run:
 # HINT: it will use `apiUrl` and `schemaPollHeaders` in `houdini.config.js`
@@ -450,7 +450,7 @@ pnpm add -D svelte-select
 We switched to inlang's [Paraglide JS](https://inlang.com/m/gerre34r/library-inlang-paraglideJs/sveltekit) for i18n
 
 ```shell
-pnpx @inlang/paraglide-js@latest init
+bunx @inlang/paraglide-js@latest init
 ```
 
 #### Progressive Web Apps (PWA)

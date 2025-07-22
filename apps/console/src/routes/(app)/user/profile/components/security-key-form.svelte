@@ -1,4 +1,10 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
+import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod4 } from 'sveltekit-superforms/adapters';
 import { invalidate, invalidateAll } from '$app/navigation';
 import { page } from '$app/stores';
 import { cache } from '$houdini';
@@ -9,12 +15,6 @@ import { getLoadingState } from '$lib/stores/loading';
 import { getNhostClient } from '$lib/stores/nhost';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
-import { Logger } from '@repo/utils';
-import { getToastStore } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import { Loader, LoaderCircle, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { defaults, type ErrorStatus, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod4 } from 'sveltekit-superforms/adapters';
 
 // Variables
 const log = new Logger('user:profile:keys:form:browser');

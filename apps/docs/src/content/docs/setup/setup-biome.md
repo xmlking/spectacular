@@ -47,20 +47,20 @@ Follow this guide step by step:
 ## 1. Install Biome
 
 ```sh
-pnpm install --save-dev --save-exact @biomejs/biome
+bun install --save-dev --save-exact @biomejs/biome
 ```
 
 ## 1.1 Install Configuration
 
 ```sh
-pnpx @biomejs/biome init
+bunx @biomejs/biome init
 ```
 
 ## 2. Migrate ESLint & Prettier Configurations
 
 ```sh
-pnpx @biomejs/biome migrate eslint --write
-pnpx @biomejs/biome migrate prettier --write
+bunx @biomejs/biome migrate eslint --write
+bunx @biomejs/biome migrate prettier --write
 ```
 
 ## 3. Remove all ESLint and Prettier dependencies and plugins from package.json
@@ -83,7 +83,7 @@ pnpx @biomejs/biome migrate prettier --write
 ## 5. Run Biome for a test
 
 ```sh
-pnpm run biome:lint
+bun run biome:lint
 ```
 
 ## 6. If not exists create a file `.vscode/settings.json` and add the following settings

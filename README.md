@@ -65,9 +65,9 @@
 ```shell
 cd ~/Developer/Work/SPA
 git clone https://github.com/xmlking/spectacular.git
-cd spectacular && pnpm i
+cd spectacular && bun install
 # (optional) playwright is required for end-to-end testing
-bunx playwright install
+bun x playwright install
 # (optional) add git-commit-hooks
 cog install-hook --all
 ```
@@ -81,7 +81,7 @@ Use `.env.local` to override environment variables in `.env` (secrets like API k
 
 ## Developing
 
-Once you've cloned the project and installed dependencies with `pnpm i`, start a development server:
+Once you've cloned the project and installed dependencies with `bun i`, start a development server:
 
 ### Start local Hasura
 
@@ -131,8 +131,8 @@ PUBLIC_NHOST_GRAPHQL_URL=api.mycompany.com:443 turbo dev
 To update the packages to their latest versions in `package.json`
 
 ```shell
-pnpm up --latest -r
-pnpm audit --fix
+bun update --latest
+bun update --check
 ```
 
 ### Format
@@ -167,12 +167,12 @@ turbo test:ui
 turbo test:coverage
 
 # updating Snapshots
-pnpx vitest -u
+bunx vitest -u
 
 # test specific folder
-pnpx vitest apps/web/src/lib/utils
+bunx vitest apps/web/src/lib/utils
 (or)
-./node_modules/.bin/vitest run apps/web/src/lib/utils
+bun node_modules/.bin/vitest run apps/web/src/lib/utils
 ```
 
 ### E2E Tests
@@ -231,5 +231,5 @@ To build and publish libs
 ```shell
 turbo build --filter=lib...
 cd package
-pnpm publish
+bun publish
 ```

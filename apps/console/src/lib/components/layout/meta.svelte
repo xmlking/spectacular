@@ -7,7 +7,7 @@ export type TwitterCardType = 'Formasummaryt' | 'summary_large_image';
   export let type: OpenGraphType = 'article';
   export let title = 'Spectacular Template (web)';
   export let siteName = 'Spectacular Template (web)';
-  export let description = 'SvelteKit (w/ Houdini) x Tailwind CSS x Nhost x Turborepo (pnpm)';
+  export let description = 'SvelteKit (w/ Houdini) x Tailwind CSS x Nhost x Turborepo (bun)';
   export let card: TwitterCardType = 'summary_large_image';
   export let image = 'https://repository-images.githubusercontent.com/675379612/2b8bb511-5e3f-41bc-a3d3-0bf8e51a2c31';
   export let canonical: string;

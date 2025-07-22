@@ -47,9 +47,10 @@ export default defineConfig({
         process.env.BUILD_TIME
     ),
   },
-  // ssr: {
-  //     noExternal: ['@nhost/nhost-js', 'graphql'],
-  // },
+  ssr: {
+    // noExternal: ["@nhost/nhost-js", "graphql"],
+    noExternal: ['@inlang/paraglide-js'],
+  },
   test: {
     projects: [
       {

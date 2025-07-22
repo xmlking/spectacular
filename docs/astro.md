@@ -45,7 +45,7 @@ Anytime a new version of astro released, we can upgrade to latest version with:
 
 ```shell
 cd apps/web
-pnpx @astrojs/upgrade
+bunx @astrojs/upgrade
 ```
 
 ## Reference

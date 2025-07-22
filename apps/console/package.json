@@ -23,6 +23,7 @@
     "lang:translate": "inlang machine translate --project ./project.inlang",
     "lang:validate": "inlang validate --project ./project.inlang",
     "preview": "ORIGIN=https://console.traefik.me:4173 dotenv-run -f .env -f .secrets -v -- vite preview",
+    "preview:production": "NODE_ENV=production ORIGIN=https://console.traefik.me:4173 dotenv-run -f .env -f .secrets -v -- vite preview",
     "prepare": "svelte-kit sync || echo ''",
     "sync": "dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
     "sync:production": "NODE_ENV=production dotenv-run -f .env -f .secrets -v -- svelte-kit sync",
