@@ -196,6 +196,7 @@ Awesome **SvelteKit** Links
 - [Titan](https://titan.rdsx.dev/) - Modern Next.js 15 stack with Better-Auth, Drizzle ORM, PostgreSQL, Shadcn UI, and Tailwind v4 for fast, secure web app development.
 - [SveltePlex](https://github.com/Pandoks/svelteplex) - Monorepo Template for Everything Svelte | SvelteKit + Shadcn + Electron + Mobile
 - [@drop-in](https://github.com/stolinski/drop-in) - A platform for building **local-first** apps rapidly with Svelte 5, Svelte Kit and [Zero](https://zero.rocicorp.dev/)
+- [Rolldown](https://github.com/Nopsled/template-sveltekit-rolldown-tauri-servo-biome-tailwind-shadcn-bun) - Template: SvelteKit (with Rolldown) + Tauri (with Servo) + Biome + Tailwind + ShadCn + Bun
 
 ## Deployment
 

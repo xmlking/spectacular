@@ -3,7 +3,7 @@
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
 ```
-pnpm create astro@latest -- --template starlight/tailwind
+bun create astro@latest -- --template starlight/tailwind
 ```
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/tailwind)
@@ -44,7 +44,7 @@ All commands are run from the root of the project, from a terminal:
 
 | Command                 | Action                                           |
 | :---------------------- | :----------------------------------------------- |
-| `pnpm install`          | Installs dependencies                            |
+| `bun install`           | Installs dependencies                            |
 | `turbo dev`             | Starts local dev server at `localhost:4321`      |
 | `turbo build`           | Build your production site to `./dist/`          |
 | `turbo preview`         | Preview your build locally, before deploying     |
@@ -63,5 +63,5 @@ We are using `rehype-mermaid` which depends on `Playwright`.
 Install **playwright**: locally and in CI environment:
 
 ```shell
-pnpx playwright install --with-deps chromium
+bunx playwright install --with-deps chromium
 ```

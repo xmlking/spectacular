@@ -28,8 +28,8 @@
     "sync": "svelte-kit sync",
     "test": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
-    "ui:add": "pnpx shadcn-svelte@latest add",
-    "ui:update": "pnpx shadcn-svelte@latest update"
+    "ui:add": "bunx shadcn-svelte@latest add",
+    "ui:update": "bunx shadcn-svelte@latest update"
   },
   "devDependencies": {
     "@internationalized/date": "^3.8.2",

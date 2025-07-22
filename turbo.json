@@ -19,7 +19,7 @@
     "SENTRY_PROJECT",
     "npm_lifecycle_event"
   ],
-  "globalDependencies": [".env", ".secrets", "pnpm-lock.yaml"],
+  "globalDependencies": [".env", ".secrets", "bun.lock"],
   "tasks": {
     "test": {
       "dependsOn": ["transit"]

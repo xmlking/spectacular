@@ -1,0 +1,15 @@
+logLevel = "error" # "debug" | "warn" | "error"
+telemetry = false
+
+[test]
+coverage = false
+# to require 90% line-level and function-level coverage
+coverageThreshold = { line = 0.7, function = 0.8, statement = 0.9 }
+
+# [install]
+# set default registry as a string
+# registry = "https://registry.npmjs.org"
+# set a token
+# registry = { url = "https://registry.npmjs.org", token = "123456" }
+# set a username/password
+# registry = "https://username:password@registry.npmjs.org"

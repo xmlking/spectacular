@@ -4,7 +4,7 @@ Frontend to showcase `User-Interactive` AI Agents
 
 ## Developing
 
-Once you've created a project and installed dependencies with `pnpm install`, start a development server:
+Once you've created a project and installed dependencies with `bun install`, start a development server:
 
 ```shell
 turbo run smart#dev
@@ -16,7 +16,7 @@ turbo run smart#dev -- --open
 to add shadcn block:
 
 ```shell
-pnpm shadcn-svelte@next add sidebar-07
+bun shadcn-svelte@next add sidebar-07
 ```
 
 ## Building

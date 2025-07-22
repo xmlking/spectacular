@@ -1,4 +1,10 @@
 <script lang="ts">
+import { Logger } from '@repo/utils';
+import { getToastStore } from '@skeletonlabs/skeleton';
+import * as Form from 'formsnap';
+import { Fingerprint, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
+import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
+import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 import { goto } from '$app/navigation';
 import { page } from '$app/stores';
 import * as m from '$i18n/messages';
@@ -10,12 +16,6 @@ import { getNhostClient } from '$lib/stores/nhost';
 import { turnstilePassed } from '$lib/stores/stores';
 import { DebugShell } from '$lib/ui/components';
 import { Alerts } from '$lib/ui/components/form';
-import { Logger } from '@repo/utils';
-import { getToastStore } from '@skeletonlabs/skeleton';
-import * as Form from 'formsnap';
-import { Fingerprint, Loader, Mail, MoreHorizontal } from 'lucide-svelte';
-import SuperDebug, { defaults, setError, setMessage, superForm } from 'sveltekit-superforms';
-import { zod4, zod4Client } from 'sveltekit-superforms/adapters';
 
 const log = new Logger('auth:signin:passwordless:browser');
 

@@ -102,8 +102,24 @@ export default defineConfig({
     include: ['@repo/ui'],
   },
   build: {
-    commonjsOptions: {
-      include: [/@repo-ui/, /node_modules/],
+    rollupOptions: {
+      output: {
+        advancedChunks: {
+          groups: [
+            {
+              name: 'some',
+            },
+          ],
+        },
+      },
     },
+    // build: {
+    // 	commonjsOptions: {
+    // 		include: [/@repo-ui/, /node_modules/],
+    // 	},
   },
+  experimental: {
+    enableNativePlugin: true,
+  },
+  esbuild: false,
 });

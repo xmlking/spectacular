@@ -10,11 +10,11 @@ Run this command and select `shadcn` components you want to add/update
 
 ```shell
 cd packages/ui
-# first time only run `pnpm run sync` this will create `.svelte-kit` folder
-pnpm run sync
+# first time only run `bun run sync` this will create `.svelte-kit` folder
+bun run sync
 # create all shadcn-svelte files.
 # --base-color =  "gray" | "neutral" | "slate" | "stone" | "zinc"
-pnpm dlx shadcn-svelte@next init  -o \
+bun dlx shadcn-svelte@next init  -o \
 --base-color=neutral \
 --css=src/styles/neutral.css \
 --components-alias=@repo/ui/components \
@@ -31,7 +31,7 @@ To add/update shadcn-svelte components, run:
 ```shell
 cd packages/ui
 # to add/update specific component
-pnpm run ui:add button # this is command is equal to `pnpm dlx shadcn-svelte@next add button`
+bun run ui:add button # this is command is equal to `bun dlx shadcn-svelte@next add button`
 # OR to add/update all components
-pnpm run ui:add --all  # equal to `pnpm dlx shadcn-svelte@next add --all`
+bun run ui:add --all  # equal to `bun dlx shadcn-svelte@next add --all`
 ```

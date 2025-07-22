@@ -61,19 +61,19 @@ code --install-extension alberto-varela.monorepo-focus-workspace
 to create a new sveltekit turborepo, Run the following command:
 
 ```sh
-pnpx create-turbo@latest -e with-svelte
+bunx create-turbo@latest -e with-svelte
 # bunx create-turbo@latest -e with-svelte
 ```
 
 ### Setup Remote Caching for Turborepo on Vercel
 
 ```shell
-pnpx turbo login
-pnpx turbo link
+bunx turbo login
+bunx turbo link
 # bunx turbo login
 ```
 
-To disable Remote Caching, run `pnpx turbo unlink`
+To disable Remote Caching, run `bunx turbo unlink`
 
 ### Environment Variables
 
@@ -149,7 +149,7 @@ turbo build --filter=console... --graph
 migrate command which both upgrades your repo to the specified version (latest by default) of turbo, and runs any codemods required.
 
 ```shell
-pnpx @turbo/codemod migrate --force
+bunx @turbo/codemod migrate --force
 ```
 
 ### Docker Build
@@ -181,7 +181,7 @@ turbo lint
 turbo run lint test --affected
 turbo run generate
 turbo run generate  --dry-run
-pnpx turbo login
+bunx turbo login
 
 turbo prune --scope=console --docker
 ```

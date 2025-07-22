@@ -13,13 +13,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: 'pnpm'
+          cache: 'bun'
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install
+        run: npm install -g bun && bun install
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
+        run: bun exec playwright install --with-deps
       - name: Run Playwright tests
-        run: pnpm exec playwright test
+        run: bun exec playwright test
       - uses: actions/upload-artifact@v4
         if: always()
         with:
