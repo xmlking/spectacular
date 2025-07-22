@@ -128,11 +128,39 @@ PUBLIC_NHOST_GRAPHQL_URL=api.mycompany.com:443 turbo dev
 
 ### Update
 
-To update the packages to their latest versions in `package.json`
+Display outdated dependencies:
 
 ```shell
+# Display outdated dependencies globally
+bun outdated -g
+# Display outdated dependencies in the current workspace.
+bun outdated
+# Display outdated dependencies in the web workspace.
+bun outdated -F web
+bun outdated -F docs
+bun outdated -F @repo/utils
+bun outdated -F @repo/mastra
+# Use --filter to include more than one workspace.
+bun outdated --filter="*"
+```
+
+Update package dependencies to latest version:
+
+```shell
+# To update global dependencies 
+bun update --latest -g 
+# To update dependencies to latest for each workspace:
+cd apps/web
 bun update --latest
-bun update --check
+# (Or) upgrade interactively
+bun update --interactive
+bun update -i --latest
+```
+
+To debug why specific dependency was added:
+
+```shell
+bun why recharts
 ```
 
 ### Format
