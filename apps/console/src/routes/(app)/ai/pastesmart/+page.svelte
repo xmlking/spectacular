@@ -271,7 +271,7 @@ $: loadingState.setFormLoading($loading);
               Press <kbd class="kbd">⌘ + C</kbd> to copy any text, then <kbd class="kbd">⌘ + V</kbd> anywhere in the form.
             </span>
           </span>
-          <SlideToggle name="slide" bind:checked={useLocal} size="sm" disabled={!("aibrow" in window)}>Use Local</SlideToggle>
+          <SlideToggle name="slide" bind:checked={useLocal} size="sm" disabled={!('LanguageModel' in self)}>Use Local</SlideToggle>
         </div>
         <!-- Form Action Buttons -->
          <section>
