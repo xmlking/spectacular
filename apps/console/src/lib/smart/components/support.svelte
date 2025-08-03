@@ -72,9 +72,9 @@ onMount(async () => {
       <li>Set "Experimental translation API" to "Enabled without language pack limit"</li>
       <li>Click <strong>Relaunch</strong> or restart browser</li>
       <li>
-        Go to <code>chrome://components/</code> and update "Optimization Guide On
-        Device Model"
+        Go to <code>chrome://components/</code> and Confirm that <bold>Optimization Guide On Device Model</bold> is present. This means Gemini Nano is either available or downloading.
       </li>
+      <li>If there's no version number listed, click <bold>Check for update</bold> to force the download.</li>
       <li> Go to <code>chrome://on-device-translation-internals/</code> and install all aviable Language Packages</li>
       AiBrow isn't installed! Please follow the
       <li><strong>Optional:</strong> For AiBrow: Please follow the<a class="anchor" href="https://aibrow.ai/install">install instructions</a></li>
@@ -83,6 +83,7 @@ onMount(async () => {
     <pre class="pre"><code
         >const session = await LanguageModel.create();</code
       ></pre>
+    <p>Troubleshoot: If the model doesn't work as expected, follow these steps: Go to: <code>chrome://on-device-internals</code></p>
   </div>
 </details>
 {/if}
