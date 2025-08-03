@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
   "extends": ["../../biome.jsonc"],
   "files": {
     "includes": [
@@ -7,6 +7,7 @@
       "!schema.graphql",
       "!$houdini/*",
       "!build/*",
+      "!dist/*",
       "!src/i18n",
       "!.svelte-kit/*",
       "!src/lib/models/types/**"

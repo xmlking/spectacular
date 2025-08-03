@@ -2,7 +2,7 @@ import type { Action } from 'svelte/action';
 import type { Writable } from 'svelte/store';
 import type { JSONSchema } from 'sveltekit-superforms';
 
-type Options<T extends Item = Item> = {
+type Options<_T extends Item = Item> = {
   api: string;
   jsonSchema: JSONSchema; // TODO: schema of type T
   loading?: Writable<boolean>;

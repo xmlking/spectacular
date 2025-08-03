@@ -13,7 +13,7 @@ const todos = getTodos();
 	<h1>Todo App</h1>
 
 	<!-- prerendering example -->
-	<p>Time: {getTime()}</p>
+	<p>Time: {await getTime()}</p>
 
 	<!-- using enhance to customize how the form is progressively enhanced -->
 	<form
@@ -21,15 +21,19 @@ const todos = getTodos();
 			// get form data
 			const text = data.get('text')!.toString().trim()
 
-			// optimistic UI update
-			await submit().updates(
-				getTodos().withOverride((todos) => {
-					return [...todos, { id: '0', text, done: false }]
-				})
-			)
+      try {
+        // optimistic UI update
+        await submit().updates(
+          getTodos().withOverride((todos) => {
+            return [...todos, { id: '0', text, done: false }]
+          })
+        )
 
-			// clear form input
-			form.reset()
+        // clear form input
+        form.reset()
+      } catch (error) {
+		    console.log('Oh no! Something went wrong', error);
+	    }
 		})}
 	>
 		<input type="text" name="text" placeholder="Add todo" autocomplete="off" />

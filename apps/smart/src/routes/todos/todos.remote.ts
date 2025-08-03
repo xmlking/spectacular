@@ -4,7 +4,7 @@
 */
 
 import { error } from '@sveltejs/kit';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 import { command, form, prerender, query } from '$app/server';
 
 type Todo = {
@@ -43,7 +43,7 @@ export const addTodo = form(async (data) => {
 
   todos.push({ id: crypto.randomUUID(), text, done: false });
 
-  // single flight mutation
+  // single-flight mutation
   // return updated data along with the form result
   await getTodos().refresh();
 });
@@ -59,12 +59,6 @@ export const deleteTodo = form(async (data) => {
   todos.splice(index, 1);
 });
 
-/*
-  - commands are an alternative way of writing data to the server
-    using JavaScript if you don't need progressive enhancement
-  - if your `query/prerender/command` receives arguments it's required
-    to pass a validation schema or 'unchecked' as the first argument
-*/
 export const toggleTodo = command(z.string(), async (id) => {
   const todo = todos.find((t) => t.id === id);
   if (!todo) error(404, 'Todo not found');
@@ -75,15 +69,6 @@ export const toggleTodo = command(z.string(), async (id) => {
   todo.done = !todo.done;
 });
 
-/*
-  - ⚠️ currently prerendering doesn't work because the build fails
-  - prerender functions are like queries except they're invoked at
-    build time to prerender the result
-  - useful for data that changes at most once per redeployment
-  - you can use prerender functions on pages that are otherwise dynamic
-    for blazingly fast partial prerendering of your data
-  - there's more about prerendering functions in the RFC
-*/
 export const getTime = prerender(() => {
   return new Date().toLocaleTimeString();
 });

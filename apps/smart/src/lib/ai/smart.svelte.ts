@@ -1,8 +1,5 @@
-import type { ai } from '@aibrow/dom-types';
-import { IsSupported } from 'runed';
 import { readable } from 'svelte/store';
 
-type AI = typeof ai;
 /**
  *  Browser AI Util Functions
  */
@@ -158,19 +155,6 @@ export function isPolyfilledSummarizer() {
 export function isPolyfilledProofreader() {
   return 'Proofreader' in self && self.Proofreader.aibrow === true;
 }
-
-/**
- * isPolyfilledAI
- * usage:
- * @example
- * ```svelte
- * <script lang="ts">
- *  if (isPolyfilledAI2.current) {
- *    // Do something with the geolocation API
- *  }
- * </script>
- */
-const isPolyfilledAI2 = new IsSupported(() => 'aibrow' in self);
 
 /**
  * print ai status to console

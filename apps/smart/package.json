@@ -33,8 +33,8 @@
     "test:e2e": "dotenv-run -f .env -f .secrets -v -- playwright test"
   },
   "devDependencies": {
-    "@ai-sdk/azure": "1.3.24",
-    "@ai-sdk/openai": "1.3.23",
+    "@ai-sdk/azure": "catalog:",
+    "@ai-sdk/openai": "catalog:",
     "@ai-sdk/svelte": "catalog:",
     "@aibrow/dom-types": "catalog:",
     "@inlang/cli": "3.0.12",
@@ -56,7 +56,7 @@
     "@tanstack/table-core": "8.21.3",
     "@types/dom-chromium-ai": "catalog:",
     "@vitest/browser": "catalog:",
-    "ai": "4.3.19",
+    "ai": "catalog:",
     "autoprefixer": "10.4.21",
     "bits-ui": "catalog:",
     "clsx": "2.1.1",

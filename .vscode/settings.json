@@ -51,6 +51,8 @@
     "comments": false,
     "strings": "on"
   },
+  "diffEditor.diffAlgorithm": "advanced",
+  "diffEditor.experimental.showMoves": true,
   ////////// Search //////////
   "search.followSymlinks": false,
   "search.exclude": {
@@ -84,6 +86,7 @@
     "**/.DS_Store": true,
     ".idea": true,
     "**/.svelte-kit": true,
+    "**/dist": true,
     "**/$houdini": true,
     "**/.turbo": true,
     "**/.astro": true,
