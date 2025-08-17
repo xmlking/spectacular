@@ -34,7 +34,7 @@
     "test:e2e": "dotenv-run -f .env -f .secrets -v -- playwright test"
   },
   "devDependencies": {
-    "@ai-sdk/azure": "1.3.24",
+    "@ai-sdk/azure": "2.0.15",
     "@ai-sdk/openai": "1.3.23",
     "@ai-sdk/svelte": "catalog:svelte4",
     "@aibrow/dom-types": "catalog:",
