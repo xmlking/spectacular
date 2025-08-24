@@ -57,7 +57,7 @@ jobs:
       - name: 🏗️ Build
         run: turbo run docs#build
       - name: ☁️ Upload Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: apps/docs/dist
   deploy:
