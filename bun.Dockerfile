@@ -2,7 +2,7 @@ ARG SCOPE=console
 ###################################################################
 # Stage 0: base image											                        #
 ###################################################################
-FROM oven/bun:1.1.29 AS base
+FROM oven/bun:1.2.23 AS base
 ENV GIT_SSL_NO_VERIFY=1
 RUN apt-get update && apt-get install -y --no-install-recommends git tini
 
