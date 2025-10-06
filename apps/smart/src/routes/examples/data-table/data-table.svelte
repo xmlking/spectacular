@@ -22,10 +22,10 @@ import {
   type VisibilityState,
 } from '@tanstack/table-core';
 import { createRawSnippet } from 'svelte';
-import ChevronDown from 'svelte-radix/ChevronDown.svelte';
 import DataTableActions from './data-table-actions.svelte';
 import DataTableCheckbox from './data-table-checkbox.svelte';
 import DataTableEmailButton from './data-table-email-button.svelte';
+  import { ChevronDown } from '@lucide/svelte';
 
 type Payment = {
   id: string;

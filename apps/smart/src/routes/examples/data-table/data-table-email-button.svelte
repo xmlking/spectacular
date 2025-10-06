@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Button } from '@repo/ui/components/ui/button/index.js';
+import  { Button } from '@repo/ui/components/ui/button/index.js';
 import type { ComponentProps } from 'svelte';
 import CaretSort from 'svelte-radix/CaretSort.svelte';
 

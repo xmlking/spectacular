@@ -5,21 +5,46 @@
       "url": "https://mcp.context7.com/mcp"
     },
     "svelte": {
-      "url": "https://svelte-llm.khromov.se/mcp/mcp"
+      "url": "https://mcp.svelte.dev/mcp"
+    },
+    "svelte-local": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sveltejs/mcp"
+      ]
     },
     "Playwright": {
       "command": "npx",
-      "args": ["@playwright/mcp@latest"],
+      "args": [
+        "@playwright/mcp@latest"
+      ],
       "env": {}
     },
     "jsrepo": {
       "command": "npx",
-      "args": ["jsrepo", "mcp"]
+      "args": [
+        "jsrepo",
+        "mcp"
+      ]
     },
     "mastra": {
       "command": "npx",
-      "args": ["-y", "@mastra/mcp-docs-server@latest"],
+      "args": [
+        "-y",
+        "@mastra/mcp-docs-server@latest"
+      ],
       "type": "stdio"
-    }
+    },
+    "ultracite": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://www.ultracite.ai/api/mcp/mcp"
+      ],
+      "type": "stdio"
+    },
   }
 }

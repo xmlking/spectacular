@@ -1,13 +1,19 @@
 {
   "$schema": "https://turborepo.com/schema.json",
-  "extends": ["//"],
+  "extends": [
+    "//"
+  ],
   "tasks": {
     "sv:check": {
-      "outputs": [".svelte-kit/**"]
+      "outputs": [
+        ".svelte-kit/**"
+      ]
     },
     "sv:check:watch": {
       "persistent": true,
-      "outputs": [".svelte-kit/**"]
+      "outputs": [
+        ".svelte-kit/**"
+      ]
     },
     "lint": {
       "dependsOn": [
@@ -16,42 +22,93 @@
       ]
     },
     "sync": {
-      "outputs": [".svelte-kit/**"]
+      "outputs": [
+        ".svelte-kit/**"
+      ]
     },
     "sync:production": {
-      "outputs": [".svelte-kit/**"]
+      "outputs": [
+        ".svelte-kit/**"
+      ]
     },
     "dev": {
-      "dependsOn": ["generate"],
+      "dependsOn": [],
+      // "dependsOn": [
+      //   "generate"
+      // ],
       "outputLogs": "new-only",
       "cache": false, // No outputs will be cached
       "persistent": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets", "$TURBO_ROOT$/.env", "$TURBO_ROOT$/.secrets"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        ".secrets",
+        "$TURBO_ROOT$/.env",
+        "$TURBO_ROOT$/.secrets"
+      ]
     },
     "dev:debug": {
-      "dependsOn": ["generate"],
+      "dependsOn": [
+        "generate"
+      ],
       "cache": false,
       "persistent": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".secrets", "$TURBO_ROOT$/.env", "$TURBO_ROOT$/.secrets"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        ".secrets",
+        "$TURBO_ROOT$/.env",
+        "$TURBO_ROOT$/.secrets"
+      ]
     },
     "dev:production": {
-      "dependsOn": ["generate:production"],
+      "dependsOn": [
+        "generate:production"
+      ],
       "cache": false,
       "persistent": true,
-      "inputs": ["$TURBO_DEFAULT$", ".env", ".env.production", ".secrets", ".secrets.production"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        ".env.production",
+        ".secrets",
+        ".secrets.production"
+      ]
     },
     "generate": {
-      "dependsOn": ["sync", "@repo/role-houdini#build"],
-      "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
+      "dependsOn": [
+        "sync",
+        "@repo/role-houdini#build"
+      ],
+      "outputs": [
+        ".svelte-kit/**",
+        "$houdini/**",
+        "schema.graphql",
+        "src/i18n"
+      ]
     },
     "generate:production": {
-      "dependsOn": ["sync:production", "@repo/role-houdini#build"],
-      "outputs": [".svelte-kit/**", "$houdini/**", "schema.graphql", "src/i18n"]
+      "dependsOn": [
+        "sync:production",
+        "@repo/role-houdini#build"
+      ],
+      "outputs": [
+        ".svelte-kit/**",
+        "$houdini/**",
+        "schema.graphql",
+        "src/i18n"
+      ]
     },
     "build": {
-      "dependsOn": ["generate"],
+      // Break the dependency chain for specific packages
+      "dependsOn": [],
+      // "dependsOn": ["generate"],
       // Consider all default inputs except the package's README
-      "inputs": ["$TURBO_DEFAULT$", ".env*", "!README.md"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*",
+        "!README.md"
+      ],
       // File outputs will be cached
       "outputs": [
         "build/**",
@@ -81,8 +138,16 @@
       ]
     },
     "build:production": {
-      "dependsOn": ["generate:production"],
-      "outputs": [".svelte-kit/**", ".vercel/**", "$houdini/**", "schema.graphql", "src/i18n"],
+      "dependsOn": [
+        "generate:production"
+      ],
+      "outputs": [
+        ".svelte-kit/**",
+        ".vercel/**",
+        "$houdini/**",
+        "schema.graphql",
+        "src/i18n"
+      ],
       "env": [
         "VERCEL",
         "VERCEL_URL",
@@ -105,10 +170,15 @@
       "persistent": true
     },
     "test:unit:coverage": {
-      "dependsOn": ["sync", "^test:unit:coverage"]
+      "dependsOn": [
+        "sync",
+        "^test:unit:coverage"
+      ]
     },
     "test:e2e": {
-      "dependsOn": ["build"]
+      "dependsOn": [
+        "build"
+      ]
     },
     "lang:lint": {},
     "lang:validate": {},
