@@ -33,7 +33,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: 🌼 Conventional Commits
-        uses: cocogitto/cocogitto-action@v3
+        uses: cocogitto/cocogitto-action@v4
         with:
           check-latest-tag-only: true
       - name: 🦶 Setup Biome CLI
